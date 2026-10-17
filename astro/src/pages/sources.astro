@@ -632,12 +632,25 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
     color: var(--c-text-sub);
   }
 
+  /* justify-content: center, ADDED 2026-10-17 under
+     R285-P2-WEBSITE-ASTRO-GATES-RED-IN-CI-01. The card centres its content and
+     this row did not: a flex row starts its items at the left edge whatever
+     text-align says, so every single pill sat flush left (measured at 1440, x
+     equal to the list's own left edge on all six cards). check-render only
+     caught it in CI, on the one card with two pills, because the second pill
+     is 935px of a 1162px row and the pair fitted with 19px to spare on
+     Windows. With the runner's glyph widths the second pill wrapped, both sat
+     on one left edge, and the gate reported "2 children pinned to one left
+     edge, worst -478px off", which is the 202px first pill at the list's left
+     edge. Centring the row is right at any width and on any platform, wrapped
+     or not. */
   .src__dates {
     margin: var(--stack-2) 0 0;
     padding: 0;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.4rem;
   }
 

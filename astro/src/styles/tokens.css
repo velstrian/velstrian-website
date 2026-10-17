@@ -2626,7 +2626,11 @@
      system-ui and -apple-system are kept behind them as the last resort for a
      machine that has neither. */
   --font-body:    'Inter', 'Inter Fallback', 'Inter Fallback Arial', system-ui, -apple-system, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  /* The three metric fallbacks sit BEFORE ui-monospace for the reason the two
+     stacks above give. Without them the swap re-wrapped the compare page
+     breadcrumb at 390 on Linux and failed check-cwv in CI. The derivation is in
+     styles/fonts.css. */
+  --font-mono:    'JetBrains Mono', 'JetBrains Fallback', 'JetBrains Fallback Consolas', 'JetBrains Fallback Courier', ui-monospace, monospace;
 
   /* ── Motion ─────────────────────────────────────────────────────────────
      One easing curve and three durations for the whole site. Anything that
