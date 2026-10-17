@@ -76,22 +76,17 @@ interface Props {
   tabs: Tab[];
   /** Which tab is selected when the URL names none. Defaults to the first. */
   defaultId?: string;
-  /**
-   * Seconds between automatic advances. OMITTED MEANS OFF, and that default is
-   * the whole reason this is a prop rather than a behaviour.
-   *
-   * Owner, 2026-08-05 (A-104 item 2): the homepage product showcase must
-   * autoplay through all five tabs in a loop. /pricing must not, and the owner
-   * separately decided (A-105) that this component stays SHARED rather than
-   * being forked for the homepage. Opt-in is what lets both be true: with the
-   * prop absent, /pricing emits byte-identical markup to what it emits today
-   * and no timer is ever created.
+  /*
+   * `autoplaySeconds` WAS REMOVED ON 2026-10-17 with its only caller, the
+   * homepage product showcase in ProductScreens.astro, which nothing imported
+   * after the homepage rebuild of 2026-09-06. The timer, the pause control and
+   * their styles went with it. The paragraphs below that mention autoplay
+   * describe the showcase as it was when the steppers were added.
    */
-  autoplaySeconds?: number;
   /**
    * Prev/next buttons and an "N of M" counter beside the tablist.
    *
-   * OPT-IN FOR THE SAME REASON `autoplaySeconds` IS. A-105 keeps this component
+   * OPT-IN, as autoplay was. A-105 keeps this component
    * SHARED rather than forked for the homepage, and /pricing is shipped: with
    * this prop absent /pricing emits byte-identical markup and no stepper exists.
    *
@@ -111,19 +106,13 @@ interface Props {
   steppers?: boolean;
 }
 
-const { label, tabs, defaultId, autoplaySeconds, steppers } = Astro.props;
+const { label, tabs, defaultId, steppers } = Astro.props;
 
 /* Rendered only when asked for, and `hidden` until the module confirms it can
  * drive them. The same contract the pause control is under. With JavaScript
  * off every panel stays visible and there is nothing for an arrow to switch,
  * so shipping a visible arrow would be shipping a dead control. */
 const showSteppers = steppers === true;
-
-/* Autoplay needs somewhere to put a pause control, and that control MUST NOT go
- * inside the tablist: a tablist may contain only tabs, and a button in there
- * would be announced as a sixth tab. So an autoplaying switcher is wrapped and
- * a non-autoplaying one is not, which keeps /pricing's DOM exactly as it was. */
-const autoplay = typeof autoplaySeconds === 'number' && autoplaySeconds > 0 ? autoplaySeconds : null;
 
 const fallbackId = defaultId ?? tabs[0]?.id;
 
@@ -184,8 +173,8 @@ const offSelectors = tabs
   exactly as though the wrapper were not there, and there is one copy of the
   markup. See `.tabsw-auto--off` below.
 */}
-<div class:list={['tabsw-auto', { 'tabsw-auto--off': !autoplay && !showSteppers }]}>
-  <div class="tabsw" data-tabs data-tabs-label={label} data-tabs-autoplay={autoplay ?? undefined}>
+<div class:list={['tabsw-auto', { 'tabsw-auto--off': !showSteppers }]}>
+  <div class="tabsw" data-tabs data-tabs-label={label}>
     {/*
       ── THE FILL THAT GLIDES, AND IT SHIPS AT ZERO WIDTH ──────────────────
 
@@ -223,21 +212,6 @@ const offSelectors = tabs
       ))
     }
   </div>
-  {
-    autoplay && (
-      /*
-       * `hidden` in the HTML and revealed by the module. The control must not
-       * exist for a reader whose autoplay never starts (JavaScript off, or
-       * prefers-reduced-motion), because a pause button for something that is
-       * not moving is a dead control. tabs.ts unhides it only once a timer is
-       * actually running.
-       */
-      <button class="tabsw-auto__pause" type="button" data-tabs-pause hidden>
-        <span class="tabsw-auto__icon" aria-hidden="true" />
-        <span data-tabs-pause-label>Pause</span>
-      </button>
-    )
-  }
   {
     showSteppers && (
       /*
@@ -374,58 +348,6 @@ const offSelectors = tabs
       justify-content: center;
       row-gap: var(--stack-2);
     }
-  }
-
-  .tabsw-auto__pause {
-    flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    /* WCAG 2.2 target size, matching the pills it sits beside. */
-    min-height: 44px;
-    padding: 0 16px;
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-pill);
-    background: var(--c-card);
-    color: var(--c-text-muted);
-    font-family: var(--font-body);
-    font-size: var(--t-micro);
-    font-weight: 700;
-    line-height: var(--lh-tight);
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  /* `(hover: hover)`, and it is the guard styles/surfaces.css and
-     styles/controls.css both put on their own hover for the same reason: a
-     touch device latches `:hover` onto the last element tapped and leaves it
-     there. Measured 2026-08-05 at 390 with `hover: none` and `pointer: coarse`
-     emulated, this rule and `.tabsw__tab:hover` below were the ONLY two on the
-     site that still fired, 189 signatures across five routes, everything else
-     correctly gated. On the tab that matters: the previously tapped tab kept
-     --c-text while a different tab carried `aria-selected`, so two tabs read as
-     active at once. */
-  @media (hover: hover) {
-    .tabsw-auto__pause:hover { color: var(--c-text); }
-  }
-
-  /* The glyph is drawn from borders rather than shipped as an icon: two bars for
-     pause, one triangle for play. NEITHER TAKES A BRAND HUE. Teal means verified
-     and violet means refused, and a transport control asserts neither, so this
-     is --c-text-muted like the label it sits with. */
-  .tabsw-auto__icon {
-    width: 10px;
-    height: 12px;
-    border-inline: 3px solid currentColor;
-    box-sizing: border-box;
-  }
-
-  .tabsw-auto__pause.is-paused .tabsw-auto__icon {
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-inline-start: 10px solid currentColor;
-    border-inline-end: 0;
   }
 
   .tabsw {
@@ -600,8 +522,11 @@ const offSelectors = tabs
       color var(--dur) var(--ease);
   }
 
-  /* Gated for the reason written out beside `.tabsw-auto__pause:hover` above:
-     a tap latches `:hover` on a touch device, and a latched tab reads as a
+  /* `(hover: hover)`, the guard styles/surfaces.css and styles/controls.css
+     put on their own hover. Measured 2026-08-05 at 390 with `hover: none` and
+     `pointer: coarse` emulated, this rule and the removed autoplay pause hover
+     were the ONLY two on the site that still fired, 189 signatures across five
+     routes. A tap latches `:hover` on a touch device, and a latched tab reads as a
      second selected tab. The gate is a media query rather than a script,
      because the selected state below and this one must never be able to
      disagree about which tab is live. */

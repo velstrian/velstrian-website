@@ -190,6 +190,34 @@
   line-gap-override: 0%;
 }
 
+/* ── 'Inter Fallback DejaVu': DERIVED 2026-10-17 ─────────────────────────────
+ *
+ * THE LINUX BAND, and the one the two above cannot reach. On Linux neither
+ * local('Segoe UI') nor local('Arial') resolves (Chromium matches local() by a
+ * face's unique name, so Liberation Sans standing in for Arial does not count),
+ * and the stack fell to system-ui, which is DejaVu Sans there, unmatched. That
+ * is the machine every CI run of check-cwv measures on, which is why CI and
+ * this Windows box disagreed about CLS. Measured under that font set over the
+ * built dist: /changelog/ at 390 shifted where Windows did not.
+ *
+ * Derived by the method of scripts/derive-inter-fallback.mjs: 3,000 real body
+ * strings (304,398 characters) from the built output, laid out in Chromium at
+ * 400px, Inter against DejaVu Sans:
+ *     400  93.92%    500  94.88%    600  95.81%    700  96.78%
+ * One band at 400, for the reason the Segoe band gives (400 carries 93.4% of
+ * body text). Validated with these descriptors: residual 1.00003 at 400, 0.990
+ * at 500, 0.980 at 600, 0.971 at 700, and the line box lands on 1.2100em,
+ * Inter's own, against 1.1625em unmatched. ascent and descent are Inter's
+ * 0.96875 and 0.24121 over the size-adjust, as above. */
+@font-face {
+  font-family: 'Inter Fallback DejaVu';
+  src: local('DejaVu Sans');
+  size-adjust: 93.92%;
+  ascent-override: 103.15%; /* 0.96875 / 0.9392 */
+  descent-override: 25.68%; /* 0.24121 / 0.9392 */
+  line-gap-override: 0%;
+}
+
 /* -- WHY JAKARTA IS `optional` AND INTER IS NOT ----------------------------
  *
  * ADDED 2026-08-31 to fix a hero fault, not a performance one. The homepage h1
@@ -395,6 +423,50 @@
   size-adjust: 109.96%;
   ascent-override: 94.40%;   /* 1.038 / 1.0996 */
   descent-override: 20.19%;  /* 0.222 / 1.0996 */
+  line-gap-override: 0%;
+}
+
+/* ── 'Jakarta Fallback DejaVu': DERIVED 2026-10-17, THE LINUX BANDS ─────────
+ *
+ * Same gap as 'Inter Fallback DejaVu' above: on Linux local('Arial') does not
+ * resolve, so 'Jakarta Fallback' is skipped and headings fell to an unmatched
+ * DejaVu Sans. Same method as the Arial bands: 628 real heading strings
+ * (18,007 characters) from the built output, laid out in Chromium at 400px,
+ * Plus Jakarta Sans against DejaVu Sans Regular, which is what local() returns
+ * at every weight (synthetic bold changes the paint, not the advance, as the
+ * Arial note records):
+ *     600  95.36%      700  96.41%      800  97.42%
+ * Validated with these descriptors: residual 1.00005, 0.99999 and 0.99996,
+ * and the line box lands on 1.2600em, Jakarta's own. Overrides are 1.038 and
+ * 0.222 over each band's size-adjust. A separate family rather than a fourth
+ * src in 'Jakarta Fallback', because one band cannot carry two faces' numbers. */
+@font-face {
+  font-family: 'Jakarta Fallback DejaVu';
+  src: local('DejaVu Sans');
+  font-weight: 1 649;
+  size-adjust: 95.36%;
+  ascent-override: 108.85%;  /* 1.038 / 0.9536 */
+  descent-override: 23.28%;  /* 0.222 / 0.9536 */
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Jakarta Fallback DejaVu';
+  src: local('DejaVu Sans');
+  font-weight: 650 749;
+  size-adjust: 96.41%;
+  ascent-override: 107.67%;  /* 1.038 / 0.9641 */
+  descent-override: 23.03%;  /* 0.222 / 0.9641 */
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Jakarta Fallback DejaVu';
+  src: local('DejaVu Sans');
+  font-weight: 750 1000;
+  size-adjust: 97.42%;
+  ascent-override: 106.55%;  /* 1.038 / 0.9742 */
+  descent-override: 22.79%;  /* 0.222 / 0.9742 */
   line-gap-override: 0%;
 }
 

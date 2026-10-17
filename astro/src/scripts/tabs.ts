@@ -466,9 +466,9 @@ function setUp(group: HTMLElement): void {
    * pattern above already handles, and that is the whole of the design.
    *
    * WHY, RATHER THAN A SECOND COPY OF THE SAME FIVE LINES. The handler above
-   * already wraps at both ends, selects, moves focus and writes the hash, and
-   * the autoplay block already treats ArrowLeft/ArrowRight as a reader's
-   * choice and stops the loop for good. Dispatching the key gets all four
+   * already wraps at both ends, selects, moves focus and writes the hash.
+   * (It also used to stop the autoplay loop, which was removed on 2026-10-17,
+   * see the note at the foot of this function.) Dispatching the key gets those
    * behaviours by construction, so the buttons and the keyboard cannot drift
    * apart, and a second control for one piece of state that behaves subtly
    * differently from the first is worse than no second control.
@@ -576,163 +576,11 @@ function setUp(group: HTMLElement): void {
     }).observe(group);
   }
 
-  /*
-   * ── AUTOPLAY, OPT-IN, WITH THE THREE CONSTRAINTS THAT ARE NOT NEGOTIABLE ────
-   *
-   * Owner, 2026-08-05 (A-104 item 2): the homepage product showcase autoplays
-   * through all five tabs in a loop. /pricing does not, and A-105 decided this
-   * component stays SHARED rather than forked, so the behaviour is opt-in via
-   * `data-tabs-autoplay` and a group without that attribute leaves this function
-   * having created no timer, no listener and no control.
-   *
-   *   1. IT MUST NOT AUTOPLAY UNDER prefers-reduced-motion. Checked live rather
-   *      than at build time, and re-checked on change, because a reader can turn
-   *      the preference on while the page is open and a loop that keeps running
-   *      through that is exactly the complaint the preference exists to make.
-   *   2. WCAG 2.2.2 REQUIRES A PAUSE CONTROL for anything moving that starts
-   *      automatically and lasts over five seconds. The control is rendered by
-   *      TabSwitcher.astro and revealed HERE, only once a timer genuinely runs,
-   *      so a reader who never gets autoplay never gets a dead button.
-   *   3. IT STOPS PERMANENTLY THE MOMENT A READER CHOOSES A TAB. Continuing to
-   *      advance after someone has expressed a preference is hostile: it takes
-   *      the page back off them. `stop()` is one-way and there is deliberately
-   *      no route that restarts the timer after it.
-   *
-   * Hover and focus merely SUSPEND, which is different from stopping: passing
-   * the pointer over the control is not a choice, so the loop resumes on leave.
-   */
-  const autoplaySeconds = Number(group.dataset.tabsAutoplay);
-  if (!Number.isFinite(autoplaySeconds) || autoplaySeconds <= 0) return;
-
-  const wrapper = group.parentElement;
-  const pauseBtn = wrapper?.querySelector<HTMLButtonElement>('[data-tabs-pause]') ?? null;
-  const pauseLabel = pauseBtn?.querySelector<HTMLElement>('[data-tabs-pause-label]') ?? null;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  /*
-   * ── A FOURTH CONSTRAINT: NO AUTOPLAY ON A PHONE. 2026-08-31 ──────────────
-   *
-   * docs/CAROUSEL-MOBILE-RESEARCH.md, which drove fourteen reference sites
-   * rather than describing them: TEN OF FOURTEEN ship no controlled carousel of
-   * product UI on a phone at all, and the four that do ship an uncontrolled
-   * scroll-snap strip whose only affordance is a peek of the next card. The
-   * GOV.UK Design System, which is the strongest precedent for this buyer, has
-   * no carousel component among its forty, and its TABS stop being tabs on a
-   * small screen and render as sections in order.
-   *
-   * THE REASON IT IS THE LOAD-BEARING MOVE AND NOT A PREFERENCE. Constraint 2
-   * above is what puts a pause button on this control, and it is conditional:
-   * WCAG 2.2.2 applies to something MOVING that starts automatically. Nothing
-   * starts automatically here below 40rem any more, so the requirement is not
-   * satisfied by a control, it is not raised. One decision removes a control
-   * rather than laying it out, on the width where there was no room for it.
-   *
-   * THE TABS ARE UNTOUCHED AND ARE STILL THE CONTROL. This turns off a timer,
-   * not navigation: a reader on a phone still picks a stage, they simply pick
-   * it rather than being carried through five of them while reading one.
-   *
-   * 40rem, WHICH IS 640px AT THE ROOT DEFAULT AND MOVES WITH IT. In `rem` and
-   * not `px` deliberately, so a reader who has enlarged their root font gets
-   * the phone treatment at the width where their text behaves like phone text.
-   *
-   * READ ONCE, LIKE `autoplaySeconds`, AND NOT WATCHED. A reader who rotates a
-   * phone into landscape does not want a timer to start under them mid-read,
-   * and `run()` is only ever called by an explicit resume path. Rechecking on
-   * resize would be a route that STARTS motion nobody asked for, which is the
-   * same hostility constraint 3 refuses.
-   */
-  const narrow = window.matchMedia('(max-width: 39.999rem)');
-  if (narrow.matches) return;
-
-  let timer: number | null = null;
-  /** Set once a reader picks a tab. One-way, by design: see constraint 3. */
-  let abandoned = false;
-  /** Paused by the button. Distinct from `abandoned` and from a hover suspend. */
-  let paused = false;
-
-  const advance = (): void => {
-    const current = pairs.findIndex(({ panel }) => !panel.hidden);
-    const next = pairs[(current + 1) % pairs.length];
-    /* No hash write and no focus move. Writing the hash on a timer would
-       rewrite the reader's URL every few seconds and poison a copied link;
-       moving focus would steal the caret from whatever they were using. */
-    if (next) select(next.panel.id, false);
-  };
-
-  const run = (): void => {
-    if (timer !== null || abandoned || paused || reduced.matches) return;
-    timer = window.setInterval(advance, autoplaySeconds * 1000);
-  };
-
-  const halt = (): void => {
-    if (timer === null) return;
-    window.clearInterval(timer);
-    timer = null;
-  };
-
-  /** One-way. The control is removed with the behaviour it controls. */
-  const stop = (): void => {
-    abandoned = true;
-    halt();
-    if (pauseBtn) pauseBtn.hidden = true;
-  };
-
-  if (pauseBtn) {
-    pauseBtn.addEventListener('click', () => {
-      paused = !paused;
-      if (paused) halt();
-      else run();
-      pauseBtn.setAttribute('aria-pressed', String(paused));
-      if (pauseLabel) pauseLabel.textContent = paused ? 'Play' : 'Pause';
-      pauseBtn.classList.toggle('is-paused', paused);
-    });
-  }
-
-  /* An explicit choice, by pointer or by keyboard, ends autoplay for good.
-     Capture phase so it lands even though the group's own click handler calls
-     preventDefault, and `keydown` covers the arrow-key path through the ARIA
-     pattern, which is a choice just as much as a click is. */
-  group.addEventListener('click', (e) => {
-    if ((e.target as Element | null)?.closest('a[data-tab]')) stop();
-  }, true);
-  group.addEventListener('keydown', (e) => {
-    if (['ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' '].includes(e.key)) stop();
-  }, true);
-
-  /* NO SEPARATE STEPPER LISTENER IS NEEDED, and that is a consequence of the
-     steppers dispatching a real ArrowLeft/ArrowRight at the group: the keydown
-     handler directly above already calls stop() for those keys, so a stepper
-     press ends autoplay through the same route a key press does. */
-
-  /* Suspend while the reader is over or inside the control, and while the tab
-     is in the background. Neither is a choice, so neither is permanent. */
-  const suspendOn = ['pointerenter', 'focusin'] as const;
-  const resumeOn = ['pointerleave', 'focusout'] as const;
-  for (const ev of suspendOn) wrapper?.addEventListener(ev, halt);
-  for (const ev of resumeOn) wrapper?.addEventListener(ev, run);
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') halt();
-    else run();
-  });
-
-  /* Re-checked on change, per constraint 1. Turning the preference ON stops the
-     loop and withdraws the control; turning it off does not silently start
-     animating a page the reader is already reading, which is why this only
-     halts and never calls run(). */
-  const onReducedChange = (): void => {
-    if (!reduced.matches) return;
-    halt();
-    if (pauseBtn) pauseBtn.hidden = true;
-  };
-  if (typeof reduced.addEventListener === 'function') {
-    reduced.addEventListener('change', onReducedChange);
-  }
-
-  if (!reduced.matches) {
-    if (pauseBtn) {
-      pauseBtn.hidden = false;
-      pauseBtn.setAttribute('aria-pressed', 'false');
-    }
-    run();
-  }
+  /* AUTOPLAY WAS REMOVED ON 2026-10-17 (R285-P2-WEBSITE-ASTRO-GATES-RED-IN-CI-01).
+     Its only caller, the homepage product showcase in ProductScreens.astro,
+     stopped being imported at the homepage rebuild of 2026-09-06 and is deleted
+     with this change. Nothing else passed
+     autoplaySeconds, so the timer, the pause control and their listeners were
+     dead code. The moving parts that remain on the site are the hero workbench
+     and the connector band, and check-autoplay.mjs drives those. */
 }

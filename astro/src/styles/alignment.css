@@ -354,7 +354,7 @@
       .card__body, .item__body, .pair__body, .cap__body, .principles__body,
       .conn__note, .role__p, .note, .tl__p, .hir__p, .in__aside, .compare,
       .plans__trial, .lead, .faq__a, .sec-faq-a, .cmp-intro, .sec-say,
-      .sec-prose, .gx-def, .gl-def, .rt__detail, .pg__p, .reach__body,
+      .sec-prose, .gx-def, .gl-def, .pg__p, .reach__body,
       /* HOME 2.0, 2026-09-06. `.h2pf__p` is `.pg__p` under a new name: the same
          two paragraphs of the same argument, in the Home 2.0 proof section,
          which sets them as prose beside the gate rather than inside two equal
@@ -564,7 +564,7 @@
             .faq-item__a, .card__body, .item__body, .pair__body, .cap__body,
             .principles__body, .conn__note, .role__p, .note, .tl__p, .hir__p,
             .in__aside, .compare, .plans__trial, .lead, .faq__a, .sec-faq-a,
-            .cmp-intro, .sec-say, .sec-prose, .gx-def, .gl-def, .rt__detail,
+            .cmp-intro, .sec-say, .sec-prose, .gx-def, .gl-def,
             .pg__p, .reach__body, .cards__body, .cat__body, .spec__quote
           )
       ) {

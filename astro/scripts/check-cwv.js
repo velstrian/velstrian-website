@@ -152,8 +152,13 @@ const EXCEPTIONS = new Map([
    * enough that ordinary run-to-run variation does not fail a build, not enough
    * that a new shift can hide behind an existing one.
    */
-  ['/compare/crowmark-vs-cleantender/@1440', { ceiling: 0.17, why: '0.1492 measured. Inter swap re-wraps p.section__standfirst; see above.' }],
-  ['/compare/crowmark-vs-mytender-io/@1440', { ceiling: 0.13, why: '0.1141 measured. Same standfirst re-wrap on the same template.' }],
+  /*
+   * THE TWO /compare @1440 ENTRIES WERE REMOVED ON 2026-10-17. 'Inter Fallback'
+   * (A-152) fixed the standfirst re-wrap they recorded, and both routes measured
+   * 0.0001 or less at 1440 in CI run 39058437416 and on this machine, so they
+   * were ceilings over nothing. The monospace fallbacks added the same day in
+   * styles/fonts.css fixed the @390 breach on the same two routes.
+   */
   ['/about/@390', { ceiling: 0.12, why: '0.1054 measured. div.section__body drops 30px on the swap.' }],
   ['/pricing/@390', { ceiling: 0.12, why: '0.1022 measured. h1 hero-title +15px and div.pricing +48px on the swap.' }],
 ]);

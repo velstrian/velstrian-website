@@ -2618,14 +2618,14 @@
      had to be kept in step with its source by hand, and it was not.
      It goes BEFORE system-ui: a fallback that sits after the generic families
      is never reached. */
-  --font-display: 'Plus Jakarta Sans', 'Jakarta Fallback', system-ui, -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Jakarta Fallback', 'Jakarta Fallback DejaVu', system-ui, -apple-system, sans-serif;
   /* The two metric fallbacks sit BEFORE system-ui, which is the whole point of
      A-152: system-ui is what this stack fell through to, and it reflowed every
      paragraph on swap because nothing corrected its metrics. Segoe first, then
      Arial. See the derivation and the platform reasoning in styles/fonts.css.
      system-ui and -apple-system are kept behind them as the last resort for a
      machine that has neither. */
-  --font-body:    'Inter', 'Inter Fallback', 'Inter Fallback Arial', system-ui, -apple-system, sans-serif;
+  --font-body:    'Inter', 'Inter Fallback', 'Inter Fallback Arial', 'Inter Fallback DejaVu', system-ui, -apple-system, sans-serif;
   /* The three metric fallbacks sit BEFORE ui-monospace for the reason the two
      stacks above give. Without them the swap re-wrapped the compare page
      breadcrumb at 390 on Linux and failed check-cwv in CI. The derivation is in

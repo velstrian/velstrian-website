@@ -223,70 +223,10 @@ const ALLOW_UNEQUAL = [
  * ADR 0005, which leaves "is this element a marker" to review instead of
  * building a gate that guesses. */
 const ALLOW_BESPOKE = [
-  {
-    selector: '.tabsw-auto__pause',
-    reason:
-      'The autoplay pause control on the homepage product showcase. It is a MEDIA ' +
-      'TRANSPORT control governing the component it sits inside, not an action the ' +
-      'page offers, which is the same distinction .ca-search-trigger is exempted on ' +
-      'directly below. WCAG 2.2.2 REQUIRES it to exist: the showcase advances every ' +
-      'six seconds, and anything moving automatically for more than five seconds must ' +
-      'offer a way to pause it. Rendering it with Button.astro would give a mandatory ' +
-      'accessibility affordance the weight of a 54px primary call to action, sitting ' +
-      'beside the tabs and competing with "Request access", so obeying the one-button ' +
-      'rule literally here would make the page worse in exactly the way that rule ' +
-      'exists to prevent. It is deliberately quieter than the pills it accompanies, ' +
-      'and it is emitted only when autoplay is actually running, so it can never be a ' +
-      'dead control: a reader with JavaScript off or prefers-reduced-motion set never ' +
-      'receives it at all. — STALE SINCE 2026-09-06 AND DELIBERATELY RETAINED. The homepage was rebuilt and this component no longer ships on any route, so this gate reads dist and reports the entry as matching nothing. It is kept because the component still exists in src/ as the rollback path, and deleting a correct accessibility exemption for a component that is one import away from shipping again would turn a rollback into a red build. Delete this entry when the component itself is deleted, not before.',
-  },
-  {
-    selector: '.wt__pause',
-    reason:
-      'The autoplay pause control on the homepage WorkstationTour carousel. Same ' +
-      'distinction as .tabsw-auto__pause directly above and the same requirement: ' +
-      'it is a MEDIA TRANSPORT control governing the component it sits inside, not ' +
-      'an action the page offers. The tour advances every seven seconds, so WCAG ' +
-      '2.2.2 requires a way to pause it; rendering that with Button.astro would give ' +
-      'it the weight of a 54px primary call to action beside the prev/next arrows, ' +
-      'which is exactly the outcome the sibling entry above exists to avoid. It is ' +
-      'emitted only once the component confirms a timer is genuinely running ' +
-      '(`hidden` until then), so a reader with JavaScript off or ' +
-      'prefers-reduced-motion set never receives it and it can never be a dead ' +
-      'control. — STALE SINCE 2026-09-06 AND DELIBERATELY RETAINED. The homepage was rebuilt and this component no longer ships on any route, so this gate reads dist and reports the entry as matching nothing. It is kept because the component still exists in src/ as the rollback path, and deleting a correct accessibility exemption for a component that is one import away from shipping again would turn a rollback into a red build. Delete this entry when the component itself is deleted, not before.',
-  },
-  {
-    selector: '.rt__toggle',
-    reason:
-      'The refused-figure toggle inside the homepage reasoning trace ledger. It is a ' +
-      'VIEW STATE governing the figure it sits inside rather than an action the page ' +
-      'offers, which is the same distinction .gx-chip is exempted on below ("a filter ' +
-      'is a state you are in rather than an action you take") and the same one ' +
-      '.wt__pause is exempted on above. It carries no destination and completes no ' +
-      'task: it puts the refused claim back into the ledger struck through, and takes ' +
-      'it out again. Rendering it with Button.astro would put a 54px primary call to ' +
-      'action inside a drawn proof, three lines above the two real links this section ' +
-      'closes on, so obeying the one-button rule literally here would make the page ' +
-      'worse in exactly the way that rule exists to prevent. It is emitted `hidden` ' +
-      'and revealed only by the script that gives it something to do, so a reader ' +
-      'with JavaScript off receives the fuller ledger and no dead control, which is ' +
-      'the contract .wt__pause and .tabsw-auto__pause already state on this same page. ' +
-      'It is on the shared `control chip` recipe, so its 36px target, its padding, its ' +
-      'radius and its pointer response are the same ones .art__pill and .gx-chip wear. ' +
-      '— WHAT THIS ENTRY IS NOT, MEASURED AND RECORDED BECAUSE THE TWO FAILURES LOOK ' +
-      'ALIKE FROM A DISTANCE. An earlier build of this control was reported at ' +
-      '173x19, below the 24px SC 2.5.8 floor, and an exemption for THAT would have been ' +
-      'the softening move this file exists to refuse: a gate does not stop a control ' +
-      'being too small to hit. That state was a real defect and it was fixed at the ' +
-      'source rather than exempted, by putting the button on `control chip` so it takes ' +
-      'the 36px min-height labels.css already gives a chip that is a link or a button. ' +
-      'Re-measured on the built page at three viewports: 263x36 at 1440, 245x36 on a ' +
-      'Pixel 7 and 245x36 on an iPhone 13, both with hasTouch and isMobile set. ' +
-      'check-controls.js rule 3 measures the same element at 1440 and 390 and passes it. ' +
-      'What is left, and the only thing this entry covers, is the bespoke-button rule ' +
-      'below: a padded, rounded, painted control that is not a .btn. Every user of ' +
-      '`control chip` on this site trips that rule and every one of them is named here. — STALE SINCE 2026-09-06 AND DELIBERATELY RETAINED. The homepage was rebuilt and this component no longer ships on any route, so this gate reads dist and reports the entry as matching nothing. It is kept because the component still exists in src/ as the rollback path, and deleting a correct accessibility exemption for a component that is one import away from shipping again would turn a rollback into a red build. Delete this entry when the component itself is deleted, not before.',
-  },
+  /* Three entries were deleted here on 2026-10-17 (R285-P2-WEBSITE-ASTRO-GATES-RED-IN-CI-01):
+   * .tabsw-auto__pause, .wt__pause and .rt__toggle. Each said to delete it when its
+   * component was deleted, and ProductScreens, WorkstationTour and ReasoningTrace
+   * were deleted that day as dead code, with the autoplay branch of TabSwitcher. */
   {
     selector: '.ca-search-trigger',
     reason:
@@ -584,7 +524,7 @@ const MEASURE = `(() => {
        '.principles__body', '.conn__note', '.role__p', '.note', '.tl__p',
        '.hir__p', '.in__aside', '.compare', '.plans__trial',
        '.lead', '.faq__a', '.sec-faq-a', '.cmp-intro', '.sec-say', '.sec-prose',
-       '.gx-def', '.gl-def', '.rt__detail', '.pg__p', '.reach__body',
+       '.gx-def', '.gl-def', '.pg__p', '.reach__body',
        '.cards__body', '.cat__body', '.spec__quote',
       ].some((t) => el.querySelector(':scope > ' + t))
     ) continue;
@@ -813,15 +753,16 @@ const MEASURE = `(() => {
    * TWO SELECTORS, NOT A REGEX OVER PROSE. A first pass matched currency and
    * percentages in section textContent and produced "00210%", having glued the
    * 002 of "PPN 002" to the 10% beside it. Figures that are PRESENTED as figures
-   * have their own elements: MarketShape renders each in .spine__value, and
-   * ReasoningTrace puts its total in [data-rt-sum]. Reading those asks "what
+   * have their own elements: MarketShape renders each in .spine__value. (The
+   * ReasoningTrace total, [data-rt-sum], was deleted with that component on
+   * 2026-10-17.) Reading those asks "what
    * does this page present as a figure" instead of "what looks like a number",
    * which is the distinction every other rule in this file turns on.
    *
    * The limit is stated rather than hidden: a figure written inline in a
-   * sentence is not covered. ReasoningTrace's 27,000 is one, and it is mapped.
+   * sentence is not covered.
    * What IS covered is the place new homepage figures are actually added. */
-  const figures = [...document.querySelectorAll('.spine__value, [data-rt-sum]')]
+  const figures = [...document.querySelectorAll('.spine__value')]
     .map((el) => el.textContent.trim())
     .filter(Boolean);
 
@@ -1090,7 +1031,7 @@ const MEASURE_LEFT = `window.__measureLeft = () => {
     '.card__body, .item__body, .pair__body, .cap__body, .principles__body, ' +
     '.conn__note, .role__p, .note, .tl__p, .hir__p, .in__aside, .compare, ' +
     '.plans__trial, .lead, .faq__a, .sec-faq-a, .cmp-intro, .sec-say, ' +
-    '.sec-prose, .gx-def, .gl-def, .rt__detail, .pg__p, .reach__body, ' +
+    '.sec-prose, .gx-def, .gl-def, .pg__p, .reach__body, ' +
     '.cards__body, .cat__body, .spec__quote, .h2pf__p, .h2pf__line';
 
   /* MIRRORS styles/alignment.css RULE 4, ONE BOX ONE AXIS, BY HAND, and the two

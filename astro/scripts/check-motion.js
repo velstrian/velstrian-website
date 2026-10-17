@@ -132,8 +132,6 @@ const ALLOWED = new Map([
    'the hero key light on /about: two aria-hidden blurred blooms rising from 0.55 alpha on load. It is not content, it cannot be read, and 0.55 is above the central floor of 0.35 anyway. It is a LIGHT arriving rather than a block arriving, and motion.css deliberately owns only the second. Kept as design; the only thing wrong with it is that its 0.55 is written here rather than beside --arrive-floor'],
   ['entrance  src/pages/about.astro  @keyframes dot-settle',
    'the trust-row dot itself, from 0.4 alpha and no glow to its shipped state. A 6px mark, aria-hidden, and the fallback is the settled dot rather than the dim one, so a browser without the timeline shows the finished mark. Same argument as bloom-in: a mark settling is not a block arriving. It is listed under DEBT above only for the TIMELINE it hangs on, not for this'],
-  ['entrance  src/components/sections/ReasoningTrace.astro  @keyframes rt-drop',
-   'the dropped figure on the homepage reasoning trace: an 8px displacement with a slight overshoot on the refusal box, at the beat the light reaches Ground. It is the section ARGUING — a figure being dropped is the content, not a way of introducing it — and it runs once, never loops, which is Rule 04 on refusals. It travels 8px and settles, so this rule catches it correctly and the answer is that it is not an entrance'],
 
   /* ── 3 OBSERVER ──────────────────────────────────────────────────────────
    *
@@ -178,8 +176,6 @@ const ALLOWED = new Map([
    'DEBT: a second, inline, byte-identical copy of the `data-lit` trigger above, at crowmark.astro:885. Same fifteen lines, same threshold of 0.25, same unobserve. The stated reason is payload — an is:inline script avoids a module request on a route already at 97 KB against a 100 KB budget — which is a real argument for INLINING and not an argument for a second implementation. It should import the shared one or the shared one should be inlined by the layout for every route'],
   ['observer  src/pages/crowmark-buyers.astro  IntersectionObserver',
    'DEBT: the THIRD copy of the same fifteen lines, at crowmark-buyers.astro:720. Identical to the crowmark.astro copy including its comment. Two pages carrying private copies of one trigger is how eleven motion systems started on the legacy site'],
-  ['observer  src/components/sections/ReasoningTrace.astro  IntersectionObserver',
-   'DEBT: a FOURTH observer, and a different one — not the data-lit trigger but a private count-up on the worked sum, ReasoningTrace.astro:371-395. It is carefully built: it reads its target from a data attribute the template writes, so the number can never disagree with the markup and nothing is ever parsed back out of formatted text, it returns early under reduced motion, and if it never runs the figure is already correct. Two things are still wrong with it. It is a second observer on the SAME route as motion.ts, which already has one and could carry this. And a count-up is the primitive motion.ts deleted rather than ported, on the grounds that MarketShape.astro forbids one on its four figures BY NAME because the legacy build animated them from zero. The same argument reaches this figure'],
 ]);
 
 /* ══════════════════════════════════════════════════════════════════════════
