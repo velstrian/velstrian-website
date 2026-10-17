@@ -524,12 +524,28 @@ for (const surface of SURFACES) {
         width: Math.round(box.w - 4),
         height: Math.round(box.h - 4),
       };
+      /*
+       * THE CARET IS HELD STILL FOR BOTH CAPTURES, ADDED 2026-10-17. The field
+       * is focused and typed into (it has to be, see above), so its text caret
+       * blinks, and a blink landing between the two captures was a second
+       * thing that could move pixels. CI logged exactly that, 29 pixels at peak
+       * 58 at either width on three runs (2026-08-19 at 1440, 2026-09-01 and
+       * 2026-10-17 at 390), with 0 on the runs between. A fixed-size object
+       * at either width, in a field that is focused for both captures, is the
+       * caret. caret-color: transparent is set on the field for the duration of the
+       * pair and removed after it, inside this gate only and never in product
+       * CSS. Focus is KEPT, because blurring would withdraw the native glyph
+       * this rule exists to find, and the injected-defect run still fails. */
+      const steady = await page.addStyleTag({
+        content: `${surface.input}{caret-color:transparent !important}`,
+      });
       const asBuilt = await page.screenshot({ clip });
       const probe = await page.addStyleTag({
         content: `${surface.input}::-webkit-search-cancel-button{-webkit-appearance:none !important;appearance:none !important}`,
       });
       const withoutNative = await page.screenshot({ clip });
       await probe.evaluate((el) => el.remove());
+      await steady.evaluate((el) => el.remove());
       await page.evaluate((sel) => {
         document.querySelector(sel.clear).style.removeProperty('display');
       }, surface);
