@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Velstran rebrand plan</title>
+<style>
+:root{--bg-dark:#070a13;--bg-card:rgba(17,24,39,.75);--border-color:rgba(255,255,255,.085);--primary:#6366f1;--primary-light:#818cf8;--secondary:#10b981;--secondary-light:#34d399;--warning:#f59e0b;--danger:#ef4444;--cyan:#06b6d4;--text-main:#f8fafc;--text-muted:#94a3b8;--text-dim:#64748b;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-heading:'Outfit',var(--font-sans);--font-code:'Fira Code',ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg-dark);color:var(--text-main);font-family:var(--font-sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;background-image:radial-gradient(circle at 15% 15%,rgba(99,102,241,.09),transparent 45%),radial-gradient(circle at 85% 85%,rgba(16,185,129,.07),transparent 45%);background-attachment:fixed}
+header{position:sticky;top:0;z-index:50;background:rgba(7,10,19,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);padding:.8rem 16px}
+.hc{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem}
+.hc h1{font-family:var(--font-heading);font-size:1.25rem;letter-spacing:-.02em}
+.hc p{font-size:.72rem;color:var(--secondary-light);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+nav{display:flex;flex-wrap:wrap;gap:4px}
+nav a{color:var(--text-muted);text-decoration:none;font-size:.78rem;padding:4px 10px;border:1px solid var(--border-color);border-radius:8px}
+nav a:hover{color:var(--text-main);border-color:var(--primary)}
+main{max-width:1200px;margin:0 auto;padding:24px 16px 80px}
+section{margin-top:40px}
+h2{font-family:var(--font-heading);font-size:1.5rem;letter-spacing:-.02em;margin-bottom:12px;scroll-margin-top:80px}
+h2 .n{display:block;font-size:.72rem;font-family:var(--font-sans);color:var(--primary-light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+h3{font-family:var(--font-heading);font-size:1.05rem;margin:22px 0 8px;color:var(--primary-light)}
+p,li{color:var(--text-muted)}
+p{margin:8px 0}
+ul{margin:8px 0 8px 20px}
+code{font-family:var(--font-code);font-size:.85em;color:var(--cyan)}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:16px 18px;margin:12px 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.kpis div{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px}
+.kpis b{display:block;font-family:var(--font-heading);font-size:1.35rem;color:var(--secondary-light);line-height:1.2}
+.kpis span{font-size:.8rem;color:var(--text-muted)}
+.tblwrap{overflow-x:auto;margin:10px 0;border:1px solid var(--border-color);border-radius:12px}
+.tbl{border-collapse:collapse;width:100%;min-width:640px;font-size:.85rem}
+.tbl th{background:rgba(99,102,241,.14);color:var(--text-main);text-align:left;padding:8px 10px;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;position:sticky;top:0}
+.tbl td{padding:8px 10px;border-top:1px solid var(--border-color);vertical-align:top;color:var(--text-muted)}
+.tbl td b{color:var(--text-main)}
+td.keep{color:var(--warning);font-weight:700}
+td.chg{color:var(--secondary-light);font-weight:700}
+.unv{background:rgba(245,158,11,.16);color:var(--warning);border-radius:4px;padding:0 5px;font-size:.78em;font-weight:700}
+.dec{border-left:3px solid var(--primary);padding-left:14px;margin:16px 0}
+.dec h3{margin-top:0;color:var(--text-main)}
+.dec ol{margin:6px 0 6px 22px}
+.rec{color:var(--secondary-light);font-weight:600}
+.pill{display:inline-block;font-size:.7rem;font-weight:700;border-radius:999px;padding:1px 9px;border:1px solid var(--border-color)}
+.pill.owner{color:var(--warning);border-color:rgba(245,158,11,.4)}
+.pill.claude{color:var(--cyan);border-color:rgba(6,182,212,.4)}
+.cl{list-style:none;margin:0}
+.cl li{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;padding:8px 10px;border-top:1px solid var(--border-color);align-items:start}
+.cl li:first-child{border-top:0}
+.cl input{margin-top:4px;width:18px;height:18px;accent-color:var(--secondary)}
+.cl .t{color:var(--text-main)}
+.cl .m{font-size:.76rem;color:var(--text-dim);display:block}
+.cl li.done .t{text-decoration:line-through;color:var(--text-dim)}
+.prog{font-size:.85rem;color:var(--text-muted)}
+.bar{height:8px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin:6px 0 12px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--secondary))}
+.src li{font-size:.82rem}
+a{color:var(--primary-light)}
+@media (max-width:640px){.hc h1{font-size:1.05rem}h2{font-size:1.25rem}}
+</style>
+</head>
+<body>
+<header><div class="hc"><div><h1>Velstran rebrand plan</h1><p>Research and plan, 17 October 2026</p></div>
+<nav><a href="#summary">Summary</a><a href="#decisions">Decisions</a><a href="#phases">Phases</a><a href="#estimates">Estimates</a><a href="#footprint">Footprint</a><a href="#vendors">Vendors</a><a href="#domains">Domains</a><a href="#tm">Trade mark</a><a href="#ch">Companies House</a><a href="#checklist">Checklist</a><a href="#sources">Sources</a></nav></div></header>
+<main>
+<p>Research only. No product code, config, DNS, account or register was changed to produce this page. Prices were read on 17 October 2026. Anything marked <span class="unv">UNVERIFIED</span> could not be confirmed and must be checked before it is relied on. Markdown twin: <code>crowagent-platform/docs/rebrand/VELSTRAN-REBRAND-PLAN.md</code>.</p>
+<section id="summary"><h2><span class="n">Section 1</span>Executive summary</h2>
+<p>The owner is considering renaming the company from CrowAgent to Velstran after the CrowAgent trade mark application was opposed. This plan is research only. Nothing in any product, config, DNS, account or register was changed to produce it.</p><div class="kpis">
+<div><b>17</b><span>Claude agent sessions (planning estimate), plus 2 optional if CrowMark is renamed too</span></div>
+<div><b>about 50</b><span>agent lane hours in total, about 20 to 24 hours elapsed with at most 3 lanes at once (RULE 0-L)</span></div>
+<div><b>about 18M</b><span>tokens of agent usage, a scale estimate with no per-token cash figure invented</span></div>
+<div><b>about GBP 345 plus USD 22.40</b><span>core cash: UK trade mark 3 classes, Companies House filing, three Porkbun domains in year one</span></div>
+<div><b>0</b><span>new timers, crons or CI jobs. No recurring spend beyond domain renewals</span></div>
+</div><ul>
+<li>Measured footprint: the old name appears in 4,181 platform files (27,598 occurrences) and 166 website files (2,564 occurrences). About 73 percent of those (21,874 of 30,162) sit in docs, trackers and tests. Shipping code is 1,185 files and 2,590 occurrences.</li>
+<li>The name is NOT centralised. Colour is (one brand.source.json for both repos). The wordmark, the legal line and two logo components are still hard coded. The first work package therefore builds one identity block, then a codemod, then a guard test.</li>
+<li>Biggest hidden risk: passkeys are bound to the domain (rp_id). Moving domain means users re-enrol passkeys unless both hosts run side by side for a window. Beta stage and Stripe test mode make now the cheapest moment to move.</li>
+<li>Name check so far: no exact Velstran hit on Companies House and the five domains checked read as unregistered. Two near names exist (VELSTRA LIMITED, VELSTRAND LTD). Trademark register clearance could NOT be run from this machine and is <span class="unv">UNVERIFIED</span>. It is the first gate.</li>
+<li>Elapsed time is dominated by the owner, not by Claude: UK trade mark registration takes about 3 to 4 months if unopposed, but the rebrand does not need to wait for it. Google needs weeks to settle a domain move.</li>
+</ul>
+<p>Effort totals from the estimates table: <b>17 sessions, 49.5 lane hours, 18.4M tokens</b>. These are planning estimates derived from the measured footprint, not benchmarks of earlier runs.</p>
+<h3>Cash</h3>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Item</th><th>Amount</th><th>Timing</th><th>Source</th></tr></thead><tbody>
+<tr><td>UK trade mark, 3 classes (9, 35, 42 assumed)</td><td>GBP 325</td><td>one off</td><td>S8</td></tr>
+<tr><td>Companies House name change online</td><td>GBP 20 (GBP 85 same day)</td><td>one off</td><td>S13</td></tr>
+<tr><td>Domains velstran.com, .co.uk, .uk at Porkbun</td><td>USD 22.40</td><td>year one, renews at USD 22.40</td><td>S1</td></tr>
+<tr><td>Subtotal core</td><td>about GBP 345 plus USD 22.40</td><td></td><td>arithmetic</td></tr>
+<tr><td>Optional velstran.ai</td><td>USD 82.70</td><td>per year</td><td>S1</td></tr>
+<tr><td>Optional EU trade mark, 3 classes</td><td>about EUR 1,050</td><td>one off</td><td>S17, <span class="unv">UNVERIFIED</span></td></tr>
+<tr><td>Optional Right Start UK check</td><td>GBP 125 plus GBP 30 per extra class, twice if continued</td><td>one off</td><td>S8</td></tr>
+<tr><td>Trade mark attorney</td><td><span class="unv">UNVERIFIED</span></td><td>quote required</td><td>none</td></tr>
+<tr><td>Vendor rename fees (Vercel, Stripe, Supabase, Brevo, Cloudflare, GitHub)</td><td>none found, <span class="unv">UNVERIFIED</span></td><td></td><td>none</td></tr>
+<tr><td>Claude agent usage</td><td>about 18.4M tokens, 17 sessions</td><td>scale estimate, no cash figure</td><td>planning estimate</td></tr>
+</tbody></table></div>
+</section>
+<section id="decisions"><h2><span class="n">Section 2</span>Decisions the owner must make</h2><p>Each decision is a question with options and one recommended answer. None is settled by this page.</p>
+<div class="dec"><h3>D1. Is Velstran the final name, subject to clearance?</h3><ol><li>Go only if the register clearance and an attorney review are clean (Gate 0)</li><li>Go now and accept the risk</li><li>Pick another name</li></ol><p class="rec">Recommended: Option 1. A second opposed application would cost another cycle, and clearance costs far less than that.</p></div>
+<div class="dec"><h3>D2. CrowMark and CrowMark Buyer both contain the stem Crow. Rename them too?</h3><ol><li>Keep both names for now</li><li>Rename both in this same programme (needs two new names cleared)</li><li>Keep for now and decide after the CrowAgent opposition grounds are read</li></ol><p class="rec">Recommended: Option 3. Read who opposed and on which element first. If the grounds cite the Crow stem, take option 2 inside this programme, because a second rebrand later costs more than extending this one by about 2 sessions. This is the owner decision, the recommendation is not a ruling.</p></div>
+<div class="dec"><h3>D3. Which domains to buy and where?</h3><ol><li>velstran.com, velstran.co.uk, velstran.uk at Porkbun (USD 22.40 year one)</li><li>Add velstran.ai (USD 82.70 a year) and velstran.app</li><li>Different registrar</li></ol><p class="rec">Recommended: Option 1. Porkbun is the only registrar whose first-year and renewal prices were verified here. DNS stays on the free Cloudflare plan, never Cloudflare Registrar.</p></div>
+<div class="dec"><h3>D4. Primary public domain</h3><ol><li>velstran.com with app.velstran.com and portal.velstran.com</li><li>velstran.co.uk</li><li>velstran.ai</li></ol><p class="rec">Recommended: Option 1. The two UK domains redirect to it.</p></div>
+<div class="dec"><h3>D5. Trade mark route</h3><ol><li>Standard UK online application, GBP 205 plus GBP 60 per extra class</li><li>UK Right Start check first</li><li>UK plus EU and WIPO filings now</li></ol><p class="rec">Recommended: Option 1 with an attorney reviewing the specification. Add EU or WIPO only after the UK path is clear. Classes 9, 35 and 42 are an assumption to confirm with the attorney.</p></div>
+<div class="dec"><h3>D6. Order of company name change versus trade mark filing</h3><ol><li>File the trade mark first, then change the company name</li><li>Change the company name first</li><li>Same week</li></ol><p class="rec">Recommended: Option 1. Filing fixes the date. The name change is a same-day online filing.</p></div>
+<div class="dec"><h3>D7. What happens to the opposed CrowAgent application?</h3><ol><li>Let counsel advise on withdrawing, defending or letting it lapse</li><li>Withdraw now</li><li>Defend</li></ol><p class="rec">Recommended: Option 1. This is procedure and money that only the owner and a trade mark attorney can decide.</p></div>
+<div class="dec"><h3>D8. Internal identifiers: package scope @crowagent/*, CROWAGENT_ env vars, database names, Stripe lookup keys, repo and project names</h3><ol><li>Keep all internal, change everything a customer can see</li><li>Rename internals too</li></ol><p class="rec">Recommended: Option 1. Renaming internals touches secrets in four vendors and lockfiles for no customer value. A later optional cleanup can follow.</p></div>
+<div class="dec"><h3>D9. Cutover shape</h3><ol><li>Run both domains in parallel for 30 to 90 days, then retire the old ones to redirect only</li><li>Hard cutover on one day</li></ol><p class="rec">Recommended: Option 1. Passkeys, OAuth redirect URIs and email reputation all need an overlap.</p></div>
+<div class="dec"><h3>D10. The platform mailbox crowagent.platform@gmail.com and the identity rule in CLAUDE.md</h3><ol><li>Create a new platform identity and restate the rule myself</li><li>Keep the mailbox as an internal identity</li></ol><p class="rec">Recommended: Option 2 for now. The rule names this identity and only the owner can change it. A Gmail address cannot be renamed (<span class="unv">UNVERIFIED</span> here), so a new mailbox plus forwarding is the route if wanted.</p></div>
+<div class="dec"><h3>D11. Owner supplied artwork</h3><ol><li>Owner provides the Velstran mark, wordmark and favicon</li><li>Claude proposes concepts</li></ol><p class="rec">Recommended: Option 1. RULE 0-C forbids inventing a brand value. Colours stay frozen per the owner decision of 2026-08-11.</p></div>
+<div class="dec"><h3>D12. Push and deploy budget for this programme (RULE 0-G, RULE 0-P)</h3><ol><li>2 pushes (platform, website) and 1 production promote of web and portal, each with its own approval</li><li>More</li></ol><p class="rec">Recommended: Option 1. Staging promote needs no push. Costs are stated again before each ask.</p></div>
+<h3>Product names: CrowMark and CrowMark Buyer</h3>
+<div class="card"><p>CrowMark and CrowMark Buyer both contain Crow. The CrowAgent application was opposed, but the grounds are not known to this research. If the opposer relied on the Crow element, the CrowMark names carry the same exposure and renaming only the company would move the problem instead of removing it. If the opposer relied on Agent or on a descriptive overlap, CrowMark may be unaffected.</p><ul><li>A. Keep both names (cheapest, exposure unknown)</li><li>B. Rename both inside this programme (needs two cleared names, about 2 extra sessions, 12 lane hours, 5M tokens, and a second clearance)</li><li>C. Keep for now, decide at Gate 0 after the grounds are read</li></ul><p class="rec">Recommendation as a question: choose C, then B if the grounds cite the Crow element. A later second rebrand would repeat the whole sweep, whereas doing it now adds about 30 percent. The owner decides.</p></div>
+</section>
+<section id="phases"><h2><span class="n">Section 3</span>Phased plan</h2>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Phase</th><th>Name</th><th>Goal</th><th>Elapsed</th></tr></thead><tbody>
+<tr><td><b>P0</b></td><td>Decide and clear</td><td>Read the opposition grounds, run the clearance, take decisions D1 to D3 and D7. Gate 0 is a go or no go.</td><td>1 day to about 2 weeks (attorney time <span class="unv">UNVERIFIED</span>)</td></tr>
+<tr><td><b>P1</b></td><td>Secure the name</td><td>Buy domains, point them at free Cloudflare, file the UK trade mark, change the company name, notify HMRC, bank and others.</td><td>1 to 3 days for domains and Companies House, owner paced</td></tr>
+<tr><td><b>P2</b></td><td>Vendors and DNS, additive only</td><td>Add new hosts and senders beside the old ones. Remove nothing. Verify every vendor by reading state back.</td><td>2 to 3 days</td></tr>
+<tr><td><b>P3</b></td><td>Code rebrand behind one identity block</td><td>One central identity source, a codemod, a guard test, local gates, staging promote and walk, then the approved push and promote.</td><td>5 to 7 days including approvals</td></tr>
+<tr><td><b>P4</b></td><td>Redirects and SEO</td><td>One hop 301 redirects from every old host and path, new sitemap, Search Console change of address.</td><td>1 to 2 days of work, then weeks for Google to settle</td></tr>
+<tr><td><b>P5</b></td><td>Customer, email and Stripe communications</td><td>Notices to beta users and customers, signatures, receipts, supplier profiles.</td><td>1 to 2 days</td></tr>
+<tr><td><b>P6</b></td><td>Decommission</td><td>Retire old senders, redirect URIs and webhooks only after the overlap window. Keep crowagent.ai redirecting for at least a year.</td><td>After the 30 to 90 day window</td></tr>
+</tbody></table></div>
+<h3>Sequencing rules and the cost statement</h3><ul>
+<li>Everything additive comes first (domains, DNS, senders, redirect URIs). Nothing is removed until P6.</li>
+<li>The company name change waits for Gate 0 and the trade mark filing, but it should land before customer facing copy goes live, so the legal footer is true.</li>
+<li>RULE 0-R: file each work package as a row in RELEASE-2.8.5-TRACKER.md before work starts, and RULE 0-V applies to every verification. This research created no rows.</li>
+<li>RULE 0-P: LOCAL to staging to production. Staging promote is pnpm staging:promote and needs no push. Production is pnpm prod:promote with a verified staging record, a green billing audit and the owner approval text carrying the sha prefix.</li>
+<li>RULE 0-G cost statement for this programme: pushes needed 2 (platform, website), each separately approved, a push to website main is a production Cloudflare deploy. Vercel production deploys: 1 promote covering web and portal, inside the 4 per release budget (confirm the R2.8.5 count before asking). New timers or crons: none. Recurring spend: domain renewals only, USD 22.40 a year at today prices. Switch off: nothing to switch off, redirects are static.</li>
+<li>Machine load (RULE 0-L): at most 3 heavy lanes, one heavyweight build or test at a time, check free RAM before each fan out. WP3.2 to WP3.4 can run as three lanes only if free RAM stays above 1 GB.</li>
+<li>Gate 0 (end of P0), Gate 1 (end of P2, every new host reads back healthy), Gate 2 (staging walk green and passkey re-enrol proven), Gate 3 (production promote approved), Gate 4 (redirect walk green).</li>
+</ul></section>
+<section id="estimates"><h2><span class="n">Section 4</span>Estimates: Claude effort</h2><p>One lane is one agent session. Hours are wall clock on this machine including builds and test runs. Tokens are an approximate usage scale. Lane types follow RULE 0-M. Never read as human developer days.</p>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>WP</th><th>Phase</th><th>Work</th><th>Lane</th><th>Sessions</th><th>Hours</th><th>Tokens (M)</th></tr></thead><tbody>
+<tr><td><b>WP0.1</b></td><td>P0</td><td>Register clearance in a real browser (UKIPO, TMview, WIPO) and domain and Companies House re-check</td><td>crow-researcher (Sonnet 5.5)</td><td>1</td><td>1.5</td><td>0.4</td></tr>
+<tr><td><b>WP1.1</b></td><td>P1</td><td>Owner filing pack: DNS records, trade mark specification text, resolution wording, notification letters</td><td>crow-researcher (Sonnet 5.5)</td><td>1</td><td>1.5</td><td>0.4</td></tr>
+<tr><td><b>WP1.2</b></td><td>P1</td><td>Cloudflare zone and DNS plan for the new domains, read only until the owner approves</td><td>crow-mechanic (Haiku 5.5)</td><td>1</td><td>1</td><td>0.3</td></tr>
+<tr><td><b>WP2.1</b></td><td>P2</td><td>Vercel, Cloudflare Access, Supabase, Railway additive config through the MCP tools</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>3</td><td>1</td></tr>
+<tr><td><b>WP2.2</b></td><td>P2</td><td>Stripe, Brevo, PostHog, Sentry additive config and read back verification</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>3</td><td>0.8</td></tr>
+<tr><td><b>WP3.1</b></td><td>P3</td><td>Identity block in brand.source.json, generators for TS, Python and astro, shared logo component</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>4</td><td>1.5</td></tr>
+<tr><td><b>WP3.2</b></td><td>P3</td><td>web and apps/portal sweep: copy, i18n, metadata, manifests, logos</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>6</td><td>3</td></tr>
+<tr><td><b>WP3.3</b></td><td>P3</td><td>api: email templates, PDF and DOCX mastheads, config defaults, scheduler copy</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>4</td><td>2.5</td></tr>
+<tr><td><b>WP3.4</b></td><td>P3</td><td>crowagent-website astro: site data, pages, SEO, JSON-LD, llms.txt, sitemap, workers</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>3</td><td>1.5</td></tr>
+<tr><td><b>WP3.5</b></td><td>P3</td><td>Tests that assert the visible name, plus the guard test, one targeted regression run</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>5</td><td>2</td></tr>
+<tr><td><b>WP3.6</b></td><td>P3</td><td>Docs, specs, onboarding guide, tracker rows, board rebuild</td><td>crow-mechanic (Haiku 5.5)</td><td>1</td><td>2</td><td>0.6</td></tr>
+<tr><td><b>WP3.7</b></td><td>P3</td><td>Local gates, staging promote, staging walk (login, passkey re-enrol, checkout test, email, PDF)</td><td>crow-walker (Sonnet 5.5)</td><td>1</td><td>4</td><td>1.2</td></tr>
+<tr><td><b>WP3.8</b></td><td>P3</td><td>Log based certification per RULE 0-CERT and post deploy audit</td><td>crow-walker (Sonnet 5.5)</td><td>1</td><td>3</td><td>0.5</td></tr>
+<tr><td><b>WP4.1</b></td><td>P4</td><td>Redirect map and rules, canonical, sitemap, robots, Search Console prep</td><td>crow-builder (Opus 5.5)</td><td>1</td><td>3</td><td>1</td></tr>
+<tr><td><b>WP4.2</b></td><td>P4</td><td>Production walk of redirect status codes and landed URLs</td><td>crow-walker (Sonnet 5.5)</td><td>1</td><td>2</td><td>0.6</td></tr>
+<tr><td><b>WP5.1</b></td><td>P5</td><td>Drafts: customer notice, receipts check, signatures, legal footer text for owner approval</td><td>crow-researcher (Sonnet 5.5)</td><td>1</td><td>1.5</td><td>0.5</td></tr>
+<tr><td><b>WP6.1</b></td><td>P6</td><td>Decommission audit and final leftover scan after the window</td><td>crow-researcher (Sonnet 5.5)</td><td>1</td><td>2</td><td>0.6</td></tr>
+</tbody></table></div>
+<p><b>Total: 17 sessions, 49.5 lane hours, 18.4M tokens.</b> With at most 3 concurrent heavy lanes (RULE 0-L) the elapsed agent time is about 20 to 24 hours.</p>
+<p>Optional if CrowMark is renamed too: 2 extra sessions, 12 lane hours, 5M tokens. Also rename CrowMark and CrowMark Buyer (adds about 30 percent to WP3.2 to WP3.5 plus a second clearance).</p>
+<h3>Owner actions and real world elapsed time</h3>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Owner action</th><th>Owner effort</th><th>Elapsed or wait</th></tr></thead><tbody>
+<tr><td>Read the CrowAgent opposition notice and note opposer, grounds and earlier mark</td><td>about 1 hour</td><td>same day, free</td></tr>
+<tr><td>Trade mark attorney review of clearance and specification (advisable)</td><td><span class="unv">UNVERIFIED</span></td><td>attorney quote required, none invented here</td></tr>
+<tr><td>Buy the three domains and set nameservers to Cloudflare</td><td>about 30 minutes</td><td>registration is minutes, nameserver change takes up to 24 hours (Cloudflare docs)</td></tr>
+<tr><td>File the UK trade mark application online</td><td>about 1 hour</td><td>examination within 2 weeks, 2 month objection window after publication, about 3 to 4 months to registration if unopposed (gov.uk timeline)</td></tr>
+<tr><td>Pass the special resolution and file the company name change online</td><td>about 1 hour</td><td>GBP 20, or GBP 85 same day. Standard processing time not stated on the gov.uk page, <span class="unv">UNVERIFIED</span></td></tr>
+<tr><td>Notify HMRC, bank, ICO, insurer, IASME and Cyber Essentials body, key contracts</td><td>about 3 hours</td><td>days to weeks, each body sets its own pace, <span class="unv">UNVERIFIED</span></td></tr>
+<tr><td>Account side changes only a human can authorise: Stripe business details, registrar, GitHub org rename, Google Cloud OAuth consent, Brevo senders</td><td>about 3 hours</td><td>mostly minutes each, Stripe verification time <span class="unv">UNVERIFIED</span></td></tr>
+<tr><td>Provide Velstran logo, wordmark and favicon artwork</td><td>owner paced</td><td>blocks WP3.1 logo work only</td></tr>
+<tr><td>Per act approvals: each push, the production promote, any spend</td><td>minutes each</td><td>RULE 0-G allows 2 pushes per session even with approval</td></tr>
+<tr><td>Search Console ownership of the new domain and Change of Address</td><td>about 30 minutes</td><td>Google says medium sites can take several weeks or more to show new URLs (Google docs)</td></tr>
+</tbody></table></div>
+</section>
+<section id="footprint"><h2><span class="n">Section 5</span>Footprint measured in the repositories</h2>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Repository</th><th>Files with a hit</th><th>Occurrences (case insensitive)</th><th>crowagent.ai</th><th>CrowAgent</th><th>Crow Agent</th></tr></thead><tbody>
+<tr><td><b>crowagent-platform (all text files)</b></td><td>4,181</td><td>27,598</td><td>10,132</td><td>6,408</td><td>675</td></tr>
+<tr><td><b>crowagent-website (all text files)</b></td><td>166</td><td>2,564</td><td>934</td><td>820</td><td>23</td></tr>
+</tbody></table></div>
+<h3>By kind of file</h3>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Kind</th><th>Files</th><th>Occurrences</th><th>Recommendation</th></tr></thead><tbody>
+<tr><td>docs, specs, trackers, boards (markdown and status)</td><td>1,070</td><td>14,446</td><td class="keep">KEEP as history, edit only the live guides</td></tr>
+<tr><td>tests (assertions and fixtures)</td><td>1,244</td><td>7,428</td><td class="chg">CHANGE only where a test asserts the visible name, follows the codemod</td></tr>
+<tr><td>other source code (path not otherwise classified)</td><td>612</td><td>3,007</td><td>mixed, handled inside WP3.2 to WP3.4</td></tr>
+<tr><td>ui pages and copy (tsx, astro, html)</td><td>718</td><td>1,433</td><td class="chg">CHANGE</td></tr>
+<tr><td>email templates and senders</td><td>133</td><td>930</td><td class="chg">CHANGE, dual sending during overlap</td></tr>
+<tr><td>config, CI, scripts</td><td>132</td><td>1,262</td><td class="chg">CHANGE hostnames only, KEEP names that are identifiers</td></tr>
+<tr><td>api python</td><td>142</td><td>529</td><td class="chg">CHANGE copy and sender defaults</td></tr>
+<tr><td>database sql and migrations</td><td>162</td><td>453</td><td class="keep">KEEP, migrations are immutable history</td></tr>
+<tr><td>brand tokens, logos, favicons</td><td>49</td><td>239</td><td class="chg">CHANGE, needs owner artwork</td></tr>
+<tr><td>pdf, docx, report mastheads</td><td>36</td><td>192</td><td class="chg">CHANGE</td></tr>
+<tr><td>legal pages</td><td>27</td><td>115</td><td class="chg">CHANGE with owner approved text</td></tr>
+<tr><td>seo, structured data, llms.txt, sitemap</td><td>7</td><td>69</td><td class="chg">CHANGE</td></tr>
+<tr><td>package and workspace files</td><td>15</td><td>59</td><td class="keep">KEEP the @crowagent/* scope</td></tr>
+</tbody></table></div>
+<ul><li>Shipping code view (non test, non markdown, comment lines stripped): 1,185 files, 2,590 occurrences</li><li>web/src 868, apps/portal 523, api/app 474, supabase/migrations 406, astro/src 176, packages/tokens 75, web/public 34</li><li>Lines in that view by kind: @crowagent/ import scope 760, crowagent.ai domain 305, Stripe lookup key 44, CROWAGENT_ env name 44, storage or cookie key 23</li></ul>
+<h3>Hosts named in code and config</h3>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Host</th><th>Occurrences</th></tr></thead><tbody>
+<tr><td>crowagent.ai (apex)</td><td>430</td></tr>
+<tr><td>app.crowagent.ai</td><td>208</td></tr>
+<tr><td>portal.crowagent.ai</td><td>104</td></tr>
+<tr><td>staging-app.crowagent.ai</td><td>89</td></tr>
+<tr><td>staging-portal.crowagent.ai</td><td>21</td></tr>
+<tr><td>www.crowagent.ai</td><td>11</td></tr>
+<tr><td>status.crowagent.ai</td><td>9</td></tr>
+<tr><td>staging.crowagent.ai</td><td>7</td></tr>
+<tr><td>inbound.crowagent.ai</td><td>5</td></tr>
+<tr><td>ops.crowagent.ai</td><td>3</td></tr>
+<tr><td>internal.crowagent.ai</td><td>1 (decommissioned project)</td></tr>
+</tbody></table></div>
+<p>Method: a Node script walked both repos, skipped node_modules, .next, dist, .venv, coverage, test-results, .git and similar, read text files up to 2 MB and counted case insensitive crowagent plus the exact strings. The class split is by file path, so it is a hint rather than a verdict. The shipping code view skips test and markdown files and lines that begin with a comment marker. Scripts were kept outside the repository.</p>
+<h3>Change or keep, by class</h3>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Class</th><th>Verdict</th><th>Why</th><th>Risk</th></tr></thead><tbody>
+<tr><td><b>User facing copy (web, portal, astro, i18n)</b></td><td class="chg">CHANGE</td><td>Customers read it. Include metadata, titles, error text and tour copy.</td><td>None beyond a missed string, which the guard test catches</td></tr>
+<tr><td><b>Brand tokens, logos, favicons</b></td><td class="chg">CHANGE</td><td>Colours stay frozen (owner decision 2026-08-11). Marks and wordmark change and need owner artwork.</td><td>RULE 0-C: never invent a brand value</td></tr>
+<tr><td><b>Domains and URLs in code</b></td><td class="chg">CHANGE</td><td>Move to config driven defaults, keep old hosts as redirect sources.</td><td>Passkey rp_id, OAuth redirect URIs, cookies on .crowagent.ai, Stripe return URLs</td></tr>
+<tr><td><b>Email senders and templates</b></td><td class="chg">CHANGE</td><td>New sender domain with DKIM and DMARC, dual sending for the overlap.</td><td>Cold sender reputation, so warm up and keep volume low</td></tr>
+<tr><td><b>PDF, DOCX and report mastheads</b></td><td class="chg">CHANGE</td><td>Attribution lines and letterheads come from tokens and generated files.</td><td>Documents already issued keep the old name, which is correct</td></tr>
+<tr><td><b>Legal pages: terms, privacy, cookies</b></td><td class="chg">CHANGE</td><td>Add a formerly known as line. Company number stays the same.</td><td>Owner must approve legal wording</td></tr>
+<tr><td><b>SEO, meta, structured data, llms.txt, sitemap</b></td><td class="chg">CHANGE</td><td>Pair with one hop 301s and a new sitemap.</td><td>Temporary ranking movement (Google docs)</td></tr>
+<tr><td><b>Package scope @crowagent/*</b></td><td class="keep">KEEP</td><td>Private file: dependencies, never shown to customers, 760 import lines, lockfile ordering traps already documented.</td><td>Developer confusion only. Optional cleanup later</td></tr>
+<tr><td><b>Env var names CROWAGENT_*</b></td><td class="keep">KEEP</td><td>44 lines in code and secrets in Railway, Vercel and GitHub. A rename needs synchronised secret changes.</td><td>Low. Values never printed</td></tr>
+<tr><td><b>Database identifiers and migrations</b></td><td class="keep">KEEP</td><td>Migrations are history. A live rename needs a migration that ships with its code.</td><td>Low</td></tr>
+<tr><td><b>Stripe lookup keys crowagent_&lt;product&gt;_&lt;tier&gt;_&lt;cadence&gt;</b></td><td class="keep">KEEP</td><td>Referenced by packages/pricing/catalogue.ts and seed migrations. Customers never see them. Product display names do change.</td><td>Low. Do not touch live prices</td></tr>
+<tr><td><b>localStorage and cookie keys (crowagent_tour_*)</b></td><td class="keep">KEEP</td><td>A rename resets user preferences for no gain.</td><td>Low</td></tr>
+<tr><td><b>Repo, folder, Vercel project and Railway service names</b></td><td class="keep">KEEP</td><td>Scripts under scripts/staging reference them. Vercel project rename changes the default vercel.app URL.</td><td>Low. Redirects exist for GitHub renames only</td></tr>
+<tr><td><b>Test assertions</b></td><td class="chg">CHANGE where they assert the visible name</td><td>Follow the codemod, one targeted run.</td><td>Do not weaken a guard</td></tr>
+<tr><td><b>Docs, trackers, board history</b></td><td class="keep">KEEP</td><td>Historical record. Edit only the live onboarding guide, ENGINEERING-STANDARDS and entry files.</td><td>None</td></tr>
+<tr><td><b>Public Python SDK file crowagent_python_sdk.py under web/public/sdk</b></td><td class="chg">CHANGE with an alias</td><td>Customer facing. Ship the new name and keep the old file serving.</td><td>Unknown external users, <span class="unv">UNVERIFIED</span></td></tr>
+</tbody></table></div>
+<h3>How central the name really is (RULE 0-C)</h3><ul><li>Colour: central. packages/tokens/brand/brand.source.json is the one source, gen-brand.mjs writes tokens.css, constants.ts and the copy in crowagent-website/astro/src/styles (package.json brand comment, packages/tokens).</li><li>Contact identity: central. packages/tokens/src/contact.ts holds SUPPORT_EMAIL, SALES_EMAIL, SECURITY_EMAIL and the From name. attribution.ts holds the document footer. Both are imported through @crowagent/tokens, which has 44 import lines across web and apps.</li><li>Wordmark and legal line: NOT central. email-shell.ts lines 124 to 140 hard code the text CrowAgent and the company line. No BRAND_NAME or COMPANY_NAME constant exists in web/src (grep for the usual names finds only two unrelated i18n files).</li><li>Logo: duplicated. CrowAgentLogo.tsx exists in web/src/shared/ui and apps/portal/src/components.</li><li>Python side: partly generated. api/app/services/_email_shell_generated.py and regulated_constants_generated.py show a generator pattern that can be extended, but api/app/config.py hard codes the addresses and the default sender display name.</li><li>Website: astro/src/data/site.ts holds 15 hits and pages repeat the name directly. The website keeps its own copy of brand.source.json.</li><li>Verdict: change once and propagate is true for colour and half true for contact. It is false for the name. Plan WP3.1 first and make everything else consume it.</li></ul>
+<h3>Guard test design</h3><ul><li>Add an identity block to brand.source.json (name, legalName, formerName, primary domain, hosts, mailbox addresses) and make gen-brand.mjs emit it for TypeScript, Python and astro. brand:check already fails on drift.</li><li>Guard test: scan the code roots (web/src, apps/portal/src, api/app, packages, astro/src) with comments stripped for crowagent, Crow Agent and CrowAgent, case insensitive. Fail on any hit outside an allowlist of patterns, not a count.</li><li>Allowlist patterns: the @crowagent/ package scope, CROWAGENT_ env names, crowagent_&lt;product&gt;_ Stripe keys, the supabase/migrations tree, the redirect map file, the formerly known as legal line, localStorage keys, and test fixtures that assert the absence of the old name.</li><li>Red prove it: add a raw old name to a component, show the test fail, remove it. Run it locally through pnpm. Per RULE 0-G it is attached to the product fix in the same commit, it is a pattern allowlist and not a numeric baseline, and wiring it into CI needs separate owner approval.</li></ul></section>
+<section id="vendors"><h2><span class="n">Section 6</span>Vendors and accounts</h2>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Vendor</th><th>What changes</th><th>Steps</th><th>Order</th><th>Risk</th><th>Can stay internal</th><th>Source</th></tr></thead><tbody>
+<tr><td><b>GitHub (org crowagent, repos crowagent-platform and crowagent-website per .git/config)</b></td><td>Org name, optional repo names</td><td>Rename the org in settings. Repo web links redirect, old remote URLs keep working but should be updated. Profile links and API calls to the old org name do not redirect, and the old org name becomes claimable by anyone.</td><td>Do after P3 ships so CI secrets and remotes are touched once</td><td>Medium: name squatting on the old org</td><td>Repo names, local folders</td><td>S18</td></tr>
+<tr><td><b>Vercel (projects crowagent-platform-web and crowagent-portal)</b></td><td>Add new hosts, later remove old</td><td>Add app.velstran.com and portal.velstran.com plus staging hosts as extra domains, verify, redirect old to new at the end. Never edit vercel.json off main (RULE 0).</td><td>After new DNS exists, before P3 promote</td><td>Medium: production deploy is gated by RULE 0-P and the 4 deploy budget</td><td>Project names and ids, team slug</td><td>S23</td></tr>
+<tr><td><b>Cloudflare (free plan zone crowagent.ai, Access apps, Pages, Workers)</b></td><td>New zone velstran.com, Access policy for the new portal host, Pages custom domain, redirect rules</td><td>Onboard velstran.com on the Free plan, set nameservers, copy records. Keep the crowagent.ai zone as the redirect source. Free plan redirect rule quotas are <span class="unv">UNVERIFIED</span>, check before relying on rules, else redirect at Vercel and Pages.</td><td>First vendor step, everything else needs DNS</td><td>Low if additive. Access lock out if the new host has no policy</td><td>Access team name winter-violet-71d5 (internal), worker names</td><td>S20</td></tr>
+<tr><td><b>Supabase (prod gujtuecjzfiqsdnzgyvo, staging ipgrnwvfnumgvnxkpxsc)</b></td><td>Site URL and redirect allow list, auth SMTP sender name and address, webauthn_rp_id setting, email templates</td><td>Add new redirect URLs first, switch the SMTP sender fields at cutover (smtp_admin_email and smtp_sender_name), ship a migration that extends the portal and app passkey host allowlist (the allowlist migration is 20269000000432). Passkeys registered on the old rp_id stop working on the new one.</td><td>Staging first. A migration that changes what deployed code writes ships with its code</td><td>High: passkeys and session cookies are per origin</td><td>Project names and refs</td><td>S22</td></tr>
+<tr><td><b>Railway (services crowagent-platform, crowagent-platform-staging, crowagent-worker)</b></td><td>CORS origins and CROWAGENT_ env values that name the old host, tender_intake_domain</td><td>Update host valued variables only. No service rename.</td><td>With the platform promote</td><td>Low</td><td>Service and project names, CROWAGENT_* names</td><td>repo: api/app/config.py</td></tr>
+<tr><td><b>Stripe (account is in TEST MODE per owner notes)</b></td><td>Public business name, statement descriptor, branding, support URL, receipt text, webhook endpoint URLs, Checkout return URLs, product display names</td><td>Update business details in the Dashboard. A statement descriptor must be 5 to 22 Latin characters and reflect the DBA. Add the new webhook endpoint before removing the old one. Changing the legal entity name may trigger verification, <span class="unv">UNVERIFIED</span>.</td><td>After Companies House confirms the new name</td><td>Medium for live mode later, low now</td><td>Lookup keys, price ids</td><td>S19</td></tr>
+<tr><td><b>Brevo (one key for all email, two verified senders)</b></td><td>New sender domain, DKIM, Brevo code, DMARC, verified senders, inbound parse domain</td><td>Authenticate velstran.com and add both senders, warm up, dual send, then switch BREVO_FROM_EMAIL. Add MX for inbound.velstran.com and keep inbound.crowagent.ai live. The Brevo help page was blocked here, so exact record names are <span class="unv">UNVERIFIED</span>.</td><td>P2, before the cutover</td><td>Medium: new domain reputation</td><td>BREVO_* env names</td><td>repo: api/app/config.py lines 765 to 811</td></tr>
+<tr><td><b>PostHog (eu.posthog.com)</b></td><td>Project and org display names, allowed URLs</td><td>Rename display names, add new host to authorised URLs.</td><td>Any time</td><td>Low, specifics <span class="unv">UNVERIFIED</span></td><td>Project ids and keys</td><td>none fetched</td></tr>
+<tr><td><b>Sentry (de.sentry.io)</b></td><td>Org display name, alert and webhook URLs that name the old host</td><td>Rename display name only. The org slug appears in URLs, whether it can change safely was not found in the docs fetched, <span class="unv">UNVERIFIED</span>.</td><td>Any time</td><td>Low</td><td>Org slug, DSNs, project slugs</td><td>none fetched</td></tr>
+<tr><td><b>Google mailbox crowagent.platform@gmail.com and Google Cloud OAuth client</b></td><td>Mailbox cannot be renamed (<span class="unv">UNVERIFIED</span>). OAuth consent screen app name, authorised domains and redirect URIs</td><td>Add new redirect URIs before cutover. Consent screen re verification needs are <span class="unv">UNVERIFIED</span>.</td><td>P2</td><td>Medium: login with Google breaks if redirect URIs are missing</td><td>The mailbox as an internal identity (D10)</td><td>none fetched</td></tr>
+<tr><td><b>Upstash (database name is random)</b></td><td>Nothing user visible</td><td>None.</td><td>n/a</td><td>None</td><td>Everything</td><td>repo: docs</td></tr>
+<tr><td><b>Also found in the repo</b></td><td>Word add-in manifest (word-addin/), Zapier connector copy, public Python SDK, status.crowagent.ai, MCP descriptors, Cyber Essentials and IASME certificate holder name</td><td>Include each in WP3.2 and the owner notifications.</td><td>P3 and P5</td><td>Medium for the SDK and the add-in store listing</td><td>Internal ids</td><td>repo: scan</td></tr>
+</tbody></table></div>
+</section>
+<section id="domains"><h2><span class="n">Section 7</span>Domains</h2>
+<p>Availability is from RDAP, the registry lookup service. A 404 from the registry means no registration record, with control lookups returning 200 for google.com, google.co.uk, google.io, google.ai and google.app. RDAP cannot show registry reserved or premium names, so confirm at checkout. Checked 17 October 2026.</p>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Domain</th><th>Availability (RDAP)</th><th>Porkbun first year / renewal (USD)</th><th>IONOS UK (GBP excl. VAT)</th><th>123-reg (GBP excl. VAT)</th><th>Cheapest with verified renewal</th></tr></thead><tbody>
+<tr><td><b>velstran.com</b></td><td>Not registered</td><td>USD 11.08 / USD 11.08</td><td>GBP 1 for 1 year promo (original GBP 15), renewal not stated</td><td>GBP 0.01 first year promo, renewal not shown</td><td>Porkbun for verified renewal, 123-reg promo is first year only</td></tr>
+<tr><td><b>velstran.co.uk</b></td><td>Not registered</td><td>USD 5.66 / USD 5.66</td><td>GBP 1 promo (original GBP 10), renewal not stated</td><td>GBP 3.99 first year, renewal not shown</td><td>Porkbun</td></tr>
+<tr><td><b>velstran.uk</b></td><td>Not registered</td><td>USD 5.66 / USD 5.66</td><td>not listed</td><td>GBP 0.01 (1p) promo, renewal not shown</td><td>Porkbun</td></tr>
+<tr><td><b>velstran.ai</b></td><td>Not registered</td><td>USD 82.70 / USD 82.70</td><td>GBP 80 promo (original GBP 120)</td><td>GBP 36.99 first year with a 2 year term</td><td>Porkbun for a one year price, 123-reg only with a 2 year term</td></tr>
+<tr><td><b>velstran.io</b></td><td>Not registered</td><td>USD 28.12 / USD 51.80</td><td>GBP 41.25 promo (original GBP 75)</td><td>not listed</td><td>Porkbun first year, renewal jumps</td></tr>
+<tr><td><b>velstran.app</b></td><td>Not registered</td><td>USD 8.75 / USD 14.93</td><td>not listed</td><td>not listed</td><td>Porkbun</td></tr>
+</tbody></table></div>
+<p>Namecheap (403 on fetch) and Squarespace Domains (404) could not be read, so no price is given for them and they are <span class="unv">UNVERIFIED</span>. IONOS and 123-reg pages show promotional first year prices without renewal figures, so they are not a basis for a budget. Currency is not converted.</p><p class="rec">Recommended set: velstran.com (primary), velstran.co.uk and velstran.uk (defensive UK redirects). Year one at Porkbun is USD 22.40, renewal USD 22.40 a year at today prices. Do not buy .io (renewal USD 51.80). Treat .ai (USD 82.70 a year) as optional and revisit after the trade mark is clear. Keep nameservers on the free Cloudflare plan and never use Cloudflare Registrar.</p><p>Sources: S1 Porkbun, S2 to S5 RDAP, S6 IONOS, S7 123-reg.</p></section>
+<section id="tm"><h2><span class="n">Section 8</span>Trade mark steps (UKIPO first)</h2>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Step</th><th>Who</th><th>Detail and source</th></tr></thead><tbody>
+<tr><td>Read the CrowAgent opposition grounds and the opposer register entries</td><td>owner</td><td>Free. Decides D2.</td></tr>
+<tr><td>Run clearance for VELSTRAN and near forms on the UKIPO register, TMview (EU) and the WIPO Global Brand Database</td><td>Claude in a real browser, then attorney</td><td>These registers are scripted web apps and refused automated access here (UKIPO search returned 403, TMview gave no response). <span class="unv">UNVERIFIED</span>, first gate.</td></tr>
+<tr><td>Choose goods and services and classes (assumption 9 software, 42 software as a service, 35 business services, confirm with an attorney)</td><td>owner with attorney</td><td>Class choice drives the fee.</td></tr>
+<tr><td>File the UK application online</td><td>owner</td><td>GBP 205 for one class and GBP 60 for each extra class. Three classes is GBP 325 (S8).</td></tr>
+<tr><td>IPO examination</td><td>IPO</td><td>Within 2 weeks (S9).</td></tr>
+<tr><td>Publication in the trade marks journal, then the opposition window</td><td>IPO</td><td>2 months (S9). An extension request exists in the UK system but was not confirmed in the pages fetched, <span class="unv">UNVERIFIED</span>.</td></tr>
+<tr><td>Registration if unopposed</td><td>IPO</td><td>About 3 to 4 months from filing (S9, S11).</td></tr>
+<tr><td>Optional Right Start check before committing</td><td>owner</td><td>GBP 125 plus GBP 30 per extra class for a report, then the same again to continue, 28 days to decide (S8).</td></tr>
+<tr><td>Optional EU filing</td><td>owner with attorney</td><td>EUIPO fee stated as EUR 850 for one class, EUR 50 for a second and EUR 150 for each further (secondary sources only, EUIPO page returned 403, S17). Three classes is about EUR 1,050. <span class="unv">UNVERIFIED</span> against EUIPO.</td></tr>
+<tr><td>If someone opposes VELSTRAN</td><td>owner with attorney</td><td>Opposition fees from 1 April 2026: GBP 125 for identity or likelihood of confusion grounds only, GBP 250 including other grounds (S10). Defence cost is the attorney quote, <span class="unv">UNVERIFIED</span>.</td></tr>
+</tbody></table></div>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Fee or period</th><th>Amount</th><th>Source</th></tr></thead><tbody>
+<tr><td>UK application, online, one class</td><td>GBP 205</td><td>S8</td></tr>
+<tr><td>Each additional class</td><td>GBP 60</td><td>S8</td></tr>
+<tr><td>Three classes total</td><td>GBP 325</td><td>S8, arithmetic</td></tr>
+<tr><td>Right Start step one, one class</td><td>GBP 125 plus GBP 30 per extra class</td><td>S8</td></tr>
+<tr><td>Opposition filed against a mark, confusion grounds only</td><td>GBP 125</td><td>S10</td></tr>
+<tr><td>Opposition filed against a mark, other grounds included</td><td>GBP 250</td><td>S10</td></tr>
+<tr><td>Renewal at 10 years, first class</td><td>GBP 245</td><td>S10</td></tr>
+</tbody></table></div>
+<p>What the CrowAgent opposition implies, procedure only: an opposer has a prior right or a claim that the two marks are alike. It tells you the examiner and the opposer may read the name that way. It does not by itself say anything about VELSTRAN or CrowMark. A trade mark attorney is advisable for the clearance reading, the specification wording, the decision on the opposed application and any CrowMark question. This is not legal advice.</p></section>
+<section id="ch"><h2><span class="n">Section 9</span>Companies House steps</h2>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Step</th><th>Who</th><th>Detail and source</th></tr></thead><tbody>
+<tr><td>Check the name is free: Companies House search for velstran returned no results on 17 October 2026</td><td>Claude, done</td><td>S14</td></tr>
+<tr><td>Check near names. VELSTRA LIMITED (09456400, incorporated 24 February 2015) and VELSTRAND LTD (15195832, incorporated 9 October 2023) are one letter away</td><td>owner decision</td><td>Same as is rejected, too like is complaint based and can force a change later (S15, from a search snippet, <span class="unv">UNVERIFIED</span> in full). Consider attorney view</td></tr>
+<tr><td>Pass a special resolution of the members to change the name</td><td>owner</td><td>Required for the online route (S12)</td></tr>
+<tr><td>File the change online</td><td>owner</td><td>GBP 20, or GBP 85 same day (S13, updated 19 June 2026). Another gov.uk page quotes GBP 83 for same day, so confirm at the point of payment</td></tr>
+<tr><td>Postal alternative</td><td>owner</td><td>Form NM01 with a copy of the resolution and a GBP 30 cheque (S12)</td></tr>
+<tr><td>The name changes only when Companies House registers it, not when the resolution is passed</td><td>info</td><td>S12</td></tr>
+<tr><td>Company number 17076461 stays the same, so legal footers keep the number and add a formerly known as line</td><td>info</td><td>Number from packages/tokens/src/contact.ts, name change does not issue a new number (<span class="unv">UNVERIFIED</span> on the page fetched, widely stated)</td></tr>
+<tr><td>Consequential updates: HMRC, bank, ICO data protection registration, VAT if registered, Cyber Essentials and IASME, insurance, contracts, website legal footer, email signatures, invoices, supplier portal profiles</td><td>owner, Claude drafts</td><td>ICO: a name change goes through the registration helpline (S16, from a search snippet, <span class="unv">UNVERIFIED</span> in full)</td></tr>
+</tbody></table></div>
+</section>
+<section id="checklist"><h2><span class="n">Section 10</span>Master checklist</h2><p>Every action as a checkbox. State is remembered in this browser only. Owner is Claude or the owner. Dependency lists the ids that must be done first.</p><div class="card"><div class="prog" id="prog">0 of 0 done</div><div class="bar"><i id="barfill"></i></div></div>
+<h3>P0 Decide and clear</h3><div class="card"><ul class="cl">
+<li data-id="0.1"><input type="checkbox" id="c0_1" aria-label="Item 0.1"><label for="c0_1"><span class="t"><b>0.1</b> Read the CrowAgent opposition notice, record opposer, grounds and earlier mark</span><span class="m"><span class="pill owner">owner</span> depends on: none</span></label></li>
+<li data-id="0.2"><input type="checkbox" id="c0_2" aria-label="Item 0.2"><label for="c0_2"><span class="t"><b>0.2</b> Run register clearance in a real browser for VELSTRAN and near forms (UKIPO, TMview, WIPO), save screenshots</span><span class="m"><span class="pill claude">Claude</span> depends on: none</span></label></li>
+<li data-id="0.3"><input type="checkbox" id="c0_3" aria-label="Item 0.3"><label for="c0_3"><span class="t"><b>0.3</b> Re-run RDAP domain availability and the Companies House name search on the day of purchase</span><span class="m"><span class="pill claude">Claude</span> depends on: none</span></label></li>
+<li data-id="0.4"><input type="checkbox" id="c0_4" aria-label="Item 0.4"><label for="c0_4"><span class="t"><b>0.4</b> Attorney reviews clearance and drafts the specification (advisable)</span><span class="m"><span class="pill owner">owner</span> depends on: 0.2</span></label></li>
+<li data-id="0.5"><input type="checkbox" id="c0_5" aria-label="Item 0.5"><label for="c0_5"><span class="t"><b>0.5</b> Decide D2 (CrowMark names) using 0.1</span><span class="m"><span class="pill owner">owner</span> depends on: 0.1</span></label></li>
+<li data-id="0.6"><input type="checkbox" id="c0_6" aria-label="Item 0.6"><label for="c0_6"><span class="t"><b>0.6</b> Approve the RULE 0-G cost statement and push plan (D12)</span><span class="m"><span class="pill owner">owner</span> depends on: none</span></label></li>
+<li data-id="0.7"><input type="checkbox" id="c0_7" aria-label="Item 0.7"><label for="c0_7"><span class="t"><b>0.7</b> Gate 0: go or no go on Velstran (D1)</span><span class="m"><span class="pill owner">owner</span> depends on: 0.2, 0.3, 0.4, 0.5, 0.6</span></label></li>
+</ul></div>
+<h3>P1 Secure the name</h3><div class="card"><ul class="cl">
+<li data-id="1.1"><input type="checkbox" id="c1_1" aria-label="Item 1.1"><label for="c1_1"><span class="t"><b>1.1</b> Register velstran.com, velstran.co.uk, velstran.uk at the chosen registrar with auto renew, lock and 2FA</span><span class="m"><span class="pill owner">owner</span> depends on: 0.7</span></label></li>
+<li data-id="1.2"><input type="checkbox" id="c1_2" aria-label="Item 1.2"><label for="c1_2"><span class="t"><b>1.2</b> Use the platform identity, never a personal address, as registrant contact</span><span class="m"><span class="pill owner">owner</span> depends on: 1.1</span></label></li>
+<li data-id="1.3"><input type="checkbox" id="c1_3" aria-label="Item 1.3"><label for="c1_3"><span class="t"><b>1.3</b> Add the velstran.com zone on the free Cloudflare plan</span><span class="m"><span class="pill owner">owner</span> depends on: 1.1</span></label></li>
+<li data-id="1.4"><input type="checkbox" id="c1_4" aria-label="Item 1.4"><label for="c1_4"><span class="t"><b>1.4</b> Set the two Cloudflare nameservers at the registrar and wait for Active</span><span class="m"><span class="pill owner">owner</span> depends on: 1.3</span></label></li>
+<li data-id="1.5"><input type="checkbox" id="c1_5" aria-label="Item 1.5"><label for="c1_5"><span class="t"><b>1.5</b> Prepare the owner filing pack: specification text, resolution wording, notification letters</span><span class="m"><span class="pill claude">Claude</span> depends on: 0.7</span></label></li>
+<li data-id="1.6"><input type="checkbox" id="c1_6" aria-label="Item 1.6"><label for="c1_6"><span class="t"><b>1.6</b> File the UK trade mark application (word mark, classes per attorney)</span><span class="m"><span class="pill owner">owner</span> depends on: 0.7, 1.5</span></label></li>
+<li data-id="1.7"><input type="checkbox" id="c1_7" aria-label="Item 1.7"><label for="c1_7"><span class="t"><b>1.7</b> Decide whether to file EU or WIPO now (D5)</span><span class="m"><span class="pill owner">owner</span> depends on: 1.6</span></label></li>
+<li data-id="1.8"><input type="checkbox" id="c1_8" aria-label="Item 1.8"><label for="c1_8"><span class="t"><b>1.8</b> Pass the special resolution to change the company name</span><span class="m"><span class="pill owner">owner</span> depends on: 1.6</span></label></li>
+<li data-id="1.9"><input type="checkbox" id="c1_9" aria-label="Item 1.9"><label for="c1_9"><span class="t"><b>1.9</b> File the name change online (GBP 20 or GBP 85 same day)</span><span class="m"><span class="pill owner">owner</span> depends on: 1.8</span></label></li>
+<li data-id="1.10"><input type="checkbox" id="c1_10" aria-label="Item 1.10"><label for="c1_10"><span class="t"><b>1.10</b> Notify HMRC, bank, ICO (via helpline), VAT if registered, insurer, IASME and Cyber Essentials body</span><span class="m"><span class="pill owner">owner</span> depends on: 1.9</span></label></li>
+<li data-id="1.11"><input type="checkbox" id="c1_11" aria-label="Item 1.11"><label for="c1_11"><span class="t"><b>1.11</b> Update key contracts and supplier portal profiles</span><span class="m"><span class="pill owner">owner</span> depends on: 1.9</span></label></li>
+<li data-id="1.12"><input type="checkbox" id="c1_12" aria-label="Item 1.12"><label for="c1_12"><span class="t"><b>1.12</b> Decide the platform mailbox question and whether to restate the identity rule (D10)</span><span class="m"><span class="pill owner">owner</span> depends on: 0.7</span></label></li>
+</ul></div>
+<h3>P2 Vendors and DNS, additive only</h3><div class="card"><ul class="cl">
+<li data-id="2.1"><input type="checkbox" id="c2_1" aria-label="Item 2.1"><label for="c2_1"><span class="t"><b>2.1</b> Build the old to new host and path redirect map from the 11 hosts found</span><span class="m"><span class="pill claude">Claude</span> depends on: 0.7</span></label></li>
+<li data-id="2.2"><input type="checkbox" id="c2_2" aria-label="Item 2.2"><label for="c2_2"><span class="t"><b>2.2</b> Add new DNS records (app, portal, staging-app, staging-portal, status, www, inbound) in Cloudflare</span><span class="m"><span class="pill claude">Claude</span> depends on: 1.4</span></label></li>
+<li data-id="2.3"><input type="checkbox" id="c2_3" aria-label="Item 2.3"><label for="c2_3"><span class="t"><b>2.3</b> Add the new hosts to the two Vercel projects as extra domains and verify</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.2</span></label></li>
+<li data-id="2.4"><input type="checkbox" id="c2_4" aria-label="Item 2.4"><label for="c2_4"><span class="t"><b>2.4</b> Add a Cloudflare Access policy for the new portal host before it is used</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.2</span></label></li>
+<li data-id="2.5"><input type="checkbox" id="c2_5" aria-label="Item 2.5"><label for="c2_5"><span class="t"><b>2.5</b> Supabase: add new Site URL and redirect URLs, keep the old ones</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.2</span></label></li>
+<li data-id="2.6"><input type="checkbox" id="c2_6" aria-label="Item 2.6"><label for="c2_6"><span class="t"><b>2.6</b> Google Cloud OAuth: add new redirect URIs and authorised domain, update consent screen name when D11 art is ready</span><span class="m"><span class="pill owner">owner</span> depends on: 2.2</span></label></li>
+<li data-id="2.7"><input type="checkbox" id="c2_7" aria-label="Item 2.7"><label for="c2_7"><span class="t"><b>2.7</b> Brevo: authenticate velstran.com (DKIM, Brevo code, DMARC), add both senders, plan warm up</span><span class="m"><span class="pill owner">owner</span> depends on: 1.4</span></label></li>
+<li data-id="2.8"><input type="checkbox" id="c2_8" aria-label="Item 2.8"><label for="c2_8"><span class="t"><b>2.8</b> Add MX for inbound.velstran.com and keep inbound.crowagent.ai live</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.7</span></label></li>
+<li data-id="2.9"><input type="checkbox" id="c2_9" aria-label="Item 2.9"><label for="c2_9"><span class="t"><b>2.9</b> Stripe: update business name, statement descriptor, branding, support URL and add the new webhook endpoint beside the old</span><span class="m"><span class="pill owner">owner</span> depends on: 1.9</span></label></li>
+<li data-id="2.10"><input type="checkbox" id="c2_10" aria-label="Item 2.10"><label for="c2_10"><span class="t"><b>2.10</b> Cloudflare Pages: add the website custom domain on the new host</span><span class="m"><span class="pill owner">owner</span> depends on: 2.2</span></label></li>
+<li data-id="2.11"><input type="checkbox" id="c2_11" aria-label="Item 2.11"><label for="c2_11"><span class="t"><b>2.11</b> Google Search Console: verify the new domain property</span><span class="m"><span class="pill owner">owner</span> depends on: 1.4</span></label></li>
+<li data-id="2.12"><input type="checkbox" id="c2_12" aria-label="Item 2.12"><label for="c2_12"><span class="t"><b>2.12</b> Cosmetic renames: Sentry and PostHog display names, Railway and Vercel team display names</span><span class="m"><span class="pill owner">owner</span> depends on: 1.9</span></label></li>
+<li data-id="2.13"><input type="checkbox" id="c2_13" aria-label="Item 2.13"><label for="c2_13"><span class="t"><b>2.13</b> Read back every vendor change and record the state (RULE 0-V)</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.3 to 2.12</span></label></li>
+<li data-id="2.14"><input type="checkbox" id="c2_14" aria-label="Item 2.14"><label for="c2_14"><span class="t"><b>2.14</b> Gate 1: all new hosts healthy, nothing removed</span><span class="m"><span class="pill owner">owner</span> depends on: 2.13</span></label></li>
+</ul></div>
+<h3>P3 Code rebrand behind one identity block</h3><div class="card"><ul class="cl">
+<li data-id="3.1"><input type="checkbox" id="c3_1" aria-label="Item 3.1"><label for="c3_1"><span class="t"><b>3.1</b> File one tracker row per work package in RELEASE-2.8.5-TRACKER.md (RULE 0-R)</span><span class="m"><span class="pill claude">Claude</span> depends on: 0.7</span></label></li>
+<li data-id="3.2"><input type="checkbox" id="c3_2" aria-label="Item 3.2"><label for="c3_2"><span class="t"><b>3.2</b> Owner supplies the Velstran mark, wordmark and favicon artwork (D11)</span><span class="m"><span class="pill owner">owner</span> depends on: 0.7</span></label></li>
+<li data-id="3.3"><input type="checkbox" id="c3_3" aria-label="Item 3.3"><label for="c3_3"><span class="t"><b>3.3</b> Add the identity block to brand.source.json and extend gen-brand.mjs for TS, Python and astro</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.1</span></label></li>
+<li data-id="3.4"><input type="checkbox" id="c3_4" aria-label="Item 3.4"><label for="c3_4"><span class="t"><b>3.4</b> Replace the hard coded wordmark and legal line in email-shell.ts, contact.ts and attribution.ts with generated constants</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.3</span></label></li>
+<li data-id="3.5"><input type="checkbox" id="c3_5" aria-label="Item 3.5"><label for="c3_5"><span class="t"><b>3.5</b> Merge the two CrowAgentLogo components into one shared component and swap artwork</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.2, 3.3</span></label></li>
+<li data-id="3.6"><input type="checkbox" id="c3_6" aria-label="Item 3.6"><label for="c3_6"><span class="t"><b>3.6</b> Codemod web and apps/portal copy, metadata, manifests and i18n</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.4</span></label></li>
+<li data-id="3.7"><input type="checkbox" id="c3_7" aria-label="Item 3.7"><label for="c3_7"><span class="t"><b>3.7</b> API: email templates, PDF and DOCX mastheads, config sender defaults, scheduler copy</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.4</span></label></li>
+<li data-id="3.8"><input type="checkbox" id="c3_8" aria-label="Item 3.8"><label for="c3_8"><span class="t"><b>3.8</b> Website astro: site data, pages, SEO, JSON-LD, llms.txt, sitemap, robots, OG images, workers</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.3</span></label></li>
+<li data-id="3.9"><input type="checkbox" id="c3_9" aria-label="Item 3.9"><label for="c3_9"><span class="t"><b>3.9</b> Passkey: write the rp_id allowlist migration for the new hosts, ship it with its code, staging first</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.5</span></label></li>
+<li data-id="3.10"><input type="checkbox" id="c3_10" aria-label="Item 3.10"><label for="c3_10"><span class="t"><b>3.10</b> Legal pages: new name plus formerly known as line, company number unchanged. Owner approves the wording</span><span class="m"><span class="pill owner">owner</span> depends on: 3.6</span></label></li>
+<li data-id="3.11"><input type="checkbox" id="c3_11" aria-label="Item 3.11"><label for="c3_11"><span class="t"><b>3.11</b> Word add-in manifest, public Python SDK with an alias, Zapier copy, MCP descriptors, status page</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.4</span></label></li>
+<li data-id="3.12"><input type="checkbox" id="c3_12" aria-label="Item 3.12"><label for="c3_12"><span class="t"><b>3.12</b> Write the guard test with a pattern allowlist and red prove it</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.6, 3.7, 3.8</span></label></li>
+<li data-id="3.13"><input type="checkbox" id="c3_13" aria-label="Item 3.13"><label for="c3_13"><span class="t"><b>3.13</b> Fix tests that assert the visible name, then one targeted regression run (RULE 0-T)</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.12</span></label></li>
+<li data-id="3.14"><input type="checkbox" id="c3_14" aria-label="Item 3.14"><label for="c3_14"><span class="t"><b>3.14</b> Docs, specs, onboarding guide, entry files, board rebuild</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.6</span></label></li>
+<li data-id="3.15"><input type="checkbox" id="c3_15" aria-label="Item 3.15"><label for="c3_15"><span class="t"><b>3.15</b> Local gates: tsc on both projects, next build, targeted tests (RULE 0-G local first)</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.13</span></label></li>
+<li data-id="3.16"><input type="checkbox" id="c3_16" aria-label="Item 3.16"><label for="c3_16"><span class="t"><b>3.16</b> pnpm staging:promote then walk staging: login, Google login, passkey re-enrol, test checkout, email render, PDF masthead</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.15</span></label></li>
+<li data-id="3.17"><input type="checkbox" id="c3_17" aria-label="Item 3.17"><label for="c3_17"><span class="t"><b>3.17</b> Gate 2: staging walk green, collected counts compared</span><span class="m"><span class="pill owner">owner</span> depends on: 3.16</span></label></li>
+<li data-id="3.18"><input type="checkbox" id="c3_18" aria-label="Item 3.18"><label for="c3_18"><span class="t"><b>3.18</b> Approve push A (platform) with its stated cost</span><span class="m"><span class="pill owner">owner</span> depends on: 3.17</span></label></li>
+<li data-id="3.19"><input type="checkbox" id="c3_19" aria-label="Item 3.19"><label for="c3_19"><span class="t"><b>3.19</b> Approve pnpm prod:promote with the sha prefix (billing audit green first)</span><span class="m"><span class="pill owner">owner</span> depends on: 3.18</span></label></li>
+<li data-id="3.20"><input type="checkbox" id="c3_20" aria-label="Item 3.20"><label for="c3_20"><span class="t"><b>3.20</b> Approve push B (website main, a production Cloudflare deploy) with its stated cost</span><span class="m"><span class="pill owner">owner</span> depends on: 3.19</span></label></li>
+<li data-id="3.21"><input type="checkbox" id="c3_21" aria-label="Item 3.21"><label for="c3_21"><span class="t"><b>3.21</b> Post deploy audit: every non main Vercel build CANCELED, production healthy</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.19</span></label></li>
+<li data-id="3.22"><input type="checkbox" id="c3_22" aria-label="Item 3.22"><label for="c3_22"><span class="t"><b>3.22</b> Log based certification: green, current tree, comparable collections (RULE 0-CERT)</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.19</span></label></li>
+</ul></div>
+<h3>P4 Redirects and SEO</h3><div class="card"><ul class="cl">
+<li data-id="4.1"><input type="checkbox" id="c4_1" aria-label="Item 4.1"><label for="c4_1"><span class="t"><b>4.1</b> Create one hop 301 redirects from every old host and path to the matching new URL</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.20</span></label></li>
+<li data-id="4.2"><input type="checkbox" id="c4_2" aria-label="Item 4.2"><label for="c4_2"><span class="t"><b>4.2</b> Keep the old zone, certificates and inbound domain alive during the overlap</span><span class="m"><span class="pill claude">Claude</span> depends on: 4.1</span></label></li>
+<li data-id="4.3"><input type="checkbox" id="c4_3" aria-label="Item 4.3"><label for="c4_3"><span class="t"><b>4.3</b> Canonical tags, new sitemap, robots, llms.txt point at the new domain</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.20</span></label></li>
+<li data-id="4.4"><input type="checkbox" id="c4_4" aria-label="Item 4.4"><label for="c4_4"><span class="t"><b>4.4</b> Assert status codes and landed URLs on a sample of old pages, not only the 200 (RULE 0-V)</span><span class="m"><span class="pill claude">Claude</span> depends on: 4.1</span></label></li>
+<li data-id="4.5"><input type="checkbox" id="c4_5" aria-label="Item 4.5"><label for="c4_5"><span class="t"><b>4.5</b> Search Console Change of Address for each verified old property</span><span class="m"><span class="pill owner">owner</span> depends on: 4.1, 2.11</span></label></li>
+<li data-id="4.6"><input type="checkbox" id="c4_6" aria-label="Item 4.6"><label for="c4_6"><span class="t"><b>4.6</b> Update external listings: LinkedIn, directories, registry and marketplace profiles</span><span class="m"><span class="pill owner">owner</span> depends on: 3.20</span></label></li>
+<li data-id="4.7"><input type="checkbox" id="c4_7" aria-label="Item 4.7"><label for="c4_7"><span class="t"><b>4.7</b> Gate 4: redirect walk green</span><span class="m"><span class="pill owner">owner</span> depends on: 4.4</span></label></li>
+</ul></div>
+<h3>P5 Customer, email and Stripe communications</h3><div class="card"><ul class="cl">
+<li data-id="5.1"><input type="checkbox" id="c5_1" aria-label="Item 5.1"><label for="c5_1"><span class="t"><b>5.1</b> Claude drafts the beta tester and customer notice, owner approves and sends via Brevo</span><span class="m"><span class="pill claude">Claude</span> depends on: 3.19</span></label></li>
+<li data-id="5.2"><input type="checkbox" id="c5_2" aria-label="Item 5.2"><label for="c5_2"><span class="t"><b>5.2</b> Check Stripe receipts, invoice and subscription email text show the new name</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.9, 3.19</span></label></li>
+<li data-id="5.3"><input type="checkbox" id="c5_3" aria-label="Item 5.3"><label for="c5_3"><span class="t"><b>5.3</b> Update email signatures, letterhead, quotes, invoices and bank details</span><span class="m"><span class="pill owner">owner</span> depends on: 1.9</span></label></li>
+<li data-id="5.4"><input type="checkbox" id="c5_4" aria-label="Item 5.4"><label for="c5_4"><span class="t"><b>5.4</b> Update Cyber Essentials and IASME certificate holder name</span><span class="m"><span class="pill owner">owner</span> depends on: 1.9</span></label></li>
+<li data-id="5.5"><input type="checkbox" id="c5_5" aria-label="Item 5.5"><label for="c5_5"><span class="t"><b>5.5</b> Update public procurement and supplier registration profiles</span><span class="m"><span class="pill owner">owner</span> depends on: 1.9</span></label></li>
+<li data-id="5.6"><input type="checkbox" id="c5_6" aria-label="Item 5.6"><label for="c5_6"><span class="t"><b>5.6</b> Switch Supabase auth SMTP sender and BREVO_FROM_EMAIL to the new domain after warm up</span><span class="m"><span class="pill claude">Claude</span> depends on: 2.7, 3.19</span></label></li>
+</ul></div>
+<h3>P6 Decommission</h3><div class="card"><ul class="cl">
+<li data-id="6.1"><input type="checkbox" id="c6_1" aria-label="Item 6.1"><label for="c6_1"><span class="t"><b>6.1</b> Keep crowagent.ai registered and redirecting for at least 12 months (Google guidance)</span><span class="m"><span class="pill owner">owner</span> depends on: 4.7</span></label></li>
+<li data-id="6.2"><input type="checkbox" id="c6_2" aria-label="Item 6.2"><label for="c6_2"><span class="t"><b>6.2</b> After the window, remove old senders, redirect URIs, Access apps, webhook endpoints and DNS records, one approval each</span><span class="m"><span class="pill claude">Claude</span> depends on: 6.1</span></label></li>
+<li data-id="6.3"><input type="checkbox" id="c6_3" aria-label="Item 6.3"><label for="c6_3"><span class="t"><b>6.3</b> Decide on any other old domains held (defensive redirect or release)</span><span class="m"><span class="pill owner">owner</span> depends on: 6.1</span></label></li>
+<li data-id="6.4"><input type="checkbox" id="c6_4" aria-label="Item 6.4"><label for="c6_4"><span class="t"><b>6.4</b> Final leftover scan with the guard allowlist, report counts and open rows together</span><span class="m"><span class="pill claude">Claude</span> depends on: 6.2</span></label></li>
+<li data-id="6.5"><input type="checkbox" id="c6_5" aria-label="Item 6.5"><label for="c6_5"><span class="t"><b>6.5</b> Close out the opposed CrowAgent application on counsel advice (D7)</span><span class="m"><span class="pill owner">owner</span> depends on: 0.4</span></label></li>
+</ul></div>
+</section>
+<section id="sources"><h2><span class="n">Section 11</span>Not verified and sources</h2><h3>Not verified</h3><ul>
+<li>Trade mark register clearance for VELSTRAN on UKIPO, EUIPO and WIPO. The registers refused or could not be queried from here. A general web search found no Velstran mark, company or product, which is a weak signal and not a register search.</li>
+<li>Namecheap and Squarespace prices. Renewal prices at IONOS and 123-reg. Premium or reserved status of any domain.</li>
+<li>EUIPO official fees, the UK notice of threatened opposition and any extension of the 2 month window, Companies House standard (non same day) processing time, GBP 83 versus GBP 85 for same day.</li>
+<li>Trade mark attorney fees, vendor rename fees, Stripe verification effects of a legal name change, whether a Gmail address can be renamed, Sentry org slug rename effects, free plan redirect rule quotas on Cloudflare, Brevo exact record names.</li>
+<li>Whether WebAuthn related origin requests could avoid passkey re-enrolment on the new domain. Not researched.</li>
+<li>Classes 9, 35 and 42 as the right set. They are an assumption.</li>
+<li>The effort numbers are planning estimates derived from the measured footprint. They are not benchmarks of past runs.</li>
+</ul><h3>Sources, checked 17 October 2026</h3><ul class="src">
+<li><b>S1</b> Porkbun pricing API, fetched 17 Oct 2026. <a href="https://api.porkbun.com/api/json/v3/pricing/get" rel="noopener noreferrer">https://api.porkbun.com/api/json/v3/pricing/get</a></li>
+<li><b>S2</b> Verisign RDAP for velstran.com (404 means unregistered, control google.com returned 200). <a href="https://rdap.verisign.com/com/v1/domain/velstran.com" rel="noopener noreferrer">https://rdap.verisign.com/com/v1/domain/velstran.com</a></li>
+<li><b>S3</b> Nominet RDAP for velstran.co.uk and velstran.uk (control google.co.uk returned 200). <a href="https://rdap.nominet.uk/uk/domain/velstran.co.uk" rel="noopener noreferrer">https://rdap.nominet.uk/uk/domain/velstran.co.uk</a></li>
+<li><b>S4</b> Identity Digital RDAP for velstran.io and velstran.ai (controls returned 200). <a href="https://rdap.identitydigital.services/rdap/domain/velstran.io" rel="noopener noreferrer">https://rdap.identitydigital.services/rdap/domain/velstran.io</a></li>
+<li><b>S5</b> Google Registry RDAP for velstran.app (control google.app returned 200). <a href="https://pubapi.registry.google/rdap/domain/velstran.app" rel="noopener noreferrer">https://pubapi.registry.google/rdap/domain/velstran.app</a></li>
+<li><b>S6</b> IONOS UK domain prices, checked 17 Oct 2026. <a href="https://www.ionos.co.uk/domains/domain-names" rel="noopener noreferrer">https://www.ionos.co.uk/domains/domain-names</a></li>
+<li><b>S7</b> 123-reg domain prices, checked 17 Oct 2026. <a href="https://www.123-reg.co.uk/domain-names/" rel="noopener noreferrer">https://www.123-reg.co.uk/domain-names/</a></li>
+<li><b>S8</b> gov.uk, start your trade mark application (fees, Right Start). <a href="https://www.gov.uk/how-to-register-a-trade-mark/start-your-application" rel="noopener noreferrer">https://www.gov.uk/how-to-register-a-trade-mark/start-your-application</a></li>
+<li><b>S9</b> gov.uk, trade marks timeline (2 weeks, 2 months). <a href="https://www.gov.uk/government/publications/process-for-applying-to-register-for-a-trade-mark/trade-marks-timeline" rel="noopener noreferrer">https://www.gov.uk/government/publications/process-for-applying-to-register-for-a-trade-mark/trade-marks-timeline</a></li>
+<li><b>S10</b> Reddie, UK trade mark fee increases from 1 April 2026 (opposition and renewal fees, secondary source). <a href="https://www.reddie.co.uk/?p=8632" rel="noopener noreferrer">https://www.reddie.co.uk/?p=8632</a></li>
+<li><b>S11</b> gov.uk, how to register a trade mark (3 to 4 months, at least GBP 205). <a href="https://www.gov.uk/how-to-register-a-trade-mark" rel="noopener noreferrer">https://www.gov.uk/how-to-register-a-trade-mark</a></li>
+<li><b>S12</b> gov.uk, change your company name. <a href="https://www.gov.uk/make-changes-to-your-limited-company/company-name" rel="noopener noreferrer">https://www.gov.uk/make-changes-to-your-limited-company/company-name</a></li>
+<li><b>S13</b> gov.uk, form NM01 (GBP 20 or GBP 85 same day, updated 19 June 2026). <a href="https://www.gov.uk/government/publications/change-a-company-name-nm01" rel="noopener noreferrer">https://www.gov.uk/government/publications/change-a-company-name-nm01</a></li>
+<li><b>S14</b> Companies House name search for velstran, velstra and crowagent control. <a href="https://find-and-update.company-information.service.gov.uk/search/companies?q=velstran" rel="noopener noreferrer">https://find-and-update.company-information.service.gov.uk/search/companies?q=velstran</a></li>
+<li><b>S15</b> gov.uk, choose a company name (same as, too like), seen via search snippet only. <a href="https://www.gov.uk/choose-company-name" rel="noopener noreferrer">https://www.gov.uk/choose-company-name</a></li>
+<li><b>S16</b> ICO, change your registration details (seen via search snippet only). <a href="https://ico.org.uk/for-organisations/data-protection-fee/change/" rel="noopener noreferrer">https://ico.org.uk/for-organisations/data-protection-fee/change/</a></li>
+<li><b>S17</b> EU trade mark fee guide (secondary, EUIPO page returned 403). <a href="https://www.dury.de/en/european-tradmark-law/1077-eu-trademark-registration-2026-a-complete-guide-for-international-businesses" rel="noopener noreferrer">https://www.dury.de/en/european-tradmark-law/1077-eu-trademark-registration-2026-a-complete-guide-for-international-businesses</a></li>
+<li><b>S18</b> GitHub docs, renaming an organization. <a href="https://docs.github.com/en/organizations/managing-organization-settings/renaming-an-organization" rel="noopener noreferrer">https://docs.github.com/en/organizations/managing-organization-settings/renaming-an-organization</a></li>
+<li><b>S19</b> Stripe docs, statement descriptors. <a href="https://docs.stripe.com/get-started/account/statement-descriptors" rel="noopener noreferrer">https://docs.stripe.com/get-started/account/statement-descriptors</a></li>
+<li><b>S20</b> Cloudflare docs, full DNS setup on the free plan. <a href="https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/" rel="noopener noreferrer">https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/</a></li>
+<li><b>S21</b> Google Search Central, site move with URL changes. <a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes" rel="noopener noreferrer">https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes</a></li>
+<li><b>S22</b> Supabase docs, custom SMTP for auth. <a href="https://supabase.com/docs/guides/auth/auth-smtp" rel="noopener noreferrer">https://supabase.com/docs/guides/auth/auth-smtp</a></li>
+<li><b>S23</b> Vercel docs, add and configure a custom domain. <a href="https://vercel.com/docs/domains/working-with-domains/add-a-domain" rel="noopener noreferrer">https://vercel.com/docs/domains/working-with-domains/add-a-domain</a></li>
+</ul><p>Repository evidence: packages/tokens/brand/brand.source.json, packages/tokens/src/contact.ts, attribution.ts, email-shell.ts (lines 124 to 140), api/app/config.py (lines 765 to 811), web/src/shared/lib/auth/passkey-config.ts, supabase/migrations/20269000000432 passkey allowlist migration, web/package.json, vercel.json, .git/config of both repositories.</p></section>
+</main>
+<script>
+(function(){
+  var KEY='rebrand-velstran-checklist-v1';
+  var state={};
+  try{var raw=localStorage.getItem(KEY);if(raw){state=JSON.parse(raw)||{};}}catch(e){state={};}
+  var items=[].slice.call(document.querySelectorAll('.cl li'));
+  function paint(){
+    var done=0;
+    items.forEach(function(li){var on=!!state[li.getAttribute('data-id')];li.classList.toggle('done',on);li.querySelector('input').checked=on;if(on)done++;});
+    var p=document.getElementById('prog');if(p)p.textContent=done+' of '+items.length+' done';
+    var b=document.getElementById('barfill');if(b)b.style.width=(items.length?Math.round(done*100/items.length):0)+'%';
+  }
+  items.forEach(function(li){
+    li.querySelector('input').addEventListener('change',function(ev){
+      state[li.getAttribute('data-id')]=ev.target.checked;
+      try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){/* storage blocked, page still works */}
+      paint();
+    });
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
