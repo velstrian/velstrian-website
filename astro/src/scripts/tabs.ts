@@ -188,15 +188,6 @@ function setUp(group: HTMLElement): void {
   );
 
   /*
-   * The stepper counter, resolved before `select` so the ONE place state is
-   * written is also the one place the counter is written. Null on every call
-   * site that did not ask for steppers, which is every call site but the
-   * homepage showcase.
-   */
-  const stepWrap = group.parentElement?.querySelector<HTMLElement>('[data-tabs-steppers]') ?? null;
-  const counterEl = stepWrap?.querySelector<HTMLElement>('[data-tabs-counter]') ?? null;
-
-  /*
    * ── KEEP THE SELECTED TAB INSIDE THE TROUGH ────────────────────────────────
    *
    * `.tabsw` scrolls sideways once the labels outrun the width, which is the
@@ -297,13 +288,6 @@ function setUp(group: HTMLElement): void {
   const select = (id: string, moveFocus: boolean): void => {
     for (const { tab, panel } of pairs) {
       const on = panel.id === id;
-      if (on && counterEl) {
-        /* Written from the SELECTED panel's index rather than from a counter
-           the steppers increment themselves. Autoplay, a hash, a tab click and
-           an arrow all land here, so there is no route that moves the stage
-           without moving the number with it. */
-        counterEl.textContent = `${pairs.findIndex((pr) => pr.panel.id === id) + 1} of ${pairs.length}`;
-      }
       tab.setAttribute('aria-selected', String(on));
       /* Roving tabindex: one stop in the tab order for the whole group, per the
          ARIA tabs pattern. Arrow keys move within it. */
@@ -363,67 +347,16 @@ function setUp(group: HTMLElement): void {
   });
 
   /*
-   * ── THE STEPPER BUTTONS WERE DEAD FROM THE DAY THEY SHIPPED ──────────────
-   *
-   * Owner, 2026-08-31: the product section's scroll button does nothing. It
-   * does nothing, and the cause is the two lines this comment replaces.
-   *
-   * REPRODUCED BEFORE IT WAS TOUCHED, on the built page at 1440, autoplay
-   * paused first so it could not confound the result:
-   *
-   *   BEFORE  tabs ["true","false","false","false","false"]  counter "1 of 5"
-   *   click   #product button[aria-label="Next stage"]
-   *   AFTER   tabs ["true","false","false","false","false"]  counter "1 of 5"
-   *           document.activeElement -> BUTTON aria-label="Next stage"
-   *
-   *   then, in the same page: focus the selected tab, dispatch the IDENTICAL
-   *   synthetic ArrowRight at the group
-   *   AFTER   tabs ["false","true","false","false","false"]
-   *
-   * So the button exists, is not hidden, is not disabled, its listener fires,
-   * and the event reaches this handler. THE HANDLER THEN DISCARDS IT. The
-   * steppers synthesise an arrow key at the group, and this line resolved the
-   * current index from `document.activeElement`, which after a real mouse
-   * press is the BUTTON. A button is not in `pairs`, `findIndex` returned -1,
-   * and the early return sent every click straight to the floor.
-   *
-   * IT WAS NEVER THE CAROUSEL. `ProductScreens.astro` mounts `Carousel.astro`
-   * once per panel with a single slide, and that carousel's own controls are
-   * hidden because `data-pcar` is unset. That is a true statement about a
-   * different component and it is the obvious place to look, so it is written
-   * down: the arrows in the showcase belong to TabSwitcher and to this file,
-   * and the carousel was never wired to them and never had to be.
-   *
-   * THE FIX KEEPS THE SYNTHESISED KEY, WHICH IS THE PART OF THE DESIGN THAT IS
-   * RIGHT. The note below the handler argues at length that dispatching the key
-   * buys wrapping, selection, focus and the autoplay stop for free rather than
-   * duplicating five lines, and that argument is sound and is why this is a
-   * three-line change. What was missing is that the ARIA pattern's index and
-   * the CONTROL's index are two different questions: a keyboard user is asking
-   * about the tab they are standing on, and a stepper is asking about the tab
-   * that is currently selected. Only the first has an answer in `activeElement`.
-   *
-   * `moveFocus` FOLLOWS THE SAME DISTINCTION AND IS NOT A DETAIL. A keyboard
-   * user must have focus carried to the newly selected tab or the roving
-   * tabindex strands them. A pointer user pressing "next" three times must NOT
-   * have focus yanked off the button under their cursor, or the second press
-   * lands on an element that has moved out from under them and the arrow keys
-   * then step the tablist instead of the button doing it. So focus moves only
-   * when it was in the tablist to begin with, which is exactly what `fromTab`
-   * records.
+   * THE KEYBOARD HALF OF THE ARIA TABS PATTERN. Only a focused tab can send a
+   * keydown here: the group holds the tabs and an aria-hidden fill and nothing
+   * else. It used to also answer a synthesised arrow from the stepper buttons,
+   * which stepped from the SELECTED tab rather than the focused one and so had
+   * to leave focus where it was. The steppers were removed on 2026-10-17 with
+   * their only caller, ProductScreens.astro, so a keydown that did not start
+   * on a tab is no longer a case this handler has, and focus always follows.
    */
   group.addEventListener('keydown', (event) => {
-    const focused = pairs.findIndex(({ tab }) => tab === document.activeElement);
-    const fromTab = focused !== -1;
-    /* Not focused in the tablist: this is a stepper, so step from what is
-       SELECTED. `aria-selected` is written by `select` and by nothing else, so
-       there is no second copy of this state to fall out of step with. */
-    const current = fromTab
-      ? focused
-      : pairs.findIndex(({ tab }) => tab.getAttribute('aria-selected') === 'true');
-    /* Neither focused nor selected. Unreachable while `select` has ever run,
-       and kept because a keydown bubbling from some future child of the group
-       must not be able to index `pairs[-1]`. */
+    const current = pairs.findIndex(({ tab }) => tab === document.activeElement);
     if (current === -1) return;
 
     let next = current;
@@ -453,56 +386,10 @@ function setUp(group: HTMLElement): void {
 
     event.preventDefault();
     const id = pairs[next].panel.id;
-    /* See the note above the handler: focus follows the keyboard and never
-       follows a pointer, or the second press of a stepper lands on nothing. */
-    select(id, fromTab);
+    /* A key press moves focus with the selection, per the roving tabindex. */
+    select(id, true);
     writeHash(id);
   });
-
-  /*
-   * ── THE STEPPERS, 2026-08-07 ────────────────────────────────────────────
-   *
-   * They do not implement stepping. They SYNTHESISE the arrow key the ARIA
-   * pattern above already handles, and that is the whole of the design.
-   *
-   * WHY, RATHER THAN A SECOND COPY OF THE SAME FIVE LINES. The handler above
-   * already wraps at both ends, selects, moves focus and writes the hash.
-   * (It also used to stop the autoplay loop, which was removed on 2026-10-17,
-   * see the note at the foot of this function.) Dispatching the key gets those
-   * behaviours by construction, so the buttons and the keyboard cannot drift
-   * apart, and a second control for one piece of state that behaves subtly
-   * differently from the first is worse than no second control.
-   *
-   * IT IS ALSO WHAT KEEPS THE JS BUDGET. Written out longhand, this block plus
-   * its own autoplay listener pushed tabs.ts past the threshold at which Vite
-   * stops inlining the chunk and emits it as a file, and check-budgets counts
-   * that file whole: JS total went 21.6 KB across 2 files to 25.8 KB across 3
-   * against a 23.0 KB budget, for roughly 600 bytes of actual new code. The
-   * measured lesson is that a duplicated code path can cost seven times its
-   * own size once it crosses a packaging boundary.
-   *
-   * REVEALED ONLY HERE. The wrapper ships `hidden`, so the arrows exist for a
-   * reader whose module ran and for nobody else. The same contract the pause
-   * control is under.
-   *
-   * THAT SENTENCE USED TO END "and the reason neither can become a dead
-   * control", AND IT WAS WRONG IN THE MOST INSTRUCTIVE WAY. These arrows were
-   * revealed, enabled, focusable and completely inert from the day they
-   * shipped until 2026-08-31, and the owner found it by pressing one. Revealing
-   * a control on the condition that the module RAN says nothing about whether
-   * the control WORKS: the module ran, the listener attached, the event
-   * dispatched, and the handler it dispatched into threw the event away. The
-   * reproduction and the cause are recorded above that handler. A guard that
-   * proves a script executed is not a guard that proves a button does anything,
-   * and this comment is left as the standing example of that.
-   */
-  if (stepWrap) {
-    const press = (key: string) => () =>
-      group.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
-    stepWrap.querySelector('[data-tabs-prev]')?.addEventListener('click', press('ArrowLeft'));
-    stepWrap.querySelector('[data-tabs-next]')?.addEventListener('click', press('ArrowRight'));
-    stepWrap.hidden = false;
-  }
 
   /*
    * CROSS-PANEL ANCHOR RESCUE. Any other in-page link can point at something

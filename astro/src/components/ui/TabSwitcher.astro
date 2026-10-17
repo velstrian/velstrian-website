@@ -77,42 +77,15 @@ interface Props {
   /** Which tab is selected when the URL names none. Defaults to the first. */
   defaultId?: string;
   /*
-   * `autoplaySeconds` WAS REMOVED ON 2026-10-17 with its only caller, the
-   * homepage product showcase in ProductScreens.astro, which nothing imported
-   * after the homepage rebuild of 2026-09-06. The timer, the pause control and
-   * their styles went with it. The paragraphs below that mention autoplay
-   * describe the showcase as it was when the steppers were added.
+   * `autoplaySeconds` and `steppers` WERE REMOVED ON 2026-10-17 with their only
+   * caller, the homepage product showcase in ProductScreens.astro, which nothing
+   * imported after the homepage rebuild of 2026-09-06. The timer, the pause
+   * control, the prev and next buttons, the counter and their styles went with
+   * them. /pricing passed neither, so it renders what it rendered before.
    */
-  /**
-   * Prev/next buttons and an "N of M" counter beside the tablist.
-   *
-   * OPT-IN, as autoplay was. A-105 keeps this component
-   * SHARED rather than forked for the homepage, and /pricing is shipped: with
-   * this prop absent /pricing emits byte-identical markup and no stepper exists.
-   *
-   * WHY IT WAS ADDED, 2026-08-07. The owner reviewed a concept whose product
-   * tour was driven by arrows and a slide counter and asked for that reading.
-   * The homepage showcase ALREADY had the tour (one panel, five named stages,
-   * autoplay with a pause control), so what was actually missing was the two
-   * controls, not the section. Adding them here rather than rebuilding the
-   * showcase around a carousel keeps the five per-stage note blocks, and with
-   * them the verbatim in-product quotes that carry the claims discipline.
-   *
-   * THE TABLIST STAYS AND THE STEPPERS SIT OUTSIDE IT. A tablist may contain
-   * only tabs, so these are siblings in the same wrapper the pause control
-   * already uses. Named tabs remain the primary control; the steppers are a
-   * second route to the same state, never a replacement for it.
-   */
-  steppers?: boolean;
 }
 
-const { label, tabs, defaultId, steppers } = Astro.props;
-
-/* Rendered only when asked for, and `hidden` until the module confirms it can
- * drive them. The same contract the pause control is under. With JavaScript
- * off every panel stays visible and there is nothing for an arrow to switch,
- * so shipping a visible arrow would be shipping a dead control. */
-const showSteppers = steppers === true;
+const { label, tabs, defaultId } = Astro.props;
 
 const fallbackId = defaultId ?? tabs[0]?.id;
 
@@ -158,82 +131,42 @@ const offSelectors = tabs
   .join('');
 ---
 
-{/*
-  ── THE WRAPPER IS ALWAYS EMITTED AND IS LAYOUT-NEUTRAL WHEN AUTOPLAY IS OFF ──
+<div class="tabsw" data-tabs data-tabs-label={label}>
+  {/*
+    ── THE FILL THAT GLIDES, AND IT SHIPS AT ZERO WIDTH ──────────────────
 
-  The pause control cannot live inside `.tabsw`, because that element becomes
-  role="tablist" and a tablist may contain only tabs: a button in there is
-  announced as a sixth tab. So an autoplaying switcher needs a container holding
-  the tablist AND the button as siblings.
+    Owner, 2026-08-31: switching a stage should carry the capsule across the
+    trough rather than repaint it in place. There is no React here and so no
+    `layoutId` to hand the work to. What that API does is measure the target
+    and animate one element between two rects, and that is what this element
+    is: one absolutely positioned fill whose x and width come from the
+    SELECTED tab's own measured box, written by scripts/tabs.ts.
 
-  Emitting that container conditionally would mean writing the tab loop twice,
-  in two branches that can drift apart. Emitting it unconditionally would change
-  /pricing's layout, and /pricing is shipped. `display: contents` resolves both:
-  the element generates no box at all, so with autoplay off the tablist lays out
-  exactly as though the wrapper were not there, and there is one copy of the
-  markup. See `.tabsw-auto--off` below.
-*/}
-<div class:list={['tabsw-auto', { 'tabsw-auto--off': !showSteppers }]}>
-  <div class="tabsw" data-tabs data-tabs-label={label}>
-    {/*
-      ── THE FILL THAT GLIDES, AND IT SHIPS AT ZERO WIDTH ──────────────────
+    IT IS EMITTED ALWAYS AND PAINTS NOTHING UNTIL MEASURED. `--glide-w`
+    falls back to zero, so before the module runs, and forever if it never
+    runs, this is a zero-width box and the selected pill keeps the fill it
+    has always had. The module's first act is to measure, size this, and set
+    `data-glide` on the trough, which is the one attribute that moves the
+    fill from the pill to here. Both are the same white capsule in the same
+    place, so the handover is invisible rather than a flash.
 
-      Owner, 2026-08-31: switching a stage should carry the capsule across the
-      trough rather than repaint it in place. There is no React here and so no
-      `layoutId` to hand the work to. What that API does is measure the target
-      and animate one element between two rects, and that is what this element
-      is: one absolutely positioned fill whose x and width come from the
-      SELECTED tab's own measured box, written by scripts/tabs.ts.
-
-      IT IS EMITTED ALWAYS AND PAINTS NOTHING UNTIL MEASURED. `--glide-w`
-      falls back to zero, so before the module runs, and forever if it never
-      runs, this is a zero-width box and the selected pill keeps the fill it
-      has always had. The module's first act is to measure, size this, and set
-      `data-glide` on the trough, which is the one attribute that moves the
-      fill from the pill to here. Both are the same white capsule in the same
-      place, so the handover is invisible rather than a flash.
-
-      `aria-hidden`, because a tablist may contain only tabs and because this
-      states nothing: `aria-selected` is still the whole of the state, read by
-      assistive technology and by the stylesheet from the same attribute.
-    */}
-    <span class="tabsw__glide" data-tabs-glide aria-hidden="true"></span>
-    {
-      tabs.map((t) => (
-        <a
-          class="tabsw__tab"
-          id={`tab-${t.id}`}
-          href={`#${t.id}`}
-          data-tab={t.id}
-          data-tab-default={t.id === fallbackId ? '' : undefined}
-        >
-          {t.label}
-        </a>
-      ))
-    }
-  </div>
+    `aria-hidden`, because a tablist may contain only tabs and because this
+    states nothing: `aria-selected` is still the whole of the state, read by
+    assistive technology and by the stylesheet from the same attribute.
+  */}
+  <span class="tabsw__glide" data-tabs-glide aria-hidden="true"></span>
   {
-    showSteppers && (
-      /*
-       * The counter is server-rendered at "1 of N" so it is TRUE before the
-       * module runs rather than empty and filled in later, and tabs.ts rewrites
-       * it on every selection from whichever route made it (arrow, tab, hash
-       * or autoplay), so it cannot describe a stage other than the one showing.
-       */
-      <div class="tabsw-step" data-tabs-steppers hidden>
-        <button class="control tabsw-step__btn" type="button" data-tabs-prev aria-label="Previous stage">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-        <p class="meta tabsw-step__count" data-tabs-counter>1 of {tabs.length}</p>
-        <button class="control tabsw-step__btn" type="button" data-tabs-next aria-label="Next stage">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
-    )
+    tabs.map((t) => (
+      <a
+        class="tabsw__tab"
+        id={`tab-${t.id}`}
+        href={`#${t.id}`}
+        data-tab={t.id}
+        data-tab-default={t.id === fallbackId ? '' : undefined}
+      >
+        {t.label}
+      </a>
+    ))
   }
 </div>
 
@@ -267,88 +200,10 @@ const offSelectors = tabs
 */}
 
 <style>
-  /* ── The autoplay wrapper ───────────────────────────────────────────────
-   *
-   * `display: contents` is the whole trick and it is why /pricing is untouched:
-   * the element generates no box, so with autoplay off the tablist inside lays
-   * out exactly as though this div were not in the DOM. One copy of the markup,
-   * zero layout change on the route that does not autoplay. */
-  .tabsw-auto--off { display: contents; }
-
-  /* ── THE STEPPERS, 2026-08-07 ───────────────────────────────────────────
-   *
-   * Geometry is the pause control's, not a third size: --btn-h-sm square, the
-   * pill radius, the shared `.control` recipe for the face, the focus ring and
-   * the hover. This block writes placement and the counter's measure, which is
-   * all a second control of an existing family should have to say.
-   *
-   * `[hidden]` IS RESTATED BECAUSE A DISPLAY VALUE BEATS IT. The wrapper ships
-   * hidden and `display: inline-flex` would render it anyway, which would put
-   * two dead arrows on the page for every reader whose JavaScript never ran.
-   * The precise defect the hidden attribute is there to prevent.
-   *
-   * THE COUNTER IS FIXED-MEASURE SO THE ARROWS DO NOT MOVE. "1 of 5" and
-   * "5 of 5" are the same width in this face because .sv-numeral's tabular
-   * figures are not in play here, so the min-inline-size holds the row still
-   * as the number changes rather than letting the next arrow shuffle sideways
-   * under a reader's pointer between presses.
-   */
-  .tabsw-step {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--stack-1);
-    flex: 0 0 auto;
-  }
-
-  .tabsw-step[hidden] {
-    display: none;
-  }
-
-  .tabsw-step__btn {
-    width: var(--btn-h-sm);
-    height: var(--btn-h-sm);
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border-radius: var(--radius-pill);
-    --ctl-ink: var(--c-text);
-  }
-
-  .tabsw-step__btn svg {
-    width: 1rem;
-    height: 1rem;
-    flex: 0 0 auto;
-  }
-
-  .tabsw-step__count {
-    min-inline-size: 6ch;
-    text-align: center;
-    color: var(--c-text-muted);
-    margin: 0;
-  }
-
-  .tabsw-auto {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--stack-1);
-    max-width: 100%;
-    /* The tablist scrolls sideways at narrow widths (see .tabsw). The pause
-       control must not be pushed off the page with it, so it keeps its size
-       while the tablist takes the squeeze. */
-    flex-wrap: nowrap;
-    /* WITH STEPPERS THE ROW HOLDS THREE THINGS, AND AT 390 IT CANNOT. Five
-       pills, a pause control and a stepper group on one nowrap line leaves the
-       tablist a squeeze it cannot absorb even scrolling. Wrapping is allowed
-       only where it is needed: the row centres and the controls drop under the
-       tablist rather than any of them leaving the page. Call sites without
-       steppers keep the single nowrap line they ship today, because the
-       selector cannot match them. */
-    &:has(.tabsw-step) {
-      flex-wrap: wrap;
-      justify-content: center;
-      row-gap: var(--stack-2);
-    }
-  }
+  /* The `.tabsw-auto` wrapper, the stepper buttons and the phone fade that was
+     scoped to them were removed on 2026-10-17 with their only caller,
+     ProductScreens.astro. Measured before and after on /pricing at 1440 and
+     390: the tablist lands on the same box either way. */
 
   .tabsw {
     display: inline-flex;
@@ -563,66 +418,6 @@ const offSelectors = tabs
 
     .tabsw[data-glide='on'] .tabsw__glide {
       transition: none;
-    }
-  }
-
-  /* ── THE ENDS FADE ON A PHONE, 2026-08-29 ─────────────────────────────────
-   *
-   * Owner report from an iPhone 16 Pro Max: the homepage tab strip "overflows
-   * the viewport, clipping the first and last tabs". It was never overflowing
-   * the PAGE (measured 390 and 430, `documentElement.scrollWidth` equals
-   * `innerWidth` at both), it was overflowing ITSELF, which is what the scroll
-   * container above is for. What was missing was any sign of it: five pills at
-   * 572px inside a 306px trough, cut off square through a letter at each end.
-   *
-   * The larger half of that report is fixed in scripts/tabs.ts, which now keeps
-   * the SELECTED pill inside the trough. This is the smaller half. A hard slice
-   * through a glyph reads as a rendering fault and a fade reads as a row that
-   * continues, which is the argument Integrations.astro's `--in-fade` already
-   * makes for the connector band, in the same words, for the same reason.
-   *
-   * `:not(:focus-within)` IS LOAD-BEARING AND IS NOT TIDINESS. The note on
-   * `overflow-x` above works out that the focus ring survives the scrollport by
-   * exactly 0px: the ring is 3px at an offset of 3, the trough's padding is 6.
-   * A mask would therefore fade the ring on whichever pill is at an end, and
-   * the last tab lands flush against the right edge whenever it is selected. So
-   * the fade lifts the moment focus enters the group, and a keyboard reader
-   * never meets it.
-   *
-   * SCOPED TO THE STEPPERED CALL SITE, which is the homepage showcase and
-   * nothing else. /pricing has two pills, never overflows, and would gain a
-   * fade over the two closed ends of a trough that has nothing to continue
-   * into. Same reasoning as the `:has(.tabsw-step)` wrap rule above.
-   */
-  @media (max-width: 767px) {
-    /* THE TROUGH GROWS ITS OWN INLINE PADDING TO THE WIDTH OF THE FADE, and
-       that is what keeps the fade off the pills that matter. A scroll container
-       counts its end padding in `scrollWidth`, so at either limit of the scroll
-       the outermost pill comes to rest a full fade-width inside the edge rather
-       than flush against it. Without this the LAST tab, which is flush at
-       maximum scroll whenever it is the selected one, had its own right-hand
-       cap dissolved by the ramp: the fade would have been eating the one pill a
-       reader most needs to see. */
-    .tabsw-auto:has(.tabsw-step) .tabsw {
-      --tabsw-fade: clamp(16px, 5vw, 32px);
-      padding-inline: var(--tabsw-fade);
-    }
-
-    .tabsw-auto:has(.tabsw-step) .tabsw:not(:focus-within) {
-      -webkit-mask-image: linear-gradient(
-        90deg,
-        transparent 0,
-        rgb(0 0 0) var(--tabsw-fade),
-        rgb(0 0 0) calc(100% - var(--tabsw-fade)),
-        transparent 100%
-      );
-      mask-image: linear-gradient(
-        90deg,
-        transparent 0,
-        rgb(0 0 0) var(--tabsw-fade),
-        rgb(0 0 0) calc(100% - var(--tabsw-fade)),
-        transparent 100%
-      );
     }
   }
 </style>
