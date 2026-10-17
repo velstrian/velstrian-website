@@ -41,7 +41,7 @@
     "lighthouse": "^13.3.0",
     "satori": "^0.12.2",
     "serve": "^14.2.6",
-    "sharp": "^0.35.3",
+    "sharp": "^0.35.5",
     "tsx": "^4.19.2"
   },
   "dependencies": {
@@ -49,6 +49,9 @@
   },
   "overrides": {
     "qs": "^6.15.2",
+    "compression": "^1.8.2",
+    "fast-uri": "^3.1.8",
+    "brace-expansion@1": "^1.1.21",
     "esbuild": "^0.28.1"
   }
 }
