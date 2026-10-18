@@ -1,12 +1,12 @@
 ---
-title: "Accessibility | CrowAgent"
-description: "CrowAgent's accessibility statement: what we have tested against WCAG 2.2 AA, the results, what we have not yet tested, and how to report a barrier."
+title: "Accessibility | Velstrian"
+description: "Velstrian's accessibility statement: what we have tested against WCAG 2.2 AA, the results, what we have not yet tested, and how to report a barrier."
 heading: "What we have tested, and what we have not."
 eyebrow: "Accessibility"
 lastUpdated: "9 August 2026"
 ---
 
-This statement covers the CrowAgent marketing website at [crowagent.ai](https://crowagent.ai/). The CrowAgent application at `app.crowagent.ai` is a separate product and is **not** covered here. It has its own statement, published at [app.crowagent.ai/accessibility](https://app.crowagent.ai/accessibility), and neither statement should be read as evidence for the other: the two are different codebases, tested in different ways, on different dates.
+This statement covers the Velstrian marketing website at [velstrian.com](https://velstrian.com/). The application at `app.crowagent.ai` is a separate product and is **not** covered here. It has its own statement, published at [app.crowagent.ai/accessibility](https://app.crowagent.ai/accessibility), and neither statement should be read as evidence for the other: the two are different codebases, tested in different ways, on different dates.
 
 ## Conformance status
 
@@ -20,7 +20,7 @@ Testing was run on **9 August 2026** against the live site, not a staging copy.
 
 <div class="prose-scroll" role="region" aria-label="What we tested (table)" tabindex="0"><table> <caption>What we tested</caption> <thead> <tr><th scope="col">what</th><th scope="col">scope</th><th scope="col">result</th></tr> </thead> <tbody> <tr><td>axe-core, serious and critical issues</td><td>13 key pages × Chromium, Firefox, WebKit</td><td><strong>39 / 39 passed</strong></td></tr> <tr><td>axe-core, <strong>every</strong> issue at <strong>any</strong> severity</td><td>every built route, Chromium</td><td><strong>45 / 45 passed</strong></td></tr> </tbody> </table></div>
 
-Tooling: [axe-core](https://github.com/dequelabs/axe-core) driven through Playwright, run against `https://crowagent.ai`. The checks run as part of our build process, so a regression fails the build rather than waiting to be noticed.
+Tooling: [axe-core](https://github.com/dequelabs/axe-core) driven through Playwright, run against `https://velstrian.com`. The checks run as part of our build process, so a regression fails the build rather than waiting to be noticed.
 
 ## What we have NOT tested
 
@@ -39,13 +39,13 @@ Until those are done, there may be barriers on this site that our testing has no
 If any part of this site prevents you from doing something, tell us:
 
 - Use the [contact form](/contact/), or
-- Email **hello@crowagent.ai**
+- Email **hello@velstrian.com**
 
 Please include the page address and what you were trying to do. We aim to respond within **5 working days**. If you need something on this site in a different format, ask and we will tell you honestly whether and when we can provide it.
 
 ## Enforcement
 
-The Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 apply to public sector bodies. **CrowAgent Ltd is a private supplier and is not a public sector body**, so those regulations do not bind this site. We publish this statement because accessibility matters to our users and because our public sector customers reasonably ask suppliers for one, not because we are legally required to.
+The Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 apply to public sector bodies. **VELSTRIAN SYSTEMS LIMITED is a private supplier and is not a public sector body**, so those regulations do not bind this site. We publish this statement because accessibility matters to our users and because our public sector customers reasonably ask suppliers for one, not because we are legally required to.
 
 Our obligations under the **Equality Act 2010** to make reasonable adjustments do apply, and we take them seriously. If you are dissatisfied with how we respond to an accessibility complaint, you can contact the [Equality Advisory and Support Service (EASS)](https://www.equalityadvisoryservice.com/).
 

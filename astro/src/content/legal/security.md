@@ -1,6 +1,6 @@
 ---
-title: "Security | CrowAgent"
-description: "How CrowAgent stores and protects your bid data: AES-256 at rest, TLS 1.3 in transit, where each layer is stored and processed, and what we send to AI providers."
+title: "Security | Velstrian"
+description: "How Velstrian stores and protects your bid data: AES-256 at rest, TLS 1.3 in transit, where each layer is stored and processed, and what we send to AI providers."
 heading: "Encrypted, documented, and auditable."
 eyebrow: "Security & Trust"
 ---[System status: status.crowagent.ai](https://status.crowagent.ai)
@@ -9,7 +9,7 @@ Every layer, from disk to API, is named and auditable.
 
 ## Operational standards
 
-The controls every CrowAgent organisation inherits by default, from encryption to data residency to regulatory registration.
+The controls every Velstrian organisation inherits by default, from encryption to data residency to regulatory registration.
 
 ### AES-256 encryption at rest
 
@@ -33,13 +33,13 @@ Our security controls programme is built to ISO 27001.
 
 ### ICO Registered Data Controller
 
-CrowAgent Ltd is registered with the Information Commissioner's Office and verifiable on the ICO public register.
+VELSTRIAN SYSTEMS LIMITED is registered with the Information Commissioner's Office and verifiable on the ICO public register.
 
 ## Security documentation
 
 The detail behind each control, written for security and procurement teams. Jump to any topic, or contact us for an audit pack.
 
-<aside aria-label="Security contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Security Contact</strong> <p>For security disclosures or audit requests, contact our security team at <a href="mailto:security@crowagent.ai">security@crowagent.ai</a></p> </div> </aside>
+<aside aria-label="Security contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Security Contact</strong> <p>For security disclosures or audit requests, contact our security team at <a href="mailto:security@velstrian.com">security@velstrian.com</a></p> </div> </aside>
 
 ## AES-256 encryption
 
@@ -50,7 +50,7 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 ## EU data residency
 
 - Primary customer data is stored in Supabase’s EU region, AWS eu-west-1 (Ireland).
-- The CrowAgent API and its background worker run in the EU, in Google Cloud europe-west4 (Netherlands).
+- The Velstrian API and its background worker run in the EU, in Google Cloud europe-west4 (Netherlands).
 - Supporting services may process metadata in the EU (PostHog EU Cloud, Sentry EU).
 - Web application rendering runs on Vercel in London (lhr1).
 - Other processors operate under Standard Contractual Clauses (SCCs).
@@ -60,11 +60,11 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 
 ## GDPR compliance
 
-- CrowAgent Ltd is registered as a data controller with the Information Commissioner’s Office (ICO) under the Data Protection (Charges and Information) Regulations 2018.
+- VELSTRIAN SYSTEMS LIMITED is registered as a data controller with the Information Commissioner’s Office (ICO) under the Data Protection (Charges and Information) Regulations 2018.
 - A Data Processing Agreement (DPA) is available on request for customers. It is in draft pending legal review, so terms may change before signature.
 - Data subject rights supported: right to erasure, data portability, restriction of processing, and access.
 
-<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Verifiable on the <a href="https://ico.org.uk/ESDWebPages/Search">ICO public register</a> by searching for “CrowAgent Ltd”.</p> <p>Data requests: <a href="mailto:hello@crowagent.ai">hello@crowagent.ai</a></p> </dd> </dl>
+<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Verifiable on the <a href="https://ico.org.uk/ESDWebPages/Search">ICO public register</a> by searching for “VELSTRIAN SYSTEMS LIMITED”.</p> <p>Data requests: <a href="mailto:hello@velstrian.com">hello@velstrian.com</a></p> </dd> </dl>
 
 ## Access controls
 
@@ -98,13 +98,13 @@ Cyber Essentials is the certification we expect to pursue first.
 
 AI inference runs through server-side API calls only. Customer-facing drafting uses Google Gemini. Heavier reasoning and analysis use Anthropic's Claude. Both are data sub-processors under signed DPAs. The boundaries below describe exactly what crosses to a model provider.
 
-<dl class="deflist"> <dt>What is sent</dt> <dd> <ul> <li>Prompt context for the active task.</li> <li>Public reference text where required.</li> <li>Server-side API calls only.</li> </ul> </dd> <dt>What is NOT sent</dt> <dd> <ul> <li>Customer data for training.</li> <li>Bulk exports or full org datasets.</li> <li>Authentication tokens or PII.</li> </ul> </dd> <dt>Inference &amp; retention</dt> <dd> <ul> <li>CrowAgent-brokered infrastructure.</li> <li>Provider zero-retention terms.</li> <li>Inputs not retained by the model.</li> </ul> </dd> </dl>
+<dl class="deflist"> <dt>What is sent</dt> <dd> <ul> <li>Prompt context for the active task.</li> <li>Public reference text where required.</li> <li>Server-side API calls only.</li> </ul> </dd> <dt>What is NOT sent</dt> <dd> <ul> <li>Customer data for training.</li> <li>Bulk exports or full org datasets.</li> <li>Authentication tokens or PII.</li> </ul> </dd> <dt>Inference &amp; retention</dt> <dd> <ul> <li>Velstrian-brokered infrastructure.</li> <li>Provider zero-retention terms.</li> <li>Inputs not retained by the model.</li> </ul> </dd> </dl>
 
-<dl class="deflist"> <dt>Model Usage &amp; Data Isolation</dt> <dd>Inference traffic is brokered through CrowAgent-controlled service identities. Prompts include the minimum context required to satisfy the active task. Model responses are post-processed before storage to strip provider metadata.</dd> </dl>
+<dl class="deflist"> <dt>Model Usage &amp; Data Isolation</dt> <dd>Inference traffic is brokered through Velstrian-controlled service identities. Prompts include the minimum context required to satisfy the active task. Model responses are post-processed before storage to strip provider metadata.</dd> </dl>
 
 ## Vulnerability disclosure
 
-Report security vulnerabilities responsibly to [security@crowagent.ai](mailto:security@crowagent.ai?subject=Security%20Disclosure) with the subject “Security Disclosure”. We acknowledge receipt within two business days and triage as below. These are targets we set ourselves, not a contractual service level.
+Report security vulnerabilities responsibly to [security@velstrian.com](mailto:security@velstrian.com?subject=Security%20Disclosure) with the subject “Security Disclosure”. We acknowledge receipt within two business days and triage as below. These are targets we set ourselves, not a contractual service level.
 
 On a narrow screen, this table scrolls sideways.
 
@@ -114,7 +114,7 @@ On a narrow screen, this table scrolls sideways.
 
 99.5<sup>%</sup>
 
-CrowAgent targets 99.5% monthly uptime, with independent public status monitoring you can check yourself.
+Velstrian targets 99.5% monthly uptime, with independent public status monitoring you can check yourself.
 
 [View status page](https://status.crowagent.ai)
 
@@ -126,9 +126,9 @@ CrowAgent targets 99.5% monthly uptime, with independent public status monitorin
 
 ## Company & regulatory details
 
-<dl class="deflist deflist--ledger"> <dt>ICO registration</dt> <dd>Registered Data Controller</dd> <dt>Company</dt> <dd>CrowAgent Ltd</dd> <dt>Registered</dt> <dd>England and Wales</dd> <dt>Data controller</dt> <dd>CrowAgent Ltd</dd> <dt>General Enquiries</dt> <dd><a href="mailto:hello@crowagent.ai">hello@crowagent.ai</a></dd> <dt>Security</dt> <dd><a href="mailto:security@crowagent.ai">security@crowagent.ai</a></dd> </dl>
+<dl class="deflist deflist--ledger"> <dt>ICO registration</dt> <dd>Registered Data Controller</dd> <dt>Company</dt> <dd>VELSTRIAN SYSTEMS LIMITED</dd> <dt>Registered</dt> <dd>England and Wales</dd> <dt>Data controller</dt> <dd>VELSTRIAN SYSTEMS LIMITED</dd> <dt>General Enquiries</dt> <dd><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></dd> <dt>Security</dt> <dd><a href="mailto:security@velstrian.com">security@velstrian.com</a></dd> </dl>
 
-<dl class="deflist"> <dt>Data request contact</dt> <dd>For erasure, portability, restriction, or access requests, email <a href="mailto:hello@crowagent.ai">hello@crowagent.ai</a>. We respond within statutory timeframes.</dd> </dl>
+<dl class="deflist"> <dt>Data request contact</dt> <dd>For erasure, portability, restriction, or access requests, email <a href="mailto:hello@velstrian.com">hello@velstrian.com</a>. We respond within statutory timeframes.</dd> </dl>
 
 ## Finished your review?
 

@@ -1,18 +1,18 @@
 ---
-title: "Privacy Policy | CrowAgent"
-description: "How CrowAgent Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info."
+title: "Privacy Policy | Velstrian"
+description: "How VELSTRIAN SYSTEMS LIMITED collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info."
 heading: "Privacy Policy."
 eyebrow: "Legal & Data Protection"
 lastUpdated: "2026-05-17"
----How CrowAgent Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
+---How VELSTRIAN SYSTEMS LIMITED collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
 
 ## What this policy covers
 
-CrowAgent Ltd is the data controller for personal data processed through the platform. These are the foundations. The full detail follows below.
+VELSTRIAN SYSTEMS LIMITED is the data controller for personal data processed through the platform. These are the foundations. The full detail follows below.
 
 ### ICO Registered Controller
 
-CrowAgent Ltd is registered with the Information Commissioner's Office under the Data Protection (Charges and Information) Regulations 2018.
+VELSTRIAN SYSTEMS LIMITED is registered with the Information Commissioner's Office under the Data Protection (Charges and Information) Regulations 2018.
 
 ### UK GDPR lawful bases
 
@@ -30,26 +30,26 @@ We use Google Gemini and Anthropic Claude as AI sub-processors. No personal data
 
 Every clause below is written for clarity. Jump to any section, or contact our Data Protection Officer with a question.
 
-<aside aria-label="Data Protection Officer" class="legal-aside"> <div class="legal-aside__card"> <strong>Data Protection Officer</strong> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@crowagent.ai">dpo@crowagent.ai</a></p> </div> </aside>
+<aside aria-label="Data Protection Officer" class="legal-aside"> <div class="legal-aside__card"> <strong>Data Protection Officer</strong> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
 
 ## Data controller
 
-**CrowAgent Ltd**, a private company limited by shares incorporated in England and Wales, is the data controller for personal data processed through the CrowAgent platform.
+**VELSTRIAN SYSTEMS LIMITED**, a private company limited by shares incorporated in England and Wales, is the data controller for personal data processed through the Velstrian platform.
 
-CrowAgent Ltd (the "Company", "we", "us", or "our") is committed to protecting and respecting your privacy. This policy (together with our terms of use and any other documents referred to on it) sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us.
+VELSTRIAN SYSTEMS LIMITED (the "Company", "we", "us", or "our") is committed to protecting and respecting your privacy. This policy (together with our terms of use and any other documents referred to on it) sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us.
 
-For data-protection enquiries: [hello@crowagent.ai](mailto:hello@crowagent.ai)
+For data-protection enquiries: [hello@velstrian.com](mailto:hello@velstrian.com)
 
 ### ICO data-controller registration
 
-CrowAgent Ltd is registered as a data controller with the UK Information Commissioner’s Office (ICO) in accordance with the Data Protection (Charges and Information) Regulations 2018. Verifiable on the [ICO public register](https://ico.org.uk/ESDWebPages/Search) by searching for “CrowAgent Ltd”. Companies House No. 17076461.
+VELSTRIAN SYSTEMS LIMITED is registered as a data controller with the UK Information Commissioner’s Office (ICO) in accordance with the Data Protection (Charges and Information) Regulations 2018. Verifiable on the [ICO public register](https://ico.org.uk/ESDWebPages/Search) by searching for “VELSTRIAN SYSTEMS LIMITED”. Companies House No. 17076461.
 
 ## Data we collect
 
 We may collect and process the following data about you:
 
 - **Account data:** Information that you provide by filling in forms on our site or via our application (app.crowagent.ai). This includes email address, full name, and password hash (via Supabase Auth).
-- **Sustainability data:** Activity and energy-consumption figures submitted through legacy reporting features, available to existing customers only. This is essential for the CrowAgent platform.
+- **Sustainability data:** Activity and energy-consumption figures submitted through legacy reporting features, available to existing customers only. This is essential for the Velstrian platform.
 - **Social Value data:** Procurement descriptions, National TOMs selections, and submissions you enter for social value scoring and CrowMark narrative generation.
 - **Usage data:** Details of your visits to our site including, but not limited to, traffic data, location data, weblogs and other communication data, API call counts, feature usage events, timestamps, and subscription plan.
 - **Billing data:** Stripe customer ID and subscription status. We do not store raw card numbers. These are handled directly by Stripe.
@@ -60,7 +60,7 @@ We may collect and process the following data about you:
 
 We use information held about you in the following ways:
 
-- To provide the CrowAgent service, including CrowMark and legacy features retained for existing customers, such as authentication, sustainability reporting, security-evidence preparation, and Social Value scoring based on National TOMs.
+- To provide the Velstrian service, including CrowMark and legacy features retained for existing customers, such as authentication, sustainability reporting, security-evidence preparation, and Social Value scoring based on National TOMs.
 - To process billing and maintain financial records through Stripe.
 - To improve the product through aggregate analytics and user feedback (consent-gated via PostHog).
 - To monitor and fix errors, ensuring service stability (via Sentry).
@@ -70,7 +70,7 @@ We use information held about you in the following ways:
 
 Under the UK GDPR, the lawful bases we rely on for processing this information are:
 
-- **Contract performance (Article 6(1)(b) UK GDPR):** processing necessary to provide the CrowAgent service and fulfil our obligations arising from any contracts entered into between you and us.
+- **Contract performance (Article 6(1)(b) UK GDPR):** processing necessary to provide the Velstrian service and fulfil our obligations arising from any contracts entered into between you and us.
 - **Legitimate interests (Article 6(1)(f) UK GDPR):** processing necessary for our legitimate interests, including error monitoring, fraud prevention, service security, and general improvement of the platform.
 - **Consent (Article 6(1)(a) UK GDPR):** processing where you have given clear consent for us to process your personal data for a specific purpose, such as analytics tracking via PostHog or marketing communications.
 - **Legal obligation (Article 6(1)(c) UK GDPR):** processing necessary for compliance with a legal obligation to which we are subject, such as financial records retention for HMRC.
@@ -98,11 +98,11 @@ You have the following rights in respect of personal data we hold about you. To 
 
 Our Data Protection Officer is the canonical contact for all data-protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact our DPO for any matter related to CrowMark or to any legacy feature retained for existing customers data handling.
 
-<dl class="deflist"> <dt>Contact the DPO</dt> <dd>Email: <a href="mailto:dpo@crowagent.ai">dpo@crowagent.ai</a> | <a href="mailto:privacy@crowagent.ai">privacy@crowagent.ai</a></dd> </dl>
+<dl class="deflist"> <dt>Contact the DPO</dt> <dd>Email: <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a> | <a href="mailto:privacy@velstrian.com">privacy@velstrian.com</a></dd> </dl>
 
 ## Cookies
 
-CrowAgent sets a minimal set of cookies. Analytics and non-essential cookies are gated behind explicit consent (PECR & UK GDPR). Essential cookies are required for the platform to function correctly.
+Velstrian sets a minimal set of cookies. Analytics and non-essential cookies are gated behind explicit consent (PECR & UK GDPR). Essential cookies are required for the platform to function correctly.
 
 - **Supabase Auth:** Session cookies for sign-in. (No consent required, essential for service)
 - **PostHog:** Product analytics and feature flags. (Consent required)
@@ -114,8 +114,8 @@ We engage the following third-party sub-processors to operate the service. A Dat
 
 Supabase EU Railway EU Vercel Edge Cloudflare Edge Stripe US/EU PostHog EU Sentry US Brevo EU Google Gemini US Anthropic Claude US
 
-- **Supabase (EU):** Database, authentication, object storage. Essential for CrowAgent platform data residency.
-- **Railway (EU):** Application hosting for the CrowAgent backend and AI engines.
+- **Supabase (EU):** Database, authentication, object storage. Essential for Velstrian platform data residency.
+- **Railway (EU):** Application hosting for the Velstrian backend and AI engines.
 - **Vercel (Edge):** Frontend hosting for app.crowagent.ai.
 - **Cloudflare (Edge):** DNS, CDN, DDoS protection, and Turnstile bot challenges.
 - **Stripe (US/EU):** Payment processing and subscription management.
@@ -137,11 +137,11 @@ Where personal data is transferred outside the UK, we rely on UK IDTA or EU SCCs
 
 ## Automated decisions & AI
 
-In accordance with Article 22 UK GDPR, we confirm that CrowAgent does not make any decision about you that is based solely on automated processing and that produces legal effects. CrowAgent uses AI models from Google (Gemini) and Anthropic (Claude) to draft content, such as social value narratives based on TOMs data and, for existing customers, legacy sustainability report drafts. All such outputs are advisory and must be reviewed and signed off by a human before use.
+In accordance with Article 22 UK GDPR, we confirm that Velstrian does not make any decision about you that is based solely on automated processing and that produces legal effects. Velstrian uses AI models from Google (Gemini) and Anthropic (Claude) to draft content, such as social value narratives based on TOMs data and, for existing customers, legacy sustainability report drafts. All such outputs are advisory and must be reviewed and signed off by a human before use.
 
 ## Subject Access Request (DSAR) procedure
 
-You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [privacy@crowagent.ai](mailto:privacy@crowagent.ai) with the subject line “DSAR, \[type of request\]”. Please include the email address associated with your CrowAgent account and a brief description of the request. We will verify your identity where necessary and respond within one calendar month of receipt.
+You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [privacy@velstrian.com](mailto:privacy@velstrian.com) with the subject line “DSAR, \[type of request\]”. Please include the email address associated with your Velstrian account and a brief description of the request. We will verify your identity where necessary and respond within one calendar month of receipt.
 
 ## Google Gemini DPA
 
@@ -149,7 +149,7 @@ CrowMark uses Google Gemini 1.5 Flash to assist with drafting Social Value narra
 
 ## Anthropic (Claude) AI processing
 
-CrowAgent uses Anthropic's Claude models as an AI sub-processor to generate and draft content from the data you provide, including CrowMark social value bid narratives and, for existing customers, legacy sustainability report drafting.
+Velstrian uses Anthropic's Claude models as an AI sub-processor to generate and draft content from the data you provide, including CrowMark social value bid narratives and, for existing customers, legacy sustainability report drafting.
 
 What data is sent
 
@@ -163,11 +163,11 @@ Anthropic acts as a data processor on our behalf under our agreement with them. 
 
 ## Sentry retention & error scrubbing
 
-We use Sentry for error monitoring to ensure the stability of the CrowAgent platform and its modules. Error events are retained for 90 days, and session replays are retained for 30 days. The Sentry SDK is configured to scrub sensitive keys such as passwords and tokens before they are transmitted from your browser.
+We use Sentry for error monitoring to ensure the stability of the Velstrian platform and its modules. Error events are retained for 90 days, and session replays are retained for 30 days. The Sentry SDK is configured to scrub sensitive keys such as passwords and tokens before they are transmitted from your browser.
 
 ## Contact & ICO complaint
 
-<dl class="deflist deflist--ledger"> <dt>Company</dt> <dd>CrowAgent Ltd</dd> <dt>Companies House No.</dt> <dd>17076461</dd> <dt>Registered office</dt> <dd>Reading, Berkshire, RG1 6SP, GB</dd> <dt>Data Protection</dt> <dd><a href="mailto:dpo@crowagent.ai">dpo@crowagent.ai</a></dd> </dl>
+<dl class="deflist deflist--ledger"> <dt>Company</dt> <dd>VELSTRIAN SYSTEMS LIMITED</dd> <dt>Companies House No.</dt> <dd>17076461</dd> <dt>Registered office</dt> <dd>Reading, Berkshire, RG1 6SP, GB</dd> <dt>Data Protection</dt> <dd><a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></dd> </dl>
 
 If you are not satisfied with our response to a data protection request, you have the right to complain to the UK Information Commissioner’s Office (ICO).
 

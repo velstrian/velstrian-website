@@ -1,6 +1,6 @@
 ---
-title: "Terms of Service | CrowAgent"
-description: "CrowAgent Ltd terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes."
+title: "Terms of Service | Velstrian"
+description: "VELSTRIAN SYSTEMS LIMITED terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes."
 heading: "Terms of Service."
 lastUpdated: "2026-03-01"
 ---
@@ -26,17 +26,17 @@ Tap any card to jump straight to the full clause. The complete agreement follows
 
   IF YOU RENUMBER A HEADING IN THIS FILE, THESE MOVE WITH IT.
 -->
-<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>CrowAgent Ltd (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are not legal or professional advice.</p> </a> <a href="#6-limitation-of-liability" class="prose-card"> <span aria-hidden="true"></span> <h3>Liability</h3> <p>Aggregate cap: greater of 12 months' fees or £1,000.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
+<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>VELSTRIAN SYSTEMS LIMITED (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are not legal or professional advice.</p> </a> <a href="#6-limitation-of-liability" class="prose-card"> <span aria-hidden="true"></span> <h3>Liability</h3> <p>Aggregate cap: greater of 12 months' fees or £1,000.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
 
 ## Full terms of service
 
 The complete agreement, written in plain language. Jump to any clause, or contact us for a Data Processing Agreement.
 
-<aside aria-label="Legal contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Legal contact</strong> <p>For DPA or contract requests, email <a href="mailto:legal@crowagent.ai">legal@crowagent.ai</a></p> </div> </aside>
+<aside aria-label="Legal contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Legal contact</strong> <p>For DPA or contract requests, email <a href="mailto:legal@velstrian.com">legal@velstrian.com</a></p> </div> </aside>
 
 ## 1. Parties and Agreement
 
-These Terms of Service (“Terms”) form a legally binding agreement between **CrowAgent Ltd** (a private company limited by shares incorporated in England and Wales, “CrowAgent”, “we”, “us”) and the individual or organisation accessing or using the CrowAgent platform (“Customer”, “you”). By creating an account or using the platform, you agree to these Terms.
+These Terms of Service (“Terms”) form a legally binding agreement between **VELSTRIAN SYSTEMS LIMITED** (a private company limited by shares incorporated in England and Wales, “Velstrian”, “we”, “us”) and the individual or organisation accessing or using the Velstrian platform (“Customer”, “you”). By creating an account or using the platform, you agree to these Terms.
 
 ## 2. Subscription and Access
 
@@ -46,7 +46,7 @@ These Terms of Service (“Terms”) form a legally binding agreement between **
 - An evaluation trial may be granted on request. Where one is granted it is time limited and usage limited. The standard trial runs for 14 days at the Starter feature set for 1 user. Any trial granted on different terms has those terms stated to you when access is given. No charge arises during a trial or when it ends.
 - Trials are limited to one per organisation. When a trial period ends, access stops unless a subscription is taken, and your data is retained.
 - Paid plans are subject to the limits specified on the Pricing page.
-- CrowAgent may modify plans or pricing with 30 days' written notice to subscribers.
+- Velstrian may modify plans or pricing with 30 days' written notice to subscribers.
 
 <dl class="deflist"> <dt>Cancellation &amp; refunds</dt> <dd> <p>You may cancel your subscription at any time from <strong>Settings → Billing</strong>. Access continues until the end of the current billing period.</p> <p><strong>No refunds are issued for partial periods.</strong> Pro-rated refunds are not available for unused days within a billing cycle.</p> </dd> </dl>
 
@@ -56,13 +56,13 @@ These Terms of Service (“Terms”) form a legally binding agreement between **
 
 ## 3. Acceptable Use
 
-Use of the CrowAgent platform is conditional on staying within the boundaries below. The list applies to every account, whether on a paid subscription or an evaluation trial.
+Use of the Velstrian platform is conditional on staying within the boundaries below. The list applies to every account, whether on a paid subscription or an evaluation trial.
 
 ### Permitted
 
 - Using outputs internally to support your own compliance, procurement, or sustainability workflows.
 - Inviting colleagues to your workspace under your subscription's seat limit.
-- Sharing reports with clients with proper attribution to CrowAgent where AI outputs are reproduced.
+- Sharing reports with clients with proper attribution to Velstrian where AI outputs are reproduced.
 - Exporting your own data at any time from Settings → Data.
 
 ### Prohibited
@@ -73,39 +73,39 @@ Use of the CrowAgent platform is conditional on staying within the boundaries be
 - Submitting content that is defamatory, fraudulent, or infringes third-party intellectual property rights.
 - Using AI outputs to misrepresent compliance status in regulatory filings without independent professional review.
 
-<details class="lc-details" id="use-detail"> <summary>Acceptable Use, full enforcement detail</summary> <div class="lc-details__body"> <p>CrowAgent reserves the right to suspend or terminate access for material breach of these terms, with or without prior notice depending on severity.</p> <p>For first-time, low-severity breaches we typically issue a written warning and a 7-day remediation window. For severe breaches (data scraping, credential resale, regulatory fraud) access may be suspended immediately and accounts terminated without refund.</p> <ul> <li>Warnings are sent to the account's billing email address.</li> <li>Appeals can be raised by replying to the warning email within 14 days.</li> <li>Final termination decisions rest with CrowAgent's legal officer.</li> </ul> </div> </details>
+<details class="lc-details" id="use-detail"> <summary>Acceptable Use, full enforcement detail</summary> <div class="lc-details__body"> <p>Velstrian reserves the right to suspend or terminate access for material breach of these terms, with or without prior notice depending on severity.</p> <p>For first-time, low-severity breaches we typically issue a written warning and a 7-day remediation window. For severe breaches (data scraping, credential resale, regulatory fraud) access may be suspended immediately and accounts terminated without refund.</p> <ul> <li>Warnings are sent to the account's billing email address.</li> <li>Appeals can be raised by replying to the warning email within 14 days.</li> <li>Final termination decisions rest with Velstrian's legal officer.</li> </ul> </div> </details>
 
 ## 4. AI Output Disclaimer
 
-<dl class="deflist"> <dt>Important, AI outputs are not advice</dt> <dd> <p>The CrowAgent platform uses artificial intelligence models (including Google Gemini) to generate PPN 026 social value scores and bid content, and, for existing customers, legacy sustainability and security-evidence guidance.</p> <p><strong>These outputs do not constitute legal, surveying, financial, or professional advice.</strong> They are provided for informational and decision-support purposes only.</p> </dd> </dl>
+<dl class="deflist"> <dt>Important, AI outputs are not advice</dt> <dd> <p>The Velstrian platform uses artificial intelligence models (including Google Gemini) to generate PPN 026 social value scores and bid content, and, for existing customers, legacy sustainability and security-evidence guidance.</p> <p><strong>These outputs do not constitute legal, surveying, financial, or professional advice.</strong> They are provided for informational and decision-support purposes only.</p> </dd> </dl>
 
-<details class="lc-details" id="ai-detail"> <summary>AI Disclaimer, model behaviour, accuracy, professional review</summary> <div class="lc-details__body"> <p>You should not rely solely on AI outputs to make compliance decisions, submit regulatory returns, or advise clients. CrowAgent strongly recommends that all significant compliance or procurement decisions are reviewed by a qualified professional before action is taken.</p> <p>AI model outputs may contain errors, omissions, or outdated information. CrowAgent does not warrant the accuracy, completeness, or fitness for purpose of any AI-generated content.</p> <ul> <li>Outputs reflect the model's training data and may not capture the latest regulatory changes.</li> <li>Confidence scores indicate model certainty, not factual accuracy.</li> <li>Always cross-check material thresholds and dates against the source legislation.</li> <li>For regulated submissions, obtain a sign-off from a qualified surveyor, lawyer, or compliance officer.</li> </ul> </div> </details>
+<details class="lc-details" id="ai-detail"> <summary>AI Disclaimer, model behaviour, accuracy, professional review</summary> <div class="lc-details__body"> <p>You should not rely solely on AI outputs to make compliance decisions, submit regulatory returns, or advise clients. Velstrian strongly recommends that all significant compliance or procurement decisions are reviewed by a qualified professional before action is taken.</p> <p>AI model outputs may contain errors, omissions, or outdated information. Velstrian does not warrant the accuracy, completeness, or fitness for purpose of any AI-generated content.</p> <ul> <li>Outputs reflect the model's training data and may not capture the latest regulatory changes.</li> <li>Confidence scores indicate model certainty, not factual accuracy.</li> <li>Always cross-check material thresholds and dates against the source legislation.</li> <li>For regulated submissions, obtain a sign-off from a qualified surveyor, lawyer, or compliance officer.</li> </ul> </div> </details>
 
 ## 5. Intellectual Property
 
-- The CrowAgent platform, branding, and underlying software are the intellectual property of CrowAgent Ltd. No licence to copy or distribute the software is granted.
-- You retain ownership of all data and content you submit to the platform. You grant CrowAgent a limited licence to process that data solely to provide the service.
+- The Velstrian platform, branding, and underlying software are the intellectual property of VELSTRIAN SYSTEMS LIMITED. No licence to copy or distribute the software is granted.
+- You retain ownership of all data and content you submit to the platform. You grant Velstrian a limited licence to process that data solely to provide the service.
 - AI outputs generated from your inputs are provided to you for your internal use. You may not represent AI outputs as your own original professional opinion.
 
 ## 6. Limitation of Liability
 
-<dl class="deflist"> <dt>Aggregate liability cap</dt> <dd>CrowAgent's aggregate liability shall not exceed the <strong>greater of (a) total subscription fees paid in the 12 months preceding the claim, or (b) £1,000</strong>.</dd> </dl>
+<dl class="deflist"> <dt>Aggregate liability cap</dt> <dd>Velstrian's aggregate liability shall not exceed the <strong>greater of (a) total subscription fees paid in the 12 months preceding the claim, or (b) £1,000</strong>.</dd> </dl>
 
 ### Liability limits at a glance
 
 <div class="prose-scroll" role="region" aria-label="Liability and exclusions (table)" tabindex="0"><table class="lc-table"> <caption>Liability and exclusions</caption> <thead> <tr><th scope="col">Category</th><th scope="col">Treatment</th></tr> </thead> <tbody> <tr><th scope="row">Aggregate cap</th><td>Greater of 12 months' fees paid, or £1,000</td></tr> <tr><th scope="row">Indirect / consequential losses</th><td>Excluded to the maximum extent permitted by law</td></tr> <tr><th scope="row">Loss of profits / revenue / data</th><td>Excluded</td></tr> <tr><th scope="row">Business interruption</th><td>Excluded</td></tr> <tr><th scope="row">Death or personal injury (negligence)</th><td>Not limited</td></tr> <tr><th scope="row">Fraud / fraudulent misrepresentation</th><td>Not limited</td></tr> </tbody> </table></div>
 
-<details class="lc-details" id="liability-detail"> <summary>Liability, full clause text</summary> <div class="lc-details__body"> <p>To the maximum extent permitted by applicable law, CrowAgent's aggregate liability to you under or in connection with these Terms shall not exceed the greater of (a) the total subscription fees paid by you in the 12 months preceding the claim, or (b) £1,000.</p> <p>CrowAgent shall not be liable for any indirect, consequential, special, or punitive damages, including loss of profits, loss of revenue, loss of data, or business interruption.</p> <p>Nothing in these Terms limits liability for death or personal injury caused by negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded by law.</p> </div> </details>
+<details class="lc-details" id="liability-detail"> <summary>Liability, full clause text</summary> <div class="lc-details__body"> <p>To the maximum extent permitted by applicable law, Velstrian's aggregate liability to you under or in connection with these Terms shall not exceed the greater of (a) the total subscription fees paid by you in the 12 months preceding the claim, or (b) £1,000.</p> <p>Velstrian shall not be liable for any indirect, consequential, special, or punitive damages, including loss of profits, loss of revenue, loss of data, or business interruption.</p> <p>Nothing in these Terms limits liability for death or personal injury caused by negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded by law.</p> </div> </details>
 
 ## 7. Data Processing
 
 Personal data is processed in accordance with our [Privacy Policy](/privacy/). For B2B customers who require a Data Processing Agreement under Article 28 UK GDPR, request a copy using the buttons below.
 
-[Request DPA](mailto:legal@crowagent.ai?subject=DPA%20Request) [Contact Support](mailto:support@crowagent.ai)
+[Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:support@velstrian.com)
 
 ## 8. Service Availability
 
-CrowAgent targets **99.5% monthly uptime** but does not guarantee uninterrupted access. We may perform maintenance with reasonable prior notice. Planned downtime is excluded from uptime calculations.
+Velstrian targets **99.5% monthly uptime** but does not guarantee uninterrupted access. We may perform maintenance with reasonable prior notice. Planned downtime is excluded from uptime calculations.
 
 99.5<sup>%</sup>
 
@@ -123,6 +123,6 @@ We may update these Terms from time to time. Material changes will be communicat
 
 ## 11. Contact
 
-<div class="prose-scroll" role="region" aria-label="How to reach CrowAgent (table)" tabindex="0"><table class="lc-table"> <caption>How to reach CrowAgent</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:hello@crowagent.ai">hello@crowagent.ai</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@crowagent.ai">legal@crowagent.ai</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:support@crowagent.ai">support@crowagent.ai</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.crowagent.ai" target="_blank" rel="noopener noreferrer">status.crowagent.ai</a></td></tr> <tr><th scope="row">Registered entity</th><td>CrowAgent Ltd, England &amp; Wales</td></tr> </tbody> </table></div>
+<div class="prose-scroll" role="region" aria-label="How to reach Velstrian (table)" tabindex="0"><table class="lc-table"> <caption>How to reach Velstrian</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@velstrian.com">legal@velstrian.com</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:support@velstrian.com">support@velstrian.com</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.crowagent.ai" target="_blank" rel="noopener noreferrer">status.crowagent.ai</a></td></tr> <tr><th scope="row">Registered entity</th><td>VELSTRIAN SYSTEMS LIMITED, England &amp; Wales</td></tr> </tbody> </table></div>
 
-[Request DPA](mailto:legal@crowagent.ai?subject=DPA%20Request) [Contact Support](mailto:support@crowagent.ai)
+[Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:support@velstrian.com)
