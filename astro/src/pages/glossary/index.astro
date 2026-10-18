@@ -5,7 +5,7 @@ import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
 import Button from '../../components/ui/Button.astro';
 
-const title = 'UK Procurement Glossary | CrowAgent';
+const title = 'UK Procurement Glossary | Velstrian';
 const description =
   'Plain-English definitions of UK public procurement and bidding terms: PPN 026, PPN 017, Find a Tender, frameworks, MAT, standstill, TUPE and more.';
 const path = '/glossary';
@@ -199,12 +199,12 @@ const schema = [
        the trailing slash, which is the 308 source on a directory-format build.
        Five URLs in this one graph named /glossary and its terms that way. */
     url: routeUrl(path),
-    publisher: { '@type': 'Organization', name: 'CrowAgent', url: routeUrl('/') },
+    publisher: { '@type': 'Organization', name: 'Velstrian', url: routeUrl('/') },
   },
   {
     '@type': 'DefinedTermSet',
     '@id': `${routeUrl(path)}#termset`,
-    name: 'CrowAgent UK Public Procurement and Bid Glossary',
+    name: 'Velstrian UK Public Procurement and Bid Glossary',
     description: 'Definitions of the UK public procurement and bidding terms that decide whether a supplier wins and delivers public contracts.',
     url: routeUrl(path),
     hasDefinedTerm: terms.map((t) => ({

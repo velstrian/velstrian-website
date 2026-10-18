@@ -30,7 +30,7 @@ import ContactForm from '../components/forms/ContactForm.astro';
 import NewsletterForm from '../components/forms/NewsletterForm.astro';
 import { breadcrumbs } from '../lib/schema';
 
-const title = 'Contact CrowAgent | Book a demo or ask a question';
+const title = 'Contact Velstrian | Book a demo or ask a question';
 const description =
   'Book a 30-minute call, send an enquiry, or email us. UK team, replying within three to five business days.';
 
@@ -52,10 +52,10 @@ const breadcrumb = breadcrumbs([
 /** Who to email, and for what. Kept as data so the list cannot drift from the
     directory rendered below it. */
 const DIRECTORY = [
-  { purpose: 'General and partnerships', address: 'hello@crowagent.ai' },
-  { purpose: 'Support and data requests (GDPR)', address: 'support@crowagent.ai' },
-  { purpose: 'Enterprise sales', address: 'sales@crowagent.ai' },
-  { purpose: 'Security disclosures', address: 'security@crowagent.ai' },
+  { purpose: 'General and partnerships', address: 'hello@velstrian.com' },
+  { purpose: 'Support and data requests (GDPR)', address: 'support@velstrian.com' },
+  { purpose: 'Enterprise sales', address: 'sales@velstrian.com' },
+  { purpose: 'Security disclosures', address: 'security@velstrian.com' },
 ];
 
 /**
@@ -77,7 +77,7 @@ const DIRECTORY = [
  * it in a three-up card grid with the booking card and the email card, which are
  * the two panels this grid already renders. Copy is verbatim from
  * contact.html:245-247, and the action is the same mailto the live card carries;
- * sales@crowagent.ai is already published in the directory below.
+ * sales@velstrian.com is already published in the directory below.
  */
 const REACH = [
   {
@@ -90,15 +90,15 @@ const REACH = [
   {
     heading: 'Portfolio plan and volume licensing',
     body: 'Microsoft Entra ID single sign-on, branded exports, invoice or purchase order billing, and pricing scoped to a high-volume bidding team.',
-    href: 'mailto:sales@crowagent.ai?subject=Enterprise%20enquiry',
+    href: 'mailto:sales@velstrian.com?subject=Enterprise%20enquiry',
     action: 'Email sales',
     external: false,
   },
   {
     heading: 'Send us an email',
-    body: 'hello@crowagent.ai · We respond within 3 to 5 business days.',
-    href: 'mailto:hello@crowagent.ai',
-    action: 'hello@crowagent.ai',
+    body: 'hello@velstrian.com · We respond within 3 to 5 business days.',
+    href: 'mailto:hello@velstrian.com',
+    action: 'hello@velstrian.com',
     external: false,
   },
 ];
@@ -140,13 +140,13 @@ const COMPANY = [
       same mechanism it was describing. Describe the delimiters in words. */}
   <Section
     eyebrow="Contact"
-    title="Talk to CrowAgent."
+    title="Talk to Velstrian."
     standfirst="Book a slot, send an enquiry, or email us directly. We reply within three to five business days, and the person who replies is on the team that built it."
     id="contact-hero"
     as="h1">
     <div class="btn-row">
       <Button href={CALENDLY} target="_blank">Book a 30-minute call</Button>
-      <Button href="mailto:hello@crowagent.ai" variant="secondary">Email us</Button>
+      <Button href="mailto:hello@velstrian.com" variant="secondary">Email us</Button>
     </div>
   </Section>
 
@@ -263,7 +263,7 @@ const COMPANY = [
   <Section
     eyebrow="Send a message"
     title="Tell us what you're working on."
-    standfirst="Bidding for public sector contracts, or working out whether CrowAgent fits your organisation: tell us the situation and we will answer properly."
+    standfirst="Bidding for public sector contracts, or working out whether Velstrian fits your organisation: tell us the situation and we will answer properly."
     id="contact-form"
   >
     <div class="contact-grid">
@@ -287,7 +287,7 @@ const COMPANY = [
           }
         </dl>
 
-        <h3 class="aside__title" id="company-title">CrowAgent Ltd</h3>
+        <h3 class="aside__title" id="company-title">VELSTRIAN SYSTEMS LIMITED</h3>
         <dl class="directory" aria-labelledby="company-title">
           {
             COMPANY.map((c) => (

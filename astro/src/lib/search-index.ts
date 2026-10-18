@@ -47,7 +47,7 @@ export async function buildSearchIndex(): Promise<SearchEntry[]> {
     out.push(entry);
   };
 
-  add({ title: 'Home', href: '/', section: 'CrowAgent', hint: 'start homepage' });
+  add({ title: 'Home', href: '/', section: 'Velstrian', hint: 'start homepage' });
 
   /*
    * EVERY dropdown, not just the products one. `NAV.productDropdown` became
@@ -75,7 +75,7 @@ export async function buildSearchIndex(): Promise<SearchEntry[]> {
   }
 
   for (const link of NAV.topLinks) {
-    add({ title: link.label, href: link.href, section: 'CrowAgent' });
+    add({ title: link.label, href: link.href, section: 'Velstrian' });
   }
 
   for (const column of FOOTER.columns) {

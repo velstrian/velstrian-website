@@ -24,7 +24,7 @@ import Button from '../components/ui/Button.astro';
 import { FAQ_CATEGORIES, FAQ_ALL } from '../data/faq';
 import { faqPage, breadcrumbs } from '../lib/schema';
 
-const title = 'CrowMark FAQ | Bid software questions answered | CrowAgent';
+const title = 'CrowMark FAQ | Bid software questions answered | Velstrian';
 const description =
   'Plans, pricing, AI credits, security and the rules CrowMark reads. Answers to the questions UK bid teams ask most.';
 
@@ -54,7 +54,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
 <Base title={title} description={description} path="/faq" schema={schema} updatedAt={UPDATED}>
   <Section
     eyebrow="Help centre · Support"
-    title="Questions about CrowAgent?"
+    title="Questions about Velstrian?"
     standfirst="Plans, pricing, AI credits, security and the rules CrowMark reads. If your question is not on this page, book a call."
     id="faq-top"
   
@@ -138,7 +138,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     <div class="btn-row">
       <Button href="/contact/#contact-form">Send us a message</Button>
       <Button href={CALENDLY} variant="secondary" target="_blank">Book a call</Button>
-      <Button href="mailto:hello@crowagent.ai" variant="secondary">Email us</Button>
+      <Button href="mailto:hello@velstrian.com" variant="secondary">Email us</Button>
     </div>
   </Section>
 </Base>

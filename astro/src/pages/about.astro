@@ -127,14 +127,14 @@ import Button from '../components/ui/Button.astro';
 import NewsletterForm from '../components/forms/NewsletterForm.astro';
 import { breadcrumbs } from '../lib/schema';
 
-const title = 'About Us | CrowAgent';
+const title = 'About Us | Velstrian';
 /* The overclaim was in here too, which is why it reached og:description,
    twitter:description and the og:image alt text: one string, five places in the
    shipped head. Corrected 2026-08-04, O-07. check-seo-parity.js fails on a
    description that is MISSING, not on one that changed, and /about is not among
    the routes tests/parity.spec.js walks, so there is no baseline to move. */
 const description =
-  'Written for bid teams and readable by the people scoring them. CrowAgent Ltd: company details, history, what we stand for and the statutes we build against.';
+  'Written for bid teams and readable by the people scoring them. VELSTRIAN SYSTEMS LIMITED: company details, history, what we stand for and the statutes we build against.';
 
 const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
 const COMPANIES_HOUSE =
@@ -330,7 +330,7 @@ const TIMELINE: {
        quiet version of the defect. See OWNER-REGISTER.md and O-07. */
     when: '2010 to 2025',
     heading: 'Founding team experience',
-    body: 'Bid and tender work inside regulated industries from 2010, including multi-million pound bids written, won and delivered to completion. That is the founders’ own record before CrowAgent, not a result of the product. It is also where we saw at first hand how much of the friction smaller suppliers face is evidence that exists and cannot be found.',
+    body: 'Bid and tender work inside regulated industries from 2010, including multi-million pound bids written, won and delivered to completion. That is the founders’ own record before Velstrian, not a result of the product. It is also where we saw at first hand how much of the friction smaller suppliers face is evidence that exists and cannot be found.',
     status: 'done',
   },
   {
@@ -347,10 +347,10 @@ const TIMELINE: {
   },
   {
     when: 'March 2026',
-    heading: 'CrowAgent founded',
+    heading: 'Velstrian founded',
     // The number itself is in the company card beside this column, once. It was
     // printed three times within one screen: here, in the link label, and there.
-    body: 'Incorporated as CrowAgent Ltd in England and Wales. Engine prototyping begins.',
+    body: 'Incorporated as VELSTRIAN SYSTEMS LIMITED in England and Wales. Engine prototyping begins.',
     status: 'done',
     link: { label: 'The registration on Companies House', href: COMPANIES_HOUSE },
   },
@@ -691,7 +691,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
         <div class="hist__sticky">
           <div class="company surface surface--pad" id="company">
             <p class="eyebrow">Company details</p>
-            <h2 class="hist__title hist__title--sm">CrowAgent Ltd</h2>
+            <h2 class="hist__title hist__title--sm">VELSTRIAN SYSTEMS LIMITED</h2>
             <dl class="company__list">
               {
                 COMPANY.map((c) => (
@@ -703,7 +703,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
               }
               <div class="company__row">
                 <dt>Contact</dt>
-                <dd><a href="mailto:hello@crowagent.ai">hello@crowagent.ai</a></dd>
+                <dd><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></dd>
               </div>
             </dl>
           </div>

@@ -2,16 +2,16 @@ User-agent: *
 Allow: /
 
 # WS-AUDIT-021: removed `Disallow: /api/` — no /api/ surface exists on
-# crowagent.ai (the API lives on app.crowagent.ai). The directive was
+# velstrian.com (the API lives on app.crowagent.ai). The directive was
 # harmless but signalled confused IA.
 
 # WS-AUDIT-021 (2026-05-10): AI-discovery surfaces ENABLED.
 # Strategic decision per docs/marketing-content-gaps-2026-05-06.md —
-# CrowAgent's marketing content (regulation explainers, free tools,
+# Velstrian's marketing content (regulation explainers, free tools,
 # methodology pages) is exactly the corpus we want surfaced in AI-search
 # answers (Google AI Overviews, ChatGPT/Claude/Perplexity citations).
 # Blocking these crawlers locked us out of a growing zero-click discovery
-# channel for ~zero benefit (no proprietary data lives on crowagent.ai;
+# channel for ~zero benefit (no proprietary data lives on velstrian.com;
 # the platform/portal data lives behind auth on app.crowagent.ai).
 User-agent: GPTBot
 Allow: /
