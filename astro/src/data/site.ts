@@ -17,12 +17,12 @@
  */
 
 export const SITE = {
-  name: 'CrowAgent',
-  legalName: 'CrowAgent Ltd',
-  origin: 'https://crowagent.ai',
-  defaultOgImage: 'https://crowagent.ai/Assets/og-image.png?v=20260730',
-  twitter: '@CrowAgentLtd',
-  email: 'hello@crowagent.ai',
+  name: 'Velstrian',
+  legalName: 'VELSTRIAN SYSTEMS LIMITED',
+  origin: 'https://velstrian.com',
+  defaultOgImage: 'https://velstrian.com/Assets/og-image.png?v=20260730',
+  twitter: '@VelstrianLtd',
+  email: 'hello@velstrian.com',
 
   /**
    * The Organization JSON-LD node, emitted on every page by Seo.astro as
@@ -44,10 +44,10 @@ export const SITE = {
    */
   organizationSchema: {
     '@type': 'Organization',
-    '@id': 'https://crowagent.ai/#organization',
-    name: 'CrowAgent Ltd',
-    url: 'https://crowagent.ai/',
-    logo: 'https://crowagent.ai/Assets/og-image.png?v=20260730',
+    '@id': 'https://velstrian.com/#organization',
+    name: 'VELSTRIAN SYSTEMS LIMITED',
+    url: 'https://velstrian.com/',
+    logo: 'https://velstrian.com/Assets/og-image.png?v=20260730',
     /**
      * ── REALIGNED TO THE HOMEPAGE, 2026-08-05, A-112 ─────────────────────────
      *
@@ -63,14 +63,16 @@ export const SITE = {
      * otherwise. Updated with the homepage rather than after it.
      */
     description:
-      'CrowAgent serves both sides of a procurement, public sector and private. Suppliers answer tenders, RFPs, PQQs and SQs from bids already written. Buyers publish requirements and find the evidence.',
-    email: 'hello@crowagent.ai',
+      'Velstrian serves both sides of a procurement, public sector and private. Suppliers answer tenders, RFPs, PQQs and SQs from bids already written. Buyers publish requirements and find the evidence.',
+    email: 'hello@velstrian.com',
     identifier: { '@type': 'PropertyValue', name: 'Companies House', value: '17076461' },
     address: { '@type': 'PostalAddress', addressCountry: 'GB' },
     sameAs: [
-      'https://www.linkedin.com/company/crowagent-ltd/',
-      'https://x.com/CrowAgentLtd',
-      'https://www.youtube.com/@CrowAgentUK',
+      'https://www.youtube.com/@VELSTRIAN-UK',
+      'https://x.com/VelstrianLtd',
+      'https://www.linkedin.com/company/-velstrian/',
+      'https://www.instagram.com/velstrian/',
+      'https://medium.com/@velstrian-systems-ltd',
     ],
   },
 } as const;

@@ -27,6 +27,7 @@
  * why, what that changes for a screen reader, and what it costs.
  */
 import { FOOTER } from '../../data/footer';
+import { SITE } from '../../data/site';
 
 const year = new Date().getFullYear();
 ---
@@ -106,7 +107,7 @@ const year = new Date().getFullYear();
 
     <div class="ca-footer-grid">
       <div class="ca-footer-col ca-footer-col-brand">
-        <a href="/" class="ca-logo" aria-label="CrowAgent, home">
+        <a href="/" class="ca-logo" aria-label={`${SITE.name}, home`}>
           <span class="ca-logo-mark" aria-hidden="true">
             <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" focusable="false">
               <defs>
@@ -127,7 +128,7 @@ const year = new Date().getFullYear();
               <rect x="43" y="15" width="6" height="34" rx="2" fill="url(#caMarkTeal-footer)"></rect>
             </svg>
           </span>
-          <span class="ca-logo-word">CrowAgent</span>
+          <span class="ca-logo-word">{SITE.name}</span>
         </a>
         <p class="ca-footer-tagline">{FOOTER.brand.tagline}</p>
         {/*
@@ -185,7 +186,7 @@ const year = new Date().getFullYear();
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`CrowAgent on ${s.label} (opens in a new tab)`}
+                aria-label={`${SITE.name} on ${s.label} (opens in a new tab)`}
                 class="ca-social-link"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--c-text-muted)" aria-hidden="true">
@@ -348,7 +349,7 @@ const year = new Date().getFullYear();
         House link is the part a reader can actually verify.
       */}
       <p class="ca-footer-copyright">
-        &copy; <span>{year}</span> CrowAgent Ltd. Registered in England &amp; Wales, company no.{' '}
+        &copy; <span>{year}</span> {SITE.legalName}, registered in England and Wales, company number{' '}
         <a href={FOOTER.legalEntity.companiesHouseUrl} target="_blank" rel="noopener noreferrer" class="ca-footer-companies-house-link">
           {FOOTER.legalEntity.companyNumber}</a>. All rights reserved.
       </p>

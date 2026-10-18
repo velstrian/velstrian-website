@@ -1,4 +1,4 @@
-# Security Policy for CrowAgent Ltd
+# Security Policy for VELSTRIAN SYSTEMS LIMITED
 # Per RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116)
 #
 # WS-AUDIT-009 (2026-05-06): Encryption: line removed because the referenced
@@ -7,8 +7,8 @@
 # researchers attempting encrypted disclosure get a 404 and may fall back to
 # cleartext). Restore the Encryption: line only after pgp-key.txt is published.
 
-Contact: mailto:security@crowagent.ai
+Contact: mailto:security@velstrian.com
 Expires: 2027-04-30T23:59:59.000Z
 Preferred-Languages: en
 Canonical: https://crowagent.ai/.well-known/security.txt
-Policy: https://crowagent.ai/security
+Policy: https://velstrian.com/security

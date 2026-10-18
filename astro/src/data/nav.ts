@@ -57,6 +57,7 @@
  * between its two copies of the same link. One form now, and it is the one the
  * canonical tag declares.
  */
+import { SITE } from './site';
 
 export interface NavLink {
   label: string;
@@ -193,7 +194,7 @@ const RESOURCES: NavMenu = {
 export const NAV = {
   logo: {
     href: '/',
-    ariaLabel: 'CrowAgent, home',
+    ariaLabel: `${SITE.name}, home`,
   },
 
   /** Every dropdown, desktop and mobile, in nav order. */

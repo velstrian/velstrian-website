@@ -41,6 +41,7 @@
  * becomes unreachable.
  */
 import { NAV } from '../../data/nav';
+import { SITE } from '../../data/site';
 import NavDropdown from './NavDropdown.astro';
 import Button from '../ui/Button.astro';
 
@@ -100,7 +101,7 @@ const menus = NAV.menus.map((menu) => ({
           <rect x="43" y="15" width="6" height="34" rx="2" fill="url(#caMarkTeal-nav)"></rect>
         </svg>
       </span>
-      <span class="ca-logo-word">CrowAgent</span>
+      <span class="ca-logo-word">{SITE.name}</span>
     </a>
 
     <div class="ca-nav-links">

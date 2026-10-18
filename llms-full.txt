@@ -1,16 +1,16 @@
-# CrowAgent, full reference corpus
+# Velstrian, full reference corpus
 
-CrowAgent helps UK suppliers find the work, draft answers grounded in their own past bids, and evidence delivery after award. CrowMark serves both sides of a procurement: CrowMark for Suppliers answers tenders, RFPs, RFIs, PQQs and SQs, and CrowMark for Buyers builds and publishes requirements then locates the evidence for each one across the responses received. Both operate in the public sector and the private sector.
+Velstrian helps UK suppliers find the work, draft answers grounded in their own past bids, and evidence delivery after award. CrowMark serves both sides of a procurement: CrowMark for Suppliers answers tenders, RFPs, RFIs, PQQs and SQs, and CrowMark for Buyers builds and publishes requirements then locates the evidence for each one across the responses received. Both operate in the public sector and the private sector.
 
-Source: https://crowagent.ai/llms-full.txt
-Contact: CrowAgent, hello@crowagent.ai
+Source: https://velstrian.com/llms-full.txt
+Contact: Velstrian, hello@velstrian.com
 
 ---
 
 ## Products
 
 ### CrowMark for Suppliers
-CrowMark for Suppliers is CrowAgent's UK bid and tender suite, in private beta and in active development. It tracks Contracts Finder and Find a Tender daily, drafts social-value answers grounded in the supplier's own submitted bids, and evidences delivery under the Procurement Act 2023. It also provides bid-fit and coverage marking, a compliance matrix, e-sourcing, and Pink, Red and Gold reviews. From £49/month.
+CrowMark for Suppliers is Velstrian's UK bid and tender suite, in private beta and in active development. It tracks Contracts Finder and Find a Tender daily, drafts social-value answers grounded in the supplier's own submitted bids, and evidences delivery under the Procurement Act 2023. It also provides bid-fit and coverage marking, a compliance matrix, e-sourcing, and Pink, Red and Gold reviews. From £49/month.
 
 Two grounding rules define CrowMark. First, every pound and percentage that appears in generated prose has to exist in an allowed-figure set computed from the supplier's own data before a draft is released; if it does not, the draft is rejected, so the language model is never the source of a figure. Second, every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and a person has to approve the answer before it is submitted.
 
@@ -31,9 +31,9 @@ The date that decides which edition applies is the date the procurement was comm
 
 A Procurement Policy Note is Cabinet Office policy rather than statute, so what binds a bidder on any given tender is the requirement the buyer publishes in its own documents. Many contracting authorities outside central government evaluate social value as a matter of their own policy, and many of those use the National TOMs (Themes, Outcomes and Measures) framework instead, published by the Social Value Portal with the Local Government Association and the National Social Value Taskforce. A Procurement Policy Note and TOMs are different instruments asking different questions, so a response written for one does not automatically score the other.
 
-CrowAgent publishes four things about PPN 026 and no more: that it is the next edition of the Social Value Model, its publication date, its application date and value threshold, and the two minimum weightings. The rest of the scoring model is deliberately not summarised, because a compliance reference filled in from expectation is worse than one that states it does not yet have the detail. Every figure above is published beside its primary source at https://crowagent.ai/sources/.
+Velstrian publishes four things about PPN 026 and no more: that it is the next edition of the Social Value Model, its publication date, its application date and value threshold, and the two minimum weightings. The rest of the scoring model is deliberately not summarised, because a compliance reference filled in from expectation is worse than one that states it does not yet have the detail. Every figure above is published beside its primary source at https://velstrian.com/sources/.
 
-CrowAgent stops supporting the previous edition of the Social Value Model in its products on 31 December 2026. That is a product decision about what CrowAgent maintains. It is not a statement about the status of any notice on GOV.UK, and nothing here should be read as saying that GOV.UK has withdrawn, replaced or superseded any Procurement Policy Note.
+Velstrian stops supporting the previous edition of the Social Value Model in its products on 31 December 2026. That is a product decision about what Velstrian maintains. It is not a statement about the status of any notice on GOV.UK, and nothing here should be read as saying that GOV.UK has withdrawn, replaced or superseded any Procurement Policy Note.
 
 ---
 
