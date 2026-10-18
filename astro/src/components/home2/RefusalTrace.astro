@@ -47,6 +47,7 @@
  */
 import Section from '../layout/Section.astro';
 import DeviceChrome from './DeviceChrome.astro';
+import { SITE } from '../../data/site';
 
 interface Step {
   n: string;
@@ -121,7 +122,7 @@ const SIDEBAR = [
 <Section
   eyebrow="Run the real engine"
   title="Watch it refuse a figure."
-  standfirst="If a figure cannot be traced, the engine refuses it. A generative tool asked for a number it does not have will produce a plausible one. CrowAgent does the opposite, and it does it visibly."
+  standfirst="If a figure cannot be traced, the engine refuses it. A generative tool asked for a number it does not have will produce a plausible one. CrowMark does the opposite, and it does it visibly."
   id="reasoning"
   class="h2rt"
   cascade
@@ -154,7 +155,7 @@ const SIDEBAR = [
 
         <div class="h2rt__app">
           <nav class="h2rt__side" aria-label="Product navigation, illustrative">
-            <p class="h2rt__brand">CrowAgent</p>
+            <p class="h2rt__brand">{SITE.name}</p>
             <p class="h2rt__plan"><span>CrowMark</span><span class="chip h2rt__plan-tag">Pro</span></p>
             {
               SIDEBAR.map((g) => (

@@ -54,9 +54,9 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // by scoping the product to one market and closed with "Both work in the
         // public sector and the private sector." It also feeds /faq's FAQPage
         // node, so the market scoping was in the structured data twice.
-        question: 'What is CrowAgent?',
+        question: 'What is Velstrian?',
         answer:
-          'CrowAgent helps suppliers find the work, draft answers cited to the rules, the tender and their own bids, and evidence delivery after award. Its product, CrowMark, drafts every answer from your own submitted bids and checks the figures in code rather than generating them. It serves both sides of a procurement. CrowMark for Suppliers answers tenders, RFPs, RFIs, PQQs and SQs from bids you have already written. CrowMark for Buyers builds and publishes requirements, then locates the evidence for each one across the responses received. It never scores, because the evaluation panel scores. Both work in the public sector and the private sector.',
+          'Velstrian helps suppliers find the work, draft answers cited to the rules, the tender and their own bids, and evidence delivery after award. Its product, CrowMark, drafts every answer from your own submitted bids and checks the figures in code rather than generating them. It serves both sides of a procurement. CrowMark for Suppliers answers tenders, RFPs, RFIs, PQQs and SQs from bids you have already written. CrowMark for Buyers builds and publishes requirements, then locates the evidence for each one across the responses received. It never scores, because the evaluation panel scores. Both work in the public sector and the private sector.',
       },
       // ── A-54, 2026-08-04: THE 14-DAY TRIAL IS GONE FROM THIS FILE ──────────
       // Both entries below asserted a published 14-day free trial with no card
@@ -231,7 +231,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'How are AI credits counted?',
         answer:
-          'One credit is one AI generation, such as a drafted tender answer or a rewritten method statement. Your plan includes a monthly allowance of them. Reading a tender document and extracting its requirements is charged by size, at 3 credits per 10 pages, rounded up, so a 10-page invitation to tender costs 3 credits. A page means one PDF page, one PowerPoint slide, or a whole Word or plain text document. Everything CrowAgent calculates rather than generates, including social value arithmetic, scoring and exports, is free and unlimited on every paid plan, and a generation that fails is never charged.',
+          'One credit is one AI generation, such as a drafted tender answer or a rewritten method statement. Your plan includes a monthly allowance of them. Reading a tender document and extracting its requirements is charged by size, at 3 credits per 10 pages, rounded up, so a 10-page invitation to tender costs 3 credits. A page means one PDF page, one PowerPoint slide, or a whole Word or plain text document. Everything CrowMark calculates rather than generates, including social value arithmetic, scoring and exports, is free and unlimited on every paid plan, and a generation that fails is never charged.',
       },
       {
         // ── R262-WEB-08, 2026-08-09 ────────────────────────────────────────
@@ -286,7 +286,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'Is my data secure?',
         answer:
-          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. CrowAgent Ltd is registered with the ICO as a data controller and we are GDPR compliant.',
+          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. VELSTRIAN SYSTEMS LIMITED is registered with the ICO as a data controller and we are GDPR compliant.',
         link: { label: 'See our Security page for full details', href: '/security/' },
       },
     ],

@@ -186,7 +186,7 @@ export const AI_LIVE: { heading: string; body: string; link?: { label: string; h
   },
   {
     heading: 'A human signs every output',
-    body: 'Under Article 22 UK GDPR, CrowAgent makes no solely-automated decision with legal effect about anyone. AI drafts are advisory. You review, edit and approve before a single word reaches a bid, a report or a buyer. The model proposes. You decide.',
+    body: 'Under Article 22 UK GDPR, Velstrian makes no solely-automated decision with legal effect about anyone. AI drafts are advisory. You review, edit and approve before a single word reaches a bid, a report or a buyer. The model proposes. You decide.',
   },
 ];
 
@@ -237,7 +237,7 @@ export const METHOD: { n: string; heading: string; body: string }[] = [
   {
     n: '04',
     heading: 'Where the edge sits',
-    body: 'CrowAgent does not try to out-feature every bid-writing tool on the market. The edge is grounded, statute-cited accuracy.',
+    body: 'Velstrian does not try to out-feature every bid-writing tool on the market. The edge is grounded, statute-cited accuracy.',
   },
 ];
 
@@ -245,7 +245,7 @@ export const METHOD: { n: string; heading: string; body: string }[] = [
 export const WONT_BUILD: { heading: string; body: string }[] = [
   {
     heading: 'EPR / WEEE / Packaging Tax',
-    body: 'These are real regulations but adjacent to a buyer CrowAgent does not currently serve. Maybe in 2027, but not on the current roadmap.',
+    body: 'These are real regulations but adjacent to a buyer Velstrian does not currently serve. Maybe in 2027, but not on the current roadmap.',
   },
   {
     heading: 'Hallucinating AI copilots',

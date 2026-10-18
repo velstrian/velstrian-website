@@ -79,6 +79,8 @@
  * failed check, and only the first one does.
  */
 
+import { SITE } from '../../data/site';
+
 interface Props {
   /**
    * Prefix for this instance's error-element id. /contact carries two forms in
@@ -96,7 +98,7 @@ const SITEKEY_LOCAL = '1x00000000000000000000AA';
 
 const PENDING = 'The security check is still loading. Please try again in a moment.';
 const FAILED =
-  'The security check could not load, so this form cannot be sent. Please email hello@crowagent.ai and we will pick it up from there.';
+  `The security check could not load, so this form cannot be sent. Please email ${SITE.email} and we will pick it up from there.`;
 ---
 
 <div class="field">

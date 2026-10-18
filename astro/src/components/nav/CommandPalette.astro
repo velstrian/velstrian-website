@@ -34,6 +34,8 @@
  * it, which is what this comment is about.
  */
 ---
+import { SITE } from '../../data/site';
+---
 
 <div class="cmdk" id="cmdk" hidden>
   {/* The scrim is a sibling, not a parent, so a click on it cannot land inside
@@ -46,7 +48,7 @@
     aria-modal="true"
     aria-labelledby="cmdk-label"
   >
-    <h2 class="visually-hidden" id="cmdk-label">Search CrowAgent</h2>
+    <h2 class="visually-hidden" id="cmdk-label">Search {SITE.name}</h2>
 
     <div class="cmdk__field">
       <svg class="cmdk__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">

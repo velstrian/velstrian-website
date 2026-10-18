@@ -105,6 +105,7 @@ import Turnstile from './Turnstile.astro';
 import '../../styles/forms.css';
 import Button from '../ui/Button.astro';
 import { FOOTER } from '../../data/footer';
+import { SITE } from '../../data/site';
 
 /**
  * [A-269 2026-09-08] TRUST ROW AT THE CONVERSION POINT.
@@ -251,7 +252,7 @@ const TRUST_BADGES: string[] = [
     <label class="consent">
       <input type="checkbox" name="gdpr_consent" id="cp-consent" required aria-describedby="cp-consent-err" />
       <span>
-        I agree that CrowAgent Ltd may process my data to respond to this enquiry, in
+        I agree that {SITE.legalName} may process my data to respond to this enquiry, in
         line with the <a href="/privacy/">Privacy Policy</a>.
       </span>
     </label>
@@ -265,7 +266,7 @@ const TRUST_BADGES: string[] = [
       adjacency to the live region below it. The tick is the same shape and the
       same muted ink as the footer credibility row: a bullet, not a
       certification. See the frontmatter for where each line comes from. */}
-  <ul class="form__trust" role="list" aria-label="How CrowAgent handles the information you send">
+  <ul class="form__trust" role="list" aria-label={`How ${SITE.name} handles the information you send`}>
     {
       TRUST_BADGES.map((badge) => (
         <li>
@@ -302,7 +303,7 @@ const TRUST_BADGES: string[] = [
   <noscript>
     <p class="form__noscript">
       This form needs JavaScript to send. Please email us directly at
-      <a href="mailto:hello@crowagent.ai">hello@crowagent.ai</a>.
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
     </p>
   </noscript>
 </form>
@@ -312,7 +313,7 @@ const TRUST_BADGES: string[] = [
   const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   const ACCESS_SEED =
-    'I would like to request access to CrowAgent.\n\nOrganisation:\nWhat we need CrowAgent for:\n';
+    'I would like to request access to CrowMark.\n\nOrganisation:\nWhat we need CrowMark for:\n';
 
   /** ?product= / ?tier= mapping, carried over verbatim from scripts.js. The
       legacy slugs cyber / cash / esg / csrd are deliberately UNMAPPED: those
@@ -526,7 +527,7 @@ const TRUST_BADGES: string[] = [
               timestamp: new Date().toISOString(),
             }),
           );
-          setStatus('bad', 'Something went wrong. Please email hello@crowagent.ai directly.');
+          setStatus('bad', 'Something went wrong. Please email hello@velstrian.com directly.');
           setBusy(false);
           btn.textContent = 'Send message';
         });

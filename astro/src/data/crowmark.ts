@@ -43,7 +43,7 @@ export const KEY_FACTS = [
   {
     term: 'What it is',
     detail:
-      "A UK public-sector bid and tender management suite, and CrowAgent's flagship product.",
+      "A UK public-sector bid and tender management suite, and Velstrian's flagship product.",
   },
   {
     term: 'Who it is for',

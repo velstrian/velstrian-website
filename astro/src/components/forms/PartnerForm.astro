@@ -56,6 +56,7 @@
 import Turnstile from './Turnstile.astro';
 import '../../styles/forms.css';
 import Button from '../ui/Button.astro';
+import { SITE } from '../../data/site';
 
 /**
  * The Railway host the platform's own frontend calls (`NEXT_PUBLIC_API_URL`
@@ -228,7 +229,7 @@ const PARTNER_TYPES = [
         aria-describedby="pt-consent-err"
       />
       <span>
-        I agree that CrowAgent Ltd may process my data to evaluate this partner enquiry,
+        I agree that {SITE.legalName} may process my data to evaluate this partner enquiry,
         in line with the <a href="/privacy/">Privacy Policy</a>.
       </span>
     </label>
@@ -255,7 +256,7 @@ const PARTNER_TYPES = [
   <noscript>
     <p class="form__noscript">
       This form needs JavaScript to send. Please email us directly at
-      <a href="mailto:hello@crowagent.ai">hello@crowagent.ai</a>.
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
     </p>
   </noscript>
 </form>
@@ -429,7 +430,7 @@ const PARTNER_TYPES = [
               timestamp: new Date().toISOString(),
             }),
           );
-          setStatus('bad', 'Something went wrong. Please email hello@crowagent.ai directly.');
+          setStatus('bad', 'Something went wrong. Please email hello@velstrian.com directly.');
           setBusy(false);
           btn.textContent = 'Submit enquiry';
         });
