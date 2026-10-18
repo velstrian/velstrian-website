@@ -1,7 +1,7 @@
 ---
-title: "TOMs Framework (Themes, Outcomes, Measures) | CrowAgent"
+title: "TOMs Framework (Themes, Outcomes, Measures) | Velstrian"
 description: "TOMs framework explained. The standard UK scoring structure for social value in public procurement, using National TOMs proxy values."
-ogTitle: "TOMs Framework - Themes, Outcomes, Measures | CrowAgent Glossary"
+ogTitle: "TOMs Framework - Themes, Outcomes, Measures | Velstrian Glossary"
 ogDescription: "Standard UK scoring structure for social value in public procurement."
 ogImage: "/Assets/og/glossary-toms-framework.png?v=20260730"
 ogImageAlt: "TOMs Framework (Themes, Outcomes, Measures) - Glossary"
@@ -54,5 +54,5 @@ ctaSub: "CrowMark maps your contract to the TOMs measures you are eligible for a
 <li><strong>Buyer discretion:</strong> buyers choose which TOMs measures to score. Under PPN 026 they cannot go below the minimum social value weighting, only above it.</li>
 </ul>
 
-<h2 id="how-we-help">How CrowAgent uses this term</h2>
+<h2 id="how-we-help">How Velstrian uses this term</h2>
 <p><a href="/crowmark/">CrowMark</a> stores its social value measures in the database, never hardcoded. The catalogue is curated, 19 measures aligned to National TOMs conventions and mapped to the edition of the Social Value Model the buyer names, which every draft records. It is not a full National TOMs implementation. When a contract profile is submitted, deterministic rules surface the eligible measures, and the arithmetic runs in code with every number traceable to its source.</p>

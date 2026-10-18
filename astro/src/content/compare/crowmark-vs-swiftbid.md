@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">CrowMark</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications CrowAgent does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
 <dt class="meta">SwiftBid</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
@@ -95,7 +95,7 @@ faq:
 <p>For a firm that bids only once or twice a year, that model has a real advantage: no ongoing commitment, and at Premium the option of a human reviewer on the draft. CrowMark does not offer either of those. If your bidding is genuinely occasional, paying per bid can be the cheaper and simpler choice, and SwiftBid is built around exactly that.</p>
 
 <h2 id="what-is-crowmark">What is CrowMark?</h2>
-<p>CrowMark is CrowAgent's UK bid and tender management suite, in daily use on real bids. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Contracts Finder and Find a Tender, refreshed every morning at 06:00, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>CrowMark is Velstrian's UK bid and tender management suite, in daily use on real bids. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Contracts Finder and Find a Tender, refreshed every morning at 06:00, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <figure class="cmp-shot">
 <picture>
 <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-5-answer-library-light.avif?v=20260805a">
@@ -122,7 +122,7 @@ faq:
 </ul>
 </div>
 <div class="cmp-choose-card is-us">
-<h3>Choose CrowAgent (CrowMark) if</h3>
+<h3>Choose Velstrian (CrowMark) if</h3>
 <ul>
 <li>You bid regularly and want continuous access rather than paying per bid.</li>
 <li>You need Contracts Finder and Find a Tender discovery refreshed daily.</li>
@@ -176,8 +176,8 @@ faq:
 <ol>
 <li>SwiftBid per-bid pricing (&pound;149 Basic, &pound;349 Standard, &pound;749 Premium), no tender discovery feed, optional human expert review and 6-hour turnaround at Premium, and target of 1 to 4 bids a year. These figures are reported by a dated third-party comparison. SwiftBid does not publish an equivalent primary pricing page we could verify directly. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>Per-bid versus subscription break-even (three SwiftBid Standard bids at roughly &pound;1,047). CleanTender, "Bid writer vs AI bid tool: which wins for UK SMEs", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool</a></li>
-<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). CrowAgent, <a href="/crowmark/">CrowMark product page</a>.</li>
-<li>CrowMark pricing: Starter &pound;49/month (&pound;529/year), Pro &pound;149/month, Portfolio contact sales (first party). CrowAgent, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). Velstrian, <a href="/crowmark/">CrowMark product page</a>.</li>
+<li>CrowMark pricing: Starter &pound;49/month (&pound;529/year), Pro &pound;149/month, Portfolio contact sales (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">CrowMark</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications CrowAgent does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
 <dt class="meta">CleanTender</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
@@ -96,7 +96,7 @@ faq:
 <p>That specialisation is a real advantage, and it is one CrowMark does not try to match. If cleaning or security is all you bid for, CleanTender's vocabulary and its fast fit scan are built around exactly your work, and its pricing is public: a free tier to browse the contract directory, and Pro at &pound;99 per month or &pound;990 per year, which adds the qualification scan, unlimited drafts, the Compliance Vault and email alerts. CleanTender positions itself for soft-FM SMEs doing roughly 4 to 12 bids a year.</p>
 
 <h2 id="what-is-crowmark">What is CrowMark?</h2>
-<p>CrowMark is CrowAgent's UK bid and tender management suite, in daily use on real bids. Unlike a sector specialist, it is sector-agnostic: it tracks Contracts Finder and Find a Tender across any category, refreshed every morning at 06:00. It drafts answers grounded in the supplier's own submitted bids, and its defining rule is figure-grounding, so before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>CrowMark is Velstrian's UK bid and tender management suite, in daily use on real bids. Unlike a sector specialist, it is sector-agnostic: it tracks Contracts Finder and Find a Tender across any category, refreshed every morning at 06:00. It drafts answers grounded in the supplier's own submitted bids, and its defining rule is figure-grounding, so before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <p>CrowMark calculates social value deterministically in code against the weighting the buyer published rather than only drafting it as a questionnaire section, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. Its bid-fit and coverage marking, by contrast, is still in development and not in the released product, so on the fit-scan row above CleanTender is genuinely ahead today.</p>
 <figure class="cmp-shot">
 <picture>
@@ -123,7 +123,7 @@ faq:
 </ul>
 </div>
 <div class="cmp-choose-card is-us">
-<h3>Choose CrowAgent (CrowMark) if</h3>
+<h3>Choose Velstrian (CrowMark) if</h3>
 <ul>
 <li>You bid across more than one sector on Contracts Finder and Find a Tender.</li>
 <li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
@@ -177,8 +177,8 @@ faq:
 <ol>
 <li>CleanTender pricing (free tier, Pro &pound;99/month or &pound;990/year), curated soft-FM feed, 0 to 100 qualification scan in under 30 seconds, Selection Questionnaire sections and sector vocabulary, Compliance Vault, and target of 4 to 12 bids a year. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>CleanTender soft-FM scope and free contract-directory access. CleanTender, "AI Bid Management Software: Best UK Options (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk</a></li>
-<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71. Bid-fit marking noted as in development, not released (first party). CrowAgent, <a href="/crowmark/">CrowMark product page</a>.</li>
-<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio contact sales (first party). CrowAgent, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71. Bid-fit marking noted as in development, not released (first party). Velstrian, <a href="/crowmark/">CrowMark product page</a>.</li>
+<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio contact sales (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

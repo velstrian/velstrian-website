@@ -24,8 +24,8 @@ faq:
     answer: "AutogenAI has no built-in UK tender discovery feed. You bring your own pipeline. CrowMark tracks Contracts Finder and Find a Tender and refreshes the feed every morning at 06:00."
   - question: "Can either tool stop the AI inventing figures?"
     answer: "CrowMark uses a deterministic figure-grounding gate: every £ and % in a draft has to exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in AutogenAI's public materials."
-  - question: "Is AutogenAI a bigger company than CrowAgent?"
-    answer: "Yes. AutogenAI is venture-backed and enterprise-scale, having raised a $39.5m Series B in December 2023 and $65.3m in total. CrowMark is a newer product from CrowAgent, focused on the UK SME segment."
+  - question: "Is AutogenAI a bigger company than Velstrian?"
+    answer: "Yes. AutogenAI is venture-backed and enterprise-scale, having raised a $39.5m Series B in December 2023 and $65.3m in total. CrowMark is a newer product from Velstrian, focused on the UK SME segment."
   - question: "Does either cover social value maths?"
     answer: "CrowMark calculates social value deterministically in code against the weighting the buyer published, and the AI never computes the total. AutogenAI is a general bid-writing engine rather than a dedicated social-value calculator."
   - question: "Can I use both CrowMark and AutogenAI?"
@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">CrowMark</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications CrowAgent does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
 <dt class="meta">AutogenAI</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
@@ -95,7 +95,7 @@ faq:
 <p>AutogenAI does not publish a price. Its pricing is enterprise, quoted on request, so any specific figure you see quoted elsewhere is a third-party estimate rather than a vendor rate. On this page we mark it as Not published.</p>
 
 <h2 id="what-is-crowmark">What is CrowMark?</h2>
-<p>CrowMark is CrowAgent's UK bid and tender management suite, in daily use on real bids. It tracks Contracts Finder and Find a Tender, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>CrowMark is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Contracts Finder and Find a Tender, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <figure class="cmp-shot">
 <picture>
 <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-2-tender-questions-light.avif?v=20260805a">
@@ -122,7 +122,7 @@ faq:
 </ul>
 </div>
 <div class="cmp-choose-card is-us">
-<h3>Choose CrowAgent (CrowMark) if</h3>
+<h3>Choose Velstrian (CrowMark) if</h3>
 <ul>
 <li>You are a UK SME or public-sector supplier who wants published pricing from &pound;49 per month.</li>
 <li>You need Contracts Finder and Find a Tender discovery refreshed daily.</li>
@@ -158,8 +158,8 @@ faq:
     <div class="cfaq-a"><p>CrowMark uses a deterministic figure-grounding gate: every &pound; and % in a draft has to exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in AutogenAI's public materials.</p></div>
   </details>
   <details>
-    <summary><h3>Is AutogenAI a bigger company than CrowAgent?</h3></summary>
-    <div class="cfaq-a"><p>Yes. AutogenAI is venture-backed and enterprise-scale, having raised a $39.5m Series B in December 2023 and $65.3m in total. CrowMark is a newer product from CrowAgent, focused on the UK SME segment.</p></div>
+    <summary><h3>Is AutogenAI a bigger company than Velstrian?</h3></summary>
+    <div class="cfaq-a"><p>Yes. AutogenAI is venture-backed and enterprise-scale, having raised a $39.5m Series B in December 2023 and $65.3m in total. CrowMark is a newer product from Velstrian, focused on the UK SME segment.</p></div>
   </details>
   <details>
     <summary><h3>Does either cover social value maths?</h3></summary>
@@ -177,8 +177,8 @@ faq:
 <li>AutogenAI pricing and positioning (enterprise, on request; bid teams of 5+; no built-in tender discovery; Procurement Act 2023 alignment). CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>AutogenAI listing showing no vendor-published price. GetApp UK, AutogenAI, accessed 26 July 2026. <a href="https://www.getapp.co.uk/software/2072629/autogenai" target="_blank" rel="noopener noreferrer">getapp.co.uk/software/2072629/autogenai</a></li>
 <li>AutogenAI $39.5m Series B (Salesforce Ventures, Spark Capital, Blossom Capital) and $65.3m total investment. FinSMEs, 6 December 2023. <a href="https://www.finsmes.com/2023/12/autogenai-raises-39-5m-in-series-b-funding.html" target="_blank" rel="noopener noreferrer">finsmes.com/2023/12/autogenai-raises-39-5m-in-series-b-funding.html</a></li>
-<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). CrowAgent, <a href="/crowmark/">CrowMark product page</a>.</li>
-<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio contact sales (first party). CrowAgent, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). Velstrian, <a href="/crowmark/">CrowMark product page</a>.</li>
+<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio contact sales (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

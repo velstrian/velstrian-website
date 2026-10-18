@@ -19,7 +19,7 @@ faq:
   - question: "Does mytender.io publish its pricing?"
     answer: "No. mytender.io does not list public prices. It directs prospects to a demo or the account dashboard and offers a one-month refundable period after commencement. On this page we mark its price as Not published."
   - question: "Is mytender.io a UK company?"
-    answer: "Yes. mytender.io is a University of Southampton startup founded by Samuel Aaron, Jamie Horsnell and Nicolas Dickreuter, with pre-seed investment led by Fuel Ventures. CrowMark is also UK-built, from CrowAgent Ltd."
+    answer: "Yes. mytender.io is a University of Southampton startup founded by Samuel Aaron, Jamie Horsnell and Nicolas Dickreuter, with pre-seed investment led by Fuel Ventures. CrowMark is also UK-built, from VELSTRIAN SYSTEMS LIMITED."
   - question: "Does mytender.io find tenders for me?"
     answer: "mytender.io does not advertise its own daily discovery feed, though it has stated a partnership with a large UK public-sector tender portal. CrowMark tracks Contracts Finder and Find a Tender directly and refreshes the feed every morning at 06:00."
   - question: "Which is more private or secure?"
@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">CrowMark</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications CrowAgent does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
 <dt class="meta">mytender.io</dt>
 <dd>Virtual Private Cloud deployment, reported by Future Worlds on 21 May 2025 and listed in the sources at the foot of this page. Encryption, data residency and registration detail are not documented there.</dd>
 </dl>
@@ -97,7 +97,7 @@ faq:
 <p>mytender.io does not publish a price. It points prospects to a demo or the in-app dashboard and offers a one-month refundable period after commencement. On this page we therefore mark its price as Not published.</p>
 
 <h2 id="what-is-crowmark">What is CrowMark?</h2>
-<p>CrowMark is CrowAgent's UK bid and tender management suite, in daily use on real bids. It tracks Contracts Finder and Find a Tender, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>CrowMark is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Contracts Finder and Find a Tender, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <figure class="cmp-shot">
 <picture>
 <source type="image/avif" srcset="/Assets/shots/figma-v2/buy-1-requirement-builder-light.avif?v=20260805a">
@@ -124,7 +124,7 @@ faq:
 </ul>
 </div>
 <div class="cmp-choose-card is-us">
-<h3>Choose CrowAgent (CrowMark) if</h3>
+<h3>Choose Velstrian (CrowMark) if</h3>
 <ul>
 <li>You want published pricing from &pound;49 per month, stated before any call.</li>
 <li>You need Contracts Finder and Find a Tender discovery refreshed daily.</li>
@@ -149,7 +149,7 @@ faq:
   </details>
   <details>
     <summary><h3>Is mytender.io a UK company?</h3></summary>
-    <div class="cfaq-a"><p>Yes. mytender.io is a University of Southampton startup founded by Samuel Aaron, Jamie Horsnell and Nicolas Dickreuter, with pre-seed investment led by Fuel Ventures. CrowMark is also UK-built, from CrowAgent Ltd.</p></div>
+    <div class="cfaq-a"><p>Yes. mytender.io is a University of Southampton startup founded by Samuel Aaron, Jamie Horsnell and Nicolas Dickreuter, with pre-seed investment led by Fuel Ventures. CrowMark is also UK-built, from VELSTRIAN SYSTEMS LIMITED.</p></div>
   </details>
   <details>
     <summary><h3>Does mytender.io find tenders for me?</h3></summary>
@@ -179,8 +179,8 @@ faq:
 <li>mytender.io founders, University of Southampton origin, Fuel Ventures pre-seed, Virtual Private Cloud and public-sector tender portal partnership. Future Worlds, "mytender.io: AI-driven bid writing platform", 21 May 2025. <a href="https://futureworlds.com/mytender-io-ai-driven-bid-writing-platform/" target="_blank" rel="noopener noreferrer">futureworlds.com/mytender-io-ai-driven-bid-writing-platform</a></li>
 <li>mytender.io pricing shown on request, one-month refundable period. mytender.io Terms &amp; Conditions and Capterra listing, accessed 26 July 2026. <a href="https://www.capterra.com/p/10031061/mytender-io/" target="_blank" rel="noopener noreferrer">capterra.com/p/10031061/mytender-io</a></li>
 <li>mytender.io positioning, content-library drafting, SharePoint / Salesforce / Google Drive integrations, no own discovery feed, target of 10+ bids a year. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
-<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026, Procurement Act 2023 s.52 / s.71, and security posture (first party). CrowAgent, <a href="/crowmark/">CrowMark product page</a>.</li>
-<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio contact sales (first party). CrowAgent, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026, Procurement Act 2023 s.52 / s.71, and security posture (first party). Velstrian, <a href="/crowmark/">CrowMark product page</a>.</li>
+<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio contact sales (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

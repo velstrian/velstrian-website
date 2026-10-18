@@ -6,7 +6,7 @@ publishDate: 2026-09-08
 category: "Procurement Act 2023"
 readingTime: 9
 author: "Aparajita Parihar"
-authorRole: "Founder, CrowAgent"
+authorRole: "Founder, Velstrian"
 draft: false
 faq:
   - question: >-

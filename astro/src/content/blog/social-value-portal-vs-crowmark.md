@@ -40,7 +40,7 @@ SVP offers a platform that covers the full social value lifecycle: bid planning,
 
 ## CrowMark: built for SMEs
 
-CrowMark was built specifically for SME suppliers who have to answer a scored social value section without the cost and complexity of an enterprise platform. It is CrowAgent's bid and tender product.
+CrowMark was built specifically for SME suppliers who have to answer a scored social value section without the cost and complexity of an enterprise platform. It is Velstrian's bid and tender product.
 
 CrowMark covers the core workflow: contract profiling, deterministic mapping of the profile to the model the buyer names (rules-based, not AI-generated), TOMs measure selection with National TOMs 2023-24 proxy values, AI-assisted narrative generation, evidence tracking, and PDF export.
 
@@ -56,7 +56,7 @@ CrowMark covers the core workflow: contract profiling, deterministic mapping of 
 
 - CrowMark does not integrate directly with contracting authority procurement portals. If a contracting authority requires you to submit social value data through SVP specifically, you will need an SVP account for that submission.
 - CrowMark does not offer the benchmarking and network-wide analytics that SVP provides to large organisations managing hundreds of supplier relationships.
-- The variant compared here is CrowMark for Suppliers. CrowAgent also offers CrowMark for Buyers, but that variant does something different: it helps a buying team build and publish requirements and then locate the evidence for each one across the responses received. It never scores, because the human evaluation panel does that. Neither variant aggregates social value delivery across an authority's whole supply chain the way SVP does.
+- The variant compared here is CrowMark for Suppliers. Velstrian also offers CrowMark for Buyers, but that variant does something different: it helps a buying team build and publish requirements and then locate the evidence for each one across the responses received. It never scores, because the human evaluation panel does that. Neither variant aggregates social value delivery across an authority's whole supply chain the way SVP does.
 
 ## Head-to-head comparison
 

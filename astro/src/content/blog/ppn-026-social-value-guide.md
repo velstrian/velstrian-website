@@ -45,7 +45,7 @@ So this page states four things about the edition and stops: that it is the next
 
 What does not depend on the edition is the working method, and that is what the rest of this guide is about: find the question the buyer actually asked, commit to something measurable, evidence it in the unit the buyer counts in, and keep the record from day one of delivery. That is the same work in every edition and in every framework.
 
-**One thing this page is not saying.** CrowAgent stops supporting the previous edition of the Social Value Model in its products on 31 December 2026, so that no customer is drafting against a model we have stopped maintaining once the 1 January 2027 date passes. That is our own product decision about our own roadmap. It is not a statement about the status of any notice on GOV.UK.
+**One thing this page is not saying.** Velstrian stops supporting the previous edition of the Social Value Model in its products on 31 December 2026, so that no customer is drafting against a model we have stopped maintaining once the 1 January 2027 date passes. That is our own product decision about our own roadmap. It is not a statement about the status of any notice on GOV.UK.
 
 ## 4. The TOMs framework and National TOMs proxy values
 
@@ -138,7 +138,7 @@ Based on published evaluation feedback and contracting authority guidance, the s
 
 ## 8. How CrowMark builds a social value response
 
-CrowMark is CrowAgent's bid and tender product. The variant relevant here is CrowMark for Suppliers, which answers tenders, RFPs, RFIs, PQQs and SQs, and it takes on the slowest parts of a social value response: assembling the evidence, drafting the narrative and keeping the record afterwards.
+CrowMark is Velstrian's bid and tender product. The variant relevant here is CrowMark for Suppliers, which answers tenders, RFPs, RFIs, PQQs and SQs, and it takes on the slowest parts of a social value response: assembling the evidence, drafting the narrative and keeping the record afterwards.
 
 CrowMark scores social value from evidence your organisation has already submitted, and cites the source of every figure it produces. That work does not change with the edition. What changes is which model the output is mapped to, and CrowMark reports the model it used on every draft, so a reviewer can see it on the page rather than having to ask.
 
