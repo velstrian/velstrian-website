@@ -263,7 +263,7 @@ const checks = [
   // A copied-but-empty file would 200 and satisfy the live guard while saying
   // nothing, which is the failure mode this whole block exists to refuse.
   ['llms.txt', /^#\s+\S/m, 'its H1 title line'],
-  ['llms.txt', /https:\/\/crowagent\.ai\//, 'at least one absolute crowagent.ai link'],
+  ['llms.txt', /https:\/\/velstrian\.com\//, 'at least one absolute velstrian.com link (R285-REBRAND-VELSTRIAN-01)'],
   ['llms-full.txt', /^#\s+\S/m, 'its H1 title line'],
   // RFC 9116 makes exactly two fields mandatory: Contact (2.5.3) and Expires
   // (2.5.5). A file missing either is not a security.txt, it is a text file at

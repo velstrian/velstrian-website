@@ -168,7 +168,7 @@ function record(directive, url, file) {
   } catch {
     return; // relative — same-origin, covered by 'self'
   }
-  if (origin === 'https://crowagent.ai') return; // self
+  if (origin === 'https://velstrian.com') return; // self (R285-REBRAND-VELSTRIAN-01)
   const key = `${directive} ${origin}`;
   if (!found.has(key)) found.set(key, new Set());
   found.get(key).add(path.relative(DIST, file));

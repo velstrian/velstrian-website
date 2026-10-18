@@ -175,7 +175,7 @@ function rehypeContentCards() {
 }
 
 export default defineConfig({
-  site: 'https://crowagent.ai',
+  site: 'https://velstrian.com', // R285-REBRAND-VELSTRIAN-01: velstrian.com is the primary origin (owner 2026-10-18)
   markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards] },
   output: 'static',
   trailingSlash: 'ignore',

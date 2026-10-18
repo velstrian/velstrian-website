@@ -7,7 +7,9 @@ written brief you were given.** No brief, no work. Added 2026-10-09.
 Gemini's role here is a reviewer: walk the live site `https://crowagent.ai` or a local build of
 `astro/`, record layout, accessibility, console and copy findings at 1280x800 and 390x844, and write
 the report file the brief names. Gemini changes no code and pushes nothing. A push to `main` is a
-production deploy.
+production deploy. The one exception is a written brief from the owner that ASSIGNS build work, such
+as `docs/rebrand-velstrian/GEMINI-BRIEF-WEBSITE-REBRAND.md` (added 2026-10-18). Then Gemini edits only
+the paths that brief names, inside the hooks in `.gemini/settings.json`, and still pushes nothing.
 
 Flag in your report: any em dash or semicolon in user facing text, "council" or "PPN 002" anywhere
 a reader can see it, a product other than CrowMark and CrowMark Buyer, and any claim the product
