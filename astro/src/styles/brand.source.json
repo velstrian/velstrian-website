@@ -148,6 +148,127 @@
         "from": "apps/portal/src/app/crowagent-brand-tokens.css:228, measured 2026-08-09",
         "why": "[R281-TOKENS-NEST-SIGHT-LIGHT-DECISION-01 2026-09-03] Same defect and same derivation as accent-nest above. Before, the dark neon measured 2.20 to 2.65:1 on the four light grounds, under both floors. The value is the portal's own light --sight, already shipping, so nothing that renders today changes. TWO INDEPENDENT DERIVATIONS LANDED ON THE SAME HEX, which is why it is recorded as the value rather than merely accepted: stepping the pink ramp down from the 400 rung this pigment sits on, the way --mark went violet 400 to 600 and --coral went red 400 to 700, the first rung that clears 4.5:1 on ALL FOUR frozen light grounds is the 700 rung #BE185D. The 600 rung #DB2777 reaches only 3.82:1 on #E7EAF2 and fails, which is why the step is 400 to 700 here and not 400 to 600. Hue 329 degrees goes to 335. MEASURED with the WCAG 2.1 relative luminance formula, L(#F472B6)=0.346451 and L(#BE185D)=0.123907. AS TEXT: --surf 2.65 to 6.04, --bg 2.45 to 5.59, --surf2 2.32 to 5.29, --bg-deep/--surf3/--surf4 2.20 to 5.02. All four FAIL to PASS at 4.5:1. AS A STATUS DOT the ground is the Badge product wash, --teal-dim rgba(10,154,128,0.10) composited over each ground: 2.36 to 5.39 on #E7F5F2, 2.20 to 5.02 on #DEEDEE, 2.08 to 4.74 on #D6E7EB, 1.99 to 4.53 on #D1E2E7. All four FAIL to PASS at 3:1. DARK IS UNTOUCHED at 7.74 / 7.54 / 7.12 / 7.00 / 6.28:1 as text and 6.81 / 6.58 / 6.00 / 5.90 / 5.17:1 as a dot. NO COMPANION RULE IS NEEDED for the same enumerated reason as accent-nest: --sight paints text and dots only, never a fill under a label."
       }
+    },
+    "iris-accent": {
+      "role": "Carbon and Iris accent FILL. Platform iris --teal. Carries a white label at 4.70:1 in dark.",
+      "dark": {
+        "value": "#5E6AD2",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#434EAF",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-accent-text": {
+      "role": "Carbon and Iris accent AS TEXT. Platform iris --ca-teal-text. The website --c-teal, which the site paints as text and as the verified accent.",
+      "dark": {
+        "value": "#8B95E5",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#434EAF",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-accent-deep": {
+      "role": "Carbon and Iris hover and pressed step. Platform iris --teal-d.",
+      "dark": {
+        "value": "#363E8F",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#363E8F",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ground-0": {
+      "role": "Carbon deepest ground. Platform iris --bg-deep.",
+      "dark": {
+        "value": "#040505",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#EAECEE",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ground-1": {
+      "role": "Carbon page canvas. Platform iris --bg.",
+      "dark": {
+        "value": "#08090A",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#F9FAFB",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ground-2": {
+      "role": "Carbon card. Platform iris --surf.",
+      "dark": {
+        "value": "#0F1012",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#FFFFFF",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ground-3": {
+      "role": "Carbon raised well. Platform iris --surf2.",
+      "dark": {
+        "value": "#16181D",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#F1F3F5",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ground-4": {
+      "role": "Carbon deepest inset. Platform iris --surf3.",
+      "dark": {
+        "value": "#212328",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#EAECEE",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ink-0": {
+      "role": "Carbon primary text. Platform iris --cloud.",
+      "dark": {
+        "value": "#F7F8F8",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#090A0B",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ink-1": {
+      "role": "Carbon strong secondary text. Platform iris --steel.",
+      "dark": {
+        "value": "#CBCED2",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#2A2D33",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
+    },
+    "iris-ink-2": {
+      "role": "Carbon muted text. Platform iris --mist.",
+      "dark": {
+        "value": "#8A8F98",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+      },
+      "light": {
+        "value": "#5C626E",
+        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+      }
     }
   },
   "ladderNotes": {
@@ -182,16 +303,17 @@
   "websiteBindings": {
     "_file": "crowagent-website/astro/src/styles/tokens.css",
     "_mode": "dark",
-    "--c-teal": "brand-teal",
-    "--c-teal-dark": "brand-teal-deep",
-    "--c-floor": "ground-0",
-    "--c-bg": "ground-1",
-    "--c-panel": "ground-2",
-    "--c-raised": "ground-3",
-    "--c-lit": "ground-4",
-    "--c-text": "ink-0",
-    "--c-text-sub": "ink-1",
-    "--c-text-muted": "ink-2"
+    "_decision": "R285-P2-BRAND-DEFAULT-CARBON-IRIS-01. OWNER DECISION 2026-10-18: 'i have decided Carbon and Iris, Soft indigo on near black carbon. must be my default primary hence you must update this everywhere including stripe'. The website has one brand and no picker, so it binds to the iris pigments. The platform bindings below stay on teal because tokens.css is the teal palette, still selectable in the app.",
+    "--c-teal": "iris-accent-text",
+    "--c-teal-dark": "iris-accent",
+    "--c-floor": "iris-ground-0",
+    "--c-bg": "iris-ground-1",
+    "--c-panel": "iris-ground-2",
+    "--c-raised": "iris-ground-3",
+    "--c-lit": "iris-ground-4",
+    "--c-text": "iris-ink-0",
+    "--c-text-sub": "iris-ink-1",
+    "--c-text-muted": "iris-ink-2"
   },
   "platformBindings": {
     "_file": "crowagent-platform/packages/tokens/src/tokens.css",
@@ -760,7 +882,7 @@
     "GLASS_MORPHISM_TOKENS.glassBgStrong": "rgba({rgb:ground-2}, 0.72)",
     "GLASS_MORPHISM_TOKENS.glassBorder": "rgba({rgb:brand-teal}, 0.12)",
     "GLASS_MORPHISM_TOKENS.glassBorderHover": "rgba({rgb:brand-teal}, 0.22)",
-    "EMAIL_COLOR_TOKENS.accentBg12": "rgba({rgb:brand-teal}, 0.12)",
+    "BRAND_COLOR_TOKENS.accent12": "rgba({rgb:brand-teal}, 0.12)",
     "_lightGroupNote": "LIGHT_THEME_TOKENS is the PRINT / light canvas the PDF, DOCX and XLSX generators paint on, and it is the ONE colour group in constants.ts that is not dark. Bound with the @light mode suffix. MEASURED 2026-08-11, before these bindings existed: ten of its twelve colour keys disagreed with the reconciled [data-theme=\"light\"] block in tokens.css that they cite in their own comments (bg #F6F8FB vs #F5F6FA, bgDeep #EEF2F7 vs #E7EAF2, surf2 #F2F5F9 vs #EDF0F7, surf3 #E9EEF5 vs #E7EAF2, surf4 #DFE6F0 vs #E7EAF2, cloud #14181F vs #0B0E19, steel #3A4655 vs #2B3245, mist #586577 vs #5A6478, dimC #6B7688 vs #5A6478). Only teal/tealD already agreed. An UNBOUND key is invisible to the drift guard, so this group drifted silently while every bound key was green. gridPrint, inkPrint, ragRed, ragGreen, ragRedTint, ragAmberTint and coralPrint are deliberately NOT bound: brand.source.json records no counterpart for them, they ship on customer documents today, and inventing one would breach RULE 0-C. They are named here so their absence is a recorded decision rather than an oversight.",
     "LIGHT_THEME_TOKENS.bg": "{hex:ground-1@light}",
     "LIGHT_THEME_TOKENS.bgDeep": "{hex:ground-0@light}",

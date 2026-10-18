@@ -544,9 +544,12 @@ const canonicalUrl = routeUrl(path);
     --c-text-sub: #2b3245;
     --c-text-muted: #626c82;
     --c-border: rgba(11, 14, 25, 0.12);
-    --c-border-glow: rgba(15, 118, 110, 0.4);
-    --c-teal: #0f766e;
-    --c-teal-glow: rgba(15, 118, 110, 0.25);
+    /* [R285-P2-BRAND-DEFAULT-CARBON-IRIS-01] The accent on paper is the Carbon and Iris LIGHT
+       text rung #434EAF (7.1:1 on white, the platform iris light --ca-teal-text). The
+       alphas are the ones this pane already chose, carried onto the iris hue. */
+    --c-border-glow: rgba(67, 78, 175, 0.4);
+    --c-teal: #434EAF;
+    --c-teal-glow: rgba(67, 78, 175, 0.25);
 
     /* ── EVERY TOKEN THAT CAN CARRY TEXT, REBOUND ────────────────────────
      *
@@ -581,7 +584,7 @@ const canonicalUrl = routeUrl(path);
     --c-orchid: #7e22ce;
     --c-violet: #6d28d9;
     --c-pink: #be185d;
-    --c-teal-dark: #115e59;
+    --c-teal-dark: #363E8F;
     /* ── AND THE LIST FELL BEHIND AGAIN, EXACTLY AS PREDICTED ─────────────
      *
      * Added 2026-08-04, and it is the sixth token to arrive here late. The PPN
@@ -669,23 +672,23 @@ const canonicalUrl = routeUrl(path);
      * saturated dark to a near-white pane subtracts it. Six of these carry no
      * text today and are listed anyway, because every previous entry in this
      * block was a trap before it was a defect. */
-    --c-verified:      #0f766e;
-    --c-verified-glow: rgba(15, 118, 110, 0.25);
+    --c-verified:      #434EAF;
+    --c-verified-glow: rgba(67, 78, 175, 0.25);
     --c-refused:       #7e22ce;
     --c-at-risk:       #886311;
-    --c-ambient-start: #0f766e;
+    --c-ambient-start: #434EAF;
     --c-ambient-mid:   #0e7490;
     --c-ambient-end:   #6d28d9;
     --c-ambient-far:   #7e22ce;
     --c-ambient-deep:  #6d28d9;
-    --c-ambient-glow:  rgba(15, 118, 110, 0.25);
+    --c-ambient-glow:  rgba(67, 78, 175, 0.25);
     /* --c-tour-accent, ADDED 2026-08-08. Rule 8 caught it the same day it was
        created, which is the list working exactly as this block predicts a new
        token will fail it. Same value as --c-ambient-start immediately above,
        because it is the same hue for the same reason: WorkstationTour's badge
        and bezel are decoration, not a mark, so they follow the ambient set
        onto paper rather than keeping a separate light value nobody chose. */
-    --c-tour-accent:   #0f766e;
+    --c-tour-accent:   #434EAF;
     --c-interactive-fill:      #0e7490;
     --c-interactive-fill-lit:  #0a566a;
     --c-interactive-fill-text: #ffffff;

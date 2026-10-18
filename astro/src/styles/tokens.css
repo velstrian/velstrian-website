@@ -1191,11 +1191,14 @@
    * the VERIFIED role, and spending it as atmosphere drains the one saturated
    * element a reader is meant to look at. The ground moves; the wash does not
    * arrive. */
-  --c-floor:      #02040A;
-  --c-bg:         #050814;
-  --c-raised:     #0F131F;
-  --c-lit:        #191E2C;
-  --c-panel:      #0B1024;
+  /* [R285-P2-BRAND-DEFAULT-CARBON-IRIS-01] OWNER DECISION 2026-10-18, Carbon and Iris is the
+     default primary everywhere. The ground ladder is the Carbon ladder, bound in
+     brand.source.json websiteBindings to the iris-ground pigments. */
+  --c-floor:      #040505;
+  --c-bg:         #08090A;
+  --c-raised:     #16181D;
+  --c-lit:        #212328;
+  --c-panel:      #0F1012;
   /* Live's card is a WHITE tint at 5%, not a navy fill at 55%. That is why its
      cards read as glass over the page rather than as panels laid on it, and it
      is what makes `saturate(1.6)` in the backdrop filter do visible work. */
@@ -1297,9 +1300,13 @@
    * degrees off --c-violet, so refusal and the ambient ramp are now one hue
    * family seen at two strengths, which is exactly V6's "teal and violet are
    * the only two hues". Contrast is re-measured in the role layer below. */
-  --c-teal:        #2DD4BF;
-  --c-teal-dark:   #0CC9A8;
-  --c-teal-glow:   rgba(45, 212, 191, 0.45);
+  /* [R285-P2-BRAND-DEFAULT-CARBON-IRIS-01] The accent is soft indigo. --c-teal is painted as
+     TEXT and as the verified accent, so it takes the iris text rung #8B95E5 (6.8:1 on
+     --c-panel). --c-teal-dark is the iris fill #5E6AD2. The glow is the iris --teal-45 rung.
+     The token NAMES stay, so no component changes. */
+  --c-teal:        #8B95E5;
+  --c-teal-dark:   #5E6AD2;
+  --c-teal-glow:   rgba(94, 106, 210, 0.45);
   --c-cyan:        #22D3EE;
   --c-violet:      #A78BFA;
   --c-violet-deep: #7C3AED;
@@ -2493,7 +2500,7 @@
    * grain is page-wide and tiled, so every glass card on every route now has
    * something to bite on. */
   --orb-violet:     radial-gradient(circle, rgba(124, 58, 237, 0.82), rgba(0, 0, 0, 0) 66%);
-  --orb-teal:       radial-gradient(circle, rgba(45, 212, 191, 0.78), rgba(0, 0, 0, 0) 68%);
+  --orb-teal:       radial-gradient(circle, rgba(94, 106, 210, 0.78), rgba(0, 0, 0, 0) 68%);
   /* ── THE ACHROMATIC ORB, AND WHY IT EXISTS ────────────────────────────────
    *
    * A THIRD MEMBER OF THE SET ABOVE, ADDED UNDER THE OWNER'S GRADIENT RULE OF
@@ -2589,9 +2596,9 @@
      and the platform's Slate and Iris palettes already use a soft white. Interactive
      glyphs keep --c-white. #F8F9FB on --c-bg #05070E is 18.9:1. The platform reads this
      through brand/brand.source.json ink-0. */
-  --c-text:       #F8F9FB;
-  --c-text-sub:   #D2DBEE;
-  --c-text-muted: #A9B6D2;
+  --c-text:       #F7F8F8;
+  --c-text-sub:   #CBCED2;
+  --c-text-muted: #8A8F98;
 
   /* ── Type families ──────────────────────────────────────────────────────*/
   /* A-92. 'Jakarta Fallback' was DECLARED in styles/fonts.css and named in no
