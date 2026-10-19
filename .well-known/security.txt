@@ -10,5 +10,5 @@
 Contact: mailto:security@velstrian.com
 Expires: 2027-04-30T23:59:59.000Z
 Preferred-Languages: en
-Canonical: https://crowagent.ai/.well-known/security.txt
+Canonical: https://velstrian.com/.well-known/security.txt
 Policy: https://velstrian.com/security

@@ -276,7 +276,7 @@ const checks = [
   ['.well-known/security.txt', /^Expires:\s*\S/m, 'its mandatory Expires field (RFC 9116 s2.5.5)'],
   [
     '.well-known/security.txt',
-    /^Canonical:\s*https:\/\/crowagent\.ai\/\.well-known\/security\.txt\s*$/m,
+    /^Canonical:\s*https:\/\/velstrian\.com\/\.well-known\/security\.txt\s*$/m, // R285-REBRAND-VELSTRIAN-01
     'its Canonical line pointing at the URL it is served from',
   ],
 ];

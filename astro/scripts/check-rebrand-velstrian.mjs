@@ -43,7 +43,12 @@ const OLD_SOCIALS = [
 // Hosts that stay on crowagent.ai in this round (owner decision 2026-10-18: website and
 // email move now, the app moves later in its own migration). A reader can see these and
 // that is correct until the app migration lands.
-const KEPT_HOSTS = ['app.crowagent.ai', 'status.crowagent.ai', 'calendly.com/crowagent-platform'];
+const KEPT_HOSTS = [
+  'app.crowagent.ai',
+  'status.crowagent.ai',
+  'calendly.com/crowagent-platform',
+  'crowagent-platform-production.up.railway.app', // the API host the partner form posts to, moves with the app
+];
 
 const TEXT_EXT = new Set(['.html', '.xml', '.txt', '.json', '.js', '.webmanifest', '.svg']);
 
