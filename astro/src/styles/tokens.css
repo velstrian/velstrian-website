@@ -1307,7 +1307,15 @@
   --c-teal:        #8B95E5;
   --c-teal-dark:   #5E6AD2;
   --c-teal-glow:   rgba(94, 106, 210, 0.45);
-  --c-cyan:        #22D3EE;
+  /* [R285-REBRAND-VELSTRIAN-01] Owner 2026-10-19: "instead of teal use default however i
+     would like to keep purple as well". --c-cyan was #22D3EE, the last teal family hue on the
+     shelf, and it reached the reader as --c-ambient-mid: the middle stop of the hero headline
+     gradient, the rules and the lifecycle ring. It now follows --c-teal, the platform iris
+     text rung, so the ramp runs iris into the violet and orchid kept below. The bound is TEXT
+     SAFE on purpose: .strip__out on /crowmark paints --c-ambient-mid as micro text, and the
+     iris fill #5E6AD2 is only about 4.2:1 on --c-bg. Bound, not restated, so a palette move
+     on --c-teal carries this with it. The NAME stays, as it did for --c-teal. */
+  --c-cyan:        var(--c-teal);
   --c-violet:      #A78BFA;
   --c-violet-deep: #7C3AED;
   --c-orchid:      #B39DFB;
@@ -1845,9 +1853,9 @@
    * is set per orb on the element instead, which is what the deployed site
    * does. */
   --orb-1: radial-gradient(circle, #7C3AED, rgba(0, 0, 0, 0) 66%);
-  --orb-2: radial-gradient(circle, #22D3EE, rgba(0, 0, 0, 0) 66%);
+  --orb-2: radial-gradient(circle, #5E6AD2, rgba(0, 0, 0, 0) 66%);
   --orb-3: radial-gradient(circle, #B39DFB, rgba(0, 0, 0, 0) 68%);
-  --orb-4: radial-gradient(circle, #2DD4BF, rgba(0, 0, 0, 0) 68%);
+  --orb-4: radial-gradient(circle, #8B95E5, rgba(0, 0, 0, 0) 68%);
 
   /* FOUR EXPLICIT TOKENS RATHER THAN ONE RECIPE WITH KNOBS, and the reason is
      measured rather than stylistic. The knob version (one --grad-orb carrying
@@ -1859,7 +1867,13 @@
      The colours are literals here for the same reason: a var() inside a token
      that is itself substituted is the construction that broke. Every value is
      the deployed site's, and they are the same four hexes --c-violet-deep,
-     --c-cyan, --c-orchid and --c-teal hold. */
+     --c-cyan, --c-orchid and --c-teal hold.
+
+     [R285-REBRAND-VELSTRIAN-01] Orbs 2 and 4 were cyan #22D3EE and teal #2DD4BF.
+     They are now the iris fill #5E6AD2 (--c-teal-dark) and the iris text rung
+     #8B95E5 (--c-teal), the platform default primary, so the shelf they mirror
+     carries no teal. Neither has a caller today (HeroStack and HeroLive2 draw
+     --orb-1 only), so this changes no rendered pixel. */
 
   /* --grad-page-wash WAS DECLARED HERE AND IS DELETED, 2026-08-04. Owner: "Can
      you remove home page backgound gradient and keep background color exactly

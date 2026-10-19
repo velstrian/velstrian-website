@@ -579,8 +579,13 @@ const canonicalUrl = routeUrl(path);
      * though that also passes: ADR 0005 separates interactive from verified.
      *
      * Rule 8 of check-design-system.js now asserts this list is complete. */
-    --c-interactive: #0e7490;
-    --c-cyan: #0e7490;
+    /* [R285-REBRAND-VELSTRIAN-01] Owner 2026-10-19, "instead of teal use default". The
+       interactive and cyan rungs above were teal family #0e7490. Interactive is now the
+       platform iris light hover rung #363E8F, 8.7:1 on #F5F6FA, which is also this pane's
+       --c-teal-dark, so it stays a separate value from verified #434EAF as ADR 0005 asks.
+       Cyan follows the pane's --c-teal, because at :root --c-cyan now follows --c-teal. */
+    --c-interactive: #363E8F;
+    --c-cyan: #434EAF;
     --c-orchid: #7e22ce;
     --c-violet: #6d28d9;
     --c-pink: #be185d;
@@ -625,7 +630,7 @@ const canonicalUrl = routeUrl(path);
      * palette is a list, and a new token added anywhere else is missing from it
      * by default. Any token added to :root that can carry TEXT needs a line
      * here. */
-    --c-interactive: #0e7490;
+    --c-interactive: #363E8F;
 
     /* ── AND THE WHOLE ROLE LAYER, WHICH ARRIVED 2026-08-04 ───────────────
      *
@@ -677,7 +682,7 @@ const canonicalUrl = routeUrl(path);
     --c-refused:       #7e22ce;
     --c-at-risk:       #886311;
     --c-ambient-start: #434EAF;
-    --c-ambient-mid:   #0e7490;
+    --c-ambient-mid:   #434EAF;
     --c-ambient-end:   #6d28d9;
     --c-ambient-far:   #7e22ce;
     --c-ambient-deep:  #6d28d9;
@@ -689,10 +694,13 @@ const canonicalUrl = routeUrl(path);
        and bezel are decoration, not a mark, so they follow the ambient set
        onto paper rather than keeping a separate light value nobody chose. */
     --c-tour-accent:   #434EAF;
-    --c-interactive-fill:      #0e7490;
-    --c-interactive-fill-lit:  #0a566a;
+    /* [R285-REBRAND-VELSTRIAN-01] The fill follows --c-interactive onto iris #363E8F, white
+       label 9.4:1. The pressed step mirrors :root, where fill-lit is --c-text-sub: here that
+       is #2b3245, white label 12.8:1. Was teal #0e7490 and #0a566a. */
+    --c-interactive-fill:      #363E8F;
+    --c-interactive-fill-lit:  #2b3245;
     --c-interactive-fill-text: #ffffff;
-    --c-interactive-glow:      rgba(14, 116, 144, 0.30);
+    --c-interactive-glow:      rgba(54, 62, 143, 0.30);
 
     /*
      * A four-step ladder at 4 to 7 percent, not the dark six-step ladder,
