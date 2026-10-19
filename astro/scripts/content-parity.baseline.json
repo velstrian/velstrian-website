@@ -1,8 +1,8 @@
 {
-  "capturedAt": "2026-08-13T13:34:41.784Z",
-  "capturedFromCommit": "38b7c9306a5dd033fe1c574f8a93c9c2fb68492b",
-  "distFingerprint": "sha256:544ce58b80a15a1f",
-  "routeCount": 45,
+  "capturedAt": "2026-10-19T00:48:07.375Z",
+  "capturedFromCommit": "585f2bae0b7932411bff33494fa9076bbf0fbeb1",
+  "distFingerprint": "sha256:5c509c88316c2bd6",
+  "routeCount": 47,
   "sitemap": [
     "/",
     "/about",
@@ -12,8 +12,10 @@
     "/blog/carbon-reduction-plan-ppn-0621-sme-guide",
     "/blog/find-first-public-sector-contract",
     "/blog/frameworks-and-dps-explained",
+    "/blog/life-after-award-kpis-contract-performance",
     "/blog/method-statement-that-scores",
-    "/blog/ppn-002-social-value-guide",
+    "/blog/ppn-026-social-value-guide",
+    "/blog/ppn-026-what-has-published-and-what-has-not",
     "/blog/private-sector-rfp-pqq-guide",
     "/blog/procurement-act-2023-sme-guide",
     "/blog/regulatory-updates-2026",
@@ -31,7 +33,7 @@
     "/crowmark-buyers",
     "/faq",
     "/glossary",
-    "/glossary/ppn-002",
+    "/glossary/ppn-026",
     "/glossary/toms-framework",
     "/integrations",
     "/partners",
@@ -63,7 +65,6 @@
         "Draft",
         "Refuse",
         "Evidence",
-        "The rest of the workstation.",
         "One tender, from notice to evidence.",
         "Notices you could actually win the argument on.",
         "Fit, broken into its parts, with the reason attached.",
@@ -72,16 +73,28 @@
         "A commitment is only worth the evidence filed against it.",
         "Read from either end.",
         "Watch it refuse a figure.",
-        "Step 01: Retrieve",
-        "Step 02: Ground",
-        "Step 03: Compute",
-        "Step 04: Check",
-        "Step 05: Cite",
+        "Retrieve",
+        "Ground",
+        "Compute",
+        "Check",
+        "Cite",
         "Your evidence already exists. We read it where it lives.",
         "See it on your own tender.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
+        {
+          "type": "radio",
+          "name": "hmt"
+        },
+        {
+          "type": "radio",
+          "name": "hmt"
+        },
+        {
+          "type": "radio",
+          "name": "hmt"
+        },
         {
           "type": "text",
           "name": "cmdk-input"
@@ -101,7 +114,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -116,12 +129,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/about/": {
@@ -139,17 +152,17 @@
         "Where we are.",
         "Founding team experience Delivered",
         "Regulatory research Delivered",
-        "CrowAgent founded Delivered",
+        "Velstrian founded Delivered",
         "Platform live Live now",
         "Regulatory monitor Planned, not yet built",
-        "CrowAgent Ltd",
+        "VELSTRIAN SYSTEMS LIMITED",
         "One product, two variants.",
         "CrowMark for Suppliers",
         "CrowMark for Buyers",
         "Secure, and honest about what we do not hold.",
         "Whichever of the four you are.",
         "Get monthly UK procurement digests",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -179,7 +192,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -195,13 +208,13 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "mailto:hello@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/accessibility/": {
@@ -213,7 +226,7 @@
         "Reporting a barrier",
         "Enforcement",
         "Preparation of this statement",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -235,7 +248,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -248,35 +261,38 @@
         "/terms",
         "/tools",
         "/tools/tender-compliance-matrix",
+        "app.crowagent.ai/accessibility",
         "app.crowagent.ai/login",
-        "crowagent.ai",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "github.com/dequelabs/axe-core",
-        "mailto:hello@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
+        "velstrian.com",
         "www.equalityadvisoryservice.com",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/": {
       "headings": [
         "Statute, in plain English.",
-        "The Procurement Act 2023: what SME bidders actually need to know",
+        "PPN 026 tracker: what has published, and what has not",
         "All guides",
+        "Life after the award: the KPIs you will be measured on, in public",
         "How AI is changing UK public sector tender evaluation",
         "PPN 06/21 & Carbon Reduction Plans: a guide for SME bidders",
         "Frameworks and DPS explained: G-Cloud, lots and call-offs",
         "How to write a method statement that actually scores",
         "Responding to corporate RFPs and PQQs in the private sector",
         "How to find and win your first UK public sector contract",
+        "The Procurement Act 2023: what SME bidders actually need to know",
         "Social Value Portal vs CrowMark: Which is Right for Your Business?",
-        "PPN 002 in 2026: What Changed (and What Didn't)",
-        "PPN 002: The Complete Guide to Social Value Scoring for UK Bids",
-        "Search CrowAgent"
+        "PPN 026 in 2026: What Changed (and What Didn't)",
+        "Social Value Scoring for UK Bids: The Complete Guide to PPN 026",
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -293,8 +309,10 @@
         "/blog/carbon-reduction-plan-ppn-0621-sme-guide",
         "/blog/find-first-public-sector-contract",
         "/blog/frameworks-and-dps-explained",
+        "/blog/life-after-award-kpis-contract-performance",
         "/blog/method-statement-that-scores",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
+        "/blog/ppn-026-what-has-published-and-what-has-not",
         "/blog/private-sector-rfp-pqq-guide",
         "/blog/procurement-act-2023-sme-guide",
         "/blog/regulatory-updates-2026",
@@ -308,7 +326,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -323,12 +341,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/ai-tender-evaluation-uk-public-sector/": {
@@ -351,7 +369,7 @@
         "How to write a method statement that actually scores",
         "PPN 06/21 & Carbon Reduction Plans: a guide for SME bidders",
         "Responding to corporate RFPs and PQQs in the private sector",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -377,7 +395,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -393,18 +411,18 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.gov.uk/government/collections/transforming-public-procurement",
         "www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement",
         "www.gov.uk/government/publications/procurement-policy-note-0621-taking-account-of-carbon-reduction-plans-in-the-procurement-of-major-government-contracts",
-        "www.instagram.com/crowagent.ai",
+        "www.instagram.com/velstrian",
         "www.legislation.gov.uk/ukpga/2023/54/contents",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/carbon-reduction-plan-ppn-0621-sme-guide/": {
@@ -424,10 +442,10 @@
         "Check the plan before the buyer does",
         "Related articles",
         "The Procurement Act 2023: what SME bidders actually need to know",
-        "PPN 002: The Complete Guide to Social Value Scoring for UK Bids",
-        "PPN 002 in 2026: What Changed (and What Didn't)",
+        "Social Value Scoring for UK Bids: The Complete Guide to PPN 026",
+        "PPN 026 in 2026: What Changed (and What Didn't)",
         "How AI is changing UK public sector tender evaluation",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -441,7 +459,7 @@
         "/accessibility",
         "/blog",
         "/blog/ai-tender-evaluation-uk-public-sector",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
         "/blog/procurement-act-2023-sme-guide",
         "/blog/regulatory-updates-2026",
         "/changelog",
@@ -453,7 +471,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -469,18 +487,18 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.gov.uk/government/collections/government-conversion-factors-for-company-reporting",
         "www.gov.uk/government/publications/procurement-policy-note-0621-taking-account-of-carbon-reduction-plans-in-the-procurement-of-major-government-contracts",
-        "www.instagram.com/crowagent.ai",
+        "www.instagram.com/velstrian",
         "www.legislation.gov.uk/ukpga/2008/27/contents",
         "www.legislation.gov.uk/ukpga/2023/54/contents",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/find-first-public-sector-contract/": {
@@ -493,7 +511,7 @@
         "How to read a tender",
         "SQ versus ITT",
         "The bid or no-bid decision",
-        "Social value and PPN 002",
+        "Social value and PPN 026",
         "Common first-timer mistakes",
         "Frequently asked questions",
         "Where do I find UK public sector contracts?",
@@ -504,10 +522,10 @@
         "Make the scored section your strength",
         "Related articles",
         "The Procurement Act 2023: what SME bidders actually need to know",
-        "PPN 002: The Complete Guide to Social Value Scoring for UK Bids",
-        "PPN 002 in 2026: What Changed (and What Didn't)",
+        "Social Value Scoring for UK Bids: The Complete Guide to PPN 026",
+        "PPN 026 in 2026: What Changed (and What Didn't)",
         "How to write a method statement that actually scores",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -521,7 +539,7 @@
         "/accessibility",
         "/blog",
         "/blog/method-statement-that-scores",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
         "/blog/procurement-act-2023-sme-guide",
         "/blog/regulatory-updates-2026",
         "/changelog",
@@ -533,7 +551,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -549,18 +567,18 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.find-tender.service.gov.uk",
         "www.gov.uk/contracts-finder",
         "www.gov.uk/government/collections/transforming-public-procurement",
         "www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/frameworks-and-dps-explained/": {
@@ -585,7 +603,7 @@
         "The Procurement Act 2023: what SME bidders actually need to know",
         "How to find and win your first UK public sector contract",
         "How to write a method statement that actually scores",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -610,7 +628,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -626,19 +644,91 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.crowncommercial.gov.uk",
         "www.digitalmarketplace.service.gov.uk",
         "www.find-tender.service.gov.uk",
         "www.gov.uk/government/collections/transforming-public-procurement",
-        "www.instagram.com/crowagent.ai",
+        "www.instagram.com/velstrian",
         "www.legislation.gov.uk/ukpga/2023/54/contents",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
+      ]
+    },
+    "/blog/life-after-award-kpis-contract-performance/": {
+      "headings": [
+        "Life after the award: the KPIs you will be measured on, in public",
+        "Two duties, not one",
+        "What this actually changes for a supplier",
+        "The gap where it goes wrong",
+        "What CrowMark does about it",
+        "Where the AI helps, and where we stop it",
+        "What to do this quarter",
+        "Frequently asked questions",
+        "Which contracts have to publish key performance indicators?",
+        "How often is performance assessed and published?",
+        "Are section 52 and section 71 the same duty?",
+        "What happens to the commitments made in the winning bid?",
+        "Sources",
+        "Related articles",
+        "The Procurement Act 2023: what SME bidders actually need to know",
+        "PPN 026 tracker: what has published, and what has not",
+        "How AI is changing UK public sector tender evaluation",
+        "Search Velstrian"
+      ],
+      "controls": [
+        {
+          "type": "text",
+          "name": "cmdk-input"
+        }
+      ],
+      "links": [
+        "/",
+        "/about",
+        "/accessibility",
+        "/blog",
+        "/blog/ai-tender-evaluation-uk-public-sector",
+        "/blog/ppn-026-what-has-published-and-what-has-not",
+        "/blog/procurement-act-2023-sme-guide",
+        "/changelog",
+        "/compare",
+        "/contact",
+        "/cookie-preferences",
+        "/cookies",
+        "/crowmark",
+        "/crowmark-buyers",
+        "/faq",
+        "/glossary",
+        "/glossary/ppn-026",
+        "/integrations",
+        "/partners",
+        "/pricing",
+        "/privacy",
+        "/resources",
+        "/roadmap",
+        "/sectors",
+        "/security",
+        "/sources",
+        "/terms",
+        "/tools",
+        "/tools/tender-compliance-matrix",
+        "app.crowagent.ai/login",
+        "find-and-update.company-information.service.gov.uk/company/17076461",
+        "mailto:",
+        "medium.com/@velstrian-systems-ltd",
+        "status.crowagent.ai",
+        "twitter.com/intent/tweet",
+        "www.instagram.com/velstrian",
+        "www.legislation.gov.uk/ukpga/2023/54/section/52",
+        "www.legislation.gov.uk/ukpga/2023/54/section/71",
+        "www.linkedin.com/company/-velstrian",
+        "www.linkedin.com/feed",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/method-statement-that-scores/": {
@@ -664,7 +754,7 @@
         "How to find and win your first UK public sector contract",
         "The Procurement Act 2023: what SME bidders actually need to know",
         "Frameworks and DPS explained: G-Cloud, lots and call-offs",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -689,7 +779,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -705,43 +795,34 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.gov.uk/government/collections/transforming-public-procurement",
         "www.gov.uk/government/publications/guidance-on-transparent-and-responsible-use-of-ai-in-procurement",
-        "www.instagram.com/crowagent.ai",
+        "www.instagram.com/velstrian",
         "www.legislation.gov.uk/ukpga/2023/54/contents",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
-    "/blog/ppn-002-social-value-guide/": {
+    "/blog/ppn-026-social-value-guide/": {
       "headings": [
-        "PPN 002: The Complete Guide to Social Value Scoring for UK Bids",
-        "1. What is PPN 002?",
-        "2. The five PPN 002 missions",
-        "Mission 1: Kickstart economic growth",
-        "Mission 2: Make Britain a clean energy superpower",
-        "Mission 3: Take back our streets",
-        "Mission 4: Break down barriers to opportunity",
-        "Mission 5: Build an NHS fit for the future",
-        "Named commitments buyers look for",
-        "3. The TOMs framework and National TOMs proxy values",
+        "Social Value Scoring for UK Bids: The Complete Guide to PPN 026",
+        "1. Which edition applies to your bid",
+        "2. The minimum weighting, and what a weighting is",
+        "3. What this guide states, and what it does not",
+        "4. The TOMs framework and National TOMs proxy values",
         "How a monetised TOMs score is calculated",
-        "4. The 10% threshold: what it really means",
-        "Strategies for maximising your social value score",
-        "5. Which sectors are affected?",
+        "5. Which sectors are affected",
         "6. Evidence requirements and post-award reporting",
         "At bid stage",
-        "Post-award reporting",
+        "After award, the commitment is contractual",
         "Audit risk",
         "7. Common pitfalls that cost suppliers marks",
-        "8. How CrowMark builds a PPN 002 response",
-        "Automatic mission mapping",
-        "Measure catalogue and TOMs-aligned scoring",
+        "8. How CrowMark builds a social value response",
         "AI narrative generation",
         "Evidence tracker",
         "One pass, not a blank page",
@@ -749,10 +830,10 @@
         "Score your next public sector bid",
         "Related articles",
         "How to find and win your first UK public sector contract",
-        "PPN 002 in 2026: What Changed (and What Didn't)",
+        "PPN 026 in 2026: What Changed (and What Didn't)",
         "Social Value Portal vs CrowMark: Which is Right for Your Business?",
         "How to write a method statement that actually scores",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -778,7 +859,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -794,19 +875,93 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
+        "socialvalueportal.com/solutions/national-toms",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.gov.uk/government/collections/procurement-policy-notes",
-        "www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts",
-        "www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts/ppn-002-guide-to-using-the-social-value-model-html",
-        "www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts/procurement-policy-note-002-the-social-value-model-html",
-        "www.gov.uk/government/publications/procurement-policy-note-0620-taking-account-of-social-value-in-the-award-of-central-government-contracts",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.gov.uk/government/publications/ppn-026-the-social-value-model",
+        "www.instagram.com/velstrian",
+        "www.legislation.gov.uk/ukpga/2023/54/section/52",
+        "www.legislation.gov.uk/ukpga/2023/54/section/71",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
+      ]
+    },
+    "/blog/ppn-026-what-has-published-and-what-has-not/": {
+      "headings": [
+        "PPN 026 tracker: what has published, and what has not",
+        "What has published",
+        "What has not published",
+        "The date collision worth checking",
+        "What this edition stops asking about",
+        "Who is actually in scope",
+        "Where PPN 002 stands",
+        "What to do before January",
+        "Frequently asked questions",
+        "Has the full PPN 026 guidance been published?",
+        "Does PPN 026 replace or withdraw PPN 002?",
+        "Which organisations does PPN 026 actually bind?",
+        "What does PPN 026 no longer ask about?",
+        "Sources",
+        "Related articles",
+        "Social Value Portal vs CrowMark: Which is Right for Your Business?",
+        "Life after the award: the KPIs you will be measured on, in public",
+        "How AI is changing UK public sector tender evaluation",
+        "Search Velstrian"
+      ],
+      "controls": [
+        {
+          "type": "text",
+          "name": "cmdk-input"
+        }
+      ],
+      "links": [
+        "/",
+        "/about",
+        "/accessibility",
+        "/blog",
+        "/blog/ai-tender-evaluation-uk-public-sector",
+        "/blog/life-after-award-kpis-contract-performance",
+        "/blog/ppn-026-social-value-guide",
+        "/blog/social-value-portal-vs-crowmark",
+        "/changelog",
+        "/compare",
+        "/contact",
+        "/cookie-preferences",
+        "/cookies",
+        "/crowmark",
+        "/crowmark-buyers",
+        "/faq",
+        "/glossary",
+        "/glossary/ppn-026",
+        "/integrations",
+        "/partners",
+        "/pricing",
+        "/privacy",
+        "/resources",
+        "/roadmap",
+        "/sectors",
+        "/security",
+        "/sources",
+        "/terms",
+        "/tools",
+        "/tools/tender-compliance-matrix",
+        "app.crowagent.ai/login",
+        "find-and-update.company-information.service.gov.uk/company/17076461",
+        "mailto:",
+        "medium.com/@velstrian-systems-ltd",
+        "status.crowagent.ai",
+        "twitter.com/intent/tweet",
+        "www.gov.uk/government/collections/procurement-policy-notes",
+        "www.gov.uk/government/publications/ppn-026-the-social-value-model",
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.linkedin.com/feed",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/private-sector-rfp-pqq-guide/": {
@@ -830,7 +985,7 @@
         "How to write a method statement that actually scores",
         "How to find and win your first UK public sector contract",
         "The Procurement Act 2023: what SME bidders actually need to know",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -855,7 +1010,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -871,16 +1026,16 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.gov.uk/government/collections/transforming-public-procurement",
-        "www.instagram.com/crowagent.ai",
+        "www.instagram.com/velstrian",
         "www.legislation.gov.uk/ukpga/2023/54/contents",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/procurement-act-2023-sme-guide/": {
@@ -903,10 +1058,10 @@
         "Put your effort where the marks are",
         "Related articles",
         "How to find and win your first UK public sector contract",
-        "PPN 002: The Complete Guide to Social Value Scoring for UK Bids",
-        "PPN 002 in 2026: What Changed (and What Didn't)",
+        "Social Value Scoring for UK Bids: The Complete Guide to PPN 026",
+        "PPN 026 in 2026: What Changed (and What Didn't)",
         "Frameworks and DPS explained: G-Cloud, lots and call-offs",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -921,7 +1076,7 @@
         "/blog",
         "/blog/find-first-public-sector-contract",
         "/blog/frameworks-and-dps-explained",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
         "/blog/regulatory-updates-2026",
         "/changelog",
         "/compare",
@@ -932,7 +1087,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -948,35 +1103,35 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
         "www.find-tender.service.gov.uk",
         "www.gov.uk/government/collections/transforming-public-procurement",
-        "www.instagram.com/crowagent.ai",
+        "www.instagram.com/velstrian",
         "www.legislation.gov.uk/ukpga/2023/54/contents",
         "www.legislation.gov.uk/ukpga/2023/54/section/12",
         "www.legislation.gov.uk/ukpga/2023/54/section/52",
         "www.legislation.gov.uk/ukpga/2023/54/section/71",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/regulatory-updates-2026/": {
       "headings": [
-        "PPN 002 in 2026: What Changed (and What Didn't)",
+        "PPN 026 in 2026: What Changed (and What Didn't)",
         "Introduction",
-        "PPN 002: social value in procurement",
+        "PPN 026: social value in procurement",
         "Summary",
-        "Track your PPN 002 scoring",
+        "Track your social value scoring",
         "Related articles",
-        "PPN 002: The Complete Guide to Social Value Scoring for UK Bids",
+        "Social Value Scoring for UK Bids: The Complete Guide to PPN 026",
         "The Procurement Act 2023: what SME bidders actually need to know",
         "How to find and win your first UK public sector contract",
         "Frameworks and DPS explained: G-Cloud, lots and call-offs",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -991,7 +1146,7 @@
         "/blog",
         "/blog/find-first-public-sector-contract",
         "/blog/frameworks-and-dps-explained",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
         "/blog/procurement-act-2023-sme-guide",
         "/changelog",
         "/compare",
@@ -1002,7 +1157,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1018,33 +1173,33 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/blog/social-value-portal-vs-crowmark/": {
       "headings": [
         "Social Value Portal vs CrowMark: Which is Right for Your Business?",
-        "The regulatory context: PPN 002",
+        "The regulatory context: PPN 026",
         "Social Value Portal: the enterprise standard",
         "CrowMark: built for SMEs",
         "Head-to-head comparison",
         "Which should you choose?",
         "The bigger picture: social value is not optional",
-        "Build your PPN 002 social value plan in one sitting",
+        "Build your PPN 026 social value plan in one sitting",
         "Related articles",
         "Related articles",
         "How to find and win your first UK public sector contract",
-        "PPN 002: The Complete Guide to Social Value Scoring for UK Bids",
+        "Social Value Scoring for UK Bids: The Complete Guide to PPN 026",
         "The Procurement Act 2023: what SME bidders actually need to know",
         "Responding to corporate RFPs and PQQs in the private sector",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1059,7 +1214,7 @@
         "/blog",
         "/blog/find-first-public-sector-contract",
         "/blog/method-statement-that-scores",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
         "/blog/private-sector-rfp-pqq-guide",
         "/blog/procurement-act-2023-sme-guide",
         "/changelog",
@@ -1071,7 +1226,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1087,24 +1242,27 @@
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "mailto:",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "twitter.com/intent/tweet",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
         "www.linkedin.com/feed",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/changelog/": {
       "headings": [
         "What we shipped, and when.",
         "Release notes",
+        "Managing the contract after award, and PPN 026 by default",
+        "Review gates, version history and a briefing for the tender pack",
+        "Release 2.6: whole tender packs in, one editor, six stages",
         "MP1: Marketing surface expansion",
         "Cloudflare Pages migration complete",
         "Ready to see what's next for CrowMark?",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1126,7 +1284,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1141,12 +1299,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/compare/": {
@@ -1157,7 +1315,7 @@
         "CrowMark vs CleanTender",
         "CrowMark vs SwiftBid",
         "DECIDE FASTER.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1183,7 +1341,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1198,24 +1356,28 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/compare/crowmark-vs-autogenai/": {
       "headings": [
         "CrowMark vs AutogenAI",
+        "What buyers check first",
+        "Traceability",
+        "Data governance",
+        "UK regulatory alignment",
         "At a glance",
         "What is AutogenAI?",
         "What is CrowMark?",
         "Pricing compared",
         "Which should you choose?",
         "Choose AutogenAI if",
-        "Choose CrowAgent (CrowMark) if",
+        "Choose Velstrian (CrowMark) if",
         "Where CrowMark loses honestly",
         "Frequently asked questions",
         "Is CrowMark or AutogenAI cheaper?",
@@ -1223,13 +1385,13 @@
         "Which is better for a small supplier or SME?",
         "Does AutogenAI find tenders for me?",
         "Can either tool stop the AI inventing figures?",
-        "Is AutogenAI a bigger company than CrowAgent?",
-        "Does either cover PPN 002 social value maths?",
+        "Is AutogenAI a bigger company than Velstrian?",
+        "Does either cover social value maths?",
         "Can I use both CrowMark and AutogenAI?",
         "Sources",
         "Related comparisons",
         "SEE THE PRICE.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1254,7 +1416,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1270,26 +1432,30 @@
         "app.crowagent.ai/login",
         "cleantender.co.uk/resources/comparisons/ai-tender-software",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "www.finsmes.com/2023/12/autogenai-raises-39-5m-in-series-b-funding.html",
         "www.getapp.co.uk/software/2072629/autogenai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/compare/crowmark-vs-cleantender/": {
       "headings": [
         "CrowMark vs CleanTender",
+        "What buyers check first",
+        "Traceability",
+        "Data governance",
+        "UK regulatory alignment",
         "At a glance",
         "What is CleanTender?",
         "What is CrowMark?",
         "Pricing compared",
         "Which should you choose?",
         "Choose CleanTender if",
-        "Choose CrowAgent (CrowMark) if",
+        "Choose Velstrian (CrowMark) if",
         "Where CrowMark loses honestly",
         "Frequently asked questions",
         "Is CrowMark or CleanTender cheaper?",
@@ -1303,7 +1469,7 @@
         "Sources",
         "Related comparisons",
         "BID WIDER.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1328,7 +1494,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1345,24 +1511,28 @@
         "cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk",
         "cleantender.co.uk/resources/comparisons/ai-tender-software",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/compare/crowmark-vs-mytender-io/": {
       "headings": [
         "CrowMark vs mytender.io",
+        "What buyers check first",
+        "Traceability",
+        "Data governance",
+        "UK regulatory alignment",
         "At a glance",
         "What is mytender.io?",
         "What is CrowMark?",
         "Pricing compared",
         "Which should you choose?",
         "Choose mytender.io if",
-        "Choose CrowAgent (CrowMark) if",
+        "Choose Velstrian (CrowMark) if",
         "Where CrowMark loses honestly",
         "Frequently asked questions",
         "Is CrowMark or mytender.io cheaper?",
@@ -1376,7 +1546,7 @@
         "Sources",
         "Related comparisons",
         "SEE THE PRICE.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1401,7 +1571,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1418,25 +1588,29 @@
         "cleantender.co.uk/resources/comparisons/ai-tender-software",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "futureworlds.com/mytender-io-ai-driven-bid-writing-platform",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
         "www.capterra.com/p/10031061/mytender-io",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/compare/crowmark-vs-swiftbid/": {
       "headings": [
         "CrowMark vs SwiftBid",
+        "What buyers check first",
+        "Traceability",
+        "Data governance",
+        "UK regulatory alignment",
         "At a glance",
         "What is SwiftBid?",
         "What is CrowMark?",
         "Pricing compared",
         "Which should you choose?",
         "Choose SwiftBid if",
-        "Choose CrowAgent (CrowMark) if",
+        "Choose Velstrian (CrowMark) if",
         "Where CrowMark loses honestly",
         "Frequently asked questions",
         "Is CrowMark or SwiftBid cheaper?",
@@ -1450,7 +1624,7 @@
         "Sources",
         "Related comparisons",
         "BID OFTEN.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1475,7 +1649,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1492,17 +1666,17 @@
         "cleantender.co.uk/resources/comparisons/ai-tender-software",
         "cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/contact/": {
       "headings": [
-        "Talk to CrowAgent.",
+        "Talk to Velstrian.",
         "Book a 30-minute call",
         "Portfolio plan and volume licensing",
         "Send us an email",
@@ -1510,9 +1684,9 @@
         "Tell us what you're working on.",
         "Send us a message",
         "How to reach us by email",
-        "CrowAgent Ltd",
+        "VELSTRIAN SYSTEMS LIMITED",
         "Prefer regulatory updates?",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1570,7 +1744,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1586,16 +1760,16 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "mailto:hello@crowagent.ai",
-        "mailto:sales@crowagent.ai",
-        "mailto:security@crowagent.ai",
-        "mailto:support@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "mailto:sales@velstrian.com",
+        "mailto:security@velstrian.com",
+        "mailto:support@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/cookie-preferences/": {
@@ -1610,7 +1784,7 @@
         "CrowMark is a separate matter.",
         "What signing in involves",
         "What we would do first.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1632,7 +1806,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1647,12 +1821,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/cookies/": {
@@ -1667,7 +1841,7 @@
         "How long do cookies last?",
         "What happens if I reject all optional cookies?",
         "6. How to change your choices",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1689,7 +1863,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1704,12 +1878,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/crowmark-buyers/": {
@@ -1736,12 +1910,12 @@
         "Alongside your portal, not instead of it.",
         "What it does",
         "What it does not do",
-        "Scoped to your organisation.",
-        "Buyer side",
-        "Talk to us if",
+        "Two ways to buy.",
+        "Buyer Pro",
+        "Buyer Portfolio",
         "The six we are asked first.",
         "See it against one of your own requirements.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1763,7 +1937,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1778,12 +1952,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/crowmark/": {
@@ -1814,7 +1988,7 @@
         "What CrowMark does today.",
         "UK tender discovery",
         "Cited answer drafting",
-        "Deterministic PPN 002 maths",
+        "Deterministic social value maths",
         "Tender document ingestion",
         "Bid or no-bid, with reasons",
         "Answer marking against the rubric",
@@ -1831,7 +2005,7 @@
         "Tender Compliance Matrix.",
         "Frequently asked questions",
         "Know the rules better than your competition.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1853,7 +2027,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1869,23 +2043,23 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/faq/": {
       "headings": [
-        "Questions about CrowAgent?",
+        "Questions about Velstrian?",
         "General",
         "Products",
         "Pricing",
         "Security",
         "Still have questions?",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1911,7 +2085,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -1927,13 +2101,13 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "mailto:hello@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/glossary/": {
@@ -1955,7 +2129,7 @@
         "KPIs",
         "Lot",
         "Most Advantageous Tender (MAT)",
-        "PPN 002",
+        "PPN 026",
         "PPN 017",
         "PQQ",
         "Procurement Act 2023",
@@ -1966,7 +2140,7 @@
         "TUPE",
         "Go deeper on the rules.",
         "Know the term. Now read the requirement.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -1992,7 +2166,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/glossary/toms-framework",
         "/integrations",
         "/partners",
@@ -2008,26 +2182,24 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
-    "/glossary/ppn-002/": {
+    "/glossary/ppn-026/": {
       "headings": [
-        "PPN 002",
-        "TL;DR",
-        "The 5 PPN 002 missions",
-        "Key facts",
-        "How CrowAgent uses this term",
+        "PPN 026",
+        "What this page states, and what it does not",
+        "How Velstrian uses this term",
         "Read more",
         "Tender Compliance Matrix",
         "CrowMark",
-        "Score your next bid to PPN 002",
-        "Search CrowAgent"
+        "Keep your social value evidence in one place",
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2040,7 +2212,6 @@
         "/about",
         "/accessibility",
         "/blog",
-        "/blog/ppn-002-social-value-guide",
         "/changelog",
         "/compare",
         "/contact",
@@ -2050,8 +2221,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
-        "/glossary/toms-framework",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2066,12 +2236,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/glossary/toms-framework/": {
@@ -2080,12 +2250,12 @@
         "TL;DR",
         "Structure",
         "Key facts",
-        "How CrowAgent uses this term",
+        "How Velstrian uses this term",
         "Read more",
-        "PPN 002",
+        "PPN 026",
         "CrowMark",
         "Structure your social value to the TOMs framework",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2098,7 +2268,7 @@
         "/about",
         "/accessibility",
         "/blog",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
         "/changelog",
         "/compare",
         "/contact",
@@ -2108,7 +2278,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2123,12 +2293,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/integrations/": {
@@ -2157,7 +2327,7 @@
         "Filters you set",
         "What happens next",
         "Connect once, bid from one place.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2179,7 +2349,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2194,12 +2364,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/partners/": {
@@ -2214,7 +2384,7 @@
         "Public sector advisors",
         "Express your interest.",
         "Why partner?",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2272,7 +2442,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2288,13 +2458,13 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "mailto:hello@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/pricing/": {
@@ -2305,8 +2475,8 @@
         "Pro",
         "Portfolio",
         "CrowMark for Buyers",
-        "Buyer side",
-        "Why no published price?",
+        "Buyer Pro",
+        "Buyer Portfolio",
         "Compare the details.",
         "CrowMark",
         "How AI usage is counted.",
@@ -2323,12 +2493,12 @@
         "Are there any hidden setup fees?",
         "Can I switch plans mid-cycle?",
         "Do you price for large organisations?",
-        "Why is there no price for the buyer side?",
+        "How is CrowMark Buyer priced?",
         "How are AI credits counted?",
         "What happens when my AI credits run out?",
         "What payment methods do you accept?",
         "Buying on a purchase order.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2354,7 +2524,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2369,12 +2539,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/privacy/": {
@@ -2403,7 +2573,7 @@
         "Anthropic (Claude) AI processing",
         "Sentry retention & error scrubbing",
         "Contact & ICO complaint",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2425,7 +2595,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2442,15 +2612,15 @@
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "ico.org.uk/esdwebpages/search",
         "ico.org.uk/make-a-complaint",
-        "mailto:dpo@crowagent.ai",
-        "mailto:hello@crowagent.ai",
-        "mailto:privacy@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:dpo@velstrian.com",
+        "mailto:hello@velstrian.com",
+        "mailto:privacy@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/resources/": {
@@ -2459,12 +2629,12 @@
         "Free tender compliance matrix",
         "Tender Compliance Matrix",
         "In-depth guides",
-        "PPN 002 Social Value: How the 10% Weighting Works",
+        "PPN 026 Social Value: How the Model Is Scored",
         "How the rules are sourced",
-        "PPN 002 in full",
+        "PPN 026 in full",
         "Glossary of procurement terms",
         "Start with the workflow you need now.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2477,7 +2647,7 @@
         "/about",
         "/accessibility",
         "/blog",
-        "/blog/ppn-002-social-value-guide",
+        "/blog/ppn-026-social-value-guide",
         "/changelog",
         "/compare",
         "/contact",
@@ -2487,7 +2657,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2502,17 +2672,17 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/roadmap/": {
       "headings": [
-        "CrowAgent product roadmap",
+        "Velstrian product roadmap",
         "Shipped, in progress, and next",
         "Phase 1",
         "CrowMark for Suppliers",
@@ -2543,9 +2713,9 @@
         "EPR / WEEE / Packaging Tax",
         "Hallucinating AI copilots",
         "Deadlines on the radar",
-        "PPN 002 Social Value (mandatory from 1 October 2025)",
+        "PPN 026 Social Value (applies from 1 January 2027)",
         "Request access to CrowMark",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2567,7 +2737,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2582,12 +2752,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/sectors/": {
@@ -2596,7 +2766,7 @@
         "Every sector is under its own clock.",
         "Whatever your sector, the answer is cited.",
         "Find the work. Win it. Prove you delivered.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2618,7 +2788,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2638,13 +2808,13 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "mailto:hello@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/sectors/construction/": {
@@ -2654,7 +2824,7 @@
         "From notice to submission-ready, faster.",
         "Construction bidding, answered.",
         "Find the work. Win it. Prove you delivered.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2676,7 +2846,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2692,12 +2862,12 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/sectors/education/": {
@@ -2707,7 +2877,7 @@
         "One supplier voice, every buyer.",
         "Education bidding, answered.",
         "Find the work. Win it. Prove you delivered.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2729,7 +2899,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2745,12 +2915,12 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/sectors/facilities/": {
@@ -2760,7 +2930,7 @@
         "Consistent answers, mobilisation to KPI.",
         "FM bidding, answered.",
         "Find the work. Win it. Prove you delivered.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2782,7 +2952,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2798,12 +2968,12 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/sectors/highways/": {
@@ -2813,7 +2983,7 @@
         "From scheme notice to evidenced delivery.",
         "Highways bidding, answered.",
         "Find the work. Win it. Prove you delivered.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2835,7 +3005,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2851,27 +3021,27 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/security/": {
       "headings": [
-        "Encrypted, UK-hosted, and documented.",
+        "Encrypted, documented, and auditable.",
         "Operational standards",
         "AES-256 encryption at rest",
         "TLS 1.3 in transit",
-        "GDPR-aligned data processing",
-        "UK and EU data residency",
-        "ISO 27001 controls *",
+        "GDPR compliant",
+        "EU data residency",
+        "ISO 27001 controls",
         "ICO Registered Data Controller",
         "Security documentation",
         "AES-256 encryption",
-        "UK & EU data residency",
+        "EU data residency",
         "GDPR compliance",
         "Access controls",
         "RBAC",
@@ -2884,7 +3054,7 @@
         "Deep dives",
         "Company & regulatory details",
         "Finished your review?",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2906,7 +3076,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2923,14 +3093,14 @@
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
         "ico.org.uk/esdwebpages/search",
-        "mailto:hello@crowagent.ai",
-        "mailto:security@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "mailto:security@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/sources/": {
@@ -2941,8 +3111,7 @@
         "Procurement Act 2023, section 52",
         "Procurement Act 2023, section 71",
         "The social value floor",
-        "Procurement Policy Note 002",
-        "The five missions",
+        "Procurement Policy Note 026",
         "Directive 2014/24/EU",
         "Directive 2014/24/EU, Article 67",
         "Directive 2014/24/EU, Article 70",
@@ -2953,7 +3122,7 @@
         "EU and international",
         "Private sector",
         "What this page is, and what it is not.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -2975,7 +3144,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -2991,17 +3160,16 @@
         "app.crowagent.ai/login",
         "eur-lex.europa.eu/eli/dir/2014/24/oj",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "socialvalueportal.com/solutions/national-toms",
         "status.crowagent.ai",
-        "www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts",
-        "www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts/procurement-policy-note-002-the-social-value-model-html",
-        "www.instagram.com/crowagent.ai",
+        "www.gov.uk/government/publications/ppn-026-the-social-value-model",
+        "www.instagram.com/velstrian",
         "www.legislation.gov.uk/ukpga/2023/54/section/52",
         "www.legislation.gov.uk/ukpga/2023/54/section/71",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/terms/": {
@@ -3030,7 +3198,7 @@
         "9. Governing Law and Disputes",
         "10. Changes to These Terms",
         "11. Contact",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -3052,7 +3220,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -3067,15 +3235,15 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "mailto:hello@crowagent.ai",
-        "mailto:legal@crowagent.ai",
-        "mailto:support@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "mailto:legal@velstrian.com",
+        "mailto:support@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/tools/": {
@@ -3086,10 +3254,10 @@
         "Ready for more than a free check?",
         "Tender discovery",
         "Grounded answers",
-        "PPN 002 social value",
+        "PPN 026 social value",
         "Delivery under the Act",
         "Find it. Draft it. Win it.",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
@@ -3111,7 +3279,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -3127,27 +3295,42 @@
         "app.crowagent.ai/login",
         "calendly.com/crowagent-platform/30min",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "mailto:hello@crowagent.ai",
-        "medium.com/@crowagent.platform",
+        "mailto:hello@velstrian.com",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     },
     "/tools/tender-compliance-matrix/": {
       "headings": [
         "Tender Compliance Matrix",
         "What the rules look for.",
+        "Obligation wording",
+        "Numbered questions",
+        "Numbered references",
+        "Pass or fail wording",
+        "Closing dates and times",
+        "Who the line is about",
+        "Flattened tables",
+        "Response limits",
+        "Percentage weightings",
+        "Quoted wording",
+        "Wrapped lines",
         "What this tool does not do.",
         "Need the whole bid read, not one section?",
-        "Search CrowAgent"
+        "Search Velstrian"
       ],
       "controls": [
         {
           "type": "textarea",
           "name": "tenderText"
+        },
+        {
+          "type": "search",
+          "name": "matrix-q"
         },
         {
           "type": "text",
@@ -3168,7 +3351,7 @@
         "/crowmark-buyers",
         "/faq",
         "/glossary",
-        "/glossary/ppn-002",
+        "/glossary/ppn-026",
         "/integrations",
         "/partners",
         "/pricing",
@@ -3183,12 +3366,12 @@
         "/tools/tender-compliance-matrix",
         "app.crowagent.ai/login",
         "find-and-update.company-information.service.gov.uk/company/17076461",
-        "medium.com/@crowagent.platform",
+        "medium.com/@velstrian-systems-ltd",
         "status.crowagent.ai",
-        "www.instagram.com/crowagent.ai",
-        "www.linkedin.com/company/crowagent-ltd",
-        "www.youtube.com/@crowagentuk",
-        "x.com/crowagentltd"
+        "www.instagram.com/velstrian",
+        "www.linkedin.com/company/-velstrian",
+        "www.youtube.com/@velstrian-uk",
+        "x.com/velstrianltd"
       ]
     }
   }
