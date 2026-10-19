@@ -486,7 +486,7 @@ export const PRICING_FAQS: Faq[] = [
        the array header. Asking is free, but the trial it names two sentences
        earlier does collect a card at Stripe checkout before it starts. */
     answer:
-      'No. CrowMark is a paid product. You can run the free Tender Compliance Matrix at any time with no account, and your first 14 days on CrowMark are free. A card is needed to start, held securely by Stripe and never stored by us.',
+      'No. CrowMark is a paid product. You can run the free Tender Compliance Matrix at any time with no account, and your first 7 days on CrowMark are free. A card is needed to start, held securely by Stripe and never stored by us.',
   },
   {
     /* WAS "How does the 14-day trial work?", answered with "full access to the
@@ -524,14 +524,14 @@ export const PRICING_FAQS: Faq[] = [
        not the standard for publishing a limit, and A-80's rule is a standing
        one: the trial credit figure goes back only when the flip is verified on
        the running service. See A-80. */
-    question: 'How does the 14-day trial work?',
+    question: 'How does the 7 day trial work?',
     /* "A card is required to start it..." ADDED, R262-D-20, 2026-08-08. See
        the array header. This answer is literally "how it works", so the step
        where Stripe collects a card belongs in it; leaving it out was the same
        omission as the removed "no card taken" lines, just by silence rather
        than by a false sentence. */
     answer:
-      'Choose a plan and select Start now. Your first 14 days are free, on the Starter features for 1 user. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 14 days and nothing is charged. There is one free trial per organisation and work email domain.',
+      'Choose a plan and select Start now. Your first 7 days are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 7 days and nothing is charged. There is one free trial per organisation and work email domain.',
   },
   {
     question: 'How do I get access?',

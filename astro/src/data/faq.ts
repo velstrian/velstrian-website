@@ -112,7 +112,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // the note on "How do I sign up?" above; same route, same fix.
         question: 'Can I try CrowMark before I subscribe?',
         answer:
-          'Yes. Your first 14 days on CrowMark are free, on the Starter features for 1 user. A card is needed to start, held securely by Stripe and never stored by us. If you would rather see it first, book a demo. The tender compliance matrix is always free with no account needed.',
+          'Yes. Your first 7 days on CrowMark are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. If you would rather see it first, book a demo. The tender compliance matrix is always free with no account needed.',
       },
     ],
   },
@@ -227,7 +227,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           // D236 (2026-10-19): the trial is no longer requested. A first
           // CrowMark plan starts with 14 free days at Starter, as the
           // platform's create-checkout route provisions it (BILL-TRIAL-002).
-          'Yes. Your first 14 days are free, on the Starter features for 1 user, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 14 days and nothing is charged. There is one free trial per organisation and work email domain.',
+          'Yes. Your first 7 days are free, on the Starter features for 1 user with 30 AI credits, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 7 days and nothing is charged. There is one free trial per organisation and work email domain.',
         link: { label: 'Start now', href: SIGNUP_URL },
       },
       {

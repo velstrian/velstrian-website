@@ -42,8 +42,8 @@ These Terms of Service (“Terms”) form a legally binding agreement between **
 
 - Access to the platform is provided on a subscription basis as described on our Pricing page.
 - Subscriptions are billed monthly or annually in advance via Stripe. All prices are quoted in GBP.
-- There is no free plan. Access is offered by request rather than by self-serve signup.
-- An evaluation trial may be granted on request. Where one is granted it is time limited and usage limited. The standard trial runs for 14 days at the Starter feature set for 1 user. Any trial granted on different terms has those terms stated to you when access is given. No charge arises during a trial or when it ends.
+- There is no free plan. You can sign up and start a plan yourself on our website, paying by card, or for qualifying plans by invoice with a purchase order.
+- A free trial is available when you start a plan. It runs for 7 days at the Starter feature set for 1 user, with 30 AI credits, and needs a card to start. No charge arises during a trial, and you can cancel before it ends.
 - Trials are limited to one per organisation. When a trial period ends, access stops unless a subscription is taken, and your data is retained.
 - Paid plans are subject to the limits specified on the Pricing page.
 - Velstrian may modify plans or pricing with 30 days' written notice to subscribers.
