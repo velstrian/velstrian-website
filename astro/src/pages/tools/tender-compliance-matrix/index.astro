@@ -82,6 +82,7 @@
 import Base from '../../../layouts/Base.astro';
 import Section from '../../../components/layout/Section.astro';
 import Button from '../../../components/ui/Button.astro';
+import { SIGNUP_URL } from '../../../data/app';
 import FinalCta from '../../../components/sections/FinalCta.astro';
 import { breadcrumbs } from '../../../lib/schema';
 import { SITE } from '../../../data/site';
@@ -831,7 +832,7 @@ Section 5: Submission and Compliance
       { label: 'PPN 026 explained', href: '/glossary/ppn-026/' },
     ]}
   >
-    <Button href="/contact/?enquiry=limited-access#contact-form">Request access</Button>
+    <Button href={SIGNUP_URL}>Start now</Button>
     <Button href="/crowmark/" variant="secondary">Explore CrowMark</Button>
   </FinalCta>
 </Base>

@@ -130,7 +130,9 @@ const description =
   'Find UK tenders, draft answers cited to the regulations and your own bids, and evidence delivery after award. From £49/month.';
 
 const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
-const REQUEST_ACCESS = '/contact/?enquiry=limited-access#contact-form';
+/* D236 (2026-10-19): sign up is self serve, so the primary action is the app's
+   sign up page, from data/app.ts where the host is written once. */
+import { SIGNUP_URL as START_NOW } from '../data/app';
 
 const schema = [
   /*
@@ -920,7 +922,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="Pricing"
     title="From £49/month."
-    standfirst="Three plans sized to your team. Access is offered by request, so you book a demo and the account is set up once the plan is agreed."
+    standfirst="Three plans sized to your team. Choose one and start today by card."
     id="pricing"
   >
     <ul class="grid grid--3 card-sync">
@@ -980,7 +982,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="Try it now"
     title="Tender Compliance Matrix."
-    standfirst="Paste the text of a tender and read back the requirements its wording states, from the social value weighting to the certificates and the deadlines, each one shown with the line it came from. No sign-up, no account. Already bidding? Request access to the full CrowMark workspace."
+    standfirst="Paste the text of a tender and read back the requirements its wording states, from the social value weighting to the certificates and the deadlines, each one shown with the line it came from. No sign-up, no account. Already bidding? Start now with the full CrowMark workspace."
     id="free-tool"
   >
     <div class="btn-row">
@@ -1015,7 +1017,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="Procurement Act 2023 · s.52 · s.71 · PPN 026"
     title="Know the rules better than your competition."
-    standfirst="Book a 30-minute call, or send a question and we will answer it. Access is limited and offered by request."
+    standfirst="Start today by card, or book a 30-minute call and we will show you round first."
     id="crowmark-cta"
   >
     <div class="cw cw--close" data-spot="off" data-lit>
@@ -1023,7 +1025,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
         <b></b><b></b><i class="sv-spot"></i><i class="sv-grain"></i>
       </div>
       <div class="btn-row">
-        <Button href={REQUEST_ACCESS}>Request access</Button>
+        <Button href={START_NOW}>Start now</Button>
         <Button href={CALENDLY} variant="secondary" target="_blank">
           Book a demo<span class="visually-hidden"> (opens in a new window)</span>
         </Button>

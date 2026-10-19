@@ -78,10 +78,13 @@ const LOCK = {
   plans: [
     { name: 'Starter', monthly: 49, seats: 1, credits: 200 },
     { name: 'Pro', monthly: 149, seats: 5, credits: 750 },
-    /* QUOTE, never a figure. £549 / £5,929 are ACTIVE in Stripe so sales can
-       quote against them, and publication is blocked in code rather than by
-       archiving the price. Publishing either is a P0. */
-    { name: 'Portfolio', monthly: null, seats: 10, credits: 3000 },
+    /* PUBLISHED SINCE D235 (2026-10-19, crowagent-platform/docs/release-2.8.4/
+       scope/DECISION-GATES.md), the dated owner entry this table's rule asks
+       for. It was quote only under the 2026-08-09 lock, while the same 54900
+       and 592900 pence pair sat ACTIVE in Stripe. D235 point 1 publishes that
+       pair and corrects D232's 39900, which was recommended without reading
+       the recorded quote. */
+    { name: 'Portfolio', monthly: 549, seats: 10, credits: 3000 },
   ],
   /* [R285-P2-DROP-01] CROWMARK BUYER, OWNER DECISION D195 (2026-10-09), recorded in
      crowagent-platform/docs/decisions/D195-r285-self-service-tier-model.md. That entry
@@ -92,7 +95,9 @@ const LOCK = {
      evaluators, and publishes no amount, like Portfolio. */
   buyerPlans: [
     { name: 'Buyer Pro', monthly: 299, seats: 5, credits: 750, guestEvaluators: 10 },
-    { name: 'Buyer Portfolio', monthly: null, seats: 10, credits: 3000, guestEvaluators: 25 },
+    /* D235 point 2 (2026-10-19): 69900 pence a month, annual 754900, no longer
+       mirroring CrowMark Portfolio. */
+    { name: 'Buyer Portfolio', monthly: 699, seats: 10, credits: 3000, guestEvaluators: 25 },
   ],
   /** Annual is COMPUTED, never written as a literal. Lock section 1. */
   annual: (monthly) => Math.floor(monthly * 12 * 0.9),
@@ -114,18 +119,21 @@ const LOCK = {
  * spent a year serving on an OG card is the precedent.
  */
 const FORBIDDEN = [
+  /* D235 (2026-10-19) PUBLISHED the £549 and £5,929 Portfolio pair that these two
+     rules used to forbid. What D235 forbids instead is the figure it CORRECTED:
+     D232 recommended £399 for Portfolio without reading the recorded quote, and
+     that figure, with its computed annual, must never reach a page. */
   {
-    id: 'portfolio-list-price',
-    pattern: /(?:£|&pound;)\s?549\b/gi,
+    id: 'superseded-portfolio-price',
+    pattern: /(?:£|&pound;)\s?399\b/gi,
     why:
-      'Portfolio is CONTACT SALES. Its £549 monthly list price stays ACTIVE in Stripe so sales\n' +
-      '      can quote against it, and the lock says publication is blocked in code rather than by\n' +
-      '      archiving the price. Publishing it is a P0.',
+      'D232 recommended £399 for Portfolio and D235 corrected it to £549, the recorded quote.\n' +
+      '      Publishing the superseded figure would sell a plan below its price.',
   },
   {
-    id: 'portfolio-annual-list-price',
-    pattern: /(?:£|&pound;)\s?5,?929\b/gi,
-    why: 'The Portfolio ANNUAL list price. Same rule, same severity, as the monthly one above.',
+    id: 'superseded-portfolio-annual',
+    pattern: /(?:£|&pound;)\s?4,?309\b/gi,
+    why: 'The annual of the superseded £399, floor(399 x 12 x 0.9). Same rule as the monthly one above.',
   },
 ];
 
@@ -392,7 +400,7 @@ function runControls() {
     PLANS: [
       { name: 'Starter', monthly: 49, annual: 529, seats: 3, credits: 200 },
       { name: 'Pro', monthly: 149, annual: 1610, seats: 10, credits: 500 },
-      { name: 'Portfolio', monthly: 549, annual: 5929, seats: 10, credits: 3000 },
+      { name: 'Portfolio', monthly: 399, annual: 4309, seats: 10, credits: 3000 },
     ],
     CREDIT_TOPUPS: [
       { credits: 100, price: 12 },
@@ -406,9 +414,10 @@ function runControls() {
     OVERAGE_PENCE_PER_CREDIT: 15,
   };
   const caught = checkCatalogue(corrupt);
-  /* A correct checker reports NINE findings against that object: Starter seats;
-     Pro seats, credits and annual; Portfolio publishing a monthly and an annual
-     at all; the top-up price and the unit rate it implies; and the overage rate.
+  /* A correct checker reports NINE findings against that object (more since the
+     Buyer rows joined it): Starter seats, then Pro seats, credits and annual, then
+     Portfolio at the superseded D232 monthly and its annual, then the top-up
+     price and the unit rate it implies, and finally the overage rate.
      The floor is held at seven rather than nine so that adding a check cannot
      fail the control, while dropping two would. */
   if (caught.length < 7) {
@@ -419,7 +428,7 @@ function runControls() {
   }
 
   /* NEGATIVE CONTROL 2 — the forbidden sweep must catch a planted price. */
-  const planted = '<p>Portfolio is £549 a month, or £5,929 a year.</p>';
+  const planted = '<p>Portfolio is £399 a month, or £4,309 a year.</p>';
   for (const rule of FORBIDDEN) {
     rule.pattern.lastIndex = 0;
     if (!rule.pattern.test(planted)) {
@@ -434,8 +443,8 @@ function runControls() {
      on publishedText(). Kept as a permanent control rather than a one-off fix,
      because the failure mode was silent and would be silent again. */
   const hidden =
-    '<script type="application/ld+json">{"text":"Portfolio is £549 a month."}</script>' +
-    '<meta name="description" content="CrowMark from £5,929 a year">' +
+    '<script type="application/ld+json">{"text":"Portfolio is £399 a month."}</script>' +
+    '<meta name="description" content="CrowMark from £4,309 a year">' +
     '<p>Nothing to see in the prose.</p>';
   const scanned = publishedText(hidden);
   for (const rule of FORBIDDEN) {
@@ -489,7 +498,7 @@ function runControls() {
 
 const violations = [];
 
-console.log('pricing parity: lock = PRICING-LOCK-2026-08.md (owner decision, 2026-08-09) plus D195 for CrowMark Buyer (2026-10-09)');
+console.log('pricing parity: lock = PRICING-LOCK-2026-08.md (owner decision, 2026-08-09), D195 for CrowMark Buyer (2026-10-09) and D235 for both Portfolio prices (2026-10-19)');
 
 // ── Controls first.
 const brokenControls = runControls();

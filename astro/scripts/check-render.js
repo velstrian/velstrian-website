@@ -185,7 +185,7 @@ const ALLOW_UNEQUAL = [
   {
     selector: '.ca-nav-actions',
     reason:
-      'The nav pairs a quiet "Sign in" link with a solid "Request access" CTA. ' +
+      'The nav pairs a quiet "Sign in" link with a solid "Start now" CTA. ' +
       'Stretching the link to match the CTA presents two equal choices where the ' +
       'page deliberately offers one, and this row is nav chrome rather than a CTA ' +
       'row: it also holds the search trigger and is hidden below 900px. The ' +

@@ -134,7 +134,7 @@ Velstrian targets 99.5% monthly uptime, with independent public status monitorin
 
 Everything above is what we can evidence today, including the gaps. If it clears your bar, the next step is access to a live workspace. If it does not, tell us which control is missing and we will say plainly whether it is on the roadmap.
 
-[Request access](/contact/?enquiry=limited-access#contact-form) [Book a 30-minute demo](https://calendly.com/crowagent-platform/30min)
+[Start now](https://app.crowagent.ai/signup) [Book a 30-minute demo](https://calendly.com/crowagent-platform/30min)
 
 ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. Built to ISO 27001 controls.
 

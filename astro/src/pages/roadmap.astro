@@ -111,6 +111,7 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/layout/Section.astro';
 import Button from '../components/ui/Button.astro';
+import { SIGNUP_URL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 import {
   PHASES,
@@ -125,7 +126,6 @@ const title = 'CrowMark roadmap | Shipped, in flight and next | Velstrian';
 const description =
   'See what Velstrian has shipped, what is in flight, and what is coming next for CrowMark, across public sector tenders and private sector bids.';
 
-const REQUEST_ACCESS = '/contact/?enquiry=limited-access#contact-form';
 
 /*
  * The date this document last materially changed.
@@ -389,12 +389,12 @@ const schema = [
       lit panel would sell harder than the page has earned. */}
   <Section
     eyebrow="Get started"
-    title="Request access to CrowMark"
-    standfirst="Access is by request while we onboard teams one at a time. Tell us what you bid for and we will come back to you."
+    title="Start with CrowMark"
+    standfirst="Choose a plan and start today by card. Tell us what you bid for if you would like a hand getting set up."
     id="cta"
   >
     <div class="btn-row">
-      <Button href={REQUEST_ACCESS}>Request access</Button>
+      <Button href={SIGNUP_URL}>Start now</Button>
       <Button href="/contact/" variant="secondary">Enterprise enquiry</Button>
     </div>
   </Section>

@@ -29,9 +29,9 @@
  *   prices   Stripe (live mode) and src/data/crowmark.ts. £49 and £149, NOT
  *            £99. Specs/architecture/DEPLOYMENT-AND-RELEASE.md §3.2 records
  *            "£99/mo" as a non-existent price removed from the OG card on
- *            2026-07-30. Portfolio's £549 list price is deliberately Stripe-only
- *            for post-demo checkout and must not appear here (owner decision
- *            R241-PRICING-STRATEGY change 3).
+ *            2026-07-30. Portfolio's £549 list price was Stripe-only until owner
+ *            decision D235 (2026-10-19, crowagent-platform/docs/release-2.8.4/
+ *            scope/DECISION-GATES.md) published it, with Buyer Portfolio at £699.
  *
  *            THE OLD CITATION HERE WAS `pricing.html (live)`, AND IT STOPPED
  *            BEING TRUE ON 2026-08-05, when the Cloudflare Pages deploy source
@@ -61,6 +61,10 @@
  * never-copy-this-one exception onto its most valuable tier. Three cards do not
  * justify that risk.
  *
+ * D235 (2026-10-19) lifted that exception: the Portfolio pair is now published
+ * at the same 54900 and 592900 pence. The second reason below still stands, so
+ * the figures stay hand maintained and gated.
+ *
  * The second reason is the one at the top of this file. The defect that made
  * this file necessary was the same per-tier number restated in four places until
  * they disagreed. An automated writer would be a fifth restatement, not a cure,
@@ -83,6 +87,32 @@
  * disagrees with it. Copy drift is what produced every defect recorded in this
  * header; the gate is the thing that stops the next one.
  */
+import { SIGNUP_URL } from './app.ts';
+
+export { SIGNUP_URL };
+
+/*
+ * ── R285-P2-SELF-SERVE-SIGNUP-01 · D236 (2026-10-19): EVERY PLAN SAYS START NOW ─
+ *
+ * Sign up is self serve. Every plan button goes to the app's sign up page with
+ * the plan chosen, as `?plan=<token>`, and the app carries the token through
+ * onboarding into checkout (crowagent-platform web/app/(auth)/signup and
+ * VALID_CHECKOUT_PLANS in app/(onboarding)/onboarding/action-types.ts). The
+ * monthly token is the plan's `planKey`. The annual token is the same with
+ * `_annual` appended, the shape the app already accepts for Starter and Pro.
+ */
+/** The sign up link for one plan and billing period, or the bare sign up page. */
+export function startHref(planKey?: string, annual = false): string {
+  if (!planKey) return SIGNUP_URL;
+  const token = annual ? `${planKey}_annual` : planKey;
+  return `${SIGNUP_URL}?plan=${encodeURIComponent(token)}`;
+}
+
+/** A quieter second action under a plan's main button. */
+export interface PlanLink {
+  label: string;
+  href: string;
+}
 
 export interface Plan {
   name: string;
@@ -105,9 +135,20 @@ export interface Plan {
   seats: number;
   /** Included AI credits per calendar month. */
   credits: number;
-  body: string;
+  /**
+   * The third line on the card, after users and credits: one short line of what
+   * the plan includes. The first two lines are generated from `seats` and
+   * `credits`, so neither figure is typed twice. R285-P2-ENTERPRISE-SELF-SERVE-01.
+   */
+  includes: string;
+  /** True where more users than `seats` can be arranged. Portfolio only. */
+  moreSeatsByArrangement?: boolean;
+  /** The main button's label. "Start now" on every plan (D236). */
   cta: string;
-  href: string;
+  /** The sign up token the app reads from `?plan=`. See startHref(). */
+  planKey: string;
+  /** A quieter second action, where a plan has one. */
+  secondary?: PlanLink;
   recommended?: boolean;
 }
 
@@ -119,10 +160,9 @@ export const PLANS: Plan[] = [
     annual: 529,
     seats: 1,
     credits: 200,
-    body:
-      '1 user and 200 AI credits a month. Tender feed, document ingestion, grounded answer drafting, deterministic social value calculation, and branded PDF or DOCX export.',
-    cta: 'Request access',
-    href: '/contact/?enquiry=limited-access#contact-form',
+    includes: 'Tender feed, cited drafting, social value calculation and PDF or DOCX export.',
+    cta: 'Start now',
+    planKey: 'crowmark_starter',
   },
   {
     name: 'Pro',
@@ -133,53 +173,57 @@ export const PLANS: Plan[] = [
     annual: 1609,
     seats: 5,
     credits: 750,
-    body:
-      '5 users and 750 AI credits a month, plus post-award delivery tracking, monthly social value reports, and advisory checks on the section 52 indicators and the section 71 assessment.',
-    cta: 'Request access',
-    href: '/contact/?enquiry=limited-access#contact-form',
+    includes: 'Everything in Starter, plus delivery tracking, monthly reports and the section 52 and 71 checks.',
+    cta: 'Start now',
+    planKey: 'crowmark_pro',
     recommended: true,
   },
   {
     name: 'Portfolio',
     who: 'Enterprise groups and Tier 1 suppliers',
-    monthly: null,
-    annual: null,
+    /* D235 (2026-10-19): PUBLISHED. 54900 pence a month, annual 592900, which is
+       floor(549 x 12 x 0.9) = 5,929, the same rounding as Starter and Pro. Single
+       sign-on is included in Portfolio bought this way (D235 point 6). Contracts
+       and custom terms stay behind talk to us, which is the secondary link.
+
+       Bid volume is unmetered on every plan, but this plan has a cap like the
+       others: 3,000 AI credits a month. Both facts are stated separately so
+       neither can be mistaken for the other (OA-05). */
+    monthly: 549,
+    annual: 5929,
     seats: 10,
     credits: 3000,
-    /* CORRECTED, AND THIS IS THE HEART OF OA-05. This read "Bid volume
-       effectively unlimited". Bid volume genuinely is unmetered, but the
-       sentence read as "this plan has no cap", and it does: 3,000 AI credits a
-       month, enforced by the same guard as every other plan. Both facts are now
-       stated separately so neither can be mistaken for the other. */
-    body:
-      '10 users included, more by arrangement, and 3,000 AI credits a month, branded exports, and a named account contact for high-volume bidding teams.',
-    cta: 'Contact sales',
-    href: '/contact/?product=crowmark&tier=portfolio',
+    includes: 'Everything in Pro, plus single sign-on, branded exports and a named contact.',
+    moreSeatsByArrangement: true,
+    cta: 'Buy Portfolio',
+    planKey: 'crowmark_portfolio',
+    secondary: {
+      label: 'Talk to us about contracts',
+      href: '/contact/?product=crowmark&tier=portfolio',
+    },
   },
 ];
 
 /*
- * ── R285-P2-DROP-01 · CROWMARK BUYER, THE D195 MODEL ─────────────────────────
+ * ── R285-P2-DROP-01 · CROWMARK BUYER, THE D195 MODEL, REPRICED BY D235 ───────
  *
  * Owner decision D195, 2026-10-09 (crowagent-platform/docs/decisions/
- * D195-r285-self-service-tier-model.md): CrowMark Buyer has TWO offerings, Buyer Pro
- * (listed, self serve) and Buyer Portfolio (contact us, never priced). This
- * supersedes the old site line that buyer pricing is "Contact sales" for everyone,
- * and the platform archived the Small, Standard and Large ladder with it.
+ * D195-r285-self-service-tier-model.md): CrowMark Buyer has TWO offerings, Buyer
+ * Pro and Buyer Portfolio. D195 kept Buyer Portfolio unpriced. D235 (2026-10-19)
+ * published it at 69900 pence a month, annual 754900, no longer mirroring
+ * CrowMark Portfolio, payable by card or by invoice on 30 days with a PO number
+ * at the same price.
  *
  * THE FIGURES ARE NOT AUTHORED HERE. They are the platform catalogue's, in
  * crowagent-platform/packages/pricing/catalogue.ts (BUYER_PRODUCT_CATALOGUE):
  *
  *   buyer_pro        29900 pence a month, 5 seats, 750 credits, 10 guest evaluators
- *   buyer_portfolio  quote only, 10 seats, 3000 credits, 25 guest evaluators
+ *   buyer_portfolio  69900 pence a month, 10 seats, 3000 credits, 25 guest evaluators
  *
- * D195-Q1 gives £299 a month and £3,229 a year, the annual by the locked formula
- * floor(299 x 12 x 0.9) = 3,229 and never a literal in the platform. It is typed
- * here as a number so scripts/check-pricing-parity.js can hold it against that
- * arithmetic. Buyer Portfolio publishes no amount, exactly as CrowMark Portfolio
- * does (D195 invariant 2). Access on the live site is still by request, so the
- * buttons say Request access, as the supplier plans do (D195-Q6: production signup
- * stays invitation only until the beta ends).
+ * Annuals by the locked formula: floor(299 x 12 x 0.9) = 3,229 and
+ * floor(699 x 12 x 0.9) = 7,549. Both are typed as numbers so
+ * scripts/check-pricing-parity.js can hold them against that arithmetic. D236
+ * replaced Request access with Start now on both.
  */
 export interface BuyerPlan {
   name: string;
@@ -193,9 +237,11 @@ export interface BuyerPlan {
   credits: number;
   /** Guest evaluators a panel can invite. */
   guestEvaluators: number;
-  body: string;
+  /** The third line on the card. See Plan.includes. */
+  includes: string;
   cta: string;
-  href: string;
+  planKey: string;
+  secondary?: PlanLink;
 }
 
 export const BUYER_PLANS: BuyerPlan[] = [
@@ -207,23 +253,25 @@ export const BUYER_PLANS: BuyerPlan[] = [
     seats: 5,
     credits: 750,
     guestEvaluators: 10,
-    body:
-      '5 users, 750 AI credits a month and 10 guest evaluators. Build and publish requirements with a deterministic social value rubric, locate the evidence for each one in every response, run the evaluation, and monitor delivery after award.',
-    cta: 'Request access',
-    href: '/contact/?product=buyer-side#contact-form',
+    includes: '10 guest evaluators, requirement builder, evidence locator and delivery monitoring.',
+    cta: 'Start now',
+    planKey: 'buyer_pro',
   },
   {
     name: 'Buyer Portfolio',
     who: 'Large authorities, groups and multi entity buyers',
-    monthly: null,
-    annual: null,
+    monthly: 699,
+    annual: 7549,
     seats: 10,
     credits: 3000,
     guestEvaluators: 25,
-    body:
-      '10 users included, more by arrangement, 3,000 AI credits a month and 25 guest evaluators, with a named account contact. Scoped to your organisation and quoted rather than listed.',
-    cta: 'Contact sales',
-    href: '/contact/?product=buyer-side&tier=portfolio#contact-form',
+    includes: '25 guest evaluators and single sign-on. Pay by card, or by invoice on 30 days with a PO number.',
+    cta: 'Start now',
+    planKey: 'buyer_portfolio',
+    secondary: {
+      label: 'Talk to us about frameworks',
+      href: '/contact/?product=buyer-side&tier=portfolio#contact-form',
+    },
   },
 ];
 
@@ -278,6 +326,9 @@ export const OVERAGE_PENCE_PER_CREDIT = 10;
 /** £0.10, for prose. Two decimal places always, because a rate reads as one. */
 export const OVERAGE_PER_CREDIT_LABEL = `£${(OVERAGE_PENCE_PER_CREDIT / 100).toFixed(2)}`;
 
+/** 10p, for the short Extra usage strip on /pricing. */
+export const OVERAGE_PENCE_LABEL = `${OVERAGE_PENCE_PER_CREDIT}p`;
+
 /** A cell is a tick, a cross, or a literal value. */
 export type Cell = true | false | string;
 
@@ -313,7 +364,7 @@ function triple(cell: (p: Plan) => Cell): [Cell, Cell, Cell] {
 /** "1 user" / "5 users", and Portfolio's included-plus-more wording. */
 function seatCell(p: Plan): string {
   const users = `${p.seats} user${p.seats === 1 ? '' : 's'}`;
-  return p.monthly === null ? `${users} included, more by arrangement` : users;
+  return p.moreSeatsByArrangement ? `${users} included, more by arrangement` : users;
 }
 
 export const COMPARE_LEAD: CompareRow[] = [
@@ -332,12 +383,11 @@ export const COMPARE_LEAD: CompareRow[] = [
     feature: 'When the credits run out',
     cells: triple(
       () =>
-        /* "BY REQUEST", not "if you turn it on". The platform has a self-serve
-           button, but the branch behind it is also gated by a platform-wide
-           switch this site cannot read, so a cell promising self-serve would be
-           promising a mechanism whose live state is unknown. Same wording as the
-           card on /pricing and the answer in the FAQ, deliberately. */
-        `Top-ups from £${CREDIT_TOPUPS[0].price}, or ${OVERAGE_PER_CREDIT_LABEL} a credit on pay-as-you-go, by request`,
+        /* R285-P2-EXTRA-USAGE-SELF-SERVE-01, D234 and D235: packs, auto reload
+           up to a limit the customer sets, and pay as you go only when the
+           customer switches it on. Same wording as the Extra usage strip on
+           /pricing and the answer in the FAQ. */
+        `Packs from £${CREDIT_TOPUPS[0].price}, auto reload, or ${OVERAGE_PER_CREDIT_LABEL} a credit on pay as you go if you switch it on`,
     ),
   },
   {
@@ -436,7 +486,7 @@ export const PRICING_FAQS: Faq[] = [
        the array header. Asking is free, but the trial it names two sentences
        earlier does collect a card at Stripe checkout before it starts. */
     answer:
-      'CrowMark is a paid product and there is no free plan. A 14-day evaluation trial is available on request, and you can run the free Tender Compliance Matrix at any time with no account. Access is offered by request rather than self-serve signup. A card is required to start. It is held securely by Stripe and we never store it.',
+      'No. CrowMark is a paid product. You can run the free Tender Compliance Matrix at any time with no account, and your first 14 days on CrowMark are free. A card is needed to start, held securely by Stripe and never stored by us.',
   },
   {
     /* WAS "How does the 14-day trial work?", answered with "full access to the
@@ -481,7 +531,7 @@ export const PRICING_FAQS: Faq[] = [
        omission as the removed "no card taken" lines, just by silence rather
        than by a false sentence. */
     answer:
-      'Ask for one and we set it up. It runs for 14 days at the Starter feature set for 1 user, so the Pro surfaces, meaning delivery tracking, monthly social value reports and the section 52 and section 71 checks, are not included. A card is required to start it, held securely by Stripe and never stored by us, but nothing is charged during the trial. When the 14 days end, access stops unless you take a plan, and your data is retained.',
+      'Choose a plan and select Start now. Your first 14 days are free, on the Starter features for 1 user. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 14 days and nothing is charged. There is one free trial per organisation and work email domain.',
   },
   {
     question: 'How do I get access?',
@@ -491,7 +541,7 @@ export const PRICING_FAQS: Faq[] = [
        checkout. The old wording let the true first half stand for the whole
        process. */
     answer:
-      'Book a demo. We walk through how you bid, agree the plan and the number of seats that fit it, and set the account up for you. There is no self-serve signup. Setting the account up needs a card, held securely by Stripe and never stored by us, and nothing is charged until you have agreed a plan.',
+      'Choose a plan and select Start now. You create your account, pay by card through Stripe, and start straight away. There is nothing to request first. If you would like a walk through before you start, book a demo.',
   },
   {
     question: 'Are there any hidden setup fees?',
@@ -504,7 +554,7 @@ export const PRICING_FAQS: Faq[] = [
        the question badly. Both are named here and priced in full two answers
        down. */
     answer:
-      'No. There are no setup fees, implementation charges or training costs on Starter or Pro. A scoped Portfolio rollout may carry a one-off integration fee, and we tell you the figure before you sign. The only charges beyond your plan are ones you choose: a credit top-up, or pay-as-you-go overage at £0.10 a credit if you ask us to switch it on.',
+      'No. There are no setup, implementation or training fees on any plan. The only charges beyond your plan are ones you choose: a credit pack, auto reload up to a monthly limit you set, or pay as you go at £0.10 a credit if you switch it on.',
   },
   {
     question: 'Can I switch plans mid-cycle?',
@@ -525,7 +575,7 @@ export const PRICING_FAQS: Faq[] = [
        No tier is named here, because which plan includes SSO is a commercial
        packaging question the code does not answer and I will not invent. */
     answer:
-      'Yes. Portfolio is scoped to your organisation and quoted rather than listed, built around the seats and volume you need. Contact sales for licensing across large supplier networks or multi-entity corporate groups. Single sign-on via SAML 2.0, with SCIM user provisioning, is configured per organisation, so tell us your identity provider and we will confirm the setup.',
+      'Yes. Portfolio is £549 a month, or £5,929 a year, for 10 users and 3,000 AI credits a month, with single sign-on via SAML 2.0 and SCIM user provisioning included. Buy it by card and start today. Talk to us about contracts, custom terms or more than 10 users.',
   },
   {
     question: 'How is CrowMark Buyer priced?',
@@ -535,7 +585,7 @@ export const PRICING_FAQS: Faq[] = [
        than kept, because a question that names the old position keeps it alive in
        search results and in the FAQPage JSON-LD this array feeds. */
     answer:
-      'CrowMark Buyer has two offerings. Buyer Pro is £299 a month, or £3,229 a year, which is 10% off twelve months. It includes 5 users, 750 AI credits a month and 10 guest evaluators. Buyer Portfolio is for larger authorities and groups, with 10 users included, 3,000 AI credits a month and 25 guest evaluators, and it is quoted for your organisation rather than listed. Contact sales for Buyer Portfolio, and for invoice or purchase order billing on annual terms.',
+      'Buyer Pro is £299 a month, or £3,229 a year, with 5 users, 750 AI credits a month and 10 guest evaluators. Buyer Portfolio is £699 a month, or £7,549 a year, with 10 users, 3,000 AI credits a month and 25 guest evaluators. Annual prices are 10% off twelve months. Pay by card, or pay for Buyer Portfolio by invoice on 30 days with a PO number. Talk to us if you buy through a framework.',
   },
   {
     question: 'How are AI credits counted?',
@@ -579,15 +629,21 @@ export const PRICING_FAQS: Faq[] = [
    * "Ask us and we switch it on" is true whatever that switch is set to;
    * "press the button and generation continues" would not be. The site does not
    * publish a mechanism whose live state it could not read.
+   *
+   * SUPERSEDED BY D234 AND D235 (2026-10-19). Overage, auto reload and one click
+   * packs become self serve in R285-P2-EXTRA-USAGE-SELF-SERVE-01, and D236 holds
+   * production until that work ships in one combined round. This answer states
+   * the behaviour of that release, so it must not reach the live site before the
+   * app does.
    */
   {
     question: 'What happens when my AI credits run out?',
     answer:
-      'Your monthly allowance is spent first, then any top-up credits you have bought. When both are gone, AI generation is refused for the rest of the calendar month rather than continuing and billing you for it. Two things restore it. A credit top-up is a one-off purchase that never expires: £10 for 100 credits, £50 for 500, or £100 for 1,000. Pay-as-you-go overage is switched on for your organisation on request, and each further credit is then billed at £0.10 on your next invoice. Overage stays off unless you ask for it, so you are never billed beyond your plan without agreeing to it first. The monthly allowance resets at the start of each calendar month and does not roll over. Purchased top-up credits do. Everything we calculate rather than generate keeps working either way, and a generation that fails is not charged.',
+      'Your monthly allowance is spent first, then any credits you have bought. After that, three options keep you going, and each one is your choice. Credit packs of 100, 500 or 1,000 credits cost £10, £50 or £100 and never expire. Auto reload buys a pack for you when you run low, up to a monthly limit you set. Pay as you go is off unless you switch it on, and then bills £0.10 a credit up to a cap you choose. With none of these on, AI generation stops until the month resets, so you are never billed beyond your plan without agreeing to it. The monthly allowance does not roll over. Bought credits do. Everything we calculate rather than generate keeps working, and a generation that fails is not charged.',
   },
   {
     question: 'What payment methods do you accept?',
     answer:
-      'We accept all major credit and debit cards via Stripe. On annual Portfolio plans we can also take payment by invoice and BACS transfer, on request to our finance team.',
+      'All major credit and debit cards, through Stripe. Buyer Portfolio can also be paid by invoice on 30 days with a PO number, at the same price. Talk to us about invoice billing on any other plan.',
   },
 ];

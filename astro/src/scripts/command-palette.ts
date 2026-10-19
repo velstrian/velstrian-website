@@ -23,6 +23,8 @@
    rather than moving focus, the three distinct empty states) is in the
    frontmatter of CommandPalette.astro, with the markup it describes.
    ============================================================================ */
+import { SIGNUP_URL } from '../data/app';
+
 
 interface Entry {
   title: string;
@@ -94,10 +96,13 @@ interface Entry {
    ============================================================================ */
 const ACTIONS: Entry[] = [
   {
-    title: 'Request access',
-    href: '/contact/?enquiry=limited-access#contact-form',
+    /* D236 (2026-10-19): sign up is self serve, so the action goes to the
+       app's sign up page. "request access" stays in the hint so a reader who
+       types the old words still finds it. */
+    title: 'Start now',
+    href: SIGNUP_URL,
     section: 'Action',
-    hint: 'trial sign up get started demo account onboarding',
+    hint: 'request access trial sign up get started demo account onboarding',
     kind: 'action',
   },
   {

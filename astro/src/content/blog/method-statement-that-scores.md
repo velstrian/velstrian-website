@@ -134,5 +134,5 @@ Only as a starting point, never as a final answer. Every buyer asks the question
 
 CrowMark drafts answers from your organisation's own submitted bids, refuses to print a figure your data does not contain, and carries a PPN 017 AI-transparency disclosure on every draft, so the evidence in your method statement is real.
 
-[Request access](/contact/?enquiry=limited-access#contact-form)
+[Start now](https://app.crowagent.ai/signup)
 [See CrowMark →](/crowmark/)

@@ -25,6 +25,8 @@
  * call, not mine. See OWNER-ACTIONS.md (OA-12).
  */
 
+import { SIGNUP_URL } from './app';
+
 export interface FaqEntry {
   question: string;
   /** Plain text. Any link is expressed via `link` so the JSON-LD stays clean. */
@@ -82,8 +84,10 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // below and to /pricing's FAQ, so the three do not drift back apart.
         question: 'How do I sign up?',
         answer:
-          'Book a demo, or request access, and once we have agreed the plan that fits you can create your account. There is no self-serve signup. Creating the account needs a card, held securely by Stripe and never stored by us, and you can start scoring bids or preparing your evidence as soon as you sign in.',
-        link: { label: 'Request access', href: '/contact/?enquiry=limited-access#contact-form' },
+          // D236 (2026-10-19): sign up is self serve. The answer above this
+          // line described the request step that D236 removed.
+          'Choose a plan on the pricing page and select Start now. You create your account, pay by card through Stripe, and can start scoring bids or preparing your evidence straight away. The card is held securely by Stripe and never stored by us.',
+        link: { label: 'Start now', href: SIGNUP_URL },
       },
       {
         // The question itself is replaced, not just its answer. A question that
@@ -108,7 +112,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // the note on "How do I sign up?" above; same route, same fix.
         question: 'Can I try CrowMark before I subscribe?',
         answer:
-          'Access is offered by request rather than by open signup. Book a demo and we will show you the product against the kind of tenders you bid for, then agree the plan and the seats that fit before anything is charged. Starting access needs a card, held securely by Stripe and never stored by us. The tender compliance matrix is always free with no account needed.',
+          'Yes. Your first 14 days on CrowMark are free, on the Starter features for 1 user. A card is needed to start, held securely by Stripe and never stored by us. If you would rather see it first, book a demo. The tender compliance matrix is always free with no account needed.',
       },
     ],
   },
@@ -156,7 +160,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // into the plans answer published two motions at once; it is a
         // separate offer with its own limits and it reads as one.
         answer:
-          "CrowMark's plans are Starter, Pro and Portfolio. Access is offered by request rather than self-serve signup, and annual billing saves 10%.",
+          "CrowMark's plans are Starter, Pro and Portfolio, each with a published price. Sign up and start today by card, and annual billing saves 10%.",
         link: { label: 'See current pricing', href: '/pricing/' },
       },
       {
@@ -220,8 +224,11 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // card before it starts.
         question: 'Is there a free trial?',
         answer:
-          'Yes. A 14-day evaluation trial is available on request. It runs at the Starter feature set for 1 user, so the Pro surfaces, meaning delivery tracking, monthly social value reports and the section 52 and section 71 checks, are not part of it. A card is required to start it, held securely by Stripe and never stored by us, but nothing is charged during the trial. When the 14 days end, access stops unless you take a plan, and your data is retained so nothing you produced is lost.',
-        link: { label: 'Request a trial', href: '/contact/?enquiry=limited-access#contact-form' },
+          // D236 (2026-10-19): the trial is no longer requested. A first
+          // CrowMark plan starts with 14 free days at Starter, as the
+          // platform's create-checkout route provisions it (BILL-TRIAL-002).
+          'Yes. Your first 14 days are free, on the Starter features for 1 user, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 14 days and nothing is charged. There is one free trial per organisation and work email domain.',
+        link: { label: 'Start now', href: SIGNUP_URL },
       },
       {
         question: 'Can I cancel anytime?',

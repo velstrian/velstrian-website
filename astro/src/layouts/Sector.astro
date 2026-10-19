@@ -10,6 +10,7 @@
 import Base from './Base.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
 import Button from '../components/ui/Button.astro';
+import { SIGNUP_URL } from '../data/app';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import { breadcrumbs } from '../lib/schema';
 
@@ -160,7 +161,7 @@ if (faq.length) {
         */}
         <PageHeader title={`Stronger bids for ${heroTitleAccent}`} eyebrow={sectorLabel} standfirst={heroDescription}>
           <div class="btn-row sec-hero-cta">
-            <Button href="/contact/?enquiry=limited-access#contact-form" size="md">Request access</Button>
+            <Button href={SIGNUP_URL} size="md">Start now</Button>
             <Button href="/crowmark/" variant="secondary" size="md">Explore CrowMark</Button>
           </div>
         </PageHeader>
@@ -241,7 +242,7 @@ if (faq.length) {
         <h2>Find the work. Win it. <span class="accent">Prove you delivered.</span></h2>
         <p class="sec-final-sub">{finalCtaSub}</p>
         <div class="btn-row sec-hero-cta">
-          <Button href="/contact/?enquiry=limited-access#contact-form" size="md">Request access</Button>
+          <Button href={SIGNUP_URL} size="md">Start now</Button>
           <Button href="https://calendly.com/crowagent-platform/30min" variant="secondary" size="md">Book a demo</Button>
         </div>
         <div class="sec-final-links">

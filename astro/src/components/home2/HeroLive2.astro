@@ -43,6 +43,7 @@
  * it is ever half-drawn, and under reduced motion it simply appears.
  */
 import Button from '../ui/Button.astro';
+import { SIGNUP_URL } from '../../data/app';
 import DeviceChrome from './DeviceChrome.astro';
 import { analyse } from '../../lib/tender-matrix';
 import { readLine, matchLine } from '../../scripts/hero-terminal';
@@ -141,7 +142,7 @@ const CHECKED = SAMPLES.map((s) => {
     </p>
 
     <div class="btn-row">
-      <Button href="/contact/?enquiry=limited-access#contact-form">Request access</Button>
+      <Button href={SIGNUP_URL}>Start now</Button>
       <Button href="/tools/tender-compliance-matrix/" variant="secondary">
         Read a tender, free
       </Button>

@@ -76,7 +76,7 @@ import Carousel from '../components/ui/Carousel.astro';
 import DutyCard from '../components/sections/DutyCard.astro';
 import { S52, S71, PPN026 } from '../data/duty';
 import { BUYER_SCREENS } from '../data/crowmark-screens';
-import { BUYER_PLANS } from '../data/pricing';
+import { BUYER_PLANS, startHref } from '../data/pricing';
 import { faqPage, breadcrumbs } from '../lib/schema';
 import { SITE } from '../data/site';
 
@@ -176,7 +176,9 @@ const KEY_FACTS = [
   {
     term: 'Price',
     detail:
-      'Buyer Pro is £299 a month, or £3,229 a year. Buyer Portfolio is for larger authorities and groups, and is quoted rather than listed. Supplier pricing is published in full on the pricing page.',
+      /* D235 (2026-10-19): both Buyer prices are published. Read from
+         data/pricing.ts, so this fact cannot disagree with /pricing. */
+      `Buyer Pro is £${BUYER_PLANS[0].monthly} a month and Buyer Portfolio is £${BUYER_PLANS[1].monthly} a month, both 10% off when paid yearly. Supplier pricing is published in full on the pricing page.`,
   },
   {
     term: 'The differentiator',
@@ -299,12 +301,13 @@ const INCLUDED = [
    data/pricing.ts, which holds them for /pricing too, so the two pages cannot disagree. */
 const [BUYER_PRO, BUYER_PORTFOLIO] = BUYER_PLANS;
 const proAnnual = BUYER_PRO.annual!.toLocaleString('en-GB');
+const portfolioAnnual = BUYER_PORTFOLIO.annual!.toLocaleString('en-GB');
 
 const QUALIFY = [
   'You run competitions and evaluate responses',
   'Social value is scored in your competitions and monitored after award',
   'You need multi entity or group consolidation',
-  'You need invoice or PO billing, SSO and SAML, or a DPA',
+  'You buy through a framework, or need a DPA or custom terms',
   'You have to publish a Procurement Act award notice return',
 ];
 
@@ -335,7 +338,7 @@ const FAQS = [
   {
     question: 'What does it cost?',
     answer:
-      'Buyer Pro is £299 a month, or £3,229 a year, which is 10% off twelve months. It includes 5 users, 750 AI credits a month and 10 guest evaluators. Buyer Portfolio is for larger authorities and groups, with 10 users included, 3,000 AI credits a month and 25 guest evaluators, and it is quoted for your organisation rather than listed. Contact sales for Buyer Portfolio, and for invoice or purchase order billing on annual terms.',
+      `Buyer Pro is £${BUYER_PRO.monthly} a month, or £${proAnnual} a year, with ${BUYER_PRO.seats} users, ${BUYER_PRO.credits.toLocaleString('en-GB')} AI credits a month and ${BUYER_PRO.guestEvaluators} guest evaluators. Buyer Portfolio is £${BUYER_PORTFOLIO.monthly} a month, or £${portfolioAnnual} a year, with ${BUYER_PORTFOLIO.seats} users, ${BUYER_PORTFOLIO.credits.toLocaleString('en-GB')} AI credits a month and ${BUYER_PORTFOLIO.guestEvaluators} guest evaluators. Annual prices are 10% off twelve months. Pay by card, or pay for Buyer Portfolio by invoice on 30 days with a PO number.`,
   },
   {
     question: 'Can it produce our Procurement Act transparency return?',
@@ -672,7 +675,7 @@ const UPDATED = new Date('2026-08-05');
   <Section
     eyebrow="Access"
     title="Two ways to buy."
-    standfirst="Buyer Pro is a listed price. Buyer Portfolio is scoped to your organisation. Access is by request on both."
+    standfirst="Both are listed prices. Start either one today by card."
     id="access"
   >
     <div class="access">
@@ -689,23 +692,30 @@ const UPDATED = new Date('2026-08-05');
         <p class="eyebrow kicker kicker--tight">Included</p>
         <ul class="ticks">{INCLUDED.map((i) => <li>{i}</li>)}</ul>
         <div class="btn-row">
-          <Button href={BUYER_PRO.href}>Request access</Button>
+          <Button href={startHref(BUYER_PRO.planKey)}>{BUYER_PRO.cta}</Button>
           <Button href="#faq" variant="secondary">Read the FAQ</Button>
         </div>
       </div>
 
       <div class="card surface">
         <h3 class="card-h card__h">{BUYER_PORTFOLIO.name}</h3>
-        <p class="access__price">Contact sales<span>Scoped to your organisation</span></p>
+        <p class="access__price">
+          £{BUYER_PORTFOLIO.monthly} a month<span>or £{portfolioAnnual} a year, which is 10% off</span>
+        </p>
         <p class="card__body">
           {BUYER_PORTFOLIO.seats} users included, more by arrangement,{' '}
           {BUYER_PORTFOLIO.credits.toLocaleString('en-GB')} AI credits a month and{' '}
-          {BUYER_PORTFOLIO.guestEvaluators} guest evaluators. If you need to buy through a
-          framework, tell us which one and we will confirm what is possible rather than guess.
+          {BUYER_PORTFOLIO.guestEvaluators} guest evaluators. Pay by card, or by invoice on 30
+          days with a PO number.
         </p>
         <p class="eyebrow kicker kicker--tight">Talk to us if</p>
         <ul class="ticks">{QUALIFY.map((q) => <li>{q}</li>)}</ul>
-        <p class="card__cta"><a href={BUYER_PORTFOLIO.href}>Contact sales</a></p>
+        <div class="btn-row">
+          <Button href={startHref(BUYER_PORTFOLIO.planKey)}>{BUYER_PORTFOLIO.cta}</Button>
+        </div>
+        <p class="card__cta">
+          <a href={BUYER_PORTFOLIO.secondary!.href}>{BUYER_PORTFOLIO.secondary!.label}</a>
+        </p>
       </div>
     </div>
   </Section>

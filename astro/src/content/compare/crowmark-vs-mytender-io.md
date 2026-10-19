@@ -15,7 +15,7 @@ ctaSubLine1: "Published pricing from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 faq:
   - question: "Is CrowMark or mytender.io cheaper?"
-    answer: "CrowMark publishes its prices: Starter is £49 per month and Pro is £149 per month, with access offered by request rather than self-serve signup. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information."
+    answer: "CrowMark publishes its prices: Starter is £49 per month and Pro is £149 per month, and anyone can sign up and start by card. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information."
   - question: "Does mytender.io publish its pricing?"
     answer: "No. mytender.io does not list public prices. It directs prospects to a demo or the account dashboard and offers a one-month refundable period after commencement. On this page we mark its price as Not published."
   - question: "Is mytender.io a UK company?"
@@ -107,7 +107,7 @@ faq:
 <figcaption>The buyer-side social value requirement in CrowMark, shown as a drawn representation. The criteria, weightings and evidence requirements on screen are part of the drawing.</figcaption>
 </figure>
 <p>After award, CrowMark keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. On security, it uses EU data residency, AES-256 encryption at rest and TLS 1.3 in transit.</p>
-<p>CrowMark publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is contact sales. Access is offered by request rather than self-serve signup, so you book a demo and the account is set up once the plan is agreed. Setting it up needs a card, held securely by Stripe and never stored by us.</p>
+<p>CrowMark publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 
 <h2 id="pricing-compared">Pricing compared</h2>
 <p>The pricing models are different in kind, not just in number. CrowMark states &pound;49 and &pound;149 per month in public, on a page anyone can read without a demo. mytender.io keeps its tiers behind a demo or the dashboard. Both of us open an account through a conversation, but only one of us makes you have it before you know the price. If knowing the cost up front is part of how you evaluate software, CrowMark gives you that immediately. If you prefer to see a tailored quote after a walkthrough, mytender.io's model fits that.</p>
@@ -141,7 +141,7 @@ faq:
 <div class="cfaq">
   <details>
     <summary><h3>Is CrowMark or mytender.io cheaper?</h3></summary>
-    <div class="cfaq-a"><p>CrowMark publishes its prices: Starter is &pound;49 per month and Pro is &pound;149 per month, with access offered by request rather than self-serve signup. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information.</p></div>
+    <div class="cfaq-a"><p>CrowMark publishes its prices: Starter is &pound;49 per month and Pro is &pound;149 per month, and anyone can sign up and start by card. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information.</p></div>
   </details>
   <details>
     <summary><h3>Does mytender.io publish its pricing?</h3></summary>
@@ -180,7 +180,7 @@ faq:
 <li>mytender.io pricing shown on request, one-month refundable period. mytender.io Terms &amp; Conditions and Capterra listing, accessed 26 July 2026. <a href="https://www.capterra.com/p/10031061/mytender-io/" target="_blank" rel="noopener noreferrer">capterra.com/p/10031061/mytender-io</a></li>
 <li>mytender.io positioning, content-library drafting, SharePoint / Salesforce / Google Drive integrations, no own discovery feed, target of 10+ bids a year. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026, Procurement Act 2023 s.52 / s.71, and security posture (first party). Velstrian, <a href="/crowmark/">CrowMark product page</a>.</li>
-<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio contact sales (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>CrowMark pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio &pound;549/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

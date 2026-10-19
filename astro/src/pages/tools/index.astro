@@ -40,6 +40,7 @@
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/layout/Section.astro';
 import Button from '../../components/ui/Button.astro';
+import { SIGNUP_URL } from '../../data/app';
 import FinalCta from '../../components/sections/FinalCta.astro';
 import { breadcrumbs } from '../../lib/schema';
 import { SITE } from '../../data/site';
@@ -249,7 +250,7 @@ const schema = [
     ]}
     note="Built by UK procurement and ML engineers"
   >
-    <Button href="/contact/?enquiry=limited-access#contact-form">Request access</Button>
+    <Button href={SIGNUP_URL}>Start now</Button>
     <Button href={CALENDLY} variant="secondary" target="_blank">
       Book a demo<span class="visually-hidden"> (opens in a new window)</span>
     </Button>

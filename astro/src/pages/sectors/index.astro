@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/layout/PageHeader.astro';
 import { SITE } from '../../data/site';
 import Button from '../../components/ui/Button.astro';
+import { SIGNUP_URL } from '../../data/app';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { breadcrumbs } from '../../lib/schema';
 
@@ -237,7 +238,7 @@ const schema = [
         <h2>Find the work. Win it. <span class="accent">Prove you delivered.</span></h2>
         <p class="sec-final-sub">See how CrowMark fits your sector's bidding calendar.</p>
         <div class="btn-row sec-hero-cta">
-          <Button href="/contact/?enquiry=limited-access#contact-form" size="md">Request access</Button>
+          <Button href={SIGNUP_URL} size="md">Start now</Button>
           <Button href="https://calendly.com/crowagent-platform/30min" variant="secondary" size="md">Book a demo</Button>
         </div>
         <div class="sec-final-links">

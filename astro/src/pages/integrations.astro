@@ -67,6 +67,7 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/layout/Section.astro';
 import Button from '../components/ui/Button.astro';
+import { SIGNUP_URL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 import { SOURCES, IDENTITY, OUTBOUND, RULE_STEPS } from '../data/integrations';
 
@@ -77,7 +78,6 @@ const title = 'Integrations | Velstrian';
 const description =
   'Sign in with your work identity, pull bid documents read-only from where your team keeps them, and send deadline alerts to Slack or Teams.';
 
-const REQUEST_ACCESS = '/contact/?enquiry=limited-access#contact-form';
 
 const schema = [
   breadcrumbs([
@@ -102,7 +102,7 @@ const schema = [
     id="hero"
   >
     <div class="btn-row">
-      <Button href={REQUEST_ACCESS}>Request access</Button>
+      <Button href={SIGNUP_URL}>Start now</Button>
       <Button href="/security/" variant="secondary">Read the security model</Button>
     </div>
   </Section>
@@ -331,7 +331,7 @@ const schema = [
     id="cta"
   >
     <div class="btn-row">
-      <Button href={REQUEST_ACCESS}>Request access</Button>
+      <Button href={SIGNUP_URL}>Start now</Button>
       <Button href="/pricing/" variant="secondary">View all pricing</Button>
     </div>
   </Section>

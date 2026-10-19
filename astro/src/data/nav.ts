@@ -58,6 +58,7 @@
  * canonical tag declares.
  */
 import { SITE } from './site';
+import { APP_ORIGIN, SIGNUP_URL } from './app';
 
 export interface NavLink {
   label: string;
@@ -211,11 +212,13 @@ export const NAV = {
   actions: {
     signIn: {
       label: 'Sign in',
-      href: 'https://app.crowagent.ai/login',
+      href: `${APP_ORIGIN}/login`,
     } as NavLink,
+    /* D236 (2026-10-19): sign up is self serve, so the header CTA goes
+       straight to the app's sign up page rather than to a request form. */
     cta: {
-      label: 'Request access',
-      href: '/contact/?enquiry=limited-access#contact-form',
+      label: 'Start now',
+      href: SIGNUP_URL,
     } as NavLink,
   },
 };

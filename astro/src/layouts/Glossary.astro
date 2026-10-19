@@ -14,6 +14,7 @@ import PageHeader from '../components/layout/PageHeader.astro';
 import { breadcrumbs } from '../lib/schema';
 import { routeUrl } from '../lib/route-url';
 import Button from '../components/ui/Button.astro';
+import { SIGNUP_URL } from '../data/app';
 
 interface Props {
   title: string;
@@ -194,8 +195,8 @@ const schema: Record<string, unknown>[] = [
         <h2>{ctaHeading}</h2>
         <p class="gl-cta-sub">{ctaSub}</p>
         <div class="btn-row">
-          <Button href="/contact/?enquiry=limited-access#contact-form" target="_blank">
-            Request access
+          <Button href={SIGNUP_URL} target="_blank">
+            Start now
           </Button>
           <Button href="/crowmark/" variant="secondary" size="md">See how CrowMark works</Button>
         </div>

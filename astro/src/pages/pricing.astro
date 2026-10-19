@@ -164,18 +164,36 @@ import {
   COMPARE_MORE,
   CREDIT_PAGES,
   CREDIT_TOPUPS,
-  OVERAGE_PER_CREDIT_LABEL,
+  OVERAGE_PENCE_LABEL,
+  SIGNUP_URL,
+  startHref,
 } from '../data/pricing';
 
 const title = 'CrowMark pricing | Plans from £49 a month | Velstrian';
 const description =
-  'CrowMark pricing: Starter £49 a month, Pro £149, Buyer Pro £299, Portfolio quoted. Annual billing saves 10%, and every plan publishes its seats and AI credits.';
+  'CrowMark pricing: Starter £49 a month, Pro £149, Portfolio £549, Buyer Pro £299 and Buyer Portfolio £699. Annual billing saves 10%. Start today by card.';
 
-/* WIRE VALUES read by /contact to preselect a subject. Not copy; do not tidy.
-   The plan CTAs carry their own, from data/pricing.ts, so only these two are
-   needed here. */
-const REQUEST_ACCESS = '/contact/?enquiry=limited-access#contact-form';
+/* WIRE VALUE read by /contact to preselect a subject. Not copy; do not tidy.
+   The plan buttons carry their own sign up links, from data/pricing.ts.
+   REQUEST_ACCESS went with D236 (2026-10-19): sign up is self serve. */
 const CONTACT_BUYER = '/contact/?product=buyer-side#contact-form';
+
+/* The annual figures for the Annual savings card, read off the same arrays as
+   the cards so no annual price is typed twice on this page. */
+const ANNUALS = [...PLANS, ...BUYER_PLANS]
+  .filter((p) => p.annual !== null)
+  .map((p) => `${p.name} £${p.annual!.toLocaleString('en-GB')}`);
+
+/* "1 user" or "5 users", and Portfolio's "more by arrangement". */
+/* "a, b or c", for the pack sizes and prices in the Extra usage strip. */
+function orList(items: string[]): string {
+  return items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} or ${items[items.length - 1]}`;
+}
+
+function users(seats: number, more?: boolean): string {
+  const base = `${seats} user${seats === 1 ? '' : 's'}`;
+  return more ? `${base}, more by arrangement` : base;
+}
 
 /*
  * STRUCTURED DATA. The legacy page publishes BreadcrumbList and ItemList, and
@@ -184,9 +202,11 @@ const CONTACT_BUYER = '/contact/?product=buyer-side#contact-form';
  * corrected in one place and left stale in the other. The drift that put a
  * £99 price on an OG card and kept it there for a year.
  *
- * Portfolio carries no Offer. It has no published price, and an Offer with no
- * price is worse than no Offer. No aggregateRating and no review: this site
- * does not publish ratings it cannot evidence.
+ * Since D235 (2026-10-19) every plan has a published price, so every plan
+ * carries an Offer. The null filter stays so a future unpriced plan gets no
+ * Offer, because an Offer with no price is worse than no Offer. No
+ * aggregateRating and no review: this site does not publish ratings it cannot
+ * evidence.
  */
 const offers = PLANS.filter((p) => p.monthly !== null).map((p) => ({
   '@type': 'Offer',
@@ -196,8 +216,8 @@ const offers = PLANS.filter((p) => p.monthly !== null).map((p) => ({
   url: `${SITE.origin}/pricing`,
 }));
 
-/* [R285-P2-DROP-01] Buyer Pro is a listed price (D195), so it gets an Offer. Buyer Portfolio,
-   like Portfolio, has no published price and so no Offer. */
+/* [R285-P2-DROP-01] Buyer Pro is a listed price (D195) and Buyer Portfolio is one since D235,
+   so both get an Offer. */
 const buyerOffers = BUYER_PLANS.filter((p) => p.monthly !== null).map((p) => ({
   '@type': 'Offer',
   name: p.name,
@@ -274,7 +294,7 @@ const TRUST = [
  * stale is safer than advancing it falsely, because a sitemap that claims
  * everything changed is discounted.
  */
-const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTENT changed, which is the only thing that may bump it. The credit top-up prices and the metered overage rate are published on this route for the first time. */
+const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Portfolio and Buyer Portfolio prices published, every plan starts by self serve sign up. Earlier: */ /* R262-WEB-08: bumped because the CONTENT changed, which is the only thing that may bump it. The credit top-up prices and the metered overage rate are published on this route for the first time. */
 
 ---
 
@@ -306,12 +326,12 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     as="h1"
     eyebrow="Published pricing · No quote required"
     title="See the price first. Sized for SMEs."
-    standfirst="Supplier plans from £49 a month and CrowMark Buyer Pro at £299. The seats each plan includes, the AI credits it is metered on, and what extra credits cost if you need them, are printed here rather than discovered after you pay."
+    standfirst="Supplier plans from £49 a month and CrowMark Buyer from £299. Every plan shows its price, users and AI credits, and you can start today by card."
     id="hero"
     atmosphere
   >
     <div class="btn-row">
-      <Button href={REQUEST_ACCESS}>Request access</Button>
+      <Button href={SIGNUP_URL}>Start now</Button>
       <Button href="#suppliers" variant="secondary">See the plans</Button>
     </div>
   </Section>
@@ -436,12 +456,32 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
                 </>
               )}
 
-              <p class="card__body">{p.body}</p>
-              <p class="card__cta">
-                <Button href={p.href} variant={p.recommended ? 'primary' : 'secondary'}>
-                  {p.cta}<span class="visually-hidden"> for the {p.name} plan</span>
-                </Button>
-              </p>
+              {/* R285-P2-ENTERPRISE-SELF-SERVE-01: three short lines in place of
+                  the paragraph. Users and credits are generated from the typed
+                  fields, so the card cannot disagree with the comparison table. */}
+              <ul class="plan__lines" role="list">
+                <li>{users(p.seats, p.moreSeatsByArrangement)}</li>
+                <li>{p.credits.toLocaleString('en-GB')} AI credits a month</li>
+                <li>{p.includes}</li>
+              </ul>
+              {/* D236: Start now goes to the app's sign up with the plan chosen.
+                  One button per billing period, shown by the same checkbox that
+                  swaps the price above, so the annual price signs up annual. */}
+              <div class="card__cta">
+                <p class="plan__go plan__go--m">
+                  <Button href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>
+                    {p.cta}<span class="visually-hidden"> on the {p.name} plan, billed monthly</span>
+                  </Button>
+                </p>
+                <p class="plan__go plan__go--a">
+                  <Button href={startHref(p.planKey, true)} variant={p.recommended ? 'primary' : 'secondary'}>
+                    {p.cta}<span class="visually-hidden"> on the {p.name} plan, billed annually</span>
+                  </Button>
+                </p>
+                {p.secondary && (
+                  <p class="plan__alt"><a href={p.secondary.href}>{p.secondary.label}</a></p>
+                )}
+              </div>
             </li>
           ))
         }
@@ -480,11 +520,12 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
         false. The true and stronger claim is that WE never see, transmit or
         store the card; Stripe does.
       */}
+      {/* D236 (2026-10-19): the trial is no longer requested. A first CrowMark
+          plan starts with 14 free days at the Starter features for 1 user, as
+          create-checkout provisions it today (BILL-TRIAL-002 in the platform). */}
       <p class="plans__trial">
-        Not ready to choose? <a href="/contact/?enquiry=limited-access#contact-form"
-          >Request a 14-day trial</a
-        >. Starter features, 1 user. A card is required to start it,
-        held securely by Stripe and never stored by us.
+        Your first 14 days are free, on the Starter features for 1 user. A card is
+        needed to start, held securely by Stripe and never stored by us.
       </p>
     </Section>
 
@@ -511,9 +552,8 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
         describes.
       */}
       <p class="note">
-        Buyer Pro is a listed price with the seats and AI credits it includes. Buyer
-        Portfolio is scoped to your organisation and quoted, in the same way as Portfolio
-        for suppliers. Access is by request on both.
+        Start either plan today by card. Buyer Portfolio can also be paid by invoice on 30
+        days with a PO number, at the same price.
       </p>
 
       <p class="eyebrow kicker">Buyer plans</p>
@@ -540,12 +580,26 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
                 </>
               )}
 
-              <p class="card__body">{p.body}</p>
-              <p class="card__cta">
-                <Button href={p.href} variant={p.monthly === null ? 'secondary' : 'primary'}>
-                  {p.cta}<span class="visually-hidden"> for the {p.name} plan</span>
-                </Button>
-              </p>
+              <ul class="plan__lines" role="list">
+                <li>{users(p.seats)}</li>
+                <li>{p.credits.toLocaleString('en-GB')} AI credits a month</li>
+                <li>{p.includes}</li>
+              </ul>
+              <div class="card__cta">
+                <p class="plan__go plan__go--m">
+                  <Button href={startHref(p.planKey)}>
+                    {p.cta}<span class="visually-hidden"> on the {p.name} plan, billed monthly</span>
+                  </Button>
+                </p>
+                <p class="plan__go plan__go--a">
+                  <Button href={startHref(p.planKey, true)}>
+                    {p.cta}<span class="visually-hidden"> on the {p.name} plan, billed annually</span>
+                  </Button>
+                </p>
+                {p.secondary && (
+                  <p class="plan__alt"><a href={p.secondary.href}>{p.secondary.label}</a></p>
+                )}
+              </div>
             </li>
           ))
         }
@@ -559,9 +613,47 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
         <li>Delivery monitoring against what was promised</li>
       </ul>
       <p class="plans__trial">
-        Need invoice or purchase order billing, single sign-on or a DPA, or want to buy
-        through a framework? <a href={CONTACT_BUYER}>Contact sales</a>.
+        Need a DPA, a security review or custom terms? <a href={CONTACT_BUYER}>Talk to us</a>.
       </p>
+    </Section>
+
+    {/*
+      EXTRA USAGE, ONE SHORT STRIP (R285-P2-EXTRA-USAGE-SELF-SERVE-01).
+
+      Replaces the long top up and pay as you go card that sat in the AI
+      credits section. Owner, 2026-10-19: "make things simpler and easy to use".
+      Outside both tab panels, so it shows on either side of the procurement:
+      Buyer plans use the same credits. Pack prices are read from CREDIT_TOPUPS
+      and the rate from OVERAGE_PENCE_PER_CREDIT, so nothing here is typed twice.
+      The behaviour is D234 and D235: packs never expire, auto reload stops at a
+      monthly limit the customer sets, pay as you go is off until switched on and
+      has its own cap.
+    */}
+    <Section
+      eyebrow="Extra usage"
+      title="Need more credits?"
+      standfirst="Three options, each one your choice. Nothing extra is charged unless you set it up."
+      id="extra-usage"
+    >
+      <ul class="grid grid--3 extra" role="list">
+        <li class="card surface">
+          <h3 class="card-h card__h">Credit packs</h3>
+          <p class="card__body">
+            Packs of {orList(CREDIT_TOPUPS.map((t) => t.credits.toLocaleString('en-GB')))} credits
+            for {orList(CREDIT_TOPUPS.map((t) => `£${t.price}`))}. They never expire.
+          </p>
+        </li>
+        <li class="card surface">
+          <h3 class="card-h card__h">Auto reload</h3>
+          <p class="card__body">Buys a pack for you when you run low, up to a monthly limit you set.</p>
+        </li>
+        <li class="card surface">
+          <h3 class="card-h card__h">Pay as you go</h3>
+          <p class="card__body">
+            Off unless you switch it on. Then {OVERAGE_PENCE_LABEL} a credit, with a cap you choose.
+          </p>
+        </li>
+      </ul>
     </Section>
 
     <Section
@@ -718,71 +810,9 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
           </p>
         </div>
 
-        {/*
-          ── R262-WEB-08 · THE CHARGES THAT WERE REAL AND UNPUBLISHED ──────────
-
-          Owner decision, PRICING-LOCK-2026-08.md section 1: the top-up packs and
-          the £0.10 metered overage are PUBLIC, and their absence "was a clarity
-          gap, not a marketing choice". Four prices were live and chargeable in
-          Stripe on 2026-08-09 while this page, which argues that its whole
-          virtue is printing the price first, mentioned none of them. A customer
-          could be billed for something no public surface named.
-
-          IT SITS SECOND IN THIS STACK, DIRECTLY UNDER THE ALLOWANCES. The card
-          above is the only thing on the site that states a cap; the question a
-          cap raises is what happens when you reach it, and the answer belongs
-          next to it rather than in the FAQ eight sections down. The FAQ carries
-          the same answer for a reader who arrives there instead.
-
-          THE BEHAVIOUR IS READ FROM THE PLATFORM, NOT INFERRED FROM THE PRICES.
-          The refusal, the spend order, the non-expiry of top-ups and the
-          opt-in-only nature of overage each cite a file in data/pricing.ts's
-          FAQ block, which is where the citations live so they are written once.
-        */}
-        <div class="card surface">
-          <h3 class="card-h card__h">If you need more credits than your plan includes</h3>
-          <p class="card__body">
-            Your monthly allowance is spent first, then any top-up credits you have bought. When
-            both are gone, AI generation is refused for the rest of the calendar month rather
-            than carrying on and billing you for it, so nothing is charged automatically at that
-            point. Two things restore it.
-          </p>
-          <div class="cmp__scroll" tabindex="0" role="region" aria-label="Credit top-up prices, scrollable">
-            <table class="cmp cmp--slim">
-              <caption class="visually-hidden">One-time credit top-up packs and their prices</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Top-up pack</th>
-                  <th scope="col">One-time price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  CREDIT_TOPUPS.map((t) => (
-                    <tr>
-                      <th scope="row">{t.credits.toLocaleString('en-GB')} credits</th>
-                      <td>£{t.price}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-          </div>
-          <p class="card__body">
-            Top-ups are a one-off purchase and they never expire, so a pack bought in March is
-            still there in June. They are used only after the month's included allowance is
-            spent. The included allowance itself resets at the start of each calendar month and
-            does not roll over.
-          </p>
-          <p class="card__body">
-            The other route is pay-as-you-go overage, which we switch on for your organisation
-            when you ask. With it on, generation continues past the allowance and every further
-            credit is billed at <strong>{OVERAGE_PER_CREDIT_LABEL}</strong> on your next invoice,
-            at the same unit rate as a top-up. It stays off until you ask for it, so until then
-            your plan price is the most CrowMark can charge you.
-          </p>
-        </div>
-
+        {/* The top up and pay as you go card that sat here moved up to the Extra
+            usage strip under the plan cards, shortened, R285-P2-EXTRA-USAGE-
+            SELF-SERVE-01. The full answer stays in the FAQ below. */}
         <div class="card surface">
           <h3 class="card-h card__h">Reading a tender document is charged by page</h3>
           <p class="card__body">
@@ -843,9 +873,9 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
           <p class="pct">-10%</p>
           <h3 class="card-h card__h">Annual billing</h3>
           <p class="card__body">
-            Pay upfront for the year and lock in a 10% discount on any plan. Starter is £529 a
-            year and Pro is £1,609 a year. You can switch from monthly to annual billing at any
-            time from your account settings.
+            Pay upfront for the year and save 10% on any plan: {ANNUALS.join(', ')} a year.
+            You can switch from monthly to annual billing at any time from your account
+            settings.
           </p>
         </div>
       </div>
@@ -873,25 +903,22 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="Public sector purchasing"
     title="Buying on a purchase order."
-    standfirst="Public sector organisations rarely buy software on a card, so CrowMark for Suppliers can be scoped and billed by invoice or purchase order on annual terms."
+    standfirst="Public sector organisations rarely buy software on a card. Buyer Portfolio can be bought by invoice on 30 days with a PO number, at the same price as by card."
     id="purchase-order"
     atmosphere
   >
     <div class="po">
       <div class="po__copy">
         <p class="card__body">
-          Tiers scale with organisation size, so we scope rather than list a single number. If
-          you need to buy through a framework, tell us which one and we will confirm what is
-          possible.
+          Every plan has a published price, so there is nothing to scope before you start. If
+          you buy through a framework, tell us which one and we will confirm what is possible.
         </p>
         <p class="card__body">
-          Contact sales if any of these apply. You are a public sector contracting authority.
-          You are beyond the top self-serve plan's allowance. You need multi-entity or group
-          consolidation. Or you need single sign-on, a security review or DPA, SOC 2 evidence,
-          or invoice and BACS billing.
+          Talk to us about frameworks, more users than Portfolio includes, group
+          consolidation, a security review or DPA, SOC 2 evidence, or custom contract terms.
         </p>
         <p class="btn-row row--left">
-          <Button href="/contact/">Talk to sales</Button>
+          <Button href="/contact/">Talk to us about frameworks</Button>
           <Button href="#suppliers" variant="secondary">See CrowMark plans</Button>
         </p>
       </div>
@@ -952,6 +979,8 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
 <style is:global>
   #billing-toggle:not(:checked) ~ * .plan__price--a { display: none; }
   #billing-toggle:checked ~ * .plan__price--m { display: none; }
+  #billing-toggle:not(:checked) ~ * .plan__go--a { display: none; }
+  #billing-toggle:checked ~ * .plan__go--m { display: none; }
 </style>
 
 <style>
@@ -1225,8 +1254,32 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   .plan .card__h { grid-row: 2; }
   .plan__who { grid-row: 3; }
   .plan__price { grid-row: 4; }
-  .plan .card__body { grid-row: 5; }
+  .plan .plan__lines { grid-row: 5; }
   .plan .card__cta { grid-row: 6; }
+
+  /* The three short lines on a plan card. Type and ink from the same tokens as
+     .card__body, the paragraph they replace. */
+  .plan__lines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.6;
+    color: var(--c-text-sub);
+  }
+  .plan__go { margin: 0; }
+  /* The quieter second action under a plan's button. A text link, so it takes
+     the shared link recipe from styles/links.css, with the 44px target floor. */
+  .plan__alt { margin: var(--stack-1) 0 0; font-size: var(--t-caption); }
+  .plan__alt a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--c-interactive);
+  }
 
   /* THE TRIAL LINE UNDER THE PLAN GRID (A-117, owner 2026-08-05).
      Geometry only. It states no colour of its own and no link decoration: the
@@ -1242,7 +1295,14 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     color: var(--c-text-muted);
   }
 
-  .plan__flag {
+  /* `.plan > .plan__flag`, NOT a bare `.plan__flag`. styles/labels.css states
+     `.card > .chip { justify-self: start }` for capsules in left aligned cards,
+     and at equal specificity it won, so the Recommended chip sat at the card's
+     start edge: measured 95px off centre at 390 and 100px at 1440 on
+     2026-10-19. check-render.js could not see it while the card had a direct
+     `.card__body` child, which exempts a card from its centring check. The plan
+     cards lost that paragraph to the three short lines and the gate found it. */
+  .plan > .plan__flag {
     /* `justify-self`, NOT `align-self`, and the difference is not cosmetic.
        In the flex column this replaced, `align-self` was the cross axis and
        therefore the horizontal one; in a grid it is the block axis, so the same

@@ -4,6 +4,7 @@ import PageHeader from '../../components/layout/PageHeader.astro';
 import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
 import Button from '../../components/ui/Button.astro';
+import { SIGNUP_URL } from '../../data/app';
 
 const title = 'UK Procurement Glossary | Velstrian';
 const description =
@@ -391,7 +392,7 @@ const schema = [
         <p class="gx-cta-sub">Paste the text of a tender and the free compliance matrix lists the requirements its wording states, each one shown with the line it came from. No account, no email.</p>
         <div class="btn-row">
           <Button href="/tools/tender-compliance-matrix/" size="md">Use the free tool</Button>
-          <Button href="/contact/?enquiry=limited-access#contact-form" variant="secondary" size="md">Request access</Button>
+          <Button href={SIGNUP_URL} variant="secondary" size="md">Start now</Button>
         </div>
         <div class="gx-cta-links">
           <a href="/resources/">Browse resources</a>

@@ -154,7 +154,7 @@ CrowMark includes an integrated evidence tracker that lets you log evidence agai
 
 The workflow runs end to end in a single sitting: contract profile in, measures priced against the TOMs library, narrative drafted, evidence plan attached, response exported. For an SME with no dedicated social value team, the work that changes is the assembly, not the judgement. You still decide which commitments your organisation can actually keep.
 
-> **Ready to score your next bid?** CrowMark handles measure scoring, AI narrative drafting, and evidence tracking, all in one platform. [Request access](/contact/?enquiry=limited-access#contact-form)
+> **Ready to score your next bid?** CrowMark handles measure scoring, AI narrative drafting, and evidence tracking, all in one platform. [Start now](https://app.crowagent.ai/signup)
 
 ## Sources
 
@@ -172,4 +172,4 @@ Last reviewed: 30 August 2026. Any monetary figures shown in the worked example 
 
 Build a cited social value response from evidence your team has already submitted, ready for review before it goes in.
 
-[Request access](/contact/?enquiry=limited-access#contact-form)
+[Start now](https://app.crowagent.ai/signup)

@@ -266,6 +266,11 @@ const ALLOWED_LOSSES = new Map([
      question is rewritten as "How is CrowMark Buyer priced?", which answers it with the price. */
   ['/pricing/  heading: buyer side',
    'Replaced by the Buyer Pro and Buyer Portfolio cards. The single "Contact sales" buyer card described the position D195 superseded, and the reader now sees both offerings and the Buyer Pro price.'],
+  /* R285-P2-SELF-SERVE-SIGNUP-01, D236 (2026-10-19). Sign up is self serve, so the
+     Request access step went from the website. The roadmap's closing section asked
+     the reader to request access, and it now asks them to start. */
+  ['/roadmap/  heading: request access to crowmark',
+   'Renamed "Start with CrowMark" under D236, which removed the Request access step from the app and the website. The section, its Start now button and the enquiry link beside it are all still there, so the reader loses no action, only the name of a step that no longer exists.'],
   ['/pricing/  heading: why is there no price for the buyer side?',
    'Rewritten as "How is CrowMark Buyer priced?" under D195, because Buyer Pro is a listed price. The old question named a position that no longer holds and would have kept it alive in search results.'],
   /* /sources printed the previous edition's five missions from one shared

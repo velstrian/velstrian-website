@@ -27,6 +27,7 @@
  * homepage after it was found to be carrying four competing calls to action.
  */
 import Button from '../ui/Button.astro';
+import { SIGNUP_URL } from '../../data/app';
 ---
 
 <section class="h2cta" aria-labelledby="h2cta-title">
@@ -63,17 +64,16 @@ import Button from '../ui/Button.astro';
     <h2 class="h2cta__title" id="h2cta-title">See it on your own tender.</h2>
 
     <p class="h2cta__lede">
-      Bring a live notice and we will run it with you. Access is limited and by request.
+      Bring a live notice and run it today. Choose a plan and start by card.
     </p>
 
     <div class="btn-row h2cta__row">
-      <Button href="/contact/?enquiry=limited-access#contact-form">Request access</Button>
+      <Button href={SIGNUP_URL}>Start now</Button>
       <Button href="/tools/tender-compliance-matrix/" variant="secondary">Read a tender, free</Button>
     </div>
 
     <p class="h2cta__note">
-      Access is by request. There is no free plan, and no self-serve signup. A 14-day evaluation
-      trial is available on request.
+      There is no free plan. Your first 14 days are free, and a card is needed to start.
     </p>
   </div>
 </section>

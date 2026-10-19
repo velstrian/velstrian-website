@@ -94,7 +94,7 @@ const FIELDS: Field[] = [
 /** Values are WIRE VALUES. Never rename. */
 const ENQUIRY_OPTIONS = [
   { value: '', label: 'Select an option' },
-  { value: 'limited-access', label: 'Request access' },
+  { value: 'limited-access', label: 'Help getting started' },
   { value: 'ppn002-bid', label: 'CrowMark for Suppliers' },
   { value: 'buyer-side', label: 'CrowMark for Buyers' },
   { value: 'enterprise', label: 'Portfolio / volume pricing' },
@@ -313,7 +313,7 @@ const TRUST_BADGES: string[] = [
   const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   const ACCESS_SEED =
-    'I would like to request access to CrowMark.\n\nOrganisation:\nWhat we need CrowMark for:\n';
+    'I would like help getting started with CrowMark.\n\nOrganisation:\nWhat we need CrowMark for:\n';
 
   /** ?product= / ?tier= mapping, carried over verbatim from scripts.js. The
       legacy slugs cyber / cash / esg / csrd are deliberately UNMAPPED: those

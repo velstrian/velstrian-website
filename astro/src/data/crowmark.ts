@@ -21,6 +21,10 @@
  * /crowmark-buyers is missing (OA-15).
  */
 
+import { PLANS as PRICED_PLANS, startHref } from './pricing.ts';
+
+const [STARTER, PRO, PORTFOLIO] = PRICED_PLANS;
+
 export interface Faq {
   question: string;
   answer: string;
@@ -65,7 +69,7 @@ export const KEY_FACTS = [
        facts list, and "every plan starts with a trial" was never a price. The
        trial is published where a reader looks for it, on /pricing and /faq. */
     detail:
-      'From £49/month (Starter). Pro is £149/month. Portfolio is contact sales. Access is offered by request, so book a demo rather than signing up.',
+      `From £${STARTER.monthly}/month (Starter). Pro is £${PRO.monthly}/month and Portfolio is £${PORTFOLIO.monthly}/month. Sign up and start today by card.`,
   },
   {
     term: 'The differentiator',
@@ -175,42 +179,39 @@ export interface Plan {
   recommended?: boolean;
 }
 
+/* PRICES AND LINKS READ FROM data/pricing.ts, R285-P2-ENTERPRISE-SELF-SERVE-01.
+   This band typed '£49' and '£149' beside the array that already held both
+   numbers, and Portfolio read 'Contact sales' after D235 (2026-10-19) published
+   it. The figures and the Start now links (D236) now come from the one file the
+   pricing parity gate checks, so the two pages cannot disagree. */
 export const PLANS: Plan[] = [
   {
     name: 'Starter',
-    price: '£49',
+    price: `£${STARTER.monthly}`,
     period: '/mo',
     body: '1 user and 200 AI credits a month. Tender feed, document ingestion, cited drafting, social value calculation and PDF or DOCX export.',
-    cta: 'Request access',
-    href: '/contact/?enquiry=limited-access#contact-form',
+    cta: STARTER.cta,
+    href: startHref(STARTER.planKey),
   },
   {
     name: 'Pro',
-    price: '£149',
+    price: `£${PRO.monthly}`,
     period: '/mo',
     body: '5 users and 750 AI credits a month, plus the post-award evidence vault and the authority-facing social-value report. Sized for an SME bid team.',
-    cta: 'Request access',
-    href: '/contact/?enquiry=limited-access#contact-form',
+    cta: PRO.cta,
+    href: startHref(PRO.planKey),
     recommended: true,
   },
   {
     name: 'Portfolio',
-    price: 'Contact sales',
-    /* [PRICING-LOCK-2026-08] Two corrections, both of which had survived here
-       after being fixed on /pricing.
-       1. "Bid volume effectively unlimited" is RETIRED. Bid volume genuinely is
-          unmetered, but the sentence read as "this plan has no cap", and it has
-          one: 3,000 AI credits a month, enforced by the same guard as every
-          other plan. The credit figure is now stated so the two facts cannot be
-          mistaken for each other.
-       2. "white-label" -> "branded", matching /pricing. White-label claims the
-          export carries NO CrowAgent branding at all, which is a materially
-          stronger promise than an export carrying the customer's own brand.
-          "Branded" is the one engineering can defend, so it is the one used on
-          both surfaces. */
-    body: '10 users included, more by arrangement, and 3,000 AI credits a month. Branded exports and a named account contact for high-volume bidding teams.',
-    cta: 'Contact sales',
-    href: '/contact/',
+    price: `£${PORTFOLIO.monthly}`,
+    period: '/mo',
+    /* [PRICING-LOCK-2026-08] "Bid volume effectively unlimited" is RETIRED: the
+       plan has a cap, 3,000 AI credits a month. "Branded", never "white-label",
+       matching /pricing. Single sign-on is included since D235. */
+    body: '10 users included, more by arrangement, and 3,000 AI credits a month. Single sign-on, branded exports and a named account contact for high-volume bidding teams.',
+    cta: PORTFOLIO.cta,
+    href: startHref(PORTFOLIO.planKey),
   },
 ];
 

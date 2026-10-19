@@ -150,6 +150,7 @@
  * else. Violet and teal appear nowhere near a control, a hover or a focus ring.
  */
 import Button from '../ui/Button.astro';
+import { SIGNUP_URL } from '../../data/app';
 import { analyse } from '../../lib/tender-matrix';
 /*
  * THE SAME TWO FORMATTERS THE LIVE TERMINAL USES, 2026-09-01. They live in
@@ -459,7 +460,7 @@ const CHECKED = SAMPLES.map((s) => {
       offer at two scroll depths, not a second competing action.
     */}
     <div class="btn-row">
-      <Button href="/contact/?enquiry=limited-access#contact-form">Request access</Button>
+      <Button href={SIGNUP_URL}>Start now</Button>
       <Button href="/tools/tender-compliance-matrix/" variant="secondary">
         Read a tender, free
       </Button>

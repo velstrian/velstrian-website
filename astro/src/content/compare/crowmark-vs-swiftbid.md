@@ -105,7 +105,7 @@ faq:
 <figcaption>The answer library in CrowMark, shown as a drawn representation. It is the store a subscription builds up bid after bid, which the drafter then grounds new answers in.</figcaption>
 </figure>
 <p>CrowMark also calculates social value deterministically against the weighting the buyer published, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. It does not supply an external bid writer. The reviewer who approves each draft is your own.</p>
-<p>CrowMark publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is contact sales. Access is offered by request rather than self-serve signup, so you book a demo and the account is set up once the plan is agreed. Setting it up needs a card, held securely by Stripe and never stored by us.</p>
+<p>CrowMark publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 
 <h2 id="pricing-compared">Pricing compared</h2>
 <p>The maths comes down to volume. SwiftBid Standard at &pound;349 a bid costs about &pound;1,047 for three bids in a year. A CrowMark Starter subscription is &pound;49 per month, or &pound;529 for a year on annual billing, which covers as many bids as you want to write in that time. So for one or two bids a year SwiftBid can be cheaper, and from roughly the third bid of the year a CrowMark subscription tends to win on cost, before you even count the tender discovery, social-value maths and delivery evidence that come with it.</p>
@@ -177,7 +177,7 @@ faq:
 <li>SwiftBid per-bid pricing (&pound;149 Basic, &pound;349 Standard, &pound;749 Premium), no tender discovery feed, optional human expert review and 6-hour turnaround at Premium, and target of 1 to 4 bids a year. These figures are reported by a dated third-party comparison. SwiftBid does not publish an equivalent primary pricing page we could verify directly. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>Per-bid versus subscription break-even (three SwiftBid Standard bids at roughly &pound;1,047). CleanTender, "Bid writer vs AI bid tool: which wins for UK SMEs", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool</a></li>
 <li>CrowMark capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). Velstrian, <a href="/crowmark/">CrowMark product page</a>.</li>
-<li>CrowMark pricing: Starter &pound;49/month (&pound;529/year), Pro &pound;149/month, Portfolio contact sales (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>CrowMark pricing: Starter &pound;49/month (&pound;529/year), Pro &pound;149/month, Portfolio &pound;549/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 
