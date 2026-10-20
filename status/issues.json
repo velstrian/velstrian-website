@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T21:08:04.455Z",
+  "updated": "2026-10-20T20:24:52.809Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2929,6 +2929,14 @@
       "title": "Pricing page: Portfolio and Buyer Portfolio prices published, every plan says Start now, simpler cards and one Extra usage strip (R285-P2-ENTERPRISE-SELF-SERVE-01, R285-P2-SELF-SERVE-SIGNUP-01, D235, D236)",
       "status": "BUILT",
       "note": "BUILT 2026-10-19, committed locally, NOT pushed. D236 holds production for one combined round, and the site now describes self serve sign up, Portfolio checkout and self serve extra usage, so it must ship with the app and never ahead of it. Portfolio GBP 549 a month, GBP 5,929 a year, Buyer Portfolio GBP 699 and GBP 7,549, both floor(monthly x 12 x 0.9) like Starter 529 and Pro 1,609. Every plan button goes to https://app.crowagent.ai/signup?plan=<token>, with _annual appended when the annual switch is on: crowmark_starter, crowmark_pro, crowmark_portfolio, buyer_pro, buyer_portfolio. The app today accepts only crowmark_starter, crowmark_pro and their _annual forms (VALID_CHECKOUT_PLANS), so the other six tokens need the app lane. Request access left the nav, the homepage, the sector, glossary, tools, roadmap, resources, integrations and compare pages, the command palette and the blog CTAs. check-pricing-parity.js now holds both Portfolio prices against D235 and forbids the superseded D232 GBP 399 and its GBP 4,309 annual. Build:deploy chain, content, FAQ, SEO, links, design system, palette, render, treatments, controls, sticky and budget gates green on the built site. OPEN for the owner: terms.md section 2 still says access is by request and no self serve signup, which D236 makes false, left unedited because it is the legal text."
+    },
+    {
+      "id": "A-294",
+      "src": "owner 2026-10-20",
+      "sev": "P1",
+      "title": "Rebrand the website to Velstrian Tenderworks (Velstrian Bid, Velstrian Buy, Velstrian Systems Ltd) and 301 crowagent.ai to velstrian.com",
+      "status": "OPEN",
+      "note": "Platform row R285-REBRAND-08-WEBSITE (RELEASE-2.8.5-TRACKER.md). Content, metadata, llms.txt, legal pages, OG images (artwork pending, R285-REBRAND-05), then the crowagent.ai 301 (plan C5 to C7). Push to main is a production Cloudflare deploy and needs the owner approval. D237 holds pricing changes until self serve is proven."
     }
   ],
   "directives": [
@@ -2998,5 +3006,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 294
+  "nextId": 295
 }
