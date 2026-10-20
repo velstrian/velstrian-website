@@ -135,6 +135,7 @@ const GATES = [
      in `build:deploy`, unlike check-csp, because a policy that silently kills a
      paid capability should stop a deploy rather than wait for certification. */
   { name: 'check-csp-required-origins', cmd: node, args: ['scripts/check-csp-required-origins.js'] },
+  { name: 'check-brand-names', cmd: node, args: ['scripts/check-brand-names.js'] },
   { name: 'check-utilities', cmd: node, args: ['scripts/check-utilities.js'] },
   { name: 'check-render', cmd: node, args: ['scripts/check-render.js'] },
   { name: 'check-glossary-filter', cmd: node, args: ['scripts/check-glossary-filter.js'] },

@@ -33,7 +33,7 @@ Our security controls programme is built to ISO 27001.
 
 ### ICO Registered Data Controller
 
-VELSTRIAN SYSTEMS LIMITED is registered with the Information Commissioner's Office and verifiable on the ICO public register.
+Velstrian Systems Ltd is registered with the Information Commissioner's Office and verifiable on the ICO public register.
 
 ## Security documentation
 
@@ -60,11 +60,11 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 
 ## GDPR compliance
 
-- VELSTRIAN SYSTEMS LIMITED is registered as a data controller with the Information Commissioner’s Office (ICO) under the Data Protection (Charges and Information) Regulations 2018.
+- Velstrian Systems Ltd is registered as a data controller with the Information Commissioner’s Office (ICO) under the Data Protection (Charges and Information) Regulations 2018.
 - A Data Processing Agreement (DPA) is available on request for customers. It is in draft pending legal review, so terms may change before signature.
 - Data subject rights supported: right to erasure, data portability, restriction of processing, and access.
 
-<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Verifiable on the <a href="https://ico.org.uk/ESDWebPages/Search">ICO public register</a> by searching for “VELSTRIAN SYSTEMS LIMITED”.</p> <p>Data requests: <a href="mailto:hello@velstrian.com">hello@velstrian.com</a></p> </dd> </dl>
+<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Verifiable on the <a href="https://ico.org.uk/ESDWebPages/Search">ICO public register</a> by searching for “Velstrian Systems Ltd”.</p> <p>Data requests: <a href="mailto:hello@velstrian.com">hello@velstrian.com</a></p> </dd> </dl>
 
 ## Access controls
 
@@ -126,7 +126,7 @@ Velstrian targets 99.5% monthly uptime, with independent public status monitorin
 
 ## Company & regulatory details
 
-<dl class="deflist deflist--ledger"> <dt>ICO registration</dt> <dd>Registered Data Controller</dd> <dt>Company</dt> <dd>VELSTRIAN SYSTEMS LIMITED</dd> <dt>Registered</dt> <dd>England and Wales</dd> <dt>Data controller</dt> <dd>VELSTRIAN SYSTEMS LIMITED</dd> <dt>General Enquiries</dt> <dd><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></dd> <dt>Security</dt> <dd><a href="mailto:security@velstrian.com">security@velstrian.com</a></dd> </dl>
+<dl class="deflist deflist--ledger"> <dt>ICO registration</dt> <dd>Registered Data Controller</dd> <dt>Company</dt> <dd>Velstrian Systems Ltd</dd> <dt>Registered</dt> <dd>England and Wales</dd> <dt>Data controller</dt> <dd>Velstrian Systems Ltd</dd> <dt>General Enquiries</dt> <dd><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></dd> <dt>Security</dt> <dd><a href="mailto:security@velstrian.com">security@velstrian.com</a></dd> </dl>
 
 <dl class="deflist"> <dt>Data request contact</dt> <dd>For erasure, portability, restriction, or access requests, email <a href="mailto:hello@velstrian.com">hello@velstrian.com</a>. We respond within statutory timeframes.</dd> </dl>
 

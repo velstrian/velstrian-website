@@ -5,7 +5,7 @@ description: "PPN 026 sets two outcomes and six model award criteria, and five o
 publishDate: 2026-09-08
 category: "PPN 026 & Social Value"
 readingTime: 8
-author: "CrowMark Regulatory Desk"
+author: "Velstrian Regulatory Desk"
 authorType: "Organization"
 draft: false
 faq:
@@ -61,7 +61,7 @@ Five things were expected in autumn 2026 and none of them has appeared.
 4. **The framework and call off guidance.** How the model works where the buy runs through a framework or a dynamic market rather than a standalone procurement.
 5. **The Target Cohorts and Target Skills definitions.** Which groups and which skills count, which is the difference between an answer that scores and an answer that reads well.
 
-This is the single most important fact on this page, so we will state it plainly. **Anyone offering you a finished PPN 026 scoring engine today is scoring against criteria that have not been published.** That includes us, which is why CrowMark offers PPN 026 and makes it the default on new work, and does not pretend to score against sub criteria nobody has seen.
+This is the single most important fact on this page, so we will state it plainly. **Anyone offering you a finished PPN 026 scoring engine today is scoring against criteria that have not been published.** That includes us, which is why Velstrian Bid offers PPN 026 and makes it the default on new work, and does not pretend to score against sub criteria nobody has seen.
 
 ## The date collision worth checking
 
@@ -95,7 +95,7 @@ PPN 026 **does not mention PPN 002 at all.** It refers to a transition period fr
 
 What PPN 026 does say is that for procurements commenced under the Procurement Act 2023 before 1 January 2027, in scope organisations are encouraged to transition to the new model but may apply the previous edition during the transition period.
 
-So both models are live work for the next few months. We have made our own product decision about that, which is a decision about our roadmap and not a statement about the status of any notice: CrowMark stops offering the previous edition after 31 December 2026, and anything already built under it stays readable, stays exportable and keeps naming the model it was built against.
+So both models are live work for the next few months. We have made our own product decision about that, which is a decision about our roadmap and not a statement about the status of any notice: Velstrian Bid stops offering the previous edition after 31 December 2026, and anything already built under it stays readable, stays exportable and keeps naming the model it was built against.
 
 ## What to do before January
 

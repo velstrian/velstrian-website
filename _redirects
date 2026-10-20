@@ -618,8 +618,29 @@ https://www.crowagent.ai/*  https://crowagent.ai/:splat  301!
 #    handed a 301 and then a 308.
 /compare/crowmark-vs-manual   /compare/                                                    301
 /compare/crowmark-vs-manual/  /compare/                                                    301
-/how-it-works                 /crowmark/                                                   301
-/how-it-works/                /crowmark/                                                   301
+/how-it-works                 /bid/                                                        301
+/how-it-works/                /bid/                                                        301
+
+# ── 18. REBRAND: CROWMARK TO BID/BUY (2026-10-20, A-294) ────────────────────
+# Owner decisions D238, D239, D243, D245. CrowMark is rebranded to Velstrian Bid,
+# CrowMark Buyer to Velstrian Buy. Seven routes renamed.
+# Both slashed and unslashed forms are mapped so any external link or search
+# index entry resolves cleanly to the new slug.
+# Plain 301, trailing slash on all destinations.
+/crowmark                     /bid/                                                        301
+/crowmark/                    /bid/                                                        301
+/crowmark-buyers              /buy/                                                        301
+/crowmark-buyers/             /buy/                                                        301
+/compare/crowmark-vs-autogenai /compare/bid-vs-autogenai/                                  301
+/compare/crowmark-vs-autogenai/ /compare/bid-vs-autogenai/                                 301
+/compare/crowmark-vs-cleantender /compare/bid-vs-cleantender/                               301
+/compare/crowmark-vs-cleantender/ /compare/bid-vs-cleantender/                              301
+/compare/crowmark-vs-mytender-io /compare/bid-vs-mytender-io/                               301
+/compare/crowmark-vs-mytender-io/ /compare/bid-vs-mytender-io/                              301
+/compare/crowmark-vs-swiftbid  /compare/bid-vs-swiftbid/                                   301
+/compare/crowmark-vs-swiftbid/ /compare/bid-vs-swiftbid/                                   301
+/blog/social-value-portal-vs-crowmark /blog/social-value-portal-vs-bid/                     301
+/blog/social-value-portal-vs-crowmark/ /blog/social-value-portal-vs-bid/                    301
 
 # ── 18. CATCH-ALL 404 ───────────────────────────────────────────────────────
 # WS-AUDIT-030 (2026-05-10). Any URL not matched by a file on disk or by a rule

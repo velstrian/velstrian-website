@@ -119,7 +119,7 @@ Yes. Section 12 requires contracting authorities to have regard to the particula
 
 ### Put your effort where the marks are
 
-Under MAT, social value sits inside the award test. CrowMark helps you plan and draft a TOMs-aligned PPN 026 social value response so a scored section becomes a strength, not an afterthought.
+Under MAT, social value sits inside the award test. Velstrian Bid helps you plan and draft a TOMs-aligned PPN 026 social value response so a scored section becomes a strength, not an afterthought.
 
-[See CrowMark →](/crowmark/)
+[See Velstrian Bid →](/bid/)
 [Read the PPN 026 guide →](/blog/ppn-026-social-value-guide/)

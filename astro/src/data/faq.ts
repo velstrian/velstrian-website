@@ -58,7 +58,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // node, so the market scoping was in the structured data twice.
         question: 'What is Velstrian?',
         answer:
-          'Velstrian helps suppliers find the work, draft answers cited to the rules, the tender and their own bids, and evidence delivery after award. Its product, CrowMark, drafts every answer from your own submitted bids and checks the figures in code rather than generating them. It serves both sides of a procurement. CrowMark for Suppliers answers tenders, RFPs, RFIs, PQQs and SQs from bids you have already written. CrowMark for Buyers builds and publishes requirements, then locates the evidence for each one across the responses received. It never scores, because the evaluation panel scores. Both work in the public sector and the private sector.',
+          'Velstrian helps suppliers find the work, draft answers cited to the rules, the tender and their own bids, and evidence delivery after award. Its platform drafts every answer from your own submitted bids and checks the figures in code rather than generating them. It serves both sides of a procurement. Velstrian Bid answers tenders, RFPs, RFIs, PQQs and SQs from bids you have already written. Velstrian Buy builds and publishes requirements, then locates the evidence for each one across the responses received. It never scores, because the evaluation panel scores. Both work in the public sector and the private sector.',
       },
       // ── A-54, 2026-08-04: THE 14-DAY TRIAL IS GONE FROM THIS FILE ──────────
       // Both entries below asserted a published 14-day free trial with no card
@@ -110,9 +110,9 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // ("Free, no account") and its page body ("there is no sign-up").
         // "NO CARD IS TAKEN WHEN YOU ASK" REMOVED, R262-D-20, 2026-08-08. See
         // the note on "How do I sign up?" above; same route, same fix.
-        question: 'Can I try CrowMark before I subscribe?',
+        question: 'Can I try Velstrian Bid before I subscribe?',
         answer:
-          'Yes. Your first 7 days on CrowMark are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. If you would rather see it first, book a demo. The tender compliance matrix is always free with no account needed.',
+          'Yes. Your first 7 days on Velstrian Bid are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. If you would rather see it first, book a demo. The tender compliance matrix is always free with no account needed.',
       },
     ],
   },
@@ -120,7 +120,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
     id: 'faq-products',
     label: 'Products',
     heading: 'Products',
-    standfirst: 'How CrowMark finds tenders, drafts answers and scores social value.',
+    standfirst: 'How Velstrian Bid finds tenders, drafts answers and scores social value.',
     entries: [
       {
         question: 'What is PPN 026?',
@@ -130,18 +130,18 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'What is the 10% minimum?',
         answer:
-          'The buyer publishes the social value weighting in its own tender documents, and many local authorities and NHS trusts set a higher one than central government requires. CrowMark lets you model the weighting your buyer published, calculates the social-value total in code, and drafts the narrative with a PPN 017 AI-transparency disclosure for you to approve.',
+          'The buyer publishes the social value weighting in its own tender documents, and many local authorities and NHS trusts set a higher one than central government requires. Velstrian Bid lets you model the weighting your buyer published, calculates the social-value total in code, and drafts the narrative with a PPN 017 AI-transparency disclosure for you to approve.',
       },
       {
         question: 'How is social value scored?',
         answer:
-          'CrowMark calculates it deterministically in code, using unit-aware arithmetic over a curated catalogue of 19 social-value measures aligned to National TOMs conventions. It is not a full National TOMs implementation. The language model never computes the figure: any generated prose containing a £ or % that the computed figures do not support is rejected rather than shown.',
+          'Velstrian Bid calculates it deterministically in code, using unit-aware arithmetic over a curated catalogue of 19 social-value measures aligned to National TOMs conventions. It is not a full National TOMs implementation. The language model never computes the figure: any generated prose containing a £ or % that the computed figures do not support is rejected rather than shown.',
       },
       {
-        question: 'Is CrowMark ready to use?',
+        question: 'Is Velstrian Bid ready to use?',
         answer:
-          'CrowMark is live and in daily use, with more being added. Tender discovery from Contracts Finder and Find a Tender, document ingestion, grounded answer drafting, deterministic social value calculation, delivery tracking and Procurement Act 2023 s.52 and s.71 KPI checks all work today. See the CrowMark page for what each stage covers.',
-        link: { label: 'CrowMark page', href: '/crowmark/' },
+          'Velstrian Bid is live and in daily use, with more being added. Tender discovery from Contracts Finder and Find a Tender, document ingestion, grounded answer drafting, deterministic social value calculation, delivery tracking and Procurement Act 2023 s.52 and s.71 KPI checks all work today. See the Velstrian Bid page for what each stage covers.',
+        link: { label: 'Velstrian Bid page', href: '/bid/' },
       },
     ],
   },
@@ -160,7 +160,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // into the plans answer published two motions at once; it is a
         // separate offer with its own limits and it reads as one.
         answer:
-          "CrowMark's plans are Starter, Pro and Portfolio, each with a published price. Sign up and start today by card, and annual billing saves 10%.",
+          "Velstrian Bid's plans are Starter, Pro and Portfolio, each with a published price. Sign up and start today by card, and annual billing saves 10%.",
         link: { label: 'See current pricing', href: '/pricing/' },
       },
       {
@@ -238,7 +238,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'How are AI credits counted?',
         answer:
-          'One credit is one AI generation, such as a drafted tender answer or a rewritten method statement. Your plan includes a monthly allowance of them. Reading a tender document and extracting its requirements is charged by size, at 3 credits per 10 pages, rounded up, so a 10-page invitation to tender costs 3 credits. A page means one PDF page, one PowerPoint slide, or a whole Word or plain text document. Everything CrowMark calculates rather than generates, including social value arithmetic, scoring and exports, is free and unlimited on every paid plan, and a generation that fails is never charged.',
+          'One credit is one AI generation, such as a drafted tender answer or a rewritten method statement. Your plan includes a monthly allowance of them. Reading a tender document and extracting its requirements is charged by size, at 3 credits per 10 pages, rounded up, so a 10-page invitation to tender costs 3 credits. A page means one PDF page, one PowerPoint slide, or a whole Word or plain text document. Everything Velstrian Bid calculates rather than generates, including social value arithmetic, scoring and exports, is free and unlimited on every paid plan, and a generation that fails is never charged.',
       },
       {
         // ── R262-WEB-08, 2026-08-09 ────────────────────────────────────────
@@ -288,12 +288,12 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'What data do you use?',
         answer:
-          "Social value is computed in code with unit-aware arithmetic over CrowMark's curated measure catalogue.",
+          "Social value is computed in code with unit-aware arithmetic over Velstrian's curated measure catalogue.",
       },
       {
         question: 'Is my data secure?',
         answer:
-          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. VELSTRIAN SYSTEMS LIMITED is registered with the ICO as a data controller and we are GDPR compliant.',
+          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. Velstrian Systems Ltd is registered with the ICO as a data controller and we are GDPR compliant.',
         link: { label: 'See our Security page for full details', href: '/security/' },
       },
     ],

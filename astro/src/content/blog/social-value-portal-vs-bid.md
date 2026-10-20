@@ -1,14 +1,14 @@
 ---
-title: "Social Value Portal vs CrowMark: Which is Right for Your Business?"
-seoTitle: "Social Value Portal vs CrowMark compared"
-description: "A straight comparison of Social Value Portal and CrowMark on social value work: who each one is built for, what each does well, and where neither will suit you."
+title: "Social Value Portal vs Velstrian Bid: Which is Right for Your Business?"
+seoTitle: "Social Value Portal vs Velstrian Bid compared"
+description: "A straight comparison of Social Value Portal and Velstrian Bid on social value work: who each one is built for, what each does well, and where neither will suit you."
 publishDate: 2026-04-10
 category: "PPN 026 & Social Value"
 readingTime: 8
 draft: false
 ---
 
-If you bid for UK public sector contracts, you need a social value strategy. PPN 026 sets a minimum social value weighting of 10% in central government procurement, rising to 20% on the largest contracts, and buyers often set a higher weighting than the minimum in practice. Two platforms that help suppliers meet this requirement are the Social Value Portal (SVP) and CrowMark. They serve different segments of the market, at very different price points. This guide offers an honest comparison to help you choose the right tool for your organisation.
+If you bid for UK public sector contracts, you need a social value strategy. PPN 026 sets a minimum social value weighting of 10% in central government procurement, rising to 20% on the largest contracts, and buyers often set a higher weighting than the minimum in practice. Two platforms that help suppliers meet this requirement are the Social Value Portal (SVP) and Velstrian Bid. They serve different segments of the market, at very different price points. This guide offers an honest comparison to help you choose the right tool for your organisation.
 
 ## The regulatory context: PPN 026
 
@@ -38,38 +38,38 @@ SVP offers a platform that covers the full social value lifecycle: bid planning,
 - **Complexity:** The platform is feature-rich, which means a steeper learning curve for smaller teams without dedicated social value staff.
 - **Onboarding time:** Enterprise platforms typically require onboarding sessions, training, and configuration. This is appropriate for large organisations but can delay smaller suppliers who need to respond to a tender quickly.
 
-## CrowMark: built for SMEs
+## Velstrian Bid: built for SMEs
 
-CrowMark was built specifically for SME suppliers who have to answer a scored social value section without the cost and complexity of an enterprise platform. It is Velstrian's bid and tender product.
+Velstrian Bid was built specifically for SME suppliers who have to answer a scored social value section without the cost and complexity of an enterprise platform. It is Velstrian's bid and tender product.
 
-CrowMark covers the core workflow: contract profiling, deterministic mapping of the profile to the model the buyer names (rules-based, not AI-generated), TOMs measure selection with National TOMs 2023-24 proxy values, AI-assisted narrative generation, evidence tracking, and PDF export.
+Velstrian Bid covers the core workflow: contract profiling, deterministic mapping of the profile to the model the buyer names (rules-based, not AI-generated), TOMs measure selection with National TOMs 2023-24 proxy values, AI-assisted narrative generation, evidence tracking, and PDF export.
 
-**Where CrowMark excels:**
+**Where Velstrian Bid excels:**
 
-- **Pricing:** CrowMark starts at £49 per month (Starter plan), with Pro at £149 per month. This is a fraction of SVP's annual cost, making it accessible to SMEs and sole traders.
+- **Pricing:** Velstrian Bid starts at £49 per month (Starter plan), with Pro at £149 per month. This is a fraction of SVP's annual cost, making it accessible to SMEs and sole traders.
 - **Speed:** The whole path from contract profile to exportable PDF runs in one sitting, without waiting on a scheduled onboarding call first.
 - **Simplicity:** The interface is designed for suppliers who do not have a dedicated social value team. The deterministic mapping guides you through the TOMs framework step by step.
-- **AI narrative generation:** CrowMark uses AI to generate bid-ready social value narrative text, which you can review and customise before submission. This saves hours of writing time for teams without social value copywriting experience.
+- **AI narrative generation:** Velstrian Bid uses AI to generate bid-ready social value narrative text, which you can review and customise before submission. This saves hours of writing time for teams without social value copywriting experience.
 - **Evidence tracking:** Built-in evidence tracker with monthly email reminders helps you stay on top of delivery commitments throughout the contract lifecycle.
 
-**Where CrowMark may not fit:**
+**Where Velstrian Bid may not fit:**
 
-- CrowMark does not integrate directly with contracting authority procurement portals. If a contracting authority requires you to submit social value data through SVP specifically, you will need an SVP account for that submission.
-- CrowMark does not offer the benchmarking and network-wide analytics that SVP provides to large organisations managing hundreds of supplier relationships.
-- The variant compared here is CrowMark for Suppliers. Velstrian also offers CrowMark for Buyers, but that variant does something different: it helps a buying team build and publish requirements and then locate the evidence for each one across the responses received. It never scores, because the human evaluation panel does that. Neither variant aggregates social value delivery across an authority's whole supply chain the way SVP does.
+- Velstrian Bid does not integrate directly with contracting authority procurement portals. If a contracting authority requires you to submit social value data through SVP specifically, you will need an SVP account for that submission.
+- Velstrian Bid does not offer the benchmarking and network-wide analytics that SVP provides to large organisations managing hundreds of supplier relationships.
+- The variant compared here is Velstrian Bid. Velstrian also offers Velstrian Bid for Buyers, but that variant does something different: it helps a buying team build and publish requirements and then locate the evidence for each one across the responses received. It never scores, because the human evaluation panel does that. Neither variant aggregates social value delivery across an authority's whole supply chain the way SVP does.
 
 ## Head-to-head comparison
 
 The following comparison covers the key decision factors for suppliers evaluating the two platforms:
 
-- **Annual cost:** SVP does not publish pricing (enterprise, quote on request). CrowMark Starter is £529 per year (£49/month). Pro is £1,609 per year (£149/month).
-- **Target user:** SVP targets large enterprises and Tier 1 contractors. CrowMark targets SMEs and mid-market suppliers.
-- **TOMs framework:** Both platforms support the TOMs framework. CrowMark uses National TOMs 2023-24 proxy values stored in its database.
-- **PPN support:** Both work against a Procurement Policy Note social value section. CrowMark reports which edition of the Social Value Model a draft was mapped to, so a reviewer can check it against the tender before submission.
-- **Narrative generation:** SVP provides templates and guidance. CrowMark uses AI to generate draft narrative text that you can customise.
-- **Evidence tracking:** Both platforms offer evidence tracking. CrowMark includes automated monthly email reminders.
-- **Onboarding time:** SVP typically requires scheduled onboarding and training. CrowMark walks you through the workflow in-product, with no training session to book.
-- **Contracting authority integration:** SVP integrates with many contracting authority systems. CrowMark does not, you export a PDF and submit through the authority's portal.
+- **Annual cost:** SVP does not publish pricing (enterprise, quote on request). Velstrian Bid Starter is £529 per year (£49/month). Pro is £1,609 per year (£149/month).
+- **Target user:** SVP targets large enterprises and Tier 1 contractors. Velstrian Bid targets SMEs and mid-market suppliers.
+- **TOMs framework:** Both platforms support the TOMs framework. Velstrian Bid uses National TOMs 2023-24 proxy values stored in its database.
+- **PPN support:** Both work against a Procurement Policy Note social value section. Velstrian Bid reports which edition of the Social Value Model a draft was mapped to, so a reviewer can check it against the tender before submission.
+- **Narrative generation:** SVP provides templates and guidance. Velstrian Bid uses AI to generate draft narrative text that you can customise.
+- **Evidence tracking:** Both platforms offer evidence tracking. Velstrian Bid includes automated monthly email reminders.
+- **Onboarding time:** SVP typically requires scheduled onboarding and training. Velstrian Bid walks you through the workflow in-product, with no training session to book.
+- **Contracting authority integration:** SVP integrates with many contracting authority systems. Velstrian Bid does not, you export a PDF and submit through the authority's portal.
 
 ## Which should you choose?
 
@@ -77,9 +77,9 @@ The honest answer is that it depends on your organisation's size, budget, and th
 
 > **Choose SVP if:** You are a large enterprise or Tier 1 contractor managing multiple large public sector contracts. Your contracting authorities require SVP submissions. You have dedicated social value staff and the budget to support an enterprise platform. You need network-wide benchmarking and analytics.
 >
-> **Choose CrowMark if:** You are an SME or mid-market supplier bidding on public sector contracts. You need to answer a scored social value section without spending thousands per year. You want to complete social value plans quickly without extensive training. You do not have a dedicated social value team and would benefit from AI-assisted narrative generation.
+> **Choose Velstrian Bid if:** You are an SME or mid-market supplier bidding on public sector contracts. You need to answer a scored social value section without spending thousands per year. You want to complete social value plans quickly without extensive training. You do not have a dedicated social value team and would benefit from AI-assisted narrative generation.
 
-It is also worth noting that the two platforms are not mutually exclusive. Some organisations use SVP for contracts where the contracting authority mandates it, and CrowMark for all other bids where they have flexibility in how they present their social value commitments. The cost savings from using CrowMark on the majority of bids can offset the cost of maintaining an SVP subscription for the contracts that require it.
+It is also worth noting that the two platforms are not mutually exclusive. Some organisations use SVP for contracts where the contracting authority mandates it, and Velstrian Bid for all other bids where they have flexibility in how they present their social value commitments. The cost savings from using Velstrian Bid on the majority of bids can offset the cost of maintaining an SVP subscription for the contracts that require it.
 
 ## The bigger picture: social value is not optional
 
@@ -87,7 +87,7 @@ Regardless of which platform you choose, the underlying message is the same: soc
 
 The cost of a weak social value response is not confined to one bid. The same section comes up on every public sector tender you enter, so a habit of leaving it until the last afternoon compounds across a year of bidding. Where two bids are close on quality and price, the social value marks are what separate them.
 
-Whether you use SVP, CrowMark, or another approach entirely, the important thing is to have a systematic, evidence-based process for social value planning and delivery. The regulatory requirement is here to stay, and treating it as a strategic discipline rather than a compliance burden puts a supplier in a stronger position at evaluation.
+Whether you use SVP, Velstrian Bid, or another approach entirely, the important thing is to have a systematic, evidence-based process for social value planning and delivery. The regulatory requirement is here to stay, and treating it as a strategic discipline rather than a compliance burden puts a supplier in a stronger position at evaluation.
 
 ---
 

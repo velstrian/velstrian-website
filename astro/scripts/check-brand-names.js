@@ -1,0 +1,128 @@
+#!/usr/bin/env node
+/**
+ * check-brand-names.js — single source of truth and brand names guard.
+ * [R285-REBRAND-08 · A-294]
+ *
+ * Verifies:
+ * 1. astro/src/lib/brand-names.ts matches crowagent-platform/packages/tokens/src/brand-names.ts
+ * 2. No old brand names (CrowMark, CrowAgent, Crow Agent, old company name) appear in built HTML.
+ *    (External app/infrastructure hosts during transition are allowed: app.crowagent.ai,
+ *    status.crowagent.ai, calendly.com/crowagent-platform, crowagent-platform-production.up.railway.app).
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.join(__dirname, '..');
+const DIST = path.join(ROOT, 'dist');
+const WEBSITE_LIB = path.join(ROOT, 'src', 'lib', 'brand-names.ts');
+const PLATFORM_TOKENS = path.resolve(ROOT, '..', '..', 'crowagent-platform', 'packages', 'tokens', 'src', 'brand-names.ts');
+
+let errors = [];
+
+// 1. Check brand-names.ts source agreement with platform tokens if platform repo is present
+if (fs.existsSync(PLATFORM_TOKENS) && fs.existsSync(WEBSITE_LIB)) {
+  const websiteContent = fs.readFileSync(WEBSITE_LIB, 'utf8');
+  const platformContent = fs.readFileSync(PLATFORM_TOKENS, 'utf8');
+
+  const extractConstants = (src) => {
+    const map = {};
+    const re = /export\s+const\s+([A-Za-z0-9_]+)\s*=\s*(?:`([^`]*)`|"([^"]*)"|'([^']*)')/g;
+    let m;
+    while ((m = re.exec(src)) !== null) {
+      map[m[1]] = m[2] ?? m[3] ?? m[4];
+    }
+    return map;
+  };
+
+  const webConsts = extractConstants(websiteContent);
+  const platConsts = extractConstants(platformContent);
+
+  const keysToCheck = [
+    'PLATFORM_NAME',
+    'PLATFORM_SHORT_NAME',
+    'PRODUCT_NAME_BID',
+    'PRODUCT_NAME_BUY',
+    'LEGAL_ENTITY_NAME',
+    'COMPANY_NUMBER',
+    'ICO_NUMBER',
+    'REGISTERED_OFFICE',
+  ];
+
+  for (const k of keysToCheck) {
+    if (webConsts[k] !== platConsts[k]) {
+      errors.push(`brand-names drift: ${k} in website is "${webConsts[k]}", platform tokens has "${platConsts[k]}"`);
+    }
+  }
+}
+
+// 2. Check built HTML in dist/ for forbidden old brand names
+function getHtmlFiles(dir) {
+  let res = [];
+  if (!fs.existsSync(dir)) return res;
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) res = res.concat(getHtmlFiles(full));
+    else if (ent.name.endsWith('.html')) res.push(full);
+  }
+  return res;
+}
+
+const KEPT_HOSTS = [
+  'app.crowagent.ai',
+  'status.crowagent.ai',
+  'calendly.com/crowagent-platform',
+  'crowagent-platform-production.up.railway.app',
+];
+
+if (fs.existsSync(DIST)) {
+  const htmlFiles = getHtmlFiles(DIST);
+  for (const file of htmlFiles) {
+    const rel = path.relative(DIST, file).replace(/\\/g, '/');
+    let content = fs.readFileSync(file, 'utf8');
+
+    // Mask allowed transitional external hosts
+    for (const h of KEPT_HOSTS) {
+      content = content.split(h).join('__KEPT_HOST__');
+    }
+
+    // Check for CrowMark
+    const crowmarkMatches = content.match(/\bCrowMark\b/g);
+    if (crowmarkMatches) {
+      errors.push(`[old-product-name] ${rel}: found ${crowmarkMatches.length} occurrence(s) of "CrowMark" in built HTML`);
+    }
+
+    // Check for CrowAgent / Crow Agent
+    const crowagentMatches = content.match(/\bCrow\s?Agent\b/g);
+    if (crowagentMatches) {
+      errors.push(`[old-brand-name] ${rel}: found ${crowagentMatches.length} occurrence(s) of "CrowAgent" in built HTML`);
+    }
+
+    // Check for old email addresses @crowagent.ai
+    const emailMatches = content.match(/[a-z0-9._-]+@crowagent\.ai/gi);
+    if (emailMatches) {
+      errors.push(`[old-email] ${rel}: found old email "${emailMatches.join(', ')}" in built HTML`);
+    }
+
+    // Check for old company name
+    const legalMatches = content.match(/(?:CROWAGENT\s+LTD|Crow[Aa]gent\s+(?:Ltd|Limited)|VELSTRIAN\s+SYSTEMS\s+LIMITED)\b/g);
+    if (legalMatches) {
+      errors.push(`[wrong-legal-name] ${rel}: found "${legalMatches.join(', ')}" in built HTML (must be "Velstrian Systems Ltd")`);
+    }
+  }
+}
+
+if (errors.length > 0) {
+  console.error(`FAIL — check-brand-names: ${errors.length} violation(s) found:\n`);
+  for (const err of errors.slice(0, 30)) {
+    console.error(`  - ${err}`);
+  }
+  if (errors.length > 30) {
+    console.error(`  ... and ${errors.length - 30} more`);
+  }
+  process.exit(1);
+} else {
+  console.log('PASS — check-brand-names: brand names match tokens and 0 old brand occurrences found in built HTML.');
+  process.exit(0);
+}

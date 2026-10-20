@@ -61,15 +61,15 @@ When the assessment comes round, somebody has to reconstruct what was promised, 
 
 The commitment was real. The delivery may well have been real too. What is missing is the thread connecting them, and that thread is what an assessment is.
 
-## What CrowMark does about it
+## What Velstrian Bid does about it
 
-This is the part of the problem CrowMark was built to close, and it is worth being precise about which bits are automated and which are not.
+This is the part of the problem Velstrian Bid was built to close, and it is worth being precise about which bits are automated and which are not.
 
 **The commitments come out of the bid and into the contract record.** When a bid is won, the commitments it made become tracked items on a supplier profile rather than sentences in a submitted PDF. They carry the wording that was actually offered. The delivery team gets the promise without having to find the document.
 
 **Evidence attaches to the commitment it belongs to.** Post-award delivery evidence is filed against the thing it proves, not into a general folder. When an assessment is due, the question is which commitments have evidence and which do not, which is a question you can answer in an afternoon rather than a fortnight.
 
-**The section 52 and section 71 duties are checked as duties.** They are two separate checks in CrowMark because they are two separate duties in the Act, with different triggers. Merging them is exactly the mistake that leaves an organisation confident it is compliant because it did the first half.
+**The section 52 and section 71 duties are checked as duties.** They are two separate checks in Velstrian Bid because they are two separate duties in the Act, with different triggers. Merging them is exactly the mistake that leaves an organisation confident it is compliant because it did the first half.
 
 **Concerns and corrective actions hang off the commitment.** When something slips, it is recorded against the specific indicator it affects, so the eventual assessment has a history behind it rather than a verdict arriving from nowhere.
 
@@ -77,7 +77,7 @@ On the buyer side the same record works in the other direction. Scorecards, peri
 
 ## Where the AI helps, and where we stop it
 
-CrowMark uses AI throughout the bid, and the design constraint is the same everywhere: it is grounded, and it cites.
+Velstrian Bid uses AI throughout the bid, and the design constraint is the same everywhere: it is grounded, and it cites.
 
 **Drafting is grounded in your own material.** Answers are drafted from your previously submitted bids, your answer library and the evidence you have uploaded, not from a general model impression of what a good answer sounds like. Each suggestion cites what it drew on, so you can check the source before you accept the sentence. The model proposes. You decide.
 
@@ -85,7 +85,7 @@ CrowMark uses AI throughout the bid, and the design constraint is the same every
 
 **The AI is not allowed to invent a number.** That is enforced rather than hoped for. A figure that appears in a drafted answer has to come from something you supplied. It matters most in social value, where a plausible invented figure is worse than a blank, because a blank gets noticed and a plausible number gets submitted.
 
-**And where the ground does not exist yet, we say so.** PPN 026, the new edition of the Social Value Model, was published on 5 August 2026 and applies to central government procurements commenced on or after 1 January 2027. Its detailed sub criteria have not been published and are expected in autumn 2026. CrowMark offers PPN 026 and makes it the default on new work, because that is what future tenders will ask for, and it does not score against sub criteria that do not exist. Anyone selling you a finished PPN 026 scoring engine today is scoring against criteria nobody has published.
+**And where the ground does not exist yet, we say so.** PPN 026, the new edition of the Social Value Model, was published on 5 August 2026 and applies to central government procurements commenced on or after 1 January 2027. Its detailed sub criteria have not been published and are expected in autumn 2026. Velstrian Bid offers PPN 026 and makes it the default on new work, because that is what future tenders will ask for, and it does not score against sub criteria that do not exist. Anyone selling you a finished PPN 026 scoring engine today is scoring against criteria nobody has published.
 
 That last one is the same discipline as the first three. A tool that answers when it does not know is not saving you work. It is moving the error somewhere you will not find it until an evaluator does.
 

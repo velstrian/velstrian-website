@@ -388,7 +388,7 @@ export const RULE_STEPS: { label: string; heading: string; body: string }[] = [
   {
     label: 'Trigger',
     heading: 'An event fires',
-    body: 'A tender deadline is approaching. CrowMark sweeps for them once a day and fires the rules that match.',
+    body: 'A tender deadline is approaching. Velstrian Bid sweeps for them once a day and fires the rules that match.',
   },
   {
     label: 'Conditions',

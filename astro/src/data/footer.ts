@@ -21,6 +21,8 @@
  *     emit it, so it is correctly absent here too.
  */
 
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../lib/brand-names';
+
 export interface FooterLink {
   label: string;
   href: string;
@@ -196,8 +198,8 @@ export const FOOTER = {
     {
       title: 'Product',
       links: [
-        { label: 'CrowMark for Suppliers', href: '/crowmark/' },
-        { label: 'CrowMark for Buyers', href: '/crowmark-buyers/' },
+        { label: PRODUCT_NAME_BID, href: '/bid/' },
+        { label: PRODUCT_NAME_BUY, href: '/buy/' },
         { label: 'Pricing', href: '/pricing/' },
         { label: 'Integrations', href: '/integrations/' },
         { label: 'Sectors', href: '/sectors/' },
@@ -212,7 +214,7 @@ export const FOOTER = {
       links: [
         { label: 'Resources hub', href: '/resources/' },
         { label: 'Blog', href: '/blog/' },
-        { label: 'Compare CrowMark', href: '/compare/' },
+        { label: `Compare ${PRODUCT_NAME_BID}`, href: '/compare/' },
         { label: 'FAQ', href: '/faq/' },
         { label: 'Procurement Glossary', href: '/glossary/' },
         /*

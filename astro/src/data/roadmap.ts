@@ -56,25 +56,25 @@ export const PHASES: Phase[] = [
     /*
      * BODIES REFRESHED 2026-09-08 against what is DEPLOYED, not against what is
      * committed. The owner reported this page as not updated while a great deal
-     * had shipped, and they were right: these two paragraphs described CrowMark
+     * had shipped, and they were right: these two paragraphs described Velstrian Bid
      * as it stood months earlier and named none of the bid workspace that went
      * live with R2.7.1 on 24 August, nor the supplier relationship management
      * suite that went live with R2.8.1 on 3 September. Every capability named
      * below resolves to a route on the platform's origin/main, which is the tip
      * Vercel reports READY in production.
      */
-    lead: 'CrowMark is in production today, in both variants: for suppliers and for buyers. It reads the source regulation directly, so the output you stand behind traces back to a rule rather than to a model.',
+    lead: 'Velstrian Bid is in production today, in both variants: for suppliers and for buyers. It reads the source regulation directly, so the output you stand behind traces back to a rule rather than to a model.',
     items: [
       {
-        title: 'CrowMark for Suppliers',
+        title: 'Velstrian Bid',
         body: 'Contracts Finder and Find a Tender refreshed daily, with prior information notices and framework or dynamic market expiry dates so a pipeline is visible before a tender opens. Upload the whole tender pack and get it briefed rather than read cover to cover. Drafting is grounded in your own submitted bids and answer library, with version history, diff, restore and track changes on every answer. Configurable review gates take bid or no bid as gate zero. Deterministic social-value calculation, post-award delivery evidence, and Procurement Act 2023 s.52 and s.71 KPI checks.',
-        href: '/crowmark/',
+        href: '/bid/',
       },
       {
-        title: 'CrowMark for Buyers',
+        title: 'Velstrian Buy',
         body:
-          "Build and publish requirements against a deterministic social value rubric, then locate the evidence for each one across every response received, quoted verbatim or dropped. CrowMark organises. Your evaluation panel scores. After award it keeps going: the commitments made in the winning bid become a tracked supplier profile, with scorecards, periodic review sessions, a risk radar, concerns and their corrective actions, a benefit and value realisation tracker, and a due diligence workspace.",
-        href: '/crowmark-buyers/',
+          "Build and publish requirements against a deterministic social value rubric, then locate the evidence for each one across every response received, quoted verbatim or dropped. Velstrian Bid organises. Your evaluation panel scores. After award it keeps going: the commitments made in the winning bid become a tracked supplier profile, with scorecards, periodic review sessions, a risk radar, concerns and their corrective actions, a benefit and value realisation tracker, and a due diligence workspace.",
+        href: '/buy/',
       },
     ],
   },
@@ -98,15 +98,15 @@ export const PHASES: Phase[] = [
     name: 'Phase 2',
     status: 'live',
     date: 'Q3 2026',
-    lead: 'Delivered in Q3 2026. Security and access work that builds on CrowMark.',
+    lead: 'Delivered in Q3 2026. Security and access work that builds on Velstrian Bid.',
     items: [
       {
         title: 'Passkeys (WebAuthn)',
-        body: 'Windows Hello and Touch ID in place of a typed code, as an alternative second factor on your CrowMark account. One passkey covers the app and the portal, and you can list and revoke your credentials in settings.',
+        body: 'Windows Hello and Touch ID in place of a typed code, as an alternative second factor on your Velstrian Bid account. One passkey covers the app and the portal, and you can list and revoke your credentials in settings.',
       },
       {
         title: 'Deeper grounded auto-fill (public sector)',
-        body: "CrowMark's grounded drafting reads the buyer's own published priorities alongside your uploaded evidence, and proposes social value narratives that cite what they came from for you to approve or edit. The model proposes, you decide.",
+        body: "Velstrian Bid's grounded drafting reads the buyer's own published priorities alongside your uploaded evidence, and proposes social value narratives that cite what they came from for you to approve or edit. The model proposes, you decide.",
       },
     ],
   },
@@ -123,7 +123,7 @@ export const PHASES: Phase[] = [
     items: [
       {
         title: 'Regulatory Monitor (public sector)',
-        body: 'A live UK public procurement regulatory change feed. Material updates to PPN 026 and the Procurement Act 2023 flow straight into the CrowMark dashboard, so you act, not just read.',
+        body: 'A live UK public procurement regulatory change feed. Material updates to PPN 026 and the Procurement Act 2023 flow straight into the Velstrian Bid dashboard, so you act, not just read.',
       },
       {
         title: 'Tender reasoning copilot (public sector)',
@@ -177,12 +177,12 @@ export const AI_LIVE: { heading: string; body: string; link?: { label: string; h
   },
   {
     heading: 'Two models, two jobs',
-    body: "Customer-facing drafting (CrowMark bid narratives) runs on Google Gemini. Heavier reasoning and analysis tasks run on Anthropic's Claude. Both are used as data sub-processors under signed DPAs. Your prompts are not used to train their foundation models. The full list is on the",
+    body: "Customer-facing drafting (Velstrian Bid bid narratives) runs on Google Gemini. Heavier reasoning and analysis tasks run on Anthropic's Claude. Both are used as data sub-processors under signed DPAs. Your prompts are not used to train their foundation models. The full list is on the",
     link: { label: 'privacy page', href: '/privacy/' },
   },
   {
     heading: 'Grounded in the source law',
-    body: 'CrowMark reads the actual regulation it serves: PPN 026, the next edition of the Social Value Model, published 5 August 2026 and applying to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and the Procurement Act 2023 sections 52 and 71 for delivery KPIs. Outputs cite the named instrument so the claim is auditable rather than asserted.',
+    body: 'Velstrian Bid reads the actual regulation it serves: PPN 026, the next edition of the Social Value Model, published 5 August 2026 and applying to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and the Procurement Act 2023 sections 52 and 71 for delivery KPIs. Outputs cite the named instrument so the claim is auditable rather than asserted.',
   },
   {
     heading: 'A human signs every output',
@@ -203,7 +203,7 @@ export const AI_NEXT: { status: PhaseStatus; heading: string; body: string }[] =
      */
     status: 'live',
     heading: 'Deeper grounded auto-fill (public sector)',
-    body: "Shipped. CrowMark drafts grounded bid answers from your own submitted bids and answer library, and now reads the buyer's own published priorities alongside your uploaded evidence to propose social value narratives, each suggestion citing what it drew on for you to approve or edit.",
+    body: "Shipped. Velstrian Bid drafts grounded bid answers from your own submitted bids and answer library, and now reads the buyer's own published priorities alongside your uploaded evidence to propose social value narratives, each suggestion citing what it drew on for you to approve or edit.",
   },
   {
     status: 'research',
@@ -213,7 +213,7 @@ export const AI_NEXT: { status: PhaseStatus; heading: string; body: string }[] =
   {
     status: 'research',
     heading: 'Regulatory monitor feed (public sector)',
-    body: 'A live UK public procurement regulatory change feed so material updates to PPN 026 and the Procurement Act 2023 surface in the CrowMark dashboard, with the model summarising what changed and what it means for your existing work. Research stage only.',
+    body: 'A live UK public procurement regulatory change feed so material updates to PPN 026 and the Procurement Act 2023 surface in the Velstrian Bid dashboard, with the model summarising what changed and what it means for your existing work. Research stage only.',
   },
 ];
 

@@ -17,19 +17,19 @@ const sectorCards = [
     accent: 'violet',
     name: 'Public-Sector Suppliers',
     say: 'PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and makes social value a scored award criterion on in-scope central-government tenders.',
-    href: '/crowmark/',
+    href: '/bid/',
   },
   {
     accent: 'teal',
     name: 'IT Managed Service Providers',
     say: 'Public-sector IT and managed-service tenders are scored on PPN 026 social value alongside technical fit and price.',
-    href: '/crowmark/',
+    href: '/bid/',
   },
   {
     accent: 'teal',
     name: 'Professional Services',
     say: 'Framework and consultancy tenders reward a consistent, evidenced bid response.',
-    href: '/crowmark/',
+    href: '/bid/',
   },
   {
     accent: 'violet',
@@ -53,7 +53,7 @@ const sectorCards = [
     accent: 'violet',
     name: 'NHS Suppliers',
     say: 'Framework bids weigh PPN 026 social value alongside a track record of on-time, evidenced delivery.',
-    href: '/crowmark/',
+    href: '/bid/',
   },
   {
     accent: 'teal',
@@ -65,7 +65,7 @@ const sectorCards = [
     accent: 'violet',
     name: 'Charities',
     say: 'Grant and tender bids are judged on PPN 026 social value, with reporting that has to stay lean.',
-    href: '/crowmark/',
+    href: '/bid/',
   },
 ];
 
@@ -135,7 +135,7 @@ const schema = [
         <PageHeader
           eyebrow="By sector"
           title="The statute behind your sector."
-          standfirst="Different rules, one product. See what decides whether you win the tender in your sector, and how CrowMark for Suppliers helps you answer it."
+          standfirst="Different rules, one product. See what decides whether you win the tender in your sector, and how Velstrian Bid helps you answer it."
         />
       </div>
     </header>
@@ -145,7 +145,7 @@ const schema = [
         <div class="sec-head">
           <span class="eyebrow sec-eyebrow-inline">Who we build for</span>
           <h2>Every sector is under its own clock.</h2>
-          <p class="sec-head-lede">Nine UK sectors, each with its own bidding pressure. One line on the pressure, and how CrowMark answers it.</p>
+          <p class="sec-head-lede">Nine UK sectors, each with its own bidding pressure. One line on the pressure, and how Velstrian Bid answers it.</p>
         </div>
         <div class="sec-grid">
           {
@@ -154,7 +154,7 @@ const schema = [
                 <div class="sec-verb">{c.name}</div>
                 <p class="sec-say">{c.say}</p>
                 <div class="sec-serves">
-                  <a class="meta" href={c.href}>CrowMark</a>
+                  <a class="meta" href={c.href}>Velstrian Bid</a>
                 </div>
               </div>
             ))
@@ -200,10 +200,10 @@ const schema = [
               height="1536"
               loading="lazy"
               decoding="async"
-              alt="The CrowMark Insights dashboard. Four figures head the screen: total contracts across five sectors, social value delivered on won bids, evidence completion against committed measures, and s.71 assessments due within 90 days. A contracts-by-status bar chart counting draft, profiling, evidence, won and lost sits beside a pipeline summary of active bids, pending outcome, won this period and draft, each with a count and a value. A quick stats panel sits beside sector benchmarks for healthcare and social care, which include the statutory minimum social value weighting of 10 per cent. A footnote reads that every figure is drawn from your own contract records and from published awards, and that CrowMark reports what has been evidenced and does not forecast outcomes."
+              alt="The Velstrian Bid Insights dashboard. Four figures head the screen: total contracts across five sectors, social value delivered on won bids, evidence completion against committed measures, and s.71 assessments due within 90 days. A contracts-by-status bar chart counting draft, profiling, evidence, won and lost sits beside a pipeline summary of active bids, pending outcome, won this period and draft, each with a count and a value. A quick stats panel sits beside sector benchmarks for healthcare and social care, which include the statutory minimum social value weighting of 10 per cent. A footnote reads that every figure is drawn from your own contract records and from published awards, and that Velstrian Bid reports what has been evidenced and does not forecast outcomes."
             />
           </picture>
-          <figcaption>Contracts by status, pipeline value and sector benchmarks in CrowMark Insights, shown as a drawn representation. The figures on screen are part of the drawing. They are not a customer result and not an outcome to expect.</figcaption>
+          <figcaption>Contracts by status, pipeline value and sector benchmarks in Velstrian Bid Insights, shown as a drawn representation. The figures on screen are part of the drawing. They are not a customer result and not an outcome to expect.</figcaption>
         </figure>
       </div>
     </section>
@@ -211,9 +211,9 @@ const schema = [
     <section class="sec-band sec-light">
       <div class="sec-wrap">
         <div class="sec-head">
-          <span class="eyebrow sec-eyebrow-inline">How CrowMark works</span>
+          <span class="eyebrow sec-eyebrow-inline">How Velstrian Bid works</span>
           <h2>Whatever your sector, the answer is cited.</h2>
-          <p class="sec-head-lede">CrowMark reads the rules behind the tender, so every score, weighting and figure traces back to its source.</p>
+          <p class="sec-head-lede">Velstrian Bid reads the rules behind the tender, so every score, weighting and figure traces back to its source.</p>
         </div>
         <div class="sec-ledger">
           {/* `surface--row`: reference, description and source are three
@@ -221,7 +221,7 @@ const schema = [
               below already said in a comment and could not say in a class.
               Defined once in styles/surfaces.css. */}
           <div class="sec-lrow surface surface--row">
-            <div class="sec-ref">CrowMark</div>
+            <div class="sec-ref">Velstrian Bid</div>
             <div class="sec-desc"><strong>Social value computed in code</strong>, over a curated catalogue of TOMs-aligned measures, with answers drafted from your own submitted bids.</div>
             <div class="sec-meta">Cabinet Office<br />February 2025 &middot; mandatory from 1 Oct 2025</div>
           </div>
@@ -236,7 +236,7 @@ const schema = [
             somebody will hang a seventh capsule on. */}
         <span class="eyebrow">Ready when you are</span>
         <h2>Find the work. Win it. <span class="accent">Prove you delivered.</span></h2>
-        <p class="sec-final-sub">See how CrowMark fits your sector's bidding calendar.</p>
+        <p class="sec-final-sub">See how Velstrian Bid fits your sector's bidding calendar.</p>
         <div class="btn-row sec-hero-cta">
           <Button href={SIGNUP_URL} size="md">Start now</Button>
           <Button href="https://calendly.com/crowagent-platform/30min" variant="secondary" size="md">Book a demo</Button>

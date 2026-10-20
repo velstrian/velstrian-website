@@ -16,56 +16,38 @@
  * footer, contact page and every other page's structured data.
  */
 
+import {
+  PLATFORM_NAME,
+  PLATFORM_SHORT_NAME,
+  LEGAL_ENTITY_NAME,
+  SUPPORT_EMAIL,
+  COMPANY_NUMBER,
+} from '../lib/brand-names';
+
 export const SITE = {
-  name: 'Velstrian',
-  legalName: 'VELSTRIAN SYSTEMS LIMITED',
+  name: PLATFORM_SHORT_NAME,
+  platformName: PLATFORM_NAME,
+  legalName: LEGAL_ENTITY_NAME,
   origin: 'https://velstrian.com',
   defaultOgImage: 'https://velstrian.com/Assets/og-image.png?v=20260730',
   twitter: '@VelstrianLtd',
-  email: 'hello@velstrian.com',
+  email: SUPPORT_EMAIL,
 
   /**
    * The Organization JSON-LD node, emitted on every page by Seo.astro as
-   * the first entry in the @graph. Modelled on the injected fallback
-   * (`js/nav-inject.js` ORGANIZATION_FALLBACK_INJECTED) (the shape that
-   * actually renders on the majority of legacy pages) with the
-   * corrected support email above.
-   *
-   * MARKET SCOPE CORRECTED (2026-08-04, A-50). `description` read "CrowAgent
-   * helps UK suppliers find the work", which is the OA-33 market-scoping the
-   * homepage title and meta description were corrected for on 2026-08-03. The
-   * visible copy moved and the machine-readable graph did not, so on all 44
-   * routes the page said one thing and the @graph said another. The wording
-   * below is index.astro's corrected description verbatim rather than a third
-   * phrasing: one word out, nothing else touched. The same sentence was also
-   * shipping as the footer tagline and as the first /faq answer, and both are
-   * corrected identically. Fixing only the instance you were shown is how
-   * OA-33 survived its own sweep.
+   * the first entry in the @graph.
    */
   organizationSchema: {
     '@type': 'Organization',
     '@id': 'https://velstrian.com/#organization',
-    name: 'VELSTRIAN SYSTEMS LIMITED',
+    name: PLATFORM_NAME,
+    legalName: LEGAL_ENTITY_NAME,
     url: 'https://velstrian.com/',
     logo: 'https://velstrian.com/Assets/og-image.png?v=20260730',
-    /**
-     * ── REALIGNED TO THE HOMEPAGE, 2026-08-05, A-112 ─────────────────────────
-     *
-     * A-50 deliberately made this string, footer.ts's `brand.tagline` and the
-     * homepage meta description ONE sentence, so the organisation describes
-     * itself the same way wherever it is read. A-112 changed the homepage to
-     * name both sides of a procurement and both sectors, on the owner's
-     * instruction that "our bid suite is for both supplier and buyer and also
-     * covering public and private RFPs as well, must cover all". Leaving this
-     * behind would not merely be untidy: this string ships in the Organization
-     * node of the JSON-LD @graph on EVERY route, so search engines would have
-     * been told the supplier-only story sitewide while the homepage said
-     * otherwise. Updated with the homepage rather than after it.
-     */
     description:
       'Velstrian serves both sides of a procurement, public sector and private. Suppliers answer tenders, RFPs, PQQs and SQs from bids already written. Buyers publish requirements and find the evidence.',
-    email: 'hello@velstrian.com',
-    identifier: { '@type': 'PropertyValue', name: 'Companies House', value: '17076461' },
+    email: SUPPORT_EMAIL,
+    identifier: { '@type': 'PropertyValue', name: 'Companies House', value: COMPANY_NUMBER },
     address: { '@type': 'PostalAddress', addressCountry: 'GB' },
     sameAs: [
       'https://www.youtube.com/@VELSTRIAN-UK',

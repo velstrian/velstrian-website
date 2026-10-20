@@ -137,7 +137,7 @@ No. Use a bid or no-bid decision to weigh fit, capacity, the strength of any inc
 
 ### Make the scored section your strength
 
-Social value carries at least 10 percent of the score on in-scope contracts. CrowMark for Suppliers helps you plan and draft a TOMs-aligned social value response, so your first bid has a real answer to the section that carries at least 10 percent of the marks.
+Social value carries at least 10 percent of the score on in-scope contracts. Velstrian Bid helps you plan and draft a TOMs-aligned social value response, so your first bid has a real answer to the section that carries at least 10 percent of the marks.
 
-[See CrowMark →](/crowmark/)
-[Compare CrowMark →](/compare/)
+[See Velstrian Bid →](/bid/)
+[Compare Velstrian Bid →](/compare/)

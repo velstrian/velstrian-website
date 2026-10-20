@@ -59,6 +59,7 @@
  */
 import { SITE } from './site';
 import { APP_ORIGIN, SIGNUP_URL } from './app';
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../lib/brand-names';
 
 export interface NavLink {
   label: string;
@@ -97,27 +98,27 @@ export interface NavMenu {
 const PRODUCTS: NavMenu = {
   id: 'products',
   label: 'Products',
-  activeRoutes: ['/crowmark', '/compare'],
+  activeRoutes: ['/bid', '/buy', '/compare'],
   columns: [
     {
       label: 'Bid and tender software',
       items: [
         {
-          label: 'CrowMark for Suppliers',
-          href: '/crowmark/',
+          label: PRODUCT_NAME_BID,
+          href: '/bid/',
           description: 'Respond to tenders, RFPs, RFIs and questionnaires',
           accent: 'mark',
           icon: 'dot',
         },
         {
-          label: 'CrowMark for Buyers',
-          href: '/crowmark-buyers/',
+          label: PRODUCT_NAME_BUY,
+          href: '/buy/',
           description: 'Read the responses you receive, against the requirements you published',
           accent: 'teal',
           icon: 'dot',
         },
         {
-          label: 'Compare CrowMark',
+          label: `Compare ${PRODUCT_NAME_BID}`,
           href: '/compare/',
           description: 'How it stacks up against other bid tools',
           accent: 'teal',

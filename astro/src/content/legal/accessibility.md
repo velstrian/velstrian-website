@@ -45,7 +45,7 @@ Please include the page address and what you were trying to do. We aim to respon
 
 ## Enforcement
 
-The Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 apply to public sector bodies. **VELSTRIAN SYSTEMS LIMITED is a private supplier and is not a public sector body**, so those regulations do not bind this site. We publish this statement because accessibility matters to our users and because our public sector customers reasonably ask suppliers for one, not because we are legally required to.
+The Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 apply to public sector bodies. **Velstrian Systems Ltd is a private supplier and is not a public sector body**, so those regulations do not bind this site. We publish this statement because accessibility matters to our users and because our public sector customers reasonably ask suppliers for one, not because we are legally required to.
 
 Our obligations under the **Equality Act 2010** to make reasonable adjustments do apply, and we take them seriously. If you are dissatisfied with how we respond to an accessibility complaint, you can contact the [Equality Advisory and Support Service (EASS)](https://www.equalityadvisoryservice.com/).
 

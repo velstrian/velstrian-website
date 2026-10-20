@@ -84,7 +84,7 @@ export const HEROES: Record<string, Hero> = {
    * wrong-subject photograph on a piece comparing two social value reporting
    * platforms.
    */
-  'social-value-portal-vs-crowmark': {
+  'social-value-portal-vs-bid': {
     file: 'reviewing-charts-together',
     alt: 'Two colleagues holding printed reports of bar charts side by side, one pointing at a row with a pencil',
   },

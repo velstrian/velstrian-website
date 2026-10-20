@@ -114,14 +114,14 @@ const ACTIONS: Entry[] = [
     external: true,
   },
   {
-    title: 'Ask about CrowMark for Suppliers',
+    title: 'Ask about Velstrian Bid',
     href: '/contact/?enquiry=ppn002-bid#contact-form',
     section: 'Action',
     hint: 'bid tender questionnaire ppn 002 supplier enquiry',
     kind: 'action',
   },
   {
-    title: 'Ask about CrowMark for Buyers',
+    title: 'Ask about Velstrian Buy',
     href: '/contact/?enquiry=buyer-side#contact-form',
     section: 'Action',
     hint: 'buyer evaluation procurement authority enquiry',

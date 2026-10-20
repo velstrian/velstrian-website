@@ -7,36 +7,36 @@ import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
 
-const title = 'Compare CrowMark with UK bid software';
+const title = 'Compare Velstrian Bid with UK bid software';
 const description =
-  'Side-by-side comparisons of CrowMark against AutogenAI, mytender.io, CleanTender and SwiftBid. A dated source for every competitor figure.';
+  'Side-by-side comparisons of Velstrian Bid against AutogenAI, mytender.io, CleanTender and SwiftBid. A dated source for every competitor figure.';
 const path = '/compare';
 
 const comparisons = [
   {
-    href: '/compare/crowmark-vs-autogenai/',
+    href: '/compare/bid-vs-autogenai/',
     tag: 'Enterprise engine',
-    name: 'CrowMark vs AutogenAI',
+    name: 'Velstrian Bid vs AutogenAI',
     blurb:
       'Published SME pricing against a venture-backed enterprise engine that quotes on request. Where scale wins and where it does not.',
   },
   {
-    href: '/compare/crowmark-vs-mytender-io/',
+    href: '/compare/bid-vs-mytender-io/',
     tag: 'UK drafting platform',
-    name: 'CrowMark vs mytender.io',
+    name: 'Velstrian Bid vs mytender.io',
     blurb:
       'Two UK-built tools. Figure-grounding and published pricing against a private-cloud drafting platform with content-tool integrations.',
   },
   {
-    href: '/compare/crowmark-vs-cleantender/',
+    href: '/compare/bid-vs-cleantender/',
     tag: 'Soft-FM specialist',
-    name: 'CrowMark vs CleanTender',
+    name: 'Velstrian Bid vs CleanTender',
     blurb: 'A sector-agnostic suite against a soft-FM specialist. Both publish pricing, so the question is scope and depth.',
   },
   {
-    href: '/compare/crowmark-vs-swiftbid/',
+    href: '/compare/bid-vs-swiftbid/',
     tag: 'Per-bid service',
-    name: 'CrowMark vs SwiftBid',
+    name: 'Velstrian Bid vs SwiftBid',
     blurb: 'Subscribe, or pay per bid. Which model fits depends on how often you bid. The break-even, worked through.',
   },
 ];
@@ -55,7 +55,7 @@ const schema = [
        slash and is therefore the 308 source on a directory-format build. This
        node named its own page and all four comparison pages that way. */
     url: routeUrl(path),
-    description: 'Honest, sourced comparisons of CrowMark against AutogenAI, mytender.io, CleanTender and SwiftBid.',
+    description: 'Honest, sourced comparisons of Velstrian Bid against AutogenAI, mytender.io, CleanTender and SwiftBid.',
     publisher: { '@id': `${SITE.origin}/#organization` },
     hasPart: comparisons.map((c) => ({
       '@type': 'WebPage',
@@ -101,8 +101,8 @@ const schema = [
         */}
         <PageHeader
           eyebrow="Honest comparisons"
-          title="Compare CrowMark with UK bid software"
-          standfirst="Side-by-side, sourced comparisons of CrowMark against the tools UK suppliers shortlist. Real feature tables, our published pricing, and a dated source for every competitor figure."
+          title="Compare Velstrian Bid with UK bid software"
+          standfirst="Side-by-side, sourced comparisons of Velstrian Bid against the tools UK suppliers shortlist. Real feature tables, our published pricing, and a dated source for every competitor figure."
         />
       </div>
     </header>
@@ -110,13 +110,13 @@ const schema = [
     <section class="cmp-hub">
       <div class="cmp-hub-inner">
         <p class="cmp-intro">
-          CrowMark is a UK bid and tender management suite from &pound;49 per month. Where a rival does not publish a
-          figure, we mark it Not published rather than guess, and we concede the points where CrowMark is not the
+          Velstrian Bid is a UK bid and tender management suite from &pound;49 per month. Where a rival does not publish a
+          figure, we mark it Not published rather than guess, and we concede the points where Velstrian Bid is not the
           strongest option. Pick a comparison below.
         </p>
         <p class="cmp-intro">
-          CrowMark serves both sides of a procurement: CrowMark for Suppliers answers tenders, RFPs and questionnaires,
-          and CrowMark for Buyers locates the evidence for each published requirement across the responses received.
+          Velstrian serves both sides of a procurement: Velstrian Bid for Suppliers answers tenders, RFPs and questionnaires,
+          and Velstrian Buy for Buyers locates the evidence for each published requirement across the responses received.
           Both work in the public sector and the private sector. Every supplier and buyer plan has a published price,
           on the <a href="/pricing/">pricing page</a>. The comparisons below are supplier-side,
           because that is where the competing tools sit.
@@ -161,10 +161,10 @@ const schema = [
               height="1800"
               loading="lazy"
               decoding="async"
-              alt="The CrowMark Discover feed. A product rail and a workspace sidebar sit on the left, and the feed lists published notices, each with the buying authority, the contract value, the sector, how long ago it was published and the register it came from, and a relevance percentage in its top right. A filter row offers all sources, Find a Tender, Contracts Finder, sector, value and relevance, and every notice offers Open in CrowMark, a link out to the source register, and Save."
+              alt="The Velstrian Bid Discover feed. A product rail and a workspace sidebar sit on the left, and the feed lists published notices, each with the buying authority, the contract value, the sector, how long ago it was published and the register it came from, and a relevance percentage in its top right. A filter row offers all sources, Find a Tender, Contracts Finder, sector, value and relevance, and every notice offers Open in Velstrian Bid, a link out to the source register, and Save."
             />
           </picture>
-          <figcaption>The daily UK tender feed in CrowMark, shown as a drawn representation. The notices themselves are genuine published Find a Tender and Contracts Finder records.</figcaption>
+          <figcaption>The daily UK tender feed in Velstrian Bid, shown as a drawn representation. The notices themselves are genuine published Find a Tender and Contracts Finder records.</figcaption>
         </figure>
 
         <div class="cmp-hub-grid">
@@ -188,7 +188,7 @@ const schema = [
         <p class="cmp-cta-sub">Published pricing from &pound;49/month.<br /> <span class="accent">Live, paid, and in daily use on real bids.</span></p>
         <div class="btn-row">
           <Button href="/pricing/?product=mark" size="md">See pricing</Button>
-          <Button href="/crowmark/" variant="secondary" size="md">Explore CrowMark</Button>
+          <Button href="/bid/" variant="secondary" size="md">Explore Velstrian Bid</Button>
         </div>
       </div>
     </section>

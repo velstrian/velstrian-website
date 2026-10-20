@@ -132,7 +132,7 @@ Only as a starting point, never as a final answer. Every buyer asks the question
 
 ### Draft method statements grounded in your own evidence
 
-CrowMark drafts answers from your organisation's own submitted bids, refuses to print a figure your data does not contain, and carries a PPN 017 AI-transparency disclosure on every draft, so the evidence in your method statement is real.
+Velstrian Bid drafts answers from your organisation's own submitted bids, refuses to print a figure your data does not contain, and carries a PPN 017 AI-transparency disclosure on every draft, so the evidence in your method statement is real.
 
 [Start now](https://app.crowagent.ai/signup)
-[See CrowMark →](/crowmark/)
+[See Velstrian Bid →](/bid/)

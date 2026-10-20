@@ -92,7 +92,7 @@ export const STEPS = [
   {
     n: '02',
     heading: 'Read it, then decide',
-    body: 'Upload the tender pack as PDF, DOCX, XLSX or an image, up to 10MB. CrowMark extracts the requirements, scores fit and coverage with the reason behind each component, and returns pursue, review or pass with the gaps named. It reads the tender rather than predicting the award, and a named person decides.',
+    body: 'Upload the tender pack as PDF, DOCX, XLSX or an image, up to 10MB. Velstrian Bid extracts the requirements, scores fit and coverage with the reason behind each component, and returns pursue, review or pass with the gaps named. It reads the tender rather than predicting the award, and a named person decides.',
   },
   {
     n: '03',
@@ -113,7 +113,7 @@ export const BENEFITS: Card[] = [
   },
   {
     heading: 'PPN 017 disclosure, human approval',
-    body: 'Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and nothing reaches a buyer without a person approving it. A person approves, never the model. If no AI key is configured, CrowMark returns nothing rather than a canned answer.',
+    body: 'Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and nothing reaches a buyer without a person approving it. A person approves, never the model. If no AI key is configured, Velstrian Bid returns nothing rather than a canned answer.',
   },
   {
     heading: 'Award to delivery to reporting',
@@ -124,11 +124,11 @@ export const BENEFITS: Card[] = [
 export const STATUTES: Card[] = [
   {
     heading: 'Section 52',
-    body: 'Public contracts with an estimated value above £5m must have at least three published key performance indicators. CrowMark flags the threshold, counts your published KPIs, and shows the shortfall.',
+    body: 'Public contracts with an estimated value above £5m must have at least three published key performance indicators. Velstrian Bid flags the threshold, counts your published KPIs, and shows the shortfall.',
   },
   {
     heading: 'Section 71',
-    body: 'Performance against those KPIs has to be assessed and published. CrowMark holds the KPI set alongside your delivery evidence, so the assessment is drawn from the record rather than reconstructed, and the annual roll-up is rated red, amber or green.',
+    body: 'Performance against those KPIs has to be assessed and published. Velstrian Bid holds the KPI set alongside your delivery evidence, so the assessment is drawn from the record rather than reconstructed, and the annual roll-up is rated red, amber or green.',
   },
 ];
 
@@ -147,7 +147,7 @@ export const CAPABILITIES: Card[] = [
   },
   {
     heading: 'Tender document ingestion',
-    body: 'PDF, DOCX, XLSX, PNG and JPEG up to 10MB. Requirements and clauses are extracted from the text layer and become a citation source in their own right, so an answer can point at the wording it is answering. Scanned PDFs are reported honestly as needing OCR, which CrowMark does not do.',
+    body: 'PDF, DOCX, XLSX, PNG and JPEG up to 10MB. Requirements and clauses are extracted from the text layer and become a citation source in their own right, so an answer can point at the wording it is answering. Scanned PDFs are reported honestly as needing OCR, which Velstrian Bid does not do.',
   },
   {
     heading: 'Bid or no-bid, with reasons',
@@ -230,17 +230,17 @@ export const FAQS: Faq[] = [
      * checked, and the one most likely to be produced in an argument later.
      *
      * REWRITTEN TO WHAT A DEMO ACTUALLY SETTLES, which is the owner's test. The
-     * page still says what CrowMark does; it no longer certifies the whole of
+     * page still says what Velstrian Bid does; it no longer certifies the whole of
      * itself in one sentence. No accuracy figures, and no win rates.
      *
      * OPEN FOR THE OWNER: a per-capability live-versus-planned split cannot be
      * derived from this repository. Nothing in it records which grid items are
-     * shipped. If any capability in the "What CrowMark does today" grid is in
+     * shipped. If any capability in the "What Velstrian Bid does today" grid is in
      * fact not yet released, it belongs on /roadmap in the future tense, and
      * that is a product fact only the owner holds. */
     question: 'Is everything described on this page available today?',
     answer:
-      'This page describes what CrowMark does now, not what is planned. Anything still being built is on the roadmap rather than here. The fastest way to see where a capability is today is to book a demo and ask us to run it against the kind of tender you bid for.',
+      'This page describes what Velstrian Bid does now, not what is planned. Anything still being built is on the roadmap rather than here. The fastest way to see where a capability is today is to book a demo and ask us to run it against the kind of tender you bid for.',
   },
   {
     question: 'Where do the tenders come from?',
@@ -255,27 +255,27 @@ export const FAQS: Faq[] = [
   {
     question: 'Is AI use disclosed to the buyer?',
     answer:
-      'Yes. Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and a person has to approve the answer before it goes to the buyer. CrowMark does not send anything to a buyer portal on your behalf. If no AI key is configured, CrowMark returns nothing rather than a generic fallback answer.',
+      'Yes. Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and a person has to approve the answer before it goes to the buyer. Velstrian Bid does not send anything to a buyer portal on your behalf. If no AI key is configured, Velstrian Bid returns nothing rather than a generic fallback answer.',
   },
   {
     question: 'How is social value calculated?',
     answer:
-      'Deterministically, in code. CrowMark uses a curated catalogue of 19 social-value measures, aligned to National TOMs conventions, and applies unit-aware arithmetic to them. It is not a full National TOMs implementation, and the AI never computes the total. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. The buyer publishes the weighting, and it is a weighting, not a score.',
+      'Deterministically, in code. Velstrian Bid uses a curated catalogue of 19 social-value measures, aligned to National TOMs conventions, and applies unit-aware arithmetic to them. It is not a full National TOMs implementation, and the AI never computes the total. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. The buyer publishes the weighting, and it is a weighting, not a score.',
   },
   {
-    question: 'Can CrowMark read a scanned tender document?',
+    question: 'Can Velstrian Bid read a scanned tender document?',
     answer:
-      'No. CrowMark reads PDF, DOCX, XLSX, PNG and JPEG files up to 10MB and extracts requirements and clauses from the text layer, quoting only what is present in the source. A scanned PDF with no text layer is reported as needing OCR, which CrowMark does not perform.',
+      'No. Velstrian Bid reads PDF, DOCX, XLSX, PNG and JPEG files up to 10MB and extracts requirements and clauses from the text layer, quoting only what is present in the source. A scanned PDF with no text layer is reported as needing OCR, which Velstrian Bid does not perform.',
   },
   {
     question: 'Does the fit score tell me whether I will win?',
     // LOAD-BEARING. The refusal of a win-prediction claim is the positioning.
     answer:
-      'No. CrowMark scores fit and coverage against the tender in front of you and shows the reason behind each component, and the bid or no bid rubric returns pursue, review or pass with the gaps named. The same inputs always give the same result. It is a reading of the tender, not a prediction of the award, and a named person still makes the decision.',
+      'No. Velstrian Bid scores fit and coverage against the tender in front of you and shows the reason behind each component, and the bid or no bid rubric returns pursue, review or pass with the gaps named. The same inputs always give the same result. It is a reading of the tender, not a prediction of the award, and a named person still makes the decision.',
   },
   {
-    question: 'Does CrowMark cover the Procurement Act 2023 KPI duties?',
+    question: 'Does Velstrian Bid cover the Procurement Act 2023 KPI duties?',
     answer:
-      'CrowMark checks section 52, which applies above an estimated contract value of £5m and expects at least three published KPIs, and section 71, on assessing and publishing performance against them, with an annual roll-up rated red, amber or green. The check is advisory, it never blocks you, and it is not legal advice.',
+      'Velstrian Bid checks section 52, which applies above an estimated contract value of £5m and expects at least three published KPIs, and section 71, on assessing and publishing performance against them, with an annual roll-up rated red, amber or green. The check is advisory, it never blocks you, and it is not legal advice.',
   },
 ];

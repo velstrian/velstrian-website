@@ -35,6 +35,6 @@ Every figure above is published beside its primary source, with the date and a l
 
 ### Track your social value scoring
 
-CrowMark for Suppliers drafts your PPN 026 social value answer from your own submitted bids, then tracks the evidence for each commitment after award.
+Velstrian Bid drafts your PPN 026 social value answer from your own submitted bids, then tracks the evidence for each commitment after award.
 
 [Start now](https://app.crowagent.ai/signup)

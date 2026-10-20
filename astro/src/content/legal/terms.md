@@ -1,6 +1,6 @@
 ---
 title: "Terms of Service | Velstrian"
-description: "VELSTRIAN SYSTEMS LIMITED terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes."
+description: "Velstrian Systems Ltd terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes."
 heading: "Terms of Service."
 lastUpdated: "2026-03-01"
 ---
@@ -26,7 +26,7 @@ Tap any card to jump straight to the full clause. The complete agreement follows
 
   IF YOU RENUMBER A HEADING IN THIS FILE, THESE MOVE WITH IT.
 -->
-<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>VELSTRIAN SYSTEMS LIMITED (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are not legal or professional advice.</p> </a> <a href="#6-limitation-of-liability" class="prose-card"> <span aria-hidden="true"></span> <h3>Liability</h3> <p>Aggregate cap: greater of 12 months' fees or £1,000.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
+<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>Velstrian Systems Ltd (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are not legal or professional advice.</p> </a> <a href="#6-limitation-of-liability" class="prose-card"> <span aria-hidden="true"></span> <h3>Liability</h3> <p>Aggregate cap: greater of 12 months' fees or £1,000.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
 
 ## Full terms of service
 
@@ -36,7 +36,7 @@ The complete agreement, written in plain language. Jump to any clause, or contac
 
 ## 1. Parties and Agreement
 
-These Terms of Service (“Terms”) form a legally binding agreement between **VELSTRIAN SYSTEMS LIMITED** (a private company limited by shares incorporated in England and Wales, “Velstrian”, “we”, “us”) and the individual or organisation accessing or using the Velstrian platform (“Customer”, “you”). By creating an account or using the platform, you agree to these Terms.
+These Terms of Service (“Terms”) form a legally binding agreement between **Velstrian Systems Ltd** (a private company limited by shares incorporated in England and Wales, “Velstrian”, “we”, “us”) and the individual or organisation accessing or using the Velstrian platform (“Customer”, “you”). By creating an account or using the platform, you agree to these Terms.
 
 ## 2. Subscription and Access
 
@@ -83,7 +83,7 @@ Use of the Velstrian platform is conditional on staying within the boundaries be
 
 ## 5. Intellectual Property
 
-- The Velstrian platform, branding, and underlying software are the intellectual property of VELSTRIAN SYSTEMS LIMITED. No licence to copy or distribute the software is granted.
+- The Velstrian platform, branding, and underlying software are the intellectual property of Velstrian Systems Ltd. No licence to copy or distribute the software is granted.
 - You retain ownership of all data and content you submit to the platform. You grant Velstrian a limited licence to process that data solely to provide the service.
 - AI outputs generated from your inputs are provided to you for your internal use. You may not represent AI outputs as your own original professional opinion.
 
@@ -123,6 +123,6 @@ We may update these Terms from time to time. Material changes will be communicat
 
 ## 11. Contact
 
-<div class="prose-scroll" role="region" aria-label="How to reach Velstrian (table)" tabindex="0"><table class="lc-table"> <caption>How to reach Velstrian</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@velstrian.com">legal@velstrian.com</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:support@velstrian.com">support@velstrian.com</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.crowagent.ai" target="_blank" rel="noopener noreferrer">status.crowagent.ai</a></td></tr> <tr><th scope="row">Registered entity</th><td>VELSTRIAN SYSTEMS LIMITED, England &amp; Wales</td></tr> </tbody> </table></div>
+<div class="prose-scroll" role="region" aria-label="How to reach Velstrian (table)" tabindex="0"><table class="lc-table"> <caption>How to reach Velstrian</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@velstrian.com">legal@velstrian.com</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:support@velstrian.com">support@velstrian.com</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.crowagent.ai" target="_blank" rel="noopener noreferrer">status.crowagent.ai</a></td></tr> <tr><th scope="row">Registered entity</th><td>Velstrian Systems Ltd, England &amp; Wales</td></tr> </tbody> </table></div>
 
 [Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:support@velstrian.com)

@@ -486,7 +486,7 @@ export const PRICING_FAQS: Faq[] = [
        the array header. Asking is free, but the trial it names two sentences
        earlier does collect a card at Stripe checkout before it starts. */
     answer:
-      'No. CrowMark is a paid product. You can run the free Tender Compliance Matrix at any time with no account, and your first 7 days on CrowMark are free. A card is needed to start, held securely by Stripe and never stored by us.',
+      'No. Velstrian Bid is a paid product. You can run the free Tender Compliance Matrix at any time with no account, and your first 7 days on Velstrian Bid are free. A card is needed to start, held securely by Stripe and never stored by us.',
   },
   {
     /* WAS "How does the 14-day trial work?", answered with "full access to the
@@ -578,7 +578,7 @@ export const PRICING_FAQS: Faq[] = [
       'Yes. Portfolio is £549 a month, or £5,929 a year, for 10 users and 3,000 AI credits a month, with single sign-on via SAML 2.0 and SCIM user provisioning included. Buy it by card and start today. Talk to us about contracts, custom terms or more than 10 users.',
   },
   {
-    question: 'How is CrowMark Buyer priced?',
+    question: 'How is Velstrian Buy priced?',
     /* WAS "Why is there no price for the buyer side?", answered with "a single
        self-serve number would be misleading". D195 (2026-10-09) replaced that
        position: Buyer Pro is a listed price. The question is rewritten rather
@@ -592,7 +592,7 @@ export const PRICING_FAQS: Faq[] = [
     /* The included allowances were never published anywhere on the legacy page.
        They are the first sentence now. */
     answer:
-      'Each plan includes a monthly allowance: 200 credits on Starter, 750 on Pro and 3,000 on Portfolio, and CrowMark Buyer carries 750 on Buyer Pro and 3,000 on Buyer Portfolio. One credit is one AI generation. Reading a tender document and extracting its requirements costs 3 credits per 10 pages, rounded up, so a 10-page ITT costs 3 credits. A page is one PDF page, one PowerPoint slide, or a whole Word or text document. A spreadsheet is counted by rows rather than by sheets: 50 rows count as one page, so a 5,000-row pricing schedule on a single sheet counts as 100 pages, or 30 credits. Everything we calculate rather than generate is never charged and never capped, and a generation that fails is not charged.',
+      'Each plan includes a monthly allowance: 200 credits on Starter, 750 on Pro and 3,000 on Portfolio, and Velstrian Buy carries 750 on Buyer Pro and 3,000 on Buyer Portfolio. One credit is one AI generation. Reading a tender document and extracting its requirements costs 3 credits per 10 pages, rounded up, so a 10-page ITT costs 3 credits. A page is one PDF page, one PowerPoint slide, or a whole Word or text document. A spreadsheet is counted by rows rather than by sheets: 50 rows count as one page, so a 5,000-row pricing schedule on a single sheet counts as 100 pages, or 30 credits. Everything we calculate rather than generate is never charged and never capped, and a generation that fails is not charged.',
   },
   /*
    * ── R262-WEB-08 · THE ANSWER TO THE QUESTION THE CREDIT MODEL RAISES ───────

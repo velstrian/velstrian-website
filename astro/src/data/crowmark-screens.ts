@@ -36,7 +36,7 @@
  * 3  NO WIN RATES, EVER, AND NO PROBABILITY OF AWARD. CrowMark is framed as fit
  *    and coverage. Two of these screens put that refusal on the interface
  *    itself (the supplier fit score says in so many words that it "is not a
- *    probability of award, and CrowMark does not produce one"), and those
+ *    probability of award, and Velstrian Bid does not produce one"), and those
  *    sentences are quoted rather than paraphrased, because a paraphrase of a
  *    refusal is a weaker refusal.
  *
@@ -250,32 +250,32 @@ export const SUPPLIER_SCREENS: Slide[] = [
   {
     src: shot('sup-1-discover'),
     ...DESKTOP,
-    alt: 'The CrowMark Discover feed. Published notices are listed with the buying authority, the contract value, the sector, the publication date and the register they came from, each carrying a relevance percentage. A filter row offers the two registers, sector, value and relevance, and every notice offers Open in CrowMark, a link out to the source register, and Save.',
+    alt: 'The Velstrian Bid Discover feed. Published notices are listed with the buying authority, the contract value, the sector, the publication date and the register they came from, each carrying a relevance percentage. A filter row offers the two registers, sector, value and relevance, and every notice offers Open in Velstrian Bid, a link out to the source register, and Save.',
     caption: 'Notices from Find a Tender and Contracts Finder, scored against what you can evidence today',
   },
   {
     src: shot('sup-3-bid-no-bid'),
     ...DESKTOP,
     /* The refusal is quoted, not summarised. See rule 3 in the header. */
-    alt: 'The CrowMark bid or no-bid screen. A fit score sits beside the contract value, the days to deadline and the number of recorded prior contracts, and a data confidence panel states: “This is FIT context. It is not a probability of award, and CrowMark does not produce one.” Below, the score is broken down component by component, each with a band, a points total and a one-line reason.',
+    alt: 'The Velstrian Bid bid or no-bid screen. A fit score sits beside the contract value, the days to deadline and the number of recorded prior contracts, and a data confidence panel states: “This is FIT context. It is not a probability of award, and Velstrian Bid does not produce one.” Below, the score is broken down component by component, each with a band, a points total and a one-line reason.',
     caption: 'Fit broken down component by component, stated as context and never as a probability of award',
   },
   {
     src: shot('sup-2-tender-questions'),
     ...DESKTOP,
-    alt: 'The CrowMark tender questions screen. A tender is broken into its scored questions, each with a category, a word limit, a weighting and a draft action. A banner states the grounding boundary. Answers are grounded only in your own answer library, the published requirement and your confirmed commitments. Every figure comes from computed commitments and is never invented. And a named human approves every answer before it is submitted.',
+    alt: 'The Velstrian Bid tender questions screen. A tender is broken into its scored questions, each with a category, a word limit, a weighting and a draft action. A banner states the grounding boundary. Answers are grounded only in your own answer library, the published requirement and your confirmed commitments. Every figure comes from computed commitments and is never invented. And a named human approves every answer before it is submitted.',
     caption: 'Award questions with their weightings, above a drafter told where every figure has to come from',
   },
   {
     src: shot('sup-4-evidence-tracker'),
     ...DESKTOP,
-    alt: 'The CrowMark evidence tracker, following a won contract into delivery. A headline bar gives the evidence coverage for this month against committed measures, and a card per measure lists the dated evidence filed against it with an upload control. A statutory strip runs along the foot covering section 52 KPIs, the section 71 cycle and the statutory minimum weighting.',
+    alt: 'The Velstrian Bid evidence tracker, following a won contract into delivery. A headline bar gives the evidence coverage for this month against committed measures, and a card per measure lists the dated evidence filed against it with an upload control. A statutory strip runs along the foot covering section 52 KPIs, the section 71 cycle and the statutory minimum weighting.',
     caption: 'After award, each commitment tracked to the dated evidence that proves it, month by month',
   },
   {
     src: shot('sup-5-answer-library'),
     ...TABLET_WIDE,
-    alt: 'The CrowMark answer library. Previously submitted answers are listed under the note that the drafter grounds new answers in these, and that answers marked as coming from a won bid rank higher as sources. A search field, a sort control and a won-bids filter sit above the list, and each answer carries topic tags.',
+    alt: 'The Velstrian Bid answer library. Previously submitted answers are listed under the note that the drafter grounds new answers in these, and that answers marked as coming from a won bid rank higher as sources. A search field, a sort control and a won-bids filter sit above the list, and each answer carries topic tags.',
     caption: 'Your own submitted answers, held as the sources a new draft is grounded in',
   },
   {
@@ -284,7 +284,7 @@ export const SUPPLIER_SCREENS: Slide[] = [
     /* NO WIN-RATE PANEL. The real analytics route has one; it was deliberately
        left out of the drawing, and it must not be described back in here.
        See specs/PRODUCT-SCREENS-FIGMA.md, "What the Insights rebuild found". */
-    alt: 'The CrowMark insights dashboard at tablet width. Four figures head the screen: contracts and sectors, social value delivered on won bids, evidence completion against committed measures, and section 71 assessments due. Panels below cover contracts by status, the pipeline, quick stats and sector benchmarks, under a footnote that every figure is drawn from your own contract records and from published awards.',
+    alt: 'The Velstrian Bid insights dashboard at tablet width. Four figures head the screen: contracts and sectors, social value delivered on won bids, evidence completion against committed measures, and section 71 assessments due. Panels below cover contracts by status, the pipeline, quick stats and sector benchmarks, under a footnote that every figure is drawn from your own contract records and from published awards.',
     caption: 'What has been committed, delivered and evidenced, drawn from your own records and published awards',
   },
 ];
@@ -294,38 +294,38 @@ export const BUYER_SCREENS: Slide[] = [
   {
     src: shot('buy-1-requirement-builder'),
     ...DESKTOP,
-    alt: 'The CrowMark social value requirement builder for a buying authority. Four figures head the page: the social value weighting set against the statutory minimum, the number of criteria published, the total weight split across quality, price and social value, and the responses received. The award criteria table lists each criterion with its TOMs reference, its weighting and the evidence a supplier must supply.',
+    alt: 'The Velstrian Buy social value requirement builder for a buying authority. Four figures head the page: the social value weighting set against the statutory minimum, the number of criteria published, the total weight split across quality, price and social value, and the responses received. The award criteria table lists each criterion with its TOMs reference, its weighting and the evidence a supplier must supply.',
     caption: 'Criteria, weightings and the evidence each one demands, set against the statutory minimum',
   },
   {
     src: shot('buy-2-response-review'),
     ...DESKTOP,
     /* The buyer-side refusal, quoted. Same reason as sup-3. */
-    alt: 'The CrowMark response review screen, one criterion against one response. A banner states that CrowMark locates the passage that answers this criterion and shows you where it came from. It does not score, rank or recommend. The band is yours to set. A panel quotes the supplier verbatim and cites it to a section and page of the response document. On the right, four bands are offered under the note that there are no half marks and no rounding, with an audit line naming the evaluator.',
+    alt: 'The Velstrian Buy response review screen, one criterion against one response. A banner states that Velstrian Buy locates the passage that answers this criterion and shows you where it came from. It does not score, rank or recommend. The band is yours to set. A panel quotes the supplier verbatim and cites it to a section and page of the response document. On the right, four bands are offered under the note that there are no half marks and no rounding, with an audit line naming the evaluator.',
     caption: 'The passage that answers the criterion, located and cited, with the band left to a named evaluator',
   },
   {
     src: shot('buy-3-evaluation'),
     ...DESKTOP,
-    alt: 'The CrowMark evaluation grid, banding suppliers against criteria. Every cell is a band rather than a number, under a legend reading four bands, no half marks and no rounding. A panel below flags where two evaluators disagreed by more than one band. The closing statement reads that CrowMark located the passage behind each one. It did not set, rank or recommend any band.',
+    alt: 'The Velstrian Buy evaluation grid, banding suppliers against criteria. Every cell is a band rather than a number, under a legend reading four bands, no half marks and no rounding. A panel below flags where two evaluators disagreed by more than one band. The closing statement reads that Velstrian Buy located the passage behind each one. It did not set, rank or recommend any band.',
     caption: 'Four bands, no half marks and no rounding, with every disagreement sent to moderation',
   },
   {
     src: shot('buy-4-delivery-oversight'),
     ...DESKTOP,
-    alt: 'The CrowMark delivery oversight screen, tracking commitments made at award through to the evidence that proves them. Four figures head the page, covering contracts in delivery, measures committed, evidence received this month and section 71 assessments due. A table gives each supplier an evidence percentage, a status of on track, at risk or behind, and its next section 71 date.',
+    alt: 'The Velstrian Buy delivery oversight screen, tracking commitments made at award through to the evidence that proves them. Four figures head the page, covering contracts in delivery, measures committed, evidence received this month and section 71 assessments due. A table gives each supplier an evidence percentage, a status of on track, at risk or behind, and its next section 71 date.',
     caption: 'What each supplier committed at award, against what they have since evidenced',
   },
   {
     src: shot('buy-5-supplier-comparison'),
     ...TABLET,
-    alt: 'The CrowMark supplier comparison at tablet width, putting shortlisted suppliers side by side. Each column carries an overall band and the same measures, with a quantified social value total. A footnote states that figures are quoted from each response and are not adjusted, normalised or ranked by CrowMark, and that the overall band is the moderated evaluator band.',
+    alt: 'The Velstrian Buy supplier comparison at tablet width, putting shortlisted suppliers side by side. Each column carries an overall band and the same measures, with a quantified social value total. A footnote states that figures are quoted from each response and are not adjusted, normalised or ranked by Velstrian Buy, and that the overall band is the moderated evaluator band.',
     caption: 'Committed measures side by side, quoted from each response and neither normalised nor ranked',
   },
   {
     src: shot('buy-6-reports-audit'),
     ...TABLET_WIDE,
-    alt: 'The CrowMark reports and audit trail. Four figures summarise the trail, with a seven-year retention marker and an export action, above a table listing each action with the person who took it and a timestamp. The closing line reads that every band carries the evaluator who set it and the time they set it. Nothing in this trail was written by the model.',
+    alt: 'The Velstrian Buy reports and audit trail. Four figures summarise the trail, with a seven-year retention marker and an export action, above a table listing each action with the person who took it and a timestamp. The closing line reads that every band carries the evaluator who set it and the time they set it. Nothing in this trail was written by the model.',
     caption: 'Every band, every change and every export, against the person and the moment it happened',
   },
 ];

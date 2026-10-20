@@ -1,47 +1,47 @@
 ---
 title: "Education Bid Software | School and MAT Tenders | Velstrian"
-description: "CrowMark helps suppliers to schools, academy trusts and colleges find education tenders and evidence social value under PPN 026, the next edition of the Social Value Model."
-ogDescription: "Find education tenders and build stronger school, MAT and college bids with CrowMark, cited to PPN 026 and the Procurement Act 2023."
-ogImageAlt: "CrowMark bid software for suppliers to UK schools and academy trusts"
+description: "Velstrian Bid helps suppliers to schools, academy trusts and colleges find education tenders and evidence social value under PPN 026, the next edition of the Social Value Model."
+ogDescription: "Find education tenders and build stronger school, MAT and college bids with Velstrian Bid, cited to PPN 026 and the Procurement Act 2023."
+ogImageAlt: "Velstrian Bid bid software for suppliers to UK schools and academy trusts"
 sectorLabel: "Education"
 heroTitleAccent: "education contracts."
-heroDescription: "CrowMark for Suppliers helps suppliers to schools, multi-academy trusts and colleges find education tenders and build stronger bids, from social value to delivery evidence. Every figure and commitment in your bid traces back to your own data and the rules that apply."
+heroDescription: "Velstrian Bid helps suppliers to schools, multi-academy trusts and colleges find education tenders and build stronger bids, from social value to delivery evidence. Every figure and commitment in your bid traces back to your own data and the rules that apply."
 contextEyebrow: "The pressure on education suppliers"
 contextHeading: "Many buyers, tight budgets, careful due diligence."
 helpsHeading: "One supplier voice, every buyer."
 steps:
   - accent: teal
     verb: "Find the right education work, daily."
-    say: "CrowMark tracks Contracts Finder and Find a Tender and refreshes at 06:00 each day. Filter by CPV code, region and value so only the school, trust, college and university contracts you can deliver reach your list."
+    say: "Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes at 06:00 each day. Filter by CPV code, region and value so only the school, trust, college and university contracts you can deliver reach your list."
   - accent: violet
     verb: "Stay consistent across buyers."
-    say: "CrowMark drafts answers grounded in bids your organisation has already submitted, so a single supplier voice holds across a small single-site tender and a trust-wide procurement. A person reviews and approves every draft."
+    say: "Velstrian Bid drafts answers grounded in bids your organisation has already submitted, so a single supplier voice holds across a small single-site tender and a trust-wide procurement. A person reviews and approves every draft."
   - accent: sky
     verb: "Score social value in code."
-    say: "CrowMark computes social value in code, over a curated catalogue of TOMs-aligned measures. Every pound and percentage has to exist in your own data before the draft is released."
+    say: "Velstrian Bid computes social value in code, over a curated catalogue of TOMs-aligned measures. Every pound and percentage has to exist in your own data before the draft is released."
   - accent: teal
     verb: "Disclose AI and evidence delivery."
-    say: "Every AI-assisted draft carries a PPN 017 transparency disclosure. After award, CrowMark checks the Procurement Act 2023 KPI duties as an advisory step and gives you a place to evidence what you committed to. These checks are advisory and are not legal advice."
-helpsIntro: "CrowMark covers finding, drafting and evidencing education-sector tenders in one place."
+    say: "Every AI-assisted draft carries a PPN 017 transparency disclosure. After award, Velstrian Bid checks the Procurement Act 2023 KPI duties as an advisory step and gives you a place to evidence what you committed to. These checks are advisory and are not legal advice."
+helpsIntro: "Velstrian Bid covers finding, drafting and evidencing education-sector tenders in one place."
 figure:
   avif: "/Assets/shots/figma-v2/sup-5-answer-library-light.avif?v=20260805a"
   webp: "/Assets/shots/figma-v2/sup-5-answer-library-light.webp?v=20260805a"
   png: "/Assets/shots/figma-v2/sup-5-answer-library-light.png?v=20260805a"
   width: 2048
   height: 1536
-  alt: "The CrowMark answer library at tablet width, described on screen as your previously submitted answers, which the drafter grounds new answers in, with answers you marked as coming from a won bid ranking higher as sources. Buttons to import answers and to add an answer sit at the top, above a field to search topic, answer text or tag, a sort control set to Newest first and a filter for answers from won bids only, then a count of 10 answers. Three answers are shown in full. A social value answer about a Social Value Lead reporting quarterly against the TOMs framework, tagged social-value, a procurement policy note and toms. An eight-week mobilisation answer with a named transition manager and TUPE consultation from week one, tagged mobilisation and tupe. And a safeguarding answer about training to level 3 with DBS status re-checked every three years, tagged safeguarding and compliance. The first two carry a From a won bid marker."
-  caption: "The answer library in CrowMark, shown as a drawn representation. It is what holds one supplier voice across every buyer: new answers are grounded in what your organisation has already submitted."
+  alt: "The Velstrian Bid answer library at tablet width, described on screen as your previously submitted answers, which the drafter grounds new answers in, with answers you marked as coming from a won bid ranking higher as sources. Buttons to import answers and to add an answer sit at the top, above a field to search topic, answer text or tag, a sort control set to Newest first and a filter for answers from won bids only, then a count of 10 answers. Three answers are shown in full. A social value answer about a Social Value Lead reporting quarterly against the TOMs framework, tagged social-value, a procurement policy note and toms. An eight-week mobilisation answer with a named transition manager and TUPE consultation from week one, tagged mobilisation and tupe. And a safeguarding answer about training to level 3 with DBS status re-checked every three years, tagged safeguarding and compliance. The first two carry a From a won bid marker."
+  caption: "The answer library in Velstrian Bid, shown as a drawn representation. It is what holds one supplier voice across every buyer: new answers are grounded in what your organisation has already submitted."
 faqHeading: "Education bidding, answered."
 finalCtaSub: "Start with the education tenders your team should be bidding this week."
 faq:
-  - question: "Which education buyers and frameworks does CrowMark cover?"
-    answer: "CrowMark tracks education tenders published on Contracts Finder and Find a Tender, including opportunities from local authorities, multi-academy trusts, colleges and universities, and work let through Department for Education and the Cabinet Office's central commercial organisation frameworks for catering, cleaning, ICT, MIS and estates. You filter by CPV code, region and value to see only the contracts you can deliver."
+  - question: "Which education buyers and frameworks does Velstrian Bid cover?"
+    answer: "Velstrian Bid tracks education tenders published on Contracts Finder and Find a Tender, including opportunities from local authorities, multi-academy trusts, colleges and universities, and work let through Department for Education and the Cabinet Office's central commercial organisation frameworks for catering, cleaning, ICT, MIS and estates. You filter by CPV code, region and value to see only the contracts you can deliver."
   - question: "How does buying differ across schools, MATs and colleges?"
-    answer: "A standalone school may buy under delegated thresholds, while a multi-academy trust often runs a central, more formal procurement across many sites, and colleges follow their own governance. CrowMark helps you respond to each with answers grounded in bids you have already submitted, so a single supplier voice stays consistent across trust-wide and single-site tenders."
+    answer: "A standalone school may buy under delegated thresholds, while a multi-academy trust often runs a central, more formal procurement across many sites, and colleges follow their own governance. Velstrian Bid helps you respond to each with answers grounded in bids you have already submitted, so a single supplier voice stays consistent across trust-wide and single-site tenders."
   - question: "How is PPN 026 social value scored on education contracts?"
-    answer: "PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and education buyers often ask for local employment, curriculum support and community benefit. CrowMark computes the figures in code and drafts the narrative from your own data."
-  - question: "Does CrowMark help evidence delivery on education contracts?"
-    answer: "Yes. After award, CrowMark checks the Procurement Act 2023 KPI duties as an advisory step and gives you a place to evidence what you committed to at bid stage, so promises made to a school, trust or college follow through into delivery. These checks are advisory and are not legal advice."
+    answer: "PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and education buyers often ask for local employment, curriculum support and community benefit. Velstrian Bid computes the figures in code and drafts the narrative from your own data."
+  - question: "Does Velstrian Bid help evidence delivery on education contracts?"
+    answer: "Yes. After award, Velstrian Bid checks the Procurement Act 2023 KPI duties as an advisory step and gives you a place to evidence what you committed to at bid stage, so promises made to a school, trust or college follow through into delivery. These checks are advisory and are not legal advice."
 ---
 
 Selling to education means selling to a fragmented set of buyers. Local authorities buy on behalf of maintained schools, multi-academy trusts run central procurement across dozens of sites, and colleges and universities follow their own governance. Catering, cleaning, grounds, ICT and management information systems, estates and professional services are all procured this way, often through Department for Education and central-government frameworks, and advertised on Contracts Finder and Find a Tender through e-sourcing portals.

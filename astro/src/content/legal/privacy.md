@@ -1,18 +1,18 @@
 ---
 title: "Privacy Policy | Velstrian"
-description: "How VELSTRIAN SYSTEMS LIMITED collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info."
+description: "How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info."
 heading: "Privacy Policy."
 eyebrow: "Legal & Data Protection"
 lastUpdated: "2026-05-17"
----How VELSTRIAN SYSTEMS LIMITED collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
+---How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
 
 ## What this policy covers
 
-VELSTRIAN SYSTEMS LIMITED is the data controller for personal data processed through the platform. These are the foundations. The full detail follows below.
+Velstrian Systems Ltd is the data controller for personal data processed through the platform. These are the foundations. The full detail follows below.
 
 ### ICO Registered Controller
 
-VELSTRIAN SYSTEMS LIMITED is registered with the Information Commissioner's Office under the Data Protection (Charges and Information) Regulations 2018.
+Velstrian Systems Ltd is registered with the Information Commissioner's Office under the Data Protection (Charges and Information) Regulations 2018.
 
 ### UK GDPR lawful bases
 
@@ -34,15 +34,15 @@ Every clause below is written for clarity. Jump to any section, or contact our D
 
 ## Data controller
 
-**VELSTRIAN SYSTEMS LIMITED**, a private company limited by shares incorporated in England and Wales, is the data controller for personal data processed through the Velstrian platform.
+**Velstrian Systems Ltd**, a private company limited by shares incorporated in England and Wales, is the data controller for personal data processed through the Velstrian platform.
 
-VELSTRIAN SYSTEMS LIMITED (the "Company", "we", "us", or "our") is committed to protecting and respecting your privacy. This policy (together with our terms of use and any other documents referred to on it) sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us.
+Velstrian Systems Ltd (the "Company", "we", "us", or "our") is committed to protecting and respecting your privacy. This policy (together with our terms of use and any other documents referred to on it) sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us.
 
 For data-protection enquiries: [hello@velstrian.com](mailto:hello@velstrian.com)
 
 ### ICO data-controller registration
 
-VELSTRIAN SYSTEMS LIMITED is registered as a data controller with the UK Information Commissioner’s Office (ICO) in accordance with the Data Protection (Charges and Information) Regulations 2018. Verifiable on the [ICO public register](https://ico.org.uk/ESDWebPages/Search) by searching for “VELSTRIAN SYSTEMS LIMITED”. Companies House No. 17076461.
+Velstrian Systems Ltd is registered as a data controller with the UK Information Commissioner’s Office (ICO) in accordance with the Data Protection (Charges and Information) Regulations 2018. Verifiable on the [ICO public register](https://ico.org.uk/ESDWebPages/Search) by searching for “Velstrian Systems Ltd”. Companies House No. 17076461.
 
 ## Data we collect
 
@@ -50,7 +50,7 @@ We may collect and process the following data about you:
 
 - **Account data:** Information that you provide by filling in forms on our site or via our application (app.crowagent.ai). This includes email address, full name, and password hash (via Supabase Auth).
 - **Sustainability data:** Activity and energy-consumption figures submitted through legacy reporting features, available to existing customers only. This is essential for the Velstrian platform.
-- **Social Value data:** Procurement descriptions, National TOMs selections, and submissions you enter for social value scoring and CrowMark narrative generation.
+- **Social Value data:** Procurement descriptions, National TOMs selections, and submissions you enter for social value scoring and Velstrian Bid narrative generation.
 - **Usage data:** Details of your visits to our site including, but not limited to, traffic data, location data, weblogs and other communication data, API call counts, feature usage events, timestamps, and subscription plan.
 - **Billing data:** Stripe customer ID and subscription status. We do not store raw card numbers. These are handled directly by Stripe.
 - **Technical data:** IP address, browser type, and error telemetry (collected by Sentry).
@@ -60,7 +60,7 @@ We may collect and process the following data about you:
 
 We use information held about you in the following ways:
 
-- To provide the Velstrian service, including CrowMark and legacy features retained for existing customers, such as authentication, sustainability reporting, security-evidence preparation, and Social Value scoring based on National TOMs.
+- To provide the Velstrian service, including Velstrian Bid and legacy features retained for existing customers, such as authentication, sustainability reporting, security-evidence preparation, and Social Value scoring based on National TOMs.
 - To process billing and maintain financial records through Stripe.
 - To improve the product through aggregate analytics and user feedback (consent-gated via PostHog).
 - To monitor and fix errors, ensuring service stability (via Sentry).
@@ -96,7 +96,7 @@ You have the following rights in respect of personal data we hold about you. To 
 
 ## Data Protection Officer
 
-Our Data Protection Officer is the canonical contact for all data-protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact our DPO for any matter related to CrowMark or to any legacy feature retained for existing customers data handling.
+Our Data Protection Officer is the canonical contact for all data-protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact our DPO for any matter related to Velstrian Bid or to any legacy feature retained for existing customers data handling.
 
 <dl class="deflist"> <dt>Contact the DPO</dt> <dd>Email: <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a> | <a href="mailto:privacy@velstrian.com">privacy@velstrian.com</a></dd> </dl>
 
@@ -122,8 +122,8 @@ Supabase EU Railway EU Vercel Edge Cloudflare Edge Stripe US/EU PostHog EU Sentr
 - **PostHog (EU):** Product analytics and session recording.
 - **Sentry (US):** Error monitoring and performance tracking.
 - **Brevo (EU):** Transactional and marketing email delivery.
-- **Google Gemini (US):** AI narrative generation for CrowMark social value drafts based on National TOMs.
-- **Anthropic, Claude (US):** AI narrative generation for drafting content, including CrowMark social value bid narratives and, for existing customers only, legacy sustainability report drafting, from the inputs you provide.
+- **Google Gemini (US):** AI narrative generation for Velstrian Bid social value drafts based on National TOMs.
+- **Anthropic, Claude (US):** AI narrative generation for drafting content, including Velstrian Bid social value bid narratives and, for existing customers only, legacy sustainability report drafting, from the inputs you provide.
 
 **Integrations you connect:** You control which third-party services you link, and you can disconnect any of them at any time from your settings.
 
@@ -145,11 +145,11 @@ You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [
 
 ## Google Gemini DPA
 
-CrowMark uses Google Gemini 1.5 Flash to assist with drafting Social Value narratives. We have signed Google’s Cloud Data Processing Addendum (DPA) to ensure data protection. Prompts and completions submitted via our API are not used to train Google's foundation models, and PII is stripped at the prompt boundary to maintain anonymity.
+Velstrian Bid uses Google Gemini 1.5 Flash to assist with drafting Social Value narratives. We have signed Google’s Cloud Data Processing Addendum (DPA) to ensure data protection. Prompts and completions submitted via our API are not used to train Google's foundation models, and PII is stripped at the prompt boundary to maintain anonymity.
 
 ## Anthropic (Claude) AI processing
 
-Velstrian uses Anthropic's Claude models as an AI sub-processor to generate and draft content from the data you provide, including CrowMark social value bid narratives and, for existing customers, legacy sustainability report drafting.
+Velstrian uses Anthropic's Claude models as an AI sub-processor to generate and draft content from the data you provide, including Velstrian Bid social value bid narratives and, for existing customers, legacy sustainability report drafting.
 
 What data is sent
 
@@ -167,7 +167,7 @@ We use Sentry for error monitoring to ensure the stability of the Velstrian plat
 
 ## Contact & ICO complaint
 
-<dl class="deflist deflist--ledger"> <dt>Company</dt> <dd>VELSTRIAN SYSTEMS LIMITED</dd> <dt>Companies House No.</dt> <dd>17076461</dd> <dt>Registered office</dt> <dd>Reading, Berkshire, RG1 6SP, GB</dd> <dt>Data Protection</dt> <dd><a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></dd> </dl>
+<dl class="deflist deflist--ledger"> <dt>Company</dt> <dd>Velstrian Systems Ltd</dd> <dt>Companies House No.</dt> <dd>17076461</dd> <dt>Registered office</dt> <dd>Reading, Berkshire, RG1 6SP, GB</dd> <dt>Data Protection</dt> <dd><a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></dd> </dl>
 
 If you are not satisfied with our response to a data protection request, you have the right to complain to the UK Information Commissioner’s Office (ICO).
 

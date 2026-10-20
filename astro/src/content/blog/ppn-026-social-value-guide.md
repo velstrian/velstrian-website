@@ -136,25 +136,25 @@ Based on published evaluation feedback and contracting authority guidance, the s
 - **Ignoring the contract context.** Proposing activity unrelated to the contract geography, workforce, or subject matter. A facilities management contract in Manchester should propose local employment in Manchester, not corporate volunteering in London.
 - **No evidence-tracking plan.** Making commitments without explaining how they will be monitored and reported. Many contracts require quarterly social value reporting, and buyers reward bidders who plan for it from the outset.
 
-## 8. How CrowMark builds a social value response
+## 8. How Velstrian Bid builds a social value response
 
-CrowMark is Velstrian's bid and tender product. The variant relevant here is CrowMark for Suppliers, which answers tenders, RFPs, RFIs, PQQs and SQs, and it takes on the slowest parts of a social value response: assembling the evidence, drafting the narrative and keeping the record afterwards.
+Velstrian Bid is Velstrian's bid and tender product. The variant relevant here is Velstrian Bid, which answers tenders, RFPs, RFIs, PQQs and SQs, and it takes on the slowest parts of a social value response: assembling the evidence, drafting the narrative and keeping the record afterwards.
 
-CrowMark scores social value from evidence your organisation has already submitted, and cites the source of every figure it produces. That work does not change with the edition. What changes is which model the output is mapped to, and CrowMark reports the model it used on every draft, so a reviewer can see it on the page rather than having to ask.
+Velstrian Bid scores social value from evidence your organisation has already submitted, and cites the source of every figure it produces. That work does not change with the edition. What changes is which model the output is mapped to, and Velstrian Bid reports the model it used on every draft, so a reviewer can see it on the page rather than having to ask.
 
 ### AI narrative generation
 
-Once you have selected your measures and entered your quantities, CrowMark generates a draft social value narrative using server-side AI. The narrative references specific measures and quantities and is written in the formal tone public sector evaluators expect. The language model never computes the figures: any generated prose containing a £ or % that the computed figures do not support is rejected rather than shown. You review, edit, and approve before anything is exported. The AI handles the first draft. Your subject matter expertise handles the final polish.
+Once you have selected your measures and entered your quantities, Velstrian Bid generates a draft social value narrative using server-side AI. The narrative references specific measures and quantities and is written in the formal tone public sector evaluators expect. The language model never computes the figures: any generated prose containing a £ or % that the computed figures do not support is rejected rather than shown. You review, edit, and approve before anything is exported. The AI handles the first draft. Your subject matter expertise handles the final polish.
 
 ### Evidence tracker
 
-CrowMark includes an integrated evidence tracker that lets you log evidence against each committed measure throughout the contract lifecycle. Upload enrolment certificates, volunteering timesheets, emissions calculations, and supply chain spend data directly against the relevant measure. The platform sends monthly email reminders to keep evidence collection on track and generates progress reports you can send to contracting authorities.
+Velstrian Bid includes an integrated evidence tracker that lets you log evidence against each committed measure throughout the contract lifecycle. Upload enrolment certificates, volunteering timesheets, emissions calculations, and supply chain spend data directly against the relevant measure. The platform sends monthly email reminders to keep evidence collection on track and generates progress reports you can send to contracting authorities.
 
 ### One pass, not a blank page
 
 The workflow runs end to end in a single sitting: contract profile in, measures priced against the TOMs library, narrative drafted, evidence plan attached, response exported. For an SME with no dedicated social value team, the work that changes is the assembly, not the judgement. You still decide which commitments your organisation can actually keep.
 
-> **Ready to score your next bid?** CrowMark handles measure scoring, AI narrative drafting, and evidence tracking, all in one platform. [Start now](https://app.crowagent.ai/signup)
+> **Ready to score your next bid?** Velstrian Bid handles measure scoring, AI narrative drafting, and evidence tracking, all in one platform. [Start now](https://app.crowagent.ai/signup)
 
 ## Sources
 

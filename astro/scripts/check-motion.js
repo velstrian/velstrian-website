@@ -172,10 +172,10 @@ const ALLOWED = new Map([
 
   ['observer  src/scripts/motion.ts  IntersectionObserver',
    'the `data-lit` trigger, and the one copy of it that should survive. It does not reveal content: it sets data-lit="on" once on a wrapper whose only job is to start ambient light-field loops, every one of them aria-hidden and behind the text. Rest state is final state, so if it never fires the page is complete and merely still. That is the exact inversion of the sv-reveal pattern rather than a smaller dose of it. If it ever gates something a reader has to read, it becomes a violation'],
-  ['observer  src/pages/crowmark.astro  IntersectionObserver',
-   'DEBT: a second, inline, byte-identical copy of the `data-lit` trigger above, at crowmark.astro:885. Same fifteen lines, same threshold of 0.25, same unobserve. The stated reason is payload — an is:inline script avoids a module request on a route already at 97 KB against a 100 KB budget — which is a real argument for INLINING and not an argument for a second implementation. It should import the shared one or the shared one should be inlined by the layout for every route'],
-  ['observer  src/pages/crowmark-buyers.astro  IntersectionObserver',
-   'DEBT: the THIRD copy of the same fifteen lines, at crowmark-buyers.astro:720. Identical to the crowmark.astro copy including its comment. Two pages carrying private copies of one trigger is how eleven motion systems started on the legacy site'],
+  ['observer  src/pages/bid.astro  IntersectionObserver',
+   'DEBT: a second, inline, byte-identical copy of the `data-lit` trigger above, at bid.astro:885. Same fifteen lines, same threshold of 0.25, same unobserve. The stated reason is payload — an is:inline script avoids a module request on a route already at 97 KB against a 100 KB budget — which is a real argument for INLINING and not an argument for a second implementation. It should import the shared one or the shared one should be inlined by the layout for every route'],
+  ['observer  src/pages/buy.astro  IntersectionObserver',
+   'DEBT: the THIRD copy of the same fifteen lines, at buy.astro:720. Identical to the bid.astro copy including its comment. Two pages carrying private copies of one trigger is how eleven motion systems started on the legacy site'],
 ]);
 
 /* ══════════════════════════════════════════════════════════════════════════

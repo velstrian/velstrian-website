@@ -4,7 +4,7 @@
  *
  * ── THE APPROVED DESIGN, AND WHAT WAS TAKEN FROM WHERE ──────────────────────
  *
- * P1 "Obligation ledger", Figma `223:3` on page `Page — Product (CrowMark)`
+ * P1 "Obligation ledger", Figma `223:3` on page `Page — Product (Velstrian Bid)`
  * (`223:2`), file wJ9DK6ByFUN6rWe0CpCVPU. P1 was chosen because it is the only
  * variant whose argument survives covering the prose: the award-line bar, the
  * gate and the twelve-month strip each make the point on their own. Its
@@ -78,7 +78,7 @@ import Carousel from '../components/ui/Carousel.astro';
    drawing and the recipe behind it are shared: the markup is DutyCard.astro, the
    CSS is styles/duty-card.css (loaded by Base.astro), and the figures and
    citations are data/duty.ts. What stays here is the wording, because /crowmark
-   addresses the party the duty is imposed on and /crowmark-buyers the party that
+   addresses the party the duty is imposed on and /buy/ the party that
    holds it. Until 2026-08-04 the whole recipe was written out in both files and
    every correction had to be made twice. */
 import DutyCard from '../components/sections/DutyCard.astro';
@@ -125,7 +125,7 @@ import {
  */
 import '../styles/crowmark.css';
 
-const title = 'CrowMark | Bid and tender software for UK suppliers';
+const title = 'Velstrian Bid | Bid and tender software for UK suppliers';
 const description =
   'Find UK tenders, draft answers cited to the regulations and your own bids, and evidence delivery after award. From £49/month.';
 
@@ -146,10 +146,10 @@ const schema = [
    */
   {
     '@type': 'SoftwareApplication',
-    name: 'CrowMark',
+    name: 'Velstrian Bid',
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
-    url: `${SITE.origin}/crowmark`,
+    url: `${SITE.origin}/bid`,
     description,
     publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
     /* A-88. Without ONE of offers, aggregateRating or review, Google does not
@@ -176,7 +176,7 @@ const schema = [
   ...faqPage(FAQS),
   breadcrumbs([
     { name: 'Home', path: '/' },
-    { name: 'CrowMark', path: '/crowmark/' },
+    { name: 'Velstrian Bid', path: '/bid/' },
   ]),
 ];
 
@@ -224,7 +224,7 @@ const MECHANISM = [
   {
     n: '01',
     heading: 'Read the rule that applies',
-    body: 'Statute, the tender document and your own past bids are three different sources, and CrowMark keeps them apart. Every retrieved passage keeps its citation from the moment it is read.',
+    body: 'Statute, the tender document and your own past bids are three different sources, and Velstrian Bid keeps them apart. Every retrieved passage keeps its citation from the moment it is read.',
     /* Each card carries its own small drawn artefact. A section whose only
        visual idea is a bordered box with text in it is named as a failure in
        specs/DESIGN-DECISIONS.md, and three of them in a row is that failure
@@ -242,7 +242,7 @@ const MECHANISM = [
   {
     n: '03',
     heading: 'Hold the promise to the evidence',
-    body: 'A priced commitment becomes a KPI in the contract. CrowMark keeps that promise attached to the artefacts that prove it, ready for the twelve month assessment.',
+    body: 'A priced commitment becomes a KPI in the contract. Velstrian Bid keeps that promise attached to the artefacts that prove it, ready for the twelve month assessment.',
     art: 'link' as const,
     chips: ['Promise: 4 local jobs', 'Evidence: payroll, Q3'],
   },
@@ -307,7 +307,7 @@ const MONTHS = [38, 52, 61, 74, 44, 57, 70, 82, 49, 63, 77, 45];
  * scripts/check-device-frames.js.
  *
  * THE SLIDES AND THEIR STRINGS MOVED TO data/crowmark-screens.ts. They used to
- * be an eighty-line array in this file and a matching gap on /crowmark-buyers,
+ * be an eighty-line array in this file and a matching gap on /buy/,
  * which is the shape a rule gets broken in: alt text and captions on this site
  * obey three rules that are easy to break one page at a time, and the sixteen
  * strings that have to obey them now sit together where they can be read
@@ -341,7 +341,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
 
 ---
 
-<Base title={title} description={description} path="/crowmark" schema={schema} updatedAt={UPDATED}>
+<Base title={title} description={description} path="/bid" schema={schema} updatedAt={UPDATED}>
   {/*
     ── HERO ────────────────────────────────────────────────────────────────
     The head block is Section.astro's: centred eyebrow capsule, h1, standfirst.
@@ -359,7 +359,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     as="h1"
     eyebrow="Procurement Act 2023 · s.52 · s.71 · PPN 026"
     title="Find UK tenders. Cite every answer. Prove delivery."
-    standfirst="CrowMark reads the notice, drafts the answer against the rule that applies, and keeps the promise you priced attached to the evidence that proves it after award."
+    standfirst="Velstrian Bid reads the notice, drafts the answer against the rule that applies, and keeps the promise you priced attached to the evidence that proves it after award."
     id="hero"
   >
     <div class="cw cw--hero" data-spot="off">
@@ -431,13 +431,13 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     argues it without naming anybody: the bid ends at award, the obligation
     crosses it and runs twelve months further.
 
-    What CrowMark does about that is a claim about our own product, which is
+    What Velstrian Bid does about that is a claim about our own product, which is
     normal marketing and needs no source.
   */}
   <Section
     eyebrow="The gap"
     title="The obligation outlives the bid."
-    standfirst="s.52 puts at least three KPIs into contracts with an estimated value above £5m and requires you to publish them. s.71 makes you assess and publish against those same KPIs at least every twelve months, and on termination. CrowMark works on both sides of that line."
+    standfirst="s.52 puts at least three KPIs into contracts with an estimated value above £5m and requires you to publish them. s.71 makes you assess and publish against those same KPIs at least every twelve months, and on termination. Velstrian Bid works on both sides of that line."
     id="the-gap"
   >
     <div class="cw cw--gap" data-lit>
@@ -523,7 +523,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
         <p class="meta cap__n">01</p>
         <h2 class="cap__h">Find the work that actually fits</h2>
         <p class="cap__body">
-          CrowMark reads live notices and scores each against what you can evidence today:
+          Velstrian Bid reads live notices and scores each against what you can evidence today:
           turnover, accreditations, past delivery in the same category. A low score is an answer,
           not a failure, and it comes with the reason. You stop writing bids you cannot support.
         </p>
@@ -626,10 +626,10 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="See it in action"
     title="The same four steps, in the product."
-    standfirst="Six CrowMark screens, drawn from the product's own design system, at desktop and tablet widths. The first four match the four capabilities above."
+    standfirst="Six Velstrian Bid screens, drawn from the product's own design system, at desktop and tablet widths. The first four match the four capabilities above."
     id="showcase"
   >
-    <Carousel slides={SUPPLIER_SCREENS} path="mark" label="CrowMark supplier screens" />
+    <Carousel slides={SUPPLIER_SCREENS} path="mark" label="Velstrian Bid supplier screens" />
   </Section>
 
   <Section id="cap-refusal">
@@ -642,7 +642,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
         <p class="meta cap__n">03</p>
         <h2 class="cap__h">It refuses what it cannot evidence</h2>
         <p class="cap__body">
-          Where there is no recorded commitment behind a figure, CrowMark will not produce the
+          Where there is no recorded commitment behind a figure, Velstrian Bid will not produce the
           figure. The gap is shown, named and left open rather than filled. That refusal is the
           product, and it is why the rest of the numbers can be trusted.
         </p>
@@ -696,7 +696,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
         <p class="meta cap__n">04</p>
         <h2 class="cap__h">The promise survives the award</h2>
         <p class="cap__body">
-          Priced commitments become KPIs under s.52. CrowMark keeps each one attached to the
+          Priced commitments become KPIs under s.52. Velstrian Bid keeps each one attached to the
           evidence that proves it, month by month, so the s.71 assessment twelve months later is
           an export rather than an excavation.
         </p>
@@ -764,7 +764,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   </Section>
 
   <Section
-    eyebrow="Why CrowMark"
+    eyebrow="Why Velstrian Bid"
     title="Three things most bid tools will not do."
     standfirst="The AI cannot invent a number, every draft says it is AI-assisted, and the commitment you bid is the commitment you report against."
     id="benefits"
@@ -784,7 +784,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="Procurement Act 2023"
     title="The KPI duties nobody reads until it's too late."
-    standfirst="CrowMark checks your contract against the Procurement Act 2023 KPI duties and tells you where you stand. The check is advisory, it never blocks you, and it is not legal advice."
+    standfirst="Velstrian Bid checks your contract against the Procurement Act 2023 KPI duties and tells you where you stand. The check is advisory, it never blocks you, and it is not legal advice."
     id="procurement-act"
   >
     <ul class="grid grid--2 card-sync">
@@ -801,7 +801,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
 
   <Section
     eyebrow="Available now"
-    title="What CrowMark does today."
+    title="What Velstrian Bid does today."
     standfirst="What the product does now. Anything still being built is on the roadmap rather than in this grid."
     id="features"
   >
@@ -818,12 +818,12 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   </Section>
 
   <Section
-    eyebrow="What is CrowMark?"
+    eyebrow="What is Velstrian Bid?"
     title="A UK bid and tender suite."
-    id="what-is-crowmark"
+    id="what-is-bid"
   >
     <p class="lead">
-      CrowMark is a UK bid and tender management suite for public-sector suppliers. It tracks
+      Velstrian Bid is a UK bid and tender management suite for public-sector suppliers. It tracks
       Find a Tender, Contracts Finder and Public Contracts Scotland every day, drafts answers
       cited to the regulations, to the tender's own clauses and to the supplier's answer
       library, checks every figure against the supplier's own data so the model cannot invent
@@ -849,7 +849,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     <p class="compare">
       Weighing up your options?{' '}
       <a href="/compare/">
-        See how CrowMark compares to AutogenAI, mytender.io, CleanTender and SwiftBid
+        See how Velstrian Bid compares to AutogenAI, mytender.io, CleanTender and SwiftBid
       </a>.
     </p>
   </Section>
@@ -857,13 +857,13 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="Both sides of the tender"
     title="One product. Two sides of the table."
-    standfirst="Two sides to every procurement: one writes the answers, the other reads them. CrowMark serves both, and sells them separately."
+    standfirst="Two sides to every procurement: one writes the answers, the other reads them. Velstrian Bid serves both, and sells them separately."
     id="buyers"
   >
     <ul class="grid grid--2 card-sync">
       <li class="card surface surface--accent card--here">
         <p class="eyebrow kicker">You are here</p>
-        <h3 class="card-h card__h">CrowMark for Suppliers: answering the questions</h3>
+        <h3 class="card-h card__h">Velstrian Bid: answering the questions</h3>
         <p class="card__body">
           Find the work, then answer every question that follows, cited to the regulations, to
           the tender itself and to your own answer library. Tenders, RFPs, RFIs, PQQs and SQs,
@@ -877,7 +877,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
       </li>
       <li class="card surface surface--accent card--other">
         <p class="eyebrow kicker">The other side</p>
-        <h3 class="card-h card__h">CrowMark for Buyers: reading the answers</h3>
+        <h3 class="card-h card__h">Velstrian Buy: reading the answers</h3>
         <p class="card__body">
           If you run the competition rather than respond to it, you publish the requirement and
           read what comes back. That is a different product with a different proposition, a
@@ -888,7 +888,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
           Contracting authorities, councils, NHS bodies and universities, and private sector
           procurement teams.
         </p>
-        <p class="card__cta"><a href="/crowmark-buyers/">See CrowMark for Buyers</a></p>
+        <p class="card__cta"><a href="/buy/">See Velstrian Buy</a></p>
       </li>
     </ul>
 
@@ -982,7 +982,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   <Section
     eyebrow="Try it now"
     title="Tender Compliance Matrix."
-    standfirst="Paste the text of a tender and read back the requirements its wording states, from the social value weighting to the certificates and the deadlines, each one shown with the line it came from. No sign-up, no account. Already bidding? Start now with the full CrowMark workspace."
+    standfirst="Paste the text of a tender and read back the requirements its wording states, from the social value weighting to the certificates and the deadlines, each one shown with the line it came from. No sign-up, no account. Already bidding? Start now with the full Velstrian Bid workspace."
     id="free-tool"
   >
     <div class="btn-row">
@@ -1018,7 +1018,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     eyebrow="Procurement Act 2023 · s.52 · s.71 · PPN 026"
     title="Know the rules better than your competition."
     standfirst="Start today by card, or book a 30-minute call and we will show you round first."
-    id="crowmark-cta"
+    id="bid-cta"
   >
     <div class="cw cw--close" data-spot="off" data-lit>
       <div class="amb" data-field aria-hidden="true">

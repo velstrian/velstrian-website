@@ -169,9 +169,9 @@ import {
   startHref,
 } from '../data/pricing';
 
-const title = 'CrowMark pricing | Plans from £49 a month | Velstrian';
+const title = 'Velstrian Bid pricing | Plans from £49 a month | Velstrian';
 const description =
-  'CrowMark pricing: Starter £49 a month, Pro £149, Portfolio £549, Buyer Pro £299 and Buyer Portfolio £699. Annual billing saves 10%. Start today by card.';
+  'Velstrian pricing: Velstrian Bid from £49 a month, Pro £149, Portfolio £549, Velstrian Buy from £299 and Buyer Portfolio £699. Annual billing saves 10%. Start today by card.';
 
 /* WIRE VALUE read by /contact to preselect a subject. Not copy; do not tidy.
    The plan buttons carry their own sign up links, from data/pricing.ts.
@@ -239,10 +239,10 @@ const schema = [
         position: 1,
         item: {
           '@type': 'SoftwareApplication',
-          name: 'CrowMark',
+          name: 'Velstrian Bid',
           applicationCategory: 'BusinessApplication',
           operatingSystem: 'Web',
-          url: `${SITE.origin}/crowmark`,
+          url: `${SITE.origin}/bid`,
           publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
           offers,
         },
@@ -252,10 +252,10 @@ const schema = [
         position: 2,
         item: {
           '@type': 'SoftwareApplication',
-          name: 'CrowMark Buyer',
+          name: 'Velstrian Buy',
           applicationCategory: 'BusinessApplication',
           operatingSystem: 'Web',
-          url: `${SITE.origin}/crowmark-buyers`,
+          url: `${SITE.origin}/buy`,
           publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
           offers: buyerOffers,
         },
@@ -326,7 +326,7 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
     as="h1"
     eyebrow="Published pricing · No quote required"
     title="See the price first. Sized for SMEs."
-    standfirst="Supplier plans from £49 a month and CrowMark Buyer from £299. Every plan shows its price, users and AI credits, and you can start today by card."
+    standfirst="Supplier plans from £49 a month and Velstrian Buy from £299. Every plan shows its price, users and AI credits, and you can start today by card."
     id="hero"
     atmosphere
   >
@@ -412,14 +412,14 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
 
     <Section
       eyebrow="Bid and tender software"
-      title="CrowMark for Suppliers"
+      title="Velstrian Bid"
       standfirst="Respond to tenders, RFPs, RFIs, PQQs and SQs, in the public sector and the private sector."
       id="suppliers"
     >
       <ul class="capsules" role="list">
         {SUPPLIER_CAPSULES.map((c) => <li>{c}</li>)}
       </ul>
-      <p class="viewlink"><a href="/crowmark/">View product</a></p>
+      <p class="viewlink"><a href="/bid/">View product</a></p>
 
       <p class="note">
         Every plan below covers public and private sector bidding. Tender discovery, PPN 026
@@ -531,14 +531,14 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
 
     <Section
       eyebrow="Bid and tender software"
-      title="CrowMark for Buyers"
+      title="Velstrian Buy"
       standfirst="Publish requirements, then locate the evidence for each one across every response you receive."
       id="buyers"
     >
       <ul class="capsules" role="list">
         {BUYER_CAPSULES.map((c) => <li>{c}</li>)}
       </ul>
-      <p class="viewlink"><a href="/crowmark-buyers/">View product</a></p>
+      <p class="viewlink"><a href="/buy/">View product</a></p>
 
       {/*
         R285-P2-DROP-01 · D195 (2026-10-09). This block said buyer engagements are
@@ -663,11 +663,11 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
       id="compare"
       atmosphere
     >
-      <h3 class="cmp__h"><span class="cmp__dot" aria-hidden="true"></span>CrowMark</h3>
+      <h3 class="cmp__h"><span class="cmp__dot" aria-hidden="true"></span>Velstrian Bid</h3>
 
-      <div class="cmp__scroll" tabindex="0" role="region" aria-label="CrowMark features by plan, scrollable">
+      <div class="cmp__scroll" tabindex="0" role="region" aria-label="Velstrian Bid features by plan, scrollable">
         <table class="cmp">
-          <caption class="visually-hidden">CrowMark features by plan</caption>
+          <caption class="visually-hidden">Velstrian Bid features by plan</caption>
           <thead>
             <tr>
               <th scope="col">Feature</th>
@@ -716,7 +716,7 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
             <span class="cmp__hide">Show fewer features</span>
           </summary>
           <table class="cmp">
-            <caption class="visually-hidden">Additional CrowMark features by plan</caption>
+            <caption class="visually-hidden">Additional Velstrian Bid features by plan</caption>
             <thead class="visually-hidden">
               <tr>
                 <th scope="col">Feature</th>
@@ -919,7 +919,7 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
         </p>
         <p class="btn-row row--left">
           <Button href="/contact/">Talk to us about frameworks</Button>
-          <Button href="#suppliers" variant="secondary">See CrowMark plans</Button>
+          <Button href="#suppliers" variant="secondary">See Velstrian Bid plans</Button>
         </p>
       </div>
 

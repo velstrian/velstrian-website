@@ -538,9 +538,9 @@ async function open(page, route) {
    The homepage is not unmeasured because of it. The two checks further down
    drive one frame and the closing card on `/` directly and assert that each
    cancel is still in place, which is a stronger statement about that page than
-   the generic probe ever made. `/crowmark/` takes its slot here because it has
+   the generic probe ever made. `/bid/` takes its slot here because it has
    25 plain surfaces, the most of any route. */
-const CARD_ROUTES = ['/crowmark/', '/about/', '/pricing/'];
+const CARD_ROUTES = ['/bid/', '/about/', '/pricing/'];
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 
 for (const route of CARD_ROUTES) {

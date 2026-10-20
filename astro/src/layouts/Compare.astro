@@ -67,7 +67,7 @@ const {
    so `mainEntityOfPage` on all four comparison pages pointed at a redirect. See
    lib/route-url.ts. */
 const canonical = routeUrl(path);
-const breadcrumbLabel = `CrowMark vs ${competitor}`;
+const breadcrumbLabel = `Velstrian Bid vs ${competitor}`;
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
@@ -213,7 +213,7 @@ if (faq.length) {
           asserted one would force an override at every call site.
         */}
         <PageHeader
-          title={`CrowMark vs ${competitor}`}
+          title={`Velstrian Bid vs ${competitor}`}
           eyebrow={eyebrow}
           standfirst={heroDescription}
         >
@@ -234,7 +234,7 @@ if (faq.length) {
         <p class="cmp-cta-sub">{ctaSubLine1}<br /> <span class="accent">{ctaSubLine2}</span></p>
         <div class="btn-row">
           <Button href="/pricing/?product=mark" size="md">See pricing</Button>
-          <Button href="/crowmark/" variant="secondary" size="md">Explore CrowMark</Button>
+          <Button href="/bid/" variant="secondary" size="md">Explore Velstrian Bid</Button>
         </div>
       </div>
     </section>

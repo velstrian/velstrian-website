@@ -134,7 +134,7 @@ const title = 'About Us | Velstrian';
    description that is MISSING, not on one that changed, and /about is not among
    the routes tests/parity.spec.js walks, so there is no baseline to move. */
 const description =
-  'Written for bid teams and readable by the people scoring them. VELSTRIAN SYSTEMS LIMITED: company details, history, what we stand for and the statutes we build against.';
+  'Written for bid teams and readable by the people scoring them. Velstrian Systems Ltd: company details, history, what we stand for and the statutes we build against.';
 
 const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
 const COMPANIES_HOUSE =
@@ -350,14 +350,14 @@ const TIMELINE: {
     heading: 'Velstrian founded',
     // The number itself is in the company card beside this column, once. It was
     // printed three times within one screen: here, in the link label, and there.
-    body: 'Incorporated as VELSTRIAN SYSTEMS LIMITED in England and Wales. Engine prototyping begins.',
+    body: 'Incorporated as Velstrian Systems Ltd in England and Wales. Engine prototyping begins.',
     status: 'done',
     link: { label: 'The registration on Companies House', href: COMPANIES_HOUSE },
   },
   {
     when: 'May 2026',
     heading: 'Platform live',
-    body: 'CrowMark in live production.',
+    body: 'Velstrian Bid in live production.',
     status: 'now',
   },
   {
@@ -400,7 +400,7 @@ const COMPANY = [
 
 const VARIANTS = [
   {
-    heading: 'CrowMark for Suppliers',
+    heading: 'Velstrian Bid',
     // s.52 and s.71 are duties on the AUTHORITY, so a supplier feature cannot
     // be described as publishing or assessing under either. What a supplier
     // does is produce the evidence, which is what this says.
@@ -408,13 +408,13 @@ const VARIANTS = [
     // and cited on two artefacts. What a supplier DOES is produce the evidence,
     // which is what this now says without borrowing the authority's duty.
     body: 'Tender discovery from Contracts Finder and Find a Tender, the social value the buyer scores on in-scope central government contracts, PPN 017 AI disclosure, and, after award, the evidence behind each KPI the authority assesses.',
-    href: '/crowmark/',
+    href: '/bid/',
     cta: 'See the supplier side',
   },
   {
-    heading: 'CrowMark for Buyers',
-    body: 'Publish your requirements against a deterministic social value rubric, then locate the evidence for each one across the responses you receive, quoted verbatim or dropped. CrowMark organises. Your evaluation panel scores.',
-    href: '/crowmark-buyers/',
+    heading: 'Velstrian Buy',
+    body: 'Publish your requirements against a deterministic social value rubric, then locate the evidence for each one across the responses you receive, quoted verbatim or dropped. Velstrian Buy organises. Your evaluation panel scores.',
+    href: '/buy/',
     cta: 'See the buyer side',
   },
 ];
@@ -691,7 +691,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
         <div class="hist__sticky">
           <div class="company surface surface--pad" id="company">
             <p class="eyebrow">Company details</p>
-            <h2 class="hist__title hist__title--sm">VELSTRIAN SYSTEMS LIMITED</h2>
+            <h2 class="hist__title hist__title--sm">Velstrian Systems Ltd</h2>
             <dl class="company__list">
               {
                 COMPANY.map((c) => (
@@ -715,7 +715,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
   <Section
     eyebrow="The stack"
     title="One product, two variants."
-    standfirst="CrowMark serves both sides of a procurement, and both work in the public sector and the private sector."
+    standfirst="Velstrian serves both sides of a procurement, and both work in the public sector and the private sector."
     id="variants"
   >
     <div class="pair">
@@ -795,7 +795,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
     <div class="digest surface surface--pad">
       <h2 class="digest__h">Get monthly UK procurement digests</h2>
       <p class="digest__p">
-        PPN 026 social value, tender-market trends and CrowMark product news, once a month.
+        PPN 026 social value, tender-market trends and Velstrian product news, once a month.
         Unsubscribe any time.
       </p>
       <NewsletterForm id="about-nl" source="about-newsletter" />

@@ -95,8 +95,8 @@ const FIELDS: Field[] = [
 const ENQUIRY_OPTIONS = [
   { value: '', label: 'Select an option' },
   { value: 'limited-access', label: 'Help getting started' },
-  { value: 'ppn002-bid', label: 'CrowMark for Suppliers' },
-  { value: 'buyer-side', label: 'CrowMark for Buyers' },
+  { value: 'ppn002-bid', label: 'Velstrian Bid' },
+  { value: 'buyer-side', label: 'Velstrian Buy' },
   { value: 'enterprise', label: 'Portfolio / volume pricing' },
   { value: 'general', label: 'General question' },
 ];
@@ -313,12 +313,14 @@ const TRUST_BADGES: string[] = [
   const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   const ACCESS_SEED =
-    'I would like help getting started with CrowMark.\n\nOrganisation:\nWhat we need CrowMark for:\n';
+    'I would like help getting started with Velstrian Bid.\n\nOrganisation:\nWhat we need Velstrian Bid for:\n';
 
   /** ?product= / ?tier= mapping, carried over verbatim from scripts.js. The
       legacy slugs cyber / cash / esg / csrd are deliberately UNMAPPED: those
       products no longer exist and must not resolve to an enquiry type. */
   const PRODUCT_TO_ENQUIRY: Record<string, string> = {
+    bid: 'ppn002-bid',
+    buy: 'buyer-side',
     mark: 'ppn002-bid',
     crowmark: 'ppn002-bid',
     public: 'ppn002-bid',
@@ -328,8 +330,8 @@ const TRUST_BADGES: string[] = [
     enterprise: 'enterprise',
   };
   const PRODUCT_LABELS: Record<string, string> = {
-    'ppn002-bid': 'CrowMark for Suppliers',
-    'buyer-side': 'CrowMark for Buyers',
+    'ppn002-bid': 'Velstrian Bid',
+    'buyer-side': 'Velstrian Buy',
     enterprise: 'the Portfolio plan',
   };
 
@@ -561,7 +563,7 @@ const TRUST_BADGES: string[] = [
     let resolved = PRODUCT_TO_ENQUIRY[product];
     if (!resolved && (tier === 'portfolio' || tier === 'enterprise')) resolved = 'enterprise';
     if (resolved && setType(resolved) && msg && !msg.value) {
-      const label = PRODUCT_LABELS[resolved] ?? 'CrowMark';
+      const label = PRODUCT_LABELS[resolved] ?? 'Velstrian Bid';
       msg.value = `I would like to talk to sales about ${label}${tier ? ` (${tier} tier)` : ''}.\n\n`;
     }
   }

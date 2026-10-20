@@ -41,7 +41,7 @@ export const RELATED_POSTS: Record<string, string[]> = {
   'ppn-026-social-value-guide': [
     'find-first-public-sector-contract',
     'regulatory-updates-2026',
-    'social-value-portal-vs-crowmark',
+    'social-value-portal-vs-bid',
     'method-statement-that-scores',
   ],
   'private-sector-rfp-pqq-guide': [
@@ -61,7 +61,7 @@ export const RELATED_POSTS: Record<string, string[]> = {
     'find-first-public-sector-contract',
     'frameworks-and-dps-explained',
   ],
-  'social-value-portal-vs-crowmark': [
+  'social-value-portal-vs-bid': [
     'find-first-public-sector-contract',
     'ppn-026-social-value-guide',
     'procurement-act-2023-sme-guide',

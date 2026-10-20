@@ -1,11 +1,11 @@
 ---
 title: "Cookie Policy | Velstrian"
-description: "How Velstrian uses cookies. This website sets none. The signed-in CrowMark platform sets the items listed here, with the reason and lifetime for each."
+description: "How Velstrian uses cookies. This website sets none. The signed-in Velstrian platform sets the items listed here, with the reason and lifetime for each."
 heading: "Cookie Policy."
 lastUpdated: "2026-08-03"
----Full statutory disclosure for VELSTRIAN SYSTEMS LIMITED. UK GDPR and PECR aligned transparency.
+---Full statutory disclosure for Velstrian Systems Ltd. UK GDPR and PECR aligned transparency.
 
-Cookies are small files that websites place on your device. This website does not place any. The CrowMark platform you sign in to does, and every one of them is named below.
+Cookies are small files that websites place on your device. This website does not place any. The Velstrian platform you sign in to does, and every one of them is named below.
 
 ## 1. What cookies are, in plain English
 
@@ -17,7 +17,7 @@ We follow the Privacy and Electronic Communications Regulations (PECR) for stora
 
 **This website, velstrian.com, sets nothing.** No cookies, no local storage, no session storage, and no requests to anyone else. There is no consent banner on it because there is nothing to ask you about, and no analytics because none is installed. You can confirm all of that yourself in about ten seconds. The [cookie preferences](/cookie-preferences/) page shows you how.
 
-The table below is the **CrowMark platform**, the signed-in application you reach at a separate address. Items marked **Consent-gated** are not set unless you agree in the platform's own consent banner. Where a row names no expiry, the item lasts for the browser session and is gone when you close it.
+The table below is the **Velstrian platform**, the signed-in application you reach at a separate address. Items marked **Consent-gated** are not set unless you agree in the platform's own consent banner. Where a row names no expiry, the item lasts for the browser session and is gone when you close it.
 
 On a narrow screen, this table scrolls sideways.
 
@@ -59,4 +59,4 @@ Inside the platform, the consent banner appears the first time you use it and yo
 
 [See what this site stores](/cookie-preferences/) [Privacy Policy](/privacy/)
 
-<aside role="region" aria-label="Corporate information" class="legal-aside"> <div class="legal-aside__card"> <p class="eyebrow legal-aside__label">Corporate Information</p> <p>VELSTRIAN SYSTEMS LIMITED</p> <p>Companies House No. 17076461<br>Registered in England &amp; Wales</p> <!-- A11Y-2026-08-05 (WCAG 1.3.1), O-25: this carried role="region" with NO accessible name. A region without a name is not exposed as a landmark at all, and declaring the role also suppressed the implicit `complementary` role the bare <aside> would have had, so the element was worse off named nothing than it would have been with no role attribute. aria-label added rather than the role removed, because the card is a named aside in the design. The comment previously here described an unnamed <nav> landmark, which is not this element and not this page's defect; it was a stale paste. --> </div> </aside>
+<aside role="region" aria-label="Corporate information" class="legal-aside"> <div class="legal-aside__card"> <p class="eyebrow legal-aside__label">Corporate Information</p> <p>Velstrian Systems Ltd</p> <p>Companies House No. 17076461<br>Registered in England &amp; Wales</p> <!-- A11Y-2026-08-05 (WCAG 1.3.1), O-25: this carried role="region" with NO accessible name. A region without a name is not exposed as a landmark at all, and declaring the role also suppressed the implicit `complementary` role the bare <aside> would have had, so the element was worse off named nothing than it would have been with no role attribute. aria-label added rather than the role removed, because the card is a named aside in the design. The comment previously here described an unnamed <nav> landmark, which is not this element and not this page's defect; it was a stale paste. --> </div> </aside>

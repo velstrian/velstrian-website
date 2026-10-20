@@ -363,6 +363,20 @@ const RETIRED_ROUTES = new Map([
    'The free social value calculator. Removed 2026-08-04 by owner instruction, on the ground that it was not giving any value: it did arithmetic a bidder could do unaided, against a floor that is a single constant. Its 301 pointed at /glossary/ppn-002 until 2026-08-30 and now points at /glossary/ppn-026 directly, retargeted rather than left to chain through a page that no longer exists. The remaining free tool, the Tender Compliance Matrix, is one click on from there.'],
   ['/tools/ppn-002-calculator/methodology',
    'The calculator methodology page, retired with the calculator it documented. 301 to /glossary/ppn-026 since 2026-08-30, retargeted from /glossary/ppn-002 when that page was deleted. Worth recording that this page was the site\'s longest-running accuracy defect: it described monetary proxy values, an Oxford Social Value Bank framework that does not exist, and Green Book discounting of forward-year cashflows, none of which the engine implemented — OA-17, which blocked the port, and the stale-baseline false finding that argued for capturing a fingerprint with every baseline. The claim it made was corrected before that page was retired, and is recorded here because the defect is worth keeping on file: the Social Value Model reports in counts, hours, litres, tonnes, square metres and pounds of direct spend, and does not use monetary proxy values at all.'],
+  ['/crowmark',
+   'Rebranded to /bid/ under owner decisions D238, D239, D243, D245 (Velstrian Bid). 301 in _redirects.'],
+  ['/crowmark-buyers',
+   'Rebranded to /buy/ under owner decisions D238, D239, D243, D245 (Velstrian Buy). 301 in _redirects.'],
+  ['/compare/crowmark-vs-autogenai',
+   'Rebranded to /compare/bid-vs-autogenai/ under owner decisions D238, D239, D243, D245. 301 in _redirects.'],
+  ['/compare/crowmark-vs-cleantender',
+   'Rebranded to /compare/bid-vs-cleantender/ under owner decisions D238, D239, D243, D245. 301 in _redirects.'],
+  ['/compare/crowmark-vs-mytender-io',
+   'Rebranded to /compare/bid-vs-mytender-io/ under owner decisions D238, D239, D243, D245. 301 in _redirects.'],
+  ['/compare/crowmark-vs-swiftbid',
+   'Rebranded to /compare/bid-vs-swiftbid/ under owner decisions D238, D239, D243, D245. 301 in _redirects.'],
+  ['/blog/social-value-portal-vs-crowmark',
+   'Rebranded to /blog/social-value-portal-vs-bid/ under owner decisions D238, D239, D243, D245. 301 in _redirects.'],
 ]);
 
 /* ------------------------------------------------------------------ */
