@@ -286,6 +286,21 @@ const ALLOWED_LOSSES = new Map([
   ['*  link: /blog/ppn-002-social-value-guide',
    'The social value pillar post was republished at /blog/ppn-026-social-value-guide on 2026-08-30 and every internal link was repointed in the same change. The reader loses nothing: the destination is the same article rewritten against the edition that applies from 1 January 2027, and the old URL 301s there for anyone holding it. Renaming our own URL is an editorial decision about this site and not a statement about the regulation.'],
 
+  /* R285-WEB-CLAIMS-AUDIT-01, owner decision D252 (2026-10-21). Each of these
+     was a claim the audit found wrong in one direction or the other, and each
+     is replaced on the same page, so the reader loses a wrong sentence, not a
+     capability. */
+  ['/roadmap/  heading: tender reasoning copilot (public sector)',
+   'D252 (5): the assistant this research row described is released as the AI Compliance Advisor. The row moved to live under that name on the same page, described from the shipped code (api/app/routers/advisor.py).'],
+  ['/security/  heading: gdpr compliant',
+   'Claims audit T3: a flat "compliant" is a conclusion the page cannot show. The heading now reads "UK GDPR controls in place" and the same paragraph lists the controls.'],
+  ['/security/  link: ico.org.uk/esdwebpages/search',
+   'D252 (4): until the ICO register shows the new company name, no page tells a reader to search it for Velstrian Systems Ltd. The registration statement stays.'],
+  ['/privacy/  link: ico.org.uk/esdwebpages/search',
+   'D252 (4): same as /security/. The registration statement and the company number stay.'],
+  ['/buy/  heading: eight surfaces, one thread.',
+   'Claims audit U3: the buyer workspace holds more than eight screens. The section is now "One workspace, one thread." and lists the screens the audit found missing.'],
+
   ['*  link: status.crowagent.ai',
    'The public status URL moved to https://status.velstrian.com (Better Stack) on 2026-10-21 per owner decision D250. Every internal link across the footer and legal pages now points to the new status host.'],
 

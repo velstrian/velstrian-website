@@ -111,6 +111,9 @@ const GATES = [
      same reason check-links is: everything before it writes dist, everything
      from here on reads it. */
   { name: 'check-pricing-parity', cmd: node, args: ['scripts/check-pricing-parity.js'] },
+  /* R285-WEB-CLAIMS-AUDIT-01, D252 (7): the site facts gate, one rule per record in
+     src/data/site-facts.json. Same position as in build:deploy, after the build it reads. */
+  { name: 'check-site-facts', cmd: node, args: ['scripts/check-site-facts.mjs'] },
   { name: 'check-links', cmd: node, args: ['scripts/check-links.js'] },
   /* AFTER copy-assets, because it reads the image FILES the build has just
      copied and not only the HTML that names them: the whole point of it is that
