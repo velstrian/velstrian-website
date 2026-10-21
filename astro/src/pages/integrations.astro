@@ -70,6 +70,7 @@ import Button from '../components/ui/Button.astro';
 import { SIGNUP_URL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 import { SOURCES, IDENTITY, OUTBOUND, RULE_STEPS } from '../data/integrations';
+import { INTEGRATIONS_PLAN_LINE } from '../data/site-facts';
 
 const title = 'Integrations | Velstrian';
 /* Untouched from the legacy page. OA-10 records that the meta and og
@@ -324,10 +325,53 @@ const schema = [
     </p>
   </Section>
 
+  {/* R285-WEB-CLAIMS-AUDIT-01, capabilities M7 and M8, and row I5. All three
+      were live and absent from this page: e-sourcing packaging
+      (crowagent-platform api/app/services/bid_esourcing_connectors.py, which
+      prepares and never lodges), the CRM routes in api/app/routers/crm.py (push
+      bids, pull CRM changes back) and the MCP server in api/app/routers/mcp.py.
+      The plan line reads the integrations flag from site-facts.json, which is
+      generated from packages/pricing/catalogue.ts. No price is printed here. */}
+  <Section
+    eyebrow="E-sourcing, CRM and agents"
+    title="Hand off to the systems that own the next step."
+    standfirst="Velstrian Bid prepares the work and passes it on. It never lodges a bid for you."
+    id="handoff"
+  >
+    <ul class="grid grid--2" role="list">
+      <li class="card surface surface--pad">
+        <h3 class="conn__h">E-sourcing portals</h3>
+        <p class="conn__note">
+          Velstrian Bid prepares the submission pack for Jaggaer, Atamis and In-tend and checks it
+          against the portal's requirements. You submit it, in the portal, under your own account.
+        </p>
+      </li>
+      <li class="card surface surface--pad">
+        <h3 class="conn__h">Salesforce and HubSpot</h3>
+        <p class="conn__note">
+          Push your bids into the CRM with the stage mapping you set, and pull CRM changes back
+          into the bid. A change that would overwrite an edit in Velstrian Bid is held for you to
+          review rather than applied.
+        </p>
+      </li>
+      <li class="card surface surface--pad">
+        <h3 class="conn__h">MCP server</h3>
+        <p class="conn__note">
+          A read and write Model Context Protocol server, so your team can work with Velstrian Bid
+          from inside its own AI tooling.
+        </p>
+      </li>
+      <li class="card surface surface--pad">
+        <h3 class="conn__h">The Integrations package</h3>
+        <p class="conn__note">{INTEGRATIONS_PLAN_LINE}</p>
+      </li>
+    </ul>
+  </Section>
+
   <Section
     eyebrow="One place"
     title="Connect once, bid from one place."
-    standfirst="Every connector reads only what it needs, cites the statute behind each figure, and keeps your data in the UK."
+    standfirst="Every connector reads only what it needs, cites the statute behind each figure, and keeps your data in the EU."
     id="cta"
   >
     <div class="btn-row">

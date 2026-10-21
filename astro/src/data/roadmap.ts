@@ -63,18 +63,27 @@ export const PHASES: Phase[] = [
      * below resolves to a route on the platform's origin/main, which is the tip
      * Vercel reports READY in production.
      */
-    lead: 'Velstrian Bid is in production today, in both variants: for suppliers and for buyers. It reads the source regulation directly, so the output you stand behind traces back to a rule rather than to a model.',
+    lead: 'Velstrian Bid and Velstrian Buy are in production today: one for suppliers, one for buyers. It reads the source regulation directly, so the output you stand behind traces back to a rule rather than to a model.',
     items: [
       {
         title: 'Velstrian Bid',
-        body: 'Contracts Finder and Find a Tender refreshed daily, with prior information notices and framework or dynamic market expiry dates so a pipeline is visible before a tender opens. Upload the whole tender pack and get it briefed rather than read cover to cover. Drafting is grounded in your own submitted bids and answer library, with version history, diff, restore and track changes on every answer. Configurable review gates take bid or no bid as gate zero. Deterministic social-value calculation, post-award delivery evidence, and Procurement Act 2023 s.52 and s.71 KPI checks.',
+        body: 'Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED refreshed daily, with prior information notices and framework or dynamic market expiry dates so a pipeline is visible before a tender opens. Upload the whole tender pack and get it briefed rather than read cover to cover. Drafting is grounded in your own submitted bids and answer library, with version history, diff, restore and track changes on every answer. Configurable review gates take bid or no bid as gate zero. Deterministic social-value calculation, post-award delivery evidence, and Procurement Act 2023 s.52 and s.71 KPI checks.',
         href: '/bid/',
       },
       {
         title: 'Velstrian Buy',
         body:
-          "Build and publish requirements against a deterministic social value rubric, then locate the evidence for each one across every response received, quoted verbatim or dropped. Velstrian Bid organises. Your evaluation panel scores. After award it keeps going: the commitments made in the winning bid become a tracked supplier profile, with scorecards, periodic review sessions, a risk radar, concerns and their corrective actions, a benefit and value realisation tracker, and a due diligence workspace.",
+          "Build and publish requirements against a deterministic social value rubric, then locate the evidence for each one across every response received, quoted verbatim or dropped. Velstrian Buy organises. Your evaluation panel scores. After award it keeps going: the commitments made in the winning bid become a tracked supplier profile, with scorecards, periodic review sessions, a risk radar, concerns and their corrective actions, a benefit and value realisation tracker, and a due diligence workspace.",
         href: '/buy/',
+      },
+      /* R285-WEB-CLAIMS-AUDIT-01, D252 (5): the AI Compliance Advisor is a
+         released feature. It sat in Phase 3 as "Tender reasoning copilot",
+         researching and uncommitted, while the product shipped it
+         (api/app/routers/advisor.py). Described only by what that code does. */
+      {
+        title: 'AI Compliance Advisor',
+        body: 'Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, with your AI data consent, from your own bids and social value commitments, and you can point it at one bid to include its confirmed requirements. Only regulatory references matched against its citation corpus are shown, and any money figure or percentage it cannot trace to your records, your question or the brief is flagged for you to check.',
+        href: '/bid/#features',
       },
     ],
   },
@@ -106,7 +115,9 @@ export const PHASES: Phase[] = [
       },
       {
         title: 'Deeper grounded auto-fill (public sector)',
-        body: "Velstrian Bid's grounded drafting reads the buyer's own published priorities alongside your uploaded evidence, and proposes social value narratives that cite what they came from for you to approve or edit. The model proposes, you decide.",
+        /* R285-WEB-CLAIMS-AUDIT-01 R4: the AI buyer priority extractor is off in
+           production, so the priorities come from documents the bidder attaches. */
+        body: "Velstrian Bid's grounded drafting reads the buyer's priorities from the strategy documents you attach, alongside your uploaded evidence, and proposes social value narratives that cite what they came from for you to approve or edit. The model proposes, you decide.",
       },
     ],
   },
@@ -124,10 +135,6 @@ export const PHASES: Phase[] = [
       {
         title: 'Regulatory Monitor (public sector)',
         body: 'A live UK public procurement regulatory change feed. Material updates to PPN 026 and the Procurement Act 2023 flow straight into the Velstrian Bid dashboard, so you act, not just read.',
-      },
-      {
-        title: 'Tender reasoning copilot (public sector)',
-        body: 'One statute-grounded assistant that reasons across PPN 026 and the Procurement Act 2023 at once, answering bid questions and citing the named regulation behind every line. Retrieval-grounded against the source law, never free-styling the legislation.',
       },
     ],
   },
@@ -203,12 +210,14 @@ export const AI_NEXT: { status: PhaseStatus; heading: string; body: string }[] =
      */
     status: 'live',
     heading: 'Deeper grounded auto-fill (public sector)',
-    body: "Shipped. Velstrian Bid drafts grounded bid answers from your own submitted bids and answer library, and now reads the buyer's own published priorities alongside your uploaded evidence to propose social value narratives, each suggestion citing what it drew on for you to approve or edit.",
+    body: "Shipped. Velstrian Bid drafts grounded bid answers from your own submitted bids and answer library, and now reads the buyer's priorities from the strategy documents you attach, alongside your uploaded evidence, to propose social value narratives, each suggestion citing what it drew on for you to approve or edit.",
   },
   {
-    status: 'research',
-    heading: 'Tender reasoning copilot (public sector)',
-    body: 'Early research, not committed engineering. One assistant that reasons across PPN 026 and the Procurement Act 2023 at once, answering bid questions and citing the named regulation behind every line. It would be retrieval-grounded against the source law, never free-styling the legislation.',
+    /* R285-WEB-CLAIMS-AUDIT-01, D252 (5). Was "Tender reasoning copilot",
+       research stage. Released as the AI Compliance Advisor. */
+    status: 'live',
+    heading: 'AI Compliance Advisor',
+    body: 'Shipped. Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, with your AI data consent, from your own bids and social value commitments, and you can point it at one bid to include its confirmed requirements. Only regulatory references matched against its citation corpus are shown, and any money figure or percentage it cannot trace to your records, your question or the brief is flagged for you to check.',
   },
   {
     status: 'research',

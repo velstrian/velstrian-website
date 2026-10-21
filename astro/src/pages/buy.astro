@@ -258,14 +258,61 @@ const SURFACES = [
     heading: 'Transparency and reports',
     body: 'A Procurement Act 2023 award notice return across your contracts, plus exportable reports for committee and scrutiny.',
   },
+  /* R285-WEB-CLAIMS-AUDIT-01 U3, M5 and M6. The heading said "Eight surfaces"
+     while the workspace holds the screens below as well, each a route under
+     crowagent-platform web/app/(dashboard)/buyer and described from its own
+     copy catalogue in web/src/shared/i18n/messages/public-sector. */
+  {
+    heading: 'Supplier invitations and clarifications',
+    body: 'Invite suppliers to respond by personal link. Each response gets a receipt, and the answer to a supplier question is published to every invited supplier without saying who asked.',
+  },
+  {
+    heading: 'Quick RFQ',
+    body: 'For smaller requests: describe the job, check the scope, download an RFQ pack and send it to suppliers by personal link. Each supplier uploads a quote and gets a receipt, and the quote lands on the evaluation. You write the scope. The AI does not draft it.',
+  },
+  {
+    heading: 'Pipeline',
+    body: 'Every procurement you are planning, running, evaluating, awarding or managing, with its dates and value, worked out from your own records each time you open it.',
+  },
+  {
+    heading: 'Supplier screening',
+    body: 'Checked against public registers when a response arrives or a supplier joins an evaluation. It is not a score and it never excludes a supplier. You decide.',
+  },
+  {
+    heading: 'Supplier risk',
+    body: 'Risk signals across your suppliers, with what the platform worked out from its own records kept apart from what your team has flagged.',
+  },
+  {
+    heading: 'Supplier relationship management',
+    body: 'Scorecards, review sessions and joint actions per supplier, every open action in one table, and how your suppliers rate the working relationship, quarter by quarter.',
+  },
+  {
+    heading: 'Value realisation',
+    body: 'Savings and other value claimed against each supplier, and what finance has signed off.',
+  },
+  {
+    heading: 'Whole life costs',
+    body: 'Cost each way of delivering a requirement across its whole life, from assumptions you supply.',
+  },
+  {
+    heading: 'Bid normalisation and comparison',
+    body: "Enter each supplier's price schedule to see every bid as one whole life figure over the same term and quantities, then set the options side by side and record what your team judges.",
+  },
 ];
 
 /** Each band carries a TEXT label as well as a colour: already correct on the
     legacy page, and preserved rather than "improved". */
+/* R285-WEB-CLAIMS-AUDIT-01 U6. The thresholds were located in code:
+   crowagent-platform web/src/features/public-sector/monitoring-logic.ts lines
+   106 and 107 (95 and 80) and the legend in
+   web/src/shared/i18n/messages/public-sector/portfolio.ts. Below 80% has two
+   bands there, not one: "not yet due" while no deadline has passed, and
+   "breached" after it. The page said "breached" for both. */
 const BANDS = [
   { value: '≥ 95%', label: 'On track', tone: 'on' },
   { value: '80 to 94%', label: 'At risk', tone: 'risk' },
-  { value: '< 80%', label: 'Breached', tone: 'breach' },
+  { value: '< 80%, no deadline passed', label: 'Not yet due', tone: 'none' },
+  { value: '< 80%, deadline passed', label: 'Breached', tone: 'breach' },
   { value: 'Nothing committed', label: 'No data, never green', tone: 'none' },
 ];
 
@@ -273,6 +320,8 @@ const DOES = [
   'Builds and publishes a social value requirement with a deterministic rubric',
   'Locates evidence per published criterion, quoted verbatim from the response',
   'Gives the panel one place to score against the rubric you published',
+  'Invites suppliers to respond by personal link, with a receipt for every response and one clarification register for all of them',
+  'Runs Quick RFQ for smaller requests: an RFQ pack sent by personal link and the quotes collected in one place',
   'Records awarded contracts and the commitments made in them',
   'Rolls committed against delivered up by National TOMs theme, and flags under delivery',
   'Assembles the Procurement Act 2023 award notice return for you to publish',
@@ -281,8 +330,8 @@ const DOES = [
 const DOES_NOT = [
   'Score, rank or recommend a mark on any response',
   'Replace Jaggaer, Atamis, In-tend, ProContract or Proactis as your system of record',
-  'Publish your notices or receive supplier submissions',
-  'Host clarifications or the competition audit trail',
+  'Publish your formal tender notices. Those go on Find a Tender or through your e-sourcing portal',
+  'Hold the formal competition audit trail, which stays in your e-sourcing system',
   'Give legal advice. The statutory checks it applies are advisory',
   "Form or publish a view on a supplier's wider standing",
 ];
@@ -321,7 +370,7 @@ const FAQS = [
   {
     question: 'Does Velstrian Buy replace our e-sourcing portal?',
     answer:
-      'No. It is not a system of record and it does not run your competition. Notices, tender packs, clarifications, response submission and the audit trail stay in the portal you already use, such as Jaggaer, Atamis, In-tend, ProContract or Proactis. It sits alongside that portal: you build the social value requirement, read the responses against it, and monitor delivery after award.',
+      'No. It is not a system of record and it does not run your formal competition. Formal notices and the competition audit trail stay in the portal you already use, such as Jaggaer, Atamis, In-tend, ProContract or Proactis. It sits alongside that portal: you build the social value requirement, read the responses against it, and monitor delivery after award. For smaller requests, Quick RFQ sends the request to suppliers by personal link and collects their quotes and receipts in one place.',
   },
   {
     question: 'How is social value handled on the buyer side?',
@@ -414,8 +463,8 @@ const UPDATED = new Date('2026-08-05');
 
   <Section
     eyebrow="The workspace"
-    title="Eight surfaces, one thread."
-    standfirst="Every screen in the buyer workspace, what each one is for, and what each one looks like."
+    title="One workspace, one thread."
+    standfirst="The main screens in the buyer workspace, what each one is for, and what each one looks like."
     id="workspace"
   >
     <ul class="grid grid--2">
@@ -591,7 +640,7 @@ const UPDATED = new Date('2026-08-05');
   <Section
     eyebrow="What a pre-read looks like"
     title="One criterion. One located quote."
-    standfirst="The pre-read reports per criterion, and every card it produces carries the advisory label below. Select any submission to inspect the located text and scoring rationale."
+    standfirst="The pre-read reports per criterion, and every card it produces carries the advisory label below. Select any submission to see the located text beside the score and note your panel's evaluator entered."
     id="specimen"
   >
     <div class="buy-drawer-wrap">
@@ -654,25 +703,31 @@ const UPDATED = new Date('2026-08-05');
         </blockquote>
         <p class="spec__cite">Located verbatim · response section 4.1, page 12</p>
         <div class="spec__eval">
-          <p class="meta spec__eval-head">Evaluator scoring rationale</p>
+          {/* R285-WEB-CLAIMS-AUDIT-01. This block read "Evaluator scoring
+              rationale" and "Score: 4 / 5" beside a promise that the AI never
+              scores, so a reader could not tell whose score it was. It is the
+              PANEL's score, typed by the evaluator, and now says so in words.
+              check-site-facts.mjs (buy_panel_score) fails the build on a bare
+              score label anywhere on this page, the script below included. */}
+          <p class="meta spec__eval-head">Entered by your panel's evaluator</p>
           <p class="spec__rationale">
-            Specific commitment with accountable named supervisor and local recruitment target. Directly satisfies PPN 026 social value criterion.
+            Specific commitment with an accountable named supervisor and a local recruitment target. Meets the local employment criterion.
           </p>
-          <span class="chip spec__score">Score: 4 / 5</span>
+          <span class="chip spec__score">Panel score: 4 / 5</span>
         </div>
         <p class="spec__foot">
-          No mark is set, changed, or suggested here. The panel evaluates and scores this response.
+          The pre-read set no mark, changed none and suggested none. The score and note above are the evaluator's.
         </p>
       </figure>
     </div>
     <p class="spec__caption">
-      An interactive pre-read evidence drawer demonstrating verbatim quote extraction and scoring defensibility. Select each bidder above to inspect the located text and evaluation trail.
+      An illustration of the evidence drawer: the quote the pre-read located, and beside it the score and note your panel's evaluator entered. Select each bidder above to compare.
     </p>
   </Section>
 
   <Section
     eyebrow="Delivery monitoring"
-    title="Four bands. No flattering rounding."
+    title="Five bands. No flattering rounding."
     standfirst="Delivery against commitment is banded on fixed thresholds, per theme and per contract."
     id="delivery"
   >
@@ -808,24 +863,24 @@ const UPDATED = new Date('2026-08-05');
         chip: 'Advisory · Verbatim match',
         quote: 'Two apprenticeship starts in the first contract year, both recruited from the borough, with a named site supervisor accountable for completion.',
         cite: 'Located verbatim · response section 4.1, page 12',
-        rationale: 'Specific commitment with accountable named supervisor and local recruitment target. Directly satisfies PPN 026 social value criterion.',
-        score: 'Score: 4 / 5'
+        rationale: 'Specific commitment with an accountable named supervisor and a local recruitment target. Meets the local employment criterion.',
+        score: 'Panel score: 4 / 5'
       },
       '2': {
         crit: 'Criterion 3.2 · Local employment',
-        chip: 'Advisory · Aspirational claim',
+        chip: 'Advisory · Verbatim match',
         quote: 'We intend to explore opportunities for local training and work experience placements subject to contract value and operational feasibility.',
         cite: 'Located verbatim · response section 2.3, page 7',
-        rationale: 'Aspirational language without committed headcounts, milestones, or named supervision. The rubric identifies unbacked statements.',
-        score: 'Score: 2 / 5'
+        rationale: 'An intention, with no committed headcount, milestone or named supervision.',
+        score: 'Panel score: 2 / 5'
       },
       '3': {
         crit: 'Criterion 3.2 · Local employment',
         chip: 'Advisory · Verbatim match',
         quote: 'Four accredited apprenticeships with London Living Wage guarantee, enrolled through the Borough Skills Hub with quarterly completion reviews.',
         cite: 'Located verbatim · response section 5.2, page 18',
-        rationale: 'Clear quantifiable commitment exceeding the baseline weighting with verified training provider registration and wage guarantee.',
-        score: 'Score: 5 / 5'
+        rationale: 'A countable commitment with a named training provider, a wage guarantee and quarterly completion reviews.',
+        score: 'Panel score: 5 / 5'
       }
     };
 
