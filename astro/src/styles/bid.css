@@ -32,9 +32,9 @@
    NOT: importing it makes every rule global. So the scoping had to be replaced
    rather than dropped, and this is what replaces it.
 
-   EVERY RULE IN THIS FILE IS A DESCENDANT OF `.pg-crowmark`. All 192 of them,
+   EVERY RULE IN THIS FILE IS A DESCENDANT OF `.pg-bid`. All 192 of them,
    which is the whole selector count. There is no rule here that is not.
-   `.pg-crowmark` is put on <body> by layouts/Base.astro, derived from the
+   `.pg-bid` is put on <body> by layouts/Base.astro, derived from the
    route, so it is on /crowmark and on nothing else. This is the same technique
    styles/prose.css uses and states in its own header: a global sheet made safe
    by anchoring, not by trust.
@@ -49,7 +49,7 @@
 
    SPECIFICITY IS UNCHANGED, and that was the condition for moving it. Astro
    compiled `.hint` to `.hint.astro-ivyj52o5`, a class plus a class, (0,2,0).
-   `.pg-crowmark .hint` is a class plus a class, (0,2,0). Compound selectors
+   `.pg-bid .hint` is a class plus a class, (0,2,0). Compound selectors
    lose a little (`.amb b` was `.amb.astro-ivyj52o5 b.astro-ivyj52o5` (0,3,1)
    and is now (0,2,1)), which can only matter if some other rule sits between
    the two weights on the same element, and nothing on this route does.
@@ -81,9 +81,9 @@
    from the radius scale, never a card.
    ============================================================================ */
 
-.pg-crowmark .row--after { margin-top: var(--sec-gap); }
+.pg-bid .row--after { margin-top: var(--sec-gap); }
 
-.pg-crowmark .hint {
+.pg-bid .hint {
   margin: var(--stack-1) 0 0;
   text-align: center;
   font-family: var(--font-body);
@@ -91,7 +91,7 @@
   color: var(--c-text-muted);
 }
 
-.pg-crowmark .kicker {
+.pg-bid .kicker {
   margin: 0 0 var(--stack-1);
   color: var(--c-text-muted);
 }
@@ -100,7 +100,7 @@
    `isolation: isolate` so the z-index -1 field cannot escape behind the page
    background, and `position: relative` so the rig has something to measure
    against. Identical in construction to the six homepage sections. */
-.pg-crowmark .cw {
+.pg-bid .cw {
   position: relative;
   isolation: isolate;
 }
@@ -137,7 +137,7 @@
  * corner. A percentage ellipse leaves about 25% of the field alive at the
  * edge midpoints, which draws a lighter rectangle across the section.
  */
-.pg-crowmark .amb {
+.pg-bid .amb {
   position: absolute;
   inset-block: -14%;
   inset-inline: calc(-1 * var(--gutter));
@@ -148,14 +148,14 @@
   mask-image: radial-gradient(closest-side, rgb(0 0 0) 42%, transparent 100%);
 }
 
-.pg-crowmark .amb b {
+.pg-bid .amb b {
   position: absolute;
   border-radius: 50%;
   filter: blur(150px);
   mix-blend-mode: screen;
 }
 
-.pg-crowmark .amb b:nth-child(1) {
+.pg-bid .amb b:nth-child(1) {
   width: 560px;
   height: 440px;
   left: -8%;
@@ -164,7 +164,7 @@
   opacity: 0.42;
 }
 
-.pg-crowmark .amb b:nth-child(2) {
+.pg-bid .amb b:nth-child(2) {
   width: 540px;
   height: 440px;
   right: -8%;
@@ -175,13 +175,13 @@
 
 /* The per-section parallax speeds. Five values, deliberately unequal, so the
    rigs never travel as one sheet. */
-.pg-crowmark .cw--hero .amb { --par: 48px; }
-.pg-crowmark .cw--mech .amb { --par: 34px; }
-.pg-crowmark .cap--art-right .amb { --par: 26px; }
-.pg-crowmark .cw--close .amb { --par: 40px; }
+.pg-bid .cw--hero .amb { --par: 48px; }
+.pg-bid .cw--mech .amb { --par: 34px; }
+.pg-bid .cap--art-right .amb { --par: 26px; }
+.pg-bid .cw--close .amb { --par: 40px; }
 
 @media (max-width: 560px) {
-  .pg-crowmark .amb b { filter: blur(90px); width: 320px; height: 280px; }
+  .pg-bid .amb b { filter: blur(90px); width: 320px; height: 280px; }
 }
 
 /* ══ THE HERO PLANE STACK, `223:5` ═══════════════════════════════════════
@@ -206,13 +206,13 @@
    be defined on a product page in the first place; the duty half now lives
    with the rest of that card and this half stays with the artefacts it
    actually belongs to, `.art` at three call sites below. */
-.pg-crowmark .art__kicker {
+.pg-bid .art__kicker {
   margin: 0 0 var(--stack-2);
   color: var(--c-text-muted);
 }
 
 /* ── Hero proof strip ───────────────────────────────────────────────────── */
-.pg-crowmark .proof {
+.pg-bid .proof {
   list-style: none;
   margin: var(--sec-gap) 0 0;
   padding: 0;
@@ -221,7 +221,7 @@
   gap: clamp(16px, 2vw, 28px);
 }
 
-.pg-crowmark .proof li {
+.pg-bid .proof li {
   padding-top: var(--stack-1);
   border-top: 2px solid var(--c-ambient-start);
   font-family: var(--font-body);
@@ -230,7 +230,7 @@
   color: var(--c-text-sub);
 }
 
-.pg-crowmark .proof strong {
+.pg-bid .proof strong {
   display: block;
   font-family: var(--font-display);
   font-size: var(--t-h4);
@@ -239,14 +239,14 @@
 
 /* ══ THE AWARD LINE, `228:7` ═════════════════════════════════════════════ */
 
-.pg-crowmark .award {
+.pg-bid .award {
   position: relative;
   padding: var(--blk-pad);
 }
 
 /* The gate. One absolutely positioned rule down the middle of the panel, so
    both lanes and every stop below measure against the same vertical. */
-.pg-crowmark .award::before {
+.pg-bid .award::before {
   content: '';
   position: absolute;
   top: calc(var(--blk-pad) * 1.6);
@@ -263,20 +263,20 @@
   background: var(--grad-hairline);
 }
 
-.pg-crowmark .award__gate {
+.pg-bid .award__gate {
   margin: 0 0 var(--stack-2);
   text-align: center;
   color: var(--c-text);
 }
 
-.pg-crowmark .award__lane {
+.pg-bid .award__lane {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 6px;
   margin-top: var(--stack-2);
 }
 
-.pg-crowmark .award__name {
+.pg-bid .award__name {
   margin: 0;
   font-family: var(--font-body);
   font-size: var(--t-micro);
@@ -284,21 +284,21 @@
   color: var(--c-text-sub);
 }
 
-.pg-crowmark .award__lane--us .award__name { color: var(--c-verified); }
+.pg-bid .award__lane--us .award__name { color: var(--c-verified); }
 
 /* THE TRACK EXISTS TO CLIP, and that is not belt and braces. The bar scales
    from zero on its left edge; without a clipping parent a mid-animation frame
    can paint outside the panel and grow the document's scrollWidth, which is a
    horizontal-overflow failure that exists ONLY while the animation runs and
    is invisible to a settled-page check. */
-.pg-crowmark .award__track {
+.pg-bid .award__track {
   display: block;
   position: relative;
   height: 8px;
   overflow: hidden;
 }
 
-.pg-crowmark .award__bar {
+.pg-bid .award__bar {
   position: absolute;
   inset-block: 0;
   left: 0;
@@ -308,14 +308,14 @@
 
 /* Ends at the gate. Neutral, because "the bid" is not a marker of anything:
    it is the half of the timeline that finishes. */
-.pg-crowmark .award__bar--a {
+.pg-bid .award__bar--a {
   width: 50%;
   background: color-mix(in srgb, var(--c-text) 26%, transparent);
 }
 
 /* Crosses it and runs to month 12. Teal at the source through cyan at the
    far end: one light, not two categories. */
-.pg-crowmark .award__bar--b {
+.pg-bid .award__bar--b {
   width: 100%;
   /* --grad-rule, and it is BYTE-IDENTICAL to what was written here: the token is
      `linear-gradient(90deg, var(--c-ambient-start), var(--c-ambient-mid))`, so
@@ -338,7 +338,7 @@
 /* Centred, because the centre of the lane IS the gate: the panel is one
    measure wide and the rule sits at 50%. So "ends here" lands on the line the
    bar stops at without a single magic offset. */
-.pg-crowmark .award__note {
+.pg-bid .award__note {
   margin: 0;
   text-align: center;
   font-family: var(--font-body);
@@ -361,13 +361,13 @@
  * content whatever its colour is, so the span has to be positioned to sit in
  * the same layer and win on tree order.
  */
-.pg-crowmark .award__knock {
+.pg-bid .award__knock {
   position: relative;
   padding: 0 8px;
   background: var(--c-raised);
 }
 
-.pg-crowmark .award__note--lit {
+.pg-bid .award__note--lit {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -375,7 +375,7 @@
   color: var(--c-ambient-start);
 }
 
-.pg-crowmark .award__tick {
+.pg-bid .award__tick {
   width: 2px;
   height: 14px;
   border-radius: var(--radius-pill);
@@ -389,7 +389,7 @@
    RIGHT of the award line at 50%), which says you submit after award. 1fr
    1fr 1fr 3fr puts the first three at 8%, 25% and 42% and Month 12 at 75%,
    so the timeline agrees with the gate it is drawn under. */
-.pg-crowmark .award__stops {
+.pg-bid .award__stops {
   list-style: none;
   margin: var(--stack-2) 0 0;
   padding: 0;
@@ -401,7 +401,7 @@
   color: var(--c-text-muted);
 }
 
-.pg-crowmark .award__stops li { text-align: center; }
+.pg-bid .award__stops li { text-align: center; }
 
 /*
  * ── M-P2 · THE AWARD LINE, TWO BARS, ONE STOPS ───────────────────────────
@@ -434,15 +434,15 @@
  * ends anyway.
  */
 @media (prefers-reduced-motion: no-preference) {
-  .pg-crowmark [data-lit='on'] .award__bar--a {
+  .pg-bid [data-lit='on'] .award__bar--a {
     animation: cw-grow var(--m-beat) var(--m-ease-land) 1 both;
   }
 
-  .pg-crowmark [data-lit='on'] .award__bar--b {
+  .pg-bid [data-lit='on'] .award__bar--b {
     animation: cw-grow calc(var(--m-beat) * 1.5) var(--m-ease-land) calc(var(--m-beat) * 1.33) 1 both;
   }
 
-  .pg-crowmark [data-lit='on'] .award__tick {
+  .pg-bid [data-lit='on'] .award__tick {
     animation: cw-tick calc(var(--m-beat) * 0.5) var(--m-ease-land) calc(var(--m-beat) * 2.83) 1 both;
   }
 }
@@ -459,7 +459,7 @@
 
 /* ══ THE MECHANISM, `229:2` ══════════════════════════════════════════════ */
 
-.pg-crowmark .mech {
+.pg-bid .mech {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -488,9 +488,9 @@
  * wanted it belongs in surfaces.css for every card on the site, in one edit,
  * not here for three.
  */
-.pg-crowmark .mech__card { padding: var(--blk-pad); }
+.pg-bid .mech__card { padding: var(--blk-pad); }
 
-.pg-crowmark .mech__n {
+.pg-bid .mech__n {
   margin: 0 0 var(--stack-1);
   color: var(--c-ambient-start);
 }
@@ -509,7 +509,7 @@
  * pill that hugs its own text, the dot became a flex item instead of an
  * absolutely positioned one, and there is nothing left to align.
  */
-.pg-crowmark .mech__art {
+.pg-bid .mech__art {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -522,7 +522,7 @@
   min-height: 108px;
 }
 
-.pg-crowmark .mech__chip {
+.pg-bid .mech__chip {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -540,7 +540,7 @@
 
 /* Teal = a source that was retrieved and kept with its citation. A flex item,
    so it sits before the label without taking the label off centre. */
-.pg-crowmark .mech__chip::before {
+.pg-bid .mech__chip::before {
   content: '';
   flex: none;
   width: 6px;
@@ -561,7 +561,7 @@
    in words. The three rules now start at 0 rather than at 10, which lines the
    sentence up with the chips beneath it instead of hanging it off a bar that is
    no longer there. */
-.pg-crowmark .mech__rule {
+.pg-bid .mech__rule {
   display: block;
   height: 26px;
   background:
@@ -573,18 +573,18 @@
 
 /* 02 puts its two citations side by side under the drafted sentence, because
    the point of the card is that they travel WITH it. */
-.pg-crowmark .mech__art--draft { flex-direction: row; flex-wrap: wrap; }
-.pg-crowmark .mech__art--draft .mech__rule { flex: 1 0 100%; }
+.pg-bid .mech__art--draft { flex-direction: row; flex-wrap: wrap; }
+.pg-bid .mech__art--draft .mech__rule { flex: 1 0 100%; }
 
 /* 03 hangs the evidence off the promise. The connector is the argument of the
    card: a commitment and the artefact that proves it are one object. */
-.pg-crowmark .mech__art--link { gap: 22px; }
+.pg-bid .mech__art--link { gap: 22px; }
 
-.pg-crowmark .mech__art--link .mech__chip:last-child {
+.pg-bid .mech__art--link .mech__chip:last-child {
   border-color: color-mix(in srgb, var(--c-verified) 45%, transparent);
 }
 
-.pg-crowmark .mech__art--link .mech__chip:last-child::after {
+.pg-bid .mech__art--link .mech__chip:last-child::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -608,21 +608,21 @@
    decision; a capability pair has no head block at all, it has a left column
    and an artefact. Section.astro's own comment draws exactly this line:
    "Structured content keeps its own internal alignment." */
-.pg-crowmark .cap {
+.pg-bid .cap {
   display: grid;
   grid-template-columns: minmax(0, 440fr) minmax(0, 60fr) minmax(0, 520fr);
   align-items: center;
 }
 
-.pg-crowmark .cap--art-right .cap__text { grid-column: 1; }
-.pg-crowmark .cap--art-right .cap__art { grid-column: 3; }
+.pg-bid .cap--art-right .cap__text { grid-column: 1; }
+.pg-bid .cap--art-right .cap__art { grid-column: 3; }
 /* Reading order in the DOM is always text then artefact; only the painted
    position swaps, so a screen reader meets the argument before the drawing
    on every one of the four. */
-.pg-crowmark .cap--art-left .cap__text { grid-column: 3; grid-row: 1; }
-.pg-crowmark .cap--art-left .cap__art { grid-column: 1; grid-row: 1; }
+.pg-bid .cap--art-left .cap__text { grid-column: 3; grid-row: 1; }
+.pg-bid .cap--art-left .cap__art { grid-column: 1; grid-row: 1; }
 
-.pg-crowmark .cap__n {
+.pg-bid .cap__n {
   margin: 0 0 var(--stack-1);
   color: var(--c-ambient-start);
 }
@@ -631,7 +631,7 @@
    margin is not a measure, it is a left alignment: this 18ch heading sat in a
    centred block with all its slack on one side, which is the defect
    scripts/check-render.js describes for capped columns. */
-.pg-crowmark .cap__h {
+.pg-bid .cap__h {
   margin: 0 auto var(--stack-2);
   font-family: var(--font-display);
   font-size: var(--t-h2);
@@ -644,7 +644,7 @@
 
 /* Same as .cap__h directly above: a 48ch cap needs the auto margin, or the
    measure reads as a gutter. */
-.pg-crowmark .cap__body {
+.pg-bid .cap__body {
   margin: 0 auto;
   max-width: 48ch;
   font-family: var(--font-body);
@@ -653,9 +653,9 @@
   color: var(--c-text-sub);
 }
 
-.pg-crowmark .cap__more { margin: var(--stack-2) 0 0; }
+.pg-bid .cap__more { margin: var(--stack-2) 0 0; }
 
-.pg-crowmark .cap__more a {
+.pg-bid .cap__more a {
   display: inline-flex;
   align-items: center;
   /* WCAG 2.2 target size. */
@@ -666,9 +666,9 @@
 }
 
 /* Thickness rather than colour: see .prose a:hover in styles/prose.css. */
-.pg-crowmark .cap__more a:hover { text-decoration-thickness: 2px; }
+.pg-bid .cap__more a:hover { text-decoration-thickness: 2px; }
 
-.pg-crowmark .cap__more a:focus-visible {
+.pg-bid .cap__more a:focus-visible {
   outline: 3px solid var(--c-interactive);
   outline-offset: 3px;
   border-radius: 2px;
@@ -676,16 +676,16 @@
 
 /* ── 01 · Fit ───────────────────────────────────────────────────────────── */
 
-.pg-crowmark .fit,
-.pg-crowmark .cite,
-.pg-crowmark .gate,
-.pg-crowmark .strip { padding: var(--blk-pad); }
+.pg-bid .fit,
+.pg-bid .cite,
+.pg-bid .gate,
+.pg-bid .strip { padding: var(--blk-pad); }
 
-.pg-crowmark .cite { margin: 0; }
+.pg-bid .cite { margin: 0; }
 
-.pg-crowmark .fit__rows { list-style: none; margin: 0; padding: 0; }
+.pg-bid .fit__rows { list-style: none; margin: 0; padding: 0; }
 
-.pg-crowmark .fit__row {
+.pg-bid .fit__row {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
@@ -695,9 +695,9 @@
   border-top: 1px solid var(--c-border);
 }
 
-.pg-crowmark .fit__row:first-child { border-top: 0; }
+.pg-bid .fit__row:first-child { border-top: 0; }
 
-.pg-crowmark .fit__name {
+.pg-bid .fit__name {
   margin: 0;
   font-family: var(--font-body);
   font-size: var(--t-body);
@@ -706,12 +706,12 @@
 
 /* THE WORD, NOT ONLY THE COLOUR. WCAG 1.4.1: remove every pixel of hue and
    the verdict still reads. */
-.pg-crowmark .fit__verdict {
+.pg-bid .fit__verdict {
   margin: 0;
   color: var(--tone, var(--c-text-muted));
 }
 
-.pg-crowmark .fit__score {
+.pg-bid .fit__score {
   margin: 0;
   font-family: var(--font-mono);
   line-height: var(--lh-tight);
@@ -723,7 +723,7 @@
 
 /* The bar length is the score. Drawn under the row rather than beside it, so
    four rows read as one chart. */
-.pg-crowmark .fit__bar {
+.pg-bid .fit__bar {
   position: absolute;
   left: 0;
   bottom: var(--stack-1);
@@ -738,20 +738,20 @@
    frontmatter: a low fit score is a fact about the reader's situation, not a
    figure the engine refused, and blurring those two weakens the one signal on
    this site a competitor cannot copy. */
-.pg-crowmark .fit__row--go { --tone: var(--c-verified); }
-.pg-crowmark .fit__row--risk { --tone: var(--c-at-risk); }
-.pg-crowmark .fit__row--stop { --tone: var(--c-refused); }
+.pg-bid .fit__row--go { --tone: var(--c-verified); }
+.pg-bid .fit__row--risk { --tone: var(--c-at-risk); }
+.pg-bid .fit__row--stop { --tone: var(--c-refused); }
 
 /* ── 02 · Citation ──────────────────────────────────────────────────────── */
 
 /* The quote treatment is styles/blocks.css. This was one of four on the site
    and the only one at --t-lede; nothing about a statutory citation asks to be
    larger than the worked example on /blog that was set smaller. */
-.pg-crowmark .cite__q {
+.pg-bid .cite__q {
   color: var(--c-text);
 }
 
-.pg-crowmark .cite__chips {
+.pg-bid .cite__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -760,7 +760,7 @@
 
 /* A chip, not a card: --radius-chip is below the card threshold by
    construction, which is how the design-system gate tells the two apart. */
-.pg-crowmark .cite__chips span {
+.pg-bid .cite__chips span {
   padding: 4px 10px;
   border: 1px solid color-mix(in srgb, var(--c-verified) 45%, transparent);
   border-radius: var(--radius-chip);
@@ -770,7 +770,7 @@
   color: var(--c-verified);
 }
 
-.pg-crowmark .cite__foot {
+.pg-bid .cite__foot {
   margin: var(--stack-2) 0 0;
   font-family: var(--font-body);
   font-size: var(--t-micro);
@@ -783,14 +783,14 @@
    shorter bar and nothing else; with it, three tracks visibly cross and one
    visibly does not. Positioned off the verdict column's own width so the rule
    lands exactly where every track ends, at any type size. */
-.pg-crowmark .gate__rows {
+.pg-bid .gate__rows {
   position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.pg-crowmark .gate__rows::after {
+.pg-bid .gate__rows::after {
   content: '';
   position: absolute;
   top: 4px;
@@ -803,7 +803,7 @@
   background: var(--grad-hairline);
 }
 
-.pg-crowmark .gate__row {
+.pg-bid .gate__row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 84px) minmax(0, 10ch);
   align-items: center;
@@ -812,9 +812,9 @@
   border-top: 1px solid var(--c-border);
 }
 
-.pg-crowmark .gate__row:first-child { border-top: 0; }
+.pg-bid .gate__row:first-child { border-top: 0; }
 
-.pg-crowmark .gate__name {
+.pg-bid .gate__name {
   grid-column: 1;
   margin: 0;
   font-family: var(--font-body);
@@ -822,7 +822,7 @@
   color: var(--c-text);
 }
 
-.pg-crowmark .gate__src {
+.pg-bid .gate__src {
   grid-column: 1;
   grid-row: 2;
   margin: 0;
@@ -831,7 +831,7 @@
   color: var(--c-text-muted);
 }
 
-.pg-crowmark .gate__track {
+.pg-bid .gate__track {
   grid-column: 2;
   grid-row: 1 / span 2;
   position: relative;
@@ -839,7 +839,7 @@
   overflow: hidden;
 }
 
-.pg-crowmark .gate__bar {
+.pg-bid .gate__bar {
   position: absolute;
   inset: 0;
   border-radius: var(--radius-pill);
@@ -847,14 +847,14 @@
   transform-origin: left center;
 }
 
-.pg-crowmark .gate__row--stop .gate__bar {
+.pg-bid .gate__row--stop .gate__bar {
   /* Stops at the gate: two thirds of the track, and the last third stays
      empty. The refusal is drawn as an absence, which is what a refusal is. */
   right: 34%;
   background: linear-gradient(90deg, transparent, var(--c-refused));
 }
 
-.pg-crowmark .gate__end {
+.pg-bid .gate__end {
   grid-column: 3;
   grid-row: 1 / span 2;
   display: flex;
@@ -864,9 +864,9 @@
   color: var(--c-verified);
 }
 
-.pg-crowmark .gate__end--stop { color: var(--c-refused); }
+.pg-bid .gate__end--stop { color: var(--c-refused); }
 
-.pg-crowmark .gate__pip {
+.pg-bid .gate__pip {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -874,11 +874,11 @@
   box-shadow: 0 0 6px var(--c-verified-glow);
 }
 
-.pg-crowmark .gate__x { flex: none; width: 12px; height: 12px; }
+.pg-bid .gate__x { flex: none; width: 12px; height: 12px; }
 
 /* Dashed entirely out of view at rest, so the visible cross is the path
    beneath it and this one only ever adds light. */
-.pg-crowmark .gate__x-draw { stroke-dasharray: 0 20; }
+.pg-bid .gate__x-draw { stroke-dasharray: 0 20; }
 
 /*
  * ── M-P3 · THE GATE, THREE PASS AND ONE IS REFUSED ───────────────────────
@@ -904,18 +904,18 @@
  * cross draws itself over a cross that is already there.
  */
 @media (prefers-reduced-motion: no-preference) {
-  .pg-crowmark [data-lit='on'] .gate__bar {
+  .pg-bid [data-lit='on'] .gate__bar {
     animation: cw-grow calc(var(--m-beat) * 0.7) var(--m-ease-land) 1 both;
   }
 
-  .pg-crowmark [data-lit='on'] .gate__row:nth-child(2) .gate__bar { animation-delay: calc(var(--m-beat) * 0.25); }
-  .pg-crowmark [data-lit='on'] .gate__row:nth-child(3) .gate__bar { animation-delay: calc(var(--m-beat) * 0.5); }
-  .pg-crowmark [data-lit='on'] .gate__row:nth-child(4) .gate__bar { animation-delay: calc(var(--m-beat) * 0.75); }
+  .pg-bid [data-lit='on'] .gate__row:nth-child(2) .gate__bar { animation-delay: calc(var(--m-beat) * 0.25); }
+  .pg-bid [data-lit='on'] .gate__row:nth-child(3) .gate__bar { animation-delay: calc(var(--m-beat) * 0.5); }
+  .pg-bid [data-lit='on'] .gate__row:nth-child(4) .gate__bar { animation-delay: calc(var(--m-beat) * 0.75); }
 
   /* The cross draws 220ms after track 4 has stopped: 0.75 + 0.7 beats of
      track, then the board's 220ms hold, expressed as 0.37 of a beat. Two
      strokes, forwards, once. */
-  .pg-crowmark [data-lit='on'] .gate__x-draw {
+  .pg-bid [data-lit='on'] .gate__x-draw {
     animation: cw-cross calc(var(--m-beat) * 0.55) var(--m-ease-travel) calc(var(--m-beat) * 1.82) forwards;
   }
 }
@@ -927,7 +927,7 @@
 
 /* ── 04 · Twelve months ─────────────────────────────────────────────────── */
 
-.pg-crowmark .strip__chart {
+.pg-bid .strip__chart {
   position: relative;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -940,7 +940,7 @@
   padding-right: 18px;
 }
 
-.pg-crowmark .strip__bar {
+.pg-bid .strip__bar {
   height: var(--h);
   border-radius: var(--radius-chip) var(--radius-chip) 0 0;
   background: linear-gradient(
@@ -953,7 +953,7 @@
 
 /* The assessment. A single lit rule at the right edge: the moment the twelve
    months become one published document. */
-.pg-crowmark .strip__line {
+.pg-bid .strip__line {
   position: absolute;
   right: 4px;
   top: 6%;
@@ -964,7 +964,7 @@
   box-shadow: 0 0 10px var(--c-ambient-glow), 0 0 26px var(--c-ambient-glow);
 }
 
-.pg-crowmark .strip__foot {
+.pg-bid .strip__foot {
   display: flex;
   justify-content: space-between;
   gap: var(--stack-2);
@@ -975,7 +975,7 @@
   color: var(--c-text-muted);
 }
 
-.pg-crowmark .strip__out { color: var(--c-ambient-mid); }
+.pg-bid .strip__out { color: var(--c-ambient-mid); }
 
 /* The strip rises as the section is lit. TWELVE BARS, ONE BEAT APART OVER ONE
    BEAT is a full cycle of noise; the board gives this section no sequence of
@@ -984,21 +984,21 @@
    aria-hidden decoration and carry no figure, so nothing here can hide
    content. */
 @media (prefers-reduced-motion: no-preference) {
-  .pg-crowmark [data-lit='on'] .strip__bar {
+  .pg-bid [data-lit='on'] .strip__bar {
     animation: cw-rise calc(var(--m-beat) * 0.8) var(--m-ease-land) 1 both;
   }
 
-  .pg-crowmark .strip__bar:nth-child(2) { animation-delay: calc(var(--m-beat) / 12); }
-  .pg-crowmark .strip__bar:nth-child(3) { animation-delay: calc(var(--m-beat) * 2 / 12); }
-  .pg-crowmark .strip__bar:nth-child(4) { animation-delay: calc(var(--m-beat) * 3 / 12); }
-  .pg-crowmark .strip__bar:nth-child(5) { animation-delay: calc(var(--m-beat) * 4 / 12); }
-  .pg-crowmark .strip__bar:nth-child(6) { animation-delay: calc(var(--m-beat) * 5 / 12); }
-  .pg-crowmark .strip__bar:nth-child(7) { animation-delay: calc(var(--m-beat) * 6 / 12); }
-  .pg-crowmark .strip__bar:nth-child(8) { animation-delay: calc(var(--m-beat) * 7 / 12); }
-  .pg-crowmark .strip__bar:nth-child(9) { animation-delay: calc(var(--m-beat) * 8 / 12); }
-  .pg-crowmark .strip__bar:nth-child(10) { animation-delay: calc(var(--m-beat) * 9 / 12); }
-  .pg-crowmark .strip__bar:nth-child(11) { animation-delay: calc(var(--m-beat) * 10 / 12); }
-  .pg-crowmark .strip__bar:nth-child(12) { animation-delay: calc(var(--m-beat) * 11 / 12); }
+  .pg-bid .strip__bar:nth-child(2) { animation-delay: calc(var(--m-beat) / 12); }
+  .pg-bid .strip__bar:nth-child(3) { animation-delay: calc(var(--m-beat) * 2 / 12); }
+  .pg-bid .strip__bar:nth-child(4) { animation-delay: calc(var(--m-beat) * 3 / 12); }
+  .pg-bid .strip__bar:nth-child(5) { animation-delay: calc(var(--m-beat) * 4 / 12); }
+  .pg-bid .strip__bar:nth-child(6) { animation-delay: calc(var(--m-beat) * 5 / 12); }
+  .pg-bid .strip__bar:nth-child(7) { animation-delay: calc(var(--m-beat) * 6 / 12); }
+  .pg-bid .strip__bar:nth-child(8) { animation-delay: calc(var(--m-beat) * 7 / 12); }
+  .pg-bid .strip__bar:nth-child(9) { animation-delay: calc(var(--m-beat) * 8 / 12); }
+  .pg-bid .strip__bar:nth-child(10) { animation-delay: calc(var(--m-beat) * 9 / 12); }
+  .pg-bid .strip__bar:nth-child(11) { animation-delay: calc(var(--m-beat) * 10 / 12); }
+  .pg-bid .strip__bar:nth-child(12) { animation-delay: calc(var(--m-beat) * 11 / 12); }
 }
 
 @keyframes cw-rise {
@@ -1007,14 +1007,14 @@
 }
 
 /* ══ In-page nav ═════════════════════════════════════════════════════════ */
-.pg-crowmark .subnav {
+.pg-bid .subnav {
   position: sticky;
   top: 0;
   z-index: 20;
   border-block: 1px solid var(--c-border);
   background: var(--c-bg);
 }
-.pg-crowmark .subnav ul {
+.pg-bid .subnav ul {
   list-style: none;
   margin: 0 auto;
   padding: 0 var(--gutter);
@@ -1023,7 +1023,7 @@
   flex-wrap: wrap;
   gap: clamp(12px, 3vw, 36px);
 }
-.pg-crowmark .subnav a {
+.pg-bid .subnav a {
   display: inline-flex;
   align-items: center;
   /* WCAG 2.2 target size. */
@@ -1033,8 +1033,8 @@
   color: var(--c-text-muted);
   text-decoration: none;
 }
-.pg-crowmark .subnav a:hover { color: var(--c-text); }
-.pg-crowmark .subnav a:focus-visible { outline: 3px solid var(--c-interactive); outline-offset: -3px; }
+.pg-bid .subnav a:hover { color: var(--c-text); }
+.pg-bid .subnav a:focus-visible { outline: 3px solid var(--c-interactive); outline-offset: -3px; }
 
 /* ══ Prose bits ══════════════════════════════════════════════════════════ */
 /* CENTRED AS A BLOCK, left as TEXT. The head-block decision of 2026-08-02 is
@@ -1044,7 +1044,7 @@
    sat 60px off axis with dead space down the right. Capping a measure and
    positioning a block are two different jobs; `margin-inline: auto` does the
    second without touching the first. */
-.pg-crowmark .lead {
+.pg-bid .lead {
   margin: 0 auto var(--sec-gap);
   max-width: 72ch;
   font-family: var(--font-body);
@@ -1053,22 +1053,22 @@
   color: var(--c-text-sub);
 }
 
-.pg-crowmark .facts { margin-inline: auto; max-width: var(--measure-band); }
-.pg-crowmark .facts__row {
+.pg-bid .facts { margin-inline: auto; max-width: var(--measure-band); }
+.pg-bid .facts__row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
   gap: 0 1.5rem;
   padding: 0.8rem 0;
   border-bottom: 1px solid var(--c-border);
 }
-.pg-crowmark .facts__row:last-child { border-bottom: 0; }
+.pg-bid .facts__row:last-child { border-bottom: 0; }
 /* THE RECIPE IS GONE FROM HERE, 2026-08-04, A-48. `.facts dt` restated the
    mono micro-label - face, leading, --t-micro, 0.1em, uppercase - which is
    `.meta` in styles/labels.css value for value. The <dt> carries `meta` now.
    COLOUR STAYS, because colour is deliberately not part of any of the three
    recipes: labels.css sets none and the call site decides. */
-.pg-crowmark .facts dt { color: var(--c-text-muted); }
-.pg-crowmark .facts dd {
+.pg-bid .facts dt { color: var(--c-text-muted); }
+.pg-bid .facts dd {
   margin: 0;
   font-family: var(--font-body);
   font-size: var(--t-body);
@@ -1076,8 +1076,8 @@
   color: var(--c-text-sub);
 }
 
-.pg-crowmark .compare,
-.pg-crowmark .note {
+.pg-bid .compare,
+.pg-bid .note {
   margin: var(--sec-gap) auto 0;
   max-width: 72ch;
   font-family: var(--font-body);
@@ -1085,8 +1085,8 @@
   line-height: 1.7;
   color: var(--c-text-sub);
 }
-.pg-crowmark .compare a,
-.pg-crowmark .card__cta a {
+.pg-bid .compare a,
+.pg-bid .card__cta a {
   color: var(--c-interactive);
 }
 
@@ -1101,17 +1101,17 @@
  * which 2.5.8 exempts as an inline target, and giving it a 44px box would
  * open a hole in the middle of a paragraph.
  */
-.pg-crowmark .card__cta a {
+.pg-bid .card__cta a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
 }
 
 /* ══ Cards ═══════════════════════════════════════════════════════════════ */
-.pg-crowmark .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(18px, 2.2vw, 30px); }
-.pg-crowmark .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.pg-crowmark .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.pg-crowmark .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.pg-bid .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(18px, 2.2vw, 30px); }
+.pg-bid .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pg-bid .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pg-bid .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 /* ── HOW MANY PARTS EACH ROW'S CARDS ARE BUILT FROM ──────────────────────
  *
@@ -1122,21 +1122,21 @@
  * under #buyers, and a value on the shared class would have to be wrong for
  * one of them. styles/card-row.css holds the recipe and the argument; a wrong
  * count here is caught by check-timeline.js rule 5 on the rendered page. */
-.pg-crowmark #procurement-act .grid,
-.pg-crowmark #features .grid,
-.pg-crowmark #benefits .grid { --card-parts: 2; }
+.pg-bid #procurement-act .grid,
+.pg-bid #features .grid,
+.pg-bid #benefits .grid { --card-parts: 2; }
 /* FIVE, NOT FOUR, and the fifth track is empty on one of the two cards: only
    the buyers card ends in a link, because the reader is already on the
    suppliers page. Declaring four would have piled that link into the aside's
    track. */
-.pg-crowmark #buyers .grid { --card-parts: 5; }
-.pg-crowmark #pricing .grid { --card-parts: 5; }
-.pg-crowmark .steps { --card-parts: 3; }
-.pg-crowmark .mech { --card-parts: 4; }
+.pg-bid #buyers .grid { --card-parts: 5; }
+.pg-bid #pricing .grid { --card-parts: 5; }
+.pg-bid .steps { --card-parts: 3; }
+.pg-bid .mech { --card-parts: 4; }
 
 /* Geometry only. Border, radius, background, gloss and hover live in
    styles/surfaces.css under `surface`. */
-.pg-crowmark .card { padding: var(--blk-pad); }
+.pg-bid .card { padding: var(--blk-pad); }
 
 /* O-35. `--here` is a YOU ARE HERE marker and asserts nothing about evidence,
    so it leaves the violet family with the RECOMMENDED badge. Violet is
@@ -1151,10 +1151,10 @@
    two cards apart, and the drawing is now `surface--accent` in
    styles/surfaces.css, one recipe shared with /sectors and /crowmark-buyers.
    These two rules do nothing but point its knob. */
-.pg-crowmark .card--here { --surface-accent: var(--c-interactive); }
-.pg-crowmark .card--other { --surface-accent: var(--c-ambient-start); }
+.pg-bid .card--here { --surface-accent: var(--c-interactive); }
+.pg-bid .card--other { --surface-accent: var(--c-ambient-start); }
 
-.pg-crowmark .card__body {
+.pg-bid .card__body {
   margin: 0;
   font-family: var(--font-body);
   font-size: var(--t-body);
@@ -1162,7 +1162,7 @@
   color: var(--c-text-sub);
 }
 
-.pg-crowmark .card__aside {
+.pg-bid .card__aside {
   margin: var(--stack-1) 0 0;
   font-family: var(--font-body);
   font-size: var(--t-micro);
@@ -1170,10 +1170,10 @@
   color: var(--c-text-muted);
 }
 
-.pg-crowmark .card__cta { margin: var(--stack-1) 0 0; font-size: var(--t-body); }
+.pg-bid .card__cta { margin: var(--stack-1) 0 0; font-size: var(--t-body); }
 
 /* ══ Steps ═══════════════════════════════════════════════════════════════ */
-.pg-crowmark .steps {
+.pg-bid .steps {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1181,8 +1181,8 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(18px, 2.2vw, 30px);
 }
-.pg-crowmark .steps__item { padding: var(--blk-pad); }
-.pg-crowmark .steps__n {
+.pg-bid .steps__item { padding: var(--blk-pad); }
+.pg-bid .steps__n {
   display: block;
   margin-bottom: var(--stack-1);
   font-family: var(--font-mono);
@@ -1206,41 +1206,41 @@
  * `display: flex; flex-direction: column` USED TO BE HERE and had to go: a
  * scoped rule is unlayered, so it beat the shared recipe and the card would
  * have kept its private column while the container handed out tracks. */
-.pg-crowmark .plan__flag { grid-row: 1; }
-.pg-crowmark .plan .card__h { grid-row: 2; }
-.pg-crowmark .plan__price { grid-row: 3; }
-.pg-crowmark .plan .card__body { grid-row: 4; }
-.pg-crowmark .plan .card__cta { grid-row: 5; }
+.pg-bid .plan__flag { grid-row: 1; }
+.pg-bid .plan .card__h { grid-row: 2; }
+.pg-bid .plan__price { grid-row: 3; }
+.pg-bid .plan .card__body { grid-row: 4; }
+.pg-bid .plan .card__cta { grid-row: 5; }
 
-.pg-crowmark .plan--rec { border-color: var(--c-border-glow); box-shadow: var(--shadow-panel); }
+.pg-bid .plan--rec { border-color: var(--c-border-glow); box-shadow: var(--shadow-panel); }
 
-.pg-crowmark .plan__flag {
+.pg-bid .plan__flag {
   margin: 0 0 var(--stack-1);
   background: var(--c-ambient-start);
   color: var(--c-bg);
 }
 
-.pg-crowmark .plan__price {
+.pg-bid .plan__price {
   margin: 0 0 var(--stack-1);
   font-family: var(--font-display);
   font-size: var(--t-h3);
   font-weight: 800;
   color: var(--c-text);
 }
-.pg-crowmark .plan__per {
+.pg-bid .plan__per {
   font-family: var(--font-body);
   font-size: var(--t-body);
   font-weight: 400;
   color: var(--c-text-muted);
 }
-.pg-crowmark .plan .card__cta { margin-top: auto; padding-top: var(--stack-2); }
+.pg-bid .plan .card__cta { margin-top: auto; padding-top: var(--stack-2); }
 
 /* ══ FAQ ═════════════════════════════════════════════════════════════════ */
-.pg-crowmark .faqs { display: grid; }
-.pg-crowmark .faq { border-bottom: 1px solid var(--c-border); }
+.pg-bid .faqs { display: grid; }
+.pg-bid .faq { border-bottom: 1px solid var(--c-border); }
 /* Layout, pointer, marker suppression and the mark itself are on `summary` in
    styles/blocks.css since A-65. This row keeps its own height and type. */
-.pg-crowmark .faq__q {
+.pg-bid .faq__q {
   min-height: 60px;
   padding: var(--stack-1) 0;
   font-family: var(--font-display);
@@ -1249,9 +1249,9 @@
   line-height: 1.35;
   color: var(--c-text);
 }
-.pg-crowmark .faq__q:hover { color: var(--c-interactive); }
-.pg-crowmark .faq__q:focus-visible { outline: 3px solid var(--c-interactive); outline-offset: 2px; border-radius: 4px; }
-.pg-crowmark .faq__a {
+.pg-bid .faq__q:hover { color: var(--c-interactive); }
+.pg-bid .faq__q:focus-visible { outline: 3px solid var(--c-interactive); outline-offset: 2px; border-radius: 4px; }
+.pg-bid .faq__a {
   margin: 0;
   padding-bottom: var(--stack-2);
   max-width: 76ch;
@@ -1266,37 +1266,37 @@
    under it, in the order a screen reader already read them. The geometry
    changes; every word survives, including the refusal. */
 @media (max-width: 1099px) {
-  .pg-crowmark .grid--4,
-  .pg-crowmark .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pg-crowmark .proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pg-crowmark .mech { grid-template-columns: minmax(0, 1fr); }
+  .pg-bid .grid--4,
+  .pg-bid .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pg-bid .proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pg-bid .mech { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 899px) {
-  .pg-crowmark .cap { grid-template-columns: minmax(0, 1fr); gap: var(--sec-gap); }
-  .pg-crowmark .cap--art-right .cap__text,
-  .pg-crowmark .cap--art-left .cap__text,
-  .pg-crowmark .cap--art-right .cap__art,
-  .pg-crowmark .cap--art-left .cap__art { grid-column: 1; grid-row: auto; }
-  .pg-crowmark .cap__h { max-width: none; }
-  .pg-crowmark .cap__body { max-width: none; }
+  .pg-bid .cap { grid-template-columns: minmax(0, 1fr); gap: var(--sec-gap); }
+  .pg-bid .cap--art-right .cap__text,
+  .pg-bid .cap--art-left .cap__text,
+  .pg-bid .cap--art-right .cap__art,
+  .pg-bid .cap--art-left .cap__art { grid-column: 1; grid-row: auto; }
+  .pg-bid .cap__h { max-width: none; }
+  .pg-bid .cap__body { max-width: none; }
 }
 
 @media (max-width: 767px) {
-  .pg-crowmark .grid--2,
-  .pg-crowmark .grid--3,
-  .pg-crowmark .grid--4,
-  .pg-crowmark .steps,
-  .pg-crowmark .proof { grid-template-columns: minmax(0, 1fr); }
-  .pg-crowmark .facts__row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .pg-bid .grid--2,
+  .pg-bid .grid--3,
+  .pg-bid .grid--4,
+  .pg-bid .steps,
+  .pg-bid .proof { grid-template-columns: minmax(0, 1fr); }
+  .pg-bid .facts__row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
   /* The proof card's own phone layout moved to styles/duty-card.css with the
      rest of its recipe. It was declared here AND in crowmark-buyers.astro. */
-  .pg-crowmark .award__stops { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
-  .pg-crowmark .gate__row { grid-template-columns: minmax(0, 1fr) auto; }
+  .pg-bid .award__stops { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .pg-bid .gate__row { grid-template-columns: minmax(0, 1fr) auto; }
   /* No track means no gate to draw. */
-  .pg-crowmark .gate__track,
-  .pg-crowmark .gate__rows::after { display: none; }
-  .pg-crowmark .gate__end { grid-column: 2; }
+  .pg-bid .gate__track,
+  .pg-bid .gate__rows::after { display: none; }
+  .pg-bid .gate__end { grid-column: 2; }
 }
 
 /* ── THE GROUND LADDER, 2026-08-05 ──────────────────────────────────────────
@@ -1319,7 +1319,7 @@
  * to pages/index.astro under A-118 and A-104 item 1 on the same day, and for
  * the same reason.
  *
- * IT IS NOT ANCHORED TO .pg-crowmark, unlike every other rule in this file.
+ * IT IS NOT ANCHORED TO .pg-bid, unlike every other rule in this file.
  * That is deliberate and it is safe: `#main-content` is layouts/Base.astro's
  * <main>, this stylesheet is imported by /crowmark alone, and Astro bundles a
  * page's styles per route, so it reaches no other document. Anchoring it would

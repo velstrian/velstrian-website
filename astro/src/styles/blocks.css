@@ -478,8 +478,8 @@ details[open] > summary::after {
  * display face that names one thing in a row of comparable things.
  *
  * ADDED 2026-09-06. Five pages declared these six values byte for byte
- * (about's `.principles__h`, crowmark-buyers' and pricing's `.card__h`,
- * crowmark's `.pg-crowmark .card__h`, roadmap's `.item__h`), which is 622 bytes
+ * (about's `.principles__h`, buy's and pricing's `.card__h`,
+ * bid's `.pg-bid .card__h`, roadmap's `.item__h`), which is 622 bytes
  * of restatement and five edits for one change. Same defect and same fix as
  * A-48, where `.facts dt` gave up its copy of the mono micro-label and took
  * `.meta` from styles/labels.css instead.

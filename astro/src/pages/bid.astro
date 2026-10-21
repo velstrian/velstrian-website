@@ -115,7 +115,7 @@ import {
  * stylesheet where the other seventeen stylesheets are.
  *
  * IT IS GLOBAL CSS, SO IT IS ANCHORED. Every rule in it descends from
- * `.pg-crowmark`, which layouts/Base.astro puts on <body> from the route. That
+ * `.pg-bid`, which layouts/Base.astro puts on <body> from the route. That
  * is not belt and braces: 41 of the 103 class names it selects on also exist on
  * eight other routes, so unanchored it would have restyled them. The file's own
  * header carries the measurement and the specificity argument.
@@ -123,7 +123,7 @@ import {
  * The import sits here, last, so this sheet still loads after everything
  * Base.astro imports. The same position the scoped block held.
  */
-import '../styles/crowmark.css';
+import '../styles/bid.css';
 
 const title = 'Velstrian Bid | Bid and tender software for UK suppliers';
 const description =
@@ -737,7 +737,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
        It was proved on 2026-08-05. The owner asked for the showcase to move up
        the page, above the refusal, and the eight hand-placed classes would have
        had to be re-reasoned again - the third time this page had paid that cost.
-       So they were removed. styles/crowmark.css now derives the ground from a
+       So they were removed. styles/bid.css now derives the ground from a
        section's POSITION with two rules, exactly as pages/index.astro does under
        A-118, and moving a section now moves its surface with it. There is no
        parity to break, no adjacent pair to place, and nothing to re-reason the
@@ -1091,13 +1091,13 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   THERE IS NO <style> BLOCK ON THIS PAGE ANY MORE, AND THAT IS THE POINT.
 
   1,206 lines of it stood here until 2026-08-04. It is now
-  src/styles/crowmark.css, imported at the top of this file, every rule
-  anchored under `.pg-crowmark`. ADR 0010 records why; the file's own header
+  src/styles/bid.css, imported at the top of this file, every rule
+  anchored under `.pg-bid`. ADR 0010 records why; the file's own header
   records how the scoping was preserved and what was measured to prove it.
 
   DO NOT ADD ONE BACK. A single `<style>` here, however small, brings the
   `astro-ivyj52o5` scope class back onto every element this page renders,
   about 5.3 KB on the largest document on the site, against a per-route budget
   it clears by 1.1 KB before the saving. Page CSS goes in src/styles/, anchored
-  under the body class, the way prose.css and crowmark.css both are.
+  under the body class, the way prose.css and bid.css both are.
 */}

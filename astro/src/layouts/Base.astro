@@ -150,9 +150,9 @@ const {
  *
  * The alternative was already available for markdown (`styles/prose.css` is a
  * global sheet made safe by anchoring every rule under `.prose`), but a page
- * has no `.prose` to anchor to. This gives it one. `styles/crowmark.css` is
- * the first sheet to use it and is anchored under `.pg-crowmark`; the same
- * argument applies to /crowmark-buyers, /pricing and /about next.
+ * has no `.prose` to anchor to. This gives it one. `styles/bid.css` is
+ * the first sheet to use it and is anchored under `.pg-bid`; the same
+ * argument applies to /buy, /pricing and /about next.
  *
  * ── WHY DERIVED FROM `path` RATHER THAN PASSED IN ──────────────────────────
  *
@@ -163,14 +163,14 @@ const {
  * ── WHY A CLASS AND NOT AN ATTRIBUTE ───────────────────────────────────────
  *
  * Specificity, and it was measured rather than assumed. A scoped rule compiles
- * to `.hint.astro-ivyj52o5`, (0,2,0). `.pg-crowmark .hint` is also (0,2,0),
+ * to `.hint.astro-ivyj52o5`, (0,2,0). `.pg-bid .hint` is also (0,2,0),
  * so a sheet that moves out of a `<style>` block keeps the exact weight it had
- * and not one cascade decision moves with it. `[data-page='/crowmark'] .hint`
+ * and not one cascade decision moves with it. `[data-page='/bid'] .hint`
  * would weigh the same but costs 9 more bytes per selector across 192 of them,
  * against a CSS budget with 6.3 KB of headroom.
  *
  * The slug is the path with the slashes turned into hyphens: `/` is `pg-home`,
- * `/crowmark` is `pg-crowmark`, `/blog/x` is `pg-blog-x`. Anything outside
+ * `/bid` is `pg-bid`, `/blog/x` is `pg-blog-x`. Anything outside
  * [a-z0-9-] is replaced, so a path can never emit a class that breaks a
  * selector.
  */
