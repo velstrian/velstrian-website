@@ -2,7 +2,7 @@
 
 Row R285-WEB-ENTERPRISE-REDESIGN-01. Decisions D254 and the owner's 2026-10-21 direction: "understand web design and do choreographed and build excellent design pattern throughout, and must not rush into change instead do deeper understand and do design thinking, make proper strategy and then do top 1% ultra premium design."
 
-Status: VERSION 2, ADOPTED 2026-10-21 evening. Section 0 overrides sections 2, 3, 4 and 6 where they differ. BUILDING. It replaces the patch list in `R285-ENTERPRISE-DESIGN-BRIEF-2026-10-21.md` as the plan. The brief stays as the measurement record.
+Status: VERSION 3 visual system (section 0.8) on the VERSION 2 storyline (sections 0.1 to 0.7). Section 0 overrides everything below it. BUILDING.
 
 ---
 
@@ -76,6 +76,64 @@ Owner: "lot of pages still hold true and correct content and needs only minor tw
 | Every other page (pricing, about, sources, tools, glossary, blog, FAQ, legal, compare, changelog, roadmap and the rest) | Keep. Minor tweaks only: Velstrian naming, D255 positive wording, the live site trust strip, RULE 0-U plain words where a sentence is hard to read. Never rewrite correct content for its own sake | Redesigned on the same system: tokens, type, layout grid, components, header, footer, motion. One consistent experience end to end |
 
 Order: (1) home, built and approved, which proves the system. (2) /bid/ and /buy/ storyline and design. (3) the shared shell (header, footer, page templates) moves to the system, which lifts every page at once. (4) each remaining page reviewed at 1440 and 390 and adjusted where its layout needs more than the shell. (5) old components, styles and tokens deleted, gates assert the new system only.
+
+---
+
+## 0.8 DESIGN SYSTEM VERSION 3 (owner, 2026-10-21 night). Overrides section 5 wherever they differ
+
+Owner, with eight annotated screenshots of responsive.io: "look how well front page each sections designed ... see the cleaniness and excellent clear design ... your cards looks very poor and flat all across, where is the products real screens carousels or promo videos ... motion and effects are so weaker, whole design systems are still weaker ... learn how top 1% ultra premium websites does the things". responsive.io follows Stripe's design principles. We learn the principles, we do not copy the page.
+
+### What makes those pages clean, and what we adopt
+
+| Principle (seen in the owner's screenshots) | Velstrian version 3 |
+|---|---|
+| Light and dark bands alternate, each section has its own temperature | Alternating bands: light canvas sections (white and a cool off white) and dark sections (our near black). Hero light, proof band dark, capabilities light, the "will not make things up" moment dark, pricing light, FAQ light, close as a gradient band that overlaps into the dark footer. Both modes come from tokens, no hardcoded colours |
+| Real product UI floating on a vivid gradient stage | The signature visual. Every product view sits on a "stage": a large rounded panel filled with the brand gradient (indigo to Velstrian purple, from the existing `--c-teal-dark` and `--mark` families, never red or pink red, D256). On the stage, crisp product UI cards float with layered shadows, overlapping the stage edge |
+| Product UI cards that animate in sequence (Importing, upload complete, analysis complete) | Product micro sequences built in HTML and CSS, so they are sharp at every size and readable as text: "Tender added, 6 questions found, 4 answers drafted from your documents, 1 needs your proof". Each step slides and settles in order when the stage enters view, once, under 2.5 seconds, reduced motion shows the final state |
+| Big confident type, short plain lead, one solid and one outline button | Inter, 64 to 72px hero at weight 500 to 600, tracking about -0.03em, lead 20px in a muted ink, max two lines. Primary button solid (ink on light bands, white on dark bands), secondary outline. Square-ish 6px radius. The button light sweep stays (owner) |
+| Structure from hairlines, not boxes | Stats and facts bands are columns split by 1px rules, each with a small gradient icon tile (24px icon on a 40px rounded square filled with the stage gradient). No card borders around text |
+| Every section a different form | Hero with stage, sources strip, facts band with icon tiles, "who are you" tabs with a stage per tab, capability carousel of real product screens, the refusal moment, three step start, pricing cards, FAQ rules, gradient close band |
+| Carousels of product and stories | A product carousel: real staging captures (and HTML recreations until they land) on the stage, arrows plus 1/5 counter, swipe on mobile, autoplay off by default, keyboard operable. No testimonials until we have real customers (D252) |
+| A gradient call to action band that overlaps the white to dark transition into the footer | Adopted, using the brand gradient |
+| Elevation | A three step elevation scale as tokens: rest (hairline border, no shadow), raised (product UI on a stage: two layer soft shadow), floating (the overlapping card: larger blur, slight y offset). Cards on light bands are white with a hairline, never flat grey boxes |
+
+### Colour roles, version 3
+
+All from existing families (RULE 0-C, D256, no new brand hues invented):
+
+| Role | Light band | Dark band |
+|---|---|---|
+| Canvas | white, and a cool off white for alternate light bands | `--c-bg` |
+| Ink | near black from the existing dark token | `--c-text` |
+| Muted ink | existing grey family at AA on its band | `--c-text-muted` |
+| Hairline | a light grey line token | `--c-border` |
+| Stage gradient | indigo `--c-teal-dark` to Velstrian purple `--mark`, 135 degrees, with a subtle noise or light bloom for depth | same |
+| Accent text and links | indigo at AA on white | `--c-teal` |
+| Refusal and problems | Velstrian purple with an icon (D256) | same |
+
+New tokens are added as roles (`--band-light`, `--band-light-alt`, `--ink-on-light`, `--stage-gradient`, `--elev-raised`, `--elev-floating`), each pointing at an existing value or a measured AA pair, with the palette and contrast gates updated in the same commit.
+
+### Imagery and media, version 3
+
+1. **Real product screens** from the staging seed lane (approved, cap 3 pounds), shown on stages and in the product carousel.
+2. **HTML product micro sequences** for the hero and capabilities, which carry the motion.
+3. **AI generated brand art** for places where a product view is wrong (resource cards, blog headers, the close band texture, social cards), produced by Gemini from the prompt pack `docs/design/R285-GEMINI-VISUAL-ASSET-PROMPTS.md`, quality checked by the driver before use. No AI generated people presented as customers.
+4. **Promo videos.** The three 16:9 drafts (V1, V2, V4 in `crowagent-platform/docs/rebrand-velstrian/promo-drafts/`) were judged too slow. They are re-cut from the real captures once those land: faster voice, tighter holds, real product footage. On the site the video opens from a "Watch the 90 second tour" button in the hero, in a lightweight player, never autoplaying with sound.
+
+### Motion, version 3
+
+Motion is stronger, but always meaningful:
+- Product micro sequences on stages (once per view).
+- The refusal moment (once).
+- Section content settles in on first view (opacity and 12px rise, 300ms, staggered 60ms between items), once, off under reduced motion. This replaces the version 1 "no reveals" rule, because the reference pages do it and it reads premium when it is quick and quiet.
+- Carousel slides with a 400ms ease.
+- Tabs crossfade the stage content.
+- Button light sweep on hover. Cards on light bands lift their shadow one elevation step on hover (no movement on dark bands).
+- Nothing loops forever.
+
+### Gates
+
+The motion, sheen, palette, treatments and budget gates are rewritten to assert version 3 (D254 and the owner's "dont fix any rule permanently"). Budgets rise only by what version 3 measures, reported as numbers.
 
 ---
 
