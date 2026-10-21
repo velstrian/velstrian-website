@@ -42,7 +42,7 @@ Velstrian Buy is for the other side: a busy person who has to buy a service and 
 | 3 | What can it do? | Five capabilities in everyday words, tabbed beside one product screen: find contracts that suit you, decide which to go for, answer every question from your documents, get a colleague to check it, keep track of what you promised after you win | Dense but simple |
 | 4 | Can I trust what it writes? | "It will not make things up": the one animated moment, an answer with its sources shown, and a sentence it refused to write because there was no proof | The one slow moment |
 | 5 | How hard is it to start? | Three steps: add your documents, add a tender, answer the questions | Quick |
-| 6 | Is my data safe, what does it cost? | Plain facts: where your data is kept, who processes it, the plain statement that no certificate is held, and the starting price | Quick |
+| 6 | Is my data safe, what does it cost? | The live site trust strip (AES-256 at rest, TLS 1.3 in transit, GDPR compliant, EU data residency, Built to ISO 27001 controls, ICO registered, D255) and the starting price | Quick |
 | 7 | I have questions | An FAQ that explains the words a newcomer meets (what is a tender, what is social value, do I need a bid writer) | Calm |
 | 8 | What now? | One sentence, Start free, Book a call | Calm |
 
@@ -192,7 +192,7 @@ Ours follows the questions a sceptical bid professional asks, in order, with the
 | 3 | Why is it different? | **The refusal.** One large statement on its own ("It will not write what you cannot prove" or similar, to be checked against site facts), then the single orchestrated moment: a draft figure is checked, finds no evidence and is struck | Slow, the emotional peak |
 | 4 | How does it work for me? | **The bid, end to end.** A real sequence, so it is shown as one horizontal timeline, not five cards: find, decide, answer, review, deliver. Each stage has one sentence and one small capture. The sticky stage label tracks the scroll | Dense, structured |
 | 5 | What about the buyer side? | **Both sides of the table.** A split composition: the supplier's answer on the left, the buyer's evaluation of the same answer on the right, joined by the same citation. One idea, one visual | Calm |
-| 6 | Can I trust the company? | **The facts sheet.** A typeset table: where data lives (London, Ireland, the Netherlands), every processor, the plain statement that no certificate is held and what the Statement of Applicability covers, the status page | Dense, document like |
+| 6 | Can I trust the company? | **The facts sheet.** A typeset table: where data lives (London, Ireland, the Netherlands), every processor, the live site trust strip (D255), the status page | Dense, document like |
 | 7 | What does it cost? | **Price, in the open.** The three Bid plans with seats and credits from the catalogue, link to full pricing | Quick |
 | 8 | What do I do now? | **Close.** One sentence, start a bid, book a walkthrough, on the one colour field that bookends the hero | Calm |
 
