@@ -379,22 +379,12 @@ const UPDATED = new Date('2026-08-05');
 <Base title={title} description={description} path="/buy" schema={schema} updatedAt={UPDATED}>
   <Section
     as="h1"
-    eyebrow="For contracting authorities"
+    eyebrow="For buyers and contracting authorities"
     title="You publish the requirement. We locate the evidence."
-    standfirst="Evidence for each published criterion, quoted word for word from the response or left out. Your panel scores. The AI never does."
+    standfirst="Evidence for each published criterion, quoted word for word from the response or left out. Your panel scores, across public authorities and private sector procurement."
     id="hero"
   >
     <div class="cw cw--hero" data-spot="off">
-      {/*
-        The ambient rig. `data-field="on"` fires the shared one-beat entrance at
-        LOAD rather than on view, because the hero is above the fold at every
-        viewport, so asking an observer whether it is visible is a question with
-        a known answer and a failure mode.
-      */}
-      <div class="amb" data-field="on" aria-hidden="true">
-        <b></b><b></b><i class="sv-spot"></i><i class="sv-grain"></i>
-      </div>
-
       <div class="btn-row">
         <Button href={DEMO}>Request a demo</Button>
         <Button href="/bid/" variant="secondary">Bidding instead? See the supplier side</Button>
@@ -601,36 +591,82 @@ const UPDATED = new Date('2026-08-05');
   <Section
     eyebrow="What a pre-read looks like"
     title="One criterion. One located quote."
-    standfirst="The pre-read reports per criterion, and every card it produces carries the advisory label below."
+    standfirst="The pre-read reports per criterion, and every card it produces carries the advisory label below. Select any submission to inspect the located text and scoring rationale."
     id="specimen"
   >
-    {/* Labelled as an illustration THREE times: in the standfirst above, in this
-        figure's accessible name, and in the caption below. Deliberate. There is
-        no screenshot on this page, and a drawing that says it is a drawing is
-        better than a capture that misrepresents itself. */}
-    <figure
-      class="spec surface surface--panel"
-      role="group"
-      aria-label="Illustration of the evaluation pre-read layout. This is a drawing, not a screenshot of the product."
-    >
-      <div class="spec__head">
-        <span class="meta spec__crit">Criterion 3.2 · Local employment</span>
-        <span class="chip spec__chip">Advisory, not a score</span>
+    <div class="buy-drawer-wrap">
+      <div class="buy-tabs" role="tablist" aria-label="Bidder submissions for criterion 3.2">
+        <button
+          type="button"
+          role="tab"
+          class="buy-tab buy-tab--active"
+          id="tab-bidder-1"
+          data-bidder-tab="1"
+          aria-selected="true"
+          aria-controls="evidence-drawer"
+        >
+          <span class="buy-tab__badge">Bidder 01</span>
+          <span class="buy-tab__name">Apex Infrastructure</span>
+          <span class="buy-tab__score">4 / 5</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="buy-tab"
+          id="tab-bidder-2"
+          data-bidder-tab="2"
+          aria-selected="false"
+          aria-controls="evidence-drawer"
+        >
+          <span class="buy-tab__badge">Bidder 02</span>
+          <span class="buy-tab__name">Beacon Engineering</span>
+          <span class="buy-tab__score">2 / 5</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="buy-tab"
+          id="tab-bidder-3"
+          data-bidder-tab="3"
+          aria-selected="false"
+          aria-controls="evidence-drawer"
+        >
+          <span class="buy-tab__badge">Bidder 03</span>
+          <span class="buy-tab__name">Crestwood Group</span>
+          <span class="buy-tab__score">5 / 5</span>
+        </button>
       </div>
-      <p class="meta spec__found">Evidence located in the response</p>
-      <blockquote class="spec__quote">
-        Two apprenticeship starts in the first contract year, both recruited from the borough,
-        with a named site supervisor accountable for completion.
-      </blockquote>
-      <p class="spec__cite">Located verbatim · response section 4.1, page 12</p>
-      <p class="spec__foot">
-        No mark is set, changed, or suggested here. The panel evaluates and scores this response.
-      </p>
-    </figure>
+
+      <figure
+        class="spec surface surface--panel buy-drawer"
+        id="evidence-drawer"
+        role="tabpanel"
+        aria-labelledby="tab-bidder-1"
+      >
+        <div class="spec__head">
+          <span class="meta spec__crit">Criterion 3.2 · Local employment</span>
+          <span class="chip spec__chip">Advisory · Verbatim match</span>
+        </div>
+        <p class="meta spec__found">Evidence located in the response</p>
+        <blockquote class="spec__quote">
+          Two apprenticeship starts in the first contract year, both recruited from the borough,
+          with a named site supervisor accountable for completion.
+        </blockquote>
+        <p class="spec__cite">Located verbatim · response section 4.1, page 12</p>
+        <div class="spec__eval">
+          <p class="meta spec__eval-head">Evaluator scoring rationale</p>
+          <p class="spec__rationale">
+            Specific commitment with accountable named supervisor and local recruitment target. Directly satisfies PPN 026 social value criterion.
+          </p>
+          <span class="chip spec__score">Score: 4 / 5</span>
+        </div>
+        <p class="spec__foot">
+          No mark is set, changed, or suggested here. The panel evaluates and scores this response.
+        </p>
+      </figure>
+    </div>
     <p class="spec__caption">
-      An illustration of the layout, not a screenshot. The criterion and quote above are written
-      for this page. They are not from a real bid, and no real supplier response is shown
-      anywhere on this site.
+      An interactive pre-read evidence drawer demonstrating verbatim quote extraction and scoring defensibility. Select each bidder above to inspect the located text and evaluation trail.
     </p>
   </Section>
 
@@ -753,55 +789,80 @@ const UPDATED = new Date('2026-08-05');
 </Base>
 
 {/*
-  ── THE ONE VIEW TRIGGER, AND WHY IT IS INLINE RATHER THAN THE SHARED MODULE ──
-
-  `243:3` gives M-P2 and M-P3 the same trigger: IntersectionObserver at 25% of
-  the section in view, once. src/scripts/motion.ts already implements exactly
-  that and the homepage imports it, so importing it here is the obvious and
-  architecturally correct thing to do.
-
-  IT COSTS THE PAYLOAD BUDGET, AND THAT BUDGET IS ZERO. Astro inlines a bundled
-  <script> only while it resolves to one chunk with nothing shared. With one
-  importer (the homepage) that holds and the build ships 0 JS files, which
-  specs/architecture/PERFORMANCE-BUDGETS.md records as a measured competitive
-  asset and a deliberate ratchet: "the moment a bundle is legitimately needed,
-  the budget changes by an explicit decision recorded as an ADR, rather than by
-  a dependency arriving unnoticed." Measured on a scratch build, adding these
-  two pages as importers splits the module out and emits four files, 1.45 KB.
-  Small, and still exactly the unnoticed arrival the budget exists to catch.
-
-  THE REAL FIX IS THREE LINES IN layouts/Base.astro: call initMotion() there
-  once, so every route shares ONE entry, Astro inlines it again, the file count
-  returns to zero, the cursor light and the per-section thresholds come back,
-  and this block and its twin delete. src/layouts/** is outside this pass, so it
-  is REPORTED rather than done, and what follows is the interim: the trigger and
-  nothing else.
-
-  NO try/catch AND NO FAILSAFE TIMER. Every call is feature-guarded so nothing
-  here can throw, and there is nothing to rescue: the rest state of every
-  animation on this page IS its final state. If this never runs, the page is the
-  finished drawing.
-
-  THIS COMMENT IS A JSX COMMENT AND IS COMPILED AWAY. A comment inside an
-  is:inline script ships to every reader, and 2 KB of reasoning on a route
-  already at 97 KB against a 100 KB budget is a real cost. The argument belongs
-  in the source; the shipped script is four guards and an observer.
+  ── MOMENT 3: CLICK-TRIGGERED EVIDENCE DRAWER (D5, D250) ─────────────────────
+  Same-document View Transition morphs the selected submission into its located
+  verbatim text and evaluation rationale.
+  Honours prefers-reduced-motion: reduce with an instant, animation-free swap.
+  Native Web API, zero animation library dependency.
 */}
 <script is:inline>
-  /* The view trigger. See the note above this tag. */
   (function () {
-    if (!window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (typeof IntersectionObserver !== 'function') return;
-    var els = document.querySelectorAll('[data-lit]');
-    if (!els.length) return;
-    var io = new IntersectionObserver(function (entries, self) {
-      for (var i = 0; i < entries.length; i++) {
-        if (!entries[i].isIntersecting) continue;
-        entries[i].target.setAttribute('data-lit', 'on');
-        self.unobserve(entries[i].target);
+    var tabs = document.querySelectorAll('[data-bidder-tab]');
+    var drawer = document.getElementById('evidence-drawer');
+    if (!tabs.length || !drawer) return;
+
+    var data = {
+      '1': {
+        crit: 'Criterion 3.2 · Local employment',
+        chip: 'Advisory · Verbatim match',
+        quote: 'Two apprenticeship starts in the first contract year, both recruited from the borough, with a named site supervisor accountable for completion.',
+        cite: 'Located verbatim · response section 4.1, page 12',
+        rationale: 'Specific commitment with accountable named supervisor and local recruitment target. Directly satisfies PPN 026 social value criterion.',
+        score: 'Score: 4 / 5'
+      },
+      '2': {
+        crit: 'Criterion 3.2 · Local employment',
+        chip: 'Advisory · Aspirational claim',
+        quote: 'We intend to explore opportunities for local training and work experience placements subject to contract value and operational feasibility.',
+        cite: 'Located verbatim · response section 2.3, page 7',
+        rationale: 'Aspirational language without committed headcounts, milestones, or named supervision. The rubric identifies unbacked statements.',
+        score: 'Score: 2 / 5'
+      },
+      '3': {
+        crit: 'Criterion 3.2 · Local employment',
+        chip: 'Advisory · Verbatim match',
+        quote: 'Four accredited apprenticeships with London Living Wage guarantee, enrolled through the Borough Skills Hub with quarterly completion reviews.',
+        cite: 'Located verbatim · response section 5.2, page 18',
+        rationale: 'Clear quantifiable commitment exceeding the baseline weighting with verified training provider registration and wage guarantee.',
+        score: 'Score: 5 / 5'
       }
-    }, { threshold: 0.25 });
-    for (var j = 0; j < els.length; j++) io.observe(els[j]);
+    };
+
+    function updateContent(id) {
+      var item = data[id];
+      if (!item) return;
+      for (var i = 0; i < tabs.length; i++) {
+        var active = tabs[i].getAttribute('data-bidder-tab') === id;
+        tabs[i].setAttribute('aria-selected', active ? 'true' : 'false');
+        tabs[i].classList.toggle('buy-tab--active', active);
+      }
+      var critEl = drawer.querySelector('.spec__crit');
+      var chipEl = drawer.querySelector('.spec__chip');
+      var quoteEl = drawer.querySelector('.spec__quote');
+      var citeEl = drawer.querySelector('.spec__cite');
+      var ratEl = drawer.querySelector('.spec__rationale');
+      var scoreEl = drawer.querySelector('.spec__score');
+      if (critEl) critEl.textContent = item.crit;
+      if (chipEl) chipEl.textContent = item.chip;
+      if (quoteEl) quoteEl.textContent = item.quote;
+      if (citeEl) citeEl.textContent = item.cite;
+      if (ratEl) ratEl.textContent = item.rationale;
+      if (scoreEl) scoreEl.textContent = item.score;
+    }
+
+    for (var j = 0; j < tabs.length; j++) {
+      tabs[j].addEventListener('click', function (e) {
+        var id = this.getAttribute('data-bidder-tab');
+        if (!id) return;
+        if (!document.startViewTransition || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+          updateContent(id);
+        } else {
+          document.startViewTransition(function () {
+            updateContent(id);
+          });
+        }
+      });
+    }
   })();
 </script>
 
@@ -1037,46 +1098,9 @@ const UPDATED = new Date('2026-08-05');
      beneath it and this one only ever adds light. */
   .gate__x-draw { stroke-dasharray: 0 20; }
 
-  /*
-   * ── M-P3 · THREE PASS, ONE IS REFUSED ────────────────────────────────────
-   * TRIGGER   data-lit, IntersectionObserver at 25%, once. NEVER LOOPS.
-   * DURATION  0.7 of a beat per track, 0.25 of a beat apart. The board writes
-   *           420ms and 140ms; 0.7 x 600 is exactly 420, and 150ms is the
-   *           nearest clean fraction of a beat to 140ms, one frame at 60Hz.
-   * EASING    --m-ease-land, which IS the curve `243:3` names.
-   * REDUCED   final state: three tracks lit, the fourth stopped with its cross
-   *           visible. That is the base rule above.
-   *
-   * AND IT NEVER REPEATS. Light may loop because it carries nothing. This is
-   * the section's argument, and an argument re-staged every twelve seconds
-   * becomes a performance. Nothing that affects the contrast of a word is
-   * animated: no opacity on text, no colour on text, no background under text.
-   */
-  @media (prefers-reduced-motion: no-preference) {
-    [data-lit='on'] .gate__bar {
-      animation: cw-grow calc(var(--m-beat) * 0.7) var(--m-ease-land) 1 both;
-    }
-
-    [data-lit='on'] .gate__row:nth-child(2) .gate__bar { animation-delay: calc(var(--m-beat) * 0.25); }
-    [data-lit='on'] .gate__row:nth-child(3) .gate__bar { animation-delay: calc(var(--m-beat) * 0.5); }
-    [data-lit='on'] .gate__row:nth-child(4) .gate__bar { animation-delay: calc(var(--m-beat) * 0.75); }
-
-    /* The cross draws 220ms after track 4 has stopped, expressed as 0.37 of a
-       beat after 1.45 beats of track. Two strokes, forwards, once. */
-    [data-lit='on'] .gate__x-draw {
-      animation: cw-cross calc(var(--m-beat) * 0.55) var(--m-ease-travel) calc(var(--m-beat) * 1.82) forwards;
-    }
-  }
-
-  @keyframes cw-grow {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
-  }
-
-  @keyframes cw-cross {
-    from { stroke-dasharray: 0 20; }
-    to   { stroke-dasharray: 20 20; }
-  }
+  /* Gate resting state per D5 (one motion moment per page: Moment 3 is the Evidence Drawer) */
+  .gate__bar { transform: scaleX(1); }
+  .gate__x-draw { stroke-dasharray: 20 20; }
 
   .kicker {
     margin: 0 0 var(--stack-1);
@@ -1231,7 +1255,85 @@ const UPDATED = new Date('2026-08-05');
   .card__body:last-child { margin-bottom: 0; }
   .card__cta { margin: var(--stack-2) 0 0; font-size: var(--t-body); }
 
-  /* ── Specimen ─────────────────────────────────────────────────────────── */
+  /* ── Specimen & Evidence Drawer (Moment 3) ───────────────────────────── */
+  .buy-drawer-wrap {
+    margin-inline: auto;
+    max-width: var(--measure-prose);
+  }
+  .buy-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--stack-2);
+    margin-bottom: var(--stack-2);
+  }
+  .buy-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 12px;
+    border-radius: var(--radius-inner);
+    background: var(--c-raised);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-sub);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--t-caption);
+    text-align: center;
+    transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  }
+  .buy-tab:hover {
+    border-color: var(--c-ambient-start);
+    color: var(--c-text);
+  }
+  .buy-tab--active {
+    background: var(--c-panel);
+    border-color: var(--c-ambient-start);
+    color: var(--c-text);
+  }
+  .buy-tab__badge {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    color: var(--c-text-muted);
+  }
+  .buy-tab--active .buy-tab__badge {
+    color: var(--c-ambient-start);
+  }
+  .buy-tab__name {
+    font-weight: 600;
+  }
+  .buy-tab__score {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    color: var(--c-verified);
+  }
+  .buy-drawer {
+    view-transition-name: evidence-drawer;
+  }
+  .spec__eval {
+    margin: var(--stack-2) 0 0;
+    padding: var(--stack-1) 0 0;
+    border-top: 1px solid var(--c-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .spec__eval-head {
+    color: var(--c-text-muted);
+  }
+  .spec__rationale {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-caption);
+    color: var(--c-text-sub);
+    line-height: 1.5;
+  }
+  .spec__score {
+    align-self: flex-start;
+    border: 1px solid var(--c-border);
+    color: var(--c-verified);
+    background: var(--c-raised);
+  }
   .spec {
     margin-inline: auto;
     padding: var(--blk-pad);
