@@ -1,0 +1,74 @@
+[
+  {
+    "file": "bid-answer-with-sources.png",
+    "screen": "Answer, drafted with its source",
+    "what_it_shows": "Question 1 drafted with figures from the supplier answer library, the Sources this draft used chip and the Where this answer comes from panel",
+    "url_path": "/bid/contracts/50f9beb0-1e75-4440-8834-4cd1927701d4/questions",
+    "viewport": "1440x900@2x",
+    "captured_at": "2026-10-21T21:31:17.961Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  },
+  {
+    "file": "bid-refusal-no-source-found.png",
+    "screen": "Refusal, unsupported figure not written",
+    "what_it_shows": "Question 6 asks for a carbon figure in tonnes. The draft states that no target is recorded instead of inventing one, and the question is flagged No source found",
+    "url_path": "/bid/contracts/50f9beb0-1e75-4440-8834-4cd1927701d4/questions",
+    "viewport": "1440x900@2x",
+    "captured_at": "2026-10-21T21:31:22.015Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  },
+  {
+    "file": "bid-answer-question-list.png",
+    "screen": "Answer stage, six tender questions drafted",
+    "what_it_shows": "The six tender questions with word counts, the AI drafted label and a source or No source found flag on each",
+    "url_path": "/bid/contracts/50f9beb0-1e75-4440-8834-4cd1927701d4/questions",
+    "viewport": "1440x900@2x",
+    "captured_at": "2026-10-21T21:31:25.116Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  },
+  {
+    "file": "bid-find-opportunity-feed.png",
+    "screen": "Find, opportunity feed",
+    "what_it_shows": "Discover feed of live public notices with buyer, value, sector, region and a relevance score",
+    "url_path": "/bid/opportunities",
+    "viewport": "1440x900@2x",
+    "captured_at": "2026-10-21T21:31:37.188Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  },
+  {
+    "file": "bid-decide-bid-no-bid-fit.png",
+    "screen": "Decide, bid or no bid fit",
+    "what_it_shows": "The rule based bid or no bid fit assessment on the bid overview",
+    "url_path": "/bid/contracts/50f9beb0-1e75-4440-8834-4cd1927701d4/overview",
+    "viewport": "1440x900@2x",
+    "captured_at": "2026-10-21T21:31:55.384Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  },
+  {
+    "file": "bid-review-sign-off.png",
+    "screen": "Review, sign off ladder",
+    "what_it_shows": "The review ladder (bid or no bid, Pink, Red and Gold team, release to submit) and the readiness check: 6 of 6 answers drafted, no answer over its word limit, one answer resting on unconfirmed facts",
+    "url_path": "/bid/contracts/50f9beb0-1e75-4440-8834-4cd1927701d4/review",
+    "viewport": "1440x900@2x",
+    "captured_at": "2026-10-21T21:32:07.832Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  },
+  {
+    "file": "bid-answer-mobile.png",
+    "screen": "Answer at phone width",
+    "what_it_shows": "The drafted answer area at phone width",
+    "url_path": "/bid/contracts/50f9beb0-1e75-4440-8834-4cd1927701d4/questions",
+    "viewport": "390x844@2x",
+    "captured_at": "2026-10-21T21:32:21.063Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  },
+  {
+    "file": "bid-find-mobile.png",
+    "screen": "Find at phone width",
+    "what_it_shows": "The opportunity feed at phone width",
+    "url_path": "/bid/opportunities",
+    "viewport": "390x844@2x",
+    "captured_at": "2026-10-21T21:32:32.498Z",
+    "data_note": "Neutral demo organisation Northfield Facilities Services Ltd on staging, invented tender from Riverside Borough Estates, invented evidence. Not a customer."
+  }
+]
