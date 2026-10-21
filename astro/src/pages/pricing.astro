@@ -328,6 +328,7 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
     title="See the price first. Sized for SMEs."
     standfirst="Supplier plans from £49 a month and Velstrian Buy from £299. Every plan shows its price, users and AI credits, and you can start today by card."
     id="hero"
+    class="pr-sec"
     atmosphere
   >
     <div class="btn-row">
@@ -663,7 +664,7 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
       id="compare"
       atmosphere
     >
-      <h3 class="cmp__h"><span class="cmp__dot" aria-hidden="true"></span>Velstrian Bid</h3>
+      <h3 class="cmp__h">Velstrian Bid</h3>
 
       <div class="cmp__scroll" tabindex="0" role="region" aria-label="Velstrian Bid features by plan, scrollable">
         <table class="cmp">
@@ -887,8 +888,9 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
     title="Everything you need to know."
     standfirst="Answers to common billing and product questions."
     id="faq"
+    class="pr-sec"
   >
-    <ul class="grid grid--3 card-sync" role="list">
+    <ul class="grid grid--3 grid--faq card-sync" role="list">
       {
         PRICING_FAQS.map((f) => (
           <li class="card surface">
@@ -905,6 +907,7 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
     title="Buying on a purchase order."
     standfirst="Public sector organisations rarely buy software on a card. Buyer Portfolio can be bought by invoice on 30 days with a PO number, at the same price as by card."
     id="purchase-order"
+    class="pr-sec"
     atmosphere
   >
     <div class="po">
@@ -977,6 +980,13 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
   exists on this route and nowhere else in the build.
 */}
 <style is:global>
+  /* R285-WEB-PRICING-ABOUT-FORMAT-01. Even out the head block's lines, so "See
+     the price first. Sized for SMEs." does not leave "SMEs." alone on line two.
+     Global because Section.astro renders these elements under its own scope.
+     It cannot leak: `.pr-sec` and `.pricing` are classes this page alone
+     writes. It never adds a line, only moves words between the lines there are. */
+  :is(.pr-sec, .pricing) :is(.section__title, .section__standfirst) { text-wrap: balance; }
+
   #billing-toggle:not(:checked) ~ * .plan__price--a { display: none; }
   #billing-toggle:checked ~ * .plan__price--m { display: none; }
   #billing-toggle:not(:checked) ~ * .plan__go--a { display: none; }
@@ -1006,6 +1016,16 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
     font-size: var(--t-body);
     line-height: 1.7;
     color: var(--c-text-sub);
+  }
+
+  /* A-16, the owner's line count rule, applied where CSS can apply it. `.note`
+     is on alignment.css rule 2's left axis because it runs to five lines at
+     390. From 1024px up its 72ch cap holds both notes on this page to three
+     line boxes or fewer (measured 3 and 2 at 1280), which is the owner's
+     "centre up to 3 lines", so there they centre under the centred head block
+     instead of starting at an edge nothing else on the page uses. */
+  @media (min-width: 1024px) {
+    .note { text-align: center; }
   }
 
   .viewlink {
@@ -1160,7 +1180,31 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
   }
 
   /* ── Cards. Geometry only: the treatment lives in styles/surfaces.css. ─── */
-  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(18px, 2.2vw, 30px); }
+  .grid {
+    --grid-gap: clamp(18px, 2.2vw, 30px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--grid-gap);
+  }
+
+  /* THE LAST FAQ CARD DOES NOT SIT ALONE AT THE LEFT, R285-WEB-PRICING-ABOUT-FORMAT-01.
+     Seven answers on a three column grid left the seventh under the first with
+     two empty tracks beside it. It takes the middle track at three columns and
+     the centre of the row at two, at the width of its siblings either way. The
+     count is not written down: the selectors fire only when the last card is
+     the first of its row, so an eighth answer simply stops them matching. */
+  @media (min-width: 1024px) {
+    .grid--faq > :last-child:nth-child(3n + 1) { grid-column: 2; }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .grid--faq > :last-child:nth-child(2n + 1) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc((100% - var(--grid-gap)) / 2);
+    }
+  }
   .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -1264,12 +1308,27 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
     margin: 0;
     padding: 0;
     display: grid;
+    /* `start`, R285-WEB-PRICING-ABOUT-FORMAT-01. The list fills card-sync's
+       shared fifth track, which is as tall as the longest card's lines, and a
+       grid stretches its implicit rows to fill that by default. Starter's three
+       short lines were spaced 39px apart against Pro's 30px, so the same list
+       read with two different leadings across one row. */
+    align-content: start;
     gap: 6px;
     font-family: var(--font-body);
     font-size: var(--t-body);
     line-height: 1.6;
     color: var(--c-text-sub);
   }
+  /* ONE BOX, ONE AXIS (alignment.css rule 4), R285-WEB-PRICING-ABOUT-FORMAT-01.
+     alignment.css rule 3 sends every <li> to the left edge so a bullet stays on
+     the edge its text hangs from, and it says in as many words that a list
+     with no markers takes its centring back through its own class. These are
+     that list: `list-style: none`, no marker, three short lines of at most
+     three line boxes at 1280. Left, they were the only left edge in a card
+     whose badge, name, audience, price and button all sit on the centre line,
+     which is the three-axis card rule 4 exists to stop. */
+  .plan__lines > li { text-align: center; }
   .plan__go { margin: 0; }
   /* The quieter second action under a plan's button. A text link, so it takes
      the shared link recipe from styles/links.css, with the 44px target floor. */
@@ -1379,24 +1438,18 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
   .ticks--plain li::before { content: '• '; color: var(--c-ambient-start); }
 
   /* ── Comparison table ─────────────────────────────────────────────────── */
+  /* R285-WEB-PRICING-ABOUT-FORMAT-01 (2026-10-21): the 8px `.cmp__dot` that sat
+     before this heading is gone, and the flex row that held it went with it.
+     It was drawn when the section compared two products, one group heading
+     each; with one group left it read as a lone list marker leaking out of a
+     list, which is what the owner saw. Without the flex row the heading takes
+     the centre line every other heading in this section uses. */
   .cmp__h {
-    display: flex;
-    align-items: center;
-    gap: 12px;
     margin: 0 0 var(--stack-2);
     font-family: var(--font-display);
     font-size: var(--t-h4);
     font-weight: 700;
     color: var(--c-text);
-  }
-  .cmp__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: var(--radius-pill);
-    /* O-35 / W7. A bullet marking a comparison row is not a refusal. Moved out
-       of the violet family with the RECOMMENDED badge, .card--here and
-       .step__lbl. The four that O-35 named. */
-    background: var(--c-interactive);
   }
 
   /* The table has a floor width so its columns stay readable; the wrapper is

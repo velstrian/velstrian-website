@@ -590,6 +590,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
     eyebrow="Who is behind it"
     title="Built by engineers who read the rules."
     id="who-builds-it"
+    class="ab-bal"
   >
     <div class="pair">
       {
@@ -664,8 +665,13 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
                   class:list={['tl__dot', t.status === 'now' && 'fx-status-pulse']}
                   aria-hidden="true"
                 />
-                <p class="meta tl__when">{t.when}</p>
+                {/* The date sits INSIDE the body, R285-WEB-PRICING-ABOUT-FORMAT-01.
+                    As a sibling of `.tl__body` it stayed on the card's centre
+                    line while the heading and copy beside it went left under
+                    alignment.css rule 4, so every entry had two axes. Inside,
+                    it shares the one left edge the body already uses. */}
                 <div class="tl__body">
+                  <p class="meta tl__when">{t.when}</p>
                   <h3 class="tl__h">
                     {t.heading}
                     {/* Text, not opacity. A planned item must not read as delivered. */}
@@ -1026,27 +1032,48 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
      `surface surface--pad` in the markup, so the border, radius, glass,
      specular top edge and cast shadow are the one card recipe. Nothing here
      restates any of them. */
+  /* ── THE ROW IS BALANCED BY ITS EDGES, NOT BY CENTRING, R285-WEB-PRICING-ABOUT-FORMAT-01 ──
+   *
+   * O-46 above still holds: the two columns share a TOP edge and the card is
+   * not dropped to the middle of the row. What it left was a 148 to 188px card
+   * beside a 268 to 327px column of prose, so the card read as half empty and
+   * ended in mid air. It now STRETCHES to the row (top AND bottom edge shared
+   * with the prose) and holds its figure on its own vertical centre, so the
+   * pair are two equal boxes. `display: flex` sits on the card wrapper only;
+   * at one column (below 900px) the row is a single track and the stretch has
+   * nothing taller to match, so the phone layout is unchanged. */
+  .role__art {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .art {
     margin: 0;
   }
 
-  /* The mark. In flow rather than absolutely positioned, so it cannot drift
-     away from the figure it belongs to at any width. */
-  .art::before {
+  /* THE MARK MOVED ONTO THE SOURCE LINE, R285-WEB-PRICING-ABOUT-FORMAT-01. It
+     was a block of its own above the figure, an 8px dot alone on a line, which
+     read as a stray artefact rather than as the verified or refused mark it
+     is. Inline before the citation it marks the citation, the same way
+     `.chip__dot` marks each reader in the hero's four links. */
+  .art__source::before {
     content: '';
-    display: block;
+    display: inline-block;
     width: 8px;
     height: 8px;
-    margin-bottom: var(--stack-1);
+    margin-inline-end: var(--stack-1);
     border-radius: 50%;
+    vertical-align: middle;
   }
 
-  .art--verified::before {
+  .art--verified .art__source::before {
     background: var(--c-verified);
     box-shadow: 0 0 12px var(--c-verified-glow);
   }
 
-  .art--refused::before {
+  .art--refused .art__source::before {
     background: var(--c-refused);
   }
 
@@ -1446,6 +1473,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
   /* The label recipe is `.meta` in styles/labels.css. What stays is the colour,
      which is a call-site decision and deliberately not part of the shared rule. */
   .tl__when {
+    margin: 0 0 var(--stack-1);
     color: var(--c-text-muted);
   }
 
@@ -1587,6 +1615,15 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
      left the digest as the last card on the site with a centred heading over a
      left-aligned form. The owner decision of 2026-08-03 that this comment
      records is about the card CONTAINING the form, which is untouched. */
+  /* THE CARD TAKES THE ONE WIDE COLUMN MEASURE, R285-WEB-PRICING-ABOUT-FORMAT-01.
+     At the full 1232px measure its heading, its 800px paragraph and a 520px
+     form all ended in the left two thirds, leaving a third of an empty card.
+     `--measure-band` is the token for one wide column, the same cap /pricing's
+     single annual card uses, so the content now fills the box it is in. */
+  .digest {
+    max-width: var(--measure-band);
+    margin-inline: auto;
+  }
   .digest__h {
     margin: 0 0 var(--stack-1);
     font-family: var(--font-display);
@@ -1611,6 +1648,10 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
 
   .company dd.is-mono { font-family: var(--font-mono); }
   .company dd a { color: var(--c-interactive); }
+
+  /* Global for the same reason as /pricing's: Section.astro renders its head
+     under its own scope. `.ab-bal` is written on this page only. */
+  :global(.ab-bal .section__title) { text-wrap: balance; }
 
   /* ── Responsive ───────────────────────────────────────────────────────── */
   @media (max-width: 1023px) {
