@@ -16,4 +16,4 @@ a reader can see it, a product other than CrowMark and CrowMark Buyer, and any c
 cannot prove (win rates, AI accuracy figures, "makes you compliant").
 
 Never write a password, key or token anywhere, your report included (guide section 3.7). Report
-only what you measured, and sign anything as `Crow Agent <crowagent.platform@gmail.com>`.
+only what you measured, and sign anything as `Velstrian Tenderworks <platform@velstrian.com>` (from 2026-10-20, R285-REBRAND-12).

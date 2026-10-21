@@ -27,7 +27,7 @@ bind here too. The canonical rule text is `../crowagent-platform/ENGINEERING-STA
    `npm run build` in `astro/`, looked at in a browser, never on the source alone.
 6. **Shared machine, measured claims.** Check free RAM before heavy work, never kill a process you
    did not start, report only what you measured, and all identity is
-   `Crow Agent <crowagent.platform@gmail.com>`.
+   `Velstrian Tenderworks <platform@velstrian.com>` (from 2026-10-20, R285-REBRAND-12).
 
 Note: `CLAUDE.md` in this repository still describes an older transformation spec and pages for
 decommissioned products. Where it disagrees with the onboarding guide, the guide wins.

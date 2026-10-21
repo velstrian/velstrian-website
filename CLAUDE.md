@@ -59,7 +59,8 @@ ship. Every standing rule it carried that still holds is kept below.
 9. **Shared machine (RULE 0-L).** Check free RAM before a build, never start heavy work below 2 GB
    free, never kill a process you did not start.
 10. **Identity (IDENTITY HARD RULE).** Every commit, document and generated file is authored as
-    `Crow Agent <crowagent.platform@gmail.com>`. The pre-commit hook enforces it.
+    `Velstrian Tenderworks <platform@velstrian.com>` (owner, R285-REBRAND-12, from 2026-10-20;
+    commits before that keep `Crow Agent`, history is never rewritten). The pre-commit hook enforces it.
 
 ## Standing owner decisions (kept from the previous version)
 
