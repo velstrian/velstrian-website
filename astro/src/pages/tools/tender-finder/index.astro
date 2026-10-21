@@ -1,0 +1,582 @@
+---
+/**
+ * /tools/tender-finder
+ *
+ * R285-WEB-FREE-TENDER-FINDER-01, owner decision D253: a free public search over
+ * the UK and EU notices the platform already ingests, so a visitor sees tender
+ * discovery working before signing up. The second free tool, beside the Tender
+ * Compliance Matrix, and the first that calls the platform.
+ *
+ * HOW IT REACHES THE API. Straight from the browser to
+ * `POST {API_ORIGIN}/api/v1/bid/free/tenders/search`, the same host and the same
+ * pattern PartnerForm.astro already uses. That host is in `connect-src` in
+ * `_headers`, and the API's production CORS list carries every marketing host on
+ * both registrable domains, so there is no proxy and no new allow list entry.
+ *
+ * THE CHECKS ARE THE API'S, AND IT FAILS CLOSED. Every search carries a fresh
+ * Cloudflare Turnstile token, rendered by the shared Turnstile component, whose
+ * capture phase gate refuses a submit with no token. A token is single use, so the
+ * widget is reset after every answer and the next page asks for a new one. The API
+ * answers 503 when its Turnstile secret is missing, 403 when a token fails, 429
+ * past 10 searches an hour or 50 a day, and 422 for a filter it does not accept.
+ * Each has its own sentence below. A raw error never reaches the page.
+ *
+ * EVERY SENTENCE IS IN THE MARKUP, NOT THE SCRIPT, for the reason the matrix page
+ * records: the JavaScript budget is the tightest on the site, and copy in a
+ * script is paid for there. The script fills values into a <template> and picks
+ * which prepared sentence to show.
+ *
+ * THE LICENCE LINES ARE WRITTEN HERE, KEYED BY THE SOURCES THE API RETURNS. The
+ * API sends a statement per source, but its TED statement carries "00a9" where
+ * the copyright sign should be (free_tender_finder.py TED_STATEMENT, the escape
+ * lost its backslash), so showing the API's text would print that to a reader.
+ * The wording below is the API's, corrected, and the TED logo is never shown,
+ * because the TED legal notice does not allow it without consent.
+ */
+import Base from '../../../layouts/Base.astro';
+import Section from '../../../components/layout/Section.astro';
+import PageHeader from '../../../components/layout/PageHeader.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import Button from '../../../components/ui/Button.astro';
+import Turnstile from '../../../components/forms/Turnstile.astro';
+import FinalCta from '../../../components/sections/FinalCta.astro';
+import { SIGNUP_URL } from '../../../data/app';
+import { breadcrumbs } from '../../../lib/schema';
+import { SITE } from '../../../data/site';
+import { FACTS, LIVE_SOURCES, FIT_COUNT_WORD } from '../../../data/site-facts';
+import {
+  RECENT_DAYS,
+  PAGE_SIZE,
+  MAX_PAGES,
+  MAX_KEYWORD_CHARS,
+  HOURLY_LIMIT,
+  DAILY_LIMIT,
+  REGIONS,
+  VALUE_BANDS,
+  CLOSING_WINDOWS,
+  EU_COUNTRY_CODES,
+  OGL_URL,
+  TED_LEGAL_URL,
+} from '../../../data/tender-finder';
+
+const title = 'Free UK and EU Tender Finder | No account | Velstrian';
+const description = `Search open UK and EU public sector tenders from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. Filter by keyword, region, value and closing date. Free, no account.`;
+
+const path = '/tools/tender-finder/';
+const trail = [
+  { name: 'Home', path: '/' },
+  { name: 'Tools', path: '/tools/' },
+];
+
+/* Country names come from the platform's ICU data at build time, so no name is
+   typed here and none ships in the script. */
+const regionNames = new Intl.DisplayNames(['en-GB'], { type: 'region' });
+const COUNTRIES = EU_COUNTRY_CODES.map((code) => ({ value: code, label: regionNames.of(code) ?? code })).sort(
+  (a, b) => a.label.localeCompare(b.label, 'en-GB'),
+);
+
+const SOURCES = FACTS.sources.live.map((s) => ({ value: s.key, label: s.name }));
+
+const year = new Date().getFullYear();
+
+const schema = [
+  {
+    '@type': 'WebApplication',
+    name: 'Tender Finder',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: `${SITE.origin}/tools/tender-finder`,
+    description,
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
+    publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
+  },
+  breadcrumbs([...trail, { name: 'Tender Finder', path }]),
+];
+---
+
+<Base title={title} description={description} path="/tools/tender-finder" schema={schema}>
+  <Section id="finder">
+    <div class="tf-crumb"><Breadcrumb trail={trail} current="Tender Finder" /></div>
+    <PageHeader
+      eyebrow="Free, no account"
+      title="Find UK and EU tenders"
+      standfirst={`Search open public sector notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. No account and no email needed.`}
+    />
+
+    <form class="form tf-form" id="tf-form" novalidate>
+      <div class="field">
+        <label class="field__label" for="tf-keyword">Keyword</label>
+        <input
+          class="field__input"
+          id="tf-keyword"
+          name="keyword"
+          type="search"
+          maxlength={MAX_KEYWORD_CHARS}
+          autocomplete="off"
+          placeholder="For example cleaning, software or highways"
+          aria-describedby="tf-keyword-help"
+        />
+        <p class="field__help" id="tf-keyword-help">
+          Matched against the notice title and description. Leave it empty to see everything open.
+        </p>
+      </div>
+
+      <div class="tf-filters">
+        <div class="field">
+          <label class="field__label" for="tf-region">UK region</label>
+          <select class="field__input" id="tf-region" name="region">
+            <option value="">Any</option>
+            {REGIONS.map((r) => <option value={r.value}>{r.label}</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="tf-country">Country</label>
+          <select class="field__input" id="tf-country" name="country">
+            <option value="">Any</option>
+            <option value="GB">United Kingdom</option>
+            <optgroup label="Europe, from EU TED">
+              {COUNTRIES.map((c) => <option value={c.value}>{c.label}</option>)}
+            </optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="tf-value">Value</label>
+          <select class="field__input" id="tf-value" name="value_band" aria-describedby="tf-value-help">
+            <option value="">Any</option>
+            {VALUE_BANDS.map((v) => <option value={v.value}>{v.label}</option>)}
+          </select>
+          <p class="field__help" id="tf-value-help">
+            Uses the value in pounds. A notice priced only in another currency matches no band.
+          </p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="tf-closing">Closes within</label>
+          <select class="field__input" id="tf-closing" name="closes_within_days">
+            <option value="">Any date</option>
+            {CLOSING_WINDOWS.map((d) => <option value={d}>{d} days</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="tf-source">Source</label>
+          <select class="field__input" id="tf-source" name="source">
+            <option value="">All four sources</option>
+            {SOURCES.map((s) => <option value={s.value}>{s.label}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <Turnstile id="tf" />
+
+      <div class="btn-row">
+        <Button type="submit" id="tf-submit">Search tenders</Button>
+        <Button type="reset" variant="secondary">Clear</Button>
+      </div>
+
+      <noscript>
+        <p class="form__noscript">
+          The search runs in your browser, so it needs JavaScript. You can also browse the notices
+          directly on {LIVE_SOURCES}.
+        </p>
+      </noscript>
+    </form>
+
+    {/*
+      ONE LIVE REGION FOR THE OUTCOME, AND ONLY THE SUMMARY SPEAKS. The list of
+      twenty notices sits outside it, so a screen reader hears "20 open tenders,
+      page 1 of up to 5" rather than every title. Each sentence is a data
+      attribute, so only the text node changes, which is what the shared
+      `.form__status` region was built around.
+    */}
+    <p
+      class="form__status tf-status"
+      id="tf-status"
+      role="status"
+      aria-live="polite"
+      data-busy="Searching open tenders."
+      data-found="{n} open tenders on page {p}. Soonest closing first."
+      data-one="1 open tender on page {p}."
+      data-none="No open tenders match those filters. Try a broader keyword or fewer filters."
+      data-e400="Some of those search details could not be used. Use letters or numbers in the keyword and try again."
+      data-e403="The security check did not go through. Please search again."
+      data-e429={`You have reached the free search limit of ${HOURLY_LIMIT} searches an hour and ${DAILY_LIMIT} a day. Please try again later.`}
+      data-e503="Tender search is not available right now. Please try again later."
+      hidden
+    >
+      <span class="form__spinner" aria-hidden="true"></span>
+      <span class="form__status-text"></span>
+    </p>
+
+    <div class="tf-results" id="tf-results" hidden>
+      <h2 class="visually-hidden" id="tf-results-h" tabindex="-1">Search results</h2>
+      <ol class="tf-list" id="tf-list" role="list"></ol>
+
+      <nav class="btn-row tf-pager" aria-label="Results pages">
+        <Button variant="secondary" id="tf-prev">Previous page</Button>
+        <Button variant="secondary" id="tf-next">Next page</Button>
+      </nav>
+
+      <div class="tf-attr">
+        <p id="tf-attr-ogl" hidden>
+          Contains public sector information licensed under the
+          <a href={OGL_URL} rel="noopener noreferrer">Open Government Licence v3.0</a>.
+        </p>
+        <p id="tf-attr-ted" hidden>
+          Source: Tenders Electronic Daily (TED), © European Union, 1998-{year}. Notices reused
+          under the Commission Decision of 12 December 2011 on the reuse of Commission documents
+          (2011/833/EU), as set out in the
+          <a href={TED_LEGAL_URL} rel="noopener noreferrer">TED legal notice</a>.
+        </p>
+      </div>
+
+      <p class="tf-upsell">
+        Want new matches by email and a fit score for each tender?
+        <a href={SIGNUP_URL}>Start with Velstrian Bid</a>.
+      </p>
+    </div>
+
+    <template id="tf-row">
+      <li class="surface surface--pad tf-item">
+        <h3 class="card-h tf-item__h" data-f="title"></h3>
+        <dl class="deflist deflist--ledger tf-item__facts">
+          <dt>Buyer</dt>
+          <dd data-f="buyer">Not stated</dd>
+          <dt>Value</dt>
+          <dd data-f="value">Not stated</dd>
+          <dt>Closes</dt>
+          <dd data-f="closes"></dd>
+          <dt>Location</dt>
+          <dd data-f="where">Not stated</dd>
+          <dt>Source</dt>
+          <dd data-f="source"></dd>
+        </dl>
+        <p class="tf-item__cta" data-f="cta">
+          <a data-f="link" target="_blank" rel="noopener noreferrer">
+            Read the full notice<span class="visually-hidden">
+              for <span data-f="sr-title"></span>, opens in a new window</span>
+          </a>
+        </p>
+      </li>
+    </template>
+  </Section>
+
+  <Section
+    eyebrow="Stated plainly"
+    title="What this search covers."
+    standfirst="A free look at live notices, with the limits written down."
+    id="covers"
+  >
+    <ul class="tf-limits">
+      <li>
+        Open notices only, published in the last {RECENT_DAYS} days, with a closing date still to
+        come. A notice with no stated closing date is left out, because the search cannot say it is
+        open.
+      </li>
+      <li>
+        {PAGE_SIZE} results a page and up to {MAX_PAGES} pages for each search, soonest closing
+        first.
+      </li>
+      <li>
+        Up to {HOURLY_LIMIT} searches an hour and {DAILY_LIMIT} a day from one connection, each with
+        a Cloudflare security check.
+      </li>
+      <li>
+        No AI reads your search and nothing is scored. Results are a filtered read of the notices
+        Velstrian Bid already collects from {LIVE_SOURCES}.
+      </li>
+      <li>
+        Always read the full notice on its source before you bid. The source holds the documents,
+        any changes and the official deadline.
+      </li>
+    </ul>
+  </Section>
+
+  <FinalCta
+    eyebrow="Go further"
+    title="Want these by email, scored for fit?"
+    standfirst={`Velstrian Bid saves your search, sends new matching notices by email and scores each tender for fit across ${FIT_COUNT_WORD} dimensions, so you see what is worth bidding for first.`}
+    id="product"
+    links={[
+      { label: 'All free tools', href: '/tools/' },
+      { label: 'Tender Compliance Matrix', href: '/tools/tender-compliance-matrix/' },
+    ]}
+  >
+    <Button href={SIGNUP_URL}>Start now</Button>
+    <Button href="/bid/" variant="secondary">Explore Velstrian Bid</Button>
+  </FinalCta>
+</Base>
+
+<script>
+  import { API_ORIGIN } from '../../../data/app';
+  import { TENDER_SEARCH_PATH, UK_SOURCE_KEYS, PAGE_SIZE } from '../../../data/tender-finder';
+
+  interface Item {
+    title: string | null;
+    buyer_name: string | null;
+    source: string;
+    source_label: string;
+    region: string | null;
+    country: string | null;
+    closes_at: string | null;
+    value_amount: number | null;
+    value_currency: string | null;
+    value_min_gbp: number | null;
+    value_max_gbp: number | null;
+    notice_url: string | null;
+  }
+  interface Result {
+    items: Item[];
+    page: number;
+    has_more: boolean;
+    attribution: { source: string }[];
+  }
+  type Turnstile = { reset(widget?: string): void };
+
+  const byId = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const form = byId<HTMLFormElement>('tf-form');
+  const status = byId<HTMLElement>('tf-status');
+  const statusText = status.querySelector('.form__status-text') as HTMLElement;
+  const results = byId<HTMLElement>('tf-results');
+  const list = byId<HTMLOListElement>('tf-list');
+  const row = byId<HTMLTemplateElement>('tf-row');
+  const submit = byId<HTMLButtonElement>('tf-submit');
+  const prev = byId<HTMLButtonElement>('tf-prev');
+  const next = byId<HTMLButtonElement>('tf-next');
+  let busy = false;
+  /* The page a pager button asked for. Read by the submit handler during the
+     synchronous dispatch of requestSubmit() and cleared straight after, so a
+     submit the Turnstile gate refused cannot leave a stale page behind. */
+  let want = 0;
+
+  const say = (key: string, state: 'busy' | 'ok' | 'bad', page = 1, n = 0) => {
+    status.className = `form__status tf-status form__status--${state}`;
+    statusText.textContent = (status.dataset[key] ?? '')
+      .replace('{n}', String(n))
+      .replace('{p}', String(page));
+    status.hidden = false;
+  };
+
+  const money = (amount: number, currency: string) => {
+    try {
+      return new Intl.NumberFormat('en-GB', { style: 'currency', currency, maximumFractionDigits: 0 }).format(amount);
+    } catch (err) {
+      // An unknown currency code is a RangeError: show the code and the figure.
+      if (!(err instanceof RangeError)) throw err;
+      return `${currency} ${Math.round(amount).toLocaleString('en-GB')}`;
+    }
+  };
+
+  const valueOf = (it: Item) => {
+    const lo = it.value_min_gbp;
+    const hi = it.value_max_gbp;
+    if (lo != null && hi != null && lo !== hi) return `${money(lo, 'GBP')} to ${money(hi, 'GBP')}`;
+    if (lo != null || hi != null) return money((lo ?? hi) as number, 'GBP');
+    if (it.value_amount != null && it.value_currency) return money(it.value_amount, it.value_currency);
+    return null;
+  };
+
+  /* The select already holds the label for every region and country code. */
+  const labelOf = (select: string, code: string | null) =>
+    code ? form.querySelector(`#${select} option[value="${CSS.escape(code)}"]`)?.textContent ?? code : null;
+
+  const fill = (el: Element, f: string, text: string | null) => {
+    const t = el.querySelector(`[data-f="${f}"]`);
+    if (t && text) t.textContent = text;
+  };
+
+  const render = (data: Result) => {
+    list.replaceChildren(
+      ...data.items.map((it) => {
+        const li = (row.content.firstElementChild as HTMLElement).cloneNode(true) as HTMLElement;
+        const name = it.title || 'Untitled notice';
+        fill(li, 'title', name);
+        fill(li, 'sr-title', name);
+        fill(li, 'buyer', it.buyer_name);
+        fill(li, 'value', valueOf(it));
+        const closes = it.closes_at ? new Date(it.closes_at) : null;
+        fill(
+          li,
+          'closes',
+          closes && !Number.isNaN(closes.getTime())
+            ? closes.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+            : null,
+        );
+        const where = [labelOf('tf-region', it.region), it.country === 'GB' ? null : labelOf('tf-country', it.country)];
+        fill(li, 'where', where.filter(Boolean).join(', ') || (it.country === 'GB' ? 'United Kingdom' : null));
+        fill(li, 'source', it.source_label);
+        const a = li.querySelector('[data-f="link"]') as HTMLAnchorElement;
+        if (it.notice_url) a.href = it.notice_url;
+        else (li.querySelector('[data-f="cta"]') as HTMLElement).remove();
+        return li;
+      }),
+    );
+    const seen = data.attribution.map((x) => x.source);
+    byId('tf-attr-ogl').hidden = !seen.some((s) => UK_SOURCE_KEYS.includes(s));
+    byId('tf-attr-ted').hidden = !seen.includes('ted');
+    prev.hidden = data.page <= 1;
+    next.hidden = !data.has_more;
+    prev.dataset.page = String(data.page - 1);
+    next.dataset.page = String(data.page + 1);
+    results.hidden = false;
+  };
+
+  const resetCheck = () => {
+    (window as Window & { turnstile?: Turnstile }).turnstile?.reset();
+  };
+
+  for (const b of [prev, next]) {
+    b.addEventListener('click', () => {
+      want = Number(b.dataset.page) || 1;
+      form.requestSubmit();
+      want = 0;
+    });
+  }
+
+  form.addEventListener('reset', () => {
+    results.hidden = true;
+    status.hidden = true;
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (busy) return;
+    const paged = want > 0;
+    const page = want || 1;
+    const fd = new FormData(form);
+    const body: Record<string, string | number> = { page, page_size: PAGE_SIZE };
+    for (const [k, v] of fd) {
+      const s = String(v).trim();
+      if (!s) continue;
+      if (k === 'cf-turnstile-response') body.turnstile_token = s;
+      else body[k] = k === 'closes_within_days' ? Number(s) : s;
+    }
+
+    busy = true;
+    submit.setAttribute('aria-busy', 'true');
+    say('busy', 'busy', page);
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 20000);
+    try {
+      const res = await fetch(`${API_ORIGIN}${TENDER_SEARCH_PATH}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        signal: ctl.signal,
+      });
+      if (res.ok) {
+        const data = (await res.json()) as Result;
+        render(data);
+        const n = data.items.length;
+        say(n ? (n === 1 ? 'one' : 'found') : 'none', 'ok', data.page, n);
+        if (paged) byId('tf-results-h').focus();
+      } else {
+        const s = res.status;
+        say(s === 400 || s === 422 ? 'e400' : s === 403 ? 'e403' : s === 429 ? 'e429' : 'e503', 'bad');
+      }
+    } catch (err) {
+      console.error(
+        JSON.stringify({
+          level: 'error',
+          service: 'tender-finder',
+          operation: 'search',
+          error: err instanceof Error ? `${err.name}: ${err.message}` : String(err),
+          timestamp: new Date().toISOString(),
+        }),
+      );
+      say('e503', 'bad');
+    } finally {
+      clearTimeout(timer);
+      busy = false;
+      submit.removeAttribute('aria-busy');
+      resetCheck();
+    }
+  });
+</script>
+
+<style>
+  .tf-crumb {
+    margin: 0 0 var(--stack-2);
+  }
+
+  .tf-form,
+  .tf-status,
+  .tf-results {
+    max-width: var(--measure-band);
+    margin-inline: auto;
+  }
+
+  .tf-status {
+    margin-block-start: var(--stack-2);
+  }
+
+  /* Filters sit two or three to a row where there is room, one on a phone. The
+     tracks are auto-fit so a sixth filter needs no new breakpoint. */
+  .tf-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--stack-2);
+  }
+
+  .tf-results {
+    margin-block-start: var(--stack-2);
+  }
+
+  .tf-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--stack-2);
+  }
+
+  .tf-item__facts {
+    margin: var(--stack-1) 0 0;
+  }
+
+  .tf-item__facts dd {
+    color: var(--c-text-sub);
+  }
+
+  .tf-item__cta {
+    margin: var(--stack-1) 0 0;
+  }
+
+  .tf-item__cta a {
+    display: inline-flex;
+    align-items: center;
+    /* 44px, WCAG 2.2 target size. */
+    min-height: 44px;
+    color: var(--c-interactive);
+  }
+
+  .tf-pager {
+    margin-block-start: var(--stack-2);
+  }
+
+  .tf-attr p,
+  .tf-upsell {
+    margin: var(--stack-2) 0 0;
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--c-text-muted);
+  }
+
+  .tf-attr a,
+  .tf-upsell a {
+    color: var(--c-interactive);
+  }
+
+  .tf-limits {
+    max-width: var(--measure-band);
+    margin: 0 auto;
+    padding-inline-start: 1.2rem;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.7;
+    color: var(--c-text-sub);
+  }
+
+  .tf-limits li + li {
+    margin-block-start: var(--stack-1);
+  }
+</style>

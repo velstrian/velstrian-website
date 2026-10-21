@@ -46,6 +46,7 @@ import { breadcrumbs } from '../../lib/schema';
 import { SITE } from '../../data/site';
 import { HELLO_EMAIL } from '../../lib/brand-names';
 import { LIVE_SOURCES } from '../../data/site-facts';
+import { RECENT_DAYS } from '../../data/tender-finder';
 
 /*
  * SINGULAR, 2026-08-04, O-58. The owner reported this page arguing with itself:
@@ -92,15 +93,28 @@ import { LIVE_SOURCES } from '../../data/site-facts';
  * tender's requirements. No ALLOWED_LOSSES entry is spent. A heading rewrite
  * that has to be excused is a heading rewrite that lost something.
  */
-const title = 'Free UK Tender Tools: Tender Compliance Matrix | Velstrian';
+/* ── AND PLURAL AGAIN, 2026-10-21, WHEN THE TENDER FINDER SHIPPED ─────────
+ *
+ * R285-WEB-FREE-TENDER-FINDER-01, owner decision D253: a free search over the
+ * open UK and EU notices the platform already ingests. Two tools, so the title,
+ * the H1, the standfirst, the second section head and the ItemList name move
+ * together again, for the reason recorded above. */
+const title = 'Free UK Tender Tools: Tender Finder and Compliance Matrix | Velstrian';
 const description =
-  'A free tool for UK public sector bidders: paste tender text and read back the requirements the wording states, including the social value weighting, each with the line it came from. No account required.';
+  'Two free tools for UK public sector bidders: search open UK and EU tenders, and paste tender text to read back the requirements its wording states, each with the line it came from. No account required.';
 
 const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
 
 const CHIPS = ['PPN 026 social value', 'National TOMs', 'Procurement Act 2023'];
 
 const TOOLS = [
+  {
+    tag: 'Open notices · UK and EU',
+    name: 'Tender Finder',
+    body: `Search open tenders from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. Filter by keyword, region, value and closing date. No account.`,
+    cta: 'Open tool',
+    href: '/tools/tender-finder/',
+  },
   {
     tag: 'Requirements · verbatim',
     name: 'Tender Compliance Matrix',
@@ -146,7 +160,7 @@ const CROSS_SELL = [
     and its methodology after both were removed. It says what the one entry is. */
 const itemList = {
   '@type': 'ItemList',
-  name: 'Free UK tender tools: the tender compliance matrix',
+  name: 'Free UK tender tools: the tender finder and the tender compliance matrix',
   itemListElement: TOOLS.map((t, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -168,8 +182,8 @@ const schema = [
   <Section
     as="h1"
     eyebrow="Free, no account"
-    title="Free tender compliance matrix."
-    standfirst="One free tool for UK public sector bidders. Paste tender text and it lists the requirements the wording states, from the social value weighting to the certificates, the deadlines and the formats. No account, no email gate."
+    title="Free tender finder and compliance matrix."
+    standfirst="Two free tools for UK public sector bidders. Search open UK and EU tenders, then paste tender text to list the requirements the wording states, from the social value weighting to the certificates, the deadlines and the formats. No account, no email gate."
     id="tools-hero"
   >
     <ul class="chips" role="list">
@@ -179,8 +193,8 @@ const schema = [
 
   <Section
     eyebrow="Sourced end to end"
-    title="One tool, fully shown."
-    standfirst="It cites what it implements and returns something you can defend with buyers and evaluators: the tender's own wording, line by line. The full working is published. No email gate."
+    title="Two tools, each one fully shown."
+    standfirst="Each states where its answer comes from: the finder links every notice to its official source, and the matrix returns the tender's own wording, line by line. No email gate."
     id="tools"
   >
     {/* THE TRACK COUNT FOLLOWS THE LIST, it is not typed. This row was

@@ -231,6 +231,8 @@ export const FOOTER = {
            that tool. This row is the free-tool row rather than that one tool's
            row, so it names the free tool the site actually has now. */
         { label: 'Tender Compliance Matrix', href: '/tools/tender-compliance-matrix/', chip: 'Free' },
+        /* R285-WEB-FREE-TENDER-FINDER-01: the second free tool. */
+        { label: 'Tender Finder', href: '/tools/tender-finder/', chip: 'Free' },
       ],
     },
     {

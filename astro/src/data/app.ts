@@ -16,3 +16,15 @@
 export const APP_ORIGIN = 'https://app.crowagent.ai';
 
 export const SIGNUP_URL = `${APP_ORIGIN}/signup`;
+
+/**
+ * The platform API, which the website calls straight from the browser for the
+ * partner enquiry and the free tender finder. It is the Railway host the
+ * platform's own frontend uses, already allowed in `connect-src` and
+ * `form-action` in `_headers` and guarded by check-csp-required-origins.js. The
+ * API's production CORS list takes every marketing host on both domains from
+ * `packages/server-infra/src/public-hosts.mjs` in crowagent-platform, so no
+ * proxy is needed. Written once here (R285-WEB-FREE-TENDER-FINDER-01), it was
+ * typed into PartnerForm.astro before.
+ */
+export const API_ORIGIN = 'https://crowagent-platform-production.up.railway.app';

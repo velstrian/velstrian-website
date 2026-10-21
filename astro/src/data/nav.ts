@@ -168,6 +168,13 @@ const RESOURCES: NavMenu = {
           icon: 'dot',
         },
         {
+          label: 'Tender Finder',
+          href: '/tools/tender-finder/',
+          description: 'Search open UK and EU tenders, free',
+          accent: 'mark',
+          icon: 'dot',
+        },
+        {
           label: 'Free tools hub',
           href: '/tools/',
           description: 'No account, no email gate',

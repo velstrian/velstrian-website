@@ -57,6 +57,7 @@ import Turnstile from './Turnstile.astro';
 import '../../styles/forms.css';
 import Button from '../ui/Button.astro';
 import { SITE } from '../../data/site';
+import { API_ORIGIN } from '../../data/app';
 
 /**
  * The Railway host the platform's own frontend calls (`NEXT_PUBLIC_API_URL`
@@ -64,7 +65,7 @@ import { SITE } from '../../data/site';
  * rather than `app.crowagent.ai`: the platform's Next.js app has no BFF route
  * for this form to go through, so this posts straight to the FastAPI route.
  */
-const API_ENDPOINT = 'https://crowagent-platform-production.up.railway.app/api/v1/partners/enquiry';
+const API_ENDPOINT = `${API_ORIGIN}/api/v1/partners/enquiry`;
 
 interface Field {
   name: string;

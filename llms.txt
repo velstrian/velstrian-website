@@ -11,6 +11,7 @@
 
 - [Tools hub](https://velstrian.com/tools/): Free procurement checks for UK bid teams, cited to the underlying policy. No account required.
 - [Tender compliance matrix](https://velstrian.com/tools/tender-compliance-matrix/): Paste the text of a UK tender and read back the requirements its wording states, each one shown with the line it was read from. Rule based, no upload, no account. The social value calculator that used to sit here was withdrawn on 4 August 2026, and both of its URLs now redirect to the PPN 026 glossary entry below.
+- [Tender finder](https://velstrian.com/tools/tender-finder/): Search open UK and EU public sector tenders from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, published in the last 30 days. Filter by keyword, region, country, value band, closing date and source, 20 results a page. Free, no account, no AI. UK notices are shown under the Open Government Licence v3.0 and TED notices under Commission Decision 2011/833/EU.
 
 ## Procurement guides
 
