@@ -2,7 +2,67 @@
 
 Row R285-WEB-ENTERPRISE-REDESIGN-01. Decisions D254 and the owner's 2026-10-21 direction: "understand web design and do choreographed and build excellent design pattern throughout, and must not rush into change instead do deeper understand and do design thinking, make proper strategy and then do top 1% ultra premium design."
 
-Status: ADOPTED 2026-10-21, BUILDING (see section 9). It replaces the patch list in `R285-ENTERPRISE-DESIGN-BRIEF-2026-10-21.md` as the plan. The brief stays as the measurement record.
+Status: VERSION 2, ADOPTED 2026-10-21 evening. Section 0 overrides sections 2, 3, 4 and 6 where they differ. BUILDING. It replaces the patch list in `R285-ENTERPRISE-DESIGN-BRIEF-2026-10-21.md` as the plan. The brief stays as the measurement record.
+
+---
+
+## 0. VERSION 2, the owner's strategic direction (2026-10-21, evening). READ THIS FIRST, IT OVERRIDES SECTIONS 2, 3, 4 AND 6 BELOW WHERE THEY DIFFER
+
+Owner, after seeing the first build of the new home page: "langauge, wordings, statements and page looks complicated ... why do you are just focusing on public bid and tender, why cant you bit simplify the things, check this out https://www.responsive.io/ ... our target customers are not expert bidder instead lot of them will be small and mid size organisation who can create bid by themself, it must be super easy for them ... added photographs does not look great and looks cheap ... no compromise and no silent defered no silent alteration on quality". Written as RULE 0-U in the workspace and platform rules.
+
+Version 1 designed for a sceptical professional bid manager, with Procurement Act section numbers and public sector framing. **That was the wrong customer.** Version 2 corrects it.
+
+### 0.1 Who we are talking to
+
+A small or mid size organisation, 5 to 200 people, that writes its own bids. Often the owner, an operations lead or an office manager does it alongside their day job. No bid team, no procurement training. They bid for **public and private** work: councils, schools, housing associations, the NHS, and private companies that send out tenders and requests for quotes. They want three things: find work that suits them, write a good answer without starting from a blank page, and not be caught out by something they cannot back up.
+
+Velstrian Buy is for the other side: a busy person who has to buy a service and compare the replies fairly. Also not a specialist.
+
+### 0.2 What responsive.io does that we adopt (measured 2026-10-21 through a page read)
+
+1. **One plain sentence says what the product does and names everything it covers.** Theirs names RFPs, security questionnaires and buyer questions in one line.
+2. **"Who are you" tabs.** One of their seven tabs is literally "Small Businesses". Each visitor sees one short story that is theirs.
+3. **Capabilities as short, everyday statements**, one line each, each beside a product view.
+4. **An FAQ that explains the terms** a newcomer will meet ("What is an RFP?").
+5. What we do NOT copy: their claims rest on customer logos, review scores and "#1" badges, which we cannot use (D252), and their lower page slides into jargon ("Strategic Response Management").
+
+### 0.3 The message, in plain words
+
+- **What it is, in one sentence:** Velstrian helps you find contracts that suit your business and write strong bids yourself, with every answer built from your own documents.
+- **Public and private, always both:** "contracts from councils, schools, the NHS and private companies".
+- **The difference, in plain words:** it uses your own documents, shows you where every answer came from, and it will not make things up. If you have no proof for something, it tells you instead of inventing it. (The "refusal" of version 1 stays, said simply.)
+- **No jargon above the fold.** ITT, PPN 026, the Procurement Act, social value and evaluation criteria appear further down, only where a reader needs them, each explained in a few words the first time.
+
+### 0.4 Home page, version 2 (replaces the section 4 home table)
+
+| # | The visitor wonders | Section | Form |
+|---|---|---|---|
+| 1 | What is this, is it for me? | Hero: the one sentence, two buttons ("Start free", "See how it works"), one reassurance line ("No bid team needed"), a real product screen beneath | Calm |
+| 2 | Is it for someone like me? | "Who are you" tabs: I run a small business, I lead a growing team, I buy services. Each tab: two sentences and one product view | Interactive, short |
+| 3 | What can it do? | Five capabilities in everyday words, tabbed beside one product screen: find contracts that suit you, decide which to go for, answer every question from your documents, get a colleague to check it, keep track of what you promised after you win | Dense but simple |
+| 4 | Can I trust what it writes? | "It will not make things up": the one animated moment, an answer with its sources shown, and a sentence it refused to write because there was no proof | The one slow moment |
+| 5 | How hard is it to start? | Three steps: add your documents, add a tender, answer the questions | Quick |
+| 6 | Is my data safe, what does it cost? | Plain facts: where your data is kept, who processes it, the plain statement that no certificate is held, and the starting price | Quick |
+| 7 | I have questions | An FAQ that explains the words a newcomer meets (what is a tender, what is social value, do I need a bid writer) | Calm |
+| 8 | What now? | One sentence, Start free, Book a call | Calm |
+
+The bid product page and the buyer page follow the same voice. Expert detail (Procurement Act duties, PPN 026, the seven fit factors and their weights) lives on those pages lower down and in the glossary, not on the home page.
+
+### 0.5 Imagery, version 2
+
+The eight stock photographs of commit 66e58ae0 are **withdrawn from the site** because the owner judged them cheap. They stay in the repository with their credits but no page uses them. Imagery is now:
+
+1. **Real product screens**, the main imagery, from the staging capture lane (neutral demo organisations, approved 2026-10-21, cap 3 pounds).
+2. Until those land, HTML recreations of the real screens with a visible "Example data" caption.
+3. No stock photography and no AI generated people, unless an image is excellent, specific to small businesses at work, and approved by the driver against the references. Nothing ships because a slot needs filling.
+
+### 0.6 Copy rules, version 2 (added to section 6)
+
+- Write for someone who has never bid before. Short sentences, everyday verbs.
+- Say what they get, not how the system works: "answer the questions using your own documents", not "retrieve, ground, compute, check, cite".
+- One idea per section, one primary action per screen.
+- Never public sector only. Name both.
+- Every capability still appears, made easy to understand. Simplicity is never a scope cut.
 
 ---
 
