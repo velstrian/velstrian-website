@@ -7,6 +7,7 @@
  * Each with its own clear call to action.
  */
 import Button from '../ui/Button.astro';
+import { LIVE_SOURCES_DAILY } from '../../data/site-facts';
 ---
 
 <section class="h-audiences" id="audiences" aria-labelledby="audiences-title">
@@ -27,7 +28,9 @@ import Button from '../ui/Button.astro';
           Find qualifying opportunities, draft answers cited to the regulations and tender specifications, and evidence every contract commitment after award.
         </p>
         <ul class="h-audience__bullets" role="list">
-          <li>Live UK, EU and Canada official tender feeds</li>
+          {/* R285-WEB-CLAIMS-AUDIT-01, D252 (1). Was "Live UK, EU and Canada": Canada
+              is on request per organisation, not live coverage. */}
+          <li>{LIVE_SOURCES_DAILY}</li>
           <li>Deterministic fit and qualification rubrics</li>
           <li>Cited method statements and PPN 026 social value maths</li>
           <li>Refusal gate prevents hallucinated figures</li>
@@ -45,7 +48,7 @@ import Button from '../ui/Button.astro';
         </p>
         <ul class="h-audience__bullets" role="list">
           <li>Pre-lock evaluation criteria before reading submissions</li>
-          <li>Evidence drawer links every score to cited tender text</li>
+          <li>Evidence drawer sets the panel's score beside the quoted response</li>
           <li>Audit logs support debriefs and legal challenges</li>
           <li>Serves private enterprise buyers and public sector authorities</li>
         </ul>

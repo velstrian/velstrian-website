@@ -135,12 +135,12 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'How is social value scored?',
         answer:
-          'Velstrian Bid calculates it deterministically in code, using unit-aware arithmetic over a curated catalogue of 19 social-value measures aligned to National TOMs conventions. It is not a full National TOMs implementation. The language model never computes the figure: any generated prose containing a £ or % that the computed figures do not support is rejected rather than shown.',
+          'Velstrian Bid calculates it deterministically in code, using unit-aware arithmetic over a curated library of social value measures aligned to National TOMs conventions. It is not a full National TOMs implementation. The language model never computes the figure: any generated prose containing a £ or % that the computed figures do not support is rejected rather than shown.',
       },
       {
         question: 'Is Velstrian Bid ready to use?',
         answer:
-          'Velstrian Bid is live and in daily use, with more being added. Tender discovery from Contracts Finder and Find a Tender, document ingestion, grounded answer drafting, deterministic social value calculation, delivery tracking and Procurement Act 2023 s.52 and s.71 KPI checks all work today. See the Velstrian Bid page for what each stage covers.',
+          'Velstrian Bid is live and in daily use, with more being added. Tender discovery from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, document ingestion, grounded answer drafting, deterministic social value calculation, delivery tracking and Procurement Act 2023 s.52 and s.71 KPI checks all work today. See the Velstrian Bid page for what each stage covers.',
         link: { label: 'Velstrian Bid page', href: '/bid/' },
       },
     ],
@@ -293,7 +293,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'Is my data secure?',
         answer:
-          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. Velstrian Systems Ltd is registered with the ICO as a data controller and we are GDPR compliant.',
+          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. Velstrian Systems Ltd is registered with the ICO as a data controller, and the UK GDPR controls are in place: a data processing agreement on request, a subject access address and a published retention table. Customer data is stored in the EU (Ireland).',
         link: { label: 'See our Security page for full details', href: '/security/' },
       },
     ],

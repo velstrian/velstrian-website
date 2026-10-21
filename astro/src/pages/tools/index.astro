@@ -45,6 +45,7 @@ import FinalCta from '../../components/sections/FinalCta.astro';
 import { breadcrumbs } from '../../lib/schema';
 import { SITE } from '../../data/site';
 import { HELLO_EMAIL } from '../../lib/brand-names';
+import { LIVE_SOURCES } from '../../data/site-facts';
 
 /*
  * SINGULAR, 2026-08-04, O-58. The owner reported this page arguing with itself:
@@ -113,7 +114,7 @@ const CROSS_SELL = [
   {
     job: 'Find',
     heading: 'Tender discovery',
-    body: 'Live tenders from Contracts Finder and Find a Tender, filtered to what you can actually win.',
+    body: `Live tenders from ${LIVE_SOURCES}, filtered to what you can actually win.`,
     href: '/bid/',
   },
   {

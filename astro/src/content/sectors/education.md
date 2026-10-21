@@ -12,7 +12,7 @@ helpsHeading: "One supplier voice, every buyer."
 steps:
   - accent: teal
     verb: "Find the right education work, daily."
-    say: "Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes at 06:00 each day. Filter by CPV code, region and value so only the school, trust, college and university contracts you can deliver reach your list."
+    say: "Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes at 06:00 UTC each day. Filter by CPV code, region and value so only the school, trust, college and university contracts you can deliver reach your list."
   - accent: violet
     verb: "Stay consistent across buyers."
     say: "Velstrian Bid drafts answers grounded in bids your organisation has already submitted, so a single supplier voice holds across a small single-site tender and a trust-wide procurement. A person reviews and approves every draft."
@@ -35,7 +35,7 @@ faqHeading: "Education bidding, answered."
 finalCtaSub: "Start with the education tenders your team should be bidding this week."
 faq:
   - question: "Which education buyers and frameworks does Velstrian Bid cover?"
-    answer: "Velstrian Bid tracks education tenders published on Contracts Finder and Find a Tender, including opportunities from local authorities, multi-academy trusts, colleges and universities, and work let through Department for Education and the Cabinet Office's central commercial organisation frameworks for catering, cleaning, ICT, MIS and estates. You filter by CPV code, region and value to see only the contracts you can deliver."
+    answer: "Velstrian Bid tracks education tenders published on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, including opportunities from local authorities, multi-academy trusts, colleges and universities, and work let through Department for Education and the Cabinet Office's central commercial organisation frameworks for catering, cleaning, ICT, MIS and estates. You filter by CPV code, region and value to see only the contracts you can deliver."
   - question: "How does buying differ across schools, MATs and colleges?"
     answer: "A standalone school may buy under delegated thresholds, while a multi-academy trust often runs a central, more formal procurement across many sites, and colleges follow their own governance. Velstrian Bid helps you respond to each with answers grounded in bids you have already submitted, so a single supplier voice stays consistent across trust-wide and single-site tenders."
   - question: "How is PPN 026 social value scored on education contracts?"
@@ -44,7 +44,7 @@ faq:
     answer: "Yes. After award, Velstrian Bid checks the Procurement Act 2023 KPI duties as an advisory step and gives you a place to evidence what you committed to at bid stage, so promises made to a school, trust or college follow through into delivery. These checks are advisory and are not legal advice."
 ---
 
-Selling to education means selling to a fragmented set of buyers. Local authorities buy on behalf of maintained schools, multi-academy trusts run central procurement across dozens of sites, and colleges and universities follow their own governance. Catering, cleaning, grounds, ICT and management information systems, estates and professional services are all procured this way, often through Department for Education and central-government frameworks, and advertised on Contracts Finder and Find a Tender through e-sourcing portals.
+Selling to education means selling to a fragmented set of buyers. Local authorities buy on behalf of maintained schools, multi-academy trusts run central procurement across dozens of sites, and colleges and universities follow their own governance. Catering, cleaning, grounds, ICT and management information systems, estates and professional services are all procured this way, often through Department for Education and central-government frameworks, and advertised on Contracts Finder or Find a Tender through e-sourcing portals.
 
 Three things make education bids demanding. First, the buyer mix. A single-site school may buy under delegated thresholds, while a trust-wide tender is a formal, high-value procurement, so the same supplier has to pitch at very different levels. Second, due diligence. Because suppliers handle pupil and staff data or connect to school systems, buyers expect data protection evidence and recognised security accreditation before award. Third, [social value](/glossary/ppn-026/). Central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above are scored on social value under PPN 026, the next edition of the Social Value Model, and the Procurement Act 2023 expects published KPIs and delivery evidence on larger contracts.
 

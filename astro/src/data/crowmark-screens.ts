@@ -251,7 +251,7 @@ export const SUPPLIER_SCREENS: Slide[] = [
     src: shot('sup-1-discover'),
     ...DESKTOP,
     alt: 'The Velstrian Bid Discover feed. Published notices are listed with the buying authority, the contract value, the sector, the publication date and the register they came from, each carrying a relevance percentage. A filter row offers the two registers, sector, value and relevance, and every notice offers Open in Velstrian Bid, a link out to the source register, and Save.',
-    caption: 'Notices from Find a Tender and Contracts Finder, scored against what you can evidence today',
+    caption: 'Notices from the UK public registers, scored against what you can evidence today',
   },
   {
     src: shot('sup-3-bid-no-bid'),

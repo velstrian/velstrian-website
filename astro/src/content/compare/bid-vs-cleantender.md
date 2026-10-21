@@ -17,11 +17,11 @@ faq:
   - question: "Is Velstrian Bid or CleanTender cheaper?"
     answer: "Both publish prices. CleanTender has a free tier and a Pro plan at £99 per month or £990 per year. Velstrian Bid Starter is £49 per month and Pro is £149 per month. For a soft-FM-only supplier, CleanTender Pro at £99 sits between Velstrian Bid's two paid tiers."
   - question: "What sectors does CleanTender cover?"
-    answer: "CleanTender is a soft facilities-management specialist covering cleaning, security, grounds, waste and catering. Velstrian Bid is sector-agnostic and works across any UK public-sector tender on Contracts Finder and Find a Tender."
+    answer: "CleanTender is a soft facilities-management specialist covering cleaning, security, grounds, waste and catering. Velstrian Bid is sector-agnostic and works across any UK public-sector tender on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED."
   - question: "Does CleanTender handle social value?"
     answer: "Yes. CleanTender drafts a Social Value and TOMs section as part of its Selection Questionnaire responses. Velstrian Bid calculates social value deterministically in code against the weighting the buyer published, and the AI never computes the total."
   - question: "Which finds more tenders?"
-    answer: "CleanTender curates a soft-FM feed from official UK public-sector sources, which is focused but narrow. Velstrian Bid pulls Contracts Finder and Find a Tender across all sectors and refreshes the feed every morning at 06:00."
+    answer: "CleanTender curates a soft-FM feed from official UK public-sector sources, which is focused but narrow. Velstrian Bid pulls Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED across all sectors and refreshes the feed every morning at 06:00 UTC."
   - question: "Does CleanTender have a qualification score?"
     answer: "Yes, and it is a genuine strength: CleanTender reads a contract pack and scores your stored profile against it from 0 to 100 in under 30 seconds. Velstrian Bid's own bid-fit and coverage marking is in development and is not in the released product yet."
   - question: "Which handles post-award delivery?"
@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR controls and ICO registration. ISO/IEC 27001 Annex A is reviewed in our own Statement of Applicability, and no certificate is held. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
 <dt class="meta">CleanTender</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
@@ -76,7 +76,7 @@ faq:
 </thead>
 <tbody>
 <tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite (all sectors)</td><td>Soft-FM bid tool (cleaning, security, grounds, waste, catering)</td></tr>
-<tr><th scope="row">UK tender discovery</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, Contracts Finder + Find a Tender, daily at 06:00, all sectors</td><td>Curated soft-FM feed from official UK sources</td></tr>
+<tr><th scope="row">UK tender discovery</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, daily at 06:00 UTC, all sectors</td><td>Curated soft-FM feed from official UK sources</td></tr>
 <tr><th scope="row">Sector coverage</th><td class="cmp-us">Sector-agnostic</td><td>Soft FM only</td></tr>
 <tr><th scope="row">Bid qualification / fit scan</th><td>In development, not in the released product</td><td><span class="cmp-yes">Yes</span>, 0 to 100 in under 30 seconds</td></tr>
 <tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>SQ drafting with soft-FM vocabulary, unlimited drafts on Pro</td></tr>
@@ -96,7 +96,7 @@ faq:
 <p>That specialisation is a real advantage, and it is one Velstrian Bid does not try to match. If cleaning or security is all you bid for, CleanTender's vocabulary and its fast fit scan are built around exactly your work, and its pricing is public: a free tier to browse the contract directory, and Pro at &pound;99 per month or &pound;990 per year, which adds the qualification scan, unlimited drafts, the Compliance Vault and email alerts. CleanTender positions itself for soft-FM SMEs doing roughly 4 to 12 bids a year.</p>
 
 <h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
-<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. Unlike a sector specialist, it is sector-agnostic: it tracks Contracts Finder and Find a Tender across any category, refreshed every morning at 06:00. It drafts answers grounded in the supplier's own submitted bids, and its defining rule is figure-grounding, so before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. Unlike a sector specialist, it is sector-agnostic: it tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED across any category, refreshed every morning at 06:00 UTC. It drafts answers grounded in the supplier's own submitted bids, and its defining rule is figure-grounding, so before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <p>Velstrian Bid calculates social value deterministically in code against the weighting the buyer published rather than only drafting it as a questionnaire section, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. Its bid-fit and coverage marking, by contrast, is still in development and not in the released product, so on the fit-scan row above CleanTender is genuinely ahead today.</p>
 <figure class="cmp-shot">
 <picture>
@@ -125,7 +125,7 @@ faq:
 <div class="cmp-choose-card is-us">
 <h3>Choose Velstrian (Velstrian Bid) if</h3>
 <ul>
-<li>You bid across more than one sector on Contracts Finder and Find a Tender.</li>
+<li>You bid across more than one sector on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED.</li>
 <li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
 <li>You need deterministic social value maths, not just a drafted section.</li>
 <li>You want post-award delivery evidence under the Procurement Act 2023.</li>
@@ -144,7 +144,7 @@ faq:
   </details>
   <details>
     <summary><h3>What sectors does CleanTender cover?</h3></summary>
-    <div class="cfaq-a"><p>CleanTender is a soft facilities-management specialist covering cleaning, security, grounds, waste and catering. Velstrian Bid is sector-agnostic and works across any UK public-sector tender on Contracts Finder and Find a Tender.</p></div>
+    <div class="cfaq-a"><p>CleanTender is a soft facilities-management specialist covering cleaning, security, grounds, waste and catering. Velstrian Bid is sector-agnostic and works across any UK public-sector tender on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED.</p></div>
   </details>
   <details>
     <summary><h3>Does CleanTender handle social value?</h3></summary>
@@ -152,7 +152,7 @@ faq:
   </details>
   <details>
     <summary><h3>Which finds more tenders?</h3></summary>
-    <div class="cfaq-a"><p>CleanTender curates a soft-FM feed from official UK public-sector sources, which is focused but narrow. Velstrian Bid pulls Contracts Finder and Find a Tender across all sectors and refreshes the feed every morning at 06:00.</p></div>
+    <div class="cfaq-a"><p>CleanTender curates a soft-FM feed from official UK public-sector sources, which is focused but narrow. Velstrian Bid pulls Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED across all sectors and refreshes the feed every morning at 06:00 UTC.</p></div>
   </details>
   <details>
     <summary><h3>Does CleanTender have a qualification score?</h3></summary>

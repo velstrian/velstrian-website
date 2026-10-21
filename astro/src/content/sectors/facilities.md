@@ -12,7 +12,7 @@ helpsHeading: "Consistent answers, mobilisation to KPI."
 steps:
   - accent: teal
     verb: "Find the right FM work, daily."
-    say: "Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes at 06:00 each day. Filter by CPV code, region and value so only the hard and soft FM contracts you can staff and mobilise reach your list."
+    say: "Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes at 06:00 UTC each day. Filter by CPV code, region and value so only the hard and soft FM contracts you can staff and mobilise reach your list."
   - accent: violet
     verb: "Answer TUPE and mobilisation with confidence."
     say: "Velstrian Bid drafts your workforce, TUPE and mobilisation answers grounded in bids your organisation has already submitted, so your approach to consultation, continuity and stand-up reads consistently across every tender. A person reviews and approves each draft."
@@ -35,7 +35,7 @@ faqHeading: "FM bidding, answered."
 finalCtaSub: "Start with the FM tenders your team should be bidding this week."
 faq:
   - question: "Which FM frameworks and buyers does Velstrian Bid cover?"
-    answer: "Velstrian Bid tracks the FM tenders and call-offs published on Contracts Finder and Find a Tender, including work let through central-government facilities management agreements and the wide range of NHS, education, local authority and housing buyers who procure hard and soft services. You filter by CPV code, region and value to see only the contracts you can staff and mobilise."
+    answer: "Velstrian Bid tracks the FM tenders and call-offs published on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, including work let through central-government facilities management agreements and the wide range of NHS, education, local authority and housing buyers who procure hard and soft services. You filter by CPV code, region and value to see only the contracts you can staff and mobilise."
   - question: "How do I answer TUPE questions in an FM bid?"
     answer: "Most FM re-tenders involve TUPE, the Transfer of Undertakings (Protection of Employment) Regulations 2006, because staff transfer with the contract. Velstrian Bid drafts your TUPE and workforce answers grounded in bids you have already submitted, so your approach to consultation, terms and continuity is consistent, and a person reviews every draft before it goes in."
   - question: "Does Velstrian Bid help with mobilisation and KPI commitments?"

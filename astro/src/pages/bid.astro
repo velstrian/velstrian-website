@@ -94,6 +94,7 @@ import { SUPPLIER_SCREENS } from '../data/crowmark-screens';
 import { PLANS as PRICED_PLANS } from '../data/pricing';
 import { faqPage, breadcrumbs } from '../lib/schema';
 import { SITE } from '../data/site';
+import { LIVE_SOURCES } from '../data/site-facts';
 import {
   PROOF,
   KEY_FACTS,
@@ -879,7 +880,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   >
     <p class="lead">
       Velstrian Bid is a UK bid and tender management suite for public-sector suppliers. It tracks
-      Find a Tender, Contracts Finder and Public Contracts Scotland every day, drafts answers
+      {LIVE_SOURCES} every day, drafts answers
       cited to the regulations, to the tender's own clauses and to the supplier's answer
       library, checks every figure against the supplier's own data so the model cannot invent
       a number, discloses AI use under PPN 017, and holds the evidence of delivery after
@@ -909,8 +910,8 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
 
   <Section
     eyebrow="Both sides of the tender"
-    title="One product. Two sides of the table."
-    standfirst="Two sides to every procurement: one writes the answers, the other reads them. Velstrian Bid serves both, and sells them separately."
+    title="Two products. Two sides of the table."
+    standfirst="Two sides to every procurement: one writes the answers, the other reads them. Velstrian Bid serves the supplier, Velstrian Buy serves the buyer, and each is sold on its own."
     id="buyers"
   >
     <ul class="grid grid--2 card-sync">

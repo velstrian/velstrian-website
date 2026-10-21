@@ -19,7 +19,7 @@ faq:
   - question: "Does SwiftBid have a subscription?"
     answer: "No. SwiftBid is a per-bid service with no subscription, which is the point of it. You pay for each bid you want written. Velstrian Bid is a monthly subscription with continuous access to every feature on your plan."
   - question: "Does SwiftBid find tenders for me?"
-    answer: "No. SwiftBid has no built-in tender discovery feed. You upload the contract pack you want a bid written against. Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes the feed every morning at 06:00."
+    answer: "No. SwiftBid has no built-in tender discovery feed. You upload the contract pack you want a bid written against. Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes the feed every morning at 06:00 UTC."
   - question: "Does SwiftBid include a human bid writer?"
     answer: "Its Premium tier adds optional human expert review alongside the AI draft. Velstrian Bid is self-serve software: it drafts and your own reviewer approves each answer before submission, but it does not supply an external bid writer."
   - question: "How fast is each one?"
@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR controls and ICO registration. ISO/IEC 27001 Annex A is reviewed in our own Statement of Applicability, and no certificate is held. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
 <dt class="meta">SwiftBid</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
@@ -77,7 +77,7 @@ faq:
 <tbody>
 <tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite (subscription)</td><td>Per-bid AI bid-writing service</td></tr>
 <tr><th scope="row">Pricing model</th><td class="cmp-us">Subscription from &pound;49/month</td><td>Per bid: &pound;149 / &pound;349 / &pound;749</td></tr>
-<tr><th scope="row">UK tender discovery (Contracts Finder + Find a Tender)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00</td><td><span class="cmp-no">None</span>. You upload contract packs</td></tr>
+<tr><th scope="row">UK and EU tender discovery (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td><span class="cmp-no">None</span>. You upload contract packs</td></tr>
 <tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Per-bid AI drafting from documents you supply</td></tr>
 <tr><th scope="row">Human expert review</th><td>Software only. Your own reviewer approves each draft</td><td>Optional at Premium tier</td></tr>
 <tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic gate</td><td>Not stated publicly</td></tr>
@@ -95,7 +95,7 @@ faq:
 <p>For a firm that bids only once or twice a year, that model has a real advantage: no ongoing commitment, and at Premium the option of a human reviewer on the draft. Velstrian Bid does not offer either of those. If your bidding is genuinely occasional, paying per bid can be the cheaper and simpler choice, and SwiftBid is built around exactly that.</p>
 
 <h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
-<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Contracts Finder and Find a Tender, refreshed every morning at 06:00, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, refreshed every morning at 06:00 UTC, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <figure class="cmp-shot">
 <picture>
 <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-5-answer-library-light.avif?v=20260805a">
@@ -125,7 +125,7 @@ faq:
 <h3>Choose Velstrian (Velstrian Bid) if</h3>
 <ul>
 <li>You bid regularly and want continuous access rather than paying per bid.</li>
-<li>You need Contracts Finder and Find a Tender discovery refreshed daily.</li>
+<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
 <li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
 <li>You need deterministic social value maths and post-award delivery evidence.</li>
 </ul>
@@ -147,7 +147,7 @@ faq:
   </details>
   <details>
     <summary><h3>Does SwiftBid find tenders for me?</h3></summary>
-    <div class="cfaq-a"><p>No. SwiftBid has no built-in tender discovery feed. You upload the contract pack you want a bid written against. Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes the feed every morning at 06:00.</p></div>
+    <div class="cfaq-a"><p>No. SwiftBid has no built-in tender discovery feed. You upload the contract pack you want a bid written against. Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes the feed every morning at 06:00 UTC.</p></div>
   </details>
   <details>
     <summary><h3>Does SwiftBid include a human bid writer?</h3></summary>

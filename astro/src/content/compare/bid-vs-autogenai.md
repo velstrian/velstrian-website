@@ -21,7 +21,7 @@ faq:
   - question: "Which is better for a small supplier or SME?"
     answer: "Velstrian Bid is built for UK SMEs and public-sector suppliers, with published plans from £49 per month. AutogenAI is built for enterprise bid teams of five or more, so it tends to be more than a small supplier needs."
   - question: "Does AutogenAI find tenders for me?"
-    answer: "AutogenAI has no built-in UK tender discovery feed. You bring your own pipeline. Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes the feed every morning at 06:00."
+    answer: "AutogenAI has no built-in UK tender discovery feed. You bring your own pipeline. Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes the feed every morning at 06:00 UTC."
   - question: "Can either tool stop the AI inventing figures?"
     answer: "Velstrian Bid uses a deterministic figure-grounding gate: every £ and % in a draft has to exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in AutogenAI's public materials."
   - question: "Is AutogenAI a bigger company than Velstrian?"
@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, EU data residency, GDPR compliant, ICO registered, and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR controls and ICO registration. ISO/IEC 27001 Annex A is reviewed in our own Statement of Applicability, and no certificate is held. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
 <dt class="meta">AutogenAI</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
@@ -76,7 +76,7 @@ faq:
 </thead>
 <tbody>
 <tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite</td><td>Enterprise AI bid-writing engine</td></tr>
-<tr><th scope="row">UK tender discovery (Contracts Finder + Find a Tender)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00</td><td><span class="cmp-no">Not built in</span>. Bring your own pipeline</td></tr>
+<tr><th scope="row">UK and EU tender discovery (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td><span class="cmp-no">Not built in</span>. Bring your own pipeline</td></tr>
 <tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Yes, retrieval over your content library</td></tr>
 <tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic gate</td><td>Not stated publicly</td></tr>
 <tr><th scope="row">PPN 017 AI-use disclosure on every draft</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
@@ -95,7 +95,7 @@ faq:
 <p>AutogenAI does not publish a price. Its pricing is enterprise, quoted on request, so any specific figure you see quoted elsewhere is a third-party estimate rather than a vendor rate. On this page we mark it as Not published.</p>
 
 <h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
-<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Contracts Finder and Find a Tender, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <figure class="cmp-shot">
 <picture>
 <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-2-tender-questions-light.avif?v=20260805a">
@@ -125,7 +125,7 @@ faq:
 <h3>Choose Velstrian (Velstrian Bid) if</h3>
 <ul>
 <li>You are a UK SME or public-sector supplier who wants published pricing from &pound;49 per month.</li>
-<li>You need Contracts Finder and Find a Tender discovery refreshed daily.</li>
+<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
 <li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
 <li>You need deterministic social value maths and post-award delivery evidence.</li>
 </ul>
@@ -151,7 +151,7 @@ faq:
   </details>
   <details>
     <summary><h3>Does AutogenAI find tenders for me?</h3></summary>
-    <div class="cfaq-a"><p>AutogenAI has no built-in UK tender discovery feed. You bring your own pipeline. Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes the feed every morning at 06:00.</p></div>
+    <div class="cfaq-a"><p>AutogenAI has no built-in UK tender discovery feed. You bring your own pipeline. Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes the feed every morning at 06:00 UTC.</p></div>
   </details>
   <details>
     <summary><h3>Can either tool stop the AI inventing figures?</h3></summary>

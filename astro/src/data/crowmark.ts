@@ -22,6 +22,17 @@
  */
 
 import { PLANS as PRICED_PLANS, startHref } from './pricing.ts';
+import {
+  LIVE_SOURCES,
+  LIVE_SOURCES_DAILY,
+  ON_REQUEST_SENTENCE,
+  UPLOAD_SENTENCE,
+  START_FORMATS,
+  START_MAX_MB,
+  PACK_MAX_MB,
+  FIT_COUNT_WORD,
+  FIT_DIMENSIONS,
+} from './site-facts.ts';
 
 const [STARTER, PRO, PORTFOLIO] = PRICED_PLANS;
 
@@ -36,9 +47,13 @@ export interface Card {
 }
 
 /** Hero proof strip. `lead` is the emphasised fragment. */
+/* R285-WEB-CLAIMS-AUDIT-01, D252 (1): "Canada" was listed as a live feed. It is
+   a market an organisation switches on, and no Canadian notice has been fetched
+   in production. The live four and the on request three come from
+   site-facts.json, which is generated from the platform's bid_markets.json. */
 export const PROOF = [
-  { lead: 'Live feeds', rest: 'UK, EU and Canada public tenders' },
-  { lead: 'On request', rest: 'World Bank and US federal notices' },
+  { lead: 'Daily feeds', rest: 'UK and EU public tenders, four official sources' },
+  { lead: 'On request', rest: 'Canada, US federal and World Bank notices' },
   { lead: 'PPN 017', rest: 'Disclosure on every draft' },
   { lead: 's.52 · s.71', rest: 'Procurement Act 2023' },
 ];
@@ -52,7 +67,7 @@ export const KEY_FACTS = [
   {
     term: 'Who it is for',
     detail:
-      'UK SMEs and suppliers bidding for public-sector contracts on Find a Tender, Contracts Finder and Public Contracts Scotland.',
+      `UK SMEs and suppliers bidding for public-sector contracts, with notices from ${LIVE_SOURCES}.`,
   },
   {
     term: 'Price',
@@ -87,12 +102,12 @@ export const STEPS = [
   {
     n: '01',
     heading: 'Find the tender',
-    body: 'Find a Tender, Contracts Finder and Public Contracts Scotland, refreshed daily. Filter by sector, value and region, sort the feed, and bookmark what is worth a bid.',
+    body: `${LIVE_SOURCES_DAILY}. Filter by sector, value and region, sort the feed, and bookmark what is worth a bid. The pipeline also shows prior information notices and framework and DPS expiry dates, before a tender opens.`,
   },
   {
     n: '02',
     heading: 'Read it, then decide',
-    body: 'Upload the tender pack as PDF, DOCX, XLSX or an image, up to 10MB. Velstrian Bid extracts the requirements, scores fit and coverage with the reason behind each component, and returns pursue, review or pass with the gaps named. It reads the tender rather than predicting the award, and a named person decides.',
+    body: `${UPLOAD_SENTENCE} Velstrian Bid extracts the requirements, scores fit and coverage with the reason behind each component, and returns pursue, review or pass with the gaps named. It reads the tender rather than predicting the award, and a named person decides.`,
   },
   {
     n: '03',
@@ -113,7 +128,9 @@ export const BENEFITS: Card[] = [
   },
   {
     heading: 'PPN 017 disclosure, human approval',
-    body: 'Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and nothing reaches a buyer without a person approving it. A person approves, never the model. If no AI key is configured, Velstrian Bid returns nothing rather than a canned answer.',
+    /* R285-WEB-CLAIMS-AUDIT-01 B6: "If no AI key is configured ..." removed. It
+       described internal configuration, not something a customer meets. */
+    body: 'Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and nothing reaches a buyer without a person approving it. A person approves, never the model.',
   },
   {
     heading: 'Award to delivery to reporting',
@@ -134,8 +151,8 @@ export const STATUTES: Card[] = [
 
 export const CAPABILITIES: Card[] = [
   {
-    heading: 'UK tender discovery',
-    body: 'Find a Tender, Contracts Finder and Public Contracts Scotland, ingested from their published feeds and refreshed daily. Filter by sector, value and region, sort the feed, and bookmark what matters.',
+    heading: 'UK and EU tender discovery',
+    body: `${LIVE_SOURCES}, ingested from their published feeds and refreshed daily. The source is named on every notice. ${ON_REQUEST_SENTENCE} Filter by sector, value and region, sort the feed, and bookmark what matters.`,
   },
   {
     heading: 'Cited answer drafting',
@@ -147,11 +164,16 @@ export const CAPABILITIES: Card[] = [
   },
   {
     heading: 'Tender document ingestion',
-    body: 'PDF, DOCX, XLSX, PNG and JPEG up to 10MB. Requirements and clauses are extracted from the text layer and become a citation source in their own right, so an answer can point at the wording it is answering. Scanned PDFs are reported honestly as needing OCR, which Velstrian Bid does not do.',
+    /* R285-WEB-CLAIMS-AUDIT-01 B2 and B5. Was "PDF, DOCX, XLSX, PNG and JPEG up
+       to 10MB": images are not accepted and the limits are 25 MB at the door and
+       100 MB in the pack (TenderDropzone.tsx, TenderUploadPanel.tsx). "OCR,
+       which Velstrian Bid does not do" was dropped because an OCR path exists
+       behind a key whose production state is not measured here. */
+    body: `${UPLOAD_SENTENCE} Requirements and clauses are extracted from the text layer and become a citation source in their own right, so an answer can point at the wording it is answering. A scanned PDF with no text layer is flagged as needing OCR rather than guessed at.`,
   },
   {
     heading: 'Bid or no-bid, with reasons',
-    body: 'A deterministic six-dimension rubric scores how well a published tender fits your organisation, and shows the reason behind each dimension rather than a single opaque number. It is a fit score, not a prediction: it tells you where you match and where you do not, and the decision stays yours.',
+    body: `A deterministic ${FIT_COUNT_WORD}-dimension rubric (${FIT_DIMENSIONS}) scores how well a published tender fits your organisation, and shows the reason behind each dimension rather than a single opaque number. It is a fit score, not a prediction: it tells you where you match and where you do not, and the decision stays yours. The market dimension reads public award history: who won comparable contracts, at what value, and against how many bidders.`,
   },
   {
     heading: 'Answer marking against the rubric',
@@ -165,6 +187,26 @@ export const CAPABILITIES: Card[] = [
   {
     heading: 'SQ and PQQ from one master set',
     body: 'Standard selection questions answered from a reusable master answer set, citing your capability profile: accreditations, insurances, financial standing, policies, case studies and named staff. Offered only above the Procurement Act 2023 section 85 threshold, because below it the question does not arise.',
+  },
+  /* R285-WEB-CLAIMS-AUDIT-01, capabilities M3, M4, M15 and M16. Each was live
+     in the product and absent from this grid. Each has a record in
+     site-facts.json (capabilities) and check-site-facts.mjs fails the build if
+     its phrase leaves this page. */
+  {
+    heading: 'Award history',
+    body: 'More than 100,000 published contract awards from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED: who won comparable work, at what value, and against how many bidders. It feeds the market dimension of the fit score and sits beside the notice you are reading.',
+  },
+  {
+    heading: 'Private sector quotes',
+    body: "Quick Quote takes a buyer's RFQ, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. You write the scope. The AI does not draft it.",
+  },
+  {
+    heading: 'Answer library, tone profiles and learnings',
+    body: 'A reusable answer library, tone profiles for how your organisation writes, learnings recorded from each debrief, bid analytics and board reports, so each bid starts from what the last one taught you.',
+  },
+  {
+    heading: 'AI Compliance Advisor',
+    body: 'Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, with your consent, from your own bids and social value commitments, and you can point it at one bid to include its confirmed requirements. Only regulatory references matched against its citation corpus are shown, and any money figure or percentage it cannot trace to your records, your question or the brief is flagged for you to check.',
   },
 ];
 
@@ -209,7 +251,8 @@ export const PLANS: Plan[] = [
     /* [PRICING-LOCK-2026-08] "Bid volume effectively unlimited" is RETIRED: the
        plan has a cap, 3,000 AI credits a month. "Branded", never "white-label",
        matching /pricing. Single sign-on is included since D235. */
-    body: '10 users included, more by arrangement, and 3,000 AI credits a month. Single sign-on, branded exports and a named account contact for high-volume bidding teams.',
+    /* R285-WEB-CLAIMS-AUDIT-01 H10: single sign-on is on every plan (D241). */
+    body: '10 users included, more by arrangement, and 3,000 AI credits a month. Single sign-on is included on every plan. Portfolio adds branded exports, the Integrations package and a named account contact.',
     cta: PORTFOLIO.cta,
     href: startHref(PORTFOLIO.planKey),
   },
@@ -244,8 +287,7 @@ export const FAQS: Faq[] = [
   },
   {
     question: 'Where do the tenders come from?',
-    answer:
-      'UK, EU and Canada tenders are live from official public feeds. World Bank and US federal notices are available on request. You filter by sector, value and region, sort the results, and bookmark what you want to come back to.',
+    answer: `From ${LIVE_SOURCES_DAILY}, and the source is named on every notice. ${ON_REQUEST_SENTENCE} You filter by sector, value and region, sort the results, and bookmark what you want to come back to.`,
   },
   {
     question: 'Can the AI make up a number in my bid?',
@@ -255,17 +297,16 @@ export const FAQS: Faq[] = [
   {
     question: 'Is AI use disclosed to the buyer?',
     answer:
-      'Yes. Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and a person has to approve the answer before it goes to the buyer. Velstrian Bid does not send anything to a buyer portal on your behalf. If no AI key is configured, Velstrian Bid returns nothing rather than a generic fallback answer.',
+      'Yes. Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and a person has to approve the answer before it goes to the buyer. Velstrian Bid does not send anything to a buyer portal on your behalf.',
   },
   {
     question: 'How is social value calculated?',
     answer:
-      'Deterministically, in code. Velstrian Bid uses a curated catalogue of 19 social-value measures, aligned to National TOMs conventions, and applies unit-aware arithmetic to them. It is not a full National TOMs implementation, and the AI never computes the total. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. The buyer publishes the weighting, and it is a weighting, not a score.',
+      'Deterministically, in code. Velstrian Bid uses a curated library of social value measures, aligned to National TOMs conventions, and applies unit-aware arithmetic to them. It is not a full National TOMs implementation, and the AI never computes the total. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. The buyer publishes the weighting, and it is a weighting, not a score.',
   },
   {
     question: 'Can Velstrian Bid read a scanned tender document?',
-    answer:
-      'No. Velstrian Bid reads PDF, DOCX, XLSX, PNG and JPEG files up to 10MB and extracts requirements and clauses from the text layer, quoting only what is present in the source. A scanned PDF with no text layer is reported as needing OCR, which Velstrian Bid does not perform.',
+    answer: `Velstrian Bid reads text. A bid starts from ${START_FORMATS} files up to ${START_MAX_MB} MB, and the rest of the pack, including ZIP archives and PowerPoint, can be added up to ${PACK_MAX_MB} MB a file. Requirements and clauses are extracted from the text layer, quoting only what is present in the source. A scanned PDF with no text layer is flagged as needing OCR rather than guessed at.`,
   },
   {
     question: 'Does the fit score tell me whether I will win?',

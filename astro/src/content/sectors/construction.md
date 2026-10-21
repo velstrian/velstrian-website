@@ -1,6 +1,6 @@
 ---
 title: "Construction Bid Software | Public Works Tenders | Velstrian"
-description: "Velstrian Bid helps UK construction firms find public works tenders on Contracts Finder and Find a Tender, and evidence social value under PPN 026, the next edition of the Social Value Model."
+description: "Velstrian Bid helps UK construction firms find public works tenders on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, and evidence social value under PPN 026, the next edition of the Social Value Model."
 ogDescription: "Find public works tenders and build stronger framework and project bids with Velstrian Bid, cited to PPN 026 and the Procurement Act 2023."
 ogImageAlt: "Velstrian Bid bid software for UK construction suppliers"
 sectorLabel: "Construction"
@@ -12,7 +12,7 @@ helpsHeading: "From notice to submission-ready, faster."
 steps:
   - accent: teal
     verb: "Find the right works, daily."
-    say: "Velstrian Bid tracks Contracts Finder and Find a Tender and refreshes the feed at 06:00 each day. Filter by CPV code, region and contract value so only the works packages you can deliver reach your list, then bookmark the ones worth a bid/no-bid decision."
+    say: "Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes the feed at 06:00 UTC each day. Filter by CPV code, region and contract value so only the works packages you can deliver reach your list, then bookmark the ones worth a bid/no-bid decision."
   - accent: violet
     verb: "Draft social value that stands up."
     say: "Velstrian Bid computes social value in code, over a curated catalogue of TOMs-aligned measures, and drafts answers grounded in bids your firm has already submitted. Every pound and percentage in the prose has to exist in your own data before the draft is released, so nothing is invented."
@@ -35,7 +35,7 @@ faqHeading: "Construction bidding, answered."
 finalCtaSub: "Start with the tenders your construction team should be bidding this week."
 faq:
   - question: "Which construction frameworks does Velstrian Bid help me bid for?"
-    answer: "Velstrian Bid tracks the public tenders and framework call-offs published on Contracts Finder and Find a Tender, including works let through major construction frameworks such as SCAPE, Pagabo, Fusion21, Procure Partnerships and NHS Shared Business Services. You filter by CPV code, region and value, so only the works packages you can deliver reach your list."
+    answer: "Velstrian Bid tracks the public tenders and framework call-offs published on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, including works let through major construction frameworks such as SCAPE, Pagabo, Fusion21, Procure Partnerships and NHS Shared Business Services. You filter by CPV code, region and value, so only the works packages you can deliver reach your list."
   - question: "How does PPN 026 social value apply to construction bids?"
     answer: "PPN 026, the next edition of the Social Value Model, was published on 5 August 2026 and applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Construction buyers commonly ask for local employment, apprenticeships, spend with SMEs and carbon reduction. Velstrian Bid calculates the social value figures in code and drafts answers grounded in bids you have already submitted."
   - question: "How does Velstrian Bid handle bid evidence on public works contracts?"
