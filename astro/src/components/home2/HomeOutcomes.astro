@@ -1,6 +1,6 @@
 ---
 /**
- * HomeOutcomes.astro — Customer outcomes section (R285-WEB-ENTERPRISE-REDESIGN-01).
+ * HomeOutcomes.astro: Customer outcomes section (R285-WEB-ENTERPRISE-REDESIGN-01).
  *
  * What the customer gets: fewer hours drafting, consistent evidence,
  * compliance gaps made visible, delivery tracked after award.
@@ -49,7 +49,7 @@ const OUTCOMES: Outcome[] = [
     <div class="h-outcomes__grid">
       {
         OUTCOMES.map((o) => (
-          <article class="h-outcomes__card surface">
+          <article class="h-outcomes__card surface surface--pad">
             <span class="chip h-outcomes__tag">{o.tag}</span>
             <h3 class="h-outcomes__h">{o.title}</h3>
             <p class="h-outcomes__p">{o.body}</p>

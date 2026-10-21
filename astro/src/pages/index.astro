@@ -95,6 +95,7 @@ import Base from '../layouts/Base.astro';
 import HeroOutcome from '../components/home2/HeroOutcome.astro';
 import HomeOutcomes from '../components/home2/HomeOutcomes.astro';
 import OneTenderStages from '../components/home2/OneTenderStages.astro';
+import RefusalTrace from '../components/home2/RefusalTrace.astro';
 import HomeWalkthrough from '../components/home2/HomeWalkthrough.astro';
 import HomeAudiencePaths from '../components/home2/HomeAudiencePaths.astro';
 import HomeTrustSummary from '../components/home2/HomeTrustSummary.astro';
@@ -147,6 +148,10 @@ const UPDATED = new Date('2026-10-21');
   <HeroOutcome />
   <HomeOutcomes />
   <OneTenderStages />
+  {/* The worked refusal, full width, directly after stage 04 names it. It was
+      rendered inside the stage 04 card's right column, where its rail, app
+      window and ledger had ~640px and broke (R285-WEB-HOME-FORMAT-01). */}
+  <RefusalTrace />
   <HomeWalkthrough />
   <HomeAudiencePaths />
   <HomeTrustSummary />

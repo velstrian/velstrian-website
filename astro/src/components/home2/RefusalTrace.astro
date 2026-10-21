@@ -48,6 +48,7 @@
 import Section from '../layout/Section.astro';
 import DeviceChrome from './DeviceChrome.astro';
 import { SITE } from '../../data/site';
+import { APP_ORIGIN } from '../../data/app';
 
 interface Step {
   n: string;
@@ -113,6 +114,13 @@ const GROUNDING = [
 const BANNER =
   'Answers are AI-assisted and grounded only in your own answer library, the published requirement and your confirmed commitments. Every £ and % comes from your engine-computed commitments and is never invented. A named human reviews, edits and approves every answer before you submit it.';
 
+/* THE ADDRESS BAR READS THE ONE APP HOST CONSTANT, R285-WEB-HOME-FORMAT-01.
+   It was typed as `app.crowagent.ai/` with the retired `mark/draft` route.
+   data/app.ts is where the app host lives, so a host change there now reaches
+   this bar too. The path is the app's real contracts route, which is the item
+   the sidebar below marks as open. */
+const APP_HOST = `${new URL(APP_ORIGIN).host}/`;
+
 const SIDEBAR = [
   { group: 'Workspace', items: ['Home', 'Action centre', 'Settings'] },
   { group: 'Velstrian Bid', items: ['Contracts', 'Discover', 'New contract', 'Answer library', 'Insights', 'Reports'] },
@@ -151,7 +159,7 @@ const SIDEBAR = [
 
     <div class="h2rt__desk">
       <div class="surface surface--frame surface--row h2rt__pane" role="group" aria-label="The draft, as the engine reads it" data-reel>
-        <DeviceChrome host="app.crowagent.ai/" path="mark/draft" />
+        <DeviceChrome host={APP_HOST} path="bid/contracts" />
 
         <div class="h2rt__app">
           <nav class="h2rt__side" aria-label="Product navigation, illustrative">

@@ -1,6 +1,6 @@
 ---
 /**
- * HomeTrustSummary.astro — Concise enterprise trust summary (R285-WEB-ENTERPRISE-REDESIGN-01).
+ * HomeTrustSummary.astro: Concise enterprise trust summary (R285-WEB-ENTERPRISE-REDESIGN-01).
  *
  * Sits directly on the main buying path:
  * - Company registration: Velstrian Systems Ltd, 17076461, England and Wales
@@ -60,7 +60,7 @@ const TRUST_POINTS: TrustPoint[] = [
     <div class="h-trust__grid">
       {
         TRUST_POINTS.map((tp) => (
-          <article class="h-trust__card surface">
+          <article class="h-trust__card surface surface--pad">
             <h3 class="h-trust__h">{tp.title}</h3>
             <p class="h-trust__p">{tp.detail}</p>
           </article>

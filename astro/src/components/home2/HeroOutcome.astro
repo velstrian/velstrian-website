@@ -1,12 +1,21 @@
 ---
 /**
- * HeroOutcome.astro — Outcome-led enterprise hero (R285-WEB-ENTERPRISE-REDESIGN-01).
+ * HeroOutcome.astro: outcome-led enterprise hero (R285-WEB-ENTERPRISE-REDESIGN-01).
  *
  * Leads with customer outcomes rather than mechanics:
  * "Better bids. Defensible evidence. Measurable delivery."
  *
- * Left: outcome statement, one-line explanation, two actions.
- * Right: real product preview frame with marked slot for Claude's capture.
+ * LAYOUT, R285-WEB-HOME-FORMAT-01 (2026-10-21). The eyebrow and the headline
+ * span both columns, then the lede and actions sit beside the drawn workspace.
+ * The headline is set at --t-h1 (the hero tier), and inside one ~620px column
+ * at 1280 that tier wrapped one word per line. Spanning the measure gives it
+ * two lines and lets the two columns below balance on their own content.
+ *
+ * THE PREVIEW IS A DRAWING, NOT A PLACEHOLDER. It shipped as a dashed box
+ * repeating its own caption. It is now a small drawn workspace built from the
+ * same pieces as the stage figures in OneTenderStages: requirement rows, a
+ * clause citation chip and a traced state. It carries no figure and no claim,
+ * and the slot comment stays so a real capture can replace it.
  */
 import Button from '../ui/Button.astro';
 
@@ -15,21 +24,32 @@ interface Props {
 }
 
 const { id = 'hero' } = Astro.props;
+
+/* The rows of the drawn workspace. Labels only, no figures. */
+const ROWS = [
+  { req: 'Mobilisation plan', cite: 'Tender clause', state: 'Traced' },
+  { req: 'Planned maintenance regime', cite: 'Bid library', state: 'Traced' },
+  { req: 'Social value commitment', cite: 'PPN 026', state: 'Traced' },
+  { req: 'Insurance certificates', cite: 'Evidence', state: 'Missing' },
+];
 ---
 
 <section class="h-hero" id={id} aria-labelledby="hero-title">
   <div class="h-hero__wrap">
-    <div class="h-hero__content">
+    <div class="h-hero__head">
       <p class="eyebrow h-hero__eyebrow">Procurement Act 2023 · s.52 · s.71 · PPN 026</p>
       <h1 class="h-hero__title" id="hero-title">
         Better bids. Defensible evidence. Measurable delivery.
       </h1>
+    </div>
+
+    <div class="h-hero__content">
       <p class="h-hero__lede">
         One connected platform to find opportunities, prepare evidence backed tender responses and track contract commitments.
       </p>
       <div class="h-hero__actions btn-row">
         <Button href="/bid/">Start with Velstrian Bid</Button>
-        <Button href="#walkthrough" variant="secondary">See a real tender walkthrough</Button>
+        <Button href="#stages" variant="secondary">See a real tender walkthrough</Button>
       </div>
       <p class="h-hero__note">
         From £49/month for suppliers. Public and private sector procurement teams.
@@ -46,13 +66,33 @@ const { id = 'hero' } = Astro.props;
         </div>
         <div class="h-preview__stage">
           <!-- slot: R285-WEB-PRODUCT-SCREENSHOTS-01 -->
-          <div class="h-preview__slot">
-            <p class="chip h-preview__kicker">Live workspace preview</p>
-            <p class="h-preview__caption">Requirements extraction, clause citations and evidence tracing</p>
+          <div class="h-preview__app" aria-hidden="true">
+            <figure class="h-preview__side">
+              <i class="h-draw__line" style="--w: 70%"></i>
+              <i class="h-draw__line h-draw__line--on" style="--w: 90%"></i>
+              <i class="h-draw__line" style="--w: 60%"></i>
+              <i class="h-draw__line" style="--w: 80%"></i>
+            </figure>
+            <ul class="h-draw" role="list">
+              <li class="h-draw__head meta">
+                <span>Requirement</span><span>State</span>
+              </li>
+              {
+                ROWS.map((r) => (
+                  <li class="h-draw__row surface--row">
+                    <span class="h-draw__label">{r.req}</span>
+                    <span class="h-draw__cite">{r.cite}</span>
+                    <span class={`h-draw__state meta ${r.state === 'Traced' ? 'h-draw__state--ok' : 'h-draw__state--gap'}`}>
+                      {r.state}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
         <figcaption class="h-preview__foot">
-          Fig 01. Live tender workspace: requirement extraction, clause citations and evidence tracing.
+          Fig 01. Tender workspace, drawn: requirement extraction, clause citations and evidence tracing.
         </figcaption>
       </figure>
     </div>

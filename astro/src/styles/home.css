@@ -46,9 +46,33 @@
   max-width: var(--measure);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: clamp(32px, 5vw, 64px);
+  /* R285-WEB-HOME-FORMAT-01. The head (eyebrow and headline) spans both
+     columns: inside one ~620px column the --t-h1 headline wrapped one word per
+     line at 1280. The lede and actions then sit beside the drawn workspace,
+     two balanced columns centred on each other. minmax(0, ...) on every track,
+     because a bare `1fr` keeps a min-content floor and the nowrap title in the
+     preview bar pushed the single column to 416px inside a 390px viewport. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    'head head'
+    'content preview';
+  column-gap: clamp(32px, 5vw, 64px);
+  row-gap: var(--stack-3);
   align-items: center;
+}
+
+.h-hero__head {
+  grid-area: head;
+  max-width: var(--measure-mid);
+  margin-inline: auto;
+}
+
+.h-hero__content {
+  grid-area: content;
+}
+
+.h-hero__preview {
+  grid-area: preview;
 }
 
 .h-hero__eyebrow {
@@ -57,7 +81,8 @@
 }
 
 .h-hero__title {
-  margin: 0 0 var(--stack-3, 20px);
+  margin: 0;
+  text-wrap: balance;
   font-family: var(--font-display);
   font-size: var(--t-h1);
   font-weight: 700;
@@ -67,7 +92,7 @@
 }
 
 .h-hero__lede {
-  margin: 0 0 var(--stack-3, 24px);
+  margin: 0 auto var(--stack-3, 24px);
   font-family: var(--font-body);
   font-size: var(--t-lede);
   line-height: 1.5;
@@ -77,6 +102,7 @@
 
 .h-hero__actions {
   margin-bottom: var(--stack-2, 12px);
+  justify-content: center;
 }
 
 .h-hero__note {
@@ -122,34 +148,30 @@
 }
 
 .h-preview__stage {
-  padding: clamp(24px, 4vw, 40px);
-  min-height: 280px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: var(--space-6);
   background: var(--c-bg);
 }
 
-.h-preview__slot {
-  text-align: center;
-  padding: 24px;
-  border: 1px dashed var(--c-border);
-  border-radius: var(--radius-inner);
-  max-width: var(--measure-prose);
-  width: 100%;
+/* THE DRAWN WORKSPACE: a sidebar of skeleton lines beside the requirement
+   rows. Built from the shared `.h-draw` pieces below. */
+.h-preview__app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 4fr);
+  gap: var(--space-4);
+  align-items: start;
 }
 
-.h-preview__kicker {
-  margin: 0 0 6px;
-  color: var(--c-ambient-start);
-}
-
-.h-preview__caption {
+.h-preview__side {
+  /* A <figure>: the sidebar is a drawing, and a drawing keeps its own internal
+     alignment (surfaces.css, the figure carve-out). margin 0 drops the UA figure inset. */
   margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--t-caption);
-  color: var(--c-text-sub);
-  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-chip);
+  background: var(--c-panel);
+  border: 1px solid var(--c-border);
 }
 
 .h-preview__foot {
@@ -268,7 +290,7 @@
 
 .h-stage__frame {
   margin: 0;
-  border-radius: var(--radius-inner);
+  border-radius: var(--radius-frame);
   background: var(--c-bg);
   border: 1px solid var(--c-border);
   overflow: hidden;
@@ -302,34 +324,7 @@
 }
 
 .h-stage__slot {
-  padding: clamp(20px, 3vw, 36px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 220px;
-}
-
-.h-stage__placeholder {
-  text-align: center;
-  padding: 16px;
-  border: 1px dashed var(--c-border);
-  border-radius: var(--radius-inner);
-  width: 100%;
-}
-
-.h-stage__kicker {
-  margin: 0 0 6px;
-  font-family: var(--font-body);
-  font-size: var(--t-caption);
-  font-weight: 600;
-  color: var(--c-text);
-}
-
-.h-stage__desc {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--t-micro);
-  color: var(--c-text-muted);
+  padding: var(--space-6);
 }
 
 .h-stage__cap {
@@ -341,8 +336,141 @@
   background: var(--c-panel);
 }
 
-.h-stage__moment {
-  width: 100%;
+/* ── THE DRAWING PIECES (R285-WEB-HOME-FORMAT-01) ─────────────────────────
+ *
+ * One set of pieces for every drawn figure on this page: the hero workspace
+ * and the five stage figures. A row is a label, a source chip and a state. A
+ * meter is a track with a fill whose width is the only value it carries, and
+ * no number is printed. A paragraph is a skeleton line, with a citation chip
+ * where the drawn sentence cites something. The state colours are the palette
+ * roles: --c-verified for traced, --c-refused for refused or still owed, and
+ * only a refused row is struck through.
+ *
+ * Every drawing is a <ul>, which alignment.css reads left to right, and is
+ * aria-hidden behind its figcaption, so nothing here is read twice. */
+.h-draw {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.h-draw__head,
+.h-draw__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.h-draw__head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 0 var(--space-3);
+  /* The mono uppercase recipe comes from `.meta` (styles/labels.css) on the element. */
+  color: var(--c-text-muted);
+}
+
+.h-draw__row {
+  padding: var(--space-3);
+  border-radius: var(--radius-chip);
+  background: var(--c-panel);
+  border: 1px solid var(--c-border);
+}
+
+.h-draw__row--meter {
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr) auto;
+}
+
+.h-draw__label {
+  font-family: var(--font-body);
+  font-size: var(--t-caption);
+  color: var(--c-text);
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.h-draw__cite {
+  justify-self: start;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--c-border);
+  background: var(--c-raised);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  color: var(--c-text-sub);
+  white-space: nowrap;
+}
+
+.h-draw__state {
+  /* The mono uppercase recipe comes from `.meta` (styles/labels.css) on the element. */
+  white-space: nowrap;
+}
+
+.h-draw__state--ok {
+  color: var(--c-verified);
+}
+
+.h-draw__state--gap {
+  color: var(--c-refused);
+}
+
+.h-draw__row--refused .h-draw__label {
+  text-decoration: line-through;
+  text-decoration-color: var(--c-refused);
+  color: var(--c-text-sub);
+}
+
+.h-draw__track {
+  display: block;
+  height: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--c-raised);
+  overflow: hidden;
+}
+
+.h-draw__fill {
+  display: block;
+  height: 100%;
+  width: var(--w);
+  border-radius: inherit;
+  background: var(--c-verified);
+}
+
+.h-draw__fill--gap {
+  background: var(--c-refused);
+}
+
+.h-draw__line {
+  display: block;
+  height: var(--space-2);
+  width: var(--w);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--c-text-muted) 35%, transparent);
+}
+
+.h-draw__line--on {
+  background: var(--c-verified);
+}
+
+.h-draw--prose {
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-chip);
+  background: var(--c-panel);
+  border: 1px solid var(--c-border);
+}
+
+.h-draw__para {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.h-draw__para .h-draw__line {
+  flex: 0 1 var(--w);
+  width: auto;
 }
 
 /* ── 4. WALKTHROUGH ────────────────────────────────────────────────────────── */
@@ -355,79 +483,34 @@
   margin-inline: auto;
 }
 
-.h-walkthrough__box.surface {
-  padding: 0;
-  overflow: hidden;
+/* R285-WEB-HOME-FORMAT-01: four numbered steps, each a link to the stage that
+   draws it. Four tracks, two at tablet, one on a phone, so no row is ever
+   left with an orphan. */
+.h-walkthrough__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--stack-2);
 }
 
-.h-walkthrough__bar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 18px;
-  background: var(--c-raised);
-  border-bottom: 1px solid var(--c-border);
-}
-
-.h-walkthrough__dots {
-  display: flex;
-  gap: 6px;
-}
-
-.h-walkthrough__dots i {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--c-text-muted) 40%, transparent);
-}
-
-.h-walkthrough__title {
-  font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  color: var(--c-text-muted);
-}
-
-.h-walkthrough__stage {
-  padding: clamp(32px, 6vw, 64px) var(--gutter, 24px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--c-bg);
-}
-
-.h-walkthrough__slot {
-  text-align: center;
-  max-width: var(--measure-prose);
+.h-walkthrough__link.surface {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-}
-
-.h-walkthrough__kicker {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--t-h4);
-  font-weight: 700;
+  gap: var(--space-2);
+  text-align: center;
+  text-decoration: none;
   color: var(--c-text);
 }
 
-.h-walkthrough__caption {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--t-caption);
-  color: var(--c-text-sub);
-  line-height: 1.5;
+.h-walkthrough__n {
+  color: var(--c-ambient-start);
 }
 
-.h-walkthrough__foot {
-  margin: 0;
-  padding: 10px 18px;
-  font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  color: var(--c-text-muted);
-  border-top: 1px solid var(--c-border);
-  background: var(--c-panel);
+.h-walkthrough__name {
+  font-family: var(--font-display);
+  font-size: var(--t-body);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 /* ── 5. TWO AUDIENCE PATHS ─────────────────────────────────────────────────── */
@@ -522,7 +605,9 @@
 
 .h-trust__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* Six cards. auto-fit at 280px gave four plus two at 1280, with two empty
+     cells. Three tracks fill two rows exactly, two tracks fill three. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--stack-2, 16px);
   margin-bottom: var(--stack-3, 24px);
 }
@@ -530,7 +615,7 @@
 .h-trust__card.surface {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-2);
 }
 
 .h-trust__h {
@@ -643,15 +728,60 @@
 /* ── RESPONSIVE ────────────────────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .h-hero__wrap {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'head'
+      'content'
+      'preview';
   }
 
   .h-stage.surface {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .h-trust__grid,
+  .h-walkthrough__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
+  .h-trust__grid,
+  .h-walkthrough__steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* On a phone the workspace drops its sidebar: the rows are the drawing. */
+  .h-preview__app {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .h-preview__side {
+    display: none;
+  }
+
+  /* A row's source chip moves under its label, so the label keeps its width. */
+  .h-draw__head {
+    display: none;
+  }
+
+  .h-draw__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .h-draw__row .h-draw__cite {
+    grid-row: 2;
+  }
+
+  .h-draw__row--meter {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .h-draw__row--meter .h-draw__track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .h-conversion__actions {
     grid-template-columns: 1fr;
   }
