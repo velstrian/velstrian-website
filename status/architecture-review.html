@@ -1,4 +1,4 @@
-<!-- [R27-ARCH-01] COPY of crowagent-platform/tools/arch-visualizer/index.html, sha256:59a3b7599358133f.
+<!-- [R27-ARCH-01] COPY of crowagent-platform/tools/arch-visualizer/index.html, sha256:b2ae41eaaa794e32714ec378d59e00d99158e4397c37dcc5f66443e005b190e5.
      It lives here because the status server serves crowagent-website/status only.
      A copy that can drift is a defect, so status/check-architecture-copy.mjs compares
      the two and fails if they diverge. Edit the SOURCE, then re-copy.
@@ -702,16 +702,17 @@
     <header>
         <div class="header-container" style="flex-direction:column;align-items:stretch;gap:1rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
-                <div class="logo-group">
+                <a href="/" style="text-decoration:none;color:inherit" class="logo-group" title="Back to Master Hub">
                     <div class="logo-icon">C</div>
                     <div class="logo-text">
                         <h1>CrowAgent Platform Architecture Review</h1>
                         <p>Flagship: CrowMark Bid & Tender Intelligence</p>
                     </div>
-                </div>
+                </a>
 
                 <!-- Top-level Board Switcher (matches status dashboard tabs) -->
                 <div class="nav-tabs" style="background:rgba(12,17,29,0.85);border-color:rgba(255,255,255,0.12)">
+                    <a href="/" class="board-tab" style="text-decoration:none;font-weight:700;color:#2DD4BF">Master Hub</a>
                     <a href="/#website" class="board-tab" style="text-decoration:none">Website</a>
                     <a href="/#platform" class="board-tab" style="text-decoration:none">Platform &amp; Portal</a>
                     <a href="/#tenancy" class="board-tab" style="text-decoration:none">Tenancy &amp; Isolation</a>

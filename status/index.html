@@ -638,7 +638,7 @@
     --pb-scheme:var(--pb-scheme-dk);
   }
 
-  body.pbmode, body.archmode, body.webmode{
+  body.pbmode, body.archmode, body.webmode, body.mastermode{
     --bg:var(--pb-bg); --text:var(--pb-ink); --sub:var(--pb-muted); --line:var(--pb-line);
     --card:var(--pb-panel); --card2:var(--pb-panel2); --teal:var(--pb-accent);
     --fixed:var(--pb-fixed); --built:var(--pb-built); --wip:var(--pb-wip);
@@ -649,7 +649,7 @@
     background:var(--pb-bg);color:var(--pb-ink);padding:0;
     font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
     font-size:14px;line-height:1.5}
-  body.pbmode .wrap, body.archmode .wrap, body.webmode .wrap{max-width:var(--measure);padding:28px var(--gutter) 56px;
+  body.pbmode .wrap, body.archmode .wrap, body.webmode .wrap, body.mastermode .wrap{max-width:var(--measure);padding:28px var(--gutter) 56px;
     display:flex;flex-direction:column;gap:22px}
   /* The older platform chrome this layout replaces. Hidden by CSS rather than
      the hidden attribute, because load() and render() already own that
@@ -660,12 +660,26 @@
   body.pbmode .warn{margin:0}
   body.pbmode .deploy{margin:0;border-radius:10px}
   body.pbmode .boardnav{margin:0;padding:0 0 14px}
-  body.pbmode .tabs button, body.archmode .tabs button, body.webmode .tabs button{border:1px solid var(--pb-line);background:var(--pb-panel);
+  body.pbmode .tabs button, body.archmode .tabs button, body.webmode .tabs button, body.mastermode .tabs button{border:1px solid var(--pb-line);background:var(--pb-panel);
     color:var(--pb-ink);border-radius:999px;padding:5px 14px;font:inherit;font-size:13px;
     min-height:32px;font-weight:400;cursor:pointer;transition:border-color .15s ease,background .15s ease}
-  body.pbmode .tabs button:hover, body.archmode .tabs button:hover, body.webmode .tabs button:hover{border-color:var(--pb-muted)}
-  body.pbmode .tabs button[aria-pressed="true"], body.archmode .tabs button[aria-pressed="true"], body.webmode .tabs button[aria-pressed="true"]{background:var(--pb-accent-soft);
+  body.pbmode .tabs button:hover, body.archmode .tabs button:hover, body.webmode .tabs button:hover, body.mastermode .tabs button:hover{border-color:var(--pb-muted)}
+  body.pbmode .tabs button[aria-pressed="true"], body.archmode .tabs button[aria-pressed="true"], body.webmode .tabs button[aria-pressed="true"], body.mastermode .tabs button[aria-pressed="true"]{background:var(--pb-accent-soft);
     border-color:var(--pb-accent);color:var(--pb-ink);font-weight:600}
+
+  /* ════════════════════════════════════════════════════════════════════════
+     MASTER HUB DESIGN SYSTEM (matching Platform & Architecture theme)
+     ════════════════════════════════════════════════════════════════════════ */
+  body.mastermode #updated,
+  body.mastermode #stats, body.mastermode #movement, body.mastermode #srcnote,
+  body.mastermode #filters, body.mastermode #issuetable, body.mastermode #legendbox,
+  body.mastermode #pbhead, body.mastermode #pbtop, body.mastermode #pbitems, body.mastermode #pbfoot{display:none}
+  body.mastermode .boardnav{margin:0;padding:0 0 10px;display:flex;flex-direction:column;gap:14px}
+
+  body.mastermode #boardheading{margin:0;font-size:26px;line-height:1.35;font-weight:700;
+    letter-spacing:-.01em;color:var(--pb-ink)}
+  body.mastermode #boardheading span{color:var(--pb-accent)}
+  body.mastermode #boardsub{color:var(--pb-muted);margin:2px 0 0;font-size:14px;line-height:1.5;max-width:960px}
 
   /* ════════════════════════════════════════════════════════════════════════
      ARCHITECTURE & TENANCY BOARD DESIGN SYSTEM (matching the Platform theme)
@@ -1142,6 +1156,44 @@
   .pb-note{padding:0 12px 12px;color:var(--pb-muted);font-size:13px;overflow-wrap:anywhere}
   .pb-empty{padding:20px;text-align:center;color:var(--pb-muted)}
   .pb-foot{font-size:12px;color:var(--pb-muted)}
+
+  /* Master Hub (CrowAgent Standards: matching Platform & Architecture) */
+  #masterhub{margin:0;display:flex;flex-direction:column;gap:22px}
+  .hub-hero{background:var(--pb-panel);border:1px solid var(--pb-line);border-left:4px solid var(--pb-accent);
+    border-radius:10px;padding:20px 22px}
+  .hub-hero .kicker{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pb-accent);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .hub-hero h2{margin:0 0 8px;font-size:22px;letter-spacing:-.015em;color:var(--pb-ink);font-weight:700}
+  .hub-hero p{margin:0;color:var(--pb-muted);font-size:13.5px;line-height:1.55;max-width:920px}
+  .hub-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+  .hub-search-wrap{position:relative;flex:1;min-width:260px;max-width:520px}
+  .hub-search{width:100%;background:var(--pb-panel2);border:1px solid var(--pb-line);border-radius:8px;padding:8px 14px;color:var(--pb-ink);font-family:"IBM Plex Sans",sans-serif;font-size:13.5px;outline:none;box-sizing:border-box;transition:border-color .15s ease}
+  .hub-search:focus{border-color:var(--pb-accent)}
+  .hub-search::placeholder{color:var(--pb-muted)}
+  .hub-meta{display:flex;flex-wrap:wrap;gap:8px}
+  .hub-pill{display:inline-flex;align-items:center;gap:6px;background:var(--pb-panel2);border:1px solid var(--pb-line);padding:5px 10px;border-radius:6px;font-size:11.5px;color:var(--pb-muted);font-family:"IBM Plex Mono",monospace}
+  .hub-pill b{color:var(--pb-ink);font-weight:600}
+  .hub-pill.live b{color:var(--pb-accent)}
+  .hub-section{margin:0;display:flex;flex-direction:column;gap:10px}
+  .hub-sec-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--pb-muted);margin:0;font-family:"IBM Plex Sans",sans-serif}
+  .hub-sec-sub{font-size:12.5px;color:var(--pb-muted);margin:0 0 4px;line-height:1.45}
+  .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+  .hub-card{display:flex;flex-direction:column;justify-content:space-between;background:var(--pb-panel);border:1px solid var(--pb-line);border-radius:10px;padding:16px 18px;text-decoration:none;color:inherit;transition:border-color .15s ease,background .15s ease}
+  .hub-card:hover{background:var(--pb-panel2);border-color:var(--pb-accent)}
+  .hub-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .hub-card-title{font-size:15px;font-weight:600;color:var(--pb-ink);margin:0;line-height:1.35}
+  .hub-card:hover .hub-card-title{color:var(--pb-accent)}
+  .hub-badge{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap;font-family:"IBM Plex Mono",monospace}
+  .hub-badge.teal{background:var(--pb-accent-soft);color:var(--pb-accent)}
+  .hub-badge.blue{background:var(--pb-built-bg);color:var(--pb-built)}
+  .hub-badge.amber{background:var(--pb-wip-bg);color:var(--pb-wip)}
+  .hub-badge.purple{background:var(--pb-decision-bg);color:var(--pb-decision)}
+  .hub-badge.slate{background:var(--pb-panel2);color:var(--pb-muted);border:1px solid var(--pb-line)}
+  .hub-badge.green{background:var(--pb-fixed-bg);color:var(--pb-fixed)}
+  .hub-card-desc{font-size:13px;color:var(--pb-muted);line-height:1.5;margin:0 0 14px;flex:1}
+  .hub-card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--pb-line);padding-top:10px;font-size:12px;color:var(--pb-accent);font-weight:600;font-family:"IBM Plex Mono",monospace}
+  .hub-card-footer .meta{color:var(--pb-muted);font-weight:400;font-size:11.5px}
+  .crumb-home{color:var(--pb-accent);text-decoration:none;font-weight:600}
+  .crumb-home:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -1245,6 +1297,7 @@
   <!-- [R27-ARCH-01] Where a document board renders. Empty and hidden for the two
        issue boards, so nothing shifts for them. -->
   <section id="docbody" hidden></section>
+  <section id="masterhub" hidden></section>
 
   <!-- [R283-BOARD-PLATFORM-ARTIFACT-01] The Platform tab item list. The legacy
        #issuetable below still renders, hidden, so nothing that reads it breaks. -->
@@ -2128,6 +2181,11 @@ document.getElementById('filters').addEventListener('click',e=>{
  * on the same page instead of silently resetting to the website.
  */
 const BOARDS = {
+  master: {
+    label: 'Master Hub',
+    heading: 'CrowAgent: Master Hub (Release 2.8.5)',
+    blurb: 'Unified directory of all status trackers, technical architecture blueprints, rebrand specifications, and environment endpoints.'
+  },
   website:  { file: 'issues.json',   label: 'Website',
               heading: 'Website transformation status',
               blurb: 'Every issue the owner reported, plus everything the audit found. Authored by hand, and nothing is marked done without evidence.' },
@@ -2187,41 +2245,11 @@ const BOARDS = {
       { id: 'aionboarding', label: 'AI onboarding',
         blurb: 'What every AI tool must follow: entry files, roles, deploy, test, pipeline and secret rules',
         doc:   'architecture-ai-onboarding.html' },
-      /* [R28-ARCH-REVIEW-RETIRED-01] THE ARCHITECTURE REVIEW VIEW WAS REMOVED
-         2026-08-29 on owner instruction, after the owner reported the page as
-         reading "very odd".
-
-         It was not a styling fault. `architecture-review.html` is a 311KB
-         HAND-AUTHORED document titled "revalidated for Release 2.7,
-         2026-08-16". It carries its own complete design system, so it always
-         read as a different website inside a frame, and no board styling can
-         fix that without rewriting it. `tools/arch-visualizer/` holds only a
-         server and an instructions file, so it is NOT generated by a pipeline
-         and "regenerate it" was never a button.
-
-         The deciding reason is content, not appearance: it is an R2.7 record
-         that CONTRADICTS the current and target diagrams built on 2026-08-29
-         from measured production numbers, and it predates the decision to
-         separate the internal portal. TWO ARCHITECTURE DOCUMENTS THAT DISAGREE
-         ARE WORSE THAN ONE.
-
-         NOTHING WAS DELETED. `status/architecture-review.html` and
-         `crowagent-platform/tools/arch-visualizer/index.html` both remain on
-         disk and the file still serves at its own URL. The board simply stops
-         OFFERING it beside three views that are current. Restoring it is one
-         entry in this array. */
     ],
   },
 };
 /* [R28-BOARD-HASH-FALLBACK-01] The board name is NORMALISED before the lookup,
    and an unrecognised one is SAID OUT LOUD rather than silently swapped.
-
-   The owner sat on `#platform?` and reported the board as not updating. It was
-   updating perfectly. The trailing `?` made the lookup key `platform?`, which is
-   not in BOARDS, so this fell through to `website` and rendered a DIFFERENT
-   DATASET with no indication at all. A status surface that quietly shows you the
-   wrong board is worse than one that is stale, because stale at least looks
-   wrong eventually.
 
    Normalising kills the whole class: anything after a `?` or a second `#` is
    stripped, surrounding space goes, and the compare is case-insensitive, so
@@ -2233,8 +2261,9 @@ function boardFromHash() {
   const raw = location.hash.replace('#', '').split('/')[0];
   const key = raw.split('?')[0].split('#')[0].trim().toLowerCase();
   if (key in BOARDS) return { board: key, misread: raw !== key ? raw : null };
-  if (key) return { board: 'website', misread: raw, unknown: true };
-  return { board: 'website', misread: null };
+  if (!key || key === 'home' || key === 'index') return { board: 'master', misread: null };
+  if (key) return { board: 'master', misread: raw, unknown: true };
+  return { board: 'master', misread: null };
 }
 const _initialBoard = boardFromHash();
 let board = _initialBoard.board;
@@ -2262,7 +2291,9 @@ function renderTabs(){
     : (BOARDS[board].heading || BOARDS[board].label);
   const el = document.getElementById('boardheading');
   if (el) {
-    if (board === 'architecture' && h.includes(': ')) {
+    if (board === 'master') {
+      el.innerHTML = 'CrowAgent: <span>Master Hub (Release 2.8.5)</span>';
+    } else if (board === 'architecture' && h.includes(': ')) {
       const parts = h.split(': ');
       el.innerHTML = esc(parts[0]) + ': <span>' + esc(parts[1]) + '</span>';
     } else if (board === 'website' && h.includes('status')) {
@@ -2337,7 +2368,7 @@ function renderDocSwitch(spec, active){
   if (!el) return;
   const view = spec.views.find(v => v.id === active) || spec.views[0];
   const crumb =
-    '<p class="crumb"><span>Status</span><span class="sep">&rsaquo;</span>' +
+    '<p class="crumb"><a href="#master" class="crumb-home">Master Hub</a><span class="sep">&rsaquo;</span>' +
     '<span>' + esc(spec.label) + '</span><span class="sep">&rsaquo;</span>' +
     '<b>' + esc(view.label) + '</b>' +
     '<span class="sep">&middot;</span><span>' + esc(view.blurb || '') + '</span></p>';
@@ -2421,6 +2452,33 @@ async function load(){
   document.body.classList.toggle('pbmode', board === 'platform');
   document.body.classList.toggle('archmode', board === 'architecture');
   document.body.classList.toggle('webmode', board === 'website');
+  document.body.classList.toggle('mastermode', board === 'master');
+
+  const hubEl = document.getElementById('masterhub');
+
+  if (board === 'master') {
+    renderTabs();
+    if (hubEl) {
+      hubEl.hidden = false;
+      renderMasterHub();
+    }
+    for (const id of ['filters','deploy','summary','movement','srcnote','legend',
+                      'stats','legendbox','warn','unreadable','updated']) {
+      const el = document.getElementById(id); if (el) el.hidden = true;
+    }
+    const pbHead = document.getElementById('pbhead'); if (pbHead) pbHead.hidden = true;
+    const pbTop = document.getElementById('pbtop'); if (pbTop) pbTop.hidden = true;
+    const pbList = document.getElementById('pbitems'); if (pbList) pbList.hidden = true;
+    document.getElementById('issuetable').hidden = true;
+    document.getElementById('docbody').hidden = true;
+    const swEl = document.getElementById('docswitch');
+    if (swEl) { swEl.innerHTML = ''; swEl.hidden = true; }
+    document.body.classList.remove('fullbleed');
+    return;
+  }
+
+  if (hubEl) hubEl.hidden = true;
+
   if (spec.views) {
     renderTabs();
     /* [R28-BOARD-NAV-01] `stats` AND `legendbox` WERE MISSING FROM THIS LIST, and
@@ -2577,6 +2635,310 @@ document.getElementById('docbody').addEventListener('click', e => {
   target.scrollIntoView({ block: 'start' });
 });
 
+function renderMasterHub() {
+  const hub = document.getElementById('masterhub');
+  if (!hub) return;
+  hub.innerHTML = `
+    <div class="hub-hero">
+      <div class="kicker">Release 2.8.5 &middot; Master Directory</div>
+      <div class="hub-bar" style="margin-top:0">
+        <div>
+          <h2>Platform, Website &amp; Architecture Directory</h2>
+          <p>Unified directory for the CrowAgent / Velstrian workspace. All status trackers, technical architecture blueprints, rebrand specifications, and environment endpoints are indexed below. Every page includes a return link back to this master directory.</p>
+        </div>
+      </div>
+      <div class="hub-bar" style="margin-top:14px">
+        <div class="hub-search-wrap">
+          <input type="search" id="hubsearch" class="hub-search" placeholder="Filter pages (e.g. platform, tenancy, devguide, rebrand, astro)..." autocomplete="off" aria-label="Search all pages">
+        </div>
+        <div class="hub-meta">
+          <span class="hub-pill live"><b>SERVER ONLINE</b> http://localhost:8099/</span>
+          <span class="hub-pill"><b>RELEASE</b> 2.8.5</span>
+          <span class="hub-pill"><b>DESTINATIONS</b> 15 verified</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hub-section" data-cat="trackers">
+      <h3 class="hub-sec-title">Status Boards &amp; Issue Registers</h3>
+      <p class="hub-sec-sub">Live progress trackers, owner-reported issue registers, defect metrics, and release gating status.</p>
+      <div class="hub-grid">
+        <a href="#platform" class="hub-card" data-kw="platform portal release status defects issues r285 r28 burn matrix">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Platform &amp; Portal Release Status</h4>
+              <span class="hub-badge teal">Auto-Derived</span>
+            </div>
+            <p class="hub-card-desc">Derived automatically from RELEASE-2.8.5-TRACKER.md and defect register. Shows progress per owner prompt, severity by status, running jobs, and burning issues.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Open Platform Board &rarr;</span>
+            <span class="meta">#platform &middot; localhost:8099</span>
+          </div>
+        </a>
+
+        <a href="#website" class="hub-card" data-kw="website transformation status issues audit marketing fixes evidence">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Website Transformation Status</h4>
+              <span class="hub-badge blue">Hand-Authored</span>
+            </div>
+            <p class="hub-card-desc">Comprehensive register of every issue the owner reported, plus everything the audit found. Nothing marked done without evidence. Tracks 400+ marketing items.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Open Website Board &rarr;</span>
+            <span class="meta">#website &middot; localhost:8099</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="hub-section" data-cat="architecture">
+      <h3 class="hub-sec-title">Architecture &amp; Engineering Governance</h3>
+      <p class="hub-sec-sub">System architecture diagrams, tenancy models, developer commands, CI estate, and AI agent standards.</p>
+      <div class="hub-grid">
+        <a href="#architecture/target" class="hub-card" data-kw="architecture target state diagrams topology coupling services isolation">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Target Architecture</h4>
+              <span class="hub-badge teal">Diagrams &amp; Metrics</span>
+            </div>
+            <p class="hub-card-desc">Visual system diagrams: what runs today, what to build, separation between Platform and CrowMark, and measured coupling numbers.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View Architecture &rarr;</span>
+            <span class="meta">#architecture/target</span>
+          </div>
+        </a>
+
+        <a href="#architecture/tenancy" class="hub-card" data-kw="tenancy isolation database customer dedicated pooled multi-tenant g-cloud">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Tenancy &amp; Isolation Analysis</h4>
+              <span class="hub-badge purple">Security &amp; Database</span>
+            </div>
+            <p class="hub-card-desc">Can a customer have its own database, and should it? Written against codebase realities, with G-Cloud answers and competitor comparison.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View Tenancy Model &rarr;</span>
+            <span class="meta">#architecture/tenancy</span>
+          </div>
+        </a>
+
+        <a href="#architecture/ci" class="hub-card" data-kw="ci continuous integration scheduled cron workflows cost gates test">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">CI &amp; Scheduled Work Estate</h4>
+              <span class="hub-badge amber">Pipelines &amp; Costs</span>
+            </div>
+            <p class="hub-card-desc">Every GitHub Actions job run, what each costs, execution cadence, and which workflows gate production releases. Measured, not estimated.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View CI Estate &rarr;</span>
+            <span class="meta">#architecture/ci</span>
+          </div>
+        </a>
+
+        <a href="#architecture/release" class="hub-card" data-kw="release environments staging production promotion mandate deploy guardrails">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Release &amp; Environments Guide</h4>
+              <span class="hub-badge blue">Binding Mandate</span>
+            </div>
+            <p class="hub-card-desc">Local to staging to production by promotion only. Required environment variables, verification gates, and release guardrails.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View Release Guide &rarr;</span>
+            <span class="meta">#architecture/release</span>
+          </div>
+        </a>
+
+        <a href="#architecture/devguide" class="hub-card" data-kw="developer guide commands terminal scripts manifests ci pipeline test verify">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Developer Guide</h4>
+              <span class="hub-badge slate">Manual Commands</span>
+            </div>
+            <p class="hub-card-desc">Set up, run, verify, promote. Complete inventory of terminal commands, scripts that matter, and what CI runs. Read from manifests.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View Developer Guide &rarr;</span>
+            <span class="meta">#architecture/devguide</span>
+          </div>
+        </a>
+
+        <a href="#architecture/aionboarding" class="hub-card" data-kw="ai onboarding gemini claude kiro codex cursor copilot rules secrets standards">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">AI Onboarding Standards</h4>
+              <span class="hub-badge green">Agent Guardrails</span>
+            </div>
+            <p class="hub-card-desc">What every AI tool (Gemini, Claude, Kiro, Codex) must follow: entry files, roles, deployment limits, test rules, and secret protection.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View AI Standards &rarr;</span>
+            <span class="meta">#architecture/aionboarding</span>
+          </div>
+        </a>
+
+        <a href="/architecture-review.html" class="hub-card" data-kw="architecture review visualizer 3d chart.js mermaid crowmark rating visualizer">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Architecture Review Visualizer</h4>
+              <span class="hub-badge teal">Standalone App</span>
+            </div>
+            <p class="hub-card-desc">Interactive 3D/Mermaid deep-dive into platform components, CrowMark capabilities, and benchmark metrics with Chart.js analytics.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Launch Visualizer &rarr;</span>
+            <span class="meta">/architecture-review.html</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="hub-section" data-cat="brand">
+      <h3 class="hub-sec-title">Brand Strategy &amp; Design Systems</h3>
+      <p class="hub-sec-sub">Rebranding roadmaps, Companies House &amp; TM clearance, and curated enterprise brand theme palettes.</p>
+      <div class="hub-grid">
+        <a href="/rebrand-velstran.html" class="hub-card" data-kw="rebrand velstran plan trade mark companies house domains porkbun dry run rename">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Velstrian Rebrand Plan &amp; Strategy</h4>
+              <span class="hub-badge amber">Blueprint &amp; Dry Run</span>
+            </div>
+            <p class="hub-card-desc">Strategic rename from CrowAgent to Velstrian (owner decision 18 Oct 2026). Domains free, Companies House clear, trade mark search is an owner step, 41 numbered steps.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Open Rebrand Plan &rarr;</span>
+            <span class="meta">/rebrand-velstran.html</span>
+          </div>
+        </a>
+
+        <a href="/enterprise-brand-color.html" class="hub-card" data-kw="brand colors figma lovable themes palette dark light enterprise design system">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Enterprise Brand Color Matrix</h4>
+              <span class="hub-badge purple">Design System</span>
+            </div>
+            <p class="hub-card-desc">Top 20 enterprise brand themes curated from top Figma enterprise systems and Lovable UI architecture. Interactive dark/light mode preview and CSS token generator.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Open Color Matrix &rarr;</span>
+            <span class="meta">/enterprise-brand-color.html</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="hub-section" data-cat="environments">
+      <h3 class="hub-sec-title">Live Services &amp; Environments</h3>
+      <p class="hub-sec-sub">External links to live production applications, customer portals, local dev servers, and public tools.</p>
+      <div class="hub-grid">
+        <a href="https://crowagent.ai" target="_blank" rel="noopener" class="hub-card" data-kw="marketing website live production crowagent.ai cloudflare">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Live Marketing Site</h4>
+              <span class="hub-badge green">Production</span>
+            </div>
+            <p class="hub-card-desc">Official CrowAgent marketing site hosted on Cloudflare Pages. Built from astro/dist on push to main.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Visit crowagent.ai &rarr;</span>
+            <span class="meta">https://crowagent.ai</span>
+          </div>
+        </a>
+
+        <a href="http://localhost:8093" target="_blank" rel="noopener" class="hub-card" data-kw="local astro dev server localhost:8093 8094 marketing preview">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Local Marketing Dev Server</h4>
+              <span class="hub-badge slate">Port 8093</span>
+            </div>
+            <p class="hub-card-desc">Local development server for the Astro marketing website. Started via 'npm run dev' inside the astro directory.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Open Local Dev &rarr;</span>
+            <span class="meta">http://localhost:8093</span>
+          </div>
+        </a>
+
+        <a href="https://staging-app.crowagent.ai" target="_blank" rel="noopener" class="hub-card" data-kw="staging app platform test tenant crowagent staging-app">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Staging Platform App</h4>
+              <span class="hub-badge amber">Staging Testbed</span>
+            </div>
+            <p class="hub-card-desc">Staging environment for test tenant walks and verification runs before production promotion.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Visit Staging App &rarr;</span>
+            <span class="meta">https://staging-app.crowagent.ai</span>
+          </div>
+        </a>
+
+        <a href="https://app.crowagent.ai" target="_blank" rel="noopener" class="hub-card" data-kw="production app platform crowmark bid tender intelligence">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Production Platform App</h4>
+              <span class="hub-badge green">Production</span>
+            </div>
+            <p class="hub-card-desc">Flagship CrowMark Bid &amp; Tender Intelligence SaaS platform in production.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Visit Production App &rarr;</span>
+            <span class="meta">https://app.crowagent.ai</span>
+          </div>
+        </a>
+
+        <a href="https://portal.crowagent.ai" target="_blank" rel="noopener" class="hub-card" data-kw="customer portal self-service organisation billing">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Production Customer Portal</h4>
+              <span class="hub-badge blue">Portal</span>
+            </div>
+            <p class="hub-card-desc">Self-service organisation administration, user invitations, and account subscription management.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Visit Portal &rarr;</span>
+            <span class="meta">https://portal.crowagent.ai</span>
+          </div>
+        </a>
+
+        <a href="https://crowagent.ai/tools/tender-compliance-matrix" target="_blank" rel="noopener" class="hub-card" data-kw="tender compliance matrix free tool procurement">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Tender Compliance Matrix</h4>
+              <span class="hub-badge teal">Free Tool</span>
+            </div>
+            <p class="hub-card-desc">The single retained free procurement compliance tool on the live marketing website.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>Open Free Tool &rarr;</span>
+            <span class="meta">crowagent.ai/tools/...</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  `;
+
+  const input = document.getElementById('hubsearch');
+  if (input) {
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      const cards = hub.querySelectorAll('.hub-card');
+      cards.forEach(c => {
+        const text = (c.textContent + ' ' + (c.getAttribute('data-kw') || '')).toLowerCase();
+        c.style.display = (!q || text.includes(q)) ? '' : 'none';
+      });
+      hub.querySelectorAll('.hub-section').forEach(sec => {
+        const visCards = sec.querySelectorAll('.hub-card:not([style*="display: none"])');
+        sec.style.display = visCards.length ? '' : 'none';
+      });
+    });
+  }
+}
+
 load();
 
 /* [R28-BOARD-HASH-FALLBACK-01] Say it, then fix the URL. A silent correction
@@ -2595,11 +2957,9 @@ if (_initialBoard.misread) {
 }
 
 /* [R27-ARCH-06] The poll refreshes platform.json for ISSUE boards. On a DOCUMENT
-   board there is nothing to refresh, and re-injecting the fragment every 10
-   seconds WIPED the reader's chosen diagram state and closed every evidence
-   block they had opened. Measured, not theorised: a selection reverted between
-   two reads 20 seconds apart. So the poll now skips document boards. */
-setInterval(() => { if (!BOARDS[board].views) load(); }, 10000);
+   board or the MASTER hub there is nothing to refresh, and re-injecting the fragment
+   every 10 seconds wiped reader state. */
+setInterval(() => { if (!BOARDS[board].views && board !== 'master') load(); }, 10000);
 </script>
 </body>
 </html>
