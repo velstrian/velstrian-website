@@ -71,44 +71,71 @@ function getHtmlFiles(dir) {
 
 const KEPT_HOSTS = [
   'app.crowagent.ai',
+  'portal.crowagent.ai',
   'status.crowagent.ai',
   'calendly.com/crowagent-platform',
   'crowagent-platform-production.up.railway.app',
 ];
 
+const ROOT_TEXT_FILES = [
+  'robots.txt',
+  'llms.txt',
+  'llms-full.txt',
+  '.well-known/security.txt',
+];
+
+function checkContent(rel, rawContent) {
+  let content = rawContent;
+
+  // Mask allowed transitional external app/infrastructure hosts
+  for (const h of KEPT_HOSTS) {
+    content = content.split(h).join('__KEPT_HOST__');
+  }
+
+  // Check for CrowMark
+  const crowmarkMatches = content.match(/\bCrowMark\b/g);
+  if (crowmarkMatches) {
+    errors.push(`[old-product-name] ${rel}: found ${crowmarkMatches.length} occurrence(s) of "CrowMark"`);
+  }
+
+  // Check for CrowAgent / Crow Agent
+  const crowagentMatches = content.match(/\bCrow\s?Agent\b/g);
+  if (crowagentMatches) {
+    errors.push(`[old-brand-name] ${rel}: found ${crowagentMatches.length} occurrence(s) of "CrowAgent"`);
+  }
+
+  // Check for old email addresses @crowagent.ai
+  const emailMatches = content.match(/[a-z0-9._%+-]+@crowagent\.ai\b/gi);
+  if (emailMatches) {
+    errors.push(`[old-email] ${rel}: found old email "${emailMatches.join(', ')}"`);
+  }
+
+  // Check for self references to crowagent.ai (any unmasked crowagent.ai)
+  const selfRefMatches = content.match(/(?:https?:\/\/)?(?:www\.)?crowagent\.ai[^\s"'<>)]*/gi);
+  if (selfRefMatches) {
+    errors.push(`[self-reference] ${rel}: found self-reference "${selfRefMatches.join(', ')}" to crowagent.ai`);
+  }
+
+  // Check for old company name
+  const legalMatches = content.match(/(?:CROWAGENT\s+LTD|Crow[Aa]gent\s+(?:Ltd|Limited)|VELSTRIAN\s+SYSTEMS\s+LIMITED)\b/g);
+  if (legalMatches) {
+    errors.push(`[wrong-legal-name] ${rel}: found "${legalMatches.join(', ')}" (must be "Velstrian Systems Ltd")`);
+  }
+}
+
 if (fs.existsSync(DIST)) {
   const htmlFiles = getHtmlFiles(DIST);
   for (const file of htmlFiles) {
     const rel = path.relative(DIST, file).replace(/\\/g, '/');
-    let content = fs.readFileSync(file, 'utf8');
+    const content = fs.readFileSync(file, 'utf8');
+    checkContent(rel, content);
+  }
 
-    // Mask allowed transitional external hosts
-    for (const h of KEPT_HOSTS) {
-      content = content.split(h).join('__KEPT_HOST__');
-    }
-
-    // Check for CrowMark
-    const crowmarkMatches = content.match(/\bCrowMark\b/g);
-    if (crowmarkMatches) {
-      errors.push(`[old-product-name] ${rel}: found ${crowmarkMatches.length} occurrence(s) of "CrowMark" in built HTML`);
-    }
-
-    // Check for CrowAgent / Crow Agent
-    const crowagentMatches = content.match(/\bCrow\s?Agent\b/g);
-    if (crowagentMatches) {
-      errors.push(`[old-brand-name] ${rel}: found ${crowagentMatches.length} occurrence(s) of "CrowAgent" in built HTML`);
-    }
-
-    // Check for old email addresses @crowagent.ai
-    const emailMatches = content.match(/[a-z0-9._-]+@crowagent\.ai/gi);
-    if (emailMatches) {
-      errors.push(`[old-email] ${rel}: found old email "${emailMatches.join(', ')}" in built HTML`);
-    }
-
-    // Check for old company name
-    const legalMatches = content.match(/(?:CROWAGENT\s+LTD|Crow[Aa]gent\s+(?:Ltd|Limited)|VELSTRIAN\s+SYSTEMS\s+LIMITED)\b/g);
-    if (legalMatches) {
-      errors.push(`[wrong-legal-name] ${rel}: found "${legalMatches.join(', ')}" in built HTML (must be "Velstrian Systems Ltd")`);
+  for (const textFile of ROOT_TEXT_FILES) {
+    const fullPath = path.join(DIST, textFile);
+    if (fs.existsSync(fullPath)) {
+      const content = fs.readFileSync(fullPath, 'utf8');
+      checkContent(textFile, content);
     }
   }
 }

@@ -23,6 +23,7 @@ import Section from '../components/layout/Section.astro';
 import Button from '../components/ui/Button.astro';
 import { FAQ_CATEGORIES, FAQ_ALL } from '../data/faq';
 import { faqPage, breadcrumbs } from '../lib/schema';
+import { HELLO_EMAIL } from '../lib/brand-names';
 
 const title = 'Velstrian Bid FAQ | Bid software questions answered | Velstrian';
 const description =
@@ -128,7 +129,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
   >
     {/*
       "EMAIL US" IS BACK (OA-28, 2026-08-02). faq.html:446-449 offers exactly two
-      actions here, a Calendly booking and mailto:hello@crowagent.ai, and the port
+      actions here, a Calendly booking and mailto:hello@velstrian.com, and the port
       kept only the booking. The allow-list justified dropping the mailto by the
       "request access is a web form, never a bare mailto" rule, but that rule is
       about ACCESS REQUESTS, which this is not: it is the general enquiry address,
@@ -138,7 +139,7 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     <div class="btn-row">
       <Button href="/contact/#contact-form">Send us a message</Button>
       <Button href={CALENDLY} variant="secondary" target="_blank">Book a call</Button>
-      <Button href="mailto:hello@velstrian.com" variant="secondary">Email us</Button>
+      <Button href={`mailto:${HELLO_EMAIL}`} variant="secondary">Email us</Button>
     </div>
   </Section>
 </Base>

@@ -12,7 +12,7 @@
  * `crowagent.platform@gmail.com` / "Crow Agent". That is a cross-project
  * copy/paste defect (those are the `crowagent-platform` repo's identity
  * strings, not this website's) and is NOT carried forward here. Every
- * contact surface in this file uses `hello@crowagent.ai`, matching the
+ * contact surface in this file uses `hello@velstrian.com`, matching the
  * footer, contact page and every other page's structured data.
  */
 
@@ -20,18 +20,19 @@ import {
   PLATFORM_NAME,
   PLATFORM_SHORT_NAME,
   LEGAL_ENTITY_NAME,
-  SUPPORT_EMAIL,
+  HELLO_EMAIL,
   COMPANY_NUMBER,
+  SITE_ORIGIN,
 } from '../lib/brand-names';
 
 export const SITE = {
   name: PLATFORM_SHORT_NAME,
   platformName: PLATFORM_NAME,
   legalName: LEGAL_ENTITY_NAME,
-  origin: 'https://velstrian.com',
-  defaultOgImage: 'https://velstrian.com/Assets/og-image.png?v=20260730',
+  origin: SITE_ORIGIN,
+  defaultOgImage: `${SITE_ORIGIN}/Assets/og-image.png?v=20260730`,
   twitter: '@VelstrianLtd',
-  email: SUPPORT_EMAIL,
+  email: HELLO_EMAIL,
 
   /**
    * The Organization JSON-LD node, emitted on every page by Seo.astro as
@@ -39,14 +40,14 @@ export const SITE = {
    */
   organizationSchema: {
     '@type': 'Organization',
-    '@id': 'https://velstrian.com/#organization',
+    '@id': `${SITE_ORIGIN}/#organization`,
     name: PLATFORM_NAME,
     legalName: LEGAL_ENTITY_NAME,
-    url: 'https://velstrian.com/',
-    logo: 'https://velstrian.com/Assets/og-image.png?v=20260730',
+    url: `${SITE_ORIGIN}/`,
+    logo: `${SITE_ORIGIN}/Assets/og-image.png?v=20260730`,
     description:
       'Velstrian serves both sides of a procurement, public sector and private. Suppliers answer tenders, RFPs, PQQs and SQs from bids already written. Buyers publish requirements and find the evidence.',
-    email: SUPPORT_EMAIL,
+    email: HELLO_EMAIL,
     identifier: { '@type': 'PropertyValue', name: 'Companies House', value: COMPANY_NUMBER },
     address: { '@type': 'PostalAddress', addressCountry: 'GB' },
     sameAs: [

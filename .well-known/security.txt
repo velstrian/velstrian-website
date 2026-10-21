@@ -1,4 +1,4 @@
-# Security Policy for VELSTRIAN SYSTEMS LIMITED
+# Security Policy for Velstrian Systems Ltd
 # Per RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116)
 #
 # WS-AUDIT-009 (2026-05-06): Encryption: line removed because the referenced

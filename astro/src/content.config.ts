@@ -15,7 +15,7 @@ const blog = defineCollection({
     /*
      * THE SERP TITLE, WHERE IT CANNOT BE THE HEADLINE (A-89).
      *
-     * `<title>` is composed as `${title} | CrowAgent`, so a headline of 50
+     * `<title>` is composed as `${title} | Velstrian`, so a headline of 50
      * characters ships a 61-character title and Google truncates it around 60.
      * Measured 2026-08-04: eight of the eight blog posts were over, the longest
      * at 78, and what the truncation ate was the descriptive clause (the part
@@ -50,7 +50,7 @@ const blog = defineCollection({
     author: z.string().optional(),
     /*
      * THE ROLE IS A SEPARATE FIELD AND NOT PART OF THE NAME. Folding it into
-     * `author` would put "Founder, CrowAgent" inside the schema.org Person
+     * `author` would put "Founder, Velstrian" inside the schema.org Person
      * `name`, which is a claim that the person is called that. Kept apart, the
      * byline reads as a byline and the structured data carries `jobTitle`.
      */
@@ -76,7 +76,7 @@ const blog = defineCollection({
 });
 
 /**
- * /compare/*: honest, sourced CrowMark-vs-competitor pages.
+ * /compare/*: honest, sourced Velstrian-Bid-vs-competitor pages.
  *
  * og:title/twitter:title equal the bare `title` (no " | CrowAgent" suffix)
  * on every legacy compare page, so the page derives them from `title`

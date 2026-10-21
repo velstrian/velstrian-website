@@ -31,7 +31,7 @@ name: Robots guard — AI crawlers must stay allowed on crowagent.ai
 # for six HTTPS assertions. That container is already running and already paid for.
 #
 # WHERE A FAILURE SURFACES NOW: a `job_runs` row, a Sentry issue, an IMMEDIATE
-# branded email to hello@crowagent.ai, and the 00:30 UTC daily failure digest,
+# branded email to hello@velstrian.com, and the 00:30 UTC daily failure digest,
 # rather than a red square in the Actions tab.
 #
 # THE `push` TRIGGER STAYS. The thing this guard watches is a Cloudflare DASHBOARD

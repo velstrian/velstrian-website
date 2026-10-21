@@ -37,7 +37,7 @@
  * reject every submission on a live capture path.
  *
  * NO PERSONAL DATA GOES ANYWHERE THE NOTICE DOES NOT NAME. This is first-party
- * to CrowAgent, and the address is held in Brevo (EU), which the privacy notice
+ * to Velstrian, and the address is held in Brevo (EU), which the privacy notice
  * already lists as a sub-processor for "transactional and marketing email
  * delivery". This is not a second OA-08.
  *
@@ -85,6 +85,7 @@ const NOTIFY_ENDPOINT = 'https://app.crowagent.ai/api/notify';
   novalidate
   data-newsletter
   data-source={source}
+  data-contact-email={SITE.email}
 >
   {/* Honeypot, carried over from the legacy block. Off-screen rather than
       display:none so a bot reading the DOM still finds it. */}
@@ -330,9 +331,10 @@ const NOTIFY_ENDPOINT = 'https://app.crowagent.ai/api/notify';
                 timestamp: new Date().toISOString(),
               }),
             );
+            const contactEmail = form.getAttribute('data-contact-email') || 'hello@velstrian.com';
             setStatus(
               'bad',
-              'Something went wrong. Please try again, or email hello@velstrian.com.',
+              `Something went wrong. Please try again, or email ${contactEmail}.`,
             );
             setBusy(false);
             btn.textContent = idle;

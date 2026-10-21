@@ -1,5 +1,5 @@
 /**
- * integrations.ts: what CrowMark actually connects to, and the evidence for
+ * integrations.ts: what Velstrian Bid actually connects to, and the evidence for
  * each line.
  *
  * ── WHY THIS FILE EXISTS RATHER THAN LIVING IN THE PAGE ─────────────────────

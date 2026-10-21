@@ -221,7 +221,7 @@ blockquote > a,
  *
  *   233x23, 125.6x23, 233x23   a link that IS a card's h3, on /resources and
  *                              /tools. A heading is not in that selector list.
- *   154.2x20                   li > Email > strong > a to hello@crowagent.ai on
+ *   154.2x20                   li > Email > strong > a to hello@velstrian.com on
  *                              /accessibility. One phrasing wrapper deep, so the
  *                              direct-child combinator steps straight over it.
  *

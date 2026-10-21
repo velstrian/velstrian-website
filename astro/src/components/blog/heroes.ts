@@ -109,7 +109,7 @@ export const HEROES: Record<string, Hero> = {
    * REPLACED 2026-08-04, and this one retires a deliberate decision rather than
    * a weak picture, so the decision is written down.
    *
-   * These last two posts carried generated CrowAgent brand artwork instead of a
+   * These last two posts carried generated Velstrian brand artwork instead of a
    * photograph, on the argument recorded in blog/PHOTO-CREDITS.md that neither
    * subject had an honest photographic match. That argument was made while
    * every photograph on the page was being desaturated to near-monochrome by

@@ -23,6 +23,7 @@ import Section from '../components/layout/Section.astro';
 import Button from '../components/ui/Button.astro';
 import PartnerForm from '../components/forms/PartnerForm.astro';
 import { breadcrumbs } from '../lib/schema';
+import { HELLO_EMAIL } from '../lib/brand-names';
 
 const title = 'Partners | Velstrian';
 /*
@@ -155,7 +156,7 @@ const WHY = [
 /*
  * THE BOOKING LINK IS BACK (OA-28, 2026-08-02). partners.html:320-327 closes on
  * a "Ready to start?" band whose two actions are this Calendly link and
- * mailto:hello@crowagent.ai. The port folded that band's heading into "Express
+ * mailto:hello@velstrian.com. The port folded that band's heading into "Express
  * your interest." and kept the mailto in the hero, but the booking link went
  * with the band, leaving the form as the only way a partner could start a
  * conversation. It returns inside the enquiry section, which is where the folded
@@ -195,7 +196,7 @@ const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
     as="h1">
     <div class="btn-row">
       <Button href="#partner-enquiry">Become a partner</Button>
-      <Button href="mailto:hello@velstrian.com" variant="secondary">Talk to us</Button>
+      <Button href={`mailto:${HELLO_EMAIL}`} variant="secondary">Talk to us</Button>
     </div>
   </Section>
 

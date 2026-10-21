@@ -6,6 +6,7 @@ import Button from '../../components/ui/Button.astro';
 import { SIGNUP_URL } from '../../data/app';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { breadcrumbs } from '../../lib/schema';
+import { HELLO_EMAIL } from '../../lib/brand-names';
 
 const title = 'By Sector | Velstrian';
 const description =
@@ -243,7 +244,7 @@ const schema = [
         </div>
         <div class="sec-final-links">
           <a href="/pricing/">See pricing</a>
-          <a href="mailto:hello@velstrian.com">Ask a question</a>
+          <a href={`mailto:${HELLO_EMAIL}`}>Ask a question</a>
           <span>Built by UK procurement and ML engineers</span>
         </div>
       </div>

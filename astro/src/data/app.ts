@@ -1,5 +1,5 @@
 /**
- * app.ts: where the CrowMark app lives, written once.
+ * app.ts: where the Velstrian app lives, written once.
  *
  * The app keeps its own host through the Velstrian rebrand. People sign in and
  * sign up there, so the header, the plan buttons on /pricing and every Start

@@ -29,6 +29,7 @@ import Button from '../components/ui/Button.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
 import NewsletterForm from '../components/forms/NewsletterForm.astro';
 import { breadcrumbs } from '../lib/schema';
+import { CONTACT_EMAILS, COMPANY_NUMBER } from '../lib/brand-names';
 
 const title = 'Contact Velstrian | Book a demo or ask a question';
 const description =
@@ -52,10 +53,10 @@ const breadcrumb = breadcrumbs([
 /** Who to email, and for what. Kept as data so the list cannot drift from the
     directory rendered below it. */
 const DIRECTORY = [
-  { purpose: 'General and partnerships', address: 'hello@velstrian.com' },
-  { purpose: 'Support and data requests (GDPR)', address: 'support@velstrian.com' },
-  { purpose: 'Enterprise sales', address: 'sales@velstrian.com' },
-  { purpose: 'Security disclosures', address: 'security@velstrian.com' },
+  { purpose: 'General and partnerships', address: CONTACT_EMAILS.hello },
+  { purpose: 'Support and data requests (GDPR)', address: CONTACT_EMAILS.support },
+  { purpose: 'Enterprise sales', address: CONTACT_EMAILS.sales },
+  { purpose: 'Security disclosures', address: CONTACT_EMAILS.security },
 ];
 
 /**
@@ -77,7 +78,7 @@ const DIRECTORY = [
  * it in a three-up card grid with the booking card and the email card, which are
  * the two panels this grid already renders. Copy is verbatim from
  * contact.html:245-247, and the action is the same mailto the live card carries;
- * sales@velstrian.com is already published in the directory below.
+ * sales email is already published in the directory below.
  */
 const REACH = [
   {
@@ -90,22 +91,22 @@ const REACH = [
   {
     heading: 'Portfolio plan and volume licensing',
     body: 'Microsoft Entra ID single sign-on, branded exports, invoice or purchase order billing, and pricing scoped to a high-volume bidding team.',
-    href: 'mailto:sales@velstrian.com?subject=Enterprise%20enquiry',
+    href: `mailto:${CONTACT_EMAILS.sales}?subject=Enterprise%20enquiry`,
     action: 'Email sales',
     external: false,
   },
   {
     heading: 'Send us an email',
-    body: 'hello@velstrian.com · We respond within 3 to 5 business days.',
-    href: 'mailto:hello@velstrian.com',
-    action: 'hello@velstrian.com',
+    body: `${CONTACT_EMAILS.hello} · We respond within 3 to 5 business days.`,
+    href: `mailto:${CONTACT_EMAILS.hello}`,
+    action: CONTACT_EMAILS.hello,
     external: false,
   },
 ];
 
 const COMPANY = [
   { term: 'Registration', detail: 'Registered in England and Wales' },
-  { term: 'Companies House number', detail: '17076461', mono: true },
+  { term: 'Companies House number', detail: COMPANY_NUMBER, mono: true },
   { term: 'Data protection', detail: 'ICO registered data controller' },
   { term: 'Data residency', detail: 'EU' },
   { term: 'UK business hours', detail: 'Mon-Fri, 09:00-17:30 BST' },
@@ -121,7 +122,7 @@ const COMPANY = [
       first line of the contact page narrows exactly what that decision opened.
 
       NOTHING FACTUAL IS LOST, which is why this is safe to do without asking:
-      the CrowAgent Ltd card on this same page already prints "Registered in
+      the Velstrian Systems Ltd card on this same page already prints "Registered in
       England and Wales", the Companies House number, EU data residency
       and UK business hours. The eyebrow was the only place the jurisdiction
       led rather than informed.
@@ -146,7 +147,7 @@ const COMPANY = [
     as="h1">
     <div class="btn-row">
       <Button href={CALENDLY} target="_blank">Book a 30-minute call</Button>
-      <Button href="mailto:hello@velstrian.com" variant="secondary">Email us</Button>
+      <Button href={`mailto:${CONTACT_EMAILS.hello}`} variant="secondary">Email us</Button>
     </div>
   </Section>
 

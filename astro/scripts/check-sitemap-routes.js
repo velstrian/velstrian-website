@@ -120,9 +120,21 @@ if (!fs.existsSync(DIST)) {
  * against, so a canonical or sitemap entry pointing at a FOREIGN origin is a
  * failure rather than something this quietly resolves against dist anyway.
  */
-const originMatch = fs.readFileSync(SITE_TS, 'utf8').match(/origin:\s*'([^']+)'/);
-if (!originMatch) die('sitemap-routes: could not read SITE.origin from src/data/site.ts.');
-const ORIGIN = originMatch[1].replace(/\/$/, '');
+const siteTsContent = fs.readFileSync(SITE_TS, 'utf8');
+let ORIGIN;
+const originMatch = siteTsContent.match(/origin:\s*(?:'([^']+)'|"([^"]+)"|([A-Za-z0-9_]+))/);
+if (originMatch) {
+  if (originMatch[1] || originMatch[2]) {
+    ORIGIN = (originMatch[1] || originMatch[2]).replace(/\/$/, '');
+  } else if (originMatch[3]) {
+    const brandTs = path.join(__dirname, '..', 'src', 'lib', 'brand-names.ts');
+    if (fs.existsSync(brandTs)) {
+      const bm = fs.readFileSync(brandTs, 'utf8').match(new RegExp(`${originMatch[3]}\\s*=\\s*["']([^"']+)["']`));
+      if (bm) ORIGIN = bm[1].replace(/\/$/, '');
+    }
+  }
+}
+if (!ORIGIN) die('sitemap-routes: could not read SITE.origin from src/data/site.ts.');
 
 const SITEMAP = path.join(DIST, 'sitemap.xml');
 if (!fs.existsSync(SITEMAP)) {

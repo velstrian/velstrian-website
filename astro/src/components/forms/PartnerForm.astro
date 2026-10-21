@@ -10,7 +10,7 @@
  * `POST /api/v1/partners/enquiry` instead (`api/app/routers/partners.py:111`
  * in the platform repo). That closes the disclosure gap and the US transfer
  * at once: the enquiry now lands first party in the `partner_enquiries`
- * Supabase table, and CrowAgent ops is alerted by email from the same request.
+ * Supabase table, and Velstrian ops is alerted by email from the same request.
  *
  * ENDPOINT is `https://crowagent-platform-production.up.railway.app`, the same
  * Railway host the platform's own production frontend calls
@@ -142,6 +142,7 @@ const PARTNER_TYPES = [
   class="form"
   method="POST"
   action={API_ENDPOINT}
+  data-contact-email={SITE.email}
   novalidate
 >
   <div class="form__pot" aria-hidden="true">
@@ -262,6 +263,7 @@ const PARTNER_TYPES = [
 </form>
 
 <script>
+
   /** Same definition as the contact form. One rule, so blur and submit agree. */
   const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
@@ -430,7 +432,8 @@ const PARTNER_TYPES = [
               timestamp: new Date().toISOString(),
             }),
           );
-          setStatus('bad', 'Something went wrong. Please email hello@velstrian.com directly.');
+          const contactEmail = form.dataset.contactEmail || 'hello@velstrian.com';
+          setStatus('bad', `Something went wrong. Please email ${contactEmail} directly.`);
           setBusy(false);
           btn.textContent = 'Submit enquiry';
         });

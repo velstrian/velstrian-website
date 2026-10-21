@@ -149,7 +149,7 @@ function fromFooter(claim: string): string {
  * Anthropic Claude as AI sub-processors. No personal data is used to train
  * their foundation models." content/legal/security.md says the same thing from
  * the other side: "No personal data is sent to AI providers for training."
- * privacy.md adds, for CrowMark specifically, that prompts and completions
+ * privacy.md adds, for Velstrian Bid specifically, that prompts and completions
  * submitted via the API are not used to train Google's foundation models and
  * that PII is stripped at the prompt boundary.
  *
@@ -178,6 +178,7 @@ const TRUST_BADGES: string[] = [
   method="POST"
   action="https://app.crowagent.ai/api/contact/submit"
   novalidate
+  data-contact-email={SITE.email}
 >
   {/* Honeypot. aria-hidden and tabindex=-1 so it is unreachable by keyboard or
       assistive tech, and invisible to a human, but attractive to a bot that
@@ -529,7 +530,8 @@ const TRUST_BADGES: string[] = [
               timestamp: new Date().toISOString(),
             }),
           );
-          setStatus('bad', 'Something went wrong. Please email hello@velstrian.com directly.');
+          const contactEmail = form.dataset.contactEmail || 'hello@velstrian.com';
+          setStatus('bad', `Something went wrong. Please email ${contactEmail} directly.`);
           setBusy(false);
           btn.textContent = 'Send message';
         });

@@ -126,6 +126,7 @@ import Section from '../components/layout/Section.astro';
 import Button from '../components/ui/Button.astro';
 import NewsletterForm from '../components/forms/NewsletterForm.astro';
 import { breadcrumbs } from '../lib/schema';
+import { HELLO_EMAIL } from '../lib/brand-names';
 
 const title = 'About Us | Velstrian';
 /* The overclaim was in here too, which is why it reached og:description,
@@ -703,7 +704,7 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
               }
               <div class="company__row">
                 <dt>Contact</dt>
-                <dd><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></dd>
+                <dd><a href={`mailto:${HELLO_EMAIL}`}>{HELLO_EMAIL}</a></dd>
               </div>
             </dl>
           </div>

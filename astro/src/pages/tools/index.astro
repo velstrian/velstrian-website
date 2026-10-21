@@ -44,6 +44,7 @@ import { SIGNUP_URL } from '../../data/app';
 import FinalCta from '../../components/sections/FinalCta.astro';
 import { breadcrumbs } from '../../lib/schema';
 import { SITE } from '../../data/site';
+import { HELLO_EMAIL } from '../../lib/brand-names';
 
 /*
  * SINGULAR, 2026-08-04, O-58. The owner reported this page arguing with itself:
@@ -246,7 +247,7 @@ const schema = [
     id="pricing"
     links={[
       { label: 'See pricing', href: '/pricing/' },
-      { label: 'Ask a question', href: 'mailto:hello@velstrian.com' },
+      { label: 'Ask a question', href: `mailto:${HELLO_EMAIL}` },
     ]}
     note="Built by UK procurement and ML engineers"
   >

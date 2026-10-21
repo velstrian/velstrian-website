@@ -42,7 +42,7 @@ name: Smoke test — crowagent.ai must never redirect to login
 # minutes, which is a third of the daily quota spent repeating one fact.
 #
 # WHERE A FAILURE SURFACES NOW: a `job_runs` row, a Sentry issue, an IMMEDIATE
-# branded email to hello@crowagent.ai, and the 00:30 UTC daily failure digest.
+# branded email to hello@velstrian.com, and the 00:30 UTC daily failure digest.
 # Here it was a red square in a tab nobody opened, which is how this monitor stayed
 # red on roughly 672 runs a week against the wrong host and nobody noticed.
 #

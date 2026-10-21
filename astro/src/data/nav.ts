@@ -31,7 +31,7 @@
  * buried under a menu nobody opens looking for a calculator. They now have
  * their own "Resources" menu, and Blog stays top level.
  *
- *   Products    CrowMark for Suppliers · CrowMark for Buyers · Compare CrowMark
+ *   Products    Velstrian Bid · Velstrian Buy · Compare Velstrian
  *   Resources   Tender Compliance Matrix · Free tools hub · PPN 002 explained ·
  *               Glossary
  *   Top level   Pricing · Blog · FAQ · About
