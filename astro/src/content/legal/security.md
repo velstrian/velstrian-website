@@ -92,7 +92,6 @@ Platform access is enforced in depth: organisation-scoped roles at the applicati
 
 We follow ISO/IEC 27001 and review every Annex A control in our own Statement of Applicability. Internal security reviews run continuously, and OWASP practices are applied to all application development. The control set, the risk register, the statement of applicability, the internal audit and the management review are maintained as documents and are available on request.
 
-Cyber Essentials is the first certification we plan to take.
 
 ## AI data handling
 
