@@ -1,0 +1,50 @@
+---
+/**
+ * TourDialog: the "Watch the 90 second tour" action and its player.
+ *
+ * Strategy section 0.8, imagery and media item 4. A secondary action that opens
+ * a lightweight native <dialog> holding one <video>, poster first, controls on,
+ * no autoplay and never sound on open: the reader presses play. Closing the
+ * dialog pauses the video (scripts/evidenced.ts initTour).
+ *
+ * The source is ONE entry in data/media.ts. While its `src` is null this
+ * component renders NOTHING, neither the button nor the dialog, so a reader
+ * never meets a control that plays nothing. `preload="none"` keeps the video
+ * off the page's network path until it is asked for.
+ */
+import Action from './Action.astro';
+import Icon from './Icon.astro';
+import { TOUR_VIDEO } from '../../data/media';
+
+const v = TOUR_VIDEO;
+---
+
+{
+  v.src && (
+    <>
+      <Action as="button" variant="quiet" data-tour-open="">
+        <Icon name="play" size={22} slot="icon" />
+        {v.label}
+      </Action>
+      <dialog class="ea-tour band--dark" data-tour aria-label={v.label}>
+        <div class="ea-tour__frame">
+          <video
+            class="ea-tour__video"
+            controls
+            preload="none"
+            playsinline
+            poster={v.poster ?? undefined}
+          >
+            <source src={v.src} />
+            {v.captions && <track kind="captions" src={v.captions} srclang="en" label="English" default />}
+          </video>
+        </div>
+        <form method="dialog" class="ea-tour__bar">
+          <button class="ea-tour__close" type="submit" aria-label="Close the tour">
+            <Icon name="close" size={22} />
+          </button>
+        </form>
+      </dialog>
+    </>
+  )
+}

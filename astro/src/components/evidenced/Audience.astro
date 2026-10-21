@@ -1,0 +1,96 @@
+---
+/**
+ * Audience: is it for someone like me? (strategy section 0.4, row 2)
+ *
+ * A LIGHT band. Three "who are you" tabs, after responsive.io's role tabs.
+ * Each tab is two sentences and one product view floating on a stage. The switch is the site's one switcher,
+ * components/ui/TabSwitcher.astro, so with no script every panel is simply
+ * shown in order and every tab is a link to its panel.
+ */
+import TabSwitcher from '../ui/TabSwitcher.astro';
+import Frame from './Frame.astro';
+import Band from './Band.astro';
+import Stage from './Stage.astro';
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
+---
+
+<Band tone="light" class="ea-who" labelledby="ea-who-title">
+  <div class="ea-wrap">
+    <h2 class="ea-h2" id="ea-who-title" data-reveal>Made for people who write their own bids.</h2>
+    <div class="ea-switch" data-reveal>
+      <TabSwitcher
+        label="Who are you"
+        stack="narrow"
+        tabs={[
+          { id: 'who-small', label: 'I run a small business' },
+          { id: 'who-team', label: 'I lead a growing team' },
+          { id: 'who-buyer', label: 'I buy services' },
+        ]}
+      />
+    </div>
+
+    <div class="ea-panel" id="who-small">
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">You fit bids around everything else</h3>
+        <p>
+          {PRODUCT_NAME_BID} shows you the contracts worth your time and writes a first draft of every answer from
+          your past answers, checked against your documents. You start with something to edit, not a blank page.
+        </p>
+        <a class="ea-link" href="/bid/">See {PRODUCT_NAME_BID}</a>
+      </div>
+      <Stage layout="centre">
+        <Frame title="Contracts that suit you" status="3 new today" capture="home-who-small" caption="Contract names are an example.">
+          <ul class="ea-mini-list">
+            <li><span>Office cleaning, a primary school</span><span class="ea-state ea-state--ok">Strong match</span></li>
+            <li><span>Grounds care for a housing association</span><span class="ea-state ea-state--ok">Good match</span></li>
+            <li><span>Facilities support, a private retailer</span><span class="ea-state">Worth a look</span></li>
+          </ul>
+        </Frame>
+      </Stage>
+    </div>
+
+    <div class="ea-panel" id="who-team">
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Several people work on every bid</h3>
+        <p>
+          Share out the questions, ask colleagues to check answers and keep one library of approved answers that
+          everyone reuses. Everyone sees what is done and what is left.
+        </p>
+        <a class="ea-link" href="/bid/">See {PRODUCT_NAME_BID}</a>
+      </div>
+      <Stage layout="centre">
+        <Frame title="Who is doing what" status="8 of 12 answered" capture="home-who-team" caption="Names and progress are an example.">
+          <ul class="ea-mini-list">
+            <li><span>1. About your company</span><span class="ea-state ea-state--ok">Sam, done</span></li>
+            <li><span>4. Cover when staff are off</span><span class="ea-state ea-state--ok">Priya, checking</span></li>
+            <li><span>7. Health and safety</span><span class="ea-state">Alex, drafting</span></li>
+            <li><span>9. Price</span><span class="ea-state">Not started</span></li>
+          </ul>
+        </Frame>
+      </Stage>
+    </div>
+
+    <div class="ea-panel" id="who-buyer">
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">You need to compare replies fairly</h3>
+        <p>
+          {PRODUCT_NAME_BUY} collects the replies to your request and finds the proof behind each claim. Your own
+          team does the scoring, never the AI.
+        </p>
+        <a class="ea-link" href="/buy/">See {PRODUCT_NAME_BUY}</a>
+      </div>
+      <Stage layout="centre">
+        <Frame title="Reply from supplier B" status="Proof found" capture="home-who-buyer" caption="The supplier, the claim and the document are an example.">
+          <div class="ea-mini-thread">
+            <p class="ea-mini-who">What they said</p>
+            <p class="ea-mini-reply">Two trained cover staff are on call for every site.</p>
+            <p class="ea-mini-who">Where they proved it</p>
+            <p class="ea-quote ea-mini-quote">Staffing policy, page 3: two trained cover operatives are kept on call for each site.</p>
+            <p class="ea-mini-who">Score</p>
+            <p class="ea-mini-reply">Set by your panel</p>
+          </div>
+        </Frame>
+      </Stage>
+    </div>
+  </div>
+</Band>

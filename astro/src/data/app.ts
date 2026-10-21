@@ -28,3 +28,10 @@ export const SIGNUP_URL = `${APP_ORIGIN}/signup`;
  * typed into PartnerForm.astro before.
  */
 export const API_ORIGIN = 'https://crowagent-platform-production.up.railway.app';
+
+/**
+ * The 30 minute walkthrough booking page. Typed into three page files before
+ * (HomeConversion.astro, about.astro, bid.astro). The evidenced answer pages
+ * read it from here, and the older pages move to it as they adopt the system.
+ */
+export const WALKTHROUGH_URL = 'https://calendly.com/crowagent-platform/30min';

@@ -1,0 +1,65 @@
+---
+/**
+ * Frame: a product screen, 12px radius, one title bar with the screen's name.
+ * No window dots and no tilt. Version 3 (strategy 0.8): the screen is always
+ * drawn LIGHT, as the app draws it (`on-light` rebinds the roles), it sits on a
+ * Stage at the raised elevation, and its caption is the window's own footer, so
+ * the caption reads the same on any stage or band.
+ *
+ * `capture` is a key in data/product-captures.ts. While that entry is null the
+ * slot renders, which is an HTML recreation of the real screen, and the caption
+ * opens with "Example data" so the recreation is never read as a customer
+ * screenshot. When the entry is set the image replaces the slot.
+ */
+import { CAPTURES } from '../../data/product-captures';
+
+interface Props {
+  title: string;
+  capture: string;
+  /** Right side of the title bar, for example a status. */
+  status?: string;
+  /** What the recreation shows, after "Example data." */
+  caption: string;
+  class?: string;
+  /** Id of the caption, so a section can point aria-describedby at it. */
+  captionId?: string;
+}
+const { title, capture, status, caption, class: cls = '', captionId } = Astro.props;
+const shot = CAPTURES[capture] ?? null;
+---
+
+<figure class={`ea-frame ${shot ? 'ea-frame--shot' : ''} ${cls}`.replace(/\s+/g, ' ').trim()} data-capture={capture}>
+  <div class="ea-frame__window on-light">
+    {/* A real capture carries the app's own header, so the recreated title
+        bar is drawn only over a recreation. */}
+    {!shot && (
+      <div class="ea-frame__bar">
+        <span class="ea-frame__title">{title}</span>
+        {status && <span class="ea-frame__status">{status}</span>}
+      </div>
+    )}
+    {
+      shot ? (
+        <picture>
+          {shot.narrow && <source media="(max-width: 599px)" srcset={shot.narrow.src} width={shot.narrow.width} height={shot.narrow.height} />}
+          <img
+            class="ea-frame__shot"
+            src={shot.src}
+            width={shot.width}
+            height={shot.height}
+            alt={shot.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      ) : (
+        <div class="ea-frame__body">
+          <slot />
+        </div>
+      )
+    }
+    <figcaption class="ea-frame__caption" id={captionId}>
+      {shot ? shot.caption : <><span class="ea-frame__example">Example data.</span> {caption}</>}
+    </figcaption>
+  </div>
+</figure>

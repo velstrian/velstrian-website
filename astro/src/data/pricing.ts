@@ -325,6 +325,11 @@ export const CREDIT_TOPUPS: CreditTopup[] = [
  * cannot pick up a floating-point tail on its way to the page. Rendered as
  * £0.10. Mirrors CREDIT_UNIT_PRICE_PENCE on the platform.
  */
+/** The free days a first CrowMark plan starts with (D236, BILL-TRIAL-002 in the
+ *  platform's create-checkout route). Read by /pricing and the home page, so the
+ *  number is written once. A card is collected by Stripe before it starts. */
+export const TRIAL_DAYS = 7;
+
 export const OVERAGE_PENCE_PER_CREDIT = 10;
 
 /** £0.10, for prose. Two decimal places always, because a rate reads as one. */

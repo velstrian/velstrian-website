@@ -1,0 +1,17 @@
+---
+/**
+ * IconTile: a 24px line icon on a 40px rounded square filled with the stage
+ * gradient (strategy section 0.8, "structure from hairlines"). The one small
+ * gradient object on a page of hairlines, so a column of facts reads as
+ * designed rather than as a list.
+ */
+import Icon from './Icon.astro';
+import type { IconName } from '../../data/icons';
+
+interface Props {
+  name: IconName;
+}
+const { name } = Astro.props;
+---
+
+<span class="ea-tile"><Icon name={name} size={22} /></span>

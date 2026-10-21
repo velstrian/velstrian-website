@@ -1,0 +1,106 @@
+---
+/**
+ * Hero: what is this, and is it for me? (strategy 0.4 row 1, visual 0.8)
+ *
+ * A LIGHT band. One plain sentence, public and private named, a solid primary
+ * ("Start 7 day trial", billing spec part 6), an outline secondary, the tour
+ * when there is one, one reassurance line. Beneath it the signature stage: the
+ * real answer screen floating on the indigo to purple gradient, an answer with
+ * each claim linked to the document that proves it, and a product sequence card
+ * over the stage's edge that plays once on load: tender added, questions
+ * found, answers drafted from your past answers, one claim with no proof in your documents (purple,
+ * D256).
+ *
+ * Written for a 10 person firm that has never bid (RULE 0-U): no tender jargon
+ * here. The terms a newcomer meets are explained in the FAQ.
+ */
+import Band from './Band.astro';
+import Action from './Action.astro';
+import Frame from './Frame.astro';
+import Stage from './Stage.astro';
+import Sequence from './Sequence.astro';
+import TourDialog from './TourDialog.astro';
+import { SIGNUP_URL } from '../../data/app';
+import { TRIAL_DAYS } from '../../data/pricing';
+import { PLATFORM_SHORT_NAME } from '../../lib/brand-names';
+---
+
+<Band tone="light" class="ea-hero" labelledby="ea-hero-title">
+  <div class="ea-wrap ea-hero__head">
+    <h1 class="ea-hero__title" id="ea-hero-title">Write strong bids yourself, using what you already have.</h1>
+    <p class="ea-lead ea-hero__lead">
+      {PLATFORM_SHORT_NAME} finds contracts that suit your business, from schools and the NHS to private companies,
+      drafts each answer from your past answers, and checks every claim against your documents.
+    </p>
+    <div class="ea-actions">
+      <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+      <Action href="#what-it-does" variant="secondary">See how it works</Action>
+      <TourDialog />
+    </div>
+    <p class="ea-hero__note">No bid team needed. Card needed to start, cancel in the {TRIAL_DAYS} days and pay nothing.</p>
+  </div>
+
+  <div class="ea-wrap">
+    <Stage layout="hero">
+      <Frame
+        title="Question 4 of 6: cover when staff are off"
+        status="2 claims checked"
+        capture="home-hero-answer"
+        caption="A drafted answer, with each claim linked to the document that proves it."
+      >
+        <div class="ea-answer" data-cite-root>
+          <svg class="ea-cite-svg" data-cite-svg aria-hidden="true" focusable="false"></svg>
+          <div class="ea-answer__work" data-cite-pane>
+            <p class="ea-label">The question</p>
+            <blockquote class="ea-quote ea-answer__question">
+              <p>Tell us how you will keep the service running when a member of staff is off sick.</p>
+            </blockquote>
+            <p class="ea-label">Your answer</p>
+            <div class="ea-answer__text">
+              <p>
+                We keep two trained cover staff on call for every site, so a visit is never <span class="ea-nowrap">missed.<a
+                  class="ea-mark"
+                  href="#ea-hero-src-1"
+                  data-cite-from="h1"><span aria-hidden="true">1</span><span class="visually-hidden">Source 1, staffing policy, page 3</span></a></span>
+              </p>
+              <p>
+                Cover staff have the same checks and training as our regular <span class="ea-nowrap">team.<a
+                  class="ea-mark"
+                  href="#ea-hero-src-2"
+                  data-cite-from="h2"><span aria-hidden="true">2</span><span class="visually-hidden">Source 2, training record</span></a></span>
+              </p>
+            </div>
+          </div>
+          <div class="ea-answer__sources">
+            <p class="ea-label">Checked against your documents</p>
+            <article class="ea-sheet" id="ea-hero-src-1" data-cite-sheet aria-label="Source 1">
+              <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">1</span>Staffing policy, page 3</p>
+              <p class="ea-sheet__text">
+                <mark data-cite-to="h1">Two trained cover operatives are kept on call for each site</mark> and can attend
+                the same day.
+              </p>
+            </article>
+            <article class="ea-sheet" id="ea-hero-src-2" data-cite-sheet aria-label="Source 2">
+              <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">2</span>Training record, cover team</p>
+              <p class="ea-sheet__text">
+                <mark data-cite-to="h2">All cover staff complete the same induction and checks as permanent staff</mark>
+                before their first shift.
+              </p>
+            </article>
+          </div>
+        </div>
+      </Frame>
+      <Sequence
+        slot="float"
+        play="load"
+        title="Grounds care, a housing association"
+        steps={[
+          { label: 'Tender added', detail: 'From the email you forwarded' },
+          { label: '6 questions found' },
+          { label: '4 answers drafted', detail: 'From your past answers' },
+          { label: '1 claim has no proof', detail: 'Not in your documents. Add one, or change it', state: 'held' },
+        ]}
+      />
+    </Stage>
+  </div>
+</Band>

@@ -1,0 +1,50 @@
+---
+/**
+ * Action: the one button of the design system.
+ *
+ * Version 3 (strategy section 0.8). Primary is SOLID: ink on a light band,
+ * white on a dark band or a stage, read from --ea-btn-fill and --ea-btn-ink,
+ * which each band rebinds, so the same component is right on every band. One
+ * soft light sweep crosses it once per hover (styles/evidenced.css
+ * .ea-btn::after), the owner kept it. Secondary is an outline. 6px radius,
+ * 48px tall. The label says what happens, and no arrow glyph is ever appended.
+ * A link that opens a new window says so to a screen reader.
+ *
+ * With `as="button"` it renders a real <button> for an in-page action such as
+ * opening the tour dialog, with `data-*` passed through for the script.
+ */
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'quiet';
+  newWindow?: boolean;
+  as?: 'a' | 'button';
+  [key: `data-${string}`]: string | undefined;
+}
+const { href, variant = 'primary', newWindow = false, as = 'a', ...rest } = Astro.props;
+const data = Object.fromEntries(Object.entries(rest).filter(([k]) => k.startsWith('data-')));
+---
+
+{
+  as === 'button' ? (
+    <button type="button" class={`ea-btn ea-btn--${variant}`} {...data}>
+      <slot name="icon" />
+      <span class="ea-btn__label">
+        <slot />
+      </span>
+    </button>
+  ) : (
+    <a
+      class={`ea-btn ea-btn--${variant}`}
+      href={href}
+      target={newWindow ? '_blank' : undefined}
+      rel={newWindow ? 'noopener noreferrer' : undefined}
+      {...data}
+    >
+      <slot name="icon" />
+      <span class="ea-btn__label">
+        <slot />
+      </span>
+      {newWindow && <span class="visually-hidden"> (opens in a new window)</span>}
+    </a>
+  )
+}

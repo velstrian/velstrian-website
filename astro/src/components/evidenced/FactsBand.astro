@@ -1,0 +1,55 @@
+---
+/**
+ * FactsBand: a band of facts structured by hairlines, not boxes (strategy 0.8).
+ *
+ * Columns split by 1px rules that run the full height of the band, each with a
+ * gradient icon tile, a figure and one plain line. Under them, optionally, a
+ * strip of short statements with a tick each, such as the live trust strip.
+ * No card borders around text.
+ *
+ * Generic: the caller passes the facts, so /bid/, /buy/, /security/ and
+ * /pricing/ can each carry their own. Every figure a caller passes must be read
+ * from site-facts.json or pricing.ts, never typed.
+ */
+import Icon from './Icon.astro';
+import IconTile from './IconTile.astro';
+import type { IconName } from '../../data/icons';
+
+interface Fact {
+  icon: IconName;
+  value: string;
+  label: string;
+}
+interface Props {
+  facts: Fact[];
+  strip?: string[];
+  stripLabel?: string;
+}
+const { facts, strip = [], stripLabel } = Astro.props;
+---
+
+<div class="ea-facts">
+  <ul class="ea-facts__cols" style={`--facts-n: ${facts.length}`}>
+    {
+      facts.map((f) => (
+        <li class="ea-facts__col" data-reveal>
+          <IconTile name={f.icon} />
+          <p class="ea-facts__value">{f.value}</p>
+          <p class="ea-facts__label">{f.label}</p>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    strip.length > 0 && (
+      <ul class="ea-facts__strip" aria-label={stripLabel} data-reveal>
+        {strip.map((s) => (
+          <li>
+            <Icon name="done" size={18} />
+            {s}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>

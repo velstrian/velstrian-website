@@ -1,0 +1,39 @@
+---
+/**
+ * Band: one section of a page, at one temperature.
+ *
+ * Design system version 3 (strategy section 0.8). A page is a run of bands that
+ * alternate light and dark, each section its own temperature. The tone is a
+ * class from tokens.css (.band--light, .band--light-alt, .band--dark) that
+ * REBINDS THE ROLES for everything inside, so a component never asks which band
+ * it is on: an Action, a Frame, a TabSwitcher or a FactsBand paints correctly on
+ * any of them.
+ *
+ * Content marked `data-reveal` inside a band settles in on first view
+ * (scripts/evidenced.ts initReveal), opacity and a 12px rise, 300ms, 60ms
+ * between items, once, never under reduced motion, and never for anything
+ * already on screen at load.
+ *
+ * Ready for /bid/, /buy/ and the shared page templates: it knows nothing about
+ * the home page.
+ */
+interface Props {
+  tone: 'light' | 'light-alt' | 'dark';
+  id?: string;
+  /** Id of the band's heading. */
+  labelledby?: string;
+  class?: string;
+  /** Tight top, for a band that follows a hero with no gap of its own. */
+  flush?: boolean;
+}
+const { tone, id, labelledby, class: cls = '', flush = false } = Astro.props;
+---
+
+<section
+  class={`ea-sec band band--${tone} ${flush ? 'band--flush' : ''} ${cls}`.replace(/\s+/g, ' ').trim()}
+  id={id}
+  aria-labelledby={labelledby}
+  data-band={tone}
+>
+  <slot />
+</section>

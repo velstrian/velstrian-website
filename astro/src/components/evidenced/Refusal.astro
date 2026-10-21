@@ -1,0 +1,72 @@
+---
+/**
+ * Refusal: can I trust what it writes? (strategy section 0.4, row 4)
+ *
+ * A DARK band, and the page's one slow moment, the frame on a stage. Two claims in a draft are checked
+ * against the business's own documents. The first is found, and a line draws
+ * to where it came from. The second has no proof, so it is struck out and the
+ * sentence is left out. About 1.9 seconds, played once when the block reaches
+ * the middle of the window (scripts/evidenced.ts initRefusal).
+ *
+ * THE MARKUP IS THE FINISHED FRAME. The script arms the block only when it
+ * starts below the fold and motion is allowed. With no script, under
+ * prefers-reduced-motion, or when the block is already on screen at load, the
+ * reader sees the end state. A screen reader reads that same end state, never
+ * the transient "checking" text, which is aria-hidden.
+ *
+ * The rating is an example the caption names as one the business never
+ * recorded. It is not a claim about Velstrian or about any customer.
+ */
+import Frame from './Frame.astro';
+import Band from './Band.astro';
+import Stage from './Stage.astro';
+---
+
+<Band tone="dark" class="ea-refusal" labelledby="ea-refusal-title">
+  <div class="ea-wrap ea-refusal__head">
+    <h2 class="ea-h2 ea-h2--centre ea-refusal__title" id="ea-refusal-title" data-reveal>It will not make things up.</h2>
+    <p class="ea-lead ea-refusal__lead" data-reveal>
+      It checks every claim against your documents. If they back it up, it shows you where. If they don't, it tells you.
+    </p>
+  </div>
+  <div class="ea-wrap ea-refusal__stage">
+    <Stage layout="centre">
+      <Frame
+        title="Checking your draft"
+        status="14 documents checked"
+        capture="home-refusal-check"
+        caption="The rating is one this business never recorded, so the sentence was left out."
+        class="ea-refusal__frame"
+      >
+        <div class="ea-check" data-cite-root data-refusal>
+          <svg class="ea-cite-svg" data-cite-svg aria-hidden="true" focusable="false"></svg>
+          <div class="ea-check__draft" data-cite-pane>
+            <p class="ea-label">Draft answer</p>
+            <p class="ea-check__s ea-check__s--ok">
+              We reply to every urgent call within <span class="ea-nowrap"><span class="ea-fig ea-fig--found">two hours</span>.<a
+                class="ea-mark"
+                href="#ea-ref-src-1"
+                data-cite-from="r1"><span aria-hidden="true">1</span><span class="visually-hidden">Source 1, service agreement, section 7</span></a></span>
+            </p>
+            <p class="ea-check__s ea-check__s--held">
+              Our customers rate us <s class="ea-fig ea-fig--struck">4.9 out of 5<span class="visually-hidden">, no proof found</span></s>.
+            </p>
+            <p class="ea-check__verdict">
+              <span class="ea-check__pending" aria-hidden="true">Looking for 4.9 out of 5 in your documents</span>
+              <span class="ea-check__final"><span class="ea-check__tag"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="5.5" /><path d="M4.2 11.8l7.6-7.6" /></svg>Left out</span> No proof of this rating in your documents. Add it, or change the sentence.</span>
+            </p>
+          </div>
+          <div class="ea-check__source">
+            <p class="ea-label">Proof found for two hours</p>
+            <article class="ea-sheet" id="ea-ref-src-1" data-cite-sheet aria-label="Source 1">
+              <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">1</span>Service agreement, section 7</p>
+              <p class="ea-sheet__text">
+                Urgent calls are answered by an engineer <mark data-cite-to="r1">within two hours</mark>, day or night.
+              </p>
+            </article>
+          </div>
+        </div>
+      </Frame>
+    </Stage>
+  </div>
+</Band>

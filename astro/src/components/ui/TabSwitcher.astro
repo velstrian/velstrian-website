@@ -83,9 +83,26 @@ interface Props {
    * control, the prev and next buttons, the counter and their styles went with
    * them. /pricing passed neither, so it renders what it rendered before.
    */
+  /**
+   * R285-WEB-ENTERPRISE-REDESIGN-01. `vertical` stacks the tabs as a list, for a
+   * row of capabilities read beside one product screen (the home page "what it
+   * does" section). Same behaviour, arrow keys Up and Down, no gliding fill:
+   * the selected tab paints its own fill, which is the documented fallback the
+   * glide already has. Defaults to horizontal, so /pricing and every other
+   * caller render exactly what they rendered before.
+   */
+  orientation?: 'horizontal' | 'vertical';
+  /**
+   * `narrow`: a horizontal row that would overflow a phone stacks into a list
+   * below 560px instead of scrolling sideways, so every label is readable
+   * without a swipe (RULE 0-U). The glide stands down while stacked and the
+   * selected tab paints its own fill. Off by default.
+   */
+  stack?: 'narrow';
 }
 
-const { label, tabs, defaultId } = Astro.props;
+const { label, tabs, defaultId, orientation = 'horizontal', stack } = Astro.props;
+const vertical = orientation === 'vertical';
 
 const fallbackId = defaultId ?? tabs[0]?.id;
 
@@ -131,7 +148,7 @@ const offSelectors = tabs
   .join('');
 ---
 
-<div class="tabsw" data-tabs data-tabs-label={label}>
+<div class="tabsw" data-tabs data-tabs-label={label} data-orientation={vertical ? 'vertical' : undefined} data-stack={stack}>
   {/*
     ── THE FILL THAT GLIDES, AND IT SHIPS AT ZERO WIDTH ──────────────────
 
@@ -154,7 +171,7 @@ const offSelectors = tabs
     states nothing: `aria-selected` is still the whole of the state, read by
     assistive technology and by the stylesheet from the same attribute.
   */}
-  <span class="tabsw__glide" data-tabs-glide aria-hidden="true"></span>
+  {!vertical && <span class="tabsw__glide" data-tabs-glide aria-hidden="true"></span>}
   {
     tabs.map((t) => (
       <a
@@ -404,6 +421,47 @@ const offSelectors = tabs
   .tabsw__tab:focus-visible {
     outline: 3px solid var(--c-interactive);
     outline-offset: 3px;
+  }
+
+  /* The vertical list. One column of full width rows inside the same trough,
+     left aligned because a list of labels is read, not scanned as a pill row. */
+  .tabsw[data-orientation='vertical'] {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: visible;
+    border-radius: var(--radius-frame);
+  }
+
+  @media (max-width: 559px) {
+    .tabsw[data-stack='narrow'] {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      overflow-x: visible;
+      border-radius: var(--radius-frame);
+    }
+
+    .tabsw[data-stack='narrow'] .tabsw__glide {
+      display: none;
+    }
+
+    .tabsw[data-stack='narrow'] .tabsw__tab {
+      justify-content: flex-start;
+      border-radius: calc(var(--radius-frame) - var(--tabsw-pad) / 2);
+    }
+
+    .tabsw[data-stack='narrow'][data-glide] .tabsw__tab[aria-selected='true'] {
+      background: var(--c-interactive);
+    }
+  }
+
+  .tabsw[data-orientation='vertical'] .tabsw__tab {
+    justify-content: flex-start;
+    min-height: 52px;
+    border-radius: calc(var(--radius-frame) - var(--tabsw-pad) / 2);
+    text-align: start;
+    white-space: normal;
   }
 
   /* --dur is already 0.01ms under this preference, so the two rules below add

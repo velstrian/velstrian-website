@@ -1,0 +1,67 @@
+---
+/**
+ * Sequence: a product micro sequence, built in HTML so it is sharp at any size
+ * and readable as text (strategy section 0.8, "product UI cards that animate in
+ * sequence").
+ *
+ * A small product card listing what the product just did, step by step: "Tender
+ * added", "6 questions found", "4 answers drafted from your past answers", "1
+ * claim has no proof in your documents". Each step settles in order, --seq-step apart, once, when the card
+ * first comes into view (scripts/evidenced.ts initSequences). The last step can
+ * be `held`: purple, with an icon and words, never red (D256).
+ *
+ * THE MARKUP IS THE FINISHED CARD. With no script, under reduced motion, or for
+ * a card already on screen at load that is not marked `play="load"`, a reader
+ * sees every step done. A screen reader reads the finished list. `play="load"`
+ * runs the sequence once on page load, for a hero whose card is the first
+ * thing seen.
+ *
+ * The labels mirror the real product's screens (crowagent-platform
+ * web/src/features/bid: intake, answer-editor, review, delivery).
+ */
+import Icon from './Icon.astro';
+
+interface Step {
+  label: string;
+  detail?: string;
+  state?: 'done' | 'held';
+}
+interface Props {
+  title: string;
+  steps: Step[];
+  play?: 'view' | 'load';
+  class?: string;
+}
+const { title, steps, play = 'view', class: cls = '' } = Astro.props;
+---
+
+<div class={`ea-seq on-light ${cls}`.trim()} data-seq={play} role="group" aria-label={title}>
+  <p class="ea-seq__title">
+    <span class="ea-seq__spark" aria-hidden="true"></span>{title}
+  </p>
+  <ol class="ea-seq__list">
+    {
+      steps.map((s, i) => (
+        <li class={`ea-seq__step ea-seq__step--${s.state ?? 'done'}`} style={`--seq-i: ${i}`}>
+          <Icon name={s.state === 'held' ? 'held' : 'done'} size={20} class="ea-seq__icon" />
+          <span class="ea-seq__text">
+            <span class="ea-seq__label">{s.label}</span>
+            {s.detail && <span class="ea-seq__detail">{s.detail}</span>}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <span class="ea-seq__bar" aria-hidden="true"><span></span></span>
+</div>
+{/* A card that plays on load is armed by this one line DURING PARSE, before
+    first paint, so the first frame is the armed one and nothing flashes.
+    With no script, or under reduced motion, it is never armed and the
+    finished card shows. */}
+{play === 'load' && (
+  <script is:inline>
+    (function (c) {
+      if (c && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) c.setAttribute('data-seq-state', 'armed');
+    })(document.currentScript && document.currentScript.previousElementSibling);
+  </script>
+)}

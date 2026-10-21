@@ -1,0 +1,63 @@
+---
+/**
+ * AppWindow: a whole product screen, the shell the Velstrian Bid app draws
+ * around every page (a narrow icon rail, a top bar with where you are, and the
+ * page), recreated in HTML so it is sharp at any size and every word reads.
+ *
+ * Used by the product carousel and ready for /bid/ and /buy/. Like Frame, it
+ * names a key in data/product-captures.ts: while that entry is null the slot
+ * renders with a visible "Example data" caption, and when the staging capture
+ * lane lands a real screen the one entry swaps the recreation for the image.
+ */
+import Icon from './Icon.astro';
+import { CAPTURES } from '../../data/product-captures';
+import type { IconName } from '../../data/icons';
+
+interface Props {
+  /** Breadcrumb trail above the page title, for example "Bids". */
+  crumb: string;
+  /** The page title in the top bar. */
+  title: string;
+  capture: string;
+  caption: string;
+  /** Which rail icon is the current page. */
+  current?: IconName;
+}
+const { crumb, title, capture, caption, current = 'pen' } = Astro.props;
+const shot = CAPTURES[capture] ?? null;
+const RAIL: IconName[] = ['search', 'pen', 'chat', 'checklist', 'document'];
+---
+
+<figure class="ea-app on-light" data-capture={capture}>
+  {
+    shot ? (
+      <img class="ea-app__shot" src={shot.src} width={shot.width} height={shot.height} alt={shot.alt} loading="lazy" decoding="async" />
+    ) : (
+      <div class="ea-app__window">
+        <div class="ea-app__rail" aria-hidden="true">
+          <span class="ea-app__logo"></span>
+          {RAIL.map((r) => (
+            <span class={`ea-app__railitem ${r === current ? 'is-current' : ''}`}>
+              <Icon name={r} size={18} />
+            </span>
+          ))}
+        </div>
+        <div class="ea-app__main">
+          <div class="ea-app__top">
+            <div>
+              <p class="ea-app__crumb">{crumb}</p>
+              <p class="ea-app__title">{title}</p>
+            </div>
+            <span class="ea-app__avatar" aria-hidden="true">SM</span>
+          </div>
+          <div class="ea-app__page">
+            <slot />
+          </div>
+        </div>
+      </div>
+    )
+  }
+  <figcaption class="ea-frame__caption">
+    {shot ? shot.caption : <><span class="ea-frame__example">Example data.</span> {caption}</>}
+  </figcaption>
+</figure>

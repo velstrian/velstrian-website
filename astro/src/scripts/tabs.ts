@@ -152,6 +152,8 @@ function setUp(group: HTMLElement): void {
   group.dataset.tabsReady = 'true';
 
   group.setAttribute('role', 'tablist');
+  const vertical = group.dataset.orientation === 'vertical';
+  if (vertical) group.setAttribute('aria-orientation', 'vertical');
   const label = group.dataset.tabsLabel;
   if (label) group.setAttribute('aria-label', label);
 
@@ -362,9 +364,15 @@ function setUp(group: HTMLElement): void {
     let next = current;
     switch (event.key) {
       case 'ArrowRight':
+      case 'ArrowDown':
+        /* Down only in a vertical list, Right only in a row, per the ARIA tabs
+           pattern's aria-orientation. */
+        if ((event.key === 'ArrowDown') !== vertical) return;
         next = (current + 1) % pairs.length;
         break;
       case 'ArrowLeft':
+      case 'ArrowUp':
+        if ((event.key === 'ArrowUp') !== vertical) return;
         next = (current - 1 + pairs.length) % pairs.length;
         break;
       case 'Home':

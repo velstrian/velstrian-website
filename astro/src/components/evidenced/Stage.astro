@@ -1,0 +1,31 @@
+---
+/**
+ * Stage: the signature visual of design system version 3.
+ *
+ * A large rounded panel filled with the brand gradient, indigo into purple
+ * (--stage-gradient, never red, D256), with a soft bloom of light and a fine
+ * grain over it (::before and ::after in styles/evidenced.css), and an optional
+ * texture image read from --stage-texture. Product UI floats on it: the default
+ * slot holds the main screen at the raised elevation, and the `float` slot holds
+ * a card that overlaps the stage edge at the floating elevation.
+ *
+ * `layout`:
+ *   hero    a wide stage, the screen inset from the top left and running out
+ *           of the stage's bottom edge, the floating card over the right edge
+ *   panel   the stage beside copy in a feature row, the screen inset and the
+ *           floating card over the bottom left edge
+ *   centre  one screen centred on the stage, nothing floating
+ */
+interface Props {
+  layout?: 'hero' | 'panel' | 'centre';
+  class?: string;
+}
+const { layout = 'panel', class: cls = '' } = Astro.props;
+const hasFloat = Astro.slots.has('float');
+---
+
+<div class={`ea-stage ea-stage--${layout} ${hasFloat ? 'ea-stage--has-float' : ''} ${cls}`.replace(/\s+/g, ' ').trim()}>
+  <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
+  <div class="ea-stage__screen"><slot /></div>
+  {hasFloat && <div class="ea-stage__float"><slot name="float" /></div>}
+</div>

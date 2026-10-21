@@ -1,0 +1,41 @@
+---
+/**
+ * Steps: how hard is it to start? (strategy 0.4 row 5)
+ *
+ * A DARK band. Three steps, a real sequence, so they are numbered, in hairline
+ * columns with a gradient icon tile each. Formats and file sizes are read from
+ * site-facts.json.
+ */
+import Band from './Band.astro';
+import IconTile from './IconTile.astro';
+import Action from './Action.astro';
+import { SIGNUP_URL } from '../../data/app';
+import { TRIAL_DAYS } from '../../data/pricing';
+import { START_FORMATS, START_MAX_MB, PACK_MAX_MB } from '../../data/site-facts';
+---
+
+<Band tone="dark" class="ea-steps" labelledby="ea-steps-title">
+  <div class="ea-wrap">
+    <h2 class="ea-h2" id="ea-steps-title" data-reveal>Start in three steps.</h2>
+    <ol class="ea-steps__list">
+      <li class="ea-step" data-reveal>
+        <IconTile name="document" />
+        <h3 class="ea-h3"><span class="ea-step__n">1.</span> Add what you already have</h3>
+        <p>Your past answers, and the policies and case studies that prove them, as {START_FORMATS} files up to {START_MAX_MB} MB each.</p>
+      </li>
+      <li class="ea-step" data-reveal>
+        <IconTile name="upload" />
+        <h3 class="ea-h3"><span class="ea-step__n">2.</span> Add a contract</h3>
+        <p>Pick one from your matches, or upload one you were sent. Whole tender packs can be up to {PACK_MAX_MB} MB a file, or just forward the email.</p>
+      </li>
+      <li class="ea-step" data-reveal>
+        <IconTile name="pen" />
+        <h3 class="ea-h3"><span class="ea-step__n">3.</span> Answer the questions</h3>
+        <p>Read each drafted answer, change what you like, then download your bid as a PDF or Word file.</p>
+      </li>
+    </ol>
+    <div class="ea-actions" data-reveal>
+      <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+    </div>
+  </div>
+</Band>

@@ -1,0 +1,31 @@
+---
+/**
+ * Icon: one glyph from data/icons.ts, the single line family of design system
+ * version 3. Painted with currentColor at a 1.75 stroke, so it takes the colour
+ * of the role it sits in. Decorative by default, because every icon on the site
+ * sits beside words that say the same thing.
+ */
+import { ICONS, type IconName } from '../../data/icons';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+}
+const { name, size = 24, class: cls = '' } = Astro.props;
+---
+
+<svg
+  class={`ea-icon ${cls}`.trim()}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={ICONS[name]}
+/>

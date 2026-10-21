@@ -1,0 +1,230 @@
+---
+/**
+ * Capabilities: what can it do? (strategy section 0.4, row 3)
+ *
+ * Five things, said the way a small business owner would say them, each beside
+ * one product screen. Every capability Velstrian Bid has still appears: finding
+ * work (four live sources, private tenders by upload or email), deciding (the
+ * fit score out of 100 and award history), answering from your past answers, every claim checked against your documents, with
+ * the answer library, review by guest reviewers, and tracking what you
+ * promised after you win. The expert detail lives on /bid/ and in the glossary.
+ *
+ * Every number is read from site-facts.json.
+ */
+import TabSwitcher from '../ui/TabSwitcher.astro';
+import Frame from './Frame.astro';
+import Band from './Band.astro';
+import Stage from './Stage.astro';
+import Sequence from './Sequence.astro';
+import { FACTS, GUEST_REVIEWERS } from '../../data/site-facts';
+
+const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 0);
+/* Example scores inside the real maxima. */
+const EXAMPLE: Record<string, number> = {
+  sector: 18,
+  'social value': 15,
+  capacity: 14,
+  geography: 12,
+  timeline: 8,
+  evidence: 4,
+  market: 3,
+};
+const PLAIN: Record<string, string> = {
+  sector: 'Your kind of work',
+  'social value': 'Good you do locally',
+  capacity: 'Size you can handle',
+  geography: 'Where it is',
+  timeline: 'Time to respond',
+  evidence: 'Proof you hold',
+  market: 'Competition',
+};
+const dims = FACTS.fit_dimensions.dimensions.map((d) => ({
+  name: PLAIN[d.name] ?? d.name,
+  max: d.points,
+  got: EXAMPLE[d.name] ?? 0,
+}));
+const got = dims.reduce((a, d) => a + d.got, 0);
+---
+
+<Band tone="light-alt" class="ea-caps" labelledby="ea-caps-title" id="what-it-does">
+  <div class="ea-wrap">
+    <h2 class="ea-h2" id="ea-caps-title" data-reveal>Everything from finding the work to delivering it.</h2>
+    <div class="ea-caps__layout">
+    <div class="ea-switch">
+      <TabSwitcher
+        label="What it does"
+        orientation="vertical"
+        tabs={[
+          { id: 'cap-find', label: 'Find contracts that suit you' },
+          { id: 'cap-decide', label: 'Decide which ones to go for' },
+          { id: 'cap-answer', label: 'Answer from your past answers' },
+          { id: 'cap-check', label: 'Get a colleague to check it' },
+          { id: 'cap-deliver', label: 'Keep track of what you promised' },
+        ]}
+      />
+    </div>
+    <div class="ea-caps__panels">
+
+    <div class="ea-panel ea-panel--stack" id="cap-find">
+      <div class="ea-panel__copy">
+        <h3 class="visually-hidden">Find contracts that suit you</h3>
+        <p>
+          New public contracts from the official UK and EU listing sites arrive every morning, scored for you. Got a
+          private tender or a request for a quote? Upload it, or forward the email.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="New today" status="12 matches" capture="home-cap-find" caption="Contract names and dates are an example.">
+          <ul class="ea-mini-list">
+            <li><span>Office cleaning, a primary school</span><span class="ea-state">Closes in 21 days</span></li>
+            <li><span>Grounds care for a housing association</span><span class="ea-state">Closes in 14 days</span></li>
+            <li><span>Facilities support, a private retailer</span><span class="ea-state">Uploaded by you</span></li>
+            <li><span>Window cleaning, an NHS trust</span><span class="ea-state">Closes in 30 days</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="This morning"
+          steps={[
+            { label: `Checked ${FACTS.sources.live.length} live sources` },
+            { label: '38 new contracts', detail: 'Plus 1 you uploaded' },
+            { label: '12 suit your business' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    <div class="ea-panel ea-panel--stack" id="cap-decide">
+      <div class="ea-panel__copy">
+        <h3 class="visually-hidden">Decide which ones to go for</h3>
+        <p>
+          Every contract gets a score out of {fitTotal} for how well it fits you, with the reasons. Past results show
+          who won similar work and what it was worth.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Grounds care for a housing association" status={`Fit ${got} of ${fitTotal}`} capture="home-cap-decide" caption="The points available are the real ones. The scores are an example.">
+          <table class="ea-mini-table ea-fit">
+            <caption class="visually-hidden">Why this contract scores {got} of {fitTotal}, example</caption>
+            <thead>
+              <tr><th scope="col">Reason</th><th scope="col">Points</th><th scope="col"><span class="visually-hidden">Share of points</span></th></tr>
+            </thead>
+            <tbody>
+              {
+                dims.map((d) => (
+                  <tr>
+                    <th scope="row">{d.name}</th>
+                    <td class="ea-num">{d.got} of {d.max}</td>
+                    <td class="ea-fit__bar">
+                      <svg viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <rect class="ea-fit__track" width="100" height="4" rx="2" />
+                        <rect class="ea-fit__fill" width={Math.round((d.got / d.max) * 100)} height="4" rx="2" />
+                      </svg>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Grounds care, a housing association"
+          steps={[
+            { label: `Fit ${got} of ${fitTotal}`, detail: `${dims.length} reasons, all shown` },
+            { label: 'Past winners found', detail: '3 similar contracts' },
+            { label: 'Worth going for' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    <div class="ea-panel ea-panel--stack" id="cap-answer">
+      <div class="ea-panel__copy">
+        <h3 class="visually-hidden">Answer from your past answers</h3>
+        <p>
+          Each answer is drafted from your past answers, kept in one library you build as you go. Every claim is
+          checked against your policies and case studies, and good answers are saved to reuse next time.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Your questions" status="9 of 12 drafted" capture="home-cap-answer" caption="Questions and progress are an example.">
+          <ul class="ea-mini-list">
+            <li><span>1. About your company</span><span class="ea-state ea-state--ok">Drafted from 3 past answers</span></li>
+            <li><span>4. Cover when staff are off</span><span class="ea-state ea-state--ok">Drafted from 2 past answers</span></li>
+            <li><span>6. Customer ratings</span><span class="ea-state ea-state--held">Needs your proof</span></li>
+            <li><span>9. Price</span><span class="ea-state">Yours to fill in</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Your library"
+          steps={[
+            { label: '14 past answers found' },
+            { label: '9 of 12 drafted' },
+            { label: '1 needs your proof', detail: 'Customer ratings', state: 'held' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    <div class="ea-panel ea-panel--stack" id="cap-check">
+      <div class="ea-panel__copy">
+        <h3 class="visually-hidden">Get a colleague to check it</h3>
+        <p>
+          Invite people to read and comment without paying for another seat: {GUEST_REVIEWERS.starter} on Starter,
+          {GUEST_REVIEWERS.pro} on Pro and {GUEST_REVIEWERS.portfolio} on Portfolio.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Comments on question 4" status="1 to reply to" capture="home-cap-check" caption="Names and comments are an example.">
+          <div class="ea-mini-thread">
+            <p class="ea-mini-who">Priya, operations</p>
+            <p class="ea-mini-reply">Can we say how quickly cover arrives?</p>
+            <p class="ea-mini-who">You</p>
+            <p class="ea-mini-reply">Added "the same day" from the staffing policy.</p>
+          </div>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Question 4"
+          steps={[
+            { label: 'Priya invited to check', detail: 'No extra seat needed' },
+            { label: '1 comment added' },
+            { label: 'Answer updated' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    <div class="ea-panel ea-panel--stack" id="cap-deliver">
+      <div class="ea-panel__copy">
+        <h3 class="visually-hidden">Keep track of what you promised</h3>
+        <p>
+          Once you win, the promises in your bid become a checklist with dates, so nothing slips and your reports are
+          ready when the customer asks.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="After you win: grounds care contract" capture="home-cap-deliver" caption="Promises and dates are an example.">
+          <ul class="ea-mini-list">
+            <li><span>Cover staff on call for every site</span><span class="ea-state ea-state--ok">On track</span></li>
+            <li><span>Two local apprentices this year</span><span class="ea-state ea-state--ok">1 of 2 hired</span></li>
+            <li><span>Quarterly report to the customer</span><span class="ea-state">Due 31 January</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="After you win"
+          steps={[
+            { label: 'Contract won' },
+            { label: '3 promises found', detail: 'In your bid' },
+            { label: 'Checklist ready', detail: 'With dates and owners' },
+          ]}
+        />
+      </Stage>
+    </div>
+    </div>
+    </div>
+  </div>
+</Band>

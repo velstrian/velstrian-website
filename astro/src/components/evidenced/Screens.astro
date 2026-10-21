@@ -1,0 +1,96 @@
+---
+/**
+ * Screens: what does it look like? The product carousel on the home page.
+ *
+ * A LIGHT band. Four whole screens of Velstrian Bid, in the order a first bid
+ * goes: your bids, an answer drafted from your library, a figure it would not
+ * invent, and after you win. Two are real staging captures, two are HTML
+ * recreations until the capture lane reaches them. Each is an AppWindow, an HTML recreation captioned "Example
+ * data" until the staging capture lane lands the real screen
+ * (data/product-captures.ts), with names and states from the real product
+ * (crowagent-platform web/src/features/bid: bid-board, discover,
+ * answer-editor, delivery).
+ */
+import Band from './Band.astro';
+import AppWindow from './AppWindow.astro';
+import ProductCarousel from './ProductCarousel.astro';
+
+const BIDS = [
+  { name: 'Grounds care, a housing association', done: 4, of: 6, stage: 'Drafting', due: '14 days' },
+  { name: 'Office cleaning, a primary school', done: 9, of: 12, stage: 'With a colleague', due: '21 days' },
+  { name: 'Facilities support, a private retailer', done: 12, of: 12, stage: 'Ready to send', due: '3 days' },
+  { name: 'Window cleaning, an NHS trust', done: 0, of: 8, stage: 'Not started', due: '30 days' },
+];
+---
+
+<Band tone="light" class="ea-screens" labelledby="ea-screens-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <h2 class="ea-h2" id="ea-screens-title">See the screens you will use.</h2>
+      <p class="ea-lead">From finding a contract to keeping your promises, everything is in one place.</p>
+    </div>
+    <div data-reveal>
+      <ProductCarousel label="Velstrian Bid screens" count={4}>
+        <li class="ea-car__slide">
+          <AppWindow crumb="Bids" title="Your bids" current="pen" capture="home-car-board" caption="Your bids, how far each one has got and when it closes.">
+            <table class="ea-app-table">
+              <caption class="visually-hidden">Your bids, example</caption>
+              <thead><tr><th scope="col">Bid</th><th scope="col">Answered</th><th scope="col">Stage</th><th scope="col">Closes in</th></tr></thead>
+              <tbody>
+                {BIDS.map((b) => (
+                  <tr>
+                    <th scope="row">{b.name}</th>
+                    <td>
+                      <span class="ea-progress"><span class="ea-progress__n ea-num">{b.done}/{b.of}</span><span class="ea-progress__bar"><span style={`width: ${Math.round((b.done / b.of) * 100)}%`}></span></span></span>
+                    </td>
+                    <td><span class={`ea-chip ${b.done === b.of ? 'ea-chip--ok' : ''}`}>{b.stage}</span></td>
+                    <td class="ea-num">{b.due}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </AppWindow>
+        </li>
+        <li class="ea-car__slide">
+          <AppWindow crumb="Bids / Grounds care, a housing association" title="Question 4 of 6" current="pen" capture="home-car-answer" caption="An answer drafted from your library.">
+            <div class="ea-app-split">
+              <ol class="ea-app-qs">
+                <li><span>1. About your company</span><span class="ea-chip ea-chip--ok">Drafted</span></li>
+                <li><span>2. Your experience</span><span class="ea-chip ea-chip--ok">Drafted</span></li>
+                <li><span>3. Health and safety</span><span class="ea-chip ea-chip--ok">Drafted</span></li>
+                <li class="is-current"><span>4. Cover when staff are off</span><span class="ea-chip ea-chip--ok">Drafted</span></li>
+                <li><span>5. Customer ratings</span><span class="ea-chip ea-chip--held">Needs proof</span></li>
+                <li><span>6. Price</span><span class="ea-chip">Yours to fill in</span></li>
+              </ol>
+              <div class="ea-app-answer">
+                <p class="ea-label">Your answer</p>
+                <p>We keep two trained cover staff on call for every site, so a visit is never missed. <span class="ea-src-chip">Staffing policy, p3</span></p>
+                <p>Cover staff have the same checks and training as our regular team. <span class="ea-src-chip">Training record</span></p>
+                <p class="ea-app-answer__held"><span class="ea-chip ea-chip--held">Held back</span> No proof found for "rated 4.9 out of 5". Add a document, or change the sentence.</p>
+              </div>
+            </div>
+          </AppWindow>
+        </li>
+        <li class="ea-car__slide">
+          <AppWindow crumb="Bids / Building care, a housing estate" title="Question 6 of 12" current="pen" capture="home-car-refusal" caption="Asked for a figure there was no proof of, it said so instead of inventing one.">
+            <div class="ea-app-answer">
+              <p class="ea-label">Question 6: by how much will you cut carbon in the first year?</p>
+              <p>No carbon reduction target is recorded for this contract. We will first measure current energy use for each building, then report the savings against it every quarter.</p>
+              <p class="ea-app-answer__held"><span class="ea-chip ea-chip--held">No source found</span> Drafted with AI, no source recorded.</p>
+            </div>
+          </AppWindow>
+        </li>
+        <li class="ea-car__slide">
+          <AppWindow crumb="Delivery" title="After you win: grounds care" current="checklist" capture="home-car-deliver" caption="The promises from a winning bid, as a checklist with dates.">
+            <ul class="ea-app-list ea-app-list--check">
+              <li><span class="ea-tick" aria-hidden="true"></span><span class="ea-app-list__text"><span class="ea-app-list__name">Cover staff on call for every site</span><span class="ea-app-list__meta">From your answer to question 4</span></span><span class="ea-chip ea-chip--ok">On track</span></li>
+              <li><span class="ea-tick" aria-hidden="true"></span><span class="ea-app-list__text"><span class="ea-app-list__name">Two local apprentices this year</span><span class="ea-app-list__meta">1 of 2 hired</span></span><span class="ea-chip ea-chip--ok">On track</span></li>
+              <li><span class="ea-tick ea-tick--open" aria-hidden="true"></span><span class="ea-app-list__text"><span class="ea-app-list__name">Quarterly report to the customer</span><span class="ea-app-list__meta">Due 31 January</span></span><span class="ea-chip">Due soon</span></li>
+              <li><span class="ea-tick ea-tick--open" aria-hidden="true"></span><span class="ea-app-list__text"><span class="ea-app-list__name">Reply to urgent calls within two hours</span><span class="ea-app-list__meta">Checked every month</span></span><span class="ea-chip">Monthly</span></li>
+            </ul>
+          </AppWindow>
+        </li>
+      </ProductCarousel>
+    </div>
+  </div>
+</Band>

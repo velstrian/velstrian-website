@@ -1,0 +1,36 @@
+---
+/**
+ * Facts: why trust it? The home page's proof band (strategy 0.8: "hero light,
+ * proof band dark").
+ *
+ * A DARK band. Four facts in hairline columns with gradient icon tiles: the
+ * live sources counted from site-facts.json, the match factors and their
+ * points total, the largest upload, and where the data lives. Under them the
+ * live trust strip, the six badges word for word from TRUST_BADGES (D255),
+ * the one canonical list. No security wording is written here.
+ */
+import Band from './Band.astro';
+import FactsBand from './FactsBand.astro';
+import { FACTS, TRUST_BADGES, PACK_MAX_MB } from '../../data/site-facts';
+
+const live = FACTS.sources.live.length;
+const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 0);
+const fitCount = FACTS.fit_dimensions.dimensions.length;
+const where = FACTS.regions.data_at_rest.place;
+---
+
+<Band tone="dark" class="ea-proof" labelledby="ea-proof-title">
+  <div class="ea-wrap">
+    <h2 class="ea-h2 ea-h2--centre" id="ea-proof-title" data-reveal>Real contracts, real proof, and your data kept safe.</h2>
+    <FactsBand
+      facts={[
+        { icon: 'search', value: `${live}`, label: 'Live UK and EU contract listings, checked for you every morning' },
+        { icon: 'sliders', value: `${fitCount}`, label: `Reasons each contract is matched on, scored out of ${fitTotal}, every one shown` },
+        { icon: 'upload', value: `${PACK_MAX_MB} MB`, label: 'The largest tender pack file you can upload. Or just forward the email' },
+        { icon: 'globe', value: 'EU', label: `Your documents stay in ${where} and are never used to train AI` },
+      ]}
+      strip={[...TRUST_BADGES]}
+      stripLabel="How your data is protected"
+    />
+  </div>
+</Band>

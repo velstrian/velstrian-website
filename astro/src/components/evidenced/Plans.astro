@@ -1,0 +1,55 @@
+---
+/**
+ * Plans: what does it cost? (strategy 0.4 row 6, visual 0.8 "pricing light")
+ *
+ * A LIGHT band. The three Velstrian Bid plans as white cards with a hairline
+ * that lift one elevation step on hover, the recommended one raised at rest.
+ * Every figure is read from data/pricing.ts, which check-pricing-parity.js
+ * holds to the platform catalogue: no price is typed here. The plain "who it
+ * is for" and "what you get" lines are the billing spec's own wording
+ * (R285-BILLING-AND-PRICING-TRANSFORMATION-SPEC part 2.3), and every plan says
+ * "Start now" (D236).
+ */
+import Band from './Band.astro';
+import Action from './Action.astro';
+import { PLANS, TRIAL_DAYS, startHref } from '../../data/pricing';
+
+const PLAIN: Record<string, { who: string; gets: string }> = {
+  Starter: { who: 'You bid on your own', gets: 'Find contracts, draft answers from your past answers, download as Word or PDF.' },
+  Pro: { who: 'A few of you work on bids together', gets: 'Everything in Starter, plus tracking after you win and monthly reports.' },
+  Portfolio: { who: 'Bids run across several teams', gets: 'Everything in Pro, plus connections to your other tools.' },
+};
+const n = (v: number) => v.toLocaleString('en-GB');
+---
+
+<Band tone="light-alt" class="ea-plans" labelledby="ea-plans-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <h2 class="ea-h2" id="ea-plans-title">Simple prices, shown up front.</h2>
+      <p class="ea-lead">Your first {TRIAL_DAYS} days are free. A card is needed to start, and you can cancel any time in the trial.</p>
+    </div>
+    <ul class="ea-plans__grid">
+      {
+        PLANS.map((p) => (
+          <li class={`ea-card ea-plan ${p.recommended ? 'ea-plan--rec' : ''}`} data-reveal>
+            <div class="ea-plan__top">
+              <h3 class="ea-h3">{p.name}</h3>
+              {p.recommended && <span class="ea-plan__badge">Recommended</span>}
+            </div>
+            <p class="ea-plan__who">{PLAIN[p.name]?.who ?? p.who}</p>
+            <p class="ea-plan__price">
+              <span class="ea-plan__amount">£{n(p.monthly ?? 0)}</span>
+              <span class="ea-plan__per">a month</span>
+            </p>
+            <p class="ea-plan__inc">
+              {p.seats} {p.seats === 1 ? 'person' : 'people'}, {n(p.credits)} AI credits a month
+            </p>
+            <p class="ea-plan__gets">{PLAIN[p.name]?.gets ?? p.includes}</p>
+            <Action href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>Start now</Action>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="ea-plans__more" data-reveal><a class="ea-link" href="/pricing/">Compare every plan and add on</a></p>
+  </div>
+</Band>

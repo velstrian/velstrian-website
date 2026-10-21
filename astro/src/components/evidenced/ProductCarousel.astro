@@ -1,0 +1,42 @@
+---
+/**
+ * ProductCarousel: the product's real screens, one at a time, on a stage
+ * (strategy 0.8, "carousels of product").
+ *
+ * Arrows, a "2 / 4" counter, swipe, and the arrow keys when focus is inside.
+ * NO AUTOPLAY: nothing moves until the reader asks, so there is no timer, no
+ * pause control and nothing to fight a screen reader. A slide moves in 400ms
+ * (--slide-dur), and instantly under reduced motion.
+ *
+ * WITHOUT SCRIPT it is a horizontal scroll strip with snap points, so every
+ * slide is reachable by swipe or scroll and every caption is in the document.
+ * scripts/evidenced.ts initCarousels turns it into the paged control and only
+ * then shows the arrows and counter.
+ *
+ * Slides are the default slot, each a <li class="ea-car__slide">, usually an
+ * AppWindow. `count` is the number of slides, for the server rendered counter.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  label: string;
+  count: number;
+}
+const { label, count } = Astro.props;
+---
+
+<div class="ea-car" data-car role="region" aria-roledescription="carousel" aria-label={label}>
+  <div class="ea-car__stage">
+    <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
+    <div class="ea-car__viewport" data-car-viewport tabindex="0" aria-label={`${label}, use the arrow keys to move between screens`}>
+      <ul class="ea-car__track" data-car-track>
+        <slot />
+      </ul>
+    </div>
+  </div>
+  <div class="ea-car__controls" data-car-controls hidden>
+    <button class="ea-car__btn" type="button" data-car-prev aria-label="Previous screen"><Icon name="left" size={20} /></button>
+    <p class="ea-car__count" aria-live="polite"><span data-car-n>1</span> / {count}</p>
+    <button class="ea-car__btn" type="button" data-car-next aria-label="Next screen"><Icon name="right" size={20} /></button>
+  </div>
+</div>
