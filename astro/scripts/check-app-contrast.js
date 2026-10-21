@@ -82,9 +82,15 @@ const DIST = path.join(__dirname, '..', 'dist');
    to have another one. */
 const SCREENS = [
   {
-    sel: '.h2rt__app',
+    /* R285-WEB-ENTERPRISE-REDESIGN-01: the home page rebuilt on the evidenced
+       answer system draws its product screens with components/evidenced/
+       Frame.astro, ten of them, and some carry a light paper sheet inside the
+       dark frame. Every visible one is measured, not just the first. Was
+       `.h2rt__app` (home2/RefusalTrace.astro), which the new home no longer
+       renders. */
+    sel: '.ea-frame__window',
     route: '/',
-    why: 'home2/RefusalTrace.astro draws a light CrowMark screen inside the dark page',
+    why: 'evidenced/Frame.astro draws the product screens, with light evidence sheets inside dark frames',
   },
 ];
 
@@ -147,10 +153,10 @@ const MEASURE = (sel) => {
   };
   const hex = (c) => '#' + c.slice(0, 3).map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
 
-  const root = document.querySelector(sel);
-  if (!root) return { missing: true };
+  const roots = [...document.querySelectorAll(sel)];
+  if (!roots.length) return { missing: true };
   const seen = new Map();
-  for (const el of root.querySelectorAll('*')) {
+  for (const el of roots.flatMap((r) => [...r.querySelectorAll('*')])) {
     const own = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
     if (!own) continue;
     const cs = getComputedStyle(el);

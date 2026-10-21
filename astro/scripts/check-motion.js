@@ -38,7 +38,7 @@
  *     and is not being fixed today" is a different statement from "this is
  *     right, and here is the argument"
  *
- * ── THE FOUR RULES ───────────────────────────────────────────────────────────
+ * ── THE FIVE RULES (rule 5 added 2026-10-21, version 3) ──────────────────────
  *
  *   1 TIMELINE   A scroll-driven timeline (`animation-timeline`, `view()`,
  *                `scroll()`, `timeline-scope`, `view-timeline`, `scroll-timeline`)
@@ -398,7 +398,10 @@ for (const f of files) {
 
 const REVEAL_WORDS =
   'is-visible|in-view|is-inview|revealed|reveal|animate-in|animate-on-scroll|fade-in|fade-up|slide-up|scroll-reveal|has-entered|sv-reveal|js-reveal|aos-init';
-const REVEAL_SELECTOR = new RegExp(`\\.(${REVEAL_WORDS})(?![\\w-])`, 'g');
+/* `(?<!dataset)`, added 2026-10-21 with rule 5: `el.dataset.reveal` is a script
+   writing the version 3 ATTRIBUTE, not a class selector, and rule 5 governs it.
+   The same correction as above: a class, never a word. */
+const REVEAL_SELECTOR = new RegExp(`(?<!dataset)\\.(${REVEAL_WORDS})(?![\\w-])`, 'g');
 const REVEAL_SCRIPT = new RegExp(
   `(?:classList\\s*\\.\\s*(?:add|toggle|remove)|className\\s*[+]?=|setAttribute\\s*\\(\\s*['"\`]class)[^;\\n]*?['"\`\\s](${REVEAL_WORDS})(?![\\w-])`,
   'g'
@@ -416,6 +419,126 @@ for (const f of files) {
     }
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * RULE 5 — THE ONE VERSION 3 ENTRANCE, EXACTLY AS DECIDED
+ *
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy section 0.8 "Motion" (owner,
+ * 2026-10-21 night): "Section content settles in on first view (opacity and
+ * 12px rise, 300ms, staggered 60ms between items), once, off under reduced
+ * motion. This replaces the version 1 'no reveals' rule, because the reference
+ * pages do it and it reads premium when it is quick and quiet."
+ *
+ * Rules 2 to 4 above still stand, because every defect they record is still
+ * a defect: content hidden by CSS alone, an observer that never fires, an
+ * entrance each component invents. Version 3 is allowed ONE entrance, and this
+ * rule holds it to exactly the decided shape so it cannot become the next
+ * eleventh motion system:
+ *
+ *   5a  The hidden state is written as an ATTRIBUTE VALUE the script sets,
+ *       [data-reveal='armed'] (and, for product sequences, [data-seq-state=
+ *       'armed']), never as a class, and only in ENTRANCE_HOME. With no
+ *       script nothing carries the attribute value, so nothing is hidden.
+ *   5b  Every armed rule sits inside @media (prefers-reduced-motion:
+ *       no-preference), so under reduced motion nothing is ever hidden.
+ *   5c  The armed state moves opacity to 0 and translates by the rise token
+ *       (or scales the sequence's progress line to 0), and nothing else.
+ *   5d  The tokens are the decided numbers: a 12px rise, 300ms, 60ms between
+ *       items.
+ *   5e  The script arms only what starts BELOW the fold and returns early
+ *       under reduced motion, so nothing a reader is looking at disappears.
+ *   5f  No other file writes the armed value.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+const ENTRANCE_HOME = 'src/styles/evidenced.css';
+const ENTRANCE_SCRIPT = 'src/scripts/evidenced.ts';
+const ARMED = /\[data-(?:reveal|seq-state)\s*=\s*['"]armed['"]\]/;
+const entranceFails = [];
+const entranceHome = files.find((f) => f.file === ENTRANCE_HOME);
+const entranceScript = files.find((f) => f.file === ENTRANCE_SCRIPT);
+
+if (!entranceHome || !entranceScript) {
+  entranceFails.push(`5: ${!entranceHome ? ENTRANCE_HOME : ENTRANCE_SCRIPT} is missing, the version 3 entrance has no home`);
+} else {
+  /* 5a and 5f: where the armed value is written. */
+  for (const f of files) {
+    if (f.file === ENTRANCE_HOME || f.file === ENTRANCE_SCRIPT) continue;
+    if (ARMED.test(f.code) || /data-(?:reveal|seq-state)\s*=\s*['"]armed['"]/.test(f.code) || /dataset\.(?:reveal|seqState)\s*=\s*['"]armed['"]/.test(f.code)) {
+      /* The one sanctioned writer outside the script: Sequence.astro arms a
+         play-on-load card during parse, before first paint. */
+      const sanctioned = f.file === 'src/components/evidenced/Sequence.astro' && /setAttribute\(\s*'data-seq-state',\s*'armed'\s*\)/.test(f.code) && /prefers-reduced-motion: reduce/.test(f.code);
+      if (!sanctioned) entranceFails.push(`5a/5f: ${f.file} writes the armed entrance state. Only ${ENTRANCE_HOME} and ${ENTRANCE_SCRIPT} may`);
+    }
+  }
+
+  /* 5b and 5c: walk the home sheet's rules, tracking the enclosing @media. */
+  const css = entranceHome.code;
+  const ruleRe = /([^{}]+)\{([^{}]*)\}/g;
+  const mediaAt = [];
+  {
+    const mre = /@media\s*([^{]+)\{/g;
+    for (const m of css.matchAll(mre)) {
+      let depth = 1;
+      let i = m.index + m[0].length;
+      while (i < css.length && depth > 0) {
+        if (css[i] === '{') depth++;
+        else if (css[i] === '}') depth--;
+        i++;
+      }
+      mediaAt.push({ from: m.index, to: i, query: m[1].trim() });
+    }
+  }
+  let armedRules = 0;
+  for (const m of css.matchAll(ruleRe)) {
+    const sel = m[1].trim();
+    if (!ARMED.test(sel)) continue;
+    armedRules++;
+    const media = mediaAt.filter((x) => x.from < m.index && m.index < x.to).map((x) => x.query);
+    if (!media.some((q) => /prefers-reduced-motion:\s*no-preference/.test(q))) {
+      entranceFails.push(`5b: "${sel.split('\n').pop()}" (line ${lineAt(css, m.index)}) hides content outside @media (prefers-reduced-motion: no-preference)`);
+    }
+    const decls = m[2].split(';').map((d) => d.trim()).filter(Boolean);
+    for (const d of decls) {
+      const [prop, ...rest] = d.split(':');
+      const value = rest.join(':').trim();
+      const p = prop.trim();
+      const ok =
+        (p === 'opacity' && value === '0') ||
+        (p === 'transform' && (value === 'translateY(var(--reveal-rise))' || value === 'scaleX(0)'));
+      if (!ok) entranceFails.push(`5c: "${d}" in an armed rule (line ${lineAt(css, m.index)}). The armed state may only set opacity: 0 and the rise`);
+    }
+  }
+  if (armedRules === 0) entranceFails.push(`5: ${ENTRANCE_HOME} declares no armed state, so the decided entrance is missing`);
+
+  /* 5d: the decided numbers. */
+  const tokens = files.find((f) => f.file === 'src/styles/tokens.css');
+  const want = { '--reveal-rise': '12px', '--reveal-dur': '300ms', '--reveal-step': '60ms' };
+  for (const [name, val] of Object.entries(want)) {
+    const m = tokens && new RegExp(`${name}\\s*:\\s*([^;]+);`).exec(tokens.code);
+    if (!m || m[1].trim() !== val) entranceFails.push(`5d: ${name} is ${m ? m[1].trim() : 'missing'}, the decided value is ${val}`);
+  }
+  if (!/var\(--reveal-dur\)[^;]*calc\(var\(--reveal-i,\s*0\)\s*\*\s*var\(--reveal-step\)\)/.test(css)) {
+    entranceFails.push('5d: the [data-reveal=\'in\'] transition does not run var(--reveal-dur) staggered by var(--reveal-step)');
+  }
+
+  /* 5e: the script's two guards. */
+  const js = entranceScript.code;
+  const body = /export function initReveal\(\)[^{]*\{([\s\S]*?)\n\}/.exec(js);
+  if (!body) entranceFails.push(`5e: ${ENTRANCE_SCRIPT} has no initReveal`);
+  else {
+    if (!/if\s*\(\s*reduced\(\)\s*\)\s*return/.test(body[1])) entranceFails.push('5e: initReveal does not return under reduced motion before arming');
+    if (!/getBoundingClientRect\(\)\.top\s*>\s*vh/.test(body[1])) entranceFails.push('5e: initReveal arms items without checking they start below the fold');
+  }
+}
+
+if (entranceFails.length) {
+  console.error(`\nmotion: ${entranceFails.length} VERSION 3 ENTRANCE VIOLATION(S)\n`);
+  for (const x of entranceFails) console.error(`    ${x}`);
+  console.error('\n  The one entrance is opacity and a 12px rise, 300ms, 60ms between items, once,');
+  console.error('  armed by script only below the fold and never under reduced motion (strategy 0.8).\n');
+  process.exit(1);
+}
+console.log(`motion: version 3 entrance held to the decision (rule 5): ${ENTRANCE_HOME}, 12px, 300ms, 60ms, below the fold only, off under reduced motion`);
 
 /* ══════════════════════════════════════════════════════════════════════════
  * OUTPUT

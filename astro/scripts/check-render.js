@@ -465,6 +465,8 @@ const MEASURE = `(() => {
      * closing brace is a template literal evaluated in the page, so a backtick in
      * a comment ends the string and the file stops parsing. */
     if (el.classList.contains('surface--row')) continue;
+    /* A card inside a version 3 band: see the note on excused() below. */
+    if (el.closest('[data-band]')) continue;
 
     /* ── WHAT IS READ RATHER THAN SCANNED ────────────────────────────────
      *
@@ -669,7 +671,12 @@ const MEASURE = `(() => {
    * in ALLOW_BESPOKE with the argument for each. */
   const bespoke = [];
   for (const el of document.querySelectorAll('a, button, [role="button"]')) {
-    if (el.classList.contains('btn')) continue;
+    /* .ea-btn is components/evidenced/Action.astro, the version 3 button
+       (strategy 0.8: solid primary, outline secondary, 6px radius, one light
+       sweep). It is a component with one definition, exactly what this rule
+       protects, and it is the button for every page that moves to version 3.
+       Button.astro stays the button of the pages that have not moved yet. */
+    if (el.classList.contains('btn') || el.classList.contains('ea-btn')) continue;
     const cs = getComputedStyle(el);
     const r = el.getBoundingClientRect();
     if (r.width === 0 || r.height === 0) continue;
@@ -1051,6 +1058,16 @@ const MEASURE_LEFT = `window.__measureLeft = () => {
     'table, form, fieldset, dl, pre, ' + BODIES;
 
   const excused = (el) => {
+    /* VERSION 3 BANDS (R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.8, owner
+       2026-10-21). A section built as a components/evidenced/Band.astro band
+       aligns by COMPOSITION: a left head with its lead beside it, hairline
+       columns, a stage. The adopted strategy states left aligned by default
+       and centres only what it names (.ea-h2--centre, the hero head, the
+       FAQ). The centring rule below was written for the version 1 card
+       recipe, and applied to a band it would centre the hairline columns the
+       version 3 decision exists to line up. Excused by WHAT IT IS, a band,
+       never by route. */
+    if (el.closest('[data-band]')) return 'version 3 band';
     if (el.matches(STRUCTURE)) return 'structure';
     if (el.matches(BODIES)) return 'long-form body';
     if (el.matches('.surface--row')) return 'surface--row';
@@ -1161,7 +1178,7 @@ const MEASURE_LEFT = `window.__measureLeft = () => {
     const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden') continue;
     if (cs.textAlign !== 'center') continue;
-    if (el.closest(STRUCT_ALL) || el.closest('.surface--row')) continue;
+    if (el.closest(STRUCT_ALL) || el.closest('.surface--row') || el.closest('[data-band]')) continue;
     const r = el.getBoundingClientRect();
     if (r.width < 120 || r.height < 24) continue;
 

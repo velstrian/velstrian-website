@@ -187,6 +187,32 @@ const ALLOWED_LOSSES = new Map([
      and hero workbench loop with: outcome-led hero, customer outcomes, one-tender
      5-stage scenario (with refusal scan inside Review stage), walkthrough slot,
      two audience paths, and concise trust summary. */
+  /* 2026-10-21 night: R285-WEB-ENTERPRISE-REDESIGN-01 VERSION 2 STORYLINE and
+     VERSION 3 DESIGN SYSTEM (strategy sections 0.4 and 0.8). The owner judged the
+     mechanics vocabulary too expert for the real customer, a small business
+     writing its own bids (RULE 0-U). Every capability the eight headings below
+     introduced is still on the home page in plain words: finding and scoring
+     contracts ("Find contracts that suit you", "Decide which ones to go for"),
+     drafting from your own documents with every source shown ("Answer from your
+     own documents", the hero answer with its sources), and the refusal ("It will
+     not make things up", plus a real capture of it in the product carousel). */
+  ['/  heading: qualify',
+   'Version 2 storyline: the capability is "Find contracts that suit you" and "Decide which ones to go for", in the capability tabs on the same page.'],
+  ['/  heading: refuse',
+   'Version 2 storyline: the refusal is its own section, "It will not make things up.", with the animated check and a real staging capture in the carousel.'],
+  ['/  heading: one tender, from notice to evidence.',
+   'Version 2 storyline: the journey is now "Start in three steps." and the five capability tabs, in plain words for a first time bidder.'],
+  ['/  heading: watch it refuse a figure.',
+   'Version 2 storyline: replaced by "It will not make things up.", the same moment said simply.'],
+  ['/  heading: retrieve',
+   'Version 2 storyline: the pipeline vocabulary (retrieve, ground, compute, cite) is how the system works, not what the reader gets (strategy 0.6). Said as "Answer from your own documents".'],
+  ['/  heading: ground',
+   'Version 2 storyline: see retrieve. The grounding is shown, not named: every answer shows where each part came from.'],
+  ['/  heading: compute',
+   'Version 2 storyline: see retrieve. The fit score out of 100 and its reasons are in "Decide which ones to go for".'],
+  ['/  heading: cite',
+   'Version 2 storyline: see retrieve. Citation is the hero product moment, each part of the answer linked to its source document.'],
+
   ['/  heading: qualify. draft. prove it.',
    'Replaced by outcome-led hero ("Better bids. Defensible evidence. Measurable delivery.") under R285-WEB-ENTERPRISE-REDESIGN-01.'],
   ['/  heading: the engine that refuses to make things up.',

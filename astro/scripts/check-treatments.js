@@ -660,10 +660,17 @@ const MEASURE = `(() => {
      * result that made the widening safe to ship. See styles/labels.css. */
     const radius = parseFloat(cs.borderTopLeftRadius) || 0;
     const boxed = (parseFloat(cs.borderTopWidth) || 0) > 0 || radius >= 8;
+    /* THE DISPLAY FACE IS ONE ROLE MID MIGRATION (2026-10-21, D254 and design
+       system version 3). A version 3 page resolves var(--font-display) to
+       Inter and the pages not yet moved resolve it to Plus Jakarta Sans, so the
+       same grouplabel in the shared header and footer reads as two faces on two
+       pages. Both are named here as the one display role. A mono label is still
+       its own face and still splits a recipe. */
+    const face = cs.fontFamily.split(',')[0].replace(/"/g, '');
     out.labels.push({
       s: sig(el),
       recipe: [
-        cs.fontFamily.split(',')[0].replace(/"/g, ''),
+        face === 'Inter' || face === 'Plus Jakarta Sans' ? 'display face' : face,
         px(cs.fontSize) + 'px',
         'lh' + px(cs.lineHeight),
         'track' + px(cs.letterSpacing),
@@ -686,6 +693,10 @@ const MEASURE = `(() => {
    * with a 2px rule and 38px of indent directly above a quote with no rule and
    * no indent at all. A pulled quote is one object. */
   for (const el of document.querySelectorAll('blockquote')) {
+    /* A quoted tender question inside a product screen recreation is the
+       app's own drawing, not a pulled quote on the site (see the table cells
+       rule below, same reason). */
+    if (el.closest('[data-capture]')) continue;
     const cs = getComputedStyle(el);
     out.quotes.push({
       s: sig(el),
@@ -706,6 +717,13 @@ const MEASURE = `(() => {
    * and smaller than a td — that is what a column header is — but the grid the
    * eye tracks across is the padding, and there is no argument for four of it. */
   for (const el of document.querySelectorAll('td, th')) {
+    /* A PRODUCT SCREEN IS NOT SITE CONTENT (version 3, 2026-10-21). A cell
+       inside a [data-capture] figure (components/evidenced/Frame.astro and
+       AppWindow.astro) is an HTML recreation of the Velstrian Bid app's own
+       table, captioned Example data until the real capture replaces it. It
+       draws the APP's density, as the capture will, and a site prose recipe
+       would make the recreation lie about the product. */
+    if (el.closest('[data-capture]')) continue;
     const cs = getComputedStyle(el);
     const r = el.getBoundingClientRect();
     if (r.width === 0 && r.height === 0) continue;
@@ -766,6 +784,10 @@ const MEASURE = `(() => {
        to stop. Reached only because the selector above is now a descendant one,
        so the exclusion arrives with the widening. */
     if (a.closest('h1, h2, h3, h4, h5, h6')) continue;
+    /* Inside a product screen recreation, the same reason as the table cells
+       above: the numbered citation markers there are the app's own source
+       chips, a pill with a number, not a word in a sentence. */
+    if (a.closest('[data-capture]')) continue;
     /* Inside <nav> is an INDEX of links — a breadcrumb, a contents rail, an
        on-this-page bar — and underlining every entry in an index turns it into a
        wall of rules. Excluded structurally, mirroring styles/links.css exactly,

@@ -374,6 +374,74 @@ for (const reduced of [false, true]) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+ * 3b: THE EVIDENCED ANSWER BUTTON, ONE LIGHT SWEEP PER HOVER
+ *
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy section 5 (adopted 2026-10-21):
+ * the owner liked the light sweep and kept it on the PRIMARY button of the new
+ * system only, "a single soft highlight passes across the button once per
+ * hover, 400ms, on the button only, never on cards, never looping, off under
+ * reduced motion". Rule 3 above still holds every older .btn to colour only.
+ * This asserts the one sanctioned exception as a measured property, so the
+ * sweep cannot spread to a card or start looping without failing here:
+ *   - on hover exactly one transform transition runs, on ::after, 350-450ms,
+ *     finite, and nothing else animates
+ *   - a second hover plays it once more, so it is per hover and not a loop
+ *   - under prefers-reduced-motion nothing moves at all
+ *   - the secondary button changes colour only
+ * ══════════════════════════════════════════════════════════════════════════ */
+const SWEEP = { route: '/', primary: 'main .ea-btn--primary', secondary: 'main .ea-btn--secondary', min: 350, max: 450 };
+for (const reduced of [false, true]) {
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: reduced ? 'reduce' : 'no-preference' });
+  const page = await ctx.newPage();
+  await open(page, SWEEP.route);
+  const sig = await tagButton(page, SWEEP.primary);
+  const probe = reduced ? 'sweep, reduced motion' : 'sweep';
+  if (!sig) {
+    preflight.push(`${probe}: no visible ${SWEEP.primary} on ${SWEEP.route}`);
+    await ctx.close();
+    continue;
+  }
+  const passes = [];
+  for (let i = 0; i < 2; i++) {
+    const m = await measure(page);
+    if (!m.hovered) {
+      preflight.push(`${probe} on ${SWEEP.route} (${sig}): the pointer could not be brought onto it`);
+      break;
+    }
+    passes.push(m);
+  }
+  if (passes.length === 2) {
+    for (const [i, m] of passes.entries()) {
+      const sweep = m.moving.filter((a) => a.kind === 'CSSTransition' && a.pseudo === '::after' && a.name === 'transform');
+      const other = m.moving.filter((a) => !sweep.includes(a) && !(a.kind === 'CSSTransition' && TRANSITION_OK.test(a.name)));
+      if (reduced) {
+        rec(probe, `hover ${i + 1}: nothing moves`, sweep.length === 0 && other.length === 0,
+          [...sweep, ...other].map((a) => `${a.kind} ${a.name}${a.pseudo}`).join(', ') || 'still');
+      } else {
+        const ok = sweep.length === 1 && !sweep[0].infinite && sweep[0].dur >= SWEEP.min && sweep[0].dur <= SWEEP.max;
+        rec(probe, `hover ${i + 1}: one ${SWEEP.min}-${SWEEP.max}ms pass`, ok && other.length === 0,
+          `${sig}: ` + ([...sweep, ...other].map((a) => `${a.kind} ${a.name}${a.pseudo} ${a.dur}ms${a.infinite ? ' infinite' : ''}`).join(', ') || 'no sweep ran'));
+      }
+    }
+  }
+  if (!reduced) {
+    const sec = await tagButton(page, SWEEP.secondary);
+    if (sec) {
+      await page.evaluate((s) => document.querySelectorAll('[data-calm-probe]').forEach((e) => e.removeAttribute('data-calm-probe')), null);
+      await tagButton(page, SWEEP.secondary);
+      const m = await measure(page);
+      if (m.hovered) {
+        const flash = flashes(m.rest, m.lit, BUTTON_MAY_CHANGE);
+        const anims = m.moving.filter((a) => a.kind !== 'CSSTransition' || !TRANSITION_OK.test(a.name));
+        rec('evidenced secondary', 'colour only, nothing moves', flash.length === 0 && anims.length === 0,
+          [...flash, ...anims.map((a) => `${a.kind} ${a.name}${a.pseudo}`)].join('; ') || 'colour only');
+      }
+    }
+  }
+  await ctx.close();
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
  * 5: NOTHING LOOPS, ON EVERY BUILT ROUTE
  * ══════════════════════════════════════════════════════════════════════════ */
 const allRoutes = routesOf(DIST);

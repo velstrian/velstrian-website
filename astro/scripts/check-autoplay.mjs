@@ -109,38 +109,62 @@ const open = async (reducedMotion) => {
   return page;
 };
 
-const TRACE_ELEM = '.h2rt__trace';
-
-const reelValue = (page) =>
-  page.evaluate((sel) => {
-    const el = document.querySelector(sel);
-    if (!el) return null;
-    return getComputedStyle(el).getPropertyValue('--reel').trim();
-  }, TRACE_ELEM);
-
 console.log('autoplay: verifying motion behaviour and WCAG 2.2.2 compliance on /');
 
-/* ── 1. THE REFUSAL SCAN (MOMENT 1) ────────────────────────────────────────── */
-console.log('\n  the refusal scan (.h2rt) — plays once on view, no loop (D1, D5)');
+/* ── 1. THE VERSION 3 MOTION MOMENTS (rewritten 2026-10-21) ────────────────
+ *
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.8 "Motion". The home page now
+ * moves in four ways, and every one is driven here and read back:
+ *
+ *   the refusal check   [data-refusal]: plays once when it reaches mid
+ *                       window and ends on the finished frame (no data-play)
+ *   product sequences   .ea-seq: the hero card plays once on load, the
+ *                       capability cards once in view, each ending at
+ *                       data-seq-state="run" and never cycling back
+ *   the carousel        [data-car]: NO AUTOPLAY. It stays on screen 1 for
+ *                       longer than WCAG 2.2.2's five seconds untouched, and
+ *                       moves only when a reader presses next
+ *   reduced motion      nothing is armed at all: no hidden step, no hidden
+ *                       section, no refusal mid frame
+ *
+ * The version 2 RefusalTrace (.h2rt, its --reel custom property) is no longer
+ * rendered on /. Asserting it would fail on an absence the strategy decided. */
+console.log('\n  version 3 motion moments on / (strategy 0.8)');
 {
-  const page = await open('reduce');
-  await page.evaluate(() => document.querySelector('.h2rt')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
-  const valBefore = await reelValue(page);
-  check('refusal trace is present on page', valBefore !== null, `initial --reel=${valBefore}`);
+  const page = await open('no-preference');
+  const seqLoad = await page.evaluate(() => document.querySelector('.ea-seq[data-seq="load"]')?.dataset.seqState ?? null);
+  await page.waitForTimeout(2500);
+  const seqAfter = await page.evaluate(() => document.querySelector('.ea-seq[data-seq="load"]')?.dataset.seqState ?? null);
+  check('hero sequence plays once on load', seqAfter === 'run', `${seqLoad} -> ${seqAfter}`);
+
+  const refusalBefore = await page.evaluate(() => document.querySelector('[data-refusal]')?.dataset.play ?? 'absent');
+  check('refusal check is armed below the fold before it is seen', refusalBefore === 'armed', `data-play=${refusalBefore}`);
+  await page.evaluate(() => document.querySelector('[data-refusal]')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
   await page.waitForTimeout(3000);
-  const valAfter = await reelValue(page);
-  check('does not animate or loop under prefers-reduced-motion', valBefore === valAfter, `${valBefore} -> ${valAfter}`);
+  const refusalAfter = await page.evaluate(() => document.querySelector('[data-refusal]')?.dataset.play ?? 'absent');
+  check('refusal check plays once to its finished frame', refusalAfter === 'run', `data-play=${refusalAfter}`);
+  await page.waitForTimeout(3000);
+  const refusalLater = await page.evaluate(() => document.querySelector('[data-refusal]')?.dataset.play ?? 'absent');
+  check('refusal check halts, no loop (WCAG 2.2.2)', refusalLater === refusalAfter, `${refusalAfter} -> ${refusalLater}`);
+
+  await page.evaluate(() => document.querySelector('[data-car]')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  const carStart = await page.evaluate(() => document.querySelector('[data-car-n]')?.textContent ?? null);
+  await page.waitForTimeout(6500);
+  const carLater = await page.evaluate(() => document.querySelector('[data-car-n]')?.textContent ?? null);
+  check('carousel never advances on its own (6.5s untouched)', carStart === '1' && carLater === '1', `${carStart} -> ${carLater}`);
+  await page.click('[data-car-next]');
+  await page.waitForTimeout(600);
+  const carNext = await page.evaluate(() => document.querySelector('[data-car-n]')?.textContent ?? null);
+  check('carousel moves when the reader presses next', carNext === '2', `screen ${carNext}`);
   await page.close();
 }
 {
-  const page = await open('no-preference');
-  await page.evaluate(() => document.querySelector('.h2rt')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
-  await page.waitForTimeout(3500);
-  const settled = await reelValue(page);
-  check('reaches resting state after scan', settled === '1', `--reel=${settled}`);
-  await page.waitForTimeout(3000);
-  const afterDwell = await reelValue(page);
-  check('halts permanently with no autoplay loop (WCAG 2.2.2)', settled === afterDwell, `${settled} -> ${afterDwell}`);
+  const page = await open('reduce');
+  await page.waitForTimeout(800);
+  const armed = await page.evaluate(() =>
+    document.querySelectorAll('[data-reveal="armed"], [data-seq-state="armed"], [data-play="armed"]').length,
+  );
+  check('under reduced motion nothing is armed or hidden', armed === 0, `armed=${armed}`);
   await page.close();
 }
 

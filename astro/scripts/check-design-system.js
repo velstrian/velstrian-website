@@ -897,7 +897,13 @@ for (const r of rules) {
   if (size) {
     const targetsHeading =
       /(^|[\s,>+~(])h[1-6]\b/.test(selLower) || r.classes.some((c) => headingClasses.has(c));
-    if (targetsHeading && !/var\(\s*--t-(h1|page|h2|h3|h4|stat)\s*\)/.test(size)) {
+    /* VERSION 3 TIERS (R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.8, owner
+       2026-10-21): the version 3 scale is three more token names for the same
+       three levels, --t-hero (h1, 72px), --t-v3-h2 (h2, 48px) and --t-ea-h3
+       (h3, 20px), set in tokens.css and used only by styles/evidenced.css.
+       Still a token, never a number next to the heading, and rule 2b below
+       still ranks each against the heading's level. */
+    if (targetsHeading && !/var\(\s*--t-(h1|page|h2|h3|h4|stat|hero|v3-h2|ea-h3)\s*\)/.test(size)) {
       report('type', r.file, r.selector, `heading sized ${size}, which is not one of the four tiers (line ${r.line})`);
     }
 
@@ -933,8 +939,8 @@ for (const r of rules) {
        Level is document structure; the two tokens are two sizes for one level,
        the hero and the page title. So an <h1> at --t-page is correct and an
        <h2> at --t-page is still two tiers out of place. */
-    const TIER = { h1: 1, page: 1, h2: 2, h3: 3, h4: 4 };
-    const tier = (size.match(/var\(\s*--t-(h[1-4]|page)\s*\)/) || [])[1];
+    const TIER = { h1: 1, page: 1, hero: 1, h2: 2, 'v3-h2': 2, h3: 3, 'ea-h3': 3, h4: 4 };
+    const tier = (size.match(/var\(\s*--t-(h[1-4]|page|hero|v3-h2|ea-h3)\s*\)/) || [])[1];
     if (tier) {
       const levels = new Set();
       const direct = selLower.match(/(^|[\s,>+~(])h([1-6])\b/);
@@ -961,7 +967,7 @@ for (const r of rules) {
         )
           continue;
         const gap = TIER[tier] - TIER[lv];
-        if (gap >= 2 || (lv === 'h1' && tier !== 'h1' && tier !== 'page')) {
+        if (gap >= 2 || (lv === 'h1' && tier !== 'h1' && tier !== 'page' && tier !== 'hero')) {
           report('type', r.file, r.selector,
             `<${lv}> sized --t-${tier}, ${gap} tier(s) below its level (line ${r.line})`);
         }

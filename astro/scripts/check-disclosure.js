@@ -463,10 +463,16 @@ const MEASURE = `(() => {
         visibility: p.visibility,
         alpha,
         contrast: ratio(ink, behind(s)),
+        /* THE FACE IS NOT IN THE FINGERPRINT (2026-10-21, D254 and design system
+           version 3). The mark is drawn in var(--font-display), and a page on
+           version 3 resolves that one token to Inter while the pages not yet
+           moved resolve it to Plus Jakarta Sans. That is one recipe meeting a
+           page level typeface decision mid migration, not a second recipe, the
+           same reasoning as colour above. Glyph, size, weight and box still
+           split a recipe. */
         recipe: [
           which,
           content,
-          p.fontFamily.split(',')[0].replace(/"/g, ''),
           px(p.fontSize) + 'px',
           'w' + p.fontWeight,
           'h' + px(p.height),
