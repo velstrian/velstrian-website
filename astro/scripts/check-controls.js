@@ -84,8 +84,8 @@
  *                 0.01ms, which removes the ANIMATION and leaves the
  *                 displacement — so a hover transform under `reduce` still moves
  *                 the control, it just moves it instantly. `.pcar__arrow` lifted
- *                 --lift-btn and was doing exactly that; check-sheen.js asserts
- *                 this for `.surface` and `.btn` and looks at nothing else.
+ *                 the button lift and was doing exactly that. check-sheen.js
+ *                 asserts that `.surface` and `.btn` never move on hover at all.
  *
  *   5 FLOOR       Every rule above is satisfied trivially if `.control` stops
  *                 existing. So the gate states how many controls and how many
@@ -136,17 +136,18 @@ const OWNER = 'src/styles/controls.css';
  * right, and here is the argument".
  * ══════════════════════════════════════════════════════════════════════════ */
 const ALLOWED = new Map([
+  /* ── THE CARD AND THE BUTTON LEFT THIS LIST ON 2026-10-21 ────────────────
+   *
+   * R285-WEB-ENTERPRISE-REDESIGN-01. `.surface:hover`, `a.prose-card:hover`,
+   * `.btn:hover` and `.bs__station:hover .bs__chip` no longer light a wash or
+   * the --c-border-glow hairline. A card, a tile and a button now step their
+   * edge to --c-border-hover and nothing else, so none of them declares the
+   * control response any more and their entries would only match nothing. */
   /* ── THE THREE OTHER CENTRAL DEFINITIONS ─────────────────────────────────
    *
    * Each of these IS the one definition of a different object. They are listed
    * rather than exempted by filename so that a SECOND rule appearing in any of
    * them still fails: what is excused here is one selector, not a file. */
-  ['response  src/styles/surfaces.css  .surface:hover, .surface:focus-within',
-   'THE CARD. A card is above the 12px radius threshold and carries --blk-pad, a specular top-light, a travelling sheen and a 2px lift; a control is below it and carries none of those. They step the same wash because they sit in the same light, not because they are the same object — and routing a 44px carousel arrow through `.surface` was the obvious wrong answer this whole pass exists to avoid'],
-  ['response  src/styles/surfaces.css  a.prose-card:hover, a.prose-card:focus-visible',
-   'THE CARD, reached by a markdown-authored block that cannot be given a class from a stylesheet. Same recipe and the same argument as the entry above; surfaces.css records why it needs a second selector rather than a second definition'],
-  ['response  src/components/ui/Button.astro  .btn:hover:not(:disabled)',
-   'THE BUTTON, which is a control that has been argued into being louder rather than a fork of this one. It scales 1.05, lifts, sweeps a band across its face and carries a magnetic lean, none of which is available below it; Button.astro states each of those against a measurement. What it shares with `.control` is the hairline token, which is the system working'],
   ['response  src/styles/motion.css  main tbody tr:hover',
    'THE TABLE ROW. It steps the same wash and it is not a control: there is no border to brighten, no target to hit and nothing to activate — a row lights up so the eye can hold its place across a wide table. Central already, in the file that owns every other pointer response that is not a component'],
 
@@ -158,8 +159,6 @@ const ALLOWED = new Map([
    * way to a smaller number and the wrong answer. */
   ['response  src/components/nav/NavDropdown.astro  .ca-mega-item:hover, .ca-mega-item:focus-visible',
    'A ROW IN A FLOATING MENU, WHICH HAS NO BOX AT REST. It draws no wash and no hairline until the pointer arrives, so there is nothing for the shared treatment to brighten — what happens is the PANEL lighting one of its rows, not a control lighting its own edge. Giving eight menu rows a teal hairline each would be a new design rather than a consolidation. It already shares what can be shared: the wash is --c-card-hover, the same token'],
-  ['response  src/components/sections/BothSides.astro  .bs__station:hover .bs__chip',
-   'A LABEL ON A DRAWN FIGURE, and it is driven by the STATION hovering rather than by the chip. It comes forward on --c-lit with --shadow-ladder rather than stepping to --c-card-hover, which is the raised-label recipe `.lc__stage` uses on the lifecycle ring, and it is not a target: there is nothing to click and nothing to activate. It is in the same family as the 17 filter/text-shadow rules that light parts of these diagrams, which are deliberately out of scope — folding a diagram into a control treatment flattens the diagram'],
   ['response  src/layouts/Legal.astro  .legal__toc a:hover',
    'A MARKER ON A NAVIGATION RAIL, and it is the fourteenth rule rather than one of the thirteen: the audit that opened A-52 did not see it, and this gate did on its first run, which is the difference between a sweep and a rule. It brightens ONE EDGE — a 2px border-left that is transparent at rest — so what the reader sees is a position on the rail filling in beside the clause they are pointing at, in the same shape as the sticky rail marking where they ARE. The shared treatment would put a four-sided pill round every clause in a table of contents and lose the rail entirely'],
 

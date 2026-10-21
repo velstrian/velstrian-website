@@ -1044,16 +1044,8 @@ const STATIONS: Station[] = [
    * white now, which is the same white they are drawn in, so a hover brightens
    * the drawing rather than colouring it.
    */
-  .bs__cap,
-  .bs__tick,
-  .bs__railcell::before,
   .bs__chip {
-    transition:
-      background-color var(--dur) var(--ease),
-      border-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease),
-      filter var(--dur) var(--ease),
-      transform var(--dur) var(--ease);
+    transition: var(--transition-hover);
   }
 
   /* `color` only, and on its own line rather than added to the list above,
@@ -1065,26 +1057,11 @@ const STATIONS: Station[] = [
   }
 
   @media (hover: hover) {
-    /* The halo opens white, which is the colour it now has at rest. It was
-       --c-verified-glow here as well as at rest, so the pair were consistent
-       and consistently wrong; check-palette-roles rule 2 would have fired the
-       moment only one of them moved, because an interactive state may restate a
-       mark the subject already has and may never introduce one. Both moved. */
-    .bs__station:hover .bs__cap {
-      transform: translate(-50%, -50%) scale(1.14);
-      box-shadow:
-        0 0 0 1px color-mix(in srgb, var(--c-text) 18%, transparent),
-        0 0 26px color-mix(in srgb, var(--c-text) 34%, transparent);
-    }
-
-    .bs__station:hover .bs__tick { filter: brightness(1.8); }
-
-    .bs__station:hover .bs__railcell::before { filter: brightness(1.8); }
-
+    /* The one calm hover (R285-WEB-ENTERPRISE-REDESIGN-01). The cap no
+       longer scales or glows and the ticks no longer brighten: the station's
+       name chip steps its edge to --c-border-hover and nothing else moves. */
     .bs__station:hover .bs__chip {
-      background-color: var(--c-lit);
-      border-color: var(--c-border-glow);
-      box-shadow: var(--gloss-inset), var(--shadow-ladder);
+      border-color: var(--c-border-hover);
     }
 
     /* ══ THE PAIRING, 2026-08-30, AND IT REVERSES ONE SENTENCE ABOVE ═════════

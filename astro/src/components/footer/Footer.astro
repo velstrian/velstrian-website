@@ -169,13 +169,11 @@ const year = new Date().getFullYear();
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* The live mark breathes. `fx-status-pulse` is the shared recipe in
-              styles/effects.css, the same one the current milestone on /about
-              wears. The label says "All systems operational", which is a
-              statement about right now, and a still dot says it in the past
-              tense. Decorative and aria-hidden: the sentence beside it carries
-              the meaning, so a reader who never sees the motion loses nothing. */}
-          <span class="ca-footer-status-dot fx-status-pulse" aria-hidden="true"></span>
+          {/* The live mark. Decorative and aria-hidden: the sentence beside it
+              carries the meaning. It holds still since 2026-10-21
+              (R285-WEB-ENTERPRISE-REDESIGN-01), when the looping pulse and ping
+              went with every other looping decoration on the site. */}
+          <span class="ca-footer-status-dot" aria-hidden="true"></span>
           <span class="ca-footer-status-label">{FOOTER.brand.statusLabel}</span>
           <span class="visually-hidden">. Open the live status page (opens in a new tab)</span>
         </a>
@@ -400,23 +398,19 @@ const year = new Date().getFullYear();
 </script>
 
 <style>
-  /* ── 3px, FOUR COLOURS, TRAVELLING ──────────────────────────────────
+  /* ── 3px, FOUR COLOURS, STILL ───────────────────────────────────────
      Owner, 2026-09-06: "the teal color line between home page and footer, cant
      this be multi gradient colors use most of the colors and must feel like
      motion and line width must be slightly slim?"
 
      It was 6px of --grad-rule, which is two stops of one family and therefore
      reads as a solid teal bar at that weight. It is now half the weight and
-     carries the full ambient ramp from --grad-seam, tiled at a fixed 1200px so
-     the travel in styles/effects.css can move it by exactly one tile and loop
-     without a jump. The tile is measured in pixels rather than percent on
-     purpose: a percentage tile is a different number of pixels at every
-     viewport, so the loop would be seamless at one width and stutter at the
-     next.
+     carries the full ambient ramp from --grad-seam, tiled at a fixed 1200px.
 
-     The geometry lives here and the motion lives in effects.css, beside the
-     site's other four named effects, because a page that turns motion off must
-     be able to drop the animation without losing the line. */
+     IT NO LONGER TRAVELS. The seam loop that moved it one tile every 18s was
+     removed on 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01) with every other
+     looping decoration, so the line is the four colours holding still, which
+     is exactly what a reader with reduced motion always saw. */
   .ca-footer-hairline {
     height: 3px;
     /* O-40. This hand-rolled a THIRD gradient opinion: 90deg across three ambient

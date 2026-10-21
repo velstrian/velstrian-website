@@ -1255,17 +1255,9 @@ const SIDEBAR = [
     }
   }
 
-  /* The one loop that is not the reader's: a status light breathing. */
-  @media (prefers-reduced-motion: no-preference) {
-    .h2rt__live i {
-      animation: h2rt-breathe calc(var(--m-beat) * 3) var(--m-ease-breath) infinite;
-    }
-  }
-
-  @keyframes h2rt-breathe {
-    0%, 100% { box-shadow: 0 0 6px var(--c-verified-glow); }
-    50%      { box-shadow: 0 0 14px var(--c-verified-glow); }
-  }
+  /* The status light used to breathe on a loop. It holds still since
+     2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01): the refusal scan above is the
+     one motion this section owns, and it plays once. */
 </style>
 
 <script>

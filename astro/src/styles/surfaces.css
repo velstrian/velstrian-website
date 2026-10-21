@@ -47,26 +47,15 @@
      surface--lift         DOES NOTHING. Kept so two existing call sites on
                            /tools do not break. See below
 
-   HOVER SCOPE: CORRECTED 2026-08-04, BECAUSE THIS PARAGRAPH HAD OUTLIVED ITS
-   RULE. It used to say the lift was "deliberately narrower than the live site's"
-   and "limited to elements that are actually interactive (a, button, label,
-   summary) plus an explicit `surface--lift`", on the argument that moving a
-   non-interactive block under the pointer advertises an affordance that is not
-   there. That argument is still true and the owner weighed it against matching
-   live on 2026-08-03 and chose live: EVERY card lifts now, 2px, whether or not it
-   does anything when clicked. The rule was widened that day; this description of
-   it was not, so the file's own summary contradicted its own rule for a day.
-   The full reasoning, and the trade, is stated once beside `.surface:hover`
-   below rather than argued twice. `surface--lift` is a no-op as a consequence.
+   HOVER, 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01). Every card answers a
+   pointer with ONE change: its edge steps from --c-border to --c-border-hover.
+   No card lifts, glows, sweeps or carries a pointer lamp any more. The recipe
+   is three tokens in tokens.css and the rule is beside `.surface:hover` below.
 
-   AND TWO KINDS OF `.surface` ARE NOT CARDS, 2026-08-05. A CONTAINER, which
-   holds another `.surface`, and a DRAWING, which is marked `<figure>`, do not
-   lift, do not light an edge and carry no travelling band. Both are read off the
-   rendered tree rather than declared, so nothing has to be remembered; the card
-   INSIDE a container still answers in full, which is the whole point. Five
-   elements today, all measured, and the reasoning is beside the rules rather
-   than here. This does not narrow the owner's decision above: a card is still a
-   card, and every card still lifts.
+   TWO KINDS OF `.surface` ARE NOT CARDS. A CONTAINER, which holds another
+   `.surface`, and a DRAWING, which is marked `<figure>`, keep their resting
+   edge. Both are read off the rendered tree rather than declared, so nothing
+   has to be remembered, and the card INSIDE a container still answers.
    ========================================================================= */
 
 /* The layer order, restated so that whichever stylesheet a route happens to link
@@ -107,16 +96,10 @@
        panel takes `--shadow-card` rather than inheriting the panel's `none`. */
     --surface-shadow: var(--shadow-card);
     box-shadow: var(--surface-shadow);
-    /* Named properties, never `all`: `transition: all` on a card animates
-       height and width during a reflow and is why hover felt sticky on the
-       legacy build, which used `duration-700` on `all`. */
-    /* --dur-card, not --dur. Live settles a card over 0.5s and a button over
-       0.3s, on this same easing curve. Measured on the deployed /about. */
-    transition:
-      border-color var(--dur-card) var(--ease),
-      background-color var(--dur-card) var(--ease),
-      box-shadow var(--dur-card) var(--ease),
-      transform var(--dur-card) var(--ease);
+    /* The one card hover (R285-WEB-ENTERPRISE-REDESIGN-01). The edge is the
+       only thing that changes under a pointer, so it is the only thing that
+       transitions. The recipe is --transition-hover in tokens.css. */
+    transition: var(--transition-hover);
   }
 
   /* --c-card is translucent "so the drift shows through" (tokens.css). Without
@@ -577,23 +560,10 @@
   }
 
   @media (hover: hover) {
-    .surface--frame:hover,
-    .surface--frame:focus-within {
+    .surface.surface--frame:hover,
+    .surface.surface--frame:focus-within {
       border-color: var(--surface-edge);
-      background-color: var(--c-card);
-      box-shadow: var(--surface-shadow);
-      transform: none;
     }
-  }
-
-  /* And no pointer lamp or perimeter sheen either. Owner, 2026-09-06: the
-     light that followed the mouse across the hero's workbench did not read
-     well. A window is looked into, not stroked. The class is doubled so this
-     outranks the lamp and sheen rules further down, which sit at the same
-     specificity and later in the file. */
-  .surface.surface--frame.surface--frame::before,
-  .surface.surface--frame.surface--frame::after {
-    content: none;
   }
 
   /* OPACITY IS THE DIFFERENCE, NOT SHAPE. This modifier used to set
@@ -674,136 +644,9 @@
     backdrop-filter: none;
   }
 
-  /* ── THE TOP-EDGE LIGHT, 2026-08-07 ───────────────────────────────────────
-   *
-   * Owner adopted "the light effect in top of cards" from the Gemini concept.
-   * What the concept ships is `laser-edge-beam`, a keyframed band travelling
-   * the card's border forever. This is the same READ built without the motion,
-   * and the substitution is deliberate on three counts.
-   *
-   * A PERMANENT ANIMATION IS THE THING THAT WAS ALREADY REMOVED. The aurora,
-   * mesh, grain and glow were cut site-wide on owner instruction for "a clean,
-   * restrained surface", and a beam looping on every card on the page is that
-   * decision undone at greater volume. The concept's version also carries no
-   * `prefers-reduced-motion` branch at all, so it would move for a reader who
-   * asked for stillness.
-   *
-   * ::before, BECAUSE ::after IS SPOKEN FOR. The travelling hover sheen lives
-   * on `.surface::after` and check-sheen.js measures that pseudo-element's
-   * transform across three frames. Painting here would have made a static band
-   * sit where the gate expects a moving one. The gate would have gone green
-   * or red for reasons unrelated to either effect. ::before is unused.
-   *
-   * LUMINANCE ONLY, WHICH IS WHAT MAKES IT LEGAL UNDER THE PALETTE RULE. The
-   * owner's rule permits a gradient to change luminance anywhere and to change
-   * HUE only once per section on the element that section is about. This is
-   * white light at 22%, mixed from --c-text rather than stated as a colour, so
-   * it introduces no hue and names no role. --c-border-glow was the obvious
-   * token and is the wrong one: it resolves to --c-interactive, and spending
-   * the teal on decoration across every card is precisely what A-113 cut.
-   *
-   * The radius is inherited so the light stops where the corner turns, and it
-   * is pointer-transparent so it cannot take a hover from the card under it.
-   */
-  /* ── THE TRAVELLING EDGE BEAM, 2026-08-07 ─────────────────────────────────
-   *
-   * Owner, after two static attempts: "still cant see any card top moving
-   * light", pointing at the Ultra-Premium Mode of homepage-concept.html. The
-   * concept's rule, read out of that file rather than described:
-   *
-   *     height: 2px;
-   *     background: linear-gradient(90deg, transparent, #2DD4BF, #22D3EE, transparent);
-   *     opacity: .75;
-   *     animation: laser-edge-beam 4s infinite linear;   // -100% -> 100%
-   *
-   * THIS REVERSES THE 2026-08-07 "no new motion" DECISION, on the owner's own
-   * instruction and only here. The aurora, mesh, grain and glow stay removed;
-   * what is restored is one 2px band on the top edge of a card.
-   *
-   * IT IS ON ::before, WHICH ::after COULD NOT HAVE BEEN. The travelling hover
-   * sheen owns `.surface::after` and check-sheen.js samples that pseudo's
-   * transform across three frames to prove the hover band crosses and leaves.
-   * A second permanent animation on the same pseudo would have made that gate
-   * measure two effects at once and report whichever it caught.
-   *
-   * THE HUE IS THE CONCEPT'S AND IS NAMED, NOT TYPED. #2DD4BF IS --c-teal and
-   * #22D3EE IS --c-cyan on this site, so the beam is written from the tokens
-   * and follows the palette. It is the one place teal appears without meaning
-   * VERIFIED, and it is confined to a 2px decorative edge inside an
-   * aria-hidden-equivalent pseudo. It names nothing, labels nothing, and sits
-   * on no control or state, which is the boundary the owner's palette rule
-   * draws.
-   *
-   * REDUCED MOTION GETS THE STATIC EDGE, WHICH THE CONCEPT DOES NOT OFFER AT
-   * ALL. Gemini's layer carries two keyframes and zero prefers-reduced-motion
-   * branches, so it moves for a reader who asked for stillness. Here the beam
-   * simply stops travelling and resolves to a centred hairline, so the card
-   * keeps its lit edge and nothing moves.
-   */
-  /* translateX, WHICH IS THE CONCEPT'S OWN MECHANISM, ADOPTED AFTER A POOR
-     SUBSTITUTE. The first attempt animated background-position to avoid giving
-     the card `overflow: hidden`. It read wrong: percentage background-position
-     resolves against (container - image), so the band neither enters nor
-     leaves cleanly, and the narrow gradient it needed concentrated the hue.
-     The concept translates a card-WIDE band from fully left to fully right and
-     lets the card clip it.
-
-     THE CLIP WAS MEASURED BEFORE IT WAS ADDED. The worry was that a panel might
-     legitimately overhang. `.surface--panel` is worn by the ProductScreens
-     showcase as well as by cards. Every descendant of every `.surface--panel`
-     on /, /crowmark/ and /pricing/ was measured against its panel's box: zero
-     elements exceed it by more than 2px. So nothing is being clipped that was
-     visible before. If a future block does need to overhang a panel, it will
-     need its own container, and this is the note that says why. */
-  @keyframes surface-edge-beam {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(100%);
-    }
-  }
-
-  .surface--panel {
-    overflow: hidden;
-  }
-
-  .surface--panel::before {
-    content: '';
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline: 0;
-    block-size: 2px;
-    background-image: var(--grad-edge-beam);
-    opacity: 0.75;
-    pointer-events: none;
-    animation: surface-edge-beam 4s linear infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .surface--panel::before {
-      animation: none;
-      /* Centred and softened, so a still card still reads as lit rather than
-         as a card with a bright bar parked at one end. */
-      background-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        color-mix(in srgb, var(--c-text) 45%, transparent) 50%,
-        transparent 100%
-      );
-      transform: none;
-      opacity: 1;
-    }
-  }
-
-  /* Windows high-contrast discards decorative paint; the card's own border
-     carries the edge there, so the light simply does not exist rather than
-     rendering as an opaque bar in a system colour. */
-  @media (forced-colors: active) {
-    .surface--panel::before {
-      content: none;
-    }
-  }
+  /* The top-edge beam that travelled every panel (surface-edge-beam) was
+     removed on 2026-10-21, R285-WEB-ENTERPRISE-REDESIGN-01, with the rest of
+     the looping decoration on the site. */
 
   /* ── THE RAMP IS A SECOND TIER, AND PUTTING IT ON --panel WAS MY MISTAKE ───
    *
@@ -947,561 +790,41 @@
     background-clip: padding-box, border-box;
   }
 
-  /* ── The lit state ──────────────────────────────────────────────────────
-     @media (hover: hover) so a touch device does not latch a card into its
-     hover state after a tap and leave it there. */
+  /* ══ THE ONE CARD HOVER, R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-21 ════
+   *
+   * Owner: "remove unnecessary flashing animation when mouse hover into any
+   * cards as looks very cheap". A card used to answer a pointer with five
+   * things at once: a 2px lift, a white edge, a 50px cast glow, a diagonal
+   * sheen crossing its face and a pointer lamp on its perimeter. It now
+   * answers with one: its edge steps from --c-border to --c-border-hover over
+   * --dur-hover. Nothing moves, nothing glows and nothing travels.
+   *
+   * @media (hover: hover) so a touch device does not latch a card into its
+   * hover state after a tap and leave it there. */
   @media (hover: hover) {
     .surface:hover,
     .surface:focus-within {
-      border-color: var(--c-border-glow);
-      background-color: var(--c-card-hover);
-      box-shadow: var(--shadow-card-hover);
+      border-color: var(--c-border-hover);
     }
 
-    /* ── AN OPAQUE PANEL STAYS OPAQUE UNDER THE POINTER ─────────────────────
+    /* ONE SURFACE ANSWERS A POINTER AT A TIME, AND IT IS THE INNERMOST ONE.
      *
-     * WHAT THIS RULE USED TO CLAIM, AND WHY THE CLAIM HAD TO GO. It read "A
-     * PANEL STILL DOES NOT LIFT ... Delete this rule and panels start lifting
-     * on hover again." Measured on the built homepage on 2026-08-05, with the
-     * rule in place and unmodified, `figure.spine__panel` went
-     * `transform: none` -> `matrix(1, 0, 0, 1, 0, -2)` the moment a pointer
-     * entered it. The lift is set by `.surface:hover` below and this rule never
-     * named `transform`, so the sentence was false of the tree for as long as
-     * it stood, which is directive W8. The lift is dealt with where it is set.
+     * A CONTAINER holds another `.surface`, and the card inside is what the
+     * pointer is really on. A DRAWING is marked `<figure>` and has nothing to
+     * open. Both keep their resting edge, so a pointer on one step card does
+     * not also light the 1,232px panel around it.
      *
-     * WHAT THE RULE IS ACTUALLY FOR, AND IT IS THE FILL. `--c-card-hover` is
-     * BOUND to `--c-card` (A-63): live keeps the 5% white fill still under the
-     * pointer and lets the edge carry the state, so the `background-color` in
-     * the rule above is a no-op on every glass card on the site. It was not a
-     * no-op here. A panel's rest fill is `--c-panel`, an opaque rgb(12, 16, 32),
-     * and this modifier's contract at the head of this file is "anything that
-     * must not show the page through it". Measured, every panel swapped that for
-     * `rgba(255, 255, 255, 0.05)` under the pointer: the opaque panel became
-     * glass, which is the one thing the modifier exists to prevent. Re-asserting
-     * the token restores the contract and makes the A-63 decision true of
-     * panels as well as of cards.
-     *
-     * The shadow half is unchanged in effect and is now written as the knob, so
-     * it says what it means: keep the shadow you have at rest. The resting panel
-     * casts nothing (owner, 2026-08-05), so this holds it at none rather than
-     * letting `--shadow-card-hover` open a 50px glow under a whole panel. */
-    .surface--panel:hover,
-    .surface--panel:focus-within {
-      background-color: var(--c-panel);
-      box-shadow: var(--surface-shadow);
-    }
-
-    /* ── EVERY CARD LIFTS, NOT ONLY THE ONES THAT NAVIGATE ─────────────────
-     *
-     * Owner decision, 2026-08-03, choosing "live's hover, exactly" from a
-     * measured comparison. The deployed /about lifts every card by 2px on
-     * hover, including cards that do nothing when clicked.
-     *
-     * THIS REVERSES A DELIBERATE RULE AND THE TRADE IS WORTH STATING. The lift
-     * was previously restricted to a, button, label, summary and an explicit
-     * `surface--lift`, on the argument that moving a non-interactive block under
-     * the pointer advertises an affordance that is not there. That argument is
-     * still true; the owner has weighed it against matching live and chosen
-     * live. It is a 2px lift rather than the 4px this build used, so the signal
-     * it sends is quieter than the one the old rule was written against.
-     *
-     * `.surface--lift` is now redundant and kept only so existing call sites do
-     * not break. */
-    .surface:hover,
-    a.surface:focus-visible,
-    button.surface:focus-visible {
-      transform: translateY(var(--lift-card));
-    }
-
-    /* ══════════════════════════════════════════════════════════════════════
-     * ONE SURFACE ANSWERS A POINTER AT A TIME, AND IT IS THE INNERMOST ONE.
-     * ══════════════════════════════════════════════════════════════════════
-     *
-     * Owner, 2026-08-05: *"i dont think our mouse hoover effect issue is
-     * resolved"*. Three rounds had already tuned this hover (the sheen was
-     * restored (O-34), its core moved to white (O-37), its alpha halved (O-66)),
-     * and every one of them changed how BRIGHT the light is. Measured on the
-     * built homepage, brightness was not the defect. WHAT THE LIGHT LANDS ON
-     * was:
-     *
-     *   figure.spine__panel   1232 x 311   a drawing of four statutory figures
-     *   div.hir               1232 x 358   the pipeline, holding five step cards
-     *   div.ps__showcase      1232 x 694   the showcase, holding five surfaces
-     *   figure.spec           800 x 417    a drawing, /crowmark-buyers
-     *
-     * Each is a `.surface`, so each took the card treatment whole: all four
-     * borders `rgba(255, 255, 255, 0.12)` -> `rgb(255, 255, 255)`,
-     * `transform: none` -> `matrix(1, 0, 0, 1, 0, -2)`, and a band travelling
-     * 2,460px across the face. And `:hover` matches an ANCESTOR, so it fired
-     * from anywhere inside: putting the pointer on one 219px step card lifted
-     * the step AND the 1,232px panel under it, so a single pointer produced two
-     * lifts, two white edges and two bands at once. Rest and hovered frames of
-     * `.hir` differ by the whole block translating 2px with a bright rule drawn
-     * round all of it. That is the effect the owner can see, and halving an
-     * alpha could never have touched it.
-     *
-     * "LIGHT, NEVER MOVEMENT" IS ALREADY THIS SITE'S RULE FOR EVERYTHING THAT
-     * IS NOT A CARD. styles/controls.css states it for the pill and the arrow,
-     * Integrations.astro states it for the chip, and `.sv-raised` below
-     * implements it for the nine drawn panels: they light and none of them
-     * moves. `.surface` was the one recipe where a non-card still got the
-     * card's movement, because nothing distinguished the two.
-     *
-     * A CARD IS A BOUNDED BLOCK A READER COULD TAKE FOR A DESTINATION. The
-     * owner's decision of 2026-08-03 that EVERY card lifts is about those and is
-     * untouched: /pricing plans, /crowmark mechanism cards, /about timeline
-     * items and both ProofGate cards still lift 2px, still light their edge and
-     * still carry the band, re-measured after this change. The only thing that
-     * moved for them is the opaque fill, above, which they were losing under the
-     * pointer. Two kinds of `.surface` are not cards, and both are recognisable
-     * from the RENDERED TREE rather than from a class somebody has to remember:
-     *
-     *   A CONTAINER holds another `.surface`. The card inside is what the
-     *   pointer is really on and it still answers; the box around it is
-     *   scenery. `surface--flat` exists precisely to mark "a card inside
-     *   another card", so the nesting tested for here is already part of the
-     *   stated vocabulary rather than a new idea.
-     *
-     *   A DRAWING is marked `<figure>`, which is this file's own existing
-     *   convention and not a new one: `.sv-raised:not(figure)` above already
-     *   exempts figures from the centring rule because "every raised panel that
-     *   carries a drawn artefact is a <figure>". A drawing has nothing to open,
-     *   so lighting its edge advertises an affordance that is not there. Two
-     *   `figure.surface` on the whole site, both measured above, neither of them
-     *   a link or a button.
-     *
-     * TWO RULES, NOT ONE COMMA LIST, for the reason recorded beside
-     * `.surface:not(aside):has(~ .surface:not(aside))` further up this file: an
-     * unsupported `:has()` invalidates its entire comma list, so combining them
-     * would take the figure half down with it on Firefox before 121. Split, the
-     * figure half survives and the container half degrades to what ships today,
-     * which is the correct failure direction.
-     *
-     * SPECIFICITY IS COUNTED, NOT FOUGHT. `.surface:has(.surface):hover` is
-     * (0,3,0) and `figure.surface:hover` is (0,2,1); both outrank every (0,2,0)
-     * rule above, so neither depends on source order. `box-shadow` restores
-     * `--surface-shadow` rather than a literal, so a container that is a panel
-     * keeps `none` and a container that is plain glass keeps `--shadow-card`,
-     * from one declaration.
-     *
-     * AND `border-color` RESTORES `--surface-edge` FOR EXACTLY THE SAME REASON,
-     * 2026-08-05. It was the literal --c-border, which is right for every recipe
-     * except `surface--edge`, whose border is transparent so a gradient can show
-     * through it. Written as the literal, a pointer entering `.ps__showcase`
-     * painted a flat 12% line over the lit edge. A state change on the one
-     * element in this block that exists to stand still. One knob, one
-     * declaration, right for all of them.
-     *
-     * `:focus-within` IS IN THE LIST BECAUSE THE KEYBOARD REACHES THIS TOO.
-     * Tabbing to a tab inside `.ps__showcase` lit the whole 1,232 x 694 panel.
-     * The focus ring at the foot of this file is what marks where the keyboard
-     * is, and it is untouched. */
+     * Two rules and not one comma list: an unsupported `:has()` invalidates its
+     * whole list, so combining them would take the figure half down with it on
+     * an older Firefox. (0,3,0) and (0,2,1) outrank the (0,2,0) rule above. */
     .surface:has(.surface):hover,
     .surface:has(.surface):focus-within {
       border-color: var(--surface-edge);
-      box-shadow: var(--surface-shadow);
-      transform: none;
     }
 
     figure.surface:hover,
     figure.surface:focus-within {
       border-color: var(--surface-edge);
-      box-shadow: var(--surface-shadow);
-      transform: none;
-    }
-
-    /* ── THE SHEEN. THE FOURTH INGREDIENT, AND THE ONE THAT WAS NEVER BUILT ──
-     *
-     * Owner, 2026-08-04: *"card hoover animation effect i can still see in live
-     * version, we have missed something, you must check and fix"*. They are
-     * right, and it is one thing rather than a general shortfall. Measured on
-     * the deployed site and on the two pre-26-July builds at :8092 and :8110,
-     * which agree exactly, a card hover is FOUR ingredients:
-     *
-     *     lift -2px    present here, and identical
-     *     glow         present here; teal on live, white under V6
-     *     border       present here; teal on live, white under V6
-     *     SHEEN        a diagonal band crossing the face over 0.9s. ABSENT.
-     *
-     * The first three were restored on 2026-08-03. The fourth was lost with
-     * Assets/css/nav-global-fix-2026-05-27.css when the routes moved to Astro,
-     * and nothing in the rebuild replaced it: `.surface` measured
-     * `content: none` on every route checked, so there was no layer for a band
-     * to travel on. It is pure CSS on live and it is pure CSS here.
-     *
-     * ── `::after` AND NOT `::before`, AND THAT IS A MEASURED CONSTRAINT ──────
-     *
-     * Live writes this on `::before`. Here that would break a page. Astro's
-     * scoped component styles are UNLAYERED and outrank every layer, so where a
-     * component already owns the same pseudo-element the two rules merge
-     * per-property rather than one replacing the other. `.principles__item` on
-     * /about draws its 2px top rule as `::before` with a `background`
-     * shorthand: it would keep its colour, inherit `opacity: 0` from here, and
-     * the rule would vanish at rest and then slide across the card on hover.
-     * `::after` was unused by every class carrying `surface` when this was
-     * written, checked then. THE COUNT THAT USED TO SIT IN THIS SENTENCE ("all
-     * 43 classes") IS GONE, 2026-08-04: it was 57 by the time anybody looked
-     * again, and a number that has to be re-counted by hand to stay true is a
-     * claim that will be false most of the time it is read. The hazard runs in
-     * both directions anyway (a component that adds an `::after` to a card in
-     * future takes the sheen off it), and the standing guarantee is not this
-     * sentence but scripts/check-sheen.js, which measures the rendered page
-     * rather than the source and does not need to be told how many classes
-     * there are.
-     *
-     * ── WHAT EACH DECLARATION IS DOING, BECAUSE THREE OF THEM LOOK OPTIONAL ──
-     *
-     *   border-radius: inherit   clips the band to the card's own corners. It
-     *                            is what makes `overflow: hidden` on the parent
-     *                            unnecessary, and `overflow: hidden` on a card
-     *                            would clip the glow that deliberately sits
-     *                            proud of it.
-     *   mix-blend-mode: screen   the band ADDS light rather than laying a
-     *                            translucent film over the card. Screen can
-     *                            only lighten, which is why it can pass over
-     *                            white body copy without touching it: screening
-     *                            anything onto white returns white.
-     *   pointer-events: none     the layer covers the whole card, including any
-     *                            link or button inside it.
-     *
-     * `position: relative` is already on `.surface` at the head of this file,
-     * so nothing here changes a layout.
-     *
-     * ── THE CORE IS WHITE. OWNER DECISION O-37, 2026-08-04 ──────────────────
-     *
-     * *"sheen -> white. V6 is the thing shipping; live is the thing being
-     * replaced. A single teal element in an otherwise white hover is the
-     * anomaly you'd fix next week anyway."*
-     *
-     * WHAT THIS PARAGRAPH USED TO SAY, BECAUSE THE REASONING MATTERED AND ONLY
-     * ITS PREMISE FAILED. The band was white shoulders around a TEAL core at
-     * 12%, drawn from `--c-ambient-start`, and the argument for it was parity:
-     * live's band is built that way and the owner had asked for the hover to
-     * match the build they were looking at. That argument was sound while live
-     * was the reference. It is not sound now, and the owner has said why in one
-     * line. Live is the thing being REPLACED, so matching it is matching a
-     * palette we are in the middle of retiring.
-     *
-     * THE ANOMALY IS THE REAL POINT, NOT THE PIGMENT. Every other ingredient of
-     * this hover moved to white on 2026-08-03: the 2px lift is colourless, the
-     * border lights white and the cast glow spills white. A teal core was the
-     * one survivor of the old palette inside a state that is otherwise entirely
-     * white, and a lone hue in the middle of a white response does not read as
-     * an accent. It reads as something nobody finished.
-     *
-     * `--c-interactive` IS THE ROLE, AND IT IS THE ROLE ON MEANING RATHER THAN
-     * BECAUSE IT HAPPENS TO BE WHITE TODAY. tokens.css defines it as the
-     * site's non-semantic emphasis (the colour a control wears when it answers
-     * a reader), and it is already what the focus ring at the foot of this file
-     * takes. A sheen is exactly that and nothing more: a card acknowledging a
-     * pointer. Binding the band to that role means the next palette variant
-     * moves this light by moving one line in tokens.css, which is the whole
-     * property check-palette-roles.js exists to protect.
-     *
-     * NO NEW ROLE WAS ADDED, AND THAT WAS THE HARDER CALL. A `--c-sheen-core`
-     * would have been a second name for a decision this file is not entitled to
-     * take, and the rule in tokens.css is explicit that a role is added when
-     * none FITS rather than when none is named after the element. One fitted.
-     *
-     * IT IS NOT `--c-verified`, AND THE DISTINCTION IS THE WHOLE OF V6. That
-     * token is teal and it MEANS something: a figure the engine traced back to
-     * a recorded commitment. A hover means nothing at all (it is a pointer
-     * being somewhere), so painting a mark into one would make teal evidence of
-     * having moved a mouse, and once teal can say that it can no longer say
-     * anything. check-palette-roles.js rule 2 fails the build if a mark reaches
-     * an interactive selector, and `.surface:hover::after` is exactly such a
-     * selector. Naming the interactive role here is not a way round that rule,
-     * it is the rule being satisfied.
-     *
-     * `--c-ambient-start` BROKE NO RULE EITHER, AND IT STILL LOST. The ambient
-     * set is named for POSITION IN A RAMP rather than for a hue, so a band of
-     * light was a fair reading of it and rule 1 was never in question. But this
-     * decoration only ever appears under a pointer, and tokens.css records that
-     * V6 deliberately did NOT drain the decorative ramp, so an ambient token
-     * would have gone on dragging the old palette into the new hover for as
-     * long as that ramp stays teal, which is the anomaly the owner named.
-     *
-     * NOT `--grad-beam`, WHICH IS THE SITE'S OTHER TRAVELLING LIGHT, and O-37
-     * brings the two closer together without making them the same thing. That
-     * token is a LAMP: `--c-text` at full strength in its centre with the hue
-     * in its bloom, which tokens.css calls the clearest tell separating a lamp
-     * from a marker. This is a specular pass over glass rather than a light
-     * travelling a rail, so what it varies now is ALPHA rather than hue (3% at
-     * the shoulders and 7% at the core), and it has to stay dimmer than the
-     * white edge that lights at the same moment or the card gets two highlights
-     * competing. A beam knob cannot express that: `--grad-beam` fixes its
-     * centre opaque. check-design-system.js rule 7 allows a gradient written
-     * where it is used provided every colour in it resolves from a token, which
-     * is the case here.
-     *
-     * THE SHOULDERS STAYED ON `--c-text`, AND THEY ARE A SECOND ROLE ON PURPOSE
-     * RATHER THAN AN OVERSIGHT. O-37 moved the CORE, which is where the teal
-     * was; the shoulders were already white and there was nothing in them to
-     * fix. They are also the site's standing way of writing specular white
-     * (`.fx-shimmer` in styles/effects.css and the button sweep in
-     * components/ui/Button.astro both do the same), so changing them here would
-     * have split one convention across three files to no visible effect. The
-     * two roles resolve to the same #FFFFFF on the dark page today and that is a
-     * COINCIDENCE, not a guarantee: a variant that tints `--c-interactive` will
-     * give this band a white surround around a tinted core, which is the
-     * specular construction the effect was drawn as in the first place and is
-     * therefore the right way for it to come apart.
-     *
-     * O-37 MOVED ONLY THE COLOUR. The 135deg angle, the five stops at
-     * 30/47/50/53/70, the 0.9s linear travel and the opacity ramp were all
-     * untouched, because TRAVEL is what scripts/check-sheen.js measures and
-     * geometry is what travel is made of. That change could only make the band
-     * brighter: under `mix-blend-mode: screen` white adds light in all three
-     * channels where teal barely moved the red one, so the gate's mean-channel
-     * reading rose rather than fell and its 1.0 threshold went further away.
-     *
-     * ── AND THEN IT WAS DIMMED, 2026-08-04, BY HALF ─────────────────────────
-     *
-     * Owner: "mouse hoover shiny effect is too much on cards make it bit
-     * pleasant and premium". The strengths above went 6% to 3% at the shoulders
-     * and 12% to 7% at the core. Nothing else moved, and the restraint is the
-     * point rather than laziness.
-     *
-     * ALPHA WAS THE ONLY SAFE KNOB, AND THAT IS A MEASURED CLAIM RATHER THAN A
-     * PREFERENCE. The obvious alternative reading of "too much" is that the
-     * band is too NARROW and therefore too hard-edged, which would be fixed by
-     * spreading the stops. That would have been the wrong edit here: widening
-     * the band leaves more of it on the card at the settled frame, which lifts
-     * the settled delta, and check-sheen.js asserts `dSettled.mean * 4 <
-     * dMid.mean`, so a softer band is bought directly out of the margin on
-     * SETTLED_RATIO, the one assertion that proves the light LEAVES again.
-     * Alpha scales the mid and settled readings together and leaves that ratio
-     * where it was.
-     *
-     * IT KEEPS ITS MARGIN ON THE OTHER THRESHOLD TOO. MEAN_DELTA is 1.0 and the
-     * gate's own header records the real reading as roughly four times that.
-     * Alpha at 0.5x to 0.58x of what it was puts the reading near 2.3, which is
-     * a bit over twice the floor. Halving it AGAIN would land on 1.0 exactly,
-     * and a value sitting on a threshold is the flake this repo has already
-     * been bitten by twice (A-74, A-83): it passes the run it is written in and
-     * fails a later one. If this is still too loud, the next move is NOT a
-     * third halving of alpha. It is dropping `mix-blend-mode: screen`, which
-     * is what makes a small alpha read bright on a dark card.
-     *
-     * ── LINEAR, AND 0.9s ────────────────────────────────────────────────────
-     *
-     * `--m-ease-travel` is `linear` and tokens.css states why in as many words:
-     * "a lamp crossing a fixed distance moves at a constant speed; easing a
-     * travelling highlight makes it arrive early and crawl". On `--ease`, which
-     * is an expo-out, the band would be 93% of the way across by 400ms and the
-     * remaining half-second would show nothing at all.
-     *
-     * 0.9s is live's measured travel and is deliberately not `--dur-card`. A
-     * card SETTLES in 0.5s; a band crosses the full width of that card and back
-     * off the other edge, which is a longer journey for the same reason the
-     * card is slower than the button. The opacity fade stays on `--dur` so the
-     * band is never caught frozen mid-face when a pointer leaves early.
-     *
-     * GATED ON `prefers-reduced-motion: no-preference` RATHER THAN ZEROED
-     * LATER. Under `reduce` the rule does not exist, so the pseudo-element is
-     * never generated and there is nothing to travel. A stronger guarantee
-     * than a duration of 0.01ms, and it is what check-sheen.js asserts as its
-     * negative case. */
-    @media (prefers-reduced-motion: no-preference) {
-      .surface::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        border-radius: inherit;
-        mix-blend-mode: screen;
-        background-image: linear-gradient(
-          135deg,
-          transparent 30%,
-          color-mix(in srgb, var(--c-text) 3%, transparent) 47%,
-          color-mix(in srgb, var(--c-interactive) 7%, transparent) 50%,
-          color-mix(in srgb, var(--c-text) 3%, transparent) 53%,
-          transparent 70%
-        );
-        opacity: 0;
-        transform: translateX(-100%);
-        transition:
-          opacity var(--dur) var(--ease),
-          transform 0.9s var(--m-ease-travel);
-      }
-
-      .surface:hover::after {
-        opacity: 1;
-        transform: translateX(100%);
-      }
-
-      /* AND THE BAND IS PART OF "STAND STILL". A container and a drawing are
-         excluded from the sheen for the same reason they are excluded from the
-         lift, argued in full beside those two rules: the band is 100% of the
-         element wide and travels its full width plus its own, so on
-         `.ps__showcase` that is 2,460px of light crossing a 1,232 x 694 box
-         because a pointer landed on a 110px tab inside it.
-
-         `content: none` rather than `opacity: 0`, so the layer is never
-         generated at all. That is the same construction the reduced-motion case
-         uses at the foot of this file and it is stronger than hiding one: there
-         is no pseudo-element left to animate, to composite or to be brought
-         back by a later opacity rule.
-
-         SPLIT INTO TWO RULES, and it is the same `:has()` argument as above
-         rather than a style preference, one comma list would lose the figure
-         half wherever `:has()` is unsupported. (0,2,0) and (0,1,1) against the
-         (0,1,0) of `.surface::after`, so both win outright.
-
-         scripts/check-sheen.js still measures a real band on all three of its
-         routes: it takes the first `.surface` of at least 240x120 in document
-         order, which is `article.pg__card` on /, `.role__art` on /about/ and
-         `li.card.surface.plan` on /pricing/. None of the three is a container
-         or a figure, and all three were re-measured after this change. */
-      .surface:has(.surface)::after { content: none; }
-      figure.surface::after { content: none; }
-
-      /* AND THE CLOSING CARD, for the reason directly above rather than a new
-         one: the band is 100% of the element wide and travels its full width
-         plus its own, which on a 1,280 x 520 closing block is about 2,560px of
-         light crossing it because a pointer entered anywhere. That card is
-         already carrying a travelling edge light and a breathing glow behind
-         its primary button, and a third and fourth light on the same element
-         is what the owner was seeing when they asked, on 2026-09-06, why there
-         was a mouse focus animation on the CTA.
-
-         Specificity (0,2,0) against the (0,1,0) of `.surface::after`, so it
-         wins outright without a doubled class. */
-      .surface.fc::after { content: none; }
-    }
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-   * THE CARD LAMP: one gradient, one mask, and it does both halves of the ask.
-   * ══════════════════════════════════════════════════════════════════════
-   *
-   * Owner request, 2026-08-30, in two sentences that read as two effects:
-   * a radial wash on `.surface` that tracks the pointer, and a specular sheen
-   * on the 1px perimeter nearest to it, built with mask-composite.
-   *
-   * THEY ARE ONE PAINT HERE, AND THAT IS WHAT MAKES IT CHEAP. A second
-   * pseudo-element would have been a second composited layer on every hovered
-   * card for a second copy of the same gradient at a different strength. Two
-   * mask layers do it instead. `exclude` resolves to
-   * `src x (1 - dst-alpha) + dst x (1 - src-alpha)`, and with the inner layer
-   * held at 0.72 over an opaque outer one that arithmetic gives:
-   *
-   *   the face   inner 0.72, outer 1  ->  1 x (1 - 0.72)  =  0.28
-   *   the 1px ring  inner 0 (the content box excludes it), outer 1  ->  1
-   *
-   * So the perimeter is painted at full strength and the face at 28 percent of
-   * it, from ONE gradient. The owner asked for the wash at 0.08 alpha, and 29
-   * percent of --c-ambient-start through that ratio lands at 0.081. The ring is
-   * the same light at 0.29, which is what makes it read as specular rather than
-   * as a second border colour.
-   *
-   * A LAMP, NOT A MARKER, which is the L04 rule the ambient rig and the hero
-   * key light already follow: a hot white core with the hue in the bloom, never
-   * a flat coloured stroke. A marker would label whatever it happened to be
-   * over, and this passes over headings and figures.
-   *
-   * NOT --c-verified, AND THAT IS A ROLE DECISION RATHER THAN A SHADE ONE.
-   * The owner's text names rgba(45, 212, 191, 0.08), which is --c-teal with an
-   * alpha on it. --c-teal is a COLOUR and this site binds jobs, not colours, so
-   * the question is which job. Teal is --c-verified when it marks a claim as
-   * traced and --c-ambient-start when it is light in the room. A wash that
-   * follows a pointer across every card on the page is the second: it means
-   * nothing about what it lands on, and painting it in the verification hue
-   * would put a truth signal on a decoration. --c-ambient-start is the same
-   * pigment under the name that says what it is doing.
-   *
-   * PANELS ARE EXCLUDED, AND IT IS A REAL GAP RATHER THAN A CHOICE. A card has
-   * exactly two pseudo-elements and `.surface--panel` has spent both: `::after`
-   * carries the travelling sheen that scripts/check-sheen.js measures on
-   * `article.pg__card` on the homepage, and `::before` carries the 2px animated
-   * top beam a few hundred lines above. There is no third layer to take, and
-   * neither of the two can be displaced for a decoration. Seven of the twenty
-   * four cards on `/` are panels. Freeing `::before` means redrawing that beam
-   * as a background layer on the panel itself, which changes an animation two
-   * gates watch, so it is named here and left for a pass that can measure it
-   * rather than folded into this one.
-   *
-   * `--spot-reach` IS THE ONLY NEW KNOB AND IT IS A LENGTH, NOT A BRAND VALUE.
-   * 400px is the owner's figure. It is declared on the rule that reads it so
-   * there is one place to change it, and it is deliberately not in tokens.css:
-   * nothing else has a reach, so a token would be a shared name with one
-   * caller.
-   *
-   * ── THE FOUR GUARDS ──────────────────────────────────────────────────────
-   *
-   * `(hover: hover) and (pointer: fine)` so a touch device never gets it. There
-   * is no cursor on a phone to follow, and a tap latches `:hover`, which would
-   * park a lamp on one card and leave it there for the rest of the visit.
-   *
-   * `prefers-reduced-motion: no-preference` as a gate on the whole rule rather
-   * than as an override under it. Under `reduce` the pseudo-element is never
-   * generated, so there is nothing to travel and nothing to undo. That is the
-   * construction A-43 was written about and it is stronger than a duration of
-   * 0.01ms, which removes the animation and keeps the displacement.
-   *
-   * `@supports` on mask-composite for the reason styles/effects.css states at
-   * its own ring: without the mask the gradient would paint the whole box at
-   * ring strength, which is three and a half times the intended wash. A browser
-   * that cannot cut the ring gets no lamp instead of a bright one.
-   *
-   * AND THE REST STATE IS STILL FINAL. `--mx` and `--my` fall back to 50%, so a
-   * card with no JavaScript running shows a centred lamp on hover rather than a
-   * broken one. src/scripts/card-spotlight.ts only ever makes it follow. */
-  @supports ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
-    @media (hover: hover) and (pointer: fine) {
-      @media (prefers-reduced-motion: no-preference) {
-        /* `.fc` JOINED `.surface--panel` HERE ON 2026-09-06, on the same
-           argument and an owner report. The closing card draws its travelling
-           edge light on `.fc::before` in styles/effects.css, so this lamp was
-           landing on the same pseudo-element of the same element and winning
-           on specificity, (0,2,0) against (0,1,0), inside one layer. The
-           reader lost the edge light and gained a 420px wash following the
-           cursor across the one block on the page that asks them for
-           something. Owner, twice: "why you have added mouse point focus on
-           CTA?" and "i can still see mouse focus animation when i hoover in
-           CTA bottom in home page". */
-        .surface:not(.surface--panel, .fc)::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          box-sizing: border-box;
-          padding: 1px;
-          pointer-events: none;
-          border-radius: inherit;
-          mix-blend-mode: screen;
-          background-image: radial-gradient(
-            circle var(--spot-reach, 400px) at var(--mx, 50%) var(--my, 50%),
-            color-mix(in srgb, var(--c-text) 26%, transparent) 0%,
-            color-mix(in srgb, var(--c-ambient-start) 29%, transparent) 38%,
-            transparent 80%
-          );
-          /* Achromatic paint, and a mask reads nothing but its alpha. The
-             prefixed pair is first so the standard one wins wherever both are
-             understood. */
-          -webkit-mask-image:
-            linear-gradient(rgba(0, 0, 0, 0.72) 0 0),
-            linear-gradient(rgba(0, 0, 0, 1) 0 0);
-          -webkit-mask-clip: content-box, border-box;
-          -webkit-mask-composite: xor;
-          mask-image:
-            linear-gradient(rgba(0, 0, 0, 0.72) 0 0),
-            linear-gradient(rgba(0, 0, 0, 1) 0 0);
-          mask-clip: content-box, border-box;
-          mask-composite: exclude;
-          opacity: 0;
-          transition: opacity var(--dur-card) var(--ease);
-        }
-
-        .surface:not(.surface--panel):hover::before { opacity: 1; }
-
-        /* The same two exclusions the sheen makes, for the same reason argued
-           beside it: one surface answers a pointer at a time and it is the
-           innermost one. A container lights its cards, not itself, and a figure
-           is a drawing that stands still. Written after the rule above so equal
-           specificity resolves this way round. */
-        .surface:has(.surface)::before { content: none; }
-        figure.surface::before { content: none; }
-      }
     }
   }
 
@@ -1563,11 +886,7 @@
   .gl-tldr,
   .legal-aside__card {
     box-shadow: var(--shadow-card);
-    transition:
-      border-color var(--dur) var(--ease),
-      background-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease),
-      transform var(--dur) var(--ease);
+    transition: var(--transition-hover);
   }
 
   /* THE BASE, FOR ALL OF THEM. This block previously applied only to
@@ -1617,20 +936,13 @@
        pointer while somebody reads it is noise, not polish. `.cmp-relcard` used
        to be named here and is not any more: it carries `surface` now, so
        `a.surface:hover` above is already its hover and repeating it here would
-       be the duplication this file exists to prevent. */
+       be the duplication this file exists to prevent. The hover is the one
+       calm edge step every card takes, nothing more. */
     a.prose-card:hover,
     a.prose-card:focus-visible {
-      border-color: var(--c-border-glow);
-      background-color: var(--c-card-hover);
-      box-shadow: var(--shadow-card-hover);
-      transform: translateY(var(--lift-card));
+      border-color: var(--c-border-hover);
     }
   }
-
-  /* The reduced-motion override for this recipe is at the FOOT OF THIS FILE,
-     with the one for `.surface`. It used to sit here, four lines below the rule
-     it guards, and being four lines below is exactly how the `.surface` version
-     came to be outgrown. See the note down there. */
 
   @media (forced-colors: active) {
     .prose-card,
@@ -1718,9 +1030,8 @@
        3  the hairline, on the border box, showing only in the 1px the
           transparent border occupies.
 
-     The lit state raises the body one more step to --c-lit and opens the glow.
-     That is the fourth step earning its place: a surface directly under a
-     light, which is what a surface under a cursor is. */
+     Under a pointer only the edge steps, to --c-border-hover, which is the
+     one card hover every surface on the site shares. */
   .sv-raised {
     position: relative;
     border: 1px solid transparent;
@@ -1737,10 +1048,7 @@
     background-origin: padding-box, padding-box, border-box;
     background-clip: padding-box, padding-box, border-box;
     box-shadow: var(--gloss-inset), var(--shadow-ladder);
-    transition:
-      background-image var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease),
-      border-color var(--dur) var(--ease);
+    transition: var(--transition-hover);
   }
 
   /* ── A PANEL WITH A DRAWING ON IT IS A <figure> ──────────────────────────
@@ -1771,61 +1079,13 @@
    */
   figure.sv-raised { margin: 0; }
 
+  /* The border paints over the hairline layer in the 1px the transparent
+     border occupies, so the one edge step reads on a raised panel exactly as
+     it does on a card. */
   @media (hover: hover) {
     .sv-raised:hover,
     .sv-raised:focus-within {
-      /* The lit state raises the body one step, so the middle layer stops being
-         a flat colour and becomes a real two-stop ramp. */
-      --ramp-from: var(--c-lit);
-      --ramp-to: var(--c-raised);
-      background-image:
-        var(--grad-wash-lit),
-        var(--grad-ramp),
-        var(--grad-hairline);
-      /* ── THE CAST GLOW WAS VIOLET, AND VIOLET MEANS SOMETHING ─────────────
-       *
-       * It read `color-mix(in srgb, var(--c-ambient-deep) 26%, transparent)`.
-       * Measured on the built homepage 2026-08-05, that resolves to
-       * `color(srgb 0.486274 0.227451 0.929412 / 0.26)` (rgb(124, 58, 237),
-       * #7C3AED, hue 262), so hovering any of the nine drawn panels opened a
-       * 42px VIOLET glow around it. `--c-ambient-deep` is bound to
-       * `--c-violet-deep` in tokens.css.
-       *
-       * Directive W7 is one semantic per hue and violet is spoken for: it means
-       * the engine REFUSED something. A hover means nothing at all (it is a
-       * pointer being somewhere), so a violet glow makes the refusal hue a
-       * report that a mouse moved, and once violet can say that it can no
-       * longer say the one thing it is for. On the homepage the same panel
-       * family sits feet away from `.pg__slab` and `.hir__step--refused`, which
-       * carry `--c-refused` because a figure really was refused.
-       *
-       * `--c-interactive` IS THE ROLE, and this is the identical substitution
-       * O-37 made on the sheen core four lines of reasoning at a time: the
-       * non-semantic emphasis colour, the one a surface wears when it answers a
-       * reader, already taken by the focus ring at the foot of this file and by
-       * the band above. The ambient set was rejected there for the reason that
-       * applies here too. It is named for position in a ramp, V6 deliberately
-       * did not drain that ramp, so an ambient token goes on dragging the old
-       * palette into a new hover for as long as the ramp stays teal and violet.
-       *
-       * 14%, NOT 26%, AND THE NUMBER IS MEASURED RATHER THAN GUESSED. White
-       * carries far more luminance than #7C3AED at the same alpha, so keeping
-       * 26% would have made a quiet glow into a bright one under cover of a
-       * palette fix. Rest and hovered frames of `figure.bs__panel` were
-       * captured with the whole document frozen and every other ingredient of
-       * the lit state held constant, so the reading is the glow alone:
-       *
-       *     violet #7C3AED 26%   mean channel delta 1.2706   (the target)
-       *     white 12%                               1.0506
-       *     white 14%                               1.2582   <- 1% off, taken
-       *     white 16%                               1.4534
-       *     white 26%                               2.4903   (twice as strong)
-       *
-       * Geometry, blur and spread are untouched at `0 0 42px`. */
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        var(--shadow-ladder),
-        0 0 42px color-mix(in srgb, var(--c-interactive) 14%, transparent);
+      border-color: var(--c-border-hover);
     }
   }
 
@@ -1861,8 +1121,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sv-hit,
-    .sv-raised { transition-property: color, background-color, border-color, opacity; }
+    .sv-hit { transition-property: color, background-color, border-color, opacity; }
   }
 
   /* ── THE AMBIENT FIELD ──────────────────────────────────────────────────
@@ -2172,66 +1431,6 @@
       -webkit-text-stroke: 0;
       filter: none;
       text-shadow: none;
-    }
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
- * REDUCED MOTION: A-43, AND THE SHAPE THAT STOPS IT HAPPENING AGAIN.
- * ══════════════════════════════════════════════════════════════════════════
- *
- * WHAT WAS BROKEN. Two overrides used to sit inside the `components` layer,
- * each a few lines below the rule it guarded, each written as a list of the
- * selectors that rule happened to use on the day:
- *
- *     a.surface:hover, button.surface:hover, label.surface:hover,
- *     .surface--lift:hover, a.surface:focus-visible, button.surface:focus-visible
- *
- * On 2026-08-03 the lift was widened to every card (`.surface:hover`, plain)
- * on the owner's instruction. The override was not widened with it, and nothing
- * could see the difference: it still matched, it still read as complete, and
- * every selector in it was still real. Measured under
- * `prefers-reduced-motion: reduce`, a bare `<div class="surface">` went from
- * `none` to `translateY(-2px)` under the pointer. An accessibility guarantee had
- * been silently outgrown by the rule it was written to guard.
- *
- * WHY THE FIX IS NOT "ADD `.surface:hover` TO THE LIST". That restores today's
- * behaviour and rebuilds the defect: the next state anybody adds (`:active`, a
- * `:has()` rule, a new modifier) is outside the list again, and the failure is
- * invisible in exactly the same way.
- *
- * SO IT IS STATED AS A LAYER, WHICH IS WHAT LAYERS ARE FOR. tokens.css already
- * says it: "if a rule is losing, it is in the wrong layer. Move it; do not
- * escalate it." Layer order is resolved BEFORE specificity, so a single-class
- * rule in `utilities` beats every selector in `components` no matter how it is
- * written or how many are added later. The list of states can then be a
- * `:where()`, which contributes ZERO specificity (it does not need any), and
- * covers every interactive state a card has rather than the ones that existed
- * when somebody last looked.
- *
- * It is deliberately NOT a bare `.surface { transform: none }`. A transform at
- * REST is a drawing rather than a motion, and there is no accessibility reason
- * to flatten one. What `reduce` asks for is that nothing MOVES in response to a
- * pointer or a key, and that is what the state list says.
- *
- * THE SHEEN NEEDS NOTHING HERE, and that is by construction rather than by
- * omission: it is generated inside `@media (prefers-reduced-motion:
- * no-preference)`, so under `reduce` the pseudo-element does not exist at all.
- * There is no rule to override, which is a stronger guarantee than an override,
- * and it is what scripts/check-sheen.js asserts as its negative case, along
- * with the lift above.
- *
- * NOTHING HERE CAN BEAT AN ASTRO SCOPED STYLE, which is unlayered and outranks
- * every layer including this one. Checked before writing: no component sets a
- * transform on a `.surface` or a `.prose-card` in any state. A component that
- * does in future re-opens this hole, and only a rendered-page measurement can
- * see it, which is why the gate measures rather than reads.
- * ══════════════════════════════════════════════════════════════════════════ */
-@layer utilities {
-  @media (prefers-reduced-motion: reduce) {
-    .surface:where(:hover, :focus, :focus-visible, :focus-within, :active),
-    .prose-card:where(:hover, :focus, :focus-visible, :focus-within, :active) {
-      transform: none;
     }
   }
 }

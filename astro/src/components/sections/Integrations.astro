@@ -812,7 +812,6 @@ import { HOME_CHIPS } from '../../data/integrations';
       display: flex;
       flex-wrap: nowrap;
       width: max-content;
-      animation: in-band calc(var(--m-cycle) * 3) linear infinite;
     }
 
     /* The one thing the pause control does, and the only thing hover, focus and
@@ -859,14 +858,8 @@ import { HOME_CHIPS } from '../../data/integrations';
     }
   }
 
-  /* Starts AT rest and travels away from it, which is a loop and not an
-     entrance: check-motion.js rule 2 asks whether the first offset translates
-     and the last resolves to zero, and this is the other way round. The element
-     is never missing from anywhere it belongs. */
-  @keyframes in-band {
-    from { transform: translate3d(0, 0, 0); }
-    to   { transform: translate3d(-50%, 0, 0); }
-  }
+  /* The in-band marquee loop was removed on 2026-10-21
+     (R285-WEB-ENTERPRISE-REDESIGN-01) with every other looping decoration. */
 
   /* ── The pause control ────────────────────────────────────────────────────
    *
@@ -1094,53 +1087,10 @@ import { HOME_CHIPS } from '../../data/integrations';
   }
 
   @media (hover: hover) {
-    /* The lit state is the same two recipes at a higher light level, not a
-       second pair: only the knobs move. background-image rather than the
-       shorthand, so the padding-box / border-box origins set above survive. */
+    /* The one calm card hover (R285-WEB-ENTERPRISE-REDESIGN-01): the edge
+       steps to --c-border-hover and nothing else changes. */
     .in__chip:hover {
-      --ramp-from: color-mix(in srgb, var(--c-ambient-start) 7%, var(--c-lit));
-      --ramp-to: var(--c-raised);
-      --edge-a: 78%;
-      --edge-b: 62%;
-      /* Written here, not var(--grad-ramp). A custom property's var()s are
-         substituted where it is DECLARED, so a knob token on :root bakes in its
-         fallbacks and inherits finished. Measured: --grad-ramp computes to
-         `linear-gradient(180deg, #161B2F, #0E1220 100%)` on every element,
-         whatever knobs it sets. It hid every blog hero photo behind an opaque
-         rectangle before this was found. Colours still come from tokens. */
-      /* ── NEUTRAL, BECAUSE THIS IS A HOVER ────────────────────────────────
-       *
-       * This lit state used to resolve from --c-ambient-start and
-       * --c-ambient-deep, which are teal and violet: a 7% teal tint in the
-       * fill, a 26px teal glow at 22%, and a 38% VIOLET cast shadow. Teal means
-       * VERIFIED on this site and violet means REFUSED, and the standing rule
-       * is that neither may appear on a hover, a focus ring or a control fill.
-       * Six connector chips were lighting in both semantic hues because a mouse
-       * moved over them.
-       *
-       * It is the same defect the hover audit of 2026-08-05 found on
-       * `.sv-raised`, where nine drawn panels opened a violet glow, and it was
-       * missed there for the same reason: the tokens are named for the AMBIENT
-       * FIELD rather than for their hue, so `--c-ambient-deep` does not read as
-       * "the refusal colour" at the call site. It resolves to #7C3AED.
-       *
-       * All three now resolve from --c-interactive, which V6 puts at white, so
-       * the lit state is a LUMINANCE change - which is exactly what the
-       * gradient rule approved on 2026-08-05 permits anywhere, including under
-       * text. The cast shadow takes --c-floor instead: a shadow is an absence
-       * of light, so a white one was never right regardless of the hue rule.
-       *
-       * The glow drops 22% to 12% with the hue change. White at the old alpha
-       * reads far brighter than a saturated teal at the same number, which is
-       * the same correction the audit measured on `.sv-raised` when it took
-       * violet 26% to white 14%. */
-      background-image:
-        linear-gradient(160deg, color-mix(in srgb, var(--c-interactive) 7%, var(--c-lit)), var(--c-raised) 78%),
-        var(--grad-edge);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.16),
-        0 0 26px color-mix(in srgb, var(--c-interactive) 12%, transparent),
-        0 18px 48px color-mix(in srgb, var(--c-floor) 38%, transparent);
+      border-color: var(--c-border-hover);
     }
 
     /* A-84: the rest state moved up to --c-text-sub to clear 4.5:1 on the

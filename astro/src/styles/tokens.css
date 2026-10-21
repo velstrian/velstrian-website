@@ -1222,10 +1222,9 @@
      would still be one line. Same pattern, same reason, as --c-border-glow
      below, which is bound to --c-interactive rather than restating it.
 
-     WHAT CARRIES THE HOVER INSTEAD, on those three recipes: the border goes to
-     --c-border-glow (--c-border 12% white -> --c-interactive, fully opaque) and
-     the shadow goes to --shadow-card-hover. Two signals, and on a card a 2px
-     lift as well.
+     WHAT CARRIES THE HOVER INSTEAD, on those three recipes: the border steps
+     from --c-border to --c-border-hover and nothing else moves. See the one
+     card hover block further down this file.
 
      AND IT IS NOT A NO-OP EVERYWHERE, which is the other reason the name earns
      its keep. Where the resting element has NO fill, this token is the wash
@@ -1759,60 +1758,6 @@
    * through git history to compare the three again. */
   --grad-hero-text: linear-gradient(100deg, var(--c-ambient-start), var(--c-ambient-mid) 42%, var(--c-ambient-end));
 
-  /* ── THE CARD EDGE BEAM, 2026-08-07 ──────────────────────────────────────
-   *
-   * Owner adopted the travelling top-edge light from the Ultra-Premium concept,
-   * whose rule paints `linear-gradient(90deg, transparent, #2DD4BF, #22D3EE,
-   * transparent)`. On this site #2DD4BF IS --c-teal and #22D3EE IS --c-cyan, so
-   * the concept's colours arrive as tokens rather than as hexes.
-   *
-   * IT IS A TOKEN BECAUSE check-palette-roles.js IS RIGHT. Written inline in
-   * styles/surfaces.css, this failed the gate twice over ("--c-teal referenced
-   * outside styles/tokens.css", "--c-cyan referenced outside styles/tokens.css")
-   * under the rule that a component names a ROLE and only this file names a
-   * COLOUR. Naming the gradient here is the fix the rule asks for, not a way
-   * around it: surfaces.css now says `--grad-edge-beam`, which is a role, and
-   * the two hues stay in the one file that is allowed to know them.
-   *
-   * THE ONE PLACE TEAL DOES NOT MEAN VERIFIED, AND IT IS BOUNDED. Everywhere
-   * else on this site teal is the verified role. Here it is a 2px decorative
-   * band inside a pseudo-element, carrying no label, on no control and no
-   * state, which is the limit the owner's palette rule sets for a hue. If this
-   * token is ever spent on anything other than that edge, it has escaped.
-   */
-  /* NO EXPLICIT STOPS, AND THAT IS THE WHOLE DIFFERENCE. The first attempt set
-   * them at 35% and 65% inside a band 60% of the card wide, which squeezed both
-   * hues into a short saturated bar. Read by the owner, correctly, as
-   * "excessive teal". The concept writes four stops and lets them fall at 0,
-   * 33, 66 and 100 across the FULL width of the card, so each hue occupies a
-   * third of a card-wide sweep and both ends are transparent. Same two colours,
-   * a quarter of the intensity at any one point. */
-  /* TEAL TO PURPLE, 2026-08-07, ON THE OWNER'S CORRECTION. It ran teal to cyan,
-   * copied from the concept's CARD rule. The concept's ENGINE THEATRE bar is the
-   * one the owner was describing (`#2DD4BF, #22D3EE, #B39DFB`, teal through to
-   * orchid), and two hues a third of the wheel apart read as a gradient where
-   * teal and cyan, which are neighbours, read as one colour going slightly off.
-   * That is why the first version looked like "still teal".
-   *
-   * ORCHID IS THE REFUSED ROLE AND THIS IS THE SECOND PLACE IT APPEARS WITHOUT
-   * MEANING IT. Same bound as the teal beside it: a 2px decorative edge, inside
-   * a pseudo-element, carrying no label, on no control and no state. If either
-   * hue is ever spent on anything else from this token, it has escaped. */
-  /* WEIGHTED TOWARDS PURPLE, on the owner's second correction: "make purple
-   * more and teal less". With four evenly spaced stops each hue held a third of
-   * the sweep. Teal now enters late and narrow at 26% and orchid owns from 52%
-   * to 78%, so roughly a quarter of the band is teal against half orchid, and
-   * the beam reads as purple with a teal leading edge rather than as two equal
-   * colours meeting in the middle. */
-  --grad-edge-beam: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--c-teal) 26%,
-    var(--c-orchid) 52%,
-    var(--c-orchid) 78%,
-    transparent 100%
-  );
-
   /* ── THE PAGE WASH, READ OFF THE DEPLOYED SITE ───────────────────────────
    *
    * Owner, 2026-08-03: "the page background gradient issue is not yet resolved,
@@ -2332,10 +2277,8 @@
      flat fill, confirmed independently on three reference sites and recorded
      in specs/DESIGN-DECISIONS.md. It is the TOP layer of .sv-raised, over the
      opaque body; it is not a surface on its own and it is not page atmosphere.
-     The lit variant is the same recipe at a higher light level, which is the
-     property --shadow-card / --shadow-card-hover already keeps. */
+     The lit variant is the same recipe at a higher light level. */
   --grad-wash:     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 60%);
-  --grad-wash-lit: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 60%);
 
   /* A COLOURED 1px GRADIENT BORDER, painted on the border box under a
      transparent border. Distinct from --grad-hairline, which is the neutral
@@ -2696,23 +2639,14 @@
    *     integrations  1 beat  (six parallel arrows, a sixth of a beat apart)
    *     final CTA     3 beats (one sweep across the card's top edge)
    *
-   * ── AND THEN IT RESTS ─────────────────────────────────────────────────────
+   * ── NOTHING LOOPS, 2026-10-21 ────────────────────────────────────────────
    *
-   * --m-cycle is the period every looping light on the page shares. A section
-   * spends its pass travelling and the remainder dark. A light that crosses and
-   * then rests reads as a lit object; a light that never stops reads as a
-   * loading state, and there are two buttons inside the closing card. The rest
-   * is also what keeps this admissible beside prose: at 12s the page refreshes
-   * about five times a minute rather than strobing.
+   * R285-WEB-ENTERPRISE-REDESIGN-01 removed every looping light on the site,
+   * so --m-cycle (the shared loop period), --m-drift (the ambient field's
+   * period) and the breath curve that only a loop could use went with them.
+   * What remains plays once: an arrival, a trace, a fill.
    *
-   * --m-cycle IS EXACTLY 20 BEATS, AND THAT IS THE ONE ARITHMETIC FACT TO
-   * KEEP. It makes one beat exactly 5% of a cycle, so every station boundary in
-   * every section's @keyframes lands on a round multiple of 5% and the numbers
-   * in those blocks can be checked by eye. Change --m-beat or --m-cycle without
-   * keeping that ratio and every keyframe block on the homepage silently drifts
-   * out of step with its own delays. Change them together.
-   *
-   * ── THREE CURVES, ONE FAMILY ──────────────────────────────────────────────
+   * ── TWO CURVES, ONE FAMILY ────────────────────────────────────────────────
    *
    *   travel  LINEAR, and it is not a placeholder. A lamp crossing a fixed
    *           distance moves at a constant speed; easing a travelling highlight
@@ -2722,9 +2656,6 @@
    *   land    An arrival: a bloom, a nudge, a cap opening. --ease, the site's
    *           existing expo-out, so a landing on the homepage is the same
    *           motion as a card lifting under the pointer.
-   *   breath  Symmetric in-out, for anything ambient that reverses. It is the
-   *           only curve here that is not one of the two above, because a field
-   *           that breathes has no arrival to ease towards.
    *
    * ── AND ONE ENTRANCE, THE SAME IN ALL SEVEN ───────────────────────────────
    *
@@ -2746,16 +2677,9 @@
    * once or not at all. A refusal is a fact, not a performance.
    * ═════════════════════════════════════════════════════════════════════════ */
   --m-beat:  600ms;
-  --m-cycle: 12s;   /* exactly 20 beats. See above before changing either. */
-  /* The ambient field's own period, and deliberately NOT a multiple of the
-     cycle. 18s against 12s means the two never land together twice in the same
-     place, so the page never repeats itself exactly. Inherited from the final
-     CTA's blob drift, which Figma `149:98` names as the reference rig. */
-  --m-drift: 18s;
 
   --m-ease-travel: linear;
   --m-ease-land:   var(--ease);
-  --m-ease-breath: cubic-bezier(0.45, 0, 0.55, 1);
 
   /* ── Elevation ──────────────────────────────────────────────────────────
      The glass recipe, as one variable rather than repeated per component.
@@ -2846,23 +2770,30 @@
      on all descendants of a dark card and made white and teal buttons invisible.
      Nothing here touches colour on descendants at all.
 
-     The hover shadow lifts the inset from .07 to .16 and deepens the cast
-     shadow. It is the same recipe at a higher light level, not a second one. */
-  /* Live: the contact shadow holds and the lifted one CASTS A COLOUR,
-     `rgba(12,201,168,0.28) 0 22px 50px -14px`. The card does not just rise, it
-     casts. The specular inset is ours and is kept.
+     THE HOVER IS NOT HERE ANY MORE. It lives in the one calm hover block
+     directly below, see R285-WEB-ENTERPRISE-REDESIGN-01. */
 
-     V6, 2026-08-04: THE CAST IS WHITE NOW, NOT TEAL. This shadow is the lit
-     state of a card and of every button on the site, so a teal cast put the
-     verified mark underneath every control on every hover. The largest single
-     piece of teal-on-a-control left after the token sweep, and invisible to the
-     role gate because it was written as a literal rgba inside this file. The
-     GEOMETRY is live's, unchanged, and so is the 0.28; only the pigment moves,
-     and it moves through --c-interactive so the next palette change reaches it
-     without anybody remembering this line exists. */
-  --shadow-card-hover: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 1px 2px rgba(0, 0, 0, 0.28), 0 22px 50px -14px color-mix(in srgb, var(--c-interactive) 28%, transparent);
-  /* One lift distance. The rebuild had -3px, -4px and -5px in three files. */
-  --lift-card: -2px;   /* live's lift, measured; ours was double it */
+  /* ══ THE ONE CARD HOVER, R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-21 ══════
+   *
+   * Owner: "remove unnecessary flashing animation when mouse hover into any
+   * cards as looks very cheap". The site is to read like Linear, Vanta, Auth0,
+   * Better Stack and Atlassian: calm, enterprise, authentic.
+   *
+   * So a card answers a pointer with ONE change and nothing else. Its edge
+   * moves one step, from --c-border to --c-border-hover, over --dur-hover on
+   * --ease-hover. No lift, no cast glow, no sweep, no lamp, no scale and no
+   * colour flash. These three names are the whole recipe and every card,
+   * tile and chip on the site reads them, so the hover changes in one place.
+   *
+   * --dur-hover IS --dur-fast, 0.18s, so it stays on the one duration scale
+   * scripts/check-transitions.js holds every control to, and it collapses to
+   * 0.01ms with the rest of that scale under reduced motion: the edge still
+   * changes for a reader who asked for no motion, it simply does not fade.
+   * --transition-hover is the transition list a hovering block carries. */
+  --c-border-hover: rgba(255, 255, 255, 0.28);
+  --dur-hover: var(--dur-fast);
+  --ease-hover: ease;
+  --transition-hover: border-color var(--dur-hover) var(--ease-hover);
 
   /* ── THE BUTTON'S OWN SHADOW, WHICH IS A GLOW AND NOTHING ELSE ────────────
    *
@@ -2884,12 +2815,6 @@
    * than as light, because the spill would no longer be the colour of the thing
    * spilling it. */
   --shadow-btn:       0 5px 16px -7px color-mix(in srgb, var(--c-interactive) 65%, transparent);
-  --shadow-btn-hover: 0 10px 24px -8px color-mix(in srgb, var(--c-interactive) 80%, transparent),
-                      0 2px 8px -4px color-mix(in srgb, var(--c-interactive) 45%, transparent);
-
-  /* Live lifts the button 1.5px, three quarters of the card's 2px: a control
-     responds faster and travels less than the surface it sits on. */
-  --lift-btn: -1.5px;
 }
 
 /* Reduced motion is handled once, here, rather than per component. Every
@@ -3156,8 +3081,8 @@
    still frames. Marking a wrapper `data-field` opts it into two things, and
    both are declared once, here, so a section cannot have its own opinion:
 
-     m-drift    always on, --m-drift, alternating, each field a third of the
-                period out of phase with the last. Scale only.
+     m-drift    RETIRED 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01), with
+                every other looping decoration on the site.
      m-arrive   ONE BEAT, ONCE, when the section is lit. The shared entrance.
 
    TRANSFORM ONLY, IN BOTH. No opacity anywhere in this block, and that is the
@@ -3169,18 +3094,6 @@
    something a contrast checker can catch mid-transition either way. Scale is
    also compositor-only, so seven of these cost one frame between them.
 
-   THE ENTRANCE IS SECOND IN THE LIST ON PURPOSE. Both animations target
-   `transform`, and the later entry owns a property while it is running, so
-   m-arrive takes the field for its one beat and hands it straight back to
-   m-drift. That is the same handover Lifecycle already documents between its
-   6s breath and its one-shot beat, generalised.
-
-   NEGATIVE DELAYS, NOT POSITIVE ONES. The final CTA phased its three blobs with
-   `6s` and `12s`, which means blobs two and three sit perfectly still for the
-   first six and twelve seconds of the page's life. A negative delay starts the
-   animation part-way through instead, so all three are moving from the first
-   frame and the phase offset is the same.
-
    `data-field="on"` is the hero, and it is the one field that fires its
    entrance at load rather than on view. The hero is above the fold at every
    viewport, so asking an observer whether it is visible is a question with a
@@ -3189,39 +3102,12 @@
    ========================================================================= */
 @layer components {
   @media (prefers-reduced-motion: no-preference) {
-    [data-field] > b {
-      animation: m-drift var(--m-drift) var(--m-ease-breath) infinite alternate;
-    }
-
-    [data-field] > b:nth-child(2) {
-      animation-delay: calc(-1 * var(--m-drift) / 3);
-    }
-
-    [data-field] > b:nth-child(3) {
-      animation-delay: calc(-2 * var(--m-drift) / 3);
-    }
-
-    /* Longhands rather than the shorthand: a second `animation:` declaration
-       would reset animation-delay for both entries, and the drift's phase
-       offsets below have to survive the entrance being added on top. */
+    /* R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-21. The always-on m-drift loop
+       is gone with the other looping decoration, so a field now holds still
+       and only takes its one-beat entrance when its section is lit. */
     [data-lit='on'] [data-field] > b,
     [data-field='on'] > b {
-      animation-name: m-drift, m-arrive;
-      animation-duration: var(--m-drift), var(--m-beat);
-      animation-timing-function: var(--m-ease-breath), var(--m-ease-land);
-      animation-iteration-count: infinite, 1;
-      animation-direction: alternate, normal;
-      animation-delay: 0s, 0s;
-    }
-
-    [data-lit='on'] [data-field] > b:nth-child(2),
-    [data-field='on'] > b:nth-child(2) {
-      animation-delay: calc(-1 * var(--m-drift) / 3), 0s;
-    }
-
-    [data-lit='on'] [data-field] > b:nth-child(3),
-    [data-field='on'] > b:nth-child(3) {
-      animation-delay: calc(-2 * var(--m-drift) / 3), 0s;
+      animation: m-arrive var(--m-beat) var(--m-ease-land) 1;
     }
 
     /* ── SCROLL-DRIVEN, AND IT IS NOT SCROLL-JACKING ────────────────────────
@@ -3262,11 +3148,7 @@
 
 /* Global, unscoped, and referenced only by the rules above. Every section's own
    keyframes stay inside that section's Astro <style>, where they are scoped and
-   renamed; these two are shared, so they live where the rules that use them do. */
-@keyframes m-drift {
-  from { transform: scale(1); }
-  to   { transform: scale(1.04); }
-}
+   renamed; this one is shared, so it lives where the rules that use it do. */
 
 /* Rises and returns to exactly where it started, so the rest state is the state
    before and after. Rule 02: motion may only add light. */

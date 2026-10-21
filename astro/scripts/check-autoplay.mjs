@@ -154,10 +154,11 @@ console.log('\n  retired motion devices (workbench loop, marquee, orbs) — reti
     const all = [...document.querySelectorAll('main *')];
     return all.filter((el) => {
       const cs = getComputedStyle(el);
-      if (cs.animationIterationCount !== 'infinite' || cs.animationDuration === '0s') return false;
-      // Allow only the 6px status light breathing indicator inside the trace
-      if (cs.animationName.includes('breathe') || cs.animationName.includes('pulse')) return false;
-      return true;
+      // No exception. The 6px status light in the trace used to breathe here
+      // and was the one loop this check let through. It holds still since
+      // 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01), so any loop now fails.
+      return cs.animationIterationCount.split(',').some((n) => n.trim() === 'infinite') &&
+        cs.animationDuration !== '0s';
     }).length;
   });
   check('no infinite animation loops run on the page content', infiniteAnimations === 0, `infinite loops=${infiniteAnimations}`);

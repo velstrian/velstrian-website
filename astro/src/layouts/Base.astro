@@ -82,13 +82,9 @@ import '../styles/controls.css';
    below and to `.surface` above, and because it must apply to every route with
    no page opting in. Zero JavaScript; see the header of the file. */
 import '../styles/motion.css';
-/* The three premium micro-animations, restored 2026-08-03. Loaded here for the
-   opposite reason to the four above: they must NOT apply to every route. It is
-   in the layout so the recipes are defined in one place and the list of what
-   carries them can be counted, which is the only defence against the effect
-   that appears on one more element per week until it means nothing. Each rule
-   names its carriers above itself. */
-import '../styles/effects.css';
+/* styles/effects.css held the looping micro-animations (shimmer, CTA pulse,
+   edge ring, status ping, footer seam). All five were removed on 2026-10-21,
+   R285-WEB-ENTERPRISE-REDESIGN-01, and the file went with them. */
 
 interface Props {
   title: string;
@@ -410,19 +406,9 @@ const pageClass = `pg-${
 
   ── WHAT HAS NOT CHANGED ────────────────────────────────────────────────────
 
-  The magnet is still mounted in the LAYOUT and nowhere else, for the reason it
-  was restored on 2026-08-03: the visual layer went missing in the first place
-  because every ported section dropped it independently and no single omission
-  looked wrong. A route cannot forget an effect the shell owns. In the legacy
-  build this was a `<script defer>` that pages carried one at a time, so /about
-  got one magnetic control and /contact got three and nobody decided either
-  number; Button.astro emits `data-magnetic` for every primary and this line is
-  what makes those attributes mean something on all 44 routes.
-
   If this file fails to load, every button keeps its hover, press and focus
-  states, because --mag-x and --mag-y fall back to 0px in Button.astro. Rest
-  state is final state, which is the same contract motion.ts states in its own
-  header. The nav degrades the same way: the dropdown keeps its CSS-only
+  states, which are pure CSS. Rest state is final state, which is the same
+  contract motion.ts states in its own header. The nav degrades the same way: the dropdown keeps its CSS-only
   :hover/:focus-within fallback until `data-js` is stamped, and the palette's
   trigger is a button that simply does nothing.
 

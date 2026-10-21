@@ -661,19 +661,11 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
               <li class:list={['tl__item', 'surface', 'surface--pad', `tl__item--${t.status}`]}>
                 {/* The dot ON the rail. Legacy drew it at -41px from the card
                     edge; here it is placed against the rail the column owns.
-
-                    THE CURRENT MILESTONE BREATHES, and the recipe for that is
-                    `fx-status-pulse` in styles/effects.css, shared with the
-                    footer's live mark. Production put `animate-pulse` on this
-                    exact dot and nothing else in the section; the rebuild had
-                    dropped it, which is the whole of the owner's report of
-                    2026-08-04. It is asked for HERE rather than matched by
-                    selector over there so that the set of things on this site
-                    that pulse is the set of things wearing the class. */}
-                <span
-                  class:list={['tl__dot', t.status === 'now' && 'fx-status-pulse']}
-                  aria-hidden="true"
-                />
+                    The current milestone is marked by its own fill and label,
+                    and it holds still: the breathing pulse it used to carry
+                    was removed on 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01)
+                    with every other looping decoration. */}
+                <span class="tl__dot" aria-hidden="true" />
                 {/* The date sits INSIDE the body, R285-WEB-PRICING-ABOUT-FORMAT-01.
                     As a sibling of `.tl__body` it stayed on the card's centre
                     line while the heading and copy beside it went left under

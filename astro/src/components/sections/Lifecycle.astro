@@ -320,45 +320,14 @@ const deliverGradient = {
   stops: rampStops(R_DELIVER, deliverStage.start + GAP, deliverStage.end - GAP),
 };
 
-/*
- * ── THE TRAVERSE, AND WHY IT IS AN OVERLAY ────────────────────────────────
- *
- * `145:8`: "The whole ring, all four arcs, the bracket and the closing arrow,
- * complete and legible. A true draw-on would start this empty, and AN EMPTY
- * RING IS A WRONG RING." So the light does not DRAW the ring. It WRITES IT A
- * SECOND TIME: a hot head runs along the finished arc with a trail behind it,
- * over the top of a drawing that was already whole.
- *
- * Two overlay paths, one per leg, because the two legs run at different speeds.
- * The first covers Find, Answer and Commit, 186 degrees in 1,400ms. The second
- * covers Deliver, 156 degrees in the same 1,400ms, half the angular speed.
- * That pacing IS the section's claim: delivery outlasting the tender, made by
- * how long the light takes rather than by a caption saying so.
- *
- * Both take pathLength=1000, so the dash arithmetic in the stylesheet is in
- * thousandths of an arc and is identical for two paths of different real
- * lengths. Nothing has to be measured at runtime.
- */
-const traverseStage = {
-  id: 'lc-g-trav-stage',
-  d: arcPath(R_STAGE, GAP, 192 - GAP),
-  ...chord(R_STAGE, GAP, 192 - GAP),
-  stops: rampStops(R_STAGE, GAP, 192 - GAP),
-};
-
-const traverseDeliver = {
-  id: 'lc-g-trav-deliver',
-  d: arcPath(R_DELIVER, deliverStage.start + GAP, deliverStage.end - GAP),
-  ...chord(R_DELIVER, deliverStage.start + GAP, deliverStage.end - GAP),
-  stops: rampStops(R_DELIVER, deliverStage.start + GAP, deliverStage.end - GAP),
-};
+/* The traverse overlay (a light that looped round the ring) was removed on
+   2026-10-21, R285-WEB-ENTERPRISE-REDESIGN-01, with every other looping
+   decoration. The ring is drawn whole and holds still. */
 
 /** Every gradient the ring needs, each carrying its own id. */
 const ringGradients = [
   ...bandGradients,
   deliverGradient,
-  traverseStage,
-  traverseDeliver,
 ];
 
 /** The outer duration bracket over Deliver, with a cap at each end. */
@@ -510,39 +479,6 @@ const arrow = arrowPoints(356, R_BRACKET);
             stroke="url(#lc-g-deliver)"
           />
 
-          {/*
-            THE TRAVERSE. Four paths laid OVER a ring that is already whole: a
-            trail and a hot head per leg. They are the last thing drawn so they
-            sit on top, they are aria-hidden by the parent svg's own labelling,
-            and with no animation running every one of them is dashed entirely
-            out of view. Remove this whole block and the diagram is unchanged.
-          */}
-          <path
-            class="lc__trail"
-            d={traverseStage.d}
-            pathLength="1000"
-            stroke={`url(#${traverseStage.id})`}
-            style={`--w:${W_STAGE}`}
-          />
-          <path
-            class="lc__head"
-            d={traverseStage.d}
-            pathLength="1000"
-            style={`--w:${W_STAGE}`}
-          />
-          <path
-            class="lc__trail lc__trail--deliver"
-            d={traverseDeliver.d}
-            pathLength="1000"
-            stroke={`url(#${traverseDeliver.id})`}
-            style={`--w:${W_DELIVER}`}
-          />
-          <path
-            class="lc__head lc__head--deliver"
-            d={traverseDeliver.d}
-            pathLength="1000"
-            style={`--w:${W_DELIVER}`}
-          />
 
           <path class="lc__bracket" d={bracket} />
           {bracketCaps.map((d) => <path class="lc__bracket" d={d} />)}
@@ -700,13 +636,6 @@ const arrow = arrowPoints(356, R_BRACKET);
     opacity: 0.55;
     border-radius: 50%;
     pointer-events: none;
-    /*
-     * FILTER, NOT OPACITY, AND THAT IS FORCED RATHER THAN CHOSEN. `lc-breathe`
-     * owns `opacity` on this element for the whole twelve-second cycle, and a
-     * running animation beats a transition on the same property. A hover that
-     * wrote opacity here would simply never be seen. Brightness is free.
-     */
-    transition: filter var(--dur) var(--ease);
   }
 
   /*
@@ -729,54 +658,11 @@ const arrow = arrowPoints(356, R_BRACKET);
   .lc__deliver,
   .lc__core {
     filter: drop-shadow(0 14px 22px color-mix(in srgb, var(--c-floor) 88%, transparent));
-    transition: filter var(--dur) var(--ease);
   }
 
-  /* Ambient only. Nothing is revealed by it and nothing is read from it, so
-     it is safe to run always and correct to stop under reduced motion.
-
-     THE BREATH IS NOW --m-drift, NOT 6s. It was the only ambient period on the
-     homepage that was neither 18s nor anything else in particular, and an
-     ambient layer running at three different speeds is what the grammar block
-     in styles/tokens.css exists to stop. Same idea, one period, shared with the
-     two blurred fields behind this section and the three inside the closing
-     card. */
-  @media (prefers-reduced-motion: no-preference) {
-    .lc__glow {
-      animation: lc-breathe var(--m-drift) var(--m-ease-breath) infinite;
-    }
-
-    /*
-     * ONE BEAT AS THE ARROW LANDS, ON THE SAME CLOCK AS THE ARROW, so the glow
-     * and the arrowhead are one event repeated once per cycle rather than two
-     * animations that used to happen to coincide at 2,900ms.
-     *
-     * IT IS A SCALE, NOT AN OPACITY, AND THAT IS THE FIX. Both this and the
-     * breath used to write `opacity`, which was survivable when the beat ran
-     * once for 600ms and is not survivable now that both loop: an animation
-     * declared later owns a property for its WHOLE duration, so a cycle-length
-     * beat on opacity would take the property for the entire twelve seconds and
-     * the breath would never be seen again. Splitting them by property is what
-     * lets both loop. It also only ever adds light, which is rule 02.
-     */
-    [data-lit='on'] .lc__glow {
-      animation:
-        lc-breathe var(--m-drift) var(--m-ease-breath) infinite,
-        lc-beat var(--m-cycle) var(--m-ease-land) infinite;
-    }
-  }
-
-  @keyframes lc-breathe {
-    0%, 100% { opacity: 0.42; }
-    50%      { opacity: 0.68; }
-  }
-
-  /* The arrow lands at 8 beats, which is 40% of the cycle. */
-  @keyframes lc-beat {
-    0%, 38%     { transform: scale(1); }
-    41%         { transform: scale(1.12); }
-    45%, 100%   { transform: scale(1); }
-  }
+  /* The glow held behind the core used to breathe and beat on a loop
+     (lc-breathe, lc-beat). Both were removed on 2026-10-21,
+     R285-WEB-ENTERPRISE-REDESIGN-01, so it holds at its rest opacity. */
 
   .lc__svg {
     position: relative;
@@ -844,151 +730,6 @@ const arrow = arrowPoints(356, R_BRACKET);
     fill: var(--c-ambient-start);
   }
 
-  /* ══ M3 · THE LOOP CLOSING ════════════════════════════════════════════════
-   *
-   * Figma `145:2`. "The section whose whole argument is a loop, closing".
-   * TRIGGER IntersectionObserver, threshold 0.4.
-   * CADENCE 8 beats: four for the first leg, four for Deliver, on --m-cycle.
-   * PLAYS: LOOPS. Twelve beats of rest, then the loop closes again.
-   * REDUCED MOTION complete static ring, no traverse, no beat.
-   *
-   * OF EVERY SECTION ON THIS PAGE THIS IS THE ONE THAT MOST WANTED TO LOOP, and
-   * it is worth saying why the owner's instruction lands well here rather than
-   * merely being obeyed. The section's entire claim is that delivery feeds the
-   * next bid: a ring that closes and then stops argues against itself, and a
-   * ring that closes, rests, and closes again is the thing the drawing says.
-   *
-   * THE PACING ARGUMENT IS UNTOUCHED. The first leg covers 186 degrees in four
-   * beats and Deliver covers 156 in the same four, so the light still visibly
-   * slows on the long arc. That is the section's argument made as pacing rather
-   * than as a caption, and it survived the retiming because both legs were
-   * scaled by the same factor.
-   *
-   * THE RING IS NEVER DRAWN FROM EMPTY. This is the point the board makes
-   * hardest and the one thing to check if anyone edits this block: a true
-   * draw-on starts the ring missing, and a missing ring is a WRONG ring, not a
-   * ring in progress. Every arc, the bracket and the closing arrow are painted
-   * at 100% before any of this exists. The light writes the ring a SECOND time
-   * over the top of the finished one, which reads as drawing and is never
-   * incomplete.
-   *
-   * The dash arithmetic is in thousandths, because both overlay paths declare
-   * pathLength="1000". A 30-unit head with a 200-unit trail behind it: at rest
-   * both are dashed entirely off the path, so the overlays occupy no pixels
-   * until something starts them.
-   *
-   * THE TRAIL IS A CONSTANT-LENGTH BAND, NOT A PER-POINT DECAY. The board
-   * specifies each point on the arc lifting and decaying over 900ms behind the
-   * head. That is a per-point timeline, which SVG dashes cannot express; a
-   * 200-unit trail travelling at the head's speed means a given point stays lit
-   * for about 280ms on the first leg and 560ms on Deliver. Same effect, coarser
-   * decay, and honest about it. It never drops below the ring's rest brightness
-   * because it is drawn OVER a ring already at full strength.
-   */
-  .lc__head,
-  .lc__trail {
-    fill: none;
-    stroke-linecap: butt;
-    /* Two thirds of the band's width, so the light sits inside the arc it is
-       writing rather than spilling over both hairlines. */
-    stroke-width: calc(var(--w) * 0.66);
-    /* Dashed completely out of view. This is the rest state and it is what
-       ships when nothing runs. */
-    stroke-dasharray: 0 1000;
-  }
-
-  /* WHITE CORE. `141:2` L04: a lamp has a hot white centre and a marker is a
-     flat coloured stroke. The trail beneath carries the hue, sampled from the
-     ring's own ramp at whatever angle the light currently occupies, because the
-     gradient is fixed in user space and the dash moves through it. */
-  .lc__head {
-    stroke: var(--c-text);
-  }
-
-  .lc__trail {
-    opacity: 0.75;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    [data-lit='on'] .lc__head {
-      stroke-dasharray: 30 1000;
-      animation: lc-head var(--m-cycle) var(--m-ease-travel) infinite;
-    }
-
-    [data-lit='on'] .lc__trail {
-      stroke-dasharray: 200 1000;
-      animation: lc-trail var(--m-cycle) var(--m-ease-travel) infinite;
-    }
-
-    /* THE SECOND LEG IS THE SECTION'S ARGUMENT, MADE AS PACING. Deliver's 156
-       degrees take the same four beats the first leg's 186 took, so the light
-       visibly slows. Delivery outlasting the tender, said by how long the eye
-       waits rather than by a caption. */
-    [data-lit='on'] .lc__head--deliver,
-    [data-lit='on'] .lc__trail--deliver {
-      animation-delay: calc(var(--m-beat) * 4);
-    }
-
-    /* THE ARROWHEAD USED TO NUDGE HERE, and it does not any more.
-     *
-     * `lc-arrow` translated <polygon class="lc__arrow"> 6px along the ring into
-     * Find and threw a glow, on an overshoot curve, "because a loop shutting is
-     * a mechanism". It was removed on 2026-08-03 under the owner's instruction
-     * to stop the animation on the homepage's images.
-     *
-     * WHY THIS ONE WENT AND THE HEAD AND TRAIL ABOVE DID NOT, because the two
-     * look alike and the difference is the whole rule. The head and the trail
-     * are dashed entirely off the path at rest: they draw NOTHING, they are the
-     * travelling light this ring's rail carries, and they are the same light
-     * .spine__light, .bs__beam and .rt__beam paint in HTML in three other
-     * sections. (.stratum__pulse was the fourth until 2026-08-04, when the
-     * owner had the hero graphic removed.)
-     * The owner has separately asked for that motion to run
-     * continuously and in symmetry across the page.
-     *
-     * The arrowhead is not a light. It is a drawn part of the diagram, present
-     * and visible with every animation on the page dead, and moving it moves the
-     * picture. Nothing inside a drawing on this homepage now moves except a
-     * light crossing it.
-     */
-  }
-
-  /*
-   * ── THE DRAIN, AND IT IS A BUG FIX RATHER THAN A RETIMING ─────────────────
-   *
-   * The head and the trail are locked 170 units apart: the trail is 200 long
-   * and the head 30, so `trail offset = head offset + 170` puts the trail's
-   * LEADING edge exactly on the head with its 200 units extending backwards
-   * along the path behind it. That relationship holds at every keyframe below
-   * and is the only thing keeping them one object.
-   *
-   * WHAT WAS WRONG. Both animations used to be `forwards` and both used to stop
-   * the instant the head left the path, head at -1000, trail at -830. A dash
-   * pattern starting at 830 on a path of length 1000 is still 170 units ON that
-   * path, so the trail's tail was left permanently lit over the last sixth of
-   * each leg. At opacity 0.75 over an arc already drawn at full strength that
-   * was easy to miss when it happened once. It is not missable at four times a
-   * minute, and it would have read as the light snagging.
-   *
-   * So there is now a drain: three per cent of the cycle in which the head runs
-   * on to -1,170 and the trail to -1,000, at which point both dash patterns
-   * begin past the end of the path and neither occupies a pixel. The travel
-   * itself still ends at 20%; the drain is after it and costs the pacing
-   * nothing.
-   */
-  @keyframes lc-head {
-    0%        { stroke-dashoffset: 30; }
-    20%       { stroke-dashoffset: -1000; }
-    23%       { stroke-dashoffset: -1170; }
-    100%      { stroke-dashoffset: -1170; }
-  }
-
-  @keyframes lc-trail {
-    0%        { stroke-dashoffset: 200; }
-    20%       { stroke-dashoffset: -830; }
-    23%       { stroke-dashoffset: -1000; }
-    100%      { stroke-dashoffset: -1000; }
-  }
 
   /* @keyframes lc-arrow was declared here and went with the rule that used it.
      An unreferenced keyframe block is the thing a later section copies without
@@ -1052,39 +793,15 @@ const arrow = arrowPoints(356, R_BRACKET);
     padding: 0.45rem 0.7rem;
     border: 1px solid transparent;
     border-radius: var(--radius-chip);
-    transition:
-      background-color var(--dur) var(--ease),
-      border-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease);
+    transition: var(--transition-hover);
   }
 
-  .lc__stage-name {
-    transition: color var(--dur) var(--ease), text-shadow var(--dur) var(--ease);
-  }
-
+  /* The one calm hover (R285-WEB-ENTERPRISE-REDESIGN-01): the edge steps and
+     nothing else changes. The ring is a drawing and does not answer at all. */
   @media (hover: hover) {
     .lc__stage:hover {
-      background-color: var(--c-lit);
-      border-color: var(--c-border);
-      box-shadow: var(--gloss-inset), var(--shadow-ladder);
+      border-color: var(--c-border-hover);
     }
-
-    .lc__stage:hover .lc__stage-name {
-      text-shadow: 0 0 20px color-mix(in srgb, var(--c-text) 30%, transparent);
-    }
-
-    /* The ring itself: the core glow opens and the whole drawing throws a
-       deeper cast, so the object reads as coming forward without any part of it
-       actually moving. */
-    .lc__ring:hover .lc__glow { filter: brightness(1.5); }
-
-    .lc__ring:hover .lc__deliver,
-    .lc__ring:hover .lc__core {
-      filter: drop-shadow(0 18px 30px color-mix(in srgb, var(--c-floor) 94%, transparent))
-        drop-shadow(0 0 26px color-mix(in srgb, var(--c-ambient-start) 24%, transparent));
-    }
-
-    .lc__ring:hover .lc__core { stroke: var(--c-border-glow); }
 
     .lc__more a:hover { color: var(--c-text); }
   }

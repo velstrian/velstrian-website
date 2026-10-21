@@ -34,12 +34,10 @@ import { SIGNUP_URL } from '../../data/app';
   {/* `fc surface` BEFORE the local class, and both are load bearing.
 
       `surface` is the site's one card recipe: border, radius, background,
-      shadow and the hover, all from styles/surfaces.css. `fc` is what
-      styles/effects.css keys the two closing-card effects on, and they exist
-      nowhere else: the pulse behind the primary button and the light
-      travelling the card's edge. This panel had neither, because it restated
-      the card recipe locally instead of using it, and a gate had to find that
-      rather than a reader.
+      shadow and the hover, all from styles/surfaces.css. `fc` names the
+      closing card. The pulse behind its primary button and the light that
+      travelled its edge were removed on 2026-10-21
+      (R285-WEB-ENTERPRISE-REDESIGN-01) with every other looping decoration.
 
       The local class keeps only what is this block's own. */}
   {/* `data-spot="off"` IS KEPT AND IT IS NOT THE THING THAT TURNED THE LIGHT
@@ -49,14 +47,10 @@ import { SIGNUP_URL } from '../../data/app';
       between the two that means nothing is worse than a line that means
       nothing.
 
-      What actually followed the pointer across this card was the CARD lamp,
-      bound to `.surface` itself by scripts/card-spotlight.ts, plus the card
-      sheen. Both are now excluded for `.fc` in styles/surfaces.css, beside the
-      exclusion `.surface--panel` already had, and the argument is written
-      there rather than repeated here. */}
+      The card lamp and the card sheen that once followed the pointer across
+      this card are gone from the whole site since 2026-10-21. */}
   <div class="fc surface h2cta__panel" data-spot="off">
     <div class="h2cta__amb" aria-hidden="true">
-      <b class="h2cta__field"></b>
       <i class="h2cta__grain"></i>
     </div>
 
@@ -110,9 +104,7 @@ import { SIGNUP_URL } from '../../data/app';
     text-align: center;
   }
 
-  /* The edge light paints at z-index 0 and is positioned, so it would sit above
-     in-flow text without this. One line, and it keeps the ring at the edge
-     where it belongs instead of over the words. */
+  /* Content above the grain layer. */
   .h2cta__panel > :not(.h2cta__amb) {
     position: relative;
     z-index: 1;
@@ -126,28 +118,12 @@ import { SIGNUP_URL } from '../../data/app';
     overflow: hidden;
   }
 
-  .h2cta__field {
-    display: none;
-  }
-
   .h2cta__grain {
     position: absolute;
     inset: 0;
     background-image: var(--grain);
     background-size: 160px 160px;
     opacity: 0.04;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .h2cta__field {
-      animation: h2cta-drift var(--m-drift) var(--m-ease-breath) infinite alternate;
-    }
-  }
-
-  /* Both ends displaced. A loop, not an arrival. */
-  @keyframes h2cta-drift {
-    from { transform: translate3d(-6%, 4%, 0) scale(1); }
-    to   { transform: translate3d(6%, -4%, 0) scale(1.08); }
   }
 
   .h2cta__brow {

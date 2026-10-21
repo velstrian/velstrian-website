@@ -55,8 +55,6 @@
 import { initNav } from './nav';
 import { initNavDropdowns } from './nav-dropdown';
 import { initCommandPalette } from './command-palette';
-import { initMagnetic } from './magnetic';
-import { initCardSpotlight } from './card-spotlight';
 import { initArrive } from './arrive';
 
 /** The whole of the shell's client behaviour. Called once, from Base.astro. */
@@ -65,13 +63,10 @@ export function initShell(): void {
   initNavDropdowns();
   initCommandPalette();
   /*
-   * The magnet and the lamp are the two pointer effects, and they never meet.
-   * The magnet binds per control and moves the element; the lamp binds once on
-   * the document and moves light inside a card. A `.btn` is not a `.surface`,
-   * so no element is claimed by both.
+   * The two pointer effects (the magnetic lean on buttons and the card lamp)
+   * were removed on 2026-10-21, R285-WEB-ENTERPRISE-REDESIGN-01. A card and a
+   * button now answer a pointer in CSS alone, with one colour step.
    */
-  initMagnetic();
-  initCardSpotlight();
   /*
    * THE ARRIVAL FALLBACK, ADDED 2026-08-31, AND IT IS THE ONE THING HERE THAT
    * RETURNS ON MOST BROWSERS. styles/motion.css runs the site's arrivals on
