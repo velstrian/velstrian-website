@@ -1,29 +1,32 @@
 #!/bin/sh
 # [IDENTITY HARD RULE 2026-06-14] Enforce platform identity on all commits.
-# Required author: Crow Agent <crowagent.platform@gmail.com>
-__ok_email="crowagent.platform@gmail.com"
+# Required author: Velstrian Tenderworks <platform@velstrian.com>
+# [R285-REBRAND-12 2026-10-21] Owner approved the move from Crow Agent
+# <crowagent.platform@gmail.com>. The workspace rule changed on 2026-10-20 and this hook had not,
+# so it forced every website commit back onto the old identity. History is not rewritten.
+__ok_email="platform@velstrian.com"
 __author="$(git var GIT_AUTHOR_IDENT 2>/dev/null)"
 case "$__author" in
-  *"$__ok_email"*)
-    :;; # platform identity confirmed — proceed
+  *"<$__ok_email>"*)
+    :;; # platform identity confirmed, proceed
   *)
-    echo "BLOCKED: commit author must be 'Crow Agent <crowagent.platform@gmail.com>'." >&2
-    echo "Run: git config user.name 'Crow Agent' && git config user.email 'crowagent.platform@gmail.com'" >&2
+    echo "BLOCKED: commit author must be 'Velstrian Tenderworks <platform@velstrian.com>'." >&2
+    echo "Run: git config user.name 'Velstrian Tenderworks' && git config user.email 'platform@velstrian.com'" >&2
     exit 1;;
 esac
 
 # [IDENTITY HARD RULE] Also block the personal identity appearing in STAGED CONTENT,
 # not just in the commit author. The author check above cannot catch a personal
-# address pasted into a doc, a ledger table, an email template or app copy — which
+# address pasted into a doc, a ledger table, an email template or app copy, which
 # is exactly the mistake this caught in crowagent-platform on 2026-07-21.
 # CLAUDE.md and the hooks themselves are excluded: they must NAME the pattern in
 # order to forbid it.
 __pn="Bhavesh Parihar"; __pm="bhavesh.parihar@gmail.com"
 if git diff --cached -U0 -- . ":(exclude)CLAUDE.md" ":(exclude)**/CLAUDE.md" ":(exclude).husky/**" | grep -iF "$__pm" >/dev/null 2>&1; then
-  echo "BLOCKED: staged content contains the personal Gmail ($__pm). Use crowagent.platform@gmail.com." >&2; exit 1
+  echo "BLOCKED: staged content contains the personal Gmail ($__pm). Use platform@velstrian.com." >&2; exit 1
 fi
 if git diff --cached -U0 -- . ":(exclude)CLAUDE.md" ":(exclude)**/CLAUDE.md" ":(exclude).husky/**" | grep -iF "$__pn" >/dev/null 2>&1; then
-  echo "BLOCKED: staged content contains the owner's personal name ($__pn). Use 'Crow Agent'." >&2; exit 1
+  echo "BLOCKED: staged content contains the owner's personal name ($__pn). Use 'Velstrian Tenderworks'." >&2; exit 1
 fi
 
 # [R284-AGENT-GUARDRAILS-01 2026-10-09] The shared guardrail checker lives in crowagent-platform.
