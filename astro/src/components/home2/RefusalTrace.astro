@@ -1260,3 +1260,51 @@ const SIDEBAR = [
     50%      { box-shadow: 0 0 14px var(--c-verified-glow); }
   }
 </style>
+
+<script>
+  /*
+   * MOMENT 1: THE REFUSAL SCAN (plays once on view, time-based).
+   * Reduced motion: leaves --reel at 1 so the final refused state is displayed still.
+   */
+  const section = document.querySelector<HTMLElement>('.h2rt');
+  if (section) {
+    const trace = section.querySelector<HTMLElement>('.h2rt__trace');
+    const reduced =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduced && trace) {
+      let ran = false;
+      const runScan = () => {
+        if (ran) return;
+        ran = true;
+        trace.style.setProperty('--reel', '0');
+        const start = performance.now();
+        const duration = 2400;
+        const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+        const tick = (now: number) => {
+          const progress = Math.min(1, (now - start) / duration);
+          trace.style.setProperty('--reel', ease(progress).toFixed(3));
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            trace.style.setProperty('--reel', '1');
+          }
+        };
+        requestAnimationFrame(tick);
+      };
+
+      if (section.dataset.lit === 'on') {
+        runScan();
+      } else {
+        const mo = new MutationObserver(() => {
+          if (section.dataset.lit === 'on') {
+            mo.disconnect();
+            runScan();
+          }
+        });
+        mo.observe(section, { attributes: true, attributeFilter: ['data-lit'] });
+      }
+    }
+  }
+</script>

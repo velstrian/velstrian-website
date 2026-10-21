@@ -105,11 +105,8 @@ import { SIGNUP_URL } from '../../data/app';
     max-width: var(--measure);
     margin-inline: auto;
     padding: clamp(var(--space-12), 7vw, calc(var(--space-12) * 2)) var(--gutter);
-    background: linear-gradient(
-      135deg,
-      var(--c-lit),
-      color-mix(in srgb, var(--c-raised) 78%, var(--c-ambient-deep)) 100%
-    );
+    background: var(--c-panel);
+    border: 1px solid var(--c-border);
     text-align: center;
   }
 
@@ -130,19 +127,7 @@ import { SIGNUP_URL } from '../../data/app';
   }
 
   .h2cta__field {
-    position: absolute;
-    inset-inline-start: 20%;
-    inset-block-start: -60%;
-    inline-size: 60%;
-    block-size: 160%;
-    border-radius: 50%;
-    filter: blur(120px);
-    background-image: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--c-ambient-deep) 42%, transparent),
-      transparent 66%
-    );
-    transform: translate3d(-6%, 4%, 0) scale(1);
+    display: none;
   }
 
   .h2cta__grain {

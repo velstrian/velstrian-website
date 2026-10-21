@@ -34,21 +34,14 @@
  * reader then finds does nothing. Under reduced motion the button must be
  * absent or hidden.
  *
- * ── WHICH TWO COMPONENTS, AND WHY THE ANSWER CHANGED ON 2026-09-06 ─────────
+ * ── 2026-10-21: AUTOPLAY LOOPS RETIRED (owner approved D1, D250) ───────────
  *
- * This file drove `#product` (a tab switcher) and `#integrations .in__track`
- * (a trust band) until the homepage was rebuilt. Neither element exists on /
- * any more, and a gate whose selectors match nothing does not pass — it stops
- * measuring, which is the failure mode this repo names "a control that reaches
- * nothing". Re-pointed, at the two things that actually move on their own now:
- *
- *   the hero workbench (`.hmt`)   four rule-engine samples, a 7s dwell each,
- *                                 stopping for good at the reader's own tab
- *   the connector band (`#integrations .h2mq__track`)   about 36px/s, endless
- *
- * The band's rules are deliberately NOT identical to the workbench's: a band
- * presents no choice, so rule 3 does not apply to it. Checking one and assuming
- * the other is how the second one drifts.
+ * Both the hero workbench loop and the connector band marquee were retired
+ * under the premium enterprise direction (R285-WEB-ENTERPRISE-REDESIGN-01).
+ * The site carries exactly three purposeful motion moments (RefusalTrace on /,
+ * scroll-scrubbed deadline on /bid/, evidence drawer on /buy/). This gate
+ * verifies that neither retired component autoplays, that neither advertises
+ * an unused pause control, and that interactive choices operate normally.
  *
  * THE WORKBENCH IS RADIO-DRIVEN, NOT A TABLIST, so its selected state is read
  * from `input.hmt__radio:checked` rather than from `aria-selected`. That is a
@@ -118,19 +111,6 @@ const checkedIndex = (page, scope) =>
     if (!radios.length) return null;
     return radios.findIndex((r) => r.checked);
   }, scope);
-
-/* Press a control, then take focus off it, so what follows measures the
-   control's own mechanism rather than the `:focus-within` suspension that any
-   click inside either component also triggers. */
-const pressAndBlur = (page, sel) =>
-  page.evaluate((s) => {
-    const el = document.querySelector(s);
-    if (!el) return null;
-    el.click();
-    const pressed = el.getAttribute('aria-pressed');
-    el.blur();
-    return pressed;
-  }, sel);
 
 const pauseControl = (page, sels) =>
   page.evaluate((s) => {
@@ -217,12 +197,12 @@ const BAND_PAUSE_SEL = '#integrations [data-mq-pause]';
 console.log('autoplay: driving the two autoplaying components on / and reading what they do');
 
 /* ── 1. THE HERO WORKBENCH ─────────────────────────────────────────────── */
-console.log('\n  the hero workbench (.hmt)');
+console.log('\n  the hero workbench (.hmt) — loop retired per D1, interactive on click');
 {
   const page = await open('reduce');
   const before = await checkedIndex(page, HMT);
   check('a sample group is present to measure', before !== null && before >= 0, `checked=${before}`);
-  await page.waitForTimeout(14000);
+  await page.waitForTimeout(4000);
   const after = await checkedIndex(page, HMT);
   check('does not advance under prefers-reduced-motion', before === after, `${before} -> ${after}`);
   const btn = await pauseControl(page, PAUSE_SEL);
@@ -236,49 +216,14 @@ console.log('\n  the hero workbench (.hmt)');
 {
   const page = await open('no-preference');
   const before = await checkedIndex(page, HMT);
-  await page.waitForTimeout(14000);
+  await page.waitForTimeout(4000);
   const after = await checkedIndex(page, HMT);
-  check('advances when motion is allowed', before !== after, `${before} -> ${after}`);
+  check('does not autoplay on a timer (loop retired per D1)', before === after, `${before} -> ${after}`);
   const btn = await pauseControl(page, PAUSE_SEL);
-  check('has a visible pause control (WCAG 2.2.2)', !!btn && !btn.hidden, JSON.stringify(btn));
   check(
-    'the pause control meets the 24x24 target floor',
-    !!btn && btn.w >= 24 && btn.h >= 24,
-    btn ? `${btn.w}x${btn.h}` : 'n/a',
-  );
-  await page.close();
-}
-{
-  /* PRESS IT. The whole reason this file exists is that finding the control in
-     the DOM proved nothing the last time somebody checked. */
-  const page = await open('no-preference');
-  await page.waitForTimeout(1500);
-  const pressed = await pressAndBlur(page, PAUSE_SEL);
-  const before = await checkedIndex(page, HMT);
-  await page.waitForTimeout(16000);
-  const after = await checkedIndex(page, HMT);
-  check(
-    'pressing pause actually stops it',
-    pressed !== null && before === after,
-    `aria-pressed=${pressed}, ${before} -> ${after}`,
-  );
-  await page.close();
-}
-{
-  /* AND PRESS IT AGAIN. A stop a reader cannot undo strands them on whichever
-     sample happened to be showing when they pressed it, so the control is a
-     toggle and the tour has to genuinely restart. */
-  const page = await open('no-preference');
-  await page.waitForTimeout(1500);
-  await pressAndBlur(page, PAUSE_SEL);
-  const resumed = await pressAndBlur(page, PAUSE_SEL);
-  const before = await checkedIndex(page, HMT);
-  await page.waitForTimeout(14000);
-  const after = await checkedIndex(page, HMT);
-  check(
-    'pressing it again resumes the tour',
-    resumed === 'false' && before !== after,
-    `aria-pressed=${resumed}, ${before} -> ${after}`,
+    'reveals no pause control when no timer runs',
+    !btn || btn.hidden,
+    btn ? `present, hidden=${btn.hidden}` : 'absent',
   );
   await page.close();
 }
@@ -291,21 +236,20 @@ console.log('\n  the hero workbench (.hmt)');
     if (active instanceof HTMLElement) active.blur();
   });
   const picked = await checkedIndex(page, HMT);
-  await page.waitForTimeout(16000);
+  check('reader can select a tab interactively', picked === 1, `picked=${picked}`);
+  await page.waitForTimeout(4000);
   const after = await checkedIndex(page, HMT);
-  check('stops permanently once a reader picks a tab', picked === after, `${picked} -> ${after}`);
+  check('holds the chosen tab with no autoplay advance', picked === after, `${picked} -> ${after}`);
   await page.close();
 }
 
 /* ── 2. THE CONNECTOR BAND ───────────────────────────────────────────────────────
- * Rule 3 does NOT apply here and that is deliberate rather than an omission: a
- * band presents no choice, so there is no explicit choice for it to respect.
- * Rules 1, 2 and the implied fourth all do. */
-console.log('\n  the connector band (#integrations)');
+ * Marquee loop retired per owner decision D1. Renders as a static connector grid. */
+console.log('\n  the connector band (#integrations) — marquee retired per D1');
 {
   const page = await open('reduce');
   await page.evaluate(() => document.querySelector('#integrations')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1000);
   const moved = await travel(page, BAND_TRACK);
   check('does not travel under prefers-reduced-motion', moved < 1, `moved ${moved}px in 1200ms`);
   const btn = await pauseControl(page, BAND_PAUSE_SEL);
@@ -319,26 +263,14 @@ console.log('\n  the connector band (#integrations)');
 {
   const page = await open('no-preference');
   await page.evaluate(() => document.querySelector('#integrations')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
-  await page.waitForTimeout(2500);
+  await page.waitForTimeout(1000);
   const moved = await travel(page, BAND_TRACK);
-  check('travels when motion is allowed', moved > 10, `moved ${moved}px in 1200ms`);
+  check('does not travel when motion is allowed (marquee retired per D1)', moved < 1, `moved ${moved}px in 1200ms`);
   const btn = await pauseControl(page, BAND_PAUSE_SEL);
-  check('has a visible pause control (WCAG 2.2.2)', !!btn && !btn.hidden, JSON.stringify(btn));
   check(
-    'the pause control meets the 24x24 target floor',
-    !!btn && btn.w >= 24 && btn.h >= 24,
-    btn ? `${btn.w}x${btn.h}` : 'n/a',
-  );
-  const pressed = await pressAndBlur(page, BAND_PAUSE_SEL);
-  /* 400ms of settle against a measured 100ms stop: four times the observed
-     worst case, because this runs inside a full build where everything is
-     slower, and a gate that flakes under load is a gate people learn to
-     re-run rather than believe. */
-  const after = await travel(page, BAND_TRACK, 1200, 400);
-  check(
-    'pressing pause actually stops it',
-    pressed !== null && after < 1,
-    `aria-pressed=${pressed}, moved ${after}px in 1200ms`,
+    'reveals no pause control when it is not moving',
+    !btn || btn.hidden,
+    btn ? `present, hidden=${btn.hidden}` : 'absent',
   );
   await page.close();
 }

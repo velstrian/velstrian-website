@@ -51,29 +51,6 @@ const CHIPS = [...HOME_CHIPS, ...IDENTITY.filter((c) => /Ping|OneLogin/.test(c.n
         ))
       }
     </ul>
-    <ul class="h2mq__track" aria-hidden="true">
-      {
-        CHIPS.map((c) => (
-          <li class="h2mq__chip">
-            <span class="h2mq__name">{c.name}</span>
-            <span class="h2mq__scope">{c.scope}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-
-  {/* WCAG 2.2.2. The row auto-travels for longer than five seconds, so a
-      reader must be able to stop it, and hover is not a mechanism a keyboard
-      or a touch screen has. The button is `hidden` in the markup and revealed
-      by the script only when the loop is actually running, so a reader under
-      reduced motion, or with no script, is never offered a control over
-      something that is not moving. */}
-  <div class="h2mq__controls">
-    <button class="control h2mq__pause" type="button" data-mq-pause aria-pressed="false" hidden>
-      <span class="h2mq__pause-icon" aria-hidden="true"></span>
-      <span data-mq-pause-label>Pause scrolling</span>
-    </button>
   </div>
 
   <p class="h2mq__note">
@@ -88,36 +65,24 @@ const CHIPS = [...HOME_CHIPS, ...IDENTITY.filter((c) => /Ping|OneLogin/.test(c.n
 <style>
   .h2mq__viewport {
     display: flex;
-    overflow: hidden;
-    padding-block: var(--space-2);
-    -webkit-mask-image: linear-gradient(
-      90deg,
-      transparent 0,
-      rgb(0 0 0) 10%,
-      rgb(0 0 0) 90%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      90deg,
-      transparent 0,
-      rgb(0 0 0) 10%,
-      rgb(0 0 0) 90%,
-      transparent 100%
-    );
+    justify-content: center;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    padding-block: var(--space-4);
   }
 
   .h2mq__track {
     display: flex;
-    flex: 0 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  /* A chip, at --radius-chip: not the card recipe. The row's gap is carried
-     by the chip so one track's width includes its own trailing space. */
-  /* Centred, name over scope, owner instruction 2026-09-06. A chip is scanned
-     rather than read, so it takes the card's alignment. */
+  /* A chip, at --radius-chip: not the card recipe. */
   .h2mq__chip {
     display: grid;
     justify-items: center;
@@ -125,7 +90,6 @@ const CHIPS = [...HOME_CHIPS, ...IDENTITY.filter((c) => /Ping|OneLogin/.test(c.n
     flex: 0 0 auto;
     min-inline-size: 11.5rem;
     padding: var(--space-3) var(--space-5);
-    margin-inline-end: var(--space-3);
     border: 1px solid var(--c-border);
     border-radius: var(--radius-chip);
     background-color: var(--c-card);
@@ -148,40 +112,6 @@ const CHIPS = [...HOME_CHIPS, ...IDENTITY.filter((c) => /Ping|OneLogin/.test(c.n
     color: var(--c-text-muted);
   }
 
-  .h2mq__controls {
-    display: flex;
-    justify-content: center;
-    margin-block-start: var(--space-5);
-    padding-inline: var(--gutter);
-  }
-
-  /* `.control` in styles/controls.css is the site's shared quiet control: the
-     ground, the hairline, the pointer response and the focus ring all come
-     from it. What is local here is the icon and the gap. */
-  .h2mq__pause {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    min-block-size: 36px;
-    padding-inline: var(--space-4);
-    font-family: var(--font-body);
-    font-size: var(--t-caption);
-  }
-
-  /* Two bars for pause, one triangle for play. Drawn rather than an icon file,
-     because it is two rectangles. */
-  .h2mq__pause-icon {
-    inline-size: 10px;
-    block-size: 10px;
-    flex: 0 0 auto;
-    background-color: currentColor;
-    clip-path: polygon(0 0, 34% 0, 34% 100%, 0 100%, 0 0, 66% 0, 100% 0, 100% 100%, 66% 100%, 66% 0);
-  }
-
-  .h2mq__pause[aria-pressed='true'] .h2mq__pause-icon {
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
-  }
-
   .h2mq__note {
     margin: var(--space-8) auto 0;
     padding-inline: var(--gutter);
@@ -202,93 +132,4 @@ const CHIPS = [...HOME_CHIPS, ...IDENTITY.filter((c) => /Ping|OneLogin/.test(c.n
     color: var(--c-text-muted);
     text-align: center;
   }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .h2mq__track {
-      /* About 36px per second. Eight chips at roughly 210px each including
-         their trailing margin is about 1,700px, and 1,700 at 36px per second
-         is about 47 seconds. */
-      animation: h2mq-run 47s var(--m-ease-travel) infinite;
-      animation-play-state: var(--h2mq-state, running);
-    }
-
-    .h2mq:focus-within,
-    .h2mq[data-mq='paused'] {
-      --h2mq-state: paused;
-    }
-
-    /* Hover pauses only where hover is real: a tap on a touch screen can
-       latch :hover on the section and would have parked the loop for good. */
-    @media (hover: hover) {
-      .h2mq:hover {
-        --h2mq-state: paused;
-      }
-    }
-  }
-
-  /* Exactly one track width. Both ends are plain values. */
-  @keyframes h2mq-run {
-    from { transform: translateX(0%); }
-    to   { transform: translateX(-100%); }
-  }
-
-  /* Reduced motion: a static wrapped grid. The duplicate half is removed
-     rather than left stacked. */
-  @media (prefers-reduced-motion: reduce) {
-    .h2mq__viewport {
-      -webkit-mask-image: none;
-      mask-image: none;
-      max-width: var(--measure);
-      margin-inline: auto;
-      padding-inline: var(--gutter);
-    }
-
-    .h2mq__track[aria-hidden='true'] {
-      display: none;
-    }
-
-    .h2mq__track {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .h2mq__chip {
-      margin-block-end: var(--space-3);
-    }
-  }
 </style>
-
-<script>
-  /*
-   * THE PAUSE CONTROL, AND THE THREE THINGS THAT MAKE IT HONEST.
-   *
-   * 1. IT APPEARS ONLY WHEN SOMETHING IS MOVING. The button ships `hidden`.
-   *    Under `prefers-reduced-motion: reduce` the loop does not exist, so the
-   *    button stays hidden: offering to pause a still row is a control that
-   *    reaches nothing.
-   * 2. IT REPORTS ITS STATE. `aria-pressed` carries it, and the label changes
-   *    with it, so a screen reader hears which of the two states it is in.
-   * 3. IT CANNOT HIDE THE CONTENT. Pausing sets one attribute that CSS reads
-   *    as `animation-play-state: paused`. The chips are fully painted and
-   *    fully legible in both states, moving or still.
-   */
-  const band = document.querySelector<HTMLElement>('.h2mq');
-  const btn = band?.querySelector<HTMLButtonElement>('[data-mq-pause]');
-  const label = btn?.querySelector<HTMLElement>('[data-mq-pause-label]');
-
-  if (band && btn && label) {
-    const reduced =
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!reduced) {
-      btn.hidden = false;
-      btn.addEventListener('click', () => {
-        const paused = band.dataset.mq !== 'paused';
-        band.dataset.mq = paused ? 'paused' : 'running';
-        btn.setAttribute('aria-pressed', String(paused));
-        label.textContent = paused ? 'Resume scrolling' : 'Pause scrolling';
-      });
-    }
-  }
-</script>

@@ -190,29 +190,13 @@ const UPDATED = new Date('2026-09-06');
 
 <script>
   import { initMotion } from '../scripts/motion';
-  import { initStory } from '../scripts/story';
-  import { initReel } from '../scripts/reel';
 
   /*
    * BOOT WHEN THE DOCUMENT EXISTS, NOT WHEN THE MODULE ARRIVES.
-   *
-   * MEASURED 2026-09-06 in the owner's Chrome, iPhone emulation, on the BUILT
-   * artefact: none of the three had any effect, `data-lit`, `data-story-active`
-   * and `--reel` were all unset, and the module had demonstrably executed (a
-   * second dynamic import was a no-op, so the registry already held it). Each
-   * of the three begins by querying for its elements and RETURNS EARLY when it
-   * finds none, so a module that runs against a half-parsed document does
-   * nothing and never tries again. A `type="module"` script is deferred in the
-   * specification, and in Playwright it behaved that way, which is why four
-   * emulator passes missed this.
-   *
-   * The guard costs one readyState test and removes the whole class: whatever
-   * the reason a module runs early, it now waits for the document.
+   * initMotion sets up the data-lit arrival trigger.
    */
   const boot = () => {
     initMotion();
-    initStory();
-    initReel();
   };
 
   if (document.readyState === 'loading') {

@@ -94,10 +94,7 @@ const CHECKED = SAMPLES.map((s) => {
 ---
 
 <section class="hero" data-spot="off" aria-labelledby="hero-title">
-  <div class="hero__wash" data-field="on" aria-hidden="true">
-    <b class="hero__amb hero__amb--1"></b>
-    <i class="hero__amb hero__amb--2"></i>
-    <i class="sv-spot"></i>
+  <div class="hero__wash" aria-hidden="true">
     <i class="sv-grain"></i>
   </div>
 
@@ -164,16 +161,6 @@ const CHECKED = SAMPLES.map((s) => {
       }
 
       <DeviceChrome class="hmt__lead" label="Checked by this page's own rule engine, at build time.">
-        {/* WCAG 2.2.2. The four samples advance on their own every seven
-            seconds, so a reader has to be able to stop them, and "it stops the
-            moment you touch it" is not a mechanism a screen-reader user can
-            find. `hidden` in the markup and revealed by the script only while
-            a timer is actually running, so under reduced motion, where nothing
-            advances, no control is offered. */}
-        <button class="control hmt__stop" type="button" data-hmt-stop aria-pressed="false" hidden>
-          <span class="hmt__stop-icon" aria-hidden="true"></span>
-          <span data-hmt-stop-label>Stop the tour</span>
-        </button>
         <span class="meta hmt__lead-live" aria-hidden="true"><i></i>Rule engine</span>
       </DeviceChrome>
 
@@ -234,45 +221,6 @@ const CHECKED = SAMPLES.map((s) => {
     pointer-events: none;
     overflow: hidden;
     --par: 48px;
-  }
-
-  .hero__amb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    mix-blend-mode: screen;
-  }
-
-  .hero__amb--1 {
-    width: 662px;
-    height: 662px;
-    top: -172px;
-    left: -115px;
-    opacity: 0.55;
-    background: var(--orb-1);
-  }
-
-  .hero__amb--2 {
-    --hero-key-par: 40px;
-    --hero-key-sweep: 4%;
-    width: 605px;
-    height: 605px;
-    top: 29px;
-    left: 835px;
-    opacity: 0.22;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--c-text) 70%, transparent),
-      transparent 66%
-    );
-  }
-
-  @media (max-width: 560px) {
-    .hero__amb {
-      filter: blur(96px);
-      width: 380px;
-      height: 320px;
-    }
   }
 
   .hero__inner,
@@ -661,32 +609,7 @@ const CHECKED = SAMPLES.map((s) => {
     background-color: var(--c-text);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .hmt:not([data-auto='off']) #hmt-a:checked ~ .hmt__tabs label[for='hmt-a']::after,
-    .hmt:not([data-auto='off']) #hmt-b:checked ~ .hmt__tabs label[for='hmt-b']::after,
-    .hmt:not([data-auto='off']) #hmt-c:checked ~ .hmt__tabs label[for='hmt-c']::after {
-      animation: hmt-dwell var(--hmt-dwell) linear;
-    }
-
-    /* A pointer resting on the desk pauses the dwell. On a touch screen there
-       is no resting pointer, and a tap can leave :hover latched on the card,
-       which paused the autoplay for good on a phone. So hover pauses only
-       where hover is real; focus pauses everywhere. */
-    .hmt:focus-within .hmt__tabs label::after {
-      animation-play-state: paused;
-    }
-
-    @media (hover: hover) {
-      .hmt:hover .hmt__tabs label::after {
-        animation-play-state: paused;
-      }
-    }
-  }
-
-  @keyframes hmt-dwell {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
-  }
+  /* 2026-10-21: hmt-dwell autoplay retired per owner decision D1 (D250). Tabs remain interactive on click. */
 
   /* ── THE DESK ────────────────────────────────────────────────────────── */
   .hmt__panes {
@@ -1047,76 +970,6 @@ const CHECKED = SAMPLES.map((s) => {
     /* Fonts change label widths as they arrive, so place again when ready. */
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
     place();
-  })();
-
-  /* The autoplay advancer, as on the live hero: the dwell line's animationend
-     moves to the next sample, the first press or key stops it, and reaching
-     the reader's own tab stops it too. */
-  (() => {
-    const hmt = document.querySelector('.hmt');
-    if (!hmt) return;
-    const radios = [...hmt.querySelectorAll<HTMLInputElement>('.hmt__radio')];
-    if (radios.length < 2) return;
-    const stop = () => hmt.setAttribute('data-auto', 'off');
-
-    /* The control. It reveals itself only while the tour is actually running,
-       reports its state through aria-pressed, and can put the tour back: a
-       stop the reader cannot undo is a worse control than none. Resuming
-       re-arms the dwell by returning to the first sample, because the dwell is
-       a CSS animation on the ACTIVE segment and there is no way to restart one
-       mid-flight without re-selecting. */
-    const stopBtn = hmt.querySelector<HTMLButtonElement>('[data-hmt-stop]');
-    const stopLabel = stopBtn?.querySelector<HTMLElement>('[data-hmt-stop-label]');
-    const reduced =
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (stopBtn && stopLabel && !reduced) {
-      stopBtn.hidden = false;
-      stopBtn.addEventListener('click', () => {
-        const stopping = hmt.getAttribute('data-auto') !== 'off';
-        if (stopping) {
-          stop();
-        } else {
-          hmt.removeAttribute('data-auto');
-          const first = hmt.querySelector<HTMLInputElement>('.hmt__radio');
-          if (first) {
-            first.checked = true;
-            first.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        }
-        stopBtn.setAttribute('aria-pressed', String(stopping));
-        stopLabel.textContent = stopping ? 'Play the tour' : 'Stop the tour';
-      });
-    }
-    /* A CHOICE stops the autoplay: a tab pressed, a key used, the box focused.
-       Not any pointer touching the card, because on a phone every scroll that
-       starts on the card is a pointerdown, and that stopped the autoplay before
-       a reader had seen a second sample. */
-    hmt.addEventListener('click', (event: Event) => {
-      const target = event.target as Element | null;
-      if (target && target.closest('.hmt__tab, .hmt__in')) stop();
-    });
-    hmt.addEventListener('keydown', stop, { once: true });
-    hmt.addEventListener('focusin', (event: Event) => {
-      const target = event.target as Element | null;
-      if (target && target.closest('.hmt__in')) stop();
-    });
-    hmt.addEventListener('animationend', (event: Event) => {
-      const e = event as AnimationEvent;
-      if (e.animationName !== 'hmt-dwell') return;
-      if (hmt.getAttribute('data-auto') === 'off') return;
-      const i = radios.findIndex((r) => r.checked);
-      if (i < 0) return;
-      const own = hmt.querySelector<HTMLInputElement>('#hmt-own');
-      const next = radios[i + 1] ?? own;
-      if (!next) return;
-      next.checked = true;
-      /* A programmatic check fires no change event, and the thumb places
-         itself on change. Say so, or the desk moves and the thumb stays. */
-      next.dispatchEvent(new Event('change', { bubbles: true }));
-      if (next === own) stop();
-    });
   })();
   };
 
