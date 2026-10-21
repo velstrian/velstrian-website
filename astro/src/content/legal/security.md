@@ -3,7 +3,7 @@ title: "Security | Velstrian"
 description: "How Velstrian stores and protects your bid data: AES-256 at rest, TLS 1.3 in transit, where each layer is stored and processed, and what we send to AI providers."
 heading: "Encrypted, documented, and auditable."
 eyebrow: "Security & Trust"
----[System status: status.crowagent.ai](https://status.crowagent.ai)
+---[System status: status.velstrian.com](https://status.velstrian.com)
 
 Every layer, from disk to API, is named and auditable.
 
@@ -116,7 +116,7 @@ On a narrow screen, this table scrolls sideways.
 
 Velstrian targets 99.5% monthly uptime, with independent public status monitoring you can check yourself.
 
-[View status page](https://status.crowagent.ai)
+[View status page](https://status.velstrian.com)
 
 ## Deep dives
 
@@ -138,4 +138,4 @@ Everything above is what we can evidence today, including the gaps. If it clears
 
 ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. Built to ISO 27001 controls.
 
-[Privacy Policy](/privacy/) [Sub-processors](#sub-processors) [Status Page](https://status.crowagent.ai)
+[Privacy Policy](/privacy/) [Sub-processors](#sub-processors) [Status Page](https://status.velstrian.com)

@@ -2513,37 +2513,16 @@
    * /sources and every legal page still had no texture behind their cards. The
    * grain is page-wide and tiled, so every glass card on every route now has
    * something to bite on. */
-  --orb-violet:     radial-gradient(circle, rgba(124, 58, 237, 0.82), rgba(0, 0, 0, 0) 66%);
-  --orb-teal:       radial-gradient(circle, rgba(94, 106, 210, 0.78), rgba(0, 0, 0, 0) 68%);
-  /* ── THE ACHROMATIC ORB, AND WHY IT EXISTS ────────────────────────────────
-   *
-   * A THIRD MEMBER OF THE SET ABOVE, ADDED UNDER THE OWNER'S GRADIENT RULE OF
-   * 2026-08-05: luminance anywhere; hue ONCE per section, on the element the
-   * section is about; never under text, never on a control, never on a state.
-   *
-   * The two orbs above are hue and they are owner-approved where they are, in
-   * the hero, once, as the brand statement. What the rule catches is the
-   * REPEAT. `.sv-amb` in styles/surfaces.css is the shared section rig, and it
-   * ran BOTH of them: measured on the built output it is on four sections of
-   * /pricing and nowhere else, so one page was carrying eight hue fields. On a
-   * page about neither verification nor refusal, which is what those two hues
-   * mean everywhere else on this site, that spends the semantic on decoration
-   * and leaves it meaning less where it is load-bearing.
-   *
-   * So this is not a desaturation of the palette and the palette is not at
-   * fault. A-113 records the audit calling it a proper token set. It is one
-   * neutral field for the rig that repeats, while the hue stays in the one
-   * place it says something. Same treatment, same reasoning and the same
-   * reading of the same rule as --grad-beam directly below.
-   *
-   * `--c-text` rather than white, so it tracks the theme: on a light ground a
-   * white ambient field is invisible and this one inverts with the palette.
-   * The alpha is carried here rather than at the call site because the two
-   * orbs above carry theirs the same way, and a set whose members take their
-   * opacity from different places is the thing A-113's own note warns about. */
-  --orb-neutral:    radial-gradient(circle, color-mix(in srgb, var(--c-text) 34%, transparent), rgba(0, 0, 0, 0) 68%);
-  --grad-stage:     radial-gradient(120% 90% at 50% 0%, rgba(124, 58, 237, 0.20) 0%, rgba(124, 58, 237, 0) 62%);
-  --grad-hero-glow: radial-gradient(ellipse at center, var(--c-ambient-glow), transparent 66%);
+  /* ── 2026-10-21: GRADIENT RESTORE REVERSED (owner decision D2, D250) ──────
+   * One accent colour (--c-teal-dark / --c-teal), solid surfaces. The four
+   * ambient gradient fills are set to `none;` to eliminate distracting
+   * drifting haze and restore flat solid surfaces with hairline borders.
+   */
+  --orb-violet:     none;
+  --orb-teal:       none;
+  --orb-neutral:    none;
+  --grad-stage:     none;
+  --grad-hero-glow: none;
 
   /* ── THE GRAIN ───────────────────────────────────────────────────────────
      260 bytes of URL-encoded feTurbulence, inline, no request and no
@@ -3276,42 +3255,9 @@
      * also why this is a bonus rather than the answer to "the motion is not
      * strong enough": the levers that carry that answer are the hover density
      * and the surface ladder, and both are pure CSS with no support question. */
-    @supports (animation-timeline: view()) {
-      [data-field] {
-        /* ── LONGHAND, NOT THE SHORTHAND, AND THE REASON IS THE MINIFIER ─────
-         *
-         * lightningcss MERGES `animation-timeline` INTO the `animation`
-         * shorthand. The source pair `animation: sv-parallax linear both` plus
-         * `animation-timeline: view()` was emitted as
-         * `animation: linear both sv-parallax view()`, and CHROME REJECTS THAT
-         * WHOLE DECLARATION. Read off the built page,
-         * `getComputedStyle(...).animationName` was `none`.
-         *
-         * `CSS.supports('animation','linear both k view()')` is FALSE while
-         * `CSS.supports('animation-timeline','view()')` is TRUE, which is why
-         * the `@supports` gate above passed and the animation still did
-         * nothing. The gate tested the feature and the minifier broke the
-         * syntax, so no gate on this site could see it: no error, no warning,
-         * every check green, and the sitewide section parallax silently off in
-         * production the whole time.
-         *
-         * Written as separate declarations, which lightningcss leaves alone.
-         * Confirmed by grepping the emitted stylesheet. */
-        animation-name: sv-parallax;
-        animation-timing-function: linear;
-        animation-fill-mode: both;
-        animation-timeline: view();
-      }
-    }
+    /* 2026-10-21: sv-parallax retired under owner D1/D250 (retire ambient orbs & parallax).
+       Only motion.css declares scroll-driven timelines (rule 1 of check-motion.js). */
   }
-}
-
-/* Travels one --par down to one --par up across the whole time the section is
-   in view. Rest state (no timeline, no support, reduced motion) is the
-   midpoint, which is exactly where the field sits today. */
-@keyframes sv-parallax {
-  from { transform: translateY(var(--par, 30px)); }
-  to   { transform: translateY(calc(-1 * var(--par, 30px))); }
 }
 
 /* Global, unscoped, and referenced only by the rules above. Every section's own

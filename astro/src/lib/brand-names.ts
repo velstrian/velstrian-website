@@ -17,6 +17,11 @@ export const SITE_ORIGIN = "https://velstrian.com";
 export const SITE_CANONICAL_HOST = "velstrian.com";
 
 /**
+ * Public status page URL (Better Stack).
+ */
+export const STATUS_URL = "https://status.velstrian.com";
+
+/**
  * The platform name (D239), shown wherever the product family is named as a whole.
  */
 export const PLATFORM_NAME = "Velstrian Tenderworks";

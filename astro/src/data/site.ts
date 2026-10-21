@@ -23,6 +23,7 @@ import {
   HELLO_EMAIL,
   COMPANY_NUMBER,
   SITE_ORIGIN,
+  STATUS_URL,
 } from '../lib/brand-names';
 
 export const SITE = {
@@ -30,6 +31,8 @@ export const SITE = {
   platformName: PLATFORM_NAME,
   legalName: LEGAL_ENTITY_NAME,
   origin: SITE_ORIGIN,
+  status: STATUS_URL,
+  statusUrl: STATUS_URL,
   defaultOgImage: `${SITE_ORIGIN}/Assets/og-image.png?v=20260730`,
   twitter: '@VelstrianLtd',
   email: HELLO_EMAIL,

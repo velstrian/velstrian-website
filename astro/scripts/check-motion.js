@@ -106,15 +106,8 @@ const HOME = 'src/styles/motion.css';
 const ALLOWED = new Map([
   /* ── 1 TIMELINE ──────────────────────────────────────────────────────────
    *
-   * Two scroll-driven systems existed before motion.css did, and neither was
-   * found by reading the code: this gate found them on its first run. Both are
-   * recorded as DEBT rather than as design, because "there are three files that
-   * drive the page off the scroll position" is the exact sentence the charter
-   * says must never be true, however good each one is on its own. */
-  ['timeline  src/styles/tokens.css  animation-timeline:',
-   'DEBT: the [data-field] ambient parallax in tokens.css. A scroll-driven timeline outside motion.css, which is what this rule forbids. It is not a second arrival — it moves an aria-hidden blurred field and never content. This reason USED TO SAY it "paints NOTHING today, because both fields resolve from --orb-violet and --orb-teal and the owner set both to `none` on 2026-08-03", which was false from later the same day: the owner reversed that ("reapply all the gradients back") and tokens.css restored both orbs to live radial-gradients. So this is a live effect on the page, not a timeline driving an invisible object, and the debt is correspondingly less comfortable. It belongs in motion.css with the rest of the scroll-driven work; ADR 0004 names the move. Not done in this pass because tokens.css was being edited by another agent'],
-  ['timeline  src/styles/tokens.css  view()',
-   'DEBT: the timeline function of the entry above, and its @supports guard. Moves with it'],
+   * [data-field] ambient parallax in tokens.css was retired on 2026-10-21 (D250).
+   * Now only motion.css owns scroll-driven timelines. */
 
   ['timeline  src/pages/about.astro  animation-timeline:',
    'DEBT: the trust-row dots, about.astro:946-962. A NAMED view timeline (--trust-row) driving six ::before dots through a five-step stagger, written for the right reason — the design sheet asked for an IntersectionObserver and the author refused it as the one-off JavaScript the charter forbids — and it is nonetheless a second scroll-driven system with its own ranges, its own stagger arithmetic and its own fallback argument. motion.css now owns exactly those three things. The dots themselves are a legitimate figure that the central arrival does not replace, so the correct fix is to lift the RANGES and the stagger step onto the shared custom properties, not to delete the effect'],

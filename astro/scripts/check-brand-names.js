@@ -7,7 +7,7 @@
  * 1. astro/src/lib/brand-names.ts matches crowagent-platform/packages/tokens/src/brand-names.ts
  * 2. No old brand names (CrowMark, CrowAgent, Crow Agent, old company name) appear in built HTML.
  *    (External app/infrastructure hosts during transition are allowed: app.crowagent.ai,
- *    status.crowagent.ai, calendly.com/crowagent-platform, crowagent-platform-production.up.railway.app).
+ *    calendly.com/crowagent-platform, crowagent-platform-production.up.railway.app).
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -72,7 +72,6 @@ function getHtmlFiles(dir) {
 const KEPT_HOSTS = [
   'app.crowagent.ai',
   'portal.crowagent.ai',
-  'status.crowagent.ai',
   'calendly.com/crowagent-platform',
   'crowagent-platform-production.up.railway.app',
 ];

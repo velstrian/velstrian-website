@@ -109,9 +109,9 @@ Velstrian targets **99.5% monthly uptime** but does not guarantee uninterrupted 
 
 99.5<sup>%</sup>
 
-Monthly uptime target across all production services. Independent public status monitoring is published at status.crowagent.ai.
+Monthly uptime target across all production services. Independent public status monitoring is published at status.velstrian.com.
 
-[View status page](https://status.crowagent.ai)
+[View status page](https://status.velstrian.com)
 
 ## 9. Governing Law and Disputes
 
@@ -123,6 +123,6 @@ We may update these Terms from time to time. Material changes will be communicat
 
 ## 11. Contact
 
-<div class="prose-scroll" role="region" aria-label="How to reach Velstrian (table)" tabindex="0"><table class="lc-table"> <caption>How to reach Velstrian</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@velstrian.com">legal@velstrian.com</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:support@velstrian.com">support@velstrian.com</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.crowagent.ai" target="_blank" rel="noopener noreferrer">status.crowagent.ai</a></td></tr> <tr><th scope="row">Registered entity</th><td>Velstrian Systems Ltd, England &amp; Wales</td></tr> </tbody> </table></div>
+<div class="prose-scroll" role="region" aria-label="How to reach Velstrian (table)" tabindex="0"><table class="lc-table"> <caption>How to reach Velstrian</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@velstrian.com">legal@velstrian.com</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:support@velstrian.com">support@velstrian.com</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.velstrian.com" target="_blank" rel="noopener noreferrer">status.velstrian.com</a></td></tr> <tr><th scope="row">Registered entity</th><td>Velstrian Systems Ltd, England &amp; Wales</td></tr> </tbody> </table></div>
 
 [Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:support@velstrian.com)

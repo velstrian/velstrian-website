@@ -21,7 +21,7 @@
  *     emit it, so it is correctly absent here too.
  */
 
-import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../lib/brand-names';
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY, STATUS_URL } from '../lib/brand-names';
 
 export interface FooterLink {
   label: string;
@@ -277,7 +277,7 @@ export const FOOTER = {
   },
 
   bottomLinks: {
-    status: { label: 'Status', href: 'https://status.crowagent.ai' } as FooterLink,
+    status: { label: 'Status', href: STATUS_URL } as FooterLink,
     cookiePreferences: { label: 'Cookie preferences', href: '/cookie-preferences/' } as FooterLink,
   },
 } as const;

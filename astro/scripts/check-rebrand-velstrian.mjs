@@ -22,7 +22,7 @@ const DIST = join(ROOT, 'dist');
 const SRC = join(ROOT, 'src');
 const JSON_OUT = process.argv.includes('--json');
 
-const LEGAL_NAME = 'VELSTRIAN SYSTEMS LIMITED';
+const LEGAL_NAME = 'Velstrian Systems Ltd';
 const COMPANY_NUMBER = '17076461';
 const ORIGIN = 'https://velstrian.com';
 const SOCIALS = [
@@ -45,7 +45,6 @@ const OLD_SOCIALS = [
 // that is correct until the app migration lands.
 const KEPT_HOSTS = [
   'app.crowagent.ai',
-  'status.crowagent.ai',
   'calendly.com/crowagent-platform',
   'crowagent-platform-production.up.railway.app', // the API host the partner form posts to, moves with the app
 ];

@@ -253,6 +253,9 @@ const ALLOWED_LOSSES = new Map([
   ['*  link: /blog/ppn-002-social-value-guide',
    'The social value pillar post was republished at /blog/ppn-026-social-value-guide on 2026-08-30 and every internal link was repointed in the same change. The reader loses nothing: the destination is the same article rewritten against the edition that applies from 1 January 2027, and the old URL 301s there for anyone holding it. Renaming our own URL is an editorial decision about this site and not a statement about the regulation.'],
 
+  ['*  link: status.crowagent.ai',
+   'The public status URL moved to https://status.velstrian.com (Better Stack) on 2026-10-21 per owner decision D250. Every internal link across the footer and legal pages now points to the new status host.'],
+
   /* The PPN 002 term card came off the glossary index in the same pass. Its
      h3 was the term name, so the heading goes with the card. The subject is not
      lost: PPN 026 has its own card, its own full entry at /glossary/ppn-026 and
