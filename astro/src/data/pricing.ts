@@ -88,6 +88,7 @@
  * header; the gate is the thing that stops the next one.
  */
 import { SIGNUP_URL } from './app.ts';
+import { GUEST_REVIEWERS, LIVE_SOURCES } from './site-facts.ts';
 
 export { SIGNUP_URL };
 
@@ -193,7 +194,10 @@ export const PLANS: Plan[] = [
     annual: 5929,
     seats: 10,
     credits: 3000,
-    includes: 'Everything in Pro, plus single sign-on, branded exports and a named contact.',
+    /* R285-WEB-CLAIMS-AUDIT-01 H10 and P3. Single sign-on is on every plan
+       (D241), so it is not what Portfolio adds. The Integrations package is
+       (D206, catalogue.ts integrations flag). */
+    includes: 'Everything in Pro, plus the Integrations package, branded exports and a named contact.',
     moreSeatsByArrangement: true,
     cta: 'Buy Portfolio',
     planKey: 'crowmark_portfolio',
@@ -265,7 +269,7 @@ export const BUYER_PLANS: BuyerPlan[] = [
     seats: 10,
     credits: 3000,
     guestEvaluators: 25,
-    includes: '25 guest evaluators and single sign-on. Pay by card, or by invoice on 30 days with a PO number.',
+    includes: '25 guest evaluators. Pay by card, or by invoice on 30 days with a PO number.',
     cta: 'Start now',
     planKey: 'buyer_portfolio',
     secondary: {
@@ -391,9 +395,18 @@ export const COMPARE_LEAD: CompareRow[] = [
     ),
   },
   {
-    feature: 'Tender feed: Contracts Finder and Find a Tender',
+    feature: `Tender feed: ${LIVE_SOURCES}`,
     cells: [true, true, true],
   },
+  /* R285-WEB-CLAIMS-AUDIT-01 P5, M10, P3, M13. Guest reviewers were published
+     for Velstrian Buy only, though every Bid plan carries them (catalogue.ts
+     guestReviewers, through site-facts.json). Single sign-on was printed as a
+     Portfolio feature, and D241 puts it on every plan. */
+  {
+    feature: 'Guest reviewers',
+    cells: [String(GUEST_REVIEWERS.starter), String(GUEST_REVIEWERS.pro), String(GUEST_REVIEWERS.portfolio)],
+  },
+  { feature: 'Single sign-on (SAML 2.0) with SCIM provisioning, and passkeys', cells: [true, true, true] },
   { feature: 'Grounded AI drafting with PPN 017 disclosure', cells: [true, true, true] },
   { feature: 'Deterministic social value calculation', cells: [true, true, true] },
 ];
@@ -575,7 +588,7 @@ export const PRICING_FAQS: Faq[] = [
        No tier is named here, because which plan includes SSO is a commercial
        packaging question the code does not answer and I will not invent. */
     answer:
-      'Yes. Portfolio is £549 a month, or £5,929 a year, for 10 users and 3,000 AI credits a month, with single sign-on via SAML 2.0 and SCIM user provisioning included. Buy it by card and start today. Talk to us about contracts, custom terms or more than 10 users.',
+      'Yes. Portfolio is £549 a month, or £5,929 a year, for 10 users and 3,000 AI credits a month, and adds the Integrations package. Single sign-on via SAML 2.0 and SCIM user provisioning are included on every plan. Buy it by card and start today. Talk to us about contracts, custom terms or more than 10 users.',
   },
   {
     question: 'How is Velstrian Buy priced?',

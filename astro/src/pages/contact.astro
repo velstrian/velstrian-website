@@ -90,7 +90,9 @@ const REACH = [
   },
   {
     heading: 'Portfolio plan and volume licensing',
-    body: 'Microsoft Entra ID single sign-on, branded exports, invoice or purchase order billing, and pricing scoped to a high-volume bidding team.',
+    /* R285-WEB-CLAIMS-AUDIT-01 C1. Single sign-on is on every plan (D241) and
+       Portfolio has a published price (D235), so neither is a reason to email. */
+    body: 'Single sign-on is included on every plan. Talk to us about Portfolio contract terms, a DPA, invoice or purchase order billing, or more than 10 users.',
     href: `mailto:${CONTACT_EMAILS.sales}?subject=Enterprise%20enquiry`,
     action: 'Email sales',
     external: false,

@@ -266,7 +266,7 @@ const schema = [
 ];
 
 const SUPPLIER_CAPSULES = [
-  'Contracts Finder and Find a Tender',
+  'Four official UK and EU tender feeds',
   'PPN 026 social value',
   'PPN 017 disclosure',
   'Procurement Act s.52 and s.71',
@@ -282,8 +282,10 @@ const BUYER_CAPSULES = [
 const TRUST = [
   { state: 'yes', label: 'EU data storage on Supabase, AWS eu-west-1 (Ireland)' },
   { state: 'yes', label: 'Volume licensing and invoice billing' },
-  { state: 'yes', label: 'Single sign-on via SAML 2.0, with SCIM provisioning' },
-  { state: 'soon', label: 'SOC 2 evidence pack (on the roadmap)' },
+  { state: 'yes', label: 'Single sign-on via SAML 2.0, with SCIM provisioning, on every plan' },
+  /* R285-WEB-CLAIMS-AUDIT-01 P12, D252 (3): the "SOC 2 evidence pack (on the
+     roadmap)" row is removed. No roadmap row exists for it and the company
+     holds no certification (D250). */
 ];
 
 /*
@@ -918,7 +920,7 @@ const UPDATED = new Date('2026-10-19'); /* R285-P2-ENTERPRISE-SELF-SERVE-01: Por
         </p>
         <p class="card__body">
           Talk to us about frameworks, more users than Portfolio includes, group
-          consolidation, a security review or DPA, SOC 2 evidence, or custom contract terms.
+          consolidation, a security review or DPA, or custom contract terms.
         </p>
         <p class="btn-row row--left">
           <Button href="/contact/">Talk to us about frameworks</Button>
