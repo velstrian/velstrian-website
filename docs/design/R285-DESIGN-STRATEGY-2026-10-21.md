@@ -66,6 +66,19 @@ The eight stock photographs of commit 66e58ae0 are **withdrawn from the site** b
 
 ---
 
+### 0.7 Scope of change across the site (owner, 2026-10-21)
+
+Owner: "lot of pages still hold true and correct content and needs only minor tweaks, major transformation is needed in home page, product pages for content storyline alignment and all the pages needs redesign for branding and new design orchestration to align e2e web design strategy".
+
+| Pages | Content | Design |
+|---|---|---|
+| Home, /bid/, /buy/ | Full rewrite to the version 2 storyline (section 0.3 and 0.4) | New system, built whole |
+| Every other page (pricing, about, sources, tools, glossary, blog, FAQ, legal, compare, changelog, roadmap and the rest) | Keep. Minor tweaks only: Velstrian naming, D255 positive wording, the live site trust strip, RULE 0-U plain words where a sentence is hard to read. Never rewrite correct content for its own sake | Redesigned on the same system: tokens, type, layout grid, components, header, footer, motion. One consistent experience end to end |
+
+Order: (1) home, built and approved, which proves the system. (2) /bid/ and /buy/ storyline and design. (3) the shared shell (header, footer, page templates) moves to the system, which lifts every page at once. (4) each remaining page reviewed at 1440 and 390 and adjusted where its layout needs more than the shell. (5) old components, styles and tokens deleted, gates assert the new system only.
+
+---
+
 ## 1. Why the current site reads as AI generated
 
 Looked at side by side, rendered at 1440, home against Auth0 (screenshots in `audit-screenshots/r285-references/`):
