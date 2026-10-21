@@ -2,7 +2,7 @@
 
 Row R285-WEB-ENTERPRISE-REDESIGN-01. Decisions D254 and the owner's 2026-10-21 direction: "understand web design and do choreographed and build excellent design pattern throughout, and must not rush into change instead do deeper understand and do design thinking, make proper strategy and then do top 1% ultra premium design."
 
-Status: STRATEGY FOR OWNER REVIEW. No site code changes until the owner has read this. It replaces the patch list in `R285-ENTERPRISE-DESIGN-BRIEF-2026-10-21.md` as the plan. The brief stays as the measurement record.
+Status: ADOPTED 2026-10-21, BUILDING (see section 9). It replaces the patch list in `R285-ENTERPRISE-DESIGN-BRIEF-2026-10-21.md` as the plan. The brief stays as the measurement record.
 
 ---
 
@@ -190,8 +190,12 @@ What makes this site its own and not anyone else's: the citation line as the sig
 6. Real product captures replace the HTML frames as soon as the staging capture run is done.
 7. Nothing goes live without the owner. A push to the website `main` is a production deploy.
 
-## 9. Open items that need the owner
+## 9. Decided (owner, 2026-10-21, later the same day)
 
-1. The direction in this document as a whole.
-2. Photography source and budget for D251 people and places imagery (licensed photography may cost money, a RULE 0-G cost statement comes with the shortlist).
-3. Adding Source Serif 4 as the document voice (free, about 50 KB to be measured).
+Owner: "why cant you help me on direction as you know all the details about platform and products, dont be conservative, use available tools if needed to design and create one", "why cant you use license free photographs and can leverage gemini ai, figma", "The document serif: you must help here", "dont assume anything, dont be conservative and dont fix any rule permanently ... keep north star top 1% ultra premium without compromise and must not go for cheap and patch design approach".
+
+1. **Direction: this strategy is adopted** and the driver owns it end to end. Status changes from "for owner review" to BUILDING. The owner reviews the built home page, not paper.
+2. **Imagery.** Free licensed photography (Unsplash licence, Pexels licence, both allow commercial use without attribution, the licence and source URL are recorded per image in `astro/src/data/image-credits.json`), plus AI generated images (Gemini, the Figma image tools) where no real photograph fits. One honesty rule only: no image is ever presented as a named customer, a testimonial or a real event at a real organisation. Atmosphere, people at work and UK places are fine from either source.
+3. **Document serif: Source Serif 4**, SIL Open Font License, self hosted variable woff2, used only for quoted tender and evidence text. Its measured size is reported in the first commit that ships it.
+4. **No rule is permanent.** Where an existing rule, gate or budget blocks a better design, the driver changes it in the same commit and says why. The hard limits stay because they protect the owner, not the design: no invented customers, numbers or certifications (D252), no em dashes in user facing text, Cloudflare free plan, nothing live without the owner.
+5. **North star: top 1 percent ultra premium.** No patch work. Every page is built whole from the system and critiqued against the references at 1440 and 390 before the owner sees it.
