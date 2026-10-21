@@ -363,17 +363,6 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     id="hero"
   >
     <div class="cw cw--hero" data-spot="off">
-      {/*
-        The ambient rig, and every value in it comes from the shared layer in
-        styles/tokens.css. `data-field="on"` fires the one-beat entrance at LOAD
-        rather than on view, because the hero is above the fold at every
-        viewport, so asking an observer whether it is visible is a question with
-        a known answer and a failure mode. Same reasoning as HeroStack.astro.
-      */}
-      <div class="amb" data-field="on" aria-hidden="true">
-        <b></b><b></b><i class="sv-spot"></i><i class="sv-grain"></i>
-      </div>
-
       <div class="btn-row">
         <Button href={CALENDLY} target="_blank">
           Book a 30-minute call<span class="visually-hidden"> (opens in a new window)</span>
@@ -472,6 +461,77 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     </div>
   </Section>
 
+  {/* ── THE DEADLINE TIMELINE (MOMENT 2: SCROLL-SCRUBBED DEADLINE) ─────────── */}
+  <Section
+    eyebrow="The deadline timeline"
+    title="From tender issue to submission deadline."
+    standfirst="In a thirty-day procurement window, seventy-eight percent of your response is pre-written and verified before writing starts. As the deadline approaches, the audit trail completes."
+    id="deadline-timeline"
+  >
+    <div class="cw cw--deadline">
+      <div class="bid-timeline" aria-label="Bid response timeline from tender issue to submission deadline">
+        <div class="bid-timeline__header">
+          <div class="bid-timeline__meta">
+            <span class="chip bid-timeline__tag">30-day tender window</span>
+            <span class="bid-timeline__stat"><strong>78%</strong> pre-written and cited</span>
+          </div>
+          <p class="bid-timeline__context">Official notice feed · Verified audit trail</p>
+        </div>
+
+        <div class="bid-timeline__track-wrap" aria-hidden="true">
+          <div class="bid-timeline__track">
+            <div class="bid-timeline__bar"></div>
+          </div>
+        </div>
+
+        <ol class="bid-timeline__stops" role="list">
+          <li class="bid-timeline__stop">
+            <div class="bid-timeline__marker"></div>
+            <p class="bid-timeline__day">Day 01</p>
+            <h3 class="bid-timeline__title">Notice published</h3>
+            <p class="bid-timeline__desc">Tender ingested from official feeds. Fit score and requirements matrix generated.</p>
+            <span class="bid-timeline__badge">Live feed</span>
+          </li>
+          <li class="bid-timeline__stop">
+            <div class="bid-timeline__marker"></div>
+            <p class="bid-timeline__day">Day 04</p>
+            <h3 class="bid-timeline__title">Selection questionnaire</h3>
+            <p class="bid-timeline__desc">Accreditations, insurances, turnover and exclusion grounds matched from library.</p>
+            <span class="bid-timeline__badge">Pre-answered</span>
+          </li>
+          <li class="bid-timeline__stop">
+            <div class="bid-timeline__marker"></div>
+            <p class="bid-timeline__day">Day 12</p>
+            <h3 class="bid-timeline__title">Technical responses</h3>
+            <p class="bid-timeline__desc">Drafted with inline citations to tender clauses and past winning method statements.</p>
+            <span class="bid-timeline__badge">Cited drafting</span>
+          </li>
+          <li class="bid-timeline__stop">
+            <div class="bid-timeline__marker"></div>
+            <p class="bid-timeline__day">Day 18</p>
+            <h3 class="bid-timeline__title">Social value &amp; KPIs</h3>
+            <p class="bid-timeline__desc">Procurement Act 2023 s.52 metrics calculated in code. PPN 026 commitments locked.</p>
+            <span class="bid-timeline__badge">Deterministic</span>
+          </li>
+          <li class="bid-timeline__stop">
+            <div class="bid-timeline__marker"></div>
+            <p class="bid-timeline__day">Day 25</p>
+            <h3 class="bid-timeline__title">Review &amp; sign-off</h3>
+            <p class="bid-timeline__desc">Every figure verified against permitted set. PPN 017 transparency disclosure attached.</p>
+            <span class="bid-timeline__badge">Human approved</span>
+          </li>
+          <li class="bid-timeline__stop">
+            <div class="bid-timeline__marker"></div>
+            <p class="bid-timeline__day">Day 30</p>
+            <h3 class="bid-timeline__title">Submission deadline</h3>
+            <p class="bid-timeline__desc">Audit bundle assembled. Clean export ready for upload days before the cut-off.</p>
+            <span class="bid-timeline__badge bid-timeline__badge--target">Submission</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </Section>
+
   {/* ── THE MECHANISM, `229:2` ───────────────────────────────────────────── */}
   <Section
     eyebrow="The mechanism"
@@ -479,10 +539,6 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
     id="mechanism"
   >
     <div class="cw cw--mech" data-spot="off" data-lit>
-      <div class="amb" data-field aria-hidden="true">
-        <b></b><b></b><i class="sv-spot"></i><i class="sv-grain"></i>
-      </div>
-
       <ol class="mech card-sync">
         {
           MECHANISM.map((m) => (

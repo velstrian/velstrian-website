@@ -37,8 +37,8 @@ export interface Card {
 
 /** Hero proof strip. `lead` is the emphasised fragment. */
 export const PROOF = [
-  { lead: '3 sources', rest: 'Find a Tender, Contracts Finder, Public Contracts Scotland' },
-  { lead: 'Daily', rest: 'Refreshed feed' },
+  { lead: 'Live feeds', rest: 'UK, EU and Canada public tenders' },
+  { lead: 'On request', rest: 'World Bank and US federal notices' },
   { lead: 'PPN 017', rest: 'Disclosure on every draft' },
   { lead: 's.52 · s.71', rest: 'Procurement Act 2023' },
 ];
@@ -245,7 +245,7 @@ export const FAQS: Faq[] = [
   {
     question: 'Where do the tenders come from?',
     answer:
-      'Three UK sources, ingested from their published feeds: Find a Tender, Contracts Finder and Public Contracts Scotland. The feed is refreshed daily. You filter by sector, value and region, sort the results, and bookmark what you want to come back to.',
+      'UK, EU and Canada tenders are live from official public feeds. World Bank and US federal notices are available on request. You filter by sector, value and region, sort the results, and bookmark what you want to come back to.',
   },
   {
     question: 'Can the AI make up a number in my bid?',

@@ -2401,3 +2401,38 @@
     }
   }
 }
+
+/* ============================================================================
+   § MOMENT 2: /bid/ SCROLL-SCRUBBED DEADLINE (D5, D250)
+   Native CSS view() scroll-driven timeline. Readers experience time saved as
+   distance travelled. Pre-written sections fill in as the reader scrolls.
+   ============================================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .pg-bid .bid-timeline__bar {
+      transform-origin: left center;
+      animation-name: bid-deadline-fill;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 65%;
+    }
+  }
+}
+
+@keyframes bid-deadline-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-bid .bid-timeline__bar {
+    transform: scaleX(1);
+  }
+}
+

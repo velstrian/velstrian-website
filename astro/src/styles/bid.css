@@ -331,8 +331,8 @@
      used, and a second name for the same four numbers is how the site got
      three opinions about a hairline. If the token is ever renamed, rename it
      for the ramp and not for the divider. */
-  background: var(--grad-rule);
-  box-shadow: 0 0 12px var(--c-verified-glow);
+  background: var(--c-ambient-start);
+  box-shadow: none;
 }
 
 /* Centred, because the centre of the lane IS the gate: the panel is one
@@ -379,8 +379,8 @@
   width: 2px;
   height: 14px;
   border-radius: var(--radius-pill);
-  background: var(--c-ambient-mid);
-  box-shadow: 0 0 8px var(--c-verified-glow);
+  background: var(--c-ambient-start);
+  box-shadow: none;
   transform-origin: center;
 }
 
@@ -433,28 +433,163 @@
  * never fires, the worst outcome is a tick at full height, which is where it
  * ends anyway.
  */
-@media (prefers-reduced-motion: no-preference) {
-  .pg-bid [data-lit='on'] .award__bar--a {
-    animation: cw-grow var(--m-beat) var(--m-ease-land) 1 both;
-  }
+/* The award bar sits static in its resting state. The single motion device
+   on /bid/ is the scroll-scrubbed deadline timeline (Moment 2). */
+.pg-bid .award__bar--a { transform: scaleX(1); }
+.pg-bid .award__bar--b { transform: scaleX(1); }
+.pg-bid .award__tick   { transform: scaleY(1); }
 
-  .pg-bid [data-lit='on'] .award__bar--b {
-    animation: cw-grow calc(var(--m-beat) * 1.5) var(--m-ease-land) calc(var(--m-beat) * 1.33) 1 both;
-  }
+/* ── MOMENT 2: THE DEADLINE TIMELINE ───────────────────────────────────────── */
+.pg-bid .cw--deadline {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
 
-  .pg-bid [data-lit='on'] .award__tick {
-    animation: cw-tick calc(var(--m-beat) * 0.5) var(--m-ease-land) calc(var(--m-beat) * 2.83) 1 both;
+.pg-bid .bid-timeline {
+  position: relative;
+  padding: var(--stack-3);
+  border-radius: var(--radius-inner);
+  background: var(--c-panel);
+  border: 1px solid var(--c-border);
+}
+
+.pg-bid .bid-timeline__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--stack-2);
+  margin-bottom: var(--stack-3);
+  padding-bottom: var(--stack-2);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.pg-bid .bid-timeline__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--stack-2);
+  flex-wrap: wrap;
+}
+
+.pg-bid .bid-timeline__stat {
+  font-family: var(--font-body);
+  font-size: var(--t-caption);
+  color: var(--c-text-sub);
+}
+
+.pg-bid .bid-timeline__stat strong {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  color: var(--c-verified);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.pg-bid .bid-timeline__context {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  color: var(--c-text-muted);
+}
+
+.pg-bid .bid-timeline__track-wrap {
+  position: relative;
+  margin: var(--stack-3) 0 var(--stack-4);
+}
+
+.pg-bid .bid-timeline__track {
+  width: 100%;
+  height: 6px;
+  background: var(--c-raised);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+}
+
+.pg-bid .bid-timeline__bar {
+  width: 100%;
+  height: 100%;
+  background: var(--c-ambient-start);
+  border-radius: var(--radius-pill);
+  transform-origin: left center;
+  transform: scaleX(1);
+}
+
+.pg-bid .bid-timeline__stops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--stack-2);
+}
+
+.pg-bid .bid-timeline__stop {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--stack-2);
+  background: var(--c-raised);
+  border-radius: var(--radius-inner);
+  border: 1px solid var(--c-border);
+}
+
+.pg-bid .bid-timeline__day {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  color: var(--c-verified);
+  font-weight: 700;
+}
+
+.pg-bid .bid-timeline__title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--t-h4);
+  font-weight: 600;
+  color: var(--c-text);
+  line-height: 1.3;
+}
+
+.pg-bid .bid-timeline__desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--t-micro);
+  color: var(--c-text-muted);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.pg-bid .bid-timeline__badge {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--c-raised);
+  color: var(--c-verified);
+  border: 1px solid var(--c-border);
+}
+
+.pg-bid .bid-timeline__badge--target {
+  background: color-mix(in srgb, var(--c-verified) 25%, transparent);
+  color: var(--c-text);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .pg-bid .bid-timeline__stops {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@keyframes cw-grow {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
-@keyframes cw-tick {
-  from { transform: scaleY(0); }
-  to   { transform: scaleY(1); }
+@media (max-width: 480px) {
+  .pg-bid .bid-timeline__stops {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ══ THE MECHANISM, `229:2` ══════════════════════════════════════════════ */
