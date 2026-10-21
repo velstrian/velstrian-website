@@ -26,11 +26,14 @@ const TRUST_POINTS: TrustPoint[] = [
   },
   {
     title: 'Data residency',
-    detail: 'Customer data is hosted in the European Union (Dublin, Ireland) on secure enterprise cloud infrastructure.',
+    /* R285-WEB-CLAIMS-AUDIT-01: "Dublin" had no source (the region is eu-west-1,
+       Ireland) and the sentence left out where the API and web tier run. */
+    detail: 'Customer data is stored in the EU (Ireland). The API runs in the Netherlands and the web application in London.',
   },
   {
     title: 'Model privacy',
-    detail: 'AI drafting uses named enterprise providers. Customer data is never used to train foundation models.',
+    /* Was "named enterprise providers", which named nobody. */
+    detail: 'AI drafting uses Google Gemini, and heavier reasoning uses Anthropic Claude, both under data processing agreements. Neither trains on your data.',
   },
   {
     title: 'Figure refusal gate',

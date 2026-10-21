@@ -19,7 +19,7 @@ Disk-level AES-256-GCM with automatic key rotation across databases, file storag
 
 Forward-secret HTTPS on every request with HSTS preload and modern cipher suites only.
 
-### GDPR compliant
+### UK GDPR controls in place
 
 Subject rights supported end to end, with lawful basis, retention and deletion documented. A Data Processing Agreement is available for customers on request, currently in draft pending legal review.
 
@@ -27,13 +27,13 @@ Subject rights supported end to end, with lawful basis, retention and deletion d
 
 Primary customer data is stored in the EU, in AWS eu-west-1 (Ireland). Our API runs in the EU and the web application runs in the UK. Full processing locations are listed under sub-processors below.
 
-### ISO 27001 controls
+### ISO/IEC 27001 Annex A
 
-Our security controls programme is built to ISO 27001.
+ISO/IEC 27001 Annex A reviewed in our own Statement of Applicability. No certificate held.
 
 ### ICO Registered Data Controller
 
-Velstrian Systems Ltd is registered with the Information Commissioner's Office and verifiable on the ICO public register.
+Velstrian Systems Ltd is registered with the Information Commissioner's Office as a data controller.
 
 ## Security documentation
 
@@ -51,12 +51,12 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 
 - Primary customer data is stored in Supabase’s EU region, AWS eu-west-1 (Ireland).
 - The Velstrian API and its background worker run in the EU, in Google Cloud europe-west4 (Netherlands).
-- Supporting services may process metadata in the EU (PostHog EU Cloud, Sentry EU).
+- Error monitoring runs in the EU (Sentry, Germany) and product analytics in the EU (PostHog EU Cloud).
 - Web application rendering runs on Vercel in London (lhr1).
 - Other processors operate under Standard Contractual Clauses (SCCs).
-- No personal data is sent to AI providers for training. See our [Privacy Policy](/privacy/) for the full sub-processor list.
+- AI drafting sends only the text a task needs to Google Gemini and Anthropic Claude, both US processors under data processing agreements. No personal data is sent to AI providers for training. The full list is below and matches our [Privacy Policy](/privacy/).
 
-<dl class="deflist"> <dt id="sub-processors">Metadata sub-processors</dt> <dd> <dl class="deflist deflist--ledger"> <dt>PostHog</dt> <dd>EU</dd> <dt>Sentry</dt> <dd>SCC</dd> <dt>Brevo</dt> <dd>EU</dd> <dt>Cloudflare</dt> <dd>SCC</dd> <dt>Calendly</dt> <dd>SCC</dd> <dt>Stripe</dt> <dd>SCC</dd> </dl> </dd> </dl>
+<dl class="deflist"> <dt id="sub-processors">Sub-processors</dt> <dd> <dl class="deflist deflist--ledger"> <dt>Supabase</dt> <dd>EU (Ireland), database, authentication and file storage</dd> <dt>Railway</dt> <dd>EU (Netherlands), the API and background worker</dd> <dt>Vercel</dt> <dd>UK (London), web application hosting</dd> <dt>Cloudflare</dt> <dd>Global edge, SCC, DNS, CDN and bot protection</dd> <dt>Stripe</dt> <dd>US and EU, SCC, payments</dd> <dt>PostHog</dt> <dd>EU, product analytics</dd> <dt>Sentry</dt> <dd>EU (Germany), error monitoring</dd> <dt>Brevo</dt> <dd>EU, email delivery</dd> <dt>Google Gemini</dt> <dd>US, under DPA, AI drafting</dd> <dt>Anthropic Claude</dt> <dd>US, under DPA, AI reasoning and the buyer pre-read</dd> <dt>Calendly</dt> <dd>SCC, meeting scheduling links</dd> </dl> </dd> </dl>
 
 ## GDPR compliance
 
@@ -64,7 +64,7 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 - A Data Processing Agreement (DPA) is available on request for customers. It is in draft pending legal review, so terms may change before signature.
 - Data subject rights supported: right to erasure, data portability, restriction of processing, and access.
 
-<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Verifiable on the <a href="https://ico.org.uk/ESDWebPages/Search">ICO public register</a> by searching for “Velstrian Systems Ltd”.</p> <p>Data requests: <a href="mailto:hello@velstrian.com">hello@velstrian.com</a></p> </dd> </dl>
+<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Registered with the Information Commissioner's Office as a data controller.</p> <p>Data requests: <a href="mailto:hello@velstrian.com">hello@velstrian.com</a></p> </dd> </dl>
 
 ## Access controls
 
@@ -88,9 +88,9 @@ Platform access is enforced in depth: organisation-scoped roles at the applicati
 - Required for Owner/Admin actions.
 - Session revocation on demand.
 
-## ISO 27001 controls
+## Certifications and ISO/IEC 27001
 
-Our security controls programme is built to ISO 27001 principles, as self-declared conformity. Internal security reviews run continuously, and OWASP practices are applied to all application development. The control set, the risk register, the statement of applicability, the internal audit and the management review are maintained as documents and are available on request.
+Velstrian holds no security certification today. ISO/IEC 27001 Annex A is reviewed in our own Statement of Applicability, and no certificate is held. Internal security reviews run continuously, and OWASP practices are applied to all application development. The control set, the risk register, the statement of applicability, the internal audit and the management review are maintained as documents and are available on request.
 
 Cyber Essentials is the certification we expect to pursue first.
 
@@ -120,7 +120,7 @@ Velstrian targets 99.5% monthly uptime, with independent public status monitorin
 
 ## Deep dives
 
-<details class="sec-acc"> <summary> Sub-processors list </summary> <div class="sec-acc-body"> <p>Sub-processors handle metadata only. None receive customer-controlled personal data for training.</p> <ul> <li><strong>PostHog</strong> (EU Cloud), product analytics, event metadata.</li> <li><strong>Brevo</strong> (EU), transactional email delivery.</li> <li><strong>Cloudflare</strong> (global, SCC), CDN, DDoS protection.</li> <li><strong>Calendly</strong> (SCC), meeting scheduling links.</li> <li><strong>Stripe</strong> (SCC), billing and payment processing.</li> </ul> </div> </details>
+<details class="sec-acc"> <summary> Sub-processors list </summary> <div class="sec-acc-body"> <p>The same list as above, with what each one does. None receives customer data for training.</p> <ul> <li><strong>Supabase</strong> (EU, Ireland), database, authentication and file storage.</li> <li><strong>Railway</strong> (EU, Netherlands), the API and background worker.</li> <li><strong>Vercel</strong> (UK, London), web application hosting.</li> <li><strong>Cloudflare</strong> (global, SCC), DNS, CDN and DDoS protection.</li> <li><strong>Stripe</strong> (US and EU, SCC), billing and payment processing.</li> <li><strong>PostHog</strong> (EU Cloud), product analytics, event metadata.</li> <li><strong>Sentry</strong> (EU, Germany), error monitoring.</li> <li><strong>Brevo</strong> (EU), transactional email delivery.</li> <li><strong>Google Gemini</strong> (US, under DPA), AI drafting.</li> <li><strong>Anthropic Claude</strong> (US, under DPA), AI reasoning and the buyer pre-read.</li> <li><strong>Calendly</strong> (SCC), meeting scheduling links.</li> </ul> </div> </details>
 
 <details class="sec-acc"> <summary> Severity levels in detail </summary> <div class="sec-acc-body"> <p>Our severity model follows CVSS 3.1 base scoring, adjusted for environmental impact across multi-tenant data isolation.</p> <ul> <li><strong>Critical:</strong> active exploitation paths affecting confidentiality or integrity of customer data.</li> <li><strong>High:</strong> escalation paths within an authenticated session.</li> <li><strong>Medium:</strong> targeted attacks requiring user interaction or constrained scope.</li> <li><strong>Low:</strong> defensive hardening, configuration drift, or informational findings.</li> </ul> </div> </details>
 
@@ -136,6 +136,6 @@ Everything above is what we can evidence today, including the gaps. If it clears
 
 [Start now](https://app.crowagent.ai/signup) [Book a 30-minute demo](https://calendly.com/crowagent-platform/30min)
 
-ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. Built to ISO 27001 controls.
+ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. ISO/IEC 27001 Annex A reviewed in our own Statement of Applicability, no certificate held.
 
 [Privacy Policy](/privacy/) [Sub-processors](#sub-processors) [Status Page](https://status.velstrian.com)

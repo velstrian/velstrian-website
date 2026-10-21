@@ -22,6 +22,7 @@
  */
 
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY, STATUS_URL } from '../lib/brand-names';
+import { SOA_STATEMENT } from './site-facts';
 
 export interface FooterLink {
   label: string;
@@ -110,12 +111,31 @@ export const FOOTER = {
    * statutory deadline, and deletion_audit_log holds 8 incomplete rows with the
    * oldest at 146 days. Board row A-222. A claim of compliance is only as good
    * as the backlog behind it, so that is the item to close, not this line. */
+  /*
+   * [2026-10-21, R285-WEB-CLAIMS-AUDIT-01, D250 and D252 (2)] TWO BADGES CHANGED.
+   *
+   * "Built to ISO 27001 controls" is gone. The company holds no certificate
+   * (STATEMENT-OF-APPLICABILITY.md: "Certification status: None") and D250
+   * rules out anything a reader can take for a certification badge. D252 (2)
+   * names the replacement word for word, and it is read from site-facts.json so
+   * the footer, /about/ and /security/ cannot disagree.
+   *
+   * "GDPR compliant" became "UK GDPR controls in place". The argument above is
+   * right that compliance is self assessed, and the claims audit (T3) still
+   * classes a flat "compliant" as a conclusion nobody can check from the page,
+   * while the controls behind it can be: a DPA on request, a subject access
+   * address and a published retention table, all on /privacy/ and /security/.
+   * This reverses the 2026-08-31 reinstatement and is flagged to the owner.
+   *
+   * check-site-facts.mjs (certifications record) fails the build if the old
+   * badge text returns on any page.
+   */
   trustBadges: [
     'AES-256 at rest',
     'TLS 1.3 in transit',
-    'GDPR compliant',
+    'UK GDPR controls in place',
     'EU data residency',
-    'Built to ISO 27001 controls',
+    SOA_STATEMENT,
     'ICO registered',
   ] as string[],
   /*
@@ -163,7 +183,11 @@ export const FOOTER = {
      * out-of-scope feature; this component renders the same honest default
      * it starts with before any fetch resolves.
      */
-    statusLabel: 'All systems operational',
+    /* [2026-10-21, R285-WEB-CLAIMS-AUDIT-01 H14] Was "All systems operational".
+       Nothing fetches the status feed (scripts.js was deleted on 2026-09-07), so
+       the words were a fixed claim about right now. The link names the
+       destination and the status page says the state. */
+    statusLabel: 'System status',
   },
 
   social: [

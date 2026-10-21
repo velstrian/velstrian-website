@@ -348,10 +348,13 @@ const TIMELINE: {
   },
   {
     when: 'March 2026',
-    heading: 'Velstrian founded',
+    heading: 'Company founded',
     // The number itself is in the company card beside this column, once. It was
     // printed three times within one screen: here, in the link label, and there.
-    body: 'Incorporated as Velstrian Systems Ltd in England and Wales. Engine prototyping begins.',
+    /* R285-WEB-CLAIMS-AUDIT-01 A1. The company was incorporated under an earlier
+       name and took the name Velstrian Systems Ltd on 20 October 2026 (D243), so
+       "Incorporated as Velstrian Systems Ltd" was not true of March. */
+    body: 'Incorporated in England and Wales, and renamed Velstrian Systems Ltd on 20 October 2026. Engine prototyping begins.',
     status: 'done',
     link: { label: 'The registration on Companies House', href: COMPANIES_HOUSE },
   },
@@ -408,7 +411,7 @@ const VARIANTS = [
     // The two section numbers came out: they are recited in "How it is built"
     // and cited on two artefacts. What a supplier DOES is produce the evidence,
     // which is what this now says without borrowing the authority's duty.
-    body: 'Tender discovery from Contracts Finder and Find a Tender, the social value the buyer scores on in-scope central government contracts, PPN 017 AI disclosure, and, after award, the evidence behind each KPI the authority assesses.',
+    body: 'Tender discovery from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, the social value the buyer scores on in-scope central government contracts, PPN 017 AI disclosure, and, after award, the evidence behind each KPI the authority assesses.',
     href: '/bid/',
     cta: 'See the supplier side',
   },
@@ -431,12 +434,15 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
   { term: 'TLS 1.3 in transit', detail: 'Encrypted while it moves.', mark: 'verified' },
   {
     term: 'EU data residency',
-    detail: 'Your documents stay in the region.',
+    /* R285-WEB-CLAIMS-AUDIT-01 A7. "Your documents stay in the region" was
+       false: the text a draft needs goes to Google Gemini and Anthropic Claude,
+       both US processors. */
+    detail: 'Customer data is stored in the EU (Ireland). Drafting sends only the text a task needs to our AI processors.',
     mark: 'verified',
   },
   {
-    term: 'GDPR compliant',
-    detail: 'Lawful basis, retention and deletion documented.',
+    term: 'UK GDPR controls',
+    detail: 'Lawful basis, retention and deletion documented, with a DPA on request.',
     mark: 'verified',
   },
   { term: 'ICO registered', detail: 'Registered with the UK regulator.', mark: 'verified' },
@@ -461,8 +467,11 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
        WHAT IS STILL FORBIDDEN, unchanged: this site must never say CERTIFIED,
        never imply an accredited audit, and never carry a certification badge or
        logo. Conformity is ours to declare. Certification is not. */
-    term: 'ISO 27001 controls',
-    detail: 'Our security programme is built to the ISO 27001 control set.',
+    /* R285-WEB-CLAIMS-AUDIT-01, D252 (2). The 2026-09-01 wording above
+       ("built to the ISO 27001 control set") is replaced by the owner's later
+       decision, which states the absence of a certificate in plain words. */
+    term: 'ISO/IEC 27001 Annex A',
+    detail: 'Reviewed in our own Statement of Applicability. No certificate held.',
     mark: 'verified',
   },
 ];

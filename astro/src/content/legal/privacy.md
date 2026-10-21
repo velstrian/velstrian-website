@@ -42,7 +42,7 @@ For data-protection enquiries: [hello@velstrian.com](mailto:hello@velstrian.com)
 
 ### ICO data-controller registration
 
-Velstrian Systems Ltd is registered as a data controller with the UK Information Commissioner’s Office (ICO) in accordance with the Data Protection (Charges and Information) Regulations 2018. Verifiable on the [ICO public register](https://ico.org.uk/ESDWebPages/Search) by searching for “Velstrian Systems Ltd”. Companies House No. 17076461.
+Velstrian Systems Ltd is registered as a data controller with the UK Information Commissioner’s Office (ICO) in accordance with the Data Protection (Charges and Information) Regulations 2018. Companies House No. 17076461.
 
 ## Data we collect
 
@@ -112,7 +112,7 @@ Velstrian sets a minimal set of cookies. Analytics and non-essential cookies are
 
 We engage the following third-party sub-processors to operate the service. A Data Processing Agreement (DPA) is available on request. We ensure that all sub-processors provide sufficient guarantees to implement appropriate technical and organisational measures.
 
-Supabase EU Railway EU Vercel Edge Cloudflare Edge Stripe US/EU PostHog EU Sentry US Brevo EU Google Gemini US Anthropic Claude US
+Supabase EU Railway EU Vercel Edge Cloudflare Edge Stripe US/EU PostHog EU Sentry EU Brevo EU Google Gemini US Anthropic Claude US
 
 - **Supabase (EU):** Database, authentication, object storage. Essential for Velstrian platform data residency.
 - **Railway (EU):** Application hosting for the Velstrian backend and AI engines.
@@ -120,7 +120,7 @@ Supabase EU Railway EU Vercel Edge Cloudflare Edge Stripe US/EU PostHog EU Sentr
 - **Cloudflare (Edge):** DNS, CDN, DDoS protection, and Turnstile bot challenges.
 - **Stripe (US/EU):** Payment processing and subscription management.
 - **PostHog (EU):** Product analytics and session recording.
-- **Sentry (US):** Error monitoring and performance tracking.
+- **Sentry (EU, Germany):** Error monitoring and performance tracking.
 - **Brevo (EU):** Transactional and marketing email delivery.
 - **Google Gemini (US):** AI narrative generation for Velstrian Bid social value drafts based on National TOMs.
 - **Anthropic, Claude (US):** AI narrative generation for drafting content, including Velstrian Bid social value bid narratives and, for existing customers only, legacy sustainability report drafting, from the inputs you provide.
@@ -145,7 +145,7 @@ You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [
 
 ## Google Gemini DPA
 
-Velstrian Bid uses Google Gemini 1.5 Flash to assist with drafting Social Value narratives. We have signed Google’s Cloud Data Processing Addendum (DPA) to ensure data protection. Prompts and completions submitted via our API are not used to train Google's foundation models, and PII is stripped at the prompt boundary to maintain anonymity.
+Velstrian Bid uses Google Gemini (2.5 Pro and 2.5 Flash) to assist with drafting Social Value narratives. We have signed Google’s Cloud Data Processing Addendum (DPA) to ensure data protection. Prompts and completions submitted via our API are not used to train Google's foundation models, and PII is stripped at the prompt boundary to maintain anonymity.
 
 ## Anthropic (Claude) AI processing
 
