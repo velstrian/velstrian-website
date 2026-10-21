@@ -130,7 +130,7 @@ export const PHASES: Phase[] = [
      */
     name: 'Phase 3',
     status: 'research',
-    lead: 'Early research, not yet committed engineering. Anchored to live regulation rather than speculation.',
+    lead: 'Early research, anchored to live regulation rather than speculation.',
     items: [
       {
         title: 'Regulatory Monitor (public sector)',

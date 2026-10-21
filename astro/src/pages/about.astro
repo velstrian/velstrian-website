@@ -127,6 +127,16 @@ import Button from '../components/ui/Button.astro';
 import NewsletterForm from '../components/forms/NewsletterForm.astro';
 import { breadcrumbs } from '../lib/schema';
 import { HELLO_EMAIL } from '../lib/brand-names';
+import { TRUST_BADGES } from '../data/site-facts';
+
+/* D255: the trust terms are the footer's badges, word for word, from one list.
+   A badge that is renamed or dropped there fails this page's build here. */
+function badge(name: string): string {
+  if (!TRUST_BADGES.includes(name)) {
+    throw new Error(`about: "${name}" is no longer in site-facts.json trust_badges.`);
+  }
+  return name;
+}
 
 const title = 'About Us | Velstrian';
 /* The overclaim was in here too, which is why it reached og:description,
@@ -302,7 +312,7 @@ const PRINCIPLES = [
   {
     kicker: 'Values',
     heading: 'Statute over speculation',
-    body: 'We do not quote win rates, ours or yours, and we name no customer, client or project as proof. A claim we cannot trace to a source is not made, on this page or in a draft.',
+    body: 'Every claim we make traces to a source, on this page and in every draft. That is why you will find no win rates and no named customers here.',
   },
 ];
 
@@ -378,7 +388,7 @@ const TIMELINE: {
 const STATUS_LABEL: Record<Status, string> = {
   done: 'Delivered',
   now: 'Live now',
-  planned: 'Planned, not yet built',
+  planned: 'Planned',
 };
 
 /*
@@ -424,16 +434,15 @@ const VARIANTS = [
 ];
 
 /**
- * TABLE STAKES. Six rows, and the sixth is the reason the section exists: it
- * says what we do NOT hold. The wording of that row is verbatim from
- * data/footer.ts `trustNote`, minus the asterisk that footnote syntax needs and
- * a card does not. We hold neither SOC 2 nor ISO 27001 certification.
+ * TRUST. Six rows, one per footer badge, read from site-facts.json
+ * trust_badges (D255: say what we do, positively). The only boundary is a
+ * certificate we do not hold, which no row claims.
  */
 const TRUST: { term: string; detail: string; mark: Mark }[] = [
-  { term: 'AES-256 at rest', detail: 'Encrypted where it is stored.', mark: 'verified' },
-  { term: 'TLS 1.3 in transit', detail: 'Encrypted while it moves.', mark: 'verified' },
+  { term: badge('AES-256 at rest'), detail: 'Encrypted where it is stored.', mark: 'verified' },
+  { term: badge('TLS 1.3 in transit'), detail: 'Encrypted while it moves.', mark: 'verified' },
   {
-    term: 'EU data residency',
+    term: badge('EU data residency'),
     /* R285-WEB-CLAIMS-AUDIT-01 A7. "Your documents stay in the region" was
        false: the text a draft needs goes to Google Gemini and Anthropic Claude,
        both US processors. */
@@ -441,11 +450,11 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
     mark: 'verified',
   },
   {
-    term: 'UK GDPR controls',
-    detail: 'Lawful basis, retention and deletion documented, with a DPA on request.',
+    term: badge('GDPR compliant'),
+    detail: 'We meet UK GDPR, with a data processing agreement on request.',
     mark: 'verified',
   },
-  { term: 'ICO registered', detail: 'Registered with the UK regulator.', mark: 'verified' },
+  { term: badge('ICO registered'), detail: 'Registered with the UK regulator.', mark: 'verified' },
   {
     /* OWNER DECISION 2026-09-01, and it reverses how this row was marked.
        Their words: "i asked not explicit mention about certifications status
@@ -467,11 +476,10 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
        WHAT IS STILL FORBIDDEN, unchanged: this site must never say CERTIFIED,
        never imply an accredited audit, and never carry a certification badge or
        logo. Conformity is ours to declare. Certification is not. */
-    /* R285-WEB-CLAIMS-AUDIT-01, D252 (2). The 2026-09-01 wording above
-       ("built to the ISO 27001 control set") is replaced by the owner's later
-       decision, which states the absence of a certificate in plain words. */
-    term: 'ISO/IEC 27001 Annex A',
-    detail: 'Reviewed in our own Statement of Applicability. No certificate held.',
+    /* R285-WEB-CLAIMS-AUDIT-01, D255 (2026-10-21) supersedes D252 (2): say
+       what we do, positively. The badge is the footer's, word for word. */
+    term: badge('Built to ISO 27001 controls'),
+    detail: 'We follow ISO/IEC 27001 and check our controls against it.',
     mark: 'verified',
   },
 ];
@@ -754,8 +762,8 @@ const TRUST: { term: string; detail: string; mark: Mark }[] = [
       F8) and is now stated in exactly one place, that card. A heading that
       narrows a fact stated correctly beneath it is worse than no heading. */}
   <Section
-    eyebrow="Table stakes"
-    title="Secure, and honest about what we do not hold."
+    eyebrow="Security"
+    title="Your data, kept safe."
     id="trust"
   >
     <div class="trust">

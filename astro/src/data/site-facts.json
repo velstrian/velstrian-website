@@ -38,16 +38,27 @@
     ]
   },
   "certifications": {
-    "measured": "2026-10-21, crowagent-platform/docs/compliance/STATEMENT-OF-APPLICABILITY.md line 12 (Certification status: None), D250, D252 (2) and (3). The AI management standard is guarded separately by a check-facts.js rule",
+    "measured": "2026-10-21, owner decision D255 (crowagent-platform docs/release-2.8.4/scope/DECISION-GATES.md): say what we do, positively. We follow ISO/IEC 27001 (crowagent-platform/docs/compliance/STATEMENT-OF-APPLICABILITY.md) and are UK GDPR compliant. The only boundary is a certificate or attestation we do not hold, so only those phrases are banned. The AI management standard is guarded separately by a check-facts.js rule",
     "held": [],
-    "soa_statement": "ISO/IEC 27001 Annex A reviewed in our own Statement of Applicability. No certificate held.",
+    "statement": "We follow ISO/IEC 27001 and are UK GDPR compliant.",
     "banned": [
       "SOC 2",
-      "Built to ISO 27001",
-      "built to ISO 27001",
-      "built to the ISO 27001",
       "ISO 27001 certified",
-      "certified to ISO 27001"
+      "ISO/IEC 27001 certified",
+      "certified to ISO 27001",
+      "certified to ISO/IEC 27001",
+      "Cyber Essentials certified"
+    ]
+  },
+  "trust_badges": {
+    "measured": "2026-10-21, owner instruction under D255: the six badges the live website footer shows, word for word. One list, read by the footer, /about/, /security/, /pricing/ and the contact form",
+    "list": [
+      "AES-256 at rest",
+      "TLS 1.3 in transit",
+      "GDPR compliant",
+      "EU data residency",
+      "Built to ISO 27001 controls",
+      "ICO registered"
     ]
   },
   "status_host": {

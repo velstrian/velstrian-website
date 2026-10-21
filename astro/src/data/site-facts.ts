@@ -76,8 +76,11 @@ export const GUEST_REVIEWERS = {
   portfolio: FACTS.plans.bid.portfolio.guest_reviewers,
 };
 
-/** The certification statement, D252 (2). */
-export const SOA_STATEMENT = FACTS.certifications.soa_statement;
+/** The security and compliance statement, D255: what we do, said positively. */
+export const CERTIFICATION_STATEMENT = FACTS.certifications.statement;
+
+/** The six trust badges the live footer shows, word for word (D255). */
+export const TRUST_BADGES: string[] = FACTS.trust_badges.list;
 
 export const ICO_REFERENCE = FACTS.ico.reference;
 

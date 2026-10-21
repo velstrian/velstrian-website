@@ -292,8 +292,12 @@ const ALLOWED_LOSSES = new Map([
      capability. */
   ['/roadmap/  heading: tender reasoning copilot (public sector)',
    'D252 (5): the assistant this research row described is released as the AI Compliance Advisor. The row moved to live under that name on the same page, described from the shipped code (api/app/routers/advisor.py).'],
-  ['/security/  heading: gdpr compliant',
-   'Claims audit T3: a flat "compliant" is a conclusion the page cannot show. The heading now reads "UK GDPR controls in place" and the same paragraph lists the controls.'],
+  /* D255 (2026-10-21): the /security/ headings "GDPR compliant" and "ISO 27001
+     controls" are back, word for word the live badges, so their entries went. */
+  ['/about/  heading: secure, and honest about what we do not hold.',
+   'D255: customer facing copy says what we do, positively. The section is now "Your data, kept safe." and its six cards are the footer trust badges, word for word.'],
+  ['/about/  heading: regulatory monitor planned, not yet built',
+   'D255: the timeline status chip reads "Planned" in place of "Planned, not yet built". The item, its description and its planned state are all still on the page.'],
   ['/security/  link: ico.org.uk/esdwebpages/search',
    'D252 (4): until the ICO register shows the new company name, no page tells a reader to search it for Velstrian Systems Ltd. The registration statement stays.'],
   ['/privacy/  link: ico.org.uk/esdwebpages/search',

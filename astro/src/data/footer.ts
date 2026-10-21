@@ -22,7 +22,7 @@
  */
 
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY, STATUS_URL } from '../lib/brand-names';
-import { SOA_STATEMENT } from './site-facts';
+import { TRUST_BADGES } from './site-facts';
 
 export interface FooterLink {
   label: string;
@@ -130,14 +130,17 @@ export const FOOTER = {
    * check-site-facts.mjs (certifications record) fails the build if the old
    * badge text returns on any page.
    */
-  trustBadges: [
-    'AES-256 at rest',
-    'TLS 1.3 in transit',
-    'UK GDPR controls in place',
-    'EU data residency',
-    SOA_STATEMENT,
-    'ICO registered',
-  ] as string[],
+  /*
+   * [2026-10-21, R285-WEB-CLAIMS-AUDIT-01, D255] THE NOTE ABOVE IS SUPERSEDED.
+   * The owner ruled that customer facing copy says what we do, positively:
+   * "Built to ISO 27001 controls" and "GDPR compliant" are approved, and the
+   * only boundary is a certificate or attestation we do not hold. The six
+   * badges are the ones the live site showed, read from site-facts.json
+   * trust_badges so the footer, /about/, /security/, /pricing/ and the contact
+   * form cannot disagree. check-site-facts.mjs fails the build if a page with
+   * this row is missing one of them.
+   */
+  trustBadges: TRUST_BADGES,
   /*
    * [2026-08-31] THE ASTERISK AND ITS FOOTNOTE ARE GONE, AND NOTHING WAS
    * WEAKENED BY REMOVING THEM.

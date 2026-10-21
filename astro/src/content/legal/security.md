@@ -19,7 +19,7 @@ Disk-level AES-256-GCM with automatic key rotation across databases, file storag
 
 Forward-secret HTTPS on every request with HSTS preload and modern cipher suites only.
 
-### UK GDPR controls in place
+### GDPR compliant
 
 Subject rights supported end to end, with lawful basis, retention and deletion documented. A Data Processing Agreement is available for customers on request, currently in draft pending legal review.
 
@@ -27,9 +27,9 @@ Subject rights supported end to end, with lawful basis, retention and deletion d
 
 Primary customer data is stored in the EU, in AWS eu-west-1 (Ireland). Our API runs in the EU and the web application runs in the UK. Full processing locations are listed under sub-processors below.
 
-### ISO/IEC 27001 Annex A
+### ISO 27001 controls
 
-ISO/IEC 27001 Annex A reviewed in our own Statement of Applicability. No certificate held.
+Built to ISO 27001 controls. We follow ISO/IEC 27001 and review every Annex A control in our own Statement of Applicability.
 
 ### ICO Registered Data Controller
 
@@ -88,11 +88,11 @@ Platform access is enforced in depth: organisation-scoped roles at the applicati
 - Required for Owner/Admin actions.
 - Session revocation on demand.
 
-## Certifications and ISO/IEC 27001
+## ISO 27001 controls
 
-Velstrian holds no security certification today. ISO/IEC 27001 Annex A is reviewed in our own Statement of Applicability, and no certificate is held. Internal security reviews run continuously, and OWASP practices are applied to all application development. The control set, the risk register, the statement of applicability, the internal audit and the management review are maintained as documents and are available on request.
+We follow ISO/IEC 27001 and review every Annex A control in our own Statement of Applicability. Internal security reviews run continuously, and OWASP practices are applied to all application development. The control set, the risk register, the statement of applicability, the internal audit and the management review are maintained as documents and are available on request.
 
-Cyber Essentials is the certification we expect to pursue first.
+Cyber Essentials is the first certification we plan to take.
 
 ## AI data handling
 
@@ -132,10 +132,10 @@ Velstrian targets 99.5% monthly uptime, with independent public status monitorin
 
 ## Finished your review?
 
-Everything above is what we can evidence today, including the gaps. If it clears your bar, the next step is access to a live workspace. If it does not, tell us which control is missing and we will say plainly whether it is on the roadmap.
+Everything above is what we can show you today. If it meets your needs, the next step is a live workspace. If you need a control you do not see here, ask us and we will tell you plainly where it stands.
 
 [Start now](https://app.crowagent.ai/signup) [Book a 30-minute demo](https://calendly.com/crowagent-platform/30min)
 
-ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. ISO/IEC 27001 Annex A reviewed in our own Statement of Applicability, no certificate held.
+ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. Built to ISO 27001 controls. GDPR compliant.
 
 [Privacy Policy](/privacy/) [Sub-processors](#sub-processors) [Status Page](https://status.velstrian.com)

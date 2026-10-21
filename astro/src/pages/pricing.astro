@@ -168,6 +168,7 @@ import {
   SIGNUP_URL,
   startHref,
 } from '../data/pricing';
+import { TRUST_BADGES } from '../data/site-facts';
 
 const title = 'Velstrian Bid pricing | Plans from £49 a month | Velstrian';
 const description =
@@ -283,6 +284,8 @@ const TRUST = [
   { state: 'yes', label: 'EU data storage on Supabase, AWS eu-west-1 (Ireland)' },
   { state: 'yes', label: 'Volume licensing and invoice billing' },
   { state: 'yes', label: 'Single sign-on via SAML 2.0, with SCIM provisioning, on every plan' },
+  /* D255: the footer's compliance badges, word for word from site-facts.json. */
+  ...TRUST_BADGES.filter((b) => b === 'GDPR compliant' || b === 'Built to ISO 27001 controls').map((label) => ({ state: 'yes', label })),
   /* R285-WEB-CLAIMS-AUDIT-01 P12, D252 (3): the "SOC 2 evidence pack (on the
      roadmap)" row is removed. No roadmap row exists for it and the company
      holds no certification (D250). */

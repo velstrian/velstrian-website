@@ -189,9 +189,19 @@ const RULES = [
   },
   {
     record: 'certifications',
-    why: 'The company holds no certification (D250). No badge, no SOC 2 (D252 (3)), no "built to ISO 27001" (D252 (2)).',
+    why: 'D255: say what we do, positively. "Built to ISO 27001 controls", "follows ISO/IEC 27001" and "GDPR compliant" are approved. The one boundary is a certificate or attestation the company does not hold, so "ISO 27001 certified", "certified to ISO 27001", "SOC 2" and "Cyber Essentials certified" fail the build. Every page that carries the footer must show the six trust badges from trust_badges, word for word.',
     check(pages) {
-      return banned(pages, FACTS.certifications.banned);
+      const out = banned(pages, FACTS.certifications.banned, 'gi');
+      /* The trust strip is the footer's, read from trust_badges. A page that
+         carries the footer and is missing a badge means a second, local list
+         has crept back in. */
+      for (const p of pages) {
+        if (!/class="[^"]*footer-credibility/.test(p.html)) continue;
+        for (const b of FACTS.trust_badges.list) {
+          if (!p.text.includes(b)) out.push({ route: p.route, hit: `missing trust badge "${b}"`, ctx: 'footer-credibility' });
+        }
+      }
+      return out;
     },
   },
   {

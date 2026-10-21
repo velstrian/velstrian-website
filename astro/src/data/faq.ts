@@ -293,7 +293,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'Is my data secure?',
         answer:
-          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. Velstrian Systems Ltd is registered with the ICO as a data controller, and the UK GDPR controls are in place: a data processing agreement on request, a subject access address and a published retention table. Customer data is stored in the EU (Ireland).',
+          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. Velstrian Systems Ltd is registered with the ICO as a data controller. We are UK GDPR compliant and built to ISO 27001 controls, with a data processing agreement on request. Customer data is stored in the EU (Ireland).',
         link: { label: 'See our Security page for full details', href: '/security/' },
       },
     ],

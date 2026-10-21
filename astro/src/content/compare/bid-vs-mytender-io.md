@@ -49,7 +49,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR controls and ICO registration. ISO/IEC 27001 Annex A is reviewed in our own Statement of Applicability, and no certificate is held. <a href="/security/">Security</a> sets out each control and states which certifications Velstrian does not hold.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), GDPR compliant, ICO registered and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control.</dd>
 <dt class="meta">mytender.io</dt>
 <dd>Virtual Private Cloud deployment, reported by Future Worlds on 21 May 2025 and listed in the sources at the foot of this page. Encryption, data residency and registration detail are not documented there.</dd>
 </dl>

@@ -78,14 +78,10 @@ const RULES = [
      * each of which a procurement reader takes as a status. Naming the standard
      * on a published page is the act this guards.
      *
-     * WHICH MAKES THE HEDGE LOAD-BEARING. The site's `/security` page is exemplary
-     * about ISO 27001: "We follow ISO 27001 controls. We are not certified yet",
-     * and "We do not currently hold ISO 27001, SOC 2 or Cyber Essentials
-     * certification". Copy in that shape about 42001 is honest and must not fail,
-     * so `unless` clears a denial within the window and nothing else does. An
-     * aspiration such as "planned" or "on the roadmap" is NOT a denial and is not
-     * listed: a plan published beside a standard reads as progress, which is the
-     * defect this exists to catch.
+     * [2026-10-21, D255] THE DENIAL NO LONGER CLEARS IT. This rule used to carry
+     * an `unless` that let "we are not certified" style wording through. The
+     * owner ruled that defensive wording goes, so there is no hedge left to
+     * protect, and a standard we neither hold nor follow is simply not named.
      *
      * IF CERTIFICATION IS EVER ACHIEVED, this rule is the change: quote the
      * certificate number and the UKAS-accredited body on the page and add a named
@@ -95,17 +91,26 @@ const RULES = [
      * issued it.
      */
     id: 'iso42001-unearned',
-    pattern: /ISO(?:\/IEC)?[\s ]*42001/gi,
-    unless:
-      /\bnot\s+(?:yet\s+)?(?:certified|accredited|audited)\b|\bdo(?:es)?\s+not\s+(?:currently\s+)?hold\b|\bwe\s+hold\s+(?:no|none)\b|\bno\s+ISO(?:\/IEC)?\s*42001\b/i,
-    message: 'ISO 42001 named on a published page without a denial beside it',
+    pattern: /ISO(?:\/IEC)?[\s ]*42001/gi,
+    message: 'ISO 42001 named on a published page',
     why:
-      'CrowAgent holds no ISO/IEC 42001 certification and none is in progress. Measured\n' +
-      '      2026-08-17: zero mentions in the site source, and the owner record of the same\n' +
-      '      day states CrowAgent holds none of ISO 42001, ISO 27001 or SOC 2. Publishing an\n' +
-      '      aspiration as a status is a credibility defect in procurement, where the claim is\n' +
-      '      checkable against a certification body register. Either state the position the way\n' +
-      '      /security states it for ISO 27001, or cite the certificate and the accredited body.',
+      'D255 (2026-10-21): say what we do, positively, and never claim a certificate we do\n' +
+      '      not hold. CrowAgent neither holds nor follows ISO/IEC 42001, so there is nothing\n' +
+      '      positive to say about it and a mention reads as a status. A denial beside it no\n' +
+      '      longer clears the rule: defensive wording is what D255 removed.',
+  },
+  {
+    /* D255 (2026-10-21). The one boundary the owner kept: never claim a
+       certificate or attestation the company does not hold. "Built to ISO 27001
+       controls", "follows ISO/IEC 27001" and "GDPR compliant" are approved and
+       do not match. check-site-facts.mjs holds the same line on the built pages. */
+    id: 'certificate-unheld',
+    pattern: /\bISO(?:\/IEC)?\s*27001\s+certified\b|\bcertified\s+to\s+ISO(?:\/IEC)?\s*27001\b|\bSOC\s*2\b|\bCyber\s+Essentials(?:\s+Plus)?\s+certified\b/gi,
+    message: 'a certificate or attestation the company does not hold',
+    why:
+      'D255: the company holds no ISO 27001 certificate, no SOC 2 report and no Cyber\n' +
+      '      Essentials certificate. Say what we do ("Built to ISO 27001 controls"), never that\n' +
+      '      we are certified.',
   },
   {
     id: 'ppn002-old-themes',
@@ -242,6 +247,12 @@ const ALLOW = [
    * of them has shipped on this site at least once. Softening or deleting a
    * guard because the defect is currently absent is how it comes back.
    */
+  {
+    rule: 'certificate-unheld',
+    file: 'data/site-facts.json',
+    reason:
+      'D255: this file is the banned list itself. certifications.banned names each false certification claim so check-site-facts.mjs can fail a built page that carries one. It is data read by the gate, never rendered.',
+  },
 ];
 
 const EXT = new Set(['.astro', '.md', '.mdx', '.ts', '.tsx', '.js', '.json']);
