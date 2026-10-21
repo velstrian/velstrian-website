@@ -472,20 +472,6 @@
   flex-wrap: wrap;
 }
 
-.pg-bid .bid-timeline__stat {
-  font-family: var(--font-body);
-  font-size: var(--t-caption);
-  color: var(--c-text-sub);
-}
-
-.pg-bid .bid-timeline__stat strong {
-  font-family: var(--font-display);
-  font-size: var(--t-h4);
-  color: var(--c-verified);
-  font-weight: 700;
-  margin-right: 4px;
-}
-
 .pg-bid .bid-timeline__context {
   margin: 0;
   font-family: var(--font-mono);
@@ -762,12 +748,20 @@
   color: var(--c-ambient-start);
 }
 
-/* `auto` on the inline axis, added 2026-08-03. A `max-width` with no auto
-   margin is not a measure, it is a left alignment: this 18ch heading sat in a
-   centred block with all its slack on one side, which is the defect
-   scripts/check-render.js describes for capped columns. */
+/* `auto` on the inline axis was added 2026-08-03, when this column was
+   CENTRED text and a capped heading with no auto margin sat with all its slack
+   on one side. That premise no longer holds: styles/alignment.css rule 4 now
+   flips any parent of a `.cap__body` to `text-align: left`, so `.cap__text` is
+   a LEFT column with a mono step number pinned to its left edge. Centring the
+   18ch heading and the 48ch body inside that column put three left edges on
+   one row, measured 2026-10-21 at 1280: number x=24, body x=47, heading x=54,
+   and 628 / 700 / 706 on the art-left rows. One left edge is the fix, so the
+   slack goes to the right, which in a left column beside an artefact is what
+   slack is for. scripts/check-render.js judges only a block that is the sole
+   thing in its track, and `.cap` is a three-column grid, so the capped-column
+   rule does not apply here and is not being dodged. */
 .pg-bid .cap__h {
-  margin: 0 auto var(--stack-2);
+  margin: 0 0 var(--stack-2);
   font-family: var(--font-display);
   font-size: var(--t-h2);
   font-weight: var(--t-w-h2);
@@ -777,10 +771,9 @@
   color: var(--c-text);
 }
 
-/* Same as .cap__h directly above: a 48ch cap needs the auto margin, or the
-   measure reads as a gutter. */
+/* Same as .cap__h directly above: one left edge with the step number. */
 .pg-bid .cap__body {
-  margin: 0 auto;
+  margin: 0;
   max-width: 48ch;
   font-family: var(--font-body);
   font-size: var(--t-body);

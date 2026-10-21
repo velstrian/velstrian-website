@@ -116,8 +116,10 @@ export interface Slide {
 
 interface Props {
   slides: Slide[];
-  /** The path shown in the chrome bar, after the host. */
-  path?: string;
+  /** The path shown in the chrome bar, after the host. Required, because each
+   *  product lives at its own app route (`bid`, `buyer`) and a default would
+   *  print one product's route over the other's screens. */
+  path: string;
   /** Accessible name for the carousel region. */
   label?: string;
   /**
@@ -153,7 +155,7 @@ interface Props {
 
 const {
   slides,
-  path = 'mark',
+  path,
   label = 'Velstrian product screens',
   priority = false,
   stageMaxPx,
@@ -189,6 +191,11 @@ const CIRC = 81.681;
 /* Declared in data/crowmark-screens.ts beside the assets it names. See the
    ladder note further down this file for why it moved. */
 import { variant, avifSrcset as avifSrcsetFor } from '../../data/crowmark-screens';
+/* The address bar's host is the app's real host, read from data/app.ts, so the
+   next host change is one edit there rather than a stale string here. It was a
+   typed literal until 2026-10-21. */
+import { APP_ORIGIN } from '../../data/app';
+const APP_HOST = new URL(APP_ORIGIN).host;
 
 /** This component's slides carry their own master width, so bind it here. */
 const avifSrcset = (s: Slide) => avifSrcsetFor(s.src, s.width);
@@ -396,7 +403,7 @@ const isCarousel = slides.length > 1;
         narrow. */}
     <div class="pcar__chrome">
       <span class="pcar__lights" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="pcar__url">app.crowagent.ai<span class="pcar__url-path">/{path}</span></span>
+      <span class="pcar__url">{APP_HOST}<span class="pcar__url-path">/{path}</span></span>
     </div>
 
     <div class="pcar__viewport">

@@ -82,10 +82,22 @@
 /* --sec-pad-y, not --sec-gap, and the reason is measurable: the two ghost
    planes are positioned at -13% and -7% of the stack's own height, which at
    the height this artefact settles to is about 65px ABOVE the front plane.
-   At one --sec-gap of clearance they landed on the price hint above them. */
+   At one --sec-gap of clearance they landed on the price hint above them.
+
+   ── AND --sec-pad-y ALONE STOPPED BEING ENOUGH (2026-10-21) ──────────────
+   --sec-pad-y was cut from 104 to 88 at 1440 and from 88 to 72 at 390, and the
+   far ghost came back onto the CTA row and the price hint. Measured with
+   getBoundingClientRect, stack top minus the bottom of the buttons and hint:
+   -18px at 1280, -26px at 1100, -12px at 1440 and -6px at 390, on /bid/ and
+   /buy/ alike. The overhang is the -13% ghost plus, from 1100 up, the 5deg
+   tilt lifting the left corner by roughly sin(5deg) x half the stack width.
+   So the clearance is stated as the overhang it has to clear: --stack-3 for
+   the ghost, and 2% of the content box for the tilt in the query below,
+   because a margin percentage resolves against the width the tilt scales
+   with. Not by shrinking the ghost offsets, see the bleed note below. */
 .duty {
   position: relative;
-  margin: var(--sec-pad-y) auto 0;
+  margin: calc(var(--sec-pad-y) + var(--stack-3)) auto 0;
   max-width: var(--measure-band);
 }
 
@@ -214,7 +226,10 @@
  * 1160px measure less its 48px gutters. Refuted 2026-08-08: the panel already
  * matches the concept, and moving it to 1064 would move it away. */
 @media (min-width: 1100px) {
-  .duty { transform: rotate(5deg); }
+  .duty {
+    transform: rotate(5deg);
+    margin-top: calc(var(--sec-pad-y) + var(--stack-3) + 2%);
+  }
 }
 
 .duty__kicker {

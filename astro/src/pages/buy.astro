@@ -456,7 +456,7 @@ const UPDATED = new Date('2026-08-05');
         `.workspace__screens[data-astro-cid-BUYERS]` and match nothing. Measured
         in this repo; the same note is in components/blog/PostImage.astro. */}
     <div class="workspace__screens">
-      <Carousel slides={BUYER_SCREENS} path="mark" label="Velstrian Buy screens" />
+      <Carousel slides={BUYER_SCREENS} path="buyer" label="Velstrian Buy screens" />
     </div>
   </Section>
 
@@ -563,7 +563,7 @@ const UPDATED = new Date('2026-08-05');
 
     <p class="note">
       Responding to tenders rather than running them?{' '}
-      <a href="/bid/">Velstrian Bid is a different product with its own published pricing</a>.
+      <a href="/bid/">Velstrian Bid is a different product with its own published pricing.</a>
     </p>
   </Section>
 
@@ -734,6 +734,7 @@ const UPDATED = new Date('2026-08-05');
       </div>
 
       <div class="card surface">
+        <p class="eyebrow kicker">{BUYER_PORTFOLIO.who}</p>
         <h3 class="card-h card__h">{BUYER_PORTFOLIO.name}</h3>
         <p class="access__price">
           £{BUYER_PORTFOLIO.monthly} a month<span>or £{portfolioAnnual} a year, which is 10% off</span>
