@@ -48,9 +48,17 @@ import Button from '../ui/Button.astro';
 interface Props {
   /** Current route path, e.g. "/crowmark". Drives aria-current highlighting. */
   currentPath: string;
+  /**
+   * R285-WEB-ENTERPRISE-REDESIGN-01, design system version 3. `light` puts the
+   * bar on the light role scope (tokens.css .on-light), so on a page whose
+   * first band is light the header is one surface with it rather than a dark
+   * slab above it. The bar paints from role tokens only, so nothing else here
+   * changes. Pages that do not pass it keep the dark bar.
+   */
+  tone?: 'light';
 }
 
-const { currentPath } = Astro.props;
+const { currentPath, tone } = Astro.props;
 
 function isActive(href: string): boolean {
   if (href.startsWith('#')) return false;
@@ -78,7 +86,7 @@ const menus = NAV.menus.map((menu) => ({
 }));
 ---
 
-<header class="ca-nav" id="ca-nav">
+<header class={tone === 'light' ? 'ca-nav on-light' : 'ca-nav'} id="ca-nav">
   <nav class="ca-nav-row" aria-label="Main navigation">
     <a href={NAV.logo.href} class="ca-logo" aria-label={NAV.logo.ariaLabel}>
       <span class="ca-logo-mark" aria-hidden="true">
@@ -551,6 +559,14 @@ const menus = NAV.menus.map((menu) => ({
     top: 0;
     z-index: 100;
     border-bottom: 1px solid var(--c-border);
+  }
+  /* Version 3 light bar (the `tone` prop). The fill stays on ::before for the
+     backdrop root reason above, and the header ALSO states the same ground,
+     so anything measuring what a focus ring is drawn against (check-
+     treatments.js reads the first painted ancestor) sees the light bar it is
+     really on rather than the dark page behind it. Same colour, no change. */
+  .ca-nav.on-light {
+    background-color: var(--c-bg);
   }
   .ca-nav::before {
     content: '';

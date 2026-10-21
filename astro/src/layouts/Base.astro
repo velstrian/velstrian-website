@@ -106,6 +106,18 @@ interface Props {
    * keeps the hard steps it has always had.
    */
   ladder?: 'soft';
+  /**
+   * R285-WEB-ENTERPRISE-REDESIGN-01. `evidenced` marks a page built from the
+   * evidenced answer system (styles/evidenced.css). It swaps the preloads to the
+   * two faces that system uses, Inter and the document serif, and puts
+   * `ea-type` on <body> so --font-display resolves to Inter on that page,
+   * which keeps Plus Jakarta Sans off its network path entirely. Pages that do
+   * not pass it are unchanged.
+   */
+  typeface?: 'evidenced';
+  /** Version 3: the header takes the light role scope when the page opens on a
+   *  light band (components/nav/Nav.astro `tone`). */
+  headerTone?: 'light';
   schema?: Record<string, unknown>[];
   ogTitle?: string;
   ogDescription?: string;
@@ -129,7 +141,10 @@ const {
   twitterTitle,
   twitterDescription,
   ladder,
+  typeface,
+  headerTone,
 } = Astro.props;
+const evidenced = typeface === 'evidenced';
 
 /**
  * THE PAGE HOOK: one class on <body>, derived from the route, so that a
@@ -256,7 +271,11 @@ const pageClass = `pg-${
        ~ scripts/build-fonts.py, and the ranges they now declare are enforced by
        ~ scripts/check-font-coverage.js. Preloaded weight went from 60,500 to
        ~ 43,816 bytes, 27.6 percent, and no page lost a single glyph. -->
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/PlusJakartaSans-700.woff2" />
+    {evidenced ? (
+      <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/VelstrianDocumentSerif-400.woff2" />
+    ) : (
+      <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/PlusJakartaSans-700.woff2" />
+    )}
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/Inter-var.woff2" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -341,7 +360,7 @@ const pageClass = `pg-${
   {/* The route's own class. See the note on `pageClass` in the frontmatter.
       It is what lets a page-sized stylesheet live in src/styles/ and still be
       unable to reach any other route. */}
-  <body class={pageClass}>
+  <body class={evidenced ? `${pageClass} ea-type` : pageClass}>
 
     {/* The page grain. One element, in the layout, so every route gets it and
         no page can forget it. See the .sv-page-grain note below for why the
@@ -366,7 +385,7 @@ const pageClass = `pg-${
       added without them. That is the whole point of owning the shell.
     */}
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <Nav currentPath={path} />
+    <Nav currentPath={path} tone={headerTone} />
     <main id="main-content" tabindex="-1" data-ladder={ladder}>
       <slot />
     </main>

@@ -714,6 +714,62 @@ if (stale.length) {
   for (const k of stale) console.log(`    ${k}`);
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+ * RULE 4 — NO RED, ANYWHERE THE SITE PAINTS (D256, owner 2026-10-21)
+ *
+ * "No red, coral or red pink hue in any Velstrian surface ... A refusal, an
+ * unsupported claim, an error or a problem state uses purple." Rules 1 to 3
+ * keep a colour decision inside tokens.css. This one says what that decision
+ * may not be. Every hex and rgb() literal in src/ is converted to HSL, comments
+ * stripped, and any chromatic value whose hue sits in the red family (340 to
+ * 360 and 0 to 25 degrees, saturation 30 percent or more, not near black or
+ * white) FAILS. Measured when written: the one hit was --c-red #C06F68, the
+ * fake window close dot, which became neutral grey in the same commit.
+ *
+ * brand.source.json is NOT scanned: it is the cross repository source and
+ * still holds the platform's coral pigments, which D256 (3) moves in the app
+ * transformation. The website binds none of them (websiteBindings), and if one
+ * were bound it would arrive in tokens.css as a literal and fail here.
+ * ══════════════════════════════════════════════════════════════════════════ */
+{
+  const hsl = (r, g, b) => {
+    r /= 255; g /= 255; b /= 255;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2;
+    if (mx === mn) return [0, 0, l];
+    const d = mx - mn;
+    const s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+    const h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    return [h * 60, s, l];
+  };
+  const reds = [];
+  const scan = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) { scan(p); continue; }
+      if (!/\.(css|astro|ts|js|svg)$/.test(e.name)) continue;
+      const text = fs.readFileSync(p, 'utf8').replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '));
+      for (const m of text.matchAll(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b|rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g)) {
+        let r, g, b;
+        if (m[1]) {
+          const h = m[1].length === 3 ? m[1].split('').map((c) => c + c).join('') : m[1];
+          [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+        } else [r, g, b] = [+m[2], +m[3], +m[4]];
+        const [hue, sat, lig] = hsl(r, g, b);
+        if ((hue >= 340 || hue <= 25) && sat >= 0.3 && lig > 0.12 && lig < 0.92) {
+          reds.push(`${path.relative(SRC, p).split(path.sep).join('/')}:${text.slice(0, m.index).split('\n').length}  ${m[0]}  hue ${Math.round(hue)}`);
+        }
+      }
+    }
+  };
+  scan(SRC);
+  if (reds.length) {
+    console.error(`\n  [no-red] ${reds.length} red family colour(s), D256 forbids red anywhere. A problem state is purple (--c-refusal):\n`);
+    for (const x of reds) console.error(`    ${x}`);
+    process.exit(1);
+  }
+  console.log('  no-red (rule 4, D256): no red, coral or red pink literal anywhere under src/');
+}
+
 if (violations.length) {
   console.error(`\n  ${violations.length} violation(s). Each is a colour decision taken outside ${TOKENS}:\n`);
   for (const v of violations) {

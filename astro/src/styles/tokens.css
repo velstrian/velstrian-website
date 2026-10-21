@@ -742,6 +742,10 @@
   --space-8:  32px;
   --space-10: 40px;
   --space-12: 48px;
+  /* R285-WEB-ENTERPRISE-REDESIGN-01: the larger steps the enterprise brief's
+     space scale names (64, 96), used by styles/evidenced.css. */
+  --space-16: 64px;
+  --space-24: 96px;
 
   /* ── Vertical rhythm ────────────────────────────────────────────────────
      ══════════════════════════════════════════════════════════════════════════
@@ -1613,11 +1617,16 @@
    * derives them onto the hue shelf automatically and rule 1 stops any component
    * naming them; a stylesheet may only reach the three roles below, which are
    * named for the window control each one depicts rather than for its colour. */
-  --c-red:          #C06F68;
+  /* D256 (owner, 2026-10-21): NO RED ANYWHERE. --c-red #C06F68 was the last red
+     the site painted, and only as this fake close dot. The close dot is a
+     window control, not a refusal, so it takes the neutral muted grey and the
+     red pigment is gone from the shelf. check-palette-roles.js rule 4 fails the
+     build if a red family literal returns. Version 3 frames draw no window
+     dots at all, so this only reaches the older DeviceChrome and Carousel. */
   --c-amber-chrome: #A57D48;
   --c-green:        #599260;
 
-  --c-chrome-close:    var(--c-red);
+  --c-chrome-close:    var(--c-text-muted);
   --c-chrome-minimise: var(--c-amber-chrome);
   --c-chrome-maximise: var(--c-green);
 
@@ -3355,4 +3364,341 @@
 :is(h1, h2, h3, h4, h5, h6) > a:not(.btn),
 :is(p, li, dd, dt, td, th, figcaption, blockquote) > :is(strong, em, b, i, span) > a:not(.btn) {
   padding-block: 4px;
+}
+
+/* ============================================================================
+   THE EVIDENCED ANSWER SYSTEM (R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-21)
+
+   The token layer for docs/design/R285-DESIGN-STRATEGY-2026-10-21.md, which the
+   owner adopted on 2026-10-21. Every value below is a ROLE bound to a pigment
+   that already exists above, so no new hex value enters the palette and
+   check-brand-drift.js has nothing new to compare. Components in
+   components/evidenced/ and styles/evidenced.css read ONLY these names.
+
+   Roles, from strategy section 5:
+     canvas, raised, ink, sub, muted   the page and its text
+     accent                            the action fill and the citation line
+     accent-ink                        accent used as text, where the fill
+                                       pigment would fall under 4.5:1 on canvas
+     refusal                           purple, exactly one use: a claim with
+                                       no proof
+     paper, paper-ink                  the document voice. Evidence and tender
+                                       passages are set as a sheet of paper in
+                                       the serif, so a reader can tell in one
+                                       glance which words are the tender's and
+                                       which are ours
+     field                             the one indigo light field, used twice,
+                                       behind the hero product and the close
+   ============================================================================ */
+:root {
+  --font-document: 'Velstrian Document Serif', Georgia, 'Times New Roman', serif;
+  --font-ui: var(--font-body);
+
+  --ea-canvas: var(--c-bg);
+  --ea-raised: var(--c-raised);
+  --ea-ink: var(--c-text);
+  --ea-sub: var(--c-text-sub);
+  --ea-muted: var(--c-text-muted);
+  --ea-rule: color-mix(in srgb, var(--c-text) 10%, transparent);
+  --ea-rule-strong: color-mix(in srgb, var(--c-text) 22%, transparent);
+  --ea-accent: var(--c-teal-dark);
+  --ea-accent-ink: var(--c-teal);
+  --ea-accent-wash: color-mix(in srgb, var(--c-teal-dark) 18%, transparent);
+  --ea-accent-hover: color-mix(in srgb, var(--c-teal-dark) 86%, var(--c-white));
+  --ea-on-accent: var(--c-white);
+  /* The refusal is PURPLE, never red. Owner, absolute, 2026-10-21: "you must
+     not use red color and use purple if you wanted to show refusal". It is
+     --c-violet (#A78BFA, the Velstrian Bid identity purple, about 7.3:1 on the
+     canvas), never colour alone: the struck figure also carries a strike line
+     and the "Left out" tag carries an icon and words. */
+  --c-refusal: var(--c-violet);
+  --ea-refusal: var(--c-refusal);
+  --ea-refusal-wash: color-mix(in srgb, var(--c-refusal) 16%, transparent);
+  --ea-paper: var(--c-text);
+  --ea-paper-ink: var(--c-bg);
+  --ea-paper-sub: color-mix(in srgb, var(--c-bg) 70%, var(--c-text));
+  --ea-paper-rule: color-mix(in srgb, var(--c-bg) 14%, var(--c-text));
+  --ea-paper-mark: color-mix(in srgb, var(--c-teal-dark) 22%, var(--c-text));
+
+  /* The light field. Two soft ellipses of the accent over the canvas, no hue
+     but the accent's own. Strategy 5: no other gradient on the page. */
+  --ea-field:
+    radial-gradient(ellipse 55% 60% at 50% 38%, color-mix(in srgb, var(--c-teal-dark) 30%, transparent), transparent 72%),
+    radial-gradient(ellipse 90% 55% at 50% 100%, color-mix(in srgb, var(--c-teal-dark) 12%, transparent), transparent 70%);
+
+  /* Type. Statement 64 / 40, section 40 / 30, per strategy 5. */
+  --t-statement: clamp(2.5rem, 1.75rem + 2.6vw, 4rem);
+  --t-ea-h2: clamp(1.875rem, 1.45rem + 1.25vw, 2.5rem);
+  --t-ea-h3: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --t-ea-lead: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+  --t-ea-body: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+  --t-ea-small: 0.875rem;
+  --t-ea-tiny: 0.8125rem;
+  --t-w-statement: 600;
+  --t-w-ea-h2: 600;
+  --t-w-ea-strong: 600;
+  --t-w-ea-medium: 500;
+  --t-w-ea-body: 400;
+  --ls-statement: -0.025em;
+  --ls-ea-h2: -0.02em;
+  --ls-ea-h3: -0.01em;
+  --lh-statement: 1.05;
+  --lh-ea-h2: 1.12;
+  --lh-ea-body: 1.6;
+  --lh-ea-quote: 1.65;
+
+  /* Layout. Sections are separated by space, never by boxes. */
+  --ea-measure: var(--measure);
+  --ea-gutter: clamp(1rem, 0.4rem + 2.6vw, 2rem);
+  --ea-sec-y: clamp(4.5rem, 3rem + 6vw, 9rem);
+  --ea-head-gap: clamp(2rem, 1.4rem + 2.4vw, 3.5rem);
+  --ea-copy: 38rem;
+  --ea-lead-w: 36rem;
+  --ea-statement-w: 15em;
+  --ea-hero-w: 18em;
+  --ea-h2-w: 22em;
+  --ea-refusal-w: 14em;
+  --ea-close-w: 16em;
+  --ea-answer-w: 34rem;
+  --ea-stage-w: 28rem;
+  --ea-frame-narrow: 60rem;
+  --ea-cite-gutter: clamp(2.75rem, 1rem + 4vw, 4.5rem);
+
+  /* Components. */
+  --ea-radius-btn: 8px;
+  --ea-radius-frame: var(--radius-frame);
+  --ea-radius-sheet: 4px;
+  --ea-btn-h: 44px;
+  --ea-btn-pad: 20px;
+  --ea-bar-h: 40px;
+  --ea-frame-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--c-text) 7%, transparent),
+    0 40px 90px -40px color-mix(in srgb, var(--c-floor) 92%, transparent);
+  --ea-sheet-shadow: 0 18px 40px -24px color-mix(in srgb, var(--c-floor) 90%, transparent);
+  --ea-cite-stroke: 1.5px;
+  --ea-sweep: linear-gradient(105deg, transparent 25%, color-mix(in srgb, var(--c-white) 30%, transparent) 50%, transparent 75%);
+  --ea-focus: 2px solid var(--c-teal);
+
+  /* Motion. One sweep per hover, one refusal moment per page, nothing loops. */
+  /* On the site's duration scale (check-transitions.js), not a new number. */
+  --ea-dur-hover: var(--dur-fast);
+  --ea-dur-sweep: 400ms;
+  --ea-dur-step: 320ms;
+  --ea-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ============================================================================
+   DESIGN SYSTEM VERSION 3: BANDS, STAGES, ELEVATION
+   (R285-WEB-ENTERPRISE-REDESIGN-01, strategy section 0.8, owner 2026-10-21 night)
+
+   Version 3 alternates light and dark bands, floats product UI on a vivid
+   indigo to purple stage, and lifts surfaces on a three step elevation scale.
+   The site's ground was dark only, so the light band needed light pigments.
+   NONE IS INVENTED. Each is the LIGHT column of a pigment brand.source.json
+   already holds for the Carbon and Iris palette the owner chose on 2026-10-18
+   (R285-P2-BRAND-DEFAULT-CARBON-IRIS-01), the values the platform paints under
+   [data-theme="light"]:
+
+     --c-light-0  #FFFFFF  iris-ground-2 light   the light canvas
+     --c-light-1  #F9FAFB  iris-ground-1 light   the alternate light canvas
+     --c-light-2  #F1F3F5  iris-ground-3 light   a well on a light band
+     --c-light-3  #EAECEE  iris-ground-4 light   the light hairline
+     --c-ink-0    #090A0B  iris-ink-0 light      ink on light, 19.6:1 on white
+     --c-ink-1    #2A2D33  iris-ink-1 light      sub ink, 13.7:1 on white
+     --c-ink-2    #5C626E  iris-ink-2 light      muted ink, 6.1:1 on white,
+                                                 5.8:1 on --c-light-1
+     --c-iris-ink #434EAF  iris-accent light     indigo as text on light, 7.4:1
+     --c-mark-ink #6D28D9  --ca-mark-text light  purple as text on light, 7.1:1
+
+   A BAND IS A SCOPE THAT REBINDS THE ROLES, not a colour a component reads.
+   .band--light, .band--light-alt, .band--dark and .band--stage each redeclare
+   the site role tokens (--c-bg, --c-text, --c-border, --c-card,
+   --c-interactive and their family) AND the evidenced roles (--ea-*), so every
+   component inside, the shared TabSwitcher included, paints correctly on either
+   temperature without knowing which one it sits on. A custom property resolves
+   its var() where it is declared, which is why the --ea-* roles are restated in
+   each band rather than inherited from the :root binding above.
+
+   D256: NO RED. The stage runs indigo (--c-teal-dark, the iris fill) into
+   purple (--c-violet-deep), both on the shelf already. Refusal is purple on
+   both temperatures: --c-violet on dark, --c-mark-ink on light.
+   ============================================================================ */
+:root {
+  --c-light-0: #FFFFFF;
+  --c-light-1: #F9FAFB;
+  --c-light-2: #F1F3F5;
+  --c-light-3: #EAECEE;
+  --c-ink-0: #090A0B;
+  --c-ink-1: #2A2D33;
+  --c-ink-2: #5C626E;
+  --c-iris-ink: #434EAF;
+  --c-mark-ink: #6D28D9;
+
+  /* The stage. 135 degrees, indigo into purple, two light blooms for depth
+     and a fine grain laid over it by .ea-stage::after. White text reads 4.7:1
+     on the indigo stop and 5.7:1 on the purple one. */
+  --stage-from: var(--c-teal-dark);
+  --stage-to: var(--c-violet-deep);
+  --stage-gradient: linear-gradient(135deg, var(--stage-from) 0%, color-mix(in srgb, var(--stage-from) 45%, var(--stage-to)) 55%, var(--stage-to) 100%);
+  --stage-bloom:
+    radial-gradient(ellipse 55% 65% at 18% 0%, color-mix(in srgb, var(--c-white) 24%, transparent), transparent 62%),
+    radial-gradient(ellipse 45% 55% at 100% 100%, color-mix(in srgb, var(--c-violet) 50%, transparent), transparent 70%);
+  /* Fine grain, an SVG turbulence tile. img-src allows data: (_headers). */
+  --stage-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* The optional texture slot. Set it to
+     url(/Assets/images/r285-gemini/stage-texture.png) once that art is
+     approved, and every stage carries it. */
+  --stage-texture: none;
+  --stage-radius: 24px;
+  --stage-ink: var(--c-white);
+
+  /* Elevation, three steps. Rest is a hairline and no shadow. Raised is
+     product UI on a stage. Floating is the card that overlaps a stage edge. */
+  --elev-shadow-ink: var(--c-floor);
+  --elev-raised:
+    0 1px 2px color-mix(in srgb, var(--elev-shadow-ink) 8%, transparent),
+    0 10px 28px -10px color-mix(in srgb, var(--elev-shadow-ink) 24%, transparent);
+  --elev-floating:
+    0 2px 6px color-mix(in srgb, var(--elev-shadow-ink) 10%, transparent),
+    0 32px 70px -20px color-mix(in srgb, var(--elev-shadow-ink) 48%, transparent);
+
+  /* Version 3 type. Hero 72px at 1440, weight 600, tracking -0.03em. */
+  --t-hero: clamp(2.375rem, 1.25rem + 3.6vw, 4.5rem);
+  --ls-hero: -0.03em;
+  --lh-hero: 1.04;
+  --t-v3-h2: clamp(2rem, 1.35rem + 1.85vw, 3rem);
+  --ls-v3-h2: -0.025em;
+  --t-v3-lead: clamp(1.125rem, 1.02rem + 0.35vw, 1.25rem);
+  --t-v3-stat: clamp(2.25rem, 1.7rem + 1.6vw, 3rem);
+
+  /* Buttons and cards, version 3: 6px button radius, 48px tall. */
+  --v3-radius-btn: 6px;
+  --v3-btn-h: 48px;
+  --v3-radius-card: 12px;
+  --v3-tile: 40px;
+  --v3-tile-radius: 10px;
+
+  /* Section entrance: opacity and a 12px rise, 300ms, 60ms between items.
+     Product sequence steps settle --seq-step apart. Carousel slides 400ms. */
+  --reveal-rise: 12px;
+  --reveal-dur: 300ms;
+  --reveal-step: 60ms;
+  --seq-step: 420ms;
+  --slide-dur: 400ms;
+
+  /* The light sweep on a WHITE primary (dark band, stage): white on white
+     would be invisible, so it is a soft indigo pass instead. */
+  --ea-sweep-on-light: linear-gradient(105deg, transparent 25%, color-mix(in srgb, var(--c-teal-dark) 22%, transparent) 50%, transparent 75%);
+  /* The button fill on the default (dark) ground. Bands rebind it. */
+  --ea-btn-fill: var(--c-white);
+  --ea-btn-ink: var(--c-bg);
+  --ea-btn-fill-hover: var(--c-text-sub);
+  --ea-well: var(--c-panel);
+  /* The dark ground, resolved here at :root so a light band's rebinding of
+     --c-bg cannot reach it. The close band paints its lower half with it, so
+     the gradient panel overlaps the change into the dark footer, whose ground
+     is --c-panel (Footer.astro .ca-footer). */
+  --ground-dark: var(--c-panel);
+}
+
+.band--light,
+.band--light-alt,
+.on-light {
+  --c-bg: var(--c-light-0);
+  --c-floor: var(--c-light-2);
+  --c-panel: var(--c-light-0);
+  --c-raised: var(--c-light-0);
+  --c-lit: var(--c-light-2);
+  --c-card: var(--c-light-0);
+  --c-card-hover: var(--c-light-0);
+  --c-border: var(--c-light-3);
+  --c-border-hover: color-mix(in srgb, var(--c-ink-0) 24%, transparent);
+  --c-text: var(--c-ink-0);
+  --c-text-sub: var(--c-ink-1);
+  --c-text-muted: var(--c-ink-2);
+  --c-interactive: var(--c-ink-0);
+  --c-interactive-fill: var(--c-ink-0);
+  --c-interactive-fill-lit: var(--c-ink-1);
+  --c-interactive-fill-text: var(--c-light-0);
+  --c-interactive-glow: color-mix(in srgb, var(--c-ink-0) 30%, transparent);
+  --c-border-glow: var(--c-ink-0);
+  /* Composite tokens resolve where they are declared, so the two the shared
+     <Button> paints with are restated here to pick up the light roles. */
+  --grad-action: linear-gradient(135deg, var(--c-interactive-fill), var(--c-interactive-fill-lit));
+  --grad-ramp: linear-gradient(var(--ramp-angle, 180deg), var(--ramp-from, var(--c-lit)), var(--ramp-to, var(--c-raised)) var(--ramp-end, 100%));
+
+  --ea-canvas: var(--c-light-0);
+  --ea-raised: var(--c-light-0);
+  --ea-well: var(--c-light-1);
+  --ea-ink: var(--c-ink-0);
+  --ea-sub: var(--c-ink-1);
+  --ea-muted: var(--c-ink-2);
+  --ea-rule: var(--c-light-3);
+  --ea-rule-strong: color-mix(in srgb, var(--c-ink-0) 18%, transparent);
+  --ea-accent: var(--c-teal-dark);
+  --ea-accent-ink: var(--c-iris-ink);
+  --ea-accent-wash: color-mix(in srgb, var(--c-teal-dark) 12%, transparent);
+  --ea-refusal: var(--c-mark-ink);
+  --ea-refusal-wash: color-mix(in srgb, var(--c-mark-ink) 9%, transparent);
+  --ea-paper: var(--c-light-1);
+  --ea-paper-ink: var(--c-ink-0);
+  --ea-paper-sub: var(--c-ink-2);
+  --ea-paper-rule: var(--c-light-3);
+  --ea-paper-mark: color-mix(in srgb, var(--c-teal-dark) 16%, var(--c-light-0));
+  --ea-btn-fill: var(--c-ink-0);
+  --ea-btn-ink: var(--c-light-0);
+  --ea-btn-fill-hover: var(--c-ink-1);
+  --ea-focus: 2px solid var(--c-iris-ink);
+  --elev-shadow-ink: var(--c-ink-0);
+  color: var(--ea-ink);
+}
+
+/* A band paints its own ground. `.on-light` is the same role scope WITHOUT a
+   ground, for a light product surface (a screen, a card) that sits on a stage
+   or a dark band: product UI is always drawn light, as the app draws it. */
+.band--light,
+.band--light-alt,
+.band--dark {
+  background: var(--ea-canvas);
+}
+
+.band--light-alt {
+  --c-bg: var(--c-light-1);
+  --ea-canvas: var(--c-light-1);
+}
+
+.band--dark {
+  --ea-canvas: var(--c-bg);
+  --ea-raised: var(--c-raised);
+  --ea-well: var(--c-panel);
+  --ea-ink: var(--c-text);
+  --ea-sub: var(--c-text-sub);
+  --ea-muted: var(--c-text-muted);
+  --ea-rule: color-mix(in srgb, var(--c-text) 12%, transparent);
+  --ea-rule-strong: color-mix(in srgb, var(--c-text) 24%, transparent);
+  --ea-accent-ink: var(--c-teal);
+  --ea-refusal: var(--c-violet);
+  --ea-refusal-wash: color-mix(in srgb, var(--c-violet) 16%, transparent);
+  --ea-btn-fill: var(--c-white);
+  --ea-btn-ink: var(--c-bg);
+  --ea-btn-fill-hover: var(--c-text-sub);
+  --ea-focus: 2px solid var(--c-teal);
+  --elev-shadow-ink: var(--c-floor);
+  color: var(--ea-ink);
+}
+
+/* On a stage or a gradient band the ink is white, 4.7:1 or better on every
+   stop of the gradient. */
+.band--stage {
+  --ea-ink: var(--stage-ink);
+  --ea-sub: var(--stage-ink);
+  --ea-muted: var(--stage-ink);
+  --ea-rule: color-mix(in srgb, var(--stage-ink) 28%, transparent);
+  --ea-rule-strong: color-mix(in srgb, var(--stage-ink) 70%, transparent);
+  --ea-accent-ink: var(--stage-ink);
+  --ea-btn-fill: var(--c-white);
+  --ea-btn-ink: var(--c-ink-0);
+  --ea-btn-fill-hover: var(--c-light-2);
+  --ea-focus: 2px solid var(--c-white);
+  color: var(--ea-ink);
 }

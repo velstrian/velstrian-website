@@ -68,11 +68,31 @@ const raw = fs.readFileSync(TOKENS_CSS, 'utf8');
    argument rather than the palette. */
 const stripped = raw.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '));
 
+/* ONLY THE :root BINDING COUNTS. Design system version 3 (R285-WEB-ENTERPRISE-
+   REDESIGN-01, 2026-10-21) adds band scopes (.band--light, .on-light) that
+   REBIND --c-bg, --c-text and the rest inside a light section, the way a light
+   theme block does on the platform. Those are scoped role rebinds, not the
+   brand binding, and reading the LAST declaration in the file reported eight
+   of them as drift. The canonical value is the one declared in a top level
+   :root block, so only declarations inside one are read. */
+const rootRanges = [];
+for (const m of stripped.matchAll(/(?:^|\n)\s*:root\s*\{/g)) {
+  let depth = 1;
+  let i = m.index + m[0].length;
+  while (i < stripped.length && depth > 0) {
+    if (stripped[i] === '{') depth++;
+    else if (stripped[i] === '}') depth--;
+    i++;
+  }
+  rootRanges.push([m.index, i]);
+}
+const inRoot = (at) => rootRanges.some(([a, b]) => at > a && at < b);
+
 function declaredValue(token) {
   const re = new RegExp(`(?:^|\\n)[ \\t]*${token.replace(/-/g, '\\-')}[ \\t]*:[ \\t]*`, 'g');
   let m;
   let last = null;
-  while ((m = re.exec(stripped))) last = m.index + m[0].length;
+  while ((m = re.exec(stripped))) if (inRoot(m.index)) last = m.index + m[0].length;
   if (last === null) return null;
   const semi = stripped.indexOf(';', last);
   if (semi === -1) return null;

@@ -1476,11 +1476,15 @@
  * FinalCta sits outside the ladder BY CONSTRUCTION rather than by exemption:
  * it renders a div, not a section, so the selector cannot reach it.
  * ══════════════════════════════════════════════════════════════════════════ */
-#main-content > section:nth-of-type(odd) {
+/* VERSION 3 (R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.8): a section that
+   declares its band (components/evidenced/Band.astro, data-band) takes the
+   ground its band names, light or dark, so the position ladder steps aside for
+   it. Pages not yet on version 3 keep the ladder exactly as before. */
+#main-content > section:nth-of-type(odd):not([data-band]) {
   background-color: transparent;
 }
 
-#main-content > section:nth-of-type(even) {
+#main-content > section:nth-of-type(even):not([data-band]) {
   background-color: var(--c-bg);
 }
 
