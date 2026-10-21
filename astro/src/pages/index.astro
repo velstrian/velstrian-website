@@ -2,105 +2,55 @@
 /**
  * The homepage.
  *
- * ── 2026-09-06: THE HOME 2.0 SECTIONS REPLACED THE PREVIOUS NINE ───────────
+ * ── 2026-10-21: BUILT WHOLE FROM THE EVIDENCED ANSWER SYSTEM ────────────────
  *
- * Owner instruction, after reading the proposal on /home-2 across several
- * days: "i want home-2 becomes live home page by replacing the current live
- * page". So the nine sections below are the ones that were built and reviewed
- * on that route, and `/home-2` is deleted rather than left as a second copy of
- * the homepage. There is no preview route any more, and that is the point: two
- * routes existed only so nothing shipped before it was approved.
+ * R285-WEB-ENTERPRISE-REDESIGN-01. docs/design/R285-DESIGN-STRATEGY-2026-10-21.md
+ * was adopted by the owner on 2026-10-21 and this page is its first build. It
+ * is composed from components/evidenced/ and styles/evidenced.css, not edited
+ * from the sections it replaces, and those sections (components/home2/) are
+ * left untouched until the owner approves this page, because other routes
+ * still use the shared shell they were built against.
  *
- * THE MESSAGING DID NOT CHANGE, AND THAT WAS THE BRIEF. Owner, 2026-09-05: "I
- * like my current home page ... however we are lacking visual and feel of top
- * 1% ultra premium". Every section below carries the copy the previous
- * homepage carried, in the same order, and the work was entirely presentation:
- * composition, block sizes, hierarchy, motion and the boundaries between
- * sections. The hero is the same hero, with its four-tab rule-engine block
- * redrawn as a workbench.
+ * VERSION 2 (strategy section 0, owner 2026-10-21 evening): written for a
+ * small or mid size organisation that writes its own bids, public AND
+ * private, never for an expert bid manager (RULE 0-U).
  *
- * WHAT THE PREVIOUS SECTIONS WERE, so the change is legible in one place:
+ * VERSION 3 (strategy section 0.8, owner 2026-10-21 night): the visual
+ * system. Bands alternate light and dark, each section its own temperature,
+ * product UI floats on the indigo to purple stage, and content settles in
+ * once on first view. Each section answers the next thing a first time
+ * visitor wonders:
  *
- *   was                     now              carrying
- *   HeroStack               HeroLive2        the same hero, workbench tabs
- *   ProofGate               Proof2           the same two arguments, unboxed
- *   MarketShape             ProofStrip       the same three statutory figures
- *   HowItRuns               HowItRuns2       the same five stages
- *   WorkstationTour  ┐
- *   ProductScreens   ┘      Story2           the same five screens, on scroll
- *   BothSides               BothSides2       the same three stations
- *   ReasoningTrace          RefusalTrace     the same worked example
- *   Integrations            IntegrationsMarquee  the same connectors and scopes
- *   FinalCta                FinalCta2        the same closing card
+ *   Hero          light      what is this, is it for me?  stage, sequence
+ *   Facts         dark       why trust it?                hairline facts, trust strip
+ *   Audience      light      is it for someone like me?   who are you tabs, stages
+ *   Capabilities  light alt  what can it do?              five tabs, stage, sequence
+ *   Refusal       dark       can I trust what it writes?  the one slow moment
+ *   Screens       light      what does it look like?      product carousel
+ *   Steps         dark       how hard is it to start?     three steps
+ *   Plans         light alt  what does it cost?           three plan cards
+ *   Faq           light      I have questions             rules, centred
+ *   Close         gradient   what now?                    overlaps into the footer
  *
- * The components under components/sections/ are NOT deleted. Several are used
- * by other routes, and the ones that are not are a record of what this page
- * was; deleting them in the same pass as a redesign is how a rollback stops
- * being possible.
+ * ── SEO IS CARRIED OVER VERBATIM, AS THROUGH EVERY EARLIER REDESIGN ────────
  *
- * ── SEO WAS CARRIED OVER VERBATIM, AS IT WAS THROUGH EVERY EARLIER REDESIGN ─
- *
- * The title, the description, the canonical and the Organization/WebSite
- * JSON-LD graph are untouched by this change. Changing homepage metadata is a
- * separate, measured decision and must never ride along inside a redesign. The
- * two values below have moved exactly twice, both recorded here:
- *
- *   2026-08-03, OA-33: "for UK suppliers" -> "for suppliers" on the title, and
- *   the description dropped one word. Both scoped the product to the UK, which
- *   contradicts the market-neutral narrative the owner settled on 2026-08-02:
- *   UK public procurement is the PROOF POINT, not the identity.
- *
- *   2026-08-05, A-112: owner instruction, verbatim: "home page must be both as
- *   our bid suite is for both supplier and buyer and also covering public and
- *   private RFP's as well, must cover all". OA-33 had taken a MARKET scope out
- *   of the title and left a SIDE scope standing in its place. The replacement
- *   wording is drawn from the "What is Velstrian?" answer in data/faq.ts rather
- *   than newly invented, so the homepage and the /faq answer say the same thing
- *   about the same product.
- *
- * OG AND TWITTER FOLLOW WITHOUT A PROP, which is why none is passed below.
- * components/seo/Seo.astro defaults ogTitle to title, ogDescription to
- * description, twitterTitle to ogTitle and twitterDescription to ogDescription,
- * so all six social fields move with the two values below. Passing explicit
- * ogTitle/ogDescription here would create a second copy of the same sentence to
- * keep in step, which is the exact defect A-50 had to fix.
- *
- * TWO COPIES OF THE OLD DESCRIPTION SURVIVE OUTSIDE THIS FILE and this change
- * does not touch them: data/site.ts organizationSchema.description and
- * data/footer.ts brand.tagline. A-50 aligned both to this file's wording on
- * 2026-08-04; that alignment has been broken since the sentence below changed,
- * and it is handed back written down rather than edited quietly.
- *
- * ── THE GROUND LADDER, AND WHY THIS PAGE ASKS FOR THE SOFT ONE ─────────────
- *
- * styles/surfaces.css paints `#main-content > section:nth-of-type(odd)`
- * transparent and the even ones --c-bg, computed by the browser per document,
- * so the alternation is a consequence of the ORDER below and of nothing else.
- * `ladder="soft"` ramps each even rung in from the floor and back out to it:
- * the hard one-pixel step between two near-blacks is what made the sections
- * read as separate slabs, which is the "disconnected" the owner reported.
- *
- * ── THE MOTION IS ONE SYSTEM ───────────────────────────────────────────────
- *
- * styles/motion.css lands the first block and arrives every one after it, and
- * §THE CASCADE and §THE DRAW in the same file stagger and draw the rows that
- * ask for it. `initMotion()` is the shared `data-lit` switch, `initStory()`
- * writes one attribute for the product story, and `initReel()` writes one
- * number for every block scrubbed by the scroll. Every animation on this page
- * is CSS keyed on one of those, every rest state is the finished drawing, and
- * nothing here moves opacity, so a page with no script at all is a complete
- * page that merely holds still.
+ * Title, description, canonical and the JSON-LD graph are untouched. Their
+ * history (OA-33, A-112, A-89) is in git: `git log -p -- astro/src/pages/index.astro`.
+ * Changing homepage metadata is a separate, measured decision and never rides
+ * along inside a redesign.
  */
 import Base from '../layouts/Base.astro';
-import HeroOutcome from '../components/home2/HeroOutcome.astro';
-import HomeOutcomes from '../components/home2/HomeOutcomes.astro';
-import OneTenderStages from '../components/home2/OneTenderStages.astro';
-import RefusalTrace from '../components/home2/RefusalTrace.astro';
-import HomeWalkthrough from '../components/home2/HomeWalkthrough.astro';
-import HomeAudiencePaths from '../components/home2/HomeAudiencePaths.astro';
-import HomeTrustSummary from '../components/home2/HomeTrustSummary.astro';
-import HomeConversion from '../components/home2/HomeConversion.astro';
-import '../styles/home.css';
+import Hero from '../components/evidenced/Hero.astro';
+import Audience from '../components/evidenced/Audience.astro';
+import Capabilities from '../components/evidenced/Capabilities.astro';
+import Refusal from '../components/evidenced/Refusal.astro';
+import Steps from '../components/evidenced/Steps.astro';
+import Facts from '../components/evidenced/Facts.astro';
+import Faq from '../components/evidenced/Faq.astro';
+import Screens from '../components/evidenced/Screens.astro';
+import Plans from '../components/evidenced/Plans.astro';
+import Close from '../components/evidenced/Close.astro';
+import '../styles/evidenced.css';
 import { SITE } from '../data/site';
 
 /* 58 characters. See the header for why this is a list and not a sentence, and
@@ -143,67 +93,27 @@ const UPDATED = new Date('2026-10-21');
   path="/"
   schema={[webSite]}
   updatedAt={UPDATED}
-  ladder="soft"
+  typeface="evidenced"
+  headerTone="light"
 >
-  <HeroOutcome />
-  <HomeOutcomes />
-  <OneTenderStages />
-  {/* The worked refusal, full width, directly after stage 04 names it. It was
-      rendered inside the stage 04 card's right column, where its rail, app
-      window and ledger had ~640px and broke (R285-WEB-HOME-FORMAT-01). */}
-  <RefusalTrace />
-  <HomeWalkthrough />
-  <HomeAudiencePaths />
-  <HomeTrustSummary />
-  <HomeConversion />
+  <Hero />
+  <Facts />
+  <Audience />
+  <Capabilities />
+  <Refusal />
+  <Screens />
+  <Steps />
+  <Plans />
+  <Faq />
+  <Close />
 </Base>
 
-<style is:global>
-  /*
-   * ── THE SMOOTH SCROLL, ON THIS PAGE ──────────────────────────────────────
-   *
-   * Owner, 2026-09-06: "make sure there must be smooth scroll in the page".
-   *
-   * It animates every scroll the PAGE performs: an in-page anchor, the skip
-   * link, the product story's dots. It does NOT touch the wheel, the trackpad
-   * or a finger, which stay native, because re-animating those under our own
-   * clock is scroll hijacking and the brief for this page rules it out by name.
-   *
-   * DECLARED HERE RATHER THAN IN styles/motion.css, AND THAT IS A MEASUREMENT
-   * RATHER THAN A PREFERENCE. Sitewide, it broke the site's own certification:
-   * scripts/check-sheen.js scrolls a card into view and measures the next
-   * frame, and with a smooth scroll the card is still in flight, so the probe
-   * reported "no visible box to clip a frame from" on / and /pricing/. Proved
-   * by removing this one declaration and re-running the gate: exit 1 with it,
-   * exit 0 without. Six browser gates scroll and measure that way, so the
-   * choice was to edit six gates or to contain the change to the page that
-   * asked for it. Contained. Making it sitewide is a separate decision that
-   * has to answer the same measurement.
-   *
-   * `is:global` because the scrolling element is <html>, which no scoped
-   * selector on this page can reach.
-   */
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
-</style>
-
 <script>
-  import { initMotion } from '../scripts/motion';
-
-  /*
-   * BOOT WHEN THE DOCUMENT EXISTS, NOT WHEN THE MODULE ARRIVES.
-   * initMotion sets up the data-lit arrival trigger.
-   */
-  const boot = () => {
-    initMotion();
-  };
+  import { initEvidenced } from '../scripts/evidenced';
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
+    document.addEventListener('DOMContentLoaded', initEvidenced, { once: true });
   } else {
-    boot();
+    initEvidenced();
   }
 </script>
