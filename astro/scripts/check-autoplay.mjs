@@ -103,175 +103,70 @@ const check = (name, ok, detail) => {
 
 const browser = await chromium.launch();
 
-/* The checked index of a radio group, which is the state the workbench's
-   autoplay changes. `:checked` is the state itself rather than a paint of it. */
-const checkedIndex = (page, scope) =>
-  page.evaluate((s) => {
-    const radios = [...document.querySelectorAll(`${s} .hmt__radio`)];
-    if (!radios.length) return null;
-    return radios.findIndex((r) => r.checked);
-  }, scope);
-
-const pauseControl = (page, sels) =>
-  page.evaluate((s) => {
-    const el = document.querySelector(s);
-    if (!el) return null;
-    const r = el.getBoundingClientRect();
-    const cs = getComputedStyle(el);
-    return {
-      w: Math.round(r.width),
-      h: Math.round(r.height),
-      hidden: el.hasAttribute('hidden') || cs.display === 'none' || cs.visibility === 'hidden',
-      name: (el.getAttribute('aria-label') || el.textContent || '').trim().slice(0, 40),
-      pressed: el.getAttribute('aria-pressed'),
-    };
-  }, sels);
-
-/* ── TRAVEL, MEASURED, NOT AN ATTRIBUTE ────────────────────────────────────
- * WRITTEN AFTER THIS GATE MADE THE EXACT MISTAKE IT EXISTS TO CATCH. The band
- * checks first asserted `data-band === 'off'` after pressing pause, and failed.
- * The defect was in the assertion: `data-band` records whether the band is
- * ALLOWED to move at all, which is the reduced-motion gate, and it stays 'on'
- * when a reader pauses. Measured instead, the track holds the same position
- * across 600ms and 2.6s while the button flips to "Resume scrolling" - so the
- * pause works and the gate was reading a record of the thing rather than the
- * thing.
- *
- * The threshold is not a guess. Sampled every 500ms with motion allowed and no
- * interaction, the track travels -18.95 -> -137.83, about 119px in three
- * seconds, so roughly 40px/s. Over the 1200ms window below that is ~48px when
- * it is moving against 0 when it is not, which is a signal no rounding can
- * blur.
- *
- * AND IT READS A RECT RATHER THAN A TRANSFORM ON PURPOSE, because the element
- * that moves is NOT the one measured. The `in-band` keyframe runs on
- * `.in__rail`, the PARENT of two `.in__track` elements - the marquee duplicates
- * the row so it can loop seamlessly - so `.in__track` has no animation of its
- * own and `getComputedStyle(track).animationName` reads 'none' while the thing
- * is plainly moving. getBoundingClientRect() composes ancestor transforms, so
- * it reports the movement wherever in the subtree it is produced.
- *
- * This was established by falsification, not by reading the stylesheet:
- * injecting `transform: none` onto `.in__track` in dist/ did NOT stop the band,
- * which is only explicable if something above it carries the transform. A check
- * written against the animated element by name would have to be rewritten every
- * time the marquee is restructured; one written against the rect does not. */
-const travel = async (page, sel, ms = 1200, settleMs = 0) => {
-  const at = () =>
-    page.evaluate(
-      (s) => Math.round((document.querySelector(s)?.getBoundingClientRect().left || 0) * 100) / 100,
-      sel,
-    );
-  /* SETTLE FIRST WHEN ASKED, AND THE REASON IS A FAILURE THIS GATE PRODUCED
-     AGAINST A SITE THAT WAS BEHAVING CORRECTLY. Build 20 failed on "pressing
-     pause actually stops it - moved 4.5px in 1200ms". The band was not still
-     running: sampled every 100ms across the click, the profile is -1.28, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0 - it stops inside a single 100ms sample and then
-     holds position for the remaining 1.1 seconds, across three trials.
-     The 4.5px was the STOPPING FRAME, and it was 4.5px rather than 1.3px
-     because that run happened inside a full build, where the scheduler is
-     contended and the gap between the click and the first read stretches.
-     Measuring from the instant of the click therefore samples the transition
-     and calls it motion.
-     The question this check asks is "is it stopped", not "did it stop within
-     one frame", so it now waits for the transition to finish and measures the
-     STEADY state. This does not weaken it: a band that genuinely ignored the
-     pause would still travel ~47px in the window, against a threshold of 1. */
-  if (settleMs) await page.waitForTimeout(settleMs);
-  const a = await at();
-  await page.waitForTimeout(ms);
-  return Math.abs((await at()) - a);
-};
-
 const open = async (reducedMotion) => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion });
   await page.goto(`${base}/`, { waitUntil: 'load' });
   return page;
 };
 
-const HMT = '.hmt';
-const PAUSE_SEL = '.hmt [data-hmt-stop]';
-const BAND_TRACK = '#integrations .h2mq__track';
-const BAND_PAUSE_SEL = '#integrations [data-mq-pause]';
+const TRACE_ELEM = '.h2rt__trace';
 
-console.log('autoplay: driving the two autoplaying components on / and reading what they do');
+const reelValue = (page) =>
+  page.evaluate((sel) => {
+    const el = document.querySelector(sel);
+    if (!el) return null;
+    return getComputedStyle(el).getPropertyValue('--reel').trim();
+  }, TRACE_ELEM);
 
-/* ── 1. THE HERO WORKBENCH ─────────────────────────────────────────────── */
-console.log('\n  the hero workbench (.hmt) — loop retired per D1, interactive on click');
+console.log('autoplay: verifying motion behaviour and WCAG 2.2.2 compliance on /');
+
+/* ── 1. THE REFUSAL SCAN (MOMENT 1) ────────────────────────────────────────── */
+console.log('\n  the refusal scan (.h2rt) — plays once on view, no loop (D1, D5)');
 {
   const page = await open('reduce');
-  const before = await checkedIndex(page, HMT);
-  check('a sample group is present to measure', before !== null && before >= 0, `checked=${before}`);
-  await page.waitForTimeout(4000);
-  const after = await checkedIndex(page, HMT);
-  check('does not advance under prefers-reduced-motion', before === after, `${before} -> ${after}`);
-  const btn = await pauseControl(page, PAUSE_SEL);
-  check(
-    'reveals no pause control when no timer runs',
-    !btn || btn.hidden,
-    btn ? `present, hidden=${btn.hidden}` : 'absent',
-  );
+  await page.evaluate(() => document.querySelector('.h2rt')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  const valBefore = await reelValue(page);
+  check('refusal trace is present on page', valBefore !== null, `initial --reel=${valBefore}`);
+  await page.waitForTimeout(3000);
+  const valAfter = await reelValue(page);
+  check('does not animate or loop under prefers-reduced-motion', valBefore === valAfter, `${valBefore} -> ${valAfter}`);
   await page.close();
 }
 {
   const page = await open('no-preference');
-  const before = await checkedIndex(page, HMT);
-  await page.waitForTimeout(4000);
-  const after = await checkedIndex(page, HMT);
-  check('does not autoplay on a timer (loop retired per D1)', before === after, `${before} -> ${after}`);
-  const btn = await pauseControl(page, PAUSE_SEL);
-  check(
-    'reveals no pause control when no timer runs',
-    !btn || btn.hidden,
-    btn ? `present, hidden=${btn.hidden}` : 'absent',
-  );
+  await page.evaluate(() => document.querySelector('.h2rt')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  await page.waitForTimeout(3500);
+  const settled = await reelValue(page);
+  check('reaches resting state after scan', settled === '1', `--reel=${settled}`);
+  await page.waitForTimeout(3000);
+  const afterDwell = await reelValue(page);
+  check('halts permanently with no autoplay loop (WCAG 2.2.2)', settled === afterDwell, `${settled} -> ${afterDwell}`);
   await page.close();
 }
+
+/* ── 2. RETIRED MOTION DEVICES (D1, D250) ───────────────────────────────────────
+ * The workbench loop, infinite marquee, reel and orbs are retired.
+ * Verify no continuous autoplay loops or bogus pause controls exist on /. */
+console.log('\n  retired motion devices (workbench loop, marquee, orbs) — retired per D1');
 {
   const page = await open('no-preference');
-  await page.evaluate(() => {
-    const tab = [...document.querySelectorAll('.hmt__tab')][1];
-    if (tab) tab.click();
-    const active = document.activeElement;
-    if (active instanceof HTMLElement) active.blur();
+  const infiniteAnimations = await page.evaluate(() => {
+    const all = [...document.querySelectorAll('main *')];
+    return all.filter((el) => {
+      const cs = getComputedStyle(el);
+      if (cs.animationIterationCount !== 'infinite' || cs.animationDuration === '0s') return false;
+      // Allow only the 6px status light breathing indicator inside the trace
+      if (cs.animationName.includes('breathe') || cs.animationName.includes('pulse')) return false;
+      return true;
+    }).length;
   });
-  const picked = await checkedIndex(page, HMT);
-  check('reader can select a tab interactively', picked === 1, `picked=${picked}`);
-  await page.waitForTimeout(4000);
-  const after = await checkedIndex(page, HMT);
-  check('holds the chosen tab with no autoplay advance', picked === after, `${picked} -> ${after}`);
-  await page.close();
-}
+  check('no infinite animation loops run on the page content', infiniteAnimations === 0, `infinite loops=${infiniteAnimations}`);
 
-/* ── 2. THE CONNECTOR BAND ───────────────────────────────────────────────────────
- * Marquee loop retired per owner decision D1. Renders as a static connector grid. */
-console.log('\n  the connector band (#integrations) — marquee retired per D1');
-{
-  const page = await open('reduce');
-  await page.evaluate(() => document.querySelector('#integrations')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
-  await page.waitForTimeout(1000);
-  const moved = await travel(page, BAND_TRACK);
-  check('does not travel under prefers-reduced-motion', moved < 1, `moved ${moved}px in 1200ms`);
-  const btn = await pauseControl(page, BAND_PAUSE_SEL);
-  check(
-    'reveals no pause control when it is not moving',
-    !btn || btn.hidden,
-    btn ? `present, hidden=${btn.hidden}` : 'absent',
-  );
-  await page.close();
-}
-{
-  const page = await open('no-preference');
-  await page.evaluate(() => document.querySelector('#integrations')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
-  await page.waitForTimeout(1000);
-  const moved = await travel(page, BAND_TRACK);
-  check('does not travel when motion is allowed (marquee retired per D1)', moved < 1, `moved ${moved}px in 1200ms`);
-  const btn = await pauseControl(page, BAND_PAUSE_SEL);
-  check(
-    'reveals no pause control when it is not moving',
-    !btn || btn.hidden,
-    btn ? `present, hidden=${btn.hidden}` : 'absent',
-  );
+  const pauseButtons = await page.evaluate(() => {
+    return [...document.querySelectorAll('button[aria-label*="pause" i], button[aria-label*="stop" i]')]
+      .filter((b) => !b.hidden && getComputedStyle(b).display !== 'none').length;
+  });
+  check('reveals no unused pause buttons when no timer runs', pauseButtons === 0, `pause buttons=${pauseButtons}`);
   await page.close();
 }
 

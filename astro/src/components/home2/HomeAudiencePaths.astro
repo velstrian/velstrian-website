@@ -1,0 +1,58 @@
+---
+/**
+ * HomeAudiencePaths.astro — Two distinct audience paths (R285-WEB-ENTERPRISE-REDESIGN-01).
+ *
+ * For suppliers: Velstrian Bid.
+ * For buyers: Velstrian Buy (public and private sector).
+ * Each with its own clear call to action.
+ */
+import Button from '../ui/Button.astro';
+---
+
+<section class="h-audiences" id="audiences" aria-labelledby="audiences-title">
+  <div class="h-audiences__wrap">
+    <div class="h-head">
+      <p class="eyebrow h-head__eyebrow">Two sides of the table</p>
+      <h2 class="h-head__title" id="audiences-title">Built for suppliers and buyers.</h2>
+      <p class="h-head__standfirst">
+        Connected intelligence whether you are bidding for work or evaluating contract delivery.
+      </p>
+    </div>
+
+    <div class="h-audiences__grid">
+      <article class="h-audience surface">
+        <span class="chip h-audience__tag">Suppliers &amp; Bidders</span>
+        <h3 class="h-audience__h">Velstrian Bid</h3>
+        <p class="h-audience__p">
+          Find qualifying opportunities, draft answers cited to the regulations and tender specifications, and evidence every contract commitment after award.
+        </p>
+        <ul class="h-audience__bullets" role="list">
+          <li>Live UK, EU and Canada official tender feeds</li>
+          <li>Deterministic fit and qualification rubrics</li>
+          <li>Cited method statements and PPN 026 social value maths</li>
+          <li>Refusal gate prevents hallucinated figures</li>
+        </ul>
+        <div class="h-audience__cta">
+          <Button href="/bid/">Explore Velstrian Bid</Button>
+        </div>
+      </article>
+
+      <article class="h-audience surface">
+        <span class="chip h-audience__tag">Buyers &amp; Authorities</span>
+        <h3 class="h-audience__h">Velstrian Buy</h3>
+        <p class="h-audience__p">
+          Evaluate supplier tenders, locate verified evidence across bids, and keep scoring defensible across public and private sector procurement.
+        </p>
+        <ul class="h-audience__bullets" role="list">
+          <li>Pre-lock evaluation criteria before reading submissions</li>
+          <li>Evidence drawer links every score to cited tender text</li>
+          <li>Audit logs support debriefs and legal challenges</li>
+          <li>Serves private enterprise buyers and public sector authorities</li>
+        </ul>
+        <div class="h-audience__cta">
+          <Button href="/buy/" variant="secondary">Explore Velstrian Buy</Button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

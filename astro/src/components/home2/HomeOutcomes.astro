@@ -1,0 +1,61 @@
+---
+/**
+ * HomeOutcomes.astro — Customer outcomes section (R285-WEB-ENTERPRISE-REDESIGN-01).
+ *
+ * What the customer gets: fewer hours drafting, consistent evidence,
+ * compliance gaps made visible, delivery tracked after award.
+ * No numbers unless backed by a verified fact record.
+ */
+interface Outcome {
+  tag: string;
+  title: string;
+  body: string;
+}
+
+const OUTCOMES: Outcome[] = [
+  {
+    tag: 'Efficiency',
+    title: 'Fewer hours drafting',
+    body: 'Reusable master answer libraries and regulatory citation engines generate qualified first drafts in minutes instead of days.',
+  },
+  {
+    tag: 'Integrity',
+    title: 'Consistent evidence',
+    body: 'Every technical specification and social value commitment links directly to verified company documents and past awards.',
+  },
+  {
+    tag: 'Assurance',
+    title: 'Compliance gaps made visible',
+    body: 'Deterministic scoring rubrics highlight missing certifications and unsupported promises before the bid is submitted.',
+  },
+  {
+    tag: 'Delivery',
+    title: 'Delivery tracked after award',
+    body: 'Contract promises convert directly to an evidence vault and annual KPI assessments under Procurement Act sections 52 and 71.',
+  },
+];
+---
+
+<section class="h-outcomes" id="outcomes" aria-labelledby="outcomes-title">
+  <div class="h-outcomes__wrap">
+    <div class="h-head">
+      <p class="eyebrow h-head__eyebrow">Customer outcomes</p>
+      <h2 class="h-head__title" id="outcomes-title">What your bid and delivery teams gain.</h2>
+      <p class="h-head__standfirst">
+        Purpose-built for public and private sector tenders where compliance is checked in code.
+      </p>
+    </div>
+
+    <div class="h-outcomes__grid">
+      {
+        OUTCOMES.map((o) => (
+          <article class="h-outcomes__card surface">
+            <span class="chip h-outcomes__tag">{o.tag}</span>
+            <h3 class="h-outcomes__h">{o.title}</h3>
+            <p class="h-outcomes__p">{o.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

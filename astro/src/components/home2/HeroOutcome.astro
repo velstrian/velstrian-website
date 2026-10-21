@@ -1,0 +1,60 @@
+---
+/**
+ * HeroOutcome.astro — Outcome-led enterprise hero (R285-WEB-ENTERPRISE-REDESIGN-01).
+ *
+ * Leads with customer outcomes rather than mechanics:
+ * "Better bids. Defensible evidence. Measurable delivery."
+ *
+ * Left: outcome statement, one-line explanation, two actions.
+ * Right: real product preview frame with marked slot for Claude's capture.
+ */
+import Button from '../ui/Button.astro';
+
+interface Props {
+  id?: string;
+}
+
+const { id = 'hero' } = Astro.props;
+---
+
+<section class="h-hero" id={id} aria-labelledby="hero-title">
+  <div class="h-hero__wrap">
+    <div class="h-hero__content">
+      <p class="eyebrow h-hero__eyebrow">Procurement Act 2023 · s.52 · s.71 · PPN 026</p>
+      <h1 class="h-hero__title" id="hero-title">
+        Better bids. Defensible evidence. Measurable delivery.
+      </h1>
+      <p class="h-hero__lede">
+        One connected platform to find opportunities, prepare evidence backed tender responses and track contract commitments.
+      </p>
+      <div class="h-hero__actions btn-row">
+        <Button href="/bid/">Start with Velstrian Bid</Button>
+        <Button href="#walkthrough" variant="secondary">See a real tender walkthrough</Button>
+      </div>
+      <p class="h-hero__note">
+        From £49/month for suppliers. Public and private sector procurement teams.
+      </p>
+    </div>
+
+    <div class="h-hero__preview">
+      <figure class="h-preview surface">
+        <div class="h-preview__bar">
+          <span class="h-preview__dots" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </span>
+          <span class="h-preview__title">Velstrian Bid · NHS Estates Maintenance Tender</span>
+        </div>
+        <div class="h-preview__stage">
+          <!-- slot: R285-WEB-PRODUCT-SCREENSHOTS-01 -->
+          <div class="h-preview__slot">
+            <p class="chip h-preview__kicker">Live workspace preview</p>
+            <p class="h-preview__caption">Requirements extraction, clause citations and evidence tracing</p>
+          </div>
+        </div>
+        <figcaption class="h-preview__foot">
+          Fig 01. Live tender workspace: requirement extraction, clause citations and evidence tracing.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

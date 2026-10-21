@@ -1,0 +1,125 @@
+---
+/**
+ * OneTenderStages.astro — One tender scenario through five connected stages (R285-WEB-ENTERPRISE-REDESIGN-01).
+ *
+ * Discover, Qualify, Draft, Review, Deliver.
+ * Carries one realistic NHS Estates facilities tender scenario across all five.
+ * The refusal scan (motion moment 1) lives INSIDE the Review stage as living proof.
+ * Marked screenshot slots for Claude's real product captures.
+ */
+import RefusalTrace from './RefusalTrace.astro';
+
+interface Stage {
+  n: string;
+  id: string;
+  name: string;
+  headline: string;
+  summary: string;
+  fig: string;
+  caption: string;
+  isReview?: boolean;
+}
+
+const STAGES: Stage[] = [
+  {
+    n: '01',
+    id: 'stage-discover',
+    name: 'Discover',
+    headline: 'Tender notice ingested and indexed',
+    summary: 'The NHS Estates facilities tender is ingested from official public feeds within hours of publication, with criteria and deadlines indexed.',
+    fig: 'Fig 02',
+    caption: 'Official feed ingestion: NHS Estates notice indexed with deadlines, criteria and evaluation weightings.',
+  },
+  {
+    n: '02',
+    id: 'stage-qualify',
+    name: 'Qualify',
+    headline: 'Fit and qualification scored',
+    summary: 'Deterministic rubrics evaluate turnover, insurance, accreditations and mandatory exclusions before allocating bid resource.',
+    fig: 'Fig 03',
+    caption: 'Fit and coverage breakdown: turnover, accreditations and exclusions scored with explicit reasons.',
+  },
+  {
+    n: '03',
+    id: 'stage-draft',
+    name: 'Draft',
+    headline: 'Responses drafted with clause citations',
+    summary: 'Method statements are drafted with inline citations to the tender specifications and your own verified bid library.',
+    fig: 'Fig 04',
+    caption: 'Cited answer drafting: each response paragraph cites the tender clause and verified past bid records.',
+  },
+  {
+    n: '04',
+    id: 'stage-review',
+    name: 'Review',
+    headline: 'Grounding gate and refusal scan',
+    summary: 'Unsupported claims are refused before human review. Every figure must match verified source data before sign-off.',
+    fig: 'Fig 05',
+    caption: 'The figure refusal gate: unevidenced figures are identified and refused before the draft is released.',
+    isReview: true,
+  },
+  {
+    n: '05',
+    id: 'stage-deliver',
+    name: 'Deliver',
+    headline: 'Contract commitments evidenced',
+    summary: 'Priced promises become contract KPIs in the post-award vault, ready for the mandatory annual section 71 assessment.',
+    fig: 'Fig 06',
+    caption: 'Post-award obligation ledger: delivery actuals recorded against statutory Procurement Act KPIs.',
+  },
+];
+---
+
+<section class="h-stages" id="stages" aria-labelledby="stages-title">
+  <div class="h-stages__wrap">
+    <div class="h-head">
+      <p class="eyebrow h-head__eyebrow">One tender, five stages</p>
+      <h2 class="h-head__title" id="stages-title">From notice publication to contract delivery.</h2>
+      <p class="h-head__standfirst">
+        One realistic NHS Estates facilities tender followed through each stage of the lifecycle.
+      </p>
+    </div>
+
+    <div class="h-stages__list">
+      {
+        STAGES.map((s) => (
+          <article class="h-stage surface surface--row" id={s.id}>
+            <div class="h-stage__meta">
+              <span class="h-stage__n" aria-hidden="true">{s.n}</span>
+              <p class="meta h-stage__step">{s.name}</p>
+              <h3 class="h-stage__h">{s.headline}</h3>
+              <p class="h-stage__summary">{s.summary}</p>
+            </div>
+
+            <div class="h-stage__display">
+              {s.isReview ? (
+                <div class="h-stage__moment">
+                  <RefusalTrace />
+                </div>
+              ) : (
+                <figure class="h-stage__frame sv-raised">
+                  <div class="h-stage__chrome">
+                    <span class="h-stage__dots" aria-hidden="true">
+                      <i></i><i></i><i></i>
+                    </span>
+                    <span class="h-stage__label">{s.name} · {s.fig}</span>
+                  </div>
+                  <div class="h-stage__slot">
+                    <!-- slot: R285-WEB-PRODUCT-SCREENSHOTS-01 -->
+                    <div class="h-stage__placeholder">
+                      <p class="h-stage__kicker">{s.headline}</p>
+                      <p class="h-stage__desc">{s.summary}</p>
+                    </div>
+                  </div>
+                  <figcaption class="h-stage__cap">
+                    {s.fig}. {s.caption}
+                  </figcaption>
+                </figure>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

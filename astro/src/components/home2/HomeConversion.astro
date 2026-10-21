@@ -1,0 +1,44 @@
+---
+/**
+ * HomeConversion.astro — Final conversion section (R285-WEB-ENTERPRISE-REDESIGN-01).
+ *
+ * Clear paths:
+ * 1. Supplier self-serve access for Velstrian Bid.
+ * 2. Public sector buyer consultation route.
+ */
+import Button from '../ui/Button.astro';
+
+const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
+---
+
+<section class="h-conversion" id="start" aria-labelledby="conversion-title">
+  <div class="fc surface h-conversion__wrap" data-spot="off">
+    <div class="h-conversion__head">
+      <p class="eyebrow h-conversion__eyebrow">Start today</p>
+      <h2 class="h-conversion__title" id="conversion-title">
+        Start bidding with verifiable evidence today.
+      </h2>
+      <p class="h-conversion__standfirst">
+        Choose self-serve access for suppliers or book a technical consultation for public sector buying teams.
+      </p>
+    </div>
+
+    <div class="h-conversion__actions">
+      <div class="h-conversion__col">
+        <h3 class="h-conversion__h">For suppliers</h3>
+        <p class="h-conversion__p">From £49/month. Explore plans or begin drafting immediately.</p>
+        <Button href="/bid/">Start with Velstrian Bid</Button>
+      </div>
+
+      <div class="h-conversion__divider" aria-hidden="true"></div>
+
+      <div class="h-conversion__col">
+        <h3 class="h-conversion__h">For buyers</h3>
+        <p class="h-conversion__p">Book a walkthrough with our procurement engineering team.</p>
+        <Button href={CALENDLY} variant="secondary" target="_blank">
+          Book a buyer consultation<span class="visually-hidden"> (opens in a new window)</span>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

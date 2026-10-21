@@ -182,6 +182,39 @@ const ALLOWED_LOSSES = new Map([
   ['/  heading: the rest of the workstation.',
    'The section head that introduced the second block of product screens on the previous homepage. The rebuilt homepage presents those same five screens inside one pinned frame the reader scrolls through, so the block it introduced no longer exists as a separate block. Every screen it pointed at is still on the page, named and captioned, and now also selectable from the dots beside the frame.'],
 
+  /* 2026-10-21: R285-WEB-ENTERPRISE-REDESIGN-01 Structure Addendum (owner approved).
+     Replaced repetitive mechanics, documentation-style screen-by-screen descriptions,
+     and hero workbench loop with: outcome-led hero, customer outcomes, one-tender
+     5-stage scenario (with refusal scan inside Review stage), walkthrough slot,
+     two audience paths, and concise trust summary. */
+  ['/  heading: qualify. draft. prove it.',
+   'Replaced by outcome-led hero ("Better bids. Defensible evidence. Measurable delivery.") under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: the engine that refuses to make things up.',
+   'Replaced by customer outcomes section ("What your bid and delivery teams gain.") under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: a figure with nothing behind it does not survive the draft.',
+   'Replaced by one-tender 5-stage scenario under R285-WEB-ENTERPRISE-REDESIGN-01, where refusal scan is consolidated into the Review stage.'],
+  ['/  heading: three numbers you are already held to',
+   'Replaced by concise trust and statutory summary under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: five stages, and one of them is a refusal.',
+   'Replaced by the 5-stage scenario ("From notice publication to contract delivery.") under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: notices you could actually win the argument on.',
+   'Replaced by Discover stage in 5-stage scenario under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: fit, broken into its parts, with the reason attached.',
+   'Replaced by Qualify stage in 5-stage scenario under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: the drafter is told where a figure may come from.',
+   'Replaced by Draft stage in 5-stage scenario under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: it finds the passage. it does not set the band.',
+   'Replaced by Review stage in 5-stage scenario under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: a commitment is only worth the evidence filed against it.',
+   'Replaced by Deliver stage in 5-stage scenario under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: read from either end.',
+   'Replaced by Two Audience Paths section under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  heading: your evidence already exists. we read it where it lives.',
+   'Replaced by Concise Trust Summary under R285-WEB-ENTERPRISE-REDESIGN-01.'],
+  ['/  form control: <radio> hmt',
+   'Hero workbench radio controls retired under R285-WEB-ENTERPRISE-REDESIGN-01 and owner decision D1.'],
+
+
   /*
    * 2026-08-31. The /security/ heading "GDPR-aligned data processing" became
    * "GDPR compliant", and this is a CORRECTION rather than a loss.

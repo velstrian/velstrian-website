@@ -92,15 +92,14 @@
  * page that merely holds still.
  */
 import Base from '../layouts/Base.astro';
-import HeroLive2 from '../components/home2/HeroLive2.astro';
-import Proof2 from '../components/home2/Proof2.astro';
-import ProofStrip from '../components/home2/ProofStrip.astro';
-import HowItRuns2 from '../components/home2/HowItRuns2.astro';
-import Story2 from '../components/home2/Story2.astro';
-import BothSides2 from '../components/home2/BothSides2.astro';
-import RefusalTrace from '../components/home2/RefusalTrace.astro';
-import IntegrationsMarquee from '../components/home2/IntegrationsMarquee.astro';
-import FinalCta2 from '../components/home2/FinalCta2.astro';
+import HeroOutcome from '../components/home2/HeroOutcome.astro';
+import HomeOutcomes from '../components/home2/HomeOutcomes.astro';
+import OneTenderStages from '../components/home2/OneTenderStages.astro';
+import HomeWalkthrough from '../components/home2/HomeWalkthrough.astro';
+import HomeAudiencePaths from '../components/home2/HomeAudiencePaths.astro';
+import HomeTrustSummary from '../components/home2/HomeTrustSummary.astro';
+import HomeConversion from '../components/home2/HomeConversion.astro';
+import '../styles/home.css';
 import { SITE } from '../data/site';
 
 /* 58 characters. See the header for why this is a list and not a sentence, and
@@ -134,7 +133,7 @@ const webSite = {
  * presentation changed completely, and a crawler that re-reads the page will
  * find a different document.
  */
-const UPDATED = new Date('2026-09-06');
+const UPDATED = new Date('2026-10-21');
 ---
 
 <Base
@@ -145,15 +144,13 @@ const UPDATED = new Date('2026-09-06');
   updatedAt={UPDATED}
   ladder="soft"
 >
-  <HeroLive2 />
-  <Proof2 />
-  <ProofStrip />
-  <HowItRuns2 />
-  <Story2 />
-  <BothSides2 />
-  <RefusalTrace />
-  <IntegrationsMarquee />
-  <FinalCta2 />
+  <HeroOutcome />
+  <HomeOutcomes />
+  <OneTenderStages />
+  <HomeWalkthrough />
+  <HomeAudiencePaths />
+  <HomeTrustSummary />
+  <HomeConversion />
 </Base>
 
 <style is:global>
