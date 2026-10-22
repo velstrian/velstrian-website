@@ -17,19 +17,34 @@
  * two call sites rather than merely forgetting.
  *
  * SEO is carried over verbatim: title, description, canonical.
+ *
+ * ── 2026-10-22: ON DESIGN SYSTEM VERSION 3 ───────────────────────────────────
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7. Every question, answer, link
+ * and control is kept, on the v3 bands:
+ *
+ *   1. PageHero    light      what is this?     h1, lead, Book a call, Browse, the search
+ *   2. SectionBand light/alt  the register      one band per category, the questions
+ *   3. SectionBand light-alt  still stuck?      message, call, email
+ *
+ * The answers carry no typed price or fact: data/faq.ts reads them from
+ * data/pricing.ts, data/duty.ts and data/site-facts.ts.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import SectionBand from '../components/evidenced/SectionBand.astro';
+import Action from '../components/evidenced/Action.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import { FAQ_CATEGORIES, FAQ_ALL } from '../data/faq';
+import { WALKTHROUGH_URL } from '../data/app';
 import { faqPage, breadcrumbs } from '../lib/schema';
 import { HELLO_EMAIL } from '../lib/brand-names';
+import '../styles/evidenced.css';
 
 const title = 'Velstrian Bid FAQ | Bid software questions answered | Velstrian';
 const description =
   'Plans, pricing, AI credits, security and the rules Velstrian Bid reads. Answers to the questions UK bid teams ask most.';
 
-const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
+const TRAIL = [{ name: 'Home', path: '/' }];
 
 /* Both nodes derive from the same array the page renders. */
 const schema = [
@@ -48,24 +63,21 @@ const schema = [
  * stale is safer than advancing it falsely, because a sitemap that claims
  * everything changed is discounted.
  */
-const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTENT changed, which is the only thing that may bump it. The credit top-up prices and the metered overage rate are published on this route for the first time. */
-
+const UPDATED = new Date('2026-10-22'); /* R285-WEB-ENTERPRISE-REDESIGN-01: the security answer now names the ICO reference and the certification statement from site-facts. */
 ---
 
-<Base title={title} description={description} path="/faq" schema={schema} updatedAt={UPDATED}>
-  <Section
-    eyebrow="Help centre · Support"
+<Base title={title} description={description} path="/faq" schema={schema} updatedAt={UPDATED} typeface="evidenced" headerTone="light">
+  <PageHero
+    id="faq-title"
+    bandId="faq-top"
+    label="Help centre · Support"
     title="Questions about Velstrian?"
-    standfirst="Plans, pricing, AI credits, security and the rules Velstrian Bid reads. If your question is not on this page, book a call."
-    id="faq-top"
-  
-    as="h1">
-    <div class="btn-row">
-      <Button href={CALENDLY} target="_blank">Book a 30-minute call</Button>
-      <Button href="#faq-general" variant="secondary">Browse questions</Button>
-    </div>
-
-    <div class="faq-search">
+    lead="Plans, pricing, AI credits, security and the rules Velstrian Bid reads. If your question is not on this page, book a call."
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="FAQ" /></div>
+    <Action href={WALKTHROUGH_URL} newWindow>Book a 30-minute call</Action>
+    <Action href="#faq-general" variant="secondary">Browse questions</Action>
+    <div slot="after" class="faq-search">
       <label class="faq-search__label" for="faq-search">Search the questions</label>
       <input
         class="field__input faq-search__input"
@@ -78,70 +90,53 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
           and a screen reader user is otherwise told nothing at all. */}
       <p class="faq-search__status" id="faq-search-status" role="status" aria-live="polite"></p>
     </div>
-  </Section>
+  </PageHero>
 
   {/*
-    `joined` ON EVERY CATEGORY, INCLUDING THE FIRST (O-43). These are not five
-    sections about five subjects; they are one register of questions broken into
-    groups, and the reader scans down it. Rendered as plain adjacent sections
-    each seam was a closing --sec-pad-y on top of an opening one: 171px at 1440
-    between the last question of a group and the next group's eyebrow, against a
-    ~60px rhythm inside the register itself. See Section.astro for the modifier
-    and why it is a claim about the content rather than a rule about this page.
-
-    The first one is joined to the hero for the same reason: the search field
-    above it filters exactly this list, so the list continues from it.
-
-    THE CLOSING SECTION BELOW IS NOT JOINED. "Still have questions?" stops
-    answering and starts asking, and the full separation is what says so.
+    One band per category, alternating light and light alt, so the register
+    reads as one column broken into groups. The category's label and heading
+    are the same word, so the heading alone is printed. The open and close
+    mark is the site's one disclosure treatment, summary::after in
+    styles/blocks.css (A-65).
   */}
   {
-    FAQ_CATEGORIES.map((cat) => (
-      <Section eyebrow={cat.label} title={cat.heading} standfirst={cat.standfirst} id={cat.id} joined>
-        <div class="faq-list">
+    FAQ_CATEGORIES.map((cat, i) => (
+      <SectionBand tone={i % 2 === 0 ? 'light' : 'light-alt'} title={cat.heading} standfirst={cat.standfirst} id={cat.id} align="centre">
+        <div class="ea-faq__wrap faq-list">
           {cat.entries.map((e) => (
-            <details class="faq-item" data-q={`${e.question} ${e.answer}`.toLowerCase()}>
-              {/* No icon child: the mark is drawn by `summary::after` in
-                  styles/blocks.css, on every disclosure on the site. This one
-                  carried a hand-rolled 20px SVG chevron, one of four marks the
-                  site drew for one job, and the fourth was nothing at all, on
-                  the three legal routes. A-65. */}
-              <summary class="faq-item__q">{e.question}</summary>
-              <div class="faq-item__a">
-                <p>{e.answer}</p>
-                {e.link && (
-                  <p>
-                    <a href={e.link.href}>{e.link.label}</a>
-                  </p>
-                )}
-              </div>
+            <details class="ea-qa faq-item" data-q={`${e.question} ${e.answer}`.toLowerCase()}>
+              <summary>{e.question}</summary>
+              <p>{e.answer}</p>
+              {e.link && (
+                <p class="faq-item__link">
+                  <a class="ea-link" href={e.link.href}>{e.link.label}</a>
+                </p>
+              )}
             </details>
           ))}
         </div>
-      </Section>
+      </SectionBand>
     ))
   }
 
-  <Section
+  <SectionBand
+    tone={FAQ_CATEGORIES.length % 2 === 0 ? 'light' : 'light-alt'}
     title="Still have questions?"
     standfirst="If the answer is not here, ask us directly. A person on the team that built it replies, usually within three to five business days."
     id="faq-contact"
+    align="centre"
   >
     {/*
-      "EMAIL US" IS BACK (OA-28, 2026-08-02). faq.html:446-449 offers exactly two
-      actions here, a Calendly booking and mailto:hello@velstrian.com, and the port
-      kept only the booking. The allow-list justified dropping the mailto by the
-      "request access is a web form, never a bare mailto" rule, but that rule is
-      about ACCESS REQUESTS, which this is not: it is the general enquiry address,
-      already published on /contact in the hero and the directory. Losing it left
-      a reader who does not want a form and does not want a call with nothing.
+      "EMAIL US" IS BACK (OA-28, 2026-08-02). The general enquiry address is a
+      third route in, beside the form and the call, for a reader who wants
+      neither.
     */}
-    <div class="btn-row">
-      <Button href="/contact/#contact-form">Send us a message</Button>
-      <Button href={CALENDLY} variant="secondary" target="_blank">Book a call</Button>
-      <Button href={`mailto:${HELLO_EMAIL}`} variant="secondary">Email us</Button>
+    <div class="ea-actions faq-contact__actions">
+      <Action href="/contact/#contact-form">Send us a message</Action>
+      <Action href={WALKTHROUGH_URL} variant="secondary" newWindow>Book a call</Action>
+      <Action href={`mailto:${HELLO_EMAIL}`} variant="secondary">Email us</Action>
     </div>
-  </Section>
+  </SectionBand>
 </Base>
 
 <script>
@@ -212,184 +207,51 @@ const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTE
 </script>
 
 <style>
-  /* Centred to match the head block above it (owner decision, 2026-08-02).
-     Alignment only: the row centres on the same axis as its heading. */
-
+  /* The search sits under the hero's actions, at a field's width. Sizes are
+     the system's: the field is the shared .field__input. */
+  /* The hero head centres its children at their own width, so the field
+     states its width rather than taking 100% of a shrunk box. */
   .faq-search {
-    /* ── CENTRED UNDER A CENTRED HEAD ─────────────────────────────────────
-     *
-     * A 460px block inside a full-measure container hugs the left edge unless
-     * it is told not to. Measured at 1440: 302px left of the page centre, sitting
-     * directly under a centred eyebrow, h1, standfirst and button pair, with
-     * 600px of empty space to its right.
-     *
-     * Same defect as /compare's intro prose, and the same distinction applies:
-     * the LABEL and the input's placeholder stay left-aligned because they are
-     * read, while the BLOCK sits on the page's centre line like everything
-     * above it. Where a column sits and how its text ragged-edges are two
-     * different decisions. */
-    margin-top: var(--sec-gap);
-    max-width: 460px;
+    width: min(var(--ea-copy), calc(100vw - var(--ea-gutter) * 2));
     margin-inline: auto;
+  }
+
+  .faq-search__input {
+    width: 100%;
   }
 
   .faq-search__label {
     display: block;
-    margin-bottom: 6px;
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    font-weight: 600;
-    color: var(--c-text);
+    margin-bottom: var(--space-2);
+    font-size: var(--t-ea-small);
+    font-weight: var(--t-w-ea-medium);
+    color: var(--ea-ink);
   }
 
-  /* `.faq-search__input` WAS A BYTE-FOR-BYTE COPY of `.field__input` in
-     styles/forms.css, 2026-08-04, same width, same height, same padding, same
-     border, same radius, same background, same face, same size. It is now the
-     shared class in the markup and nothing is declared here. That copy is the
-     clearest example on the site of why an accurate duplicate is still a defect:
-     it was correct the day it was written and would have drifted the first time
-     either file was touched. */
-
   .faq-search__input:focus-visible {
-    outline: 3px solid var(--c-interactive);
+    outline: var(--ea-focus);
     outline-offset: 2px;
-    border-color: var(--c-interactive);
   }
 
   .faq-search__status {
-    margin: 8px 0 0;
-    font-family: var(--font-body);
-    font-size: var(--t-micro);
-    color: var(--c-text-muted);
     min-height: 1em;
+    margin-top: var(--space-2);
+    font-size: var(--t-ea-tiny);
+    color: var(--ea-muted);
   }
 
-  /* ── THE REGISTER IS A COLUMN, NOT A BAND ──────────────────────────────────
-   *
-   * ADDED 2026-08-31. This was `display: grid` and nothing else, so it took the
-   * section's full 1232px at 1440 while the answer inside it was capped at its
-   * own reading measure of 727px. Measured with every item open: the hairline
-   * rule under each entry, and the `+` mark that `summary::after` pushes to the
-   * trailing edge, both ran 505px past the last word of the answer. Forty-one
-   * per cent of the row was empty, on every row, and the affordance that opens a
-   * question sat half a screen away from the question.
-   *
-   * --measure-prose, 800px, because it is the step in the scale this content
-   * already sits on. tokens.css describes it as "a standfirst or short intro"
-   * and the same token feeds ten call sites of that kind. The 5/6 and 3/4 steps
-   * were both tried and rejected by looking: --measure-band at 960px is named in
-   * tokens.css for "an FAQ stack", but the stack it was sized for is the sector
-   * FAQ, which sits inside a card and has no independent answer measure. Here
-   * 960 still left a 233px overhang.
-   *
-   * ONE MEASURE WOULD BE BETTER THAN TWO AND IS NOT AVAILABLE. Letting the
-   * answer fill the full 800 would give the rule, the mark and the last word one
-   * shared right edge, but 800px holds about 90 real characters at --t-body
-   * (tokens.css records the arithmetic and the ch-is-not-a-character correction
-   * behind it), which is past the comfortable band for eight lines of continuous
-   * answer. So the answer keeps its own reading measure and the column is set to
-   * the nearest step above it: 73px of overhang rather than 505px. */
+  /* The register is one reading column, centred under its centred head. */
   .faq-list {
-    display: grid;
-    max-width: var(--measure-prose);
+    padding-inline: 0;
     margin-inline: auto;
+    text-align: start;
   }
 
-  .faq-item {
-    border-bottom: 1px solid var(--c-border);
+  .faq-item__link {
+    margin-top: calc(var(--space-4) * -1);
   }
 
-  /* O-59: local `[hidden]` restatement removed. Tokens.css owns it sitewide. */
-
-  /* The flex, the gap, the pointer, `list-style: none` and the Safari marker
-     rule all moved to `summary` in styles/blocks.css with the mark itself, A-65.
-     What is left is this row's own size and type: it runs taller than the 44px
-     shared floor because a question is a heading, and its rule is drawn by
-     `.faq-item` above rather than by this element. */
-  .faq-item__q {
-    /* Comfortably over the WCAG 2.2 44px target floor. */
-    min-height: 60px;
-    padding: var(--stack-1) 0;
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    line-height: 1.35;
-    color: var(--c-text);
+  .faq-contact__actions {
+    justify-content: center;
   }
-
-  .faq-item__q:hover { color: var(--c-interactive); }
-
-  .faq-item__q:focus-visible {
-    outline: 3px solid var(--c-interactive);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
-  /* No auto margin here, so the block starts where the question does. The
-     measure is doing its real job: capping the line length, not positioning
-     the block.
-   *
-   * ── O-55 IS OPEN, AND IT IS NOT OPEN HERE ───────────────────────────────
-   *
-   * THE SENTENCE THAT USED TO FOLLOW SAID THIS BODY "belongs on the same left
-   * edge as the question that opens it", AND IT DESCRIBED SOMETHING THAT HAS
-   * NOT RENDERED SINCE styles/alignment.css LANDED. Measured on the built page:
-   * both the question and this body compute `text-align: center`, inherited
-   * from the sitewide rule on <main>. At 390 the longest answer sets sixteen
-   * centred lines, each starting at a different x. The owner reported it.
-   *
-   * The fix is one line and it is NOT a local `text-align: left`, which the
-   * whole point of that file is to refuse. It is this container joining the
-   * "read rather than scanned" set in styles/alignment.css, alongside .prose,
-   * .legal__body, .article-body, .gl-article and .cmp-body. A FAQ answer is
-   * continuous body copy by exactly the test that file states.
-   *
-   * IT IS NOT MADE HERE BECAUSE THE GATE MIRRORS THAT LIST BY HAND. The BODIES
-   * constant in scripts/check-render.js repeats the five selectors, and a sixth
-   * in the stylesheet with no sixth in the gate fails the build, measured, with
-   * the gate's own authority-walk replayed against this page: it reports
-   * `div.faq-item__a`. check-render.js is owned by another agent this session,
-   * so the stylesheet half is being held back rather than shipped broken. The
-   * two edits are one line each and have to land together. */
-  .faq-item__a {
-    padding-bottom: var(--stack-2);
-    /* THE MEASURE BELOW IS IN em, SO THIS BOX HAS TO CARRY THE TIER IT IS
-     * MEASURING. `em` resolves against the ELEMENT'S OWN font-size, and this
-     * <div> had none, so it fell to the user agent's 16px while every <p> inside
-     * it set --t-body at 17px: a measure written for the 17px tier was resolving
-     * on 16 and came out 44px narrow. Stating the tier here fixes that and fixes
-     * a second thing it was hiding, the "Request access" link in an answer,
-     * which is a bare <a> with no size of its own and was therefore rendering a
-     * pixel tier below the sentence it sits under. */
-    font-size: var(--t-body);
-    /* ── em, NOT ch, 2026-08-31 ─────────────────────────────────────────────
-     * This read `72ch`. A-92 and the ch-is-not-a-character correction in
-     * tokens.css both apply: `1ch` is the advance of the digit zero, so it is a
-     * property of the LOADED FACE and jumps the instant the webfont swaps,
-     * which is the single mechanism that produced this site's layout shift, and
-     * it reads about 20% low as a character count so `72ch` was never 72
-     * characters.
-     *
-     * 42.7em is the SAME RENDERED WIDTH, 727px at --t-body's 17px, measured on
-     * the built page rather than converted on paper. So no answer re-wraps and
-     * no line gets longer: what changes is that the width no longer moves when
-     * the face arrives. In real characters 727px holds about 86, which is why
-     * this cap stays rather than being widened to the 800px column around it. */
-    max-width: 42.7em;
-  }
-
-  .faq-item__a p {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.7;
-    color: var(--c-text-sub);
-  }
-
-  .faq-item__a p:last-child { margin-bottom: 0; }
-
-  .faq-item__a a {
-    color: var(--c-interactive);
-  }
-
 </style>

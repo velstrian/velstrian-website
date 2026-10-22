@@ -26,6 +26,32 @@
  */
 
 import { SIGNUP_URL } from './app';
+import {
+  PLANS,
+  TRIAL_DAYS,
+  TRIAL_CREDITS,
+  EXTRACT_CREDITS,
+  EXTRACT_PAGES,
+  SHEET_ROWS_PER_PAGE,
+  extractCredits,
+  topupSentence,
+  usersLabel,
+  annualDiscountPct,
+  OVERAGE_PER_CREDIT_LABEL,
+} from './pricing';
+import { PPN026 } from './duty';
+import { FACTS, CERTIFICATION_STATEMENT, ICO_REFERENCE, listJoin } from './site-facts';
+import { LEGAL_ENTITY_NAME } from '../lib/brand-names';
+
+/* Every price, allowance, discount and fact the answers below print is read
+   from data/pricing.ts, data/duty.ts and data/site-facts.ts, never typed
+   (R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-22). */
+const STARTER = PLANS[0];
+const ANNUAL_PCT = annualDiscountPct(STARTER);
+const TRIAL_SCOPE = `${STARTER.name} features for ${usersLabel(STARTER.seats)} with ${TRIAL_CREDITS} AI credits`;
+const num = (n: number) => n.toLocaleString('en-GB');
+const SHEET_EXAMPLE_ROWS = 5000;
+const SHEET_EXAMPLE_PAGES = SHEET_EXAMPLE_ROWS / SHEET_ROWS_PER_PAGE;
 
 export interface FaqEntry {
   question: string;
@@ -112,7 +138,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // the note on "How do I sign up?" above; same route, same fix.
         question: 'Can I try Velstrian Bid before I subscribe?',
         answer:
-          'Yes. Your first 7 days on Velstrian Bid are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. If you would rather see it first, book a demo. The tender compliance matrix is always free with no account needed.',
+          `Yes. Your first ${TRIAL_DAYS} days on Velstrian Bid are free, on the ${TRIAL_SCOPE}. A card is needed to start, held securely by Stripe and never stored by us. If you would rather see it first, book a demo. The tender compliance matrix is always free with no account needed.`,
       },
     ],
   },
@@ -128,7 +154,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           'PPN 026 (Procurement Policy Note 026) is the next edition of the UK government Social Value Model, published on GOV.UK on 5 August 2026. It applies to central government procurements commenced on or after 1 January 2027, at 1 million pounds inc VAT or above. The date that decides which edition applies is when the procurement was commenced, not when the proposal was written, so a bid drafted today is most likely scored under this one.',
       },
       {
-        question: 'What is the 10% minimum?',
+        question: `What is the ${PPN026.fig} minimum?`,
         answer:
           'The buyer publishes the social value weighting in its own tender documents, and many local authorities and NHS trusts set a higher one than central government requires. Velstrian Bid lets you model the weighting your buyer published, calculates the social-value total in code, and drafts the narrative with a PPN 017 AI-transparency disclosure for you to approve.',
       },
@@ -160,7 +186,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // into the plans answer published two motions at once; it is a
         // separate offer with its own limits and it reads as one.
         answer:
-          "Velstrian Bid's plans are Starter, Pro and Portfolio, each with a published price. Sign up and start today by card, and annual billing saves 10%.",
+          `Velstrian Bid's plans are ${listJoin(PLANS.map((p) => p.name))}, each with a published price. Sign up and start today by card, and annual billing saves ${ANNUAL_PCT}%.`,
         link: { label: 'See current pricing', href: '/pricing/' },
       },
       {
@@ -227,7 +253,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           // D236 (2026-10-19): the trial is no longer requested. A first
           // CrowMark plan starts with 14 free days at Starter, as the
           // platform's create-checkout route provisions it (BILL-TRIAL-002).
-          'Yes. Your first 7 days are free, on the Starter features for 1 user with 30 AI credits, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 7 days and nothing is charged. There is one free trial per organisation and work email domain.',
+          `Yes. Your first ${TRIAL_DAYS} days are free, on the ${TRIAL_SCOPE}, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
         link: { label: 'Start now', href: SIGNUP_URL },
       },
       {
@@ -238,7 +264,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'How are AI credits counted?',
         answer:
-          'One credit is one AI generation, such as a drafted tender answer or a rewritten method statement. Your plan includes a monthly allowance of them. Reading a tender document and extracting its requirements is charged by size, at 3 credits per 10 pages, rounded up, so a 10-page invitation to tender costs 3 credits. A page means one PDF page, one PowerPoint slide, or a whole Word or plain text document. Everything Velstrian Bid calculates rather than generates, including social value arithmetic, scoring and exports, is free and unlimited on every paid plan, and a generation that fails is never charged.',
+          `One credit is one AI generation, such as a drafted tender answer or a rewritten method statement. Your plan includes a monthly allowance of them. Reading a tender document and extracting its requirements is charged by size, at ${EXTRACT_CREDITS} credits per ${EXTRACT_PAGES} pages, rounded up, so a ${EXTRACT_PAGES}-page invitation to tender costs ${extractCredits(EXTRACT_PAGES)} credits. A page means one PDF page, one PowerPoint slide, or a whole Word or plain text document. Everything Velstrian Bid calculates rather than generates, including social value arithmetic, scoring and exports, is free and unlimited on every paid plan, and a generation that fails is never charged.`,
       },
       {
         // ── R262-WEB-08, 2026-08-09 ────────────────────────────────────────
@@ -260,13 +286,13 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // before it can bill anyone.
         question: 'What happens when my AI credits run out?',
         answer:
-          'Your monthly allowance is spent first, then any top-up credits you have bought. When both are gone, AI generation is refused for the rest of the calendar month rather than continuing and billing you for it. A credit top-up is a one-off purchase that never expires: £10 for 100 credits, £50 for 500, or £100 for 1,000. Pay-as-you-go overage is switched on for your organisation on request, and each further credit is then billed at £0.10 on your next invoice. Overage stays off unless you ask for it, so you are never billed beyond your plan without agreeing to it first. The monthly allowance resets at the start of each calendar month and does not roll over. Purchased top-up credits do.',
+          `Your monthly allowance is spent first, then any top-up credits you have bought. When both are gone, AI generation is refused for the rest of the calendar month rather than continuing and billing you for it. A credit top-up is a one-off purchase that never expires: ${topupSentence()}. Pay-as-you-go overage is switched on for your organisation on request, and each further credit is then billed at ${OVERAGE_PER_CREDIT_LABEL} on your next invoice. Overage stays off unless you ask for it, so you are never billed beyond your plan without agreeing to it first. The monthly allowance resets at the start of each calendar month and does not roll over. Purchased top-up credits do.`,
         link: { label: 'See the credit prices', href: '/pricing/#ai-credits' },
       },
       {
         question: 'How is a spreadsheet counted when I upload one?',
         answer:
-          'By rows, not by sheets. Fifty rows of a sheet count as one page, rounded up and added together across every sheet in the file. A pricing schedule of 5,000 rows on a single Excel sheet therefore counts as 100 pages, which is 30 credits, rather than as a single page. We count it this way because a 5,000-row schedule holds roughly 17 times the text of a 10-page PDF and the AI work scales with how much text there is to read. CSV files are counted exactly like Excel files, and we only count the rows we actually read.',
+          `By rows, not by sheets. ${num(SHEET_ROWS_PER_PAGE)} rows of a sheet count as one page, rounded up and added together across every sheet in the file. A pricing schedule of ${num(SHEET_EXAMPLE_ROWS)} rows on a single Excel sheet therefore counts as ${num(SHEET_EXAMPLE_PAGES)} pages, which is ${extractCredits(SHEET_EXAMPLE_PAGES)} credits, rather than as a single page. We count it this way because a 5,000-row schedule holds roughly 17 times the text of a 10-page PDF and the AI work scales with how much text there is to read. CSV files are counted exactly like Excel files, and we only count the rows we actually read.`,
       },
       {
         question: 'How do billing periods work?',
@@ -275,7 +301,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         // subscribe", which only made sense as the end of a trial, so it is
         // restated as what happens when a subscription lapses instead.
         answer:
-          "Subscriptions are billed monthly or annually (10% discount). Your billing period starts from the date you subscribe and renews on the same date until you cancel. If a subscription lapses, your data is preserved but you won't be able to create new records or contracts.",
+          `Subscriptions are billed monthly or annually (${ANNUAL_PCT}% discount). Your billing period starts from the date you subscribe and renews on the same date until you cancel. If a subscription lapses, your data is preserved but you won't be able to create new records or contracts.`,
       },
     ],
   },
@@ -293,7 +319,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'Is my data secure?',
         answer:
-          'Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. Velstrian Systems Ltd is registered with the ICO as a data controller. We are UK GDPR compliant and built to ISO 27001 controls, with a data processing agreement on request. Customer data is stored in the EU (Ireland).',
+          `Yes. We use Supabase (PostgreSQL) with Row Level Security on all tables. All data is encrypted in transit (TLS) and at rest. We are protected by Cloudflare (DDoS, Bot Fight Mode, SSL Full Strict). Authentication uses Supabase Auth with optional TOTP MFA. ${LEGAL_ENTITY_NAME} is registered with the ICO as a data controller, reference ${ICO_REFERENCE}. ${CERTIFICATION_STATEMENT} A data processing agreement is available on request. Customer data is stored in the EU (${FACTS.regions.data_at_rest.place}).`,
         link: { label: 'See our Security page for full details', href: '/security/' },
       },
     ],

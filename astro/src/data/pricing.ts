@@ -342,6 +342,36 @@ export const CREDIT_TOPUPS: CreditTopup[] = [
  *  number is written once. A card is collected by Stripe before it starts. */
 export const TRIAL_DAYS = 7;
 
+/** The AI credits a first plan's free trial carries (D236, the platform's
+ *  create-checkout trial grant). Already published in the trial answers on
+ *  /pricing/ and /faq/, now written once here so those answers read it. */
+export const TRIAL_CREDITS = 30;
+
+/** Reading a tender is charged by size: EXTRACT_CREDITS for every
+ *  EXTRACT_PAGES pages, rounded up (platform CREDIT_WEIGHTS.crowmark_rfp_extract
+ *  over CREDIT_BILLING_UNITS.crowmark_rfp_extract, see CREDIT_PAGES below).
+ *  A spreadsheet counts SHEET_ROWS_PER_PAGE rows as one page. */
+export const EXTRACT_CREDITS = 3;
+export const EXTRACT_PAGES = 10;
+export const SHEET_ROWS_PER_PAGE = 50;
+
+/** Credits to read a document of `pages` pages. */
+export function extractCredits(pages: number): number {
+  return Math.ceil(pages / EXTRACT_PAGES) * EXTRACT_CREDITS;
+}
+
+/** "£10 for 100 credits, £50 for 500, or £100 for 1,000", from CREDIT_TOPUPS. */
+export function topupSentence(): string {
+  const n = (v: number) => v.toLocaleString('en-GB');
+  const parts = CREDIT_TOPUPS.map((t, i) => `£${n(t.price)} for ${n(t.credits)}${i === 0 ? ' credits' : ''}`);
+  return `${parts.slice(0, -1).join(', ')}, or ${parts[parts.length - 1]}`;
+}
+
+/** "1 user" or "5 users". */
+export function usersLabel(seats: number): string {
+  return seats === 1 ? '1 user' : `${seats.toLocaleString('en-GB')} users`;
+}
+
 export const OVERAGE_PENCE_PER_CREDIT = 10;
 
 /** £0.10, for prose. Two decimal places always, because a rate reads as one. */
@@ -494,6 +524,14 @@ export interface Faq {
  * a trial. The accurate and stronger claim, applied consistently below: the
  * card is required, and it is Stripe that holds it, never us.
  */
+/* The figures the answers below print, read from the plan data above so no
+   answer types a price, an allowance or a discount (R285-WEB-ENTERPRISE-REDESIGN-01). */
+const [FAQ_STARTER, FAQ_PRO, FAQ_PORTFOLIO] = PLANS;
+const [FAQ_BUYER_PRO, FAQ_BUYER_PORTFOLIO] = BUYER_PLANS;
+const gbp = (n: number | null) => `£${(n ?? 0).toLocaleString('en-GB')}`;
+const num = (n: number) => n.toLocaleString('en-GB');
+const orJoin = (a: string[]) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} or ${a[a.length - 1]}`);
+
 export const PRICING_FAQS: Faq[] = [
   {
     question: 'Is there a free plan?',
@@ -516,7 +554,7 @@ export const PRICING_FAQS: Faq[] = [
        the array header. Asking is free, but the trial it names two sentences
        earlier does collect a card at Stripe checkout before it starts. */
     answer:
-      'No. Velstrian Bid is a paid product. You can run the free Tender Compliance Matrix at any time with no account, and your first 7 days on Velstrian Bid are free. A card is needed to start, held securely by Stripe and never stored by us.',
+      `No. Velstrian Bid is a paid product. You can run the free Tender Compliance Matrix at any time with no account, and your first ${TRIAL_DAYS} days on Velstrian Bid are free. A card is needed to start, held securely by Stripe and never stored by us.`,
   },
   {
     /* WAS "How does the 14-day trial work?", answered with "full access to the
@@ -554,14 +592,14 @@ export const PRICING_FAQS: Faq[] = [
        not the standard for publishing a limit, and A-80's rule is a standing
        one: the trial credit figure goes back only when the flip is verified on
        the running service. See A-80. */
-    question: 'How does the 7 day trial work?',
+    question: `How does the ${TRIAL_DAYS} day trial work?`,
     /* "A card is required to start it..." ADDED, R262-D-20, 2026-08-08. See
        the array header. This answer is literally "how it works", so the step
        where Stripe collects a card belongs in it; leaving it out was the same
        omission as the removed "no card taken" lines, just by silence rather
        than by a false sentence. */
     answer:
-      'Choose a plan and select Start now. Your first 7 days are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the 7 days and nothing is charged. There is one free trial per organisation and work email domain.',
+      `Choose a plan and select Start now. Your first ${TRIAL_DAYS} days are free, on the ${FAQ_STARTER.name} features for ${usersLabel(FAQ_STARTER.seats)} with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'How do I get access?',
@@ -584,7 +622,7 @@ export const PRICING_FAQS: Faq[] = [
        the question badly. Both are named here and priced in full two answers
        down. */
     answer:
-      'No. There are no setup, implementation or training fees on any plan. The only charges beyond your plan are ones you choose: a credit pack, auto reload up to a monthly limit you set, or pay as you go at £0.10 a credit if you switch it on.',
+      `No. There are no setup, implementation or training fees on any plan. The only charges beyond your plan are ones you choose: a credit pack, auto reload up to a monthly limit you set, or pay as you go at ${OVERAGE_PER_CREDIT_LABEL} a credit if you switch it on.`,
   },
   {
     question: 'Can I switch plans mid-cycle?',
@@ -605,7 +643,7 @@ export const PRICING_FAQS: Faq[] = [
        No tier is named here, because which plan includes SSO is a commercial
        packaging question the code does not answer and I will not invent. */
     answer:
-      'Yes. Portfolio is £549 a month, or £5,929 a year, for 10 users and 3,000 AI credits a month, and adds the Integrations package. Single sign-on via SAML 2.0 and SCIM user provisioning are included on every plan. Buy it by card and start today. Talk to us about contracts, custom terms or more than 10 users.',
+      `Yes. ${FAQ_PORTFOLIO.name} is ${gbp(FAQ_PORTFOLIO.monthly)} a month, or ${gbp(FAQ_PORTFOLIO.annual)} a year, for ${usersLabel(FAQ_PORTFOLIO.seats)} and ${num(FAQ_PORTFOLIO.credits)} AI credits a month, and adds the Integrations package. Single sign-on via SAML 2.0 and SCIM user provisioning are included on every plan. Buy it by card and start today. Talk to us about contracts, custom terms or more than ${usersLabel(FAQ_PORTFOLIO.seats)}.`,
   },
   {
     question: 'How is Velstrian Buy priced?',
@@ -615,14 +653,14 @@ export const PRICING_FAQS: Faq[] = [
        than kept, because a question that names the old position keeps it alive in
        search results and in the FAQPage JSON-LD this array feeds. */
     answer:
-      'Buyer Pro is £299 a month, or £3,229 a year, with 5 users, 750 AI credits a month and 10 guest evaluators. Buyer Portfolio is £699 a month, or £7,549 a year, with 10 users, 3,000 AI credits a month and 25 guest evaluators. Annual prices are 10% off twelve months. Pay by card, or pay for Buyer Portfolio by invoice on 30 days with a PO number. Talk to us if you buy through a framework.',
+      `${FAQ_BUYER_PRO.name} is ${gbp(FAQ_BUYER_PRO.monthly)} a month, or ${gbp(FAQ_BUYER_PRO.annual)} a year, with ${usersLabel(FAQ_BUYER_PRO.seats)}, ${num(FAQ_BUYER_PRO.credits)} AI credits a month and ${num(FAQ_BUYER_PRO.guestEvaluators)} guest evaluators. ${FAQ_BUYER_PORTFOLIO.name} is ${gbp(FAQ_BUYER_PORTFOLIO.monthly)} a month, or ${gbp(FAQ_BUYER_PORTFOLIO.annual)} a year, with ${usersLabel(FAQ_BUYER_PORTFOLIO.seats)}, ${num(FAQ_BUYER_PORTFOLIO.credits)} AI credits a month and ${num(FAQ_BUYER_PORTFOLIO.guestEvaluators)} guest evaluators. Annual prices are ${annualDiscountPct(FAQ_BUYER_PRO)}% off twelve months. Pay by card, or pay for ${FAQ_BUYER_PORTFOLIO.name} by invoice on 30 days with a PO number. Talk to us if you buy through a framework.`,
   },
   {
     question: 'How are AI credits counted?',
     /* The included allowances were never published anywhere on the legacy page.
        They are the first sentence now. */
     answer:
-      'Each plan includes a monthly allowance: 200 credits on Starter, 750 on Pro and 3,000 on Portfolio, and Velstrian Buy carries 750 on Buyer Pro and 3,000 on Buyer Portfolio. One credit is one AI generation. Reading a tender document and extracting its requirements costs 3 credits per 10 pages, rounded up, so a 10-page ITT costs 3 credits. A page is one PDF page, one PowerPoint slide, or a whole Word or text document. A spreadsheet is counted by rows rather than by sheets: 50 rows count as one page, so a 5,000-row pricing schedule on a single sheet counts as 100 pages, or 30 credits. Everything we calculate rather than generate is never charged and never capped, and a generation that fails is not charged.',
+      `Each plan includes a monthly allowance: ${num(FAQ_STARTER.credits)} credits on ${FAQ_STARTER.name}, ${num(FAQ_PRO.credits)} on ${FAQ_PRO.name} and ${num(FAQ_PORTFOLIO.credits)} on ${FAQ_PORTFOLIO.name}, and Velstrian Buy carries ${num(FAQ_BUYER_PRO.credits)} on ${FAQ_BUYER_PRO.name} and ${num(FAQ_BUYER_PORTFOLIO.credits)} on ${FAQ_BUYER_PORTFOLIO.name}. One credit is one AI generation. Reading a tender document and extracting its requirements costs ${EXTRACT_CREDITS} credits per ${EXTRACT_PAGES} pages, rounded up, so a ${EXTRACT_PAGES}-page ITT costs ${extractCredits(EXTRACT_PAGES)} credits. A page is one PDF page, one PowerPoint slide, or a whole Word or text document. A spreadsheet is counted by rows rather than by sheets: ${SHEET_ROWS_PER_PAGE} rows count as one page, so a ${num(5000)}-row pricing schedule on a single sheet counts as ${num(5000 / SHEET_ROWS_PER_PAGE)} pages, or ${extractCredits(5000 / SHEET_ROWS_PER_PAGE)} credits. Everything we calculate rather than generate is never charged and never capped, and a generation that fails is not charged.`,
   },
   /*
    * ── R262-WEB-08 · THE ANSWER TO THE QUESTION THE CREDIT MODEL RAISES ───────
@@ -669,7 +707,7 @@ export const PRICING_FAQS: Faq[] = [
   {
     question: 'What happens when my AI credits run out?',
     answer:
-      'Your monthly allowance is spent first, then any credits you have bought. After that, three options keep you going, and each one is your choice. Credit packs of 100, 500 or 1,000 credits cost £10, £50 or £100 and never expire. Auto reload buys a pack for you when you run low, up to a monthly limit you set. Pay as you go is off unless you switch it on, and then bills £0.10 a credit up to a cap you choose. With none of these on, AI generation stops until the month resets, so you are never billed beyond your plan without agreeing to it. The monthly allowance does not roll over. Bought credits do. Everything we calculate rather than generate keeps working, and a generation that fails is not charged.',
+      `Your monthly allowance is spent first, then any credits you have bought. After that, three options keep you going, and each one is your choice. Credit packs of ${orJoin(CREDIT_TOPUPS.map((t) => num(t.credits)))} credits cost ${orJoin(CREDIT_TOPUPS.map((t) => gbp(t.price)))} and never expire. Auto reload buys a pack for you when you run low, up to a monthly limit you set. Pay as you go is off unless you switch it on, and then bills ${OVERAGE_PER_CREDIT_LABEL} a credit up to a cap you choose. With none of these on, AI generation stops until the month resets, so you are never billed beyond your plan without agreeing to it. The monthly allowance does not roll over. Bought credits do. Everything we calculate rather than generate keeps working, and a generation that fails is not charged.`,
   },
   {
     question: 'What payment methods do you accept?',
