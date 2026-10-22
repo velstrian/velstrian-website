@@ -3,20 +3,25 @@
  * Facts: why trust it? The home page's proof band (strategy 0.8: "hero light,
  * proof band dark").
  *
- * A DARK band. Four facts in hairline columns with gradient icon tiles: the
- * live sources counted from site-facts.json, the match factors and their
- * points total, the largest upload, and where the data lives. Under them the
- * live trust strip, the six badges word for word from TRUST_BADGES (D255),
- * the one canonical list. No security wording is written here.
+ * A DARK band. Four benefits in hairline columns with gradient icon tiles,
+ * each one something the visitor GETS, not a spec (owner 2026-10-22 asked
+ * whether the old band was effective, and it was not: "4 listings" and
+ * "100 MB" are specs, and "stay in Ireland, never used to train AI" overstated
+ * the record, since site-facts.json lists the AI processors outside the EU and
+ * the training claim was unverified). Every line restates a claim the page
+ * already makes and site-facts.json backs: the morning check over the live
+ * sources (Faq), the fit reasons and their total (Capabilities), forwarding
+ * the email (Steps), and proof for every claim (Refusal). Under them the live
+ * trust strip, the six badges word for word from TRUST_BADGES (D255), the one
+ * canonical list. No security wording is written here.
  */
 import Band from './Band.astro';
 import FactsBand from './FactsBand.astro';
-import { FACTS, TRUST_BADGES, PACK_MAX_MB } from '../../data/site-facts';
+import { FACTS, TRUST_BADGES } from '../../data/site-facts';
 
 const live = FACTS.sources.live.length;
 const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 0);
 const fitCount = FACTS.fit_dimensions.dimensions.length;
-const where = FACTS.regions.data_at_rest.place;
 ---
 
 <Band tone="dark" class="ea-proof" labelledby="ea-proof-title">
@@ -24,10 +29,10 @@ const where = FACTS.regions.data_at_rest.place;
     <h2 class="ea-h2 ea-h2--centre" id="ea-proof-title" data-reveal>Real contracts, real proof, and your data kept safe.</h2>
     <FactsBand
       facts={[
-        { icon: 'search', value: `${live}`, label: 'Live UK and EU contract listings, checked for you every morning' },
-        { icon: 'sliders', value: `${fitCount}`, label: `Reasons each contract is matched on, scored out of ${fitTotal}, every one shown` },
-        { icon: 'upload', value: `${PACK_MAX_MB} MB`, label: 'The largest tender pack file you can upload. Or just forward the email' },
-        { icon: 'globe', value: 'EU', label: `Your documents stay in ${where} and are never used to train AI` },
+        { icon: 'search', value: 'Daily', label: `New public contracts that suit you, from ${live} live UK and EU sources, checked every morning` },
+        { icon: 'sliders', value: `${fitCount} reasons`, label: `Every match shows why it suits you, scored out of ${fitTotal}, so you decide quickly` },
+        { icon: 'upload', value: '1 email', label: 'Forward the tender email or upload the pack. That is all it takes to start' },
+        { icon: 'shield', value: 'Proof', label: 'Every claim in an answer shows which of your documents backs it up' },
       ]}
       strip={[...TRUST_BADGES]}
       stripLabel="How your data is protected"
