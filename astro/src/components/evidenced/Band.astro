@@ -1,5 +1,6 @@
 ---
 import Aurora from './Aurora.astro';
+import Icon from './Icon.astro';
 
 /**
  * Band: one section of a page, at one temperature.
@@ -23,6 +24,14 @@ import Aurora from './Aurora.astro';
  * mechanism serves every v3 hero, on the home page, /bid/, /buy/, /about/ and
  * every page hero, without any of them asking for it.
  *
+ * The aurora keeps moving (owner decision D293), so the same hero band carries
+ * its pause button (.ea-motion in styles/evidenced.css), last in the band so
+ * it comes after the hero's own actions in the tab order. A toggle: the name
+ * stays "Pause background motion" and aria-pressed says whether it is paused.
+ * It ships hidden and scripts/evidenced.ts initAurora shows it only when the
+ * loops can run, and one press stops every aurora loop on the page for the
+ * rest of the session.
+ *
  * Ready for /bid/, /buy/ and the shared page templates: it knows nothing about
  * the home page.
  */
@@ -37,6 +46,7 @@ interface Props {
 }
 const { tone, id, labelledby, class: cls = '', flush = false } = Astro.props;
 const hero = cls.split(/\s+/).includes('ea-hero');
+const MOTION_LABEL = 'Pause background motion';
 ---
 
 <section
@@ -47,6 +57,14 @@ const hero = cls.split(/\s+/).includes('ea-hero');
 >
   {hero && <div class="ea-hero__sky" aria-hidden="true"><Aurora place="foot" /></div>}
   <slot />
+  {
+    hero && (
+      <button class="ea-motion" type="button" data-aurora-pause aria-pressed="false" aria-label={MOTION_LABEL} hidden>
+        <Icon name="pause" size={20} class="ea-motion__pause" />
+        <Icon name="resume" size={20} class="ea-motion__play" />
+      </button>
+    )
+  }
 </section>
 
 {/* The one entry for every v3 behaviour (reveal, sequences, carousels, tour,

@@ -115,10 +115,24 @@ const UPDATED = new Date('2026-10-22');
   headerTone="light"
 >
   <div class="pricing-page">
+    {/* The billing choice: two radios, so each segment of the control in
+        PricingHero is a label that SELECTS rather than toggles (a second
+        press on "Monthly" leaves it monthly). They sit first in the page so
+        every band below reads them with `~ *`. #billing-toggle is the annual
+        one, and every price rule keys off `#billing-toggle:checked` in CSS,
+        with no script (R285-WEB-TRANSFORMATION-WT-F, audit S3). */}
     <input
-      type="checkbox"
+      type="radio"
+      id="billing-monthly"
+      name="billing"
+      class="billing-input visually-hidden"
+      aria-label="Show monthly prices"
+      checked
+    />
+    <input
+      type="radio"
       id="billing-toggle"
-      name="billing-toggle"
+      name="billing"
       class="billing-input visually-hidden"
       aria-label={`Show annual prices, which save ${SAVE_PCT}%`}
     />
@@ -149,19 +163,6 @@ const UPDATED = new Date('2026-10-22');
     />
   </div>
 </Base>
-
-<script>
-  const toggle = document.getElementById('billing-toggle') as HTMLInputElement | null;
-  if (toggle) {
-    const updatePrices = (isAnnual: boolean) => {
-      document.querySelectorAll<HTMLElement>('.plan-price--m').forEach((el) => (el.style.display = isAnnual ? 'none' : 'flex'));
-      document.querySelectorAll<HTMLElement>('.plan-price--a').forEach((el) => (el.style.display = isAnnual ? 'flex' : 'none'));
-      document.querySelectorAll<HTMLElement>('.plan-go--m').forEach((el) => (el.style.display = isAnnual ? 'none' : 'block'));
-      document.querySelectorAll<HTMLElement>('.plan-go--a').forEach((el) => (el.style.display = isAnnual ? 'block' : 'none'));
-    };
-    toggle.addEventListener('change', () => updatePrices(toggle.checked));
-  }
-</script>
 
 <style>
   .pricing-page {

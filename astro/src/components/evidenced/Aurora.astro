@@ -2,9 +2,12 @@
 /**
  * Aurora: the hero's living colour (R285-WEB-HERO-BACKDROP-02, owner
  * 2026-10-22). A slab with a crisp slanted top edge, filled with the brand
- * ramp, and five colour fields that each drift once over it and settle
- * inside 4.8s (WCAG 2.2.2). Every value is a token (tokens.css "THE HERO
- * AURORA"), every rule is in styles/evidenced.css, and no script runs it.
+ * ramp, and five colour fields that each drift on their own slow loop over
+ * it. It keeps moving (owner decision D293), and the hero band that draws it
+ * carries the pause button (Band.astro). Every value is a token (tokens.css
+ * "THE HERO AURORA"), every rule is in styles/evidenced.css, and
+ * scripts/evidenced.ts initAurora runs it only while it is on screen, the tab
+ * is visible and the reader has not paused it.
  *
  * `place`:
  *   stage  inside a hero Stage, where it IS the stage: full bleed, from just
@@ -20,7 +23,7 @@ interface Props {
 const { place } = Astro.props;
 ---
 
-<div class={`ea-aurora ea-aurora--${place}`} aria-hidden="true">
+<div class={`ea-aurora ea-aurora--${place}`} data-aurora aria-hidden="true">
   <span class="ea-aurora__f ea-aurora__f--1"></span>
   <span class="ea-aurora__f ea-aurora__f--2"></span>
   <span class="ea-aurora__f ea-aurora__f--3"></span>

@@ -49,20 +49,21 @@ function route(x1: number, y1: number, rail: number, y2: number, x2: number): st
   );
 }
 
+/** Set several attributes at once. Kept small: this chunk ships on every route. */
+function attrs(el: Element, a: Record<string, string | number>): void {
+  for (const k in a) el.setAttribute(k, String(a[k]));
+}
+
 function drawRoot(root: HTMLElement, lines: Map<string, Line>): void {
   const svg = root.querySelector<SVGSVGElement>('svg[data-cite-svg]');
   if (!svg) return;
   const box = root.getBoundingClientRect();
   if (box.width === 0) return;
-  svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
-  svg.setAttribute('width', String(box.width));
-  svg.setAttribute('height', String(box.height));
+  attrs(svg, { viewBox: `0 0 ${box.width} ${box.height}`, width: box.width, height: box.height });
 
   const pane = root.querySelector('[data-cite-pane]');
   const paneBox = pane ? pane.getBoundingClientRect() : box;
-  const markers = Array.from(root.querySelectorAll<HTMLElement>('[data-cite-from]'));
-
-  markers.forEach((from, i) => {
+  root.querySelectorAll<HTMLElement>('[data-cite-from]').forEach((from, i) => {
     const id = from.dataset.citeFrom ?? '';
     const to = root.querySelector<HTMLElement>(`[data-cite-to="${id}"]`);
     if (!to) return;
@@ -91,18 +92,15 @@ function drawRoot(root: HTMLElement, lines: Map<string, Line>): void {
     let line = lines.get(id);
     if (!line) {
       const path = document.createElementNS(SVG_NS, 'path');
-      path.setAttribute('class', 'ea-cite-line');
-      path.setAttribute('pathLength', '1');
+      attrs(path, { class: 'ea-cite-line', pathLength: 1 });
       const dot = document.createElementNS(SVG_NS, 'circle');
-      dot.setAttribute('class', 'ea-cite-dot');
-      dot.setAttribute('r', '3.5');
+      attrs(dot, { class: 'ea-cite-dot', r: 3.5 });
       svg.append(path, dot);
       line = { path, dot };
       lines.set(id, line);
     }
     line.path.setAttribute('d', route(x1, y1, rail, y2, x2));
-    line.dot.setAttribute('cx', String(x2));
-    line.dot.setAttribute('cy', String(y2));
+    attrs(line.dot, { cx: x2, cy: y2 });
   });
   root.dataset.citeDrawn = 'on';
 }
@@ -133,6 +131,9 @@ export function initCitations(): void {
  * because an observer that never fires is how sections were once left hidden.
  * Nothing here hides content, and the reader runs once on load as well.
  */
+const GEO = ['scroll', 'resize'];
+const PASSIVE = { passive: true };
+
 function onGeometry(fn: () => boolean | void): void {
   let queued = false;
   let done = false;
@@ -140,8 +141,7 @@ function onGeometry(fn: () => boolean | void): void {
     queued = false;
     if (!done && fn() === true) {
       done = true;
-      removeEventListener('scroll', schedule);
-      removeEventListener('resize', schedule);
+      GEO.forEach((t) => removeEventListener(t, schedule));
     }
   };
   const schedule = () => {
@@ -149,8 +149,7 @@ function onGeometry(fn: () => boolean | void): void {
     queued = true;
     requestAnimationFrame(tick);
   };
-  addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', schedule, { passive: true });
+  GEO.forEach((t) => addEventListener(t, schedule, PASSIVE));
   schedule();
 }
 
@@ -262,8 +261,7 @@ export function initSequences(): void {
   };
   onGeometry(check);
   /* A tab switch changes what is laid out without a scroll. */
-  document.addEventListener('click', () => requestAnimationFrame(() => check()));
-  document.addEventListener('keyup', () => requestAnimationFrame(() => check()));
+  ['click', 'keyup'].forEach((t) => document.addEventListener(t, () => requestAnimationFrame(check)));
 }
 
 /**
@@ -299,20 +297,16 @@ export function initCarousels(): void {
       fit();
       n.textContent = String(i + 1);
       slides.forEach((s, k) => {
-        s.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+        s.setAttribute('aria-hidden', String(k !== i));
         s.inert = k !== i;
       });
-      prev.setAttribute('aria-disabled', i === 0 ? 'true' : 'false');
-      next.setAttribute('aria-disabled', i === slides.length - 1 ? 'true' : 'false');
+      prev.setAttribute('aria-disabled', String(i === 0));
+      next.setAttribute('aria-disabled', String(i === slides.length - 1));
     };
     viewport.scrollLeft = 0;
     root.dataset.car = 'on';
     controls.hidden = false;
-    slides.forEach((s, k) => {
-      s.setAttribute('role', 'group');
-      s.setAttribute('aria-roledescription', 'slide');
-      s.setAttribute('aria-label', `${k + 1} of ${slides.length}`);
-    });
+    slides.forEach((s, k) => attrs(s, { role: 'group', 'aria-roledescription': 'slide', 'aria-label': `${k + 1} of ${slides.length}` }));
     go(0);
     /* A slide changes height when the column resizes or a lazy capture lands. */
     const watch = new ResizeObserver(fit);
@@ -338,7 +332,7 @@ export function initCarousels(): void {
         x0 = e.clientX;
         y0 = e.clientY;
       },
-      { passive: true },
+      PASSIVE,
     );
     viewport.addEventListener(
       'pointerup',
@@ -349,14 +343,14 @@ export function initCarousels(): void {
         x0 = null;
         if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(i + (dx < 0 ? 1 : -1));
       },
-      { passive: true },
+      PASSIVE,
     );
     viewport.addEventListener(
       'pointercancel',
       () => {
         x0 = null;
       },
-      { passive: true },
+      PASSIVE,
     );
   });
 }
@@ -380,7 +374,52 @@ export function initTour(): void {
   });
 }
 
+/**
+ * The hero aurora (components/evidenced/Aurora.astro) and its pause button
+ * (D293, Band.astro .ea-motion). Its loops are declared paused in
+ * styles/evidenced.css and run only while this marks the aurora `run`: some of
+ * it inside the window, the tab visible, and not paused by the reader. A
+ * hidden aurora (display none) measures zero height and stays held. The
+ * button is shown only when the loops can run (never under reduced motion),
+ * one press holds every aurora on the page, and the choice lasts the session.
+ * Geometry through onGeometry, not an observer (check-motion.js rule 3).
+ */
+export function initAurora(): void {
+  if (reduced()) return;
+  const btns = document.querySelectorAll<HTMLButtonElement>('[data-aurora-pause]');
+  /* sessionStorage throws when storage is blocked. The pause still works, it
+     just lasts this page, and the reason is logged rather than swallowed. */
+  const store = (v?: string): string | undefined => {
+    try {
+      return v ? (sessionStorage.ea_motion = v) : sessionStorage.ea_motion;
+    } catch (e) {
+      console.warn('aurora: no session storage, the pause lasts this page', e);
+    }
+  };
+  let off = store() === '0';
+  const set = () => {
+    document.querySelectorAll<HTMLElement>('[data-aurora]').forEach((s) => {
+      const r = s.getBoundingClientRect();
+      s.dataset.aurora = !off && !document.hidden && r.height && r.bottom > 0 && r.top < innerHeight ? 'run' : 'hold';
+    });
+    btns.forEach((b) => {
+      b.hidden = false;
+      b.ariaPressed = String(off);
+    });
+  };
+  btns.forEach((b) => {
+    b.onclick = () => {
+      off = !off;
+      store(off ? '0' : '1');
+      set();
+    };
+  });
+  document.addEventListener('visibilitychange', set);
+  onGeometry(set);
+}
+
 export function initEvidenced(): void {
+  initAurora();
   initReveal();
   initSequences();
   initCarousels();

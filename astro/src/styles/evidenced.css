@@ -25,13 +25,17 @@
       line draws, and the verdicts land, the last one "Never".
    4. The carousel slide, --dur (300ms), only when the reader asks.
    5. The primary button's light sweep, once per hover (check-sheen.js 3b).
-   6. A card on a light band lifts one elevation step on hover.
-   7. The hero aurora's five colour fields drift once (.ea-aurora,
+   6. A card's edge steps one shade darker on hover and nothing else moves
+      (the calm hover, check-sheen.js rule 1, D294 one card style).
+   7. The hero aurora's five colour fields drift on slow loops (.ea-aurora,
       Aurora.astro, R285-WEB-HERO-BACKDROP-02, replacing the A-301 mesh the
-      owner rejected on 2026-10-22) and settle inside 4.8s (WCAG 2.2.2,
-      check-autoplay). Transform only, inside the hero band only, never a
-      page layer (the page wash removed 2026-08-04 stays removed).
-   Nothing loops. Everything is off under prefers-reduced-motion.
+      owner rejected on 2026-10-22), the ONE loop, named in check-sheen.js
+      LOOP_ALLOW. It keeps moving by owner decision D293, and every hero that
+      draws it carries a pause button (.ea-motion) that stops every loop at
+      once (WCAG 2.2.2, check-autoplay presses it and measures). Transform
+      only, inside the hero band only, held while off screen or in a hidden
+      tab, never a page layer (the page wash removed 2026-08-04 stays removed).
+   Nothing else loops. Everything is off under prefers-reduced-motion.
    ============================================================================ */
 
 /* ── The page ─────────────────────────────────────────────────────────────── */
@@ -1128,15 +1132,17 @@ main .ea-sec * {
 /* Written as `main .ea-sec ...` on purpose: the section reset
    `main .ea-sec * { animation: none }` near the top of this file outranks a
    single class, and that reset stays, it is what keeps legacy motion out.
-   Each field drifts ONCE, out along its path and home again, and rests on
-   its first frame, the same still slab a reduced motion reader sees. Under
-   five seconds and no loop, so no pause control is owed (WCAG 2.2.2, see
-   tokens.css "WHY IT SETTLES"). The keyframes start and end at rest, so
-   check-motion rule 2 reads them as a drawing, not a private entrance. */
+   The loops are declared paused and run only while initAurora
+   (scripts/evidenced.ts) marks the aurora `run`: on screen, in a visible tab,
+   and not paused by the reader (D293, the hero's .ea-motion button). With no
+   script, or under reduced motion, the slab is the still first frame. The
+   keyframes start and end at rest, so each loop joins without a seam and
+   check-motion rule 2 reads them as a loop, not a private entrance. */
 @media (prefers-reduced-motion: no-preference) {
   main .ea-sec .ea-aurora__f {
     animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
   }
 
   main .ea-sec .ea-aurora__f--1 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t1); }
@@ -1145,6 +1151,60 @@ main .ea-sec * {
   main .ea-sec .ea-aurora__f--4 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t4); animation-direction: reverse; }
   main .ea-sec .ea-aurora__f--5 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t5); animation-direction: reverse; }
 
+  main .ea-sec .ea-aurora[data-aurora='run'] .ea-aurora__f {
+    will-change: transform;
+    animation-play-state: running;
+  }
+}
+
+/* THE PAUSE CONTROL (D293, WCAG 2.2.2). One quiet button in the bottom right
+   corner of every hero band (Band.astro), the same edge and ground as the
+   carousel's buttons, 44 by 44px. It ships `hidden` and initAurora shows it
+   only when the loops can run, so a reader with no script or with reduced
+   motion never meets a control that does nothing (check-autoplay). It sits
+   inside the band's bottom padding: a page hero's padding grows to hold it
+   (.ea-page-hero below), and under a stage it sits on the aurora past the
+   floating card. aria-pressed carries the state, the name never changes, and
+   the glyph shows the action: two bars while it moves, a play mark once
+   paused. */
+.ea-motion {
+  position: absolute;
+  z-index: 1;
+  right: var(--ea-gutter);
+  bottom: var(--space-3);
+  display: grid;
+  place-items: center;
+  width: var(--ea-btn-h);
+  height: var(--ea-btn-h);
+  border: 1px solid var(--ea-rule-strong);
+  border-radius: var(--v3-radius-btn);
+  background: var(--ea-canvas);
+  color: var(--ea-ink);
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+.ea-motion[hidden],
+.ea-motion[aria-pressed='true'] .ea-motion__pause,
+.ea-motion:not([aria-pressed='true']) .ea-motion__play {
+  display: none;
+}
+
+@media (hover: hover) {
+  .ea-motion:hover {
+    border-color: var(--ea-ink);
+  }
+}
+
+.ea-sec .ea-motion:focus-visible {
+  outline: var(--ea-focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ea-motion {
+    display: none;
+  }
 }
 
 @keyframes ea-aurora-a {
@@ -1196,8 +1256,11 @@ main .ea-sec * {
 /* The opening band of every page that is not a product page
    (evidenced/PageHero.astro). Same light and the same centred head as the
    product heroes, no stage under it, so the band ends with the head. */
+/* The bottom padding also holds the aurora's pause button (.ea-motion, D293)
+   with --space-4 clear above it, so the button never sits beside a line of
+   the head at any width. */
 .ea-page-hero {
-  padding-bottom: clamp(var(--space-10), 1rem + 3vw, var(--space-16));
+  padding-bottom: max(clamp(var(--space-10), 1rem + 3vw, var(--space-16)), calc(var(--ea-btn-h) + var(--space-3) + var(--space-4)));
 }
 
 .ea-page-hero__label {
@@ -1224,7 +1287,7 @@ main .ea-sec * {
 
 .ea-page-hero--compact {
   padding-top: clamp(var(--space-8), 0.5rem + 3vw, var(--space-12));
-  padding-bottom: clamp(var(--space-8), 0.5rem + 2vw, var(--space-12));
+  padding-bottom: max(clamp(var(--space-8), 0.5rem + 2vw, var(--space-12)), calc(var(--ea-btn-h) + var(--space-3) + var(--space-4)));
 }
 
 .ea-page-hero--compact .ea-hero__head .ea-hero__title {
@@ -1385,6 +1448,17 @@ main .ea-sec * {
 .ea-sec[data-band='light'] + script + .ea-sec[data-band='light'],
 .ea-sec[data-band='light-alt'] + script + .ea-sec[data-band='light-alt'] {
   padding-top: 0;
+}
+
+/* EXCEPT UNDER A HERO (R285-WEB-TRANSFORMATION-WT-F, audit S4). A hero band
+   ends on the aurora ribbon at its very foot, so when the next band shares
+   its tone and drops its top pad, the next block sits ON the ribbon: the
+   cards on /contact/ and the heading on /integrations/ touched it (measured
+   2026-10-22). The band under a hero keeps the page hero's own bottom pad, so
+   the ribbon has the same air under it as the head has above it. */
+.ea-sec.ea-hero[data-band='light'] + .ea-sec[data-band='light'],
+.ea-sec.ea-hero[data-band='light'] + script + .ea-sec[data-band='light'] {
+  padding-top: clamp(var(--space-10), 1rem + 3vw, var(--space-16));
 }
 
 /* A BAND THAT ENDS ON A ONE LINE FOOTNOTE LINK ("Compare every plan and add
@@ -2259,17 +2333,22 @@ main .ea-sec * {
 /* ══ CARDS AND PLANS (light) ═══════════════════════════════════════════════
    A card on a light band: white, a hairline, lifting one elevation step on
    hover. Never a flat grey box. */
+/* THE ONE CARD (D294, 2026-10-22). Every card on a light band is this one:
+   the v3 radius, white, a hairline EDGE drawn as a real border, and on hover
+   that edge steps to --c-border-hover over --dur-hover and nothing else
+   changes, the calm hover contract check-sheen.js measures on a real pointer.
+   It used to lift a shadow step on hover, which that contract forbids; the
+   gate never saw it because it sampled only the version 2 `.surface` card. */
 .ea-card {
+  border: 1px solid var(--ea-rule);
   border-radius: var(--v3-radius-card);
   background: var(--ea-raised);
-  box-shadow: 0 0 0 1px var(--ea-rule);
-  transition: box-shadow var(--dur-fast) ease-out;
+  transition: var(--transition-hover);
 }
 
 @media (hover: hover) {
-  .band--light .ea-card:hover,
-  .band--light-alt .ea-card:hover {
-    box-shadow: var(--elev-raised), 0 0 0 1px var(--ea-rule-strong);
+  .ea-card:hover {
+    border-color: var(--c-border-hover);
   }
 }
 
@@ -2441,14 +2520,12 @@ a.ea-tcard:focus-visible {
   align-self: end;
 }
 
-.ea-plan--rec {
-  box-shadow: var(--elev-raised), 0 0 0 1.5px var(--ea-accent);
-}
-
-@media (hover: hover) {
-  .band--light-alt .ea-plan--rec:hover {
-    box-shadow: var(--elev-floating), 0 0 0 1.5px var(--ea-accent);
-  }
+/* The recommended plan stands one step up and keeps its accent edge on
+   hover: it is already the marked card, so its edge does not step. */
+.ea-plan--rec,
+.ea-plan--rec:hover {
+  border-color: var(--ea-accent);
+  box-shadow: var(--elev-raised), 0 0 0 0.5px var(--ea-accent);
 }
 
 .ea-plan__top {
@@ -2668,17 +2745,21 @@ a.ea-tcard:focus-visible {
   }
 
   /* The settle uses the site's own curve, --ease (a fast start that eases
-     long into place), the same 640ms, 24px and 80ms. box-shadow is listed
-     because a revealed card keeps this transition for good: without it the
-     card's hover lift (motion 6) snapped with no ease at all, measured as no
-     transition running on hover on all three pages. */
+     long into place), the same 640ms, 24px and 80ms. The hover transition is
+     listed last because a revealed card keeps this transition list for good
+     and it replaces the card's own: without it the card's hover snapped with
+     no ease at all, measured as no transition running on hover. It was
+     box-shadow for the old lift. Since D294 a card's hover is its EDGE
+     (motion 6, .ea-card), so it is --transition-hover, the border colour on
+     the calm clock. Measured 2026-10-22 by check-sheen on /bid/ and /about/:
+     a revealed card's edge stepped with no border transition running. */
   [data-reveal='in'] {
     opacity: 1;
     transform: none;
     transition:
       opacity var(--reveal-dur) ease-out calc(var(--reveal-i, 0) * var(--reveal-step)),
       transform var(--reveal-dur) var(--ease) calc(var(--reveal-i, 0) * var(--reveal-step)),
-      box-shadow var(--dur-fast) ease-out;
+      var(--transition-hover);
   }
 }
 

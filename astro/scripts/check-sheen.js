@@ -34,7 +34,8 @@
  *      thing a reader cannot stop by moving the pointer away. LOOP_ALLOW
  *      below takes an owner decision per loop, matched by animation name AND
  *      element, and reports an entry STALE (a failure) the moment it stops
- *      running. It is empty: the hero aurora now drifts once and settles.
+ *      running. It holds the hero aurora's five fields, which keep moving by
+      owner decision D293 behind a pause control check-autoplay presses.
  *
  * ── THE SELF-TEST, BECAUSE A GATE THAT CANNOT FAIL IS THE USUAL FAILURE ─────
  *
@@ -63,12 +64,17 @@ const ALLOW = [];
 /* Rule 5's exceptions, matched exactly against "<animation> on <element>".
    Each one is an owner decision. Off under reduced motion is evidenced.css's
    job and rule 4's measurement does not see loops, so it is stated here. */
-/* EMPTY, AND THAT IS THE STATE TO KEEP IT IN. The hero aurora's five fields
-   held the only entries from R285-WEB-HERO-BACKDROP-02 until
-   R285-WEB-GATES-V3-01 (2026-10-22) made them drift once and settle inside
-   4.8s, because check-autoplay forbids any loop on the page content (WCAG
-   2.2.2). Shape kept: { loop: '<animation> on <element>', reason }. */
-const LOOP_ALLOW = [];
+/* THE HERO AURORA, AND NOTHING ELSE (D293, owner 2026-10-22). Its five
+   colour fields loop on 14 to 29 second periods, transform only, inside the
+   hero band only. R285-WEB-GATES-V3-01 had made them drift once and settle,
+   which emptied this list. The owner chose the other answer to WCAG 2.2.2:
+   it keeps moving and every hero that draws it carries a pause button, which
+   check-autoplay.mjs presses and measures. Matched by animation name AND
+   element, and STALE (a failure) the moment one stops running. */
+const AURORA_WHY = 'owner D293 2026-10-22: hero aurora keeps moving, pause control in every hero band (check-autoplay), off under reduced motion';
+const LOOP_ALLOW = [
+  ['ea-aurora-a', 1], ['ea-aurora-b', 2], ['ea-aurora-c', 3], ['ea-aurora-b', 4], ['ea-aurora-a', 5],
+].map(([name, n]) => ({ loop: `${name} on span.ea-aurora__f.ea-aurora__f--${n}`, reason: AURORA_WHY }));
 const usedLoopAllow = new Set();
 
 /* The calm clock, in milliseconds. --dur-hover is --dur-fast, 0.18s. */
@@ -207,13 +213,21 @@ const LOOPS = `() => document.getAnimations()
       (t ? t.tagName.toLowerCase() : '?') + (cls ? '.' + cls : '') + ((a.effect && a.effect.pseudoElement) || '');
   })`;
 
-/** Finite CSS animations still running inside the element (an entrance). */
+/** Finite CSS animations still running inside the element (an entrance).
+    ALSO the v3 scroll reveal, which is a TRANSITION on opacity and transform
+    (evidenced.ts initReveal, [data-reveal]) rather than an animation. The
+    probe scrolls the card into view, that starts the reveal, and a rest
+    snapshot read mid reveal then reports the reveal finishing as a hover
+    "flash". Measured 2026-10-22 on /bid/ and /about/ once .ea-card was
+    sampled: transform 6.5px -> none, opacity 0.29 -> 1. A hover never
+    starts before rest is read, so waiting these out cannot hide one. */
 const ENTRANCE_LEFT = `(sel) => {
   const el = document.querySelector(sel);
   if (!el) return 0;
   return el.getAnimations({ subtree: true })
-    .filter((a) => a.constructor.name === 'CSSAnimation' && a.playState === 'running' &&
-      a.effect && a.effect.getTiming().iterations !== Infinity && a.timeline === document.timeline)
+    .filter((a) => a.playState === 'running' && a.effect && a.timeline === document.timeline && (
+      (a.constructor.name === 'CSSAnimation' && a.effect.getTiming().iterations !== Infinity) ||
+      (a.constructor.name === 'CSSTransition' && /^(opacity|transform|translate)$/.test(a.transitionProperty))))
     .length;
 }`;
 
@@ -253,10 +267,17 @@ async function hover(page, sel) {
 }
 
 /** Tag the first plain card on the route and bring it on screen. */
-function tagCard(page) {
-  return page.evaluate(([minW, minH]) => {
-    const el = [...document.querySelectorAll('.surface:not(.surface--frame)')].find((e) => {
-      if (e.tagName === 'FIGURE' || e.querySelector('.surface')) return false;
+const CARD_SEL = { surface: '.surface:not(.surface--frame)', 'ea-card': '.ea-card' };
+function tagCard(page, kind = 'surface') {
+  return page.evaluate(([minW, minH, sel]) => {
+    /* The version 2 `.surface` card AND the v3 `.ea-card` (D294, the one
+       card). Sampling only `.surface` is how the v3 card's shadow lift on
+       hover went unmeasured until 2026-10-22. The recommended plan is left
+       out on purpose: it is the already marked card and holds its accent
+       edge on hover (evidenced.css .ea-plan--rec), so the edge step this
+       contract measures is not its behaviour. */
+    const el = [...document.querySelectorAll(sel)].find((e) => {
+      if (e.tagName === 'FIGURE' || e.querySelector('.surface, .ea-card') || e.matches('.ea-plan--rec')) return false;
       const r = e.getBoundingClientRect();
       return r.width >= minW && r.height >= minH && r.height < window.innerHeight - 40;
     });
@@ -264,7 +285,7 @@ function tagCard(page) {
     el.setAttribute('data-calm-probe', '');
     el.scrollIntoView({ block: 'center', behavior: 'instant' });
     return `${el.tagName.toLowerCase()}.${[...el.classList].filter((c) => !/^astro-/.test(c)).join('.')}`;
-  }, [MIN_CARD.w, MIN_CARD.h]);
+  }, [MIN_CARD.w, MIN_CARD.h, CARD_SEL[kind]]);
 }
 
 function tagButton(page, sel) {
@@ -330,43 +351,54 @@ async function measure(page) {
 /* ══════════════════════════════════════════════════════════════════════════
  * 1, 2, 4: CARDS, WITH AND WITHOUT MOTION
  * ══════════════════════════════════════════════════════════════════════════ */
+let eaCardsSampled = 0;
 for (const reduced of [false, true]) {
   const ctx = await browser.newContext({
     viewport: { width: 1440, height: 900 },
     reducedMotion: reduced ? 'reduce' : 'no-preference',
   });
   const page = await ctx.newPage();
+  /* Each card kind on each route, on a fresh load so only one card carries
+     the probe. A route may hold one kind or both, but it must hold one. */
   for (const route of CARD_ROUTES) {
-    const probe = `card ${route}${reduced ? ' reduce' : ''}`;
-    await open(page, route);
-    const sig = await tagCard(page);
-    if (!sig) {
-      preflight.push(`${probe}: no plain .surface of at least ${MIN_CARD.w}x${MIN_CARD.h} on this route`);
-      continue;
+    let sampled = 0;
+    for (const kind of Object.keys(CARD_SEL)) {
+      const probe = `card ${route} ${kind}${reduced ? ' reduce' : ''}`;
+      await open(page, route);
+      const sig = await tagCard(page, kind);
+      if (!sig) continue;
+      sampled += 1;
+      if (kind === 'ea-card') eaCardsSampled += 1;
+      const want = await hoverEdge(page);
+      const m = await measure(page);
+      if (!m.hovered) {
+        preflight.push(`${probe} (${sig}): the pointer could not be brought onto the card in three attempts`);
+        continue;
+      }
+      const flash = flashes(m.rest, m.lit, CARD_MAY_CHANGE);
+      rec(probe, 'one change only', flash.length === 0,
+        flash.length ? `${sig}: ${flash.join('; ')}` : `${sig}: nothing but the edge changed`);
+      rec(probe, 'edge steps to --c-border-hover', m.lit.borderTop === want && m.rest.borderTop !== want,
+        `${sig}: ${m.rest.borderTop} -> ${m.lit.borderTop} (token resolves to ${want})`);
+      const anims = m.moving.filter((a) => a.kind !== 'CSSTransition');
+      const badProps = m.moving.filter((a) => a.kind === 'CSSTransition' && !TRANSITION_OK.test(a.name));
+      rec(probe, 'no animation, colour transitions only', !anims.length && !badProps.length,
+        [...anims, ...badProps].map((a) => `${a.kind} ${a.name}${a.pseudo}`).join(', ') || 'none');
+      if (!reduced) {
+        const edge = m.moving.filter((a) => a.kind === 'CSSTransition' && /^border-/.test(a.name));
+        const off = edge.filter((a) => a.dur < CLOCK.min || a.dur > CLOCK.max);
+        rec(probe, `edge eases in ${CLOCK.min} to ${CLOCK.max}ms`, edge.length > 0 && !off.length,
+          edge.length ? edge.map((a) => `${a.name} ${a.dur}ms`).join(', ') : 'no border transition was running');
+      }
     }
-    const want = await hoverEdge(page);
-    const m = await measure(page);
-    if (!m.hovered) {
-      preflight.push(`${probe} (${sig}): the pointer could not be brought onto the card in three attempts`);
-      continue;
-    }
-    const flash = flashes(m.rest, m.lit, CARD_MAY_CHANGE);
-    rec(probe, 'one change only', flash.length === 0,
-      flash.length ? `${sig}: ${flash.join('; ')}` : `${sig}: nothing but the edge changed`);
-    rec(probe, 'edge steps to --c-border-hover', m.lit.borderTop === want && m.rest.borderTop !== want,
-      `${sig}: ${m.rest.borderTop} -> ${m.lit.borderTop} (token resolves to ${want})`);
-    const anims = m.moving.filter((a) => a.kind !== 'CSSTransition');
-    const badProps = m.moving.filter((a) => a.kind === 'CSSTransition' && !TRANSITION_OK.test(a.name));
-    rec(probe, 'no animation, colour transitions only', !anims.length && !badProps.length,
-      [...anims, ...badProps].map((a) => `${a.kind} ${a.name}${a.pseudo}`).join(', ') || 'none');
-    if (!reduced) {
-      const edge = m.moving.filter((a) => a.kind === 'CSSTransition' && /^border-/.test(a.name));
-      const off = edge.filter((a) => a.dur < CLOCK.min || a.dur > CLOCK.max);
-      rec(probe, `edge eases in ${CLOCK.min} to ${CLOCK.max}ms`, edge.length > 0 && !off.length,
-        edge.length ? edge.map((a) => `${a.name} ${a.dur}ms`).join(', ') : 'no border transition was running');
+    if (!sampled) {
+      preflight.push(`card ${route}${reduced ? ' reduce' : ''}: no .surface or .ea-card of at least ${MIN_CARD.w}x${MIN_CARD.h} on this route`);
     }
   }
   await ctx.close();
+}
+if (!eaCardsSampled) {
+  preflight.push(`no v3 .ea-card of at least ${MIN_CARD.w}x${MIN_CARD.h} on ${CARD_ROUTES.join(', ')}: the one card (D294) went unmeasured`);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

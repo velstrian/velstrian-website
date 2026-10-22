@@ -3618,8 +3618,8 @@
      What it is: a full width slab of living colour with a crisp slanted top
      edge, stripe.com's signature, that the product screen floats on. Five
      colour fields from the brand ramp and one cool light (--c-sky), each
-     drifting once on its own path and period when the page opens, so the
-     colours slide through one another and then settle. Above it the
+     on its own slow transform loop at a different period, so the colours
+     slide through one another and the picture never visibly repeats. Above it the
      headline sits on the plain light canvas with a fine engineered grid
      fading out from the top centre, so the words are ink on near white at
      every frame. Never pink, red or orange (D256).
@@ -3630,12 +3630,15 @@
      no stage it is a slim slanted ribbon inside the band's bottom padding,
      never behind words. Still under prefers-reduced-motion.
 
-     WHY IT SETTLES (R285-WEB-GATES-V3-01, 2026-10-22): the first build looped
-     forever, and moving content that starts on its own and lasts more than
-     five seconds needs a pause control (WCAG 2.2.2, Level A, check-autoplay).
-     The site's answer everywhere else is to play once, so the aurora does
-     too: every field finishes inside 4.8s and rests on the same frame a
-     reduced motion reader sees. No script, no pause button. */
+     WHY IT KEEPS MOVING, AND HOW A READER STOPS IT (D293, owner
+     2026-10-22): R285-WEB-GATES-V3-01 made it drift once and settle inside
+     4.8s, because moving content that starts on its own and lasts more than
+     five seconds needs a pause control (WCAG 2.2.2, Level A). The owner
+     chose the other answer: it keeps moving, and every hero that draws it
+     carries a pause button (Band.astro, .ea-motion), which stops all five
+     loops at once and stays paused for the session. check-autoplay presses
+     that button and measures that every loop stops. The loops are held while
+     off screen or in a hidden tab (scripts/evidenced.ts initAurora). */
   --aurora-base: linear-gradient(118deg, var(--c-iris-deep) 0%, var(--c-violet-deep) 38%, var(--c-teal-dark) 68%, var(--c-iris-deep) 100%);
   --aurora-1: var(--c-sky);
   --aurora-2: var(--c-orchid);
@@ -3646,13 +3649,14 @@
   --aurora-slant: clamp(4rem, 9vw, 10rem);
   --aurora-foot-h: clamp(1.75rem, 2.6vw, 2.5rem);
   --aurora-foot-slant: clamp(0.5rem, 1.2vw, 1.25rem);
-  /* One period per field, all under five seconds (WCAG 2.2.2), staggered
-     so the five finish one after another rather than on one beat. */
-  --aurora-t1: 3.2s;
-  --aurora-t2: 3.6s;
-  --aurora-t3: 4s;
-  --aurora-t4: 4.4s;
-  --aurora-t5: 4.8s;
+  /* One period per field with no common rhythm (14, 17, 19, 23 and 29
+     seconds), so the five never line up into a repeating beat. Slow on
+     purpose: calm, and transform only, so the compositor carries it. */
+  --aurora-t1: 14s;
+  --aurora-t2: 17s;
+  --aurora-t3: 19s;
+  --aurora-t4: 23s;
+  --aurora-t5: 29s;
   /* The engineered grid behind the headline: hairlines at 6 percent ink. */
   --hero-grid-line: color-mix(in srgb, var(--c-ink-0) 6%, transparent);
   --hero-grid-cell: 64px;

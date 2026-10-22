@@ -43,6 +43,13 @@
  * verifies that neither retired component autoplays, that neither advertises
  * an unused pause control, and that interactive choices operate normally.
  *
+ * ── 2026-10-22: ONE LOOP BACK, WITH ITS PAUSE (owner decision D293) ─────────
+ *
+ * The hero aurora keeps moving. Section 2 below no longer asserts "no loop at
+ * all": it asserts that every loop sits in a hero band, that each such band
+ * carries a pause control a keyboard can reach, that pressing it stops every
+ * loop and lasts the session, and that reduced motion shows neither.
+ *
  * THE WORKBENCH IS RADIO-DRIVEN, NOT A TABLIST, so its selected state is read
  * from `input.hmt__radio:checked` rather than from `aria-selected`. That is a
  * fact about the component, not a weakening: the radio IS the state, the CSS
@@ -69,7 +76,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DIST = path.join(__dirname, '..', 'dist');
+/* AUTOPLAY_DIST points the gate at another build, which is how its red
+   proofs run against a mutated copy without touching dist/. */
+const DIST = process.env.AUTOPLAY_DIST || path.join(__dirname, '..', 'dist');
 const TYPES = {
   '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
   '.woff2': 'font/woff2', '.webp': 'image/webp', '.avif': 'image/avif',
@@ -168,37 +177,130 @@ console.log('\n  version 3 motion moments on / (strategy 0.8)');
   await page.close();
 }
 
-/* ── 2. RETIRED MOTION DEVICES (D1, D250) ───────────────────────────────────────
- * The workbench loop, infinite marquee, reel and orbs are retired.
- * Verify no continuous autoplay loops or bogus pause controls exist on /. */
-console.log('\n  retired motion devices (workbench loop, marquee, orbs) — retired per D1');
-{
-  const page = await open('no-preference');
-  const infiniteAnimations = await page.evaluate(() => {
-    const all = [...document.querySelectorAll('main *')];
-    return all.filter((el) => {
-      const cs = getComputedStyle(el);
-      // No exception. The 6px status light in the trace used to breathe here
-      // and was the one loop this check let through. It holds still since
-      // 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01), so any loop now fails.
-      return cs.animationIterationCount.split(',').some((n) => n.trim() === 'infinite') &&
-        cs.animationDuration !== '0s';
-    }).length;
-  });
-  check('no infinite animation loops run on the page content', infiniteAnimations === 0, `infinite loops=${infiniteAnimations}`);
+/* ── 2. THE HERO AURORA LOOPS, AND ITS PAUSE CONTROL (D293) ─────────────────
+ *
+ * The owner decided on 2026-10-22 that the hero aurora keeps moving (D293).
+ * It is the ONE loop on the site, so WCAG 2.2.2 now binds it: moving content
+ * that starts on its own and lasts more than five seconds needs a way to
+ * pause it. The rule, measured on every hero route:
+ *
+ *   a  every infinite animation running in <main> sits inside a hero band
+ *      (.ea-hero). A loop anywhere else has no pause control to answer for it.
+ *   b  every hero band running a loop carries a REACHABLE pause control: shown,
+ *      at least 44 by 44px, in the tab order, not disabled or inert, and the
+ *      topmost thing at its own centre (nothing painted over it).
+ *   c  pressing it FROM THE KEYBOARD stops every loop in that band, and says so
+ *      (aria-pressed="true"). Focus is dropped before reading, for the reason
+ *      given in this file's header.
+ *   d  the choice lasts the session: after a reload the loops stay stopped,
+ *      and a second press starts them again.
+ *   e  under reduced motion no loop runs and no pause control is shown.
+ *   f  a pause control is never shown in a band where nothing loops.
+ *
+ * Red proven against a mutated copy of dist (AUTOPLAY_DIST): with the button
+ * stripped (b fails), with the loops forced to run whatever the button says
+ * (c and d fail), and with a loop injected outside the hero (a fails). */
+const HERO_ROUTES = ['/', '/bid/', '/buy/', '/pricing/'];
 
-  const pauseButtons = await page.evaluate(() => {
-    return [...document.querySelectorAll('button[aria-label*="pause" i], button[aria-label*="stop" i]')]
-      .filter((b) => !b.hidden && getComputedStyle(b).display !== 'none').length;
-  });
-  check('reveals no unused pause buttons when no timer runs', pauseButtons === 0, `pause buttons=${pauseButtons}`);
-  await page.close();
+/** Running infinite animations in <main>, each with the hero band holding it. */
+const loopsIn = (page) => page.evaluate(() => document.getAnimations()
+  .filter((a) => a.playState === 'running' && a.effect && a.effect.getTiming().iterations === Infinity)
+  .map((a) => {
+    const t = a.effect.target;
+    const inMain = Boolean(t && t.closest && t.closest('main'));
+    const hero = t && t.closest ? t.closest('.ea-hero') : null;
+    const cls = t && typeof t.className === 'string' && t.className.trim() ? '.' + t.className.trim().split(/\s+/).join('.') : '';
+    return { inMain, hero: hero ? (hero.id || 'hero') : null, name: a.animationName || 'animation', el: t ? t.tagName.toLowerCase() + cls : '?' };
+  })
+  .filter((l) => l.inMain));
+
+/** The pause control of every hero band, and whether a reader can reach it. */
+const controls = (page) => page.evaluate(() => [...document.querySelectorAll('main .ea-hero')].map((band) => {
+  const b = band.querySelector(':scope > button[data-aurora-pause]');
+  if (!b) return { hero: band.id || 'hero', present: false };
+  b.scrollIntoView({ block: 'center', behavior: 'instant' });
+  const r = b.getBoundingClientRect();
+  const cs = getComputedStyle(b);
+  const shown = !b.hidden && cs.display !== 'none' && cs.visibility !== 'hidden';
+  const top = shown ? document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2) : null;
+  return {
+    hero: band.id || 'hero', present: true, shown,
+    w: Math.round(r.width), h: Math.round(r.height),
+    tab: b.tabIndex >= 0 && !b.disabled && !b.closest('[inert]'),
+    onTop: Boolean(top && (top === b || b.contains(top))),
+  };
+}));
+
+console.log('\n  hero aurora loops and their pause control (D293, WCAG 2.2.2)');
+for (const route of HERO_ROUTES) {
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference' });
+  const page = await ctx.newPage();
+  const res = await page.goto(`${base}${route}`, { waitUntil: 'load' });
+  const landed = new URL(page.url()).pathname;
+  check(`${route} answers 200 and lands on ${route}`, res?.status() === 200 && landed === route, `status ${res?.status()} landed ${landed}`);
+  await page.waitForTimeout(600);
+
+  const loops = await loopsIn(page);
+  const stray = loops.filter((l) => !l.hero);
+  check(`${route} a: every loop sits in a hero band`, stray.length === 0,
+    stray.length ? stray.map((l) => `${l.name} on ${l.el}`).join(', ') : `${loops.length} loop(s), all in a hero`);
+
+  const ctl = await controls(page);
+  const looping = new Set(loops.filter((l) => l.hero).map((l) => l.hero));
+  for (const hero of looping) {
+    const c = ctl.find((x) => x.hero === hero);
+    const ok = Boolean(c && c.present && c.shown && c.w >= 44 && c.h >= 44 && c.tab && c.onTop);
+    check(`${route} b: hero "${hero}" has a reachable pause control`, ok,
+      c ? `present=${c.present} shown=${c.shown} ${c.w}x${c.h} tab=${c.tab} onTop=${c.onTop}` : 'no hero band found');
+  }
+  for (const c of ctl.filter((x) => x.present && x.shown && !looping.has(x.hero))) {
+    check(`${route} f: no pause control in a band where nothing loops`, false, `hero "${c.hero}" shows one with 0 loops`);
+  }
+
+  /* c and d press the control, so they run only when b found one to press.
+     Without one, b has already failed and there is nothing to measure. Only
+     loops inside a hero count here: a stray loop is rule a's finding. */
+  const inHero = async () => (await loopsIn(page)).filter((l) => l.hero);
+  if (looping.size && ctl.some((c) => c.present && c.shown)) {
+    const btn = page.locator('main .ea-hero > button[data-aurora-pause]').first();
+    await btn.focus();
+    await page.keyboard.press('Space');
+    await page.evaluate(() => document.activeElement && document.activeElement.blur());
+    await page.waitForTimeout(400);
+    const after = await inHero();
+    const pressed = await btn.getAttribute('aria-pressed');
+    check(`${route} c: the keyboard press stops every loop`, after.length === 0 && pressed === 'true',
+      `${loops.length} -> ${after.length} running, aria-pressed=${pressed}`);
+
+    await page.reload({ waitUntil: 'load' });
+    await page.waitForTimeout(600);
+    const kept = await inHero();
+    const keptPressed = await btn.getAttribute('aria-pressed');
+    check(`${route} d: the pause lasts the session (after a reload)`, kept.length === 0 && keptPressed === 'true',
+      `${kept.length} running, aria-pressed=${keptPressed}`);
+    await btn.click();
+    await page.evaluate(() => document.activeElement && document.activeElement.blur());
+    await page.waitForTimeout(400);
+    const resumed = await inHero();
+    check(`${route} d: a second press starts them again`, resumed.length > 0, `${resumed.length} running`);
+  }
+  await ctx.close();
+
+  const rctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  const rpage = await rctx.newPage();
+  await rpage.goto(`${base}${route}`, { waitUntil: 'load' });
+  await rpage.waitForTimeout(600);
+  const rl = await loopsIn(rpage);
+  const rc = (await controls(rpage)).filter((x) => x.present && x.shown);
+  check(`${route} e: reduced motion, no loop and no pause control`, rl.length === 0 && rc.length === 0,
+    `loops=${rl.length} visible pause controls=${rc.length}`);
+  await rctx.close();
 }
 
 await browser.close();
 server.close();
 
-console.log(`\n  ${checks} behavioural check(s) over 2 autoplaying component(s) on /`);
+console.log(`\n  ${checks} behavioural check(s): the v3 motion moments on /, and the hero aurora on ${HERO_ROUTES.length} routes`);
 if (failures.length) {
   console.error(`\nautoplay: ${failures.length} failure(s)`);
   for (const f of failures) console.error(`  - ${f}`);
@@ -210,7 +312,7 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  '\n  both autoplaying components stay still for a reader who asked for no motion,\n' +
-    '  offer a pause that genuinely pauses and can be undone, and the workbench stops\n' +
-    '  for good the moment a reader chooses for themselves',
+    '\n  nothing moves for a reader who asked for no motion, the only loop is the hero\n' +
+    '  aurora, and every hero that runs it offers a pause a keyboard can reach, that\n' +
+    '  genuinely stops it, lasts the session and can be undone',
 );

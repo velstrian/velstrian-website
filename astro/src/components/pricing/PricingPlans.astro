@@ -49,7 +49,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
     <ul class="ea-plans__grid" role="list" data-reveal>
       {
         PLANS.map((p) => (
-          <li class={`ea-plan surface ${p.recommended ? 'ea-plan--rec' : ''}`}>
+          <li class={`ea-card ea-plan ${p.recommended ? 'ea-plan--rec' : ''}`}>
             <div class="ea-plan__top">
               <h3 class="ea-h3">{p.name}</h3>
               {p.recommended && <span class="ea-plan__badge">Recommended</span>}

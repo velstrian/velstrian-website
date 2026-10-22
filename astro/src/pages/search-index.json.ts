@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { buildSearchIndex } from '../lib/search-index';
+import { PALETTE_ACTIONS } from '../data/palette-actions';
 
 /**
  * /search-index.json: the command palette's index, as ONE static file.
@@ -31,6 +32,7 @@ import { buildSearchIndex } from '../lib/search-index';
  * `connect-src 'self'` in _headers already permits the fetch.
  */
 export const GET: APIRoute = async () =>
-  new Response(JSON.stringify(await buildSearchIndex()), {
+  /* The palette's action rows first (data/palette-actions.ts), then the routes. */
+  new Response(JSON.stringify([...PALETTE_ACTIONS, ...(await buildSearchIndex())]), {
     headers: { 'content-type': 'application/json; charset=utf-8' },
   });

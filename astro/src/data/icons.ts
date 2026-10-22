@@ -41,6 +41,9 @@ export const ICONS = {
   close: '<path d="m6 6 12 12M18 6 6 18"/>',
   /* A lock: encryption. */
   lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
+  /* Two bars and a bare play mark: the hero aurora's pause button (D293). */
+  pause: '<path d="M9 6v12M15 6v12"/>',
+  resume: '<path d="M8 5.5v13l10.5-6.5L8 5.5Z"/>',
 } as const;
 
 export type IconName = keyof typeof ICONS;
