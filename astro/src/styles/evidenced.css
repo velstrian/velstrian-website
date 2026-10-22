@@ -20,7 +20,9 @@
    1. Section content settles in on first view: [data-reveal], opacity and a
       12px rise, 300ms, 60ms between items, once (check-motion.js rule 5).
    2. Product sequences on stages, step by step, once (.ea-seq).
-   3. The refusal moment, once (.ea-check).
+   3. The refusal moment, once (.ea-check), and on /buy/ its counterpart,
+      the pre-read boundary (.ea-moment): four rows settle in turn, each
+      line draws, and the verdicts land, the last one "Never".
    4. The carousel slide, 400ms, only when the reader asks.
    5. The primary button's light sweep, once per hover (check-sheen.js 3b).
    6. A card on a light band lifts one elevation step on hover.
@@ -686,7 +688,7 @@ main > .ea-sec * {
     transform: none;
     transition:
       opacity var(--reveal-dur) ease-out calc(var(--seq-i) * var(--seq-step) + 150ms),
-      transform var(--reveal-dur) var(--ea-ease) calc(var(--seq-i) * var(--seq-step) + 150ms);
+      transform var(--reveal-dur) var(--ease) calc(var(--seq-i) * var(--seq-step) + 150ms);
   }
 
   .ea-seq[data-seq-state='run'] .ea-seq__bar > span {
@@ -1425,6 +1427,51 @@ main > .ea-sec * {
   transition: opacity 260ms ease-out 1650ms;
 }
 
+/* ══ THE STEPPED MOMENT (.ea-moment) ══════════════════════════════════════
+   A list that plays once, row by row, driven by the same script and the same
+   attribute as the refusal (initRefusal sets data-play to armed, then run, on
+   the page's [data-refusal] block when it reaches 60 percent of the window).
+   No attribute IS the finished frame, so with no script, or under reduced
+   motion, every row, line and verdict simply shows. /buy/ has no refusal
+   block, and its pre-read boundary never moved before (measured
+   2026-10-22: data-play absent, no transition ran in the band).
+
+   Mark up each row with data-moment-step and style --moment-i (0, 1, 2 ...),
+   a line inside it with data-moment-bar, and its verdict with
+   data-moment-mark. About 2.1 seconds for four rows. */
+[data-moment-bar] {
+  transform-origin: 0 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ea-moment[data-play='armed'] [data-moment-step] {
+    opacity: 0;
+    transform: translateY(var(--reveal-rise));
+  }
+
+  .ea-moment[data-play='armed'] [data-moment-bar] {
+    transform: scaleX(0);
+  }
+
+  .ea-moment[data-play='armed'] [data-moment-mark] {
+    opacity: 0;
+  }
+
+  .ea-moment[data-play='run'] [data-moment-step] {
+    transition:
+      opacity var(--reveal-dur) ease-out calc(var(--moment-i, 0) * var(--seq-step)),
+      transform var(--reveal-dur) var(--ease) calc(var(--moment-i, 0) * var(--seq-step));
+  }
+
+  .ea-moment[data-play='run'] [data-moment-bar] {
+    transition: transform var(--ea-dur-step) var(--ease) calc(var(--moment-i, 0) * var(--seq-step) + var(--reveal-dur));
+  }
+
+  .ea-moment[data-play='run'] [data-moment-mark] {
+    transition: opacity var(--reveal-dur) ease-out calc(var(--moment-i, 0) * var(--seq-step) + var(--reveal-dur) + var(--ea-dur-step));
+  }
+}
+
 /* ══ PRODUCT CAROUSEL ══════════════════════════════════════════════════════ */
 .ea-car__stage {
   position: relative;
@@ -2118,12 +2165,18 @@ main > .ea-sec * {
     transform: translateY(var(--reveal-rise));
   }
 
+  /* The settle uses the site's own curve, --ease (a fast start that eases
+     long into place), the same 300ms, 12px and 60ms. box-shadow is listed
+     because a revealed card keeps this transition for good: without it the
+     card's hover lift (motion 6) snapped with no ease at all, measured as no
+     transition running on hover on all three pages. */
   [data-reveal='in'] {
     opacity: 1;
     transform: none;
     transition:
       opacity var(--reveal-dur) ease-out calc(var(--reveal-i, 0) * var(--reveal-step)),
-      transform var(--reveal-dur) var(--ea-ease) calc(var(--reveal-i, 0) * var(--reveal-step));
+      transform var(--reveal-dur) var(--ease) calc(var(--reveal-i, 0) * var(--reveal-step)),
+      box-shadow var(--dur-fast) ease-out;
   }
 }
 

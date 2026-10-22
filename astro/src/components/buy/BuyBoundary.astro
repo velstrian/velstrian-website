@@ -5,7 +5,11 @@
  * A DARK band, and the page's one slow moment.
  * The AI reads and summarises, it never sets a mark. People score.
  * Shown, not explained: four things asked of the pre-read, three it does,
- * the fourth (setting a mark) stops dead at the boundary.
+ * the fourth (setting a mark) stops dead at the boundary. It plays once, as
+ * the shared stepped moment (.ea-moment in styles/evidenced.css, started by
+ * the refusal script through data-refusal): each row settles in turn, its
+ * line draws, and its verdict lands, the fourth line stopping short and
+ * landing on "Never".
  */
 import Band from '../evidenced/Band.astro';
 import Stage from '../evidenced/Stage.astro';
@@ -36,18 +40,18 @@ const BOUNDARY = [
         caption="Four things asked of the pre-read. Three it does, and setting a mark stops dead at the line."
       >
         <div class="buy-gate">
-          <ol class="buy-gate__list">
+          <ol class="buy-gate__list ea-moment" data-refusal>
             {
-              BOUNDARY.map((item) => (
-                <li class={`buy-gate__item ${item.ok ? 'buy-gate__item--ok' : 'buy-gate__item--stop'}`}>
+              BOUNDARY.map((item, i) => (
+                <li class={`buy-gate__item ${item.ok ? 'buy-gate__item--ok' : 'buy-gate__item--stop'}`} data-moment-step style={`--moment-i: ${i}`}>
                   <div class="buy-gate__main">
                     <p class="buy-gate__name">{item.name}</p>
                     <p class="buy-gate__src">{item.src}</p>
                   </div>
                   <span class="buy-gate__track" aria-hidden="true">
-                    <i class="buy-gate__bar" />
+                    <i class="buy-gate__bar" data-moment-bar />
                   </span>
-                  <div class="buy-gate__verdict">
+                  <div class="buy-gate__verdict" data-moment-mark>
                     {item.ok ? (
                       <span class="ea-chip ea-chip--ok">Does</span>
                     ) : (
