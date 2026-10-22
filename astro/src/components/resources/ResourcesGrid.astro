@@ -1,0 +1,98 @@
+---
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import ResourceCard from './ResourceCard.astro';
+import { LIVE_SOURCES } from '../../data/site-facts';
+import { RECENT_DAYS } from '../../data/tender-finder';
+---
+
+<Band tone="light-alt" id="tools" labelledby="tools-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <p class="ea-label res-eyebrow">Free tools</p>
+        <h2 class="ea-h2" id="tools-title">Free tender compliance matrix</h2>
+      </div>
+      <p class="ea-lead">
+        Search open UK and EU tenders, then read back what a tender requires, the same way Velstrian Bid does internally. No account, no email gate, no credit card. Use them, then start Velstrian Bid if you want alerts, fit scores and the full audit trail.
+      </p>
+    </div>
+
+    <div class="res-grid">
+      <ResourceCard
+        href="/tools/tender-compliance-matrix/"
+        imageSlug="card-compliance-matrix"
+        label="Free tool"
+        title="Tender Compliance Matrix"
+        description="Paste the text of a tender and read back the requirements its wording states, each one shown with the line it came from. Nothing is uploaded and nothing is generated."
+      />
+      <ResourceCard
+        href="/tools/tender-finder/"
+        imageSlug="card-tender-finder"
+        label="Free tool"
+        title="Tender Finder"
+        description={`Search open notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. Filter by keyword, region, value and closing date, and follow each result to its official source.`}
+      />
+      <ResourceCard
+        href="/blog/ppn-026-social-value-guide/"
+        imageSlug="card-guides"
+        label="PPN 026"
+        title="PPN 026 Social Value: How the Model Is Scored"
+        description="A minimum 10% social value weighting applies from 1 million pounds inc VAT, rising to 20% at 5 million or above. How the National TOMs measures and National TOMs proxies turn into a defensible, bid-ready score."
+      />
+      <ResourceCard
+        href="/blog/"
+        imageSlug="card-blog"
+        label="Guides"
+        title="In-depth guides"
+        description="Long-form analysis written in-house. Each article cites the policy note, Act or section it rests on, not somebody else's summary of it."
+      />
+    </div>
+
+    <div class="res-more" data-reveal>
+      <Action href="/tools/" variant="secondary">View all tools</Action>
+      <Action href="/blog/" variant="secondary">View all articles</Action>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .res-eyebrow {
+    margin-bottom: var(--space-3);
+    color: var(--ea-accent-ink);
+  }
+
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-5);
+    align-items: stretch;
+    margin-top: clamp(var(--space-8), 2rem + 2vw, var(--space-12));
+  }
+
+  @media (max-width: 1023px) {
+    .res-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .res-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .res-more {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: clamp(var(--space-8), 2rem + 2vw, var(--space-12));
+  }
+
+  @media (max-width: 599px) {
+    .res-more {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

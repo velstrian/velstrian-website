@@ -1,29 +1,30 @@
 ---
 /**
- * /resources: the hub page.
+ * /resources/: the resources hub on design system v3.
  *
- * SEO carried over verbatim.
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy section 0.7.
+ * Rebuilt on design system version 3.
  *
- * TWO CONTENT REPAIRS ARE CARRIED FORWARD, not reintroduced. The live page (now
- * fixed) listed "National TOMs, National TOMs" and had a methodology description
- * beginning mid-clause in lower case. Both were collateral from the Oxford
- * Social Value Bank remediation, whose find/replace ran over text that already
- * said "National TOMs". The corrected strings are used here.
+ * Responsive.io style resource row: a grid of varied cards with card art on top,
+ * short label, plain title, one line of description, the whole card one link.
  *
- * The "Intel trackers" section exists on the legacy page only as an HTML comment
- * (removed 2026-07-28) and is deliberately NOT ported.
+ * STORYLINE:
+ *   1. ResourcesHero        light      what is this hub?       title, lead, two actions, no-gate reassurance
+ *   2. ResourcesGrid        light alt  free tools and guides   4 varied cards (art, label, title, line), exit actions
+ *   3. ResourcesStandards   dark       methodology & glossary  how rules are sourced, procurement glossary, compare link
+ *   4. Close                gradient   what now?               close gradient band overlapping footer
  *
- * NOTHING ON THIS PAGE IS GATED, and the page says so before the click, twice.
- * That is a promise to keep: if a resource ever moves behind an email capture,
- * the "No account, no email gate, no credit card" line has to change with it.
+ * ── SEO CARRIED OVER VERBATIM ──────────────────────────────────────────────
+ * Title, description, canonical and breadcrumbs schema are preserved.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import ResourcesHero from '../components/resources/ResourcesHero.astro';
+import ResourcesGrid from '../components/resources/ResourcesGrid.astro';
+import ResourcesStandards from '../components/resources/ResourcesStandards.astro';
+import Close from '../components/evidenced/Close.astro';
+import '../styles/evidenced.css';
 import { SIGNUP_URL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
-import { LIVE_SOURCES } from '../data/site-facts';
-import { RECENT_DAYS } from '../data/tender-finder';
 
 const title = 'Resources | Velstrian';
 const description =
@@ -35,309 +36,25 @@ const schema = [
     { name: 'Resources', path: '/resources/' },
   ]),
 ];
+
+const UPDATED = new Date('2026-10-22');
 ---
 
-<Base title={title} description={description} path="/resources" schema={schema}>
-  <Section
-    as="h1"
-    eyebrow="Hub"
-    title="The rules, explained for UK teams."
-    standfirst="A free tender compliance matrix, in-depth briefings on UK public-sector bidding, and a plain-English glossary, built around Velstrian Bid."
-    id="resources-hero"
-  >
-    <div class="btn-row">
-      <Button href="/tools/tender-compliance-matrix/">Run the free tool</Button>
-      <Button href="/blog/" variant="secondary">Read the latest briefing</Button>
-    </div>
-  </Section>
-
-  <Section
-    eyebrow="Free tools"
-    title="Free tender finder and compliance matrix"
-    standfirst="Search open UK and EU tenders, then read back what a tender requires, the same way Velstrian Bid does internally. No account, no email gate, no credit card. Use them, then start Velstrian Bid if you want alerts, fit scores and the full audit trail."
-    id="tools"
-  >
-    <article class="card surface surface--pad">
-      <h3 class="card__h">
-        <a href="/tools/tender-compliance-matrix/">Tender Compliance Matrix</a>
-      </h3>
-      <p class="card__body">
-        Paste the text of a tender and read back the requirements its wording states,
-        each one shown with the line it came from. Nothing is uploaded and nothing is
-        generated.
-      </p>
-      <p class="card__cta"><a href="/tools/tender-compliance-matrix/">Open tool</a></p>
-    </article>
-    <article class="card surface surface--pad">
-      <h3 class="card__h">
-        <a href="/tools/tender-finder/">Tender Finder</a>
-      </h3>
-      <p class="card__body">
-        Search open notices from {LIVE_SOURCES}, published in the last {RECENT_DAYS} days.
-        Filter by keyword, region, value and closing date, and follow each result to its
-        official source.
-      </p>
-      <p class="card__cta"><a href="/tools/tender-finder/">Open tool</a></p>
-    </article>
-    <div class="more"><Button href="/tools/" variant="secondary">View all tools</Button></div>
-  </Section>
-
-  <Section
-    eyebrow="Guides"
-    title="In-depth guides"
-    standfirst="Long-form analysis written in-house. Each article cites the policy note, Act or section it rests on, not somebody else's summary of it."
-    id="guides"
-  >
-    {/*
-      The legacy version wrapped the whole card in a single <a>, which makes the
-      accessible name the entire card text, capsule, heading, standfirst and
-      meta line read out as one string. Here the LINK is the heading and the
-      card is a container, so the accessible name is the article title.
-    */}
-    <article class="card surface surface--pad">
-      <p class="chip capsule">PPN 026</p>
-      <h3 class="card__h">
-        <a href="/blog/ppn-026-social-value-guide/">
-          PPN 026 Social Value: How the Model Is Scored
-        </a>
-      </h3>
-      <p class="card__body">
-        A minimum 10% social value weighting applies from 1 million pounds inc VAT, rising
-        to 20% at 5 million or above. How the National TOMs measures and National TOMs
-        proxies turn into a defensible, bid-ready score.
-      </p>
-      <div class="card__foot"><p class="meta card__meta">7 min read · March 2026</p></div>
-    </article>
-    <div class="more"><Button href="/blog/" variant="secondary">View all articles</Button></div>
-  </Section>
-
-  {/* WAS "How our calculator works", pointing at the retired calculator's
-      methodology page. Both are gone: the owner removed that tool on 2026-08-04.
-      The section is kept rather than deleted because the CLAIM it makes is the
-      one this hub exists to make, that the working is published rather than
-      asserted, and it is still true of what the site actually publishes. It now
-      points at the two pages that carry that working: the PPN 026 glossary entry
-      for the rule itself, and /sources for every figure the site prints. */}
-  <Section
-    eyebrow="Methodology"
-    title="How the rules are sourced"
-    standfirst="Every figure on this site is published with the statute, policy note or framework it rests on. No black box."
-    id="methodology"
-  >
-    <article class="card surface surface--pad">
-      <h3 class="card__h">
-        <a href="/glossary/ppn-026/">PPN 026 in full</a>
-      </h3>
-      {/* Sentence case, not the mid-clause fragment the live page carried. */}
-      <p class="card__body">
-        The 10% minimum weighting, the five missions and eight policy outcomes beneath
-        them, the publication and mandatory dates, and where PPN 06/20 still applies.
-      </p>
-      <p class="card__cta">
-        <a href="/sources/">Read every figure and its source</a>
-      </p>
-    </article>
-  </Section>
-
-  <Section
-    eyebrow="Glossary"
-    title="Glossary of procurement terms"
-    standfirst="Plain-English definitions of the regulations, frameworks and acronyms that come up in UK public-sector bidding."
-    id="glossary"
-  >
-    {/*
-      The legacy glossary block is a single bounded panel, wider than the
-      resource cards and carrying a teal top accent, with the examples and the
-      action inside it rather than loose on the page. Reproduced here as a
-      panel around the BODY only: the eyebrow and heading stay in the Section
-      head, where the owner's centred-head decision governs them.
-
-      "National TOMs" listed ONCE. The live page listed it twice.
-    */}
-    <div class="card card--wide card--centred surface surface--pad">
-      <p class="examples">PPN 026, National TOMs, the Procurement Act 2023, and more.</p>
-      <div class="more"><Button href="/glossary/">Browse the glossary</Button></div>
-    </div>
-  </Section>
-
-  <Section
+<Base
+  title={title}
+  description={description}
+  path="/resources"
+  schema={schema}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <ResourcesHero />
+  <ResourcesGrid />
+  <ResourcesStandards />
+  <Close
     title="Start with the workflow you need now."
-    standfirst="Velstrian Bid: find UK public-sector tenders, draft grounded social-value answers, and prove delivery, all in one workspace."
-    id="resources-cta"
-  >
-    <div class="btn-row">
-      <Button href={SIGNUP_URL}>Start now</Button>
-      <Button href="/pricing/" variant="secondary">View all pricing</Button>
-    </div>
-    <p class="compare">
-      Weighing up your options?{' '}
-      <a href="/compare/">
-        See how Velstrian Bid compares to AutogenAI, mytender.io, CleanTender and SwiftBid
-      </a>.
-    </p>
-  </Section>
+    lead="Velstrian Bid: find UK public-sector tenders, draft grounded social-value answers, and prove delivery, all in one workspace."
+    primary={{ href: SIGNUP_URL, label: 'Start now' }}
+  />
 </Base>
-
-<style>
-  /* Centred on the same axis as the head block above it (owner decision,
-     2026-08-02), which is also what the legacy page does with every action row
-     on this page. Alignment only. */
-
-  /*
-   * THE CARD IS CENTRED AND NARROWER THAN THE MEASURE, which is the single
-   * biggest thing this page had wrong. Every section head is centred and every
-   * card sat flush against the left gutter of a 1160px measure, so the page
-   * read as two layouts stacked on each other.
-   *
-   * The legacy page puts each of these cards in a `max-w-xl mx-auto` wrapper,
-   * one narrow column, centred, for what is a single card rather than a grid
-   * row. Width is expressed as a fraction of --measure rather than the 720px
-   * that used to be hardcoded here, so there is still exactly one number on
-   * this page that decides how wide anything is, and it lives in tokens.css.
-   * Half the measure lands at 580px against the legacy 576px.
-   */
-  /* Border, radius, background, padding, the gloss, the hover and the centring
-     of card content are `surface surface--pad` in the markup. This block used to
-     restate four of them, which is why these cards did not centre when every
-     other card on the site did. What stays is the measure, which is genuinely
-     local: these cards sit one or two to a row rather than three. */
-  .card {
-    max-width: min(100%, calc(var(--measure) / 2));
-    margin-inline: auto;
-  }
-
-  /* NO `.card--accent` HERE ANY MORE, 2026-08-31, OWNER INSTRUCTION. The tool
-     and methodology cards carried a 3px teal rule on their left edge, inherited
-     from the legacy page, to mark them "an action rather than an article". The
-     owner asked for every one of those bars to come off the site, and the mark
-     was not carrying its own weight in the first place: both cards are alone in
-     their section, so there was no article beside them to be distinguished
-     from. The class is gone from the markup as well as from here, because a
-     class that resolves to nothing is the next reader's mystery. */
-
-  /* The glossary panel is deliberately the wider of the two card widths on the
-     legacy page (max-w-4xl against max-w-xl) and turns its accent to the top
-     edge. Same fraction-of-measure treatment, at 893px against the legacy 896. */
-  .card--wide {
-    max-width: min(100%, calc(var(--measure) * 0.77));
-    border-top: 3px solid var(--c-ambient-start);
-  }
-
-  .card--centred { text-align: center; }
-
-  /* Two tool cards stack in one section, on the stack gap rather than touching. */
-  .card + .card { margin-top: var(--stack-2); }
-
-  .capsule {
-    margin: 0 0 var(--stack-1);
-    color: var(--c-ambient-start);
-  }
-
-  .card__h {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    line-height: 1.35;
-  }
-
-  .card__h a {
-    color: var(--c-text);
-    text-decoration: none;
-  }
-
-  .card__h a:hover { color: var(--c-interactive); }
-
-  .card__h a:focus-visible {
-    outline: 3px solid var(--c-interactive);
-    outline-offset: 3px;
-    border-radius: 3px;
-  }
-
-  .card__body {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.7;
-    color: var(--c-text-sub);
-  }
-
-  .card__cta { margin: 0; }
-
-  /* The article card closes on a RULED FOOTER ROW on the legacy page, which is
-     what separates the read-time from the body copy above it. It was rendering
-     here as one more line of text in the stack. */
-  /* THE DIVIDER MOVED OFF THE LABEL. The rule above this line and the space
-     under it are a separator between the card body and its footer, they belong
-     to the card, not to the words. Declared on the label they made this one
-     `.meta` a recipe of its own, which is the same mistake as putting a quote's
-     panel on the <figure> around it. */
-  .card__foot {
-    margin-top: var(--stack-2);
-    padding-top: var(--stack-2);
-    border-top: 1px solid var(--c-border);
-  }
-  .card__meta {
-    color: var(--c-text-muted);
-  }
-
-  /* The in-card action is a small uppercase link on the legacy page, which is
-     what keeps it distinct from the section-level button below the card. */
-  .card__cta a {
-    /* inline-flex + --btn-h-sm, not a bare inline link: at --t-micro the text
-       box is 15px tall, and this is a standalone action in its own row rather
-       than a link inside a sentence, so the WCAG 2.5.8 inline exception does
-       not cover it. --btn-h-sm IS the 44px floor. */
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--btn-h-sm);
-    /* The label recipe is `.meta` in styles/labels.css. */
-    color: var(--c-interactive);
-    text-decoration: none;
-  }
-
-  .card__cta a:hover { }
-
-  .compare a {
-    color: var(--c-interactive);
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-  }
-
-  /*
-   * "View all tools" / "View all articles" are BUTTONS on the legacy page, sat
-   * centred under the card, not inline text links flush against the left
-   * gutter. They are the section's exit, so they carry a control's weight and
-   * a control's 44px target, which an underlined run of text does not.
-   */
-  .more {
-    display: flex;
-    justify-content: center;
-    margin: var(--sec-gap) 0 0;
-  }
-
-  /* Inside the glossary panel the action closes the panel rather than the
-     section, so it sits on the tighter of the two stack gaps. */
-  .card .more { margin-top: var(--stack-2); }
-
-  .examples {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--t-lede);
-    font-style: italic;
-    color: var(--c-text-sub);
-  }
-
-  .compare {
-    margin: var(--sec-gap) auto 0;
-    max-width: 68ch;
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.7;
-    text-align: center;
-    color: var(--c-text-sub);
-  }
-
-  /* `.legal` and the company line it styled came out 2026-08-04 (O-17). It
-     repeated the footer's statutory disclosure a second time on this page. */
-</style>

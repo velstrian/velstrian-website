@@ -1,0 +1,153 @@
+---
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import IconTile from '../evidenced/IconTile.astro';
+---
+
+<Band tone="dark" id="methodology" labelledby="methodology-title">
+  <div class="ea-wrap">
+    <div class="res-standards-grid" data-reveal>
+      <div class="res-col">
+        <IconTile name="document" />
+        <p class="ea-label res-col__eyebrow">Methodology</p>
+        <h2 class="ea-h2" id="methodology-title">How the rules are sourced</h2>
+        <p class="ea-lead res-col__lead">
+          Every figure on this site is published with the statute, policy note or framework it rests on. No black box.
+        </p>
+
+        <div class="ea-card res-panel">
+          <h3 class="ea-h3 res-panel__h">
+            <a href="/glossary/ppn-026/">PPN 026 in full</a>
+          </h3>
+          <p class="res-panel__body">
+            The 10% minimum weighting, the five missions and eight policy outcomes beneath them, the publication and mandatory dates, and where PPN 06/20 still applies.
+          </p>
+          <div class="res-panel__links">
+            <a class="ea-link" href="/sources/">Read every figure and its source</a>
+            <a class="ea-link" href="/glossary/ppn-026/">PPN 026 glossary definition</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-col">
+        <IconTile name="checklist" />
+        <p class="ea-label res-col__eyebrow">Glossary</p>
+        <h2 class="ea-h2" id="glossary-title">Glossary of procurement terms</h2>
+        <p class="ea-lead res-col__lead">
+          Plain-English definitions of the regulations, frameworks and acronyms that come up in UK public-sector bidding.
+        </p>
+
+        <div class="ea-card res-panel">
+          <p class="res-examples">PPN 026, National TOMs, the Procurement Act 2023, and more.</p>
+          <div class="res-panel__action">
+            <Action href="/glossary/" variant="secondary">Browse the glossary</Action>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="res-onward" data-reveal>
+      <p class="res-compare">
+        Weighing up your options?{' '}
+        <a class="ea-link" href="/compare/">
+          See how Velstrian Bid compares to AutogenAI, mytender.io, CleanTender and SwiftBid
+        </a>.{' '}
+        <a class="ea-link" href="/pricing/">View all pricing</a>.
+      </p>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .res-standards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(var(--space-8), 3rem + 2vw, var(--space-12));
+  }
+
+  @media (max-width: 899px) {
+    .res-standards-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .res-col__eyebrow {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+    color: var(--ea-accent-ink);
+  }
+
+  .res-col__lead {
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .res-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+  }
+
+  .res-panel__h {
+    margin: 0;
+  }
+
+  .res-panel__h a {
+    color: var(--ea-ink);
+    text-decoration: none;
+  }
+
+  .res-panel__h a:hover {
+    color: var(--ea-accent-ink);
+  }
+
+  .res-panel__body {
+    margin: 0;
+    color: var(--ea-muted);
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
+  }
+
+  .res-panel__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  .res-examples {
+    margin: 0;
+    font-size: var(--t-ea-body);
+    font-style: italic;
+    color: var(--ea-muted);
+  }
+
+  .res-panel__action {
+    margin-top: var(--space-2);
+  }
+
+  .res-onward {
+    margin-top: clamp(var(--space-10), 3rem + 3vw, var(--space-16));
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--ea-rule);
+    text-align: center;
+  }
+
+  .res-compare {
+    margin: 0 auto;
+    max-width: 68ch;
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
+    color: var(--ea-muted);
+  }
+
+  .ea-link {
+    color: var(--ea-accent-ink);
+    text-decoration: none;
+  }
+
+  .ea-link:hover {
+    text-decoration: underline;
+  }
+</style>
