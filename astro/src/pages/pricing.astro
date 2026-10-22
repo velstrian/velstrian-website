@@ -115,12 +115,14 @@ const UPDATED = new Date('2026-10-22');
   headerTone="light"
 >
   <div class="pricing-page">
-    {/* The billing choice: two radios, so each segment of the control in
-        PricingHero is a label that SELECTS rather than toggles (a second
+    {/* The billing choice: two radios, so each segment of the control above
+        the plan cards is a label that SELECTS rather than toggles (a second
         press on "Monthly" leaves it monthly). They sit first in the page so
         every band below reads them with `~ *`. #billing-toggle is the annual
         one, and every price rule keys off `#billing-toggle:checked` in CSS,
-        with no script (R285-WEB-TRANSFORMATION-WT-F, audit S3). */}
+        with no script (R285-WEB-TRANSFORMATION-WT-F, audit S3). The labels
+        carry no role: the radios are the accessible control, and a role on
+        the labels would announce four radios (WT-H review). */}
     <input
       type="radio"
       id="billing-monthly"
@@ -139,9 +141,9 @@ const UPDATED = new Date('2026-10-22');
 
     <PricingHero />
     <PricingPlans>
-      <div class="pricing-billing" slot="toggle" role="radiogroup" aria-label="Billing interval">
-        <label for="billing-monthly" role="radio" aria-checked="true" class="pricing-billing__seg pricing-billing__seg--m">Monthly</label>
-        <label for="billing-toggle" role="radio" aria-checked="false" class="pricing-billing__seg pricing-billing__seg--a">Annual billing · Save {SAVE_PCT}%</label>
+      <div class="pricing-billing" slot="toggle">
+        <label for="billing-monthly" class="pricing-billing__seg pricing-billing__seg--m">Monthly</label>
+        <label for="billing-toggle" class="pricing-billing__seg pricing-billing__seg--a">Annual billing · Save {SAVE_PCT}%</label>
       </div>
     </PricingPlans>
     <PricingCredits />
@@ -168,29 +170,6 @@ const UPDATED = new Date('2026-10-22');
     />
   </div>
 </Base>
-
-<script>
-  function initBillingAria() {
-    const mInput = document.getElementById("billing-monthly") as HTMLInputElement | null;
-    const aInput = document.getElementById("billing-toggle") as HTMLInputElement | null;
-    const mSeg = document.querySelector(".pricing-billing__seg--m");
-    const aSeg = document.querySelector(".pricing-billing__seg--a");
-    function update() {
-      if (mInput && aInput && mSeg && aSeg) {
-        const isAnnual = aInput.checked;
-        mSeg.setAttribute("aria-checked", String(!isAnnual));
-        aSeg.setAttribute("aria-checked", String(isAnnual));
-      }
-    }
-    mInput?.addEventListener("change", update);
-    aInput?.addEventListener("change", update);
-  }
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initBillingAria, { once: true });
-  } else {
-    initBillingAria();
-  }
-</script>
 
 <style>
   .pricing-page {
