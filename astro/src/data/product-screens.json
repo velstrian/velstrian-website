@@ -12,7 +12,9 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Bid board showing public and private bids in four columns: in preparation, submitted, won and lost, each card with its deadline, value, owner and how many questions are answered.",
-      "slots": ["home-car-board"]
+      "slots": [
+        "home-car-board"
+      ]
     },
     {
       "id": "S2",
@@ -24,7 +26,13 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Bid response workspace: the list of tender questions with their marks, a drafted answer about staff cover with two numbered citations, and the two source passages from the bidder's own documents with a passed source check.",
-      "slots": ["home-car-answer", "screen-answer-library", "screen-answer-list", "bid-hero", "about-hero"]
+      "slots": [
+        "home-car-answer",
+        "screen-answer-library",
+        "screen-answer-list",
+        "bid-hero",
+        "about-hero"
+      ]
     },
     {
       "id": "S3",
@@ -36,7 +44,9 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Bid blocking a draft answer because it promises a 30 percent fuel cut that none of the bidder's documents support, with three ways to fix it: add the document, confirm it as a commitment, or remove the figure.",
-      "slots": ["home-car-refusal"]
+      "slots": [
+        "home-car-refusal"
+      ]
     },
     {
       "id": "S4",
@@ -48,7 +58,10 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Bid delivery tab for a won contract, listing each promise made in the bid with what has been delivered so far, whether it is on track, at risk or behind, and the proof attached.",
-      "slots": ["home-car-deliver", "screen-evidence"]
+      "slots": [
+        "home-car-deliver",
+        "screen-evidence"
+      ]
     },
     {
       "id": "S5",
@@ -60,7 +73,9 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Buy scorecard where the buyer's panel scores each criterion of a supplier response from 0 to 100, next to an advisory pre-read that quotes evidence from the response and never scores.",
-      "slots": ["buy-hero"]
+      "slots": [
+        "buy-hero"
+      ]
     },
     {
       "id": "S6",
@@ -72,7 +87,9 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Bid find contracts page listing new public contracts with a fit score out of 100 and a plain reason for each, plus a box for uploading the documents of a private invitation.",
-      "slots": ["screen-find"]
+      "slots": [
+        "screen-find"
+      ]
     },
     {
       "id": "S7",
@@ -84,7 +101,9 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Buy requirement pack in five steps, on the questions and weights step: five questions with a plain explanation each, weights that add up to 100 percent, and help on asking for social value suppliers can be checked against.",
-      "slots": ["screen-buyer-requirement"]
+      "slots": [
+        "screen-buyer-requirement"
+      ]
     },
     {
       "id": "S8",
@@ -96,7 +115,9 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Buy live contract page listing what the supplier promised in their winning bid, what they have delivered so far, its status, and the proof they have sent, with a button to ask for missing proof.",
-      "slots": ["screen-buyer-delivery"]
+      "slots": [
+        "screen-buyer-delivery"
+      ]
     },
     {
       "id": "S9",
@@ -108,7 +129,9 @@
       "width": 1440,
       "height": 900,
       "alt": "Velstrian Bid insights page with total bids, social value delivered and evidence completion, a chart of bids started each month, where bids stand by stage, bids by type of work and a suggested next step.",
-      "slots": ["screen-insights"]
+      "slots": [
+        "screen-insights"
+      ]
     },
     {
       "id": "S10",
@@ -120,7 +143,166 @@
       "width": 1440,
       "height": 900,
       "alt": "Action centre listing everything that needs the team, ordered by how soon it is due: a bid to sign off, an insurance certificate running out, a buyer's answer to read, proof to add and contracts to decide on, each with an owner.",
-      "slots": ["screen-action-centre"]
+      "slots": [
+        "screen-action-centre"
+      ]
+    },
+    {
+      "id": "P1",
+      "slug": "feed",
+      "kind": "panel",
+      "product": "bid",
+      "node": "11:43",
+      "file": "Assets/product-screens/panel-feed.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "New contracts for you: three public contracts with a fit score out of 100, and a prompt to upload the documents of a private invitation.",
+      "slots": [
+        "home-cap-find",
+        "contact-call-find",
+        "home-who-small"
+      ]
+    },
+    {
+      "id": "P2",
+      "slug": "question-list",
+      "kind": "panel",
+      "product": "bid",
+      "node": "11:101",
+      "file": "Assets/product-screens/panel-question-list.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "The six questions of a tender with how much of the marks each one carries and whether it is drafted, reviewed, needs proof or blocked.",
+      "slots": [
+        "home-cap-answer"
+      ]
+    },
+    {
+      "id": "P3",
+      "slug": "who-is-doing-what",
+      "kind": "panel",
+      "product": "bid",
+      "node": "11:159",
+      "file": "Assets/product-screens/panel-who-is-doing-what.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "Who is doing what on a bid: four team members, the questions each one owns, when each part is due and its status.",
+      "slots": [
+        "home-who-team"
+      ]
+    },
+    {
+      "id": "P4",
+      "slug": "comments",
+      "kind": "panel",
+      "product": "bid",
+      "node": "11:209",
+      "file": "Assets/product-screens/panel-comments.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "A resolved comment thread on one answer, where a director asks for a response time and the bid owner adds it with a citation to the staffing policy.",
+      "slots": [
+        "home-cap-check"
+      ]
+    },
+    {
+      "id": "P5",
+      "slug": "promises-checklist",
+      "kind": "panel",
+      "product": "bid",
+      "node": "13:53",
+      "file": "Assets/product-screens/panel-promises-checklist.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "Promises in this bid: a checklist of commitments made in the answers, four of five confirmed before the bid is sent.",
+      "slots": [
+        "home-cap-deliver",
+        "bid-deliver"
+      ]
+    },
+    {
+      "id": "P6",
+      "slug": "supplier-reply",
+      "kind": "panel",
+      "product": "buy",
+      "node": "13:109",
+      "file": "Assets/product-screens/panel-supplier-reply.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "A supplier answer on social value with the proof they attached, and each panel member scoring it from 0 to 100, panel score 68 out of 100.",
+      "slots": [
+        "home-who-buyer"
+      ]
+    },
+    {
+      "id": "P7",
+      "slug": "preread-boundary",
+      "kind": "panel",
+      "product": "buy",
+      "node": "13:140",
+      "file": "Assets/product-screens/panel-preread-boundary.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "The evaluation pre-read with its advisory notice in full: it quotes evidence from the supplier response and never scores, the buyer enters the score.",
+      "slots": [
+        "buy-boundary-gate"
+      ]
+    },
+    {
+      "id": "P8",
+      "slug": "requirement-pack",
+      "kind": "panel",
+      "product": "buy",
+      "node": "13:197",
+      "file": "Assets/product-screens/panel-requirement-pack.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "A requirement pack in five steps, three done, with a plain summary of each step.",
+      "slots": [
+        "buy-cap-request"
+      ]
+    },
+    {
+      "id": "P9",
+      "slug": "submissions",
+      "kind": "panel",
+      "product": "buy",
+      "node": "15:59",
+      "file": "Assets/product-screens/panel-submissions.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "Responses received from four suppliers, one missing its price, and a supplier question answered and shared with every supplier.",
+      "slots": [
+        "buy-cap-collect"
+      ]
+    },
+    {
+      "id": "P10",
+      "slug": "whole-life-costs",
+      "kind": "panel",
+      "product": "buy",
+      "node": "15:117",
+      "file": "Assets/product-screens/panel-whole-life-costs.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "Whole life cost of three priced responses over three years, split into price and running costs, showing the lowest price is not the lowest cost.",
+      "slots": [
+        "buy-cap-compare"
+      ]
+    },
+    {
+      "id": "P11",
+      "slug": "after-award",
+      "kind": "panel",
+      "product": "buy",
+      "node": "15:181",
+      "file": "Assets/product-screens/panel-after-award.png",
+      "width": 1200,
+      "height": 900,
+      "alt": "Award decision with final weighted scores out of 100, outcome letters sent, the waiting period before signing, and the supplier promises becoming a delivery checklist.",
+      "slots": [
+        "buy-cap-decision"
+      ]
     }
   ]
 }

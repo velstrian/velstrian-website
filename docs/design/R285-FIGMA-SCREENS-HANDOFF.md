@@ -21,7 +21,12 @@ Screenshot checked and exported (1440x900 PNG, `Assets/product-screens/`, record
 `astro/src/data/product-screens.json`): S1 bids board 5:119, S2 response answer 3:122 (fixed: header search wrap,
 editor header overflow, footer overlap, chips aligned), S3 no source 6:2, S4 delivery promises 7:122, S5 buyer
 evaluation 7:458, S6 discover feed 8:119, S7 requirement pack 9:134, S8 supplier promises after award 9:409, S9 insights
-(no win rate tile, no win rate chart) 9:715, S10 action centre 10:119. All 10 Screens done. The library's header search now takes `o.search` and truncates to one line.
+(no win rate tile, no win rate chart) 9:715, S10 action centre 10:119. All 10 Screens done.
+All 11 Panels done, built at 600x450 then `rescale(2)` in Figma, so each frame is 1200x900 and exports 1:1 (the 2x
+export of a 600x450 view): P1 feed 11:43, P2 question list 11:101, P3 who is doing what 11:159, P4 comments 11:209,
+P5 promises checklist 13:53, P6 supplier reply with panel score 68 / 100 13:109, P7 pre-read boundary (product notice
+verbatim) 13:140, P8 requirement pack 13:197, P9 submissions and supplier questions 15:59, P10 whole life costs 15:117,
+P11 after award 15:181. Screens sit on the page in one row at y=0, Panels in one row at y=1100. The library's header search now takes `o.search` and truncates to one line.
 
 ## Size system (driver decision, replaces the brief's)
 
