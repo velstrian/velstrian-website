@@ -1,10 +1,28 @@
 ---
+/**
+ * /glossary/: the procurement glossary.
+ *
+ * 2026-10-22: ON DESIGN SYSTEM VERSION 3. R285-WEB-ENTERPRISE-REDESIGN-01,
+ * strategy 0.7. Every term, the search, the category filter, the live count,
+ * the empty state and every link are kept, on the v3 bands:
+ *
+ *   1. PageHero     light      what does this word mean?   trail, h1, plain lead
+ *   2. Terms        light      find the word                search, four filters, count, the term cards
+ *   3. Keep reading light alt  where next?                  resources and the blog
+ *   4. Close        gradient   now what?                    the free compliance matrix
+ *
+ * The term cards are the shared ea-tcard on the ea-cards grid. The filter
+ * script is unchanged: it still reads `#ggrid .gx-term` and sets `hidden`,
+ * which tokens.css honours sitewide.
+ */
 import Base from '../../layouts/Base.astro';
-import PageHeader from '../../components/layout/PageHeader.astro';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Close from '../../components/evidenced/Close.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
-import Button from '../../components/ui/Button.astro';
-import { SIGNUP_URL } from '../../data/app';
+import '../../styles/evidenced.css';
 
 const title = 'UK Procurement Glossary | Velstrian';
 const description =
@@ -185,12 +203,12 @@ const terms: Term[] = [
   },
 ];
 
+const TRAIL = [{ name: 'Home', path: '/' }];
+const UPDATED = new Date('2026-10-22');
+
 const schema = [
   // BreadcrumbList was published by the legacy page and lost in the port (OA-24).
-  breadcrumbs([
-    { name: 'Home', path: '/' },
-    { name: 'Glossary', path: '/glossary/' },
-  ]),
+  breadcrumbs([...TRAIL, { name: 'Glossary', path: '/glossary/' }]),
   {
     '@type': 'CollectionPage',
     name: 'UK Procurement Glossary',
@@ -218,189 +236,128 @@ const schema = [
 ];
 ---
 
-<Base title={title} description={description} path={path} image="/Assets/og/glossary-index.png?v=20260730" schema={schema}>
-  {/* A DIV, NOT A SECOND <main>: A-66, same as layouts/Glossary.astro. Kept as an
-      element rather than deleted because styles/motion.css unwraps one wrapper via
-      `main > *:only-child > *`. */}
-  <div>
-    <header class="gx-hero">
-      <div class="gx-wrap">
-        {/*
-          THE SHARED HEAD BLOCK. Was a `.gx-eyebrow` capsule, a bare <h1> and a
-          `.gx-hero-sub` lede, one of the fifteen routes rendering a flat white
-          title, because the treatment lived in Section's SCOPED styles.
+<Base
+  title={title}
+  description={description}
+  path={path}
+  image="/Assets/og/glossary-index.png?v=20260730"
+  schema={schema}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero
+    id="gx-title"
+    label="Glossary"
+    title="Procurement terms, defined."
+    lead="Plain-English definitions of the words you meet in a tender, from everyday bidding terms to the regulations, frameworks and standards behind UK public sector bidding."
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Glossary" /></div>
+  </PageHero>
 
-          BOTH `.gx-eyebrow` AND `.gx-eyebrow-inline` ARE GONE, 2026-08-04. They
-          held a byte-identical copy of the eyebrow capsule; the copy went to
-          styles/labels.css and the two class names went with it, because the
-          spans that carried them already carry `eyebrow`.
-        */}
-        <PageHeader
-          eyebrow="Glossary"
-          title="Procurement terms, defined."
-          standfirst="Plain-English definitions of the regulations, frameworks and standards behind UK public sector bidding."
-        />
+  <Band tone="light" class="gx-index" labelledby="index-heading">
+    <div class="ea-wrap">
+      <h2 class="visually-hidden" id="index-heading">Term index</h2>
+      <div class="gx-toolbar">
+        <div class="gx-search">
+          <label for="gq" class="visually-hidden">Search glossary terms</label>
+          {/* type="search" for the role and the keyboard's search key, with the
+              browser's own clear glyph suppressed below so there is one clear
+              control, this button (O-53). */}
+          <input
+            id="gq"
+            class="field__input"
+            type="search"
+            autocomplete="off"
+            placeholder="Search terms, e.g. PPN 026, framework, standstill"
+            aria-describedby="gcount"
+            aria-controls="ggrid"
+          />
+          <button class="gx-clear" id="gclear" type="button" aria-label="Clear search">&times;</button>
+        </div>
+        {/* Toggle buttons with aria-pressed rather than radios: each performs an
+            action on the list, and the script keeps exactly one pressed. */}
+        <div class="gx-filters" role="group" aria-label="Filter by category">
+          <button class="control chip gx-chip" type="button" data-cat="all" aria-pressed="true" aria-controls="ggrid">All</button>
+          <button class="control chip gx-chip" type="button" data-cat="legislation" aria-pressed="false" aria-controls="ggrid">Legislation</button>
+          <button class="control chip gx-chip" type="button" data-cat="procurement" aria-pressed="false" aria-controls="ggrid">Procurement</button>
+          <button class="control chip gx-chip" type="button" data-cat="process" aria-pressed="false" aria-controls="ggrid">Bidding process</button>
+        </div>
+        {/* Server rendered with the true total, so a reader without script sees
+            the count of the cards below. */}
+        <p class="gx-count" id="gcount" role="status" aria-live="polite" aria-atomic="true">
+          {terms.length} terms
+        </p>
       </div>
-    </header>
 
-    <section class="gx-index" aria-labelledby="index-heading">
-      <div class="gx-wrap">
-        <h2 class="visually-hidden" id="index-heading">Term index</h2>
-        <div class="gx-toolbar">
-          <div class="gx-search">
-            <label for="gq" class="visually-hidden">Search glossary terms</label>
-            {/*
-              ONE CLEAR CONTROL, AND IT IS THE CUSTOM ONE: O-53, 2026-08-04.
-              `type="search"` stays, because it is what this field IS: it carries
-              the search role into the accessibility tree and gives the on-screen
-              keyboard a search key. What went is Chromium's own clear glyph,
-              suppressed in the styles below, which was rendering a second
-              &times; a few pixels from this button. The reasoning for keeping
-              this one rather than the native one is with that rule.
-            */}
-            <input
-              id="gq"
-              class="field__input"
-              type="search"
-              autocomplete="off"
-              placeholder="Search terms, e.g. PPN 026, framework, standstill"
-              aria-describedby="gcount"
-              aria-controls="ggrid"
-            />
-            <button class="gx-clear" id="gclear" type="button" aria-label="Clear search">&times;</button>
-          </div>
-          {/*
-            TOGGLE BUTTONS CARRYING `aria-pressed`, NOT RADIOS, and that is a
-            decision rather than an oversight. The four are mutually exclusive,
-            which is an argument for a radiogroup; but a radiogroup owes the
-            reader a roving tabindex and arrow-key traversal, and it announces
-            "radio button" for a control that performs an action on the list
-            below it. A toggle button announces "Legislation, toggle button,
-            pressed", which is what the chip means and what its fill says. The
-            exclusivity is upheld in the script: exactly one chip is pressed at
-            any moment. Both are legitimate; this one is what is here, and it is
-            written down so the next reader does not have to guess.
-
-            `aria-controls` names the region each control acts on, so the
-            relationship is in the accessibility tree rather than only in the
-            layout.
-          */}
-          <div class="gx-filters" role="group" aria-label="Filter by category">
-            <button class="control chip gx-chip" type="button" data-cat="all" aria-pressed="true" aria-controls="ggrid">All</button>
-            <button class="control chip gx-chip" type="button" data-cat="legislation" aria-pressed="false" aria-controls="ggrid">Legislation</button>
-            <button class="control chip gx-chip" type="button" data-cat="procurement" aria-pressed="false" aria-controls="ggrid">Procurement</button>
-            <button class="control chip gx-chip" type="button" data-cat="process" aria-pressed="false" aria-controls="ggrid">Bidding process</button>
-          </div>
-          {/*
-            THE COUNT IS SERVER-RENDERED WITH THE TRUE TOTAL rather than left
-            empty for the script to fill. It was empty, so a reader without
-            JavaScript got a blank line above 24 cards, and a reader with it got
-            a flash of nothing. The number below is the length of the same array
-            the grid is built from, so the unfiltered page cannot state a total
-            it does not show.
-
-            `role="status"` already implies `aria-live="polite"` and
-            `aria-atomic="true"`. Both are restated because the implication is
-            not honoured uniformly by older screen readers, and because an
-            atomic region is what makes "6 terms" read as a phrase rather than
-            as a changed digit.
-          */}
-          <p class="meta gx-count" id="gcount" role="status" aria-live="polite" aria-atomic="true">
-            {terms.length} terms
-          </p>
-        </div>
-
-        <div class="gx-grid" id="ggrid">
-          {
-            terms.map((t) =>
-              t.href ? (
-                <a class="gx-term surface" href={t.href} data-cat={t.cat}>
-                  <span class="meta gx-cat">{t.catLabel}</span>
-                  <h3>{t.name}</h3>
-                  <p class="gx-def">{t.card}</p>
-                  <span class="meta gx-more">{t.linkText} &rarr;</span>
-                </a>
-              ) : (
-                <div class="gx-term surface" data-cat={t.cat}>
-                  <span class="meta gx-cat">{t.catLabel}</span>
-                  <h3>{t.name}</h3>
-                  <p class="gx-def">
-                    {t.name === 'Social value model' ? (
-                      <>
-                        The UK government framework that defines how social value is scored in central government
-                        procurement, published as a Procurement Policy Note. The most recently published edition is
-                        <a href="/glossary/ppn-026/">PPN 026</a>, which applies to procurements commenced on or after
-                        1 January 2027. It is commonly measured using the
-                        <a href="/glossary/toms-framework/">TOMs framework</a>.
-                      </>
-                    ) : (
-                      t.card
-                    )}
-                  </p>
-                </div>
-              ),
-            )
-          }
-        </div>
-
-        {/*
-          THE EMPTY STATE IS CARRIED BY `hidden`, LIKE THE CARDS, so there is one
-          mechanism on this page rather than two. It used to be a `.on` class
-          toggling `display: block`, which worked, and worked is the problem:
-          the cards next to it used `hidden` and did not, so the page had a
-          working show/hide and a broken one side by side and no reason to
-          suspect either.
-
-          THE WORDING NAMES BOTH FILTERS. It said "No terms match your search",
-          which is wrong the moment nothing matches because of a category. Since
-          only "All" plus a query, or a category plus a query, can ever reach
-          zero here, the sentence has to cover both.
-
-          It is hidden at rest rather than empty, so it is out of the
-          accessibility tree until it is true. The count beside it is the live
-          region; this is the explanation, not the announcement.
-        */}
-        <p class="gx-empty" id="gempty" hidden>No terms match. Try a different word, or another category.</p>
+      <div class="ea-cards gx-grid" id="ggrid">
+        {
+          terms.map((t) =>
+            t.href ? (
+              <a class="ea-card ea-tcard gx-term" href={t.href} data-cat={t.cat}>
+                <p class="ea-label">{t.catLabel}</p>
+                <h3 class="ea-h3">{t.name}</h3>
+                <p class="gx-def">{t.card}</p>
+                <span class="ea-tcard__more">{t.linkText}</span>
+              </a>
+            ) : (
+              <div class="ea-card ea-tcard gx-term" data-cat={t.cat}>
+                <p class="ea-label">{t.catLabel}</p>
+                <h3 class="ea-h3">{t.name}</h3>
+                <p class="gx-def">
+                  {t.name === 'Social value model' ? (
+                    <>
+                      The UK government framework that defines how social value is scored in central government
+                      procurement, published as a Procurement Policy Note. The most recently published edition is
+                      <a href="/glossary/ppn-026/">PPN 026</a>, which applies to procurements commenced on or after
+                      1 January 2027. It is commonly measured using the
+                      <a href="/glossary/toms-framework/">TOMs framework</a>.
+                    </>
+                  ) : (
+                    t.card
+                  )}
+                </p>
+              </div>
+            ),
+          )
+        }
       </div>
-    </section>
+      {/* Hidden at rest, so it is out of the accessibility tree until it is
+          true. It names both filters, because either can reach zero. */}
+      <p class="gx-empty" id="gempty" hidden>No terms match. Try a different word, or another category.</p>
+    </div>
+  </Band>
 
-    <section class="gx-cross">
-      <div class="gx-wrap">
-        <div class="gx-head">
-          <span class="eyebrow">Keep reading</span>
-          <h2>Go deeper on the rules.</h2>
-        </div>
-        <div class="gx-xlinks">
-          <a class="gx-xcard surface" href="/resources/">
-            <span class="gx-xt">Resources</span>
+  <Band tone="light-alt" labelledby="gx-cross-title">
+    <div class="ea-wrap">
+      <div class="ea-split__head" data-reveal>
+        <p class="ea-label">Keep reading</p>
+        <h2 class="ea-h2" id="gx-cross-title">Go deeper on the rules.</h2>
+      </div>
+      <ul class="ea-cards ea-cards--2 gx-cross" role="list">
+        <li data-reveal>
+          <a class="ea-card ea-tcard" href="/resources/">
+            <h3 class="ea-h3">Resources</h3>
             <p>In-depth guides, the free tender compliance matrix and the sources behind every figure.</p>
-            <span class="meta gx-more">Browse resources &rarr;</span>
+            <span class="ea-tcard__more">Browse resources</span>
           </a>
-          <a class="gx-xcard surface" href="/blog/">
-            <span class="gx-xt">Regulatory blog</span>
+        </li>
+        <li data-reveal>
+          <a class="ea-card ea-tcard" href="/blog/">
+            <h3 class="ea-h3">Regulatory blog</h3>
             <p>Analysis of PPN changes and UK public procurement deadlines.</p>
-            <span class="meta gx-more">Read the blog &rarr;</span>
+            <span class="ea-tcard__more">Read the blog</span>
           </a>
-        </div>
-      </div>
-    </section>
+        </li>
+      </ul>
+    </div>
+  </Band>
 
-    <section class="gx-cta">
-      <div class="gx-wrap">
-        <span class="eyebrow">Next step</span>
-        <h2>Know the term. <span class="accent">Now read the requirement.</span></h2>
-        <p class="gx-cta-sub">Paste the text of a tender and the free compliance matrix lists the requirements its wording states, each one shown with the line it came from. No account, no email.</p>
-        <div class="btn-row">
-          <Button href="/tools/tender-compliance-matrix/" size="md">Use the free tool</Button>
-          <Button href={SIGNUP_URL} variant="secondary" size="md">Start now</Button>
-        </div>
-        <div class="gx-cta-links">
-          <a href="/resources/">Browse resources</a>
-          <a href="/bid/">See Velstrian Bid</a>
-        </div>
-      </div>
-    </section>
-  </div>
+  <Close
+    title="Know the term. Now read the requirement."
+    lead="Paste the text of a tender and the free compliance matrix lists the requirements its wording states, each one shown with the line it came from. No account, no email."
+    primary={{ href: '/tools/tender-compliance-matrix/', label: 'Use the free tool' }}
+  />
 </Base>
 
 <script>
@@ -500,70 +457,6 @@ const schema = [
 </script>
 
 <style>
-  .gx-wrap {
-    max-width: var(--measure);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
-  }
-  .gx-hero {
-    position: relative;
-    padding: var(--sec-pad-y-hero) 0 var(--sec-pad-y-sm);
-    text-align: center;
-    overflow: hidden;
-  }
-  .gx-hero::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -6%;
-    width: 70vw;
-    height: 44vw;
-    transform: translateX(-50%);
-    z-index: -1;
-    background: var(--grad-hero-glow);
-    filter: blur(20px);
-    opacity: 0.5;
-  }
-  /*
-   * EVERY EYEBROW IS A GRADIENT CAPSULE (owner decision, 2026-08-02), AND THE
-   * CAPSULE IS NO LONGER RESTATED HERE. Converted 2026-08-04, A-56/A-48.
-   *
-   * "Restated because this page builds its own bands" was the reason given, and
-   * it is the same reason given in four other files, which is how one shape came
-   * to be declared six times. A page that builds its own bands is not the
-   * problem; a treatment that only a component could reach was. `.eyebrow` in
-   * styles/labels.css has no ancestor in its selector, the two spans below
-   * already carry it, and scripts/check-treatments.js rule 8 now fails the build
-   * if the capsule is declared anywhere but that file.
-   *
-   * THE HERO EYEBROW IS NOT ONE OF THESE: it is PageHeader's `eyebrow` prop.
-   * What was left here is section-level, the "Keep reading" head and the
-   * closing CTA band.
-   *
-   * The 6px teal dot goes with the inline-flex it needed. It was the
-   * left-aligned way of giving a bare mono line something to start against;
-   * the capsule outline does that now.
-   *
-   * STILL NOT APPLIED TO .gx-cat, the category tag inside each term card. That
-   * is card content rather than a section head, and 24 gradient capsules down a
-   * grid would compete with the terms themselves. It is a `.chip`, which is the
-   * second of the three recipes and exists for exactly that job.
-   */
-  /*
-   * `.gx-hero h1` AND `.gx-hero-sub` MOVED TO styles/headings.css.
-   *
-   * The h1 rule restated --t-h1 with its own tracking and never received the
-   * shiny treatment, because that lived in Section's SCOPED styles and a page
-   * that draws its own head cannot reach into another component's scope.
-   * `.gx-hero-sub` was the standfirst under another name; the 62ch measure it
-   * had already been reconciled to is now simply the shared one, so the two
-   * cannot come apart again.
-   */
-
-  .gx-index {
-    padding: var(--sec-pad-y-sm) 0;
-    background: var(--c-panel);
-  }
   .gx-toolbar {
     max-width: var(--measure-band);
     margin: 0 auto clamp(30px, 4vw, 46px);
@@ -679,231 +572,29 @@ const schema = [
     color: var(--c-text-muted);
   }
 
-  .gx-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 18px;
-  }
-  /* Card treatment, hover and the -4px lift come from `surface`. This page had
-     18px radius, 28px padding and a 5px lift, none of which is in any scale. */
-  /* CENTRED SINCE 2026-08-03, AND THIS PAGE IS WHY THE RULE CHANGED. These 24
-     cards carried `surface--read` on the argument that a four to six line
-     definition is read rather than scanned. This is the page the owner was
-     looking at when they wrote "lot of text are left aligned in /glossary/ ...
-     all the text in cards or non cards must be in central". The opt-out is
-     retired sitewide; see styles/alignment.css. */
-  .gx-term {
-    display: flex;
-    flex-direction: column;
-    padding: var(--blk-pad);
-    text-decoration: none;
-    color: inherit;
-  }
-  /*
-   * O-19, AND THIS ONE LINE IS THE DEFECT. The rule directly above is an AUTHOR
-   * declaration; `[hidden] { display: none }` is a USER-AGENT one, and author
-   * beats user agent at any specificity. So the script could set `hidden` on
-   * eighteen cards, the counter could correctly say "6 terms", and all
-   * twenty-four cards stayed on screen. A page asserting a number that
-   * contradicted the list underneath it, reported three times and closed twice.
-   *
-   * ANY `display` ON A FILTERED ELEMENT NEEDS THIS COMPANION. It is the fifth
-   * place on this site that has had to say it out loud (components/ui/
-   * TabSwitcher.astro (which carries the same explanation), components/nav/
-   * CommandPalette.astro, pages/faq.astro and the two in styles/forms.css), so
-   * the trap is well known here and the glossary was simply the one that missed
-   * it. A central `[hidden] { display: none !important }` would end the class of
-   * defect outright, but the sheet it belongs in is styles/tokens.css and an
-   * `!important` reaching all 43 routes is not a change to make from inside one
-   * page; it is written up for the owner instead.
-   *
-   * `[hidden]` and not a `.is-hidden` class ON PURPOSE. The attribute removes
-   * the card from the accessibility tree along with the layout, so a screen
-   * reader is filtered too rather than being read twenty-four terms while the
-   * page shows six.
-   */
-  /* O-59: `.gx-term[hidden] { display: none }` removed. This page was where the
-     defect was finally caught. The filter set [hidden] on 18 cards and the
-     browser drew all 24, because `.gx-term { display: flex }` is an author rule
-     and the user-agent [hidden] rule is not. tokens.css now carries that rule
-     once, unlayered and !important, for all 43 routes. */
-  .gx-cat {
-    color: var(--c-ambient-start);
-    margin-bottom: 14px;
-  }
-  .gx-term h3 {
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: var(--t-w-h3);
-    letter-spacing: -0.02em;
-    color: var(--c-text);
-    margin: 0 0 12px;
-  }
-  /* THE `gx-def` CLASS ON THIS PARAGRAPH CARRIES NO STYLE HERE AND IS NOT DEAD
-     MARKUP. styles/alignment.css needs a NAME to put a definition on the left
-     axis, and it could not use the card: `.gx-term` is also a `.surface`, and
-     `.surface { text-align: center }` sits in the `components` layer, which
-     beats alignment.css's `base` layer whatever the specificity. Naming the
-     paragraph lets alignment.css rule 4 flip the card from the inside, at
-     (0,2,1) against `.surface`'s (0,1,0), in the same layer. Measured before the
-     change, at 1440: these definitions set up to THIRTEEN centred lines in a
-     225px column, the longest tapering block on the site. Do not remove the
-     class to tidy up, and do not add a `text-align` here to replace it. */
-  .gx-term p {
-    color: var(--c-text-sub);
-    font-size: var(--t-body);
-    line-height: 1.55;
-    margin: 0;
-  }
-  .gx-term p a {
-    color: var(--c-interactive);
-  }
-  .gx-more {
-    margin-top: 22px;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: var(--c-interactive);
-  }
-  /* Shown and hidden by the `hidden` attribute, like the cards, so this page has
-     one mechanism rather than two, and, like the cards, the attribute has to be
-     honoured explicitly because `display: block` here would otherwise outrank
-     the user-agent rule the moment anyone added one. It is stated even though
-     the rest of this block declares no `display`, because the trap is that the
-     day someone adds one is the day the empty state stops hiding. */
+
   .gx-empty {
     text-align: center;
     color: var(--c-text-sub);
     font-size: var(--t-lede);
     padding: 40px 0;
   }
-  /* O-59: removed; tokens.css owns [hidden] sitewide. */
+
+  .gx-count {
+    font-size: var(--t-ea-small);
+  }
+
+  .gx-term p a {
+    color: var(--ea-accent-ink);
+    text-underline-offset: 4px;
+  }
 
   .gx-cross {
-    padding: var(--sec-pad-y-sm) 0;
-  }
-  .gx-head {
-    text-align: center;
-    margin-bottom: var(--sec-gap);
-  }
-  .gx-head h2 {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    color: var(--c-text);
-    margin: 0.75rem 0 0;
-  }
-  .gx-xlinks {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-    max-width: var(--measure-prose);
-    margin: 0 auto;
-  }
-  .gx-xcard {
-    display: flex;
-    flex-direction: column;
-    gap: var(--stack-1);
-    padding: var(--blk-pad);
-    text-decoration: none;
-  }
-  /* The cross-link card's title. --t-h4, the card-heading tier, matched to
-     .gx-term h3 in the grid above; 1.2rem was in no scale. */
-  .gx-xt {
-    font-family: var(--font-display);
-    font-weight: var(--t-w-h3);
-    font-size: var(--t-h4);
-    color: var(--c-text);
-    letter-spacing: -0.01em;
-  }
-  .gx-xcard p {
-    margin: 0;
-    color: var(--c-text-sub);
-    font-size: var(--t-body);
-    line-height: 1.5;
-  }
-
-  .gx-cta {
-    padding: var(--sec-pad-y) 0;
-    text-align: center;
-    background: var(--c-panel);
-    border-top: 1px solid var(--c-border);
-  }
-  /* --t-h1 is reserved for the hero (tokens.css); the homepage's own closing
-     CTA renders through Section at --t-h2 / --t-w-h2. Matched to it. */
-  .gx-cta h2 {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    letter-spacing: -0.02em;
-    color: var(--c-text);
-    margin: 26px 0 0;
-  }
-  .gx-cta h2 .accent {
-    /* The same accented-phrase recipe as the hero, not a flat teal. Four
-       elements across three pages lifted a phrase out of a heading and three of
-       them painted it --c-teal while the homepage used --grad-hero-text. This is
-       the fourth; it was hidden while the CTA card-ification covered it and
-       reappeared when that was reverted, which is a good argument for fixing a
-       pattern everywhere rather than where it happens to be visible. */
-    color: var(--c-ambient-start);
-  }
-
-  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
-    .gx-cta h2 .accent {
-      background-image: var(--grad-hero-text);
-      background-size: 100% 1.06em;
-      background-repeat: repeat;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .gx-cta h2 .accent {
-      background-image: none;
-      color: CanvasText;
-      -webkit-text-fill-color: CanvasText;
-    }
-  }
-  .gx-cta-sub {
-    max-width: 62ch;
-    margin: 1.25rem auto var(--sec-gap);
-    color: var(--c-text-muted);
-    font-size: var(--t-lede);
-    line-height: 1.6;
-  }
-  .gx-cta-links {
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    font-size: var(--t-body);
-    color: var(--c-text-muted);
-  }
-  .gx-cta-links a {
-    /* WCAG 2.2 SC 2.5.8: standalone links in a row, not inside a sentence, so
-       the inline exemption does not reach them. Measured at 20px tall before
-       this. inline-flex so the box grows without moving the text.
-       Re-applied after the CTA card-ification was reverted: the cards had fixed
-       these incidentally, and reverting them brought the defect back. A fix that
-       only exists as a side effect of another change is not a fix. */
-    display: inline-flex;
-    align-items: center;
-    min-height: 24px;
-    color: var(--c-text-muted);
-  }
-  .gx-cta-links a:hover {
-    color: var(--c-text);
+    margin-top: var(--ea-head-gap);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .gx-term,
-    .gx-chip,
-    .gx-xcard {
+    .gx-chip {
       transition: none;
     }
   }
