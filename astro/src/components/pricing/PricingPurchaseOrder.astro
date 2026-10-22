@@ -1,0 +1,40 @@
+---
+/**
+ * PricingPurchaseOrder: buying on a purchase order (spec Part 2, 2.3 row 9:
+ * "kept, shortened to two sentences and one button").
+ *
+ * Public AND private organisations buy on a PO, so the band names neither
+ * (RULE 0-U). No trust tiles here: the footer carries the same badges on every
+ * page, and three trust rows in a row read as repetition, not proof.
+ */
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import { BUYER_PLANS } from '../../data/pricing';
+
+const BUYER_PORTFOLIO = BUYER_PLANS[1];
+---
+
+<Band tone="dark" class="pricing-po" id="purchase-order" labelledby="po-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <p class="ea-label">Purchase orders</p>
+        <h2 class="ea-h2" id="po-title">Buying on a purchase order.</h2>
+      </div>
+      <div>
+        <p class="ea-lead">
+          {BUYER_PORTFOLIO.name} can be paid by invoice on 30 days with a PO number, at the same price as by card. Talk to us about frameworks, group buying, custom terms or a security review.
+        </p>
+        <div class="pricing-po__actions">
+          <Action href="/contact/" variant="secondary">Talk to us</Action>
+        </div>
+      </div>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .pricing-po__actions {
+    margin-top: var(--space-6);
+  }
+</style>

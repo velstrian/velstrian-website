@@ -1,0 +1,227 @@
+---
+/**
+ * PricingCompare: feature comparison and page counting tables on design system v3.
+ *
+ * Storyline band 7: expert detail.
+ * Follows spec Part 2 (2.3 row 7):
+ * - A closed disclosure containing the full comparison table.
+ * - The statutory rows (Procurement Act 2023 sections 52 and 71, PPN 026, PPN 017) with plain labels.
+ * - Sizing left to components, table scrollable.
+ * - Page counting details and row counting explanation.
+ */
+import Band from '../evidenced/Band.astro';
+import {
+  COMPARE_LEAD,
+  COMPARE_MORE,
+  CREDIT_PAGES,
+  PLANS,
+} from '../../data/pricing';
+
+const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
+---
+
+<Band tone="light-alt" class="pricing-compare" id="compare" labelledby="compare-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <p class="ea-label">Feature depth</p>
+        <h2 class="ea-h2" id="compare-title">Compare the details.</h2>
+      </div>
+      <p class="ea-lead">
+        Every plan runs the same statutory checks. What changes between them is seats, AI credits and post-award tracking.
+      </p>
+    </div>
+
+    <div class="pricing-compare__details-wrap" data-reveal>
+      <details class="ea-qa pricing-disclosure">
+        <summary class="ea-h3 pricing-disclosure__summary">
+          Compare every feature across Velstrian Bid plans
+        </summary>
+
+        <div class="pricing-disclosure__content">
+          <h3 class="ea-h3 pricing-compare__subheading">Velstrian Bid</h3>
+
+          <div class="pricing-table-scroll" tabindex="0" role="region" aria-label="Velstrian Bid features by plan, scrollable">
+            <table class="ea-mini-table pricing-table">
+              <caption class="visually-hidden">Velstrian Bid features by plan</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  <th scope="col">Starter</th>
+                  <th scope="col">Pro</th>
+                  <th scope="col">Portfolio</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  ALL_COMPARE.map((r) => (
+                    <tr>
+                      <th scope="row">{r.feature}</th>
+                      {r.cells.map((c) => (
+                        <td>
+                          {c === true ? (
+                            <>
+                              <span class="pricing-tick" aria-hidden="true">✓</span>
+                              <span class="visually-hidden">Included</span>
+                            </>
+                          ) : c === false ? (
+                            <>
+                              <span class="pricing-dash" aria-hidden="true">-</span>
+                              <span class="visually-hidden">Not included</span>
+                            </>
+                          ) : (
+                            c
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <p class="pricing-compare__note">
+            Bids are not metered, which is why that row reads unlimited on every plan. The meter is
+            AI credits, and the number each plan includes is the row below it.
+          </p>
+
+          <div class="pricing-credits-deep-dive">
+            <h4 class="ea-h3">What each plan includes</h4>
+            <div class="pricing-table-scroll" tabindex="0" role="region" aria-label="AI credits per plan, scrollable">
+              <table class="ea-mini-table pricing-table">
+                <caption class="visually-hidden">AI credits included per plan, per calendar month</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Plan</th>
+                    <th scope="col">AI credits a month</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    PLANS.map((p) => (
+                      <tr>
+                        <th scope="row">{p.name}</th>
+                        <td>{p.credits.toLocaleString('en-GB')}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+            <p class="pricing-compare__body">
+              These are the numbers the platform enforces. Bids, contracts, seats within your
+              plan, exports and every deterministic calculation are not metered against them.
+              Re-drafting the same answer is free for the first three re-drafts each month. The
+              fourth costs one credit. A generation that fails is not charged.
+            </p>
+
+            <h4 class="ea-h3 pricing-table__title">Reading a tender document is charged by page</h4>
+            <p class="pricing-compare__body">
+              Uploading a tender document and extracting its requirements costs
+              3 credits per 10 pages, rounded up. A 10 page invitation to tender costs 3 credits.
+              Here is what counts as a page:
+            </p>
+            <div class="pricing-table-scroll" tabindex="0" role="region" aria-label="What counts as one page, scrollable">
+              <table class="ea-mini-table pricing-table">
+                <caption class="visually-hidden">
+                  What counts as one page for tender document ingestion
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Document</th>
+                    <th scope="col">One page is</th>
+                    <th scope="col">Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    CREDIT_PAGES.map((r) => (
+                      <tr>
+                        <th scope="row">{r.doc}</th>
+                        <td>{r.unit}</td>
+                        <td>{r.example}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <h4 class="ea-h3 pricing-table__title">Why spreadsheets are counted by rows, not by sheets</h4>
+            <p class="pricing-compare__body">
+              A sheet is not a page. A 5,000 row pricing schedule sitting on a single Excel sheet holds roughly 17 times the text of a 10 page PDF, and the AI work scales with how much text there is to read. Counting that as one page would charge the same for 17 times the work, so we count 50 rows as one page instead. CSV files are counted exactly like Excel files. We only count the rows we actually read, a sheet we read is never counted as nothing, and a generation that fails is not charged at all.
+            </p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .pricing-compare__details-wrap {
+    margin-top: var(--space-8);
+  }
+
+  .pricing-disclosure {
+    padding-bottom: var(--space-6);
+  }
+
+  .pricing-disclosure__summary {
+    user-select: none;
+  }
+
+  .pricing-disclosure__content {
+    margin-top: var(--space-6);
+  }
+
+  .pricing-compare__subheading {
+    margin-bottom: var(--space-4);
+  }
+
+  .pricing-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-block: var(--space-4);
+    border-radius: var(--v3-radius-card);
+  }
+
+  .pricing-table {
+    min-width: 32rem;
+  }
+
+  .pricing-tick {
+    color: var(--ea-accent-ink);
+    font-weight: var(--t-w-ea-strong);
+  }
+
+  .pricing-dash {
+    color: var(--ea-muted);
+  }
+
+  .pricing-compare__note {
+    margin-top: var(--space-4);
+    color: var(--ea-muted);
+    font-size: var(--t-ea-small);
+  }
+
+  .pricing-credits-deep-dive {
+    margin-top: var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .pricing-table__title {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-2);
+  }
+
+  .pricing-compare__body {
+    margin-bottom: var(--space-4);
+    color: var(--ea-sub);
+    font-size: var(--t-ea-small);
+    line-height: var(--lh-ea-body);
+    max-width: var(--ea-copy);
+  }
+</style>

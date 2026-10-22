@@ -1,0 +1,163 @@
+---
+/**
+ * PricingPlans: Velstrian Bid plans on design system v3.
+ *
+ * Storyline band 2: choose your plan.
+ * Follows spec Part 2 (2.3.1):
+ * - Three cards: Starter, Pro (Recommended), Portfolio.
+ * - Each card: name, one "for you if" line, price, three lines, one button.
+ * - Every number read from pricing.ts.
+ * - One line trial and annual reassurance beneath.
+ */
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import { PLANS, TRIAL_DAYS, SEAT_ADDON, startHref, annualDiscountPct } from '../../data/pricing';
+
+const PLAIN_WHO: Record<string, string> = {
+  Starter: 'You bid on your own',
+  Pro: 'A few of you work on bids together',
+  Portfolio: 'Bids run across several teams',
+};
+
+const PLAIN_GETS: Record<string, string> = {
+  Starter: 'Find tenders, draft answers from your documents, export to Word or PDF.',
+  Pro: 'Everything in Starter, plus tracking after you win and monthly reports.',
+  Portfolio: 'Everything in Pro, plus connections to your other tools.',
+};
+
+const SEAT_LINE: Record<string, string> = {
+  Starter: '1 user',
+  Pro: `5 users, add more for £${SEAT_ADDON.monthly} a month each`,
+  Portfolio: '10 users included, more by arrangement',
+};
+
+const n = (v: number) => v.toLocaleString('en-GB');
+---
+
+<Band tone="light-alt" class="pricing-plans" id="suppliers" labelledby="bid-plans-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <p class="ea-label">Velstrian Bid</p>
+        <h2 class="ea-h2" id="bid-plans-title">Same plans, either sector.</h2>
+      </div>
+      <p class="ea-lead">
+        Respond to tenders, RFPs, RFIs, PQQs and SQs in the public sector and the private sector. Every plan covers both.
+      </p>
+    </div>
+
+    <ul class="ea-plans__grid" role="list" data-reveal>
+      {
+        PLANS.map((p) => (
+          <li class={`ea-plan surface ${p.recommended ? 'ea-plan--rec' : ''}`}>
+            <div class="ea-plan__top">
+              <h3 class="ea-h3">{p.name}</h3>
+              {p.recommended && <span class="ea-plan__badge">Recommended</span>}
+            </div>
+            <p class="ea-plan__who">{PLAIN_WHO[p.name] ?? p.who}</p>
+
+            {/* Monthly price */}
+            <p class="ea-plan__price plan-price--m">
+              <span class="ea-plan__amount">£{p.monthly}</span>
+              <span class="ea-plan__per">a month</span>
+            </p>
+
+            {/* Annual price */}
+            <p class="ea-plan__price plan-price--a">
+              <span class="ea-plan__amount">£{n(p.annual ?? 0)}</span>
+              <span class="ea-plan__per">a year ({annualDiscountPct(p)}% off)</span>
+            </p>
+
+            <p class="ea-plan__inc">
+              {SEAT_LINE[p.name] ?? `${p.seats} user${p.seats === 1 ? '' : 's'}`}, {n(p.credits)} AI credits a month
+            </p>
+            <p class="ea-plan__gets">{PLAIN_GETS[p.name] ?? p.includes}</p>
+
+            <div class="pricing-plan__action">
+              <div class="plan-go--m">
+                <Action href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>
+                  Start now<span class="visually-hidden"> on the {p.name} plan, billed monthly</span>
+                </Action>
+              </div>
+              <div class="plan-go--a">
+                <Action href={startHref(p.planKey, true)} variant={p.recommended ? 'primary' : 'secondary'}>
+                  Start now<span class="visually-hidden"> on the {p.name} plan, billed annually</span>
+                </Action>
+              </div>
+            </div>
+
+            {p.secondary && (
+              <p class="ea-plans__more">
+                <a class="ea-link" href={p.secondary.href}>{p.secondary.label}</a>
+              </p>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="pricing-reassurance" data-reveal>
+      <p class="ea-lead pricing-reassurance__lead">
+        Your first {TRIAL_DAYS} days are free, on the Starter features for 1 user with 30 AI credits. A card is
+        needed to start, held securely by Stripe and never stored by us. Cancel in the {TRIAL_DAYS} days and pay nothing.
+        Annual savings: pay yearly and save 10 percent with annual billing.
+      </p>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .pricing-plans {
+    position: relative;
+  }
+
+  .pricing-plan__action {
+    margin-top: auto;
+    padding-top: var(--space-4);
+  }
+
+  .pricing-reassurance {
+    margin-top: var(--space-10);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--ea-rule);
+    text-align: center;
+  }
+
+  .pricing-reassurance__lead {
+    margin-inline: auto;
+    max-width: 44rem;
+  }
+
+  /* Annual / Monthly display toggled by #billing-toggle */
+  .plan-price--m {
+    display: flex;
+  }
+
+  .plan-price--a {
+    display: none;
+  }
+
+  .plan-go--m {
+    display: block;
+  }
+
+  .plan-go--a {
+    display: none;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-price--m {
+    display: none;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-price--a {
+    display: flex;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-go--m {
+    display: none;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-go--a {
+    display: block;
+  }
+</style>

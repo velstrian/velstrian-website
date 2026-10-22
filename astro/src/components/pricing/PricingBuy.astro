@@ -1,0 +1,183 @@
+---
+/**
+ * PricingBuy: Velstrian Buy plans on design system v3.
+ *
+ * Storyline band 6: for buyers.
+ * Follows spec Part 2 (2.3.1):
+ * - Two cards: Buyer Pro, Buyer Portfolio.
+ * - Same card pattern: name, "for you if" line, price, three lines, one button.
+ * - W2: Buyer eyebrow reads "Buying and comparing replies" rather than "Bid and tender software".
+ * - W4: Seat add on price published (£45 a month on Buyer Pro).
+ */
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import { BUYER_PLANS, SEAT_ADDON, startHref, annualDiscountPct } from '../../data/pricing';
+
+const CONTACT_BUYER = '/contact/?product=buyer-side#contact-form';
+
+const [BUYER_PRO, BUYER_PORTFOLIO] = BUYER_PLANS;
+const n = (v: number) => v.toLocaleString('en-GB');
+---
+
+<Band tone="light" class="pricing-buy" id="buyers" labelledby="buy-plans-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <p class="ea-label">Buying and comparing replies</p>
+        <h2 class="ea-h2" id="buy-plans-title">Velstrian Buy</h2>
+      </div>
+      <p class="ea-lead">
+        Publish requirements, then locate the evidence for each one across every response you receive.
+      </p>
+    </div>
+
+    <p class="pricing-buy__intro-note" data-reveal>
+      Start either plan today by card. Buyer Portfolio can also be paid by invoice on 30 days with a PO number, at the same price.
+    </p>
+
+    <ul class="ea-plans__grid" role="list" data-reveal>
+      {/* Buyer Pro */}
+      <li class="ea-plan surface">
+        <div class="ea-plan__top">
+          <h3 class="ea-h3">{BUYER_PRO.name}</h3>
+        </div>
+        <p class="ea-plan__who">For a busy buyer comparing replies</p>
+
+        {/* Monthly price */}
+        <p class="ea-plan__price plan-price--m">
+          <span class="ea-plan__amount">£{BUYER_PRO.monthly}</span>
+          <span class="ea-plan__per">a month</span>
+        </p>
+
+        {/* Annual price */}
+        <p class="ea-plan__price plan-price--a">
+          <span class="ea-plan__amount">£{n(BUYER_PRO.annual ?? 0)}</span>
+          <span class="ea-plan__per">a year ({annualDiscountPct(BUYER_PRO)}% off)</span>
+        </p>
+
+        <p class="ea-plan__inc">
+          {BUYER_PRO.seats} users (add more for £{SEAT_ADDON.monthly} a month each), {n(BUYER_PRO.credits)} AI credits a month and {BUYER_PRO.guestEvaluators} guest evaluators
+        </p>
+        <p class="ea-plan__gets">
+          Requirement builder, evidence locator and delivery monitoring.
+        </p>
+
+        <div class="pricing-plan__action">
+          <div class="plan-go--m">
+            <Action href={startHref(BUYER_PRO.planKey)} variant="secondary">
+              Start now<span class="visually-hidden"> on Buyer Pro, billed monthly</span>
+            </Action>
+          </div>
+          <div class="plan-go--a">
+            <Action href={startHref(BUYER_PRO.planKey, true)} variant="secondary">
+              Start now<span class="visually-hidden"> on Buyer Pro, billed annually</span>
+            </Action>
+          </div>
+        </div>
+      </li>
+
+      {/* Buyer Portfolio */}
+      <li class="ea-plan surface ea-plan--rec">
+        <div class="ea-plan__top">
+          <h3 class="ea-h3">{BUYER_PORTFOLIO.name}</h3>
+          <span class="ea-plan__badge">Portfolio</span>
+        </div>
+        <p class="ea-plan__who">Large authorities, groups and multi entity buyers</p>
+
+        {/* Monthly price */}
+        <p class="ea-plan__price plan-price--m">
+          <span class="ea-plan__amount">£{BUYER_PORTFOLIO.monthly}</span>
+          <span class="ea-plan__per">a month</span>
+        </p>
+
+        {/* Annual price */}
+        <p class="ea-plan__price plan-price--a">
+          <span class="ea-plan__amount">£{n(BUYER_PORTFOLIO.annual ?? 0)}</span>
+          <span class="ea-plan__per">a year ({annualDiscountPct(BUYER_PORTFOLIO)}% off)</span>
+        </p>
+
+        <p class="ea-plan__inc">
+          {BUYER_PORTFOLIO.seats} users included (more by arrangement), {n(BUYER_PORTFOLIO.credits)} AI credits a month and {BUYER_PORTFOLIO.guestEvaluators} guest evaluators
+        </p>
+        <p class="ea-plan__gets">
+          Everything in Buyer Pro. Pay by card, or by invoice on 30 days with a PO number.
+        </p>
+
+        <div class="pricing-plan__action">
+          <div class="plan-go--m">
+            <Action href={startHref(BUYER_PORTFOLIO.planKey)} variant="primary">
+              Start now<span class="visually-hidden"> on Buyer Portfolio, billed monthly</span>
+            </Action>
+          </div>
+          <div class="plan-go--a">
+            <Action href={startHref(BUYER_PORTFOLIO.planKey, true)} variant="primary">
+              Start now<span class="visually-hidden"> on Buyer Portfolio, billed annually</span>
+            </Action>
+          </div>
+        </div>
+
+        <p class="ea-plans__more">
+          <a class="ea-link" href={CONTACT_BUYER}>Talk to us about frameworks</a>
+        </p>
+      </li>
+    </ul>
+
+    <p class="pricing-buy__terms-note" data-reveal>
+      Need a DPA, a security review or custom terms? <a class="ea-link" href={CONTACT_BUYER}>Talk to us</a>.
+    </p>
+  </div>
+</Band>
+
+<style>
+  .pricing-buy__intro-note {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-8);
+    color: var(--ea-sub);
+    font-size: var(--t-ea-small);
+  }
+
+  .pricing-plan__action {
+    margin-top: auto;
+    padding-top: var(--space-4);
+  }
+
+  .pricing-buy__terms-note {
+    margin-top: var(--space-8);
+    text-align: center;
+    color: var(--ea-muted);
+    font-size: var(--t-ea-small);
+  }
+
+  /* Annual / Monthly display toggled by #billing-toggle */
+  .plan-price--m {
+    display: flex;
+  }
+
+  .plan-price--a {
+    display: none;
+  }
+
+  .plan-go--m {
+    display: block;
+  }
+
+  .plan-go--a {
+    display: none;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-price--m {
+    display: none;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-price--a {
+    display: flex;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-go--m {
+    display: none;
+  }
+
+  :global(#billing-toggle:checked) ~ * .plan-go--a {
+    display: block;
+  }
+</style>

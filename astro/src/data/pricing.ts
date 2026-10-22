@@ -103,6 +103,11 @@ export { SIGNUP_URL };
  * `_annual` appended, the shape the app already accepts for Starter and Pro.
  */
 /** The sign up link for one plan and billing period, or the bare sign up page. */
+/** The extra seat add on for Pro and Buyer Pro, in pounds. Source of truth:
+    crowagent-platform packages/pricing/catalogue.ts SEAT_ADDON_MONTHLY_PENCE
+    (4500) and the annual seat add on (£486, 45 x 10.8, D196). */
+export const SEAT_ADDON = { monthly: 45, annual: 486 } as const;
+
 /** The annual discount a plan gives, in whole percent, worked out from its own
     monthly and annual prices so the words can never drift from the numbers. */
 export function annualDiscountPct(plan: { monthly?: number | null; annual?: number | null }): number {

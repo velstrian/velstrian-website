@@ -1,0 +1,140 @@
+---
+/**
+ * PricingCredits: AI credits and extra usage on design system v3.
+ *
+ * Storyline bands 4 & 5: understand the one meter and know the extra usage options.
+ * Follows spec Part 2 (2.3.2 & 2.3.3):
+ * - One small block explaining what an AI credit is.
+ * - One small block with three short lines for extra usage (packs, auto reload, pay as you go).
+ * - Closes with "Nothing extra is charged unless you set it up."
+ */
+import Band from '../evidenced/Band.astro';
+import IconTile from '../evidenced/IconTile.astro';
+import { CREDIT_TOPUPS, OVERAGE_PENCE_LABEL } from '../../data/pricing';
+
+function orList(items: string[]): string {
+  return items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} or ${items[items.length - 1]}`;
+}
+
+const packCredits = orList(CREDIT_TOPUPS.map((t) => t.credits.toLocaleString('en-GB')));
+const packPrices = orList(CREDIT_TOPUPS.map((t) => `£${t.price}`));
+---
+
+<Band tone="dark" class="pricing-credits" id="ai-credits" labelledby="credits-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <p class="ea-label">Usage meter</p>
+        <h2 class="ea-h2" id="credits-title">What is an AI credit? How AI usage is counted.</h2>
+      </div>
+      <p class="ea-lead">
+        One credit is one piece of AI writing, such as a drafted answer. Each plan includes a number every month. Reading a tender document costs 3 credits for every 10 pages, rounded up. Searching, scoring, exports and sums are free.
+      </p>
+    </div>
+
+    <p class="pricing-credits__rollover" data-reveal>
+      Unused monthly plan credits do not roll over. Bought credits never expire. A generation that fails is never charged.
+    </p>
+
+    <div class="pricing-extra" id="extra-usage" data-reveal>
+      <div class="pricing-extra__head">
+        <h3 class="ea-h3" id="extra-usage-title">Need more credits?</h3>
+        <p class="ea-lead">Three options, each one your choice. Nothing extra is charged unless you set it up.</p>
+      </div>
+
+      <ul class="pricing-extra__grid" role="list">
+        <li class="pricing-extra__col" data-reveal>
+          <IconTile name="document" />
+          <h4 class="ea-h3 pricing-extra__h">Credit packs</h4>
+          <p class="pricing-extra__body">
+            Packs of {packCredits} credits for {packPrices}. They never expire.
+          </p>
+        </li>
+
+        <li class="pricing-extra__col" data-reveal>
+          <IconTile name="sliders" />
+          <h4 class="ea-h3 pricing-extra__h">Auto reload</h4>
+          <p class="pricing-extra__body">
+            Buys a pack for you when you run low, up to a monthly limit you set.
+          </p>
+        </li>
+
+        <li class="pricing-extra__col" data-reveal>
+          <IconTile name="done" />
+          <h4 class="ea-h3 pricing-extra__h">Pay as you go</h4>
+          <p class="pricing-extra__body">
+            Off unless you switch it on. Then {OVERAGE_PENCE_LABEL} a credit, with a cap you choose.
+          </p>
+        </li>
+      </ul>
+
+      <p class="pricing-extra__closing" data-reveal>
+        Nothing extra is charged unless you set it up. Active bids and contracts are not metered against credits.
+      </p>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .pricing-credits__rollover {
+    margin-top: var(--space-6);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--ea-rule);
+    color: var(--ea-sub);
+    font-size: var(--t-ea-small);
+  }
+
+  .pricing-extra {
+    margin-top: var(--space-10);
+  }
+
+  .pricing-extra__head {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-6);
+    align-items: baseline;
+    margin-bottom: var(--space-8);
+  }
+
+  .pricing-extra__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8);
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--ea-rule);
+    border-bottom: 1px solid var(--ea-rule);
+  }
+
+  .pricing-extra__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .pricing-extra__h {
+    color: var(--ea-ink);
+  }
+
+  .pricing-extra__body {
+    color: var(--ea-sub);
+    font-size: var(--t-ea-small);
+    line-height: var(--lh-ea-body);
+  }
+
+  .pricing-extra__closing {
+    margin-top: var(--space-6);
+    color: var(--ea-muted);
+    font-size: var(--t-ea-small);
+  }
+
+  @media (max-width: 900px) {
+    .pricing-extra__head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pricing-extra__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+/**
+ * PricingFaq: FAQ band for /pricing/ on design system v3.
+ *
+ * Storyline band 8: answer doubts.
+ * Follows spec Part 2 (2.3.5):
+ * - Seven core questions answering doubts directly in plain words.
+ * - Native <details> elements styled with .ea-qa, closed by default.
+ * - Sourced from components/pricing/faqs.ts to match schema.org JSON-LD.
+ */
+import Band from '../evidenced/Band.astro';
+import { PRICING_PAGE_FAQS } from './faqs';
+---
+
+<Band tone="light" class="ea-faq" id="faq" labelledby="pricing-faq-title">
+  <div class="ea-wrap ea-faq__wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <p class="ea-label">Common questions</p>
+        <h2 class="ea-h2" id="pricing-faq-title">Frequently asked questions</h2>
+      </div>
+      <p class="ea-lead">
+        Everything you need to know about plans, trials, billing and credits.
+      </p>
+    </div>
+
+    <div class="ea-faq__list" data-reveal>
+      {
+        PRICING_PAGE_FAQS.map((item) => (
+          <details class="ea-qa">
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))
+      }
+      <p class="ea-faq__more">
+        <a class="ea-link" href="/faq/">Read every question</a>
+      </p>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .ea-faq__list {
+    margin-top: var(--space-8);
+  }
+</style>
