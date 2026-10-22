@@ -51,7 +51,7 @@ const ROLES: Role[] = [
     label: 'If you sign it off',
     heading: 'You are the one who has to stand behind the numbers',
     body: 'A confident paragraph is not proof. Every figure in a draft either comes from your own records, with the source shown next to it, or is listed as a gap for you to fill. Nothing is rounded to make a gap disappear, so your review is shorter and you can defend what you sign.',
-    figure: 'Every figure shows its proof, or is listed as a gap',
+    figure: 'Every figure in a draft shows where it came from, or is left as an open gap to fill',
     source: 'Our rule: no figure without a source',
     mark: 'refused',
   },
@@ -121,7 +121,7 @@ const ROLES: Role[] = [
 <style>
   .ea-roles__stack {
     display: grid;
-    gap: var(--space-16);
+    gap: var(--space-12);
   }
 
   .ea-role-row {
@@ -130,8 +130,8 @@ const ROLES: Role[] = [
 
   .ea-role-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: clamp(var(--space-6), 5vw, var(--space-16));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-8);
     align-items: start;
   }
 
@@ -156,13 +156,15 @@ const ROLES: Role[] = [
   .ea-role-art {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: clamp(var(--space-6), 4vw, var(--space-10));
+    justify-content: flex-start;
+    align-self: start;
+    padding: var(--space-6);
   }
 
   .ea-art {
     margin: 0;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-3);
   }
 
