@@ -20,7 +20,7 @@ const TRUST_CARDS = [
   },
   {
     term: 'EU data residency',
-    detail: 'Customer data is stored in the EU (Ireland). Drafting sends only the text a task needs to our AI processors.',
+    detail: 'Customer data is stored in the EU (Ireland). Drafting sends only the text a task needs to our AI processors, Google Gemini and Anthropic Claude, which work outside the EU under contract.',
   },
   {
     term: 'GDPR compliant',
@@ -31,7 +31,7 @@ const TRUST_CARDS = [
     detail: 'Registered with the UK regulator.',
   },
   {
-    term: 'Built to ISO 27001 controls',
+    term: 'Follows ISO/IEC 27001',
     detail: 'We follow ISO/IEC 27001 and check our controls against it.',
   },
 ];
@@ -54,7 +54,7 @@ const TRUST_CARDS = [
         { icon: 'shield', value: 'Encrypted', label: 'AES-256 at rest and TLS 1.3 in transit' },
         { icon: 'globe', value: 'EU storage', label: 'Customer data stored in the EU (Ireland)' },
         { icon: 'document', value: 'UK GDPR', label: 'Data processing agreement available on request' },
-        { icon: 'checklist', value: 'ISO 27001', label: 'We follow ISO/IEC 27001 controls and check against them' },
+        { icon: 'checklist', value: 'ISO/IEC 27001', label: 'We follow ISO/IEC 27001 and check our controls against it' },
       ]}
       strip={[...TRUST_BADGES]}
       stripLabel="How your data is protected"

@@ -140,6 +140,11 @@ export const FOOTER = {
    * trust_badges so the footer, /about/, /security/, /pricing/ and the contact
    * form cannot disagree. check-site-facts.mjs fails the build if a page with
    * this row is missing one of them.
+   *
+   * 2026-10-22, D281 (R285-WEB-TRANSFORMATION-AUDIT-01 WT-A, M1): the ISO badge
+   * reads "Follows ISO/IEC 27001". "Built to ISO 27001 controls" is retired and
+   * listed in site-facts.json certifications.banned, so it cannot come back.
+   * D289: "TLS 1.3 in transit" and "EU data residency" stay as they are.
    */
   trustBadges: TRUST_BADGES,
   /*

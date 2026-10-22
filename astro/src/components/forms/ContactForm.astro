@@ -144,7 +144,14 @@ function fromFooter(claim: string): string {
 }
 
 /**
- * THE THIRD LINE IS THE ONE THE FOOTER DOES NOT CARRY, and it is sourced
+ * 2026-10-22, R285-WEB-CLAIMS-AUDIT-01 (WT-A, M2): THE THIRD LINE IS NOW
+ * "ICO registered", read from the footer like the other two. The line below was
+ * "No personal data used for AI training", and the record it leaned on did not
+ * hold: crowagent-platform docs/trust/INTAKE-SECURITY-RESILIENCE-FACTS-2026-10-22.md
+ * B12 holds any training promise until the owner confirms the Gemini billing
+ * tier, and no redaction runs before a prompt leaves. The history follows.
+ *
+ * WAS: THE THIRD LINE IS THE ONE THE FOOTER DOES NOT CARRY, and it was sourced
  * rather than asserted. content/legal/privacy.md: "We use Google Gemini and
  * Anthropic Claude as AI sub-processors. No personal data is used to train
  * their foundation models." content/legal/security.md says the same thing from
@@ -163,12 +170,10 @@ function fromFooter(claim: string): string {
  * would have put a broken promise beside a true one. Dropped on the owner's
  * decision, not softened.
  */
-const AI_TRAINING_CLAIM = 'No personal data used for AI training';
-
 const TRUST_BADGES: string[] = [
   fromFooter('GDPR compliant'),
   fromFooter('EU data residency'),
-  AI_TRAINING_CLAIM,
+  fromFooter('ICO registered'),
 ];
 ---
 
