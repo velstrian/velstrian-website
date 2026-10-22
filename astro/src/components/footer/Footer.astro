@@ -688,8 +688,17 @@ const year = new Date().getFullYear();
     color: var(--c-text-sub);
     text-decoration: none;
     display: inline-flex;
+    /* WRAP, SO THE CHIP MOVES AND NOT THE NAME. Measured 2026-10-22 at 1440
+       (R285-WEB-REVIEW-2026-10-22 item 11): in a 229px column "Tender
+       Compliance Matrix" plus its Free chip did not fit on one line, and as a
+       nowrap flex row the name, the only shrinkable item, broke onto two lines
+       (53px tall) beside the chip. With wrapping each item keeps its own width,
+       so the name stays on one line and the chip drops under it only when the
+       column is too narrow for both. A name longer than its column still wraps
+       inside itself as before. */
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.25rem 0.4rem;
     width: fit-content;
     /* ── WCAG 2.2 SC 2.5.8, TARGET SIZE (MINIMUM) ────────────────────────
      *
