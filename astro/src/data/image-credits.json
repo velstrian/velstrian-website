@@ -102,5 +102,31 @@
     "width": 2400,
     "height": 1600,
     "bytes": 287738
+  },
+  {
+    "file": "r285-gemini/stage-texture-2400.avif",
+    "alt": "",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "Decorative texture under the stage gradient (--stage-texture), a CSS background so no alt. Also 1600 wide, and WebP at both sizes.",
+    "width": 2400,
+    "height": 1200,
+    "bytes": 40527
+  },
+  {
+    "file": "r285-gemini/close-band-texture-2400.avif",
+    "alt": "",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "Decorative texture under the close band gradient, a CSS background so no alt. Also 1600 wide, and WebP at both sizes.",
+    "width": 2400,
+    "height": 1200,
+    "bytes": 17173
   }
 ]
