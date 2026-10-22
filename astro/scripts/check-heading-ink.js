@@ -170,6 +170,50 @@ const OVER_BG = 24;
    fails loudly and says so rather than quietly proving nothing. */
 const SELF_TEST = { route: '/privacy/', viewport: VIEWPORTS[0] };
 
+/* ── DESIGN SYSTEM VERSION 3 DRAWS NO CLIPPED HEADING, 2026-10-22 ────────────
+ *
+ * R285-WEB-GATES-V3-01. Every page moved onto the evidenced components, whose
+ * page title (.ea-hero__title) is set in flat ink, so no route renders the
+ * gradient clipped h1 this gate photographs. The gate stopped at its own
+ * self-test: "/privacy/ has no clipped h1 to inject a fault into". That was
+ * true and it was the wrong question, because the self-test was pinned to a
+ * route rather than to the treatment.
+ *
+ * So the gate first ASKS the site. A discovery pass reads every h1 on every
+ * route at the first viewport and sorts it: clipped (the population rules 1 to
+ * 3 photograph) or flat. If ANY route carries a clipped h1, the self-test runs
+ * on one of them (/privacy/ first if it is one) and everything below runs
+ * exactly as before, so a returning gradient heading is measured the day it
+ * lands. If NONE does, the self-test has nothing to prove and the rules have
+ * nothing to measure, and the gate asserts what "drawn at full ink" means for
+ * a flat heading instead, on every route: an opaque text colour, an opaque
+ * text fill, and nothing between it and the page fading it. A route with no
+ * h1 fails here too, never passes by being empty. */
+const FLAT_INK = `(() => {
+  const out = { clipped: 0, flat: [], none: 0 };
+  const hs = [...document.querySelectorAll('h1')];
+  if (!hs.length) { out.none = 1; return out; }
+  const alpha = (c) => {
+    const m = (c || '').match(/[\\d.]+/g) || [];
+    if (/^color\\(/.test(c)) return m.length >= 4 ? +m[3] : 1;
+    return m.length >= 4 ? +m[3] : 1;
+  };
+  for (const h of hs) {
+    const cs = getComputedStyle(h);
+    const clipped = /text/.test(cs.webkitBackgroundClip || '') || /text/.test(cs.backgroundClip || '');
+    if (clipped && cs.backgroundImage && cs.backgroundImage !== 'none') { out.clipped++; continue; }
+    let faded = 1;
+    for (let n = h; n; n = n.parentElement) faded *= +getComputedStyle(n).opacity;
+    out.flat.push({
+      text: (h.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 40),
+      color: alpha(cs.color),
+      fill: alpha(cs.webkitTextFillColor || cs.color),
+      faded: +faded.toFixed(3),
+    });
+  }
+  return out;
+})()`;
+
 const server = await serveDist(DIST, 'heading-ink');
 const url = (route) => server.url(route);
 
@@ -477,6 +521,36 @@ const preflight = [];
  * register a fault is not evidence of anything.
  * ══════════════════════════════════════════════════════════════════════════ */
 
+/* THE DISCOVERY PASS. Reveal settles before it is read: the v3 entrance holds
+   content at opacity 0 until it is seen, and reduced motion shows it at once. */
+const clippedRoutes = [];
+const flatFaults = [];
+let flatHeads = 0;
+{
+  const scout = await browser.newPage({
+    viewport: { width: VIEWPORTS[0].width, height: VIEWPORTS[0].height },
+    reducedMotion: 'reduce',
+  });
+  for (const route of routesOf(DIST)) {
+    await scout.goto(url(route), { waitUntil: 'load' });
+    const f = await scout.evaluate(FLAT_INK);
+    if (f.clipped) clippedRoutes.push(route);
+    if (f.none) flatFaults.push(`${route}: no h1 at all, so there is no page heading to draw`);
+    for (const h of f.flat) {
+      flatHeads++;
+      if (h.color < 1 || h.fill < 1 || h.faded < 1) {
+        flatFaults.push(
+          `${route} "${h.text}": colour alpha ${h.color}, fill alpha ${h.fill}, ` +
+          `opacity down the tree ${h.faded}. A flat page heading is drawn at full ink or it is dimmed.`,
+        );
+      }
+    }
+  }
+  await scout.close();
+}
+const anyClipped = clippedRoutes.length > 0;
+if (anyClipped && !clippedRoutes.includes(SELF_TEST.route)) SELF_TEST.route = clippedRoutes[0];
+
 const probe = await browser.newPage({
   viewport: { width: SELF_TEST.viewport.width, height: SELF_TEST.viewport.height },
   deviceScaleFactor: 2,
@@ -485,14 +559,14 @@ const probe = await browser.newPage({
 /* FAULT 1: the ramp as it was — white held to 42%, far stop at 128%, ending on
    the numeral colour. Written from the page's own custom properties so this
    file states no colour of its own. */
-const faultRamp = await measure(
+const faultRamp = anyClipped && await measure(
   probe, SELF_TEST.route, SELF_TEST.viewport,
   'h1 { background-image: linear-gradient(' +
   'var(--c-text) 0%, var(--c-text) 42%, var(--c-numeral-far) 128%) !important; }',
 );
 
 /* FAULT 2: the paint box as it was, with the descender allowance removed. */
-const faultBox = await measure(
+const faultBox = anyClipped && await measure(
   probe, SELF_TEST.route, SELF_TEST.viewport,
   'h1 { padding-block-end: 0 !important; margin-block-end: 0 !important; }',
 );
@@ -513,7 +587,7 @@ const faultBox = await measure(
  * firing here, the gate is back to the sensitivity that let A-217 happen and
  * every clean run below is a run from an instrument that cannot see a small
  * cut. */
-const faultThin = await measure(
+const faultThin = anyClipped && await measure(
   probe, SELF_TEST.route, SELF_TEST.viewport,
   'h1 { padding-block-end: 1.25px !important; margin-block-end: -1.25px !important; }',
 );
@@ -524,12 +598,15 @@ const faultThin = await measure(
    LAYOUT as a gap under the heading. This is the fault that had no instrument
    at all until 2026-09-01, and it is injected on every run for the same reason
    the other two are: a rule nobody has watched fail is not a rule. */
-const faultPair = await measure(
+const faultPair = anyClipped && await measure(
   probe, SELF_TEST.route, SELF_TEST.viewport,
   'h1 { margin-block-end: 0 !important; }',
 );
 
-if (!faultRamp || !faultBox || !faultPair || !faultThin) {
+if (!anyClipped) {
+  /* Nothing clipped anywhere: the flat ink assertion above is the measurement,
+     and the floor below keeps it from passing on an empty site. */
+} else if (!faultRamp || !faultBox || !faultPair || !faultThin) {
   preflight.push(
     `the self-test route ${SELF_TEST.route} has no clipped h1 to inject a fault into, ` +
     'so no rule was shown to work and every result below is unverified.',
@@ -590,7 +667,7 @@ let pairsSeen = 0;
 let uncancelled = 0;
 let undrawnRows = 0;
 
-for (const vp of VIEWPORTS) {
+for (const vp of anyClipped ? VIEWPORTS : []) {
   const page = await browser.newPage({
     viewport: { width: vp.width, height: vp.height },
     deviceScaleFactor: 2,
@@ -674,6 +751,27 @@ if (preflight.length) {
   for (const p of preflight) console.error(`  ${p}`);
   console.error('');
   process.exit(1);
+}
+
+/* THE FLAT INK RESULT, and its floor: one heading per built route. */
+const FLAT_FLOOR = all.length;
+console.log(`  discovery: ${clippedRoutes.length} route(s) draw a clipped h1, ${flatHeads} flat h1(s) ` +
+  `across ${all.length} route(s) at ${VIEWPORTS[0].name}`);
+if (!anyClipped && flatHeads < FLAT_FLOOR) {
+  flatFaults.push(`floor: ${flatHeads} flat page heading(s) measured across ${all.length} route(s), and every route needs one`);
+}
+if (flatFaults.length) {
+  console.error(`\nheading-ink: ${flatFaults.length} FLAT PAGE HEADING(S) NOT AT FULL INK\n`);
+  for (const f of flatFaults) console.error(`  ${f}`);
+  console.error('');
+  process.exit(1);
+}
+if (!anyClipped) {
+  console.log('\n  no route draws a clipped heading, so rules 1 to 3 have no population and the\n' +
+    '  self-test has nothing to inject into. Every page heading is a flat heading at full\n' +
+    '  ink. The day a clipped h1 returns on any route, the self-test and all three rules\n' +
+    '  run on it again.\n');
+  process.exit(0);
 }
 
 console.log(`  self-test: the old ramp measures ${faultRamp.ratio.toFixed(3)} of flat ink ` +

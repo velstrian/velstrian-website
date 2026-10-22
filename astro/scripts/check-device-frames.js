@@ -104,13 +104,37 @@ const DIST = path.join(__dirname, '..', 'dist');
 const FRAMES = [
   {
     sel: '.pcar__frame',
+    /* The file that emits the selector. Read to tell a RENAME from a frame
+       nobody renders (see THE FLOORS). */
+    component: 'src/components/ui/Carousel.astro',
     why: 'ui/Carousel.astro draws a browser: three traffic lights and the address app.crowagent.ai',
   },
 ];
 
-/* The floors. 2 routes (/bid/ and /buy/) each carrying 6 images inside .pcar__frame.
-   Story2.astro on home was retired per 2026-10-21 owner decision D1. */
-const FLOOR = { routes: 2, images: 12 };
+/* THE FLOORS, PER RENDERING ROUTE, 2026-10-22 (R285-WEB-GATES-V3-01).
+ *
+ * They were absolute: 2 routes and 12 images, because /bid/ and /buy/ each
+ * carried six screens inside .pcar__frame. Design system v3 rebuilt both pages
+ * on components/evidenced/Frame.astro, which is NOT a desktop frame: no window
+ * dots, no address bar, and over a real capture no title bar either, the frame
+ * takes the capture's own proportions (de141268), so a portrait capture is a
+ * narrow window and nothing claims it is a desktop. That is why it is left out
+ * of FRAMES, by the same test that leaves out .pi__frame above. No built route
+ * renders .pcar__frame now, so the absolute floors failed on a frame that is
+ * simply not drawn, while Carousel.astro, which draws it, is still in src/
+ * and a page could pick it up again tomorrow.
+ *
+ * What the floors were FOR is kept, as two separate questions:
+ *   RENAMED: a declared selector that matches nothing on the site AND no
+ *     longer appears in its own component has been renamed, and this gate is
+ *     blind. That fails, as before.
+ *   DORMANT: a selector its component still emits but no route renders is
+ *     reported by name on every run, not failed. The day a route renders it,
+ *     every rule here measures it.
+ *   AND A ROUTE THAT DRAWS A DESKTOP FRAME MUST YIELD AT LEAST ONE MEASURED
+ *     IMAGE, so a frame whose screens moved out of reach of the query fails
+ *     rather than passing empty. */
+const FLOOR = { imagesPerRoute: 1 };
 
 const TYPES = {
   '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
@@ -201,6 +225,8 @@ const base = `http://localhost:${server.address().port}`;
 const violations = [];
 let routesWithFrame = 0;
 let imagesMeasured = 0;
+/** route -> images found inside a declared frame on it. */
+const perRoute = new Map();
 /** How many times each declared frame selector matched. A zero is a violation. */
 const matched = new Map(FRAMES.map((f) => [f.sel, 0]));
 
@@ -236,8 +262,11 @@ for (const route of CANDIDATES) {
     return out;
   }, FRAMES);
 
+  const framesHere = await page.evaluate((frames) => frames.some((f) => document.querySelector(f.sel)), FRAMES);
+  if (framesHere && !found.length) perRoute.set(route, 0);
   if (!found.length) continue;
   routesWithFrame += 1;
+  perRoute.set(route, found.length);
   console.log(`  ${route}  ${found.length} image(s) inside a desktop frame`);
 
   for (const img of found) {
@@ -285,28 +314,35 @@ server.close();
 /* ── THE FLOORS ─────────────────────────────────────────────────────────────
    Every assertion above is satisfied by there being nothing to assert it on,
    and a selector that has stopped matching is the quietest way to get there. */
+const dormant = [];
 for (const f of FRAMES) {
-  if (matched.get(f.sel) === 0) {
+  if (matched.get(f.sel) !== 0) continue;
+  const cls = f.sel.replace(/^\./, '');
+  const src = path.join(__dirname, '..', f.component);
+  const emitted = fs.existsSync(src) && fs.readFileSync(src, 'utf8').includes(cls);
+  if (emitted) {
+    dormant.push(f);
+    continue;
+  }
+  violations.push(
+    `stale — ${f.sel} matched no image on any of ${ALL.length} routes and ${f.component} no longer emits it. It is declared as a desktop frame here and this gate is measuring nothing through it. Either the frame is gone, in which case delete the entry, or it has been renamed, in which case this gate has been blind since the rename`,
+  );
+}
+for (const [route, n] of perRoute) {
+  if (n < FLOOR.imagesPerRoute) {
     violations.push(
-      `stale — ${f.sel} matched no image on any of ${ALL.length} routes. It is declared as a desktop frame here and this gate is measuring nothing through it. Either the frame is gone, in which case delete the entry, or it has been renamed, in which case this gate has been blind since the rename`,
+      `floor — ${route} draws a desktop frame and ${n} image(s) inside it were measured. Needs at least ${FLOOR.imagesPerRoute}, or this route passes by finding nothing`,
     );
   }
-}
-if (routesWithFrame < FLOOR.routes) {
-  violations.push(
-    `floor — ${routesWithFrame} route(s) render a desktop frame, and every rule above passes trivially below that. Needs at least ${FLOOR.routes}`,
-  );
-}
-if (imagesMeasured < FLOOR.images) {
-  violations.push(
-    `floor — ${imagesMeasured} image(s) measured inside a desktop frame. Needs at least ${FLOOR.images}`,
-  );
 }
 
 console.log(
   `\n  ${routesWithFrame} route(s) with a desktop frame, ${imagesMeasured} image(s) measured from their own bytes`,
 );
 for (const f of FRAMES) console.log(`    ${f.sel}  ${matched.get(f.sel)} image(s)`);
+for (const f of dormant) {
+  console.log(`    DORMANT  ${f.sel}  ${f.component} still emits it and no built route renders it; measured the day one does`);
+}
 
 if (violations.length) {
   console.error(`\ndevice-frames: ${violations.length} violation(s)\n`);

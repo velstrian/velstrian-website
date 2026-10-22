@@ -380,30 +380,7 @@ export function initTour(): void {
   });
 }
 
-/**
- * The hero aurora (components/evidenced/Aurora.astro). Its loops are declared
- * paused in styles/evidenced.css and run only while this marks the aurora
- * `run`: some of it inside the window and the tab visible. Off screen or in a
- * hidden tab it is `hold`, so it spends nothing a reader cannot see, and it
- * resumes from the same frame. A passive scroll reader, not an observer
- * (check-motion.js rule 3). A hidden aurora (display none) measures as zero
- * height and stays held. Written small on purpose: this chunk ships on every
- * route and sits inside the jsShared exception in check-budgets.js.
- */
-export function initAurora(): void {
-  const set = () =>
-    document.querySelectorAll<HTMLElement>('[data-aurora]').forEach((s) => {
-      const r = s.getBoundingClientRect();
-      s.dataset.aurora = !document.hidden && r.height && r.bottom > 0 && r.top < innerHeight ? 'run' : 'hold';
-    });
-  /* A scroll event cannot be cancelled, so it needs no passive flag. */
-  addEventListener('scroll', set);
-  document.addEventListener('visibilitychange', set);
-  set();
-}
-
 export function initEvidenced(): void {
-  initAurora();
   initReveal();
   initSequences();
   initCarousels();

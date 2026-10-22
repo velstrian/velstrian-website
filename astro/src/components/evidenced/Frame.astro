@@ -83,8 +83,11 @@ const cropStyle = view
           {!captured && image?.avif && <source type="image/avif" srcset={image.avif} />}
           {!captured && image?.webp && <source type="image/webp" srcset={image.webp} />}
           {shot.narrow && <source media="(max-width: 599px)" srcset={shot.narrow.src} width={shot.narrow.width} height={shot.narrow.height} />}
+          {/* The picture's proportions as numbers, so its box is sized before
+              the lazy file arrives (evidenced.css .ea-frame__shot, CLS). */}
           <img
             class="ea-frame__shot"
+            style={`--w0:${shot.width};--h0:${shot.height}` + (shot.narrow ? `;--wn:${shot.narrow.width};--hn:${shot.narrow.height}` : '')}
             src={shot.src}
             width={shot.width}
             height={shot.height}

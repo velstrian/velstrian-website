@@ -439,9 +439,20 @@ const MEASURE = `(() => {
    *
    * A BAND OF ONE IS NOT MEASURED, for the same reason as rule 3: a card with
    * no neighbour has no part to be compared against. */
-  for (const row of document.querySelectorAll('.card-sync')) {
+  /* DESIGN SYSTEM VERSION 3 SYNCS ITS PLAN CARDS WITH A SUBGRID, 2026-10-22,
+   * R285-WEB-GATES-V3-01. /pricing/, /buy/ and the home page now draw their
+   * plans as .ea-plans__grid > .ea-plan, each card spanning the grid's rows
+   * (styles/evidenced.css), and no route carries .card-sync any more, so this
+   * rule measured nothing. The v3 row is measured by the same test. Its
+   * declared part count is the row span the CSS gives each card, which by its
+   * own contract counts every child, a child the billing toggle hides
+   * included, so it is checked against the deepest card's child count. */
+  for (const row of document.querySelectorAll('.card-sync, .ea-plans__grid')) {
     if (getComputedStyle(row).display === 'none') continue;
-    const declaredRaw = getComputedStyle(row).getPropertyValue('--card-parts').trim();
+    const v3 = row.classList.contains('ea-plans__grid');
+    const firstCard = v3 ? row.querySelector(':scope > .ea-plan') : null;
+    const span = firstCard ? parseInt(((getComputedStyle(firstCard).gridRowStart + ' ' + getComputedStyle(firstCard).gridRowEnd).match(/span (\\d+)/) || [])[1], 10) : NaN;
+    const declaredRaw = v3 ? (Number.isNaN(span) ? '' : String(span)) : getComputedStyle(row).getPropertyValue('--card-parts').trim();
     const declared = declaredRaw === '' ? null : Number(declaredRaw);
     for (const band of bandsOf(row)) {
       if (band.cards.length < 2) continue;
@@ -463,9 +474,10 @@ const MEASURE = `(() => {
         });
       });
       const counts = parts.map((p) => p.length);
-      const deepest = Math.max(...parts.map((p) => Math.max(...p.map((k) => k.slot))));
+      const deepestShown = Math.max(...parts.map((p) => Math.max(...p.map((k) => k.slot))));
+      const deepest = v3 ? Math.max(...band.cards.map((c) => c.children.length)) : deepestShown;
       const worst = [];
-      for (let slot = 1; slot <= deepest; slot++) {
+      for (let slot = 1; slot <= deepestShown; slot++) {
         const here = parts.map((p) => p.find((k) => k.slot === slot)).filter(Boolean);
         if (here.length < 2) continue;
         const tops = here.map((h) => h.top);

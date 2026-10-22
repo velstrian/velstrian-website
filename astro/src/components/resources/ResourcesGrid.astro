@@ -61,8 +61,10 @@ const covers = {
     </div>
 
     <div class="res-more" data-reveal>
-      <Action href="/tools/" variant="secondary">View all tools</Action>
-      <Action href="/blog/" variant="secondary">View all articles</Action>
+      <div class="ea-actions">
+        <Action href="/tools/" variant="secondary">View all tools</Action>
+        <Action href="/blog/" variant="secondary">View all articles</Action>
+      </div>
     </div>
   </div>
 </Band>
@@ -93,17 +95,15 @@ const covers = {
     }
   }
 
+  /* The two buttons sit in the shared .ea-actions row, one width each
+     (check-render.js, R285-WEB-GATES-V3-01). This only centres the row. */
   .res-more {
     display: flex;
     justify-content: center;
-    gap: var(--space-4);
     margin-top: clamp(var(--space-8), 2rem + 2vw, var(--space-12));
   }
 
-  @media (max-width: 599px) {
-    .res-more {
-      flex-direction: column;
-      align-items: stretch;
-    }
+  .res-more .ea-actions {
+    margin-top: 0;
   }
 </style>

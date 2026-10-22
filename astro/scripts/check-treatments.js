@@ -911,10 +911,58 @@ const MEASURE_FOCUS = `(() => {
   /* The first painted background up the tree. An outline is drawn just outside
      the element, so what it has to be seen against is whatever its ancestors
      paint, not the element's own fill. */
-  const behind = (el) => {
+  /* A FILL CAN BE A GRADIENT LAYER (R285-WEB-GATES-V3-01, 2026-10-22). The
+     product frame paints its white sheet as linear-gradient(fill, fill) on the
+     padding box, so its background-color is transparent and this walk used to
+     go straight through it to the dark band behind the frame: the citation
+     marker on the home page refusal sheet read 2.80:1 against near black while
+     a reader sees its ring on white. A top background-image layer that covers
+     the box and has only opaque stops is a ground, and its worst stop is the
+     one returned. Same reading as check-app-contrast.js. */
+  const splitTop = (v) => {
+    const out = [];
+    let depth = 0;
+    let start = 0;
+    for (let i = 0; i < v.length; i++) {
+      const ch = v[i];
+      if (ch === '(') depth++;
+      else if (ch === ')') depth--;
+      else if (ch === ',' && depth === 0) { out.push(v.slice(start, i).trim()); start = i + 1; }
+    }
+    out.push(v.slice(start).trim());
+    return out;
+  };
+  const stopColour = (t) => {
+    const n = rgb(t);
+    if (t.indexOf('color(') === 0) return [n[0] * 255, n[1] * 255, n[2] * 255].concat(n.length > 3 ? [n[3]] : []);
+    return n;
+  };
+  /* Layers are read top down and the first one that covers the box with only
+     opaque stops is the ground: a translucent glow over a solid fill (the
+     close band panel) must not hide the fill, and a solid layer UNDER it is
+     what the eye sees through the glow. */
+  const gradientGround = (cs, ring) => {
+    const img = cs.backgroundImage || '';
+    if (img.indexOf('gradient(') < 0) return null;
+    const layers = splitTop(img);
+    const sizes = splitTop(cs.backgroundSize || 'auto');
+    for (let i = 0; i < layers.length; i++) {
+      const size = sizes[i % sizes.length];
+      if (!/^(auto|auto auto|100% 100%|100%|cover)$/.test(size)) continue;
+      if (layers[i].indexOf('gradient(') < 0) continue;
+      const stops = (layers[i].match(/(rgba?|color)[(][^)]*[)]/g) || []).map(stopColour);
+      if (!stops.length || stops.some((c) => c.length < 3 || (c[3] !== undefined && c[3] < 1))) continue;
+      return stops.sort((a, b) => ratio(ring, a) - ratio(ring, b))[0];
+    }
+    return null;
+  };
+  const behind = (el, ring) => {
     let n = el.parentElement;
     while (n) {
-      const c = rgb(getComputedStyle(n).backgroundColor);
+      const cs = getComputedStyle(n);
+      const g = gradientGround(cs, ring);
+      if (g) return g;
+      const c = rgb(cs.backgroundColor);
       if (c.length >= 3 && (c[3] === undefined || c[3] > 0.5)) return c;
       n = n.parentElement;
     }
@@ -953,7 +1001,7 @@ const MEASURE_FOCUS = `(() => {
       bad.push({ s: sig(el), why: 'user-agent default ring, the site states none' });
       continue;
     }
-    const c = ratio(rgb(cs.outlineColor), behind(el));
+    const c = ratio(rgb(cs.outlineColor), behind(el, rgb(cs.outlineColor)));
     /* 3:1, WCAG 2.2 SC 1.4.11 — the contrast a non-text indicator has to reach
        against what is adjacent to it. */
     if (c < 3) {

@@ -51,12 +51,11 @@ import '../styles/headings.css';
    written their own. Measured 2026-08-04: 31 computed recipes for three
    objects. See the file header. */
 import '../styles/labels.css';
-/* The hero proof card, and it is loaded AFTER labels.css deliberately: its
-   kicker carries `.eyebrow` too, both files are unlayered, and an
-   equal-specificity tie has to resolve to the card. A-45. The recipe was
-   written out in full in crowmark.astro AND crowmark-buyers.astro, about 190
-   lines each, and both copies had to be edited to fix one finding. */
-import '../styles/duty-card.css';
+/* styles/duty-card.css was imported here for the hero proof card (A-45). No
+   page has drawn the card since the v3 /bid/ and /buy/ rebuilds, so the file
+   and components/sections/DutyCard.astro were deleted on 2026-10-22
+   (R285-WEB-GATES-V3-01, check-shared-blocks.js) rather than shipping 21 KB of
+   unused CSS to every route. */
 /* One underline for every link in flowing text. `text-underline-offset` was
    declared by hand in twenty-six separate files and three different answers were
    shipping, because there was nowhere central to declare it. */

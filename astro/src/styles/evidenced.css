@@ -23,16 +23,15 @@
    3. The refusal moment, once (.ea-check), and on /buy/ its counterpart,
       the pre-read boundary (.ea-moment): four rows settle in turn, each
       line draws, and the verdicts land, the last one "Never".
-   4. The carousel slide, 400ms, only when the reader asks.
+   4. The carousel slide, --dur (300ms), only when the reader asks.
    5. The primary button's light sweep, once per hover (check-sheen.js 3b).
    6. A card on a light band lifts one elevation step on hover.
-   7. The hero aurora's five colour fields drift (.ea-aurora, Aurora.astro),
-      the ONE loop (R285-WEB-HERO-BACKDROP-02, replacing the A-301 mesh the
-      owner rejected on 2026-10-22), named in check-sheen.js LOOP_ALLOW.
-      Transform only, inside the hero band only, held while off screen or in
-      a hidden tab, never a page layer (the page wash removed 2026-08-04
-      stays removed).
-   Nothing else loops. Everything is off under prefers-reduced-motion.
+   7. The hero aurora's five colour fields drift once (.ea-aurora,
+      Aurora.astro, R285-WEB-HERO-BACKDROP-02, replacing the A-301 mesh the
+      owner rejected on 2026-10-22) and settle inside 4.8s (WCAG 2.2.2,
+      check-autoplay). Transform only, inside the hero band only, never a
+      page layer (the page wash removed 2026-08-04 stays removed).
+   Nothing loops. Everything is off under prefers-reduced-motion.
    ============================================================================ */
 
 /* ── The page ─────────────────────────────────────────────────────────────── */
@@ -40,8 +39,15 @@
   --font-display: var(--font-body);
 }
 
-main > .ea-sec,
-main > .ea-sec * {
+/* `main .ea-sec`, not `main > .ea-sec` (R285-WEB-GATES-V3-01, 2026-10-22).
+   /pricing/ wraps its sections in div.pricing-page, beside the billing
+   checkbox, so the direct child form never reached them and every v3 band on
+   /pricing/ ran the version 2 scroll arrival from motion.css (sv-arrive on
+   the band, sv-arrive-item on each plan card) while no other page did.
+   Measured by check-shared-blocks.js as the one route whose closing band
+   carried an animation. Same specificity, so nothing else changes. */
+main .ea-sec,
+main .ea-sec * {
   animation: none;
 }
 
@@ -73,11 +79,16 @@ main > .ea-sec * {
    :where() keeps the guard at zero. A product screen placed INSIDE long-form
    copy (ProductScreen in a comparison) is UI, not copy, so the reset reaches
    back in for anything inside a stage. */
-:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4):where(:not(.prose *, .ea-longform *), .ea-stage *) {
+/* `.tl` is the other exception (R285-WEB-GATES-V3-01). styles/timeline.css is
+   layered, so this unlayered reset beat its padding and margin whatever the
+   specificity: the list lost its gutter, the items slid onto the rail, and
+   every dot on /about/ and /roadmap/ sat 32px left of the line it marks
+   (check-timeline.js). The timeline owns its own box. */
+:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4):where(:not(.prose *, .ea-longform *, .tl), .ea-stage *) {
   margin: 0;
 }
 
-:where(.ea-sec) :where(ul, ol):where(:not(.prose *, .ea-longform *), .ea-stage *) {
+:where(.ea-sec) :where(ul, ol):where(:not(.prose *, .ea-longform *, .tl), .ea-stage *) {
   padding: 0;
   list-style: none;
 }
@@ -307,9 +318,13 @@ main > .ea-sec * {
   min-height: var(--ea-btn-h);
   color: var(--ea-accent-ink);
   font-weight: var(--t-w-ea-medium);
-  text-decoration: underline;
+  /* The LINE only, never the `text-decoration` shorthand: the shorthand also
+     resets the thickness to auto, and with the 4px offset this rule used to
+     state it drew a second and third underline recipe wherever an .ea-link sits
+     in a sentence. Offset and thickness come from styles/links.css, the one
+     text link rule (check-treatments.js, R285-WEB-GATES-V3-01). */
+  text-decoration-line: underline;
   text-decoration-color: transparent;
-  text-underline-offset: 4px;
   transition: text-decoration-color var(--ea-dur-hover) ease-out;
 }
 
@@ -618,13 +633,33 @@ main > .ea-sec * {
   --frame-fill: var(--ground-dark);
 }
 
+/* THE BOX IS SIZED BEFORE THE PICTURE ARRIVES (R285-WEB-GATES-V3-01, CLS).
+   It was `width: auto` under a fit-content frame, and a lazy image has no
+   natural width until its file lands, so the frame drew 969px wide and then
+   1182px once the capture loaded, and everything under it moved: CLS 0.19 to
+   0.42 on /compare/ and /sectors/education/ (check-cwv). The width is now
+   the width the picture has at the 30rem height cap, from the numbers
+   Frame.astro states (--w0 and --h0, the phone source's --wn and --hn below
+   600px), clamped to the column, and the height follows the ratio. Same
+   result as the loaded picture, known at first layout. */
 .ea-frame__shot {
+  --sw: var(--w0);
+  --sh: var(--h0);
+  --shot-max-h: 30rem;
   display: block;
-  width: auto;
+  width: calc(var(--shot-max-h) * var(--sw) / var(--sh));
   max-width: 100%;
   height: auto;
-  max-height: 30rem;
+  max-height: var(--shot-max-h);
+  aspect-ratio: var(--sw) / var(--sh);
   margin-inline: auto;
+}
+
+@media (max-width: 599px) {
+  .ea-frame__shot {
+    --sw: var(--wn, var(--w0));
+    --sh: var(--hn, var(--h0));
+  }
 }
 
 /* A page's own drawn screen (Frame `image`) is a full window at the screen's
@@ -1090,29 +1125,26 @@ main > .ea-sec * {
   background: radial-gradient(closest-side, color-mix(in srgb, var(--aurora-5) 38%, transparent), transparent);
 }
 
-/* Written as `main > .ea-sec ...` on purpose: the section reset
-   `main > .ea-sec * { animation: none }` near the top of this file outranks a
+/* Written as `main .ea-sec ...` on purpose: the section reset
+   `main .ea-sec * { animation: none }` near the top of this file outranks a
    single class, and that reset stays, it is what keeps legacy motion out.
-   The loops are declared paused and run only while initAurora marks the
-   aurora `run`: on screen and in a visible tab. With no script, or under
-   reduced motion, the slab is the still first frame. */
+   Each field drifts ONCE, out along its path and home again, and rests on
+   its first frame, the same still slab a reduced motion reader sees. Under
+   five seconds and no loop, so no pause control is owed (WCAG 2.2.2, see
+   tokens.css "WHY IT SETTLES"). The keyframes start and end at rest, so
+   check-motion rule 2 reads them as a drawing, not a private entrance. */
 @media (prefers-reduced-motion: no-preference) {
-  main > .ea-sec .ea-aurora__f {
+  main .ea-sec .ea-aurora__f {
     animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-play-state: paused;
+    animation-iteration-count: 1;
   }
 
-  main > .ea-sec .ea-aurora__f--1 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t1); }
-  main > .ea-sec .ea-aurora__f--2 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t2); }
-  main > .ea-sec .ea-aurora__f--3 { animation-name: ea-aurora-c; animation-duration: var(--aurora-t3); }
-  main > .ea-sec .ea-aurora__f--4 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t4); animation-direction: reverse; }
-  main > .ea-sec .ea-aurora__f--5 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t5); animation-direction: reverse; }
+  main .ea-sec .ea-aurora__f--1 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t1); }
+  main .ea-sec .ea-aurora__f--2 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t2); }
+  main .ea-sec .ea-aurora__f--3 { animation-name: ea-aurora-c; animation-duration: var(--aurora-t3); }
+  main .ea-sec .ea-aurora__f--4 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t4); animation-direction: reverse; }
+  main .ea-sec .ea-aurora__f--5 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t5); animation-direction: reverse; }
 
-  main > .ea-sec .ea-aurora[data-aurora='run'] .ea-aurora__f {
-    will-change: transform;
-    animation-play-state: running;
-  }
 }
 
 @keyframes ea-aurora-a {
@@ -1447,9 +1479,17 @@ main > .ea-sec * {
   line-height: 1.4;
 }
 
+/* The app's own density, flush left, ONLY inside a product screen. A mini
+   table on the page itself (the /pricing/ plan tables) is site content and
+   takes the one cell padding in styles/blocks.css (check-treatments.js rule
+   4, R285-WEB-GATES-V3-01). */
+[data-capture] .ea-mini-table th,
+[data-capture] .ea-mini-table td {
+  padding: var(--space-2) var(--space-3) var(--space-2) 0;
+}
+
 .ea-mini-table th,
 .ea-mini-table td {
-  padding: var(--space-2) var(--space-3) var(--space-2) 0;
   border-bottom: 1px solid var(--ea-rule);
   text-align: start;
   vertical-align: middle;

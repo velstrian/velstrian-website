@@ -138,18 +138,62 @@ const MEASURE = (sel) => {
   const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
   const L = (c) => 0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2]);
   const ratio = (f, g) => { const a = L(f), c = L(g); return (Math.max(a, c) + 0.05) / (Math.min(a, c) + 0.05); };
+  /* A FILL CAN BE A GRADIENT LAYER. .ea-frame__window paints its sheet as
+     `linear-gradient(fill, fill) padding-box` under a gradient rim, so its
+     computed background-color is transparent. Reading only the colour walked
+     straight through the white sheet to the dark band behind the frame, and
+     on 2026-10-22 reported 13 failures of ink on near black for text that a
+     reader sees on white (R285-WEB-GATES-V3-01). The TOP layer of
+     background-image is the paint nearest the text: when every stop in it is
+     opaque it is an opaque ground, and each stop is a ground the text may sit
+     on, so the worst of them is the one measured. Only a layer that COVERS
+     the box is a ground: .ea-fig--found draws a 1.5px underline the same
+     way, and that is a rule under the words, not paper behind them. */
+  const splitTop = (v) => {
+    const out = [];
+    let depth = 0;
+    let start = 0;
+    for (let i = 0; i < v.length; i++) {
+      const ch = v[i];
+      if (ch === '(') depth++;
+      else if (ch === ')') depth--;
+      else if (ch === ',' && depth === 0) { out.push(v.slice(start, i).trim()); start = i + 1; }
+    }
+    out.push(v.slice(start).trim());
+    return out;
+  };
+  /* Layers top down: the first that covers the box with only opaque stops. */
+  const gradientGrounds = (img, size) => {
+    if (!img || img.indexOf('gradient(') < 0) return null;
+    const layers = splitTop(img);
+    const sizes = splitTop(size || 'auto');
+    for (let i = 0; i < layers.length; i++) {
+      if (!/^(auto|auto auto|100% 100%|100%|cover)$/.test(sizes[i % sizes.length])) continue;
+      if (layers[i].indexOf('gradient(') < 0) continue;
+      const stops = [...layers[i].matchAll(/rgba?\([^)]*\)|color\(srgb[^)]*\)/g)].map((m) => parse(m[0]));
+      if (!stops.length || stops.some((c) => !c || c[3] < 1)) continue;
+      return stops.map((c) => c.slice(0, 3));
+    }
+    return null;
+  };
   const bgOf = (el) => {
     const layers = [];
+    let grounds = null;
     let n = el;
     while (n) {
-      const c = parse(getComputedStyle(n).backgroundColor);
+      const cs = getComputedStyle(n);
+      const c = parse(cs.backgroundColor);
+      grounds = gradientGrounds(cs.backgroundImage, cs.backgroundSize);
+      if (grounds) break;
       if (c && c[3] > 0) { layers.push(c); if (c[3] === 1) break; }
       n = n.parentElement;
     }
-    if (!layers.length) return [255, 255, 255];
-    let acc = layers[layers.length - 1].slice(0, 3);
-    for (let i = layers.length - 2; i >= 0; i--) acc = over(layers[i], acc);
-    return acc;
+    if (!grounds) grounds = layers.length && layers[layers.length - 1][3] === 1 ? [layers.pop().slice(0, 3)] : [[255, 255, 255]];
+    return grounds.map((g) => {
+      let acc = g;
+      for (let i = layers.length - 1; i >= 0; i--) acc = over(layers[i], acc);
+      return acc;
+    });
   };
   const hex = (c) => '#' + c.slice(0, 3).map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
 
@@ -165,8 +209,10 @@ const MEASURE = (sel) => {
     if (!r.width || !r.height) continue;
     const fgRaw = parse(cs.color);
     if (!fgRaw) continue;
-    const bg = bgOf(el);
-    const fg = over(fgRaw, bg);
+    /* The worst ground the text can sit on. */
+    const [bg, fg] = bgOf(el)
+      .map((g) => [g, over(fgRaw, g)])
+      .sort((a, b) => ratio(a[1], a[0]) - ratio(b[1], b[0]))[0];
     const size = parseFloat(cs.fontSize);
     const weight = +cs.fontWeight || 400;
     const large = size >= 24 || (size >= 18.66 && weight >= 700);

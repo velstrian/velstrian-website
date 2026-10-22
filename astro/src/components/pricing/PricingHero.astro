@@ -8,59 +8,39 @@
  * - Standfirst: "Plans from £49 a month. Start with 7 days free. See the price first. Sized for SMEs."
  * - One button: "Start 7 day trial"
  * - Monthly and annual switch sits here with 10% saving.
+ *
+ * On the shared PageHero (R285-WEB-GATES-V3-01) so the page title takes the
+ * one v3 heading treatment (check-render.js). The switch sits in its `after`
+ * row, under the one button. Its styles stay here, scoped to this component's own markup.
  */
-import Band from '../evidenced/Band.astro';
+import PageHero from '../evidenced/PageHero.astro';
 import Action from '../evidenced/Action.astro';
 import { SIGNUP_URL, TRIAL_DAYS, PLANS, annualDiscountPct, START_LABEL } from '../../data/pricing';
 
 const [STARTER] = PLANS;
 ---
 
-<Band tone="light" class="pricing-hero" id="hero" labelledby="pricing-hero-title">
-  <div class="ea-wrap">
-    <div class="pricing-hero__head" data-reveal>
-      <p class="ea-label pricing-hero__eyebrow">Public and private work · Published pricing</p>
-      <h1 class="ea-hero__title" id="pricing-hero-title">
-        Find contracts that suit you and write strong bids yourself.
-      </h1>
-      <p class="ea-lead pricing-hero__lead">
-        Plans from £{STARTER.monthly} a month. Start with {TRIAL_DAYS} days free. See the price first. Sized for SMEs.
-      </p>
-    </div>
+<PageHero
+  id="pricing-hero-title"
+  bandId="hero"
+  label="Public and private work · Published pricing"
+  title="Find contracts that suit you and write strong bids yourself."
+  lead={`Plans from £${STARTER.monthly} a month. Start with ${TRIAL_DAYS} days free. See the price first. Sized for SMEs.`}
+>
+  <Action href={SIGNUP_URL}>{START_LABEL}</Action>
 
-    <div class="pricing-hero__actions" data-reveal>
-      <Action href={SIGNUP_URL}>{START_LABEL}</Action>
-
-      <div class="pricing-billing-switch">
-        <span class="pricing-billing-switch__label pricing-billing-switch__label--m">Monthly</span>
-        <label for="billing-toggle" class="pricing-billing-switch__hit">
-          <span class="pricing-billing-switch__track">
-            <span class="pricing-billing-switch__knob"></span>
-          </span>
-        </label>
-        <span class="pricing-billing-switch__label pricing-billing-switch__label--a">Annual billing · Save {annualDiscountPct(STARTER)}%</span>
-      </div>
-    </div>
+  <div class="pricing-billing-switch" slot="after">
+    <span class="pricing-billing-switch__label pricing-billing-switch__label--m">Monthly</span>
+    <label for="billing-toggle" class="pricing-billing-switch__hit">
+      <span class="pricing-billing-switch__track">
+        <span class="pricing-billing-switch__knob"></span>
+      </span>
+    </label>
+    <span class="pricing-billing-switch__label pricing-billing-switch__label--a">Annual billing · Save {annualDiscountPct(STARTER)}%</span>
   </div>
-</Band>
+</PageHero>
 
 <style>
-  .pricing-hero__eyebrow {
-    margin-bottom: var(--space-3);
-  }
-
-  .pricing-hero__lead {
-    margin-top: var(--space-5);
-  }
-
-  .pricing-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-6);
-    margin-top: var(--space-8);
-  }
-
   .pricing-billing-switch {
     display: inline-flex;
     align-items: center;

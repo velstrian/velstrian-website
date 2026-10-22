@@ -803,13 +803,27 @@ const MEASURE = `(() => {
    * the list, as an OBJECT: extra properties hung on an array do not survive
    * page.evaluate's serialisation, so an array with a .count would arrive with
    * the count missing and the check would quietly stop testing for it. */
+  /* DESIGN SYSTEM VERSION 3 HAS ITS OWN SHARED HEAD, 2026-10-22,
+   * R285-WEB-GATES-V3-01. Every page moved onto the evidenced components, and
+   * they open with h1.ea-hero__title as the direct child of .ea-hero__head,
+   * inside the .ea-hero band: the head block PageHero.astro emits, styled once
+   * in styles/evidenced.css. This rule kept asking for the version 2 markup
+   * and failed 47 of 48 routes on a treatment that is shared. Re-pointed, not
+   * widened: the v3 title must still be the DIRECT child of the shared head in
+   * the hero band, and the version 2 pair still has to match as a pair, so a
+   * page that hand-rolls its own head (as /pricing/ and /resources/ did until
+   * this change) still fails. */
   const h1s = [...document.querySelectorAll('h1')];
+  const v3Head = (h) =>
+    h.classList.contains('ea-hero__title') &&
+    !!h.parentElement && h.parentElement.classList.contains('ea-hero__head') &&
+    !!h.closest('.ea-hero');
   const head = {
     count: h1s.length,
     items: h1s.map((h) => ({
       sig: sig(h),
-      titled: h.classList.contains('section__title'),
-      inHead: !!h.closest('.section__head'),
+      titled: h.classList.contains('section__title') || v3Head(h),
+      inHead: !!h.closest('.section__head') || v3Head(h),
       text: (h.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 48),
     })),
   };
@@ -1361,7 +1375,7 @@ for (const route of all) {
         note(
           h.sig,
           !h.titled && !h.inHead
-            ? 'Not h1.section__title and not inside .section__head — a hand-rolled header.'
+            ? 'Not h1.ea-hero__title directly inside .ea-hero__head in an .ea-hero band (PageHero.astro), nor h1.section__title inside .section__head: a hand-rolled header.'
             : !h.titled
               ? 'Inside .section__head but not h1.section__title, so it misses the treatment.'
               : 'Is h1.section__title but sits outside .section__head, so the head block does not apply.',
@@ -1814,10 +1828,10 @@ render: ${badHeads.size} page heading(s) not using the shared treatment
   console.error('  all the pages except from home page hero". There were five implementations');
   console.error('  and 26 of 43 routes rendered a flat h1, because the treatment lived in one');
   console.error('  component\'s scoped styles and the other layouts could not reach it.');
-  console.error('  It now lives in styles/headings.css. Emit the heading with PageHeader.astro,');
-  console.error('  or with Section.astro if the page is built from sections — those are the two');
-  console.error('  components that produce .section__head > h1.section__title, and using either');
-  console.error('  is the whole fix. Do NOT reimplement the gradient: this rule checks the');
+  console.error('  On design system v3 open the page with evidenced/PageHero.astro, which emits');
+  console.error('  .ea-hero > .ea-hero__head > h1.ea-hero__title styled once in evidenced.css.');
+  console.error('  The version 2 pair (PageHeader.astro or Section.astro, .section__head >');
+  console.error('  h1.section__title) still passes. Do NOT reimplement the head: this rule checks the');
   console.error('  MARKUP precisely so that a hand-rolled copy of the treatment still fails.\n');
 }
 

@@ -85,7 +85,15 @@ const VIEWPORTS = [
 /* Routes, with the furniture each is known to carry. The selectors are a
    FLOOR: if one stops matching, this gate has gone blind and says so. */
 const ROUTES = [
-  { route: '/pricing/', carries: ['#ca-nav', '.bar'] },
+  /* `.bar`, the sticky plan bar this gate was written for (A-259), was removed
+     from /pricing/ by the design system v3 rebuild (99bec296), so it is gone
+     rather than renamed and the nav is what /pricing/ docks today. The second
+     docked element the rule exists to hold is now a reading rail: /privacy/
+     carries the legal contents rail (Legal.astro .legal__toc), sticky under
+     the nav, so the "one bar on a phone" and "under 18%" rules measure a real
+     second piece of furniture again (R285-WEB-GATES-V3-01, 2026-10-22). */
+  { route: '/pricing/', carries: ['#ca-nav'] },
+  { route: '/privacy/', carries: ['#ca-nav', '.legal__toc'] },
 ];
 
 const TYPES = {

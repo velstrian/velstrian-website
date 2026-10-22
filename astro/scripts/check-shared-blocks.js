@@ -111,48 +111,43 @@ const DIST = process.env.SB_DIST || path.join(ROOT, 'dist');
  * stops being cheap. Adding the next shared block is one object here.
  */
 const BLOCKS = [
+  /* `.duty` WAS THE FIRST ENTRY AND IS RETIRED, 2026-10-22, R285-WEB-GATES-V3-01.
+     The hero proof card (DutyCard.astro, styles/duty-card.css) was drawn on
+     /crowmark and /crowmark-buyers, then on /bid/ and /buy/, and the design
+     system v3 rebuilds of both pages (15be6f2f, 80113494) stopped drawing it.
+     It rendered on 0 routes, so every rule here passed by finding nothing.
+     The component and its 21 KB stylesheet, which Base.astro still loaded on
+     every route, were deleted with the entry, and the coverage moved to the
+     block below. */
   {
-    name: 'duty',
+    name: 'close',
     /* The BEM block. Every selector containing this token is the block's. */
-    prefix: 'duty',
+    prefix: 'ea-close',
     /* The one file allowed to declare it, relative to astro/. */
-    owner: 'src/styles/duty-card.css',
-    /* The one file allowed to draw it. Reported, not enforced by rule 1 — a
-       component holds markup, not CSS rules, so rule 1 never sees it. */
-    component: 'src/components/sections/DutyCard.astro',
-    /* Below this many declared rules in the owner, the recipe has been gutted
-       and every rule below would pass on an empty page. The owner declares 24
-       as measured on 2026-08-04; the floor sits under that so that ordinary
-       editing does not trip it and a deletion does. */
-    minRules: 18,
-    /* The block must actually render somewhere. Two routes today. */
-    minRoutes: 2,
-    /* Each role is one element of the drawing, and each is entitled to exactly
-       one computed recipe across every route. */
+    owner: 'src/styles/evidenced.css',
+    component: 'src/components/evidenced/Close.astro',
+    /* The owner declared 6 on 2026-10-22. The floor sits
+       just under that, so ordinary editing does not trip it and a deletion
+       does. */
+    minRules: 5,
+    /* 37 of 48 routes on 2026-10-22: every page that ends on the sign up. */
+    minRoutes: 30,
     roles: [
-      '.duty',
-      '.duty__ghost--far',
-      '.duty__ghost--mid',
-      '.duty__face',
-      '.duty__kicker',
-      '.duty__rows',
-      '.duty__row',
-      '.duty__fig',
-      '.duty__lbl',
-      '.duty__lbl span',
-      '.duty__pip',
-      '.duty__barlbl',
-      '.duty__bar',
-      '.duty__fill',
-      '.duty__legend',
-      '.duty__legend b',
-      '.duty__legend span',
+      '.ea-close',
+      '.ea-close__panel',
+      '.ea-close__copy',
+      '.ea-close__title',
+      '.ea-close__lead',
     ],
     why:
-      'The hero proof card on /crowmark and /crowmark-buyers. It states three ' +
-      'statutory figures against the instruments that set them, so it is the one ' +
-      'artefact on either page whose correctness can be checked against a ' +
-      'published document — which is exactly why it must not exist twice.',
+      'The closing band, the one primary action most pages end on (RULE 0-U: ' +
+      'one primary action per screen). One component draws it on 37 routes, ' +
+      'so a page that restyles it locally is a second recipe for the action a ' +
+      'reader is asked to take. Chosen over the plan card, which was measured ' +
+      'first and found forked (/pricing/ draws .ea-plan on the version 2 ' +
+      '.surface card, the home page, /bid/ and /buy/ on the v3 .ea-card): that ' +
+      'is filed for the owner as a decision on the card recipe, not hidden by ' +
+      'registering a block that would fail on it.',
   },
 ];
 
@@ -266,6 +261,13 @@ const server = await serveDist(DIST, 'shared-blocks');
  * and because a permanent loop has no end state to seek to.
  */
 const MEASURE = `((roles) => {
+  /* THE V3 ENTRANCE IS SETTLED FIRST, for the same reason as the animations
+     below. A block below the fold is armed (opacity 0, a 24px rise) until it
+     is scrolled to, so one route read it armed and another read it in, and
+     the gate reported a fork in correct CSS. Marking every armed item in and
+     then finishing the transitions that starts reads every route at rest. */
+  document.querySelectorAll('[data-reveal="armed"]').forEach((e) => { e.dataset.reveal = 'in'; });
+  void document.body.offsetHeight;
   for (const a of document.getAnimations()) {
     const timing = a.effect && a.effect.getComputedTiming ? a.effect.getComputedTiming() : null;
     if (!timing) continue;
@@ -313,53 +315,18 @@ const MEASURE = `((roles) => {
     out.recipes[role] = rec.join(' | ');
   }
 
-  /* ── RULE 3: THE ARITHMETIC THE DRAWING ASSERTS ──────────────────────────
+  /* ── RULE 3: THE BLOCK HOLDS ITS WORDS ───────────────────────────────────
    *
-   * Ratios, so they hold whatever the words are. Each one is a claim the card
-   * makes out loud.
-   *
-   * READ FROM THE LAYOUT BOX, NOT FROM getBoundingClientRect, AND THE FIRST
-   * VERSION OF THIS GATE GOT IT WRONG. Above 1100px the wrapper is rotated
-   * 5deg, and a client rect is the AXIS-ALIGNED box around a rotated element:
-   * its width is w.cos + h.sin, so a plane that is genuinely inset 6% measured
-   * 9.34%, and the two planes — 46% and 52% tall — produced different rect
-   * widths from identical horizontal geometry. The gate reported a fork in
-   * correct CSS. offsetLeft and offsetWidth are pre-transform layout values and
-   * are what these percentages actually resolve against; the tilt is checked
-   * separately, from the computed transform, which is where it lives. */
-  const box = (s) => {
-    const el = document.querySelector(s);
-    return el ? { left: el.offsetLeft, width: el.offsetWidth, height: el.offsetHeight } : null;
-  };
-  const wrap = box('.duty');
-  const bar = box('.duty__bar');
-  const fill = box('.duty__fill');
-  const far = box('.duty__ghost--far');
-  const mid = box('.duty__ghost--mid');
+   * The arithmetic this rule used to assert (the 10% PPN segment, the 6% and
+   * -4% bleed, the 1100px tilt) belonged to the retired .duty drawing and went
+   * with it. What every block owes at every width is kept: the page gains no
+   * horizontal scroll, and no role's WORDS overflow their own box. */
   out.geometry = {
-    /* THE PPN 002 FLOOR, DRAWN TO SCALE. The segment is 10% of the track
-       because the weighting floor is 10 per cent. If these two ever disagree
-       the picture is contradicting the instrument the caption cites. */
-    fillRatio: bar && fill ? fill.width / bar.width : null,
-    /* THE DECORATIVE BLEED. inset-inline: 6% -4% — the planes start 6% in and
-       finish 4% out, which is the whole of the 35 / 30 / 14 px that CM-01 read
-       as content spilling. Checked so that the number stays explainable.
-       offsetLeft is measured from the offset parent, which is .duty itself
-       because the wrapper is position: relative and the planes are absolute. */
-    ghostLeft: wrap && far ? far.left / wrap.width : null,
-    ghostRight: wrap && far ? (far.left + far.width - wrap.width) / wrap.width : null,
-    ghostsAgree: far && mid ? Math.abs(far.width - mid.width) < 0.5 : null,
-    /* THE TILT, present or absent, read from the matrix rather than from the
-       stylesheet. Above 1100px the wrapper is rotated 5deg; below it the
-       rotation goes to zero so the page cannot acquire horizontal overflow. */
-    rotated: wrap ? getComputedStyle(document.querySelector('.duty')).transform !== 'none' : null,
-    /* The page must not gain a horizontal scrollbar at any width. */
     docOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-    /* The box that holds the WORDS must not overflow, whatever the planes do. */
-    faceOverflow: (() => {
-      const f = document.querySelector('.duty__face');
-      return f ? f.scrollWidth - f.clientWidth : null;
-    })(),
+    wordOverflow: roles
+      .map((r) => document.querySelector(r))
+      .filter(Boolean)
+      .reduce((m, el) => Math.max(m, el.scrollWidth - el.clientWidth), 0),
   };
   return out;
 })`;
@@ -449,29 +416,11 @@ for (const b of BLOCKS) {
 
       const g = m.geometry;
       const where = `${route} @${width}`;
-      /* 10% of the track, to within half a pixel of rounding on a ~800px bar. */
-      if (g.fillRatio === null || Math.abs(g.fillRatio - 0.1) > 0.005) {
-        geometryProblems.push(`${where}  the PPN 002 segment is ${(g.fillRatio * 100).toFixed(2)}% of its track, not 10%`);
-      }
-      if (g.ghostLeft === null || Math.abs(g.ghostLeft - 0.06) > 0.005) {
-        geometryProblems.push(`${where}  the decorative plane starts at ${(g.ghostLeft * 100).toFixed(2)}% of the wrapper, not 6%`);
-      }
-      if (g.ghostRight === null || Math.abs(g.ghostRight - 0.04) > 0.005) {
-        geometryProblems.push(`${where}  the decorative plane bleeds ${(g.ghostRight * 100).toFixed(2)}% past the wrapper, not 4%`);
-      }
-      if (g.ghostsAgree !== true) {
-        geometryProblems.push(`${where}  the two decorative planes are not the same silhouette`);
-      }
-      if (g.rotated !== (width >= 1100)) {
-        geometryProblems.push(
-          `${where}  the card is ${g.rotated ? 'tilted' : 'flat'}, and at this width it must be ${width >= 1100 ? 'tilted' : 'flat'} — below 1100px the rotation goes to zero so the page cannot acquire horizontal overflow`
-        );
-      }
       if (g.docOverflow > 0) {
         geometryProblems.push(`${where}  the page scrolls ${g.docOverflow}px horizontally`);
       }
-      if (g.faceOverflow > 0) {
-        geometryProblems.push(`${where}  ${g.faceOverflow}px of WORDS overflow the front plane`);
+      if (g.wordOverflow > 0) {
+        geometryProblems.push(`${where}  ${g.wordOverflow}px of WORDS overflow a role of .${b.prefix}`);
       }
     }
     await page.close();
@@ -522,7 +471,7 @@ for (const b of BLOCKS) {
   }
   if (!forks) console.log('                           one recipe per role at each width, no fork');
 
-  console.log(`    rule 3 — the arithmetic: ${geometryProblems.length ? geometryProblems.length + ' problem(s)' : 'the 10% segment, the 6%/-4% bleed and the 1100px tilt all hold'}`);
+  console.log(`    rule 3 — words held: ${geometryProblems.length ? geometryProblems.length + ' problem(s)' : 'no page scroll and no role overflowing its words'}`);
   for (const p of geometryProblems) {
     failed = true;
     console.error(`shared-blocks: ${p}`);

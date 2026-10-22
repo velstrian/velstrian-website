@@ -1,51 +1,26 @@
 ---
-import Band from '../evidenced/Band.astro';
+/**
+ * ResourcesHero: the /resources/ opening band, on the shared PageHero so the
+ * page title takes the one v3 heading treatment (check-render.js, one page
+ * heading treatment, R285-WEB-GATES-V3-01). It used to draw its own head
+ * block, which is the fork that rule exists to stop.
+ */
+import PageHero from '../evidenced/PageHero.astro';
 import Action from '../evidenced/Action.astro';
 import Icon from '../evidenced/Icon.astro';
 ---
 
-<Band tone="light" class="ea-hero" id="resources-hero" labelledby="resources-hero-title">
-  <div class="ea-wrap">
-    <div class="ea-head-row" data-reveal>
-      <div>
-        <p class="ea-label res-eyebrow">Hub</p>
-        <h1 class="ea-hero__title" id="resources-hero-title">Plain guides to bidding, public or private.</h1>
-        <p class="ea-lead res-hero__lead">
-          A free tool that lists what a tender asks for, short guides to winning public and private work, and a glossary that explains the words buyers use.
-        </p>
-        <div class="ea-actions">
-          <Action href="/tools/tender-compliance-matrix/">Run the free tool</Action>
-          <Action href="/blog/" variant="secondary">Read the guides</Action>
-        </div>
-        <p class="res-reassurance">
-          <Icon name="done" size={18} />
-          <span>No account, no email gate, no credit card.</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</Band>
-
-<style>
-  .res-eyebrow {
-    margin-bottom: var(--space-3);
-    color: var(--ea-accent-ink);
-  }
-
-  .res-hero__lead {
-    margin-top: var(--space-4);
-  }
-
-  .res-reassurance {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-    font-size: var(--t-ea-small);
-    color: var(--ea-muted);
-  }
-
-  .res-reassurance :global(.ea-icon) {
-    color: var(--ea-accent-ink);
-  }
-</style>
+<PageHero
+  id="resources-hero-title"
+  bandId="resources-hero"
+  label="Hub"
+  title="Plain guides to bidding, public or private."
+  lead="A free tool that lists what a tender asks for, short guides to winning public and private work, and a glossary that explains the words buyers use."
+>
+  <Action href="/tools/tender-compliance-matrix/">Run the free tool</Action>
+  <Action href="/blog/" variant="secondary">Read the guides</Action>
+  <Fragment slot="note">
+    <Icon name="done" size={18} />
+    <span>No account, no email gate, no credit card.</span>
+  </Fragment>
+</PageHero>

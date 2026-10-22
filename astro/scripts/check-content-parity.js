@@ -222,6 +222,12 @@ const ALLOWED_LOSSES = new Map([
    'Version 2 storyline: see retrieve. The fit score out of 100 and its reasons are in "Decide which ones to go for".'],
   ['/  heading: cite',
    'Version 2 storyline: see retrieve. Citation is the hero product moment, each part of the answer linked to its source document.'],
+  /* 2026-10-22, R285-WEB-GATES-V3-01: the last two, found on the first full
+     gate run after today's twelve lane commits. Both deliberate. */
+  ['/  heading: evidence',
+   'Version 2 storyline: the fifth stage of the retired five stage strip (Find, Qualify, Draft, Refuse, Evidence; qualify and refuse are recorded above). The capability is "Keep track of what you promised", the fifth capability tab on the same page, in plain words (RULE 0-U).'],
+  ['/bid/  heading: one product. two sides of the table.',
+   'Reworded to "Two products. Two sides of the table." by R285-WEB-CLAIMS-AUDIT-01 (45c6dcde, it named Velstrian Buy as its own product), then the band was retired by the /bid/ v3 rebuild (15be6f2f). The other side of the table is still on the built /bid/: the onward card "Velstrian Buy: for the other side of the table", linking /buy/.'],
 
   ['/  heading: qualify. draft. prove it.',
    'Replaced by outcome-led hero ("Better bids. Defensible evidence. Measurable delivery.") under R285-WEB-ENTERPRISE-REDESIGN-01.'],
