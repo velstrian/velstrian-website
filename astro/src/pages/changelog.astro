@@ -30,9 +30,12 @@
  * owner's call, not mine.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Band from '../components/evidenced/Band.astro';
+import Close from '../components/evidenced/Close.astro';
 import { breadcrumbs } from '../lib/schema';
+import { PRODUCT_NAME_BID } from '../lib/brand-names';
+import '../styles/evidenced.css';
 
 const title = 'Changelog | Velstrian';
 const description = 'Public release notes for Velstrian Bid. Every shipped change, in one feed.';
@@ -127,56 +130,56 @@ const fmt = (iso: string) =>
 const latest = sorted[0];
 ---
 
-<Base title={title} description={description} path="/changelog" schema={schema}>
-  <Section
-    as="h1"
-    eyebrow="Changelog · UK built"
+<Base title={title} description={description} path="/changelog" schema={schema} typeface="evidenced" headerTone="light">
+  {/* 2026-10-22, ON DESIGN SYSTEM VERSION 3 (R285-WEB-ENTERPRISE-REDESIGN-01):
+      every entry, date, tag and line is kept. The hero carries the latest
+      line, derived from the entries so it cannot disagree with the top of the
+      list. The roadmap and pricing links go to the Close and the header. */}
+  <PageHero
+    id="changelog-title"
+    bandId="changelog-hero"
+    label="Changelog"
     title="What we shipped, and when."
-    standfirst="Public release notes for Velstrian Bid. Every shipped change, in one feed."
-    id="changelog-hero"
+    lead={`Public release notes for ${PRODUCT_NAME_BID}. Every shipped change, in one feed.`}
   >
-    {/* Derived from the entries, so it cannot disagree with the top of the list
-        the way a hand-written "Latest:" line eventually would. */}
-    <p class="meta latest">
+    <p slot="after" class="latest">
       Latest: <strong>{latest.heading.split(':')[0]}, <time datetime={latest.date}>{fmt(latest.date)}</time></strong>
     </p>
-  </Section>
+  </PageHero>
 
-  <Section title="Release notes" id="changelog-entries">
-    <ol class="feed">
-      {
-        sorted.map((e) => (
-          <li class="feed__item">
-            <div class="feed__meta">
-              <time class="meta feed__date" datetime={e.date}>
-                {fmt(e.date)}
-              </time>
-              <span class="chip feed__tag">{e.tag}</span>
-            </div>
-            <div>
-              <h3 class="feed__h">{e.heading}</h3>
-              <ul class="feed__list">
-                {e.items.map((i) => (
-                  <li>{i}</li>
-                ))}
-              </ul>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-  </Section>
-
-  <Section
-    title="Ready to see what's next for Velstrian Bid?"
-    standfirst="The roadmap sets out what is being built, what is being researched, and what will not be built at all."
-    id="changelog-cta"
-  >
-    <div class="btn-row">
-      <Button href="/roadmap/">View roadmap</Button>
-      <Button href="/pricing/" variant="secondary">Pricing</Button>
+  <Band tone="light" id="changelog-entries" labelledby="changelog-entries-title">
+    <div class="ea-wrap">
+      <h2 class="ea-h2 ea-h2--centre" id="changelog-entries-title" data-reveal>Release notes</h2>
+      <ol class="feed">
+        {
+          sorted.map((e) => (
+            <li class="feed__item">
+              <div class="feed__meta">
+                <time class="ea-label feed__date" datetime={e.date}>
+                  {fmt(e.date)}
+                </time>
+                <span class="ea-chip feed__tag">{e.tag}</span>
+              </div>
+              <div>
+                <h3 class="ea-h3 feed__h">{e.heading}</h3>
+                <ul class="feed__list">
+                  {e.items.map((i) => (
+                    <li>{i}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
     </div>
-  </Section>
+  </Band>
+
+  <Close
+    title={`Ready to see what's next for ${PRODUCT_NAME_BID}?`}
+    lead="The roadmap sets out what is being built, what is being researched, and what will not be built at all."
+    primary={{ href: '/roadmap/', label: 'View roadmap' }}
+  />
 </Base>
 
 <style>
@@ -226,10 +229,6 @@ const latest = sorted[0];
 
   .feed__h {
     margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    color: var(--c-text);
   }
 
   .feed__list {

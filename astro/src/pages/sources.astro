@@ -64,8 +64,10 @@
  * NO JAVASCRIPT. Every word is in the document at first paint.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import SectionBand from '../components/evidenced/SectionBand.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Action from '../components/evidenced/Action.astro';
+import '../styles/evidenced.css';
 import { breadcrumbs } from '../lib/schema';
 
 const title = 'Sources | Every figure traced to the statute | Velstrian';
@@ -355,28 +357,25 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
 ];
 ---
 
-<Base title={title} description={description} path="/sources" schema={schema}>
-  <Section
-    as="h1"
-    eyebrow="Provenance"
+<Base title={title} description={description} path="/sources" schema={schema} typeface="evidenced" headerTone="light">
+  <PageHero
+    id="sources-hero-title"
+    bandId="sources-hero"
+    label="Provenance"
     title="Every figure, and where it comes from."
-    standfirst="The homepage shows numbers. This page shows what each one rests on: the statute, the policy note or the framework, with the date, the threshold and a link to the primary source. Nothing here is a summary of a summary."
-    id="sources-hero"
+    lead="The homepage shows numbers. This page shows what each one rests on: the statute, the policy note or the framework, with the date, the threshold and a link to the primary source. Nothing here is a summary of a summary."
   >
-    <div class="btn-row">
-      <Button href="#homepage">The homepage figures</Button>
-      <Button href="/tools/tender-compliance-matrix/" variant="secondary">
+    <div slot="after">
+    <div class="ea-actions">
+      <Action href="#homepage">The homepage figures</Action>
+      <Action href="/tools/tender-compliance-matrix/" variant="secondary">
         Run the free compliance matrix
-      </Button>
+      </Action>
     </div>
-  </Section>
+  </div>
+  </PageHero>
 
-  <Section
-    eyebrow="Figure by figure"
-    title="What the homepage shows, and what it rests on."
-    standfirst="Every numeral on the homepage appears in this table. A figure with no row here would be a defect on both pages."
-    id="homepage"
-  >
+  <SectionBand tone="light" eyebrow="Figure by figure" title="What the homepage shows, and what it rests on." standfirst="Every numeral on the homepage appears in this table. A figure with no row here would be a defect on both pages." id="homepage">
     {/* tabindex makes the scroll container keyboard reachable, which an
         overflow region otherwise is not (axe: scrollable-region-focusable), and
         a focusable region needs a name. */}
@@ -408,11 +407,11 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
         </tbody>
       </table>
     </div>
-  </Section>
+  </SectionBand>
 
   {
-    GROUPS.map((g) => (
-      <Section eyebrow={g.eyebrow} title={g.title} standfirst={g.standfirst} id={g.id}>
+    GROUPS.map((g, gi) => (
+      <SectionBand tone={gi % 2 ? 'light' : 'light-alt'} eyebrow={g.eyebrow} title={g.title} standfirst={g.standfirst} id={g.id}>
         <div class="src">
           {g.items.map((s) => (
             <article class="src__card surface surface--pad" id={s.id}>
@@ -445,16 +444,11 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
           ))}
 
         </div>
-      </Section>
+      </SectionBand>
     ))
   }
 
-  <Section
-    eyebrow="Same stages, different words"
-    title="What the four stages are called in your market."
-    standfirst="Find, Answer, Commit and Deliver are the same four moments wherever you bid. Only the vocabulary changes."
-    id="vocabulary"
-  >
+  <SectionBand tone="light" eyebrow="Same stages, different words" title="What the four stages are called in your market." standfirst="Find, Answer, Commit and Deliver are the same four moments wherever you bid. Only the vocabulary changes." id="vocabulary">
     <div class="mk">
       {
         MARKETS.map((m) => (
@@ -472,13 +466,9 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
         ))
       }
     </div>
-  </Section>
+  </SectionBand>
 
-  <Section
-    eyebrow="Scope"
-    title="What this page is, and what it is not."
-    id="scope"
-  >
+  <SectionBand tone="light-alt" eyebrow="Scope" title="What this page is, and what it is not." id="scope">
     <div class="scope">
       <p>
         The duties above are UK public sector duties, used across this site as the
@@ -501,10 +491,10 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
     </div>
 
     <div class="btn-row row--close">
-      <Button href="/bid/">See what Velstrian Bid does with this</Button>
-      <Button href="/" variant="secondary">Back to the homepage</Button>
+      <Action href="/bid/">See what Velstrian Bid does with this</Action>
+      <Action href="/" variant="secondary">Back to the homepage</Action>
     </div>
-  </Section>
+  </SectionBand>
 </Base>
 
 <style>

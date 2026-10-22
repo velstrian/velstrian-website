@@ -1,0 +1,73 @@
+---
+/**
+ * SectionBand: one titled section of a content page, on design system v3.
+ *
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7. The pages after the product
+ * pages were built from components/layout/Section.astro (eyebrow, title,
+ * standfirst, id). This takes the same props, so a page moves onto v3 by
+ * swapping the component and naming each band's tone, and its content stays
+ * exactly as it was. It draws a Band, the measure, and the v3 section head:
+ * the short label, the h2 and the lead beside it (ea-head-row), or centred
+ * above the content with `align="centre"`. No title, no head: the band is
+ * then a plain run of content (Section allowed the same).
+ *
+ * The content sits in its own wrapper under a head, so the head gap is the
+ * wrapper's margin and a page's own `margin: 0` on its list cannot cancel it.
+ *
+ * Sizes, spacing and colour are the system's (styles/evidenced.css). A page
+ * never sizes a SectionBand.
+ */
+import Band from './Band.astro';
+
+interface Props {
+  tone?: 'light' | 'light-alt' | 'dark';
+  eyebrow?: string;
+  title?: string;
+  standfirst?: string;
+  id?: string;
+  /** The heading level. h2 unless the band sits under another titled band. */
+  as?: 'h2' | 'h3';
+  align?: 'row' | 'centre';
+  class?: string;
+}
+
+const { tone = 'light', eyebrow, title, standfirst, id, as = 'h2', align = 'row', class: cls = '' } = Astro.props;
+const Heading = as;
+const headId = id && title ? `${id}-title` : undefined;
+---
+
+<Band tone={tone} id={id} labelledby={headId} class={cls}>
+  <div class="ea-wrap">
+    {
+      title &&
+        (align === 'centre' ? (
+          <div class="ea-band-head ea-band-head--centre" data-reveal>
+            {eyebrow && <p class="ea-label">{eyebrow}</p>}
+            <Heading class="ea-h2 ea-h2--centre" id={headId}>
+              {title}
+            </Heading>
+            {standfirst && <p class="ea-lead">{standfirst}</p>}
+          </div>
+        ) : (
+          <div class={standfirst ? 'ea-head-row' : 'ea-band-head'} data-reveal>
+            <div class="ea-split__head">
+              {eyebrow && <p class="ea-label">{eyebrow}</p>}
+              <Heading class="ea-h2" id={headId}>
+                {title}
+              </Heading>
+            </div>
+            {standfirst && <p class="ea-lead">{standfirst}</p>}
+          </div>
+        ))
+    }
+    {
+      title ? (
+        <div class="ea-band-body">
+          <slot />
+        </div>
+      ) : (
+        <slot />
+      )
+    }
+  </div>
+</Band>

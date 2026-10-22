@@ -2037,6 +2037,28 @@ a.ea-tcard:focus-visible {
   }
 }
 
+/* The head of a SectionBand with no lead beside it, or centred over its
+   content (evidenced/SectionBand.astro). The gap to the content is the same
+   head gap every band uses. */
+.ea-band-head {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ea-band-head--centre {
+  justify-items: center;
+  text-align: center;
+}
+
+.ea-band-head--centre .ea-lead {
+  margin-inline: auto;
+}
+
+.ea-sec .ea-band-head + *,
+.ea-sec .ea-head-row + .ea-band-body {
+  margin-top: var(--ea-head-gap);
+}
+
 /* A heading beside long-form copy: the head on the left, held in view while
    the words on the right are read, the copy at the prose measure. One column
    below 960px. For the sector context, a comparison, a policy section. */
