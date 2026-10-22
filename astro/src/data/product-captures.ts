@@ -23,6 +23,24 @@ export interface Capture {
   /** A tighter crop served below 600px, where the full crop's words would be too
    *  small to read. Same screen, same caption. */
   narrow?: { src: string; width: number; height: number };
+  /**
+   * The part of the capture to show, in the same CSS pixels as `width` and
+   * `height`, for a capture too wide to read whole (owner review 2026-10-22,
+   * R285-WEB-REVIEW-2026-10-22 item 2: the feed card drew its words a few
+   * pixels tall at 732px and was cut mid line on a phone). `wide` serves 600px
+   * and up, `phone` below it. Both crop the ONE file at `src`, so a recapture
+   * from staging swaps that file and nothing else, as long as the card keeps
+   * its layout. Each region ends where whole words end, never mid line.
+   */
+  view?: { wide: CropView; phone: CropView };
+}
+
+/** A region of a capture: left, top, width and height in CSS pixels. */
+export interface CropView {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
 }
 
 /*
@@ -52,9 +70,17 @@ const FIND_FEED: Capture = {
   src: '/Assets/product-captures/web/find-feed-card.webp',
   width: 1100,
   height: 210,
-  alt: 'A live public contract in the Velstrian Bid feed: CVG close and cleaning contract 2027 to 2029, Clyde Valley Housing Association, facilities management, Scotland, published 5 days ago, relevance 55 percent, with Open in Velstrian Bid, Find on Find a Tender and Save buttons.',
-  caption: 'A real screen from a demo account: one contract in the morning feed, with how relevant it is to you.',
-  narrow: { src: '/Assets/product-captures/web/find-feed-card-narrow.webp', width: 515, height: 210 },
+  alt: 'A live public contract in the Velstrian Bid feed: CVG close and cleaning contract 2027 to 2029, Clyde Valley Housing Association, facilities management, Scotland, published 5 days ago, with Open in Velstrian Bid, Find on Find a Tender and Save buttons.',
+  caption: 'A real screen from a demo account: one contract from the morning feed, close up.',
+  /* wide: the card from its left edge to just past "FTS" (552px), every line
+     whole, drawn about 1.3 times its app size at 732px. phone: the title, the
+     buyer, the value, sector and region and the quote (to just past "Scotland",
+     368 by 140), about 0.85 times at 309px. The relevance pill sits at the far
+     right of a 1100px card and cannot share a readable crop with the title. */
+  view: {
+    wide: { x: 0, y: 0, w: 570, h: 210 },
+    phone: { x: 0, y: 0, w: 368, h: 140 },
+  },
 };
 const ANSWER_LIST: Capture = {
   src: '/Assets/product-captures/web/answer-question-list.webp',

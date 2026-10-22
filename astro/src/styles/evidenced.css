@@ -626,6 +626,47 @@ main > .ea-sec * {
   background: var(--ea-raised);
 }
 
+/* A cropped capture (Frame with a `view`, R285-WEB-REVIEW-2026-10-22 item 2).
+   The frame takes the full screen width, the window shows the region at the
+   region's own proportions, and the one image is scaled so the region fills
+   it. Below 600px the phone region applies (the inline style sets the --w and
+   --p sets, the rules below choose, since an inline --cx would beat any media
+   query). Every number is a custom property
+   set from data/product-captures.ts. */
+.ea-stage__screen > .ea-frame--shot.ea-frame--crop {
+  width: 100%;
+}
+
+.ea-frame__crop {
+  --cx: var(--wcx);
+  --cy: var(--wcy);
+  --cw: var(--wcw);
+  --ch: var(--wch);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--cw) / var(--ch);
+}
+
+.ea-frame__crop > .ea-frame__shot {
+  position: absolute;
+  width: calc(var(--fw) / var(--cw) * 100%);
+  max-width: none;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  left: calc(var(--cx) / var(--cw) * -100%);
+  top: calc(var(--cy) / var(--ch) * -100%);
+}
+
+@media (max-width: 599px) {
+  .ea-frame__crop {
+    --cx: var(--pcx);
+    --cy: var(--pcy);
+    --cw: var(--pcw);
+    --ch: var(--pch);
+  }
+}
+
 .ea-frame__caption {
   padding: var(--space-3) var(--space-5);
   border-top: 1px solid var(--ea-rule);
@@ -1624,12 +1665,22 @@ main > .ea-sec * {
 }
 
 .ea-car[data-car='on'] .ea-car__track {
+  align-items: flex-start;
   transform: translateX(calc(var(--car-i, 0) * -100%));
   transition: transform var(--slide-dur) var(--ea-ease);
 }
 
+/* The viewport is as tall as the slide on show (--car-h, set by
+   scripts/evidenced.ts initCarousels), so the stage padding is the only space
+   around a screen. Without script the strip keeps the tallest slide. */
+.ea-car[data-car='on'] .ea-car__viewport {
+  height: var(--car-h, auto);
+  transition: height var(--slide-dur) var(--ea-ease);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ea-car[data-car='on'] .ea-car__track {
+  .ea-car[data-car='on'] .ea-car__track,
+  .ea-car[data-car='on'] .ea-car__viewport {
     transition: none;
   }
 }

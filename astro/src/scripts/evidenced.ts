@@ -280,9 +280,20 @@ export function initCarousels(): void {
     const slides = Array.from(track.children) as HTMLElement[];
     if (slides.length < 2) return;
     let i = 0;
+    /* ADAPTIVE HEIGHT (R285-WEB-REVIEW-2026-10-22 item 7). The track used to
+       take the TALLEST slide's height and centre the rest, so at 1440 the
+       "Your bids" screen (493px) sat in a 715px viewport with about 170px of
+       empty stage above and below it, and at 375 the library capture (169px)
+       had 268px each side. The viewport now takes the shown slide's height, so
+       every screen has exactly the stage padding around it at every width. */
+    const fit = () => {
+      const shown = slides[i]?.firstElementChild as HTMLElement | null;
+      if (shown) root.style.setProperty('--car-h', `${shown.getBoundingClientRect().height}px`);
+    };
     const go = (to: number) => {
       i = Math.max(0, Math.min(slides.length - 1, to));
       root.style.setProperty('--car-i', String(i));
+      fit();
       n.textContent = String(i + 1);
       slides.forEach((s, k) => {
         s.setAttribute('aria-hidden', k === i ? 'false' : 'true');
@@ -300,6 +311,11 @@ export function initCarousels(): void {
       s.setAttribute('aria-label', `${k + 1} of ${slides.length}`);
     });
     go(0);
+    /* A slide changes height when the column resizes or a lazy capture lands. */
+    const watch = new ResizeObserver(fit);
+    slides.forEach((s) => {
+      if (s.firstElementChild) watch.observe(s.firstElementChild);
+    });
     prev.addEventListener('click', () => go(i - 1));
     next.addEventListener('click', () => go(i + 1));
     root.addEventListener('keydown', (e) => {
