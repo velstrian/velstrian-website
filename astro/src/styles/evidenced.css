@@ -62,7 +62,7 @@ main > .ea-sec * {
   padding-inline: var(--ea-gutter);
 }
 
-:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3) {
+:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4) {
   margin: 0;
 }
 
@@ -115,6 +115,7 @@ main > .ea-sec * {
   line-height: 1.3;
   letter-spacing: var(--ls-ea-h3);
   color: var(--ea-ink);
+  text-wrap: balance;
 }
 
 .ea-lead {
@@ -319,8 +320,23 @@ main > .ea-sec * {
   inset: 0;
   overflow: hidden;
   border-radius: var(--stage-radius);
-  background: var(--stage-texture), var(--stage-bloom), var(--stage-gradient);
+  background: var(--stage-bloom), var(--stage-gradient);
+  /* A soft rim of light on the top edge. */
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--stage-ink) 30%, transparent);
+}
+
+/* The texture (Gemini art, R285-WEB-IMAGERY-01, --stage-texture in
+   tokens.css): its own layer so it can sit at low strength under a blend,
+   rather than covering the gradient at full strength. */
+.ea-stage__ground::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--stage-texture);
+  background-position: center;
   background-size: cover;
+  opacity: var(--stage-texture-strength);
+  mix-blend-mode: var(--stage-texture-blend);
 }
 
 /* The grain: a fine turbulence tile laid over the gradient, so the stage
@@ -340,14 +356,6 @@ main > .ea-sec * {
   z-index: 1;
 }
 
-/* A soft rim of light on the top edge. */
-.ea-stage__ground::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--stage-ink) 30%, transparent);
-}
 
 .ea-stage__screen {
   position: relative;
@@ -376,6 +384,16 @@ main > .ea-sec * {
   grid-row: 1;
 }
 
+/* One hero screen size on every page. Measured before at 1440: 510px tall on
+   the home page, 357 on /bid/ and 392 on /buy/, and on the two short ones the
+   sequence card, anchored to the bottom, rose over the title bar and covered
+   "3 quotes received". */
+@media (min-width: 960px) {
+  .ea-stage--hero .ea-stage__screen > * {
+    aspect-ratio: var(--stage-hero-ratio);
+  }
+}
+
 .ea-stage--hero .ea-stage__float {
   grid-column: 2;
   grid-row: 1;
@@ -387,25 +405,82 @@ main > .ea-sec * {
 
 /* Panel: the stage beside copy. The screen sits inset at the top, and the
    sequence card hangs off the stage's bottom right corner, below the screen
-   and over the stage edge, so it never covers the screen's own words. */
+   and over the stage edge, so it never covers the screen's own words.
+
+   ONE SIZE FOR EVERY PANEL STAGE (owner 2026-10-22: "screens under the cards
+   are in different sizes"). Measured before: five panel screens on /bid/ at
+   1440 ran 184 to 436px tall, so each stage was a different height and the
+   page read as five unrelated boxes. Now:
+   - the ground sits in the screen's own grid cell (not absolute over the
+     whole stage), so the gradient ends a fixed pad below the screen whatever
+     the sequence card's height, and the card tucks over that edge from the
+     row below;
+   - every screen keeps one aspect ratio, --stage-screen-ratio, as a MINIMUM:
+     content that needs more grows the screen rather than being cropped. */
 .ea-stage--panel {
+  --stage-pad: clamp(var(--space-6), 3vw, var(--space-10));
   display: grid;
-  padding: clamp(var(--space-6), 3vw, var(--space-10));
+  grid-template-columns: minmax(0, 1fr);
 }
 
-.ea-stage--panel.ea-stage--has-float {
-  padding-bottom: 0;
+.ea-stage--panel > .ea-stage__ground {
+  position: relative;
+  inset: auto;
+  grid-area: 1 / 1;
 }
 
-.ea-stage--panel.ea-stage--has-float .ea-stage__ground {
-  bottom: var(--space-24);
+.ea-stage--panel > .ea-stage__screen {
+  grid-area: 1 / 1;
+  margin: var(--stage-pad);
+}
+
+.ea-stage--panel.ea-stage--has-float > .ea-stage__screen {
+  margin-bottom: calc(var(--stage-pad) + var(--stage-float-tuck));
 }
 
 .ea-stage--panel .ea-stage__float {
+  grid-area: 2 / 1;
   justify-self: end;
   width: min(19rem, 72%);
-  margin-top: var(--space-5);
-  margin-right: calc(clamp(var(--space-6), 3vw, var(--space-10)) * -1 - var(--space-4));
+  margin-top: calc(var(--stage-float-tuck) * -1);
+  margin-right: calc(var(--stage-pad) * -1 - var(--space-4));
+}
+
+/* The screen box. A figure with a ratio and visible overflow grows to fit
+   taller content (the ratio is the automatic minimum), and the window fills
+   it, so the caption always sits on the screen's bottom edge. */
+.ea-stage--panel .ea-stage__screen > *,
+.ea-stage--hero .ea-stage__screen > * {
+  display: flex;
+  flex-direction: column;
+}
+
+.ea-stage--panel .ea-stage__screen > * {
+  aspect-ratio: var(--stage-screen-ratio);
+}
+
+.ea-stage__screen .ea-frame__window {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.ea-stage__screen .ea-frame__body,
+.ea-stage__screen .ea-frame__window > picture {
+  flex: 1 1 auto;
+}
+
+/* A real capture keeps its own proportions inside the box, centred on the
+   app's dark ground, never stretched and never cropped. */
+.ea-stage__screen .ea-frame__window > picture {
+  display: grid;
+  place-items: center;
+}
+
+/* One cell for every child: a <source> is a grid item too, and as a second
+   row it pushed the image 72px below the centre (measured). */
+.ea-stage__screen .ea-frame__window > picture > * {
+  grid-area: 1 / 1;
 }
 
 /* Centre: one screen centred on the stage. */
@@ -414,16 +489,26 @@ main > .ea-sec * {
 }
 
 /* ── Product screen ───────────────────────────────────────────────────────── */
+/* The window's edge is lit from the top: a 1px gradient border, light at the
+   top fading to a darker hairline at the foot, drawn as a border-box layer
+   under the padding-box fill. Product screens only. A hoverable card (.ea-card,
+   .surface, the plan cards) keeps its plain hairline, because the calm hover
+   contract (check-sheen.js) lets a card's hover change its edge COLOUR and
+   nothing else, and a background image edge would break it. */
 .ea-frame__window {
+  --frame-fill: var(--ea-raised);
   overflow: hidden;
+  border: 1px solid transparent;
   border-radius: var(--ea-radius-frame);
-  background: var(--ea-raised);
+  background:
+    linear-gradient(var(--frame-fill), var(--frame-fill)) padding-box,
+    linear-gradient(to bottom, var(--frame-edge-top), var(--frame-edge-bottom)) border-box;
   color: var(--ea-ink);
-  box-shadow: var(--elev-raised), 0 0 0 1px var(--ea-rule);
+  box-shadow: var(--elev-raised);
 }
 
 .ea-stage--hero .ea-frame__window {
-  box-shadow: var(--elev-floating), 0 0 0 1px var(--ea-rule);
+  box-shadow: var(--elev-floating);
 }
 
 .ea-frame__bar {
@@ -461,7 +546,7 @@ main > .ea-sec * {
    so a portrait crop letterboxes into it, and the caption keeps the light
    footer. Portrait crops keep their own width, never stretched. */
 .ea-frame--shot .ea-frame__window {
-  background: var(--ground-dark);
+  --frame-fill: var(--ground-dark);
 }
 
 .ea-frame__shot {
@@ -878,10 +963,19 @@ main > .ea-sec * {
   margin-top: var(--ea-head-gap);
 }
 
+/* The row is the size container, and every figure is sized from ONE column
+   width computed from it, so all figures in a row are exactly one size and
+   none wraps (measured before: "Human score" broke onto two lines beside
+   "£299/mo" on one, at 1440 on /buy/). Sizing from each column's own box
+   was measured 0.14px apart, because the last column carries one more
+   hairline. --facts-cols and --facts-pad change together at each width. */
 .ea-facts__cols {
+  --facts-cols: var(--facts-n, 4);
+  --facts-pad: var(--space-6);
   display: grid;
-  grid-template-columns: repeat(var(--facts-n, 4), minmax(0, 1fr));
+  grid-template-columns: repeat(var(--facts-cols), minmax(0, 1fr));
   border-block: 1px solid var(--ea-rule);
+  container-type: inline-size;
 }
 
 .ea-facts__col {
@@ -889,7 +983,7 @@ main > .ea-sec * {
   align-content: start;
   gap: var(--space-2);
   min-height: 15rem;
-  padding: var(--space-6);
+  padding: var(--facts-pad);
   border-inline-start: 1px solid var(--ea-rule);
 }
 
@@ -903,7 +997,8 @@ main > .ea-sec * {
 
 .ea-facts__value {
   margin-top: var(--space-12);
-  font-size: var(--t-v3-stat);
+  font-size: min(var(--t-v3-stat), (100cqi / var(--facts-cols) - var(--facts-pad) * 2) * var(--t-v3-stat-fit-share));
+  white-space: nowrap;
   font-weight: var(--t-w-ea-strong);
   line-height: 1.05;
   letter-spacing: var(--ls-v3-h2);
@@ -938,9 +1033,42 @@ main > .ea-sec * {
 }
 
 /* ══ PANEL: copy beside one product stage ══════════════════════════════════ */
+/* A band's opening (a heading, or a heading row) stands one head gap above
+   what follows it, wherever the opening sits. Written for direct children of
+   .ea-wrap only, it missed a heading row nested in a sub block (the "Two ways
+   to buy" plans on /buy/ sat 0px under their heading). */
 .ea-sec > .ea-wrap > .ea-h2 + *,
-.ea-sec > .ea-wrap > .ea-head-row + * {
+.ea-sec .ea-head-row + * {
   margin-top: var(--ea-head-gap);
+}
+
+/* ONE SECTION RHYTHM. Every band pads --ea-sec-y top and bottom. Two bands of
+   the same temperature side by side read as ONE band, so the second drops
+   its top pad and the gap between them is one pad, not two (measured on
+   /buy/: the boundary and the steps, both dark, stood 269px apart against
+   134px everywhere else). */
+.ea-sec[data-band='dark'] + .ea-sec[data-band='dark'],
+.ea-sec[data-band='light'] + .ea-sec[data-band='light'],
+.ea-sec[data-band='light-alt'] + .ea-sec[data-band='light-alt'] {
+  padding-top: 0;
+}
+
+/* Feature rows, one per capability, alternating sides on a wide screen so the
+   eye walks down the page (/bid/ and /buy/). Below 960px every panel is one
+   column, copy first, and the order is left alone. */
+.ea-panel--row + .ea-panel--row {
+  margin-top: var(--ea-head-gap);
+}
+
+@media (min-width: 960px) {
+  /* Two classes, so it outranks .ea-panel's own columns further down. */
+  .ea-panel.ea-panel--flip {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .ea-panel--flip > .ea-panel__copy {
+    order: 2;
+  }
 }
 
 .ea-switch {
@@ -971,6 +1099,7 @@ main > .ea-sec * {
   font-size: var(--t-v3-lead);
   line-height: 1.55;
   color: var(--ea-sub);
+  text-wrap: pretty;
 }
 
 .ea-panel__copy .ea-link {
@@ -1642,6 +1771,7 @@ main > .ea-sec * {
 
 .ea-app-qs li {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-2) var(--space-3);
@@ -1741,11 +1871,25 @@ main > .ea-sec * {
   align-items: stretch;
 }
 
+/* Every card shares the grid's rows (subgrid), so a name, a price, the
+   allowance, the description and the button each sit on one line across the
+   row whatever each card's text length. Measured before on /buy/: the two
+   buttons 56px apart. Six rows, seven when any card in the grid carries a
+   link under its button. */
 .ea-plan {
   display: grid;
-  grid-template-rows: auto auto auto auto 1fr auto;
+  grid-row: span 6;
+  grid-template-rows: subgrid;
   gap: var(--space-3);
   padding: var(--space-8);
+}
+
+.ea-plans__grid:has(.ea-plan__more) > .ea-plan {
+  grid-row: span 7;
+}
+
+.ea-plan > .ea-btn {
+  align-self: end;
 }
 
 .ea-plan--rec {
@@ -1821,6 +1965,16 @@ main > .ea-sec * {
   text-align: center;
 }
 
+/* Two plans sit centred at two thirds of the row, each the width a card has
+   in a row of three, never two stretched halves. */
+@media (min-width: 1100px) {
+  .ea-plans__grid:has(> :last-child:nth-child(2)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: calc((100% - var(--space-5) * 2) / 3 * 2 + var(--space-5));
+    margin-inline: auto;
+  }
+}
+
 /* ══ FAQ (light) ═══════════════════════════════════════════════════════════ */
 .ea-faq__wrap {
   max-width: calc(56rem + var(--ea-gutter) * 2);
@@ -1875,9 +2029,21 @@ main > .ea-sec * {
   overflow: hidden;
   padding: clamp(var(--space-10), 5vw, 5.5rem) clamp(var(--space-6), 5vw, 5rem);
   border-radius: var(--stage-radius);
-  background: var(--stage-texture), var(--stage-bloom), var(--stage-gradient);
+  background: var(--stage-bloom), var(--stage-gradient);
   color: var(--ea-ink);
   box-shadow: var(--elev-floating);
+}
+
+.ea-close__panel::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: var(--close-texture);
+  background-position: center;
+  background-size: cover;
+  opacity: var(--stage-texture-strength);
+  mix-blend-mode: var(--stage-texture-blend);
 }
 
 .ea-close__panel::after {
@@ -1964,7 +2130,7 @@ main > .ea-sec * {
 /* ══ Narrow widths ═════════════════════════════════════════════════════════ */
 @media (max-width: 1099px) {
   .ea-facts__cols {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    --facts-cols: 2;
   }
 
   .ea-facts__col:nth-child(2n) {
@@ -2052,9 +2218,19 @@ main > .ea-sec * {
     text-align: center;
   }
 
+  .ea-facts__cols {
+    --facts-cols: 1;
+    --facts-pad: var(--space-4);
+  }
+
   .ea-facts__col {
     min-height: 0;
-    padding: var(--space-5) var(--space-4);
+    padding: var(--space-5) var(--facts-pad);
+    border-inline-end: 1px solid var(--ea-rule);
+  }
+
+  .ea-facts__col + .ea-facts__col {
+    border-top: 1px solid var(--ea-rule);
   }
 
   .ea-facts__value {
@@ -2071,7 +2247,8 @@ main > .ea-sec * {
   }
 
   .ea-stage--panel {
-    padding: var(--space-4);
+    --stage-pad: var(--space-4);
+    --stage-screen-ratio: var(--stage-screen-ratio-narrow);
   }
 
   .ea-stage--panel .ea-stage__float {

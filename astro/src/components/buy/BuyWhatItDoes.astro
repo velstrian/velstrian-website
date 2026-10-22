@@ -31,7 +31,7 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
     </div>
 
     {/* 1. Write a clear request */}
-    <div class="ea-panel" data-reveal>
+    <div class="ea-panel ea-panel--row" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Write a clear request</h3>
         <p>
@@ -60,7 +60,7 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
     </div>
 
     {/* 2. Collect the replies in one place */}
-    <div class="ea-panel buy-flip" data-reveal>
+    <div class="ea-panel ea-panel--row ea-panel--flip" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Collect the replies in one place</h3>
         <p>
@@ -89,7 +89,7 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
     </div>
 
     {/* 3. Read every reply side by side */}
-    <div class="ea-panel" data-reveal>
+    <div class="ea-panel ea-panel--row" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Read every reply side by side</h3>
         <p>
@@ -117,7 +117,7 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
     </div>
 
     {/* 4. See what each supplier can back up */}
-    <div class="ea-panel buy-flip" data-reveal>
+    <div class="ea-panel ea-panel--row ea-panel--flip" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">See what each supplier can back up</h3>
         <p>
@@ -145,7 +145,7 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
     </div>
 
     {/* 5. Record your decision and why */}
-    <div class="ea-panel" data-reveal>
+    <div class="ea-panel ea-panel--row" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Record your decision and why</h3>
         <p>
@@ -173,19 +173,3 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
     </div>
   </div>
 </Band>
-
-<style>
-  @media (min-width: 960px) {
-    .buy-flip {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    }
-
-    .buy-flip > .ea-panel__copy {
-      order: 2;
-    }
-  }
-
-  .ea-panel + .ea-panel {
-    margin-top: var(--ea-head-gap);
-  }
-</style>

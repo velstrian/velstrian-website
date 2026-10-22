@@ -19,7 +19,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
 <Band tone="light" class="ea-proof" labelledby="buy-trust-title" id="trust-and-pricing">
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
-      <h2 class="ea-h2 ea-h2--centre" id="buy-trust-title">Protected data, human scoring, and transparent pricing.</h2>
+      <h2 class="ea-h2" id="buy-trust-title">Protected data, human scoring, and transparent pricing.</h2>
       <p class="ea-lead">
         Your procurement data is protected under UK and EU data protection laws. Evaluations are scored by your team, and prices are published up front.
       </p>
@@ -38,7 +38,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
 
     <div class="buy-plans-wrap" data-reveal>
       <div class="ea-head-row">
-        <h3 class="ea-h2 ea-h2--centre">Two ways to buy.</h3>
+        <h3 class="ea-h2">Two ways to buy.</h3>
         <p class="ea-lead">Both are listed prices. Start either plan today by card, or pay for Portfolio by invoice.</p>
       </div>
 
@@ -56,9 +56,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
             {BUYER_PRO.seats} users, {n(BUYER_PRO.credits)} AI credits a month and {BUYER_PRO.guestEvaluators} guest evaluators.
           </p>
           <p class="ea-plan__gets">{BUYER_PRO.includes}</p>
-          <div class="buy-plan__action">
-            <Action href={startHref(BUYER_PRO.planKey)}>{BUYER_PRO.cta}</Action>
-          </div>
+          <Action href={startHref(BUYER_PRO.planKey)}>{BUYER_PRO.cta}</Action>
         </li>
 
         <li class="ea-card ea-plan ea-plan--rec" data-reveal>
@@ -75,9 +73,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
             {BUYER_PORTFOLIO.seats} users included, more by arrangement, {n(BUYER_PORTFOLIO.credits)} AI credits a month and {BUYER_PORTFOLIO.guestEvaluators} guest evaluators.
           </p>
           <p class="ea-plan__gets">{BUYER_PORTFOLIO.includes}</p>
-          <div class="buy-plan__action">
-            <Action href={startHref(BUYER_PORTFOLIO.planKey)} variant="primary">{BUYER_PORTFOLIO.cta}</Action>
-          </div>
+          <Action href={startHref(BUYER_PORTFOLIO.planKey)} variant="primary">{BUYER_PORTFOLIO.cta}</Action>
           {BUYER_PORTFOLIO.secondary && (
             <p class="ea-plan__more">
               <a class="ea-link" href={BUYER_PORTFOLIO.secondary.href}>{BUYER_PORTFOLIO.secondary.label}</a>
@@ -93,10 +89,5 @@ const n = (v: number) => v.toLocaleString('en-GB');
 <style>
   .buy-plans-wrap {
     margin-top: var(--ea-head-gap);
-  }
-
-  .buy-plan__action {
-    margin-top: auto;
-    padding-top: var(--space-4);
   }
 </style>

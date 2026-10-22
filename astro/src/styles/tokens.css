@@ -3545,10 +3545,44 @@
     radial-gradient(ellipse 45% 55% at 100% 100%, color-mix(in srgb, var(--c-violet) 50%, transparent), transparent 70%);
   /* Fine grain, an SVG turbulence tile. img-src allows data: (_headers). */
   --stage-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  /* The optional texture slot. Set it to
-     url(/Assets/images/r285-gemini/stage-texture.png) once that art is
-     approved, and every stage carries it. */
-  --stage-texture: none;
+  /* The texture slot, filled with the approved Gemini art
+     (R285-WEB-IMAGERY-01, commit 57dcffa5): AVIF then WebP, 1600 wide at 1x
+     and 2400 wide at 2x. It is laid on its own layer over the gradient
+     (evidenced.css .ea-stage__ground::before and .ea-close__panel::before) at
+     --stage-texture-strength under --stage-texture-blend, so it adds depth
+     without lifting the light areas of the art under white text. White text
+     on the stage and the close panel was measured at 4.5:1 or better with
+     it. --stage-texture: none takes it off every stage. */
+  --stage-texture: image-set(
+    url(/Assets/images/r285-gemini/stage-texture-1600.avif) type('image/avif') 1x,
+    url(/Assets/images/r285-gemini/stage-texture-2400.avif) type('image/avif') 2x,
+    url(/Assets/images/r285-gemini/stage-texture-1600.webp) type('image/webp') 1x,
+    url(/Assets/images/r285-gemini/stage-texture-2400.webp) type('image/webp') 2x
+  );
+  --close-texture: image-set(
+    url(/Assets/images/r285-gemini/close-band-texture-1600.avif) type('image/avif') 1x,
+    url(/Assets/images/r285-gemini/close-band-texture-2400.avif) type('image/avif') 2x,
+    url(/Assets/images/r285-gemini/close-band-texture-1600.webp) type('image/webp') 1x,
+    url(/Assets/images/r285-gemini/close-band-texture-2400.webp) type('image/webp') 2x
+  );
+  --stage-texture-strength: 0.35;
+  --stage-texture-blend: soft-light;
+
+  /* ONE PRODUCT SCREEN SIZE (owner 2026-10-22: "screens under the cards are
+     in different sizes"). Every screen on a panel stage keeps this ratio as
+     a minimum, and every hero screen keeps the hero ratio from 960px up. A
+     screen whose content needs more grows, never crops. The narrow ratio
+     applies below 600px, where the screen is the full column. The tuck is
+     how far a sequence card overlaps the stage's bottom edge. */
+  --stage-screen-ratio: 4 / 3;
+  --stage-screen-ratio-narrow: 20 / 27;
+  --stage-hero-ratio: 5 / 3;
+  --stage-float-tuck: var(--space-12);
+
+  /* A product window's edge, lit from the top (evidenced.css .ea-frame__window):
+     a light rim fading to an ink hairline at the foot. */
+  --frame-edge-top: color-mix(in srgb, var(--c-white) 92%, transparent);
+  --frame-edge-bottom: color-mix(in srgb, var(--c-ink-0) 16%, transparent);
   /* The hero's moving light (owner point 6, 2026-10-22: "something like
      stripe has ... with motion effect", and later the same day "check hero
      section i did not find any changes"). It began INSIDE the hero stage,
@@ -3591,6 +3625,14 @@
   --ls-v3-h2: -0.025em;
   --t-v3-lead: clamp(1.125rem, 1.02rem + 0.35vw, 1.25rem);
   --t-v3-stat: clamp(2.25rem, 1.7rem + 1.6vw, 3rem);
+  /* A figure in a row of figures (a facts band) is the stat size, capped at
+     this share of one column's text width (evidenced.css .ea-facts__value),
+     so every figure in one row is exactly one size and the longest, "Human
+     score", still fits on one line. The cap itself is written where it is
+     used, because it reads --facts-cols and --facts-pad from the row, and a
+     custom property declared here would resolve them at :root, where they do
+     not exist (measured: the whole declaration fell back to 17px). */
+  --t-v3-stat-fit-share: 0.15;
 
   /* Buttons and cards, version 3: 6px button radius, 48px tall. */
   --v3-radius-btn: 6px;

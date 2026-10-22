@@ -65,7 +65,7 @@ const got = dims.reduce((a, d) => a + d.got, 0);
       </p>
     </div>
 
-    <div class="ea-panel" data-reveal>
+    <div class="ea-panel ea-panel--row" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Find contracts that suit you</h3>
         <p>
@@ -93,7 +93,7 @@ const got = dims.reduce((a, d) => a + d.got, 0);
       </Stage>
     </div>
 
-    <div class="ea-panel bid-flip" data-reveal>
+    <div class="ea-panel ea-panel--row ea-panel--flip" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Decide which ones to go for</h3>
         <p>
@@ -134,7 +134,7 @@ const got = dims.reduce((a, d) => a + d.got, 0);
       </Stage>
     </div>
 
-    <div class="ea-panel" data-reveal>
+    <div class="ea-panel ea-panel--row" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Answer every question from your own documents</h3>
         <p>
@@ -161,7 +161,7 @@ const got = dims.reduce((a, d) => a + d.got, 0);
       </Stage>
     </div>
 
-    <div class="ea-panel bid-flip" data-reveal>
+    <div class="ea-panel ea-panel--row ea-panel--flip" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Get a colleague to check it</h3>
         <p>
@@ -181,7 +181,7 @@ const got = dims.reduce((a, d) => a + d.got, 0);
       </Stage>
     </div>
 
-    <div class="ea-panel" data-reveal>
+    <div class="ea-panel ea-panel--row" data-reveal>
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Keep track of what you promised after you win</h3>
         <p>
@@ -210,22 +210,3 @@ const got = dims.reduce((a, d) => a + d.got, 0);
     </div>
   </div>
 </Band>
-
-<style>
-  /* The rows alternate sides on a wide screen so the eye walks down the page.
-     Below 960px every .ea-panel is already one column (styles/evidenced.css),
-     copy first, and the order is left alone. */
-  @media (min-width: 960px) {
-    .bid-flip {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    }
-
-    .bid-flip > .ea-panel__copy {
-      order: 2;
-    }
-  }
-
-  .ea-panel + .ea-panel {
-    margin-top: var(--ea-head-gap);
-  }
-</style>
