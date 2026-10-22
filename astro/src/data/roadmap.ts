@@ -63,17 +63,17 @@ export const PHASES: Phase[] = [
      * below resolves to a route on the platform's origin/main, which is the tip
      * Vercel reports READY in production.
      */
-    lead: 'Velstrian Bid and Velstrian Buy are in production today: one for suppliers, one for buyers. It reads the source regulation directly, so the output you stand behind traces back to a rule rather than to a model.',
+    lead: 'Available now: tools to find public and private contracts, draft answers from your past bids, and manage contract delivery.',
     items: [
       {
         title: 'Velstrian Bid',
-        body: 'Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED refreshed daily, with prior information notices and framework or dynamic market expiry dates so a pipeline is visible before a tender opens. Upload the whole tender pack and get it briefed rather than read cover to cover. Drafting is grounded in your own submitted bids and answer library, with version history, diff, restore and track changes on every answer. Configurable review gates take bid or no bid as gate zero. Deterministic social-value calculation, post-award delivery evidence, and Procurement Act 2023 s.52 and s.71 KPI checks.',
+        body: 'Find contracts across Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED refreshed daily, including advance notices and framework expiry dates. Upload full tender packs for an instant brief. Draft answers grounded in your previous bids and answer library, with version history, diff comparison, and track changes. Set review checkpoints, starting with a bid or no-bid decision. Calculate social value scores in code, record post-award delivery evidence, and run key performance indicator (KPI) checks under Procurement Act 2023 sections 52 and 71.',
         href: '/bid/',
       },
       {
         title: 'Velstrian Buy',
         body:
-          "Build and publish requirements against a deterministic social value rubric, then locate the evidence for each one across every response received, quoted verbatim or dropped. Velstrian Buy organises. Your evaluation panel scores. After award it keeps going: the commitments made in the winning bid become a tracked supplier profile, with scorecards, periodic review sessions, a risk radar, concerns and their corrective actions, a benefit and value realisation tracker, and a due diligence workspace.",
+          'Publish tender requirements with clear scoring rules, then automatically find and compare evidence across every supplier submission. Velstrian Buy organises the responses so your panel can score them easily. After award, track supplier delivery with scorecards, regular review meetings, risk alerts, corrective actions, and a value tracking workspace.',
         href: '/buy/',
       },
       /* R285-WEB-CLAIMS-AUDIT-01, D252 (5): the AI Compliance Advisor is a
@@ -82,7 +82,7 @@ export const PHASES: Phase[] = [
          (api/app/routers/advisor.py). Described only by what that code does. */
       {
         title: 'AI Compliance Advisor',
-        body: 'Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, with your AI data consent, from your own bids and social value commitments, and you can point it at one bid to include its confirmed requirements. Only regulatory references matched against its citation corpus are shown, and any money figure or percentage it cannot trace to your records, your question or the brief is flagged for you to check.',
+        body: 'Ask procurement or social value questions in everyday language. The Advisor answers from official regulations and, with your consent, your own bids and commitments. Every citation links to official guidance, and any number or percentage not verified in your files or the brief is flagged for you to check.',
         href: '/bid/#features',
       },
     ],
@@ -107,17 +107,17 @@ export const PHASES: Phase[] = [
     name: 'Phase 2',
     status: 'live',
     date: 'Q3 2026',
-    lead: 'Delivered in Q3 2026. Security and access work that builds on Velstrian Bid.',
+    lead: 'Delivered security updates: faster biometric sign in and deeper document-grounded answers.',
     items: [
       {
-        title: 'Passkeys (WebAuthn)',
-        body: 'Windows Hello and Touch ID in place of a typed code, as an alternative second factor on your Velstrian Bid account. One passkey covers the app and the portal, and you can list and revoke your credentials in settings.',
+        title: 'Passkeys (fingerprint and face sign in)',
+        body: 'Use Windows Hello or Touch ID instead of typing a two-factor code to sign in to your Velstrian Bid account. One passkey covers the app and customer portal, and you can view or remove saved devices in settings at any time.',
       },
       {
-        title: 'Deeper grounded auto-fill (public sector)',
+        title: 'Deeper grounded drafting from buyer documents',
         /* R285-WEB-CLAIMS-AUDIT-01 R4: the AI buyer priority extractor is off in
            production, so the priorities come from documents the bidder attaches. */
-        body: "Velstrian Bid's grounded drafting reads the buyer's priorities from the strategy documents you attach, alongside your uploaded evidence, and proposes social value narratives that cite what they came from for you to approve or edit. The model proposes, you decide.",
+        body: 'Velstrian Bid reads buyer priorities from the tender and strategy documents you upload alongside your company evidence. It suggests social value answers citing the exact passages used, so you can review, edit, and approve every sentence before submission.',
       },
     ],
   },
@@ -130,11 +130,11 @@ export const PHASES: Phase[] = [
      */
     name: 'Phase 3',
     status: 'research',
-    lead: 'Early research, anchored to live regulation rather than speculation.',
+    lead: 'Early research into automated alerts for new procurement regulations.',
     items: [
       {
-        title: 'Regulatory Monitor (public sector)',
-        body: 'A live UK public procurement regulatory change feed. Material updates to PPN 026 and the Procurement Act 2023 flow straight into the Velstrian Bid dashboard, so you act, not just read.',
+        title: 'Live procurement regulatory updates',
+        body: 'A live feed for changes to UK public procurement rules. Important updates to Procurement Policy Note (PPN) 026 and the Procurement Act 2023 will alert you directly in your Velstrian Bid dashboard, showing what changed and what actions your bids need.',
       },
     ],
   },
@@ -148,7 +148,7 @@ export const PHASES: Phase[] = [
      */
     name: 'Later',
     status: 'research',
-    lead: 'On the radar beyond the next twelve months.',
+    lead: 'Longer-term research planned beyond the next twelve months.',
     items: [
       {
         /*
@@ -169,8 +169,8 @@ export const PHASES: Phase[] = [
          *
          * OIDC genuinely is not built. That is the part that stays here.
          */
-        title: 'Enterprise OIDC connectors',
-        body: 'SAML 2.0 single sign-on, with SCIM provisioning and DNS domain verification, is live today and covers any provider that speaks SAML. This adds OIDC as a second protocol for the identity providers that prefer it.',
+        title: 'Enterprise single sign on: OpenID Connect (OIDC)',
+        body: 'Single sign on using SAML 2.0, automated user provisioning (SCIM), and custom domain verification are live today for all major identity providers. This adds OpenID Connect (OIDC) as an additional standard for organisations that use it for team logins.',
       },
     ],
   },
@@ -180,20 +180,20 @@ export const PHASES: Phase[] = [
 export const AI_LIVE: { heading: string; body: string; link?: { label: string; href: string } }[] = [
   {
     heading: 'Deterministic engine, then narrative',
-    body: 'The numbers come from code, not a model. Social-value scoring and Procurement Act 2023 s.52 and s.71 KPI checks are computed deterministically. The language model is the last step: it turns that computed result into a readable narrative or report draft. It never invents the figure.',
+    body: 'The calculations come from precise code, not an AI guess. Social value scoring and Procurement Act 2023 key performance indicator (KPI) checks under sections 52 and 71 are calculated by code first. The language model only drafts clear sentences explaining those verified figures, and never invents a number.',
   },
   {
     heading: 'Two models, two jobs',
-    body: "Customer-facing drafting (Velstrian Bid bid narratives) runs on Google Gemini. Heavier reasoning and analysis tasks run on Anthropic's Claude. Both are data sub-processors and process the text outside the EU under contract. The full list is on the",
+    body: 'Customer-facing drafting in Velstrian Bid runs on Google Gemini. In-depth reasoning and analysis tasks run on Anthropic Claude. Both are data sub-processors that handle task text under secure contract outside the EU. The full list is on the',
     link: { label: 'privacy page', href: '/privacy/' },
   },
   {
     heading: 'Grounded in the source law',
-    body: 'Velstrian Bid reads the actual regulation it serves: PPN 026, the next edition of the Social Value Model, published 5 August 2026 and applying to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and the Procurement Act 2023 sections 52 and 71 for delivery KPIs. Outputs cite the named instrument so the claim is auditable rather than asserted.',
+    body: 'Velstrian Bid checks the real legislation behind each tender: Procurement Policy Note (PPN) 026, the updated Social Value Model applying to central government procurements from 1 January 2027 at 1 million pounds including VAT or above, and the Procurement Act 2023 for delivery performance checks. Drafts cite the exact clause so every claim is verifiable.',
   },
   {
     heading: 'A human signs every output',
-    body: 'Under Article 22 UK GDPR, Velstrian makes no solely-automated decision with legal effect about anyone. AI drafts are advisory. You review, edit and approve before a single word reaches a bid, a report or a buyer. The model proposes. You decide.',
+    body: 'Under UK data protection law (Article 22 UK GDPR), Velstrian never makes automated decisions with legal effect. AI drafts are suggestions. You review, edit, and approve every word before anything goes into a bid, report, or customer submission. The system proposes, and your team decides.',
   },
 ];
 
@@ -209,20 +209,20 @@ export const AI_NEXT: { status: PhaseStatus; heading: string; body: string }[] =
      * Whichever way that resolves, it cannot stay split.
      */
     status: 'live',
-    heading: 'Deeper grounded auto-fill (public sector)',
-    body: "Shipped. Velstrian Bid drafts grounded bid answers from your own submitted bids and answer library, and now reads the buyer's priorities from the strategy documents you attach, alongside your uploaded evidence, to propose social value narratives, each suggestion citing what it drew on for you to approve or edit.",
+    heading: 'Deeper grounded drafting from buyer documents',
+    body: 'Shipped. Velstrian Bid drafts answers using your past bids and approved answer library. It also reads buyer priorities from attached strategy documents and tender packs to suggest social value answers, citing the exact source text for your approval.',
   },
   {
     /* R285-WEB-CLAIMS-AUDIT-01, D252 (5). Was "Tender reasoning copilot",
        research stage. Released as the AI Compliance Advisor. */
     status: 'live',
     heading: 'AI Compliance Advisor',
-    body: 'Shipped. Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, with your AI data consent, from your own bids and social value commitments, and you can point it at one bid to include its confirmed requirements. Only regulatory references matched against its citation corpus are shown, and any money figure or percentage it cannot trace to your records, your question or the brief is flagged for you to check.',
+    body: 'Shipped. Ask procurement and social value questions in plain words. The Advisor answers from official regulations and, with your permission, from your past bids. Every citation is matched to official guidance, and any unverified figure is flagged for you to check.',
   },
   {
     status: 'research',
-    heading: 'Regulatory monitor feed (public sector)',
-    body: 'A live UK public procurement regulatory change feed so material updates to PPN 026 and the Procurement Act 2023 surface in the Velstrian Bid dashboard, with the model summarising what changed and what it means for your existing work. Research stage only.',
+    heading: 'Live procurement regulatory updates',
+    body: 'A live feed for changes to UK public procurement rules. Key updates to PPN 026 and the Procurement Act 2023 will appear in your Velstrian Bid dashboard with a clear summary of what changed and what it means for your bids. In research.',
   },
 ];
 
@@ -231,33 +231,33 @@ export const METHOD: { n: string; heading: string; body: string }[] = [
   {
     n: '01',
     heading: 'Regulatory deadlines',
-    body: 'A statutory instrument with a date attached (PPN 026 applying from 1 January 2027, Procurement Act 2023 commencement) earns a slot before anything else.',
+    body: 'Official legislation with fixed dates (such as PPN 026 applying from 1 January 2027 and Procurement Act 2023 commencement) is prioritised first.',
   },
   {
     n: '02',
-    heading: 'Demand-led',
-    body: 'When the same need comes up repeatedly from the teams we talk to, it moves up the plan. We prioritised post-award delivery evidence because Procurement Act 2023 KPI checks were the most-requested capability adjacent to our social value work.',
+    heading: 'Customer demand',
+    body: 'When the same need comes up repeatedly from bidding teams, it moves up our plan. We prioritised post-award delivery evidence because Procurement Act 2023 KPI checks were the most requested capability beside our social value work.',
   },
   {
     n: '03',
-    heading: 'Adjacency to a live product',
-    body: 'Post-award delivery evidence sits next to bid drafting because the same team that wins the tender also has to prove KPI performance under Procurement Act 2023 sections 52 and 71.',
+    heading: 'Connecting the bid lifecycle',
+    body: 'Post-award delivery evidence sits directly beside bid drafting because the same team that wins a contract must prove delivery performance under Procurement Act 2023 sections 52 and 71.',
   },
   {
     n: '04',
-    heading: 'Where the edge sits',
-    body: 'Velstrian does not try to out-feature every bid-writing tool on the market. The edge is grounded, statute-cited accuracy.',
+    heading: 'Verifiable accuracy over guesswork',
+    body: 'Velstrian focuses on grounded, regulation-cited accuracy rather than adding generic writing tools that make up answers.',
   },
 ];
 
 /** What we will not build. Scope discipline, stated rather than implied. */
 export const WONT_BUILD: { heading: string; body: string }[] = [
   {
-    heading: 'EPR / WEEE / Packaging Tax',
-    body: 'These are real regulations but adjacent to a buyer Velstrian does not currently serve. Maybe in 2027, but not on the current roadmap.',
+    heading: 'Regulations outside procurement',
+    body: 'Rules like Extended Producer Responsibility (EPR) or Packaging Tax are important, but fall outside the bidding and procurement work Velstrian focuses on.',
   },
   {
-    heading: 'Hallucinating AI copilots',
-    body: 'Every AI feature in the platform has a deterministic engine underneath. Narrative generation is the last step, never the source.',
+    heading: 'Unverified AI text generation',
+    body: 'Every AI feature in Velstrian is anchored to verified code, past documents, and official regulations. AI drafts words on top of verified data and never invents figures.',
   },
 ];

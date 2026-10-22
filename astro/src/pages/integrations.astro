@@ -104,17 +104,17 @@ const schema = [
 ];
 
 const SSO_EXTRAS = [
-  'SCIM 2.0 provisioning, so joiners and leavers are handled by your directory',
-  'Domain verification by DNS record before a domain can be claimed',
-  'Signed assertions required. An unsigned one is rejected rather than trusted',
-  'Enforcement, so an organisation can require single sign-on and close the password route',
+  'SCIM 2.0 provisioning, so joiners and leavers are handled automatically by your company directory',
+  'Domain verification by DNS record before a company domain can be claimed',
+  'Signed assertions required: an unsigned assertion is rejected rather than trusted',
+  'Enforcement, so an organisation can require single sign on and close the password route',
 ];
 
 const WEBHOOK = [
   'A URL you set, on any host you control, with no app to install at either end',
   'An optional secret header, so the receiver can prove the request came from us',
-  'The event and the record it fired on, as JSON, in the request body',
-  'No inbound access: a webhook is something we send, never a way in',
+  'The event and the record it fired on, as structured data (JSON), in the request body',
+  'No inbound access: a webhook is something we send outward, never a way in',
 ];
 ---
 
@@ -132,7 +132,7 @@ const WEBHOOK = [
     bandId="hero"
     label="Connect your stack"
     title="Works with the tools you already run."
-    lead="Sign in with your work identity, read documents where they live, and route alerts to your channels. We read from the systems you connect and never write back to them."
+    lead="Connect your everyday work tools to sign in quickly, read your existing bid documents safely, and receive deadline reminders where your team chats. We read from the systems you connect and never write back to them."
   >
     <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Integrations" /></div>
     <Action href={SIGNUP_URL}>{START_LABEL}</Action>
@@ -146,7 +146,7 @@ const WEBHOOK = [
     tone="light"
     eyebrow="Document sources · read only"
     title="Read your documents where they live."
-    standfirst={`Your answer library is already written. It is in the last thirty bids, sitting in the places your team already keeps them, and ${PRODUCT_NAME_BID} reads it there rather than asking you to upload it again.`}
+    standfirst={`Your answer library is already written. It is in your previous bids, sitting in the storage folders your team already uses, and ${PRODUCT_NAME_BID} reads it there rather than asking you to upload it again.`}
     id="sources"
   >
     <ul class="ea-cards" role="list">
@@ -182,9 +182,9 @@ const WEBHOOK = [
 
   <SectionBand
     tone="light-alt"
-    eyebrow="Identity and SSO"
+    eyebrow="Identity and single sign on"
     title="Use the directory you already administer."
-    standfirst="Single sign-on through any SAML 2.0 identity provider, with users provisioned and deprovisioned from your directory rather than from a spreadsheet."
+    standfirst="Single sign on through any SAML 2.0 identity provider, with users provisioned and deprovisioned from your directory rather than from a spreadsheet."
     id="sso"
   >
     <ul class="ea-cards" role="list">

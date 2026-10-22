@@ -172,7 +172,7 @@ const schema = [
     bandId="hero"
     label="Roadmap"
     title="Velstrian product roadmap"
-    lead="What is shipped, what is in flight, and what comes next for Velstrian Bid. Research is labelled as research, and dates on unshipped work are indicative."
+    lead="See what is ready to use today, what is being built next, and where Velstrian Bid is heading so your business can plan bids with confidence. Research is clearly labelled, and dates on future work are indicative."
   >
     <div slot="after">
     <p class="updated">
@@ -202,7 +202,7 @@ const schema = [
   </div>
   </PageHero>
 
-  <SectionBand tone="light" eyebrow="The build, in order" title="Shipped, in progress, and next" standfirst="A single timeline from what is live in production today to the research shaping the next twelve months. Each phase is anchored to a specific UK or EU regulatory driver, so the plan is deterministic, not speculative." id="timeline">
+  <SectionBand tone="light" eyebrow="The build, in order" title="Shipped, in progress, and next" standfirst="A single timeline from what is live in production today to the research shaping the next twelve months. Each phase is anchored to clear regulatory and customer needs for public and private bids, so the plan is dependable, not speculative." id="timeline">
     <ol class="tl" role="list">
       {
         PHASES.map((p) => (
@@ -261,7 +261,7 @@ const schema = [
     </ol>
   </SectionBand>
 
-  <SectionBand tone="light-alt" eyebrow="The intelligence layer" title="How the AI actually works" standfirst="Velstrian Bid is not a chatbot wrapped around a regulation. It runs a deterministic scoring engine first. Large language models do the writing and explaining on top, grounded in the named statute. The model proposes a draft, you review and sign it off." id="intelligence">
+  <SectionBand tone="light-alt" eyebrow="The intelligence layer" title="How the AI actually works" standfirst="Velstrian Bid is not a generic chatbot. It calculates numbers in code first. Language models then draft explanations grounded in official regulations and your uploaded files. The system suggests a draft, and your team reviews and approves it." id="intelligence">
     <ul class="grid grid--2" role="list">
       {
         AI_LIVE.map((c) => (
@@ -298,13 +298,13 @@ const schema = [
     </ul>
 
     <p class="note">
-      We will not ship a model that free-styles the law. Every AI feature keeps a deterministic
-      engine underneath, and narrative generation is the last step, never the source. That is a
+      We will not ship a model that guesses the law. Every AI feature is built on verified
+      calculation code, and narrative drafting is the final step, never the primary source. That is a
       fixed design rule, not a phase.
     </p>
   </SectionBand>
 
-  <SectionBand tone="light" eyebrow="Methodology" title="How we decide what to ship next" standfirst="Every Velstrian product traces back to a UK or EU regulation that already exists or has already passed Royal Assent. No speculative tools, and no chasing whatever is loudest this quarter." id="method">
+  <SectionBand tone="light" eyebrow="Methodology" title="How we decide what to ship next" standfirst="Every Velstrian feature traces back to genuine customer needs and UK or EU regulations that already exist or have passed Royal Assent. We build dependable tools rather than chasing passing AI trends." id="method">
     <ol class="method" role="list">
       {
         METHOD.map((m) => (
@@ -320,7 +320,7 @@ const schema = [
     </ol>
   </SectionBand>
 
-  <SectionBand tone="light-alt" eyebrow="Scope discipline" title="What we won't build" standfirst="Honesty about scope is part of the deal. We actively decide against patterns that diverge from our regulatory anchor." id="wont-build">
+  <SectionBand tone="light-alt" eyebrow="Scope discipline" title="What we won't build" standfirst="Honesty about scope helps you choose the right tools. We actively decide against features that distract from verified, accurate bidding." id="wont-build">
     <ul class="grid grid--2" role="list">
       {
         WONT_BUILD.map((w) => (
@@ -333,7 +333,7 @@ const schema = [
     </ul>
   </SectionBand>
 
-  <SectionBand tone="light" eyebrow="Regulatory clock" title="Deadlines on the radar" standfirst="The dates the plan above is anchored to, with the instrument each one comes from." id="clock">
+  <SectionBand tone="light" eyebrow="Regulatory clock" title="Deadlines on the radar" standfirst="Key regulatory dates our development plan is aligned with, along with the official policy note or statute behind each one." id="clock">
     <ul class="clock" role="list">
       <li class="clock__row">
         <p class="meta clock__when">Aug 2026</p>
@@ -365,7 +365,7 @@ const schema = [
       written down. It is the intent. /roadmap ends on a plain ask because the
       page it closes is a statement of what is NOT built yet, and a raised,
       lit panel would sell harder than the page has earned. */}
-  <SectionBand tone="light-alt" eyebrow="Get started" title="Start with Velstrian Bid" standfirst="Choose a plan and start today by card. Tell us what you bid for if you would like a hand getting set up." id="cta">
+  <SectionBand tone="light-alt" eyebrow="Get started" title="Start with Velstrian Bid" standfirst="Choose a plan and start today. Tell us what contracts you bid for if you would like personal help getting set up." id="cta">
     <div class="ea-actions">
       <Action href={SIGNUP_URL}>{START_LABEL}</Action>
       <Action href="/contact/" variant="secondary">Enterprise enquiry</Action>

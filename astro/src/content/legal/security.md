@@ -5,6 +5,8 @@ heading: "Encrypted, documented, and auditable."
 eyebrow: "Security & Trust"
 ---[System status: status.velstrian.com](https://status.velstrian.com)
 
+How Velstrian protects your bid documents, company data, and user accounts: enterprise encryption, UK and European data residency, and transparent AI processing boundaries.
+
 Every layer, from disk to API, is named and auditable.
 
 ## Operational standards
@@ -85,12 +87,11 @@ Platform access is enforced in depth: organisation-scoped roles at the applicati
 ### MFA
 
 - TOTP available for every account.
-- Required for Owner/Admin actions.
 - Session revocation on demand.
 
 ## ISO 27001 controls
 
-We follow ISO/IEC 27001 and review every Annex A control in our own Statement of Applicability. Internal security reviews run continuously, and OWASP practices are applied to all application development. The control set, the risk register, the statement of applicability, the internal audit and the management review are maintained as documents and are available on request.
+We follow ISO/IEC 27001 and review every Annex A control in our own Statement of Applicability. OWASP practices are applied to all application development. The control set, the risk register, the statement of applicability, the internal audit and the management review are maintained as documents and are available on request.
 
 
 ## AI data handling

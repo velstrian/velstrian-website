@@ -250,31 +250,31 @@ const HOMEPAGE_MAP: MapRow[] = [
   {
     figure: '£5m',
     where: 'Numbers',
-    rests: 'Procurement Act 2023 s.52 contract value threshold',
+    rests: 'Procurement Act 2023 section 52 key performance indicator (KPI) threshold for contracts over £5 million',
     href: '#s52',
   },
   {
     figure: '12',
     where: 'Numbers',
-    rests: 'Procurement Act 2023 s.71 months between published assessments',
+    rests: 'Procurement Act 2023 section 71 required review period: contract performance assessments published at least every 12 months',
     href: '#s71',
   },
   {
     figure: '10%',
     where: 'Numbers',
-    rests: 'PPN 026 minimum social value weighting. 10% from 1 million pounds inc VAT to 5 million, and 20% at 5 million pounds inc VAT or above, which is inclusive, so 10% is the minimum anywhere in scope',
+    rests: 'Procurement Policy Note (PPN) 026 social value weighting: minimum 10% on central government contracts from 1 million pounds inc VAT to 5 million, and 20% at 5 million pounds inc VAT or above, which is inclusive, so 10% is the minimum anywhere in scope',
     href: '#ppn-026',
   },
   {
     figure: '£27,000',
     where: 'Reasoning trace',
-    rests: 'Illustrative placeholder for a per job, per year proxy value. It is NOT a National TOMs proxy value',
+    rests: 'Illustrative placeholder for an example proxy value per job, per year (this is not a National TOMs proxy value)',
     href: null,
   },
   {
     figure: '£108,000',
     where: 'Reasoning trace',
-    rests: 'The arithmetic of the line above it, and illustrative for the same reason',
+    rests: 'Worked example total (4 jobs at £27,000) for illustration',
     href: null,
   },
 ];
@@ -295,14 +295,14 @@ const MARKETS: { name: string; rows: [string, string][] }[] = [
       ['Find', 'Find a Tender, Contracts Finder, Public Contracts Scotland'],
       ['Answer', 'Selection questionnaires, method statements'],
       ['Commit', 'PPN 026 commitments, National TOMs measures'],
-      ['Deliver', 's.52 KPIs, then s.71 assessment against them'],
+      ['Deliver', 'Section 52 KPIs, followed by section 71 annual performance assessments'],
     ],
   },
   {
     name: 'EU and international',
     rows: [
-      ['Find', 'TED, SAM.gov, World Bank notices'],
-      ['Answer', 'ESPD, RFP responses'],
+      ['Find', 'TED (Tenders Electronic Daily), SAM.gov, World Bank notices'],
+      ['Answer', 'European Single Procurement Document (ESPD), request for proposal (RFP) responses'],
       ['Commit', 'Directive 2014/24/EU Art. 67 criteria, Art. 70 conditions'],
       ['Deliver', 'Art. 70 monitoring'],
     ],
@@ -311,9 +311,9 @@ const MARKETS: { name: string; rows: [string, string][] }[] = [
     name: 'Private sector',
     rows: [
       ['Find', 'Portal invites, Ariba, Coupa'],
-      ['Answer', 'SIG and CAIQ security questionnaires'],
+      ['Answer', 'Security questionnaires (such as SIG and CAIQ) and vendor assessments'],
       ['Commit', 'SLAs, sustainability targets'],
-      ['Deliver', 'Scorecards, quarterly business reviews'],
+      ['Deliver', 'Supplier scorecards and quarterly business reviews'],
     ],
   },
 ];
@@ -324,7 +324,7 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
     eyebrow: 'UK statute',
     title: 'Procurement Act 2023',
     standfirst:
-      'Two separate duties, with two separate dates. Section 52 sets and publishes the indicators. Section 71 assesses performance against them and publishes the assessment. They are not one duty and this site never writes them as one.',
+      'Two separate legal duties under the Procurement Act 2023. Section 52 sets and publishes contract KPIs before award. Section 71 assesses delivery performance against them annually. They are separate duties and kept distinct across our platform.',
     items: STATUTE,
   },
   {
@@ -335,7 +335,7 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
        heading outline. The section is named for what the note DOES. */
     title: 'The social value floor',
     standfirst:
-      'The minimum social value weighting, with the dates and the thresholds it applies at.',
+      'The minimum social value weighting rules for central government contracts, including effective dates and contract value thresholds.',
     items: POLICY,
   },
   {
@@ -343,7 +343,7 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
     eyebrow: 'EU and international',
     title: 'Directive 2014/24/EU',
     standfirst:
-      'Article 67 governs how a bid is scored. Article 70 governs what the winner is held to afterwards.',
+      'Directive 2014/24/EU rules. Article 67 governs how bids are evaluated and scored. Article 70 governs the conditions and monitoring required after contract award.',
     items: EU,
   },
   {
@@ -351,7 +351,7 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
     eyebrow: 'Measurement framework',
     /* Same reason as the group above: the card's own h3 is "National TOMs". */
     title: 'How a commitment gets priced',
-    standfirst: 'A framework rather than a law, and described here as one.',
+    standfirst: 'A widely used measurement framework rather than a law, used to calculate transparent monetary proxy values for social value commitments.',
     items: FRAMEWORK,
   },
 ];
@@ -363,7 +363,7 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
     bandId="sources-hero"
     label="Provenance"
     title="Every figure, and where it comes from."
-    lead="The homepage shows numbers. This page shows what each one rests on: the statute, the policy note or the framework, with the date, the threshold and a link to the primary source. Nothing here is a summary of a summary."
+    lead="Verify the exact legislation, dates, thresholds, and official guidance behind every figure Velstrian Bid uses, with direct links to the original government sources. Nothing here is an unverified summary."
   >
     <div slot="after">
     <div class="ea-actions">
@@ -383,7 +383,7 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
       <table class="map">
         <caption class="visually-hidden">
           Each figure shown on the Velstrian homepage, the section it appears in, and
-          the instrument or worked example it rests on.
+          the legislation, policy note or worked example it rests on.
         </caption>
         <thead>
           <tr>
@@ -472,14 +472,14 @@ const GROUPS: { id: string; eyebrow: string; title: string; standfirst: string; 
     <div class="scope">
       <p>
         The duties above are UK public sector duties, used across this site as the
-        worked example, because they are published and can be checked. Promising
-        something in a bid and then evidencing it is the same work in the EU and in
-        private sector procurement. Only the instrument changes.
+        worked example because they are published and verifiable. Promising
+        commitments in a bid and evidencing them afterwards is the same work across EU and
+        private sector procurement. Only the specific regulation or contract terms change.
       </p>
       <p>
         None of this is a claim about Velstrian's performance. They are the rules the
         reader is already held to. This site publishes no win rates, and refusing to
-        publish one is a position rather than an omission.
+        publish one is a deliberate position rather than an omission.
       </p>
       <p>
         This page is general information and is not legal advice. Read the tender

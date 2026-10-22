@@ -150,13 +150,13 @@ export interface Connector {
 const SHAREPOINT: Connector = {
   name: 'SharePoint',
   scope: 'Sites.Read.All',
-  note: 'A Microsoft Graph application permission your tenant administrator grants. It reads site content and cannot change it.',
+  note: 'Permits reading bid documents stored in SharePoint. It cannot edit, move, or delete your files.',
 };
 
 const ONEDRIVE: Connector = {
   name: 'OneDrive for Business',
   scope: 'Files.Read.All',
-  note: 'The same tenant-granted Graph permission, over files rather than sites. Personal OneDrive accounts are not supported.',
+  note: 'Permits reading bid files in your team OneDrive for Business. It cannot edit or delete your files. Personal OneDrive accounts are not supported.',
 };
 
 /**
@@ -176,7 +176,7 @@ const ONEDRIVE: Connector = {
 const CONFLUENCE: Connector = {
   name: 'Confluence Cloud',
   scope: 'Your own permissions',
-  note: 'An API token issued by you. It inherits exactly the spaces your own account can already open, and nothing is escalated.',
+  note: 'Connects using an API token from your account. It can only open the documentation spaces you already have permission to view, with no extra access.',
   /* No mark. WITHDRAWN 2026-08-04 for CONSISTENCY rather than licence, and it is
      the reason worth recording: this was one of only TWO marks still served, so
      the connector grid rendered eleven neutral slots beside two pieces of
@@ -208,7 +208,7 @@ export const SOURCES: Connector[] = [SHAREPOINT, ONEDRIVE, CONFLUENCE];
 const OKTA: Connector = {
   name: 'Okta',
   scope: 'SAML 2.0, sign-in only',
-  note: 'Entity ID, sign-on URL and signing certificate. The assertion says who is signing in.',
+  note: 'Connects to your Okta portal for single sign on, confirming team members when they log in without storing separate passwords.',
   /* No mark. The plain ring served here was not an official asset at all: Okta's
      current mark is the faceted "aura", and Okta's press room publishes only a
      black-and-white wordmark pack. Named in text instead. Withdrawal 5. */
@@ -217,7 +217,7 @@ const OKTA: Connector = {
 const ENTRA: Connector = {
   name: 'Microsoft Entra ID',
   scope: 'SAML 2.0, sign-in only',
-  note: 'Configured the same way as every other provider, with no Entra-specific path in the code.',
+  note: 'Connects to Microsoft Entra (formerly Azure AD) for single sign on, letting your team log in with their existing Microsoft work accounts.',
   /* No mark. WITHDRAWN 2026-08-04 BY OWNER DECISION ON A-37, and this one was
      the last Microsoft mark still served. It was the vendor's correct current
      artwork, which is exactly why it survived the earlier withdrawals, and
@@ -236,7 +236,7 @@ const ENTRA: Connector = {
 const GOOGLE_WORKSPACE: Connector = {
   name: 'Google Workspace',
   scope: 'SAML 2.0, sign-in only',
-  note: 'A custom SAML app in the Google admin console, pointed at the metadata URL we publish.',
+  note: 'Connects with Google Workspace so your staff can log in using their standard company Google accounts.',
   /* No mark. This drew the Google corporate "G", which refers to Google the
      company rather than to Workspace, and Google's brand guidance says in terms
      not to use the G in a business's marketing materials. Workspace itself has
@@ -246,7 +246,7 @@ const GOOGLE_WORKSPACE: Connector = {
 const PING: Connector = {
   name: 'Ping Identity',
   scope: 'SAML 2.0, sign-in only',
-  note: 'Same three fields. Signed assertions are required and unsigned ones are rejected.',
+  note: 'Connects to Ping Identity with verified cryptographic signatures to confirm who is signing in.',
   /* No mark. The white "Ping" knocked out of a red square is the pre-2023 mark,
      and Ping publishes no downloadable brand asset at all. The only current
      colour file it serves is the horizontal lockup in its own site chrome, whose
@@ -256,13 +256,13 @@ const PING: Connector = {
 const ONELOGIN: Connector = {
   name: 'OneLogin',
   scope: 'SAML 2.0, sign-in only',
-  note: 'Same three fields. No app listing to install and nothing to approve on our side.',
+  note: 'Standard single sign on setup for OneLogin accounts with no extra software to install.',
 };
 
 const ANY_SAML: Connector = {
   name: 'Any SAML 2.0 provider',
   scope: 'SAML 2.0, sign-in only',
-  note: 'Including a self-hosted identity provider. If it issues a signed SAML 2.0 assertion, it works.',
+  note: 'Works with any standard identity provider or self-hosted login service that supports SAML single sign on.',
 };
 
 export const IDENTITY: Connector[] = [OKTA, ENTRA, GOOGLE_WORKSPACE, PING, ONELOGIN, ANY_SAML];
@@ -284,7 +284,7 @@ export const OUTBOUND: Connector[] = [
   {
     name: 'Slack',
     scope: 'chat:write',
-    note: 'Posts a message into the channel you authorise. It does not read your history or your files.',
+    note: 'Sends deadline reminders and status alerts into your chosen Slack channel. It never reads your channel history or files.',
   /* No mark. WITHDRAWN 2026-08-04 for CONSISTENCY rather than licence, and it is
      the reason worth recording: this was one of only TWO marks still served, so
      the connector grid rendered eleven neutral slots beside two pieces of
@@ -298,7 +298,7 @@ export const OUTBOUND: Connector[] = [
   {
     name: 'Microsoft Teams',
     scope: 'ChannelMessage.Send',
-    note: 'Sends a message into the channel you pick. It cannot change a setting in your tenant.',
+    note: 'Sends notifications into your chosen Teams channel. It cannot modify settings in your Microsoft account.',
     /* No mark. The file served here is one generation behind Microsoft's October
        2025 app-icon refresh, and the current one is licence-gated. Microsoft's
        own guidance names the alternative taken here: a third party may write
@@ -307,7 +307,7 @@ export const OUTBOUND: Connector[] = [
   {
     name: 'Google Drive',
     scope: 'drive.file',
-    note: 'Creates the export files it writes, and can open no other file in your Drive.',
+    note: 'Saves exported bid packs into a folder you choose, and cannot open or view any other files in your Google Drive.',
     /* No mark. WITHDRAWN 2026-08-04 BY OWNER DECISION ON A-37, the last Google
        mark still served. Like Entra above it was the vendor's correct current
        artwork; unlike the corporate "G" withdrawn earlier under Withdrawal 3,
@@ -387,17 +387,17 @@ export const HOME_CHIPS: Connector[] = [
 export const RULE_STEPS: { label: string; heading: string; body: string }[] = [
   {
     label: 'Trigger',
-    heading: 'An event fires',
-    body: 'A tender deadline is approaching. Velstrian Bid sweeps for them once a day and fires the rules that match.',
+    heading: 'When an event happens',
+    body: 'A tender deadline is approaching. Velstrian Bid checks for upcoming deadlines once a day and starts the notification rules you set up.',
   },
   {
     label: 'Conditions',
-    heading: 'Filters you set',
-    body: 'How many days before the deadline you want to hear about it: 7, 14, 30, 60 or 90.',
+    heading: 'Filters you choose',
+    body: 'Decide how many days in advance you want a reminder: 7, 14, 30, 60, or 90 days before the deadline.',
   },
   {
     label: 'Action',
     heading: 'What happens next',
-    body: 'Post to a webhook, send an email, or raise an in-app alert to the owner you name.',
+    body: 'Send an alert to a web address (webhook), send an email notification, or show an alert inside the app to the assigned person.',
   },
 ];
