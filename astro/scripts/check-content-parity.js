@@ -842,6 +842,36 @@ if (redirectLines === null) {
 }
 
 /* ------------------------------------------------------------------ *
+ * ONE LABEL FOR THE SIGN UP ACTION (R285-WEB-REVIEW-2026-10-22 item 3)
+ *
+ * The owner found one action under two names on the home page: "Start 7 day
+ * trial" in the hero, Start in three steps and the closing band, "Start now"
+ * in the header and on every plan card. Every link to the app's sign up page,
+ * on every built route, must read START_LABEL from src/data/app.ts. Read
+ * from the source file, not retyped here, so the label can change in one
+ * place and this check follows it. A visually hidden suffix (", on the Pro
+ * plan, billed monthly") is part of the accessible name, not the label, so it
+ * is removed before comparing.
+ * ------------------------------------------------------------------ */
+const APP_TS = fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'app.ts'), 'utf8');
+const START_LABEL = (APP_TS.match(/export const START_LABEL = '([^']+)'/) || [])[1];
+const APP_ORIGIN = (APP_TS.match(/export const APP_ORIGIN = '([^']+)'/) || [])[1];
+const labelFaults = [];
+if (!START_LABEL || !APP_ORIGIN) {
+  labelFaults.push('src/data/app.ts no longer exports START_LABEL and APP_ORIGIN as plain strings');
+} else {
+  const origin = APP_ORIGIN.replace(/[.]/g, '\\.');
+  const signupHref = new RegExp(`<a\\b[^>]*\\bhref=["']${origin}/signup[^"']*["'][^>]*>([\\s\\S]*?)</a>`, 'gi');
+  for (const route of built) {
+    const html = strip(fs.readFileSync(fileFor(route), 'utf8'));
+    for (const m of html.matchAll(signupHref)) {
+      const label = text(m[1].replace(/<span[^>]*visually-hidden[^>]*>[\s\S]*?<\/span>/gi, ' '));
+      if (label !== START_LABEL) labelFaults.push(`${route.padEnd(38)} "${label}"`);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
  * REPORT
  * ------------------------------------------------------------------ */
 
@@ -903,6 +933,16 @@ if (stale.length) {
   console.log(`  ${stale.length} allow-list entr(ies) matched nothing — delete them, the content is back:`);
   for (const k of stale) console.log(`    ${k}`);
   console.log('');
+}
+
+if (labelFaults.length) {
+  console.error(`content-parity: ${labelFaults.length} SIGN UP LINK(S) NOT LABELLED "${START_LABEL}"
+`);
+  for (const f of [...new Set(labelFaults)]) console.error(`      ${f}`);
+  console.error('');
+  console.error('  One action, one name. Use START_LABEL from src/data/app.ts on every link to the sign up page.');
+  console.error('');
+  process.exit(1);
 }
 
 /* A retired route that stopped redirecting is a hard 404 on a URL that is

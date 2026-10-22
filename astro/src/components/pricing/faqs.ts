@@ -6,6 +6,7 @@ import {
   BUYER_PLANS,
   SEAT_ADDON,
   annualDiscountPct,
+  START_LABEL,
 } from '../../data/pricing';
 
 const packs = (k: 'credits' | 'price') => {
@@ -26,12 +27,12 @@ export const PRICING_PAGE_FAQS: PricingFaq[] = [
   {
     question: 'Is there a free trial?',
     answer:
-      `Yes. Choose a plan and select Start now to begin your ${TRIAL_DAYS} day trial. Your first ${TRIAL_DAYS} days are free, on Starter features for 1 user with 30 AI credits. A card is required to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and you pay nothing. There is one free trial per organisation and work email domain.`,
+      `Yes. Choose a plan and select ${START_LABEL} to begin your ${TRIAL_DAYS} day trial. Your first ${TRIAL_DAYS} days are free, on Starter features for 1 user with 30 AI credits. A card is required to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and you pay nothing. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'How does the 7 day trial work?',
     answer:
-      `Choose a plan and select Start now. Your first ${TRIAL_DAYS} days are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
+      `Choose a plan and select ${START_LABEL}. Your first ${TRIAL_DAYS} days are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'What happens when my AI credits run out?',
@@ -71,7 +72,7 @@ export const PRICING_PAGE_FAQS: PricingFaq[] = [
   {
     question: 'How do I get access?',
     answer:
-      'Choose a plan and select Start now. You create your account, pay by card through Stripe, and start straight away. There is nothing to request first. If you would like a walk through before you start, book a demo.',
+      `Choose a plan and select ${START_LABEL}. You create your account, pay by card through Stripe, and start straight away. There is nothing to request first. If you would like a walk through before you start, book a demo.`,
   },
   {
     question: 'Do you price for large organisations?',

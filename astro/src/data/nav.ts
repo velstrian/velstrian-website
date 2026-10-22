@@ -58,7 +58,7 @@
  * canonical tag declares.
  */
 import { SITE } from './site';
-import { APP_ORIGIN, SIGNUP_URL } from './app';
+import { APP_ORIGIN, SIGNUP_URL, START_LABEL } from './app';
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../lib/brand-names';
 
 export interface NavLink {
@@ -225,7 +225,7 @@ export const NAV = {
     /* D236 (2026-10-19): sign up is self serve, so the header CTA goes
        straight to the app's sign up page rather than to a request form. */
     cta: {
-      label: 'Start now',
+      label: START_LABEL,
       href: SIGNUP_URL,
     } as NavLink,
   },

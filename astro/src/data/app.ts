@@ -18,6 +18,23 @@ export const APP_ORIGIN = 'https://app.crowagent.ai';
 export const SIGNUP_URL = `${APP_ORIGIN}/signup`;
 
 /**
+ * THE ONE LABEL for every button that goes to SIGNUP_URL (owner review
+ * 2026-10-22, R285-WEB-REVIEW-2026-10-22 item 3). The hero, Start in three
+ * steps and the closing band said "Start 7 day trial" while the header and
+ * every plan card said "Start now", one action under two names.
+ *
+ * "Start now" because it is TRUE ON EVERY BUTTON, which "Start 7 day trial"
+ * is not: Buyer Portfolio is set up on invoice with no trial, and the platform
+ * grants one trial per organisation and work email domain (BILL-01), so a
+ * returning firm starts paid. D236 (2026-10-19) also chose "Start now" for
+ * every plan in the app, so the site and the app now say the same thing. The
+ * trial is still said plainly beside the button, with the card it needs.
+ * Every page reads this constant, scripts/check-content-parity.js fails the
+ * build on a signup link with any other label.
+ */
+export const START_LABEL = 'Start now';
+
+/**
  * The platform API, which the website calls straight from the browser for the
  * partner enquiry and the free tender finder. It is the Railway host the
  * platform's own frontend uses, already allowed in `connect-src` and

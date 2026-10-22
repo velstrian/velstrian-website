@@ -38,7 +38,7 @@ import { PRICING_PAGE_FAQS } from '../components/pricing/faqs';
 import '../styles/evidenced.css';
 import { breadcrumbs, faqPage } from '../lib/schema';
 import { SITE } from '../data/site';
-import { PLANS, BUYER_PLANS, SIGNUP_URL, TRIAL_DAYS, annualDiscountPct } from '../data/pricing';
+import { PLANS, BUYER_PLANS, SIGNUP_URL, TRIAL_DAYS, annualDiscountPct, START_LABEL } from '../data/pricing';
 
 const [P_STARTER, P_PRO, P_PORTFOLIO] = PLANS;
 const [P_BUYER_PRO, P_BUYER_PORTFOLIO] = BUYER_PLANS;
@@ -145,7 +145,7 @@ const UPDATED = new Date('2026-10-22');
     <Close
       title="Your next bid or tender can start today."
       lead={`Try Velstrian Bid free for ${TRIAL_DAYS} days, or talk it through with us first.`}
-      primary={{ href: SIGNUP_URL, label: `Start ${TRIAL_DAYS} day trial` }}
+      primary={{ href: SIGNUP_URL, label: START_LABEL }}
     />
   </div>
 </Base>

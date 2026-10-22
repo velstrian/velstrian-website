@@ -23,7 +23,7 @@
    rather than moving focus, the three distinct empty states) is in the
    frontmatter of CommandPalette.astro, with the markup it describes.
    ============================================================================ */
-import { SIGNUP_URL } from '../data/app';
+import { SIGNUP_URL, START_LABEL } from '../data/app';
 
 
 interface Entry {
@@ -99,7 +99,7 @@ const ACTIONS: Entry[] = [
     /* D236 (2026-10-19): sign up is self serve, so the action goes to the
        app's sign up page. "request access" stays in the hint so a reader who
        types the old words still finds it. */
-    title: 'Start now',
+    title: START_LABEL,
     href: SIGNUP_URL,
     section: 'Action',
     hint: 'request access trial sign up get started demo account onboarding',

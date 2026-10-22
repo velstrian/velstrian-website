@@ -25,7 +25,7 @@
  * call, not mine. See OWNER-ACTIONS.md (OA-12).
  */
 
-import { SIGNUP_URL } from './app';
+import { SIGNUP_URL, START_LABEL } from './app';
 import {
   PLANS,
   TRIAL_DAYS,
@@ -112,8 +112,8 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         answer:
           // D236 (2026-10-19): sign up is self serve. The answer above this
           // line described the request step that D236 removed.
-          'Choose a plan on the pricing page and select Start now. You create your account, pay by card through Stripe, and can start scoring bids or preparing your evidence straight away. The card is held securely by Stripe and never stored by us.',
-        link: { label: 'Start now', href: SIGNUP_URL },
+          `Choose a plan on the pricing page and select ${START_LABEL}. You create your account, pay by card through Stripe, and can start scoring bids or preparing your evidence straight away. The card is held securely by Stripe and never stored by us.`,
+        link: { label: START_LABEL, href: SIGNUP_URL },
       },
       {
         // The question itself is replaced, not just its answer. A question that
@@ -254,7 +254,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           // CrowMark plan starts with 14 free days at Starter, as the
           // platform's create-checkout route provisions it (BILL-TRIAL-002).
           `Yes. Your first ${TRIAL_DAYS} days are free, on the ${TRIAL_SCOPE}, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
-        link: { label: 'Start now', href: SIGNUP_URL },
+        link: { label: START_LABEL, href: SIGNUP_URL },
       },
       {
         question: 'Can I cancel anytime?',

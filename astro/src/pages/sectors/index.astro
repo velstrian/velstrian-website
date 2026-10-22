@@ -27,8 +27,8 @@ import ProductScreen from '../../components/evidenced/ProductScreen.astro';
 import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { SITE } from '../../data/site';
-import { SIGNUP_URL } from '../../data/app';
-import { TRIAL_DAYS } from '../../data/pricing';
+import { SIGNUP_URL, START_LABEL } from '../../data/app';
+import { TRIAL_NOTE } from '../../data/pricing';
 import { breadcrumbs } from '../../lib/schema';
 import { HELLO_EMAIL, PRODUCT_NAME_BID } from '../../lib/brand-names';
 import '../../styles/evidenced.css';
@@ -123,8 +123,9 @@ const UPDATED = new Date('2026-10-22');
     lead={`Different rules, one product. See what decides who wins the work in your sector, public or private, and how ${PRODUCT_NAME_BID} helps you answer it.`}
   >
     <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Sectors" /></div>
-    <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+    <Action href={SIGNUP_URL}>{START_LABEL}</Action>
     <Action href="#sectors-list" variant="secondary">Find your sector</Action>
+    <Fragment slot="note">{TRIAL_NOTE}</Fragment>
   </PageHero>
 
   <Band tone="light" id="sectors-list" labelledby="sectors-list-title">

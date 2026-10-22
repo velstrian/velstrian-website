@@ -12,7 +12,7 @@
  */
 import Band from './Band.astro';
 import Action from './Action.astro';
-import { PLANS, TRIAL_DAYS, startHref } from '../../data/pricing';
+import { PLANS, TRIAL_DAYS, startHref, START_LABEL } from '../../data/pricing';
 
 const PLAIN: Record<string, { who: string; gets: string }> = {
   Starter: { who: 'You bid on your own', gets: 'Find contracts, draft answers from your past answers, download as Word or PDF.' },
@@ -45,7 +45,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
               {p.seats} {p.seats === 1 ? 'person' : 'people'}, {n(p.credits)} AI credits a month
             </p>
             <p class="ea-plan__gets">{PLAIN[p.name]?.gets ?? p.includes}</p>
-            <Action href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>Start now</Action>
+            <Action href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>{START_LABEL}</Action>
           </li>
         ))
       }

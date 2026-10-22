@@ -14,7 +14,7 @@
  * `secondary`, which replaces Book a call.
  */
 import Action from './Action.astro';
-import { SIGNUP_URL, WALKTHROUGH_URL } from '../../data/app';
+import { SIGNUP_URL, WALKTHROUGH_URL, START_LABEL } from '../../data/app';
 import { TRIAL_DAYS } from '../../data/pricing';
 
 interface Props {
@@ -27,7 +27,7 @@ interface Props {
 const {
   title = 'Your next bid can start today.',
   lead = `Try it free for ${TRIAL_DAYS} days, or talk it through with us first.`,
-  primary = { href: SIGNUP_URL, label: `Start ${TRIAL_DAYS} day trial` },
+  primary = { href: SIGNUP_URL, label: START_LABEL },
   secondary = { href: WALKTHROUGH_URL, label: 'Book a call', newWindow: true },
 } = Astro.props;
 ---

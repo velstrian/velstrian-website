@@ -113,7 +113,7 @@ import SectionBand from '../components/evidenced/SectionBand.astro';
 import PageHero from '../components/evidenced/PageHero.astro';
 import Action from '../components/evidenced/Action.astro';
 import '../styles/evidenced.css';
-import { SIGNUP_URL } from '../data/app';
+import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 import {
   PHASES,
@@ -367,7 +367,7 @@ const schema = [
       lit panel would sell harder than the page has earned. */}
   <SectionBand tone="light-alt" eyebrow="Get started" title="Start with Velstrian Bid" standfirst="Choose a plan and start today by card. Tell us what you bid for if you would like a hand getting set up." id="cta">
     <div class="ea-actions">
-      <Action href={SIGNUP_URL}>Start now</Action>
+      <Action href={SIGNUP_URL}>{START_LABEL}</Action>
       <Action href="/contact/" variant="secondary">Enterprise enquiry</Action>
     </div>
   </SectionBand>

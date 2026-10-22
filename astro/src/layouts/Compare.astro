@@ -19,8 +19,8 @@ import PageHero from '../components/evidenced/PageHero.astro';
 import Band from '../components/evidenced/Band.astro';
 import Action from '../components/evidenced/Action.astro';
 import Close from '../components/evidenced/Close.astro';
-import { SIGNUP_URL } from '../data/app';
-import { TRIAL_DAYS } from '../data/pricing';
+import { SIGNUP_URL, START_LABEL } from '../data/app';
+import { TRIAL_NOTE } from '../data/pricing';
 import { PRODUCT_NAME_BID } from '../lib/brand-names';
 import '../styles/evidenced.css';
 import { SITE } from '../data/site';
@@ -194,9 +194,9 @@ if (Astro.slots.has('screen')) {
 >
   <PageHero id="cmp-title" label={eyebrow} title={`${PRODUCT_NAME_BID} vs ${competitor}`} lead={heroDescription}>
     <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current={breadcrumbLabel} /></div>
-    <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+    <Action href={SIGNUP_URL}>{START_LABEL}</Action>
     <Action href="/bid/" variant="secondary">Explore {PRODUCT_NAME_BID}</Action>
-    <Fragment slot="note">{updatedLabel}</Fragment>
+    <Fragment slot="note">{TRIAL_NOTE} {updatedLabel}</Fragment>
   </PageHero>
 
   <Band tone="light" class="cmp-article">

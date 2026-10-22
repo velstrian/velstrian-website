@@ -24,8 +24,8 @@ import ProductScreen from '../../components/evidenced/ProductScreen.astro';
 import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { SITE } from '../../data/site';
-import { SIGNUP_URL } from '../../data/app';
-import { PLANS, TRIAL_DAYS } from '../../data/pricing';
+import { SIGNUP_URL, START_LABEL } from '../../data/app';
+import { PLANS, TRIAL_NOTE } from '../../data/pricing';
 import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
@@ -111,7 +111,8 @@ const schema = [
   >
     <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Compare" /></div>
     <Action href="#comparisons">See the comparisons</Action>
-    <Action href={SIGNUP_URL} variant="secondary">Start {TRIAL_DAYS} day trial</Action>
+    <Action href={SIGNUP_URL} variant="secondary">{START_LABEL}</Action>
+    <Fragment slot="note">{TRIAL_NOTE}</Fragment>
   </PageHero>
 
   <Band tone="light" id="comparisons" class="cmp-hub">

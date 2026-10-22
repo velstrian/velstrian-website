@@ -11,7 +11,7 @@
  */
 import Band from '../evidenced/Band.astro';
 import Action from '../evidenced/Action.astro';
-import { SIGNUP_URL, TRIAL_DAYS, PLANS, annualDiscountPct } from '../../data/pricing';
+import { SIGNUP_URL, TRIAL_DAYS, PLANS, annualDiscountPct, START_LABEL } from '../../data/pricing';
 
 const [STARTER] = PLANS;
 ---
@@ -29,7 +29,7 @@ const [STARTER] = PLANS;
     </div>
 
     <div class="pricing-hero__actions" data-reveal>
-      <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+      <Action href={SIGNUP_URL}>{START_LABEL}</Action>
 
       <div class="pricing-billing-switch">
         <span class="pricing-billing-switch__label pricing-billing-switch__label--m">Monthly</span>

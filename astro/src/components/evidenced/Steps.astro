@@ -13,8 +13,7 @@
 import Band from './Band.astro';
 import IconTile from './IconTile.astro';
 import Action from './Action.astro';
-import { SIGNUP_URL } from '../../data/app';
-import { TRIAL_DAYS } from '../../data/pricing';
+import { SIGNUP_URL, START_LABEL } from '../../data/app';
 import { START_FORMATS, START_MAX_MB, PACK_MAX_MB } from '../../data/site-facts';
 import type { IconName } from '../../data/icons';
 
@@ -35,7 +34,7 @@ const SUPPLIER_STEPS: Step[] = [
 
 const {
   steps = SUPPLIER_STEPS,
-  action = { href: SIGNUP_URL, label: `Start ${TRIAL_DAYS} day trial` },
+  action = { href: SIGNUP_URL, label: START_LABEL },
 } = Astro.props;
 ---
 

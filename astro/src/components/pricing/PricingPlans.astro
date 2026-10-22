@@ -11,7 +11,7 @@
  */
 import Band from '../evidenced/Band.astro';
 import Action from '../evidenced/Action.astro';
-import { PLANS, TRIAL_DAYS, SEAT_ADDON, startHref, annualDiscountPct } from '../../data/pricing';
+import { PLANS, TRIAL_DAYS, SEAT_ADDON, startHref, annualDiscountPct, START_LABEL } from '../../data/pricing';
 
 const PLAIN_WHO: Record<string, string> = {
   Starter: 'You bid on your own',
@@ -76,12 +76,12 @@ const n = (v: number) => v.toLocaleString('en-GB');
             <div class="pricing-plan__action">
               <div class="plan-go--m">
                 <Action href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>
-                  Start now<span class="visually-hidden"> on the {p.name} plan, billed monthly</span>
+                  {START_LABEL}<span class="visually-hidden"> on the {p.name} plan, billed monthly</span>
                 </Action>
               </div>
               <div class="plan-go--a">
                 <Action href={startHref(p.planKey, true)} variant={p.recommended ? 'primary' : 'secondary'}>
-                  Start now<span class="visually-hidden"> on the {p.name} plan, billed annually</span>
+                  {START_LABEL}<span class="visually-hidden"> on the {p.name} plan, billed annually</span>
                 </Action>
               </div>
             </div>

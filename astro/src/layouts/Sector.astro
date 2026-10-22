@@ -27,8 +27,8 @@ import Action from '../components/evidenced/Action.astro';
 import ProductScreen, { type ScreenName } from '../components/evidenced/ProductScreen.astro';
 import Close from '../components/evidenced/Close.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
-import { SIGNUP_URL } from '../data/app';
-import { TRIAL_DAYS } from '../data/pricing';
+import { SIGNUP_URL, START_LABEL } from '../data/app';
+import { TRIAL_NOTE } from '../data/pricing';
 import { PRODUCT_NAME_BID } from '../lib/brand-names';
 import { breadcrumbs } from '../lib/schema';
 import '../styles/evidenced.css';
@@ -118,8 +118,9 @@ if (faq.length) {
 >
   <PageHero id="sector-title" label={sectorLabel} title={`Stronger bids for ${heroTitleAccent}`} lead={heroDescription}>
     <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current={sectorLabel} /></div>
-    <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+    <Action href={SIGNUP_URL}>{START_LABEL}</Action>
     <Action href="/bid/" variant="secondary">Explore {PRODUCT_NAME_BID}</Action>
+    <Fragment slot="note">{TRIAL_NOTE}</Fragment>
   </PageHero>
 
   <Band tone="light" labelledby="sector-context-title">

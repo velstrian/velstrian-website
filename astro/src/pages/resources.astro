@@ -23,7 +23,7 @@ import ResourcesGrid from '../components/resources/ResourcesGrid.astro';
 import ResourcesStandards from '../components/resources/ResourcesStandards.astro';
 import Close from '../components/evidenced/Close.astro';
 import '../styles/evidenced.css';
-import { SIGNUP_URL } from '../data/app';
+import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 
 const title = 'Resources | Velstrian';
@@ -55,6 +55,6 @@ const UPDATED = new Date('2026-10-22');
   <Close
     title="Start with the workflow you need now."
     lead="Velstrian Bid: find UK public-sector tenders, draft grounded social-value answers, and prove delivery, all in one workspace."
-    primary={{ href: SIGNUP_URL, label: 'Start now' }}
+    primary={{ href: SIGNUP_URL, label: START_LABEL }}
   />
 </Base>

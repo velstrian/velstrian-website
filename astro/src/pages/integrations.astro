@@ -81,7 +81,7 @@ import IconTile from '../components/evidenced/IconTile.astro';
 import Icon from '../components/evidenced/Icon.astro';
 import Close from '../components/evidenced/Close.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
-import { SIGNUP_URL } from '../data/app';
+import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 import { SOURCES, IDENTITY, OUTBOUND, RULE_STEPS } from '../data/integrations';
 import { INTEGRATIONS_PLAN_LINE } from '../data/site-facts';
@@ -135,7 +135,7 @@ const WEBHOOK = [
     lead="Sign in with your work identity, read documents where they live, and route alerts to your channels. We read from the systems you connect and never write back to them."
   >
     <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Integrations" /></div>
-    <Action href={SIGNUP_URL}>Start now</Action>
+    <Action href={SIGNUP_URL}>{START_LABEL}</Action>
     <Action href="/security/" variant="secondary">Read the security model</Action>
   </PageHero>
 
@@ -332,7 +332,7 @@ const WEBHOOK = [
   <Close
     title="Connect once, bid from one place."
     lead="Every connector reads only what it needs, cites the statute behind each figure, and keeps your data in the EU."
-    primary={{ href: SIGNUP_URL, label: 'Start now' }}
+    primary={{ href: SIGNUP_URL, label: START_LABEL }}
     secondary={{ href: '/pricing/', label: 'View all pricing' }}
   />
 </Base>

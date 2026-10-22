@@ -87,10 +87,10 @@
  * disagrees with it. Copy drift is what produced every defect recorded in this
  * header; the gate is the thing that stops the next one.
  */
-import { SIGNUP_URL } from './app.ts';
+import { SIGNUP_URL, START_LABEL } from './app.ts';
 import { GUEST_REVIEWERS, LIVE_SOURCES } from './site-facts.ts';
 
-export { SIGNUP_URL };
+export { SIGNUP_URL, START_LABEL };
 
 /*
  * ── R285-P2-SELF-SERVE-SIGNUP-01 · D236 (2026-10-19): EVERY PLAN SAYS START NOW ─
@@ -174,7 +174,7 @@ export const PLANS: Plan[] = [
     seats: 1,
     credits: 200,
     includes: 'Tender feed, cited drafting, social value calculation and PDF or DOCX export.',
-    cta: 'Start now',
+    cta: START_LABEL,
     planKey: 'crowmark_starter',
   },
   {
@@ -187,7 +187,7 @@ export const PLANS: Plan[] = [
     seats: 5,
     credits: 750,
     includes: 'Everything in Starter, plus delivery tracking, monthly reports and the section 52 and 71 checks.',
-    cta: 'Start now',
+    cta: START_LABEL,
     planKey: 'crowmark_pro',
     recommended: true,
   },
@@ -270,7 +270,7 @@ export const BUYER_PLANS: BuyerPlan[] = [
     credits: 750,
     guestEvaluators: 10,
     includes: '10 guest evaluators, requirement builder, evidence locator and delivery monitoring.',
-    cta: 'Start now',
+    cta: START_LABEL,
     planKey: 'buyer_pro',
   },
   {
@@ -282,7 +282,7 @@ export const BUYER_PLANS: BuyerPlan[] = [
     credits: 3000,
     guestEvaluators: 25,
     includes: '25 guest evaluators. Pay by card, or by invoice on 30 days with a PO number.',
-    cta: 'Start now',
+    cta: START_LABEL,
     planKey: 'buyer_portfolio',
     secondary: {
       label: 'Talk to us about frameworks',
@@ -341,6 +341,11 @@ export const CREDIT_TOPUPS: CreditTopup[] = [
  *  platform's create-checkout route). Read by /pricing and the home page, so the
  *  number is written once. A card is collected by Stripe before it starts. */
 export const TRIAL_DAYS = 7;
+
+/** The one line said beside a START_LABEL button that has no trial line of its
+ *  own nearby: what the trial is and that a card is needed, so the shorter
+ *  label never hides either (R285-WEB-REVIEW-2026-10-22 item 3). */
+export const TRIAL_NOTE = `Your first ${TRIAL_DAYS} days are free. A card is needed to start.`;
 
 /** The AI credits a first plan's free trial carries (D236, the platform's
  *  create-checkout trial grant). Already published in the trial answers on
@@ -599,7 +604,7 @@ export const PRICING_FAQS: Faq[] = [
        omission as the removed "no card taken" lines, just by silence rather
        than by a false sentence. */
     answer:
-      `Choose a plan and select Start now. Your first ${TRIAL_DAYS} days are free, on the ${FAQ_STARTER.name} features for ${usersLabel(FAQ_STARTER.seats)} with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
+      `Choose a plan and select ${START_LABEL}. Your first ${TRIAL_DAYS} days are free, on the ${FAQ_STARTER.name} features for ${usersLabel(FAQ_STARTER.seats)} with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'How do I get access?',
@@ -609,7 +614,7 @@ export const PRICING_FAQS: Faq[] = [
        checkout. The old wording let the true first half stand for the whole
        process. */
     answer:
-      'Choose a plan and select Start now. You create your account, pay by card through Stripe, and start straight away. There is nothing to request first. If you would like a walk through before you start, book a demo.',
+      `Choose a plan and select ${START_LABEL}. You create your account, pay by card through Stripe, and start straight away. There is nothing to request first. If you would like a walk through before you start, book a demo.`,
   },
   {
     question: 'Are there any hidden setup fees?',

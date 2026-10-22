@@ -42,7 +42,7 @@ import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
 import { PRODUCT_NAME_BID } from '../../../lib/brand-names';
 import '../../../styles/evidenced.css';
 import Turnstile from '../../../components/forms/Turnstile.astro';
-import { SIGNUP_URL } from '../../../data/app';
+import { SIGNUP_URL, START_LABEL } from '../../../data/app';
 import { breadcrumbs } from '../../../lib/schema';
 import { SITE } from '../../../data/site';
 import { FACTS, LIVE_SOURCES, FIT_COUNT_WORD } from '../../../data/site-facts';
@@ -243,7 +243,7 @@ const schema = [
 
       <p class="tf-upsell">
         Want new matches by email and a fit score for each tender?
-        <a href={SIGNUP_URL}>Start with {PRODUCT_NAME_BID}</a>.
+        <a href={SIGNUP_URL}>{START_LABEL}</a>.
       </p>
     </div>
 

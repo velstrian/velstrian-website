@@ -11,7 +11,7 @@
  */
 import Band from '../evidenced/Band.astro';
 import Action from '../evidenced/Action.astro';
-import { BUYER_PLANS, SEAT_ADDON, startHref, annualDiscountPct } from '../../data/pricing';
+import { BUYER_PLANS, SEAT_ADDON, startHref, annualDiscountPct, START_LABEL } from '../../data/pricing';
 
 const CONTACT_BUYER = '/contact/?product=buyer-side#contact-form';
 
@@ -65,12 +65,12 @@ const n = (v: number) => v.toLocaleString('en-GB');
         <div class="pricing-plan__action">
           <div class="plan-go--m">
             <Action href={startHref(BUYER_PRO.planKey)} variant="secondary">
-              Start now<span class="visually-hidden"> on Buyer Pro, billed monthly</span>
+              {START_LABEL}<span class="visually-hidden"> on Buyer Pro, billed monthly</span>
             </Action>
           </div>
           <div class="plan-go--a">
             <Action href={startHref(BUYER_PRO.planKey, true)} variant="secondary">
-              Start now<span class="visually-hidden"> on Buyer Pro, billed annually</span>
+              {START_LABEL}<span class="visually-hidden"> on Buyer Pro, billed annually</span>
             </Action>
           </div>
         </div>
@@ -106,12 +106,12 @@ const n = (v: number) => v.toLocaleString('en-GB');
         <div class="pricing-plan__action">
           <div class="plan-go--m">
             <Action href={startHref(BUYER_PORTFOLIO.planKey)} variant="primary">
-              Start now<span class="visually-hidden"> on Buyer Portfolio, billed monthly</span>
+              {START_LABEL}<span class="visually-hidden"> on Buyer Portfolio, billed monthly</span>
             </Action>
           </div>
           <div class="plan-go--a">
             <Action href={startHref(BUYER_PORTFOLIO.planKey, true)} variant="primary">
-              Start now<span class="visually-hidden"> on Buyer Portfolio, billed annually</span>
+              {START_LABEL}<span class="visually-hidden"> on Buyer Portfolio, billed annually</span>
             </Action>
           </div>
         </div>
