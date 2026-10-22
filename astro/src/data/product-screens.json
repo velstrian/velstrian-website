@@ -1,0 +1,78 @@
+{
+  "schema": "R285-WEB-FIGMA-SCREENS-01 v1. One entry per exported Figma frame. kind is screen (1440x900, 16:10) or panel (built 600x450, exported 1200x900, 4:3). file is relative to the repo root Assets folder. slots are the website visual positions the frame is planned for, integration lane decides final wiring.",
+  "figmaFile": "https://www.figma.com/design/KO4JkhUrCvvopjP8E8zQLa",
+  "items": [
+    {
+      "id": "S1",
+      "slug": "bids-board",
+      "kind": "screen",
+      "product": "bid",
+      "node": "5:119",
+      "file": "Assets/product-screens/screen-bids-board.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Bid board showing public and private bids in four columns: in preparation, submitted, won and lost, each card with its deadline, value, owner and how many questions are answered.",
+      "slots": ["home-car-board"]
+    },
+    {
+      "id": "S2",
+      "slug": "response-answer",
+      "kind": "screen",
+      "product": "bid",
+      "node": "3:122",
+      "file": "Assets/product-screens/screen-response-answer.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Bid response workspace: the list of tender questions with their marks, a drafted answer about staff cover with two numbered citations, and the two source passages from the bidder's own documents with a passed source check.",
+      "slots": ["home-car-answer", "screen-answer-library", "screen-answer-list", "bid-hero", "about-hero"]
+    },
+    {
+      "id": "S3",
+      "slug": "no-source",
+      "kind": "screen",
+      "product": "bid",
+      "node": "6:2",
+      "file": "Assets/product-screens/screen-no-source.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Bid blocking a draft answer because it promises a 30 percent fuel cut that none of the bidder's documents support, with three ways to fix it: add the document, confirm it as a commitment, or remove the figure.",
+      "slots": ["home-car-refusal"]
+    },
+    {
+      "id": "S4",
+      "slug": "delivery-promises",
+      "kind": "screen",
+      "product": "bid",
+      "node": "7:122",
+      "file": "Assets/product-screens/screen-delivery-promises.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Bid delivery tab for a won contract, listing each promise made in the bid with what has been delivered so far, whether it is on track, at risk or behind, and the proof attached.",
+      "slots": ["home-car-deliver", "screen-evidence"]
+    },
+    {
+      "id": "S5",
+      "slug": "buyer-evaluation",
+      "kind": "screen",
+      "product": "buy",
+      "node": "7:458",
+      "file": "Assets/product-screens/screen-buyer-evaluation.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Buy scorecard where the buyer's panel scores each criterion of a supplier response from 0 to 100, next to an advisory pre-read that quotes evidence from the response and never scores.",
+      "slots": ["buy-hero"]
+    },
+    {
+      "id": "S6",
+      "slug": "discover-feed",
+      "kind": "screen",
+      "product": "bid",
+      "node": "8:119",
+      "file": "Assets/product-screens/screen-discover-feed.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Bid find contracts page listing new public contracts with a fit score out of 100 and a plain reason for each, plus a box for uploading the documents of a private invitation.",
+      "slots": ["screen-find"]
+    }
+  ]
+}

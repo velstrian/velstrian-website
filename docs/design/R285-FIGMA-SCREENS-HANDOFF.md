@@ -15,6 +15,13 @@ Figma file: https://www.figma.com/design/KO4JkhUrCvvopjP8E8zQLa (team "Crow", pa
 - Screen S2 "screen/response-answer" (node 3:122, 1440x900): Velstrian Bid response workspace, question list, drafted
   answer with two cited sources, grounding check passed. Not yet screenshot checked.
 
+## Progress, resumed 2026-10-22 after the restart
+
+Screenshot checked and exported (1440x900 PNG, `Assets/product-screens/`, recorded in
+`astro/src/data/product-screens.json`): S1 bids board 5:119, S2 response answer 3:122 (fixed: header search wrap,
+editor header overflow, footer overlap, chips aligned), S3 no source 6:2, S4 delivery promises 7:122, S5 buyer
+evaluation 7:458, S6 discover feed 8:119. The library's header search now takes `o.search` and truncates to one line.
+
 ## Size system (driver decision, replaces the brief's)
 
 - Screen 16:10, 1440x900, full app view with sidebar and header.
