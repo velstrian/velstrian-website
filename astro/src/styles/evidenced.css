@@ -917,6 +917,27 @@ main > .ea-sec * {
   color: var(--ea-muted);
 }
 
+/* The opening band of every page that is not a product page
+   (evidenced/PageHero.astro). Same light and the same centred head as the
+   product heroes, no stage under it, so the band ends with the head. */
+.ea-page-hero {
+  padding-bottom: clamp(var(--space-10), 1rem + 3vw, var(--space-16));
+}
+
+.ea-page-hero__label {
+  margin-bottom: var(--space-4);
+}
+
+.ea-page-hero--compact {
+  padding-top: clamp(var(--space-8), 0.5rem + 3vw, var(--space-12));
+  padding-bottom: clamp(var(--space-8), 0.5rem + 2vw, var(--space-12));
+}
+
+.ea-page-hero--compact .ea-hero__head .ea-hero__title {
+  max-width: 20em;
+  font-size: var(--t-page);
+}
+
 .ea-answer {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);

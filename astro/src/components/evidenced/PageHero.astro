@@ -1,0 +1,59 @@
+---
+/**
+ * PageHero: the opening band of every page that is not a product page.
+ *
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7: the remaining pages keep their
+ * content and move onto the v3 system. They all open the same way, so they
+ * share this one hero rather than each drawing its own: a LIGHT band carrying
+ * `ea-hero` (so it gets the hero's moving light from Band.astro), a short label,
+ * the page's h1, one plain lead, and the page's actions in the default slot.
+ * A `note` slot carries one small reassurance line under the actions.
+ *
+ * `size="compact"` is for reading pages (a glossary entry, a blog post, a
+ * policy), where the words below are the point and a home-size headline would
+ * push them off the first screen. Same mechanism, smaller type and padding.
+ *
+ * Sizes and spacing are tokens in styles/evidenced.css (.ea-page-hero), never
+ * set by a page.
+ */
+import Band from './Band.astro';
+
+interface Props {
+  title: string;
+  /** Id of the h1, also the band's accessible name. */
+  id: string;
+  label?: string;
+  lead?: string;
+  size?: 'standard' | 'compact';
+  /** Id of the band itself, for a page whose anchors point at the hero. */
+  bandId?: string;
+}
+
+const { title, id, label, lead, size = 'standard', bandId } = Astro.props;
+const hasActions = Astro.slots.has('default');
+const hasNote = Astro.slots.has('note');
+const hasBefore = Astro.slots.has('before');
+---
+
+<Band tone="light" class={`ea-hero ea-page-hero ea-page-hero--${size}`} labelledby={id} id={bandId}>
+  <div class="ea-wrap ea-hero__head">
+    {hasBefore && <slot name="before" />}
+    {label && <p class="ea-label ea-page-hero__label">{label}</p>}
+    <h1 class="ea-hero__title" id={id}>{title}</h1>
+    {lead && <p class="ea-lead ea-hero__lead">{lead}</p>}
+    {
+      hasActions && (
+        <div class="ea-actions">
+          <slot />
+        </div>
+      )
+    }
+    {
+      hasNote && (
+        <p class="ea-hero__note">
+          <slot name="note" />
+        </p>
+      )
+    }
+  </div>
+</Band>

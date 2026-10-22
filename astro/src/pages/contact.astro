@@ -1,57 +1,52 @@
 ---
 /**
- * /contact: the page every "Request access" CTA on the site points at.
+ * /contact/: the page every "Request access" and "Send a question" link on the
+ * site points at.
  *
- * SEO IS CARRIED OVER VERBATIM from the live page: title, description,
- * canonical and the BreadcrumbList JSON-LD. The design changes; the metadata
- * does not.
+ * ── 2026-10-22: ON DESIGN SYSTEM VERSION 3 ──────────────────────────────────
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7: the content stays, the page
+ * moves onto the v3 bands, type and cards. Written for a first time reader from
+ * a small firm (RULE 0-U), public and private named.
  *
- * THE PRODUCT IMAGE IS NOW DRAWN, NOT CAPTURED (2026-08-03, owner instruction).
- * This block records two reversals and the second cancels the first, so both are
- * kept rather than tidied away.
+ * STORYLINE:
+ *   1. PageHero   light      who do I talk to?          book a call, email us
+ *   2. Reach      light      which way suits me?        three card links, reply time
+ *   3. The call   light alt  what happens on a call?    a real screen on a stage
+ *   4. The form   light      tell us the situation      #contact-form, email directory, company
+ *   5. Digest     light alt  can I just keep up?        monthly digest signup
  *
- * The port originally dropped the legacy "What you will see on the call" section
- * because product captures on a pre-launch product are a credibility defect. On
- * 2026-08-02 that was reversed, on the grounds that the capture used here is the
- * same file /crowmark, all four /compare pages and every /sectors page already
- * ship. Holding one page to a rule the other twelve ignore is an omission with
- * a justification attached, not a standard.
+ * Every heading, link and form control of the previous page is kept. The one
+ * change of substance is the picture under "What you will see on the call": it
+ * was a drawn Figma screen, and is now a real screen from a demo account
+ * (data/product-captures.ts `contact-call-find`), shown on a stage like every
+ * other product view on the site, its caption saying exactly what it is.
  *
- * On 2026-08-03 the owner settled it a third way, which makes both earlier
- * positions moot: the captures are replaced by purpose-drawn screens, so the
- * page shows the product without shipping a photograph of a pre-launch one. The
- * caption changed with the image, because "screens from the live product" over a
- * drawing would be false. See specs/PRODUCT-SCREENS-FIGMA.md.
+ * `#contact-form` is the anchor every sitewide CTA links to. Never rename it.
+ * SEO (title, description, canonical, breadcrumb) is carried over verbatim.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import Band from '../components/evidenced/Band.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Action from '../components/evidenced/Action.astro';
+import Stage from '../components/evidenced/Stage.astro';
+import Frame from '../components/evidenced/Frame.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
 import NewsletterForm from '../components/forms/NewsletterForm.astro';
+import '../styles/evidenced.css';
 import { breadcrumbs } from '../lib/schema';
-import { CONTACT_EMAILS, COMPANY_NUMBER } from '../lib/brand-names';
+import { CONTACT_EMAILS, COMPANY_NUMBER, LEGAL_ENTITY_NAME, PRODUCT_NAME_BID } from '../lib/brand-names';
+import { WALKTHROUGH_URL } from '../data/app';
 
 const title = 'Contact Velstrian | Book a demo or ask a question';
 const description =
   'Book a 30-minute call, send an enquiry, or email us. UK team, replying within three to five business days.';
 
-const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
-
-/*
- * The trail was hand-written here as two literal ListItems, and its `/contact`
- * item carried no trailing slash. The 308 form on a directory-format build, so
- * this page's own breadcrumb pointed at a redirect to itself. Through
- * breadcrumbs() now, like every other route, so the URL form is a property of
- * lib/route-url.ts rather than of this file. The names and order are unchanged
- * from the live page.
- */
 const breadcrumb = breadcrumbs([
   { name: 'Home', path: '/' },
   { name: 'Contact', path: '/contact/' },
 ]);
 
-/** Who to email, and for what. Kept as data so the list cannot drift from the
-    directory rendered below it. */
+/** Who to email, and for what. */
 const DIRECTORY = [
   { purpose: 'General and partnerships', address: CONTACT_EMAILS.hello },
   { purpose: 'Support and data requests (GDPR)', address: CONTACT_EMAILS.support },
@@ -59,39 +54,19 @@ const DIRECTORY = [
   { purpose: 'Security disclosures', address: CONTACT_EMAILS.security },
 ];
 
-/**
- * REACH PANELS: restored from contact.html:177-205.
- *
- * The port kept only the hero and the form, so the "Send us an email" panel
- * went with the section it lives in. It is restored as the PAIR the live page
- * has: the two panels are one two-up grid, and shipping a lone card in a
- * two-column layout would be a design decision rather than a restoration. The
- * booking panel duplicating the hero button is how the live page reads today.
- *
- * Copy is verbatim, including "3 to 5 business days" in digits, which is how
- * these two panels are written on the live page.
- *
- * THE ENTERPRISE PANEL IS BACK (OA-28, 2026-08-02). It was the only route to a
- * portfolio conversation on the page and the port dropped it; the content-parity
- * allow-list carried it as "NOT a recorded decision, needs an owner call". It
- * comes back here rather than as a fourth section because contact.html:233 puts
- * it in a three-up card grid with the booking card and the email card, which are
- * the two panels this grid already renders. Copy is verbatim from
- * contact.html:245-247, and the action is the same mailto the live card carries;
- * sales email is already published in the directory below.
- */
+/** The three ways to reach us, each card one link. Copy kept from the previous
+    page, the Portfolio card worded per R285-WEB-CLAIMS-AUDIT-01 C1 (single
+    sign-on is on every plan, D241, and Portfolio has a published price, D235). */
 const REACH = [
   {
     heading: 'Book a 30-minute call',
     body: 'Speak directly with the founders. Walk through your procurement challenge live.',
-    href: 'https://calendly.com/crowagent-platform/30min',
+    href: WALKTHROUGH_URL,
     action: 'Choose a time',
     external: true,
   },
   {
     heading: 'Portfolio plan and volume licensing',
-    /* R285-WEB-CLAIMS-AUDIT-01 C1. Single sign-on is on every plan (D241) and
-       Portfolio has a published price (D235), so neither is a reason to email. */
     body: 'Single sign-on is included on every plan. Talk to us about Portfolio contract terms, a DPA, invoice or purchase order billing, or more than 10 users.',
     href: `mailto:${CONTACT_EMAILS.sales}?subject=Enterprise%20enquiry`,
     action: 'Email sales',
@@ -99,7 +74,7 @@ const REACH = [
   },
   {
     heading: 'Send us an email',
-    body: `${CONTACT_EMAILS.hello} · We respond within 3 to 5 business days.`,
+    body: `${CONTACT_EMAILS.hello}. We respond within 3 to 5 business days.`,
     href: `mailto:${CONTACT_EMAILS.hello}`,
     action: CONTACT_EMAILS.hello,
     external: false,
@@ -111,413 +86,290 @@ const COMPANY = [
   { term: 'Companies House number', detail: COMPANY_NUMBER, mono: true },
   { term: 'Data protection', detail: 'ICO registered data controller' },
   { term: 'Data residency', detail: 'EU' },
-  { term: 'UK business hours', detail: 'Mon-Fri, 09:00-17:30 BST' },
+  { term: 'UK business hours', detail: 'Mon to Fri, 09:00 to 17:30 BST' },
   { term: 'Response time', detail: 'Typically three to five business days' },
 ];
+
+const UPDATED = new Date('2026-10-22');
 ---
 
-<Base title={title} description={description} path="/contact" schema={[breadcrumb]}>
-  {/* "Contact · London based · UK team" until 2026-08-03. An eyebrow is
-      positioning copy, and OA-25 settled that the narrative covers UK public,
-      UK private, EU and global private tenders, with UK public as the PROOF
-      POINT rather than the identity. Telling a global reader "UK team" in the
-      first line of the contact page narrows exactly what that decision opened.
-
-      NOTHING FACTUAL IS LOST, which is why this is safe to do without asking:
-      the Velstrian Systems Ltd card on this same page already prints "Registered in
-      England and Wales", the Companies House number, EU data residency
-      and UK business hours. The eyebrow was the only place the jurisdiction
-      led rather than informed.
-
-      The comment sits ABOVE the element, not between its attributes, where it
-      was until 2026-08-04. A JSX comment in an attribute list is not valid
-      JSX; the Astro compiler accepted it and the build passed, while it took
-      the whole file's type-check down with an unterminated string literal.
-
-      AND THIS COMMENT THEN LEAKED ONTO THE PAGE, reported by the owner on
-      2026-08-04 as raw developer text at the top of /contact. The sentence
-      above originally spelled the delimiters out literally. A block comment
-      cannot nest: the inner closing delimiter terminated THIS comment four
-      lines early, so everything after it rendered as body copy inside <main>.
-      A note explaining a malformed-comment defect was itself malformed by the
-      same mechanism it was describing. Describe the delimiters in words. */}
-  <Section
-    eyebrow="Contact"
+<Base
+  title={title}
+  description={description}
+  path="/contact"
+  schema={[breadcrumb]}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero
+    id="contact-hero-title"
+    bandId="contact-hero"
+    label="Contact"
     title="Talk to Velstrian."
-    standfirst="Book a slot, send an enquiry, or email us directly. We reply within three to five business days, and the person who replies is on the team that built it."
-    id="contact-hero"
-    as="h1">
-    <div class="btn-row">
-      <Button href={CALENDLY} target="_blank">Book a 30-minute call</Button>
-      <Button href={`mailto:${CONTACT_EMAILS.hello}`} variant="secondary">Email us</Button>
-    </div>
-  </Section>
+    lead="Book a call, send us a message or email us. We reply within three to five business days, and the person who replies is on the team that built it."
+  >
+    <Action href={WALKTHROUGH_URL} newWindow>Book a 30-minute call</Action>
+    <Action href={`mailto:${CONTACT_EMAILS.hello}`} variant="secondary">Email us</Action>
+  </PageHero>
 
-  {/*
-    REACH PANELS: restored from contact.html:177-205. No head block, because
-    the legacy section has none: the two panel headings ARE the h2s, and adding
-    a section heading over them would be new copy nobody wrote.
-  */}
-  <Section id="reach">
-    <div class="reach">
-      {
-        REACH.map((r) => (
-          <a
-            class="reach__card surface"
-            href={r.href}
-            target={r.external ? '_blank' : undefined}
-            rel={r.external ? 'noopener noreferrer' : undefined}
+  <Band tone="light" id="reach" class="ct-reach">
+    <div class="ea-wrap">
+      <ul class="ct-reach__grid" role="list">
+        {
+          REACH.map((r) => (
+            <li data-reveal>
+              <a
+                class="ea-card ct-card"
+                href={r.href}
+                target={r.external ? '_blank' : undefined}
+                rel={r.external ? 'noopener noreferrer' : undefined}
+              >
+                <h2 class="ea-h3 ct-card__h">{r.heading}</h2>
+                <p class="ct-card__body">{r.body}</p>
+                <span class="ct-card__action">{r.action}</span>
+                {r.external && <span class="visually-hidden"> (opens in a new window)</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="ct-reach__trust" data-reveal>
+        Response within 3 to 5 business days. Founded in the UK. No outsourced support.
+      </p>
+    </div>
+  </Band>
+
+  <Band tone="light-alt" id="contact-shots" labelledby="contact-shots-title">
+    <div class="ea-wrap">
+      <div class="ea-panel ea-panel--row ct-call" data-reveal>
+        <div class="ea-panel__copy">
+          <p class="ea-label">The product</p>
+          <h2 class="ea-h2" id="contact-shots-title">What you will see on the call</h2>
+          <p>
+            We show you {PRODUCT_NAME_BID} working on a demo account, starting where most people start: the public and
+            private contracts that suit your business, and how an answer is built from your own documents.
+          </p>
+        </div>
+        <Stage layout="panel">
+          <Frame
+            title="New today"
+            status="Matched to you"
+            capture="contact-call-find"
+            caption="One contract in the morning feed, with how well it suits you."
           >
-            <h2 class="reach__h">{r.heading}</h2>
-            <p class="reach__body">{r.body}</p>
-            {/* The arrow is decoration on a link whose text already says where
-                it goes, so it is hidden from assistive tech. */}
-            <span class="meta reach__action">
-              {r.action}
-              <span aria-hidden="true"> &rarr;</span>
-            </span>
-          </a>
-        ))
-      }
+            <ul class="ea-mini-list">
+              <li><span>Office cleaning, a primary school</span><span class="ea-state">Closes in 21 days</span></li>
+              <li><span>Facilities support, a private retailer</span><span class="ea-state">Uploaded by you</span></li>
+            </ul>
+          </Frame>
+        </Stage>
+      </div>
     </div>
+  </Band>
 
-    <p class="meta reach__trust">
-      Response within 3 to 5 business days · Founded in the UK · No outsourced support
-    </p>
-  </Section>
-
-  {/*
-    PRODUCT CAPTURE: restored from contact.html:214-228. See the note at the
-    top of this file for why the earlier decision not to port it was reversed.
-  */}
-  {/*
-    LIGHT SCREEN, AND A DIFFERENT SCREEN SET. Owner instruction 2026-08-05:
-    "light mode images looks great, apply them in all the website carousels by
-    replacing dark version." The carousels moved that day, via VARIANT in
-    data/crowmark-screens.ts, but this page never read that module, so the owner
-    then reported this one still dark: "same dark screenhsot issue in
-    http://localhost:8095/contact/".
-
-    WHY THE PATH CHANGES DIRECTORY AND NOT JUST ITS SUFFIX. This figure was
-    pointing at Assets/shots/figma/mark-discover, from an OLDER and separate
-    nine-screen set that has no light variants and is not in the current Figma
-    file, so it cannot be re-exported light. The equivalent screen in the current
-    set is sup-1-discover, matched on what each screen shows rather than on its
-    name: both are the Discover feed of published notices with authority, value,
-    sector, date, source and a relevance percentage.
-
-    THE ALT TEXT WAS REWRITTEN AGAINST THE NEW IMAGE. It used to name the sidebar
-    items of the old drawing; the new screen groups them under Workspace and
-    CrowMark headings, so the string now says what is actually on screen. An alt
-    string describing the wrong picture is worse than a dark picture, because
-    nobody sighted will ever notice it.
-
-    The intrinsic size changes with the set: 1440x900 becomes 2880x1800, the 2x
-    export the v2 screens ship at. The ratio is 16:10 either way, so `.shot`,
-    which uses width:100% and height:auto and assumes no ratio, is unaffected.
-
-    DRAWN, NOT CAPTURED: owner instruction 2026-08-03, replacing the product
-    screenshot with the Figma screen from `Product — CrowMark Supplier (8)`,
-    file wJ9DK6ByFUN6rWe0CpCVPU: node `267:2` for the dark screen then, node
-    `323:3` for the light one now. The same swap OA-34 has been waiting on: the
-    site stops shipping captures of a pre-launch product.
-
-    THE CAPTION HAD TO CHANGE AND THAT IS THE POINT. It read "Screens from the
-    live product, a drawn representation built from the product's own design system."
-    A drawing is not a screen from the live product, so leaving that sentence
-    over a drawn image would have made the page say something untrue while
-    looking more honest than before. It now says what the image actually is.
-
-    The drawing itself is faithful rather than decorative: its colours come from
-    the platform's own token file and were verified against pixels sampled from
-    a real capture, and the app shell is reproduced from one. See
-    specs/PRODUCT-SCREENS-FIGMA.md.
-  */}
-  <Section
-    eyebrow="The product"
-    title="What you will see on the call"
-    standfirst="A drawn representation of the Velstrian Bid workspace, built from the product's own design system."
-    id="contact-shots"
-  >
-    <figure class="shot">
-      <picture>
-        <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-1-discover-light.avif?v=20260805a" />
-        <source type="image/webp" srcset="/Assets/shots/figma-v2/sup-1-discover-light.webp?v=20260805a" />
-        <img
-          src="/Assets/shots/figma-v2/sup-1-discover-light.png?v=20260805a"
-          width="2880"
-          height="1800"
-          loading="lazy"
-          decoding="async"
-          alt="The Velstrian Bid Discover workspace: a left product rail, then a sidebar listing Home, Action centre and Settings under Workspace and Contracts, Discover, New contract, Answer library, Insights and Reports under Velstrian Bid. Then a feed of three published tender notices, each showing the buying authority, the contract value, the sector, how long ago it was published, the register it came from and a relevance percentage, with buttons to open it in Velstrian Bid, find it on the source register, or save it."
-        />
-      </picture>
-      <figcaption>
-        Velstrian Bid Discover. A drawn representation of the workspace, not a screen capture.
-      </figcaption>
-    </figure>
-  </Section>
-
-  {/*
-    The form gets its own section and its own heading, and it is `#contact-form`
-    because every sitewide CTA links to that fragment. Changing this id breaks
-    the anchor on every page at once.
-  */}
-  <Section
-    eyebrow="Send a message"
-    title="Tell us what you're working on."
-    standfirst="Bidding for public sector contracts, or working out whether Velstrian fits your organisation: tell us the situation and we will answer properly."
-    id="contact-form"
-  >
-    <div class="contact-grid">
-      <div class="contact-grid__form surface surface--pad">
-        <h3 class="aside__title">Send us a message</h3>
-        <ContactForm />
+  <Band tone="light" id="contact-form" labelledby="contact-form-title">
+    <div class="ea-wrap">
+      <div class="ea-head-row" data-reveal>
+        <div class="ct-head">
+          <p class="ea-label">Send a message</p>
+          <h2 class="ea-h2" id="contact-form-title">Tell us what you're working on.</h2>
+        </div>
+        <p class="ea-lead">
+          Bidding for public or private contracts, or working out whether Velstrian suits your business? Tell us the
+          situation and we will answer properly.
+        </p>
       </div>
 
-      <aside class="contact-grid__aside surface surface--pad" aria-labelledby="directory-title">
-        <h3 class="aside__title" id="directory-title">How to reach us by email</h3>
-        <dl class="directory">
-          {
-            DIRECTORY.map((d) => (
-              <div class="directory__row">
-                <dt>{d.purpose}</dt>
-                <dd>
-                  <a href={`mailto:${d.address}`}>{d.address}</a>
-                </dd>
-              </div>
-            ))
-          }
-        </dl>
+      <div class="ct-grid">
+        <div class="ea-card ct-pane" data-reveal>
+          <h3 class="ea-h3">Send us a message</h3>
+          <ContactForm />
+        </div>
 
-        <h3 class="aside__title" id="company-title">Velstrian Systems Ltd</h3>
-        <dl class="directory" aria-labelledby="company-title">
-          {
-            COMPANY.map((c) => (
-              <div class="directory__row">
-                <dt>{c.term}</dt>
-                <dd class={c.mono ? 'is-mono' : undefined}>{c.detail}</dd>
-              </div>
-            ))
-          }
-          <div class="directory__row">
-            <dt>Registered office</dt>
-            <dd>Details available in our <a href="/privacy/">Privacy Policy</a></dd>
-          </div>
-        </dl>
-      </aside>
-    </div>
-  </Section>
+        <aside class="ea-card ct-pane" aria-labelledby="directory-title" data-reveal>
+          <h3 class="ea-h3" id="directory-title">How to reach us by email</h3>
+          <dl class="ct-list">
+            {
+              DIRECTORY.map((d) => (
+                <div class="ct-list__row">
+                  <dt>{d.purpose}</dt>
+                  <dd>
+                    <a class="ct-list__link" href={`mailto:${d.address}`}>{d.address}</a>
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
 
-  {/*
-    NEWSLETTER: restored from contact.html:485-498, which the first port
-    dropped. Same block as /about, different framing copy, both verbatim. The
-    eyebrow is the one addition, for the reason recorded on /about.
-  */}
-  {/* Owner, 2026-08-03: "all the Monthly digest must be in card." Same
-      treatment as /about, which is the other instance on the site. */}
-  <Section eyebrow="Monthly digest" id="newsletter">
-    <div class="digest surface surface--pad">
-      <h2 class="digest__h">Prefer regulatory updates?</h2>
-      <p class="digest__p">
-        Get our monthly procurement digest covering PPN 026 social value and Velstrian
-        product news.
-      </p>
-      <NewsletterForm id="contact-nl" source="contact-newsletter" />
+          <h3 class="ea-h3 ct-pane__next" id="company-title">{LEGAL_ENTITY_NAME}</h3>
+          <dl class="ct-list" aria-labelledby="company-title">
+            {
+              COMPANY.map((c) => (
+                <div class="ct-list__row">
+                  <dt>{c.term}</dt>
+                  <dd class={c.mono ? 'is-mono' : undefined}>{c.detail}</dd>
+                </div>
+              ))
+            }
+            <div class="ct-list__row">
+              <dt>Registered office</dt>
+              <dd>Details in our <a class="ct-list__link" href="/privacy/">Privacy Policy</a></dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
     </div>
-  </Section>
+  </Band>
+
+  <Band tone="light-alt" id="newsletter" labelledby="contact-nl-title">
+    <div class="ea-wrap">
+      <div class="ea-card ct-digest" data-reveal>
+        <p class="ea-label">Monthly digest</p>
+        <h2 class="ea-h2" id="contact-nl-title">Prefer regulatory updates?</h2>
+        <p class="ct-digest__p">
+          Get our monthly procurement digest covering PPN 026 social value and Velstrian product news.
+        </p>
+        <NewsletterForm id="contact-nl" source="contact-newsletter" />
+      </div>
+    </div>
+  </Band>
 </Base>
 
 <style>
-  /* Centred to match the head block above it (owner decision, 2026-08-02).
-     Alignment only: the row centres on the same axis as its heading. */
-
-  /* ── Reach panels ─────────────────────────────────────────────────────── */
-  /* Three-up, matching contact.html:233 (`grid-cols-1 md:grid-cols-3`): booking,
-     enterprise, email. It was two-up only while the enterprise panel was
-     missing. */
-  .reach {
+  /* ── Reach: three cards, each one link ─────────────────────────────────── */
+  .ct-reach__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(20px, 3vw, 36px);
+    gap: var(--space-5);
+    align-items: stretch;
   }
 
-  /* The whole card is the link, so the target is the panel rather than a short
-     line of text at the bottom of it. */
-  /* Border, background, gloss, hover and the focus ring all come from
-     `surface`. This page previously carried its own hover (border-color only,
-     no lift, no change of light) which is why the card felt dead next to the
-     compare hub cards, which had a different hover again. */
-  .reach__card {
-    display: block;
-    padding: var(--blk-pad);
+  .ct-reach__grid > li {
+    display: grid;
+  }
+
+  .ct-card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: var(--space-3);
+    padding: var(--space-8);
+    color: var(--ea-ink);
     text-decoration: none;
   }
 
-  .reach__h {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    color: var(--c-text);
+  .ct-card__h {
+    margin: 0;
   }
 
-  .reach__body {
-    margin: 0 0 var(--stack-2);
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.7;
-    color: var(--c-text-sub);
+  .ct-card__body {
+    color: var(--ea-muted);
     overflow-wrap: anywhere;
   }
 
-  .reach__action {
-    display: inline-block;
-    color: var(--c-interactive);
+  .ct-card__action {
+    color: var(--ea-accent-ink);
+    font-weight: var(--t-w-ea-medium);
     overflow-wrap: anywhere;
   }
 
-  .reach__trust {
-    margin: var(--sec-gap) 0 0;
+  @media (hover: hover) {
+    .ct-card:hover .ct-card__action {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+
+  .ct-reach__trust {
+    margin-top: var(--space-8);
+    font-size: var(--t-ea-small);
+    color: var(--ea-muted);
     text-align: center;
-    line-height: 1.8;
-    color: var(--c-text-muted);
   }
 
-  /* ── Product capture ──────────────────────────────────────────────────── */
-  /* Matches crowmark.astro, which ships the same file. */
-  .shot { margin: 0; }
-
-  .shot img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-card);
-  }
-
-  .shot figcaption {
-    margin-top: var(--stack-1);
-    font-family: var(--font-body);
-    font-size: var(--t-micro);
-    line-height: 1.6;
-    color: var(--c-text-muted);
-    max-width: 78ch;
-  }
-
-  .contact-grid {
+  /* ── The form and the directory ────────────────────────────────────────── */
+  .ct-head {
     display: grid;
-    /* minmax(0, …) on both tracks: a bare 1fr keeps the min-content floor and a
-       long email address would then push the page sideways. */
+    gap: var(--space-3);
+  }
+
+  .ct-grid {
+    display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    gap: clamp(24px, 3vw, 40px);
-    /* STRETCH, NOT START. Two cards side by side must share a floor; `start`
-       leaves the shorter one hanging and reads as a mistake rather than as a
-       pair. This is the same defect the owner reported on /partners. */
+    gap: var(--space-5);
     align-items: stretch;
   }
-  .contact-grid__form,
-  .contact-grid__aside {
+
+  .ct-pane {
     display: flex;
     flex-direction: column;
+    gap: var(--space-4);
+    padding: clamp(var(--space-6), 3vw, var(--space-8));
   }
 
-  /* The digest card, matching /about. Owner instruction 2026-08-03: every
-     Monthly digest on the site sits in a card. */
-  /* `.digest { text-align: center }` WAS HERE AND IS DELETED, 2026-08-31.
-     It was a restatement, not a decision: `.surface` already centres in
-     styles/surfaces.css, so this line changed nothing while it agreed with the
-     system, and the moment the system changed it was the only thing standing in
-     the way. Astro scoped styles are UNLAYERED and unlayered rules rank above
-     every @layer, so this one beat alignment.css rule 4 (one box, one axis) and
-     left the digest as the last card on the site with a centred heading over a
-     left-aligned form. The owner decision of 2026-08-03 that this comment
-     records is about the card CONTAINING the form, which is untouched. */
-  .digest__h {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h3);
-    font-weight: var(--t-w-h3);
-    line-height: 1.2;
-    color: var(--c-text);
-  }
-  .digest__p {
-    /* `margin: 0 auto var(--stack-2)` until 2026-08-31. The auto centred this
-       800px-capped paragraph inside a 1232px card, which put it 293px right of
-       the heading once alignment.css rule 4 moved the heading to the card's left
-       edge. The cap stays and does the work it was added for; only the centring
-       goes. Same change on /contact, and the same reasoning in
-       NewsletterForm.astro for the two auto margins inside the form. */
-    margin: 0 0 var(--stack-2);
-    max-width: var(--measure-prose);
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    color: var(--c-text-sub);
+  .ct-pane__next {
+    margin-top: var(--space-6);
   }
 
-  /* THESE ARE HEADINGS, SO THEY TAKE A HEADING SIZE. "How to reach us by
-     email" and "CrowAgent Ltd" each head a definition list and each is the
-     accessible name of the block below it, and they were set at --t-micro:
-     13px, mono, uppercase, muted. That is the label treatment, and at 13px a
-     heading is smaller than the text it introduces.
-     --t-h4 is the tier for a heading inside a card or panel, which is what the
-     aside column is. The eyebrow treatment stays where it belongs, on <p>. */
-  .aside__title {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: var(--t-w-h3);
-    letter-spacing: -0.01em;
-    color: var(--c-text);
-  }
-
-  .aside__title + .directory { margin-bottom: var(--sec-gap); }
-
-  .directory {
-    margin: 0;
+  .ct-list {
     display: grid;
-    gap: 0;
   }
 
-  .directory__row {
+  .ct-list__row {
     display: grid;
-    /* The label column is fixed so every value starts on one vertical, which is
-       the only reason a definition list beats two stacked paragraphs. */
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-    gap: 0 1rem;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid var(--c-border);
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--ea-rule);
   }
 
-  .directory__row:last-child { border-bottom: 0; }
-
-  .directory dt {
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    color: var(--c-text-muted);
+  .ct-list__row:last-child {
+    border-bottom: 0;
   }
 
-  .directory dd {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    color: var(--c-text-sub);
-    /* A long address wraps rather than widening the column. */
+  .ct-list dt {
+    color: var(--ea-muted);
+  }
+
+  .ct-list dd {
+    color: var(--ea-sub);
     overflow-wrap: anywhere;
   }
 
-  .directory dd.is-mono { font-family: var(--font-mono); }
-
-  .directory a {
-    color: var(--c-interactive);
+  .ct-list dd.is-mono {
+    font-family: var(--font-mono);
   }
 
-  @media (max-width: 899px) {
-    .contact-grid { grid-template-columns: minmax(0, 1fr); }
-    .reach { grid-template-columns: minmax(0, 1fr); }
+  .ct-list__link {
+    color: var(--ea-accent-ink);
+    text-underline-offset: 4px;
   }
 
-  @media (max-width: 519px) {
-    .directory__row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  /* ── Digest ────────────────────────────────────────────────────────────── */
+  .ct-digest {
+    max-width: var(--measure-band);
+    margin-inline: auto;
+    padding: clamp(var(--space-8), 5vw, var(--space-12));
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .ct-digest__p {
+    max-width: var(--measure-prose);
+    color: var(--ea-muted);
+  }
+
+  @media (max-width: 959px) {
+    .ct-reach__grid,
+    .ct-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 599px) {
+    .ct-list__row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-1);
+    }
   }
 </style>

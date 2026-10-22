@@ -94,4 +94,7 @@ export const CAPTURES: Record<string, Capture | null> = {
   'home-car-answer': ANSWER_LIBRARY,
   'home-car-refusal': REFUSAL_REAL,
   'home-car-deliver': null,
+  /* /contact/ "What you will see on the call": the call opens where most
+     people start, the morning feed. */
+  'contact-call-find': FIND_FEED,
 };
