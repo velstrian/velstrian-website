@@ -70,12 +70,14 @@ main > .ea-sec * {
    so an unlayered reset reaching inside it would strip every paragraph gap and
    list marker whatever its specificity. `.ea-longform` marks the same kind of
    copy styled by its own layout (the comparison and glossary articles).
-   :where() keeps the guard at zero. */
-:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4):where(:not(.prose *, .ea-longform *)) {
+   :where() keeps the guard at zero. A product screen placed INSIDE long-form
+   copy (ProductScreen in a comparison) is UI, not copy, so the reset reaches
+   back in for anything inside a stage. */
+:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4):where(:not(.prose *, .ea-longform *), .ea-stage *) {
   margin: 0;
 }
 
-:where(.ea-sec) :where(ul, ol):where(:not(.prose *, .ea-longform *)) {
+:where(.ea-sec) :where(ul, ol):where(:not(.prose *, .ea-longform *), .ea-stage *) {
   padding: 0;
   list-style: none;
 }
@@ -528,6 +530,14 @@ main > .ea-sec * {
 /* Centre: one screen centred on the stage. */
 .ea-stage--centre {
   padding: clamp(var(--space-6), 3.5vw, var(--space-12));
+}
+
+/* A recreation on ProductScreen's centre stage is a short list, and at the
+   full 1180px column it read as a thin strip. It sits at a reading width,
+   centred, with the stage around it. A capture keeps its own width. */
+.ea-screen-one .ea-stage__screen > .ea-frame:not(.ea-frame--shot) {
+  max-width: var(--ea-frame-centre-max);
+  margin-inline: auto;
 }
 
 /* ── Product screen ───────────────────────────────────────────────────────── */

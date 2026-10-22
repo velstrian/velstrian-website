@@ -13,6 +13,7 @@ ogImageAlt: "Velstrian Bid vs mytender.io comparison"
 ctaHeadline: "See the price."
 ctaSubLine1: "Published pricing from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
+screen: find
 faq:
   - question: "Is Velstrian Bid or mytender.io cheaper?"
     answer: "Velstrian Bid publishes its prices: Starter is £49 per month and Pro is £149 per month, and anyone can sign up and start by card. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information."
@@ -98,14 +99,7 @@ faq:
 
 <h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
-<figure class="cmp-shot">
-<picture>
-<source type="image/avif" srcset="/Assets/shots/figma-v2/buy-1-requirement-builder-light.avif?v=20260805a">
-<source type="image/webp" srcset="/Assets/shots/figma-v2/buy-1-requirement-builder-light.webp?v=20260805a">
-<img src="/Assets/shots/figma-v2/buy-1-requirement-builder-light.png?v=20260805a" width="2880" height="1800" loading="lazy" decoding="async" alt="The Velstrian Bid social value requirement builder for a buying authority, a draft requirement on a &pound;4,250,000 contract closing 7 Jun 2026. Four figures head the page. A social value weighting of 20 per cent, noted on screen as above the statutory minimum of 10 per cent. Five criteria published, each with its own evidence requirement. A total weight of 100 per cent, split quality 50, price 30 and social value 20. And 24 responses received from 24 invited suppliers. An award criteria table lists local employment, apprenticeships and skills, SME and VCSE spend, carbon reduction and supported employment, each with its TOMs reference, its weighting and the evidence a supplier must supply. Preview supplier view and Publish requirement sit at the top right." />
-</picture>
-<figcaption>The buyer-side social value requirement in Velstrian Bid, shown as a drawn representation. The criteria, weightings and evidence requirements on screen are part of the drawing.</figcaption>
-</figure>
+<div data-cmp-screen></div>
 <p>After award, Velstrian Bid keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. On security, it uses EU data residency, AES-256 encryption at rest and TLS 1.3 in transit.</p>
 <p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 

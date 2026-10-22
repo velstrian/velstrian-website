@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Compare from '../../layouts/Compare.astro';
+import ProductScreen from '../../components/evidenced/ProductScreen.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('compare');
@@ -34,4 +35,5 @@ const d = page.data;
   faq={d.faq}
 >
   <Content />
+  <ProductScreen slot="screen" name={d.screen} />
 </Compare>

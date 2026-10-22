@@ -97,4 +97,15 @@ export const CAPTURES: Record<string, Capture | null> = {
   /* /contact/ "What you will see on the call": the call opens where most
      people start, the morning feed. */
   'contact-call-find': FIND_FEED,
+  /* components/evidenced/ProductScreen.astro: the one screen on /compare/,
+     the comparisons, /sectors/, the sector pages and /partners/. These
+     replaced Figma drawings that carried the old brand inside the picture. */
+  'screen-find': FIND_FEED,
+  'screen-answer-list': ANSWER_LIST,
+  'screen-answer-library': ANSWER_LIBRARY,
+  'screen-evidence': null,
+  'screen-buyer-requirement': null,
+  'screen-buyer-delivery': null,
+  'screen-insights': null,
+  'screen-action-centre': null,
 };

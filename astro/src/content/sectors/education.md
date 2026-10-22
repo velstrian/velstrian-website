@@ -23,14 +23,7 @@ steps:
     verb: "Disclose AI and evidence delivery."
     say: "Every AI-assisted draft carries a PPN 017 transparency disclosure. After award, Velstrian Bid checks the Procurement Act 2023 KPI duties as an advisory step and gives you a place to evidence what you committed to. These checks are advisory and are not legal advice."
 helpsIntro: "Velstrian Bid covers finding, drafting and evidencing education-sector tenders in one place."
-figure:
-  avif: "/Assets/shots/figma-v2/sup-5-answer-library-light.avif?v=20260805a"
-  webp: "/Assets/shots/figma-v2/sup-5-answer-library-light.webp?v=20260805a"
-  png: "/Assets/shots/figma-v2/sup-5-answer-library-light.png?v=20260805a"
-  width: 2048
-  height: 1536
-  alt: "The Velstrian Bid answer library at tablet width, described on screen as your previously submitted answers, which the drafter grounds new answers in, with answers you marked as coming from a won bid ranking higher as sources. Buttons to import answers and to add an answer sit at the top, above a field to search topic, answer text or tag, a sort control set to Newest first and a filter for answers from won bids only, then a count of 10 answers. Three answers are shown in full. A social value answer about a Social Value Lead reporting quarterly against the TOMs framework, tagged social-value, a procurement policy note and toms. An eight-week mobilisation answer with a named transition manager and TUPE consultation from week one, tagged mobilisation and tupe. And a safeguarding answer about training to level 3 with DBS status re-checked every three years, tagged safeguarding and compliance. The first two carry a From a won bid marker."
-  caption: "The answer library in Velstrian Bid, shown as a drawn representation. It is what holds one supplier voice across every buyer: new answers are grounded in what your organisation has already submitted."
+screen: answer-library
 faqHeading: "Education bidding, answered."
 finalCtaSub: "Start with the education tenders your team should be bidding this week."
 faq:

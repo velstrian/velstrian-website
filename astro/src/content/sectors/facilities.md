@@ -23,14 +23,7 @@ steps:
     verb: "Disclose AI and evidence delivery."
     say: "Every AI-assisted draft carries a PPN 017 transparency disclosure. After award, Velstrian Bid checks the Procurement Act 2023 KPI duties as an advisory step and gives you a place to evidence what you committed to. These checks are advisory and are not legal advice."
 helpsIntro: "Velstrian Bid covers finding, drafting and evidencing FM tenders in one place."
-figure:
-  avif: "/Assets/shots/figma-v2/sup-4-evidence-tracker-light.avif?v=20260805a"
-  webp: "/Assets/shots/figma-v2/sup-4-evidence-tracker-light.webp?v=20260805a"
-  png: "/Assets/shots/figma-v2/sup-4-evidence-tracker-light.png?v=20260805a"
-  width: 2880
-  height: 1800
-  alt: 'The Velstrian Bid evidence tracker for an awarded contract, Reablement and Home Support Services, marked stage Won, showing a duration of 48 months, the next report due 1 Aug 2026 and a Generate monthly progress report button. A panel reads "This month''s evidence coverage, 3 of 5 committed measures evidenced" at 60% with a progress bar. Three measure cards sit below, local employment at 1 of 4, apprenticeships at 1 of 7 and supported employment at 1 of 3, each with its own progress bar and a dated evidence item with a link to view the file: signed employment contracts and payroll records for new local hires, apprenticeship agreements lodged with the training provider, and JobCentre Plus referral confirmations with verified start dates. Each card has an Upload evidence button. A statutory strip runs along the foot. It reads s.52, three KPIs published, with contracts above £5m required to carry at least three published KPIs. Then s.71, next assessment in 4 months, with performance assessed and published every 12 months. Then the statutory minimum weighting, social value carrying at least 10% of the award criteria.'
-  caption: 'The post-award evidence tracker in Velstrian Bid, shown as a drawn representation. The coverage figures on screen are part of the drawing.'
+screen: evidence
 faqHeading: "FM bidding, answered."
 finalCtaSub: "Start with the FM tenders your team should be bidding this week."
 faq:

@@ -23,8 +23,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/evidenced/PageHero.astro';
 import Band from '../../components/evidenced/Band.astro';
 import Action from '../../components/evidenced/Action.astro';
-import Stage from '../../components/evidenced/Stage.astro';
-import Frame from '../../components/evidenced/Frame.astro';
+import ProductScreen from '../../components/evidenced/ProductScreen.astro';
 import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { SITE } from '../../data/site';
@@ -156,21 +155,7 @@ const UPDATED = new Date('2026-10-22');
       </ul>
 
       <div class="sectors-screen" data-reveal>
-        <Stage layout="centre">
-          <Frame
-            title={`${PRODUCT_NAME_BID} Insights`}
-            capture="sectors-insights"
-            caption="Contracts by status, pipeline value and sector benchmarks in Velstrian Bid Insights, shown as a drawn representation. The figures on screen are part of the drawing. They are not a customer result and not an outcome to expect."
-            image={{
-              src: '/Assets/shots/figma-v2/sup-6-insights-light.png?v=20260805a',
-              avif: '/Assets/shots/figma-v2/sup-6-insights-light.avif?v=20260805a',
-              webp: '/Assets/shots/figma-v2/sup-6-insights-light.webp?v=20260805a',
-              width: 2048,
-              height: 1536,
-              alt: 'The Velstrian Bid Insights dashboard. Four figures head the screen: total contracts across five sectors, social value delivered on won bids, evidence completion against committed measures, and s.71 assessments due within 90 days. A contracts-by-status bar chart counting draft, profiling, evidence, won and lost sits beside a pipeline summary of active bids, pending outcome, won this period and draft, each with a count and a value. A quick stats panel sits beside sector benchmarks for healthcare and social care, which include the statutory minimum social value weighting of 10 per cent. A footnote reads that every figure is drawn from your own contract records and from published awards, and that Velstrian Bid reports what has been evidenced and does not forecast outcomes.',
-            }}
-          />
-        </Stage>
+        <ProductScreen name="insights" />
       </div>
     </div>
   </Band>

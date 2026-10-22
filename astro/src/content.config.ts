@@ -102,6 +102,8 @@ const compare = defineCollection({
     ctaHeadline: z.string(),
     ctaSubLine1: z.string(),
     ctaSubLine2: z.string(),
+    /* The one product screen, by name (components/evidenced/ProductScreen.astro). */
+    screen: z.enum(['find', 'answer-list', 'answer-library', 'evidence', 'buyer-requirement', 'buyer-delivery', 'insights', 'action-centre']),
     faq: z.array(faqEntry),
   }),
 });
@@ -135,15 +137,9 @@ const sectors = defineCollection({
     helpsHeading: z.string(),
     steps: z.array(sectorStep),
     helpsIntro: z.string(),
-    figure: z.object({
-      avif: z.string(),
-      webp: z.string(),
-      png: z.string(),
-      width: z.number(),
-      height: z.number(),
-      alt: z.string(),
-      caption: z.string(),
-    }),
+    /* The one product screen, by name (components/evidenced/ProductScreen.astro).
+       It replaced a figure of a Figma drawing that carried the old brand. */
+    screen: z.enum(['find', 'answer-list', 'answer-library', 'evidence', 'buyer-requirement', 'buyer-delivery', 'insights', 'action-centre']),
     faqHeading: z.string(),
     finalCtaSub: z.string(),
     faq: z.array(faqEntry),

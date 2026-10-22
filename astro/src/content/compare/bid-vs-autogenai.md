@@ -13,6 +13,7 @@ ogImageAlt: "Velstrian Bid vs AutogenAI comparison"
 ctaHeadline: "See the price."
 ctaSubLine1: "Published pricing from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
+screen: answer-list
 faq:
   - question: "Is Velstrian Bid or AutogenAI cheaper?"
     answer: "Velstrian Bid publishes its prices: Starter is £49 per month and Pro is £149 per month, and anyone can sign up and start by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information."
@@ -96,14 +97,7 @@ faq:
 
 <h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
-<figure class="cmp-shot">
-<picture>
-<source type="image/avif" srcset="/Assets/shots/figma-v2/sup-2-tender-questions-light.avif?v=20260805a">
-<source type="image/webp" srcset="/Assets/shots/figma-v2/sup-2-tender-questions-light.webp?v=20260805a">
-<img src="/Assets/shots/figma-v2/sup-2-tender-questions-light.png?v=20260805a" width="2880" height="1800" loading="lazy" decoding="async" alt="The Velstrian Bid tender questions screen, headed by the contract, its &pound;4,250,000 estimated value, its social value requirement, a deadline of 7 Jun 2026 and the buying authority, with a stage strip running overview, documents, response, review, delivery and outcome. A banner states that answers are AI-assisted and grounded only in your own answer library, the published requirement and your confirmed commitments, that every figure comes from your engine-computed commitments and is never invented, and that a named human reviews, edits and approves every answer before you submit it. Four scored questions are listed below, each with a category, a word limit, a weighting and an action: a quality question on mobilising the contract within eight weeks, a social value question on measurable commitments and how each will be evidenced, a compliance question on safeguarding and statutory duties, and a further quality question on continuous improvement. The first three offer Draft answer and the last shows Review draft." />
-</picture>
-<figcaption>Tender questions on a contract in Velstrian Bid, shown as a drawn representation. The panel at the top is the product&rsquo;s own standing notice about what a draft may be grounded in and who has to approve it.</figcaption>
-</figure>
+<div data-cmp-screen></div>
 <p>After award, Velstrian Bid keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. It is built for the supplier side of UK public-sector procurement, not for enterprise-wide proposal automation across every sector.</p>
 <p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 

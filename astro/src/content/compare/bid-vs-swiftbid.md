@@ -13,6 +13,7 @@ ogImageAlt: "Velstrian Bid vs SwiftBid comparison"
 ctaHeadline: "Bid often."
 ctaSubLine1: "One subscription, from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
+screen: answer-library
 faq:
   - question: "Is Velstrian Bid or SwiftBid cheaper?"
     answer: "It depends on how many bids you write. SwiftBid charges per bid at £149 (Basic), £349 (Standard) and £749 (Premium). Velstrian Bid is a subscription from £49 per month. For one or two bids a year SwiftBid can be cheaper. From around the third bid a year a Velstrian Bid subscription tends to cost less overall."
@@ -96,14 +97,7 @@ faq:
 
 <h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, refreshed every morning at 06:00 UTC, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
-<figure class="cmp-shot">
-<picture>
-<source type="image/avif" srcset="/Assets/shots/figma-v2/sup-5-answer-library-light.avif?v=20260805a">
-<source type="image/webp" srcset="/Assets/shots/figma-v2/sup-5-answer-library-light.webp?v=20260805a">
-<img src="/Assets/shots/figma-v2/sup-5-answer-library-light.png?v=20260805a" width="2048" height="1536" loading="lazy" decoding="async" alt="The Velstrian Bid answer library at tablet width: previously submitted answers, introduced on screen as what the drafter grounds new answers in, with answers marked as coming from a won bid ranked higher as sources. A search field, a Newest first sort and a won-bids filter sit above a count of 10 answers. Three answers are shown in full, on social value against the TOMs framework, on an eight-week mobilisation plan with TUPE consultation, and on safeguarding training to level 3 with DBS re-checks every three years. Each carries topic tags, and the first two are marked as from a won bid." />
-</picture>
-<figcaption>The answer library in Velstrian Bid, shown as a drawn representation. It is the store a subscription builds up bid after bid, which the drafter then grounds new answers in.</figcaption>
-</figure>
+<div data-cmp-screen></div>
 <p>Velstrian Bid also calculates social value deterministically against the weighting the buyer published, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. It does not supply an external bid writer. The reviewer who approves each draft is your own.</p>
 <p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 

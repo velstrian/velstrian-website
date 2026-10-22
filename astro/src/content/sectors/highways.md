@@ -23,14 +23,7 @@ steps:
     verb: "Disclose AI and evidence KPIs."
     say: "Every AI-assisted draft carries a PPN 017 transparency disclosure. After award, Velstrian Bid checks the Procurement Act 2023 KPI duties, section 52 and section 71, as an advisory step and gives you a place to evidence performance over the life of a term contract. These checks are advisory and are not legal advice."
 helpsIntro: "Velstrian Bid covers finding, drafting and evidencing highways tenders in one place."
-figure:
-  avif: "/Assets/shots/figma-v2/buy-4-delivery-oversight-light.avif?v=20260805a"
-  webp: "/Assets/shots/figma-v2/buy-4-delivery-oversight-light.webp?v=20260805a"
-  png: "/Assets/shots/figma-v2/buy-4-delivery-oversight-light.png?v=20260805a"
-  width: 2880
-  height: 1800
-  alt: 'The Velstrian Bid delivery oversight screen on the buying-authority side, for Northgate Borough Council, described on screen as commitments made at award, tracked to the evidence that proves them. Four figures head the page: 12 contracts in delivery across 4 categories, 58 measures committed by 12 suppliers, 74% evidence received this reporting month, and 3 s.71 assessments due within 90 days. A table lists each supplier and contract with an evidence percentage, a status chip and the next s.71 date, running from Meridian Care Group at 92% on track, through Pennine Support Partnership at 54% at risk, to Calder Health and Care Ltd at 31% behind. A statutory strip closes the page. It reads s.52, KPIs published for 9 of 12, with contracts above £5m required to carry at least three published KPIs. Then s.71, 3 assessments due, with performance assessed and published every 12 months. Then the social value weighting, 20% applied, above the 10% minimum on this requirement. Buttons to export an s.71 pack and to request evidence sit at the top right.'
-  caption: "Post-award KPI and evidence oversight in Velstrian Bid, shown as a drawn representation. The section 52 and section 71 lines on screen restate the Procurement Act 2023 duties. The counts and percentages are part of the drawing."
+screen: buyer-delivery
 faqHeading: "Highways bidding, answered."
 finalCtaSub: "Start with the highways schemes your team should be bidding this month."
 faq:

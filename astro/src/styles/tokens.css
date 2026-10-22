@@ -3594,6 +3594,8 @@
   /* A real capture's frame shrinks to the picture (a portrait capture is
      narrow) but never below this, so its caption still reads in a few lines. */
   --ea-frame-shot-min: 22rem;
+  /* An HTML recreation centred on a stage (ProductScreen) stops at this width. */
+  --ea-frame-centre-max: 46rem;
 
   /* A product window's edge, lit from the top (evidenced.css .ea-frame__window):
      a light rim fading to an ink hairline at the foot. */

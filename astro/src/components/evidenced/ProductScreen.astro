@@ -1,0 +1,102 @@
+---
+/**
+ * ProductScreen: one named product screen on a centred Stage, for the pages
+ * that show a single screen beside long copy (/compare/, the comparisons,
+ * /sectors/, the sector pages, /partners/).
+ *
+ * R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-22. Those pages showed the Figma
+ * drawings in Assets/shots/figma-v2/, and every one of them carries the old
+ * brand inside the picture (a "CrowAgent" rail, "CrowMark" crumbs, "Open in
+ * CrowMark" buttons) and several print "PPN 002". An old name must not appear
+ * anywhere a visitor sees, so no page draws them any more.
+ *
+ * Each name below is either a real staging capture (data/product-captures.ts)
+ * or, where no capture of that screen exists yet, the shared HTML recreation
+ * pattern: a Frame whose caption opens "Example data". When the capture lane
+ * lands a screen, setting its entry in product-captures.ts swaps the
+ * recreation for the image with no change here.
+ */
+import Stage from './Stage.astro';
+import Frame from './Frame.astro';
+
+export type ScreenName =
+  | 'find'
+  | 'answer-list'
+  | 'answer-library'
+  | 'evidence'
+  | 'buyer-requirement'
+  | 'buyer-delivery'
+  | 'insights'
+  | 'action-centre';
+
+interface Props {
+  name: ScreenName;
+}
+const { name } = Astro.props;
+---
+
+<Stage layout="centre" class="ea-screen-one">
+  {name === 'find' && <Frame title="New today" capture="screen-find" caption="One contract in the morning feed." />}
+  {name === 'answer-list' && <Frame title="Your questions" capture="screen-answer-list" caption="Every question drafted." />}
+  {name === 'answer-library' && <Frame title="Your answer" capture="screen-answer-library" caption="An answer drafted from your library." />}
+  {
+    name === 'evidence' && (
+      <Frame title="After you win: proof for each promise" status="Contract won" capture="screen-evidence" caption="Promises, proof and dates are an example.">
+        <ul class="ea-mini-list">
+          <li><span>Local jobs: signed contracts and payroll records</span><span class="ea-state ea-state--ok">1 of 4 proved</span></li>
+          <li><span>Apprenticeships: agreements with the training provider</span><span class="ea-state ea-state--held">Upload proof</span></li>
+          <li><span>Supported jobs: referral confirmations</span><span class="ea-state ea-state--ok">1 of 3 proved</span></li>
+          <li><span>Monthly report to the customer</span><span class="ea-state">Due 1 August</span></li>
+        </ul>
+      </Frame>
+    )
+  }
+  {
+    name === 'buyer-requirement' && (
+      <Frame title="Requirement pack: home support services" status="Draft" capture="screen-buyer-requirement" caption="The measures and the proof asked for are an example.">
+        <ul class="ea-mini-list">
+          <li><span>Local jobs</span><span class="ea-state ea-state--ok">Proof: signed contracts</span></li>
+          <li><span>Apprenticeships and skills</span><span class="ea-state ea-state--ok">Proof: agreements</span></li>
+          <li><span>Spend with small local firms</span><span class="ea-state ea-state--ok">Proof: ledger extract</span></li>
+          <li><span>Carbon reduction</span><span class="ea-state">Proof: a dated plan</span></li>
+        </ul>
+      </Frame>
+    )
+  }
+  {
+    name === 'buyer-delivery' && (
+      <Frame title="After the award: what suppliers promised" status="5 contracts" capture="screen-buyer-delivery" caption="Suppliers, contracts and progress are an example.">
+        <ul class="ea-mini-list">
+          <li><span>Highways maintenance term contract</span><span class="ea-state ea-state--ok">On track</span></li>
+          <li><span>Winter service, lot 2</span><span class="ea-state ea-state--ok">On track</span></li>
+          <li><span>Street lighting renewal</span><span class="ea-state ea-state--held">Proof late</span></li>
+          <li><span>Next published performance review</span><span class="ea-state">Due in August</span></li>
+        </ul>
+      </Frame>
+    )
+  }
+  {
+    name === 'insights' && (
+      <Frame title="Your bids at a glance" status="Last 12 months" capture="screen-insights" caption="Bids, stages and counts are an example.">
+        <ul class="ea-mini-list">
+          <li><span>Drafting</span><span class="ea-state">3 bids</span></li>
+          <li><span>Gathering proof</span><span class="ea-state ea-state--held">5 bids</span></li>
+          <li><span>Won</span><span class="ea-state ea-state--ok">6 bids</span></li>
+          <li><span>Promises proved on won contracts</span><span class="ea-state ea-state--ok">Shown per contract</span></li>
+        </ul>
+      </Frame>
+    )
+  }
+  {
+    name === 'action-centre' && (
+      <Frame title="Due this week" status="4 open" capture="screen-action-centre" caption="Tasks and dates are an example.">
+        <ul class="ea-mini-list">
+          <li><span>Upload apprenticeship agreements</span><span class="ea-state ea-state--held">Due in 2 days</span></li>
+          <li><span>Publish the yearly performance review</span><span class="ea-state">Due in 6 days</span></li>
+          <li><span>Approve the drafted answer to question 7</span><span class="ea-state">Due in 9 days</span></li>
+          <li><span>Confirm your starting figures</span><span class="ea-state">Due in 12 days</span></li>
+        </ul>
+      </Frame>
+    )
+  }
+</Stage>

@@ -13,6 +13,7 @@ ogImageAlt: "Velstrian Bid vs CleanTender comparison"
 ctaHeadline: "Bid wider."
 ctaSubLine1: "Every sector, published pricing from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
+screen: evidence
 faq:
   - question: "Is Velstrian Bid or CleanTender cheaper?"
     answer: "Both publish prices. CleanTender has a free tier and a Pro plan at £99 per month or £990 per year. Velstrian Bid Starter is £49 per month and Pro is £149 per month. For a soft-FM-only supplier, CleanTender Pro at £99 sits between Velstrian Bid's two paid tiers."
@@ -98,14 +99,7 @@ faq:
 <h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. Unlike a sector specialist, it is sector-agnostic: it tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED across any category, refreshed every morning at 06:00 UTC. It drafts answers grounded in the supplier's own submitted bids, and its defining rule is figure-grounding, so before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <p>Velstrian Bid calculates social value deterministically in code against the weighting the buyer published rather than only drafting it as a questionnaire section, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. Its bid-fit and coverage marking, by contrast, is still in development and not in the released product, so on the fit-scan row above CleanTender is genuinely ahead today.</p>
-<figure class="cmp-shot">
-<picture>
-<source type="image/avif" srcset="/Assets/shots/figma-v2/sup-4-evidence-tracker-light.avif?v=20260805a">
-<source type="image/webp" srcset="/Assets/shots/figma-v2/sup-4-evidence-tracker-light.webp?v=20260805a">
-<img src="/Assets/shots/figma-v2/sup-4-evidence-tracker-light.png?v=20260805a" width="2880" height="1800" loading="lazy" decoding="async" alt="The Velstrian Bid evidence tracker for an awarded contract at stage Won. A coverage bar reads three of five committed measures evidenced this month, at 60 per cent, beside a button to generate a monthly progress report. Three measure cards follow, local employment at one of four, apprenticeships at one of seven and supported employment at one of three, each listing a dated evidence item with a view-file link and an Upload evidence button. A statutory strip along the foot covers the s.52 published-KPI expectation on contracts above &pound;5m, the s.71 cycle of assessing and publishing performance every 12 months, and the statutory minimum social value weighting of 10 per cent." />
-</picture>
-<figcaption>The post-award evidence tracker in Velstrian Bid, shown as a drawn representation. The coverage figures on screen are part of the drawing.</figcaption>
-</figure>
+<div data-cmp-screen></div>
 <p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 
 <h2 id="pricing-compared">Pricing compared</h2>

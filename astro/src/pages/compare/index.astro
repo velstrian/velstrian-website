@@ -20,8 +20,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/evidenced/PageHero.astro';
 import Band from '../../components/evidenced/Band.astro';
 import Action from '../../components/evidenced/Action.astro';
-import Stage from '../../components/evidenced/Stage.astro';
-import Frame from '../../components/evidenced/Frame.astro';
+import ProductScreen from '../../components/evidenced/ProductScreen.astro';
 import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { SITE } from '../../data/site';
@@ -148,21 +147,7 @@ const schema = [
       </ul>
 
       <div class="cmp-hub__screen" data-reveal>
-        <Stage layout="centre">
-          <Frame
-            title={PRODUCT_NAME_BID}
-            capture="compare-feed"
-            caption="The daily UK tender feed in Velstrian Bid, shown as a drawn representation. The notices themselves are genuine published Find a Tender and Contracts Finder records."
-            image={{
-              src: '/Assets/shots/figma-v2/sup-1-discover-light.png?v=20260805a',
-              avif: '/Assets/shots/figma-v2/sup-1-discover-light.avif?v=20260805a',
-              webp: '/Assets/shots/figma-v2/sup-1-discover-light.webp?v=20260805a',
-              width: 2880,
-              height: 1800,
-              alt: 'The Velstrian Bid Discover feed. A product rail and a workspace sidebar sit on the left, and the feed lists published notices, each with the buying authority, the contract value, the sector, how long ago it was published and the register it came from, and a relevance percentage in its top right. A filter row offers all sources, Find a Tender, Contracts Finder, sector, value and relevance, and every notice offers Open in Velstrian Bid, a link out to the source register, and Save.',
-            }}
-          />
-        </Stage>
+        <ProductScreen name="find" />
       </div>
     </div>
   </Band>

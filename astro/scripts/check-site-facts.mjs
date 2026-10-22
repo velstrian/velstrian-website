@@ -295,15 +295,10 @@ const RULES = [
 
 /* ── NAMED EXCEPTIONS ───────────────────────────────────────────────────── */
 
-const EXCEPTIONS = [
-  {
-    record: 'sources',
-    route: /^\/sectors\/construction\/$|^\/compare\/$/,
-    hit: /Find a Tender(?: and | \+ |, )Contracts Finder|Contracts Finder(?: and | \+ |, )Find a Tender/,
-    ctxMatch: /Discover feed|filter row|drawn representation/,
-    why: 'Alt text and a caption describing a product screenshot captured when the feed showed the two registers. They describe the picture, and the picture is unchanged until the separate screenshot row reshoots it.',
-  },
-];
+/* The one exception (the Figma Discover drawing's alt text on
+   /sectors/construction/ and /compare/) was removed 2026-10-22 with the
+   drawing itself: ProductScreen shows the real feed capture there now. */
+const EXCEPTIONS = [];
 
 function excused(record, f) {
   return EXCEPTIONS.find(

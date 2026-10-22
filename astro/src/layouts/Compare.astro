@@ -148,6 +148,28 @@ if (faq.length) {
     })),
   });
 }
+
+/*
+ * THE PRODUCT SCREEN, PLACED BY THE MARKDOWN.
+ *
+ * The comparison bodies are Markdown, which cannot hold a component, and each
+ * used to carry a raw <figure> of a Figma drawing with the old brand inside the
+ * picture. The Markdown now marks WHERE the screen goes with an empty
+ * `<div data-cmp-screen></div>`, the page passes the ProductScreen named in its
+ * frontmatter as the `screen` slot, and the marker is swapped for it here. A
+ * body without the marker fails the build rather than silently dropping the
+ * screen.
+ */
+/* The Markdown renderer prints a bare attribute as data-cmp-screen="". */
+const SCREEN_MARK = /<div data-cmp-screen(?:="")?><\/div>/;
+let body = await Astro.slots.render('default');
+if (Astro.slots.has('screen')) {
+  if (!SCREEN_MARK.test(body)) {
+    throw new Error(`Compare: ${path} passes a screen but its Markdown has no <div data-cmp-screen></div> marker`);
+  }
+  const screen = await Astro.slots.render('screen');
+  body = body.replace(SCREEN_MARK, () => `<div class="cmp-screen">${screen}</div>`);
+}
 ---
 
 <Base
@@ -177,7 +199,7 @@ if (faq.length) {
   <Band tone="light" class="cmp-article">
     <div class="ea-wrap">
       <div class="cmp-body ea-longform">
-        <slot />
+        <Fragment set:html={body} />
       </div>
     </div>
   </Band>
@@ -238,7 +260,9 @@ if (faq.length) {
     color: var(--c-text-sub);
     margin: 0 0 1.5rem;
   }
-  .cmp-body ul,
+  /* Not the product screen's own list (ProductScreen, .ea-mini-list), which
+     keeps the shared evidenced styling. */
+  .cmp-body ul:not(.ea-mini-list),
   .cmp-body ol {
     font-size: var(--t-lede);
     line-height: 1.7;
@@ -246,7 +270,7 @@ if (faq.length) {
     margin: 0 0 1.5rem;
     padding-inline-start: 1.4rem;
   }
-  .cmp-body li {
+  .cmp-body :not(.ea-mini-list) > li {
     margin: 0 0 0.6rem;
   }
   .cmp-body a {
@@ -508,21 +532,11 @@ if (faq.length) {
     word-break: break-word;
   }
 
-  .cmp-body .cmp-shot {
+  /* The product screen the Markdown marks with data-cmp-screen (see the
+     frontmatter above). The screen, its stage and its caption are the shared
+     evidenced components, so only the spacing in the article is set here. */
+  .cmp-body .cmp-screen {
     margin: 2rem 0 2.75rem;
-  }
-  .cmp-body .cmp-shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-card);
-    border: 1px solid var(--c-border);
-  }
-  .cmp-body .cmp-shot figcaption {
-    font-size: var(--t-body);
-    line-height: 1.6;
-    color: var(--c-text-sub);
-    margin-top: 0.9rem;
   }
 
   .cmp-body .cmp-relgrid {
