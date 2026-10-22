@@ -8,7 +8,7 @@ updatedDate: 2026-07-26
 competitor: "mytender.io"
 eyebrow: "Honest comparison"
 heroDescription: "Two UK-built tools for public-sector bidding. One publishes its pricing and grounds every figure. The other is a private-cloud drafting platform. Every competitor fact is sourced."
-ogImage: "/Assets/og/crowmark.png?v=20260730"
+ogImage: "/Assets/og/crowmark.png"
 ogImageAlt: "Velstrian Bid vs mytender.io comparison"
 ctaHeadline: "See the price."
 ctaSubLine1: "Published pricing from {{bid.starter.monthly}}/month."

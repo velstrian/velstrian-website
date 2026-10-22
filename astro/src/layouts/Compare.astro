@@ -23,7 +23,7 @@ import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { TRIAL_NOTE } from '../data/pricing';
 import { PRODUCT_NAME_BID } from '../lib/brand-names';
 import '../styles/evidenced.css';
-import { SITE } from '../data/site';
+import { SITE, ogImageUrl } from '../data/site';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import { breadcrumbs } from '../lib/schema';
 import { routeUrl } from '../lib/route-url';
@@ -113,7 +113,7 @@ const schema: Record<string, unknown>[] = [
     description: articleDescription,
     datePublished: isoDate(publishedAt),
     dateModified: isoDate(updatedAt ?? publishedAt),
-    image: new URL(ogImage, SITE.origin).href,
+    image: ogImageUrl(ogImage),
     author: { '@type': 'Organization', name: SITE.legalName, url: `${SITE.origin}/` },
     /* A REFERENCE, NOT A FOURTH DESCRIPTION OF THE SAME COMPANY.
      *

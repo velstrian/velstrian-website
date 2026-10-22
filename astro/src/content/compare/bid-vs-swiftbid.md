@@ -8,7 +8,7 @@ updatedDate: 2026-07-26
 competitor: "SwiftBid"
 eyebrow: "Honest comparison"
 heroDescription: "Pay per bid, or subscribe. Which model fits depends on how often you bid. Every competitor figure is sourced and dated."
-ogImage: "/Assets/og/crowmark.png?v=20260730"
+ogImage: "/Assets/og/crowmark.png"
 ogImageAlt: "Velstrian Bid vs SwiftBid comparison"
 ctaHeadline: "Bid often."
 ctaSubLine1: "One subscription, from {{bid.starter.monthly}}/month."

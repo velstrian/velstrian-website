@@ -21,7 +21,7 @@
  * Organization and WebSite are appended by Seo.astro on every page, so they are
  * deliberately NOT built here.
  */
-import { SITE } from '../data/site';
+import { SITE, ogImageUrl } from '../data/site';
 import { routeUrl as abs } from './route-url';
 
 /*
@@ -75,7 +75,7 @@ export function blogPosting(input: BlogPostingInput): Record<string, unknown> {
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     datePublished: input.publishDate.toISOString().slice(0, 10),
     dateModified: (input.updatedDate ?? input.publishDate).toISOString().slice(0, 10),
-    image: new URL(input.image ?? SITE.defaultOgImage, SITE.origin).href,
+    image: ogImageUrl(input.image ?? SITE.defaultOgImage),
     /*
      * A NAMED PERSON WHERE THE POST CARRIES ONE, AND THE ORGANISATION OTHERWISE.
      * The visible byline and this node are rendered from the SAME frontmatter

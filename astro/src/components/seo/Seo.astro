@@ -11,7 +11,7 @@
  * Defaults come from src/data/site.ts. A page overrides only what is genuinely
  * different about it, which in practice is title, description and image.
  */
-import { SITE } from '../../data/site';
+import { SITE, ogImageUrl } from '../../data/site';
 import { routeUrl } from '../../lib/route-url';
 
 interface Props {
@@ -108,7 +108,7 @@ const {
  * that is the value the homepage has always declared. It does not move.
  */
 const canonical = routeUrl(path);
-const ogImage = new URL(image, SITE.origin).href;
+const ogImage = ogImageUrl(image);
 
 // The Organization node appeared verbatim on 40 pages. It is defined once in
 // site.ts and emitted here, with page-specific nodes appended rather than

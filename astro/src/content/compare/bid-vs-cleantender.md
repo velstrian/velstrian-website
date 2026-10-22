@@ -8,7 +8,7 @@ updatedDate: 2026-07-26
 competitor: "CleanTender"
 eyebrow: "Honest comparison"
 heroDescription: "A soft-FM specialist against a sector-agnostic bid suite. Both publish their prices, so the real question is scope. Every competitor fact is sourced and dated."
-ogImage: "/Assets/og/crowmark.png?v=20260730"
+ogImage: "/Assets/og/crowmark.png"
 ogImageAlt: "Velstrian Bid vs CleanTender comparison"
 ctaHeadline: "Bid wider."
 ctaSubLine1: "Every sector, published pricing from {{bid.starter.monthly}}/month."
