@@ -9,6 +9,11 @@
  * slot holds the main screen at the raised elevation, and the `float` slot holds
  * a card that overlaps the stage edge at the floating elevation.
  *
+ * The stage itself is still. The moving light lives on the hero BAND behind
+ * the headline (Band.astro, .ea-hero__sky), because inside the stage the
+ * screen covered about 80 percent of it and the owner saw no change. One
+ * moving light per page, so the stage no longer carries its own.
+ *
  * `layout`:
  *   hero    a wide stage, the screen inset from the top left and running out
  *           of the stage's bottom edge, the floating card over the right edge
@@ -25,7 +30,7 @@ const hasFloat = Astro.slots.has('float');
 ---
 
 <div class={`ea-stage ea-stage--${layout} ${hasFloat ? 'ea-stage--has-float' : ''} ${cls}`.replace(/\s+/g, ' ').trim()}>
-  <div class="ea-stage__ground band--stage" aria-hidden="true">{layout === 'hero' && <span class="ea-stage__mesh"></span>}</div>
+  <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
   <div class="ea-stage__screen"><slot /></div>
   {hasFloat && <div class="ea-stage__float"><slot name="float" /></div>}
 </div>

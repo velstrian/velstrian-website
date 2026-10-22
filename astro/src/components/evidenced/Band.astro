@@ -14,6 +14,11 @@
  * between items, once, never under reduced motion, and never for anything
  * already on screen at load.
  *
+ * A band carrying the `ea-hero` class gets the hero's moving light behind its
+ * content (.ea-hero__sky in styles/evidenced.css): one mechanism, so every v3
+ * hero, on the home page, /bid/, /buy/ and any page after them, has the same
+ * light without asking for it.
+ *
  * Ready for /bid/, /buy/ and the shared page templates: it knows nothing about
  * the home page.
  */
@@ -27,6 +32,7 @@ interface Props {
   flush?: boolean;
 }
 const { tone, id, labelledby, class: cls = '', flush = false } = Astro.props;
+const hero = cls.split(/\s+/).includes('ea-hero');
 ---
 
 <section
@@ -35,6 +41,7 @@ const { tone, id, labelledby, class: cls = '', flush = false } = Astro.props;
   aria-labelledby={labelledby}
   data-band={tone}
 >
+  {hero && <div class="ea-hero__sky" aria-hidden="true"><span class="ea-hero__mesh"></span></div>}
   <slot />
 </section>
 

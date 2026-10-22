@@ -65,8 +65,8 @@ const ALLOW = [];
    Each one is an owner decision. Off under reduced motion is evidenced.css's
    job and rule 4's measurement does not see loops, so it is stated here. */
 const LOOP_ALLOW = [
-  { loop: 'ea-mesh-drift on span.ea-stage__mesh',
-    reason: 'owner 2026-10-22, A-301: the hero stage light, brand ramp only, 22s transform loop, hero stage only, off under prefers-reduced-motion' },
+  { loop: 'ea-hero-drift on span.ea-hero__mesh',
+    reason: 'owner 2026-10-22, A-301: the hero light, moved from inside the hero stage to the hero band behind the headline the same day (the screen covered it), brand ramp only, 20s transform loop, hero band only, off under prefers-reduced-motion' },
 ];
 const usedLoopAllow = new Set();
 

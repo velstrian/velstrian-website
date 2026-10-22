@@ -24,10 +24,12 @@
    4. The carousel slide, 400ms, only when the reader asks.
    5. The primary button's light sweep, once per hover (check-sheen.js 3b).
    6. A card on a light band lifts one elevation step on hover.
-   7. The hero stage's light drifts (.ea-stage__mesh), the ONE loop, adopted
+   7. The hero band's light drifts (.ea-hero__mesh), the ONE loop, adopted
       by the owner 2026-10-22 (A-301) and named in check-sheen.js LOOP_ALLOW.
-      Transform only, on the hero stage only, never a page layer (the page
-      wash removed 2026-08-04 stays removed).
+      Transform only, inside the hero band only, never a page layer (the page
+      wash removed 2026-08-04 stays removed). It moved from inside the hero
+      stage to behind the headline the same day, because the screen covered
+      it and the owner saw no change.
    Nothing else loops. Everything is off under prefers-reduced-motion.
    ============================================================================ */
 
@@ -331,32 +333,6 @@ main > .ea-sec * {
   background-size: 160px 160px;
   opacity: 0.16;
   mix-blend-mode: overlay;
-}
-
-/* The hero stage's moving light: the mesh fields, blurred, drifting on one
-   transform loop that starts and ends at rest. Oversized so its edges never
-   show inside the stage while it moves. Grain and rim sit above it. */
-.ea-stage__mesh {
-  position: absolute;
-  inset: -25%;
-  background: var(--stage-mesh);
-  filter: blur(var(--stage-mesh-blur));
-}
-
-/* Written as `main > .ea-sec .ea-stage__mesh` on purpose: the section reset
-   `main > .ea-sec *  { animation: none }` near the top of this file outranks a
-   single class, and that reset stays, it is what keeps legacy motion out. */
-@media (prefers-reduced-motion: no-preference) {
-  main > .ea-sec .ea-stage__mesh {
-    will-change: transform;
-    animation: ea-mesh-drift var(--stage-mesh-dur) ease-in-out infinite;
-  }
-}
-
-@keyframes ea-mesh-drift {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-  33% { transform: translate3d(7%, -5%, 0) rotate(9deg) scale(1.1); }
-  66% { transform: translate3d(-6%, 6%, 0) rotate(-7deg) scale(1.05); }
 }
 
 .ea-stage__ground::before,
@@ -745,6 +721,85 @@ main > .ea-sec * {
   padding-top: clamp(var(--space-10), 1rem + 4vw, 5.5rem);
   padding-bottom: clamp(var(--space-12), 2rem + 3vw, 5rem);
   overflow: hidden;
+}
+
+/* The hero's moving light, behind the headline (stripe.com's hero is the
+   model). Band.astro renders .ea-hero__sky as the first child of any band
+   carrying `ea-hero`, so the home, /bid/ and /buy/ heroes and every future
+   v3 hero share this one mechanism. Three layers, back to front:
+     the band's canvas (.band--light paints it)
+     the mesh, four brand fields on one transform loop, oversized so its
+       edges never show while it moves
+     the veil, still, in the band's own canvas colour: solid behind the
+       head (.ea-hero__head::before) so the words hold AA at every frame,
+       clear at the corners and round the stage, and a fade into the canvas
+       at the foot (::after) so the next band meets a clean edge. */
+.ea-hero__sky {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ea-hero__mesh {
+  position: absolute;
+  inset: -12% -8%;
+  background: var(--hero-mesh);
+}
+
+.ea-hero__sky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 62%, var(--ea-canvas) 96%);
+}
+
+/* The veil is sized from the HEAD, not from the band. A veil sized from the
+   band was measured holding the lead at 6:1 at 1440 and failing at 390
+   (2.35:1), because a phone's band is tall and narrow and the corner fields
+   then sit under the words. Drawn from the head's own box it covers the
+   words at every width. No z-index context on the head, so this paints above
+   the sky and below the words. */
+.ea-hero__head {
+  position: relative;
+}
+
+.ea-hero__head::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--space-24) * -1);
+  bottom: calc(var(--space-24) * -1);
+  left: 50%;
+  width: min(100% + var(--space-24) * 2, 72rem);
+  transform: translateX(-50%);
+  background: var(--ea-canvas);
+  /* A feathered rectangle, not an ellipse: an ellipse was measured leaving
+     the note at 3:1 at 390, because the corners of a tall head fall outside
+     it. Two fades intersected keep every corner solid. The mask reads only
+     alpha, so the canvas colour serves as the opaque stop. */
+  mask-image:
+    linear-gradient(to right, transparent, var(--ea-canvas) var(--space-24), var(--ea-canvas) calc(100% - var(--space-24)), transparent),
+    linear-gradient(to bottom, transparent, var(--ea-canvas) var(--space-24), var(--ea-canvas) calc(100% - var(--space-24)), transparent);
+  mask-composite: intersect;
+  pointer-events: none;
+}
+
+/* Written as `main > .ea-sec .ea-hero__mesh` on purpose: the section reset
+   `main > .ea-sec * { animation: none }` near the top of this file outranks a
+   single class, and that reset stays, it is what keeps legacy motion out. */
+@media (prefers-reduced-motion: no-preference) {
+  main > .ea-sec .ea-hero__mesh {
+    will-change: transform;
+    animation: ea-hero-drift var(--hero-mesh-dur) ease-in-out infinite;
+  }
+}
+
+@keyframes ea-hero-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate3d(5%, 4%, 0) rotate(4deg) scale(1.06); }
+  66% { transform: translate3d(-5%, -3%, 0) rotate(-3deg) scale(1.03); }
 }
 
 /* The head is centred over the stage: one column of type above one wide

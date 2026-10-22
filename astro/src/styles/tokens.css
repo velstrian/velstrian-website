@@ -3549,17 +3549,27 @@
      url(/Assets/images/r285-gemini/stage-texture.png) once that art is
      approved, and every stage carries it. */
   --stage-texture: none;
-  /* The hero stage's moving light (owner point 6, 2026-10-22: "something like
-     stripe has ... with motion effect"). Four soft fields from the brand ramp,
-     iris, violet, orchid and deep violet, never pink or red (D256), drifting on
-     one transform loop. --stage-mesh: none turns it off everywhere. */
-  --stage-mesh:
-    radial-gradient(circle at 22% 30%, color-mix(in srgb, var(--c-teal) 85%, transparent), transparent 42%),
-    radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--c-orchid) 70%, transparent), transparent 40%),
-    radial-gradient(circle at 64% 78%, color-mix(in srgb, var(--c-violet-deep) 90%, transparent), transparent 45%),
-    radial-gradient(circle at 18% 86%, color-mix(in srgb, var(--c-violet) 60%, transparent), transparent 38%);
-  --stage-mesh-blur: var(--space-12);
-  --stage-mesh-dur: 22s;
+  /* The hero's moving light (owner point 6, 2026-10-22: "something like
+     stripe has ... with motion effect", and later the same day "check hero
+     section i did not find any changes"). It began INSIDE the hero stage,
+     where the product screen covers about 80 percent of it, so nobody saw it.
+     It is now the hero BAND's own background, behind the headline, the way
+     stripe.com does it: four soft fields from the brand ramp, iris, violet,
+     orchid and deep violet, never pink or red (D256), drifting on ONE
+     transform loop (.ea-hero__mesh, styles/evidenced.css). The stage keeps
+     its still gradient, so there is exactly one moving light on the page.
+     --hero-mesh: none turns it off everywhere.
+
+     The fields sit at the band's corners and behind the stage, and a still
+     veil in the band's own canvas colour (evidenced.css .ea-hero__sky::after)
+     holds the headline, lead and note at AA at every point of the loop,
+     measured by sampling the rendered pixels behind the words. */
+  --hero-mesh:
+    radial-gradient(ellipse 36% 62% at 6% 16%, color-mix(in srgb, var(--c-teal) 95%, transparent), transparent 72%),
+    radial-gradient(ellipse 34% 60% at 95% 10%, color-mix(in srgb, var(--c-orchid) 90%, transparent), transparent 72%),
+    radial-gradient(ellipse 44% 40% at 78% 72%, color-mix(in srgb, var(--c-violet-deep) 70%, transparent), transparent 72%),
+    radial-gradient(ellipse 44% 40% at 20% 76%, color-mix(in srgb, var(--c-violet) 80%, transparent), transparent 72%);
+  --hero-mesh-dur: 20s;
   --stage-radius: 24px;
   --stage-ink: var(--c-white);
 
