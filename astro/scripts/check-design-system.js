@@ -251,8 +251,6 @@ const ALLOWED = new Map([
    'DEBT: the sources heading on 5 comparison routes, --t-h4 on an h2. Needs the owner call above'],
   ['type  src/layouts/Glossary.astro  .gl-article :global(.gl-tldr h2)',
    'DEBT: the TL;DR heading on 24 glossary entries, --t-h4 on an h2. Same call'],
-  ['type  src/pages/compare/index.astro  .cmp-hub-card h2',
-   'DEBT: the hub card heading, --t-h4 on an h2, on a page whose Section h2 is 46.4px. Same call'],
   /* The `.ca-footer-col-title` entry that sat here is MOVED, not deleted, and it
      is now keyed on styles/labels.css below under rule 2. Footer.astro no longer
      sizes the title: A-61 folded the display-face group label into labels.css,

@@ -10,7 +10,7 @@ eyebrow: "Honest comparison"
 heroDescription: "An SME bid suite with published pricing set against an enterprise AI bid-writing engine. What each one does, where each one wins, and every competitor figure sourced."
 ogImage: "/Assets/og/crowmark.png?v=20260730"
 ogImageAlt: "Velstrian Bid vs AutogenAI comparison"
-ctaHeadline: "SEE THE PRICE."
+ctaHeadline: "See the price."
 ctaSubLine1: "Published pricing from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 faq:

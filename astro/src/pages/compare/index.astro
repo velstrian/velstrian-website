@@ -1,11 +1,36 @@
 ---
+/**
+ * /compare/: the comparison hub.
+ *
+ * ── 2026-10-22: ON DESIGN SYSTEM VERSION 3 ──────────────────────────────────
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7. Every comparison, link and
+ * line of the previous page is kept, on the v3 bands:
+ *
+ *   1. PageHero   light     which tools are compared?  trail, h1, lead, two actions
+ *   2. Hub        light     pick one                   the two intro lines, four cards, the feed on a stage
+ *   3. Close      gradient  what now?                  "Decide faster.", See pricing
+ *
+ * The starting price is read from data/pricing.ts, never typed (it was a
+ * typed "£49" in two places). The h1 stays spelled out rather than bound to
+ * the title const, for the reason the previous version recorded: the const is
+ * the <title> and the CollectionPage name, and binding them means tuning one
+ * silently rewrites the other.
+ */
 import Base from '../../layouts/Base.astro';
-import PageHeader from '../../components/layout/PageHeader.astro';
-import { SITE } from '../../data/site';
-import Button from '../../components/ui/Button.astro';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Action from '../../components/evidenced/Action.astro';
+import Stage from '../../components/evidenced/Stage.astro';
+import Frame from '../../components/evidenced/Frame.astro';
+import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { SITE } from '../../data/site';
+import { SIGNUP_URL } from '../../data/app';
+import { PLANS, TRIAL_DAYS } from '../../data/pricing';
 import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
+import '../../styles/evidenced.css';
 
 const title = 'Compare Velstrian Bid with UK bid software';
 const description =
@@ -44,6 +69,9 @@ const comparisons = [
 /* One array for the trail a reader sees and the trail this page publishes. See
    the note in layouts/Compare.astro: the two were hand-written separately across
    this page and that layout, and the layout's two copies disagreed. */
+const [STARTER] = PLANS;
+const UPDATED = new Date('2026-10-22');
+
 const trail = [{ name: 'Home', path: '/' }];
 
 const schema = [
@@ -66,324 +94,104 @@ const schema = [
 ];
 ---
 
-<Base title={`${title} | Velstrian`} description={description} path={path} image="/Assets/og/crowmark.png?v=20260730" schema={schema}>
-  {/* A DIV, NOT A SECOND <main>: A-66, same as layouts/Compare.astro, whose head
-      block and hero this index deliberately mirrors. Kept as an element rather than
-      deleted because styles/motion.css unwraps one wrapper via
-      `main > *:only-child > *`. */}
-  <div>
-    <header class="cmp-hero">
-      <div class="cmp-hero-inner">
-        {/* Wrapped in an element this page owns; Breadcrumb.astro records why it
-            takes no class of its own. */}
-        <div class="cmp-breadcrumb"><Breadcrumb trail={trail} current="Compare" /></div>
-        {/*
-          THE SHARED HEAD BLOCK. Was `.cmp-eyebrow` + `.cmp-h1` + `.cmp-hero-desc`.
-          The SECOND copy of the head block in layouts/Compare.astro, which is
-          the whole argument for this conversion: two files, two scoped copies of
-          one idea, and neither could reach the treatment that lived inside
-          Section's own scope. This is the fifth and last `.cmp-h1`.
+<Base
+  title={`${title} | Velstrian`}
+  description={description}
+  path={path}
+  image="/Assets/og/crowmark.png?v=20260730"
+  schema={schema}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero
+    id="cmp-hub-title"
+    label="Honest comparisons"
+    title="Compare Velstrian Bid with UK bid software"
+    lead="Side-by-side, sourced comparisons of Velstrian Bid against the tools UK suppliers shortlist. Real feature tables, our published pricing, and a dated source for every competitor figure."
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Compare" /></div>
+    <Action href="#comparisons">See the comparisons</Action>
+    <Action href={SIGNUP_URL} variant="secondary">Start {TRIAL_DAYS} day trial</Action>
+  </PageHero>
 
-          THE BREADCRUMB STAYS OUTSIDE, above, exactly as in Compare.astro:
-          PageHeader has no slot ahead of the eyebrow, and giving it one would
-          let any page push arbitrary markup into the shared block.
-
-          THE TWO-TONE SPLIT IS GONE. The words are unchanged ("Compare
-          CrowMark with UK bid software"), but the `<span class="accent">` that
-          clipped --grad-hero-text to the second half has been dropped. That is
-          a second heading treatment, and the owner asked for one.
-
-          The heading is spelled out rather than passed the `title` const above
-          it. They are the same sentence today, but that const is the <title>
-          tag and the CollectionPage schema name; binding the visible h1 to the
-          SEO title means the next person who tunes one silently rewrites the
-          other.
-        */}
-        <PageHeader
-          eyebrow="Honest comparisons"
-          title="Compare Velstrian Bid with UK bid software"
-          standfirst="Side-by-side, sourced comparisons of Velstrian Bid against the tools UK suppliers shortlist. Real feature tables, our published pricing, and a dated source for every competitor figure."
-        />
+  <Band tone="light" id="comparisons" class="cmp-hub">
+    <div class="ea-wrap">
+      <div class="cmp-hub__intro" data-reveal>
+        <p class="ea-lead">
+          {PRODUCT_NAME_BID} is a UK bid and tender management suite from &pound;{STARTER.monthly} per month. Where a
+          rival does not publish a figure, we mark it Not published rather than guess, and we concede the points where
+          {PRODUCT_NAME_BID} is not the strongest option. Pick a comparison below.
+        </p>
+        <p>
+          Velstrian serves both sides of a procurement: {PRODUCT_NAME_BID} for Suppliers answers tenders, RFPs and
+          questionnaires, and {PRODUCT_NAME_BUY} for Buyers locates the evidence for each published requirement across
+          the responses received. Both work in the public sector and the private sector. Every supplier and buyer plan
+          has a published price, on the <a class="cmp-hub__link" href="/pricing/">pricing page</a>. The comparisons
+          below are supplier-side, because that is where the competing tools sit.
+        </p>
       </div>
-    </header>
 
-    <section class="cmp-hub">
-      <div class="cmp-hub-inner">
-        <p class="cmp-intro">
-          Velstrian Bid is a UK bid and tender management suite from &pound;49 per month. Where a rival does not publish a
-          figure, we mark it Not published rather than guess, and we concede the points where Velstrian Bid is not the
-          strongest option. Pick a comparison below.
-        </p>
-        <p class="cmp-intro">
-          Velstrian serves both sides of a procurement: Velstrian Bid for Suppliers answers tenders, RFPs and questionnaires,
-          and Velstrian Buy for Buyers locates the evidence for each published requirement across the responses received.
-          Both work in the public sector and the private sector. Every supplier and buyer plan has a published price,
-          on the <a href="/pricing/">pricing page</a>. The comparisons below are supplier-side,
-          because that is where the competing tools sit.
-        </p>
-
-        {/*
-          LIGHT SCREEN, AND A DIFFERENT SCREEN SET. Owner instruction 2026-08-05:
-          "light mode images looks great, apply them in all the website carousels
-          by replacing dark version." The carousels moved that day, via VARIANT in
-          data/crowmark-screens.ts, but this page never read that module, so the
-          owner then reported this one still dark: "http://localhost:8095/compare/
-          still has dark screen of product".
-
-          WHY THE PATH CHANGES DIRECTORY AND NOT JUST ITS SUFFIX. This figure was
-          pointing at Assets/shots/figma/, an OLDER and separate nine-screen set
-          that has no light variants and is not in the current Figma file, so it
-          cannot be re-exported light. The equivalent screen in the current set is
-          sup-1-discover, matched by comparing what each screen shows rather than
-          by name: both are the Discover feed of published notices with authority,
-          value, sector, date, source and a relevance percentage. See the `shows`
-          field of Assets/shots/figma-v2/manifest.json, record sup-1-discover-light,
-          Figma node 323:3.
-
-          THE ALT TEXT WAS REWRITTEN AGAINST THE NEW IMAGE, not carried over. The
-          old string was written for the old drawing and named things by the old
-          drawing's labels; leaving it over a different picture would have been a
-          worse defect than the dark screen, because it is invisible to anyone who
-          can see the page.
-
-          The intrinsic size changes with the set: 1440x900 becomes 2880x1800, the
-          2x export the v2 screens ship at. The ratio is 16:10 either way, so
-          .cmp-shot, which sizes the image with width:100% and height:auto and
-          assumes no ratio, is unaffected.
-        */}
-        <figure class="cmp-shot">
-          <picture>
-            <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-1-discover-light.avif?v=20260805a" />
-            <source type="image/webp" srcset="/Assets/shots/figma-v2/sup-1-discover-light.webp?v=20260805a" />
-            <img
-              src="/Assets/shots/figma-v2/sup-1-discover-light.png?v=20260805a"
-              width="2880"
-              height="1800"
-              loading="lazy"
-              decoding="async"
-              alt="The Velstrian Bid Discover feed. A product rail and a workspace sidebar sit on the left, and the feed lists published notices, each with the buying authority, the contract value, the sector, how long ago it was published and the register it came from, and a relevance percentage in its top right. A filter row offers all sources, Find a Tender, Contracts Finder, sector, value and relevance, and every notice offers Open in Velstrian Bid, a link out to the source register, and Save."
-            />
-          </picture>
-          <figcaption>The daily UK tender feed in Velstrian Bid, shown as a drawn representation. The notices themselves are genuine published Find a Tender and Contracts Finder records.</figcaption>
-        </figure>
-
-        <div class="cmp-hub-grid">
-          {
-            comparisons.map((c) => (
-              <a class="cmp-hub-card surface" href={c.href}>
-                <span class="meta cmp-hub-tag">{c.tag}</span>
-                <h2>{c.name}</h2>
+      <ul class="ea-cards ea-cards--2" role="list">
+        {
+          comparisons.map((c) => (
+            <li data-reveal>
+              <a class="ea-card ea-tcard" href={c.href}>
+                <p class="ea-label">{c.tag}</p>
+                <h2 class="ea-h3">{c.name}</h2>
                 <p>{c.blurb}</p>
-                <span class="meta cmp-hub-more">Read comparison &rarr;</span>
+                <span class="ea-tcard__more">Read comparison</span>
               </a>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+            </li>
+          ))
+        }
+      </ul>
 
-    <section class="cmp-cta">
-      <div class="cmp-cta-inner">
-        <h2>DECIDE FASTER.</h2>
-        <p class="cmp-cta-sub">Published pricing from &pound;49/month.<br /> <span class="accent">Live, paid, and in daily use on real bids.</span></p>
-        <div class="btn-row">
-          <Button href="/pricing/?product=mark" size="md">See pricing</Button>
-          <Button href="/bid/" variant="secondary" size="md">Explore Velstrian Bid</Button>
-        </div>
+      <div class="cmp-hub__screen" data-reveal>
+        <Stage layout="centre">
+          <Frame
+            title={PRODUCT_NAME_BID}
+            capture="compare-feed"
+            caption="The daily UK tender feed in Velstrian Bid, shown as a drawn representation. The notices themselves are genuine published Find a Tender and Contracts Finder records."
+            image={{
+              src: '/Assets/shots/figma-v2/sup-1-discover-light.png?v=20260805a',
+              avif: '/Assets/shots/figma-v2/sup-1-discover-light.avif?v=20260805a',
+              webp: '/Assets/shots/figma-v2/sup-1-discover-light.webp?v=20260805a',
+              width: 2880,
+              height: 1800,
+              alt: 'The Velstrian Bid Discover feed. A product rail and a workspace sidebar sit on the left, and the feed lists published notices, each with the buying authority, the contract value, the sector, how long ago it was published and the register it came from, and a relevance percentage in its top right. A filter row offers all sources, Find a Tender, Contracts Finder, sector, value and relevance, and every notice offers Open in Velstrian Bid, a link out to the source register, and Save.',
+            }}
+          />
+        </Stage>
       </div>
-    </section>
-  </div>
+    </div>
+  </Band>
+
+  <Close
+    title="Decide faster."
+    lead={`Published pricing from £${STARTER.monthly} a month. Live, paid, and in daily use on real bids.`}
+    primary={{ href: '/pricing/?product=mark', label: 'See pricing' }}
+  />
 </Base>
 
 <style>
-  /*
-   * CENTRED HEAD BLOCK, GRADIENT EYEBROW: owner decision, 2026-08-02. The head
-   * block itself is components/layout/PageHeader.astro now, styled by
-   * styles/headings.css and shared with the per-comparison pages in
-   * layouts/Compare.astro rather than duplicated from them. This rule only
-   * centres the breadcrumb above it, which is all this page still draws of its
-   * own hero.
-   *
-   * The centring is on .cmp-hero and stops there. .cmp-hub holds two intro
-   * paragraphs, a captioned screenshot and the four comparison cards, all of
-   * which stay left-aligned.
-   */
-  .cmp-hero {
-    position: relative;
-    padding: var(--sec-pad-y-hero) var(--gutter) var(--sec-pad-y-sm);
-    text-align: center;
-    overflow: hidden;
-  }
-  .cmp-hero::before {
-    content: '';
-    position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 60%;
-    z-index: -1;
-    background: var(--grad-hero-glow);
-    filter: blur(30px);
-    opacity: 0.5;
-  }
-  .cmp-hero-inner {
-    max-width: var(--measure);
-    margin-inline: auto;
-  }
-  /*
-   * DONE, 2026-08-04. The comment that used to sit inside this block read: "This
-   * is a second copy of that rule and both should move to one place; recorded
-   * rather than done here because the hub page and the article layout do not
-   * share a stylesheet yet." They now share components/ui/Breadcrumb.astro, which
-   * is a better answer than a shared stylesheet: the markup and the rules move
-   * together, so a fourth copy cannot be written by copying the markup.
-   *
-   * Spacing only is left, because where the trail sits above this hero is this
-   * page's decision.
-   */
-  .cmp-breadcrumb {
-    margin: 0 0 var(--stack-2);
-  }
-  /*
-   * SIX RULES WENT FROM HERE TO styles/headings.css: `.cmp-eyebrow` and its
-   * @supports guard, `.cmp-h1`, `.cmp-h1 .accent`, the @supports block that
-   * clipped --grad-hero-text to that accent, and the forced-colours reset for
-   * it, plus `.cmp-hero-desc`.
-   *
-   * THIS FILE IS THE CLEAREST CASE FOR CENTRAL ENFORCEMENT ON THE SITE. Every
-   * one of those rules also existed, separately, in layouts/Compare.astro. Two
-   * files, two scoped copies, one idea, and because Astro scopes a component's
-   * styles to that component, neither copy could ever receive the treatment
-   * that lived in Section's scope. Copying the markup was the one thing that
-   * could not copy the look, so both sides of /compare rendered a flat white
-   * title while pages built from Section rendered the shiny one.
-   *
-   * THE ACCENT WORK IS SUPERSEDED, NOT LOST. Those three rules existed to give
-   * an accented hero phrase ONE recipe sitewide. The answer now is that a page
-   * heading has one recipe with no accented phrase in it at all.
-   * `h1.section__title` carries the ramp and its own forced-colours reset, and
-   * keeps a defensive `.accent` rule so a span added back reads teal rather
-   * than invisible.
-   *
-   * `.cmp-hero` keeps its text-align: the breadcrumb above the head block is
-   * still this page's own and still has to centre.
-   */
-
-  .cmp-hub {
-    padding: 0 var(--gutter) var(--sec-pad-y);
-  }
-  .cmp-hub-inner {
-    max-width: var(--measure);
-    margin-inline: auto;
-  }
-  .cmp-intro {
-    /* ── CENTRED AS A BLOCK, STILL LEFT-ALIGNED AS TEXT ───────────────────
-     *
-     * `.cmp-hub-inner` is centred at --measure, and these paragraphs cap at
-     * 62ch inside it, but without `margin-inline: auto` a narrower block
-     * inside a wider one hugs the left edge. Measured at 1440: the hero
-     * standfirst sat at 313..1127 (centred, the same 813px measure) while these
-     * sat at 140..954, 173px left of centre, leaving 346px of dead space down
-     * the right of the page under a centred hero.
-     *
-     * The design rule is that prose stays left-ALIGNED because it is read. That
-     * is about the ragged edge of the text, not about where the column sits on
-     * the page, and the two had been conflated here. */
-    max-width: 62ch;
-    font-size: var(--t-lede);
-    line-height: 1.7;
-    color: var(--c-text-sub);
-    margin: 0 0 1.5rem;
-    /* AFTER the shorthand, not before it, and that ordering is the whole fix.
-       `margin: 0 0 1.5rem` resets the inline margins to 0, so a
-       `margin-inline: auto` written above it is silently discarded, which is
-       exactly what happened on the first attempt: the source said auto, the
-       built CSS said auto, and the element still computed 0. */
-    margin-inline: auto;
-  }
-  .cmp-shot {
-    margin: var(--sec-gap) 0 3rem;
-  }
-  .cmp-shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-card);
-    border: 1px solid var(--c-border);
-  }
-  .cmp-shot figcaption {
-    font-size: var(--t-body);
-    line-height: 1.6;
-    color: var(--c-text-muted);
-    margin-top: 1rem;
-  }
-
-  .cmp-hub-grid {
+  .cmp-hub__intro {
     display: grid;
-    gap: 1.5rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 768px) {
-    .cmp-hub-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  /* Card treatment, hover and lift come from `surface`. This page's own hover
-     moved the card 3px while glossary moved 4px and contact moved none, which
-     is the inconsistency the owner reported. */
-  .cmp-hub-card {
-    display: block;
-    padding: var(--blk-pad);
-    text-decoration: none;
-  }
-  /* The label recipe is `.meta` in styles/labels.css. */
-  .cmp-hub-tag {
-    color: var(--c-ambient-start);
-  }
-  .cmp-hub-card h2 {
-    margin: 0.6rem 0;
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: var(--t-w-h3);
-    color: var(--c-text);
-  }
-  .cmp-hub-card p {
-    margin: 0 0 1rem;
-    font-size: var(--t-body);
-    line-height: 1.6;
-    color: var(--c-text-sub);
-  }
-  /* The label recipe is `.meta` in styles/labels.css. */
-  .cmp-hub-more {
-    color: var(--c-interactive);
+    gap: var(--space-4);
+    max-width: var(--measure-prose);
+    color: var(--ea-sub);
   }
 
-  .cmp-cta {
-    padding: var(--sec-pad-y) var(--gutter);
-    text-align: center;
-    background: var(--c-panel);
-    border-top: 1px solid var(--c-border);
+  .cmp-hub__link {
+    color: var(--ea-accent-ink);
+    text-underline-offset: 4px;
   }
-  .cmp-cta-inner {
-    max-width: var(--measure-prose);
-    margin-inline: auto;
+
+  .cmp-hub__intro + .ea-cards {
+    margin-top: var(--ea-head-gap);
   }
-  /* --t-h1 is reserved for the hero (tokens.css); the homepage's own closing
-     CTA renders through Section at --t-h2 / --t-w-h2. Matched to it. */
-  .cmp-cta h2 {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    letter-spacing: -0.02em;
-    color: var(--c-text);
-    margin: 0 0 var(--sec-gap);
-  }
-  .cmp-cta-sub {
-    font-size: var(--t-h4);
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--c-text-muted);
-    margin: 0 0 var(--sec-gap);
-  }
-  .cmp-cta-sub .accent {
-    color: var(--c-text);
+
+  .cmp-hub__screen {
+    margin-top: var(--ea-head-gap);
   }
 </style>

@@ -68,12 +68,14 @@ main > .ea-sec * {
    sector page, a glossary entry, a post, a policy) carries `.prose`, whose
    rhythm, lists and headings live in styles/prose.css. That sheet is layered,
    so an unlayered reset reaching inside it would strip every paragraph gap and
-   list marker whatever its specificity. :where() keeps the guard at zero. */
-:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4):where(:not(.prose *)) {
+   list marker whatever its specificity. `.ea-longform` marks the same kind of
+   copy styled by its own layout (the comparison and glossary articles).
+   :where() keeps the guard at zero. */
+:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4):where(:not(.prose *, .ea-longform *)) {
   margin: 0;
 }
 
-:where(.ea-sec) :where(ul, ol):where(:not(.prose *)) {
+:where(.ea-sec) :where(ul, ol):where(:not(.prose *, .ea-longform *)) {
   padding: 0;
   list-style: none;
 }

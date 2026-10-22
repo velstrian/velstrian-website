@@ -10,7 +10,7 @@ eyebrow: "Honest comparison"
 heroDescription: "A soft-FM specialist against a sector-agnostic bid suite. Both publish their prices, so the real question is scope. Every competitor fact is sourced and dated."
 ogImage: "/Assets/og/crowmark.png?v=20260730"
 ogImageAlt: "Velstrian Bid vs CleanTender comparison"
-ctaHeadline: "BID WIDER."
+ctaHeadline: "Bid wider."
 ctaSubLine1: "Every sector, published pricing from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 faq:

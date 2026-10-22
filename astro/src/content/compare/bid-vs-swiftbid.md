@@ -10,7 +10,7 @@ eyebrow: "Honest comparison"
 heroDescription: "Pay per bid, or subscribe. Which model fits depends on how often you bid. Every competitor figure is sourced and dated."
 ogImage: "/Assets/og/crowmark.png?v=20260730"
 ogImageAlt: "Velstrian Bid vs SwiftBid comparison"
-ctaHeadline: "BID OFTEN."
+ctaHeadline: "Bid often."
 ctaSubLine1: "One subscription, from £49/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 faq:
