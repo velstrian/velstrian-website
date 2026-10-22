@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T00:13:47.115Z",
+  "updated": "2026-10-22T10:00:39.208Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2993,6 +2993,78 @@
       "title": "R285-WEB-HERO-MOTION-01 animated brand light on the hero stage (owner point 6 trial)",
       "status": "DECISION",
       "note": "Built locally, uncommitted. Mesh of iris, violet, orchid and deep violet, 22s transform-only loop, hero stage only, off under reduced motion. Build plus 6 gates green, check-sheen rule 5 (nothing loops) fails on it by design. Owner decides adopt or drop."
+    },
+    {
+      "id": "A-302",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Home: the only real product screenshot (feed card) was unreadable and cut on phones",
+      "status": "BUILT",
+      "note": "Item 2, bf34a76c. Frame crops one capture file to a wide and a phone region declared in product-captures.ts, so a staging recapture swaps the file only. Measured 1.28x app size at 1440, 1.17x at 768, 0.84x at 375, every line whole (was 0.665x and cut mid line). The natural 0 image was the lazy capture in the hidden Answer tab, it loads on tab open. Built site check pending the driver build."
+    },
+    {
+      "id": "A-303",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "One action, two labels: Start 7 day trial vs Start now",
+      "status": "BUILT",
+      "note": "Item 3, 2527d0ff. START_LABEL in data/app.ts (Start now, true on every button, matches D236), TRIAL_NOTE beside buttons that had no trial line. check-content-parity fails a signup link with any other label, red proven on the old dist (44 links). Dev sweep 44 routes, 161 links, all Start now. Green on the built site pending the driver build."
+    },
+    {
+      "id": "A-304",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Jargon in title, meta description, footer line, nav and default social card",
+      "status": "BUILT",
+      "note": "Item 4, 8f86e284. HOME_DESCRIPTION (150), SITE_SUMMARY, OG_CARD_LINE in data/site.ts, plain words, public and private, Velstrian Bid and Velstrian Buy. Title Velstrian | Simple bid software for suppliers and buyers (56). og-image.png regenerated from the generator. 0 RFPs, PQQs, RFIs on dev home."
+    },
+    {
+      "id": "A-305",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Social card cache buster stale (?v=20260730) after the 2026-10-22 redraw",
+      "status": "BUILT",
+      "note": "Item 5, 3259be71. OG_VERSION and ogImageUrl() in data/site.ts version every own card URL in Seo, Compare and schema.ts. Eleven typed versions removed. Dev: og:image and logo end ?v=20261022."
+    },
+    {
+      "id": "A-306",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Facts band: 7 reasons unexplained, Daily and Proof styled as numbers",
+      "status": "BUILT",
+      "note": "Item 6, da5d8543. Four boxes in words at one size, figures from site-facts.json (4 live sources, seven fit dimensions summing to 100 from bid_fit.py)."
+    },
+    {
+      "id": "A-307",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Product carousel: about 170px of empty stage above Your bids",
+      "status": "BUILT",
+      "note": "Item 7, bf34a76c. Viewport takes the shown slide's height, so every slide has exactly the stage padding: 58/58 at 1440, 31/31 at 768, 16/16 at 375 on all four slides (was 169 at 1440, 268 at 375)."
+    },
+    {
+      "id": "A-308",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Trust row printed twice on the home page",
+      "status": "BUILT",
+      "note": "Item 8, da5d8543. Kept in the footer (every route), removed from the facts band. 1 row on / (was 2)."
+    },
+    {
+      "id": "A-309",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Facts band and pricing section ended with extra empty space",
+      "status": "BUILT",
+      "note": "Item 9, da5d8543. Strip removed, and a band ending on a one line footnote link counts it as part of its bottom pad (central rhythm rule). Facts boxes 134px and plan cards about 134px from the band edge at 1440 (were 190 and 174)."
+    },
+    {
+      "id": "A-310",
+      "src": "R285-WEB-REVIEW-2026-10-22",
+      "sev": "P2",
+      "title": "Footer Free chip pushed Tender Compliance Matrix onto two lines",
+      "status": "BUILT",
+      "note": "Item 11, 349bed76. Link row wraps so the name keeps one line and the chip moves under it only where both cannot fit (1440)."
     }
   ],
   "directives": [
@@ -3062,5 +3134,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 302
+  "nextId": 311
 }
