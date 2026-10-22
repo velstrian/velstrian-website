@@ -81,7 +81,7 @@ async function send(
     setStatus(
       st,
       'bad',
-      `Something went wrong. Please ${isNl ? 'try again, or email' : 'email'} ${form.dataset.contactEmail || 'contact@velstrian.com'}${isNl ? '.' : ' directly.'}`,
+      `Something went wrong. Please ${isNl ? 'try again, or email' : 'email'} ${form.dataset.contactEmail}${isNl ? '.' : ' directly.'}`,
     );
     setBusy(btn, false);
     btn.textContent = idle;

@@ -215,7 +215,7 @@ export const PLANS: Plan[] = [
     planKey: 'crowmark_portfolio',
     secondary: {
       label: 'Talk to us about contracts',
-      href: '/contact/?product=crowmark&tier=portfolio',
+      href: '/contact/?tier=portfolio#contact-form',
     },
   },
 ];
@@ -286,7 +286,7 @@ export const BUYER_PLANS: BuyerPlan[] = [
     planKey: 'buyer_portfolio',
     secondary: {
       label: 'Talk to us about frameworks',
-      href: '/contact/?product=buyer-side&tier=portfolio#contact-form',
+      href: '/contact/?product=buy&tier=portfolio#contact-form',
     },
   },
 ];
