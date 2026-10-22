@@ -80,10 +80,13 @@
  * rather than only in a comment.
  */
 import Base from '../../../layouts/Base.astro';
-import Section from '../../../components/layout/Section.astro';
-import Button from '../../../components/ui/Button.astro';
-import { SIGNUP_URL } from '../../../data/app';
-import FinalCta from '../../../components/sections/FinalCta.astro';
+import PageHero from '../../../components/evidenced/PageHero.astro';
+import Band from '../../../components/evidenced/Band.astro';
+import Action from '../../../components/evidenced/Action.astro';
+import Close from '../../../components/evidenced/Close.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import { PRODUCT_NAME_BID } from '../../../lib/brand-names';
+import '../../../styles/evidenced.css';
 import { breadcrumbs } from '../../../lib/schema';
 import { SITE } from '../../../data/site';
 import { MAX_CHARS, MAX_ROWS } from '../../../lib/tender-matrix';
@@ -197,6 +200,12 @@ const claim = (text: string) => {
     : { head: text.slice(0, at + 1), body: text.slice(at + 2) };
 };
 
+/** The visible trail and the BreadcrumbList are one array. */
+const TRAIL = [
+  { name: 'Home', path: '/' },
+  { name: 'Tools', path: '/tools/' },
+];
+
 const schema = [
   /*
    * WebApplication, matching the calculator's node field for field.
@@ -214,11 +223,7 @@ const schema = [
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
     publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
   },
-  breadcrumbs([
-    { name: 'Home', path: '/' },
-    { name: 'Tools', path: '/tools/' },
-    { name: 'Tender Compliance Matrix', path: '/tools/tender-compliance-matrix/' },
-  ]),
+  breadcrumbs([...TRAIL, { name: 'Tender Compliance Matrix', path: '/tools/tender-compliance-matrix/' }]),
 ];
 ---
 
@@ -227,14 +232,20 @@ const schema = [
   description={description}
   path="/tools/tender-compliance-matrix"
   schema={schema}
+  typeface="evidenced"
+  headerTone="light"
 >
-  <Section
-    as="h1"
-    eyebrow="Free, no account"
+  <PageHero
+    id="matrix-title"
+    label="Free, no account"
     title="Tender Compliance Matrix"
-    standfirst="Paste the text of a tender, a question schedule or an evaluation section. The tool lists the requirements the wording states, each with the line it was read from. Nothing is uploaded, nothing is sent anywhere, and there is no sign-up."
-    id="matrix"
+    lead="Paste the text of a tender, public or private, a question schedule or an evaluation section. The tool lists the requirements the wording states, each with the line it was read from. Nothing is uploaded, nothing is sent anywhere, and there is no sign-up."
   >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Tender Compliance Matrix" /></div>
+  </PageHero>
+
+  <Band tone="light" id="matrix" labelledby="matrix-title">
+    <div class="ea-wrap ea-longform tmx-tool">
     <form class="form matrix-form" id="matrix-form" novalidate>
       {/*
         ── THREE WAYS IN, ABOVE THE BOX RATHER THAN BELOW IT ──────────────────
@@ -309,22 +320,22 @@ const schema = [
         dropped. `id` IS forwarded, and its note in that file records the same
         constraint being met the same way for the contact form's submit button.
       */}
-      <div class="btn-row">
-        <Button type="button" variant="secondary" id="load-facilities">
+      <div class="ea-actions tmx-row">
+        <Action as="button" variant="secondary" id="load-facilities">
           Facilities services<span class="visually-hidden"
             >: load this sample and build its matrix</span
           >
-        </Button>
-        <Button type="button" variant="secondary" id="load-construction">
+        </Action>
+        <Action as="button" variant="secondary" id="load-construction">
           Construction works<span class="visually-hidden"
             >: load this sample and build its matrix</span
           >
-        </Button>
-        <Button type="button" variant="secondary" id="load-digital">
+        </Action>
+        <Action as="button" variant="secondary" id="load-digital">
           Digital services<span class="visually-hidden"
             >: load this sample and build its matrix</span
           >
-        </Button>
+        </Action>
       </div>
 
       <div class="field">
@@ -385,9 +396,9 @@ const schema = [
         </div>
       </div>
 
-      <div class="btn-row">
-        <Button type="submit">Build the matrix</Button>
-        <Button type="reset" variant="secondary">Clear</Button>
+      <div class="ea-actions tmx-row">
+        <Action as="button" type="submit">Build the matrix</Action>
+        <Action as="button" type="reset" variant="secondary">Clear</Action>
       </div>
 
       {/*
@@ -480,9 +491,9 @@ const schema = [
         <p class="result__note" id="r-trunc" hidden>
           The first {MAX_ROWS} are listed below. Paste a section at a time to read the rest.
         </p>
-        <div class="result__actions btn-row" id="r-actions" hidden>
-          <button type="button" class="btn btn--secondary btn--sm" id="btn-csv">Download CSV</button>
-          <button type="button" class="btn btn--secondary btn--sm" id="btn-copy">Copy Markdown</button>
+        <div class="result__actions ea-actions tmx-row" id="r-actions" hidden>
+          <Action as="button" variant="secondary" id="btn-csv">Download CSV</Action>
+          <Action as="button" variant="secondary" id="btn-copy">Copy Markdown</Action>
         </div>
       </div>
     </div>
@@ -749,18 +760,26 @@ Section 5: Submission and Compliance
       <a href="/glossary/ppn-026/">Read PPN 026 in full</a>, the next edition of the Social Value Model
       social-value weighting and the dates it applies from.
     </p>
-  </Section>
+    </div>
+  </Band>
 
   {/* THE COUNT IS READ FROM THE LIST. It said "Four rules" above eleven of
       them, and had since the section was written, which is the one factual
       correction in this pass. A number typed beside a list it describes is a
       number that goes stale the first time somebody adds a rule. */}
-  <Section
-    eyebrow="Published in full"
-    title="What the rules look for."
-    standfirst={`${RULES.length} rules, all deterministic. There is no model, no network call and nothing guessed. Every row the tool produces can be traced back to the characters that triggered it.`}
-    id="rules"
-  >
+  <Band tone="light-alt" id="rules" labelledby="rules-title">
+    <div class="ea-wrap">
+      <div class="ea-head-row" data-reveal>
+        <div class="ea-split__head">
+          <p class="ea-label">Published in full</p>
+          <h2 class="ea-h2" id="rules-title">What the rules look for.</h2>
+        </div>
+        <p class="ea-lead">
+          {RULES.length} rules, all deterministic. There is no model, no network call and nothing guessed. Every row the
+          tool produces can be traced back to the characters that triggered it.
+        </p>
+      </div>
+      <div class="ea-longform">
     {/* A NUMBERED SPECIFICATION, NOT A DEFINITION LIST. `.deflist` is the
         site's recipe for a term above its prose description, and it stays
         exactly as it is for the five pages that want that. This is a different
@@ -788,14 +807,22 @@ Section 5: Submission and Compliance
         ))
       }
     </ol>
-  </Section>
+      </div>
+    </div>
+  </Band>
 
-  <Section
-    eyebrow="Stated plainly"
-    title="What this tool does not do."
-    standfirst="Written down because a free tool that overstates itself costs more credibility than it earns attention."
-    id="limits"
-  >
+  <Band tone="light" id="limits" labelledby="limits-title">
+    <div class="ea-wrap">
+      <div class="ea-head-row" data-reveal>
+        <div class="ea-split__head">
+          <p class="ea-label">Stated plainly</p>
+          <h2 class="ea-h2" id="limits-title">What this tool does not do.</h2>
+        </div>
+        <p class="ea-lead">
+          Written down because a free tool that overstates itself costs more credibility than it earns attention.
+        </p>
+      </div>
+      <div class="ea-longform">
     {/* THE CLAIM IS THE HEADING AND THE REASONING IS THE BODY. Six disc
         bullets running the full column meant a reader had to read all six to
         find out what the tool will not do. Each entry already opens with that
@@ -820,21 +847,19 @@ Section 5: Submission and Compliance
         })
       }
     </ul>
-  </Section>
+      </div>
+      <p class="tmx-more" data-reveal>
+        <a class="ea-link" href="/tools/">All free tools</a>
+        <a class="ea-link" href="/glossary/ppn-026/">PPN 026 explained</a>
+        <a class="ea-link" href="/bid/">Explore {PRODUCT_NAME_BID}</a>
+      </p>
+    </div>
+  </Band>
 
-  <FinalCta
-    eyebrow="Go further"
+  <Close
     title="Need the whole bid read, not one section?"
-    standfirst="Velstrian Bid reads a full tender pack, drafts answers from your own submitted bids with the source beside each one, and tracks what you promised after the contract is awarded."
-    id="product"
-    links={[
-      { label: 'All free tools', href: '/tools/' },
-      { label: 'PPN 026 explained', href: '/glossary/ppn-026/' },
-    ]}
-  >
-    <Button href={SIGNUP_URL}>Start now</Button>
-    <Button href="/bid/" variant="secondary">Explore Velstrian Bid</Button>
-  </FinalCta>
+    lead={`${PRODUCT_NAME_BID} reads a full tender pack, drafts answers from your own submitted bids with the source beside each one, and tracks what you promised after the contract is awarded.`}
+  />
 </Base>
 
 <script>
@@ -1828,5 +1853,21 @@ Section 5: Submission and Compliance
     font-size: var(--t-caption);
     line-height: 1.7;
     color: var(--c-text-sub);
+  }
+
+  /* ── Design system v3 (2026-10-22) ──────────────────────────────────────
+     The tool's buttons are evidenced Actions in .ea-actions rows, which give
+     every button in a row the widest label's width and stack them below
+     600px, the job .btn-row did. Inside the form a row sits one step below
+     the field above it rather than a band's space-8. */
+  .tmx-row {
+    margin-top: var(--space-4);
+  }
+
+  .tmx-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
   }
 </style>
