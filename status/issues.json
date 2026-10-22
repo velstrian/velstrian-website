@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T10:06:45.735Z",
+  "updated": "2026-10-22T10:43:04.801Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -3097,6 +3097,62 @@
       "title": "R285-WEB-REVIEW-2026-10-22 items 1 and 10: 768px horizontal scroll from the panel float card, hero frame header three lines at 375",
       "status": "BUILT",
       "note": "Float hang capped at the side room less 16px: scrollWidth minus innerWidth 0 on /, /bid/, /buy/, /pricing/, /about/, /faq/ at 320 to 1920 (was 13 to 22px at 768 to 1280). Title bar wraps, badge drops under the title: one line at 375 (was three). Commit a40a58fd."
+    },
+    {
+      "id": "A-315",
+      "src": "transformation-audit-2026-10-22",
+      "sev": "P2",
+      "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-A trust and claims wording: footer, About trust cards, ProofGate, Proof2 headline, site-facts (M1 M2 S13 M9)",
+      "status": "OPEN",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): data/footer.ts, Footer.astro markup, AboutTrust.astro, ContactForm.astro, ProofGate.astro, Proof2.astro, site-facts.json"
+    },
+    {
+      "id": "A-316",
+      "src": "transformation-audit-2026-10-22",
+      "sev": "P2",
+      "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-B sectors and compare plain words, public and private (M7 M8 S12 S14)",
+      "status": "OPEN",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): content/sectors/*.md, content/compare/*.md, layouts/Compare.astro, layouts/Sector.astro"
+    },
+    {
+      "id": "A-317",
+      "src": "transformation-audit-2026-10-22",
+      "sev": "P2",
+      "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-C About and Contact trust: named people, no stock photo, mailboxes (M5 S6 S8)",
+      "status": "OPEN",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/about/* except AboutTrust, pages/about.astro, pages/contact.astro, data/site.ts"
+    },
+    {
+      "id": "A-318",
+      "src": "transformation-audit-2026-10-22",
+      "sev": "P2",
+      "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-D blog and resources imagery, type led covers (M6 S5)",
+      "status": "OPEN",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/blog/PostImage.astro, pages/blog/index.astro, components/resources/*, pages/resources.astro, layouts/Article.astro"
+    },
+    {
+      "id": "A-319",
+      "src": "transformation-audit-2026-10-22",
+      "sev": "P2",
+      "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-E bid and buy page weight and screen slots (S2 M3)",
+      "status": "OPEN",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/bid/*, components/buy/*, pages/bid.astro, pages/buy.astro"
+    },
+    {
+      "id": "A-320",
+      "src": "transformation-audit-2026-10-22",
+      "sev": "P2",
+      "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-F pricing toggle, hero strip pad, 44px targets (S3 S4 S7), after WT-A",
+      "status": "OPEN",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/pricing/*, pages/pricing.astro, components/evidenced/PageHero.astro, styles/evidenced.css, Footer.astro style block"
+    },
+    {
+      "id": "A-321",
+      "src": "transformation-audit-2026-10-22",
+      "sev": "P2",
+      "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-G roadmap, integrations, sources, changelog plain summaries (S9 S10 S11)",
+      "status": "OPEN",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): data/roadmap.ts, data/integrations.ts, pages/integrations.astro, pages/roadmap.astro, pages/sources.astro, pages/changelog.astro, content/legal/security.md"
     }
   ],
   "directives": [
@@ -3166,5 +3222,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 315
+  "nextId": 322
 }
