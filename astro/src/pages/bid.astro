@@ -1,172 +1,81 @@
 ---
 /**
- * /crowmark: the flagship product page.
+ * /bid/: the Velstrian Bid product page.
  *
- * ── THE APPROVED DESIGN, AND WHAT WAS TAKEN FROM WHERE ──────────────────────
+ * ── 2026-10-22: REBUILT ON DESIGN SYSTEM VERSION 3, VERSION 2 STORYLINE ────
  *
- * P1 "Obligation ledger", Figma `223:3` on page `Page — Product (Velstrian Bid)`
- * (`223:2`), file wJ9DK6ByFUN6rWe0CpCVPU. P1 was chosen because it is the only
- * variant whose argument survives covering the prose: the award-line bar, the
- * gate and the twelve-month strip each make the point on their own. Its
- * alternating floor/base rhythm is the value separation the platform needs, and
- * that rhythm is spent down the WHOLE page here rather than only over the five
- * designed sections.
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy section 0.7 step (2). Written for a
+ * small or mid size organisation, 5 to 200 people, that writes its own bids,
+ * public AND private, never for an expert bid manager (RULE 0-U). Composed from
+ * components/evidenced/ (the parts the home page proved) and the page's own
+ * bands in components/bid/. Each band answers the next thing a first time
+ * visitor wonders:
  *
- * THE HERO GRAPHIC IS P2's (`223:5`), three occluding rotated planes, which is
- * the strongest depth answer in the set. P1's flat obligation panel is folded
- * into the front plane, so the three cited figures and the award-evaluation bar
- * that M-P1 animates are both still there. P2's headline is used verbatim
- * ("Find UK tenders. Cite every answer. Prove delivery.") rather than P1's,
- * which is also what keeps the legacy h1 alive for check-content-parity.js.
+ *   BidHero        light      what is it, is it for me?    stage, sequence
+ *   BidWhatItDoes  light alt  what does it do for me?      five rows, five stages
+ *   Refusal        dark       can I trust what it writes?  the one slow moment
+ *   Screens        light      what does it look like?      product carousel
+ *   Steps          dark       how hard is it to start?     three steps
+ *   BidTrust       light      am I in charge, is it safe?  hairline facts, trust strip
+ *   Plans          light alt  what does it cost?           three plans, from pricing.ts
+ *   BidDetail      light      the expert detail            the rules, fit reasons, all twelve capabilities
+ *   BidFaq         light alt  words I do not know          newcomer terms first
+ *   Close          gradient   what now?                    overlaps into the footer
  *
- * Motion is `Motion — Product page`, `243:2`, frame `243:3`: five keyframe
- * sequences, each with a trigger, a duration, an easing and a reduced-motion
- * state. Every one is implemented below and every divergence from the board is
- * named at the rule that diverges. Nothing is silently reinterpreted.
+ * EVERY CAPABILITY THE PREVIOUS PAGE CARRIED IS STILL HERE, said in plain
+ * words: the section 52 and 71 duties, PPN 026, PPN 017, the fit score and
+ * its seven reasons, award history, private quotes, the evidence vault, the
+ * answer library, the Advisor, the free tool and the other side of the table.
+ * The previous page's design (DutyCard, the drawn artefacts, styles/bid.css
+ * and its inline view trigger) is retired with it: motion is now the shared
+ * evidenced script, the same one the home page runs.
  *
- * ── WHAT THIS PAGE REUSES RATHER THAN REBUILDS ──────────────────────────────
+ * ── SEO IS CARRIED OVER ─────────────────────────────────────────────────────
  *
- * Section.astro (measure, gutter, section padding, the centred head block and
- * its gradient capsule eyebrow) · `.surface` and its lit state · `.sv-raised`
- * for every drawn artefact panel · `.sv-floor` for the alternating step ·
- * `.sv-numeral` for every displayed figure · `.sv-spot` and `.sv-grain` inside
- * the ambient rigs · `[data-field]` for the shared drift, entrance and
- * scroll-driven parallax · `[data-lit]` for the one view trigger · --m-beat /
- * --m-cycle / --m-ease-* for every duration and curve · --c-amber for at risk,
- * --c-orchid for refused, --c-teal for verified.
- *
- * The one thing NOT reused is src/scripts/motion.ts, which owns `[data-lit]` on
- * the homepage. That is a payload decision rather than an architectural one and
- * it is argued in full at the inline trigger at the foot of this file.
- *
- * Not one shadow, radius, colour, timing or card recipe is authored here.
- *
- * ── WHAT IS DELIBERATELY GONE ───────────────────────────────────────────────
- *
- * THE TWO PRODUCT SCREENSHOTS. mark-analytics.png (264 KB) and
- * mark-ppn002-themes.png. specs/architecture/PERFORMANCE-BUDGETS.md measures the
- * six product captures as 58% of the whole build payload, and the standing
- * instruction is purpose-drawn graphics rather than captures because a
- * screenshot on the public site is a recorded credibility defect. The four
- * drawn artefacts below replace them and argue more than they did. No heading,
- * form control or link destination goes with them, so content parity is
- * unaffected; only two <figure>s and their captions.
- *
- * ── WHAT IS DELIBERATELY KEPT ───────────────────────────────────────────────
- *
- * EVERY SECTION THE PORTED PAGE ALREADY CARRIED. The designed spine is added in
- * front of them, not instead of them. A product page that drops the walkthrough,
- * the statute detail, the capability list, the pricing table and the FAQ in
- * order to look designed has traded the thing readers came for against a
- * silhouette, and check-content-parity.js exists precisely to stop a redesign
- * doing that quietly.
- *
- * Every claim keeps its published wording. Two passages explicitly REFUSE a
- * win-likelihood claim, and that refusal is the positioning rather than hedging
- * to be tidied. See the note in data/crowmark.ts.
- *
- * THREE ACCESSIBILITY FIXES FROM THE ORIGINAL PORT STAND: the recommended plan
- * says "Recommended" in text and not only in fill and scale; "Book a demo"
- * announces that it opens a new window; and the screenshot alt that claimed
- * live data is gone with the screenshot itself.
+ * Title, description, canonical and the JSON-LD types are unchanged. The
+ * description's starting price is now read from data/pricing.ts rather than
+ * typed, and renders the same string. The FAQPage node is built from the
+ * questions this page shows (components/bid/faqs.ts).
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
-import Carousel from '../components/ui/Carousel.astro';
-/* A-45. The hero proof card is ONE artefact appearing on two routes, so both the
-   drawing and the recipe behind it are shared: the markup is DutyCard.astro, the
-   CSS is styles/duty-card.css (loaded by Base.astro), and the figures and
-   citations are data/duty.ts. What stays here is the wording, because /crowmark
-   addresses the party the duty is imposed on and /buy/ the party that
-   holds it. Until 2026-08-04 the whole recipe was written out in both files and
-   every correction had to be made twice. */
-import DutyCard from '../components/sections/DutyCard.astro';
-import { S52, S71, PPN026 } from '../data/duty';
-import { SUPPLIER_SCREENS } from '../data/crowmark-screens';
-/* A-88. The PRICED plans, from the file /pricing already publishes from.
-   This page's own PLANS (data/crowmark.ts) carries `price: '£49'` as formatted
-   display copy, not a number, so building an Offer from it would mean parsing a
-   currency string, and a parsed price is a SECOND source of truth for a figure
-   data/pricing.ts already owns. Aliased rather than renamed because both arrays
-   are legitimately called PLANS in their own file. `astro check` caught the
-   first attempt at this, which used the wrong one. */
-import { PLANS as PRICED_PLANS } from '../data/pricing';
+import BidHero from '../components/bid/BidHero.astro';
+import BidWhatItDoes from '../components/bid/BidWhatItDoes.astro';
+import BidTrust from '../components/bid/BidTrust.astro';
+import BidDetail from '../components/bid/BidDetail.astro';
+import BidFaq from '../components/bid/BidFaq.astro';
+import { BID_FAQS } from '../components/bid/faqs';
+import Refusal from '../components/evidenced/Refusal.astro';
+import Screens from '../components/evidenced/Screens.astro';
+import Steps from '../components/evidenced/Steps.astro';
+import Plans from '../components/evidenced/Plans.astro';
+import Close from '../components/evidenced/Close.astro';
+import '../styles/evidenced.css';
+import { PLANS } from '../data/pricing';
 import { faqPage, breadcrumbs } from '../lib/schema';
 import { SITE } from '../data/site';
-import { LIVE_SOURCES } from '../data/site-facts';
-import {
-  PROOF,
-  KEY_FACTS,
-  STEPS,
-  BENEFITS,
-  STATUTES,
-  CAPABILITIES,
-  PLANS,
-  FAQS,
-} from '../data/crowmark';
-/*
- * THIS PAGE'S OWN CSS, AND IT IS A FILE RATHER THAN A <style> BLOCK AT THE
- * BOTTOM OF THIS ONE.
- *
- * It was 1,206 lines and 45.7 KB down there until 2026-08-04. Moving it out
- * under ADR 0010 removed the ~5.3 KB of `astro-ivyj52o5` scope classes this
- * page was stamping onto its own elements (/crowmark is the largest document
- * on the site and was 1,147 B inside the 100 KB per-route budget), and put a
- * stylesheet where the other seventeen stylesheets are.
- *
- * IT IS GLOBAL CSS, SO IT IS ANCHORED. Every rule in it descends from
- * `.pg-bid`, which layouts/Base.astro puts on <body> from the route. That
- * is not belt and braces: 41 of the 103 class names it selects on also exist on
- * eight other routes, so unanchored it would have restyled them. The file's own
- * header carries the measurement and the specificity argument.
- *
- * The import sits here, last, so this sheet still loads after everything
- * Base.astro imports. The same position the scoped block held.
- */
-import '../styles/bid.css';
+import { PRODUCT_NAME_BID, PLATFORM_SHORT_NAME } from '../lib/brand-names';
 
-const title = 'Velstrian Bid | Bid and tender software for UK suppliers';
-const description =
-  'Find UK tenders, draft answers cited to the regulations and your own bids, and evidence delivery after award. From £49/month.';
+const [STARTER] = PLANS;
 
-const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
-/* D236 (2026-10-19): sign up is self serve, so the primary action is the app's
-   sign up page, from data/app.ts where the host is written once. */
-import { SIGNUP_URL as START_NOW } from '../data/app';
+const title = `${PRODUCT_NAME_BID} | Bid and tender software for UK suppliers`;
+const description = `Find UK tenders, draft answers cited to the regulations and your own bids, and evidence delivery after award. From £${STARTER.monthly}/month.`;
 
 const schema = [
   /*
-   * SoftwareApplication. Published by the legacy page and dropped by the port
-   * (OA-24). It is what makes a product page eligible for a software rich
-   * result, and losing it is invisible until rankings move.
-   *
-   * No aggregateRating and no review: this site does not publish ratings it
-   * cannot evidence, and inventing them to win a rich result is exactly the
-   * behaviour the product refuses.
+   * SoftwareApplication. No aggregateRating and no review: this site does not
+   * publish ratings it cannot evidence. The offers are derived from PLANS,
+   * exactly as /pricing does it, so the two pages cannot publish different
+   * prices for the same product (A-88).
    */
   {
     '@type': 'SoftwareApplication',
-    name: 'Velstrian Bid',
+    name: PRODUCT_NAME_BID,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
     url: `${SITE.origin}/bid`,
     description,
-    publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
-    /* A-88. Without ONE of offers, aggregateRating or review, Google does not
-       consider a SoftwareApplication node eligible at all, so this node was
-       being ignored outright, silently, while looking complete.
-       DERIVED FROM PLANS, exactly as /pricing already does it, so the two pages
-       cannot publish different prices for the same product: a hand-written
-       price here would be a second source of truth for a number the data file
-       already owns. The description above this line already says "From
-       £49/month", so nothing new is being claimed.
-       NO aggregateRating AND NO review, and that refusal is deliberate rather
-       than an omission. It is the standard SEO advice for this exact warning,
-       and taking it would mean publishing ratings this site has no evidence
-       for. A breach of its own rule that a claim it cannot trace is not made,
-       and of Google's review-snippet policy at the same time. */
-    offers: PRICED_PLANS.filter((p) => p.monthly !== null).map((p) => ({
+    publisher: { '@type': 'Organization', name: PLATFORM_SHORT_NAME, url: `${SITE.origin}/` },
+    offers: PLANS.filter((p) => p.monthly !== null).map((p) => ({
       '@type': 'Offer',
       name: p.name,
       price: String(p.monthly),
@@ -174,984 +83,49 @@ const schema = [
       url: `${SITE.origin}/pricing`,
     })),
   },
-  ...faqPage(FAQS),
+  ...faqPage(BID_FAQS),
   breadcrumbs([
     { name: 'Home', path: '/' },
-    { name: 'Velstrian Bid', path: '/bid/' },
+    { name: PRODUCT_NAME_BID, path: '/bid/' },
   ]),
 ];
 
-/** Matches the legacy in-page nav exactly. Four of the sections. */
-/* "See it in action" is second because the showcase renders SECOND on the page,
-   and a sub-nav whose order disagrees with the page it links into is a small
-   lie a reader notices as soon as they use it twice. */
-const SUBNAV = [
-  { label: 'See it in action', href: '#showcase' },
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Features', href: '#features' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'FAQ', href: '#product-faq' },
-];
-
 /*
- * THE HERO ARTEFACT. Three figures, each cited to a named instrument, because
- * the standing rule has two options and no third: a figure is cited to a source
- * or it is visibly marked as an example.
- *
- * s.52 SETS AND PUBLISHES. s.71 ASSESSES AND PUBLISHES. They are two duties and
- * they must never be merged into one sentence. That is the single most common
- * way this page could become wrong, and the whole gap section below exists to
- * draw the twelve months between them.
- *
- * ONLY THE LABELS ARE HERE. The figures and the citations are the instrument and
- * come from data/duty.ts, where they are declared once for both routes; retyping
- * a commencement date into a second file is how OA-29 spread across twelve. The
- * label is the half that is genuinely this page's: a supplier reads "KPIs
- * minimum" as a count in a contract handed to them, while the authority reads
- * the same section as an obligation of its own.
+ * WHEN THIS PAGE LAST MATERIALLY CHANGED. Read by Seo.astro into dateModified
+ * and from there into the sitemap <lastmod>. Bumped because the page was
+ * rebuilt and its content rewritten on this day.
  */
-const DUTY = [
-  { ...S52, label: 'KPIs minimum' },
-  { ...S71, label: 'months to assessment' },
-  { ...PPN026, label: 'minimum evaluation weighting' },
-];
-
-/**
- * P1's SOLUTION section, `229:2`. Three cards, and the point of the section is
- * that each move leaves something behind rather than that there are three of
- * them.
- */
-const MECHANISM = [
-  {
-    n: '01',
-    heading: 'Read the rule that applies',
-    body: 'Statute, the tender document and your own past bids are three different sources, and Velstrian Bid keeps them apart. Every retrieved passage keeps its citation from the moment it is read.',
-    /* Each card carries its own small drawn artefact. A section whose only
-       visual idea is a bordered box with text in it is named as a failure in
-       specs/DESIGN-DECISIONS.md, and three of them in a row is that failure
-       three times. */
-    art: 'sources' as const,
-    chips: ['Procurement Act 2023, s.52', 'Tender, Q4.2', 'Your 2024 bid, p.31'],
-  },
-  {
-    n: '02',
-    heading: 'Draft the answer, cited',
-    body: 'The draft carries the citation inline, so a reviewer can check the sentence against the clause without leaving the page. Nothing is asserted that has no source behind it.',
-    art: 'draft' as const,
-    chips: ['s.52', 'Tender Q4.2'],
-  },
-  {
-    n: '03',
-    heading: 'Hold the promise to the evidence',
-    body: 'A priced commitment becomes a KPI in the contract. Velstrian Bid keeps that promise attached to the artefacts that prove it, ready for the twelve month assessment.',
-    art: 'link' as const,
-    chips: ['Promise: 4 local jobs', 'Evidence: payroll, Q3'],
-  },
-];
-
-/*
- * CAPABILITY 01's ARTEFACT.
- *
- * THE COLOURS DIVERGE FROM THE FIGMA FRAME, DELIBERATELY. `230:9` draws the two
- * low scores in violet. The palette rule in styles/tokens.css is explicit that
- * orchid and violet mean THE ENGINE REFUSED SOMETHING, and --c-amber, added by
- * owner decision on 2026-08-03, means a fact about the reader's situation that
- * carries risk. A low fit score is the second thing and never the first: it is
- * news about this supplier against this notice, not a figure we declined to
- * print. Drawing it in the refusal colour would weaken the one signal on this
- * site a competitor cannot copy.
- *
- * So the marks follow the product's own three-way verdict, which
- * data/crowmark.ts already publishes ("returns pursue, review or pass with the
- * gaps named"), and every row carries the WORD as well as the colour, so the
- * verdict survives with every pixel of colour removed. WCAG 1.4.1.
- */
-const FIT = [
-  { name: 'Grounds maintenance, 3 lots', score: 92, verdict: 'Pursue', tone: 'go' },
-  { name: 'Managed print, national', score: 78, verdict: 'Pursue', tone: 'go' },
-  { name: 'Clinical waste, framework', score: 41, verdict: 'Review', tone: 'risk' },
-  { name: 'Highways surfacing, DPS', score: 19, verdict: 'Pass', tone: 'stop' },
-];
-
-/*
- * CAPABILITY 03's ARTEFACT: the gate, and it is the section that defines this
- * product against competitors selling success-rate uplift.
- *
- * FOUR FIGURES CLAIMED, THREE TRACED, ONE REFUSED. A version of this artefact
- * that loses the refused row has kept the picture and thrown away the argument.
- * That row may never be cut for space.
- *
- * NO MONEY FIGURE HERE, ON PURPOSE. The homepage's reasoning trace carries
- * "4 jobs x £27,000" with a visible "illustrative" tag, because £27,000 is not
- * a published figure from a named authority and /sources says so in as many
- * words. Rather than repeat a hedged figure on a second page, the rows below
- * are counts and states that need no hedge at all. The panel is still labelled
- * a worked example.
- */
-const GATE = [
-  { name: 'Local jobs created', src: '4 starts, evidenced', ok: true },
-  { name: 'Apprenticeship weeks', src: '52 weeks, recorded', ok: true },
-  { name: 'Carbon reduction plan', src: 'published, dated', ok: true },
-  { name: 'Local supply chain spend', src: 'no recorded commitment', ok: false },
-];
-
-/** Twelve months of delivery evidence, then the s.71 assessment. Decoration:
-    the bar heights carry no figure and the strip is aria-hidden. */
-const MONTHS = [38, 52, 61, 74, 44, 57, 70, 82, 49, 63, 77, 45];
-
-/*
- * THE SHOWCASE: the six landscape supplier screens, on the owner's instruction
- * of 2026-08-04. It was eight until 2026-08-31, when the two 780x1688 PORTRAIT
- * phone renders came out of the set: this carousel draws a browser window with
- * an address bar, and a phone screen inside one is wrong at any size. The
- * account is in data/crowmark-screens.ts and the guard is
- * scripts/check-device-frames.js.
- *
- * THE SLIDES AND THEIR STRINGS MOVED TO data/crowmark-screens.ts. They used to
- * be an eighty-line array in this file and a matching gap on /buy/,
- * which is the shape a rule gets broken in: alt text and captions on this site
- * obey three rules that are easy to break one page at a time, and the sixteen
- * strings that have to obey them now sit together where they can be read
- * against each other. The three rules are written out at the top of that file.
- *
- * WHAT CHANGED BESIDES THE COUNT. The previous set was chosen partly by a
- * constraint that no longer exists: the carousel had one fixed frame, so the
- * four slides had to share one aspect ratio, and mark-fit-score (the best
- * single image on the product) was excluded for being portrait. Carousel.astro
- * now gives every slide its own proportions on a stage that does not move, so
- * the set is chosen by what it argues rather than by what fits. The four
- * desktop screens run in the order the work happens and two tablet screens
- * follow.
- *
- * THE TWO PHONE SCREENS ARE NO LONGER PART OF THAT ANSWER, and the sentence that
- * used to end this paragraph claimed they answered "does this work on a phone"
- * without a claim being made about it. They did not answer it, because they were
- * shown inside a desktop browser window, which asserts the opposite of what they
- * were there to say.
- */
-
-/*
- * WHEN THIS PAGE LAST MATERIALLY CHANGED. Read by Seo.astro into a WebPage
- * node's dateModified, and from there by scripts/build-sitemap.js into
- * <lastmod>. It is a FACT about this page, not a build timestamp: bump it only
- * when the page's content actually changes, never on a redeploy. Leaving it
- * stale is safer than advancing it falsely, because a sitemap that claims
- * everything changed is discounted.
- */
-const UPDATED = new Date('2026-08-09'); /* R262-WEB-08: bumped because the CONTENT changed, which is the only thing that may bump it. The credit top-up prices and the metered overage rate are published on this route for the first time. */
-
+const UPDATED = new Date('2026-10-22');
 ---
 
-<Base title={title} description={description} path="/bid" schema={schema} updatedAt={UPDATED}>
-  {/*
-    ── HERO ────────────────────────────────────────────────────────────────
-    The head block is Section.astro's: centred eyebrow capsule, h1, standfirst.
-    Owner decision 2026-08-02, and it applies to every page.
-
-    DIVERGENCE FROM `223:5`, RECORDED. P2 draws a left-aligned split, copy left
-    and planes right. That is a live tension recorded in specs/DESIGN-DECISIONS.md
-    section 5 and it is NOT settled, while the centred head block IS a settled
-    owner decision. So the composition follows P1, which centres, and the GRAPHIC
-    is P2's, which is the half of P2 the brief actually praises. If the owner
-    later rules for the split, this hero moves out of Section.astro exactly as
-    HeroStack.astro already does on the homepage.
-  */}
-  <Section
-    as="h1"
-    eyebrow="Procurement Act 2023 · s.52 · s.71 · PPN 026"
-    title="Find UK tenders. Cite every answer. Prove delivery."
-    standfirst="Velstrian Bid reads the notice, drafts the answer against the rule that applies, and keeps the promise you priced attached to the evidence that proves it after award."
-    id="hero"
-  >
-    <div class="cw cw--hero" data-spot="off">
-      <div class="btn-row">
-        <Button href={CALENDLY} target="_blank">
-          Book a 30-minute call<span class="visually-hidden"> (opens in a new window)</span>
-        </Button>
-        <Button href="/tools/tender-compliance-matrix/" variant="secondary">
-          Run the free compliance matrix
-        </Button>
-      </div>
-      <p class="hint">From £49/month. No card needed to run the free tool.</p>
-
-      {/*
-        ── THE PLANE STACK, `223:5` ──────────────────────────────────────────
-        The drawing is DutyCard.astro and the recipe is styles/duty-card.css;
-        both the geometry and the reasoning behind it are documented there,
-        beside the declarations they govern. The four strings below are the only
-        part of this artefact that belongs to /crowmark rather than to the pair
-        of routes, and they are here so an editor can see the supplier's wording
-        without opening a component.
-      */}
-      <DutyCard
-        kicker="The duty, one contract"
-        rows={DUTY}
-        barLabel="Award evaluation, one bid"
-        legendNote="the remaining weighting is the authority's to set"
-      />
-
-      <ul class="proof" role="list">
-        {
-          PROOF.map((p) => (
-            <li>
-              <strong>{p.lead}</strong> {p.rest}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </Section>
-
-  <nav class="subnav" aria-label="On this page">
-    <ul>
-      {SUBNAV.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
-    </ul>
-  </nav>
-
-  {/*
-    ── THE GAP, `228:2` ──────────────────────────────────────────────────────
-
-    THE HEADING DIVERGES FROM THE FRAME AND THE REASON IS A RECORDED DEFECT
-    CLASS. P1 draws "Every bid tool stops at submission." That is a categorical
-    claim about every competitor and nothing on this site can source it; the
-    homepage lifecycle heading was replaced for carrying exactly that class of
-    unsourced competitor claim (OA-18). P2's own heading for the same section,
-    "The obligation outlives the bid.", makes the identical point about the
-    STATUTE rather than about other people's products, and the drawn artefact
-    argues it without naming anybody: the bid ends at award, the obligation
-    crosses it and runs twelve months further.
-
-    What Velstrian Bid does about that is a claim about our own product, which is
-    normal marketing and needs no source.
-  */}
-  <Section
-    eyebrow="The gap"
-    title="The obligation outlives the bid."
-    standfirst="s.52 puts at least three KPIs into contracts with an estimated value above £5m and requires you to publish them. s.71 makes you assess and publish against those same KPIs at least every twelve months, and on termination. Velstrian Bid works on both sides of that line."
-    id="the-gap"
-  >
-    <div class="cw cw--gap" data-lit>
-      {/* A FIGURE: two drawn lanes, a gate rule and a stop scale. The lane
-          names and notes are labels pinned to the bars beside them. */}
-      <figure class="award sv-raised">
-        <p class="eyebrow award__gate">Award</p>
-
-        <div class="award__lane">
-          <p class="award__name">Writing the bid</p>
-          <span class="award__track" aria-hidden="true"><i class="award__bar award__bar--a"></i></span>
-          {/* The span carries the panel colour so the gate rule, which runs the
-              full height of the artefact, does not strike through the words. */}
-          <p class="award__note"><span class="award__knock">ends here</span></p>
-        </div>
-
-        <div class="award__lane award__lane--us">
-          <p class="award__name">Your obligation</p>
-          <span class="award__track" aria-hidden="true"><i class="award__bar award__bar--b"></i></span>
-          <p class="award__note award__note--lit">
-            <span class="award__tick" aria-hidden="true"></span>s.71 assessment published
-          </p>
-        </div>
-
-        <ol class="award__stops">
-          <li>Notice</li>
-          <li>Bid</li>
-          <li>Submit</li>
-          <li>Month 12</li>
-        </ol>
-      </figure>
-    </div>
-  </Section>
-
-  {/* ── THE DEADLINE TIMELINE (MOMENT 2: SCROLL-SCRUBBED DEADLINE) ─────────── */}
-  <Section
-    eyebrow="The deadline timeline"
-    title="From tender issue to submission deadline."
-    standfirst="A thirty-day tender window, stage by stage. Selection answers come from your library, drafts carry their citations, every figure is checked before sign-off, and the audit trail is complete by the deadline."
-    id="deadline-timeline"
-  >
-    <div class="cw cw--deadline">
-      <div class="bid-timeline" aria-label="Bid response timeline from tender issue to submission deadline">
-        <div class="bid-timeline__header">
-          <div class="bid-timeline__meta">
-            <span class="chip bid-timeline__tag">30-day tender window</span>
-          </div>
-          <p class="bid-timeline__context">Official notice feed · Verified audit trail</p>
-        </div>
-
-        <div class="bid-timeline__track-wrap" aria-hidden="true">
-          <div class="bid-timeline__track">
-            <div class="bid-timeline__bar"></div>
-          </div>
-        </div>
-
-        <ol class="bid-timeline__stops" role="list">
-          <li class="bid-timeline__stop">
-            <div class="bid-timeline__marker"></div>
-            <p class="bid-timeline__day">Day 01</p>
-            <h3 class="bid-timeline__title">Notice published</h3>
-            <p class="bid-timeline__desc">Tender ingested from official feeds. Fit score and requirements matrix generated.</p>
-            <span class="bid-timeline__badge">Live feed</span>
-          </li>
-          <li class="bid-timeline__stop">
-            <div class="bid-timeline__marker"></div>
-            <p class="bid-timeline__day">Day 04</p>
-            <h3 class="bid-timeline__title">Selection questionnaire</h3>
-            <p class="bid-timeline__desc">Accreditations, insurances, turnover and exclusion grounds matched from library.</p>
-            <span class="bid-timeline__badge">Pre-answered</span>
-          </li>
-          <li class="bid-timeline__stop">
-            <div class="bid-timeline__marker"></div>
-            <p class="bid-timeline__day">Day 12</p>
-            <h3 class="bid-timeline__title">Technical responses</h3>
-            <p class="bid-timeline__desc">Drafted with inline citations to tender clauses and past winning method statements.</p>
-            <span class="bid-timeline__badge">Cited drafting</span>
-          </li>
-          <li class="bid-timeline__stop">
-            <div class="bid-timeline__marker"></div>
-            <p class="bid-timeline__day">Day 18</p>
-            <h3 class="bid-timeline__title">Social value &amp; KPIs</h3>
-            <p class="bid-timeline__desc">Procurement Act 2023 s.52 metrics calculated in code. PPN 026 commitments locked.</p>
-            <span class="bid-timeline__badge">Deterministic</span>
-          </li>
-          <li class="bid-timeline__stop">
-            <div class="bid-timeline__marker"></div>
-            <p class="bid-timeline__day">Day 25</p>
-            <h3 class="bid-timeline__title">Review &amp; sign-off</h3>
-            <p class="bid-timeline__desc">Every figure verified against permitted set. PPN 017 transparency disclosure attached.</p>
-            <span class="bid-timeline__badge">Human approved</span>
-          </li>
-          <li class="bid-timeline__stop">
-            <div class="bid-timeline__marker"></div>
-            <p class="bid-timeline__day">Day 30</p>
-            <h3 class="bid-timeline__title">Submission deadline</h3>
-            <p class="bid-timeline__desc">Audit bundle assembled. Clean export ready for upload days before the cut-off.</p>
-            <span class="bid-timeline__badge bid-timeline__badge--target">Submission</span>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </Section>
-
-  {/* ── THE MECHANISM, `229:2` ───────────────────────────────────────────── */}
-  <Section
-    eyebrow="The mechanism"
-    title="Three moves. Each one leaves a record."
-    id="mechanism"
-  >
-    <div class="cw cw--mech" data-spot="off" data-lit>
-      <ol class="mech card-sync">
-        {
-          MECHANISM.map((m) => (
-            <li class="mech__card surface">
-              <p class="meta mech__n" aria-hidden="true">{m.n}</p>
-              {/* The artefact. Decoration: every word it draws is repeated in
-                  the heading and body beneath it, so it is aria-hidden and the
-                  card is complete without it.
-
-                  A FIGURE RATHER THAN A PARAGRAPH, and the paragraph was always
-                  wrong: this holds a drawn rule and two chips laid out as a
-                  picture, not a sentence. `--draft` sets them side by side, so
-                  the pair is centred as a pair and neither chip is on the
-                  centre line by itself, which is what a drawing does and what
-                  scripts/check-render.js correctly declines to ask a <figure>
-                  about. */}
-              <figure class:list={['mech__art', `mech__art--${m.art}`]} aria-hidden="true">
-                {m.art === 'draft' && <span class="mech__rule"></span>}
-                {m.chips.map((c) => <span class="mech__chip">{c}</span>)}
-              </figure>
-              <h3 class="card-h card__h">{m.heading}</h3>
-              <p class="card__body">{m.body}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </Section>
-
-  {/* ── CAPABILITY 01, `230:2` ───────────────────────────────────────────── */}
-  <Section id="cap-fit">
-    <div class="cw cap cap--art-right" data-spot="off" data-lit>
-      <div class="amb" data-field aria-hidden="true">
-        <b></b><b></b><i class="sv-spot"></i><i class="sv-grain"></i>
-      </div>
-
-      <div class="cap__text">
-        <p class="meta cap__n">01</p>
-        <h2 class="cap__h">Find the work that actually fits</h2>
-        <p class="cap__body">
-          Velstrian Bid reads live notices and scores each against what you can evidence today:
-          turnover, accreditations, past delivery in the same category. A low score is an answer,
-          not a failure, and it comes with the reason. You stop writing bids you cannot support.
-        </p>
-        <p class="cap__more"><a href="#features">See how scoring works</a></p>
-      </div>
-
-      <div class="cap__art">
-        {/* A FIGURE: scored bars with their names and verdicts set against
-            them. */}
-        <figure class="fit sv-raised">
-          <p class="eyebrow art__kicker">Fit against what you can evidence</p>
-          <ul class="fit__rows" role="list">
-            {
-              FIT.map((f) => (
-                <li class:list={['fit__row', `fit__row--${f.tone}`]}>
-                  <p class="fit__name">{f.name}</p>
-                  <p class="meta fit__verdict">{f.verdict}</p>
-                  <p class="fit__score">{f.score}</p>
-                  <span class="fit__bar" style={`--w:${f.score}%`} aria-hidden="true" />
-                </li>
-              ))
-            }
-          </ul>
-        </figure>
-      </div>
-    </div>
-  </Section>
-
-  {/* ── CAPABILITY 02, `230:28` ──────────────────────────────────────────── */}
-  <Section id="cap-citation">
-    <div class="cw cap cap--art-left" data-lit>
-      <div class="cap__text">
-        <p class="meta cap__n">02</p>
-        <h2 class="cap__h">Every answer carries its citation</h2>
-        <p class="cap__body">
-          A drafted answer names its source in the sentence: the clause of the Act, the paragraph
-          of the tender, the page of your own earlier bid. A reviewer checks it without leaving
-          the page, and an evaluator can follow the same trail.
-        </p>
-        <p class="cap__more"><a href="#benefits">See what sits behind a figure</a></p>
-      </div>
-
-      <div class="cap__art">
-        <figure class="cite sv-raised">
-          <blockquote class="cite__q">
-            We will hold at least three key performance indicators for this contract and publish
-            an assessment against them every twelve months.
-          </blockquote>
-          <p class="cite__chips">
-            <span>Procurement Act 2023, s.52</span>
-            <span>Procurement Act 2023, s.71</span>
-            <span>Tender, Q4.2</span>
-          </p>
-          <figcaption class="cite__foot">Three sources, kept apart, named in the sentence.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </Section>
-
-  {/* ── CAPABILITY 03, `230:45`: the refusal ────────────────────────────── */}
-  {/* ══ THE SHOWCASE ══════════════════════════════════════════════════════
-   *
-   * Owner instruction, 2026-08-03: restore the product showcase carousel that
-   * shipped on the live product pages before 26 July, on the product page,
-   * ALONGSIDE the drawn artefacts rather than instead of them.
-   *
-   * IT SITS BEFORE THE REFUSAL, AND IT USED TO SIT AFTER ALL FOUR
-   * CAPABILITIES. Owner instruction, 2026-08-05: "in both of the products
-   * pages carousels must be moved into upper in the product pages just before
-   * The line we do not cross section". That section is #boundary on the buyer
-   * page and #cap-refusal here, so the anchor is the REFUSAL on both and the
-   * two pages now agree on where the product is shown.
-   *
-   * WHAT THE OLD POSITION ARGUED, recorded because it was a real argument and
-   * not an accident: the four capability sections each make a claim and draw a
-   * figure to explain it, and putting the real screens immediately after all
-   * four let a reader check the drawings against the interface. That reading
-   * survives in weakened form - fit and citation are still drawn before the
-   * screens appear - but refusal and delivery are now drawn after them.
-   *
-   * WHAT THE NEW POSITION BUYS, and it is why the instruction is right: the
-   * product was previously not visible until six sections down. A reader who
-   * left before that point never saw it at all. Showing it before the refusal
-   * also puts the strongest claim on the page - that the engine removes what
-   * it cannot evidence - immediately AFTER the reader has seen the thing that
-   * does the removing, which is the better order for that particular claim.
-   *
-   * THE SLIDES ARE IN CAPABILITY ORDER, NOT IN A PLEASING ORDER. Find, decide,
-   * draft, prove. The same beats as 01 to 04 above, so the carousel reads as
-   * the same story told again in the interface. The two tablet screens that
-   * follow are the same product at one more width.
-   *
-   * THE BUYER PAGE HAS ONE NOW TOO. This note used to record its absence as a
-   * gap: every screen that existed was supplier-side, and putting supplier
-   * screens on the buyer page would have shown a reader the wrong product. The
-   * eight buyer screens drawn on 2026-08-03 closed that gap, and both sets are
-   * declared in data/crowmark-screens.ts.
-   * ══════════════════════════════════════════════════════════════════════ */}
-
-  <Section
-    eyebrow="See it in action"
-    title="The same four steps, in the product."
-    standfirst="Six Velstrian Bid screens, drawn from the product's own design system, at desktop and tablet widths. The first four match the four capabilities above."
-    id="showcase"
-  >
-    <Carousel slides={SUPPLIER_SCREENS} path="bid" label="Velstrian Bid supplier screens" />
-  </Section>
-
-  <Section id="cap-refusal">
-    <div class="cw cap cap--art-right" data-spot="off" data-lit>
-      <div class="amb" data-field aria-hidden="true">
-        <b></b><b></b><i class="sv-spot"></i><i class="sv-grain"></i>
-      </div>
-
-      <div class="cap__text">
-        <p class="meta cap__n">03</p>
-        <h2 class="cap__h">It refuses what it cannot evidence</h2>
-        <p class="cap__body">
-          Where there is no recorded commitment behind a figure, Velstrian Bid will not produce the
-          figure. The gap is shown, named and left open rather than filled. That refusal is the
-          product, and it is why the rest of the numbers can be trusted.
-        </p>
-        <p class="cap__more"><a href="/sources/">Read where every figure comes from</a></p>
-      </div>
-
-      <div class="cap__art">
-        {/* A FIGURE: four drawn tracks, one stopped dead, with each figure's
-            name and source set against its own track. */}
-        <figure class="gate sv-raised">
-          <p class="eyebrow art__kicker">Worked example · four figures claimed, three survive</p>
-          <ol class="gate__rows">
-            {
-              GATE.map((g) => (
-                <li class:list={['gate__row', { 'gate__row--stop': !g.ok }]}>
-                  <p class="gate__name">{g.name}</p>
-                  <p class="gate__src">{g.src}</p>
-                  <span class="gate__track" aria-hidden="true"><i class="gate__bar"></i></span>
-                  {g.ok ? (
-                    <p class="meta gate__end">
-                      <span class="gate__pip" aria-hidden="true" />Traced
-                    </p>
-                  ) : (
-                    <p class="meta gate__end gate__end--stop">
-                      {/* Drawn, not typed. JetBrains Mono has no ballot-X glyph
-                          and a missing glyph in this face renders as a stray
-                          character. The second path is a brighter copy that
-                          draws itself over the first; at rest it is dashed
-                          entirely out of view, so the refusal mark is the cross
-                          beneath and the animation adds nothing but light. */}
-                      <svg class="gate__x" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
-                        <path d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                        <path class="gate__x-draw" d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5" pathLength="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                      </svg>
-                      Refused
-                    </p>
-                  )}
-                </li>
-              ))
-            }
-          </ol>
-        </figure>
-      </div>
-    </div>
-  </Section>
-
-  {/* ── CAPABILITY 04, `230:72` ──────────────────────────────────────────── */}
-  <Section id="cap-delivery">
-    <div class="cw cap cap--art-left" data-lit>
-      <div class="cap__text">
-        <p class="meta cap__n">04</p>
-        <h2 class="cap__h">The promise survives the award</h2>
-        <p class="cap__body">
-          Priced commitments become KPIs under s.52. Velstrian Bid keeps each one attached to the
-          evidence that proves it, month by month, so the s.71 assessment twelve months later is
-          an export rather than an excavation.
-        </p>
-        <p class="cap__more"><a href="#procurement-act">See the two duties in full</a></p>
-      </div>
-
-      <div class="cap__art">
-        {/* A FIGURE: a twelve-bar chart with its axis labels at either end of
-            the baseline. */}
-        <figure class="strip sv-raised">
-          <p class="eyebrow art__kicker">Twelve months of evidence, then s.71</p>
-          <div class="strip__chart" aria-hidden="true">
-            {MONTHS.map((h) => <i class="strip__bar" style={`--h:${h}%`}></i>)}
-            <span class="strip__line"></span>
-          </div>
-          <p class="strip__foot">
-            <span>Month 1</span>
-            <span class="strip__out">s.71 assessment published</span>
-          </p>
-        </figure>
-      </div>
-    </div>
-  </Section>
-
-
-  {/* ══ THE DEPTH. Every section below shipped on the ported page and is kept.
-       They now sit on the same alternating floor/base rhythm as the spine
-       above, so the page reads as one system rather than as a designed top and
-       a ported bottom.
-
-       THE FLOOR ALTERNATION IS NO LONGER STATED HERE, OR ANYWHERE ON THIS PAGE.
-       This block used to explain that inserting the showcase shifted the parity
-       of every section below it, that two adjacent sections carrying `sv-floor`
-       read as one long band, and that the resulting break had been placed at the
-       end on purpose. All of that was true of a HAND-PLACED ladder, and all of
-       it was a cost paid for encoding the ground in eight separate places.
-
-       It was proved on 2026-08-05. The owner asked for the showcase to move up
-       the page, above the refusal, and the eight hand-placed classes would have
-       had to be re-reasoned again - the third time this page had paid that cost.
-       So they were removed. styles/bid.css now derives the ground from a
-       section's POSITION with two rules, exactly as pages/index.astro does under
-       A-118, and moving a section now moves its surface with it. There is no
-       parity to break, no adjacent pair to place, and nothing to re-reason the
-       next time this page is reordered.
-  */}
-
-  <Section
-    eyebrow="Product walkthrough"
-    title="Tender to delivery, in 4 steps."
-    standfirst="One thread from the notice you found this morning to the evidence your buyer asks for two years later."
-    id="how-it-works"
-  >
-    <ol class="steps card-sync">
-      {
-        STEPS.map((s) => (
-          <li class="steps__item surface">
-            <span class="steps__n" aria-hidden="true">{s.n}</span>
-            <h3 class="card-h card__h">{s.heading}</h3>
-            <p class="card__body">{s.body}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </Section>
-
-  <Section
-    eyebrow="Why Velstrian Bid"
-    title="Three things most bid tools will not do."
-    standfirst="The AI cannot invent a number, every draft says it is AI-assisted, and the commitment you bid is the commitment you report against."
-    id="benefits"
-  >
-    <ul class="grid grid--3 card-sync">
-      {
-        BENEFITS.map((b) => (
-          <li class="card surface">
-            <h3 class="card-h card__h">{b.heading}</h3>
-            <p class="card__body">{b.body}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
-
-  <Section
-    eyebrow="Procurement Act 2023"
-    title="The KPI duties nobody reads until it's too late."
-    standfirst="Velstrian Bid checks your contract against the Procurement Act 2023 KPI duties and tells you where you stand. The check is advisory, it never blocks you, and it is not legal advice."
-    id="procurement-act"
-  >
-    <ul class="grid grid--2 card-sync">
-      {
-        STATUTES.map((s) => (
-          <li class="card surface">
-            <h3 class="card-h card__h">{s.heading}</h3>
-            <p class="card__body">{s.body}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
-
-  <Section
-    eyebrow="Available now"
-    title="What Velstrian Bid does today."
-    standfirst="What the product does now. Anything still being built is on the roadmap rather than in this grid."
-    id="features"
-  >
-    <ul class="grid grid--4 card-sync">
-      {
-        CAPABILITIES.map((c) => (
-          <li class="card surface">
-            <h3 class="card-h card__h">{c.heading}</h3>
-            <p class="card__body">{c.body}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
-
-  <Section
-    eyebrow="What is Velstrian Bid?"
-    title="A UK bid and tender suite."
-    id="what-is-bid"
-  >
-    <p class="lead">
-      Velstrian Bid is a UK bid and tender management suite for public-sector suppliers. It tracks
-      {LIVE_SOURCES} every day, drafts answers
-      cited to the regulations, to the tender's own clauses and to the supplier's answer
-      library, checks every figure against the supplier's own data so the model cannot invent
-      a number, discloses AI use under PPN 017, and holds the evidence of delivery after
-      award. Pricing starts at £49 per month.
-    </p>
-
-    <dl class="facts">
-      {
-        KEY_FACTS.map((f) => (
-          <div class="facts__row">
-            {/* `meta` is the third of the three shared label recipes in
-                styles/labels.css - a bare line of provenance. A definition term
-                in a facts list is exactly that, and it used to be spelled out
-                here as six declarations of its own. */}
-            <dt class="meta">{f.term}</dt>
-            <dd>{f.detail}</dd>
-          </div>
-        ))
-      }
-    </dl>
-
-    <p class="compare">
-      Weighing up your options?{' '}
-      <a href="/compare/">See how Velstrian Bid compares to AutogenAI, mytender.io, CleanTender and SwiftBid</a>.
-    </p>
-  </Section>
-
-  <Section
-    eyebrow="Both sides of the tender"
-    title="Two products. Two sides of the table."
-    standfirst="Two sides to every procurement: one writes the answers, the other reads them. Velstrian Bid serves the supplier, Velstrian Buy serves the buyer, and each is sold on its own."
-    id="buyers"
-  >
-    <ul class="grid grid--2 card-sync">
-      <li class="card surface surface--accent card--here">
-        <p class="eyebrow kicker">You are here</p>
-        <h3 class="card-h card__h">Velstrian Bid: answering the questions</h3>
-        <p class="card__body">
-          Find the work, then answer every question that follows, cited to the regulations, to
-          the tender itself and to your own answer library. Tenders, RFPs, RFIs, PQQs and SQs,
-          in the public sector and the private sector. Figures are checked in code rather than
-          generated, and what you commit to stays tracked after award.
-        </p>
-        <p class="card__aside">
-          Suppliers of every size, bidding into public bodies and into large corporate
-          procurement teams. Everything else on this page describes this side.
-        </p>
-      </li>
-      <li class="card surface surface--accent card--other">
-        <p class="eyebrow kicker">The other side</p>
-        <h3 class="card-h card__h">Velstrian Buy: reading the answers</h3>
-        <p class="card__body">
-          If you run the competition rather than respond to it, you publish the requirement and
-          read what comes back. That is a different product with a different proposition, a
-          different commercial model and one hard boundary: the AI locates evidence and your
-          panel scores. It has its own page.
-        </p>
-        <p class="card__aside">
-          Contracting authorities, councils, NHS bodies and universities, and private sector
-          procurement teams.
-        </p>
-        <p class="card__cta"><a href="/buy/">See Velstrian Buy</a></p>
-      </li>
-    </ul>
-
-    <p class="note">
-      Tender discovery, the PPN 026 social-value model, PPN 017 disclosure and Procurement
-      Act section 52 evidencing exist only in public procurement, so they apply to public sector
-      work on either side.
-    </p>
-  </Section>
-
-  {/* A-54, owner decision 2026-08-04: the 14-day trial claim was deleted from
-      this standfirst, not reworded. THE STANDFIRST BELOW WAS THE SHARPEST
-      INSTANCE OF THE DEFECT: it promised a trial directly above the plan cards,
-      whose buttons render "Request access" from PLANS, so one band offered two
-      different motions. The defect was not that the trial was wrong somewhere;
-      it was that the page contradicted itself in a single glance.
-
-      A-174, 2026-08-05: THE TRIAL IS BACK ON THE SITE AND THIS STANDFIRST STILL
-      DOES NOT CARRY IT. That is the correct outcome rather than an oversight.
-      The restored trial is granted ON REQUEST, so it is the same motion as the
-      buttons below and could sit here without contradiction; it is left off
-      because this band's job is the plans and their prices, and the trial has
-      its own answer on /pricing and /faq where a reader goes looking for it.
-      Do not reintroduce a trial sentence here without also checking what the
-      plan buttons say, which is the check that was missed the first time.
-
-      THE COMMENT SITS ABOVE THE TAG AND NOT INSIDE IT, and that is not a style
-      preference: an expression container between two attributes is a syntax
-      error, and putting it there cost this build 11 ts(1005)/ts(1002) errors
-      before astro check caught it. */}
-  <Section
-    eyebrow="Pricing"
-    title="From £49/month."
-    standfirst="Three plans sized to your team. Choose one and start today by card."
-    id="pricing"
-  >
-    <ul class="grid grid--3 card-sync">
-      {
-        PLANS.map((p) => (
-          <li class:list={['card', 'surface', 'plan', { 'plan--rec': p.recommended }]}>
-            {/* TEXT, not fill and scale. The legacy page marked this plan only
-                by white background, violet border, 105% scale and position. */}
-            {p.recommended && <p class="chip plan__flag">Recommended</p>}
-            <h3 class="card-h card__h">{p.name}</h3>
-            <p class="plan__price">
-              {p.price}
-              {p.period && <span class="plan__per">{p.period}</span>}
-            </p>
-            <p class="card__body">{p.body}</p>
-            <p class="card__cta">
-              <a href={p.href}>
-                {p.cta}<span class="visually-hidden">, {p.name} plan</span>
-              </a>
-            </p>
-          </li>
-        ))
-      }
-    </ul>
-
-    {/*
-      ── R262-WEB-08 · A CHARGE NAMED WHERE THE ALLOWANCE IS NAMED ────────────
-
-      Each card above states an included credit allowance, and this band was the
-      second surface on the site that described a metered plan without ever
-      saying what happens past the meter. Two chargeable prices sat behind that
-      silence and were live in Stripe: the credit top-up packs and the £0.10
-      metered overage (PRICING-LOCK-2026-08.md section 1 makes both PUBLIC).
-
-      IT IS ONE SENTENCE AND A LINK, NOT THE FULL TABLE. /pricing#ai-credits
-      carries the prices, the spend order and the refusal, and restating them
-      here would be a second copy of exactly the kind that produced the drift
-      the pricing lock was written to end. What this band owes a reader is that
-      the charge EXISTS and where to read it, which is what it now says.
-    */}
-    <p class="note">
-      Need more than the allowance? Credit top-ups start at £10 for 100 credits and never
-      expire, or we can switch on pay-as-you-go at £0.10 a credit. Until you ask for it, the
-      plan price is the most you can be charged.
-      <a href="/pricing/#ai-credits">See the credit prices</a>.
-    </p>
-
-    <div class="btn-row row--after">
-      <Button href="/pricing/?product=mark" variant="secondary">See the full pricing page</Button>
-    </div>
-  </Section>
-
-  {/* WAS the PPN 002 calculator, removed 2026-08-04 by owner instruction. The
-      SLOT is what this section is for, a zero-commitment thing to try before
-      asking for access, and the site still has one, so the section keeps its
-      place and names the tool that exists. */}
-  <Section
-    eyebrow="Try it now"
-    title="Tender Compliance Matrix."
-    standfirst="Paste the text of a tender and read back the requirements its wording states, from the social value weighting to the certificates and the deadlines, each one shown with the line it came from. No sign-up, no account. Already bidding? Start now with the full Velstrian Bid workspace."
-    id="free-tool"
-  >
-    <div class="btn-row">
-      <Button href="/tools/tender-compliance-matrix/">Run the free tool</Button>
-      <Button href="/tools/" variant="secondary">All free tools</Button>
-    </div>
-  </Section>
-
-  <Section title="Frequently asked questions" id="product-faq">
-    <div class="faqs">
-      {
-        FAQS.map((f) => (
-          <details class="faq">
-            {/* The mark comes from `summary::after` in styles/blocks.css. This
-                row carried its own SVG chevron, one of the site's four marks for
-                one job. A-65. */}
-            <summary class="faq__q">{f.question}</summary>
-            <p class="faq__a">{f.answer}</p>
-          </details>
-        ))
-      }
-    </div>
-  </Section>
-
-  {/*
-    ── CLOSE, `231:2`: mirrors the hero ─────────────────────────────────────
-    Same eyebrow as the hero, so the page closes where it opened. The legacy
-    close heading was "Answered."; it is replaced by the approved P1 line and
-    the replacement is recorded in scripts/check-content-parity.js rather than
-    left to be noticed.
-  */}
-  <Section
-    eyebrow="Procurement Act 2023 · s.52 · s.71 · PPN 026"
-    title="Know the rules better than your competition."
-    standfirst="Start today by card, or book a 30-minute call and we will show you round first."
-    id="bid-cta"
-  >
-    <div class="cw cw--close" data-spot="off" data-lit>
-      <div class="amb" data-field aria-hidden="true">
-        <b></b><b></b><i class="sv-spot"></i><i class="sv-grain"></i>
-      </div>
-      <div class="btn-row">
-        <Button href={START_NOW}>Start now</Button>
-        <Button href={CALENDLY} variant="secondary" target="_blank">
-          Book a demo<span class="visually-hidden"> (opens in a new window)</span>
-        </Button>
-      </div>
-    </div>
-  </Section>
+<Base
+  title={title}
+  description={description}
+  path="/bid"
+  schema={schema}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <BidHero />
+  <BidWhatItDoes />
+  <Refusal />
+  <Screens />
+  <Steps />
+  <BidTrust />
+  <Plans />
+  <BidDetail />
+  <BidFaq />
+  <Close />
 </Base>
 
-{/*
-  ── THE ONE VIEW TRIGGER, AND WHY IT IS INLINE RATHER THAN THE SHARED MODULE ──
+{/* A bundled <script> is a module, and a module runs after the document is
+    parsed, so the readiness check the home page carries is not needed here.
+    Leaving it out keeps this entry to one import and one call: the shared
+    evidenced chunk is the code, and this file is about 50 bytes against a
+    site JS budget with under 100 bytes of headroom (check-budgets.js). */}
+<script>
+  import { initEvidenced } from '../scripts/evidenced';
 
-  `243:3` gives M-P2 and M-P3 the same trigger: IntersectionObserver at 25% of
-  the section in view, once. src/scripts/motion.ts already implements exactly
-  that and the homepage imports it, so importing it here is the obvious and
-  architecturally correct thing to do.
-
-  IT COSTS THE PAYLOAD BUDGET, AND THAT BUDGET IS ZERO. Astro inlines a bundled
-  <script> only while it resolves to one chunk with nothing shared. With one
-  importer (the homepage) that holds and the build ships 0 JS files, which
-  specs/architecture/PERFORMANCE-BUDGETS.md records as a measured competitive
-  asset and a deliberate ratchet: "the moment a bundle is legitimately needed,
-  the budget changes by an explicit decision recorded as an ADR, rather than by
-  a dependency arriving unnoticed." Measured on a scratch build, adding these
-  two pages as importers splits the module out and emits four files, 1.45 KB.
-  Small, and still exactly the unnoticed arrival the budget exists to catch.
-
-  THE REAL FIX IS THREE LINES IN layouts/Base.astro: call initMotion() there
-  once, so every route shares ONE entry, Astro inlines it again, the file count
-  returns to zero, the cursor light and the per-section thresholds come back,
-  and this block and its twin delete. src/layouts/** is outside this pass, so it
-  is REPORTED rather than done, and what follows is the interim: the trigger and
-  nothing else.
-
-  NO try/catch AND NO FAILSAFE TIMER. Every call is feature-guarded so nothing
-  here can throw, and there is nothing to rescue: the rest state of every
-  animation on this page IS its final state. If this never runs, the page is the
-  finished drawing.
-
-  THIS COMMENT IS A JSX COMMENT AND IS COMPILED AWAY. A comment inside an
-  is:inline script ships to every reader, and 2 KB of reasoning on a route
-  already at 97 KB against a 100 KB budget is a real cost. The argument belongs
-  in the source; the shipped script is four guards and an observer.
-*/}
-<script is:inline>
-  /* The view trigger. See the note above this tag. */
-  (function () {
-    if (!window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (typeof IntersectionObserver !== 'function') return;
-    var els = document.querySelectorAll('[data-lit]');
-    if (!els.length) return;
-    var io = new IntersectionObserver(function (entries, self) {
-      for (var i = 0; i < entries.length; i++) {
-        if (!entries[i].isIntersecting) continue;
-        entries[i].target.setAttribute('data-lit', 'on');
-        self.unobserve(entries[i].target);
-      }
-    }, { threshold: 0.25 });
-    for (var j = 0; j < els.length; j++) io.observe(els[j]);
-  })();
+  initEvidenced();
 </script>
-
-{/*
-  THERE IS NO <style> BLOCK ON THIS PAGE ANY MORE, AND THAT IS THE POINT.
-
-  1,206 lines of it stood here until 2026-08-04. It is now
-  src/styles/bid.css, imported at the top of this file, every rule
-  anchored under `.pg-bid`. ADR 0010 records why; the file's own header
-  records how the scoping was preserved and what was measured to prove it.
-
-  DO NOT ADD ONE BACK. A single `<style>` here, however small, brings the
-  `astro-ivyj52o5` scope class back onto every element this page renders,
-  about 5.3 KB on the largest document on the site, against a per-route budget
-  it clears by 1.1 KB before the saving. Page CSS goes in src/styles/, anchored
-  under the body class, the way prose.css and bid.css both are.
-*/}

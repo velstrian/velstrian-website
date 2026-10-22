@@ -1,0 +1,30 @@
+---
+/**
+ * BidFaq: the words a newcomer meets, explained once, and the questions a
+ * first time bidder asks about Velstrian Bid (/bid/, strategy 0.4 row 7).
+ *
+ * Built on the home page's FAQ treatment (the .ea-faq band, native <details>
+ * closed by default so every answer is in the document with no script). The
+ * questions are components/bid/faqs.ts, the same list pages/bid.astro turns
+ * into FAQPage JSON-LD, so the marked up answers are always the visible ones.
+ */
+import Band from '../evidenced/Band.astro';
+import { BID_FAQS } from './faqs';
+---
+
+<Band tone="light-alt" class="ea-faq" labelledby="bid-faq-title" id="product-faq">
+  <div class="ea-wrap ea-faq__wrap">
+    <h2 class="ea-h2 ea-h2--centre" id="bid-faq-title" data-reveal>Frequently asked questions</h2>
+    <div class="ea-faq__list" data-reveal>
+      {
+        BID_FAQS.map((item) => (
+          <details class="ea-qa">
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))
+      }
+      <p class="ea-faq__more"><a class="ea-link" href="/faq/">Read every question</a></p>
+    </div>
+  </div>
+</Band>

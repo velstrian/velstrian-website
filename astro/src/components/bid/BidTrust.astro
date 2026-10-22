@@ -1,0 +1,36 @@
+---
+/**
+ * BidTrust: can I trust it with my bids? (/bid/, strategy 0.4 row 6).
+ *
+ * A LIGHT band. Three things a first time bidder needs to hear, in hairline
+ * columns with gradient icon tiles (FactsBand), and under them the live trust
+ * strip, the six badges word for word from TRUST_BADGES (D255), the one
+ * canonical list. The starting price follows in the Plans band, read from
+ * data/pricing.ts.
+ *
+ * Each column restates a fact the previous /bid/ page published
+ * (data/crowmark.ts): every claim traced to the business's own documents, a
+ * person approves every answer and nothing is sent to a buyer portal on the
+ * business's behalf, and the PPN 017 disclosure on every AI drafted answer.
+ * PPN 017 is explained in a few words where it first appears (RULE 0-U).
+ */
+import Band from '../evidenced/Band.astro';
+import FactsBand from '../evidenced/FactsBand.astro';
+import { TRUST_BADGES } from '../../data/site-facts';
+---
+
+<Band tone="light" class="ea-proof" labelledby="bid-trust-title">
+  <div class="ea-wrap">
+    <h2 class="ea-h2 ea-h2--centre" id="bid-trust-title" data-reveal>You stay in charge of every answer.</h2>
+    <!-- REVIEW: "PPN 017, the government guidance on telling a buyer that AI helped" is a plain words gloss of the PPN 017 AI transparency disclosure the previous page named. -->
+    <FactsBand
+      facts={[
+        { icon: 'document', value: 'Proof', label: 'Every claim shows which of your documents backs it up, and it refuses to write one with no proof' },
+        { icon: 'checklist', value: 'Approved', label: 'Nothing goes to a buyer without human approval, and nothing is ever sent for you' },
+        { icon: 'shield', value: 'Disclosed', label: 'Every AI drafted answer carries a PPN 017 note, the government guidance on telling a buyer that AI helped' },
+      ]}
+      strip={[...TRUST_BADGES]}
+      stripLabel="How your data is protected"
+    />
+  </div>
+</Band>

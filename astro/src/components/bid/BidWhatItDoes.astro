@@ -1,0 +1,231 @@
+---
+/**
+ * BidWhatItDoes: what can it do for me? (/bid/, strategy 0.4 row 3).
+ *
+ * A LIGHT ALT band. The five things Velstrian Bid does, in the order the work
+ * happens, each said the way a small business owner would say it and each
+ * beside one product screen on a stage. On the home page the same five sit in
+ * tabs; here a reader has come for the product, so all five are open, one row
+ * each, alternating sides so the eye walks down the page.
+ *
+ * Every capability the previous /bid/ page described is here or in BidDetail:
+ * finding work (the live sources, private tenders by upload or email),
+ * deciding (the fit score and its reasons, award history), answering from your
+ * own documents with every claim checked, review by guests at no seat cost,
+ * and keeping track of promises after you win.
+ *
+ * Every number is read from site-facts.json. Two rows use real staging
+ * captures already in data/product-captures.ts (`home-cap-find`,
+ * `home-car-answer`); the other three are HTML recreations with the "Example
+ * data" caption until the capture lane reaches them.
+ */
+import Band from '../evidenced/Band.astro';
+import Frame from '../evidenced/Frame.astro';
+import Stage from '../evidenced/Stage.astro';
+import Sequence from '../evidenced/Sequence.astro';
+import { FACTS, LIVE_SOURCES, GUEST_REVIEWERS } from '../../data/site-facts';
+import { PRODUCT_NAME_BID } from '../../lib/brand-names';
+
+const live = FACTS.sources.live.length;
+const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 0);
+/* Example scores inside the real maxima, the same example the home page shows. */
+const EXAMPLE: Record<string, number> = {
+  sector: 18,
+  'social value': 15,
+  capacity: 14,
+  geography: 12,
+  timeline: 8,
+  evidence: 4,
+  market: 3,
+};
+const PLAIN: Record<string, string> = {
+  sector: 'Your kind of work',
+  'social value': 'Good you do locally',
+  capacity: 'Size you can handle',
+  geography: 'Where it is',
+  timeline: 'Time to respond',
+  evidence: 'Proof you hold',
+  market: 'Competition',
+};
+const dims = FACTS.fit_dimensions.dimensions.map((d) => ({
+  name: PLAIN[d.name] ?? d.name,
+  max: d.points,
+  got: EXAMPLE[d.name] ?? 0,
+}));
+const got = dims.reduce((a, d) => a + d.got, 0);
+---
+
+<Band tone="light-alt" class="ea-caps" labelledby="bid-what-title" id="what-it-does">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <h2 class="ea-h2" id="bid-what-title">Everything from finding the work to delivering it.</h2>
+      <p class="ea-lead">
+        Councils, schools, housing associations, the NHS and private companies all ask for bids. {PRODUCT_NAME_BID} helps
+        you with each one, step by step.
+      </p>
+    </div>
+
+    <div class="ea-panel" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Find contracts that suit you</h3>
+        <p>
+          New public contracts from {LIVE_SOURCES} arrive every morning, already matched to your business. Sent a private
+          tender or a request for a quote? Upload it, or forward the email. You find the work that actually fits.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="New today" status="12 matches" capture="home-cap-find" caption="Contract names and dates are an example.">
+          <ul class="ea-mini-list">
+            <li><span>Office cleaning, a primary school</span><span class="ea-state">Closes in 21 days</span></li>
+            <li><span>Grounds care for a housing association</span><span class="ea-state">Closes in 14 days</span></li>
+            <li><span>Facilities support, a private retailer</span><span class="ea-state">Uploaded by you</span></li>
+            <li><span>Window cleaning, an NHS trust</span><span class="ea-state">Closes in 30 days</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="This morning"
+          steps={[
+            { label: `Checked ${live} live sources` },
+            { label: '12 suit your business', detail: 'Plus 1 you uploaded' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    <div class="ea-panel bid-flip" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Decide which ones to go for</h3>
+        <p>
+          Every contract gets a score out of {fitTotal} for how well it suits you, with the reason behind each part. Award
+          history shows who won similar work before, and what it was worth. You make the call.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame
+          title="Grounds care for a housing association"
+          status={`Fit ${got} of ${fitTotal}`}
+          capture="bid-decide"
+          caption="The points available are the real ones. The scores are an example."
+        >
+          <table class="ea-mini-table ea-fit">
+            <caption class="visually-hidden">Why this contract scores {got} of {fitTotal}, example</caption>
+            <thead>
+              <tr><th scope="col">Reason</th><th scope="col">Points</th><th scope="col"><span class="visually-hidden">Share of points</span></th></tr>
+            </thead>
+            <tbody>
+              {
+                dims.map((d) => (
+                  <tr>
+                    <th scope="row">{d.name}</th>
+                    <td class="ea-num">{d.got} of {d.max}</td>
+                    <td class="ea-fit__bar">
+                      <svg viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <rect class="ea-fit__track" width="100" height="4" rx="2" />
+                        <rect class="ea-fit__fill" width={Math.round((d.got / d.max) * 100)} height="4" rx="2" />
+                      </svg>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </Frame>
+      </Stage>
+    </div>
+
+    <div class="ea-panel" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Answer every question from your own documents</h3>
+        <p>
+          Each answer is drafted from your past bids, policies and case studies, kept in one library that grows as you go.
+          Every claim is checked against your documents, and you can see where each one came from.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Your answer" capture="home-car-answer" caption="An answer drafted from your library.">
+          <ul class="ea-mini-list">
+            <li><span>4. Cover when staff are off</span><span class="ea-state ea-state--ok">Drafted from 2 past answers</span></li>
+            <li><span>6. Customer ratings</span><span class="ea-state ea-state--held">Needs your proof</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Your library"
+          steps={[
+            { label: '14 past answers found' },
+            { label: '9 of 12 drafted' },
+            { label: '1 needs your proof', detail: 'Customer ratings', state: 'held' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    <div class="ea-panel bid-flip" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Get a colleague to check it</h3>
+        <p>
+          Invite people to read and comment without paying for another seat: {GUEST_REVIEWERS.starter} on Starter,
+          {GUEST_REVIEWERS.pro} on Pro and {GUEST_REVIEWERS.portfolio} on Portfolio. Nothing is sent until a person approves it.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Comments on question 4" status="1 to reply to" capture="bid-check" caption="Names and comments are an example.">
+          <div class="ea-mini-thread">
+            <p class="ea-mini-who">Priya, operations</p>
+            <p class="ea-mini-reply">Can we say how quickly cover arrives?</p>
+            <p class="ea-mini-who">You</p>
+            <p class="ea-mini-reply">Added "the same day" from the staffing policy.</p>
+          </div>
+        </Frame>
+      </Stage>
+    </div>
+
+    <div class="ea-panel" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Keep track of what you promised after you win</h3>
+        <p>
+          Every promise survives the award. Once you win, the promises in your bid become a checklist with dates, with the
+          proof beside each one, so reporting to the customer is ready when they ask.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="After you win: grounds care contract" capture="bid-deliver" caption="Promises and dates are an example.">
+          <ul class="ea-mini-list">
+            <li><span>Cover staff on call for every site</span><span class="ea-state ea-state--ok">On track</span></li>
+            <li><span>Two local apprentices this year</span><span class="ea-state ea-state--ok">1 of 2 hired</span></li>
+            <li><span>Quarterly report to the customer</span><span class="ea-state">Due 31 January</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="After you win"
+          steps={[
+            { label: 'Contract won' },
+            { label: '3 promises found', detail: 'In your bid' },
+            { label: 'Checklist ready', detail: 'With dates and owners' },
+          ]}
+        />
+      </Stage>
+    </div>
+  </div>
+</Band>
+
+<style>
+  /* The rows alternate sides on a wide screen so the eye walks down the page.
+     Below 960px every .ea-panel is already one column (styles/evidenced.css),
+     copy first, and the order is left alone. */
+  @media (min-width: 960px) {
+    .bid-flip {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+
+    .bid-flip > .ea-panel__copy {
+      order: 2;
+    }
+  }
+
+  .ea-panel + .ea-panel {
+    margin-top: var(--ea-head-gap);
+  }
+</style>

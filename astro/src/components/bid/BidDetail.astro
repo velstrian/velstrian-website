@@ -1,0 +1,327 @@
+---
+/**
+ * BidDetail: the expert detail, lower down (/bid/, strategy 0.4 "expert detail
+ * lives on those pages lower down").
+ *
+ * A LIGHT band in three groups, every term explained in a few words the first
+ * time it appears (RULE 0-U):
+ *
+ *   #procurement-act  the rules for public contracts: Procurement Act 2023
+ *                     sections 52 and 71, PPN 026 (never PPN 002) and PPN 017
+ *   #fit              the seven fit reasons and their real points
+ *   #features         every capability the previous /bid/ page listed, the
+ *                     twelve of them, in plain words. /roadmap links here.
+ *
+ * then three ways onward: the free Tender Compliance Matrix, Velstrian Buy for
+ * the other side of the table, and the comparison pages.
+ *
+ * NOTHING HERE IS NEW. Each body restates a published line of data/crowmark.ts
+ * (STATUTES, CAPABILITIES, FAQS) with the jargon taken out, and every count,
+ * source and size is read from site-facts.ts. The phrases check-site-facts.mjs
+ * requires on /bid/ ("EU TED", "available per organisation on request",
+ * "Award history", "Quick Quote", "forwarded by email", "prior information
+ * notices", "tone profiles", "AI Compliance Advisor") all render from here.
+ *
+ * The cards are `.surface`, the site's one card recipe (styles/surfaces.css):
+ * white with a hairline on a light band, and the edge is the only thing that
+ * answers a pointer (check-sheen.js reads its plain cards on this route).
+ */
+import Band from '../evidenced/Band.astro';
+import IconTile from '../evidenced/IconTile.astro';
+import {
+  FACTS,
+  LIVE_SOURCES,
+  ON_REQUEST_SENTENCE,
+  UPLOAD_SENTENCE,
+  FIT_COUNT_WORD,
+  FIT_DIMENSIONS,
+} from '../../data/site-facts';
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
+
+const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 0);
+const PLAIN: Record<string, string> = {
+  sector: 'how close the work is to what you already do',
+  'social value': 'the good you can show you do locally',
+  capacity: 'whether the contract is a size you can handle',
+  geography: 'where the work is',
+  timeline: 'whether there is time to respond well',
+  evidence: 'the proof you already hold',
+  market: 'who won similar work before, and against how many bidders',
+};
+
+const RULES = [
+  {
+    heading: 'Procurement Act 2023, section 52',
+    body: `Public contracts with an estimated value above £5m must have at least three published key performance indicators, the targets the contract is measured against. ${PRODUCT_NAME_BID} flags the threshold, counts your published targets and shows any shortfall.`,
+  },
+  {
+    heading: 'Section 71',
+    body: `Performance against those targets has to be assessed and published. ${PRODUCT_NAME_BID} keeps the targets beside your delivery proof, so the assessment comes from the record, and rates the yearly summary red, amber or green. The obligation outlives the bid, for the life of the contract.`,
+  },
+  {
+    heading: 'PPN 026 and social value',
+    body: 'Social value is the extra good your business does locally. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Totals are worked out in code from a curated library of measures aligned to National TOMs conventions. The buyer publishes the weighting, and it is a weighting, not a score.',
+  },
+  {
+    heading: 'PPN 017 and AI',
+    body: 'PPN 017 is the government guidance on telling a buyer when AI helped write a bid. Every AI drafted answer carries that disclosure, and a person approves it, never the model.',
+  },
+];
+
+const CAPABILITIES = [
+  {
+    heading: 'UK and EU tender discovery',
+    body: `New contracts from ${LIVE_SOURCES}, refreshed daily, with the source named on every notice. ${ON_REQUEST_SENTENCE} Filter by sector, value and region and save the ones worth a bid. You also see prior information notices and framework and DPS end dates, the early signs that a tender is on its way.`,
+  },
+  {
+    heading: 'Bid or no-bid, with reasons',
+    body: `A ${FIT_COUNT_WORD} part score (${FIT_DIMENSIONS}) shows how well a published tender suits you, gives the reason behind each part, and suggests go for it, look again or pass. It reads the tender rather than predicting the award, and the decision stays yours.`,
+  },
+  {
+    heading: 'Award history',
+    body: 'More than 100,000 published contract awards from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED: who won similar work, at what value, and against how many bidders. It sits beside the notice you are reading.',
+  },
+  {
+    heading: 'Tender document reading, done for you',
+    body: `${UPLOAD_SENTENCE} The requirements and clauses are pulled out so an answer can point at the exact wording it answers. A scanned PDF with no text in it is flagged as needing OCR, which turns a picture of text into text, rather than guessed at.`,
+  },
+  {
+    heading: 'Cited answer drafting',
+    body: 'Answers draw on three kinds of source, kept apart: the rules, the tender’s own wording and your answer library. Your win themes, the points you want the buyer to remember, go into every answer. Each first draft is reviewed and improved against the tender’s scoring rules, and a draft with a number your data does not support is rejected. Every answer carries its citation, the document it came from.',
+  },
+  {
+    heading: 'Answer marking against the scoring rules',
+    body: 'Each drafted answer is marked for how fully it covers the tender’s published scoring rules, so you can see which part is thin before you send it. It reports coverage, never a likely mark or a chance of winning.',
+  },
+  {
+    heading: 'SQ and PQQ from one master set',
+    body: 'The standard questions about your business, such as accreditations, insurance, finances, policies, case studies and named staff, answered from one master set you keep up to date. Offered above the Procurement Act 2023 section 85 threshold, where those questions arise.',
+  },
+  {
+    heading: 'Social value maths, done in code',
+    body: 'Social value is added up in code, with the units checked, from a curated catalogue of measures. The weighting the buyer published is applied, never guessed.',
+  },
+  {
+    heading: 'Private sector quotes',
+    body: 'Quick Quote takes a buyer’s request for a quote, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. You write the scope. The AI does not draft it.',
+  },
+  {
+    heading: 'Answer library, tone profiles and learnings',
+    body: 'A reusable answer library, tone profiles for how your business writes, lessons recorded from each debrief, bid analytics and board reports, so each bid starts from what the last one taught you.',
+  },
+  {
+    heading: 'Evidence vault, after award',
+    body: 'Record what you delivered against each promise. Each piece of evidence gets one of three plain verdicts: consistent, a difference to look into, or could not check. Checks against Companies House, UKAS and Cyber Essentials, a report for the customer, and a round trip back into the buyer’s own Word or Excel file.',
+  },
+  {
+    heading: 'AI Compliance Advisor',
+    body: 'Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, if you agree, from your own bids and commitments. It shows only rule references it can match to its sources, and flags any money figure or percentage it cannot trace for you to check.',
+  },
+];
+---
+
+<Band tone="light" class="bid-detail" labelledby="bid-detail-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <h2 class="ea-h2" id="bid-detail-title">The detail, for when you need it.</h2>
+      <p class="ea-lead">Know the rules better than your competition. How public contracts work, how a contract is scored for you, and everything the {PRODUCT_NAME_BID} suite does today, from finding UK tenders to answers that cite their sources.</p>
+    </div>
+
+    <div class="bid-group" id="procurement-act" data-reveal>
+      <p class="ea-label bid-group__label">The rules for public contracts, in plain words</p>
+      <p class="bid-group__intro">
+        The Procurement Act 2023 sets the rules public buyers follow. Its KPI duties, the targets a contract is measured against, are the ones nobody reads until it is too late. These checks guide you and never block you.
+      </p>
+      <ul class="bid-cards bid-cards--two">
+        {RULES.map((r) => (
+          <li class="bid-cards__cell">
+            <div class="surface surface--pad bid-card">
+              <h3 class="ea-h3">{r.heading}</h3>
+              <p>{r.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="bid-group" id="fit" data-reveal>
+      <p class="ea-label bid-group__label">How a contract is scored for you</p>
+      <p class="bid-group__intro">
+        Each contract is scored out of {fitTotal} on {FIT_COUNT_WORD} reasons. These are the points each reason can earn.
+      </p>
+      <ul class="bid-fit">
+        {FACTS.fit_dimensions.dimensions.map((d) => (
+          <li class="bid-fit__row">
+            <span class="bid-fit__name">{d.name[0].toUpperCase() + d.name.slice(1)}</span>
+            <span class="bid-fit__what">{PLAIN[d.name] ?? ''}</span>
+            <span class="bid-fit__pts ea-num">{d.points} points</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="bid-group" id="features" data-reveal>
+      <p class="ea-label bid-group__label">Everything {PRODUCT_NAME_BID} does today</p>
+      <ul class="bid-cards">
+        {CAPABILITIES.map((c) => (
+          <li class="bid-cards__cell">
+            <div class="surface surface--pad bid-card">
+              <h3 class="ea-h3">{c.heading}</h3>
+              <p>{c.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <ul class="bid-onward" data-reveal>
+      <li class="bid-onward__item">
+        <IconTile name="search" />
+        <h3 class="ea-h3">Tender Compliance Matrix</h3>
+        <p>Free, no account needed. Paste a tender and read back what it asks for, from the social value weighting to the certificates and deadlines, each with the line it came from.</p>
+        <a class="ea-link" href="/tools/tender-compliance-matrix/">Run the free tool</a>
+      </li>
+      <li class="bid-onward__item">
+        <IconTile name="chat" />
+        <h3 class="ea-h3">{PRODUCT_NAME_BUY}: for the other side of the table</h3>
+        <p>{PRODUCT_NAME_BID} is for answering the questions. If you run the competition rather than answer it, {PRODUCT_NAME_BUY} helps you ask for what you need and read the replies. The AI finds the proof, and your panel does the scoring.</p>
+        <a class="ea-link" href="/buy/">See {PRODUCT_NAME_BUY}</a>
+      </li>
+      <li class="bid-onward__item">
+        <IconTile name="sliders" />
+        <h3 class="ea-h3">Weighing up your options?</h3>
+        <p>See how {PRODUCT_NAME_BID} compares to AutogenAI, mytender.io, CleanTender and SwiftBid, and where every figure on this site comes from.</p>
+        <a class="ea-link" href="/compare/">Compare the options</a>
+        <a class="ea-link" href="/sources/">Read our sources</a>
+      </li>
+    </ul>
+  </div>
+</Band>
+
+<style>
+  .bid-group {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--ea-head-gap);
+  }
+
+  .bid-group__label {
+    color: var(--ea-accent-ink);
+  }
+
+  .bid-group__intro {
+    max-width: var(--ea-copy);
+    color: var(--ea-sub);
+  }
+
+  .bid-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-2);
+  }
+
+  .bid-cards--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bid-cards__cell {
+    display: grid;
+  }
+
+  .bid-card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+  }
+
+  .bid-card p {
+    color: var(--ea-muted);
+  }
+
+  .bid-fit {
+    border-block: 1px solid var(--ea-rule);
+  }
+
+  .bid-fit__row {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 2fr);
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+  }
+
+  .bid-fit__row + .bid-fit__row {
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .bid-fit__name {
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
+  }
+
+  .bid-fit__what {
+    color: var(--ea-muted);
+  }
+
+  .bid-fit__pts {
+    justify-self: end;
+    color: var(--ea-ink);
+  }
+
+  .bid-onward {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: var(--ea-head-gap);
+    border-block: 1px solid var(--ea-rule);
+  }
+
+  .bid-onward__item {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-6);
+    border-inline-start: 1px solid var(--ea-rule);
+  }
+
+  .bid-onward__item:last-child {
+    border-inline-end: 1px solid var(--ea-rule);
+  }
+
+  .bid-onward__item p {
+    color: var(--ea-muted);
+  }
+
+  @media (max-width: 959px) {
+    .bid-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bid-onward {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .bid-onward__item {
+      border-inline-end: 1px solid var(--ea-rule);
+    }
+
+    .bid-onward__item + .bid-onward__item {
+      border-top: 1px solid var(--ea-rule);
+    }
+  }
+
+  @media (max-width: 599px) {
+    .bid-cards {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .bid-fit__row {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .bid-fit__what {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+</style>

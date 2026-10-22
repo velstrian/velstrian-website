@@ -1,0 +1,77 @@
+---
+/**
+ * BidHero: what is Velstrian Bid, and is it for me? (/bid/, strategy 0.3 and
+ * 0.4 row 1, visual 0.8).
+ *
+ * A LIGHT band built from the shared parts in components/evidenced/, so the
+ * product page opens the way the home page does: one plain sentence naming
+ * public AND private work, the trial as the one primary action, "See how it
+ * works" as the secondary, one reassurance line, and the product floating on
+ * the stage beneath. The screen is a tender with its questions drafted from
+ * the business's own documents, and the sequence card over the stage edge
+ * plays once on load and ends on the one answer that still needs proof
+ * (purple, D256).
+ *
+ * The capture key `bid-hero` has no entry in data/product-captures.ts yet, so
+ * Frame renders this HTML recreation with its "Example data" caption until the
+ * staging capture lane lands a real screen.
+ */
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import Frame from '../evidenced/Frame.astro';
+import Stage from '../evidenced/Stage.astro';
+import Sequence from '../evidenced/Sequence.astro';
+import { SIGNUP_URL } from '../../data/app';
+import { TRIAL_DAYS } from '../../data/pricing';
+import { PRODUCT_NAME_BID } from '../../lib/brand-names';
+---
+
+<Band tone="light" class="ea-hero" labelledby="bid-hero-title">
+  <div class="ea-wrap ea-hero__head">
+    <h1 class="ea-hero__title" id="bid-hero-title">Find contracts that suit you, then write the bid yourself.</h1>
+    <p class="ea-lead ea-hero__lead">
+      {PRODUCT_NAME_BID} finds public and private work for your business, then drafts every answer from your own documents.
+    </p>
+    <div class="ea-actions">
+      <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+      <Action href="#what-it-does" variant="secondary">See how it works</Action>
+    </div>
+    <p class="ea-hero__note">No bid team needed. Card needed to start, cancel in the {TRIAL_DAYS} days and pay nothing.</p>
+  </div>
+
+  <div class="ea-wrap">
+    <Stage layout="hero">
+      <Frame
+        title="Office cleaning, a primary school"
+        capture="bid-hero"
+        caption="A tender with its questions, each answer drafted from your own documents."
+      >
+        <div class="ea-app-split">
+          <ol class="ea-app-qs">
+            <li><span>1. About your business</span><span class="ea-chip ea-chip--ok">Drafted</span></li>
+            <li><span>2. Similar work</span><span class="ea-chip ea-chip--ok">Drafted</span></li>
+            <li class="is-current"><span>3. Cover when staff are off</span><span class="ea-chip ea-chip--ok">Drafted</span></li>
+            <li><span>5. Customer ratings</span><span class="ea-chip ea-chip--held">Needs proof</span></li>
+            <li><span>8. Price</span><span class="ea-chip">Yours to fill in</span></li>
+          </ol>
+          <div class="ea-app-answer">
+            <p class="ea-label">Your answer to question 3</p>
+            <p>We keep two trained cover staff on call for every school, so a clean is never missed. <span class="ea-src-chip">Staffing policy, p3</span></p>
+            <p>Cover staff have the same checks and training as our regular team. <span class="ea-src-chip">Training record</span></p>
+          </div>
+        </div>
+      </Frame>
+      <Sequence
+        slot="float"
+        play="load"
+        title="Office cleaning, a primary school"
+        steps={[
+          { label: 'Tender added', detail: 'From your matches this morning' },
+          { label: '8 questions found' },
+          { label: '6 answers drafted', detail: 'From your own documents' },
+          { label: '1 claim has no proof', detail: 'Add a document, or change it', state: 'held' },
+        ]}
+      />
+    </Stage>
+  </div>
+</Band>
