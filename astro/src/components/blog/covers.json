@@ -14,8 +14,8 @@
     "craft": { "ground": "mist", "motif": "steps" },
     "start": { "ground": "paper", "motif": "path" },
     "carbon": { "ground": "field", "motif": "decline" },
-    "matrix": { "ground": "night", "motif": "checklist" },
-    "finder": { "ground": "paper", "motif": "lens" },
+    "matrix": { "ground": "iris", "motif": "checklist" },
+    "finder": { "ground": "iris", "motif": "lens" },
     "library": { "ground": "iris", "motif": "spines" }
   },
   "defaultFamily": "craft",

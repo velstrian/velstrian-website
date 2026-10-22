@@ -10,7 +10,7 @@ import { buildCover, coverForPost } from '../blog/covers';
    hub and /blog/ show the same picture for the same article. */
 const PPN_GUIDE_TITLE = 'PPN 026 Social Value: How the Model Is Scored';
 const covers = {
-  matrix: buildCover({ line: 'Every requirement line by line', kind: 'Free tool', family: 'matrix' }),
+  matrix: buildCover({ line: 'Requirements line by line', kind: 'Free tool', family: 'matrix' }),
   finder: buildCover({ line: 'Open tenders in one search', kind: 'Free tool', family: 'finder' }),
   guide: coverForPost('ppn-026-social-value-guide', PPN_GUIDE_TITLE, 'Social value'),
   guides: buildCover({ line: 'Guides you can act on', kind: 'Guides', family: 'library' }),
@@ -81,6 +81,11 @@ const covers = {
     gap: var(--space-5);
     align-items: stretch;
     margin-top: clamp(var(--space-8), 2rem + 2vw, var(--space-12));
+  }
+
+  :global(.res-card .tc__line) {
+    top: 35cqi;
+    bottom: auto;
   }
 
   @media (max-width: 1023px) {
