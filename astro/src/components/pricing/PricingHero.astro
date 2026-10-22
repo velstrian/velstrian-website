@@ -7,24 +7,13 @@
  * - One sentence: "Find contracts that suit you and write strong bids yourself. Public and private work."
  * - Standfirst: "Plans from £49 a month. Start with 7 days free. See the price first. Sized for SMEs."
  * - One button: "Start 7 day trial"
- * - Monthly and annual switch sits here with 10% saving.
  *
  * On the shared PageHero (R285-WEB-GATES-V3-01) so the page title takes the
- * one v3 heading treatment (check-render.js). The switch sits in its `after`
- * row, under the one button. Its styles stay here, scoped to this component's own markup.
- *
- * R285-WEB-TRANSFORMATION-WT-F (audit S3, 2026-10-22): the headline repeated
- * the home hero, so the page opened without saying "prices" in large type,
- * and the billing switch was a 12px dot beside its words. The headline now
- * says what the page is, and the switch is a segmented control: two labels,
- * each a 44px target, for the two radios at the top of pages/pricing.astro.
- * Choosing a segment selects it (a radio), never flips it, and the arrow keys
- * move between the two. The selected segment is the raised one, read from
- * `:checked` in CSS, so there is no script.
+ * one v3 heading treatment (check-render.js).
  */
 import PageHero from '../evidenced/PageHero.astro';
 import Action from '../evidenced/Action.astro';
-import { SIGNUP_URL, TRIAL_DAYS, PLANS, annualDiscountPct, START_LABEL } from '../../data/pricing';
+import { SIGNUP_URL, TRIAL_DAYS, PLANS, START_LABEL } from '../../data/pricing';
 
 const [STARTER] = PLANS;
 ---
@@ -37,49 +26,4 @@ const [STARTER] = PLANS;
   lead={`Plans from £${STARTER.monthly} a month. Start with ${TRIAL_DAYS} days free. See the price first. Sized for SMEs.`}
 >
   <Action href={SIGNUP_URL}>{START_LABEL}</Action>
-
-  <div class="pricing-billing" slot="after">
-    <label for="billing-monthly" class="pricing-billing__seg pricing-billing__seg--m">Monthly</label>
-    <label for="billing-toggle" class="pricing-billing__seg pricing-billing__seg--a">Annual billing · Save {annualDiscountPct(STARTER)}%</label>
-  </div>
 </PageHero>
-
-<style>
-  /* One track holding two segments, the chosen one raised on it. */
-  .pricing-billing {
-    display: inline-flex;
-    gap: var(--space-1);
-    padding: var(--space-1);
-    border: 1px solid var(--ea-rule);
-    border-radius: var(--radius-pill);
-    background: var(--ea-well);
-  }
-
-  .pricing-billing__seg {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--ea-btn-h);
-    padding-inline: var(--space-5);
-    border: 1px solid transparent;
-    border-radius: var(--radius-pill);
-    font-size: var(--t-ea-small);
-    font-weight: var(--t-w-ea-medium);
-    color: var(--ea-muted);
-    cursor: pointer;
-    transition: var(--transition-hover), color var(--ea-dur-hover) ease-out;
-  }
-
-  :global(#billing-monthly:checked) ~ * .pricing-billing__seg--m,
-  :global(#billing-toggle:checked) ~ * .pricing-billing__seg--a {
-    border-color: var(--ea-rule-strong);
-    background: var(--ea-raised);
-    color: var(--ea-ink);
-    font-weight: var(--t-w-ea-strong);
-  }
-
-  :global(#billing-monthly:focus-visible) ~ * .pricing-billing__seg--m,
-  :global(#billing-toggle:focus-visible) ~ * .pricing-billing__seg--a {
-    outline: var(--ea-focus);
-    outline-offset: 2px;
-  }
-</style>

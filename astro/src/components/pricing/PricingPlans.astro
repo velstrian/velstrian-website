@@ -46,6 +46,10 @@ const n = (v: number) => v.toLocaleString('en-GB');
       </p>
     </div>
 
+    <div class="pricing-plans__toggle" data-reveal>
+      <slot name="toggle" />
+    </div>
+
     <ul class="ea-plans__grid" role="list" data-reveal>
       {
         PLANS.map((p) => (
@@ -111,6 +115,13 @@ const n = (v: number) => v.toLocaleString('en-GB');
 <style>
   .pricing-plans {
     position: relative;
+  }
+
+  .pricing-plans__toggle {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-8);
   }
 
   .pricing-plan__footer {

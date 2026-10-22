@@ -138,7 +138,12 @@ const UPDATED = new Date('2026-10-22');
     />
 
     <PricingHero />
-    <PricingPlans />
+    <PricingPlans>
+      <div class="pricing-billing" slot="toggle" role="radiogroup" aria-label="Billing interval">
+        <label for="billing-monthly" role="radio" aria-checked="true" class="pricing-billing__seg pricing-billing__seg--m">Monthly</label>
+        <label for="billing-toggle" role="radio" aria-checked="false" class="pricing-billing__seg pricing-billing__seg--a">Annual billing · Save {SAVE_PCT}%</label>
+      </div>
+    </PricingPlans>
     <PricingCredits />
     <PricingBuy />
     <PricingCompare />
@@ -164,9 +169,70 @@ const UPDATED = new Date('2026-10-22');
   </div>
 </Base>
 
+<script>
+  function initBillingAria() {
+    const mInput = document.getElementById("billing-monthly");
+    const aInput = document.getElementById("billing-toggle");
+    const mSeg = document.querySelector(".pricing-billing__seg--m");
+    const aSeg = document.querySelector(".pricing-billing__seg--a");
+    function update() {
+      if (mInput && aInput && mSeg && aSeg) {
+        const isAnnual = aInput.checked;
+        mSeg.setAttribute("aria-checked", String(!isAnnual));
+        aSeg.setAttribute("aria-checked", String(isAnnual));
+      }
+    }
+    mInput?.addEventListener("change", update);
+    aInput?.addEventListener("change", update);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBillingAria, { once: true });
+  } else {
+    initBillingAria();
+  }
+</script>
+
 <style>
   .pricing-page {
     position: relative;
+  }
+
+  .pricing-billing {
+    display: inline-flex;
+    gap: var(--space-1);
+    padding: var(--space-1);
+    border: 1px solid var(--ea-rule);
+    border-radius: var(--radius-pill);
+    background: var(--ea-well);
+  }
+
+  .pricing-billing__seg {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--ea-btn-h);
+    padding-inline: var(--space-5);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-size: var(--t-ea-small);
+    font-weight: var(--t-w-ea-medium);
+    color: var(--ea-muted);
+    cursor: pointer;
+    transition: var(--transition-hover), color var(--ea-dur-hover) ease-out;
+  }
+
+  :global(#billing-monthly:checked ~ * .pricing-billing__seg--m),
+  :global(#billing-toggle:checked ~ * .pricing-billing__seg--a) {
+    border-color: var(--ea-accent);
+    background: var(--ea-accent-wash);
+    color: var(--ea-accent-ink);
+    box-shadow: 0 0 0 1px var(--ea-accent);
+    font-weight: var(--t-w-ea-strong);
+  }
+
+  :global(#billing-monthly:focus-visible ~ * .pricing-billing__seg--m),
+  :global(#billing-toggle:focus-visible ~ * .pricing-billing__seg--a) {
+    outline: var(--ea-focus);
+    outline-offset: 2px;
   }
 
   .pricing-sources {
