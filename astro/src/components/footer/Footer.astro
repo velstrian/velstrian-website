@@ -593,12 +593,8 @@ const year = new Date().getFullYear();
     border: 1px solid var(--c-border);
   }
 
-  @media (pointer: coarse) {
-    .ca-social-link {
-      width: 44px;
-      height: 44px;
-    }
-  }
+  /* The touch size of these icons moved to THE TAP TARGETS block at the end
+     of this file, on the --btn-h-sm token rather than a raw 44px. */
   /* ── THE TRANSITION GOES ON THE THING THAT CHANGES. O-52, 2026-08-04 ─────
    *
    * The hover below repaints the ICON, not the anchor: `fill` is declared on the
@@ -955,4 +951,37 @@ const year = new Date().getFullYear();
      (the same control, the same gesture, twenty lines away) states it the same
      way. Every existing prefers-reduced-motion block in this file is untouched. */
 
+  /* ── THE TAP TARGETS. R285-WEB-TRANSFORMATION-WT-F, audit S7, 2026-10-22 ──
+     Measured on the built site at 375 and 768: 33 of the footer's 37 controls
+     were under 44px. The open column links stood 25px high, the social icons
+     36px, the status pill, Status and Cookie preferences 24px, and the logo
+     30px. Only the four column toggles met the floor. 24px passes WCAG 2.2
+     SC 2.5.8 (AA), but on a phone a finger is the pointer, and the site's own
+     floor is --btn-h-sm, "the smallest a control may ever be" (tokens.css).
+     WHERE IT APPLIES: at the accordion width (900px and under, the same step
+     the collapse uses, so 375 and 768 are both inside it) and on any coarse
+     pointer. A desktop with a mouse keeps its tighter rhythm.
+     The column list loses its gap there, because each link's own 44px box now
+     carries the space between lines: text 16px in a 44px row leaves the same
+     air the gap gave, without doubling it. min-inline-size as well, so a
+     short label such as "Status" is a 44px square at the least, not a 44px
+     high sliver. The Companies House number sits in a sentence, but it is a
+     link a reader taps on its own, so it takes the floor too. */
+  @media (max-width: 900px), (pointer: coarse) {
+    .ca-footer-links {
+      gap: 0;
+    }
+    .ca-footer-links a,
+    .ca-footer-status,
+    .ca-footer-bottom-link,
+    .ca-footer-companies-house-link,
+    .ca-footer-col-brand .ca-logo {
+      min-block-size: var(--btn-h-sm);
+      min-inline-size: var(--btn-h-sm);
+    }
+    .ca-social-link {
+      inline-size: var(--btn-h-sm);
+      block-size: var(--btn-h-sm);
+    }
+  }
 </style>
