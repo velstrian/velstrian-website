@@ -82,6 +82,14 @@ function brandName(name) {
 }
 const PLATFORM_NAME = brandName("PLATFORM_NAME");
 const PRODUCT_NAME_BID = brandName("PRODUCT_NAME_BID");
+// The default card's line, from astro/src/data/site.ts. A template literal there, so
+// any ${NAME} in it is filled from brand-names.ts here.
+const OG_CARD_LINE = (() => {
+  const site = fs.readFileSync(path.join(__dirname, "..", "astro", "src", "data", "site.ts"), "utf8");
+  const m = site.match(/export const OG_CARD_LINE = `([^`]*)`;/);
+  if (!m) throw new Error("OG_CARD_LINE not found in astro/src/data/site.ts");
+  return m[1].replace(/\$\{([A-Z_]+)\}/g, (_, name) => brandName(name));
+})();
 const PRODUCT_NAME_BUY = brandName("PRODUCT_NAME_BUY");
 const SITE_CANONICAL_HOST = brandName("SITE_CANONICAL_HOST");
 
@@ -1241,12 +1249,10 @@ async function main() {
       const svg = await satori(
         buildOgTree({
           title: `${PRODUCT_NAME_BID} · ${PRODUCT_NAME_BUY}`,
-          // The home page's own description, read from the build like every other card.
-          subtitle: clip(
-            withoutPrices(extractMetaDescription(fs.readFileSync(path.join(repoRoot, DIST_RELATIVE, "index.html"), "utf8")) ?? ""),
-            140,
-            "",
-          ),
+          // [R285-WEB-REVIEW-2026-10-22 item 4] OG_CARD_LINE in astro/src/data/site.ts, the plain
+          // words line written for this card. It WAS the home meta description read from the
+          // build, which said "tenders, RFPs and PQQs" and was too long for the card.
+          subtitle: clip(withoutPrices(OG_CARD_LINE), 140, ""),
           product: null,
         }),
         { width: 1200, height: 630, fonts },

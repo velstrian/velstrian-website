@@ -24,7 +24,28 @@ import {
   COMPANY_NUMBER,
   SITE_ORIGIN,
   STATUS_URL,
+  PRODUCT_NAME_BID,
+  PRODUCT_NAME_BUY,
 } from '../lib/brand-names';
+
+/*
+ * WHAT VELSTRIAN IS, IN PLAIN WORDS (R285-WEB-REVIEW-2026-10-22 item 4, RULE
+ * 0-U). The home description, the footer line on every route, the Organization
+ * node and the default social card all said "tenders, RFPs, PQQs and SQs", four
+ * terms a small firm writing its first bid does not know. They now say what the
+ * products do, for whom, public and private, naming Velstrian Bid and Velstrian
+ * Buy. Written once here so the four surfaces cannot drift apart again (the
+ * alignment A-50 and A-112 kept by hand).
+ */
+/** The home page meta description, at most 155 characters. */
+export const HOME_DESCRIPTION = `${PRODUCT_NAME_BID} helps small firms find public and private contracts and write bids from their own documents. ${PRODUCT_NAME_BUY} helps buyers compare replies.`;
+
+/** The longer version: the footer line on every route and the Organization node. */
+export const SITE_SUMMARY = `${PLATFORM_SHORT_NAME} makes bidding simple for small and mid size firms, for public and private work. ${PRODUCT_NAME_BID} finds contracts that suit you and drafts your answers from your own documents. ${PRODUCT_NAME_BUY} helps buyers set out what they need and compare the replies.`;
+
+/** The line under the product names on the default social card
+ *  (scripts/generate-og-images.js reads it from this file), at most 140 characters. */
+export const OG_CARD_LINE = `Find public and private contracts and write bids from your own documents. Buyers compare the replies in one place.`;
 
 /**
  * THE SOCIAL CARD VERSION, written once (R285-WEB-REVIEW-2026-10-22 item 5).
@@ -71,8 +92,7 @@ export const SITE = {
     legalName: LEGAL_ENTITY_NAME,
     url: `${SITE_ORIGIN}/`,
     logo: ogImageUrl('/Assets/og-image.png'),
-    description:
-      'Velstrian serves both sides of a procurement, public sector and private. Suppliers answer tenders, RFPs, PQQs and SQs from bids already written. Buyers publish requirements and find the evidence.',
+    description: SITE_SUMMARY,
     email: HELLO_EMAIL,
     identifier: { '@type': 'PropertyValue', name: 'Companies House', value: COMPANY_NUMBER },
     address: { '@type': 'PostalAddress', addressCountry: 'GB' },

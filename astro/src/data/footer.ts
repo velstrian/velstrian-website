@@ -22,6 +22,7 @@
  */
 
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY, STATUS_URL } from '../lib/brand-names';
+import { SITE_SUMMARY } from './site';
 import { TRUST_BADGES } from './site-facts';
 
 export interface FooterLink {
@@ -178,8 +179,9 @@ export const FOOTER = {
      * page of a site whose homepage had stopped saying it. All three move
      * together or the alignment A-50 created is not worth having.
      */
-    tagline:
-      'Velstrian serves both sides of a procurement, public sector and private. Suppliers answer tenders, RFPs, PQQs and SQs from bids already written. Buyers publish requirements and find the evidence.',
+    /* 2026-10-22, R285-WEB-REVIEW-2026-10-22 item 4: plain words, read from
+       SITE_SUMMARY in site.ts with the Organization node, so the two stay one. */
+    tagline: SITE_SUMMARY,
     /**
      * Static initial state. On the legacy site this is refined by a live
      * status-monitor fetch in scripts.js. That polling is a separate,

@@ -106,14 +106,14 @@ const PRODUCTS: NavMenu = {
         {
           label: PRODUCT_NAME_BID,
           href: '/bid/',
-          description: 'Respond to tenders, RFPs, RFIs and questionnaires',
+          description: 'Find contracts and answer them from your own documents',
           accent: 'mark',
           icon: 'dot',
         },
         {
           label: PRODUCT_NAME_BUY,
           href: '/buy/',
-          description: 'Read the responses you receive, against the requirements you published',
+          description: 'Set out what you need and compare the replies you get',
           accent: 'teal',
           icon: 'dot',
         },

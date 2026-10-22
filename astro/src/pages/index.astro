@@ -51,18 +51,20 @@ import Screens from '../components/evidenced/Screens.astro';
 import Plans from '../components/evidenced/Plans.astro';
 import Close from '../components/evidenced/Close.astro';
 import '../styles/evidenced.css';
-import { SITE } from '../data/site';
+import { SITE, HOME_DESCRIPTION } from '../data/site';
 
-/* 58 characters. See the header for why this is a list and not a sentence, and
-   for the 60-character ceiling A-89 set. Unchanged by the 2026-09-06 redesign. */
-const title = 'Velstrian | Bid software: supplier, buyer, public, private';
+/* 56 characters, under the 60-character ceiling A-89 set. WAS a keyword list
+   ("Bid software: supplier, buyer, public, private") until 2026-10-22, when the
+   owner's review found it read as one (R285-WEB-REVIEW-2026-10-22 item 4). A
+   sentence a first time small business reader understands, still carrying
+   "bid software", "suppliers" and "buyers". */
+const title = 'Velstrian | Simple bid software for suppliers and buyers';
 
-/* 157 characters, cut from 195 under A-89. Unchanged by the redesign. Both
-   sides are kept, because that is the point of the sentence and OA-25's market
-   neutrality rides on it: public sector and private, supplier and buyer, all
-   four still present. */
-const description =
-  'Velstrian serves both sides of procurement, public and private. Suppliers answer tenders, RFPs and PQQs from bids already written. Buyers find the evidence.';
+/* 150 characters, under A-89's ceiling. Plain words since 2026-10-22 (item 4
+   of the owner review): no RFPs or PQQs. All four sides OA-25 kept are still
+   present, public and private, supplier (Velstrian Bid) and buyer (Velstrian
+   Buy). Written once in data/site.ts as HOME_DESCRIPTION. */
+const description = HOME_DESCRIPTION;
 
 /** The WebSite node the legacy page emits alongside Organization. Unchanged. */
 const webSite = {
