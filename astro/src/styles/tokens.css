@@ -3659,11 +3659,22 @@
   --v3-tile: 40px;
   --v3-tile-radius: 10px;
 
-  /* Section entrance: opacity and a 12px rise, 300ms, 60ms between items.
-     Product sequence steps settle --seq-step apart. Carousel slides 400ms. */
-  --reveal-rise: 12px;
-  --reveal-dur: 300ms;
-  --reveal-step: 60ms;
+  /* Section entrance: opacity and a 24px rise, 640ms, 80ms between items.
+     Product sequence steps settle --seq-step apart. Carousel slides 400ms.
+
+     RETUNED 2026-10-22 (R285-WEB-SCROLL-MOTION-01, owner: "i dont thing
+     effect is coming with scroll motions"). The entrance was running and
+     nobody could see it. Measured in Chromium with motion allowed: on the
+     --ease curve a 12px, 300ms settle covered 9.5 of its 12px in the first
+     69ms and reached opacity 0.62 by 135ms, about four frames, and it fired
+     when the item's top crossed 92 percent of the window, the bottom strip
+     nobody is reading. 24px over 640ms on the same curve is still quick at
+     the start and lands over about 300ms the eye can follow, the range
+     Stripe and Linear use. The trigger line moved to 85 percent with it
+     (scripts/evidenced.ts initReveal). */
+  --reveal-rise: 24px;
+  --reveal-dur: 640ms;
+  --reveal-step: 80ms;
   --seq-step: 420ms;
   --slide-dur: 400ms;
 

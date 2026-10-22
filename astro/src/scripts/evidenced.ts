@@ -178,8 +178,10 @@ const reduced = (): boolean => window.matchMedia('(prefers-reduced-motion: reduc
 /**
  * Section entrance (version 3, check-motion.js rule 5). Every [data-reveal]
  * item that starts BELOW the fold is armed (opacity 0, a 12px drop, in
- * styles/evidenced.css) and set to `in` the first time its top passes 92
- * percent of the window height. Items in one band stagger 60ms apart in
+ * styles/evidenced.css) and set to `in` the first time its top passes 85
+ * percent of the window height, inside the part of the window a reader is
+ * looking at (it was 92 percent, the bottom strip, R285-WEB-SCROLL-MOTION-01).
+ * Items in one band stagger 80ms apart in
  * document order. An item already on screen at load is never armed, nothing
  * is armed under reduced motion, and with no script nothing is ever hidden.
  */
@@ -205,7 +207,7 @@ export function initReveal(): void {
   );
   const pending = new Set(armed);
   onGeometry(() => {
-    const line = window.innerHeight * 0.92;
+    const line = window.innerHeight * 0.85;
     pending.forEach((el) => {
       if (el.getBoundingClientRect().top < line) {
         el.dataset.reveal = 'in';

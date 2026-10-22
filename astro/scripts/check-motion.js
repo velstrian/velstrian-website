@@ -421,8 +421,10 @@ for (const f of files) {
  *       no-preference), so under reduced motion nothing is ever hidden.
  *   5c  The armed state moves opacity to 0 and translates by the rise token
  *       (or scales the sequence's progress line to 0), and nothing else.
- *   5d  The tokens are the decided numbers: a 12px rise, 300ms, 60ms between
- *       items.
+ *   5d  The tokens are the decided numbers: a 24px rise, 640ms, 80ms between
+ *       items. Retuned from 12px, 300ms and 60ms on 2026-10-22
+ *       (R285-WEB-SCROLL-MOTION-01) after the owner reported the entrance
+ *       could not be seen: measured, it covered 9.5 of 12px in 69ms.
  *   5e  The script arms only what starts BELOW the fold and returns early
  *       under reduced motion, so nothing a reader is looking at disappears.
  *   5f  No other file writes the armed value.
@@ -490,7 +492,7 @@ if (!entranceHome || !entranceScript) {
 
   /* 5d: the decided numbers. */
   const tokens = files.find((f) => f.file === 'src/styles/tokens.css');
-  const want = { '--reveal-rise': '12px', '--reveal-dur': '300ms', '--reveal-step': '60ms' };
+  const want = { '--reveal-rise': '24px', '--reveal-dur': '640ms', '--reveal-step': '80ms' };
   for (const [name, val] of Object.entries(want)) {
     const m = tokens && new RegExp(`${name}\\s*:\\s*([^;]+);`).exec(tokens.code);
     if (!m || m[1].trim() !== val) entranceFails.push(`5d: ${name} is ${m ? m[1].trim() : 'missing'}, the decided value is ${val}`);
@@ -512,11 +514,11 @@ if (!entranceHome || !entranceScript) {
 if (entranceFails.length) {
   console.error(`\nmotion: ${entranceFails.length} VERSION 3 ENTRANCE VIOLATION(S)\n`);
   for (const x of entranceFails) console.error(`    ${x}`);
-  console.error('\n  The one entrance is opacity and a 12px rise, 300ms, 60ms between items, once,');
+  console.error('\n  The one entrance is opacity and a 24px rise, 640ms, 80ms between items, once,');
   console.error('  armed by script only below the fold and never under reduced motion (strategy 0.8).\n');
   process.exit(1);
 }
-console.log(`motion: version 3 entrance held to the decision (rule 5): ${ENTRANCE_HOME}, 12px, 300ms, 60ms, below the fold only, off under reduced motion`);
+console.log(`motion: version 3 entrance held to the decision (rule 5): ${ENTRANCE_HOME}, 24px, 640ms, 80ms, below the fold only, off under reduced motion`);
 
 /* ══════════════════════════════════════════════════════════════════════════
  * OUTPUT

@@ -18,7 +18,7 @@
 
    ── WHAT IS ALLOWED TO MOVE (version 3, section 0.8 "Motion") ────────────────
    1. Section content settles in on first view: [data-reveal], opacity and a
-      12px rise, 300ms, 60ms between items, once (check-motion.js rule 5).
+      24px rise, 640ms, 80ms between items, once (check-motion.js rule 5).
    2. Product sequences on stages, step by step, once (.ea-seq).
    3. The refusal moment, once (.ea-check), and on /buy/ its counterpart,
       the pre-read boundary (.ea-moment): four rows settle in turn, each
@@ -2482,7 +2482,7 @@ a.ea-tcard:focus-visible {
   }
 
   /* The settle uses the site's own curve, --ease (a fast start that eases
-     long into place), the same 300ms, 12px and 60ms. box-shadow is listed
+     long into place), the same 640ms, 24px and 80ms. box-shadow is listed
      because a revealed card keeps this transition for good: without it the
      card's hover lift (motion 6) snapped with no ease at all, measured as no
      transition running on hover on all three pages. */
