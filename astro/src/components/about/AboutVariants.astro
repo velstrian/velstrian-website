@@ -1,0 +1,90 @@
+---
+/**
+ * AboutVariants: two products on one platform (/about/, strategy section 0, "Two products on one platform").
+ *
+ * A LIGHT ALT band. Describes both sides of the procurement platform:
+ * Velstrian Bid for suppliers and Velstrian Buy for buyers.
+ */
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+
+const VARIANTS = [
+  {
+    heading: 'Velstrian Bid',
+    body: 'Tender discovery from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, the social value the buyer scores on in-scope central government contracts, PPN 017 AI disclosure, and, after award, the evidence behind each KPI the authority assesses.',
+    href: '/bid/',
+    cta: 'See the supplier side',
+  },
+  {
+    heading: 'Velstrian Buy',
+    body: 'Publish your requirements against a deterministic social value rubric, then locate the evidence for each one across the responses you receive, quoted verbatim or dropped. Velstrian Buy organises. Your evaluation panel scores.',
+    href: '/buy/',
+    cta: 'See the buyer side',
+  },
+];
+---
+
+<Band tone="light-alt" class="ea-variants" id="variants" labelledby="variants-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <span class="ea-label">The stack</span>
+        <h2 class="ea-h2" id="variants-title">Two products, one platform.</h2>
+      </div>
+      <p class="ea-lead">
+        Velstrian serves both sides of a procurement, and both work in the public sector and the private sector.
+      </p>
+    </div>
+
+    <div class="variants-pair">
+      {
+        VARIANTS.map((v) => (
+          <div class="surface surface--pad variant-card" data-reveal>
+            <h3 class="ea-h3 variant-card__h">{v.heading}</h3>
+            <p class="variant-card__body">{v.body}</p>
+            <div class="variant-card__action">
+              <Action href={v.href} variant="secondary">{v.cta}</Action>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Band>
+
+<style>
+  .variants-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+  }
+
+  .variant-card {
+    padding: clamp(var(--space-6), 4vw, var(--space-8));
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+  }
+
+  .variant-card__h {
+    margin: 0;
+  }
+
+  .variant-card__body {
+    margin: 0;
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
+    color: var(--ea-muted);
+  }
+
+  .variant-card__action {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 767px) {
+    .variants-pair {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

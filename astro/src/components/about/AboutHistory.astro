@@ -1,0 +1,273 @@
+---
+/**
+ * AboutHistory: history timeline and company details side by side (/about/, strategy 0.3, 0.4).
+ *
+ * A LIGHT band. Keeps the side-by-side layout: vertical rail timeline on the left
+ * and sticky company registration card on the right.
+ */
+import Band from '../evidenced/Band.astro';
+import { HELLO_EMAIL } from '../../lib/brand-names';
+
+const COMPANIES_HOUSE =
+  'https://find-and-update.company-information.service.gov.uk/company/17076461';
+
+type Status = 'done' | 'now' | 'planned';
+
+interface Milestone {
+  when: string;
+  heading: string;
+  body: string;
+  status: Status;
+  link?: { label: string; href: string };
+}
+
+const TIMELINE: Milestone[] = [
+  {
+    when: '2010 to 2025',
+    heading: 'Founding team experience',
+    body: 'Bid and tender work inside regulated industries from 2010, including multi-million pound bids written, won and delivered to completion. That is the founders’ own record before Velstrian, not a result of the product. It is also where we saw at first hand how much of the friction smaller suppliers face is evidence that exists and cannot be found.',
+    status: 'done',
+  },
+  {
+    when: 'Jan to Feb 2026',
+    heading: 'Regulatory research',
+    body: 'Deep dive into the statutory frameworks the product is built on, before the company existed: the Social Value Model, and the KPI duties in the Procurement Act 2023.',
+    status: 'done',
+  },
+  {
+    when: 'March 2026',
+    heading: 'Velstrian founded',
+    body: 'Incorporated in England and Wales, and renamed Velstrian Systems Ltd on 20 October 2026. Engine prototyping begins.',
+    status: 'done',
+    link: { label: 'The registration on Companies House', href: COMPANIES_HOUSE },
+  },
+  {
+    when: 'May 2026',
+    heading: 'Platform live',
+    body: 'Velstrian Bid in live production.',
+    status: 'now',
+  },
+  {
+    when: 'Q4 2026',
+    heading: 'Regulatory monitor',
+    body: 'A regulatory change feed for UK public procurement, surfacing material updates straight into your dashboard once it ships.',
+    status: 'planned',
+  },
+];
+
+const STATUS_LABEL: Record<Status, string> = {
+  done: 'Delivered',
+  now: 'Live now',
+  planned: 'Planned',
+};
+
+const COMPANY = [
+  { label: 'Registered in', value: 'England and Wales' },
+  { label: 'Company number', value: '17076461', mono: true },
+  { label: 'Founded', value: 'March 2026' },
+];
+---
+
+<Band tone="light" class="ea-history" id="history">
+  <div class="ea-wrap">
+    <div class="hist-grid">
+      <div class="hist-col">
+        <div class="hist-head" data-reveal>
+          <span class="ea-label">History</span>
+          <h2 class="ea-h2" id="history-title">Where we are.</h2>
+        </div>
+
+        <ol class="tl">
+          {
+            TIMELINE.map((t) => (
+              <li class:list={['tl__item', `tl__item--${t.status}`]} data-reveal>
+                <span class="tl__dot" aria-hidden="true" />
+                <div class="surface surface--pad tl__card">
+                  <p class="tl__when">{t.when}</p>
+                  <h3 class="ea-h3 tl__h">
+                    {t.heading}
+                    <span class:list={['chip', 'tl__status', `tl__status--${t.status}`]}>
+                      {STATUS_LABEL[t.status]}
+                    </span>
+                  </h3>
+                  <p class="tl__p">{t.body}</p>
+                  {t.link && (
+                    <p class="tl__p">
+                      <a class="ea-link" href={t.link.href} target="_blank" rel="noopener noreferrer">
+                        {t.link.label}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="hist-aside">
+        <div class="hist-sticky">
+          <div class="surface surface--pad company-card" id="company" data-reveal>
+            <span class="ea-label">Company details</span>
+            <h2 class="ea-h3 company-card__title">Velstrian Systems Ltd</h2>
+            <dl class="company-list">
+              {
+                COMPANY.map((c) => (
+                  <div class="company-row">
+                    <dt>{c.label}</dt>
+                    <dd class={c.mono ? 'is-mono' : undefined}>{c.value}</dd>
+                  </div>
+                ))
+              }
+              <div class="company-row">
+                <dt>Contact</dt>
+                <dd><a class="ea-link" href={`mailto:${HELLO_EMAIL}`}>{HELLO_EMAIL}</a></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .hist-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(var(--space-8), 5vw, var(--space-16));
+    align-items: start;
+  }
+
+  @media (min-width: 64rem) {
+    .hist-grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: clamp(var(--space-10), 4vw, var(--space-16));
+    }
+
+    .hist-aside {
+      position: sticky;
+      top: calc(var(--v3-header-h) + var(--space-8));
+    }
+  }
+
+  .hist-head {
+    margin-bottom: var(--space-8);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .tl {
+    gap: var(--space-6);
+    --tl-dot-top: var(--space-6);
+  }
+
+  .tl__card {
+    padding: clamp(var(--space-5), 3vw, var(--space-6));
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .tl__item--now .tl__dot {
+    background: var(--c-verified);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--c-verified) 55%, transparent);
+  }
+
+  .tl__item--planned .tl__dot {
+    background: var(--c-border);
+  }
+
+  .tl__when {
+    margin: 0;
+    font-size: var(--t-micro);
+    color: var(--ea-muted);
+  }
+
+  .tl__h {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .tl__status {
+    flex: 0 0 auto;
+    font-size: var(--t-micro);
+  }
+
+  .tl__status--done {
+    color: var(--ea-muted);
+  }
+
+  .tl__status--now {
+    border-color: var(--c-border-glow);
+    color: var(--c-verified);
+  }
+
+  .tl__status--planned {
+    border-color: var(--c-refused);
+    color: var(--c-refused);
+  }
+
+  .tl__p {
+    margin: 0;
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
+    color: var(--ea-muted);
+  }
+
+  .company-card {
+    padding: clamp(var(--space-6), 3vw, var(--space-8));
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .company-card__title {
+    margin: 0;
+  }
+
+  .company-list {
+    margin: 0;
+    display: grid;
+  }
+
+  .company-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--ea-rule);
+  }
+
+  .company-row:last-child {
+    border-bottom: 0;
+  }
+
+  .company-row dt {
+    font-size: var(--t-ea-body);
+    color: var(--ea-muted);
+  }
+
+  .company-row dd {
+    margin: 0;
+    font-size: var(--t-ea-body);
+    color: var(--ea-ink);
+    text-align: end;
+    overflow-wrap: anywhere;
+  }
+
+  .company-row dd.is-mono {
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 599px) {
+    .company-row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-1);
+    }
+    .company-row dd {
+      text-align: start;
+    }
+  }
+</style>

@@ -1,0 +1,179 @@
+---
+/**
+ * AboutHero: who Velstrian is and why it exists (/about/, strategy 0.3, 0.4, 0.8).
+ *
+ * A LIGHT band. Opens with the plain sentence: "Written for the people who write bids. Readable by
+ * the people who score them." Lead names the four roles. Two action buttons: Book a
+ * 30-minute call (primary) and Send a question (secondary). A reassurance note on who
+ * builds it. Four navigation chips for the four readers, and an evidenced tender
+ * review screen floating on the stage beneath.
+ */
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import Stage from '../evidenced/Stage.astro';
+import Frame from '../evidenced/Frame.astro';
+import { WALKTHROUGH_URL } from '../../data/app';
+
+const ROLES = [
+  { id: 'role-run', label: 'If you run the bid', mark: 'verified' },
+  { id: 'role-sign', label: 'If you sign it off', mark: 'refused' },
+  { id: 'role-score', label: 'If you score it', mark: 'verified' },
+  { id: 'role-deliver', label: 'If you have to deliver it', mark: 'verified' },
+];
+---
+
+<Band tone="light" class="ea-hero" labelledby="about-hero-title">
+  <div class="ea-wrap ea-hero__head">
+    <h1 class="ea-hero__title" id="about-hero-title">
+      Written for the people who write bids. Readable by the people who score them.
+    </h1>
+    <p class="ea-lead ea-hero__lead">
+      Four people touch a tender and want four different things from it: the bidder, the sign-off, the evaluator and the delivery lead. The sections below are addressed to each of them in turn.
+    </p>
+
+    <div class="ea-actions">
+      <Action href={WALKTHROUGH_URL} newWindow>Book a 30-minute call</Action>
+      <Action href="/contact/#contact-form" variant="secondary">Send a question</Action>
+    </div>
+
+    <nav class="about-chips" aria-label="The four readers this page addresses">
+      <ul class="about-chips__list">
+        {
+          ROLES.map((r) => (
+            <li>
+              <a class="control rolelink" href={`#${r.id}`}>
+                <span class={`chip__dot chip__dot--${r.mark}`} aria-hidden="true" />
+                <span>{r.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <p class="ea-hero__note">
+      An engineering team builds it, advised by people with bid and consulting experience who have written and won public sector bids.
+    </p>
+  </div>
+
+  <div class="ea-wrap">
+    <Stage layout="hero">
+      <Frame
+        title="Tender response: Four role perspectives"
+        status="Evidence linked"
+        capture="about-hero"
+        caption="One evidenced response clause viewed across all four roles: citation link, sign-off refusal check, panel score and KPI obligation."
+      >
+        <div class="ea-app-split">
+          <ol class="ea-app-qs">
+            <li class="is-current">
+              <span>Section 3.1: Social value commitments</span>
+              <span class="ea-chip ea-chip--ok">Evidenced</span>
+            </li>
+            <li>
+              <span>Section 4.2: Information security controls</span>
+              <span class="ea-chip ea-chip--ok">Verified</span>
+            </li>
+            <li>
+              <span>Section 5.1: KPI reporting schedule</span>
+              <span class="ea-chip ea-chip--ok">Assessed</span>
+            </li>
+            <li>
+              <span>Section 6.3: Delivery timetable</span>
+              <span class="ea-chip">On track</span>
+            </li>
+          </ol>
+          <div class="ea-app-answer">
+            <p class="ea-label">Role 1: Run the bid, evidenced answer with citations</p>
+            <p>
+              We provide two apprenticeships per contract year, recruited from the local borough. Every milestone traces to our existing apprenticeship partnership agreement. <span class="ea-src-chip">Apprenticeship Agreement 2026, clause 3.2</span>
+            </p>
+            <p class="ea-label">Role 2: Sign-off, refusal scan on unbacked figures</p>
+            <p>
+              Draft figure "99.8% customer retention" checked against company records: <span class="ea-chip ea-chip--held">Unbacked figure struck: open gap</span>
+            </p>
+            <p class="ea-label">Role 3: Score it, evaluator check against published rubric</p>
+            <p>
+              Evidence matches published criterion. Score set by evaluation panel: <span class="ea-chip ea-chip--ok">Panel score: 5 / 5</span>
+            </p>
+            <p class="ea-label">Role 4: Deliver it, Procurement Act 2023 s.71 duty</p>
+            <p>
+              Contract obligations assembly: <span class="ea-chip ea-chip--ok">3 published KPIs tracked to annual assessment</span>
+            </p>
+          </div>
+        </div>
+      </Frame>
+    </Stage>
+  </div>
+</Band>
+
+<style>
+  .ea-hero__head {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  .about-chips {
+    margin-top: var(--space-6);
+  }
+
+  .about-chips__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .rolelink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.2;
+    text-decoration: none;
+    color: var(--ea-ink);
+  }
+
+  .chip__dot {
+    flex: 0 0 auto;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-pill);
+  }
+
+  .chip__dot--verified {
+    background: var(--c-verified);
+    box-shadow: 0 0 10px var(--c-verified-glow);
+  }
+
+  .chip__dot--refused {
+    background: var(--c-refused);
+  }
+
+  .ea-hero__note {
+    max-width: 44ch;
+    margin-top: var(--space-2);
+    font-size: var(--t-micro);
+    line-height: var(--lh-ea-snug);
+    color: var(--ea-muted);
+  }
+
+  @media (max-width: 599px) {
+    .about-chips__list {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .rolelink {
+      justify-content: center;
+    }
+  }
+</style>

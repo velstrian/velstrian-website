@@ -1,0 +1,155 @@
+---
+/**
+ * AboutStory: who is behind it, and what we stand for (/about/, strategy 0.3, 0.4, 0.8).
+ *
+ * A DARK band. Combines the engineering and advice background with the company's
+ * three foundational principles (Mission, Vision, Values).
+ * A photo of people at work sits between the intro and the two cards. It is
+ * illustrative (generated, credited in image-credits.json), never presented as
+ * our staff or a customer.
+ */
+import Band from '../evidenced/Band.astro';
+import Photo from '../ui/Photo.astro';
+
+const APPROACH = [
+  {
+    eyebrow: 'Who builds it',
+    body: 'An engineering team builds it, advised by people with bid and consulting experience who have written and won public sector bids. That advice decides what gets built rather than how, and it is why the product starts where the marks are actually lost: evidence the supplier already holds, that nobody can put a hand on in time.',
+  },
+  {
+    eyebrow: 'How it is built',
+    body: 'Every feature starts from the source rule rather than a template. PPN 026 for social value, and the two separate KPI duties in the Procurement Act 2023: under s.52 an authority sets and publishes at least 3 KPIs on a contract over £5m, and under s.71 it assesses performance against them at least every twelve months. Each answer carries the clause it was written against.',
+  },
+];
+
+const PRINCIPLES = [
+  {
+    kicker: 'Mission',
+    heading: 'Make bidding answerable, whatever your size',
+    body: 'Size and budget should not decide who can answer a requirement properly. UK public procurement is where we prove that, because its duties are published and anyone can check our reading of them against the instrument.',
+  },
+  {
+    kicker: 'Vision',
+    heading: 'Answers you can defend, first time',
+    body: 'A market where a supplier answers a tender requirement from evidence it already holds, without paying a bid-writing consultancy to assemble it.',
+  },
+  {
+    kicker: 'Values',
+    heading: 'Statute over speculation',
+    body: 'Every claim we make traces to a source, on this page and in every draft. That is why you will find no win rates and no named customers here.',
+  },
+];
+---
+
+<Band tone="dark" class="ea-story" id="who-builds-it" labelledby="story-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <span class="ea-label">Who is behind it</span>
+        <h2 class="ea-h2" id="story-title">Built by engineers who read the rules.</h2>
+      </div>
+      <p class="ea-lead">
+        Engineering discipline meets consulting experience from writing and winning public sector tenders.
+      </p>
+    </div>
+
+    <div class="story-photo" data-reveal>
+      <Photo name="r285-gemini/people-small-team" widths={[1024, 2048]} sizes="(min-width: 1200px) 1120px, 100vw" />
+    </div>
+
+    <div class="story-pair">
+      {
+        APPROACH.map((a) => (
+          <div class="surface surface--pad story-pair__card" data-reveal>
+            <p class="ea-label">{a.eyebrow}</p>
+            <p class="story-pair__body">{a.body}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="story-principles-head" data-reveal>
+      <span class="ea-label">Mission, vision, values</span>
+      <h3 class="ea-h2" id="principles">What we stand for.</h3>
+    </div>
+
+    <ul class="story-principles">
+      {
+        PRINCIPLES.map((p) => (
+          <li class="surface surface--pad story-principle" data-reveal>
+            <p class="ea-label">{p.kicker}</p>
+            <h4 class="ea-h3 story-principle__h">{p.heading}</h4>
+            <p class="story-principle__body">{p.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Band>
+
+<style>
+  .story-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+  }
+
+  .story-pair__card {
+    padding: clamp(var(--space-6), 3vw, var(--space-8));
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+  }
+
+  .story-pair__body {
+    margin: 0;
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
+    color: var(--ea-muted);
+  }
+
+  .story-principles-head {
+    margin-top: var(--space-16);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .story-principles {
+    list-style: none;
+    margin: var(--space-8) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .story-principle {
+    padding: clamp(var(--space-6), 3vw, var(--space-8));
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+  }
+
+  .story-principle__h {
+    margin: 0;
+  }
+
+  .story-principle__body {
+    margin: 0;
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
+    color: var(--ea-muted);
+  }
+
+  @media (max-width: 959px) {
+    .story-pair,
+    .story-principles {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .story-photo {
+    margin-block: var(--space-10);
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+/**
+ * Photo: one credited image, served as AVIF then WebP at two widths.
+ *
+ * The alt text and the intrinsic size come from data/image-credits.json, so a
+ * photo's description lives in one place with its credit and cannot drift per
+ * page. `name` is the file stem under Assets/images (for example
+ * "r285-gemini/people-small-team"), and the credits entry is the larger AVIF.
+ * Width and height are always set, so the page never shifts as it loads.
+ */
+import CREDITS from '../../data/image-credits.json';
+
+interface Props {
+  name: string;
+  widths: [number, number];
+  sizes: string;
+  class?: string;
+  eager?: boolean;
+}
+
+const { name, widths, sizes, class: cls = '', eager = false } = Astro.props;
+const [small, large] = widths;
+const credit = CREDITS.find((c) => c.file === `${name}-${large}.avif`);
+if (!credit) throw new Error(`Photo: no image-credits.json entry for ${name}-${large}.avif`);
+const base = `/Assets/images/${name}`;
+const set = (ext: string) => `${base}-${small}.${ext} ${small}w, ${base}-${large}.${ext} ${large}w`;
+---
+
+<picture class={`ui-photo ${cls}`.trim()}>
+  <source type="image/avif" srcset={set('avif')} sizes={sizes} />
+  <source type="image/webp" srcset={set('webp')} sizes={sizes} />
+  <img
+    src={`${base}-${large}.webp`}
+    alt={credit.alt}
+    width={credit.width}
+    height={credit.height}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+</picture>
+
+<style>
+  .ui-photo,
+  .ui-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ui-photo img {
+    border-radius: var(--radius-card);
+  }
+</style>

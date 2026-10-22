@@ -1,0 +1,136 @@
+---
+/**
+ * AboutTrust: security, data protection and regulatory trust (/about/, strategy 0.3, 0.4, 0.8).
+ *
+ * A DARK band. Hairline facts with gradient icon tiles (FactsBand), the canonical
+ * trust strip (TRUST_BADGES), and six cards detailing data residency and security controls.
+ */
+import Band from '../evidenced/Band.astro';
+import FactsBand from '../evidenced/FactsBand.astro';
+import { TRUST_BADGES } from '../../data/site-facts';
+
+const TRUST_CARDS = [
+  {
+    term: 'AES-256 at rest',
+    detail: 'Encrypted where it is stored.',
+  },
+  {
+    term: 'TLS 1.3 in transit',
+    detail: 'Encrypted while it moves.',
+  },
+  {
+    term: 'EU data residency',
+    detail: 'Customer data is stored in the EU (Ireland). Drafting sends only the text a task needs to our AI processors.',
+  },
+  {
+    term: 'GDPR compliant',
+    detail: 'We meet UK GDPR, with a data processing agreement on request.',
+  },
+  {
+    term: 'ICO registered',
+    detail: 'Registered with the UK regulator.',
+  },
+  {
+    term: 'Built to ISO 27001 controls',
+    detail: 'We follow ISO/IEC 27001 and check our controls against it.',
+  },
+];
+---
+
+<Band tone="dark" class="ea-trust" id="trust" labelledby="trust-title">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <div>
+        <span class="ea-label">Security</span>
+        <h2 class="ea-h2" id="trust-title">Your data, kept safe.</h2>
+      </div>
+      <p class="ea-lead">
+        Customer data is stored in the EU (Ireland). Drafting sends only the text a task needs to our AI processors. We meet UK GDPR, with a data processing agreement on request.
+      </p>
+    </div>
+
+    <FactsBand
+      facts={[
+        { icon: 'shield', value: 'Encrypted', label: 'AES-256 at rest and TLS 1.3 in transit' },
+        { icon: 'database', value: 'EU storage', label: 'Customer data stored in the EU (Ireland)' },
+        { icon: 'document', value: 'UK GDPR', label: 'Data processing agreement available on request' },
+        { icon: 'checklist', value: 'ISO 27001', label: 'We follow ISO/IEC 27001 controls and check against them' },
+      ]}
+      strip={[...TRUST_BADGES]}
+      stripLabel="How your data is protected"
+    />
+
+    <ul class="trust-cards-grid">
+      {
+        TRUST_CARDS.map((t) => (
+          <li class="surface surface--pad trust-card" data-reveal>
+            <div class="trust-card__term">
+              <span class="chip__dot chip__dot--verified" aria-hidden="true" />
+              <h3 class="ea-h4">{t.term}</h3>
+            </div>
+            <p class="trust-card__detail">{t.detail}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Band>
+
+<style>
+  .trust-cards-grid {
+    list-style: none;
+    margin: var(--space-12) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .trust-card {
+    padding: clamp(var(--space-5), 3vw, var(--space-6));
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+  }
+
+  .trust-card__term {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .trust-card__term .ea-h4 {
+    margin: 0;
+  }
+
+  .trust-card__detail {
+    margin: 0;
+    font-size: var(--t-micro);
+    line-height: var(--lh-ea-snug);
+    color: var(--ea-muted);
+  }
+
+  .chip__dot {
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-pill);
+  }
+
+  .chip__dot--verified {
+    background: var(--c-verified);
+    box-shadow: 0 0 10px var(--c-verified-glow);
+  }
+
+  @media (max-width: 959px) {
+    .trust-cards-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 599px) {
+    .trust-cards-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

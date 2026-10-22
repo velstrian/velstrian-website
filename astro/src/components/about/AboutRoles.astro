@@ -1,0 +1,204 @@
+---
+/**
+ * AboutRoles: the four reader perspectives (/about/, strategy 0.3, 0.4).
+ *
+ * A LIGHT ALT band. Addresses each of the four readers who touch a tender:
+ *   1. Role 1: If you run the bid
+ *   2. Role 2: If you sign it off
+ *   3. Role 3: If you score it
+ *   4. Role 4: If you have to deliver it
+ *
+ * Every role carries a verified or refused statutory artefact cited to statute or policy.
+ */
+import Band from '../evidenced/Band.astro';
+
+type Mark = 'verified' | 'refused';
+
+interface Role {
+  id: string;
+  label: string;
+  heading: string;
+  body: string;
+  figure: string;
+  source: string;
+  mark: Mark;
+  link?: { href: string; label: string };
+}
+
+const ROLES: Role[] = [
+  {
+    id: 'role-run',
+    label: 'If you run the bid',
+    heading: 'You need the answer to survive a year of scrutiny',
+    body: 'Everything you price in the response becomes a promise, and the authority publishes at award what it will hold you to. So the draft has to be answerable a year later, not just persuasive on the day.',
+    figure: '3 KPIs minimum, published at award',
+    source: 'Procurement Act 2023, s.52',
+    mark: 'verified',
+  },
+  {
+    id: 'role-sign',
+    label: 'If you sign it off',
+    heading: 'You are the one who has to stand behind the numbers',
+    body: 'A confident paragraph is not evidence. Every figure in a draft is either traced to your own confirmed data and shown with the source it came from, or listed as an open gap. Nothing is rounded into place to close one. That is a shorter review, and a defensible one.',
+    figure: 'Every figure, or an open gap',
+    source: 'No figure without a source',
+    mark: 'refused',
+  },
+  {
+    id: 'role-score',
+    label: 'If you score it',
+    heading: 'You are deciding whether to believe a stranger',
+    body: 'The same engine that writes answers reads them. A claim arrives next to the clause it cites, so your check is a comparison rather than a judgement of tone.',
+    figure: '1 million pounds inc VAT threshold',
+    source: 'PPN 026, applies from 1 January 2027',
+    mark: 'verified',
+    link: { href: '/glossary/ppn-026', label: 'Read about the PPN 026 threshold' },
+  },
+  {
+    id: 'role-deliver',
+    label: 'If you have to deliver it',
+    heading: 'You inherit somebody else’s promises',
+    body: 'The commitments made at bid stage become the KPIs you are measured on. Each one stays attached to the evidence behind it, month by month, so the assessment is assembled from a record rather than reconstructed from memory.',
+    figure: '12 months to the assessment',
+    source: 'Procurement Act 2023, s.71',
+    mark: 'verified',
+  },
+];
+---
+
+<Band tone="light-alt" class="ea-roles" id="roles">
+  <div class="ea-wrap">
+    <div class="ea-roles__stack">
+      {
+        ROLES.map((r, i) => (
+          <section class="ea-role-row" id={r.id} data-reveal>
+            <div class:list={['ea-role-grid', { 'ea-role-grid--mirror': i % 2 === 1 }]}>
+              <div class="ea-role-text">
+                <span class="ea-label">{r.label}</span>
+                <h2 class="ea-h2 ea-role-h">{r.heading}</h2>
+                <p class="ea-lead ea-role-p">{r.body}</p>
+                {r.link && (
+                  <p class="ea-role-link-p">
+                    <a class="ea-link" href={r.link.href}>{r.link.label}</a>
+                  </p>
+                )}
+              </div>
+
+              <div class="surface surface--pad ea-role-art">
+                <dl class={`ea-art ea-art--${r.mark}`}>
+                  <dt class="ea-art__figure">{r.figure}</dt>
+                  <dd class="ea-art__source">
+                    <span class={`chip__dot chip__dot--${r.mark}`} aria-hidden="true" />
+                    <span>{r.source}</span>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</Band>
+
+<style>
+  .ea-roles__stack {
+    display: grid;
+    gap: var(--space-16);
+  }
+
+  .ea-role-row {
+    scroll-margin-top: calc(var(--v3-header-h) + var(--space-8));
+  }
+
+  .ea-role-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(var(--space-6), 5vw, var(--space-16));
+    align-items: start;
+  }
+
+  .ea-role-text {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .ea-role-h {
+    margin: 0;
+  }
+
+  .ea-role-p {
+    margin: 0;
+    color: var(--ea-muted);
+  }
+
+  .ea-role-link-p {
+    margin: 0;
+  }
+
+  .ea-role-art {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(var(--space-6), 4vw, var(--space-10));
+  }
+
+  .ea-art {
+    margin: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .ea-art__figure {
+    font-family: var(--font-ui);
+    font-size: var(--t-ea-h3);
+    font-weight: var(--t-w-ea-strong);
+    line-height: 1.25;
+    letter-spacing: var(--ls-ea-h3);
+    color: var(--ea-ink);
+  }
+
+  .ea-art__source {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--t-micro);
+    line-height: var(--lh-ea-snug);
+    color: var(--ea-muted);
+  }
+
+  .chip__dot {
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-pill);
+  }
+
+  .chip__dot--verified {
+    background: var(--c-verified);
+    box-shadow: 0 0 10px var(--c-verified-glow);
+  }
+
+  .chip__dot--refused {
+    background: var(--c-refused);
+  }
+
+  @media (min-width: 960px) {
+    .ea-role-grid--mirror .ea-role-text {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .ea-role-grid--mirror .ea-role-art {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+
+  @media (max-width: 959px) {
+    .ea-role-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+  }
+</style>

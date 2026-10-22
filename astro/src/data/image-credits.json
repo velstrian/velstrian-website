@@ -180,5 +180,44 @@
     "width": 1600,
     "height": 1000,
     "bytes": 14429
+  },
+  {
+    "file": "r285-gemini/people-small-team-2048.avif",
+    "alt": "Two colleagues at a wooden desk by a window, one pointing at a printed table while the other types on a laptop.",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "People at work, illustrative, never presented as customers or staff. 1024 and 2048 wide, AVIF and WebP.",
+    "width": 2048,
+    "height": 1365,
+    "bytes": 85918
+  },
+  {
+    "file": "r285-gemini/people-buyer-panel-2048.avif",
+    "alt": "Four people around a meeting table in a room with tall windows, reading printed papers and discussing them.",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "People at work, illustrative, never presented as customers or staff. 1024 and 2048 wide, AVIF and WebP.",
+    "width": 2048,
+    "height": 1365,
+    "bytes": 67366
+  },
+  {
+    "file": "r285-gemini/people-delivery-2048.avif",
+    "alt": "A man in a navy work jacket standing in a bright corridor, writing on a clipboard.",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "People at work, illustrative, never presented as customers or staff. 1024 and 2048 wide, AVIF and WebP.",
+    "width": 2048,
+    "height": 1365,
+    "bytes": 77827
   }
 ]

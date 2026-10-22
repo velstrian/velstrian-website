@@ -1,0 +1,46 @@
+---
+/**
+ * AboutNewsletter: monthly procurement digest (/about/).
+ *
+ * A LIGHT band. Keeps the newsletter lead capture with its original heading and copy.
+ */
+import Band from '../evidenced/Band.astro';
+import NewsletterForm from '../forms/NewsletterForm.astro';
+---
+
+<Band tone="light" class="ea-newsletter" id="newsletter" labelledby="nl-title">
+  <div class="ea-wrap">
+    <div class="ea-card nl-card" data-reveal>
+      <span class="ea-label">Monthly digest</span>
+      <h2 class="ea-h2 nl-card__h" id="nl-title">Get monthly UK procurement digests</h2>
+      <p class="nl-card__p">
+        PPN 026 social value, tender-market trends and Velstrian product news, once a month.
+        Unsubscribe any time.
+      </p>
+      <NewsletterForm id="about-nl" source="about-newsletter" />
+    </div>
+  </div>
+</Band>
+
+<style>
+  .nl-card {
+    max-width: var(--measure-band);
+    margin-inline: auto;
+    padding: clamp(var(--space-8), 5vw, var(--space-12));
+    display: grid;
+    gap: var(--space-4);
+    text-align: start;
+  }
+
+  .nl-card__h {
+    margin: 0;
+  }
+
+  .nl-card__p {
+    margin: 0;
+    max-width: var(--measure-prose);
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
+    color: var(--ea-muted);
+  }
+</style>

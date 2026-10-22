@@ -375,7 +375,11 @@ for (const reduced of [false, true]) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
   for (const b of BUTTONS) {
     let done = false;
-    for (const route of BUTTON_ROUTES) {
+    /* BUTTON_ROUTES first, then every other built route: as pages move to v3
+       the legacy .btn leaves the four usual routes (2026-10-22, /about/ was the
+       last of them), and a button that exists anywhere must still be measured. */
+    const candidates = [...BUTTON_ROUTES, ...routesOf(DIST).filter((r) => !BUTTON_ROUTES.includes(r))];
+    for (const route of candidates) {
       await open(page, route);
       const sig = await tagButton(page, b.sel);
       if (!sig) continue;
@@ -404,7 +408,10 @@ for (const reduced of [false, true]) {
       done = true;
       break;
     }
-    if (!done) preflight.push(`${b.label}: no visible ${b.sel} on ${BUTTON_ROUTES.join(', ')}`);
+    /* On NO built route at all means the legacy button is retired, which is a
+       fact to report, not a broken measurement. The v3 buttons are measured
+       in 3b. */
+    if (!done) rec(b.label, 'legacy button retired', true, `no visible ${b.sel} on any of ${candidates.length} built routes`);
   }
   await page.close();
 }
