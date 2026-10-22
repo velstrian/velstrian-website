@@ -1,12 +1,38 @@
 ---
+/**
+ * /sectors/: the sector hub.
+ *
+ * ── 2026-10-22: ON DESIGN SYSTEM VERSION 3 ──────────────────────────────────
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7. Every sector card, link and
+ * fact of the previous page is kept, on the v3 bands:
+ *
+ *   1. PageHero   light      is this for my sector?   trail, plain headline, two actions
+ *   2. Sectors    light      which one is mine?       nine cards, each one link, the screen on a stage
+ *   3. Cited      light alt  can I trust the answer?  the one ledger row, a question link
+ *   4. Close      gradient   what now?                into the footer
+ *
+ * The h1 was "The statute behind your sector." and is now "What wins work in
+ * your sector." (RULE 0-U: "statute" is a word a first time bidder has to look
+ * up). Recorded in check-content-parity.js ALLOWED_LOSSES.
+ *
+ * SEO (title, description, canonical, the BreadcrumbList and CollectionPage
+ * data) is carried over verbatim. The visible trail is the one Breadcrumb
+ * component, fed from the same array as the BreadcrumbList.
+ */
 import Base from '../../layouts/Base.astro';
-import PageHeader from '../../components/layout/PageHeader.astro';
-import { SITE } from '../../data/site';
-import Button from '../../components/ui/Button.astro';
-import { SIGNUP_URL } from '../../data/app';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Action from '../../components/evidenced/Action.astro';
+import Stage from '../../components/evidenced/Stage.astro';
+import Frame from '../../components/evidenced/Frame.astro';
+import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { SITE } from '../../data/site';
+import { SIGNUP_URL } from '../../data/app';
+import { TRIAL_DAYS } from '../../data/pricing';
 import { breadcrumbs } from '../../lib/schema';
-import { HELLO_EMAIL } from '../../lib/brand-names';
+import { HELLO_EMAIL, PRODUCT_NAME_BID } from '../../lib/brand-names';
+import '../../styles/evidenced.css';
 
 const title = 'By Sector | Velstrian';
 const description =
@@ -15,87 +41,58 @@ const path = '/sectors';
 
 const sectorCards = [
   {
-    accent: 'violet',
     name: 'Public-Sector Suppliers',
     say: 'PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and makes social value a scored award criterion on in-scope central-government tenders.',
     href: '/bid/',
   },
   {
-    accent: 'teal',
     name: 'IT Managed Service Providers',
     say: 'Public-sector IT and managed-service tenders are scored on PPN 026 social value alongside technical fit and price.',
     href: '/bid/',
   },
   {
-    accent: 'teal',
     name: 'Professional Services',
     say: 'Framework and consultancy tenders reward a consistent, evidenced bid response.',
     href: '/bid/',
   },
   {
-    accent: 'violet',
     name: 'Construction',
     say: 'Public works bids score PPN 026 social value alongside price and technical quality.',
     href: '/sectors/construction/',
   },
   {
-    accent: 'violet',
     name: 'Facilities Management',
     say: 'FM tenders turn on TUPE, mobilisation and evidenced delivery against the published KPIs.',
     href: '/sectors/facilities/',
   },
   {
-    accent: 'violet',
     name: 'Highways',
     say: 'Term-maintenance and NEC4 contracts are scored on social value alongside price and capability.',
     href: '/sectors/highways/',
   },
   {
-    accent: 'violet',
     name: 'NHS Suppliers',
     say: 'Framework bids weigh PPN 026 social value alongside a track record of on-time, evidenced delivery.',
     href: '/bid/',
   },
   {
-    accent: 'teal',
     name: 'Education',
     say: 'Public-sector contracts expect a consistent, well-evidenced bid and a track record of on-time delivery.',
     href: '/sectors/education/',
   },
   {
-    accent: 'violet',
     name: 'Charities',
     say: 'Grant and tender bids are judged on PPN 026 social value, with reporting that has to stay lean.',
     href: '/bid/',
   },
 ];
 
-/* THE ONLY HUB ON THE SITE THAT PUBLISHED NO TRAIL, fixed 2026-08-05. Measured
-   across all 43 built routes, exactly three emitted no BreadcrumbList: /404,
-   / and this page. The first two are correct. A root has nothing above it and
-   an error page is not a position in the tree. This one was an omission, and a
-   conspicuous one: all four /sectors children publish a trail through Sectors to
-   a parent that did not admit to existing, and /blog, /compare, /glossary and
-   /tools all publish one.
+/** What the card's foot says: a sector with its own page names it, the rest
+    go to the product page. */
+const more = (c: { name: string; href: string }) =>
+  c.href.startsWith('/sectors/') ? `Read the ${c.name.toLowerCase()} page` : `See ${PRODUCT_NAME_BID}`;
 
-   PUBLISHED AND NOW DRAWN, and the second half is A-172. This block said the
-   opposite until 2026-08-05: "no visible breadcrumb is added: that is a design
-   decision this fix has no mandate to take, and check-breadcrumbs.js only
-   compares a visible trail with a published one when a visible one exists."
-   Both sentences were true when written and the second one was the reason the
-   first survived. A gate whose every assertion is a comparison is silent about
-   the case where only one side exists, so the deferral could never be reported
-   as debt and read as a settled position instead.
-
-   The gate now asks the question directly: a route publishing a trail with an
-   ancestor above Home must draw it, and the exemptions are named in
-   scripts/check-breadcrumbs.js with their reasons. That made the deferral a
-   decision to take rather than one to leave, and it was taken the way /compare
-   already had it, the SAME Breadcrumb component, fed from the SAME array as
-   the JSON-LD, on this hub and on all four of its children through
-   layouts/Sector.astro. */
 const trail = [{ name: 'Home', path: '/' }];
-
 const schema = [
   breadcrumbs([...trail, { name: 'Sectors', path }]),
   {
@@ -106,464 +103,151 @@ const schema = [
     publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
   },
 ];
+
+const UPDATED = new Date('2026-10-22');
 ---
 
-<Base title={title} description={description} path={path} image="/Assets/og-image.png?v=20260730" schema={schema}>
-  {/* A DIV, NOT A SECOND <main>: A-66, same as layouts/Sector.astro. Kept as an
-      element rather than deleted because styles/motion.css unwraps one wrapper via
-      `main > *:only-child > *`. */}
-  <div>
-    <header class="sec-hero">
-      <div class="sec-wrap">
-        {/* The hub's own trail, drawn the way /compare draws its hub's: one link
-            back to Home and this page as the unlinked leaf. Wrapped in an element
-            this page owns, above PageHeader, for the two reasons Sector.astro
-            states. Breadcrumb.astro takes no `class` prop, and PageHeader has no
-            slot ahead of its eyebrow. */}
-        <div class="sec-breadcrumb"><Breadcrumb trail={trail} current="Sectors" /></div>
-        {/*
-          THE SHARED HEAD BLOCK. Was a `.sec-eyebrow` capsule, a bare <h1> and a
-          `.sec-sub` lede, one of the fifteen routes rendering a flat white
-          title, because the treatment lived in Section's SCOPED styles.
+<Base
+  title={title}
+  description={description}
+  path={path}
+  image="/Assets/og-image.png?v=20260730"
+  schema={schema}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero
+    id="sectors-title"
+    label="By sector"
+    title="What wins work in your sector."
+    lead={`Different rules, one product. See what decides who wins the work in your sector, public or private, and how ${PRODUCT_NAME_BID} helps you answer it.`}
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Sectors" /></div>
+    <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+    <Action href="#sectors-list" variant="secondary">Find your sector</Action>
+  </PageHero>
 
-          The words are unchanged: "The statute behind your sector." What has
-          gone is the `<span class="accent">` around "your sector.", which
-          painted it with --grad-hero-text. That is a SECOND heading treatment,
-          and the owner asked for one.
-
-          `.sec-eyebrow` KEEPS ITS RULE BELOW: the closing band still uses it.
-        */}
-        <PageHeader
-          eyebrow="By sector"
-          title="The statute behind your sector."
-          standfirst="Different rules, one product. See what decides whether you win the tender in your sector, and how Velstrian Bid helps you answer it."
-        />
+  <Band tone="light" id="sectors-list" labelledby="sectors-list-title">
+    <div class="ea-wrap">
+      <div class="ea-head-row" data-reveal>
+        <div class="ea-split__head">
+          <p class="ea-label">Who we build for</p>
+          <h2 class="ea-h2" id="sectors-list-title">Every sector is under its own clock.</h2>
+        </div>
+        <p class="ea-lead">
+          Nine UK sectors, each with its own bidding pressure. One line on the pressure, and how {PRODUCT_NAME_BID}
+          answers it.
+        </p>
       </div>
-    </header>
 
-    <section class="sec-band">
-      <div class="sec-wrap">
-        <div class="sec-head">
-          <span class="eyebrow sec-eyebrow-inline">Who we build for</span>
-          <h2>Every sector is under its own clock.</h2>
-          <p class="sec-head-lede">Nine UK sectors, each with its own bidding pressure. One line on the pressure, and how Velstrian Bid answers it.</p>
-        </div>
-        <div class="sec-grid">
-          {
-            sectorCards.map((c) => (
-              <div class="sec-card surface surface--accent" data-accent={c.accent}>
-                <div class="sec-verb">{c.name}</div>
-                <p class="sec-say">{c.say}</p>
-                <div class="sec-serves">
-                  <a class="meta" href={c.href}>Velstrian Bid</a>
-                </div>
-              </div>
-            ))
-          }
-        </div>
+      <ul class="ea-cards" role="list">
+        {
+          sectorCards.map((c) => (
+            <li data-reveal>
+              <a class="ea-card ea-tcard" href={c.href}>
+                <h3 class="ea-h3">{c.name}</h3>
+                <p>{c.say}</p>
+                <span class="ea-tcard__more">{more(c)}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
 
-        {/*
-          LIGHT SCREEN, AND A DIFFERENT SCREEN SET. Owner instruction 2026-08-05:
-          "light mode images looks great, apply them in all the website carousels
-          by replacing dark version." The carousels moved that day, via VARIANT in
-          data/crowmark-screens.ts; this page never read that module, so it stayed
-          on the dark set alongside /compare and /contact, which the owner caught.
-
-          WHY THE PATH CHANGES DIRECTORY AND NOT JUST ITS SUFFIX. This figure was
-          pointing at Assets/shots/figma/mark-analytics-hero, from an OLDER and
-          separate nine-screen set with no light variants, not in the current
-          Figma file, so it cannot be re-exported light. The equivalent screen in
-          the current set is sup-6-insights, matched on what each screen shows:
-          the same four headline figures, the same contracts-by-status chart and
-          the same pipeline summary. Manifest record sup-6-insights-light, Figma
-          node 325:2.
-
-          THE ALT TEXT AND THE CAPTION WERE BOTH REWRITTEN AGAINST THE NEW IMAGE.
-          The caption used to call the screen "CrowMark Analytics" and to say bids
-          and contracts were grouped by sector; the screen is titled Insights and
-          groups contracts by STATUS, with sector appearing only as a benchmark
-          panel. It also called the figures a sample account's own data, which
-          cannot be true of a drawing. Both were describing something the reader
-          is not looking at.
-
-          The intrinsic size changes with the set: 1024x768 becomes 2048x1536, the
-          2x export the v2 screens ship at. The ratio is 4:3 either way, so
-          .sec-shot, which uses width:100% and height:auto and assumes no ratio,
-          is unaffected.
-        */}
-        <figure class="sec-shot">
-          <picture>
-            <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-6-insights-light.avif?v=20260805a" />
-            <source type="image/webp" srcset="/Assets/shots/figma-v2/sup-6-insights-light.webp?v=20260805a" />
-            <img
-              src="/Assets/shots/figma-v2/sup-6-insights-light.png?v=20260805a"
-              width="2048"
-              height="1536"
-              loading="lazy"
-              decoding="async"
-              alt="The Velstrian Bid Insights dashboard. Four figures head the screen: total contracts across five sectors, social value delivered on won bids, evidence completion against committed measures, and s.71 assessments due within 90 days. A contracts-by-status bar chart counting draft, profiling, evidence, won and lost sits beside a pipeline summary of active bids, pending outcome, won this period and draft, each with a count and a value. A quick stats panel sits beside sector benchmarks for healthcare and social care, which include the statutory minimum social value weighting of 10 per cent. A footnote reads that every figure is drawn from your own contract records and from published awards, and that Velstrian Bid reports what has been evidenced and does not forecast outcomes."
-            />
-          </picture>
-          <figcaption>Contracts by status, pipeline value and sector benchmarks in Velstrian Bid Insights, shown as a drawn representation. The figures on screen are part of the drawing. They are not a customer result and not an outcome to expect.</figcaption>
-        </figure>
+      <div class="sectors-screen" data-reveal>
+        <Stage layout="centre">
+          <Frame
+            title={`${PRODUCT_NAME_BID} Insights`}
+            capture="sectors-insights"
+            caption="Contracts by status, pipeline value and sector benchmarks in Velstrian Bid Insights, shown as a drawn representation. The figures on screen are part of the drawing. They are not a customer result and not an outcome to expect."
+            image={{
+              src: '/Assets/shots/figma-v2/sup-6-insights-light.png?v=20260805a',
+              avif: '/Assets/shots/figma-v2/sup-6-insights-light.avif?v=20260805a',
+              webp: '/Assets/shots/figma-v2/sup-6-insights-light.webp?v=20260805a',
+              width: 2048,
+              height: 1536,
+              alt: 'The Velstrian Bid Insights dashboard. Four figures head the screen: total contracts across five sectors, social value delivered on won bids, evidence completion against committed measures, and s.71 assessments due within 90 days. A contracts-by-status bar chart counting draft, profiling, evidence, won and lost sits beside a pipeline summary of active bids, pending outcome, won this period and draft, each with a count and a value. A quick stats panel sits beside sector benchmarks for healthcare and social care, which include the statutory minimum social value weighting of 10 per cent. A footnote reads that every figure is drawn from your own contract records and from published awards, and that Velstrian Bid reports what has been evidenced and does not forecast outcomes.',
+            }}
+          />
+        </Stage>
       </div>
-    </section>
+    </div>
+  </Band>
 
-    <section class="sec-band sec-light">
-      <div class="sec-wrap">
-        <div class="sec-head">
-          <span class="eyebrow sec-eyebrow-inline">How Velstrian Bid works</span>
-          <h2>Whatever your sector, the answer is cited.</h2>
-          <p class="sec-head-lede">Velstrian Bid reads the rules behind the tender, so every score, weighting and figure traces back to its source.</p>
+  <Band tone="light-alt" labelledby="sectors-cited-title">
+    <div class="ea-wrap">
+      <div class="ea-head-row" data-reveal>
+        <div class="ea-split__head">
+          <p class="ea-label">How {PRODUCT_NAME_BID} works</p>
+          <h2 class="ea-h2" id="sectors-cited-title">Whatever your sector, the answer is cited.</h2>
         </div>
-        <div class="sec-ledger">
-          {/* `surface--row`: reference, description and source are three
-              columns whose alignment is their meaning, which the stylesheet
-              below already said in a comment and could not say in a class.
-              Defined once in styles/surfaces.css. */}
-          <div class="sec-lrow surface surface--row">
-            <div class="sec-ref">Velstrian Bid</div>
-            <div class="sec-desc"><strong>Social value computed in code</strong>, over a curated catalogue of TOMs-aligned measures, with answers drafted from your own submitted bids.</div>
-            <div class="sec-meta">Cabinet Office<br />February 2025 &middot; mandatory from 1 Oct 2025</div>
-          </div>
-        </div>
+        <p class="ea-lead">
+          {PRODUCT_NAME_BID} reads the rules behind the tender, so every score, weighting and figure traces back to its
+          source.
+        </p>
       </div>
-    </section>
 
-    <section class="sec-final">
-      <div class="sec-wrap">
-        {/* `sec-eyebrow` dropped 2026-08-04 with the capsule it named: nothing
-            declares it any more, and a class that styles nothing is a hook
-            somebody will hang a seventh capsule on. */}
-        <span class="eyebrow">Ready when you are</span>
-        <h2>Find the work. Win it. <span class="accent">Prove you delivered.</span></h2>
-        <p class="sec-final-sub">See how Velstrian Bid fits your sector's bidding calendar.</p>
-        <div class="btn-row sec-hero-cta">
-          <Button href={SIGNUP_URL} size="md">Start now</Button>
-          <Button href="https://calendly.com/crowagent-platform/30min" variant="secondary" size="md">Book a demo</Button>
-        </div>
-        <div class="sec-final-links">
-          <a href="/pricing/">See pricing</a>
-          <a href={`mailto:${HELLO_EMAIL}`}>Ask a question</a>
-          <span>Built by UK procurement and ML engineers</span>
-        </div>
+      <div class="ea-card sectors-ledger" data-reveal>
+        <p class="ea-label">{PRODUCT_NAME_BID}</p>
+        <p class="sectors-ledger__desc">
+          <strong>Social value computed in code</strong>, over a curated catalogue of TOMs-aligned measures, with answers
+          drafted from your own submitted bids.
+        </p>
+        <p class="sectors-ledger__meta">Cabinet Office<br />February 2025, mandatory from 1 Oct 2025</p>
       </div>
-    </section>
-  </div>
+
+      <p class="sectors-ask" data-reveal>
+        <a class="ea-link" href="/pricing/">See pricing</a>
+        <a class="ea-link" href={`mailto:${HELLO_EMAIL}`}>Ask a question</a>
+      </p>
+    </div>
+  </Band>
+
+  <Close
+    title="Find the work. Win it. Prove you delivered."
+    lead={`See how ${PRODUCT_NAME_BID} fits your sector's bidding calendar.`}
+  />
 </Base>
 
 <style>
-  .sec-wrap {
-    max-width: var(--measure);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
-  }
-  .sec-hero {
-    position: relative;
-    padding: var(--sec-pad-y-hero) 0 var(--sec-pad-y-sm);
-    text-align: center;
-    overflow: hidden;
-  }
-  .sec-hero::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -6%;
-    width: 70vw;
-    height: 44vw;
-    transform: translateX(-50%);
-    z-index: -1;
-    background: var(--grad-hero-glow);
-    filter: blur(20px);
-    opacity: 0.5;
-  }
-  /* The wrapper the trail sits in. One declaration, the same --stack-2 step
-     layouts/Sector.astro and the two compare files use, because it answers the
-     same question. This page keeps its own copy for the reason every `.sec-`
-     rule here is a copy: Astro scopes a component's styles to that component,
-     so a hub page that builds its own bands cannot reach the layout's. */
-  .sec-breadcrumb {
-    margin: 0 0 var(--stack-2);
-  }
-  /*
-   * EVERY EYEBROW IS A GRADIENT CAPSULE (owner decision, 2026-08-02), AND THE
-   * CAPSULE IS NO LONGER RESTATED HERE. Converted 2026-08-04, A-56/A-48.
-   *
-   * The old comment said the shape was "restated because this page builds its
-   * own bands", which is the exact sentence that produced all six declarations
-   * of one capsule: a page cannot reach a treatment locked inside a component,
-   * so it writes the treatment again. The answer is not to stop building bands,
-   * it is for the treatment to be a CLASS anything can carry. `.eyebrow` in
-   * styles/labels.css is that class, the markup above already carries it, and
-   * scripts/check-treatments.js rule 8 now fails the build if the capsule is
-   * declared anywhere else.
-   *
-   * THE HERO EYEBROW IS NOT ONE OF THESE: it is PageHeader's `eyebrow` prop.
-   * What was left here is section-level, never page-level.
-   *
-   * The 6px teal dot goes with the inline-flex it needed. It was the
-   * left-aligned way of giving a bare mono line something to start against;
-   * the capsule outline does that now.
-   *
-   * `.sec-eyebrow-inline` keeps its 0.75rem bottom margin below. That is where
-   * the label sits rather than what it is.
-   */
-
-  /*
-   * `.sec-hero h1`, ITS `.accent` RULES AND `.sec-sub` MOVED TO
-   * styles/headings.css.
-   *
-   * FIVE RULES WENT: the h1 itself, the accent's flat-teal fallback, the
-   * @supports block that clipped --grad-hero-text to it, the forced-colours
-   * reset for that clip, and the lede. The h1 rule is why this route rendered a
-   * flat white title. The shiny treatment was in Section's SCOPED styles, and
-   * a page that draws its own head cannot reach another component's scope.
-   *
-   * THE ACCENT WORK IS NOT LOST, IT IS SUPERSEDED. Those three rules existed to
-   * give an accented hero phrase ONE recipe across the site; the answer now is
-   * that a page heading has one recipe with no accented phrase in it at all,
-   * which is what the owner asked for. `h1.section__title` in headings.css
-   * carries both the ramp and its own forced-colours reset, and keeps a
-   * defensive `.accent` rule so a span added back reads teal, never invisible.
-   *
-   * `.sec-sub` was the standfirst at 56ch against the shared 62ch.
-   */
-
-  .sec-band {
-    padding: var(--sec-pad-y-sm) 0;
-  }
-  .sec-band.sec-light {
-    background: var(--c-panel);
-  }
-  /*
-   * CENTRED HEAD BLOCK: owner decision, 2026-08-02. Scoped to .sec-head,
-   * which holds only the eyebrow, the h2 and the lede. It must NOT reach
-   * .sec-grid, .sec-shot or .sec-ledger: nine sector cards, a captioned
-   * screenshot and a three-column ledger row all read left to right.
-   */
-  .sec-head {
-    margin-bottom: var(--sec-gap);
-    text-align: center;
-  }
-  .sec-eyebrow-inline {
-    margin-bottom: 0.75rem;
-  }
-  .sec-head h2 {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    letter-spacing: -0.02em;
-    color: var(--c-text);
-    /* The measures are centred too, or heading and lede sit left inside a
-       centred head block. */
-    margin: 0 auto 0.75rem;
-    max-width: 32ch;
-  }
-  .sec-head-lede {
-    color: var(--c-text-muted);
-    font-size: var(--t-lede);
-    max-width: 48ch;
-    margin: 0 auto;
+  .sectors-screen {
+    margin-top: var(--ea-head-gap);
   }
 
-  .sec-grid {
+  .sectors-ledger {
     display: grid;
-    gap: 1.25rem;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-  /* Card treatment from `surface`, the accent from `surface--accent`, and only
-     the layout and the padding are local now.
-
-     NINE CARDS, ALTERNATING TEAL AND VIOLET, AND THAT WAS THE CLEAREST CASE ON
-     THE SITE OF WHAT THE OWNER OBJECTED TO ON 2026-08-31: a grid of blocks each
-     wearing a coloured bar down its left edge. The alternation is the reason the
-     hue is kept rather than deleted, and the hairline along the top says the
-     same thing without drawing the shape. */
-  .sec-card {
-    display: flex;
-    flex-direction: column;
-    padding: var(--blk-pad);
-    --surface-accent: var(--step-accent, var(--c-ambient-start));
-  }
-  .sec-card[data-accent='violet'] {
-    --step-accent: var(--c-ambient-end);
-  }
-  .sec-card[data-accent='teal'] {
-    --step-accent: var(--c-ambient-start);
-  }
-  .sec-verb {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: var(--t-h4);
-    color: var(--c-text);
-    margin-bottom: 0.6rem;
-  }
-  .sec-say {
-    color: var(--c-text-sub);
-    font-size: var(--t-body);
-    line-height: 1.6;
-    margin: 0;
-  }
-  .sec-serves {
-    margin-top: auto;
-    padding-top: 1.25rem;
-  }
-  .sec-serves a {
-    /* WCAG 2.2 SC 2.5.8. Standalone navigation, not a link inside a sentence,
-       so the inline exemption does not reach it. inline-flex so the box grows
-       without moving the text or changing where the row wraps. */
-    display: inline-flex;
-    align-items: center;
-    min-height: 24px;
-    /* The label recipe is `.meta` in styles/labels.css. The display face at 800
-       was one of the labels set in Plus Jakarta Sans where every other mono label
-       on the site is JetBrains Mono. */
-    text-transform: uppercase;
-    color: var(--c-interactive);
-    text-decoration: none;
-  }
-  .sec-serves a:hover {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 6fr) minmax(0, 3fr);
+    gap: var(--space-6);
+    align-items: start;
+    padding: clamp(var(--space-6), 2.5vw, var(--space-8));
   }
 
-  .sec-shot {
-    max-width: var(--measure-mid);
-    margin: 38px auto 0;
-  }
-  .sec-shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-card);
-    border: 1px solid var(--c-border);
-  }
-  .sec-shot figcaption {
-    margin-top: 14px;
-    color: var(--c-text-muted);
-    font-size: var(--t-body);
-    line-height: 1.6;
-    text-align: left;
+  .sectors-ledger__desc {
+    color: var(--ea-sub);
   }
 
-  .sec-ledger {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .sec-lrow {
-    display: grid;
-    gap: 1rem;
-    padding: var(--blk-pad);
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 768px) {
-    .sec-lrow {
-      grid-template-columns: 10rem 1fr 12rem;
-      align-items: start;
-    }
-  }
-  .sec-ref {
-    font-family: var(--font-display);
-    font-weight: 800;
-    color: var(--c-ambient-start);
-  }
-  .sec-desc {
-    color: var(--c-text-sub);
-    font-size: var(--t-body);
-    line-height: 1.6;
-  }
-  .sec-desc strong {
-    color: var(--c-text);
-  }
-  .sec-meta {
-    color: var(--c-text-muted);
-    font-family: var(--font-mono);
-    font-size: var(--t-micro);
-    line-height: 1.5;
+  .sectors-ledger__desc strong {
+    color: var(--ea-ink);
+    font-weight: var(--t-w-ea-strong);
   }
 
-  .sec-final {
-    padding: var(--sec-pad-y) 0;
-    text-align: center;
-    background: var(--c-panel);
-    border-top: 1px solid var(--c-border);
-  }
-  /* Layout comes from .btn-row. These two are genuinely this section s own:
-     a wider gap than the default, and the space above it. */
-  .sec-hero-cta {
-    gap: 1rem;
-    margin-top: 30px;
-  }
-  /* --t-h1 is reserved for the hero (tokens.css); the homepage's own closing
-     CTA renders through Section at --t-h2 / --t-w-h2. Matched to it. */
-  .sec-final h2 {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    letter-spacing: -0.02em;
-    color: var(--c-text);
-    margin: 26px 0 0;
-  }
-  .sec-final h2 .accent {
-    /* The same accented-phrase recipe as the hero, not a flat teal. Four
-       elements across three pages lifted a phrase out of a heading and three of
-       them painted it --c-teal while the homepage used --grad-hero-text. This is
-       the fourth; it was hidden while the CTA card-ification covered it and
-       reappeared when that was reverted, which is a good argument for fixing a
-       pattern everywhere rather than where it happens to be visible. */
-    color: var(--c-ambient-start);
+  .sectors-ledger__meta {
+    font-size: var(--t-ea-small);
+    color: var(--ea-muted);
   }
 
-  @supports ((background-clip: text) or (-webkit-background-clip: text)) {
-    .sec-final h2 .accent {
-      background-image: var(--grad-hero-text);
-      background-size: 100% 1.06em;
-      background-repeat: repeat;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .sec-final h2 .accent {
-      background-image: none;
-      color: CanvasText;
-      -webkit-text-fill-color: CanvasText;
-    }
-  }
-  .sec-final-sub {
-    /* 62ch, the same measure Section gives every standfirst. This page had
-       one of five different widths (40, 42, 44, 48 and 52rem) used for the
-       identical element across the compare, glossary and sector families. */
-    max-width: 62ch;
-    margin: 1.25rem auto var(--sec-gap);
-    color: var(--c-text-muted);
-    font-size: var(--t-lede);
-    line-height: 1.6;
-  }
-  .sec-final-links {
-    margin-top: 2rem;
+  .sectors-ask {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    font-size: var(--t-body);
-    color: var(--c-text-muted);
+    gap: var(--space-6);
+    margin-top: var(--space-6);
   }
-  .sec-final-links a {
-    /* WCAG 2.2 SC 2.5.8: standalone links in a row, not inside a sentence, so
-       the inline exemption does not reach them. Measured at 20px tall before
-       this. inline-flex so the box grows without moving the text.
-       Re-applied after the CTA card-ification was reverted: the cards had fixed
-       these incidentally, and reverting them brought the defect back. A fix that
-       only exists as a side effect of another change is not a fix. */
-    display: inline-flex;
-    align-items: center;
-    min-height: 24px;
-    color: var(--c-text-muted);
-  }
-  .sec-final-links a:hover {
-    color: var(--c-text);
+
+  @media (max-width: 959px) {
+    .sectors-ledger {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+    }
   }
 </style>

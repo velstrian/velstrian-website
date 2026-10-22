@@ -115,19 +115,19 @@ const UPDATED = new Date('2026-10-22');
 
   <Band tone="light" id="reach" class="ct-reach">
     <div class="ea-wrap">
-      <ul class="ct-reach__grid" role="list">
+      <ul class="ea-cards" role="list">
         {
           REACH.map((r) => (
             <li data-reveal>
               <a
-                class="ea-card ct-card"
+                class="ea-card ea-tcard"
                 href={r.href}
                 target={r.external ? '_blank' : undefined}
                 rel={r.external ? 'noopener noreferrer' : undefined}
               >
-                <h2 class="ea-h3 ct-card__h">{r.heading}</h2>
-                <p class="ct-card__body">{r.body}</p>
-                <span class="ct-card__action">{r.action}</span>
+                <h2 class="ea-h3">{r.heading}</h2>
+                <p>{r.body}</p>
+                <span class="ea-tcard__more">{r.action}</span>
                 {r.external && <span class="visually-hidden"> (opens in a new window)</span>}
               </a>
             </li>
@@ -237,49 +237,7 @@ const UPDATED = new Date('2026-10-22');
 </Base>
 
 <style>
-  /* ── Reach: three cards, each one link ─────────────────────────────────── */
-  .ct-reach__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-5);
-    align-items: stretch;
-  }
-
-  .ct-reach__grid > li {
-    display: grid;
-  }
-
-  .ct-card {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: var(--space-3);
-    padding: var(--space-8);
-    color: var(--ea-ink);
-    text-decoration: none;
-  }
-
-  .ct-card__h {
-    margin: 0;
-  }
-
-  .ct-card__body {
-    color: var(--ea-muted);
-    overflow-wrap: anywhere;
-  }
-
-  .ct-card__action {
-    color: var(--ea-accent-ink);
-    font-weight: var(--t-w-ea-medium);
-    overflow-wrap: anywhere;
-  }
-
-  @media (hover: hover) {
-    .ct-card:hover .ct-card__action {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-  }
-
+  /* ── Reach: three cards (.ea-cards, styles/evidenced.css) ─────────────── */
   .ct-reach__trust {
     margin-top: var(--space-8);
     font-size: var(--t-ea-small);
@@ -360,7 +318,6 @@ const UPDATED = new Date('2026-10-22');
   }
 
   @media (max-width: 959px) {
-    .ct-reach__grid,
     .ct-grid {
       grid-template-columns: minmax(0, 1fr);
     }

@@ -64,11 +64,16 @@ main > .ea-sec * {
   padding-inline: var(--ea-gutter);
 }
 
-:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4) {
+/* The reset stops at long-form copy. Markdown rendered into a v3 band (a
+   sector page, a glossary entry, a post, a policy) carries `.prose`, whose
+   rhythm, lists and headings live in styles/prose.css. That sheet is layered,
+   so an unlayered reset reaching inside it would strip every paragraph gap and
+   list marker whatever its specificity. :where() keeps the guard at zero. */
+:where(.ea-sec) :where(p, ul, ol, dl, dd, blockquote, figure, h2, h3, h4):where(:not(.prose *)) {
   margin: 0;
 }
 
-:where(.ea-sec) :where(ul, ol) {
+:where(.ea-sec) :where(ul, ol):where(:not(.prose *)) {
   padding: 0;
   list-style: none;
 }
@@ -560,6 +565,18 @@ main > .ea-sec * {
   margin-inline: auto;
 }
 
+/* A page's own drawn screen (Frame `image`) is a full window at the screen's
+   own ratio, drawn light, so it fills the frame edge to edge instead of
+   sitting letterboxed on the capture fill. */
+.ea-frame--drawn .ea-frame__window {
+  --frame-fill: var(--ea-raised);
+}
+
+.ea-frame--drawn .ea-frame__shot {
+  width: 100%;
+  max-height: none;
+}
+
 .ea-frame--shot .ea-frame__caption {
   background: var(--ea-raised);
 }
@@ -926,6 +943,12 @@ main > .ea-sec * {
 
 .ea-page-hero__label {
   margin-bottom: var(--space-4);
+}
+
+/* The visible trail above a page hero's label (ui/Breadcrumb.astro, fed from
+   the same array as the BreadcrumbList data). */
+.ea-trail {
+  margin-bottom: var(--space-6);
 }
 
 .ea-page-hero--compact {
@@ -1929,6 +1952,114 @@ main > .ea-sec * {
   .band--light .ea-card:hover,
   .band--light-alt .ea-card:hover {
     box-shadow: var(--elev-raised), 0 0 0 1px var(--ea-rule-strong);
+  }
+}
+
+/* A row of text cards (the pages after the product pages: contact routes,
+   sectors, comparisons, tools, glossary terms, posts). One grid, so every card
+   in a row is the same height and its parts line up: the label, the title,
+   the words, and the link pinned to the foot. Three across by default,
+   `ea-cards--2` and `ea-cards--4` for the other counts, two across below
+   1100px for four, one across below 960px. A page never sizes a card. */
+.ea-cards {
+  --cards-cols: 3;
+  display: grid;
+  grid-template-columns: repeat(var(--cards-cols), minmax(0, 1fr));
+  gap: var(--space-5);
+  align-items: stretch;
+}
+
+.ea-cards--2 {
+  --cards-cols: 2;
+}
+
+.ea-cards--4 {
+  --cards-cols: 4;
+}
+
+.ea-cards > li {
+  display: flex;
+}
+
+.ea-tcard {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: clamp(var(--space-6), 2.5vw, var(--space-8));
+  color: var(--ea-ink);
+  text-decoration: none;
+}
+
+.ea-tcard p {
+  color: var(--ea-muted);
+  overflow-wrap: anywhere;
+}
+
+.ea-tcard__more {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  color: var(--ea-accent-ink);
+  font-weight: var(--t-w-ea-medium);
+  overflow-wrap: anywhere;
+}
+
+a.ea-tcard:focus-visible {
+  outline: var(--ea-focus);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  a.ea-tcard:hover .ea-tcard__more {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+/* A heading beside long-form copy: the head on the left, held in view while
+   the words on the right are read, the copy at the prose measure. One column
+   below 960px. For the sector context, a comparison, a policy section. */
+.ea-split {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(var(--space-8), 1rem + 4vw, var(--space-16));
+  align-items: start;
+}
+
+.ea-split__head {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ea-split__body {
+  max-width: var(--measure-prose);
+}
+
+@media (min-width: 960px) {
+  .ea-split__head {
+    position: sticky;
+    top: calc(var(--v3-header-h) + var(--space-8));
+  }
+}
+
+@media (max-width: 959px) {
+  .ea-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1099px) {
+  .ea-cards--4 {
+    --cards-cols: 2;
+  }
+}
+
+@media (max-width: 959px) {
+  .ea-cards,
+  .ea-cards--2,
+  .ea-cards--4 {
+    --cards-cols: 1;
   }
 }
 

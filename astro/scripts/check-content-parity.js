@@ -158,6 +158,12 @@ const UPDATE = process.argv.includes('--update');
  * when a loss must be tolerated across several builds.
  */
 const ALLOWED_LOSSES = new Map([
+  /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: the pages after the product
+     pages on design system v3 (Claude lane). REWORDED heads, the content under
+     each confirmed on the built page. */
+  ['/sectors/  heading: the statute behind your sector.',
+   'RULE 0-U: "statute" is a word a first time bidder has to look up. Now "What wins work in your sector." in the /sectors/ hero, over the same lead ("Different rules, one product") and the same nine sector cards.'],
+
   /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: /about/ on design system v3
      (Gemini build, driver reviewed). Two heads deliberately REWORDED. */
   ['/about/  heading: written for bid teams. readable by the people scoring them.',

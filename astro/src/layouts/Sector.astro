@@ -1,18 +1,38 @@
 ---
 /**
- * Sector.astro: layout for /sectors/construction, education, facilities,
- * highways. Structure mirrors the legacy sector-steps-2026-07-30.css page:
- * hero, context prose (the <slot/>, sourced from Markdown), a 4-step "how
- * CrowMark helps" grid with one product screenshot, an FAQ accordion built
- * from `faq` (also the FAQPage JSON-LD source, so wording can't drift
- * between the two), and a closing CTA band.
+ * Sector.astro: layout for /sectors/construction, education, facilities and
+ * highways.
+ *
+ * ── 2026-10-22: ON DESIGN SYSTEM VERSION 3 ──────────────────────────────────
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7: the four pages keep every
+ * word of their Markdown and frontmatter, and move onto the v3 bands.
+ *
+ *   1. PageHero   light      is this for my sector?   trail, sector, lead, two actions
+ *   2. Context    light      what is hard about it?   the Markdown, beside its heading
+ *   3. Helps      light alt  how does it help?        the steps as cards, the screen on a stage
+ *   4. Questions  light      what do people ask?      the FAQ, the same list as the FAQPage data
+ *   5. Close      gradient   what now?                into the footer
+ *
+ * The FAQ list is also the FAQPage JSON-LD source, so its wording cannot drift
+ * between the page and the data. The visible trail is drawn by the one
+ * Breadcrumb component from the same array the BreadcrumbList is built from.
+ * The drawn product screen sits in a Frame on a Stage like every other
+ * product view on the site, its own caption saying it is a drawing.
  */
 import Base from './Base.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
-import Button from '../components/ui/Button.astro';
-import { SIGNUP_URL } from '../data/app';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Band from '../components/evidenced/Band.astro';
+import Action from '../components/evidenced/Action.astro';
+import Stage from '../components/evidenced/Stage.astro';
+import Frame from '../components/evidenced/Frame.astro';
+import Close from '../components/evidenced/Close.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import { SIGNUP_URL } from '../data/app';
+import { TRIAL_DAYS } from '../data/pricing';
+import { PRODUCT_NAME_BID } from '../lib/brand-names';
 import { breadcrumbs } from '../lib/schema';
+import '../styles/evidenced.css';
+import '../styles/prose.css';
 
 interface Step {
   accent: 'teal' | 'violet' | 'sky';
@@ -65,40 +85,12 @@ const {
   faq,
 } = Astro.props;
 
-/* `canonical` and the SITE import went with the hand-written BreadcrumbList
-   below: they existed only to build its three absolute `item` URLs, and
-   breadcrumbs() derives those from the same paths. Base.astro owns the canonical
-   link tag and takes `path`, so nothing else here needed an absolute URL. */
 const ogImage = '/Assets/og/crowmark.png?v=20260730';
-
-/*
- * THE ANCESTORS, DECLARED ONCE AND USED TWICE: A-172, 2026-08-05.
- *
- * This file hand-wrote its BreadcrumbList item by item, which is VERBATIM the
- * defect layouts/Compare.astro:78-87 records having already fixed there by
- * adopting lib/schema.ts's breadcrumbs() helper. Compare's two hand-written
- * lists disagreed; these four routes had no second list to disagree with,
- * because they drew no trail at all, so the pattern was carrying the risk
- * without yet having produced the bug.
- *
- * AND THAT ABSENCE WAS THE OTHER HALF OF THE DEFECT. /compare and its four
- * children rendered a Breadcrumb; /sectors and its four children published a
- * BreadcrumbList and rendered nothing. Same hierarchy depth, opposite
- * treatment: a machine reading the page was told the trail and a reader was
- * not, and on a leaf like /sectors/highways the only link back to the hub was
- * "All sectors" in the closing band, at the far end of the page.
- *
- * One array now. It feeds the JSON-LD below and the <nav> in the hero, so the
- * two cannot drift, and scripts/check-breadcrumbs.js fails the build both if
- * they diverge and if a nested route publishes a trail it does not draw.
- */
 const trail = [
   { name: 'Home', path: '/' },
   { name: 'Sectors', path: '/sectors/' },
 ];
-
 const schema: Record<string, unknown>[] = [breadcrumbs([...trail, { name: sectorLabel, path }])];
-
 if (faq.length) {
   schema.push({
     '@type': 'FAQPage',
@@ -121,490 +113,95 @@ if (faq.length) {
   image={ogImage}
   imageAlt={ogImageAlt}
   schema={schema}
+  typeface="evidenced"
+  headerTone="light"
 >
-  {/* A DIV, NOT A SECOND <main>: A-66, same as Compare.astro and Glossary.astro.
-      Nested inside the landmark Base.astro owns, it made three axe rules fire and
-      left "the" main region undefined. Kept as an element rather than deleted
-      because styles/motion.css unwraps one wrapper via `main > *:only-child > *`. */}
-  <div>
-    <header class="sec-hero">
-      <div class="sec-wrap">
-        {/* THE SAME COMPONENT /compare DRAWS, not a second implementation of one.
-            Wrapped in an element this layout owns because Breadcrumb.astro takes
-            no `class` prop, and records at length why: a class passed to a child
-            lands on the child's root element, which Astro's scoping never stamps,
-            so the layout's own rules would not match it. WHERE the trail sits is
-            this file's decision; what it looks like is that file's.
+  <PageHero id="sector-title" label={sectorLabel} title={`Stronger bids for ${heroTitleAccent}`} lead={heroDescription}>
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current={sectorLabel} /></div>
+    <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+    <Action href="/bid/" variant="secondary">Explore {PRODUCT_NAME_BID}</Action>
+  </PageHero>
 
-            ABOVE PageHeader, exactly as in Compare.astro and pages/compare/
-            index.astro: PageHeader can put an eyebrow before the title and
-            anything at all after it, but it has no slot ahead of the eyebrow,
-            and inventing one would let any page push arbitrary markup into the
-            shared head block. */}
-        <div class="sec-breadcrumb"><Breadcrumb trail={trail} current={sectorLabel} /></div>
-        {/*
-          THE SHARED HEAD BLOCK. Was a `.sec-eyebrow` capsule, a bare <h1> and a
-          `.sec-sub` lede. A hand-rolled head that never received the heading
-          treatment, because that treatment lived inside Section's SCOPED styles
-          and could only ever reach the routes Section drew.
-
-          The words are unchanged: "Stronger bids for {heroTitleAccent}". What
-          has gone is the `<span class="accent">` that painted the sector name
-          teal, per the owner's "keep same all the pages except from home page
-          hero". A two-tone heading is a second treatment.
-
-          THE HERO BUTTONS GO IN THE SLOT. They are this page's primary call to
-          action and sit directly under the lede in the design; the slot is
-          exactly what PageHeader provides for a layout's own furniture.
-
-          `.sec-eyebrow` KEEPS ITS RULE BELOW: the closing band still uses it.
-        */}
-        <PageHeader title={`Stronger bids for ${heroTitleAccent}`} eyebrow={sectorLabel} standfirst={heroDescription}>
-          <div class="btn-row sec-hero-cta">
-            <Button href={SIGNUP_URL} size="md">Start now</Button>
-            <Button href="/bid/" variant="secondary" size="md">Explore Velstrian Bid</Button>
-          </div>
-        </PageHeader>
+  <Band tone="light" labelledby="sector-context-title">
+    <div class="ea-wrap ea-split">
+      <div class="ea-split__head" data-reveal>
+        <p class="ea-label">{contextEyebrow}</p>
+        <h2 class="ea-h2" id="sector-context-title">{contextHeading}</h2>
       </div>
-    </header>
-
-    <section class="sec-band">
-      <div class="sec-wrap">
-        <div class="sec-head">
-          <span class="eyebrow sec-eyebrow-inline">{contextEyebrow}</span>
-          <h2>{contextHeading}</h2>
-        </div>
-        <div class="sec-prose">
-          <slot />
-        </div>
+      <div class="ea-split__body prose" data-reveal>
+        <slot />
       </div>
-    </section>
+    </div>
+  </Band>
 
-    <section class="sec-band sec-light">
-      <div class="sec-wrap">
-        <div class="sec-head">
-          <span class="eyebrow sec-eyebrow-inline">How Velstrian Bid helps</span>
-          <h2>{helpsHeading}</h2>
+  <Band tone="light-alt" labelledby="sector-helps-title">
+    <div class="ea-wrap">
+      <div class="ea-head-row" data-reveal>
+        <div class="ea-split__head">
+          <p class="ea-label">How {PRODUCT_NAME_BID} helps</p>
+          <h2 class="ea-h2" id="sector-helps-title">{helpsHeading}</h2>
         </div>
-        <div class="sec-steps">
-          {
-            steps.map((step) => (
-              <div class="sec-phase surface surface--accent" data-accent={step.accent}>
-                <div class="sec-verb">{step.verb}</div>
-                <p class="sec-say">{step.say}</p>
+        <p class="ea-lead">{helpsIntro}</p>
+      </div>
+
+      <ol class="ea-cards ea-cards--2" role="list">
+        {
+          steps.map((step, i) => (
+            <li data-reveal>
+              <div class="ea-card ea-tcard">
+                <p class="ea-label ea-step__n">Step {i + 1}</p>
+                <h3 class="ea-h3">{step.verb}</h3>
+                <p>{step.say}</p>
               </div>
-            ))
-          }
-        </div>
-        <div class="sec-prose">
-          <p>{helpsIntro}</p>
-        </div>
-        <figure class="sec-shot">
-          <picture>
-            <source type="image/avif" srcset={figure.avif} />
-            <source type="image/webp" srcset={figure.webp} />
-            <img src={figure.png} width={figure.width} height={figure.height} loading="lazy" decoding="async" alt={figure.alt} />
-          </picture>
-          <figcaption>{figure.caption}</figcaption>
-        </figure>
-      </div>
-    </section>
+            </li>
+          ))
+        }
+      </ol>
 
-    <section class="sec-band sec-light" aria-labelledby="faq-h">
-      <div class="sec-wrap">
-        <div class="sec-head sec-head-center">
-          <span class="eyebrow sec-eyebrow-inline">Questions</span>
-          <h2 id="faq-h">{faqHeading}</h2>
-        </div>
-        {/* `surface` on each row supplies the border, radius, background, gloss
-            and hover. Without it these rows had a border-radius and nothing to
-            round: no edge, no fill, no light, an accordion drawn entirely by
-            its own text. */}
-        <div class="sec-faq">
-          {
-            faq.map((f) => (
-              <details class="surface">
-                <summary>{f.question}</summary>
-                <div class="sec-faq-a">{f.answer}</div>
-              </details>
-            ))
-          }
-        </div>
+      <div class="sector-screen" data-reveal>
+        <Stage layout="centre">
+          <Frame
+            title={`${PRODUCT_NAME_BID}`}
+            capture="sector-screen"
+            caption={figure.caption}
+            image={{ src: figure.png, avif: figure.avif, webp: figure.webp, width: figure.width, height: figure.height, alt: figure.alt }}
+          />
+        </Stage>
       </div>
-    </section>
+    </div>
+  </Band>
 
-    <section class="sec-final">
-      <div class="sec-wrap">
-        {/* `sec-eyebrow` dropped 2026-08-04 with the capsule it named: the class
-            had no declaration left once the copy went, and a class that styles
-            nothing is a hook somebody will hang a seventh capsule on. */}
-        <span class="eyebrow">Ready when you are</span>
-        <h2>Find the work. Win it. <span class="accent">Prove you delivered.</span></h2>
-        <p class="sec-final-sub">{finalCtaSub}</p>
-        <div class="btn-row sec-hero-cta">
-          <Button href={SIGNUP_URL} size="md">Start now</Button>
-          <Button href="https://calendly.com/crowagent-platform/30min" variant="secondary" size="md">Book a demo</Button>
-        </div>
-        <div class="sec-final-links">
-          <a href="/pricing/">See pricing</a>
-          <a href="/sectors/">All sectors</a>
-          <span>Built by UK procurement and ML engineers</span>
-        </div>
+  <Band tone="light" class="ea-faq" labelledby="faq-h">
+    <div class="ea-wrap ea-faq__wrap">
+      <p class="ea-label sector-faq__label" data-reveal>Questions</p>
+      <h2 class="ea-h2 ea-h2--centre" id="faq-h" data-reveal>{faqHeading}</h2>
+      <div class="ea-faq__list" data-reveal>
+        {
+          faq.map((f) => (
+            <details class="ea-qa">
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+        <p class="ea-faq__more"><a class="ea-link" href="/sectors/">All sectors</a></p>
       </div>
-    </section>
-  </div>
+    </div>
+  </Band>
+
+  <Close
+    title="Find the work. Win it. Prove you delivered."
+    lead={finalCtaSub}
+  />
 </Base>
 
 <style>
-  .sec-wrap {
-    max-width: var(--measure);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
+  .sector-screen {
+    margin-top: var(--ea-head-gap);
   }
 
-  .sec-hero {
-    position: relative;
-    padding: var(--sec-pad-y-hero) 0 var(--sec-pad-y-sm);
+  .sector-faq__label {
     text-align: center;
-    overflow: hidden;
-  }
-  .sec-hero::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -6%;
-    width: 70vw;
-    height: 44vw;
-    transform: translateX(-50%);
-    z-index: -1;
-    background: var(--grad-hero-glow);
-    filter: blur(20px);
-    opacity: 0.5;
-  }
-  /*
-   * EVERY EYEBROW IS A GRADIENT CAPSULE (owner decision, 2026-08-02), AND THE
-   * CAPSULE IS NO LONGER RESTATED HERE. Converted 2026-08-04, A-56/A-48.
-   *
-   * What stood here was `.sec-eyebrow, .sec-eyebrow-inline` declaring
-   * inline-block, 0.5rem 0.85rem, a 1px --c-border rule, --radius-pill,
-   * --c-ambient-start and the whole @supports gradient block: eleven
-   * declarations, every one of them byte-identical to `.eyebrow` in
-   * styles/labels.css, on elements that already carry `class="eyebrow"` in the
-   * markup above. Nothing rendered wrongly and it was still a fork, the sixth
-   * of six declarations of one shape, findable only by reading five files at
-   * once and noticing they agreed.
-   *
-   * The old comment claimed the two classes "resolve to the same shape as
-   * components/layout/Section.astro". That was true by inspection on the day it
-   * was written and by nothing at all thereafter. It is now true by
-   * construction, and scripts/check-treatments.js rule 9 fails the build if the
-   * capsule is declared anywhere but labels.css.
-   *
-   * THAT CITED RULE 8 UNTIL 2026-08-04. Rule 8 is the MONO MICRO-LABEL,
-   * `font-family: var(--font-mono)` and `text-transform: uppercase` in one
-   * block. The eleven declarations described above are padding, a radius, a
-   * rule and a gradient, none of them mono and none uppercase, so rule 8 would
-   * not have fired on a single one of them. The capsule is rule 9. The same
-   * swap was written into RelatedPosts.astro and HeroStack.astro, which is one
-   * mistake copied three times rather than three mistakes.
-   *
-   * THE HERO EYEBROW IS NOT ONE OF THESE: it is PageHeader's `eyebrow` prop.
-   * These two are section-level labels rather than page-level ones.
-   *
-   * The 6px teal dot that used to precede these labels is gone with the
-   * inline-flex it needed. It was the left-aligned answer to giving a bare
-   * mono line something to start against; the capsule outline now does that
-   * job, and a solid dot inside a gradient capsule reads as a stray artefact.
-   *
-   * `.sec-eyebrow-inline` keeps ONE rule further down, a 0.75rem bottom margin
-   * against the shared --stack-1. That is where the label sits, not what it is,
-   * and labels.css draws exactly that line already.
-   */
-
-  /*
-   * `.sec-hero h1`, `.sec-hero h1 .accent` AND `.sec-sub` MOVED TO
-   * styles/headings.css.
-   *
-   * The h1 rule was a hand-copy of Section's title at a 16ch measure and its
-   * own tracking, and the copy is the reason all four sector routes rendered a
-   * FLAT WHITE headline: the shiny treatment was in Section's SCOPED styles,
-   * which no amount of copied markup can reach. `.sec-sub` was the standfirst
-   * under another name, at 60ch rather than the 62ch every other standfirst on
-   * the site uses. Both come from PageHeader now, so neither can drift.
-   *
-   * `.sec-hero h1 .accent` painted the sector name teal. The span is gone from
-   * the markup with it; headings.css keeps a defensive `.accent` rule so that
-   * anyone who adds one back gets a teal phrase rather than an invisible one.
-   */
-
-  /* The wrapper the trail sits in, and the ONLY thing this file says about a
-     breadcrumb. Same one declaration as `.cmp-breadcrumb` in Compare.astro and
-     pages/compare/index.astro, because it is the same answer to the same
-     question (how far the head block sits below the trail), and --stack-2 is
-     the shared step, not a number chosen here.
-
-     THE HERO IS `text-align: center` AND THE TRAIL STILL STARTS AT THE LEFT.
-     That is not an oversight of this rule: Breadcrumb.astro's list is a flex
-     container at `justify-content: flex-start`, so the inherited centring does
-     not reach it, and that file records the measurement behind the choice. The
-     one legacy route that renders a crumb left-aligns it inside a centred hero
-     too. A trail is an ordered path read from its start, and a centred one has
-     no fixed start to read from. */
-  .sec-breadcrumb {
-    margin: 0 0 var(--stack-2);
-  }
-
-  /* Layout comes from .btn-row. These two are genuinely this section s own:
-     a wider gap than the default, and the space above it. The margin is now
-     also the gap between the standfirst and the buttons, which is why it stays
-     here rather than moving into the shared block: `.section__standfirst` sets
-     a top margin only, so a page's slot owns the space beneath it. */
-  .sec-hero-cta {
-    gap: 1rem;
-    margin-top: 30px;
-  }
-
-  .sec-band {
-    padding: var(--sec-pad-y-sm) 0;
-  }
-  .sec-band.sec-light {
-    background: var(--c-panel);
-  }
-  /*
-   * CENTRED HEAD BLOCK: owner decision, 2026-08-02. Scoped to .sec-head,
-   * which holds only the eyebrow and the h2. It must NOT reach .sec-prose,
-   * .sec-steps, .sec-shot or .sec-faq: those are the sector context prose, the
-   * four-step cards, a captioned screenshot and an accordion, and centring
-   * them is the opt-out cascade this rule exists to avoid.
-   */
-  .sec-head {
-    margin-bottom: var(--sec-gap);
-    text-align: center;
-  }
-  /* Retained because the FAQ head still carries the class in markup. It now
-     asks for what .sec-head already does, so it is a no-op rather than a
-     conflict. */
-  .sec-head-center {
-    text-align: center;
-  }
-  .sec-eyebrow-inline {
-    margin-bottom: 0.75rem;
-  }
-  .sec-head h2 {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    letter-spacing: -0.02em;
-    color: var(--c-text);
-    /* The 32ch measure has to be centred too, or the heading sits left inside
-       a centred head block. */
-    margin: 0 auto;
-    max-width: 32ch;
-  }
-
-  .sec-prose {
-    max-width: var(--measure-prose);
-    margin: 0 auto;
-  }
-  .sec-prose :global(p) {
-    color: var(--c-text-sub);
-    /* 1.06rem was in no scale; --t-lede is what long-form body copy takes in
-       styles/prose.css and in .cmp-body. */
-    font-size: var(--t-lede);
-    line-height: 1.7;
-    margin: 0 0 18px;
-  }
-  .sec-prose :global(a) {
-    color: var(--c-interactive);
-  }
-
-  .sec-steps {
-    display: grid;
-    gap: 1.25rem;
-    margin-bottom: var(--sec-gap);
-  }
-  @media (min-width: 768px) {
-    .sec-steps {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  /* Card treatment from `surface`, the accent from `surface--accent`, and only
-     the padding is local now.
-
-     THE PHASE HUE IS INFORMATION, SO IT SURVIVES THE 2026-08-31 INSTRUCTION.
-     Three phases run teal, sky and violet along the ambient ramp, which is the
-     only thing marking them as an ordered set rather than three paragraphs, so
-     the colour is kept and its POSITION is what changed: a 3px bar down the
-     inline start edge became the shared hairline along the top, drawn once in
-     styles/surfaces.css.
-
-     `--step-accent` KEPT ITS NAME AND FEEDS THE SHARED KNOB. Renaming it would
-     have touched nothing but this file and would have hidden the fact that
-     these three values are one ramp, chosen per phase in the frontmatter. */
-  .sec-phase {
-    padding: var(--blk-pad);
-    --surface-accent: var(--step-accent, var(--c-ambient-start));
-  }
-  .sec-phase[data-accent='teal'] {
-    --step-accent: var(--c-ambient-start);
-  }
-  .sec-phase[data-accent='violet'] {
-    --step-accent: var(--c-ambient-end);
-  }
-  .sec-phase[data-accent='sky'] {
-    --step-accent: var(--c-ambient-mid);
-  }
-  .sec-verb {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: var(--t-h4);
-    color: var(--c-text);
-    margin-bottom: 0.6rem;
-  }
-  .sec-say {
-    color: var(--c-text-sub);
-    font-size: var(--t-body);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .sec-shot {
-    max-width: var(--measure-mid);
-    margin: 38px auto 0;
-  }
-  .sec-shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    /* Hardcoded 16px, in no scale and not even the panel token it looked like. */
-    border-radius: var(--radius-card);
-    border: 1px solid var(--c-border);
-  }
-  .sec-shot figcaption {
-    margin-top: 14px;
-    color: var(--c-text-muted);
-    font-size: var(--t-body);
-    line-height: 1.6;
-    text-align: left;
-  }
-
-  .sec-faq {
-    max-width: var(--measure-band);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  /* Radius, border, background and hover all come from `surface`. This rule
-     used to set --radius-panel on an element that had no border and no
-     background, so it rounded nothing. */
-  .sec-faq summary {
-    cursor: pointer;
-    list-style: none;
-    padding: var(--stack-2) var(--blk-pad);
-    font-family: var(--font-display);
-    font-weight: var(--t-w-h3);
-    /* The row's heading, so the card tier: it was 1.06rem, within a pixel of
-       the answer text underneath it. */
-    font-size: var(--t-h4);
-    line-height: 1.4;
-    color: var(--c-text);
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    align-items: center;
-    min-height: 44px;
-  }
-  .sec-faq summary::-webkit-details-marker {
-    display: none;
-  }
-  .sec-faq summary::after {
-    content: '+';
-    font-weight: 800;
-    color: var(--c-interactive);
-    transition: transform var(--dur) var(--ease);
-  }
-  .sec-faq details[open] summary::after {
-    transform: rotate(45deg);
-  }
-  /* `--blk-pad`, MATCHING `.sec-faq summary` ABOVE, and the hardcoded 24px it
-     replaces was measurable rather than cosmetic. Once styles/alignment.css put
-     `.sec-faq-a` on the left axis on 2026-09-01, the question and its answer
-     shared an axis but not an edge: measured at 1440, the summary text started
-     at x=275 and the answer at x=265, because the summary padded on the token
-     and this rule padded on a number. The owner's instruction is that a question
-     and its answer read as one block, so they pad on the same value. */
-  .sec-faq-a {
-    padding: 0 var(--blk-pad) 22px;
-    color: var(--c-text-sub);
-    font-size: var(--t-body);
-    line-height: 1.62;
-  }
-
-  .sec-final {
-    padding: var(--sec-pad-y) 0;
-    text-align: center;
-    background: var(--c-panel);
-    border-top: 1px solid var(--c-border);
-  }
-  /* --t-h1 is reserved for the hero (tokens.css); the homepage's own closing
-     CTA renders through Section at --t-h2 / --t-w-h2. Matched to it. */
-  .sec-final h2 {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    letter-spacing: -0.02em;
-    color: var(--c-text);
-    margin: 26px 0 0;
-  }
-  .sec-final h2 .accent {
-    color: var(--c-ambient-start);
-  }
-  .sec-final-sub {
-    /* 62ch, the same measure Section gives every standfirst. This page had
-       one of five different widths (40, 42, 44, 48 and 52rem) used for the
-       identical element across the compare, glossary and sector families. */
-    max-width: 62ch;
-    margin: 1.25rem auto var(--sec-gap);
-    color: var(--c-text-muted);
-    font-size: var(--t-lede);
-    line-height: 1.6;
-  }
-  .sec-final-links {
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    font-size: var(--t-body);
-    color: var(--c-text-muted);
-  }
-  .sec-final-links a {
-    /* WCAG 2.2 SC 2.5.8: standalone links in a row, not inside a sentence, so
-       the inline exemption does not reach them. Measured at 20px tall before
-       this. inline-flex so the box grows without moving the text.
-       Re-applied after the CTA card-ification was reverted: the cards had fixed
-       these incidentally, and reverting them brought the defect back. A fix that
-       only exists as a side effect of another change is not a fix. */
-    display: inline-flex;
-    align-items: center;
-    /* 28px, NOT 24px. A-243, 2026-09-01. This sat on exactly 24.00 and the gate
-       reported it under the floor on one run and clean on the next, naming
-       different routes each time, which is the flake tokens.css already
-       documents at its padding rule: the fallback face gives a slightly shorter
-       line box before the web font settles, so the same element measures 23.9
-       then 24.1. A floor is only a floor with headroom above it. 28 is the
-       value that rule lands its own two populations on. */
-    min-height: 28px;
-    color: var(--c-text-muted);
-  }
-  .sec-final-links a:hover {
-    color: var(--c-text);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sec-faq summary::after {
-      transition: none;
-    }
+    margin-bottom: var(--space-3);
   }
 </style>

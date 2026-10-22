@@ -10,6 +10,12 @@
  * slot renders, which is an HTML recreation of the real screen, and the caption
  * opens with "Example data" so the recreation is never read as a customer
  * screenshot. When the entry is set the image replaces the slot.
+ *
+ * `image` is the third source, for a page that already ships its own drawn
+ * product screen (the sector pages' Figma screens): the picture fills the
+ * window like a capture, AVIF and WebP first, and `caption` is printed as it
+ * is, because those captions already say the screen is a drawing. A `capture`
+ * entry, when set, still wins.
  */
 import { CAPTURES } from '../../data/product-captures';
 
@@ -23,12 +29,15 @@ interface Props {
   class?: string;
   /** Id of the caption, so a section can point aria-describedby at it. */
   captionId?: string;
+  /** A page's own drawn screen, used when `capture` has no entry. */
+  image?: { src: string; avif?: string; webp?: string; width: number; height: number; alt: string };
 }
-const { title, capture, status, caption, class: cls = '', captionId } = Astro.props;
-const shot = CAPTURES[capture] ?? null;
+const { title, capture, status, caption, class: cls = '', captionId, image } = Astro.props;
+const captured = CAPTURES[capture] ?? null;
+const shot = captured ?? (image ? { ...image, caption, narrow: undefined } : null);
 ---
 
-<figure class={`ea-frame ${shot ? 'ea-frame--shot' : ''} ${cls}`.replace(/\s+/g, ' ').trim()} data-capture={capture}>
+<figure class={`ea-frame ${shot ? 'ea-frame--shot' : ''} ${!captured && image ? 'ea-frame--drawn' : ''} ${cls}`.replace(/\s+/g, ' ').trim()} data-capture={capture}>
   <div class="ea-frame__window on-light">
     {/* A real capture carries the app's own header, so the recreated title
         bar is drawn only over a recreation. */}
@@ -41,6 +50,8 @@ const shot = CAPTURES[capture] ?? null;
     {
       shot ? (
         <picture>
+          {!captured && image?.avif && <source type="image/avif" srcset={image.avif} />}
+          {!captured && image?.webp && <source type="image/webp" srcset={image.webp} />}
           {shot.narrow && <source media="(max-width: 599px)" srcset={shot.narrow.src} width={shot.narrow.width} height={shot.narrow.height} />}
           <img
             class="ea-frame__shot"
