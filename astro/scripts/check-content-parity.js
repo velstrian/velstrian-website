@@ -404,6 +404,8 @@ const ALLOWED_LOSSES = new Map([
    'The primary-source link on the PPN 002 record, removed with the record on 2026-08-30. That record described itself as retained only while a figure on this site still rested on it, and after the duty-card move (317fd5ef) and this pass, none does: the 10% homepage figure now resolves to #ppn-026, which states both weighting bands with their citation. The one sentence on it that was OURS rather than the regulation\'s, that CrowAgent stops supporting the previous edition on 31 December 2026, moved onto the PPN 026 record and is still published. /sources still links the primary source for every figure it prints, which is the whole job of the page.'],
   ['/sources/  link: www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts/procurement-policy-note-002-the-social-value-model-html',
    'The primary-source link on the five-missions card, removed with the card on 2026-08-30 for the reason recorded against that heading above.'],
+  ['/blog/ai-tender-evaluation-uk-public-sector/  link: www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement',
+   'R285-WEB-CLAIMS-AUDIT-01, 2026-10-22. The post names PPN 026 in its body but its sources list cited PPN 002 with the PPN 002 mandatory date. The owner rule is PPN 026 only, so the citation now links the PPN 026 record on gov.uk with its published and applies-from dates, the same source /sources/ cites.'],
 
   /*
    * THREE LOSSES THAT LANDED IN EARLIER COMMITS OF THIS SAME SWEEP AND WERE

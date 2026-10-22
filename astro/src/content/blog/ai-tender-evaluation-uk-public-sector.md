@@ -87,7 +87,7 @@ Using generic AI output that produces unsubstantiated claims or buzzwords will h
 
 - [Procurement Act 2023](https://www.legislation.gov.uk/ukpga/2023/54/contents), legislation.gov.uk. In force from 24 February 2025. The award test this piece calls MAT is defined in the Act rather than in the old regulations.
 - [Transforming Public Procurement](https://www.gov.uk/government/collections/transforming-public-procurement), Cabinet Office guidance collection, gov.uk. The transition guidance and the notice regime that produced the volume this piece describes.
-- [Procurement Policy Note 002: social value in procurement](https://www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement), Cabinet Office, gov.uk. Mandatory for procurements commenced under the Act on or after 1 October 2025.
+- [Procurement Policy Note 026: the Social Value Model](https://www.gov.uk/government/publications/ppn-026-the-social-value-model), Cabinet Office, gov.uk. Published 5 August 2026. Applies to central government procurements commenced on or after 1 January 2027, at 1 million pounds inc VAT or above.
 - [Procurement Policy Note 06/21: Carbon Reduction Plans](https://www.gov.uk/government/publications/procurement-policy-note-0621-taking-account-of-carbon-reduction-plans-in-the-procurement-of-major-government-contracts), Cabinet Office, gov.uk.
 
 No source is cited for how widely UK contracting authorities use automated or AI-assisted evaluation, because none is published. That part of this piece describes how such screening works where it is used, and is not a measurement of how common it is.
