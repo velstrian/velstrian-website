@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T11:42:14.380Z",
+  "updated": "2026-10-22T11:56:47.774Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -3119,8 +3119,8 @@
       "src": "transformation-audit-2026-10-22",
       "sev": "P2",
       "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-C About and Contact trust: named people, no stock photo, mailboxes (M5 S6 S8)",
-      "status": "OPEN",
-      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/about/* except AboutTrust, pages/about.astro, pages/contact.astro, data/site.ts"
+      "status": "BUILT",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/about/* except AboutTrust, pages/about.astro, pages/contact.astro, data/site.ts || WT-C built locally in 833cf344 (unpushed). M5: stock photo gone, real capture screen-answer-library on /about/. S6 under D279: company not people, Companies House record linked from About and Contact, 2010 milestone and advisers line removed, three checkable facts linked. S8 under D280: one mailbox PUBLIC_EMAIL contact@velstrian.com in lib/brand-names.ts. QRG 1, 2, 4, 5 done. Dev server walk 375, 768, 1440 on /about/ and /contact/: status 200, overflow 0, only mailbox contact@, no stock image, no personal name, Companies House link present. Owner questions open: registered office street line, reply time, Calendly slug. Content parity baseline refresh owed at the next build."
     },
     {
       "id": "A-318",
