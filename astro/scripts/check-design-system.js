@@ -110,7 +110,10 @@
  *                  rule had changed was still explaining the old rule to
  *                  whoever it failed.
  *   8 LIGHT SCOPE  Every --c-* token used as a `color:` value anywhere in src
- *                  is rebound inside `.art__pane`, the light reading scope.
+ *                  is rebound inside the v3 light scope (`.band--light,
+ *                  .band--light-alt, .on-light` in tokens.css). It read the
+ *                  blog's `.art__pane` until 2026-10-22, when the blog moved
+ *                  onto the v3 bands and that private theme was retired.
  *                  Added 2026-08-03 after --c-interactive resolved to cyan at
  *                  1.67:1 on the light pane the day it was created, with four
  *                  more between 1.96:1 and 2.52:1 behind it. Reported under the
@@ -768,8 +771,9 @@ function hasCardScaleLength(value) {
 
 /* ── RULE 8: A LIGHT SCOPE IS A LIST, AND LISTS FALL BEHIND ─────────────────
  *
- * `.art__pane` on blog articles rebinds the palette so dark-surface values
- * cannot leak onto a light one. It is a LIST, so any token added to :root after
+ * The v3 light scope in tokens.css (`.band--light, .band--light-alt,
+ * .on-light`; until 2026-10-22 the blog's `.art__pane`) rebinds the palette so
+ * dark-surface values cannot leak onto a light one. It is a LIST, so any token added to :root after
  * it was written is missing from it by default — silently, and only visible to
  * whoever next writes `color: var(--the-new-one)` inside the pane.
  *
@@ -790,7 +794,7 @@ function lightScopeTokens(rules) {
      that only shows up when you look at the output. */
   const out = new Set();
   for (const r of rules) {
-    if (!/\.art__pane/.test(r.selector)) continue;
+    if (!/(^|,)\s*\.band--light\s*(,|$)/.test(r.selector)) continue;
     for (const m of String(r.decls).matchAll(/(--c-[a-z0-9-]+)\s*:/gi)) out.add(m[1]);
   }
   return out;
@@ -853,7 +857,7 @@ for (const r of rules) {
 }
 for (const t of textCapable) {
   if (!lightScope.has(t)) {
-    report('token', 'src/layouts/Article.astro', '.art__pane',
+    report('token', 'src/styles/tokens.css', '.band--light',
       `${t} carries text somewhere in src but is not rebound in the light scope`);
   }
 }

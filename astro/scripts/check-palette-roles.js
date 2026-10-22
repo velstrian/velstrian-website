@@ -239,19 +239,6 @@ const ALLOWED = new Map([
    * worse hole in the same place. The mitigation is that the block is a theme
    * and nothing else, so a colour appearing there that is not a light-mode
    * counterpart of a dark-mode role is already wrong on review. */
-  [
-    'literal-bound  src/layouts/Article.astro  binds chromatic colour literals to custom properties',
-    'THE LIGHT THEME FOR BLOG ARTICLES, and it is a genuine second binding site rather ' +
-      'than a component reaching for a hue. Every declaration in it REBINDS a role tokens.css ' +
-      'already defines — --c-bg, --c-text, --c-verified, --c-refused, the ambient ramp, the ' +
-      'interactive fill — to its light-mode counterpart, which is exactly what a theme is and ' +
-      'is the reason the article body picks the whole system up without knowing anything about ' +
-      'it. Moving the values into tokens.css is the right end state and is a separate change: ' +
-      'it means a media/attribute-scoped second block in the palette file, and doing it as a ' +
-      'side effect of adding this rule would put a theme switch into a commit about a gate. ' +
-      'What the rule DOES establish today is that this is the only such file, because any ' +
-      'other one fails.',
-  ],
 
   /* ── THE BRAND MARK ──────────────────────────────────────────────────────
    *

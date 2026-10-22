@@ -34,7 +34,10 @@
  * h1s or skips a level.
  */
 import Base from './Base.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Band from '../components/evidenced/Band.astro';
+import Close from '../components/evidenced/Close.astro';
+import '../styles/evidenced.css';
 import ShareRow from '../components/blog/ShareRow.astro';
 import RelatedPosts from '../components/blog/RelatedPosts.astro';
 import PostImage from '../components/blog/PostImage.astro';
@@ -181,216 +184,98 @@ const canonicalUrl = routeUrl(path);
   publishedAt={publishedAt}
   updatedAt={updatedAt}
   schema={schema}
+  typeface="evidenced"
+  headerTone="light"
 >
   <article class="art">
-    {/* ── The dark band ────────────────────────────────────────────────── */}
-    <div class="art__band">
-      <div class="art__glow" aria-hidden="true"></div>
-      {/*
-        THE TWO CONSTRUCTION RAILS WERE REMOVED ON 2026-08-04, on the owner's
-        instruction about /blog/: "can we remove vertical lines". `.art__rails`
-        drew a vertical hairline down each edge of the measure, the same
-        decoration `.bl__rails` drew on the blog index. Those two were the only
-        places on the site it existed and both are under /blog/, so taking it
-        out of one and leaving it in the other would have put the same lines
-        back one click later. Nothing was positioned against them: the element
-        was `position: absolute` with `pointer-events: none` and no layout role.
-      */}
+    {/*
+      2026-10-22, ON DESIGN SYSTEM VERSION 3 (R285-WEB-ENTERPRISE-REDESIGN-01).
+      The post opens on the compact PageHero, the reading pane is a light band,
+      and the related posts and the Close follow. Every word, the byline, the
+      picture, both share rows and the related posts are kept.
 
-      <div class="art__band-inner">
-        <div class="art__nav">
-          {/*
-            BACK TO BLOG PILL. On every legacy post and missing from the
-            rebuild. The chevron is a drawn vector rather than a character:
-            JetBrains Mono has no arrow glyphs, and an arrow character renders
-            in it as a stray plus sign.
-          */}
-          <a class="control chip art__pill" href="/blog/">
-            <svg
-              class="art__chev"
-              viewBox="0 0 6 10"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M5 1 1 5l4 4" />
-            </svg>
-            All guides
-          </a>
-
-          {/*
-            Also on legacy and also missing. The BreadcrumbList JSON-LD above has
-            been correct since the port; nothing on the page said the same thing
-            to a reader, and when this layout did start drawing one, it drew a
-            DIFFERENT trail from the one it published, and did it in a hand-rolled
-            <nav> that never received the 24px target floor the two breadcrumbs on
-            /compare had both argued for in writing. One component now, fed the
-            same ancestors as the JSON-LD.
-
-            THE LEAF IS THE CATEGORY, NOT THE HEADLINE, and that is the one place
-            the two lists are allowed to differ. The published leaf must NAME THE
-            PAGE, so it is the full headline; this trail is set in the uppercase
-            mono micro-label, where a 45-character headline is a shout and the
-            category is what a reader wants. Both are right about different
-            things, which is why check-breadcrumbs.js compares the LINKS and says
-            so at length.
-          */}
-          {/*
-            WRAPPED IN A DIV THIS FILE OWNS, and that is not a stylistic choice.
-            Astro scopes a <style> block by rewriting each selector to require a
-            `data-astro-cid` attribute it stamps onto the elements in THIS
-            template. A child component's root element is not one of those, so
-            `class="art__crumb"` passed to <Breadcrumb> arrived as a plain class
-            with no scope token and every rule in this file addressed to it
-            matched nothing.
-
-            MEASURED, not reasoned: at 390 the crumb rendered display:block, 24px
-            tall, when the rule below says display:none under 720px. So the first
-            version of this consolidation silently un-hid the breadcrumb on every
-            phone. A regression introduced by a fix, and exactly the kind that
-            reads as correct in the diff.
-
-            The wrapper is an element this template does own, so the scope lands
-            and the rule applies. It also keeps the ownership honest: WHERE the
-            trail sits, and whether this layout shows one at all on a phone, is
-            this file's decision; what it looks like belongs to the component.
-          */}
-          <div class="art__crumb">
-            <Breadcrumb trail={trail} current={category} />
-          </div>
+      THE PILL AND THE TRAIL. "All guides" goes back to /blog/, and the trail is
+      the one Breadcrumb component fed the same ancestors as the JSON-LD. Its
+      leaf is the CATEGORY, not the headline: the published leaf must name the
+      page, this one is set in the mono micro-label where a long headline is a
+      shout. check-breadcrumbs.js compares the links. The wrapper is a div this
+      file owns, because Astro's scoping never reaches a child component's root,
+      and below 720px the trail hides (the pill already goes back). The chevron
+      is drawn, because JetBrains Mono has no arrow glyph.
+    */}
+    <PageHero id="art-title" size="compact" label={category} title={title}>
+      <div slot="before" class="art__nav ea-trail">
+        <a class="control chip art__pill" href="/blog/">
+          <svg
+            class="art__chev"
+            viewBox="0 0 6 10"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M5 1 1 5l4 4" />
+          </svg>
+          All guides
+        </a>
+        <div class="art__crumb">
+          <Breadcrumb trail={trail} current={category} />
         </div>
-
-        {/*
-          THE SHARED HEAD BLOCK. The category label and the headline used to be
-          a hand-rolled `.art__eyebrow` + bare `<h1>` pair, which is why every
-          blog post rendered a flat white title while pages built from Section
-          rendered the shiny one. Both now come from the one component, and the
-          treatment itself from styles/headings.css.
-
-          THE BYLINE GOES IN THE SLOT because that is exactly what the slot is
-          for: it is this layout's own furniture, it belongs under the title
-          rather than under the standfirst of some other page, and there is no
-          standfirst here to displace it. A post has no lede. The first
-          paragraph of the body does that job, styled in the prose block below.
-        */}
-        <PageHeader title={title} eyebrow={category}>
-          <p class="meta art__meta">
-            <time datetime={publishedAt.toISOString()}>{dateFormatter.format(publishedAt)}</time>
-            {author && (
-              <>
-                <span aria-hidden="true">&middot;</span>
-                <span>By {author}{authorRole ? `, ${authorRole}` : ''}</span>
-              </>
-            )}
-            {readingTime && (
-              <>
-                <span aria-hidden="true">&middot;</span>
-                <span>{readingTime} min read</span>
-              </>
-            )}
-            {updatedAt && (
-              <>
-                <span aria-hidden="true">&middot;</span>
-                <span>Updated {dateFormatter.format(updatedAt)}</span>
-              </>
-            )}
-          </p>
-        </PageHeader>
       </div>
-    </div>
+      <p slot="after" class="meta art__meta">
+        <time datetime={publishedAt.toISOString()}>{dateFormatter.format(publishedAt)}</time>
+        {author && (
+          <>
+            <span aria-hidden="true">&middot;</span>
+            <span>By {author}{authorRole ? `, ${authorRole}` : ''}</span>
+          </>
+        )}
+        {readingTime && (
+          <>
+            <span aria-hidden="true">&middot;</span>
+            <span>{readingTime} min read</span>
+          </>
+        )}
+        {updatedAt && (
+          <>
+            <span aria-hidden="true">&middot;</span>
+            <span>Updated {dateFormatter.format(updatedAt)}</span>
+          </>
+        )}
+      </p>
+    </PageHero>
 
-    {/* ── The light reading pane ───────────────────────────────────────── */}
-    <div class="art__pane">
+    <Band tone="light" class="art__pane">
       <div class="art__hero">
-        {/* `credit` was passed here until 2026-08-04. The prop is gone: the
-            Pexels Licence does not require attribution, the owner asked for
-            none, and the caption was the only thing the picture's type scrim
-            existed to keep legible. Provenance stays in blog/PHOTO-CREDITS.md. */}
+        {/* No credit prop: the Pexels Licence needs none and the owner asked
+            for none. Provenance stays in blog/PHOTO-CREDITS.md. */}
         <PostImage
           slug={slug}
           priority
           sizes="(min-width: 1100px) 1000px, calc(100vw - 2.5rem)"
         />
       </div>
-
       <div class="art__col">
-        {/* Under the byline and again at the foot, which is where both rows sit
-            on the live post. Both are inside the pane, so both inherit its
-            rebound colours; see the palette block in the stylesheet below. */}
         <ShareRow title={title} url={canonicalUrl} position="top" />
-        <div class="article-body">
+        <div class="article-body ea-longform">
           <slot />
         </div>
         <ShareRow title={title} url={canonicalUrl} position="end" />
       </div>
-    </div>
+    </Band>
   </article>
-
   <RelatedPosts slug={slug} />
+  <Close />
 </Base>
 
 <style>
   .art {
-    /*
-     * THE HERO GEOMETRY, ONCE. 1000px at 1440 is --measure x 25/29, and the
-     * straddle is 20% of the hero's own width, which at that size is the 200px
-     * the frame specifies. Both are proportions rather than fixed pixels, so
-     * the hero keeps sitting exactly one fifth of its width above the cut at
-     * every viewport.
-     *
-     * The 100% in --art-hero-w resolves against .art's width, and both places
-     * it is used (the band's bottom padding, the hero's negative top margin)
-     * have .art's width as their containing block, so the two cannot drift.
-     * That is why .art__pane carries no inline padding of its own.
-     */
     --art-hero-w: min(100% - 2 * var(--gutter), calc(var(--measure) * 25 / 29));
-    --art-rise: calc(var(--art-hero-w) * 0.2);
-
-    /*
-     * THE SEAM COLOUR IS CAPTURED HERE, ON THE DARK SIDE, AND INHERITED DOWN.
-     * The pane rebinds --c-teal to a darkened teal that is readable as a link
-     * on #F5F6FA, so a seam written as var(--c-interactive) inside the pane resolves
-     * to that darker value and the hairline goes grey. A custom property is
-     * substituted where it is DECLARED, so declaring it out here freezes the
-     * brand teal and carries it through the rebind untouched.
-     */
-    --art-seam: var(--c-ambient-start);
   }
 
-  /* ── Dark band ────────────────────────────────────────────────────────── */
-  .art__band {
-    position: relative;
-    z-index: 0;
-    /* The bottom padding is the straddle plus the gap the frame leaves between
-       the byline and the top of the hero. */
-    padding-block: var(--sec-pad-y-hero) calc(var(--art-rise) + var(--sec-gap));
-  }
-
-  .art__glow {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline: 0;
-    /* Absolute px, not vh: a glow measured in viewport height is a different
-       piece of light on every screen. */
-    height: 820px;
-    background-image: var(--grad-stage);
-    pointer-events: none;
-  }
-
-  .art__band-inner {
-    position: relative;
-    max-width: var(--measure);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
-  }
-
-  /* Pill left, breadcrumb centred on the page. Three tracks rather than two so
-     the breadcrumb centres on the MEASURE and not on the space the pill leaves
-     behind it. */
   .art__nav {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -494,288 +379,23 @@ const canonicalUrl = routeUrl(path);
     color: var(--c-text-muted);
   }
 
-  /* ══════════════════════════════════════════════════════════════════════
-     THE LIGHT READING PANE, AND ITS PALETTE.
-
-     The palette is applied by REBINDING the site's own token names on this one
-     element rather than by writing a second set of rules. Custom properties
-     inherit, so everything inside the pane (the prose, the share rows, the
-     callouts) picks the light values up without knowing anything about the
-     pane and without a single component being edited. ShareRow.astro in
-     particular is untouched: it asks for --c-card and --c-border as it always
-     did and gets white and a light rule.
-
-     The four surface values are quoted from the approved frame. The link teal
-     is not: brand --c-teal (#2DD4BF) on #F5F6FA measures 1.6:1 and is
-     unreadable, so the pane uses a darkened teal from the same family at
-     5.1:1. Body 11.8:1, muted 4.9:1, headings 19:1, all against #F5F6FA.
-
-     WHERE THESE BELONG is styles/tokens.css, as a named light scope. They are
-     literal here because the token file has no light palette at all and this
-     pass does not own styles/. Reported to the owner.
-     ══════════════════════════════════════════════════════════════════════ */
-  .art__pane {
-    --c-bg: #f5f6fa;
-    --c-panel: #ffffff;
-    /* ADDED 2026-09-01 (A-197 item 1), AND IT IS EXACTLY THE TRAP THE NOTE
-       BELOW DESCRIBES, CAUGHT BEFORE IT SHIPPED. `.surface--panel` in
-       styles/surfaces.css now paints a lit head, a ramp from --c-lit down to
-       --c-panel, so this pane started depending on a token its list did not
-       carry: --c-panel was rebound to white and --c-lit was still #191E2C, so a
-       panel written into an article would have drawn a near-black ramp down a
-       white card. Zero such panels exist in the pane today, measured, so this
-       is a trap closed rather than a defect fixed, which is the same standing
-       this block's other five entries have.
-
-       #FFFFFF, and the reason is in src/styles/brand.source.json: "light
-       --c-raised is already #FFFFFF, so light lights DOWNWARD as a surface
-       recedes". There is no rung above white, so the lit head of a white card
-       IS white, the ramp resolves flat, and the pane renders byte-identically
-       to what it renders today. */
-    --c-lit: #ffffff;
-    --c-card: #ffffff;
-    /* Bound, not restated, for the reason A-63 gives at the :root pair in
-       styles/tokens.css: the pane's hover fill IS its card fill, and two
-       literals sitting side by side is how they come apart later. It stays
-       listed because this block is deliberately an exhaustive list. See the
-       note below on tokens added to :root after it was written. */
-    --c-card-hover: var(--c-card);
-    --c-text: #0b0e19;
-    --c-text-sub: #2b3245;
-    --c-text-muted: #626c82;
-    --c-border: rgba(11, 14, 25, 0.12);
-    /* [R285-P2-BRAND-DEFAULT-CARBON-IRIS-01] The accent on paper is the Carbon and Iris LIGHT
-       text rung #434EAF (7.1:1 on white, the platform iris light --ca-teal-text). The
-       alphas are the ones this pane already chose, carried onto the iris hue. */
-    --c-border-glow: rgba(67, 78, 175, 0.4);
-    --c-teal: #434EAF;
-    --c-teal-glow: rgba(67, 78, 175, 0.25);
-
-    /* ── EVERY TOKEN THAT CAN CARRY TEXT, REBOUND ────────────────────────
-     *
-     * Added 2026-08-03. This pane rebinds the palette so dark-surface values
-     * cannot leak onto a light one, and it is a LIST, so a token added to
-     * :root after it was written is missing by default, silently, until
-     * somebody writes `color: var(--the-new-one)` in here and gets text nobody
-     * can read. This codebase has shipped invisible text twice.
-     *
-     * --c-interactive was created earlier the SAME DAY and was already missing.
-     * Checking the whole set then found five. Measured on #F5F6FA:
-     *
-     *   interactive  (was --c-cyan #22D3EE)  1.67:1  ->  #0e7490  4.96:1
-     *   cyan         #22D3EE                 1.67:1  ->  #0e7490  4.96:1
-     *   orchid       #C77DFF                 2.49:1  ->  #7e22ce  6.47:1
-     *   violet       #A78BFA                 2.52:1  ->  #6d28d9  6.58:1
-     *   pink         #F472B6                 2.45:1  ->  #be185d  5.59:1
-     *   teal-dark    #0CC9A8                 1.96:1  ->  #115e59  7.02:1
-     *
-     * None renders as text in here today, so these are traps rather than
-     * defects. The HUES are preserved: a refusal is still violet, it is simply
-     * a violet that can be read on paper.
-     *
-     * interactive and cyan take the same value on purpose, at :root
-     * --c-interactive resolves to --c-cyan, and the two must not disagree on
-     * one surface. interactive is deliberately NOT the pane's --c-teal, even
-     * though that also passes: ADR 0005 separates interactive from verified.
-     *
-     * Rule 8 of check-design-system.js now asserts this list is complete. */
-    /* [R285-REBRAND-VELSTRIAN-01] Owner 2026-10-19, "instead of teal use default". The
-       interactive and cyan rungs above were teal family #0e7490. Interactive is now the
-       platform iris light hover rung #363E8F, 8.7:1 on #F5F6FA, which is also this pane's
-       --c-teal-dark, so it stays a separate value from verified #434EAF as ADR 0005 asks.
-       Cyan follows the pane's --c-teal, because at :root --c-cyan now follows --c-teal. */
-    --c-interactive: #363E8F;
-    --c-cyan: #434EAF;
-    --c-orchid: #7e22ce;
-    --c-violet: #6d28d9;
-    --c-pink: #be185d;
-    --c-teal-dark: #363E8F;
-    /* ── AND THE LIST FELL BEHIND AGAIN, EXACTLY AS PREDICTED ─────────────
-     *
-     * Added 2026-08-04, and it is the sixth token to arrive here late. The PPN
-     * 002 calculator's "below the floor" tag had `#E8B84B` hand-typed into it,
-     * which is --c-amber's value spelled out; replacing the literal with the
-     * token made --c-amber a colour that carries text, and rule 8 immediately
-     * reported it missing from this list. Unbound it resolves to #E8B84B, which
-     * is 1.71:1 on this pane's #F5F6FA. The worst ratio any of the eleven has
-     * had, and the token whose entire job is to say "this value is at risk".
-     *
-     * #886311 is the same hue (41.6deg, measured off #E8B84B in HSL) taken down
-     * to L 30%: 5.06:1 on the pane and 5.47:1 on its white cards. The hue is
-     * preserved for the same reason orchid stayed violet. An at-risk marker
-     * that changes colour between surfaces stops being a marker.
-     *
-     * Nothing renders it as text in here today, so this is a trap rather than a
-     * defect, which is precisely what the previous five were. */
-    --c-amber: #886311;
-    /* ── --c-interactive HAS TO BE REBOUND TOO, AND IT WAS NOT ────────────
-     *
-     * Added 2026-08-03. The pane rebinds eleven tokens so dark-surface values
-     * cannot leak onto a light one, and --c-interactive was created LATER, on
-     * the same day, when the interactive role was finally given a name. It was
-     * not in the list because it did not exist when the list was written.
-     *
-     * Measured: unbound, it resolves to --c-cyan #22D3EE, which is 1.67:1 on
-     * this pane's #F5F6FA. Nothing renders it as text in here today, so this is
-     * a trap rather than a defect. The next person to write
-     * `color: var(--c-interactive)` inside the pane gets text nobody can read,
-     * and this codebase has shipped invisible text twice already.
-     *
-     * #0e7490 is 4.96:1 here. NOT the pane's --c-teal, even though that would
-     * also pass at 5.07:1: ADR 0005 separates interactive from verified, and
-     * collapsing them on one surface would put the separation back exactly
-     * where it was before the token existed.
-     *
-     * THE GENERAL PROBLEM, worth stating because it will recur: a scoped
-     * palette is a list, and a new token added anywhere else is missing from it
-     * by default. Any token added to :root that can carry TEXT needs a line
-     * here. */
-    --c-interactive: #363E8F;
-
-    /* ── AND THE WHOLE ROLE LAYER, WHICH ARRIVED 2026-08-04 ───────────────
-     *
-     * The V6 pass took every colour outside tokens.css off a HUE name and on to
-     * a ROLE name (--c-teal became --c-verified where it meant verified and
-     * --c-ambient-start where it was decoration), and it created fourteen
-     * tokens that did not exist when the list above was written. Rule 8 of
-     * check-design-system.js reported eight of them missing here on the first
-     * build after the sweep, which is the third time that rule has caught this
-     * list falling behind and is exactly why it exists.
-     *
-     * IT IS NOT ENOUGH THAT THE HUE THEY POINT AT IS ALREADY REBOUND, and this
-     * is the trap worth writing down. `--c-verified: var(--c-teal)` is declared
-     * at :root, so its var() is substituted THERE, at computed-value time on the
-     * root element, and what inherits into this pane is the finished #2DD4BF,
-     * not a live reference that would pick up the pane's own --c-teal. Rebinding
-     * --c-teal here therefore does nothing for --c-verified. Every role needs
-     * its own line, and the same mechanism is what tokens.css records for
-     * --grad-ramp resolving to `none` in the built output.
-     *
-     * Measured on this pane's #F5F6FA, and the HUES are preserved for the reason
-     * the amber note above gives. A marker that changes colour between surfaces
-     * stops being a marker:
-     *
-     *   verified       #2DD4BF  1.60:1  ->  #0f766e  5.07:1
-     *   refused        #B39DFB  1.99:1  ->  #7e22ce  6.47:1
-     *   at risk        #E8B84B  1.71:1  ->  #886311  5.06:1
-     *   ambient start  #2DD4BF  1.60:1  ->  #0f766e  5.07:1
-     *   ambient mid    #22D3EE  1.67:1  ->  #0e7490  4.96:1
-     *   ambient end    #A78BFA  2.52:1  ->  #6d28d9  6.58:1
-     *   ambient far    #B39DFB  1.99:1  ->  #7e22ce  6.47:1
-     *
-     * The ambient set takes the same values as the hues it is bound to at :root,
-     * because on this pane it is still decoration and decoration that changed
-     * hue between the dark page and the light pane would read as two brands.
-     *
-     * THE FILLED-CONTROL SET INVERTS ON THIS SURFACE, and it has to. At :root
-     * --c-interactive-fill is #FFFFFF on a near-black page and its label is the
-     * page; a white fill on #F5F6FA is invisible and its label would be 3.73:1.
-     * So the fill takes the pane's interactive value and the label goes white:
-     * 5.36:1 at rest and 8.23:1 on the pressed state, against 4.5:1 for a button
-     * label. The glows follow their marks, and the control glow drops from the
-     * root's 60% to 30% on purpose: a glow reads by adding light, and adding a
-     * saturated dark to a near-white pane subtracts it. Six of these carry no
-     * text today and are listed anyway, because every previous entry in this
-     * block was a trap before it was a defect. */
-    --c-verified:      #434EAF;
-    --c-verified-glow: rgba(67, 78, 175, 0.25);
-    --c-refused:       #7e22ce;
-    --c-at-risk:       #886311;
-    --c-ambient-start: #434EAF;
-    --c-ambient-mid:   #434EAF;
-    --c-ambient-end:   #6d28d9;
-    --c-ambient-far:   #7e22ce;
-    --c-ambient-deep:  #6d28d9;
-    --c-ambient-glow:  rgba(67, 78, 175, 0.25);
-    /* --c-tour-accent, ADDED 2026-08-08. Rule 8 caught it the same day it was
-       created, which is the list working exactly as this block predicts a new
-       token will fail it. Same value as --c-ambient-start immediately above,
-       because it is the same hue for the same reason: WorkstationTour's badge
-       and bezel are decoration, not a mark, so they follow the ambient set
-       onto paper rather than keeping a separate light value nobody chose. */
-    --c-tour-accent:   #434EAF;
-    /* [R285-REBRAND-VELSTRIAN-01] The fill follows --c-interactive onto iris #363E8F, white
-       label 9.4:1. The pressed step mirrors :root, where fill-lit is --c-text-sub: here that
-       is #2b3245, white label 12.8:1. Was teal #0e7490 and #0a566a. */
-    --c-interactive-fill:      #363E8F;
-    --c-interactive-fill-lit:  #2b3245;
-    --c-interactive-fill-text: #ffffff;
-    --c-interactive-glow:      rgba(54, 62, 143, 0.30);
-
-    /*
-     * A four-step ladder at 4 to 7 percent, not the dark six-step ladder,
-     * because a shadow on a light ground needs far less alpha to read. Same
-     * fingerprint as the dark ladder: blur is 0.8 x Y, and Y roughly doubles
-     * each step.
-     */
-    --gloss-inset: inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    --shadow-card:
-      0 3px 2.4px rgba(11, 14, 25, 0.04), 0 6px 4.8px rgba(11, 14, 25, 0.05),
-      0 12px 9.6px rgba(11, 14, 25, 0.06), 0 24px 19.2px rgba(11, 14, 25, 0.07);
-    --shadow-panel: var(--shadow-card);
-    --blur-glass: none;
-
-    position: relative;
-    z-index: 1;
-    background-color: var(--c-bg);
-    color: var(--c-text-sub);
-    padding-bottom: var(--sec-pad-y);
-    /*
-     * flow-root, and the whole straddle depends on it. The hero is this
-     * element's first in-flow child and carries a negative top margin; without
-     * a block formatting context that margin COLLAPSES OUT through the parent
-     * and drags the pane up with it, so the picture and the cut move together
-     * and the hero ends up sitting exactly on the seam with nothing above it.
-     * Measured before the fix: 0px of the hero in the dark band against the
-     * 200px the frame specifies. flow-root contains the margin without
-     * clipping, which `overflow: hidden` would not. That would cut the top of
-     * the hero off instead.
-     */
-    display: flow-root;
+  /* In the centred hero head the trail row spans the measure, so the pill
+     sits at the start and the trail centres on the page. */
+  .art__nav {
+    justify-self: stretch;
+    width: 100%;
+    max-width: var(--measure);
+    margin-inline: auto;
   }
 
-  /*
-   * THE SEAM. 1px of teal on the cut, top and bottom, so the change of ground
-   * reads as an edit. It is a hard line by design; softening it into a
-   * gradient is what a rendering fault looks like, and it is the one thing
-   * about this layout that must not be "tidied".
-   */
-  .art__pane::before,
-  .art__pane::after {
-    content: '';
-    position: absolute;
-    inset-inline: 0;
-    height: 1px;
-    /*
-     * Effectively flat, which is what the frame draws: full teal across the
-     * measure with only the last few percent at each end fading out, so the
-     * line does not butt hard into the window edge. An earlier version ramped
-     * from 12% to 50% and, measured at the left of a 1440 viewport, the seam
-     * was a pale grey line rather than a teal one for the first 170px.
-     */
-    background-image: linear-gradient(
-      90deg,
-      transparent,
-      var(--art-seam) 4%,
-      var(--art-seam) 96%,
-      transparent
-    );
-  }
-  .art__pane::before {
-    top: 0;
-  }
-  .art__pane::after {
-    bottom: 0;
-  }
-
-  /* The straddle. z-index puts the picture over the seam, which is the order
-     the frame draws them in. */
+  /* The post's picture at the head of the reading band, at the frame width
+     it has always had. It no longer rises into a dark band above it: the
+     whole page is light now, so there is nothing for it to straddle. */
   .art__hero {
     position: relative;
     z-index: 1;
     width: var(--art-hero-w);
     margin-inline: auto;
-    margin-top: calc(var(--art-rise) * -1);
     margin-bottom: var(--sec-gap);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
@@ -1008,18 +628,4 @@ const canonicalUrl = routeUrl(path);
     }
   }
 
-  /*
-   * Windows high-contrast. The pane's whole identity is a background colour,
-   * which forced-colors replaces; without this the seam and the pane edge
-   * disappear and the article runs into the rail below it.
-   */
-  @media (forced-colors: active) {
-    .art__pane {
-      border-block: 1px solid CanvasText;
-    }
-    .art__pane::before,
-    .art__pane::after {
-      display: none;
-    }
-  }
 </style>

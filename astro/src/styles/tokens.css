@@ -3533,6 +3533,11 @@
   --c-ink-2: #5C626E;
   --c-iris-ink: #434EAF;
   --c-mark-ink: #6D28D9;
+  /* The at risk state on a light ground, the same ochre family as --c-amber
+     darkened to read as text: 5.47:1 on --c-light-0 and 5.2:1 on
+     --c-light-1. It came from the blog reading pane's own light theme, which
+     carried it as a literal (layouts/Article.astro, retired 2026-10-22). */
+  --c-amber-ink: #886311;
 
   /* The stage. 135 degrees, indigo into purple, two light blooms for depth
      and a fine grain laid over it by .ea-stage::after. White text reads 4.7:1
@@ -3693,6 +3698,22 @@
      <Button> paints with are restated here to pick up the light roles. */
   --grad-action: linear-gradient(135deg, var(--c-interactive-fill), var(--c-interactive-fill-lit));
   --grad-ramp: linear-gradient(var(--ramp-angle, 180deg), var(--ramp-from, var(--c-lit)), var(--ramp-to, var(--c-raised)) var(--ramp-end, 100%));
+
+  /* The state and accent roles, so a component that paints a state (a
+     verified dot, a refused mark, an at risk figure, an ambient accent) reads
+     at AA on a light band without knowing it is on one. The dark values are
+     light teals and lilacs that measure 1.6:1 to 2.5:1 on white. This list is
+     the one check-design-system.js rule 8 reads: every --c-* token used as a
+     text colour anywhere must be rebound here. Until 2026-10-22 the rule read
+     the blog pane's private light theme, retired when the blog moved onto
+     these bands. */
+  --c-verified: var(--c-iris-ink);
+  --c-verified-glow: color-mix(in srgb, var(--c-iris-ink) 25%, transparent);
+  --c-refused: var(--c-mark-ink);
+  --c-at-risk: var(--c-amber-ink);
+  --c-ambient-start: var(--c-iris-ink);
+  --c-ambient-mid: var(--c-iris-ink);
+  --c-ambient-end: var(--c-mark-ink);
 
   --ea-canvas: var(--c-light-0);
   --ea-raised: var(--c-light-0);

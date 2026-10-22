@@ -161,6 +161,8 @@ const ALLOWED_LOSSES = new Map([
   /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: the pages after the product
      pages on design system v3 (Claude lane). REWORDED heads, the content under
      each confirmed on the built page. */
+  ['/blog/  heading: statute, in plain english.',
+   'RULE 0-U: "statute" is a word a first time bidder has to look up. Now "Procurement rules, in plain English." in the /blog/ hero, over the same featured post and the same register of every guide.'],
   ['/sectors/  heading: the statute behind your sector.',
    'RULE 0-U: "statute" is a word a first time bidder has to look up. Now "What wins work in your sector." in the /sectors/ hero, over the same lead ("Different rules, one product") and the same nine sector cards.'],
 

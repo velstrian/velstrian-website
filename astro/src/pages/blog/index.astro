@@ -1,5 +1,24 @@
 ---
 /**
+ * /blog/: the guides.
+ *
+ * 2026-10-22: ON DESIGN SYSTEM VERSION 3 (R285-WEB-ENTERPRISE-REDESIGN-01,
+ * strategy 0.7). Every post, the featured card, the register with its dates,
+ * categories, reading times and pictures are kept:
+ *
+ *   1. PageHero  light     what is here?      trail, plain h1, lead
+ *   2. Guides    light     what should I read  the featured post, then every other post
+ *   3. Close     gradient  what now?           into the footer
+ *
+ * The h1 was "Statute, in plain English." and is now "Procurement rules, in
+ * plain English." (RULE 0-U: "statute" is a word a first time bidder has to
+ * look up). Recorded in check-content-parity.js ALLOWED_LOSSES.
+ *
+ * The category labels lost their three accent hues: those were the dark
+ * band's light ambient tones, which on a light band fall below AA. A
+ * category is a label, so it takes the label ink.
+ */
+/**
  * /blog: B1 "Editorial ledger", Figma `164:3` on page `Page — Blog index`
  * (`164:2`), chosen by the owner from the six blog-index renders on
  * 2026-08-02. See specs/DESIGN-DECISIONS.md section 6.
@@ -25,9 +44,12 @@
  */
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import PageHeader from '../../components/layout/PageHeader.astro';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Close from '../../components/evidenced/Close.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import PostImage from '../../components/blog/PostImage.astro';
-import { accentFor } from '../../components/blog/heroes';
+import '../../styles/evidenced.css';
 import { breadcrumbs } from '../../lib/schema';
 import { SITE } from '../../data/site';
 
@@ -81,6 +103,8 @@ const shortDate = new Intl.DateTimeFormat('en-GB', {
  * the port (OA-24). Blog marks this as the collection root rather than a
  * generic page; BreadcrumbList puts the trail under the search result.
  */
+const TRAIL = [{ name: 'Home', path: '/' }];
+
 const schema = [
   {
     '@type': 'Blog',
@@ -90,10 +114,7 @@ const schema = [
     url: `${SITE.origin}/blog`,
     publisher: { '@type': 'Organization', name: 'Velstrian', url: `${SITE.origin}/` },
   },
-  breadcrumbs([
-    { name: 'Home', path: '/' },
-    { name: 'Blog', path: '/blog/' },
-  ]),
+  breadcrumbs([...TRAIL, { name: 'Blog', path: '/blog/' }]),
 ];
 ---
 
@@ -102,59 +123,30 @@ const schema = [
   description="Plain-English guides on PPN 026 social value and UK public procurement. Statute-cited resources for UK bidders from Velstrian."
   path="/blog"
   schema={schema}
+  typeface="evidenced"
+  headerTone="light"
 >
-  <div class="bl">
-    {/* The wide radial that lifts the top of the page off flat black. Uses the
-        stage gradient token, so it is the same light the homepage hero sits
-        under rather than a second, nearly-identical glow. */}
-    <div class="bl__glow" aria-hidden="true"></div>
+  <PageHero
+    id="bl-title"
+    label="Regulatory blog"
+    title="Procurement rules, in plain English."
+    lead="Practical guides on the rules that decide whether you find, win and deliver public and private work, written for teams who bid themselves."
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Blog" /></div>
+  </PageHero>
 
-    <div class="bl__inner">
-      {/*
-        THE CONSTRUCTION RAILS WERE REMOVED ON 2026-08-04, on the owner's
-        instruction: "can we remove vertical lines". There used to be a
-        `.bl__rails` element here drawing four vertical hairlines at the
-        measure's edges and thirds, masked to fade out top and bottom.
-
-        Nothing was positioned against them. They were `position: absolute` with
-        `pointer-events: none` and no participation in any layout, so removing
-        the element and its rule takes the lines away and moves nothing. The
-        same decoration existed in two places and only two, both of them under
-        /blog/; the other was `.art__rails` in layouts/Article.astro, and it is
-        gone for the same reason.
-      */}
-
-      {/*
-        THE SHARED HEAD BLOCK. Was `.bl__eyebrow` + a bare <h1> + `.bl__lede`,
-        one of the fifteen routes whose page title rendered flat white because
-        the shiny treatment lived inside Section's SCOPED styles.
-
-        The <header> stays as the wrapper. It carries this page's stacking
-        context (the rails behind it are absolutely positioned and the head has
-        to sit above them), and its own bottom margin. PageHeader emits a <div>,
-        so nesting it here leaves the document outline of the page exactly as it
-        was.
-      */}
-      <header class="bl__head">
-        <PageHeader
-          eyebrow="Regulatory blog"
-          title="Statute, in plain English."
-          standfirst="Practical guides on the rules that decide whether you find, win and deliver public sector work."
-        />
-      </header>
-
-      <a class="feat surface surface--pad" href={`/blog/${featured.id}/`}>
+  <Band tone="light" labelledby="bl-title">
+    <div class="ea-wrap">
+      <a class="ea-card feat" href={`/blog/${featured.id}/`} data-reveal>
         <div class="feat__text">
-          <p class="meta feat__kicker">
-            <span class="meta feat__kicker-lead">Featured</span>
+          <p class="ea-label feat__kicker">
+            <span class="feat__kicker-lead">Featured</span>
             <span aria-hidden="true">&middot;</span>
-            <span class="meta feat__cat" data-accent={accentFor(featured.data.category)}>
-              {featured.data.category}
-            </span>
+            <span class="feat__cat">{featured.data.category}</span>
           </p>
-          <h2 class="feat__title">{featured.data.title}</h2>
+          <h2 class="ea-h3 feat__title">{featured.data.title}</h2>
           <p class="feat__desc">{featured.data.description}</p>
-          <p class="meta feat__meta">
+          <p class="ea-label feat__meta">
             {featured.data.readingTime && (
               <>
                 <span>{featured.data.readingTime} min read</span>
@@ -166,45 +158,32 @@ const schema = [
             </time>
           </p>
         </div>
-        {/* Wrapped rather than given a class: see the note in PostImage.astro
-            for why a class handed to a child component cannot be reached by
-            this page's scoped styles.
-            `duotone` and `credit` were passed here until 2026-08-04. Both props
-            are gone: the duotone was half of what made every blog picture look
-            faded, and the credit line is retired because the Pexels Licence
-            does not require attribution and the owner asked for none. The
-            provenance record stays in blog/PHOTO-CREDITS.md. */}
+        {/* Wrapped rather than given a class: a class handed to a child
+            component cannot be reached by this page's scoped styles (see
+            PostImage.astro). No duotone and no credit: the Pexels Licence needs
+            none and the owner asked for none. Provenance is in
+            blog/PHOTO-CREDITS.md. */}
         <div class="feat__pic">
-          <PostImage
-            slug={featured.id}
-            priority
-            sizes="(min-width: 1000px) 520px, calc(100vw - 5rem)"
-          />
+          <PostImage slug={featured.id} priority sizes="(min-width: 1000px) 520px, calc(100vw - 5rem)" />
         </div>
       </a>
 
-      {/* The register needs a heading of its own, or the rows below read as
-          children of the featured article. It is not drawn: the ruled list is
-          already unmistakably a list of everything else. */}
+      {/* The register's own heading, so the rows do not read as children of the
+          featured post. Not drawn: the ruled list is plainly a list. */}
       <h2 class="visually-hidden">All guides</h2>
-
       <ol class="ledger">
         {
           rest.map((post) => (
             <li class="ledger__row">
               <a class="ledger__link" href={`/blog/${post.id}/`}>
-                <time class="meta ledger__date" datetime={post.data.publishDate.toISOString()}>
+                <time class="ea-label ledger__date" datetime={post.data.publishDate.toISOString()}>
                   {shortDate.format(post.data.publishDate)}
                 </time>
                 <div class="ledger__main">
-                  <span class="meta ledger__cat" data-accent={accentFor(post.data.category)}>
-                    {post.data.category}
-                  </span>
-                  <h3 class="ledger__title">{post.data.title}</h3>
+                  <span class="ea-label ledger__cat">{post.data.category}</span>
+                  <h3 class="ea-h3 ledger__title">{post.data.title}</h3>
                 </div>
-                {post.data.readingTime && (
-                  <span class="meta ledger__read">{post.data.readingTime} min</span>
-                )}
+                {post.data.readingTime && <span class="ea-label ledger__read">{post.data.readingTime} min</span>}
                 <div class="ledger__thumb">
                   <PostImage slug={post.id} sizes="(min-width: 900px) 156px, 96px" />
                 </div>
@@ -214,58 +193,16 @@ const schema = [
         }
       </ol>
     </div>
-  </div>
+  </Band>
+
+  <Close />
 </Base>
 
 <style>
-  .bl {
-    position: relative;
-    padding-block: var(--sec-pad-y-hero) var(--sec-pad-y);
-  }
-
-  .bl__glow {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline: 0;
-    /* Absolute px, not a percentage: a glow sized in vh changes physical size
-       with the window and stops being the same piece of light. */
-    height: 900px;
-    background-image: var(--grad-stage);
-    pointer-events: none;
-  }
-
-  .bl__inner {
-    position: relative;
-    max-width: var(--measure);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
-  }
-
-  /* ── Head block ─────────────────────────────────────────────────────────
-     WHAT IS LEFT HERE IS POSITION AND SPACING, and that is the whole point.
-     `.bl__eyebrow`, its @supports guard, the bare `h1` rule and `.bl__lede`
-     were a hand-copy of Section's head block and have moved to
-     styles/headings.css, reached through PageHeader.
-
-     The z-index kept the head above the construction rails, which have gone
-     (see the note in the markup). It stays because `.bl__glow` is still an
-     absolutely positioned 900px sheet of light behind this block, and a
-     positioned ancestor with a declared layer is the cheapest guarantee that
-     the head never falls under it. The text-align has gone with the rest,
-     `.section__head` centres itself. */
-  .bl__head {
-    position: relative;
-    z-index: 1;
-    margin-bottom: var(--sec-gap);
-  }
-
-  /* ── Featured entry ─────────────────────────────────────────────────────
-     Card treatment, hover, lift and focus ring all come from `surface`.
-     Nothing here restates background, border, radius, shadow or backdrop:
-     see the note at the top of styles/surfaces.css. */
   .feat {
     position: relative;
     z-index: 1;
+    padding: clamp(var(--space-6), 3vw, var(--space-10));
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
@@ -312,24 +249,6 @@ const schema = [
     gap: 0.6rem;
     margin: 0;
     color: var(--c-text-muted);
-  }
-
-  /* ── Category accent ────────────────────────────────────────────────────
-     See the note over CATEGORY_ACCENTS in components/blog/heroes.ts: the map
-     is explicit so a category keeps one colour wherever it appears, and the
-     palette-rule conflict this creates was flagged before the pick. Anything
-     unmapped inherits the muted colour above. */
-  .feat__cat[data-accent='teal'],
-  .ledger__cat[data-accent='teal'] {
-    color: var(--c-ambient-start);
-  }
-  .feat__cat[data-accent='violet'],
-  .ledger__cat[data-accent='violet'] {
-    color: var(--c-ambient-end);
-  }
-  .feat__cat[data-accent='pink'],
-  .ledger__cat[data-accent='pink'] {
-    color: var(--c-ambient-far);
   }
 
   /* ── The ledger ─────────────────────────────────────────────────────────

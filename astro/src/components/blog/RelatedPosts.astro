@@ -30,11 +30,16 @@
  * are what the parity audit found missing and what a reader actually navigates
  * by.
  *
+ * DESIGN SYSTEM VERSION 3, 2026-10-22 (R285-WEB-ENTERPRISE-REDESIGN-01): a
+ * light alt Band with the shared ea-cards row, so every card in the row is one
+ * height and its link sits on one line.
+ *
  * HEADING LEVELS. h2 for the rail, h3 for each card. The page's only h1 is the
  * article headline in Article.astro and this component must never introduce a
  * second one.
  */
 import { getCollection } from 'astro:content';
+import Band from '../evidenced/Band.astro';
 import { RELATED_POSTS } from '../../data/blog-related';
 
 interface Props {
@@ -83,154 +88,39 @@ function derive() {
     .map((p) => p.id);
 }
 
+/** The row's column count follows the number of cards, so a row of four is
+    never three and one. */
+const COLS: Record<number, string> = { 2: 'ea-cards--2', 4: 'ea-cards--4' };
+
 const related = (configured ?? derive()).map((s) => bySlug.get(s)!).filter(Boolean);
 ---
 
 {
   related.length > 0 && (
-    <section class="related" aria-labelledby="related-articles-title">
-      <div class="related__inner">
-        <div class="related__head">
-          <p class="eyebrow">Continue reading</p>
-          <h2 class="related__title" id="related-articles-title">
-            Related articles
-          </h2>
+    <Band tone="light-alt" labelledby="related-articles-title">
+      <div class="ea-wrap">
+        <div class="ea-split__head" data-reveal>
+          <p class="ea-label">Continue reading</p>
+          <h2 class="ea-h2" id="related-articles-title">Related articles</h2>
         </div>
-        <ul class="related__grid">
+        <ul class:list={['ea-cards', COLS[related.length], 'related__grid']} role="list">
           {related.map((post) => (
-            <li class="related__item">
-              <a class="related__card surface" href={`/blog/${post.id}/`}>
-                <p class="eyebrow related__kicker">{post.data.category}</p>
-                <h3 class="related__card-title">{post.data.title}</h3>
-                <p class="related__cta">
-                  Read article
-                  <span aria-hidden="true">&nbsp;&rarr;</span>
-                </p>
+            <li data-reveal>
+              <a class="ea-card ea-tcard" href={`/blog/${post.id}/`}>
+                <p class="ea-label">{post.data.category}</p>
+                <h3 class="ea-h3">{post.data.title}</h3>
+                <span class="ea-tcard__more">Read article</span>
               </a>
             </li>
           ))}
         </ul>
       </div>
-    </section>
+    </Band>
   )
 }
 
 <style>
-  .related {
-    padding-block: var(--sec-pad-y);
-    border-top: 1px solid var(--c-border);
-  }
-
-  /*
-   * 960px, matching /blog. The article column is 720px because that is a
-   * reading measure for prose; a row of cards is not prose and would be
-   * squeezed to three narrow columns inside it. The legacy rail was likewise a
-   * full-width section outside the article column.
-   */
-  .related__inner {
-    max-width: var(--measure-mid);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
-  }
-
-  /*
-   * CENTRED HEAD BLOCK, GRADIENT EYEBROW - owner decision, 2026-08-02. The
-   * canonical implementation is components/layout/Section.astro. This rail is
-   * not a Section: Section owns the 1160px measure and this has to line up
-   * with the 960px article page it sits under, so the CENTRING is restated,
-   * exactly as Article.astro restates it.
-   *
-   * THE CAPSULE IS NOT RESTATED ANY MORE. Converted 2026-08-04, A-56/A-48.
-   * `.related__eyebrow` used to hold the whole eyebrow recipe - 0.5rem 0.85rem
-   * of padding, a 1px --c-border rule, --radius-pill, --c-ambient-start and the
-   * @supports gradient block - on a <p> that already carried `class="eyebrow"`.
-   * Twelve declarations, every one byte-identical to styles/labels.css, so the
-   * element got the same answer twice and nothing ever looked wrong. That is
-   * precisely the case a rendered gate cannot see: an identical copy has an
-   * identical fingerprint, so the site measured as having ONE eyebrow treatment
-   * while carrying six declarations of it, five of them waiting to drift.
-   * scripts/check-treatments.js rule 9 now fails the build on a seventh.
-   * (This cited rule 8 until 2026-08-04. Rule 8 is the mono micro-label, which
-   * no part of the capsule declares; the capsule is rule 9. Sector.astro and
-   * HeroStack.astro carried the identical swap.)
-   *
-   * WHAT REPLACED IT IS A HEAD BLOCK, NOT A REPLACEMENT RULE ON THE LABEL. The
-   * old rule centred the capsule with `display: block; width: fit-content;
-   * margin-inline: auto`, which labels.css argues against by name: a block that
-   * centres itself ignores its parent's alignment, so the label and the heading
-   * it introduces can drift apart. `.related__head` carries `text-align:
-   * center` and the shared `.eyebrow` stays inline-block, which is how
-   * Section.astro does it - two files, one mechanism.
-   *
-   * Nothing centres the card grid: it sits outside the head block, so the cards
-   * keep their own left-aligned text. That is the same containment rule Section
-   * applies to its slotted body.
-   */
-  .related__head {
-    text-align: center;
-  }
-
-  .related__title {
-    margin: 0 auto var(--sec-gap);
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: var(--t-w-h2);
-    line-height: 1.12;
-    letter-spacing: -0.015em;
-    color: var(--c-text);
-  }
-
   .related__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--stack-2);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .related__item {
-    display: flex;
-  }
-
-  /* Card treatment, hover, lift and focus ring come from `surface`. This
-     component had the border and background change but no lift and no change
-     of light, so it read differently from the compare and glossary cards. */
-  .related__card {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: var(--blk-pad);
-    text-decoration: none;
-    color: inherit;
-  }
-
-  /* The label recipe is `.eyebrow` in styles/labels.css. The display face was
-     the fork: this was one of four labels on the site set in Plus Jakarta Sans
-     where every other mono label is JetBrains Mono. */
-  .related__kicker {
-    color: var(--c-ambient-start);
-    margin: 0 0 0.5rem;
-  }
-
-  .related__card-title {
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--c-text);
-    margin: 0 0 0.75rem;
-  }
-
-  /* Pushed to the foot of the card so the affordance lines up across a row
-     whatever the title length. */
-  .related__cta {
-    margin: auto 0 0;
-    font-size: var(--t-body);
-    color: var(--c-text-muted);
-  }
-
-  .related__card:hover .related__cta {
-    color: var(--c-interactive);
+    margin-top: var(--ea-head-gap);
   }
 </style>
