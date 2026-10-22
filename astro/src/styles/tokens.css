@@ -3599,6 +3599,8 @@
   --stage-screen-ratio-narrow: 20 / 27;
   --stage-hero-ratio: 5 / 3;
   --stage-float-tuck: var(--space-12);
+  /* The inset of a panel stage's screen, also the copy's top offset beside it. */
+  --stage-pad-panel: clamp(var(--space-6), 3vw, var(--space-10));
   /* A real capture's frame shrinks to the picture (a portrait capture is
      narrow) but never below this, so its caption still reads in a few lines. */
   --ea-frame-shot-min: 22rem;

@@ -62,7 +62,7 @@ const headId = id && title ? `${id}-title` : undefined;
     }
     {
       title ? (
-        <div class="ea-band-body">
+        <div class={align === 'centre' ? 'ea-band-body ea-band-body--centre' : 'ea-band-body'}>
           <slot />
         </div>
       ) : (

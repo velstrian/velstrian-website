@@ -172,11 +172,15 @@ main .ea-sec * {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   gap: var(--space-8);
-  align-items: end;
+  /* Top aligned, lead on its column's left edge (2026-10-22 visual review).
+     Bottom alignment pushed a lead taller than its heading up past the h2 on
+     /resources/ and level with the eyebrow on /integrations/, and an end
+     justified lead started at a different x on every page. */
+  align-items: start;
 }
 
 .ea-head-row .ea-lead {
-  justify-self: end;
+  justify-self: start;
 }
 
 /* The document voice: quoted tender and evidence text only, inside a screen. */
@@ -454,7 +458,7 @@ main .ea-sec * {
    - every screen keeps one aspect ratio, --stage-screen-ratio, as a MINIMUM:
      content that needs more grows the screen rather than being cropped. */
 .ea-stage--panel {
-  --stage-pad: clamp(var(--space-6), 3vw, var(--space-10));
+  --stage-pad: var(--stage-pad-panel);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
 }
@@ -479,18 +483,13 @@ main .ea-sec * {
   justify-self: end;
   width: min(19rem, 72%);
   margin-top: calc(var(--stage-float-tuck) * -1);
-  /* The card hangs past the stage edge by the stage pad plus 16px, but NEVER
-     further than the room outside the stage. Measured before
-     (R285-WEB-REVIEW-2026-10-22 item 1): at 768 to 1280 the wrap's side room
-     (gutter plus the centring margin) is narrower than that hang, so the card
-     ran to x=782 at 768 and the page scrolled sideways by 13 to 22px on /,
-     /bid/ and /buy/. The second term is that side room less 16px, so the card
-     always stops 16px short of the viewport edge (100vw counts a classic
-     scrollbar, which the 16px covers). */
-  margin-right: calc(-1 * min(
-    var(--stage-pad) + var(--space-4),
-    var(--ea-gutter) + max(0px, (100vw - var(--ea-measure) - var(--ea-gutter) * 2) / 2) - var(--space-4)
-  ));
+  /* The card's right edge is the screen's right edge, inside the stage. It
+     used to hang past the stage by the pad plus 16px, which put it 56px
+     outside the content column at 1440 on /, /bid/ and /buy/ (owner, 2026-10-22:
+     cards "misaligned", visual review root cause 1), and at 768 to 1280 it
+     needed a viewport clamp to stop sideways scroll. Inside the stage neither
+     problem can exist. */
+  margin-right: var(--stage-pad);
 }
 
 /* The screen box. A figure with a ratio and visible overflow grows to fit
@@ -1248,6 +1247,11 @@ main .ea-sec * {
 }
 
 .ea-hero__note {
+  /* The tick sits on the line, beside the words (it stacked above them on
+     /resources/, 2026-10-22 review). */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   margin-top: var(--space-4);
   font-size: var(--t-ea-small);
   color: var(--ea-muted);
@@ -1499,7 +1503,9 @@ main .ea-sec * {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(var(--space-8), 1rem + 4vw, var(--space-16));
-  align-items: center;
+  /* Copy starts level with the screen's top edge, not floating in the middle
+     of a taller stage with dead space above and below it (2026-10-22 review). */
+  align-items: start;
   margin-top: var(--space-10);
 }
 
@@ -1520,6 +1526,12 @@ main .ea-sec * {
   line-height: 1.55;
   color: var(--ea-sub);
   text-wrap: pretty;
+}
+
+@media (min-width: 960px) {
+  .ea-panel > .ea-panel__copy {
+    padding-top: var(--stage-pad-panel);
+  }
 }
 
 .ea-panel__copy .ea-link {
@@ -2431,6 +2443,24 @@ a.ea-tcard:focus-visible {
   margin-inline: auto;
 }
 
+/* A centred head puts its buttons on the same axis. `.ea-actions` is an
+   inline grid, so it sat on the body's left edge under a centred heading
+   (/faq/ "Still have questions?", owner screenshot 2026-10-22). A block grid
+   at its content width with auto margins centres it and keeps the equal
+   tracks. Below 600px the row stacks full width, as everywhere else. */
+.ea-band-body--centre > .ea-actions {
+  display: grid;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+@media (max-width: 599px) {
+  .ea-band-body--centre > .ea-actions {
+    width: 100%;
+  }
+}
+
 .ea-sec .ea-band-head + *,
 .ea-sec .ea-head-row + .ea-band-body {
   margin-top: var(--ea-head-gap);
@@ -2914,8 +2944,9 @@ a.ea-tcard:focus-visible {
   }
 
   .ea-stage--panel .ea-stage__float {
-    width: calc(100% - var(--space-6));
-    margin-right: calc(var(--space-2) * -1);
+    /* The screen's width, on the screen's edges, as at every other width. */
+    width: calc(100% - var(--stage-pad) * 2);
+    margin-right: var(--stage-pad);
   }
 
   .ea-stage--centre {
