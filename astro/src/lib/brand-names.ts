@@ -69,6 +69,15 @@ export const LEGAL_ENTITY_LINE = `${LEGAL_ENTITY_NAME}, trading as ${PLATFORM_NA
 export const PUBLIC_EMAIL = "contact@velstrian.com";
 
 /**
+ * THE ONE PUBLIC REPLY TIME. Its value is the text the pages say today. D286
+ * ("within one business day") is ON HOLD while the owner reconfirms it
+ * (2026-10-22), so no page reads this yet and no reader sees a change. When it
+ * is confirmed, point contact.astro, faq.astro, partners.astro, ContactForm and
+ * PartnerForm at it and set the value once here.
+ */
+export const REPLY_TIME = "within three to five business days";
+
+/**
  * Published contact addresses for Velstrian, by purpose.
  * All route via Cloudflare Email Routing to the ops team.
  * A hardcoded address in page copy or scripts is a defect.
