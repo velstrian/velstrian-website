@@ -62,19 +62,30 @@ export const REGISTERED_OFFICE = "Reading, Berkshire RG1 6SP";
 export const LEGAL_ENTITY_LINE = `${LEGAL_ENTITY_NAME}, trading as ${PLATFORM_NAME}, company number ${COMPANY_NUMBER}`;
 
 /**
- * Published contact addresses for Velstrian.
+ * THE ONE PUBLIC MAILBOX (owner decision D280, 2026-10-22). Every general,
+ * support, sales and security message goes to this address, and every page
+ * reads it from here. Change it once here and the whole site follows.
+ */
+export const PUBLIC_EMAIL = "contact@velstrian.com";
+
+/**
+ * Published contact addresses for Velstrian, by purpose.
  * All route via Cloudflare Email Routing to the ops team.
  * A hardcoded address in page copy or scripts is a defect.
+ *
+ * hello, support, sales and security are the SAME mailbox under D280: the
+ * keys stay so a page can say what it is writing about, and they all resolve
+ * to PUBLIC_EMAIL. privacy, dpo and legal are outside D280 and unchanged.
  */
 export const CONTACT_EMAILS = {
-  hello: "hello@velstrian.com",
-  support: "support@velstrian.com",
-  security: "security@velstrian.com",
+  hello: PUBLIC_EMAIL,
+  support: PUBLIC_EMAIL,
+  security: PUBLIC_EMAIL,
   privacy: "privacy@velstrian.com",
   dpo: "dpo@velstrian.com",
   legal: "legal@velstrian.com",
-  sales: "sales@velstrian.com",
-  contact: "contact@velstrian.com",
+  sales: PUBLIC_EMAIL,
+  contact: PUBLIC_EMAIL,
 } as const;
 
 export const HELLO_EMAIL = CONTACT_EMAILS.hello;
@@ -86,5 +97,5 @@ export const LEGAL_EMAIL = CONTACT_EMAILS.legal;
 export const SALES_EMAIL = CONTACT_EMAILS.sales;
 export const CONTACT_EMAIL = CONTACT_EMAILS.contact;
 
-/** Display-name form of HELLO_EMAIL. */
+/** Display-name form of the public mailbox. */
 export const SUPPORT_FROM = `${PLATFORM_NAME} <${HELLO_EMAIL}>`;

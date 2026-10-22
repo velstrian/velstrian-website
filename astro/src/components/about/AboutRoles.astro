@@ -2,13 +2,20 @@
 /**
  * AboutRoles: the four reader perspectives (/about/, strategy 0.3, 0.4).
  *
- * A LIGHT ALT band. Addresses each of the four readers who touch a tender:
- *   1. Role 1: If you run the bid
- *   2. Role 2: If you sign it off
- *   3. Role 3: If you score it
- *   4. Role 4: If you have to deliver it
+ * A LIGHT ALT band. Addresses each of the four people who touch a bid:
+ *   1. If you write the bid
+ *   2. If you sign it off
+ *   3. If you score it
+ *   4. If you have to deliver it
  *
- * Every role carries a verified or refused statutory artefact cited to statute or policy.
+ * PLAIN WORDS FIRST (RULE 0-U, QRG fix 4, 2026-10-22). Each panel used to lead
+ * with an Act section number ("Procurement Act 2023, s.52", "s.71 duty") that a
+ * small business owner does not know. Each now leads with what the rule means
+ * for them in everyday words, and the legal reference sits underneath as a
+ * small note linked to its entry on /sources/, where the text of the rule and
+ * the official link are. The figures are the ones /sources/ records: s.52 at
+ * least 3 targets on a contract over 5 million pounds, s.71 a review at least
+ * every 12 months, PPN 026 from 1 January 2027 at 1 million pounds inc VAT.
  */
 import Band from '../evidenced/Band.astro';
 
@@ -19,8 +26,11 @@ interface Role {
   label: string;
   heading: string;
   body: string;
+  /** What it means for you, in everyday words. */
   figure: string;
+  /** The rule behind it, shown small. */
   source: string;
+  sourceHref?: string;
   mark: Mark;
   link?: { href: string; label: string };
 }
@@ -28,39 +38,42 @@ interface Role {
 const ROLES: Role[] = [
   {
     id: 'role-run',
-    label: 'If you run the bid',
-    heading: 'You need the answer to survive a year of scrutiny',
-    body: 'Everything you price in the response becomes a promise, and the authority publishes at award what it will hold you to. So the draft has to be answerable a year later, not just persuasive on the day.',
-    figure: '3 KPIs minimum, published at award',
-    source: 'Procurement Act 2023, s.52',
+    label: 'If you write the bid',
+    heading: 'Promise only what you can show later',
+    body: 'Whatever you promise in a bid becomes what the buyer checks you against once you win. So each answer keeps hold of the document that proves it, and still stands up a year later, not just on the day you send it.',
+    figure: 'On a public contract over 5 million pounds, the buyer normally publishes at least 3 targets you will be measured on',
+    source: 'The rule: Procurement Act 2023, section 52',
+    sourceHref: '/sources/#s52',
     mark: 'verified',
   },
   {
     id: 'role-sign',
     label: 'If you sign it off',
     heading: 'You are the one who has to stand behind the numbers',
-    body: 'A confident paragraph is not evidence. Every figure in a draft is either traced to your own confirmed data and shown with the source it came from, or listed as an open gap. Nothing is rounded into place to close one. That is a shorter review, and a defensible one.',
-    figure: 'Every figure, or an open gap',
-    source: 'No figure without a source',
+    body: 'A confident paragraph is not proof. Every figure in a draft either comes from your own records, with the source shown next to it, or is listed as a gap for you to fill. Nothing is rounded to make a gap disappear, so your review is shorter and you can defend what you sign.',
+    figure: 'Every figure shows its proof, or is listed as a gap',
+    source: 'Our rule: no figure without a source',
     mark: 'refused',
   },
   {
     id: 'role-score',
     label: 'If you score it',
     heading: 'You are deciding whether to believe a stranger',
-    body: 'The same engine that writes answers reads them. A claim arrives next to the clause it cites, so your check is a comparison rather than a judgement of tone.',
-    figure: '1 million pounds inc VAT threshold',
-    source: 'PPN 026, applies from 1 January 2027',
+    body: 'Each claim in a reply sits next to the document it came from. Checking it means comparing two things side by side, rather than guessing who sounds most convincing.',
+    figure: 'From 1 January 2027, central government contracts tendered at 1 million pounds or more (inc VAT) must give social value, the good a supplier does locally, at least 10% of the score',
+    source: 'The rule: PPN 026, the Social Value Model',
+    sourceHref: '/sources/#ppn-026',
     mark: 'verified',
-    link: { href: '/glossary/ppn-026', label: 'Read about the PPN 026 threshold' },
+    link: { href: '/glossary/ppn-026', label: 'What PPN 026 means, in plain words' },
   },
   {
     id: 'role-deliver',
     label: 'If you have to deliver it',
     heading: 'You inherit somebody else’s promises',
-    body: 'The commitments made at bid stage become the KPIs you are measured on. Each one stays attached to the evidence behind it, month by month, so the assessment is assembled from a record rather than reconstructed from memory.',
-    figure: '12 months to the assessment',
-    source: 'Procurement Act 2023, s.71',
+    body: 'The promises made in the bid become the targets you are measured on. Each one stays linked to the proof behind it, month by month, so the yearly review is put together from a record rather than from memory.',
+    figure: 'On those same contracts, the buyer reviews how you are doing against the targets at least once a year',
+    source: 'The rule: Procurement Act 2023, section 71',
+    sourceHref: '/sources/#s71',
     mark: 'verified',
   },
 ];
@@ -89,7 +102,11 @@ const ROLES: Role[] = [
                   <dt class="ea-art__figure">{r.figure}</dt>
                   <dd class="ea-art__source">
                     <span class={`chip__dot chip__dot--${r.mark}`} aria-hidden="true" />
-                    <span>{r.source}</span>
+                    {r.sourceHref ? (
+                      <a class="ea-link ea-art__ref" href={r.sourceHref}>{r.source}</a>
+                    ) : (
+                      <span>{r.source}</span>
+                    )}
                   </dd>
                 </dl>
               </div>
@@ -166,6 +183,12 @@ const ROLES: Role[] = [
     font-size: var(--t-micro);
     line-height: var(--lh-ea-snug);
     color: var(--ea-muted);
+  }
+
+  .ea-art__ref {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .chip__dot {

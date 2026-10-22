@@ -21,6 +21,12 @@
  * (data/product-captures.ts `contact-call-find`), shown on a stage like every
  * other product view on the site, its caption saying exactly what it is.
  *
+ * 2026-10-22, R285-WEB-TRANSFORMATION-WT-C (D280, QRG fixes 2 and 5): one
+ * public mailbox, PUBLIC_EMAIL (contact@velstrian.com), in place of four role
+ * mailboxes. The company card links the public Companies House record. The
+ * reply time keeps its true figure, three to five business days, said as what
+ * the reader gets: a considered answer from the team that built it.
+ *
  * `#contact-form` is the anchor every sitewide CTA links to. Never rename it.
  * SEO (title, description, canonical, breadcrumb) is carried over verbatim.
  */
@@ -34,7 +40,14 @@ import ContactForm from '../components/forms/ContactForm.astro';
 import NewsletterForm from '../components/forms/NewsletterForm.astro';
 import '../styles/evidenced.css';
 import { breadcrumbs } from '../lib/schema';
-import { CONTACT_EMAILS, COMPANY_NUMBER, LEGAL_ENTITY_NAME, PRODUCT_NAME_BID } from '../lib/brand-names';
+import {
+  PUBLIC_EMAIL,
+  COMPANY_NUMBER,
+  LEGAL_ENTITY_NAME,
+  PLATFORM_NAME,
+  PRODUCT_NAME_BID,
+  REGISTERED_OFFICE,
+} from '../lib/brand-names';
 import { WALKTHROUGH_URL } from '../data/app';
 
 const title = 'Contact Velstrian | Book a demo or ask a question';
@@ -46,12 +59,14 @@ const breadcrumb = breadcrumbs([
   { name: 'Contact', path: '/contact/' },
 ]);
 
-/** Who to email, and for what. */
-const DIRECTORY = [
-  { purpose: 'General and partnerships', address: CONTACT_EMAILS.hello },
-  { purpose: 'Support and data requests (GDPR)', address: CONTACT_EMAILS.support },
-  { purpose: 'Enterprise sales', address: CONTACT_EMAILS.sales },
-  { purpose: 'Security disclosures', address: CONTACT_EMAILS.security },
+const COMPANIES_HOUSE = `https://find-and-update.company-information.service.gov.uk/company/${COMPANY_NUMBER}`;
+
+/** What the one mailbox is for (D280: one address for all of these). */
+const MAILBOX_FOR = [
+  'Questions and partnerships',
+  'Help with your account, and data requests under UK GDPR',
+  'Portfolio plans and buying for a larger team',
+  'Reporting a security issue',
 ];
 
 /** The three ways to reach us, each card one link. Copy kept from the previous
@@ -68,26 +83,27 @@ const REACH = [
   {
     heading: 'Portfolio plan and volume licensing',
     body: 'Single sign-on is included on every plan. Talk to us about Portfolio contract terms, a DPA, invoice or purchase order billing, or more than 10 users.',
-    href: `mailto:${CONTACT_EMAILS.sales}?subject=Enterprise%20enquiry`,
-    action: 'Email sales',
+    href: `mailto:${PUBLIC_EMAIL}?subject=Portfolio%20enquiry`,
+    action: 'Email us about Portfolio',
     external: false,
   },
   {
     heading: 'Send us an email',
-    body: `${CONTACT_EMAILS.hello}. We respond within 3 to 5 business days.`,
-    href: `mailto:${CONTACT_EMAILS.hello}`,
-    action: CONTACT_EMAILS.hello,
+    body: 'One address for everything. A person from the team that built it reads every message and replies in three to five business days.',
+    href: `mailto:${PUBLIC_EMAIL}`,
+    action: PUBLIC_EMAIL,
     external: false,
   },
 ];
 
 const COMPANY = [
+  { term: 'Trading as', detail: PLATFORM_NAME },
   { term: 'Registration', detail: 'Registered in England and Wales' },
   { term: 'Companies House number', detail: COMPANY_NUMBER, mono: true },
   { term: 'Data protection', detail: 'ICO registered data controller' },
   { term: 'Data residency', detail: 'EU' },
-  { term: 'UK business hours', detail: 'Mon to Fri, 09:00 to 17:30 BST' },
-  { term: 'Response time', detail: 'Typically three to five business days' },
+  { term: 'UK business hours', detail: 'Mon to Fri, 09:00 to 17:30 UK time' },
+  { term: 'Reply time', detail: 'A considered reply in three to five business days' },
 ];
 
 const UPDATED = new Date('2026-10-22');
@@ -107,10 +123,10 @@ const UPDATED = new Date('2026-10-22');
     bandId="contact-hero"
     label="Contact"
     title="Talk to Velstrian."
-    lead="Book a call, send us a message or email us. We reply within three to five business days, and the person who replies is on the team that built it."
+    lead="Book a call, send us a message or email us. Every message is read by the team that built Velstrian, and you get a considered reply in three to five business days."
   >
     <Action href={WALKTHROUGH_URL} newWindow>Book a 30-minute call</Action>
-    <Action href={`mailto:${CONTACT_EMAILS.hello}`} variant="secondary">Email us</Action>
+    <Action href={`mailto:${PUBLIC_EMAIL}`} variant="secondary">Email us</Action>
   </PageHero>
 
   <Band tone="light" id="reach" class="ct-reach">
@@ -135,7 +151,7 @@ const UPDATED = new Date('2026-10-22');
         }
       </ul>
       <p class="ct-reach__trust" data-reveal>
-        Response within 3 to 5 business days. Founded in the UK. No outsourced support.
+        A UK company. Every reply comes from the team that built it, in three to five business days.
       </p>
     </div>
   </Band>
@@ -189,18 +205,13 @@ const UPDATED = new Date('2026-10-22');
 
         <aside class="ea-card ct-pane" aria-labelledby="directory-title" data-reveal>
           <h3 class="ea-h3" id="directory-title">How to reach us by email</h3>
-          <dl class="ct-list">
-            {
-              DIRECTORY.map((d) => (
-                <div class="ct-list__row">
-                  <dt>{d.purpose}</dt>
-                  <dd>
-                    <a class="ct-list__link" href={`mailto:${d.address}`}>{d.address}</a>
-                  </dd>
-                </div>
-              ))
-            }
-          </dl>
+          <p class="ct-mailbox__intro">One address for everything:</p>
+          <p class="ct-mailbox">
+            <a class="ct-list__link ct-mailbox__link" href={`mailto:${PUBLIC_EMAIL}`}>{PUBLIC_EMAIL}</a>
+          </p>
+          <ul class="ct-mailbox__for">
+            {MAILBOX_FOR.map((m) => <li>{m}</li>)}
+          </ul>
 
           <h3 class="ea-h3 ct-pane__next" id="company-title">{LEGAL_ENTITY_NAME}</h3>
           <dl class="ct-list" aria-labelledby="company-title">
@@ -212,11 +223,15 @@ const UPDATED = new Date('2026-10-22');
                 </div>
               ))
             }
+            <!-- REVIEW: registered office address needs owner confirmation before publishing -->
             <div class="ct-list__row">
               <dt>Registered office</dt>
-              <dd>Details in our <a class="ct-list__link" href="/privacy/">Privacy Policy</a></dd>
+              <dd>{REGISTERED_OFFICE}</dd>
             </div>
           </dl>
+          <a class="ct-list__link ct-mailbox__link" href={COMPANIES_HOUSE} target="_blank" rel="noopener noreferrer">
+            Check us on Companies House<span class="visually-hidden"> (opens in a new window)</span>
+          </a>
         </aside>
       </div>
     </div>
@@ -301,6 +316,31 @@ const UPDATED = new Date('2026-10-22');
   .ct-list__link {
     color: var(--ea-accent-ink);
     text-underline-offset: 4px;
+  }
+
+  .ct-mailbox__intro {
+    margin: 0;
+    color: var(--ea-muted);
+  }
+
+  .ct-mailbox {
+    margin: 0;
+    font-size: var(--t-ea-lead);
+  }
+
+  .ct-mailbox__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    overflow-wrap: anywhere;
+  }
+
+  .ct-mailbox__for {
+    margin: 0;
+    padding-inline-start: var(--space-5);
+    display: grid;
+    gap: var(--space-2);
+    color: var(--ea-muted);
   }
 
   /* ── Digest ────────────────────────────────────────────────────────────── */

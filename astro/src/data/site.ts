@@ -12,15 +12,16 @@
  * `crowagent.platform@gmail.com` / "Crow Agent". That is a cross-project
  * copy/paste defect (those are the `crowagent-platform` repo's identity
  * strings, not this website's) and is NOT carried forward here. Every
- * contact surface in this file uses `hello@velstrian.com`, matching the
- * footer, contact page and every other page's structured data.
+ * contact surface in this file uses PUBLIC_EMAIL from lib/brand-names.ts, the
+ * one public mailbox (owner decision D280, 2026-10-22), matching the footer,
+ * contact page and every other page's structured data.
  */
 
 import {
   PLATFORM_NAME,
   PLATFORM_SHORT_NAME,
   LEGAL_ENTITY_NAME,
-  HELLO_EMAIL,
+  PUBLIC_EMAIL,
   COMPANY_NUMBER,
   SITE_ORIGIN,
   STATUS_URL,
@@ -79,7 +80,7 @@ export const SITE = {
   statusUrl: STATUS_URL,
   defaultOgImage: ogImageUrl('/Assets/og-image.png'),
   twitter: '@VelstrianLtd',
-  email: HELLO_EMAIL,
+  email: PUBLIC_EMAIL,
 
   /**
    * The Organization JSON-LD node, emitted on every page by Seo.astro as
@@ -93,7 +94,7 @@ export const SITE = {
     url: `${SITE_ORIGIN}/`,
     logo: ogImageUrl('/Assets/og-image.png'),
     description: SITE_SUMMARY,
-    email: HELLO_EMAIL,
+    email: PUBLIC_EMAIL,
     identifier: { '@type': 'PropertyValue', name: 'Companies House', value: COMPANY_NUMBER },
     address: { '@type': 'PostalAddress', addressCountry: 'GB' },
     sameAs: [

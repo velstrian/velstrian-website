@@ -4,18 +4,22 @@
  *
  * A LIGHT band. Opens with the plain sentence: "Written for the people who write bids. Readable by
  * the people who score them." Lead names the four roles. Two action buttons: Book a
- * 30-minute call (primary) and Send a question (secondary). A reassurance note on who
- * builds it. Four navigation chips for the four readers, and an evidenced tender
- * review screen floating on the stage beneath.
+ * 30-minute call (primary) and Send a question (secondary). A note naming the company
+ * behind it, linked to its public record so a reader can check it (QRG fix 1, D279: the
+ * company, not people, and no claim a reader cannot check). Four navigation chips for the
+ * four readers, and an evidenced tender review screen floating on the stage beneath.
  */
 import Band from '../evidenced/Band.astro';
 import Action from '../evidenced/Action.astro';
 import Stage from '../evidenced/Stage.astro';
 import Frame from '../evidenced/Frame.astro';
 import { WALKTHROUGH_URL } from '../../data/app';
+import { LEGAL_ENTITY_NAME, COMPANY_NUMBER } from '../../lib/brand-names';
+
+const COMPANIES_HOUSE = `https://find-and-update.company-information.service.gov.uk/company/${COMPANY_NUMBER}`;
 
 const ROLES = [
-  { id: 'role-run', label: 'If you run the bid', mark: 'verified' },
+  { id: 'role-run', label: 'If you write the bid', mark: 'verified' },
   { id: 'role-sign', label: 'If you sign it off', mark: 'refused' },
   { id: 'role-score', label: 'If you score it', mark: 'verified' },
   { id: 'role-deliver', label: 'If you have to deliver it', mark: 'verified' },
@@ -28,7 +32,7 @@ const ROLES = [
       Written for the people who write bids. Readable by the people who score them.
     </h1>
     <p class="ea-lead ea-hero__lead">
-      Four people touch a tender and want four different things from it: the bidder, the sign-off, the evaluator and the delivery lead. The sections below are addressed to each of them in turn.
+      Four people touch every bid, public or private, and each wants something different: the person who writes it, the person who signs it off, the buyer who scores it and the person who delivers the work. Pick yours below.
     </p>
 
     <div class="ea-actions">
@@ -52,30 +56,31 @@ const ROLES = [
     </nav>
 
     <p class="ea-hero__note">
-      An engineering team builds it, advised by people with bid and consulting experience who have written and won public sector bids.
+      Made by {LEGAL_ENTITY_NAME}, a UK company registered in England and Wales, number {COMPANY_NUMBER}.
+      <a class="ea-link" href={COMPANIES_HOUSE} target="_blank" rel="noopener noreferrer">Check the public record on Companies House<span class="visually-hidden"> (opens in a new window)</span></a>
     </p>
   </div>
 
   <div class="ea-wrap">
     <Stage layout="hero">
       <Frame
-        title="Tender response: Four role perspectives"
-        status="Evidence linked"
+        title="One answer, four readers"
+        status="Proof attached"
         capture="about-hero"
-        caption="One evidenced response clause viewed across all four roles: citation link, sign-off refusal check, panel score and KPI obligation."
+        caption="One answer seen by all four people: where it came from, a figure with no proof flagged, the buyer's score and the promises to deliver."
       >
         <div class="ea-app-split">
           <ol class="ea-app-qs">
             <li class="is-current">
-              <span>Section 3.1: Social value commitments</span>
+              <span>Section 3.1: What you give back locally (social value)</span>
               <span class="ea-chip ea-chip--ok">Evidenced</span>
             </li>
             <li>
-              <span>Section 4.2: Information security controls</span>
+              <span>Section 4.2: Keeping information secure</span>
               <span class="ea-chip ea-chip--ok">Verified</span>
             </li>
             <li>
-              <span>Section 5.1: KPI reporting schedule</span>
+              <span>Section 5.1: How you will report progress</span>
               <span class="ea-chip ea-chip--ok">Assessed</span>
             </li>
             <li>
@@ -84,21 +89,21 @@ const ROLES = [
             </li>
           </ol>
           <div class="ea-app-answer">
-            <p class="ea-label">Role 1: Run the bid, evidenced answer with citations</p>
+            <p class="ea-label">If you write it: an answer that shows where it came from</p>
             <p>
               We provide two apprenticeships per contract year, recruited from the local borough. Every milestone traces to our existing apprenticeship partnership agreement. <span class="ea-src-chip">Apprenticeship Agreement 2026, clause 3.2</span>
             </p>
-            <p class="ea-label">Role 2: Sign-off, refusal scan on unbacked figures</p>
+            <p class="ea-label">If you sign it off: any figure without proof is flagged</p>
             <p>
-              Draft figure "99.8% customer retention" checked against company records: <span class="ea-chip ea-chip--held">Unbacked figure struck: open gap</span>
+              Draft figure "99.8% customer retention" checked against your records: <span class="ea-chip ea-chip--held">No proof found: left as a gap to fill</span>
             </p>
-            <p class="ea-label">Role 3: Score it, evaluator check against published rubric</p>
+            <p class="ea-label">If you score it: the claim sits next to its proof</p>
             <p>
-              Evidence matches published criterion. Score set by evaluation panel: <span class="ea-chip ea-chip--ok">Panel score: 5 / 5</span>
+              The proof matches what the buyer asked for. The score is the buyer's own: <span class="ea-chip ea-chip--ok">Panel score: 5 / 5</span>
             </p>
-            <p class="ea-label">Role 4: Deliver it, Procurement Act 2023 s.71 duty</p>
+            <p class="ea-label">If you deliver it: every promise you made, tracked</p>
             <p>
-              Contract obligations assembly: <span class="ea-chip ea-chip--ok">3 published KPIs tracked to annual assessment</span>
+              What you promised, kept ready for the yearly review: <span class="ea-chip ea-chip--ok">3 published targets tracked</span>
             </p>
           </div>
         </div>

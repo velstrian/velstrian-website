@@ -4,12 +4,24 @@
  *
  * A LIGHT band. Keeps the side-by-side layout: vertical rail timeline on the left
  * and sticky company registration card on the right.
+ *
+ * 2026-10-22, R285-WEB-TRANSFORMATION-WT-C (D279, D280, QRG fix 2): the
+ * "2010 to 2025 founding team experience" milestone is removed, because it
+ * could not be confirmed. The company card now carries the trading name, a
+ * link to the public Companies House record so anyone can verify the company,
+ * the registered office as the central REGISTERED_OFFICE constant (town and
+ * postcode only, already published on /privacy/), and the one public mailbox.
  */
 import Band from '../evidenced/Band.astro';
-import { HELLO_EMAIL } from '../../lib/brand-names';
+import {
+  PUBLIC_EMAIL,
+  COMPANY_NUMBER,
+  LEGAL_ENTITY_NAME,
+  PLATFORM_NAME,
+  REGISTERED_OFFICE,
+} from '../../lib/brand-names';
 
-const COMPANIES_HOUSE =
-  'https://find-and-update.company-information.service.gov.uk/company/17076461';
+const COMPANIES_HOUSE = `https://find-and-update.company-information.service.gov.uk/company/${COMPANY_NUMBER}`;
 
 type Status = 'done' | 'now' | 'planned';
 
@@ -23,15 +35,9 @@ interface Milestone {
 
 const TIMELINE: Milestone[] = [
   {
-    when: '2010 to 2025',
-    heading: 'Founding team experience',
-    body: 'Bid and tender work inside regulated industries from 2010, including multi-million pound bids written, won and delivered to completion. That is the founders’ own record before Velstrian, not a result of the product. It is also where we saw at first hand how much of the friction smaller suppliers face is evidence that exists and cannot be found.',
-    status: 'done',
-  },
-  {
     when: 'Jan to Feb 2026',
-    heading: 'Regulatory research',
-    body: 'Deep dive into the statutory frameworks the product is built on, before the company existed: the Social Value Model, and the KPI duties in the Procurement Act 2023.',
+    heading: 'Reading the rules first',
+    body: 'Before the company existed, we studied the rules the product is built on: the Social Value Model, and the duties in the Procurement Act 2023 to set and review performance targets.',
     status: 'done',
   },
   {
@@ -62,9 +68,14 @@ const STATUS_LABEL: Record<Status, string> = {
 };
 
 const COMPANY = [
+  { label: 'Trading as', value: PLATFORM_NAME },
   { label: 'Registered in', value: 'England and Wales' },
-  { label: 'Company number', value: '17076461', mono: true },
+  { label: 'Company number', value: COMPANY_NUMBER, mono: true },
   { label: 'Founded', value: 'March 2026' },
+  /* REVIEW: registered office address needs owner confirmation before publishing.
+     Only the town and postcode are shown (REGISTERED_OFFICE, already on /privacy/).
+     The street line is NOT published here: it may be a private residence. */
+  { label: 'Registered office', value: REGISTERED_OFFICE },
 ];
 ---
 
@@ -109,7 +120,8 @@ const COMPANY = [
         <div class="hist-sticky">
           <div class="surface surface--pad company-card" id="company" data-reveal>
             <span class="ea-label">Company details</span>
-            <h2 class="ea-h3 company-card__title">Velstrian Systems Ltd</h2>
+            <h2 class="ea-h3 company-card__title">{LEGAL_ENTITY_NAME}</h2>
+            <!-- REVIEW: registered office address needs owner confirmation before publishing -->
             <dl class="company-list">
               {
                 COMPANY.map((c) => (
@@ -121,9 +133,12 @@ const COMPANY = [
               }
               <div class="company-row">
                 <dt>Contact</dt>
-                <dd><a class="ea-link" href={`mailto:${HELLO_EMAIL}`}>{HELLO_EMAIL}</a></dd>
+                <dd><a class="ea-link company-link" href={`mailto:${PUBLIC_EMAIL}`}>{PUBLIC_EMAIL}</a></dd>
               </div>
             </dl>
+            <a class="ea-link company-link" href={COMPANIES_HOUSE} target="_blank" rel="noopener noreferrer">
+              Check us on Companies House<span class="visually-hidden"> (opens in a new window)</span>
+            </a>
           </div>
         </div>
       </div>
@@ -255,6 +270,12 @@ const COMPANY = [
     color: var(--ea-ink);
     text-align: end;
     overflow-wrap: anywhere;
+  }
+
+  .company-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .company-row dd.is-mono {

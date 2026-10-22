@@ -2,41 +2,76 @@
 /**
  * AboutStory: who is behind it, and what we stand for (/about/, strategy 0.3, 0.4, 0.8).
  *
- * A DARK band. Combines the engineering and advice background with the company's
- * three foundational principles (Mission, Vision, Values).
- * A photo of people at work sits between the intro and the two cards. It is
- * illustrative (generated, credited in image-credits.json), never presented as
- * our staff or a customer.
+ * A DARK band.
+ *
+ * ── 2026-10-22: THE COMPANY, NOT PEOPLE, AND ONLY WHAT A READER CAN CHECK ────
+ * R285-WEB-TRANSFORMATION-WT-C (audit M5 and S6, owner decision D279, QRG fix 1).
+ *
+ * This band used to say "Built by engineers who read the rules" above a staged
+ * stock photo of two unnamed people, and claimed advisers "who have written and
+ * won public sector bids", with nothing a reader could check. The owner chose to
+ * show the company rather than people (D279), so:
+ *
+ *   - the photo is gone. In its place is a REAL screen from a demo account
+ *     (data/product-captures.ts `screen-answer-library`, captured from staging
+ *     by the harness), shown on a stage like every other product view;
+ *   - the advisers line is gone. In its place are three facts a reader can
+ *     check through a link: the company record on Companies House, the
+ *     official notice sites the product reads (the live list in
+ *     data/site-facts.json `sources.live`, generated from the platform's
+ *     bid_markets.json), and the official rules it follows, on /sources/;
+ *   - the three principles are a ruled row (.ea-steps__list) rather than a
+ *     third row of identical cards, so the band has one real screen, one list
+ *     and one row, not three rows of boxes.
  */
 import Band from '../evidenced/Band.astro';
-import Photo from '../ui/Photo.astro';
+import Stage from '../evidenced/Stage.astro';
+import Frame from '../evidenced/Frame.astro';
+import { LEGAL_ENTITY_NAME, PLATFORM_NAME, COMPANY_NUMBER, PRODUCT_NAME_BID } from '../../lib/brand-names';
+import { LIVE_SOURCES } from '../../data/site-facts';
 
-const APPROACH = [
+const COMPANIES_HOUSE = `https://find-and-update.company-information.service.gov.uk/company/${COMPANY_NUMBER}`;
+
+
+interface Check {
+  term: string;
+  body: string;
+  link: { href: string; label: string; external?: boolean };
+}
+
+const CHECKS: Check[] = [
   {
-    eyebrow: 'Who builds it',
-    body: 'An engineering team builds it, advised by people with bid and consulting experience who have written and won public sector bids. That advice decides what gets built rather than how, and it is why the product starts where the marks are actually lost: evidence the supplier already holds, that nobody can put a hand on in time.',
+    term: 'The company',
+    body: `${LEGAL_ENTITY_NAME}, trading as ${PLATFORM_NAME}. Registered in England and Wales, company number ${COMPANY_NUMBER}.`,
+    link: { href: COMPANIES_HOUSE, label: 'See the public record on Companies House', external: true },
   },
   {
-    eyebrow: 'How it is built',
-    body: 'Every feature starts from the source rule rather than a template. PPN 026 for social value, and the two separate KPI duties in the Procurement Act 2023: under s.52 an authority sets and publishes at least 3 KPIs on a contract over £5m, and under s.71 it assesses performance against them at least every twelve months. Each answer carries the clause it was written against.',
+    term: 'Where the contracts come from',
+    body: `${PRODUCT_NAME_BID} reads the official notice sites where buyers advertise work: ${LIVE_SOURCES}. You can also upload a private contract you were sent yourself.`,
+    link: { href: '/sources/', label: 'See every source we use' },
+  },
+  {
+    term: 'The rules it follows',
+    body: 'The Procurement Act 2023 and PPN 026, the government’s guidance on social value. Each answer shows the rule it was written against, so you can read the rule yourself.',
+    link: { href: '/sources/#s52', label: 'Read the rules, with links to the official text' },
   },
 ];
 
 const PRINCIPLES = [
   {
     kicker: 'Mission',
-    heading: 'Make bidding answerable, whatever your size',
-    body: 'Size and budget should not decide who can answer a requirement properly. UK public procurement is where we prove that, because its duties are published and anyone can check our reading of them against the instrument.',
+    heading: 'Make bidding fair, whatever your size',
+    body: 'Size and budget should not decide who can answer a buyer properly. Public contracts are where we prove it, because their rules are published and anyone can check our reading of them.',
   },
   {
     kicker: 'Vision',
-    heading: 'Answers you can defend, first time',
-    body: 'A market where a supplier answers a tender requirement from evidence it already holds, without paying a bid-writing consultancy to assemble it.',
+    heading: 'Answers you can stand behind, first time',
+    body: 'A market where any business, public or private, answers a buyer from proof it already holds, without paying a bid consultancy to gather it.',
   },
   {
     kicker: 'Values',
-    heading: 'Statute over speculation',
-    body: 'Every claim we make traces to a source, on this page and in every draft. That is why you will find no win rates and no named customers here.',
+    heading: 'Proof over promises',
+    body: 'Every claim we make points to its source, on this page and in every draft. That is why you will find no win rates and no named customers here.',
   },
 ];
 ---
@@ -46,26 +81,42 @@ const PRINCIPLES = [
     <div class="ea-head-row" data-reveal>
       <div>
         <span class="ea-label">Who is behind it</span>
-        <h2 class="ea-h2" id="story-title">Built by engineers who read the rules.</h2>
+        <h2 class="ea-h2" id="story-title">A UK company you can check.</h2>
       </div>
       <p class="ea-lead">
-        Engineering discipline meets consulting experience from writing and winning public sector tenders.
+        No promises you have to take on trust. Each fact below has a link, so you can see it for yourself.
       </p>
     </div>
 
-    <div class="story-photo" data-reveal>
-      <Photo name="r285-gemini/people-small-team" widths={[1024, 2048]} sizes="(min-width: 1200px) 1120px, 100vw" />
-    </div>
-
-    <div class="story-pair">
-      {
-        APPROACH.map((a) => (
-          <div class="surface surface--pad story-pair__card" data-reveal>
-            <p class="ea-label">{a.eyebrow}</p>
-            <p class="story-pair__body">{a.body}</p>
-          </div>
-        ))
-      }
+    <div class="ea-panel ea-panel--row story-panel">
+      <div class="ea-panel__copy" data-reveal>
+        <ol class="story-checks">
+          {
+            CHECKS.map((c) => (
+              <li class="story-check">
+                <h3 class="ea-h3 story-check__h">{c.term}</h3>
+                <p class="story-check__p">{c.body}</p>
+                <a
+                  class="ea-link story-check__a"
+                  href={c.link.href}
+                  target={c.link.external ? '_blank' : undefined}
+                  rel={c.link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {c.link.label}
+                  {c.link.external && <span class="visually-hidden"> (opens in a new window)</span>}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <Stage layout="panel">
+        <Frame
+          title="An answer from your own documents"
+          capture="screen-answer-library"
+          caption="A real screen from a demo account: an answer drafted from your own documents."
+        />
+      </Stage>
     </div>
 
     <div class="story-principles-head" data-reveal>
@@ -73,40 +124,52 @@ const PRINCIPLES = [
       <h3 class="ea-h2" id="principles">What we stand for.</h3>
     </div>
 
-    <ul class="story-principles">
+    <ol class="ea-steps__list story-principles">
       {
         PRINCIPLES.map((p) => (
-          <li class="surface surface--pad story-principle" data-reveal>
+          <li class="ea-step" data-reveal>
             <p class="ea-label">{p.kicker}</p>
             <h4 class="ea-h3 story-principle__h">{p.heading}</h4>
             <p class="story-principle__body">{p.body}</p>
           </li>
         ))
       }
-    </ul>
+    </ol>
   </div>
 </Band>
 
 <style>
-  .story-pair {
+  .story-checks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-6);
-    margin-top: var(--space-10);
+    border-top: 1px solid var(--ea-rule);
   }
 
-  .story-pair__card {
-    padding: clamp(var(--space-6), 3vw, var(--space-8));
+  .story-check {
     display: grid;
-    align-content: start;
-    gap: var(--space-3);
+    gap: var(--space-2);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--ea-rule);
   }
 
-  .story-pair__body {
+  .story-check__h {
+    margin: 0;
+  }
+
+  .story-check__p {
     margin: 0;
     font-size: var(--t-ea-body);
     line-height: var(--lh-ea-body);
     color: var(--ea-muted);
+  }
+
+  .story-check__a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    justify-self: start;
   }
 
   .story-principles-head {
@@ -119,16 +182,6 @@ const PRINCIPLES = [
     list-style: none;
     margin: var(--space-8) 0 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-6);
-  }
-
-  .story-principle {
-    padding: clamp(var(--space-6), 3vw, var(--space-8));
-    display: grid;
-    align-content: start;
-    gap: var(--space-3);
   }
 
   .story-principle__h {
@@ -139,17 +192,5 @@ const PRINCIPLES = [
     margin: 0;
     font-size: var(--t-ea-body);
     line-height: var(--lh-ea-body);
-    color: var(--ea-muted);
-  }
-
-  @media (max-width: 959px) {
-    .story-pair,
-    .story-principles {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  .story-photo {
-    margin-block: var(--space-10);
   }
 </style>
