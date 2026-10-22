@@ -460,7 +460,18 @@ main > .ea-sec * {
   justify-self: end;
   width: min(19rem, 72%);
   margin-top: calc(var(--stage-float-tuck) * -1);
-  margin-right: calc(var(--stage-pad) * -1 - var(--space-4));
+  /* The card hangs past the stage edge by the stage pad plus 16px, but NEVER
+     further than the room outside the stage. Measured before
+     (R285-WEB-REVIEW-2026-10-22 item 1): at 768 to 1280 the wrap's side room
+     (gutter plus the centring margin) is narrower than that hang, so the card
+     ran to x=782 at 768 and the page scrolled sideways by 13 to 22px on /,
+     /bid/ and /buy/. The second term is that side room less 16px, so the card
+     always stops 16px short of the viewport edge (100vw counts a classic
+     scrollbar, which the 16px covers). */
+  margin-right: calc(-1 * min(
+    var(--stage-pad) + var(--space-4),
+    var(--ea-gutter) + max(0px, (100vw - var(--ea-measure) - var(--ea-gutter) * 2) / 2) - var(--space-4)
+  ));
 }
 
 /* The screen box. A figure with a ratio and visible overflow grows to fit
@@ -563,13 +574,19 @@ main > .ea-sec * {
   box-shadow: var(--elev-floating);
 }
 
+/* The title bar wraps rather than squeezing (R285-WEB-REVIEW-2026-10-22 item
+   10). At 375 the hero title "Question 4 of 6: cover when staff are off" ran
+   to three lines beside its "2 claims checked" badge. The title now keeps its
+   full width and the badge drops to its own line under it when both do not
+   fit on one, with a little vertical padding so two lines sit in the bar. */
 .ea-frame__bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-1) var(--space-4);
   min-height: var(--ea-bar-h);
-  padding: 0 var(--space-5);
+  padding: var(--space-2) var(--space-5);
   border-bottom: 1px solid var(--ea-rule);
   background: var(--ea-well);
   font-size: var(--t-ea-tiny);
