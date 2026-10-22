@@ -3177,6 +3177,14 @@
       "title": "R285-WEB-SCROLL-MOTION-02 /about/ and /roadmap/ timeline rail fills on scroll and stops light as items arrive (5bfef45b)",
       "status": "FIXED",
       "note": "CSS only, zero JS. Rail fill scroll driven in motion.css, stops settle once on the reveal clock, reduced motion shows rail full and stops lit. Measured frames at 1440 and 390."
+    },
+    {
+      "id": "A-326",
+      "src": "driver-2026-10-22",
+      "sev": "P1",
+      "title": "R285-WEB-FIGMA-SCREENS-01 product screens and panels designed in Figma, exported for the website",
+      "status": "BUILT",
+      "note": "Figma KO4JkhUrCvvopjP8E8zQLa page Screens. 10 Screens (1440x900) and 11 Panels (1200x900, 2x of 600x450) built from the real app tokens, each screenshot checked and fixed, exported to Assets/product-screens/ and recorded in astro/src/data/product-screens.json. 3 coded explainer specs in Figma only (hero answer, refusal check, fit breakdown). Buyer scores 0 to 100, no win rate tile, no email forwarding, no beta or test mode, no example labels. NOT wired into pages: integration lane after lane Y. Handoff docs/design/R285-FIGMA-SCREENS-HANDOFF.md."
     }
   ],
   "directives": [
@@ -3246,5 +3254,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 325
+  "nextId": 327
 }
