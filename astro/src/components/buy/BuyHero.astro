@@ -16,7 +16,9 @@ import Action from '../evidenced/Action.astro';
 import Frame from '../evidenced/Frame.astro';
 import Stage from '../evidenced/Stage.astro';
 import Sequence from '../evidenced/Sequence.astro';
-import { BUYER_PLANS, startHref, START_LABEL } from '../../data/pricing';
+/* D275: the one start label with the one trial line beside it. Buyer Pro has
+   the same 7 day trial as Velstrian Bid (D278, catalogue.ts trialAllowance). */
+import { BUYER_PLANS, startHref, START_LABEL, TRIAL_NOTE } from '../../data/pricing';
 import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
 
 const [BUYER_PRO] = BUYER_PLANS;
@@ -32,28 +34,28 @@ const [BUYER_PRO] = BUYER_PLANS;
       <Action href={startHref(BUYER_PRO.planKey)}>{START_LABEL}</Action>
       <Action href="#what-it-does" variant="secondary">See how it works</Action>
     </div>
-    <p class="ea-hero__note">Your panel evaluates and scores. The AI never sets, changes or suggests a mark.</p>
+    <p class="ea-hero__note">Your team does all the scoring. {TRIAL_NOTE}</p>
   </div>
 
   <div class="ea-wrap">
     <Stage layout="hero">
       <Frame
-        title="Evaluation: Local employment and apprenticeships"
-        status="3 quotes received"
+        title="Scoring: local jobs and apprenticeships"
+        status="3 replies received"
         capture="buy-hero"
-        caption="A criterion evaluation, with located passages from supplier bids and panel scores entered by evaluators."
+        caption="One question, the proof found in a supplier's reply, and the score your panel gave it."
       >
         <div class="ea-app-split">
           <ol class="ea-app-qs">
-            <li class="is-current"><span>Criterion 3.2 · Local employment</span><span class="ea-chip ea-chip--ok">Evaluated</span></li>
-            <li><span>Criterion 3.3 · Living wage commitment</span><span class="ea-chip ea-chip--ok">Evaluated</span></li>
-            <li><span>Criterion 4.1 · Environmental management</span><span class="ea-chip ea-chip--ok">Evaluated</span></li>
-            <li><span>Schedule B · Price schedule normalisation</span><span class="ea-chip">Completed</span></li>
+            <li class="is-current"><span>Question 3.2, local jobs</span><span class="ea-chip ea-chip--ok">Scored</span></li>
+            <li><span>Question 3.3, fair pay</span><span class="ea-chip ea-chip--ok">Scored</span></li>
+            <li><span>Question 4.1, less waste</span><span class="ea-chip ea-chip--ok">Scored</span></li>
+            <li><span>Prices, lined up to compare</span><span class="ea-chip">Done</span></li>
           </ol>
           <div class="ea-app-answer">
-            <p class="ea-label">Evidence located in response · Bidder 01</p>
+            <p class="ea-label">Proof found in the reply from supplier 1</p>
             <p>Two apprenticeship starts in the first contract year, both recruited from the borough, with a named site supervisor accountable for completion. <span class="ea-src-chip">Section 4.1, page 12</span></p>
-            <p class="ea-label">Entered by your panel evaluator</p>
+            <p class="ea-label">Your panel's note and score</p>
             <p>Specific commitment with an accountable named supervisor and a local recruitment target. <span class="ea-chip ea-chip--ok">Panel score: 4 / 5</span></p>
           </div>
         </div>
@@ -63,10 +65,10 @@ const [BUYER_PRO] = BUYER_PLANS;
         play="load"
         title="Facilities support, housing association"
         steps={[
-          { label: 'Request published', detail: 'Sent to 4 suppliers by personal link' },
-          { label: '4 quotes collected', detail: 'Instant receipts issued for each' },
-          { label: 'Evidence located verbatim', detail: 'Quotes found for each criterion' },
-          { label: 'Scores entered by your panel', detail: 'Evaluator scored, AI never marks', state: 'done' },
+          { label: 'Request sent', detail: 'To 4 suppliers, each by their own link' },
+          { label: '4 replies in', detail: 'Each supplier got a receipt' },
+          { label: 'Proof found for each question', detail: 'Quoted word for word' },
+          { label: 'Your panel scored it', detail: 'The AI never gives a mark', state: 'done' },
         ]}
       />
     </Stage>

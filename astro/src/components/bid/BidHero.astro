@@ -22,7 +22,8 @@ import Frame from '../evidenced/Frame.astro';
 import Stage from '../evidenced/Stage.astro';
 import Sequence from '../evidenced/Sequence.astro';
 import { SIGNUP_URL, START_LABEL } from '../../data/app';
-import { TRIAL_DAYS } from '../../data/pricing';
+/* D275: the one trial line beside the one start label, both central. */
+import { TRIAL_NOTE } from '../../data/pricing';
 import { PRODUCT_NAME_BID } from '../../lib/brand-names';
 ---
 
@@ -36,7 +37,7 @@ import { PRODUCT_NAME_BID } from '../../lib/brand-names';
       <Action href={SIGNUP_URL}>{START_LABEL}</Action>
       <Action href="#what-it-does" variant="secondary">See how it works</Action>
     </div>
-    <p class="ea-hero__note">No bid team needed. Card needed to start, cancel in the {TRIAL_DAYS} days and pay nothing.</p>
+    <p class="ea-hero__note">No bid team needed. {TRIAL_NOTE}</p>
   </div>
 
   <div class="ea-wrap">

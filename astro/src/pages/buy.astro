@@ -38,7 +38,7 @@ import '../styles/evidenced.css';
 import { faqPage, breadcrumbs } from '../lib/schema';
 import { SITE } from '../data/site';
 import { PRODUCT_NAME_BUY, PLATFORM_SHORT_NAME } from '../lib/brand-names';
-import { BUYER_PLANS, startHref, START_LABEL } from '../data/pricing';
+import { BUYER_PLANS, startHref, START_LABEL, TRIAL_NOTE } from '../data/pricing';
 
 const [BUYER_PRO] = BUYER_PLANS;
 const buyerStart = { href: startHref(BUYER_PRO.planKey), label: START_LABEL };
@@ -49,16 +49,16 @@ const buyerStart = { href: startHref(BUYER_PRO.planKey), label: START_LABEL };
    panel sets every mark. */
 const BUYER_STEPS = [
   { icon: 'checklist' as const, title: 'Say what you need',
-    body: 'Write your requirement and how you will judge the replies, before any supplier responds.' },
+    body: 'Write down what you need and how you will judge the replies, before any supplier responds.' },
   { icon: 'upload' as const, title: 'Invite suppliers',
     body: 'Send each supplier a personal link, or use a Quick RFQ for a smaller job. They upload their reply and get a receipt.' },
   { icon: 'done' as const, title: 'Compare and decide',
     body: 'Read what each supplier said against each question, with the quotes found for you. Your panel sets every mark.' },
 ];
 
-const title = 'Velstrian Buy | UK social value oversight | Velstrian';
+const title = 'Velstrian Buy | Compare supplier quotes fairly | Velstrian';
 const description =
-  'Publish a social value requirement with a deterministic rubric, locate evidence in bids verbatim and track delivery after award. Your panel scores, not the AI.';
+  'For public and private buyers. Say what you need, collect every supplier reply in one place, see the proof in each, word for word, and track delivery after award. Your panel scores, not the AI.';
 
 const schema = [
   {
@@ -96,7 +96,7 @@ const UPDATED = new Date('2026-10-22');
   <BuyFaq />
   <Close
     title="Your next purchase can start today."
-    lead="Start when you are ready, or talk it through with us first."
+    lead={`${TRIAL_NOTE} Or talk it through with us first.`}
     primary={buyerStart}
   />
 </Base>

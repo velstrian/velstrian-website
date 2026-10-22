@@ -24,9 +24,9 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
 <Band tone="light-alt" class="ea-caps" labelledby="buy-what-title" id="what-it-does">
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
-      <h2 class="ea-h2" id="buy-what-title">Five clear steps, from requirement to award.</h2>
+      <h2 class="ea-h2" id="buy-what-title">Five steps, from asking to choosing.</h2>
       <p class="ea-lead">
-        Buying a service means setting clear standards, reading bids fairly and holding the winner to their word. {PRODUCT_NAME_BUY} keeps the whole thread in one place.
+        Buying a service means saying what you need, reading every reply fairly and holding the winner to their word. {PRODUCT_NAME_BUY} keeps all of it in one place.
       </p>
     </div>
 
@@ -35,25 +35,25 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Write a clear request</h3>
         <p>
-          Build a requirement pack with a clear rubric before responses arrive, or run a Quick RFQ for smaller jobs. You set the measures, the evidence you need, and the weighting up front. You write the scope. The AI does not draft it.
+          Write down what you need and how you will judge the replies, before any supplier answers. For a smaller job, send a Quick RFQ, a short request for quotes. You write the scope. The AI does not draft it.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="Requirement pack: cleaning & facilities" status="Rubric fixed" capture="buy-cap-request" caption="Requirement measures and weightings fixed before responses arrive.">
+        <Frame title="What you need: cleaning and facilities" status="Scoring fixed" capture="buy-cap-request" caption="What you will score, and how much each part counts, fixed before replies arrive.">
           <ul class="ea-mini-list">
-            <li><span>Local employment & training</span><span class="ea-state ea-state--ok">15% weighting</span></li>
-            <li><span>Environmental waste reduction</span><span class="ea-state ea-state--ok">10% weighting</span></li>
-            <li><span>Living wage & fair working terms</span><span class="ea-state ea-state--ok">10% weighting</span></li>
-            <li><span>Service delivery & staffing</span><span class="ea-state">65% weighting</span></li>
+            <li><span>Local jobs and training</span><span class="ea-state ea-state--ok">15% weighting</span></li>
+            <li><span>Less waste</span><span class="ea-state ea-state--ok">10% weighting</span></li>
+            <li><span>Fair pay and working terms</span><span class="ea-state ea-state--ok">10% weighting</span></li>
+            <li><span>The service and its staff</span><span class="ea-state">65% weighting</span></li>
           </ul>
         </Frame>
         <Sequence
           slot="float"
           title="Requirement pack"
           steps={[
-            { label: 'Measures settled', detail: 'Before responses arrive' },
-            { label: 'Weighting locked', detail: 'Reusable across competitions' },
-            { label: 'Quick RFQ ready', detail: 'Scope written by you' },
+            { label: 'Questions settled', detail: 'Before any reply arrives' },
+            { label: 'Scoring fixed', detail: 'Reuse it next time' },
+            { label: 'Quick RFQ ready', detail: 'Written by you' },
           ]}
         />
       </Stage>
@@ -64,25 +64,25 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Collect the replies in one place</h3>
         <p>
-          Invite suppliers to respond by personal link. Each supplier gets an instant receipt when they upload their quote, and the quote lands straight in your evaluation workspace. Clarification answers are published to all invited suppliers without revealing who asked.
+          Send each supplier their own link. They upload their reply, get a receipt straight away, and the reply lands in one place for your team. When a supplier asks a question, your answer goes to every supplier, without saying who asked.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="Supplier submissions & clarifications" status="4 invited" capture="buy-cap-collect" caption="Submissions, upload receipts and clarification register in one view.">
+        <Frame title="Replies and questions" status="4 invited" capture="buy-cap-collect" caption="Every reply, its receipt, and the questions suppliers asked, in one view.">
           <ul class="ea-mini-list">
             <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">Uploaded · Receipt 801</span></li>
             <li><span>Beacon Engineering</span><span class="ea-state ea-state--ok">Uploaded · Receipt 802</span></li>
             <li><span>Crestwood Group</span><span class="ea-state ea-state--ok">Uploaded · Receipt 803</span></li>
-            <li><span>Clarification Q2 (site access)</span><span class="ea-state">Published to all 4</span></li>
+            <li><span>Question 2 (site access)</span><span class="ea-state">Answer sent to all 4</span></li>
           </ul>
         </Frame>
         <Sequence
           slot="float"
-          title="Submissions inbox"
+          title="Replies"
           steps={[
             { label: '4 suppliers invited' },
-            { label: '3 quotes uploaded', detail: 'Instant receipts issued' },
-            { label: 'Clarifications open', detail: 'Questioner names hidden' },
+            { label: '3 replies uploaded', detail: 'Each got a receipt' },
+            { label: '1 question answered', detail: 'Sent to all, names hidden' },
           ]}
         />
       </Stage>
@@ -93,24 +93,24 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Read every reply side by side</h3>
         <p>
-          Enter each supplier's price schedule to see every bid as one whole life figure over the same term and quantities. Compare options side by side with consistent assumptions, so you judge Whole life costs accurately across the contract.
+          Enter each supplier's prices and see every bid as one total cost over the same years and the same amount of work, the whole life cost. Like is compared with like, side by side.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="Whole life costs: 3 year comparison" status="3 bids normalised" capture="buy-cap-compare" caption="Bid normalisation and side by side comparison across a 3 year term.">
+        <Frame title="Total cost over 3 years" status="3 bids lined up" capture="buy-cap-compare" caption="Three bids turned into one total each, over the same 3 years.">
           <ul class="ea-mini-list">
-            <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">£142,500 whole life</span></li>
-            <li><span>Beacon Engineering</span><span class="ea-state">£156,000 whole life</span></li>
-            <li><span>Crestwood Group</span><span class="ea-state ea-state--ok">£138,000 whole life</span></li>
+            <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">£142,500 over 3 years</span></li>
+            <li><span>Beacon Engineering</span><span class="ea-state">£156,000 over 3 years</span></li>
+            <li><span>Crestwood Group</span><span class="ea-state ea-state--ok">£138,000 over 3 years</span></li>
           </ul>
         </Frame>
         <Sequence
           slot="float"
-          title="Price normalisation"
+          title="Prices lined up"
           steps={[
-            { label: 'Price schedules entered' },
-            { label: 'Quantities aligned', detail: 'Over the same 3 year term' },
-            { label: 'Whole life costs ready', detail: 'Evaluated side by side' },
+            { label: 'Prices entered' },
+            { label: 'Same amount of work', detail: 'Over the same 3 years' },
+            { label: 'Totals ready', detail: 'Side by side' },
           ]}
         />
       </Stage>
@@ -121,24 +121,24 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">See what each supplier can back up</h3>
         <p>
-          The pre-read locates evidence in each response for every published criterion, quoted word for word with the exact page and section. If evidence cannot be found in the supplier's submission, it is dropped, never guessed. You see what they can prove in seconds.
+          A first read of every reply finds the proof for each question you asked, quoted word for word with its page and section. If the reply has no proof, nothing is shown. It is never guessed. You see what each supplier can prove before you read the rest.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="Pre-read: Local employment criterion" status="Evidence located" capture="buy-cap-evidence" caption="Located quotes from supplier submissions, cited verbatim to section and page.">
+        <Frame title="First read: local jobs" status="Proof found" capture="buy-cap-evidence" caption="Quotes found in each reply, word for word, with the section and page.">
           <ul class="ea-mini-list">
             <li><span>Apex: 2 apprenticeships, borough recruited</span><span class="ea-state ea-state--ok">Section 4.1, p12</span></li>
-            <li><span>Beacon: training placements explore only</span><span class="ea-state ea-state--held">No headcount, p7</span></li>
+            <li><span>Beacon: mentions training, no numbers</span><span class="ea-state ea-state--held">No number, p7</span></li>
             <li><span>Crestwood: 4 accredited apprenticeships</span><span class="ea-state ea-state--ok">Section 5.2, p18</span></li>
           </ul>
         </Frame>
         <Sequence
           slot="float"
-          title="Verbatim evidence"
+          title="Proof, word for word"
           steps={[
-            { label: 'Response text scanned' },
-            { label: 'Verbatim quotes located', detail: 'Linked to page and section' },
-            { label: 'Missing proof dropped', detail: 'No quotes invented', state: 'done' },
+            { label: 'Every reply read' },
+            { label: 'Quotes found', detail: 'With page and section' },
+            { label: 'No proof, nothing shown', detail: 'Nothing is invented', state: 'done' },
           ]}
         />
       </Stage>
@@ -149,11 +149,11 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Record your decision and why</h3>
         <p>
-          Your panel scores against the published rubric and records the reason for every mark in one shared place. After award, track delivered commitments against what was promised across your contracts, with alerts if delivery falls behind.
+          Your panel scores each reply against the questions you published and writes down the reason for every mark, in one shared place. After you choose, you check the winner delivers what they promised, with an alert if they fall behind.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="Post-award delivery & oversight" status="Contract active" capture="buy-cap-decision" caption="Tracking promised social value and performance delivery across awarded contracts.">
+        <Frame title="After you choose: delivery" status="Contract running" capture="buy-cap-decision" caption="What the winner promised, and what they have delivered so far.">
           <ul class="ea-mini-list">
             <li><span>Local apprenticeships (2 committed)</span><span class="ea-state ea-state--ok">2 hired · On track</span></li>
             <li><span>Carbon reduction target (15% committed)</span><span class="ea-state ea-state--held">12% · At risk</span></li>
@@ -162,9 +162,9 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
         </Frame>
         <Sequence
           slot="float"
-          title="Portfolio oversight"
+          title="After you choose"
           steps={[
-            { label: 'Scores recorded by panel' },
+            { label: 'Panel scores recorded' },
             { label: 'Contract awarded' },
             { label: 'Delivery tracked', detail: 'Alerts if targets fall behind' },
           ]}

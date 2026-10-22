@@ -7,7 +7,7 @@
  * Every price is read from data/pricing.ts, never typed.
  * British English only. No em dashes or en dashes.
  */
-import { BUYER_PLANS, annualDiscountPct } from '../../data/pricing';
+import { BUYER_PLANS, annualDiscountPct, TRIAL_DAYS } from '../../data/pricing';
 import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
 
 const [BUYER_PRO, BUYER_PORTFOLIO] = BUYER_PLANS;
@@ -38,7 +38,7 @@ export const BUY_FAQS: FaqItem[] = [
   {
     question: 'Does the AI score or rank supplier bids?',
     answer:
-      'No. Scores are evaluator set. The evaluation pre-read is a reading aid that locates evidence in a response against each published criterion. It does not score, rank, or recommend a mark, and every criterion card carries an advisory label. Under the Procurement Act 2023 equal treatment duty, the panel evaluates and scores every response. There is also an AI consistency check on completed evaluations, which is advisory and never changes a number.',
+      'No. Your evaluators set every score. The first read of each reply only finds the proof for each question you published. It does not score, rank, or recommend a mark, and every card it shows says so. The law asks you to treat every supplier the same way (the equal treatment duty in the Procurement Act 2023), so your panel scores every reply. Once scoring is done, an AI check can point out uneven scoring for your panel to look at. It never changes a number.',
   },
   {
     question: `Does ${PRODUCT_NAME_BUY} replace our e-sourcing portal?`,
@@ -48,21 +48,21 @@ export const BUY_FAQS: FaqItem[] = [
   {
     question: 'How is social value handled on the buyer side?',
     answer:
-      'You build a requirement pack with a deterministic rubric, so the weighting and the measures are fixed before responses arrive rather than argued afterwards. After award, commitments on each contract roll up against delivery by National TOMs theme and are RAG rated: on track at 95% or above, at risk from 80%, breached below 80%. An authority with nothing committed shows as no data rather than green. Measures are aligned to National TOMs conventions. It is not a full National TOMs implementation.',
+      'You write the requirement with its scoring guide fixed in advance, so what you measure and how much each part counts are settled before replies arrive rather than argued afterwards. After award, the promises on each contract are added up against delivery by theme and rated red, amber or green: on track at 95% or above, at risk from 80%, breached below 80%. A contract with nothing promised shows as no data rather than green. Measures are aligned to National TOMs conventions (Themes, Outcomes and Measures, a UK framework for counting social value). It is not a full National TOMs implementation.',
   },
   {
     question: 'Are the quotes it shows us real, or generated?',
     answer:
-      "Located, not generated. Every quote is found verbatim in the supplier's own submitted text and is dropped if it cannot be located there. The pre-read points at evidence in the response. It does not write a summary of what the response might have said.",
+      "Found, not written. Every quote is found word for word in the supplier's own reply and is left out if it cannot be found there. The first read points at the proof in the reply. It does not write a summary of what the reply might have said.",
   },
   {
     question: 'What does it cost?',
     answer:
-      `Buyer Pro is £${BUYER_PRO.monthly} a month, or £${proAnnual} a year, with ${BUYER_PRO.seats} users, ${BUYER_PRO.credits.toLocaleString('en-GB')} AI credits a month and ${BUYER_PRO.guestEvaluators} guest evaluators. Buyer Portfolio is £${BUYER_PORTFOLIO.monthly} a month, or £${portfolioAnnual} a year, with ${BUYER_PORTFOLIO.seats} users, ${BUYER_PORTFOLIO.credits.toLocaleString('en-GB')} AI credits a month and ${BUYER_PORTFOLIO.guestEvaluators} guest evaluators. Annual prices are ${annualDiscountPct(BUYER_PRO)}% off twelve months. Pay by card, or pay for Buyer Portfolio by invoice on 30 days with a PO number.`,
+      `Buyer Pro is £${BUYER_PRO.monthly} a month, or £${proAnnual} a year, with ${BUYER_PRO.seats} users, ${BUYER_PRO.credits.toLocaleString('en-GB')} AI credits a month and ${BUYER_PRO.guestEvaluators} guest evaluators. Buyer Portfolio is £${BUYER_PORTFOLIO.monthly} a month, or £${portfolioAnnual} a year, with ${BUYER_PORTFOLIO.seats} users, ${BUYER_PORTFOLIO.credits.toLocaleString('en-GB')} AI credits a month and ${BUYER_PORTFOLIO.guestEvaluators} guest evaluators. Annual prices are ${annualDiscountPct(BUYER_PRO)}% off twelve months. On Buyer Pro your first ${TRIAL_DAYS} days are free, and a card is needed to start. Buyer Portfolio starts paid, by card or by invoice on 30 days with a PO number.`,
   },
   {
     question: 'Can it produce our Procurement Act transparency return?',
     answer:
-      'It produces an award notice return across your recorded contracts, which you review and publish. The statutory checks it applies, including section 52 on published KPIs above an estimated value of £5m and section 71 on assessing and publishing performance, are advisory and are not legal advice.',
+      'It produces an award notice return across your recorded contracts, which you review and publish. The checks it applies, including section 52 on published targets (KPIs) above an estimated value of £5m and section 71 on assessing and publishing performance, guide your team, and what you publish is your decision.',
   },
 ];

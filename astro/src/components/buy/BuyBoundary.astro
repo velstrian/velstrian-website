@@ -16,8 +16,8 @@ import Stage from '../evidenced/Stage.astro';
 import Frame from '../evidenced/Frame.astro';
 
 const BOUNDARY = [
-  { name: 'Locate evidence per criterion', src: 'Quoted verbatim from the response', ok: true },
-  { name: 'Drop what it cannot find', src: 'No quote, no card', ok: true },
+  { name: 'Find the proof for each question', src: 'Quoted word for word from the reply', ok: true },
+  { name: 'Leave out what it cannot find', src: 'No quote, nothing shown', ok: true },
   { name: 'Flag uneven scoring', src: 'Advisory, after your panel has scored', ok: true },
   { name: 'Set, change or suggest a mark', src: 'The panel evaluates and scores', ok: false },
 ];
@@ -27,17 +27,17 @@ const BOUNDARY = [
   <div class="ea-wrap ea-head-row" data-reveal>
     <h2 class="ea-h2" id="buy-boundary-title">The AI reads and summarises. It never sets a mark. People score.</h2>
     <p class="ea-lead">
-      Under the Procurement Act 2023 equal treatment duty, the panel evaluates and scores every response. The pre-read is a reading aid that locates evidence in a response against each published criterion. It never scores.
+      Every supplier must be treated the same way (the equal treatment duty in the Procurement Act 2023), so your panel scores every reply. The first read only points to where the proof is, question by question. It never scores.
     </p>
   </div>
 
   <div class="ea-wrap">
     <Stage layout="centre">
       <Frame
-        title="Pre-read boundary"
+        title="What the first read may do"
         status="Design constraint"
         capture="buy-boundary-gate"
-        caption="Four things asked of the pre-read. Three it does, and setting a mark stops dead at the line."
+        caption="Four things asked of the first read. It does three, and setting a mark stops dead at the line."
       >
         <div class="buy-gate">
           <ol class="buy-gate__list ea-moment" data-refusal>

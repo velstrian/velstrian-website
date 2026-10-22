@@ -10,7 +10,7 @@ import Band from '../evidenced/Band.astro';
 import FactsBand from '../evidenced/FactsBand.astro';
 import Action from '../evidenced/Action.astro';
 import { TRUST_BADGES } from '../../data/site-facts';
-import { BUYER_PLANS, startHref, annualDiscountPct } from '../../data/pricing';
+import { BUYER_PLANS, startHref, annualDiscountPct, TRIAL_DAYS } from '../../data/pricing';
 
 const [BUYER_PRO, BUYER_PORTFOLIO] = BUYER_PLANS;
 const n = (v: number) => v.toLocaleString('en-GB');
@@ -19,17 +19,17 @@ const n = (v: number) => v.toLocaleString('en-GB');
 <Band tone="light" class="ea-proof" labelledby="buy-trust-title" id="trust-and-pricing">
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
-      <h2 class="ea-h2" id="buy-trust-title">Protected data, human scoring, and transparent pricing.</h2>
+      <h2 class="ea-h2" id="buy-trust-title">Your team decides. The price is on the page.</h2>
       <p class="ea-lead">
-        Your procurement data is protected under UK and EU data protection laws. Evaluations are scored by your team, and prices are published up front.
+        People set every score, and you can see what it costs before you start.
       </p>
     </div>
 
     <FactsBand
       facts={[
-        { icon: 'document', value: 'Verbatim', label: 'Every quote is located word for word from the response, and dropped if not found' },
+        { icon: 'document', value: 'Word for word', label: 'Every quote is found word for word in the reply, and left out if it is not there' },
         { icon: 'checklist', value: 'Human score', label: 'Evaluators set and enter every score. The AI never sets, changes or suggests a mark' },
-        { icon: 'shield', value: 'Advisory', label: 'Statutory checks and consistency flags are advisory and are not legal advice' },
+        { icon: 'shield', value: 'Guidance', label: 'Checks against the rules and flags on uneven scoring guide your team. Every decision stays with you' },
         { icon: 'sliders', value: `£${BUYER_PRO.monthly}/mo`, label: `Buyer Pro starts at £${BUYER_PRO.monthly} a month, ${annualDiscountPct(BUYER_PRO)}% off when paid annually. Start by card` },
       ]}
       strip={[...TRUST_BADGES]}
@@ -39,7 +39,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
     <div class="buy-plans-wrap" data-reveal>
       <div class="ea-head-row">
         <h3 class="ea-h2">Two ways to buy.</h3>
-        <p class="ea-lead">Both are listed prices. Start either plan today by card, or pay for Portfolio by invoice.</p>
+        <p class="ea-lead">Both prices are published. On {BUYER_PRO.name} your first {TRIAL_DAYS} days are free, and a card is needed to start. {BUYER_PORTFOLIO.name} starts paid, by card or by invoice.</p>
       </div>
 
       <ul class="ea-plans__grid">
@@ -62,7 +62,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
         <li class="ea-card ea-plan ea-plan--rec" data-reveal>
           <div class="ea-plan__top">
             <h4 class="ea-h3">{BUYER_PORTFOLIO.name}</h4>
-            <span class="ea-plan__badge">Portfolio</span>
+            <span class="ea-plan__badge">Card or invoice</span>
           </div>
           <p class="ea-plan__who">{BUYER_PORTFOLIO.who}</p>
           <p class="ea-plan__price">

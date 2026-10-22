@@ -15,16 +15,33 @@
  * then three ways onward: the free Tender Compliance Matrix, Velstrian Buy for
  * the other side of the table, and the comparison pages.
  *
+ * ── ONE TAP EACH, NOTHING REMOVED (R285-WEB-TRANSFORMATION-WT-E, audit S2) ──
+ *
+ * Measured 2026-10-22 the page was 15,433px tall at 1440 and 22,053px at 375,
+ * and this band was the wall at the bottom of it: sixteen open cards of rules
+ * and capabilities a first time reader does not need to start. Every one of
+ * them is still here, word for word in the document, behind a native
+ * <details> row (the site's one disclosure recipe, `.ea-qa` plus the shared
+ * `summary::after` mark in styles/blocks.css). Closed by default, no script,
+ * readable by search engines and by check-site-facts.mjs, which reads the
+ * built HTML, so the phrases it requires on /bid/ still render from here.
+ * Each row keeps its heading element inside the summary, because the headings
+ * are what check-content-parity.js tracks.
+ *
+ * The rows replace a grid of identical cards with a reading layout: the group's
+ * label and one plain sentence on the left, the rows on the right.
+ *
+ * THE ONE CARD LEFT IS THE ONWARD PANEL. check-sheen.js probes the first plain
+ * `.surface` on /bid/ for its calm hover, so the three ways onward sit in one
+ * `.surface` panel, three columns divided by hairlines, rather than three
+ * separate cards.
+ *
  * NOTHING HERE IS NEW. Each body restates a published line of data/crowmark.ts
  * (STATUTES, CAPABILITIES, FAQS) with the jargon taken out, and every count,
  * source and size is read from site-facts.ts. The phrases check-site-facts.mjs
  * requires on /bid/ ("EU TED", "available per organisation on request",
  * "Award history", "Quick Quote", "forwarded by email", "prior information
  * notices", "tone profiles", "AI Compliance Advisor") all render from here.
- *
- * The cards are `.surface`, the site's one card recipe (styles/surfaces.css):
- * white with a hairline on a light band, and the edge is the only thing that
- * answers a pointer (check-sheen.js reads its plain cards on this route).
  */
 import Band from '../evidenced/Band.astro';
 import IconTile from '../evidenced/IconTile.astro';
@@ -60,7 +77,7 @@ const RULES = [
   },
   {
     heading: 'PPN 026 and social value',
-    body: 'Social value is the extra good your business does locally. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Totals are worked out in code from a curated library of measures aligned to National TOMs conventions. The buyer publishes the weighting, and it is a weighting, not a score.',
+    body: 'Social value is the extra good your business does locally. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Totals are worked out in code from a curated library of measures aligned to National TOMs conventions (Themes, Outcomes and Measures, a UK framework for counting social value). The buyer publishes the weighting, and it is a weighting, not a score.',
   },
   {
     heading: 'PPN 017 and AI',
@@ -71,7 +88,7 @@ const RULES = [
 const CAPABILITIES = [
   {
     heading: 'UK and EU tender discovery',
-    body: `New contracts from ${LIVE_SOURCES}, refreshed daily, with the source named on every notice. ${ON_REQUEST_SENTENCE} Filter by sector, value and region and save the ones worth a bid. You also see prior information notices and framework and DPS end dates, the early signs that a tender is on its way.`,
+    body: `New contracts from ${LIVE_SOURCES}, refreshed daily, with the source named on every notice. ${ON_REQUEST_SENTENCE} Filter by sector, value and region and save the ones worth a bid. You also see prior information notices and the end dates of frameworks and dynamic purchasing systems (standing lists of approved suppliers), the early signs that a tender is on its way.`,
   },
   {
     heading: 'Bid or no-bid, with reasons',
@@ -95,7 +112,7 @@ const CAPABILITIES = [
   },
   {
     heading: 'SQ and PQQ from one master set',
-    body: 'The standard questions about your business, such as accreditations, insurance, finances, policies, case studies and named staff, answered from one master set you keep up to date. Offered above the Procurement Act 2023 section 85 threshold, where those questions arise.',
+    body: 'The standard questions about your business that come before the tender itself (a selection questionnaire, SQ, or the older pre-qualification questionnaire, PQQ): accreditations, insurance, finances, policies, case studies and named staff, answered from one master set you keep up to date. Offered above the Procurement Act 2023 section 85 threshold, where those questions arise.',
   },
   {
     heading: 'Social value maths, done in code',
@@ -118,63 +135,80 @@ const CAPABILITIES = [
     body: 'Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, if you agree, from your own bids and commitments. It shows only rule references it can match to its sources, and flags any money figure or percentage it cannot trace for you to check.',
   },
 ];
+/* Two columns of rows on a wide screen, one list below 960px. */
+const half = Math.ceil(CAPABILITIES.length / 2);
+const CAPABILITY_COLS = [CAPABILITIES.slice(0, half), CAPABILITIES.slice(half)];
 ---
 
 <Band tone="light" class="bid-detail" labelledby="bid-detail-title">
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
       <h2 class="ea-h2" id="bid-detail-title">The detail, for when you need it.</h2>
-      <p class="ea-lead">Know the rules better than your competition. How public contracts work, how a contract is scored for you, and everything the {PRODUCT_NAME_BID} suite does today, from finding UK tenders to answers that cite their sources.</p>
+      <p class="ea-lead">You do not need any of this to start. Open a line when a rule or a word comes up in a tender, and read everything {PRODUCT_NAME_BID} does today.</p>
     </div>
 
     <div class="bid-group" id="procurement-act" data-reveal>
-      <p class="ea-label bid-group__label">The rules for public contracts, in plain words</p>
-      <p class="bid-group__intro">
-        The Procurement Act 2023 sets the rules public buyers follow. Its KPI duties, the targets a contract is measured against, are the ones nobody reads until it is too late. These checks guide you and never block you.
-      </p>
-      <ul class="bid-cards bid-cards--two">
+      <div class="bid-group__side">
+        <p class="ea-label bid-group__label">The rules for public contracts</p>
+        <p class="bid-group__intro">
+          The Procurement Act 2023 sets the rules public buyers follow. Its duties on the targets a contract is measured against are the ones nobody reads until it is too late. These checks guide you and never block you.
+        </p>
+      </div>
+      <div class="bid-rows">
         {RULES.map((r) => (
-          <li class="bid-cards__cell">
-            <div class="surface surface--pad bid-card">
-              <h3 class="ea-h3">{r.heading}</h3>
-              <p>{r.body}</p>
-            </div>
-          </li>
+          <details class="ea-qa bid-row">
+            <summary><h3 class="bid-row__h">{r.heading}</h3></summary>
+            <p>{r.body}</p>
+          </details>
         ))}
-      </ul>
+      </div>
     </div>
 
     <div class="bid-group" id="fit" data-reveal>
-      <p class="ea-label bid-group__label">How a contract is scored for you</p>
-      <p class="bid-group__intro">
-        Each contract is scored out of {fitTotal} on {FIT_COUNT_WORD} reasons. These are the points each reason can earn.
-      </p>
-      <ul class="bid-fit">
-        {FACTS.fit_dimensions.dimensions.map((d) => (
-          <li class="bid-fit__row">
-            <span class="bid-fit__name">{d.name[0].toUpperCase() + d.name.slice(1)}</span>
-            <span class="bid-fit__what">{PLAIN[d.name] ?? ''}</span>
-            <span class="bid-fit__pts ea-num">{d.points} points</span>
-          </li>
-        ))}
-      </ul>
+      <div class="bid-group__side">
+        <p class="ea-label bid-group__label">How a contract is scored for you</p>
+        <p class="bid-group__intro">
+          Each contract is scored out of {fitTotal} on {FIT_COUNT_WORD} reasons, so you can see why it suits you or not.
+        </p>
+      </div>
+      <div class="bid-rows">
+        <details class="ea-qa bid-row">
+          <summary><h3 class="bid-row__h">The {FIT_COUNT_WORD} reasons and their points</h3></summary>
+          <ul class="bid-fit">
+            {FACTS.fit_dimensions.dimensions.map((d) => (
+              <li class="bid-fit__row">
+                <span class="bid-fit__name">{d.name[0].toUpperCase() + d.name.slice(1)}</span>
+                <span class="bid-fit__what">{PLAIN[d.name] ?? ''}</span>
+                <span class="bid-fit__pts ea-num">{d.points} points</span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </div>
     </div>
 
-    <div class="bid-group" id="features" data-reveal>
-      <p class="ea-label bid-group__label">Everything {PRODUCT_NAME_BID} does today</p>
-      <ul class="bid-cards">
-        {CAPABILITIES.map((c) => (
-          <li class="bid-cards__cell">
-            <div class="surface surface--pad bid-card">
-              <h3 class="ea-h3">{c.heading}</h3>
-              <p>{c.body}</p>
-            </div>
-          </li>
+    <div class="bid-group bid-group--wide" id="features" data-reveal>
+      <div class="bid-group__side">
+        <p class="ea-label bid-group__label">Everything {PRODUCT_NAME_BID} does today</p>
+        <p class="bid-group__intro">
+          All {CAPABILITIES.length} parts of the product, from finding the work to proving you delivered it.
+        </p>
+      </div>
+      <div class="bid-cols">
+        {CAPABILITY_COLS.map((col) => (
+          <div class="bid-rows">
+            {col.map((c) => (
+              <details class="ea-qa bid-row">
+                <summary><h3 class="bid-row__h">{c.heading}</h3></summary>
+                <p>{c.body}</p>
+              </details>
+            ))}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
 
-    <ul class="bid-onward" data-reveal>
+    <ul class="bid-onward surface" data-reveal>
       <li class="bid-onward__item">
         <IconTile name="search" />
         <h3 class="ea-h3">Tender Compliance Matrix</h3>
@@ -199,10 +233,32 @@ const CAPABILITIES = [
 </Band>
 
 <style>
+  /* A group reads label first, rows second: the label and its one sentence on
+     the left, the rows on the right, so the band is a reading layout and not a
+     grid of identical cards. One column below 960px. */
   .bid-group {
     display: grid;
-    gap: var(--space-4);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-4) var(--space-8);
+    align-items: start;
     margin-top: var(--ea-head-gap);
+  }
+
+  /* The twelve capabilities take the full width, the label above and two
+     columns of rows under it, so twelve rows stand six high. */
+  .bid-group--wide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bid-cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--space-8);
+  }
+
+  .bid-group__side {
+    display: grid;
+    gap: var(--space-3);
   }
 
   .bid-group__label {
@@ -214,33 +270,17 @@ const CAPABILITIES = [
     color: var(--ea-sub);
   }
 
-  .bid-cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-5);
-    margin-top: var(--space-2);
-  }
-
-  .bid-cards--two {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .bid-cards__cell {
-    display: grid;
-  }
-
-  .bid-card {
-    display: grid;
-    align-content: start;
-    gap: var(--space-3);
-  }
-
-  .bid-card p {
-    color: var(--ea-muted);
+  /* The heading keeps its element for the outline and for content parity, and
+     takes the row's own type from `.ea-qa summary`. */
+  .bid-row__h {
+    margin: 0;
+    font: inherit;
+    color: inherit;
   }
 
   .bid-fit {
-    border-block: 1px solid var(--ea-rule);
+    margin-bottom: var(--space-6);
+    border-top: 1px solid var(--ea-rule);
   }
 
   .bid-fit__row {
@@ -272,7 +312,6 @@ const CAPABILITIES = [
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-top: var(--ea-head-gap);
-    border-block: 1px solid var(--ea-rule);
   }
 
   .bid-onward__item {
@@ -281,11 +320,10 @@ const CAPABILITIES = [
     justify-items: start;
     gap: var(--space-3);
     padding: var(--space-8) var(--space-6);
-    border-inline-start: 1px solid var(--ea-rule);
   }
 
-  .bid-onward__item:last-child {
-    border-inline-end: 1px solid var(--ea-rule);
+  .bid-onward__item + .bid-onward__item {
+    border-inline-start: 1px solid var(--ea-rule);
   }
 
   .bid-onward__item p {
@@ -293,28 +331,28 @@ const CAPABILITIES = [
   }
 
   @media (max-width: 959px) {
-    .bid-cards {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .bid-onward {
+    .bid-group {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .bid-onward__item {
-      border-inline-end: 1px solid var(--ea-rule);
+    .bid-onward,
+    .bid-cols {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Two stacked columns of rows read as one list: the seam loses its
+       doubled rule. */
+    .bid-cols > .bid-rows + .bid-rows > .ea-qa:first-child {
+      border-top: 0;
     }
 
     .bid-onward__item + .bid-onward__item {
+      border-inline-start: 0;
       border-top: 1px solid var(--ea-rule);
     }
   }
 
   @media (max-width: 599px) {
-    .bid-cards {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
     .bid-fit__row {
       grid-template-columns: minmax(0, 1fr) auto;
     }
@@ -322,6 +360,10 @@ const CAPABILITIES = [
     .bid-fit__what {
       grid-column: 1 / -1;
       grid-row: 2;
+    }
+
+    .bid-onward__item {
+      padding: var(--space-6) var(--space-5);
     }
   }
 </style>
