@@ -12,7 +12,7 @@ ogImage: "/Assets/og/crowmark.png"
 ogImageAlt: "Velstrian Bid vs SwiftBid comparison"
 ctaHeadline: "Bid often."
 ctaSubLine1: "One subscription, from {{bid.starter.monthly}}/month."
-ctaSubLine2: "Live, paid, and in daily use on real bids."
+ctaSubLine2: "Start today. No sales call needed."
 screen: answer-library
 faq:
   - question: "Is Velstrian Bid or SwiftBid cheaper?"
@@ -26,14 +26,61 @@ faq:
   - question: "How fast is each one?"
     answer: "SwiftBid quotes turnarounds as fast as 6 hours on its Premium tier. Velstrian Bid gives you continuous access to draft, score and revise whenever you like, rather than a per-bid turnaround window."
   - question: "Which handles social value and post-award delivery?"
-    answer: "Velstrian Bid calculates social value deterministically against the weighting the buyer published and tracks post-award delivery under the Procurement Act 2023 sections 52 and 71. SwiftBid does not state a social-value calculator or a post-award delivery feature."
+    answer: "Velstrian Bid calculates social value in code against the weighting the buyer published and tracks post-award delivery under the Procurement Act 2023 sections 52 and 71. SwiftBid does not state a social-value calculator or a post-award delivery feature."
   - question: "I only bid once or twice a year, which is better?"
     answer: "If you bid very occasionally and do not want a subscription, SwiftBid's per-bid model may suit you, and its Premium tier can add a human reviewer. If you bid more often, or you want tender discovery, social value maths and delivery evidence, a Velstrian Bid subscription is likely the better value."
   - question: "Can I use both Velstrian Bid and SwiftBid?"
     answer: "Yes. You could run a Velstrian Bid subscription for discovery, social value and delivery evidence, and commission SwiftBid for a one-off high-stakes bid where you want an external expert review."
 ---
 
-<p class="cmp-lead"><strong>Velstrian Bid is a subscription UK bid and tender management suite from {{bid.starter.monthly}} per month. SwiftBid is a per-bid AI writing service, charged at &pound;149 to &pound;749 a bid with no subscription.</strong> They price in completely different ways, so the honest comparison is about how often you bid and what you need around the draft. This page sets out both, states Velstrian Bid's prices, and dates every source.</p>
+<p class="cmp-lead"><strong>Velstrian Bid is a subscription that helps small and mid size firms find and answer tenders, for public and private work, from {{bid.starter.monthly}} per month. SwiftBid is a per-bid AI writing service, charged at &pound;149 to &pound;749 a bid with no subscription.</strong> They price in completely different ways, so the honest comparison is about how often you bid and what you need around the draft. This page sets out both, states Velstrian Bid's prices, and dates every source.</p>
+
+<h2 id="at-a-glance">At a glance</h2>
+<p class="rt-hint">Scroll the table sideways</p>
+<div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and SwiftBid">
+<table class="cmp-table">
+<caption class="visually-hidden">Velstrian Bid compared with SwiftBid across model, features and pricing</caption>
+<thead>
+<tr><th scope="col">Feature</th><th scope="col" class="cmp-us-col">Velstrian Bid</th><th scope="col">SwiftBid</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite (subscription)</td><td>Per-bid AI bid-writing service</td></tr>
+<tr><th scope="row">Pricing model</th><td class="cmp-us">Subscription from {{bid.starter.monthly}}/month</td><td>Per bid: &pound;149 / &pound;349 / &pound;749</td></tr>
+<tr><th scope="row">Finds public contracts for you (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td><span class="cmp-no">None</span>. You upload contract packs</td></tr>
+<tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Per-bid AI drafting from documents you supply</td></tr>
+<tr><th scope="row">Human expert review</th><td>Software only. Your own reviewer approves each draft</td><td>Optional at Premium tier</td></tr>
+<tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, a fixed check in code</td><td>Not stated publicly</td></tr>
+<tr><th scope="row">A note on every draft saying AI helped write it (the PPN 017 disclosure public buyers expect)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
+<tr><th scope="row">Social value (the local good you do) added up in code</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, worked out in code</td><td>Not stated as a dedicated calculation</td></tr>
+<tr><th scope="row">Proof of delivery after you win (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated</td></tr>
+<tr><th scope="row">Fastest turnaround</th><td>Continuous access, draft any time</td><td>As fast as 6 hours (Premium)</td></tr>
+<tr><th scope="row">Best for</th><td class="cmp-us">Small and mid size firms bidding regularly, public and private, in any sector</td><td>Firms doing 1 to 4 bids a year, no subscription</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="which-should-you-choose">Which should you choose?</h2>
+<div class="cmp-choose">
+<div class="cmp-choose-card">
+<h3>Choose SwiftBid if</h3>
+<ul>
+<li>You bid only once or twice a year and do not want a subscription.</li>
+<li>You want the option of a human expert reviewing a one-off, high-stakes bid.</li>
+<li>You already know which tender you are bidding and just need the draft written.</li>
+<li>A fixed price per bid is easier for you to approve than a monthly plan.</li>
+</ul>
+</div>
+<div class="cmp-choose-card is-us">
+<h3>Choose Velstrian (Velstrian Bid) if</h3>
+<ul>
+<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload or forward by email.</li>
+<li>You bid regularly and want continuous access rather than paying per bid.</li>
+<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
+<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>
+<li>You need social value added up in code and proof of delivery after you win.</li>
+</ul>
+</div>
+</div>
 
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
@@ -50,7 +97,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), GDPR compliant, ICO registered and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR compliant, ICO registered, and follows ISO/IEC 27001. <a href="/security/">Security</a> sets out each control.</dd>
 <dt class="meta">SwiftBid</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
@@ -67,67 +114,37 @@ faq:
 </div>
 <p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The SwiftBid lines repeat only what the third-party sources at the foot of this page actually state, and those sources note that SwiftBid publishes no equivalent primary page we could verify directly. Where something is not published, this page says so rather than inferring it. The full table follows.</p>
 
-<h2 id="at-a-glance">At a glance</h2>
-<p class="rt-hint">Scroll the table sideways</p>
-<div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and SwiftBid">
-<table class="cmp-table">
-<caption class="visually-hidden">Velstrian Bid compared with SwiftBid across model, features and pricing</caption>
-<thead>
-<tr><th scope="col">Feature</th><th scope="col" class="cmp-us-col">Velstrian Bid</th><th scope="col">SwiftBid</th></tr>
-</thead>
-<tbody>
-<tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite (subscription)</td><td>Per-bid AI bid-writing service</td></tr>
-<tr><th scope="row">Pricing model</th><td class="cmp-us">Subscription from {{bid.starter.monthly}}/month</td><td>Per bid: &pound;149 / &pound;349 / &pound;749</td></tr>
-<tr><th scope="row">UK and EU tender discovery (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td><span class="cmp-no">None</span>. You upload contract packs</td></tr>
-<tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Per-bid AI drafting from documents you supply</td></tr>
-<tr><th scope="row">Human expert review</th><td>Software only. Your own reviewer approves each draft</td><td>Optional at Premium tier</td></tr>
-<tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic gate</td><td>Not stated publicly</td></tr>
-<tr><th scope="row">PPN 017 AI-use disclosure on every draft</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
-<tr><th scope="row">Social value calculation, deterministic</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic</td><td>Not stated as a dedicated calculation</td></tr>
-<tr><th scope="row">Post-award delivery evidence (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated</td></tr>
-<tr><th scope="row">Fastest turnaround</th><td>Continuous access, draft any time</td><td>As fast as 6 hours (Premium)</td></tr>
-<tr><th scope="row">Best for</th><td class="cmp-us">Suppliers bidding regularly, across sectors</td><td>Firms doing 1 to 4 bids a year, no subscription</td></tr>
-</tbody>
-</table>
-</div>
-
-<h2 id="what-is-swiftbid">What is SwiftBid?</h2>
-<p>SwiftBid is a per-bid AI bid-writing service. Rather than a subscription, you pay for each bid at one of three fixed prices: &pound;149 for Basic, &pound;349 for Standard and &pound;749 for Premium. The Premium tier adds optional human expert review, a compliance audit, multi-document analysis and turnarounds as fast as six hours. It is sector-agnostic and has no built-in tender discovery feed. You upload the contract pack you want written against.</p>
-<p>For a firm that bids only once or twice a year, that model has a real advantage: no ongoing commitment, and at Premium the option of a human reviewer on the draft. Velstrian Bid does not offer either of those. If your bidding is genuinely occasional, paying per bid can be the cheaper and simpler choice, and SwiftBid is built around exactly that.</p>
-
-<h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
-<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, refreshed every morning at 06:00 UTC, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <div data-cmp-screen></div>
-<p>Velstrian Bid also calculates social value deterministically against the weighting the buyer published, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. It does not supply an external bid writer. The reviewer who approves each draft is your own.</p>
-<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
-
-<h2 id="pricing-compared">Pricing compared</h2>
-<p>The maths comes down to volume. SwiftBid Standard at &pound;349 a bid costs about &pound;1,047 for three bids in a year. A Velstrian Bid Starter subscription is {{bid.starter.monthly}} per month, or {{bid.starter.annual}} for a year on annual billing, which covers as many bids as you want to write in that time. So for one or two bids a year SwiftBid can be cheaper, and from roughly the third bid of the year a Velstrian Bid subscription tends to win on cost, before you even count the tender discovery, social-value maths and delivery evidence that come with it.</p>
-
-<h2 id="which-should-you-choose">Which should you choose?</h2>
-<div class="cmp-choose">
-<div class="cmp-choose-card">
-<h3>Choose SwiftBid if</h3>
-<ul>
-<li>You bid only once or twice a year and do not want a subscription.</li>
-<li>You want the option of a human expert reviewing a one-off, high-stakes bid.</li>
-<li>You already know which tender you are bidding and just need the draft written.</li>
-<li>A fixed price per bid is easier for you to approve than a monthly plan.</li>
-</ul>
-</div>
-<div class="cmp-choose-card is-us">
-<h3>Choose Velstrian (Velstrian Bid) if</h3>
-<ul>
-<li>You bid regularly and want continuous access rather than paying per bid.</li>
-<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
-<li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
-<li>You need deterministic social value maths and post-award delivery evidence.</li>
-</ul>
-</div>
-</div>
 
 <h2 id="where-crowmark-loses">Where Velstrian Bid loses honestly</h2>
-<p>For genuinely occasional bidders, SwiftBid's per-bid model is the more sensible spend: no subscription, a fixed cost per bid, and at Premium the option of a human expert on the draft, which Velstrian Bid's self-serve software does not provide. If you write one bid this year and none next year, a monthly subscription is poor value and SwiftBid is the honest recommendation. Velstrian Bid earns its keep when bidding is a regular activity, and when tender discovery, deterministic social-value maths and post-award delivery evidence are worth having in one place. The two can also be combined: subscribe to Velstrian Bid for the ongoing work and commission SwiftBid for a single high-stakes bid.</p>
+<p>For genuinely occasional bidders, SwiftBid's per-bid model is the more sensible spend: no subscription, a fixed cost per bid, and at Premium the option of a human expert on the draft, which Velstrian Bid's self-serve software does not provide. If you write one bid this year and none next year, a monthly subscription is poor value and SwiftBid is the honest recommendation. Velstrian Bid earns its keep when bidding is a regular activity, and when tender discovery, social value maths done in code and post-award delivery evidence are worth having in one place. The two can also be combined: subscribe to Velstrian Bid for the ongoing work and commission SwiftBid for a single high-stakes bid.</p>
+
+<h2 id="the-longer-read">The longer read</h2>
+<p>Each product in full, and the prices side by side. Open a line when you want the detail.</p>
+<div class="cfaq cmp-longer">
+  <details>
+    <summary><h3 id="what-is-swiftbid">What is SwiftBid?</h3></summary>
+    <div class="cfaq-a cmp-read">
+<p>SwiftBid is a per-bid AI bid-writing service. Rather than a subscription, you pay for each bid at one of three fixed prices: &pound;149 for Basic, &pound;349 for Standard and &pound;749 for Premium. The Premium tier adds optional human expert review, a compliance audit, multi-document analysis and turnarounds as fast as six hours. It is sector-agnostic and has no built-in tender discovery feed. You upload the contract pack you want written against.</p>
+<p>For a firm that bids only once or twice a year, that model has a real advantage: no ongoing commitment, and at Premium the option of a human reviewer on the draft. Velstrian Bid does not offer either of those. If your bidding is genuinely occasional, paying per bid can be the cheaper and simpler choice, and SwiftBid is built around exactly that.</p>
+    </div>
+  </details>
+  <details>
+    <summary><h3 id="what-is-crowmark">What is Velstrian Bid?</h3></summary>
+    <div class="cfaq-a cmp-read">
+<p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, refreshed every morning at 06:00 UTC, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+
+<p>Velstrian Bid also calculates social value in code against the weighting the buyer published, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. It does not supply an external bid writer. The reviewer who approves each draft is your own.</p>
+<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
+    </div>
+  </details>
+  <details>
+    <summary><h3 id="pricing-compared">Pricing compared</h3></summary>
+    <div class="cfaq-a cmp-read">
+<p>The maths comes down to volume. SwiftBid Standard at &pound;349 a bid costs about &pound;1,047 for three bids in a year. A Velstrian Bid Starter subscription is {{bid.starter.monthly}} per month, or {{bid.starter.annual}} for a year on annual billing, which covers as many bids as you want to write in that time. So for one or two bids a year SwiftBid can be cheaper, and from roughly the third bid of the year a Velstrian Bid subscription tends to win on cost, before you even count the tender discovery, social-value maths and delivery evidence that come with it.</p>
+    </div>
+  </details>
+</div>
 
 <h2 id="faq">Frequently asked questions</h2>
 <div class="cfaq">
@@ -153,7 +170,7 @@ faq:
   </details>
   <details>
     <summary><h3>Which handles social value and post-award delivery?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid calculates social value deterministically against the weighting the buyer published and tracks post-award delivery under the Procurement Act 2023 sections 52 and 71. SwiftBid does not state a social-value calculator or a post-award delivery feature.</p></div>
+    <div class="cfaq-a"><p>Velstrian Bid calculates social value in code against the weighting the buyer published and tracks post-award delivery under the Procurement Act 2023 sections 52 and 71. SwiftBid does not state a social-value calculator or a post-award delivery feature.</p></div>
   </details>
   <details>
     <summary><h3>I only bid once or twice a year, which is better?</h3></summary>

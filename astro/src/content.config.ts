@@ -143,6 +143,10 @@ const sectors = defineCollection({
     faqHeading: z.string(),
     finalCtaSub: z.string(),
     faq: z.array(faqEntry),
+    /* The expert detail, lower down and closed (RULE 0-U, audit M7). The rules,
+       frameworks and contract forms a first time bidder does not need to
+       start, each behind one tap, every term explained where it appears. */
+    detail: z.array(z.object({ heading: z.string(), body: z.string() })).min(1),
   }),
 });
 

@@ -8,10 +8,23 @@
  * word of their Markdown and frontmatter, and move onto the v3 bands.
  *
  *   1. PageHero   light      is this for my sector?   trail, sector, lead, two actions
- *   2. Context    light      what is hard about it?   the Markdown, beside its heading
- *   3. Helps      light alt  how does it help?        the steps as cards, the screen on a stage
- *   4. Questions  light      what do people ask?      the FAQ, the same list as the FAQPage data
- *   5. Close      gradient   what now?                into the footer
+ *   2. Context    light      who asks, what is hard?  the Markdown, beside its heading
+ *   3. Helps      light alt  how does it help?        numbered steps beside the screen
+ *   4. Detail     light      for when you need it     the rules and terms, one tap each
+ *   5. Questions  light alt  what do people ask?      the FAQ, the same list as the FAQPage data
+ *   6. Close      gradient   what now?                into the footer
+ *
+ * ── PLAIN WORDS FIRST, PUBLIC AND PRIVATE (R285-WEB-TRANSFORMATION-WT-B) ────
+ * Audit M7 and S12, 2026-10-22: the four pages opened on public works only and
+ * on jargon (CPV codes, TOMs, PPN 017, frameworks) in a 130 word paragraph, and
+ * repeated "advisory and not legal advice" in every step. RULE 0-U: the reader
+ * is a small firm bidding for public AND private work. The Markdown now names
+ * both kinds of client in plain words. Every rule and term the old copy carried
+ * is still on the page, in the Detail band, closed by default (the native
+ * <details> recipe /bid/ uses), each one explained where it appears. The first
+ * Detail row is built here from site-facts.ts, so the live source list and the
+ * refresh time are never typed into four Markdown files. The steps were a 2 by
+ * 2 grid of identical cards and are now a numbered sequence beside the screen.
  *
  * The FAQ list is also the FAQPage JSON-LD source, so its wording cannot drift
  * between the page and the data. The visible trail is drawn by the one
@@ -31,6 +44,7 @@ import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { TRIAL_NOTE } from '../data/pricing';
 import { PRODUCT_NAME_BID } from '../lib/brand-names';
 import { breadcrumbs } from '../lib/schema';
+import { LIVE_SOURCES, ON_REQUEST_SENTENCE, REFRESH_TIME } from '../data/site-facts';
 import '../styles/evidenced.css';
 import '../styles/prose.css';
 
@@ -43,6 +57,11 @@ interface Step {
 interface FaqItem {
   question: string;
   answer: string;
+}
+
+interface DetailItem {
+  heading: string;
+  body: string;
 }
 
 interface Props {
@@ -63,6 +82,7 @@ interface Props {
   faqHeading: string;
   finalCtaSub: string;
   faq: FaqItem[];
+  detail: DetailItem[];
 }
 
 const {
@@ -83,7 +103,15 @@ const {
   faqHeading,
   finalCtaSub,
   faq,
+  detail,
 } = Astro.props;
+
+/* The one row every sector shares, from site-facts.ts, never typed. */
+const sourcesRow: DetailItem = {
+  heading: 'Where public contracts come from',
+  body: `Public buyers must advertise most contracts on official listing sites. ${PRODUCT_NAME_BID} reads ${LIVE_SOURCES} every morning at ${REFRESH_TIME} and names the site on every notice. ${ON_REQUEST_SENTENCE} Private clients rarely advertise, so you upload the tender they send you, or forward the email.`,
+};
+const rows = [sourcesRow, ...detail];
 
 const ogImage = '/Assets/og/crowmark.png';
 const trail = [
@@ -145,27 +173,48 @@ if (faq.length) {
         <p class="ea-lead">{helpsIntro}</p>
       </div>
 
-      <ol class="ea-cards ea-cards--2" role="list">
-        {
-          steps.map((step, i) => (
-            <li data-reveal>
-              <div class="ea-card ea-tcard">
-                <p class="ea-label ea-step__n">Step {i + 1}</p>
-                <h3 class="ea-h3">{step.verb}</h3>
-                <p>{step.say}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-
-      <div class="sector-screen" data-reveal>
-        <ProductScreen name={screen} />
+      <div class="ea-panel sector-helps">
+        <ol class="sector-steps" role="list">
+          {
+            steps.map((step, i) => (
+              <li class="sector-step" data-reveal>
+                <p class="sector-step__n ea-num" aria-hidden="true">{i + 1}</p>
+                <div class="sector-step__body">
+                  <h3 class="ea-h3">{step.verb}</h3>
+                  <p>{step.say}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="sector-screen" data-reveal>
+          <ProductScreen name={screen} />
+        </div>
       </div>
     </div>
   </Band>
 
-  <Band tone="light" class="ea-faq" labelledby="faq-h">
+  <Band tone="light" labelledby="sector-detail-title">
+    <div class="ea-wrap ea-split">
+      <div class="ea-split__head" data-reveal>
+        <p class="ea-label">For when you need it</p>
+        <h2 class="ea-h2" id="sector-detail-title">The rules and words, explained.</h2>
+        <p class="sector-detail__intro">You do not need any of this to start. Open a line when a rule or a word comes up in a tender.</p>
+      </div>
+      <div class="ea-split__body" data-reveal>
+        {
+          rows.map((r) => (
+            <details class="ea-qa">
+              <summary><h3 class="sector-row__h">{r.heading}</h3></summary>
+              <p>{r.body}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Band>
+
+  <Band tone="light-alt" class="ea-faq" labelledby="faq-h">
     <div class="ea-wrap ea-faq__wrap">
       <p class="ea-label sector-faq__label" data-reveal>Questions</p>
       <h2 class="ea-h2 ea-h2--centre" id="faq-h" data-reveal>{faqHeading}</h2>
@@ -190,8 +239,57 @@ if (faq.length) {
 </Base>
 
 <style>
-  .sector-screen {
+  /* The steps beside the screen: a numbered sequence on hairlines, not a grid
+     of identical cards. The panel is the shared .ea-panel row, one column
+     below 960px (styles/evidenced.css). */
+  .sector-helps {
+    align-items: start;
     margin-top: var(--ea-head-gap);
+  }
+
+  .sector-steps {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .sector-step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-4);
+    padding-block: var(--space-5);
+    border-bottom: 1px solid var(--ea-rule);
+  }
+
+  .sector-step__n {
+    min-width: 2ch;
+    font-size: var(--t-ea-h3);
+    font-weight: var(--t-w-ea-medium);
+    line-height: 1.3;
+    color: var(--ea-accent-ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sector-step__body {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .sector-step__body p {
+    color: var(--ea-sub);
+  }
+
+  .sector-detail__intro {
+    color: var(--ea-sub);
+  }
+
+  /* A heading inside a summary reads as the summary line. */
+  .sector-row__h {
+    margin: 0;
+    font: inherit;
+    color: inherit;
   }
 
   .sector-faq__label {

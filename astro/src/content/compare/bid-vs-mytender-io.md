@@ -7,12 +7,12 @@ publishDate: 2026-07-26
 updatedDate: 2026-07-26
 competitor: "mytender.io"
 eyebrow: "Honest comparison"
-heroDescription: "Two UK-built tools for public-sector bidding. One publishes its pricing and grounds every figure. The other is a private-cloud drafting platform. Every competitor fact is sourced."
+heroDescription: "Two UK-built bid writing tools for small and mid size firms. One publishes its pricing and grounds every figure. The other is a private-cloud drafting platform. Every competitor fact is sourced."
 ogImage: "/Assets/og/crowmark.png"
 ogImageAlt: "Velstrian Bid vs mytender.io comparison"
 ctaHeadline: "See the price."
 ctaSubLine1: "Published pricing from {{bid.starter.monthly}}/month."
-ctaSubLine2: "Live, paid, and in daily use on real bids."
+ctaSubLine2: "Start today. No sales call needed."
 screen: find
 faq:
   - question: "Is Velstrian Bid or mytender.io cheaper?"
@@ -26,14 +26,62 @@ faq:
   - question: "Which is more private or secure?"
     answer: "mytender.io highlights that it runs inside a Virtual Private Cloud to address confidentiality concerns. Velstrian Bid uses standard cloud hosting with EU data residency, AES-256 encryption at rest and TLS 1.3 in transit. Both are aimed at bid data that cannot go through general public AI tools."
   - question: "Can either tool stop the AI inventing figures?"
-    answer: "Velstrian Bid uses a deterministic figure-grounding gate: every £ and % in a draft must exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in mytender.io's public materials."
-  - question: "Which suits an SME doing a few public-sector bids?"
-    answer: "Velstrian Bid, because of its published pricing from {{bid.starter.monthly}} per month, its deterministic social value maths and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year."
+    answer: "Velstrian Bid checks every figure in code before a draft is shown: every £ and % in a draft must exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in mytender.io's public materials."
+  - question: "Which suits a small firm doing a few bids a year?"
+    answer: "Velstrian Bid, because of its published pricing from {{bid.starter.monthly}} per month, its social value maths done in code and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year."
   - question: "Can I use both Velstrian Bid and mytender.io?"
     answer: "Yes. The two are not mutually exclusive. A team could draft in one platform and use Velstrian Bid for UK tender discovery, PPN 026 social value scoring and post-award delivery evidence."
 ---
 
-<p class="cmp-lead"><strong>Velstrian Bid is a UK bid and tender management suite priced from {{bid.starter.monthly}} per month. mytender.io is a UK AI tender-writing platform, built at the University of Southampton, that does not publish a price.</strong> Both are aimed at bid data that cannot go through general public AI tools. This page compares them feature by feature, states Velstrian Bid's prices, marks anything mytender.io does not publish as Not published, and dates every source.</p>
+<p class="cmp-lead"><strong>Velstrian Bid helps small and mid size firms find and answer tenders, for public and private work, from {{bid.starter.monthly}} per month. mytender.io is a UK AI tender-writing platform, built at the University of Southampton, that does not publish a price.</strong> Both are aimed at bid data that cannot go through general public AI tools. This page compares them feature by feature, states Velstrian Bid's prices, marks anything mytender.io does not publish as Not published, and dates every source.</p>
+
+<h2 id="at-a-glance">At a glance</h2>
+<p class="rt-hint">Scroll the table sideways</p>
+<div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and mytender.io">
+<table class="cmp-table">
+<caption class="visually-hidden">Velstrian Bid compared with mytender.io across category, features and pricing</caption>
+<thead>
+<tr><th scope="col">Feature</th><th scope="col" class="cmp-us-col">Velstrian Bid</th><th scope="col">mytender.io</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite</td><td>UK AI tender-writing platform</td></tr>
+<tr><th scope="row">Finds public contracts for you (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td>No own feed stated. Partnered with a UK tender portal</td></tr>
+<tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Yes, retrieval over your content library</td></tr>
+<tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, a fixed check in code</td><td>Not stated publicly</td></tr>
+<tr><th scope="row">A note on every draft saying AI helped write it (the PPN 017 disclosure public buyers expect)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
+<tr><th scope="row">Social value (the local good you do) added up in code</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, worked out in code</td><td>Not a dedicated calculator</td></tr>
+<tr><th scope="row">Proof of delivery after you win (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated</td></tr>
+<tr><th scope="row">Private-cloud (VPC) deployment</th><td>Standard cloud, EU data residency</td><td><span class="cmp-yes">Yes</span>, Virtual Private Cloud</td></tr>
+<tr><th scope="row">Content-tool integrations (SharePoint, Salesforce, Google Drive)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>. Reads SharePoint, OneDrive and Confluence, syncs bids with Salesforce and HubSpot, writes to Slack, Teams and Google Drive</td><td><span class="cmp-yes">Yes</span>, per its published material (April 2026)</td></tr>
+<tr><th scope="row">Published price</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td><span class="cmp-no">No</span></td></tr>
+<tr><th scope="row">Starting price</th><td class="cmp-us">{{bid.starter.monthly}}/month</td><td>Not published (on request)</td></tr>
+<tr><th scope="row">Best for</th><td class="cmp-us">Small and mid size firms bidding for public and private work</td><td>UK SMEs producing 10+ bids a year</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="which-should-you-choose">Which should you choose?</h2>
+<div class="cmp-choose">
+<div class="cmp-choose-card">
+<h3>Choose mytender.io if</h3>
+<ul>
+<li>A Virtual Private Cloud deployment is a hard requirement for your bid data.</li>
+<li>You want drafting wired into SharePoint, Salesforce or Google Drive.</li>
+<li>You produce ten or more bids a year and want a dedicated drafting workspace.</li>
+<li>You are comfortable getting pricing through a demo rather than up front.</li>
+</ul>
+</div>
+<div class="cmp-choose-card is-us">
+<h3>Choose Velstrian (Velstrian Bid) if</h3>
+<ul>
+<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload or forward by email.</li>
+<li>You want published pricing from {{bid.starter.monthly}} per month, stated before any call.</li>
+<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
+<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>
+<li>You need social value added up in code and proof of delivery after you win.</li>
+</ul>
+</div>
+</div>
 
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
@@ -50,7 +98,7 @@ faq:
 <h3>Data governance</h3>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), GDPR compliant, ICO registered and built to ISO 27001 controls. <a href="/security/">Security</a> sets out each control.</dd>
+<dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR compliant, ICO registered, and follows ISO/IEC 27001. <a href="/security/">Security</a> sets out each control.</dd>
 <dt class="meta">mytender.io</dt>
 <dd>Virtual Private Cloud deployment, reported by Future Worlds on 21 May 2025 and listed in the sources at the foot of this page. Encryption, data residency and registration detail are not documented there.</dd>
 </dl>
@@ -67,69 +115,38 @@ faq:
 </div>
 <p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The mytender.io lines repeat only what the vendor's published material or the dated sources at the foot of this page actually state. Where something is not published, this page says so rather than inferring it. The full table follows.</p>
 
-<h2 id="at-a-glance">At a glance</h2>
-<p class="rt-hint">Scroll the table sideways</p>
-<div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and mytender.io">
-<table class="cmp-table">
-<caption class="visually-hidden">Velstrian Bid compared with mytender.io across category, features and pricing</caption>
-<thead>
-<tr><th scope="col">Feature</th><th scope="col" class="cmp-us-col">Velstrian Bid</th><th scope="col">mytender.io</th></tr>
-</thead>
-<tbody>
-<tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite</td><td>UK AI tender-writing platform</td></tr>
-<tr><th scope="row">UK and EU tender discovery (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td>No own feed stated. Partnered with a UK tender portal</td></tr>
-<tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Yes, retrieval over your content library</td></tr>
-<tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic gate</td><td>Not stated publicly</td></tr>
-<tr><th scope="row">PPN 017 AI-use disclosure on every draft</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
-<tr><th scope="row">Social value calculation, deterministic</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic</td><td>Not a dedicated calculator</td></tr>
-<tr><th scope="row">Post-award delivery evidence (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated</td></tr>
-<tr><th scope="row">Private-cloud (VPC) deployment</th><td>Standard cloud, EU data residency</td><td><span class="cmp-yes">Yes</span>, Virtual Private Cloud</td></tr>
-<tr><th scope="row">Content-tool integrations (SharePoint, Salesforce, Google Drive)</th><td><span class="cmp-yes">Yes</span>. Reads SharePoint, OneDrive and Confluence, syncs bids with Salesforce and HubSpot, writes to Slack, Teams and Google Drive</td><td><span class="cmp-yes">Yes</span>, per its published material (April 2026)</td></tr>
-<tr><th scope="row">Published price</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td><span class="cmp-no">No</span></td></tr>
-<tr><th scope="row">Starting price</th><td class="cmp-us">{{bid.starter.monthly}}/month</td><td>Not published (on request)</td></tr>
-<tr><th scope="row">Best for</th><td class="cmp-us">UK SMEs and public-sector suppliers</td><td>UK SMEs producing 10+ bids a year</td></tr>
-</tbody>
-</table>
-</div>
+<div data-cmp-screen></div>
 
-<h2 id="what-is-mytender">What is mytender.io?</h2>
+<h2 id="where-crowmark-loses">Where Velstrian Bid loses honestly</h2>
+<p>mytender.io leads on one thing Velstrian Bid does not offer: a Virtual Private Cloud deployment model, which some security teams insist on. Both connect to SharePoint, Salesforce and Google Drive for teams that manage their proposal content there. It is also further along on general drafting-workspace collaboration. Velstrian Bid's focus is narrower and different: UK and EU tender discovery, public and private tenders answered the same way, grounded answers with a hard figure-grounding gate, social value maths done in code, and post-award delivery evidence under the Procurement Act 2023. The honest read is that they overlap on drafting but diverge on everything either side of it, and a team could reasonably run both.</p>
+
+<h2 id="the-longer-read">The longer read</h2>
+<p>Each product in full, and the prices side by side. Open a line when you want the detail.</p>
+<div class="cfaq cmp-longer">
+  <details>
+    <summary><h3 id="what-is-mytender">What is mytender.io?</h3></summary>
+    <div class="cfaq-a cmp-read">
 <p>mytender.io is a UK AI tender-writing platform founded at the University of Southampton by Samuel Aaron, Jamie Horsnell and Nicolas Dickreuter, with pre-seed investment led by Fuel Ventures. It drafts proposal answers using retrieval over a content library the customer builds from past bids, and it runs inside a Virtual Private Cloud to address the confidentiality concerns that keep bid data out of general public AI tools. It lists integrations with SharePoint, Salesforce and Google Drive, and has stated a partnership with a large UK public-sector tender portal.</p>
 <p>Those are real strengths. The Virtual Private Cloud model matters to teams with a heavy internal document estate, and Velstrian Bid does not offer one. On content tools the two now overlap: Velstrian Bid reads SharePoint, OneDrive and Confluence, syncs bids with Salesforce and HubSpot, and writes exports to Google Drive. If your priority is a private-cloud drafting workspace wired into your existing content tools, mytender.io is built around that.</p>
 <p>mytender.io does not publish a price. It points prospects to a demo or the in-app dashboard and offers a one-month refundable period after commencement. On this page we therefore mark its price as Not published.</p>
+    </div>
+  </details>
+  <details>
+    <summary><h3 id="what-is-crowmark">What is Velstrian Bid?</h3></summary>
+    <div class="cfaq-a cmp-read">
+<p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 
-<h2 id="what-is-crowmark">What is Velstrian Bid?</h2>
-<p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
-<div data-cmp-screen></div>
 <p>After award, Velstrian Bid keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. On security, it uses EU data residency, AES-256 encryption at rest and TLS 1.3 in transit.</p>
 <p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
-
-<h2 id="pricing-compared">Pricing compared</h2>
+    </div>
+  </details>
+  <details>
+    <summary><h3 id="pricing-compared">Pricing compared</h3></summary>
+    <div class="cfaq-a cmp-read">
 <p>The pricing models are different in kind, not just in number. Velstrian Bid states {{bid.starter.monthly}} and {{bid.pro.monthly}} per month in public, on a page anyone can read without a demo. mytender.io keeps its tiers behind a demo or the dashboard. Both of us open an account through a conversation, but only one of us makes you have it before you know the price. If knowing the cost up front is part of how you evaluate software, Velstrian Bid gives you that immediately. If you prefer to see a tailored quote after a walkthrough, mytender.io's model fits that.</p>
-
-<h2 id="which-should-you-choose">Which should you choose?</h2>
-<div class="cmp-choose">
-<div class="cmp-choose-card">
-<h3>Choose mytender.io if</h3>
-<ul>
-<li>A Virtual Private Cloud deployment is a hard requirement for your bid data.</li>
-<li>You want drafting wired into SharePoint, Salesforce or Google Drive.</li>
-<li>You produce ten or more bids a year and want a dedicated drafting workspace.</li>
-<li>You are comfortable getting pricing through a demo rather than up front.</li>
-</ul>
+    </div>
+  </details>
 </div>
-<div class="cmp-choose-card is-us">
-<h3>Choose Velstrian (Velstrian Bid) if</h3>
-<ul>
-<li>You want published pricing from {{bid.starter.monthly}} per month, stated before any call.</li>
-<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
-<li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
-<li>You need deterministic social value maths and post-award delivery evidence.</li>
-</ul>
-</div>
-</div>
-
-<h2 id="where-crowmark-loses">Where Velstrian Bid loses honestly</h2>
-<p>mytender.io leads on one thing Velstrian Bid does not offer: a Virtual Private Cloud deployment model, which some security teams insist on. Both connect to SharePoint, Salesforce and Google Drive for teams that manage their proposal content there. It is also further along on general drafting-workspace collaboration. Velstrian Bid's focus is narrower and different: UK public-sector tender discovery, grounded answers with a hard figure-grounding gate, deterministic social value maths, and post-award delivery evidence under the Procurement Act 2023. The honest read is that they overlap on drafting but diverge on everything either side of it, and a team could reasonably run both.</p>
 
 <h2 id="faq">Frequently asked questions</h2>
 <div class="cfaq">
@@ -155,11 +172,11 @@ faq:
   </details>
   <details>
     <summary><h3>Can either tool stop the AI inventing figures?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid uses a deterministic figure-grounding gate: every &pound; and % in a draft must exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in mytender.io's public materials.</p></div>
+    <div class="cfaq-a"><p>Velstrian Bid checks every figure in code before a draft is shown: every &pound; and % in a draft must exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in mytender.io's public materials.</p></div>
   </details>
   <details>
-    <summary><h3>Which suits an SME doing a few public-sector bids?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid, because of its published pricing from {{bid.starter.monthly}} per month, its deterministic social value maths and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year.</p></div>
+    <summary><h3>Which suits a small firm doing a few bids a year?</h3></summary>
+    <div class="cfaq-a"><p>Velstrian Bid, because of its published pricing from {{bid.starter.monthly}} per month, its social value maths done in code and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year.</p></div>
   </details>
   <details>
     <summary><h3>Can I use both Velstrian Bid and mytender.io?</h3></summary>

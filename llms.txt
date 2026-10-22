@@ -26,18 +26,18 @@
 ## Comparisons
 
 - [Compare Velstrian Bid](https://velstrian.com/compare/): Honest, sourced head-to-heads of Velstrian Bid against the UK bid tools suppliers shortlist, with published pricing and a dated source for every competitor figure.
-- [Velstrian Bid vs AutogenAI](https://velstrian.com/compare/bid-vs-autogenai/): SME bid suite with published pricing from £49/month against an enterprise engine that quotes on request.
+- [Velstrian Bid vs AutogenAI](https://velstrian.com/compare/bid-vs-autogenai/): Bid suite for small and mid size firms bidding for public and private work, published pricing from £49/month, against an enterprise engine that quotes on request.
 - [Velstrian Bid vs mytender.io](https://velstrian.com/compare/bid-vs-mytender-io/): Figure-grounding and published pricing against a UK private-cloud drafting platform.
-- [Velstrian Bid vs CleanTender](https://velstrian.com/compare/bid-vs-cleantender/): Sector-agnostic bid suite against a soft facilities-management specialist; both publish pricing.
+- [Velstrian Bid vs CleanTender](https://velstrian.com/compare/bid-vs-cleantender/): Bid suite for public and private work in any sector against a soft facilities-management specialist. Both publish pricing.
 - [Velstrian Bid vs SwiftBid](https://velstrian.com/compare/bid-vs-swiftbid/): Subscription suite from £49/month against a per-bid AI writing service, with the break-even worked through.
 - [Social Value Portal vs Velstrian Bid](https://velstrian.com/blog/social-value-portal-vs-bid/): How Velstrian Bid compares to the Social Value Portal for UK suppliers.
 
 ## Sectors
 
-- [Construction](https://velstrian.com/sectors/construction/): How Velstrian Bid helps construction bidders win framework and project work (SCAPE, Pagabo, Fusion21, PPN 026 social value).
-- [Facilities management](https://velstrian.com/sectors/facilities/): Bid and tender support for FM providers (TUPE, mobilisation, CCS facilities frameworks).
-- [Highways](https://velstrian.com/sectors/highways/): Tender support for highways and term-maintenance contracts (NEC4, National Highways, DfT).
-- [Education](https://velstrian.com/sectors/education/): Bidding for education contracts and frameworks (DfE, CCS, multi-academy trusts).
+- [Construction](https://velstrian.com/sectors/construction/): How Velstrian Bid helps small and mid size construction firms win public and private work, from councils and housing associations to developers and main contractors (SCAPE, Pagabo, Fusion21, PPN 026 social value).
+- [Facilities management](https://velstrian.com/sectors/facilities/): Bid and tender support for FM providers, public and private, from hospitals and schools to offices and managing agents (TUPE, mobilisation, CCS facilities frameworks).
+- [Highways](https://velstrian.com/sectors/highways/): Tender support for highways and maintenance contracts, public and private, from National Highways and councils to developers, ports and airports (NEC4).
+- [Education](https://velstrian.com/sectors/education/): Bidding for education contracts, public and private, from schools, trusts and colleges to independent schools (DfE, CCS, multi-academy trusts).
 
 ## Reference
 

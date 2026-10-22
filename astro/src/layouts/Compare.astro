@@ -13,6 +13,17 @@
  * The article body is long-form HTML authored in src/content, styled by the
  * is:global .cmp-body block below with role tokens, which a light band
  * rebinds. It carries `ea-longform` so the v3 reset leaves its lists alone.
+ *
+ * ── THE TABLE FIRST, THE NARRATIVE ONE TAP AWAY (R285-WEB-TRANSFORMATION-WT-B)
+ * Audit S14 and M8, 2026-10-22: each comparison was about 7,800px and 1,500
+ * words, text led, and the narrative repeated the table. Each body now reads:
+ * a plain lead naming public AND private work, the table, the "which should
+ * you choose" cards, the three summary cards, the product screen, where we
+ * lose, then "The longer read" (what each product is, pricing compared) as
+ * closed <details> rows in the same `.cfaq` recipe the FAQ uses. Nothing was
+ * removed: every sentence, source and competitor figure is still in the
+ * document, so search engines and the gates read it. The concession section
+ * stays OPEN on purpose, a balanced comparison never hides where we lose.
  */
 import Base from './Base.astro';
 import PageHero from '../components/evidenced/PageHero.astro';
@@ -609,6 +620,13 @@ if (Astro.slots.has('screen')) {
   .cmp-body .cfaq-a p {
     margin: 0;
     font-size: var(--t-body);
+  }
+  /* The longer read: several paragraphs in one row. */
+  .cmp-body .cmp-read p + p {
+    margin-top: 1rem;
+  }
+  .cmp-body .cmp-longer {
+    margin: 0 0 var(--sec-gap);
   }
 
   @media (prefers-reduced-motion: reduce) {
