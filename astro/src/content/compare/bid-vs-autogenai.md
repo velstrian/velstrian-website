@@ -1,8 +1,8 @@
 ---
 title: "Velstrian Bid vs AutogenAI: bid software, honestly"
-description: "Velstrian Bid against AutogenAI: published SME pricing from £49 a month versus an enterprise engine sold on request. Every figure sourced."
-ogDescription: "Velstrian Bid against AutogenAI: published SME pricing from £49 a month versus an enterprise engine sold on request. Every figure sourced."
-articleDescription: "Velstrian Bid is an SME bid suite with published pricing from £49/month. AutogenAI is an enterprise engine that does not publish a price. A sourced, balanced comparison for UK bidding teams."
+description: "Velstrian Bid against AutogenAI: published SME pricing from {{bid.starter.monthly}} a month versus an enterprise engine sold on request. Every figure sourced."
+ogDescription: "Velstrian Bid against AutogenAI: published SME pricing from {{bid.starter.monthly}} a month versus an enterprise engine sold on request. Every figure sourced."
+articleDescription: "Velstrian Bid is an SME bid suite with published pricing from {{bid.starter.monthly}}/month. AutogenAI is an enterprise engine that does not publish a price. A sourced, balanced comparison for UK bidding teams."
 publishDate: 2026-07-26
 updatedDate: 2026-07-26
 competitor: "AutogenAI"
@@ -11,16 +11,16 @@ heroDescription: "An SME bid suite with published pricing set against an enterpr
 ogImage: "/Assets/og/crowmark.png?v=20260730"
 ogImageAlt: "Velstrian Bid vs AutogenAI comparison"
 ctaHeadline: "See the price."
-ctaSubLine1: "Published pricing from £49/month."
+ctaSubLine1: "Published pricing from {{bid.starter.monthly}}/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 screen: answer-list
 faq:
   - question: "Is Velstrian Bid or AutogenAI cheaper?"
-    answer: "Velstrian Bid publishes its prices: Starter is £49 per month and Pro is £149 per month, and anyone can sign up and start by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information."
+    answer: "Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and anyone can sign up and start by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information."
   - question: "Does AutogenAI publish its pricing?"
     answer: "No. AutogenAI lists no public price and quotes enterprise customers on request. Figures that circulate online are third-party estimates, not vendor-published rates."
   - question: "Which is better for a small supplier or SME?"
-    answer: "Velstrian Bid is built for UK SMEs and public-sector suppliers, with published plans from £49 per month. AutogenAI is built for enterprise bid teams of five or more, so it tends to be more than a small supplier needs."
+    answer: "Velstrian Bid is built for UK SMEs and public-sector suppliers, with published plans from {{bid.starter.monthly}} per month. AutogenAI is built for enterprise bid teams of five or more, so it tends to be more than a small supplier needs."
   - question: "Does AutogenAI find tenders for me?"
     answer: "AutogenAI has no built-in UK tender discovery feed. You bring your own pipeline. Velstrian Bid tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED and refreshes the feed every morning at 06:00 UTC."
   - question: "Can either tool stop the AI inventing figures?"
@@ -33,7 +33,7 @@ faq:
     answer: "Yes. Some teams run an enterprise engine for large, complex proposals and use Velstrian Bid for UK public-sector tender discovery, social-value scoring and post-award delivery evidence. The two are not mutually exclusive."
 ---
 
-<p class="cmp-lead"><strong>Velstrian Bid is a UK bid and tender management suite for public-sector suppliers, priced from &pound;49 per month. AutogenAI is an enterprise AI bid-writing engine sold on request to bid teams of five or more.</strong> They aim at different buyers. This page compares them feature by feature, states Velstrian Bid's prices, marks any figure AutogenAI does not publish as Not published, and lists every source with a date.</p>
+<p class="cmp-lead"><strong>Velstrian Bid is a UK bid and tender management suite for public-sector suppliers, priced from {{bid.starter.monthly}} per month. AutogenAI is an enterprise AI bid-writing engine sold on request to bid teams of five or more.</strong> They aim at different buyers. This page compares them feature by feature, states Velstrian Bid's prices, marks any figure AutogenAI does not publish as Not published, and lists every source with a date.</p>
 
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
@@ -84,7 +84,7 @@ faq:
 <tr><th scope="row">Social value calculation, deterministic</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic</td><td>General engine, not a dedicated calculator</td></tr>
 <tr><th scope="row">Post-award delivery evidence (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Procurement Act 2023 alignment stated</td></tr>
 <tr><th scope="row">Published price</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td><span class="cmp-no">No</span></td></tr>
-<tr><th scope="row">Starting price</th><td class="cmp-us">&pound;49/month</td><td>Not published (enterprise, quote on request)</td></tr>
+<tr><th scope="row">Starting price</th><td class="cmp-us">{{bid.starter.monthly}}/month</td><td>Not published (enterprise, quote on request)</td></tr>
 <tr><th scope="row">Best for</th><td class="cmp-us">UK SMEs and public-sector suppliers</td><td>Enterprise bid teams of 5+</td></tr>
 </tbody>
 </table>
@@ -99,10 +99,10 @@ faq:
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <div data-cmp-screen></div>
 <p>After award, Velstrian Bid keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. It is built for the supplier side of UK public-sector procurement, not for enterprise-wide proposal automation across every sector.</p>
-<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
+<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 
 <h2 id="pricing-compared">Pricing compared</h2>
-<p>This is the clearest difference between the two. Velstrian Bid states its numbers in public: &pound;49 and &pound;149 per month, on a page anyone can read without a sales call. You can sign up and start the same day, with no call needed. AutogenAI publishes no price and sells through a quote-on-request enterprise process. For a small supplier that wants to know the cost before committing time, published pricing matters, and Velstrian Bid gives it. For an enterprise procurement team used to negotiated contracts, a quote-based model is normal and AutogenAI's scale may justify it.</p>
+<p>This is the clearest difference between the two. Velstrian Bid states its numbers in public: {{bid.starter.monthly}} and {{bid.pro.monthly}} per month, on a page anyone can read without a sales call. You can sign up and start the same day, with no call needed. AutogenAI publishes no price and sells through a quote-on-request enterprise process. For a small supplier that wants to know the cost before committing time, published pricing matters, and Velstrian Bid gives it. For an enterprise procurement team used to negotiated contracts, a quote-based model is normal and AutogenAI's scale may justify it.</p>
 
 <h2 id="which-should-you-choose">Which should you choose?</h2>
 <div class="cmp-choose">
@@ -118,7 +118,7 @@ faq:
 <div class="cmp-choose-card is-us">
 <h3>Choose Velstrian (Velstrian Bid) if</h3>
 <ul>
-<li>You are a UK SME or public-sector supplier who wants published pricing from &pound;49 per month.</li>
+<li>You are a UK SME or public-sector supplier who wants published pricing from {{bid.starter.monthly}} per month.</li>
 <li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
 <li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
 <li>You need deterministic social value maths and post-award delivery evidence.</li>
@@ -133,7 +133,7 @@ faq:
 <div class="cfaq">
   <details>
     <summary><h3>Is Velstrian Bid or AutogenAI cheaper?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid publishes its prices: Starter is &pound;49 per month and Pro is &pound;149 per month, and anyone can sign up and start by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information.</p></div>
+    <div class="cfaq-a"><p>Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and anyone can sign up and start by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information.</p></div>
   </details>
   <details>
     <summary><h3>Does AutogenAI publish its pricing?</h3></summary>
@@ -141,7 +141,7 @@ faq:
   </details>
   <details>
     <summary><h3>Which is better for a small supplier or SME?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid is built for UK SMEs and public-sector suppliers, with published plans from &pound;49 per month. AutogenAI is built for enterprise bid teams of five or more, so it tends to be more than a small supplier needs.</p></div>
+    <div class="cfaq-a"><p>Velstrian Bid is built for UK SMEs and public-sector suppliers, with published plans from {{bid.starter.monthly}} per month. AutogenAI is built for enterprise bid teams of five or more, so it tends to be more than a small supplier needs.</p></div>
   </details>
   <details>
     <summary><h3>Does AutogenAI find tenders for me?</h3></summary>
@@ -172,7 +172,7 @@ faq:
 <li>AutogenAI listing showing no vendor-published price. GetApp UK, AutogenAI, accessed 26 July 2026. <a href="https://www.getapp.co.uk/software/2072629/autogenai" target="_blank" rel="noopener noreferrer">getapp.co.uk/software/2072629/autogenai</a></li>
 <li>AutogenAI $39.5m Series B (Salesforce Ventures, Spark Capital, Blossom Capital) and $65.3m total investment. FinSMEs, 6 December 2023. <a href="https://www.finsmes.com/2023/12/autogenai-raises-39-5m-in-series-b-funding.html" target="_blank" rel="noopener noreferrer">finsmes.com/2023/12/autogenai-raises-39-5m-in-series-b-funding.html</a></li>
 <li>Velstrian Bid capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). Velstrian, <a href="/bid/">Velstrian Bid product page</a>.</li>
-<li>Velstrian Bid pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio &pound;549/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>Velstrian Bid pricing: Starter {{bid.starter.monthly}}/month, Pro {{bid.pro.monthly}}/month, Portfolio {{bid.portfolio.monthly}}/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

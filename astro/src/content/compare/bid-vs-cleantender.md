@@ -2,7 +2,7 @@
 title: "Velstrian Bid vs CleanTender: bid software, honestly"
 description: "Velstrian Bid against CleanTender: a sector-agnostic bid suite versus a soft-FM specialist. Both publish prices, so the question is scope."
 ogDescription: "Velstrian Bid against CleanTender: a sector-agnostic bid suite versus a soft-FM specialist. Both publish prices, so the question is scope."
-articleDescription: "CleanTender is a soft-FM specialist with Pro at £99/month. Velstrian Bid is a sector-agnostic bid suite from £49/month with figure-grounding and social value maths. A sourced, balanced comparison."
+articleDescription: "CleanTender is a soft-FM specialist with Pro at £99/month. Velstrian Bid is a sector-agnostic bid suite from {{bid.starter.monthly}}/month with figure-grounding and social value maths. A sourced, balanced comparison."
 publishDate: 2026-07-26
 updatedDate: 2026-07-26
 competitor: "CleanTender"
@@ -11,12 +11,12 @@ heroDescription: "A soft-FM specialist against a sector-agnostic bid suite. Both
 ogImage: "/Assets/og/crowmark.png?v=20260730"
 ogImageAlt: "Velstrian Bid vs CleanTender comparison"
 ctaHeadline: "Bid wider."
-ctaSubLine1: "Every sector, published pricing from £49/month."
+ctaSubLine1: "Every sector, published pricing from {{bid.starter.monthly}}/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 screen: evidence
 faq:
   - question: "Is Velstrian Bid or CleanTender cheaper?"
-    answer: "Both publish prices. CleanTender has a free tier and a Pro plan at £99 per month or £990 per year. Velstrian Bid Starter is £49 per month and Pro is £149 per month. For a soft-FM-only supplier, CleanTender Pro at £99 sits between Velstrian Bid's two paid tiers."
+    answer: "Both publish prices. CleanTender has a free tier and a Pro plan at £99 per month or £990 per year. Velstrian Bid Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month. For a soft-FM-only supplier, CleanTender Pro at £99 sits between Velstrian Bid's two paid tiers."
   - question: "What sectors does CleanTender cover?"
     answer: "CleanTender is a soft facilities-management specialist covering cleaning, security, grounds, waste and catering. Velstrian Bid is sector-agnostic and works across any UK public-sector tender on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED."
   - question: "Does CleanTender handle social value?"
@@ -33,7 +33,7 @@ faq:
     answer: "Yes. A soft-FM contractor could use CleanTender for cleaning and security bids and Velstrian Bid for tenders in other sectors, for social value scoring and for post-award delivery evidence."
 ---
 
-<p class="cmp-lead"><strong>Velstrian Bid is a sector-agnostic UK bid and tender management suite priced from &pound;49 per month. CleanTender is a soft facilities-management specialist, with a free tier and Pro at &pound;99 per month, tuned for cleaning, security, grounds, waste and catering bids.</strong> Both publish their pricing, so this is not a transparency contest. It is a question of scope and depth, and this page sets out both honestly with dated sources.</p>
+<p class="cmp-lead"><strong>Velstrian Bid is a sector-agnostic UK bid and tender management suite priced from {{bid.starter.monthly}} per month. CleanTender is a soft facilities-management specialist, with a free tier and Pro at &pound;99 per month, tuned for cleaning, security, grounds, waste and catering bids.</strong> Both publish their pricing, so this is not a transparency contest. It is a question of scope and depth, and this page sets out both honestly with dated sources.</p>
 
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
@@ -86,7 +86,7 @@ faq:
 <tr><th scope="row">Social value calculation, deterministic</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, deterministic calculation</td><td>Included as a TOMs / Social Value SQ section</td></tr>
 <tr><th scope="row">Post-award delivery evidence (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated</td></tr>
 <tr><th scope="row">Published price</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td><span class="cmp-yes">Yes</span></td></tr>
-<tr><th scope="row">Starting price</th><td class="cmp-us">&pound;49/month (Starter)</td><td>Free tier, Pro &pound;99/month or &pound;990/year</td></tr>
+<tr><th scope="row">Starting price</th><td class="cmp-us">{{bid.starter.monthly}}/month (Starter)</td><td>Free tier, Pro &pound;99/month or &pound;990/year</td></tr>
 <tr><th scope="row">Best for</th><td class="cmp-us">UK suppliers bidding across sectors</td><td>UK soft-FM SMEs doing 4 to 12 bids a year</td></tr>
 </tbody>
 </table>
@@ -100,10 +100,10 @@ faq:
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. Unlike a sector specialist, it is sector-agnostic: it tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED across any category, refreshed every morning at 06:00 UTC. It drafts answers grounded in the supplier's own submitted bids, and its defining rule is figure-grounding, so before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <p>Velstrian Bid calculates social value deterministically in code against the weighting the buyer published rather than only drafting it as a questionnaire section, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. Its bid-fit and coverage marking, by contrast, is still in development and not in the released product, so on the fit-scan row above CleanTender is genuinely ahead today.</p>
 <div data-cmp-screen></div>
-<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
+<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 
 <h2 id="pricing-compared">Pricing compared</h2>
-<p>Both tools publish their prices, so you can compare directly. CleanTender is free to browse and &pound;99 per month on Pro. Velstrian Bid is &pound;49 per month on Starter and &pound;149 per month on Pro. For a soft-FM supplier, CleanTender Pro at &pound;99 sits between Velstrian Bid's two paid tiers, and the deciding factor is scope rather than price: CleanTender covers soft FM deeply, Velstrian Bid covers every sector plus deterministic social value and post-award delivery.</p>
+<p>Both tools publish their prices, so you can compare directly. CleanTender is free to browse and &pound;99 per month on Pro. Velstrian Bid is {{bid.starter.monthly}} per month on Starter and {{bid.pro.monthly}} per month on Pro. For a soft-FM supplier, CleanTender Pro at &pound;99 sits between Velstrian Bid's two paid tiers, and the deciding factor is scope rather than price: CleanTender covers soft FM deeply, Velstrian Bid covers every sector plus deterministic social value and post-award delivery.</p>
 
 <h2 id="which-should-you-choose">Which should you choose?</h2>
 <div class="cmp-choose">
@@ -134,7 +134,7 @@ faq:
 <div class="cfaq">
   <details>
     <summary><h3>Is Velstrian Bid or CleanTender cheaper?</h3></summary>
-    <div class="cfaq-a"><p>Both publish prices. CleanTender has a free tier and a Pro plan at &pound;99 per month or &pound;990 per year. Velstrian Bid Starter is &pound;49 per month and Pro is &pound;149 per month. For a soft-FM-only supplier, CleanTender Pro at &pound;99 sits between Velstrian Bid's two paid tiers.</p></div>
+    <div class="cfaq-a"><p>Both publish prices. CleanTender has a free tier and a Pro plan at &pound;99 per month or &pound;990 per year. Velstrian Bid Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month. For a soft-FM-only supplier, CleanTender Pro at &pound;99 sits between Velstrian Bid's two paid tiers.</p></div>
   </details>
   <details>
     <summary><h3>What sectors does CleanTender cover?</h3></summary>
@@ -172,7 +172,7 @@ faq:
 <li>CleanTender pricing (free tier, Pro &pound;99/month or &pound;990/year), curated soft-FM feed, 0 to 100 qualification scan in under 30 seconds, Selection Questionnaire sections and sector vocabulary, Compliance Vault, and target of 4 to 12 bids a year. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>CleanTender soft-FM scope and free contract-directory access. CleanTender, "AI Bid Management Software: Best UK Options (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk</a></li>
 <li>Velstrian Bid capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71. Bid-fit marking noted as in development, not released (first party). Velstrian, <a href="/bid/">Velstrian Bid product page</a>.</li>
-<li>Velstrian Bid pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio &pound;549/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>Velstrian Bid pricing: Starter {{bid.starter.monthly}}/month, Pro {{bid.pro.monthly}}/month, Portfolio {{bid.portfolio.monthly}}/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

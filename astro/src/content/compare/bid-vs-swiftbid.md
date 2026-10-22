@@ -1,8 +1,8 @@
 ---
 title: "Velstrian Bid vs SwiftBid: bid software, honestly"
-description: "Velstrian Bid against SwiftBid: subscribe from £49 a month, or pay £149 to £749 per bid. The break-even worked through, with dated sources."
-ogDescription: "Velstrian Bid against SwiftBid: subscribe from £49 a month, or pay £149 to £749 per bid. The break-even worked through, with dated sources."
-articleDescription: "SwiftBid is a per-bid AI writing service (£149 to £749 per bid). Velstrian Bid is a subscription bid suite from £49/month with daily tender discovery and social value maths. A sourced, balanced comparison."
+description: "Velstrian Bid against SwiftBid: subscribe from {{bid.starter.monthly}} a month, or pay £149 to £749 per bid. The break-even worked through, with dated sources."
+ogDescription: "Velstrian Bid against SwiftBid: subscribe from {{bid.starter.monthly}} a month, or pay £149 to £749 per bid. The break-even worked through, with dated sources."
+articleDescription: "SwiftBid is a per-bid AI writing service (£149 to £749 per bid). Velstrian Bid is a subscription bid suite from {{bid.starter.monthly}}/month with daily tender discovery and social value maths. A sourced, balanced comparison."
 publishDate: 2026-07-26
 updatedDate: 2026-07-26
 competitor: "SwiftBid"
@@ -11,12 +11,12 @@ heroDescription: "Pay per bid, or subscribe. Which model fits depends on how oft
 ogImage: "/Assets/og/crowmark.png?v=20260730"
 ogImageAlt: "Velstrian Bid vs SwiftBid comparison"
 ctaHeadline: "Bid often."
-ctaSubLine1: "One subscription, from £49/month."
+ctaSubLine1: "One subscription, from {{bid.starter.monthly}}/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 screen: answer-library
 faq:
   - question: "Is Velstrian Bid or SwiftBid cheaper?"
-    answer: "It depends on how many bids you write. SwiftBid charges per bid at £149 (Basic), £349 (Standard) and £749 (Premium). Velstrian Bid is a subscription from £49 per month. For one or two bids a year SwiftBid can be cheaper. From around the third bid a year a Velstrian Bid subscription tends to cost less overall."
+    answer: "It depends on how many bids you write. SwiftBid charges per bid at £149 (Basic), £349 (Standard) and £749 (Premium). Velstrian Bid is a subscription from {{bid.starter.monthly}} per month. For one or two bids a year SwiftBid can be cheaper. From around the third bid a year a Velstrian Bid subscription tends to cost less overall."
   - question: "Does SwiftBid have a subscription?"
     answer: "No. SwiftBid is a per-bid service with no subscription, which is the point of it. You pay for each bid you want written. Velstrian Bid is a monthly subscription with continuous access to every feature on your plan."
   - question: "Does SwiftBid find tenders for me?"
@@ -33,7 +33,7 @@ faq:
     answer: "Yes. You could run a Velstrian Bid subscription for discovery, social value and delivery evidence, and commission SwiftBid for a one-off high-stakes bid where you want an external expert review."
 ---
 
-<p class="cmp-lead"><strong>Velstrian Bid is a subscription UK bid and tender management suite from &pound;49 per month. SwiftBid is a per-bid AI writing service, charged at &pound;149 to &pound;749 a bid with no subscription.</strong> They price in completely different ways, so the honest comparison is about how often you bid and what you need around the draft. This page sets out both, states Velstrian Bid's prices, and dates every source.</p>
+<p class="cmp-lead"><strong>Velstrian Bid is a subscription UK bid and tender management suite from {{bid.starter.monthly}} per month. SwiftBid is a per-bid AI writing service, charged at &pound;149 to &pound;749 a bid with no subscription.</strong> They price in completely different ways, so the honest comparison is about how often you bid and what you need around the draft. This page sets out both, states Velstrian Bid's prices, and dates every source.</p>
 
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
@@ -77,7 +77,7 @@ faq:
 </thead>
 <tbody>
 <tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite (subscription)</td><td>Per-bid AI bid-writing service</td></tr>
-<tr><th scope="row">Pricing model</th><td class="cmp-us">Subscription from &pound;49/month</td><td>Per bid: &pound;149 / &pound;349 / &pound;749</td></tr>
+<tr><th scope="row">Pricing model</th><td class="cmp-us">Subscription from {{bid.starter.monthly}}/month</td><td>Per bid: &pound;149 / &pound;349 / &pound;749</td></tr>
 <tr><th scope="row">UK and EU tender discovery (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td><span class="cmp-no">None</span>. You upload contract packs</td></tr>
 <tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Per-bid AI drafting from documents you supply</td></tr>
 <tr><th scope="row">Human expert review</th><td>Software only. Your own reviewer approves each draft</td><td>Optional at Premium tier</td></tr>
@@ -99,10 +99,10 @@ faq:
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, refreshed every morning at 06:00 UTC, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <div data-cmp-screen></div>
 <p>Velstrian Bid also calculates social value deterministically against the weighting the buyer published, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. It does not supply an external bid writer. The reviewer who approves each draft is your own.</p>
-<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
+<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 
 <h2 id="pricing-compared">Pricing compared</h2>
-<p>The maths comes down to volume. SwiftBid Standard at &pound;349 a bid costs about &pound;1,047 for three bids in a year. A Velstrian Bid Starter subscription is &pound;49 per month, or &pound;529 for a year on annual billing, which covers as many bids as you want to write in that time. So for one or two bids a year SwiftBid can be cheaper, and from roughly the third bid of the year a Velstrian Bid subscription tends to win on cost, before you even count the tender discovery, social-value maths and delivery evidence that come with it.</p>
+<p>The maths comes down to volume. SwiftBid Standard at &pound;349 a bid costs about &pound;1,047 for three bids in a year. A Velstrian Bid Starter subscription is {{bid.starter.monthly}} per month, or {{bid.starter.annual}} for a year on annual billing, which covers as many bids as you want to write in that time. So for one or two bids a year SwiftBid can be cheaper, and from roughly the third bid of the year a Velstrian Bid subscription tends to win on cost, before you even count the tender discovery, social-value maths and delivery evidence that come with it.</p>
 
 <h2 id="which-should-you-choose">Which should you choose?</h2>
 <div class="cmp-choose">
@@ -133,7 +133,7 @@ faq:
 <div class="cfaq">
   <details>
     <summary><h3>Is Velstrian Bid or SwiftBid cheaper?</h3></summary>
-    <div class="cfaq-a"><p>It depends on how many bids you write. SwiftBid charges per bid at &pound;149 (Basic), &pound;349 (Standard) and &pound;749 (Premium). Velstrian Bid is a subscription from &pound;49 per month. For one or two bids a year SwiftBid can be cheaper. From around the third bid a year a Velstrian Bid subscription tends to cost less overall.</p></div>
+    <div class="cfaq-a"><p>It depends on how many bids you write. SwiftBid charges per bid at &pound;149 (Basic), &pound;349 (Standard) and &pound;749 (Premium). Velstrian Bid is a subscription from {{bid.starter.monthly}} per month. For one or two bids a year SwiftBid can be cheaper. From around the third bid a year a Velstrian Bid subscription tends to cost less overall.</p></div>
   </details>
   <details>
     <summary><h3>Does SwiftBid have a subscription?</h3></summary>
@@ -171,7 +171,7 @@ faq:
 <li>SwiftBid per-bid pricing (&pound;149 Basic, &pound;349 Standard, &pound;749 Premium), no tender discovery feed, optional human expert review and 6-hour turnaround at Premium, and target of 1 to 4 bids a year. These figures are reported by a dated third-party comparison. SwiftBid does not publish an equivalent primary pricing page we could verify directly. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>Per-bid versus subscription break-even (three SwiftBid Standard bids at roughly &pound;1,047). CleanTender, "Bid writer vs AI bid tool: which wins for UK SMEs", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool</a></li>
 <li>Velstrian Bid capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). Velstrian, <a href="/bid/">Velstrian Bid product page</a>.</li>
-<li>Velstrian Bid pricing: Starter &pound;49/month (&pound;529/year), Pro &pound;149/month, Portfolio &pound;549/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>Velstrian Bid pricing: Starter {{bid.starter.monthly}}/month ({{bid.starter.annual}}/year), Pro {{bid.pro.monthly}}/month, Portfolio {{bid.portfolio.monthly}}/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

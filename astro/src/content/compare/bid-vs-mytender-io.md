@@ -2,7 +2,7 @@
 title: "Velstrian Bid vs mytender.io: bid software, honestly"
 description: "Velstrian Bid against mytender.io: published pricing and figure-grounding versus a private-cloud drafting platform. Every figure sourced and dated."
 ogDescription: "Velstrian Bid against mytender.io: published pricing and figure-grounding versus a private-cloud drafting platform. Every figure sourced and dated."
-articleDescription: "Velstrian Bid publishes pricing from £49/month and adds figure-grounding and social value maths. mytender.io is a UK AI tender-writing platform that does not publish a price. A sourced, balanced comparison."
+articleDescription: "Velstrian Bid publishes pricing from {{bid.starter.monthly}}/month and adds figure-grounding and social value maths. mytender.io is a UK AI tender-writing platform that does not publish a price. A sourced, balanced comparison."
 publishDate: 2026-07-26
 updatedDate: 2026-07-26
 competitor: "mytender.io"
@@ -11,12 +11,12 @@ heroDescription: "Two UK-built tools for public-sector bidding. One publishes it
 ogImage: "/Assets/og/crowmark.png?v=20260730"
 ogImageAlt: "Velstrian Bid vs mytender.io comparison"
 ctaHeadline: "See the price."
-ctaSubLine1: "Published pricing from £49/month."
+ctaSubLine1: "Published pricing from {{bid.starter.monthly}}/month."
 ctaSubLine2: "Live, paid, and in daily use on real bids."
 screen: find
 faq:
   - question: "Is Velstrian Bid or mytender.io cheaper?"
-    answer: "Velstrian Bid publishes its prices: Starter is £49 per month and Pro is £149 per month, and anyone can sign up and start by card. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information."
+    answer: "Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and anyone can sign up and start by card. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information."
   - question: "Does mytender.io publish its pricing?"
     answer: "No. mytender.io does not list public prices. It directs prospects to a demo or the account dashboard and offers a one-month refundable period after commencement. On this page we mark its price as Not published."
   - question: "Is mytender.io a UK company?"
@@ -28,12 +28,12 @@ faq:
   - question: "Can either tool stop the AI inventing figures?"
     answer: "Velstrian Bid uses a deterministic figure-grounding gate: every £ and % in a draft must exist in an allowed-figure set computed from your own data, or the draft is rejected. We cannot verify an equivalent guarantee in mytender.io's public materials."
   - question: "Which suits an SME doing a few public-sector bids?"
-    answer: "Velstrian Bid, because of its published pricing from £49 per month, its deterministic social value maths and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year."
+    answer: "Velstrian Bid, because of its published pricing from {{bid.starter.monthly}} per month, its deterministic social value maths and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year."
   - question: "Can I use both Velstrian Bid and mytender.io?"
     answer: "Yes. The two are not mutually exclusive. A team could draft in one platform and use Velstrian Bid for UK tender discovery, PPN 026 social value scoring and post-award delivery evidence."
 ---
 
-<p class="cmp-lead"><strong>Velstrian Bid is a UK bid and tender management suite priced from &pound;49 per month. mytender.io is a UK AI tender-writing platform, built at the University of Southampton, that does not publish a price.</strong> Both are aimed at bid data that cannot go through general public AI tools. This page compares them feature by feature, states Velstrian Bid's prices, marks anything mytender.io does not publish as Not published, and dates every source.</p>
+<p class="cmp-lead"><strong>Velstrian Bid is a UK bid and tender management suite priced from {{bid.starter.monthly}} per month. mytender.io is a UK AI tender-writing platform, built at the University of Southampton, that does not publish a price.</strong> Both are aimed at bid data that cannot go through general public AI tools. This page compares them feature by feature, states Velstrian Bid's prices, marks anything mytender.io does not publish as Not published, and dates every source.</p>
 
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
@@ -86,7 +86,7 @@ faq:
 <tr><th scope="row">Private-cloud (VPC) deployment</th><td>Standard cloud, EU data residency</td><td><span class="cmp-yes">Yes</span>, Virtual Private Cloud</td></tr>
 <tr><th scope="row">Content-tool integrations (SharePoint, Salesforce, Google Drive)</th><td><span class="cmp-yes">Yes</span>. Reads SharePoint, OneDrive and Confluence, syncs bids with Salesforce and HubSpot, writes to Slack, Teams and Google Drive</td><td><span class="cmp-yes">Yes</span>, per its published material (April 2026)</td></tr>
 <tr><th scope="row">Published price</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td><span class="cmp-no">No</span></td></tr>
-<tr><th scope="row">Starting price</th><td class="cmp-us">&pound;49/month</td><td>Not published (on request)</td></tr>
+<tr><th scope="row">Starting price</th><td class="cmp-us">{{bid.starter.monthly}}/month</td><td>Not published (on request)</td></tr>
 <tr><th scope="row">Best for</th><td class="cmp-us">UK SMEs and public-sector suppliers</td><td>UK SMEs producing 10+ bids a year</td></tr>
 </tbody>
 </table>
@@ -101,10 +101,10 @@ faq:
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, in daily use on real bids. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <div data-cmp-screen></div>
 <p>After award, Velstrian Bid keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. On security, it uses EU data residency, AES-256 encryption at rest and TLS 1.3 in transit.</p>
-<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">&pound;49 per month</a> for 1 user, Pro is &pound;149 per month for 5 users with post-award delivery tracking, and Portfolio is &pound;549 per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
+<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
 
 <h2 id="pricing-compared">Pricing compared</h2>
-<p>The pricing models are different in kind, not just in number. Velstrian Bid states &pound;49 and &pound;149 per month in public, on a page anyone can read without a demo. mytender.io keeps its tiers behind a demo or the dashboard. Both of us open an account through a conversation, but only one of us makes you have it before you know the price. If knowing the cost up front is part of how you evaluate software, Velstrian Bid gives you that immediately. If you prefer to see a tailored quote after a walkthrough, mytender.io's model fits that.</p>
+<p>The pricing models are different in kind, not just in number. Velstrian Bid states {{bid.starter.monthly}} and {{bid.pro.monthly}} per month in public, on a page anyone can read without a demo. mytender.io keeps its tiers behind a demo or the dashboard. Both of us open an account through a conversation, but only one of us makes you have it before you know the price. If knowing the cost up front is part of how you evaluate software, Velstrian Bid gives you that immediately. If you prefer to see a tailored quote after a walkthrough, mytender.io's model fits that.</p>
 
 <h2 id="which-should-you-choose">Which should you choose?</h2>
 <div class="cmp-choose">
@@ -120,7 +120,7 @@ faq:
 <div class="cmp-choose-card is-us">
 <h3>Choose Velstrian (Velstrian Bid) if</h3>
 <ul>
-<li>You want published pricing from &pound;49 per month, stated before any call.</li>
+<li>You want published pricing from {{bid.starter.monthly}} per month, stated before any call.</li>
 <li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
 <li>You want the AI blocked from inventing a figure, with a PPN 017 disclosure on every draft.</li>
 <li>You need deterministic social value maths and post-award delivery evidence.</li>
@@ -135,7 +135,7 @@ faq:
 <div class="cfaq">
   <details>
     <summary><h3>Is Velstrian Bid or mytender.io cheaper?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid publishes its prices: Starter is &pound;49 per month and Pro is &pound;149 per month, and anyone can sign up and start by card. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information.</p></div>
+    <div class="cfaq-a"><p>Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and anyone can sign up and start by card. mytender.io does not publish a price. Its tiers are shown on request or in the account dashboard, so a like-for-like number comparison is not possible from public information.</p></div>
   </details>
   <details>
     <summary><h3>Does mytender.io publish its pricing?</h3></summary>
@@ -159,7 +159,7 @@ faq:
   </details>
   <details>
     <summary><h3>Which suits an SME doing a few public-sector bids?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid, because of its published pricing from &pound;49 per month, its deterministic social value maths and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year.</p></div>
+    <div class="cfaq-a"><p>Velstrian Bid, because of its published pricing from {{bid.starter.monthly}} per month, its deterministic social value maths and its post-award delivery evidence. mytender.io positions itself for UK SMEs producing ten or more bids a year.</p></div>
   </details>
   <details>
     <summary><h3>Can I use both Velstrian Bid and mytender.io?</h3></summary>
@@ -174,7 +174,7 @@ faq:
 <li>mytender.io pricing shown on request, one-month refundable period. mytender.io Terms &amp; Conditions and Capterra listing, accessed 26 July 2026. <a href="https://www.capterra.com/p/10031061/mytender-io/" target="_blank" rel="noopener noreferrer">capterra.com/p/10031061/mytender-io</a></li>
 <li>mytender.io positioning, content-library drafting, SharePoint / Salesforce / Google Drive integrations, no own discovery feed, target of 10+ bids a year. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>Velstrian Bid capabilities, figure-grounding, PPN 017, PPN 026, Procurement Act 2023 s.52 / s.71, and security posture (first party). Velstrian, <a href="/bid/">Velstrian Bid product page</a>.</li>
-<li>Velstrian Bid pricing: Starter &pound;49/month, Pro &pound;149/month, Portfolio &pound;549/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
+<li>Velstrian Bid pricing: Starter {{bid.starter.monthly}}/month, Pro {{bid.pro.monthly}}/month, Portfolio {{bid.portfolio.monthly}}/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
 </div>
 

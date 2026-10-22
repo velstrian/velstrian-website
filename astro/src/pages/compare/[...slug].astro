@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Compare from '../../layouts/Compare.astro';
 import ProductScreen from '../../components/evidenced/ProductScreen.astro';
+import { resolvePriceTokensDeep } from '../../lib/price-tokens';
 
 export async function getStaticPaths() {
   const pages = await getCollection('compare');
@@ -13,7 +14,9 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
-const d = page.data;
+/* Our prices in the frontmatter are tokens resolved from data/pricing.ts
+   (lib/price-tokens.ts). The body's are resolved in Compare.astro. */
+const d = resolvePriceTokensDeep(page.data, `compare/${page.id}`);
 ---
 
 <Compare

@@ -27,6 +27,7 @@ import { SITE } from '../data/site';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import { breadcrumbs } from '../lib/schema';
 import { routeUrl } from '../lib/route-url';
+import { resolvePriceTokens } from '../lib/price-tokens';
 
 interface FaqItem {
   question: string;
@@ -162,7 +163,9 @@ if (faq.length) {
  */
 /* The Markdown renderer prints a bare attribute as data-cmp-screen="". */
 const SCREEN_MARK = /<div data-cmp-screen(?:="")?><\/div>/;
-let body = await Astro.slots.render('default');
+/* Our prices in the body are tokens resolved from data/pricing.ts
+   (lib/price-tokens.ts), never typed. */
+let body = resolvePriceTokens(await Astro.slots.render('default'), path);
 if (Astro.slots.has('screen')) {
   if (!SCREEN_MARK.test(body)) {
     throw new Error(`Compare: ${path} passes a screen but its Markdown has no <div data-cmp-screen></div> marker`);
