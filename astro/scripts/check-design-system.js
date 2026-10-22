@@ -391,8 +391,9 @@ const ALLOWED = new Map([
    * run as "N recorded exception(s)" and "N KNOWN DEBT", so this line can be
    * checked against the output rather than taken on trust.
    * ══════════════════════════════════════════════════════════════════════════ */
-  ['token  src/components/nav/Nav.astro  font-size: 11px',
-   'DEBT: the Cmd-K key cap. Below every tier; needs a control token or --t-micro'],
+  /* DELETED 2026-10-22, R285-WEB-BUTTON-SYSTEM-01. The Cmd-K key cap at 11px
+     was DEBT. The key cap itself was removed from the nav on owner instruction,
+     so the debt went with it and the gate reported the entry as matching nothing. */
   /* DELETED 2026-08-04, A-83. This carried the "free" chip at font-size: 10px as
      DEBT — "the smallest type on the site and the only 10px on it". The debt is
      PAID: the chip now takes var(--t-micro), so it is on the scale and two

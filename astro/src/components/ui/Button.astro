@@ -122,7 +122,8 @@ const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boo
      * The lesson is worth more than the fix: "are they the same size" was
      * answered by measuring one dimension. Measure the one that differs. */
     min-width: var(--btn-min-w, 9.5rem);
-    border-radius: var(--radius-pill);
+    /* The v3 corner, the same token .ea-btn reads (R285-WEB-BUTTON-SYSTEM-01). */
+    border-radius: var(--v3-radius-btn);
     font-family: var(--font-body);
     font-size: var(--btn-fs);
     font-weight: var(--btn-fw);
@@ -136,6 +137,7 @@ const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boo
        order against whatever ancestor happens to establish one. */
     position: relative;
     isolation: isolate;
+    overflow: hidden;
     /* The press, and the only movement this control makes. 0.98 is the
        platform press value styles/motion.css restored from
        sovereign-primitives.css:44-46. The reduced-motion block at the foot of
@@ -238,28 +240,35 @@ const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boo
    * is named rather than expanded so the drop geometry stays in one place.
    */
   .btn--primary {
-    /* Live fills the primary with a vertical RAMP rather than a flat colour
-       (measured on the deployed /about), and that structure survives V6 even
-       though both its stops moved. --grad-action holds it, so the one thing a
-       button knows about its fill is that it is the filled-control ramp. The
-       specular inset stays: it is ours, live has no equivalent, and it is the
-       "glossy" the owner has asked for twice.
-
-       THE LABEL INVERTS TO THE PAGE, not to a neutral dark. A white chip is a
-       hole cut in the page and the label showing through it is the page: 20.13:1
-       on --c-interactive-fill, and it stays legible on the pressed state too
-       because --c-interactive-fill-lit is one step of the ink ladder, not a
-       different colour. */
-    background-image: var(--grad-action);
-    color: var(--c-interactive-fill-text);
-    box-shadow:
-      inset 0 1px 0 color-mix(in srgb, var(--c-text) 40%, transparent),
-      var(--shadow-btn);
+    /* THE BRAND, owner 2026-10-22 (R285-WEB-BUTTON-SYSTEM-01): indigo into
+       purple with a white label, from the one button token set in tokens.css
+       (THE BUTTON SYSTEM) that .ea-btn reads too. The white chip this used to
+       be, and the ink chip v3 painted on a light band, were the "black and
+       white" buttons the owner rejected. */
+    background-image: var(--btn-p-fill);
+    border-color: var(--btn-p-border);
+    color: var(--btn-p-ink);
+    box-shadow: var(--btn-p-glow);
   }
 
-  /* The specular sweep that crossed every button on hover was removed on
-     2026-10-21, R285-WEB-ENTERPRISE-REDESIGN-01. A button answers a pointer
-     with a plain colour step and nothing travels across it. */
+  /* THE LIGHT SWEEP, RESTORED. It was removed on 2026-10-21 and the owner
+     asked for it back on 2026-10-22: "where is button animations effect
+     gone?". One soft band crosses the primary once per hover, the same
+     --btn-p-sweep and --btn-sweep-dur as .ea-btn--primary::after. It sits at
+     z-index -1 inside this control's own stacking context (isolation above),
+     so it paints over the fill and UNDER the label. Parked off the left edge,
+     the transition exists only in the hover state, so it crosses once on
+     arrival and snaps back unseen on leave. Never loops, never on a card, off
+     under reduced motion (foot of this file), asserted by check-sheen.js. */
+  .btn--primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--btn-p-sweep);
+    transform: translateX(-110%);
+    pointer-events: none;
+  }
 
   /*
    * ── THE TWO BUTTONS LOOK UNEQUAL AND THE BOX MODEL IS NOT WHY ─────────────
@@ -301,14 +310,14 @@ const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boo
    * still translucent over the page it sits on.
    */
   .btn--secondary {
-    /* --grad-ramp between two surface steps. A control is a raised surface and
-       a raised surface is a wash, never a flat fill. */
-    --ramp-from: var(--c-lit);
-    --ramp-to: var(--c-raised);
-    background: var(--grad-ramp);
-    color: var(--c-text);
-    border-color: color-mix(in srgb, var(--c-text) 22%, transparent);
+    /* White with ink, the pair the owner asked for on 2026-10-22, from the
+       shared --btn-s-* tokens. */
+    background: var(--btn-s-fill);
+    color: var(--btn-s-ink);
+    border-color: var(--btn-s-border);
+    box-shadow: var(--btn-s-glow);
   }
+
 
   /* ── The lit state, R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-21 ───────────
      A plain colour step and nothing else: no lift, no scale, no glow and no
@@ -320,14 +329,17 @@ const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boo
      hover state after a tap and leave it there. */
   @media (hover: hover) {
     .btn--primary:hover:not(:disabled) {
-      background-image: linear-gradient(var(--c-interactive-fill-lit), var(--c-interactive-fill-lit));
+      background-image: var(--btn-p-fill-hover);
+    }
+
+    .btn--primary:hover:not(:disabled)::after {
+      transform: translateX(110%);
+      transition: transform var(--btn-sweep-dur) var(--ea-ease);
     }
 
     .btn--secondary:hover:not(:disabled) {
-      --ramp-from: color-mix(in srgb, var(--c-lit) 78%, var(--c-text));
-      --ramp-to: var(--c-lit);
-      background: var(--grad-ramp);
-      border-color: var(--c-border-hover);
+      background: var(--btn-s-fill-hover);
+      border-color: var(--btn-s-border-hover);
     }
   }
 
@@ -367,6 +379,10 @@ const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boo
   @media (prefers-reduced-motion: reduce) {
     .btn {
       --btn-scale-press: 1;
+    }
+
+    .btn--primary::after {
+      display: none;
     }
   }
 

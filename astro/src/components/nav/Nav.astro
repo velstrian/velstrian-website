@@ -135,18 +135,6 @@ const menus = NAV.menus.map((menu) => ({
           <circle cx="11" cy="11" r="7"></circle>
           <path d="m21 21-4.3-4.3"></path>
         </svg>
-        <!--
-          Platform-aware kbd badge (fixes a legacy bug): the old injector
-          hardcoded "&#8984;K" (Mac Cmd) for every visitor even though its own
-          key handler accepts both Ctrl and Cmd. Both labels are rendered up
-          front so there is no post-hydration layout shift; a blocking inline
-          script in Base.astro's <head> (runs before this markup paints) stamps
-          `data-kbd-os="mac"` on <html> and CSS below shows only the matching
-          label. Non-Mac (including the pre-JS default) sees "Ctrl K".
-        -->
-        <kbd class="ca-search-kbd" aria-hidden="true">
-          <span class="ca-kbd-mac">&#8984;K</span><span class="ca-kbd-other">Ctrl K</span>
-        </kbd>
       </button>
       {/* The Button component, not a second recipe. This was `ca-btn
           ca-btn-ghost`: a near-copy of `.btn` with 1.1rem padding against the
@@ -681,69 +669,16 @@ const menus = NAV.menus.map((menu) => ({
   .ca-search-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    border-radius: var(--radius-pill);
-    padding: 0.45rem 0.7rem;
+    justify-content: center;
+    border-radius: var(--v3-radius-btn);
+    padding: 0;
+    inline-size: var(--btn-h-sm);
     min-block-size: var(--btn-h-sm);
   }
-  .ca-search-kbd {
-    font-family: var(--font-mono);
-    line-height: var(--lh-tight);
-    font-size: 11px;
-    /* ── --c-text-sub, NOT --c-text-muted: A WCAG 1.4.3 FIX ─────────────────
-     *
-     * This was --c-text-muted, and it FAILED AA on 12 to 17 routes. Measured
-     * from decoded pixels by an independent verifier on 2026-08-05: 3.70 to
-     * 3.94:1 against the 4.5:1 that 11px text requires.
-     *
-     * IT IS A COMPOSITING FAILURE, WHICH IS WHY NOTHING CAUGHT IT BEFORE. The
-     * header is color-mix(--c-bg 72%, transparent) over a backdrop-filter, so
-     * the colour BEHIND this badge is whatever the page is behind the header.
-     * Over a dark body it composites to 9.1:1 and passes comfortably; over a
-     * light one the true backdrop measures rgb(80,80,88) and it does not. A
-     * contrast check that reads computed styles sees --c-text-muted on a
-     * nominally dark surface and reports a pass every time, on every route.
-     * Only reading the rendered pixels finds it.
-     *
-     * --c-text-sub gives 5.75:1 on that same worst-case backdrop, verified by
-     * arithmetic against the measured pixel rather than assumed, and it stays
-     * a quiet badge rather than becoming a second label competing with the word
-     * beside it. The remaining ten pieces of header text already pass
-     * everywhere and are untouched. */
-    color: var(--c-text-sub);
-    border: 1px solid var(--c-border);
-    border-radius: 4px;
-    padding: 1px 5px;
-    /* Reserved width for the longer "Ctrl K" label so swapping which span is
-       visible never shifts layout, on top of the pre-paint <html> attribute
-       already picking the right one before first render. */
-    min-width: 3.4ch;
-    text-align: center;
-    display: inline-block;
-  }
-  .ca-kbd-mac,
-  .ca-kbd-other {
-    display: none;
-  }
-  /* THE HINT GOES BEFORE THE ROW DOES. Measured at 1024px with both dropdowns
-     in place: logo 133 + links 443 + actions 385 + gaps and padding puts the
-     row at 1039px inside 1024, a 15px horizontal overflow of the whole
-     document. The badge is 48px of that, it is aria-hidden, and it is a hint
-     about a keyboard shortcut. The least useful thing on the narrowest screens
-     and the only thing in the row that is not a control. The button keeps its
-     icon and its accessible name ("Search (Ctrl K)"), and Ctrl/Cmd-K keeps
-     working, so nothing is lost but the reminder. */
-  @media (max-width: 1200px) {
-    .ca-search-kbd {
-      display: none;
-    }
-  }
-  :global(:root[data-kbd-os='mac']) .ca-kbd-mac {
-    display: inline;
-  }
-  :global(:root:not([data-kbd-os='mac'])) .ca-kbd-other {
-    display: inline;
-  }
+  /* The Ctrl K badge was removed on 2026-10-22 (owner, R285-WEB-BUTTON-SYSTEM-01):
+     a keyboard hint is expert furniture and RULE 0-U builds for the first time
+     user. The trigger is now an icon square. Its accessible name still says
+     "Search (Ctrl K)" and the shortcut still works (CommandPalette.astro). */
 
   /* `.ca-btn`, `.ca-btn-ghost` and `.ca-btn-md` were deleted on 2026-08-03. They
      were the header's own button system, and the markup that used them was

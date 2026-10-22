@@ -2,11 +2,12 @@
 /**
  * Action: the one button of the design system.
  *
- * Version 3 (strategy section 0.8). Primary is SOLID: ink on a light band,
- * white on a dark band or a stage, read from --ea-btn-fill and --ea-btn-ink,
- * which each band rebinds, so the same component is right on every band. One
- * soft light sweep crosses it once per hover (styles/evidenced.css
- * .ea-btn::after), the owner kept it. Secondary is an outline. 6px radius,
+ * Version 3.1 (owner 2026-10-22). Primary is the BRAND fill, indigo into
+ * purple with a white label, and white with indigo ink on a stage. Secondary
+ * is white. Both read the --btn-p-* and --btn-s-* tokens (tokens.css, THE
+ * BUTTON SYSTEM), which ui/Button.astro reads too, so the site has one button
+ * whichever component drew it. One soft light sweep crosses the primary once
+ * per hover (styles/evidenced.css .ea-btn--primary::after). 6px radius,
  * 48px tall. The label says what happens, and no arrow glyph is ever appended.
  * A link that opens a new window says so to a screen reader.
  *

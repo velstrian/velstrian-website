@@ -22,15 +22,13 @@ import Sequence from './Sequence.astro';
 import TourDialog from './TourDialog.astro';
 import { SIGNUP_URL } from '../../data/app';
 import { TRIAL_DAYS } from '../../data/pricing';
-import { PLATFORM_SHORT_NAME } from '../../lib/brand-names';
 ---
 
 <Band tone="light" class="ea-hero" labelledby="ea-hero-title">
   <div class="ea-wrap ea-hero__head">
     <h1 class="ea-hero__title" id="ea-hero-title">Write strong bids yourself, using what you already have.</h1>
     <p class="ea-lead ea-hero__lead">
-      {PLATFORM_SHORT_NAME} finds contracts that suit your business, from schools and the NHS to private companies,
-      drafts each answer from your past answers, and checks every claim against your documents.
+      Find public and private contracts that suit you, then answer every question from your own documents.
     </p>
     <div class="ea-actions">
       <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>

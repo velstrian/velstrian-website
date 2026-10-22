@@ -210,13 +210,17 @@ main > .ea-sec * {
 }
 
 .ea-btn--primary {
-  background: var(--ea-btn-fill);
-  color: var(--ea-btn-ink);
+  border-color: var(--btn-p-border);
+  background: var(--btn-p-fill);
+  color: var(--btn-p-ink);
+  box-shadow: var(--btn-p-glow);
 }
 
 .ea-btn--secondary {
-  border-color: var(--ea-rule-strong);
-  color: var(--ea-ink);
+  border-color: var(--btn-s-border);
+  background: var(--btn-s-fill);
+  color: var(--btn-s-ink);
+  box-shadow: var(--btn-s-glow);
 }
 
 .ea-btn--quiet {
@@ -236,28 +240,25 @@ main > .ea-sec * {
 /* The light sweep. Parked off the left edge, it crosses once when the pointer
    arrives and snaps back unseen when it leaves, because the transition exists
    only in the hover state. Primary button only, never a card, never looping.
-   On an ink button the sweep is a light band, on a white one a soft indigo. */
+   White on the brand fill, a soft indigo on the white stage primary, both from
+   --btn-p-sweep (tokens.css, THE BUTTON SYSTEM). */
 .ea-btn--primary::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--ea-sweep);
+  background: var(--btn-p-sweep);
   transform: translateX(-110%);
   pointer-events: none;
 }
 
-.band--dark .ea-btn--primary::after,
-.band--stage .ea-btn--primary::after {
-  background: var(--ea-sweep-on-light);
-}
-
 @media (hover: hover) {
   .ea-btn--primary:hover {
-    background: var(--ea-btn-fill-hover);
+    background: var(--btn-p-fill-hover);
   }
 
   .ea-btn--secondary:hover {
-    border-color: var(--ea-ink);
+    border-color: var(--btn-s-border-hover);
+    background: var(--btn-s-fill-hover);
   }
 
   .ea-btn--quiet:hover {
@@ -266,7 +267,7 @@ main > .ea-sec * {
 
   .ea-btn--primary:hover::after {
     transform: translateX(110%);
-    transition: transform var(--ea-dur-sweep) var(--ea-ease);
+    transition: transform var(--btn-sweep-dur) var(--ea-ease);
   }
 }
 

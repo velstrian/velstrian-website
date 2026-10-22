@@ -70,7 +70,10 @@ const CARD_ROUTES = ['/bid/', '/about/', '/pricing/'];
 /* The first page that renders each button variant in <main>. */
 const BUTTON_ROUTES = ['/', '/pricing/', '/bid/', '/about/'];
 const BUTTONS = [
-  { sel: 'main .btn--primary', label: 'button primary' },
+  /* sweep: the primary carries the one sanctioned light sweep, the same pass
+     3b asserts on .ea-btn--primary (owner 2026-10-22, R285-WEB-BUTTON-SYSTEM-01:
+     "where is button animations effect gone?"). */
+  { sel: 'main .btn--primary', label: 'button primary', sweep: true },
   { sel: 'main .btn--secondary', label: 'button secondary' },
 ];
 
@@ -79,6 +82,8 @@ const CARD_MAY_CHANGE = new Set(['borderTop', 'borderRight', 'borderBottom', 'bo
 const BUTTON_MAY_CHANGE = new Set([
   'borderTop', 'borderRight', 'borderBottom', 'borderLeft', 'bg', 'bgImage', 'color',
 ]);
+/* The one sanctioned light sweep, on every primary button (sections 3 and 3b). */
+const SWEEP = { route: '/', primary: 'main .ea-btn--primary', secondary: 'main .ea-btn--secondary', min: 350, max: 450 };
 const TRANSITION_OK = /^border-(top|right|bottom|left)-color$|^border-color$|^background-color$|^color$/;
 
 /* The old hover, put back for the self-test. Every line is one of the effects
@@ -359,12 +364,22 @@ for (const reduced of [false, true]) {
         done = true;
         break;
       }
-      const flash = flashes(m.rest, m.lit, BUTTON_MAY_CHANGE);
+      /* The sweep moves the ::after, so on a sweeping primary the pseudo's own
+         snapshot may differ between rest and lit. Everything else is held. */
+      const flash = flashes(m.rest, m.lit, b.sweep ? new Set([...BUTTON_MAY_CHANGE, 'after']) : BUTTON_MAY_CHANGE);
       rec(b.label, 'plain colour change only', flash.length === 0,
         flash.length ? `${route} ${sig}: ${flash.join('; ')}` : `${route} ${sig}: colour only`);
-      const anims = m.moving.filter((a) => a.kind !== 'CSSTransition' || !TRANSITION_OK.test(a.name));
-      rec(b.label, 'no animation, colour transitions only', !anims.length,
+      const sweep = b.sweep
+        ? m.moving.filter((a) => a.kind === 'CSSTransition' && a.pseudo === '::after' && a.name === 'transform')
+        : [];
+      const anims = m.moving.filter((a) => !sweep.includes(a) && (a.kind !== 'CSSTransition' || !TRANSITION_OK.test(a.name)));
+      rec(b.label, b.sweep ? 'colour transitions and the one sweep only' : 'no animation, colour transitions only', !anims.length,
         anims.map((a) => `${a.kind} ${a.name}${a.pseudo}`).join(', ') || 'none');
+      if (b.sweep) {
+        const ok = sweep.length === 1 && !sweep[0].infinite && sweep[0].dur >= SWEEP.min && sweep[0].dur <= SWEEP.max;
+        rec(b.label, `one ${SWEEP.min}-${SWEEP.max}ms light sweep per hover`, ok,
+          `${route} ${sig}: ` + (sweep.map((a) => `${a.name}${a.pseudo} ${a.dur}ms${a.infinite ? ' infinite' : ''}`).join(', ') || 'no sweep ran'));
+      }
       done = true;
       break;
     }
@@ -380,7 +395,8 @@ for (const reduced of [false, true]) {
  * the owner liked the light sweep and kept it on the PRIMARY button of the new
  * system only, "a single soft highlight passes across the button once per
  * hover, 400ms, on the button only, never on cards, never looping, off under
- * reduced motion". Rule 3 above still holds every older .btn to colour only.
+ * reduced motion". Since 2026-10-22 rule 3 asserts the same pass on the older
+ * .btn--primary, because the owner asked for it on every primary button.
  * This asserts the one sanctioned exception as a measured property, so the
  * sweep cannot spread to a card or start looping without failing here:
  *   - on hover exactly one transform transition runs, on ::after, 350-450ms,
@@ -389,7 +405,6 @@ for (const reduced of [false, true]) {
  *   - under prefers-reduced-motion nothing moves at all
  *   - the secondary button changes colour only
  * ══════════════════════════════════════════════════════════════════════════ */
-const SWEEP = { route: '/', primary: 'main .ea-btn--primary', secondary: 'main .ea-btn--secondary', min: 350, max: 450 };
 for (const reduced of [false, true]) {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: reduced ? 'reduce' : 'no-preference' });
   const page = await ctx.newPage();

@@ -676,8 +676,10 @@
      Two heights, one weight, one font size. Buttons were rendering at 54px
      and 44px with three font sizes and three weights between them. 44px is
      also the WCAG 2.2 target-size floor, so --btn-h-sm is the smallest a
-     control may ever be. */
-  --btn-h:    54px;
+     control may ever be. 48px since 2026-10-22 (R285-WEB-BUTTON-SYSTEM-01),
+     the v3 height, so ui/Button.astro and evidenced/Action.astro are one
+     shape: --v3-btn-h. */
+  --btn-h:    var(--v3-btn-h);
   --btn-h-sm: 44px;
   --btn-fs:   15px;
   --btn-fw:   600;
@@ -3476,13 +3478,11 @@
     0 40px 90px -40px color-mix(in srgb, var(--c-floor) 92%, transparent);
   --ea-sheet-shadow: 0 18px 40px -24px color-mix(in srgb, var(--c-floor) 90%, transparent);
   --ea-cite-stroke: 1.5px;
-  --ea-sweep: linear-gradient(105deg, transparent 25%, color-mix(in srgb, var(--c-white) 30%, transparent) 50%, transparent 75%);
   --ea-focus: 2px solid var(--c-teal);
 
   /* Motion. One sweep per hover, one refusal moment per page, nothing loops. */
   /* On the site's duration scale (check-transitions.js), not a new number. */
   --ea-dur-hover: var(--dur-fast);
-  --ea-dur-sweep: 400ms;
   --ea-dur-step: 320ms;
   --ea-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -3589,10 +3589,6 @@
   /* The light sweep on a WHITE primary (dark band, stage): white on white
      would be invisible, so it is a soft indigo pass instead. */
   --ea-sweep-on-light: linear-gradient(105deg, transparent 25%, color-mix(in srgb, var(--c-teal-dark) 22%, transparent) 50%, transparent 75%);
-  /* The button fill on the default (dark) ground. Bands rebind it. */
-  --ea-btn-fill: var(--c-white);
-  --ea-btn-ink: var(--c-bg);
-  --ea-btn-fill-hover: var(--c-text-sub);
   --ea-well: var(--c-panel);
   /* The dark ground, resolved here at :root so a light band's rebinding of
      --c-bg cannot reach it. The close band paints its lower half with it, so
@@ -3645,9 +3641,6 @@
   --ea-paper-sub: var(--c-ink-2);
   --ea-paper-rule: var(--c-light-3);
   --ea-paper-mark: color-mix(in srgb, var(--c-teal-dark) 16%, var(--c-light-0));
-  --ea-btn-fill: var(--c-ink-0);
-  --ea-btn-ink: var(--c-light-0);
-  --ea-btn-fill-hover: var(--c-ink-1);
   --ea-focus: 2px solid var(--c-iris-ink);
   --elev-shadow-ink: var(--c-ink-0);
   color: var(--ea-ink);
@@ -3679,9 +3672,6 @@
   --ea-accent-ink: var(--c-teal);
   --ea-refusal: var(--c-violet);
   --ea-refusal-wash: color-mix(in srgb, var(--c-violet) 16%, transparent);
-  --ea-btn-fill: var(--c-white);
-  --ea-btn-ink: var(--c-bg);
-  --ea-btn-fill-hover: var(--c-text-sub);
   --ea-focus: 2px solid var(--c-teal);
   --elev-shadow-ink: var(--c-floor);
   color: var(--ea-ink);
@@ -3696,9 +3686,62 @@
   --ea-rule: color-mix(in srgb, var(--stage-ink) 28%, transparent);
   --ea-rule-strong: color-mix(in srgb, var(--stage-ink) 70%, transparent);
   --ea-accent-ink: var(--stage-ink);
-  --ea-btn-fill: var(--c-white);
-  --ea-btn-ink: var(--c-ink-0);
-  --ea-btn-fill-hover: var(--c-light-2);
   --ea-focus: 2px solid var(--c-white);
   color: var(--ea-ink);
+}
+
+/* ============================================================================
+   THE BUTTON SYSTEM, ONE FOR THE WHOLE SITE (R285-WEB-BUTTON-SYSTEM-01,
+   owner 2026-10-22: "all the pages need to adopt same, for example buttons
+   colors, why black and white", "where is button animations effect gone?",
+   "button colors could be white then theme main color as well")
+
+   BOTH button components read these and nothing else: ui/Button.astro (.btn,
+   the nav, footer and every older page) and evidenced/Action.astro (.ea-btn,
+   the v3 bands). Before this, v3 painted its primary ink black on a light band
+   and white on a dark one, and the older Button painted it white, so one page
+   carried three different primaries and none of them was the brand.
+
+   PRIMARY is the brand, indigo into purple (--c-teal-dark #5E6AD2 into
+   --c-violet-deep #7C3AED, both already on the shelf), white label, 4.7:1 on
+   the indigo stop and 5.7:1 on the purple. Hover deepens both stops by 14% of
+   ink, which RAISES the label contrast. One soft white sweep crosses it once
+   per hover (styles/evidenced.css, components/ui/Button.astro), off under
+   reduced motion, asserted by scripts/check-sheen.js.
+   SECONDARY is white with ink, the pair the owner asked for.
+   ON A STAGE (the brand gradient itself) a brand button would vanish, so the
+   primary turns white with indigo ink and the secondary is a white outline.
+   ============================================================================ */
+:root {
+  --btn-brand-from: var(--c-teal-dark);
+  --btn-brand-to: var(--c-violet-deep);
+  --btn-p-fill: linear-gradient(135deg, var(--btn-brand-from), var(--btn-brand-to));
+  --btn-p-fill-hover: linear-gradient(135deg, color-mix(in srgb, var(--btn-brand-from) 86%, var(--c-ink-0)), color-mix(in srgb, var(--btn-brand-to) 86%, var(--c-ink-0)));
+  --btn-p-ink: var(--c-white);
+  --btn-p-border: transparent;
+  --btn-p-glow:
+    inset 0 1px 0 color-mix(in srgb, var(--c-white) 22%, transparent),
+    0 8px 22px -10px color-mix(in srgb, var(--btn-brand-to) 70%, transparent);
+  --btn-p-sweep: linear-gradient(105deg, transparent 25%, color-mix(in srgb, var(--c-white) 32%, transparent) 50%, transparent 75%);
+  --btn-s-fill: var(--c-white);
+  --btn-s-fill-hover: var(--c-light-2);
+  --btn-s-ink: var(--c-ink-0);
+  --btn-s-border: color-mix(in srgb, var(--c-ink-0) 14%, transparent);
+  --btn-s-border-hover: color-mix(in srgb, var(--c-ink-0) 28%, transparent);
+  --btn-s-glow: 0 1px 2px color-mix(in srgb, var(--c-ink-0) 8%, transparent);
+  --btn-sweep-dur: 400ms;
+}
+
+.band--stage {
+  --btn-p-fill: linear-gradient(var(--c-white), var(--c-white));
+  --btn-p-fill-hover: linear-gradient(var(--c-light-2), var(--c-light-2));
+  --btn-p-ink: var(--c-iris-ink);
+  --btn-p-glow: 0 10px 26px -12px color-mix(in srgb, var(--c-ink-0) 45%, transparent);
+  --btn-p-sweep: var(--ea-sweep-on-light);
+  --btn-s-fill: transparent;
+  --btn-s-fill-hover: color-mix(in srgb, var(--c-white) 12%, transparent);
+  --btn-s-ink: var(--c-white);
+  --btn-s-border: color-mix(in srgb, var(--c-white) 70%, transparent);
+  --btn-s-border-hover: var(--c-white);
+  --btn-s-glow: none;
 }
