@@ -25,7 +25,7 @@ const hasFloat = Astro.slots.has('float');
 ---
 
 <div class={`ea-stage ea-stage--${layout} ${hasFloat ? 'ea-stage--has-float' : ''} ${cls}`.replace(/\s+/g, ' ').trim()}>
-  <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
+  <div class="ea-stage__ground band--stage" aria-hidden="true">{layout === 'hero' && <span class="ea-stage__mesh"></span>}</div>
   <div class="ea-stage__screen"><slot /></div>
   {hasFloat && <div class="ea-stage__float"><slot name="float" /></div>}
 </div>

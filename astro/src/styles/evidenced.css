@@ -24,7 +24,11 @@
    4. The carousel slide, 400ms, only when the reader asks.
    5. The primary button's light sweep, once per hover (check-sheen.js 3b).
    6. A card on a light band lifts one elevation step on hover.
-   Nothing loops. Everything is off under prefers-reduced-motion.
+   7. The hero stage's light drifts (.ea-stage__mesh), the ONE loop, adopted
+      by the owner 2026-10-22 (A-301) and named in check-sheen.js LOOP_ALLOW.
+      Transform only, on the hero stage only, never a page layer (the page
+      wash removed 2026-08-04 stays removed).
+   Nothing else loops. Everything is off under prefers-reduced-motion.
    ============================================================================ */
 
 /* ── The page ─────────────────────────────────────────────────────────────── */
@@ -327,6 +331,37 @@ main > .ea-sec * {
   background-size: 160px 160px;
   opacity: 0.16;
   mix-blend-mode: overlay;
+}
+
+/* The hero stage's moving light: the mesh fields, blurred, drifting on one
+   transform loop that starts and ends at rest. Oversized so its edges never
+   show inside the stage while it moves. Grain and rim sit above it. */
+.ea-stage__mesh {
+  position: absolute;
+  inset: -25%;
+  background: var(--stage-mesh);
+  filter: blur(var(--stage-mesh-blur));
+}
+
+/* Written as `main > .ea-sec .ea-stage__mesh` on purpose: the section reset
+   `main > .ea-sec *  { animation: none }` near the top of this file outranks a
+   single class, and that reset stays, it is what keeps legacy motion out. */
+@media (prefers-reduced-motion: no-preference) {
+  main > .ea-sec .ea-stage__mesh {
+    will-change: transform;
+    animation: ea-mesh-drift var(--stage-mesh-dur) ease-in-out infinite;
+  }
+}
+
+@keyframes ea-mesh-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate3d(7%, -5%, 0) rotate(9deg) scale(1.1); }
+  66% { transform: translate3d(-6%, 6%, 0) rotate(-7deg) scale(1.05); }
+}
+
+.ea-stage__ground::before,
+.ea-stage__ground::after {
+  z-index: 1;
 }
 
 /* A soft rim of light on the top edge. */

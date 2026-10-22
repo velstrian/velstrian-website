@@ -31,7 +31,11 @@
  *   5  NOTHING LOOPS. On every built route, once the page has loaded, no
  *      animation with infinite iterations is running. Shimmer, pulse, ping,
  *      breathe, drift, beam, edge and seam were all loops, and a loop is the
- *      thing a reader cannot stop by moving the pointer away.
+ *      thing a reader cannot stop by moving the pointer away. ONE named
+ *      exception, LOOP_ALLOW below: the hero stage's drifting light, adopted
+ *      by the owner on 2026-10-22 ("adopt the hero motion", row A-301). It is
+ *      matched by animation name AND element, so any other loop still fails,
+ *      and it is reported STALE (a failure) the moment it stops running.
  *
  * ── THE SELF-TEST, BECAUSE A GATE THAT CANNOT FAIL IS THE USUAL FAILURE ─────
  *
@@ -56,6 +60,15 @@ const DIST = process.env.DS_DIST || path.join(__dirname, '..', 'dist');
 /* `{ probe, reason }`. EMPTY, AND THAT IS THE STATE TO KEEP IT IN. A card that
    needs a second hover change has to argue against a clean baseline. */
 const ALLOW = [];
+
+/* Rule 5's exceptions, matched exactly against "<animation> on <element>".
+   Each one is an owner decision. Off under reduced motion is evidenced.css's
+   job and rule 4's measurement does not see loops, so it is stated here. */
+const LOOP_ALLOW = [
+  { loop: 'ea-mesh-drift on span.ea-stage__mesh',
+    reason: 'owner 2026-10-22, A-301: the hero stage light, brand ramp only, 22s transform loop, hero stage only, off under prefers-reduced-motion' },
+];
+const usedLoopAllow = new Set();
 
 /* The calm clock, in milliseconds. --dur-hover is --dur-fast, 0.18s. */
 const CLOCK = { min: 150, max: 200 };
@@ -466,8 +479,14 @@ const allRoutes = routesOf(DIST);
   for (const route of allRoutes) {
     await open(page, route);
     await page.waitForTimeout(200);
-    for (const l of await loops(page)) found.push(`${route}  ${l}`);
+    for (const l of await loops(page)) {
+      if (LOOP_ALLOW.some((a) => a.loop === l)) { usedLoopAllow.add(l); continue; }
+      found.push(`${route}  ${l}`);
+    }
   }
+  const staleLoops = LOOP_ALLOW.filter((a) => !usedLoopAllow.has(a.loop));
+  rec('every route', `${LOOP_ALLOW.length} recorded loop exception(s) still running`, staleLoops.length === 0,
+    staleLoops.length ? 'STALE, delete from LOOP_ALLOW: ' + staleLoops.map((a) => a.loop).join(', ') : LOOP_ALLOW.map((a) => a.loop).join(', '));
   rec('every route', `no infinite animation (${allRoutes.length} routes)`, found.length === 0,
     found.length ? found.join('\n' + ' '.repeat(70)) : `${allRoutes.length} routes loaded, 0 loops running`);
   await page.close();
