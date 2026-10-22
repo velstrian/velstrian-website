@@ -163,21 +163,23 @@ const WEBHOOK = [
         ))
       }
     </ul>
-    <p class="int-note">
-      Every scope above is a read permission. Your files stay exactly where they are, as they are, and your tenant
-      settings stay as you set them. SharePoint and OneDrive are granted by your own Microsoft administrator, so you can
-      see exactly what was consented to and withdraw it without asking us.
-    </p>
-    {/* D288 (2026-10-22). The home page box says "connect SharePoint, OneDrive
-        and Confluence", so the plan and the one setup step a reader needs sit
-        here. Gated by feature bid.response_drafting, Starter and above
-        (crowagent-platform api/app/services/entitlements.py), and SharePoint and
-        OneDrive need the customer's own Entra app (content_sources.py). */}
-    <p class="int-note">
-      Connecting a document source comes with every paid {PRODUCT_NAME_BID} plan. For SharePoint and OneDrive, your
-      Microsoft administrator registers an app in your own Microsoft Entra tenant and grants it read access. Confluence
-      needs only an API token from your own account.
-    </p>
+    <div class="int-notes-grid">
+      <p class="int-note">
+        Every scope above is a read permission. Your files stay exactly where they are, as they are, and your tenant
+        settings stay as you set them. SharePoint and OneDrive are granted by your own Microsoft administrator, so you can
+        see exactly what was consented to and withdraw it without asking us.
+      </p>
+      {/* D288 (2026-10-22). The home page box says "connect SharePoint, OneDrive
+          and Confluence", so the plan and the one setup step a reader needs sit
+          here. Gated by feature bid.response_drafting, Starter and above
+          (crowagent-platform api/app/services/entitlements.py), and SharePoint and
+          OneDrive need the customer's own Entra app (content_sources.py). */}
+      <p class="int-note">
+        Connecting a document source comes with every paid {PRODUCT_NAME_BID} plan. For SharePoint and OneDrive, your
+        Microsoft administrator registers an app in your own Microsoft Entra tenant and grants it read access. Confluence
+        needs only an API token from your own account.
+      </p>
+    </div>
   </SectionBand>
 
   <SectionBand
@@ -365,6 +367,25 @@ const WEBHOOK = [
     max-width: var(--ea-copy);
     margin-top: var(--space-8);
     color: var(--ea-sub);
+  }
+
+  .int-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+  }
+
+  .int-notes-grid .int-note {
+    max-width: none;
+    margin-top: 0;
+  }
+
+  @media (max-width: 800px) {
+    .int-notes-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+    }
   }
 
   .int-solo {
