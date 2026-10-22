@@ -17,13 +17,27 @@
  * to "Put CrowMark in front of to your clients.", which is not grammatical under
  * any reading and was the page's accessible name. Repaired in the legacy page
  * too, and logged as OA-11 in case a different headline was intended.
+ *
+ * -- 2026-10-22: ON DESIGN SYSTEM VERSION 3 --
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7. PageHero, What partners get,
+ * Who we partner with, and the enquiry band with the reasons panel beside the
+ * form, every heading, card, link and the form kept. The call link reads
+ * WALKTHROUGH_URL instead of a local copy of the same URL.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import SectionBand from '../components/evidenced/SectionBand.astro';
+import Action from '../components/evidenced/Action.astro';
+import Icon from '../components/evidenced/Icon.astro';
+import ProductScreen from '../components/evidenced/ProductScreen.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import { WALKTHROUGH_URL } from '../data/app';
+import '../styles/evidenced.css';
 import PartnerForm from '../components/forms/PartnerForm.astro';
 import { breadcrumbs } from '../lib/schema';
-import { HELLO_EMAIL } from '../lib/brand-names';
+import { HELLO_EMAIL, PRODUCT_NAME_BID } from '../lib/brand-names';
+
+const TRAIL = [{ name: 'Home', path: '/' }];
 
 const title = 'Partners | Velstrian';
 /*
@@ -163,7 +177,6 @@ const WHY = [
  * band now lives, rather than as a new closing band, restoring the affordance,
  * not re-adding a section the port deliberately merged.
  */
-const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
 ---
 
 <Base
@@ -172,345 +185,145 @@ const CALENDLY = 'https://calendly.com/crowagent-platform/30min';
   ogDescription={ogDescription}
   path="/partners"
   schema={schema}
+  typeface="evidenced"
+  headerTone="light"
 >
-  {/*
-    HERO EYEBROW RESTORED 2026-08-05 (O-25). Measured against the ten sibling
-    routes at 1440 and 390 under reduced motion, with rects cross-checked
-    against offsetTop: every one of them paints a hero eyebrow at y=159 (1440)
-    and the H1 at y=205. This page alone had no eyebrow, so its H1 rose into
-    the eyebrow's slot at y=159 and the whole hero sat 46px higher than every
-    other page in the set. That is the shared Section recipe rendering two
-    different ways, not a design decision: the blank line left between `id` and
-    `as` is where the prop had been.
+  <PageHero
+    id="partners-title"
+    bandId="partners-hero"
+    label="Partner programme"
+    title={`Put ${PRODUCT_NAME_BID} in front of your clients.`}
+    lead={`Velstrian partners with bid agencies, law firms and public sector advisors who run PPN 026 social value and delivery evidence for their clients. A tracked referral link, co-marketing and a priority support channel, with commission agreed on the call.`}
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Partners" /></div>
+    <Action href="#partner-enquiry">Become a partner</Action>
+    <Action href={`mailto:${HELLO_EMAIL}`} variant="secondary">Talk to us</Action>
+  </PageHero>
 
-    Do not confuse this with the deliberate omission recorded below on
-    #partner-benefits. That one drops an eyebrow that repeated its own heading
-    word for word. This one is a hero kicker that says something the heading
-    does not, which is the same job it does on the other ten routes.
-  */}
-  <Section
-    eyebrow="Partner programme"
-    title="Put Velstrian Bid in front of your clients."
-    standfirst="Velstrian partners with bid agencies, law firms and public sector advisors who run PPN 026 social value and delivery evidence for their clients. A tracked referral link, co-marketing and a priority support channel, with commission agreed on the call."
-    id="partners-hero"
-    as="h1">
-    <div class="btn-row">
-      <Button href="#partner-enquiry">Become a partner</Button>
-      <Button href={`mailto:${HELLO_EMAIL}`} variant="secondary">Talk to us</Button>
-    </div>
-  </Section>
-
-  {/*
-    NO EYEBROW HERE. It read "What partners get" directly above an h2 reading
-    "What partners get". The same six words twice, one capsule apart, which is
-    the only place on either page where the eyebrow said nothing the heading did
-    not. The legacy section carries no visible head at all (its h2 is clipped to
-    screen readers only),
-    so dropping the duplicate moves towards the legacy treatment rather than away
-    from it. The heading itself stays, visible and centred: it is what the
-    content-parity gate matches on, and a section of three cards with no heading
-    is worse for a screen-reader user than a slightly redundant one.
-  */}
-  <Section title="What partners get" id="partner-benefits">
-    <ul class="cards">
+  {/* No eyebrow: it would repeat the heading word for word. */}
+  <SectionBand tone="light" title="What partners get" id="partner-benefits" align="centre">
+    <ul class="ea-cards" role="list">
       {
         BENEFITS.map((b) => (
-          <li class="cards__item surface surface--pad">
-            <p class="eyebrow kicker">{b.kicker}</p>
-            <h3 class="cards__h">{b.heading}</h3>
-            <p class="cards__body">{b.body}</p>
+          <li data-reveal>
+            <div class="ea-card ea-tcard">
+              <p class="ea-label">{b.kicker}</p>
+              <h3 class="ea-h3">{b.heading}</h3>
+              <p>{b.body}</p>
+            </div>
           </li>
         ))
       }
     </ul>
-  </Section>
+  </SectionBand>
 
-  <Section
+  <SectionBand
+    tone="light-alt"
     eyebrow="Ecosystem"
     title="Who we partner with."
-    standfirst="Whether you write bids, advise on procurement or guide public sector clients, Velstrian Bid does the social value arithmetic and the evidence tracking underneath your service."
+    standfirst={`Whether you write bids, advise on procurement or guide public sector clients, ${PRODUCT_NAME_BID} does the social value arithmetic and the evidence tracking underneath your service.`}
     id="partner-audiences"
   >
-    <ul class="cards cards--two">
+    <ul class="ea-cards ea-cards--2" role="list">
       {
         AUDIENCES.map((a) => (
-          <li class="cards__item surface surface--pad">
-            <h3 class="cards__h">{a.heading}</h3>
-            <p class="cards__body">{a.body}</p>
+          <li data-reveal>
+            <div class="ea-card ea-tcard">
+              <h3 class="ea-h3">{a.heading}</h3>
+              <p>{a.body}</p>
+            </div>
           </li>
         ))
       }
     </ul>
-  </Section>
+  </SectionBand>
 
-  <Section
+  {/*
+    THE REASONS PANEL ON THE LEFT, THE FORM ON THE RIGHT, the legacy
+    arrangement, in one grid whose two cards stretch to one height. DOM order
+    is the mobile order: reasons to partner, then the form to do it with.
+
+    THE SCREEN IS NO LONGER THE FIGMA PHONE DRAWING. That picture carried the
+    old brand's initials and was one of the drawings removed from every page on
+    2026-10-22. ProductScreen's action centre recreation shows the same queue,
+    captioned "Example data", until a real capture lands.
+  */}
+  <SectionBand
+    tone="light"
     eyebrow="Enquiry"
     title="Express your interest."
     standfirst="Tell us who your clients are and how you work with them. We reply within two business days."
     id="partner-enquiry"
   >
-    {/*
-      COLUMN ORDER FOLLOWS THE LEGACY PAGE: the "Why partner?" panel on the
-      left, the form on the right. The port had them the other way round and at
-      1.4fr / 1fr, which put an unbounded list of ticks in a narrow right-hand
-      gutter next to a form that was not bounded either, so neither column read
-      as a thing. Two equal columns, each in its own container, is the legacy
-      arrangement and it is also what makes the form look like somewhere you
-      type rather than fields floating on the page.
-
-      DOM order is the mobile order, and it matches the legacy stack: reasons to
-      partner, then the form to do it with.
-    */}
-    {/* THE SHARED ROW, not a local grid. Owner, 2026-08-03: "card size
-        difference in /partners/ page Enquiry section", and in the same breath
-        the rule for fixing it. "must be forced centrally and automated way not
-        the manual patching". `.enquiry` was the only row of cards on all 43
-        routes with unequal heights (452px beside 1071px) and the cause was its
-        own `align-items: start`. The recipe now lives in styles/card-row.css
-        and scripts/check-timeline.js fails the build on any row that drifts
-        again, at 1440 and 390, on every route.
-
-        CORRECTED 2026-08-04, A-55. This named check-render.js, which has never
-        held a card-height rule. It measures alignment, target size, button
-        width parity and page headings, and nothing in it looks at how tall a
-        card is. The same false claim was in styles/card-row.css and was
-        corrected there first; this second copy of it survived, which is the
-        point worth taking: correcting a claim in one file does not correct it
-        in the file that repeated it. That is the identical failure mode as the
-        recipe copies this pass exists to end, one level up. */}
-    <div class="enquiry card-row card-row--wide-last">
-      {/* `surface surface--pad` rather than a local copy of the card recipe.
-          The two columns restated border, radius, background and shadow
-          themselves and landed on --radius-panel, so they were the only 16px
-          blocks on the page while every card beside them was 20px. */}
-      <aside class="enquiry__aside surface surface--pad" aria-labelledby="why-partner-title">
-        {/* A HEADING, NOT A KICKER. `.kicker` is the mono 13px label used on
-            <p> above each card heading on this page; putting it on the <h3>
-            that names this whole panel made the heading smaller than the list
-            underneath it. It takes .enquiry__h, the card-tier heading. */}
-        <h3 class="enquiry__h" id="why-partner-title">Why partner?</h3>
-        <ul class="why">
-          {WHY.map((w) => <li>{w}</li>)}
+    <div class="pt-grid">
+      <aside class="ea-card pt-pane" aria-labelledby="why-partner-title" data-reveal>
+        <h3 class="ea-h3" id="why-partner-title">Why partner?</h3>
+        <ul class="pt-why" role="list">
+          {WHY.map((w) => <li><Icon name="done" size={18} /><span>{w}</span></li>)}
         </ul>
-
-        {/* THE IMAGE THE OWNER ASKED FOR, and it is drawn rather than stock.
-            A licence-free photograph would still need downloading, optimising,
-            self-hosting and a per-image licence record. The site self-hosts
-            every subresource, and check-csp.js checks each referenced origin
-            against the shipped CSP.
-            CORRECTED 2026-08-04, A-57: this said "the site loads zero
-            third-party origins and check-csp.js enforces it", on the one page
-            whose own form posts to formspree.io. That reference is recorded in
-            the gate's KNOWN_BLOCKED list, which is a tracked exception rather
-            than an absence, and the gate enforces CSP-permission rather than
-            absence in any case. A screen we drew
-            costs none of that, carries no attribution, and shows the thing a
-            partner would actually be reselling. `card-grow` is what absorbs the
-            slack, so stretching the card fills it with content rather than with
-            a hole. */}
-        {/* THE SHOT IS A PHONE, NOT A DESKTOP, AND THAT IS THE FIX.
-            Owner report 2026-08-04: the image did not sit well in this card.
-            It was mark-evidence at 1440x900. A 16:10 LANDSCAPE screen dropped
-            into a narrow single-column card, so it letterboxed and left the
-            card carrying a wide strip with air above and below it.
-            sup-8-action-centre is 780x1688, drawn as a PHONE in the same Figma
-            set, so its aspect ratio runs WITH the card instead of across it.
-            REUSED, NOT DRAWN: four mobile screens already existed in
-            Assets/shots/figma-v2 (sup-7, sup-8, buy-7 and buy-8), so this
-            needed no new artwork. The alt text below is the wording already
-            written for this screen in data/crowmark-screens.ts, carried across
-            verbatim rather than re-described, because two descriptions of one
-            drawing is two things to keep true.
-            THE SCREEN ALSO ARGUES BETTER HERE. A partner is reselling the
-            working product, and the action centre is the product working: every
-            duty with a date on it, in one queue. */}
-        <figure class="enquiry__shot card-grow">
-          <picture>
-            <source type="image/avif" srcset="/Assets/shots/figma-v2/sup-8-action-centre-light.avif?v=20260805a" />
-            <source type="image/webp" srcset="/Assets/shots/figma-v2/sup-8-action-centre-light.webp?v=20260805a" />
-            <img
-              src="/Assets/shots/figma-v2/sup-8-action-centre-light.png?v=20260805a"
-              width="780"
-              height="1688"
-              loading="lazy"
-              decoding="async"
-              alt="The Velstrian Bid action centre on a phone. A due-this-week card counts the open items, then a card per task carries a type chip, a countdown and the contract it belongs to: an evidence upload, a section 71 assessment to publish, a drafted answer to approve and a social value baseline to confirm."
-            />
-          </picture>
-          <figcaption>
-            Every duty with a date on it, in one queue. A drawn representation of the
-            workspace, not a screen capture.
-          </figcaption>
-        </figure>
-
-        <p class="enquiry__alt">
-          Prefer to talk it through first? Book a 30-minute call to go through your client base
-          before you sign anything.
+        <ProductScreen name="action-centre" bare />
+        <p class="pt-alt">
+          Prefer to talk it through first? Book a 30-minute call to go through your client base before you sign
+          anything.
         </p>
-        <Button href={CALENDLY} variant="secondary" target="_blank">Book a 30-minute call</Button>
+        <div class="pt-call">
+          <Action href={WALKTHROUGH_URL} variant="secondary" newWindow>Book a 30-minute call</Action>
+        </div>
       </aside>
-
-      <div class="enquiry__form surface surface--pad">
+      <div class="ea-card pt-pane" data-reveal>
         <PartnerForm />
       </div>
     </div>
-  </Section>
+  </SectionBand>
 </Base>
 
 <style>
-  .kicker {
-    margin: 0 0 var(--stack-1);
-    color: var(--c-text-muted);
-  }
-
-  /* Centred to match the head block above it (owner decision, 2026-08-02).
-     Alignment only: the row centres on the same axis as its heading. */
-
-  .cards {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .pt-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(20px, 3vw, 36px);
-  }
-
-  /*
-   * TWO CARDS DO NOT FILL A THREE-CARD MEASURE. The legacy page wraps this pair
-   * in `max-w-3xl mx-auto`, a narrower centred track, because two cards stretched
-   * across the full 1160px measure read as a three-column grid with one card
-   * missing. The port had them at full measure and it was the most visible
-   * spacing difference on the page.
-   *
-   * Expressed as a fraction of --measure rather than the legacy's own 768px, so
-   * the width still follows the one shared measure. Lands at 766px.
-   */
-  .cards--two {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: calc(var(--measure) * 0.66);
-    margin-inline: auto;
+    gap: var(--space-5);
+    align-items: stretch;
   }
 
-  /* The card treatment, the padding, the gloss, the hover and the centring of
-     card content are all `surface surface--pad` in the markup. This block used
-     to restate border, radius, background and shadow, which is the duplication
-     styles/surfaces.css exists to end and the reason these cards did not centre
-     when every other card did. */
-
-  .cards__h {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    color: var(--c-text);
-  }
-
-  .cards__body {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.7;
-    color: var(--c-text-sub);
-  }
-
-  /* Two equal columns, and a gap wide enough that the two bounded containers
-     read as separate panels rather than one split box. The legacy page uses
-     gap-32, i.e. 128px, at this breakpoint. */
-  /* Layout comes from `.card-row` in styles/card-row.css. What stays here is
-     only the gap, which is this section's own composition: the legacy page sets
-     the two panels far enough apart to read as separate objects rather than one
-     split box. */
-  .enquiry { gap: clamp(32px, 5vw, 72px); }
-
-  .enquiry__shot {
-    margin: var(--stack-2) 0 0;
+  .pt-pane {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-  }
-  .enquiry__shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-card);
-    border: 1px solid var(--c-border);
-  }
-  .enquiry__shot figcaption {
-    margin-top: var(--stack-1);
-    font-family: var(--font-body);
-    font-size: var(--t-micro);
-    line-height: 1.6;
-    color: var(--c-text-muted);
+    gap: var(--space-5);
+    min-width: 0;
+    padding: clamp(var(--space-6), 3vw, var(--space-8));
   }
 
-  /*
-   * BOTH COLUMNS ARE BOUNDED, which is the legacy treatment and was the other
-   * half of what made this section look unfinished. Both take the card
-   * treatment, so the fields sit on a surface instead of on the page. The
-   * reasons panel used to take a teal left accent from the legacy page on top
-   * of that, and does not any more.
-   *
-   * --radius-panel and --shadow-panel rather than the card pair: these are the
-   * two largest blocks on the page and the panel tier is what that scale is for.
-   */
-  /* Everything the two columns share is `surface surface--pad` in the markup,
-     and after 2026-08-31 that is everything the aside has.
-
-     THE TEAL EDGE CAME OFF, OWNER INSTRUCTION. A 3px rule on the inline start
-     edge marked this column as the supporting one, and the owner asked for that
-     treatment to leave the site. Nothing is lost: the reasons panel sits beside
-     a form, in a two column grid, under its own heading, and which of the two is
-     the supporting column was never in doubt. */
-
-  .enquiry__h {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: var(--t-w-h3);
-    letter-spacing: -0.01em;
-    color: var(--c-text);
+  .pt-why {
+    display: grid;
   }
 
-  .why {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .pt-why li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--ea-rule);
+    color: var(--ea-sub);
   }
 
-  .why li {
-    padding: 0.7rem 0 0.7rem 1.6rem;
-    border-bottom: 1px solid var(--c-border);
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.6;
-    color: var(--c-text-sub);
-    position: relative;
+  .pt-why li:last-child {
+    border-bottom: 0;
   }
 
-  /* A typographic tick rather than an inline SVG per row: it is decorative,
-     it is one character, and aria-hidden keeps it out of the accessible name. */
-  .why li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--c-verified);
-    font-weight: 700;
+  .pt-why :global(svg) {
+    flex: none;
+    margin-top: 3px;
+    color: var(--ea-accent-ink);
   }
 
-  .why li:last-child { border-bottom: 0; }
-
-  /* --blk-pad, not --sec-gap: this sits INSIDE a panel now, and a section-level
-     gap between two blocks of a single panel is how a panel comes apart. */
-  .enquiry__alt {
-    margin: var(--blk-pad) 0 var(--stack-2);
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.7;
-    color: var(--c-text-sub);
+  .pt-alt {
+    margin-top: auto;
+    color: var(--ea-sub);
   }
 
-  @media (max-width: 899px) {
-    .cards, .cards--two { grid-template-columns: minmax(0, 1fr); }
-    .enquiry { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: 959px) {
+    .pt-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 </style>

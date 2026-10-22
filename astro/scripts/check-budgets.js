@@ -626,7 +626,15 @@ const EXCEPTIONS = new Map([
       why:
         '13.7 KB against 13.0 KB budget for the Tender Compliance Matrix interactive tool island (A-266).',
     },
-  ]
+  ],
+  [
+    'jsShared:all',
+    {
+      ceiling: 16 * KB,
+      why:
+        '15.6 KB against 12 KB, R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-22. NOTHING NEW REACHED A READER. jsShared counts only chunks referenced by EVERY route, and the v3 Band script (5.8 KB raw, scripts/evidenced.ts: reveal and the hero light) was already on 48 of 49 routes. /partners/ was the last page off design system v3, and moving it on made the chunk sitewide, so the intersection grew while what a typical reader downloads did not move. The owner decides whether 12 KB is still the right ceiling for a site that is now wholly v3, or whether evidenced.ts and the Base chunk are trimmed back under it. Delete this entry once that is answered.',
+    },
+  ],
 ]);
 
 /* ── Measure ──────────────────────────────────────────────────────────────── */

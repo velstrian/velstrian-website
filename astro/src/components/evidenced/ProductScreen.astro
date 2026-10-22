@@ -18,6 +18,7 @@
  */
 import Stage from './Stage.astro';
 import Frame from './Frame.astro';
+import Plain from './Plain.astro';
 
 export type ScreenName =
   | 'find'
@@ -31,11 +32,15 @@ export type ScreenName =
 
 interface Props {
   name: ScreenName;
+  /** The frame alone, for a page that sets the screen inside its own card. */
+  bare?: boolean;
 }
-const { name } = Astro.props;
+const { name, bare = false } = Astro.props;
+const Wrap = bare ? Plain : Stage;
+const wrapProps = bare ? {} : { layout: 'centre' as const, class: 'ea-screen-one' };
 ---
 
-<Stage layout="centre" class="ea-screen-one">
+<Wrap {...wrapProps}>
   {name === 'find' && <Frame title="New today" capture="screen-find" caption="One contract in the morning feed." />}
   {name === 'answer-list' && <Frame title="Your questions" capture="screen-answer-list" caption="Every question drafted." />}
   {name === 'answer-library' && <Frame title="Your answer" capture="screen-answer-library" caption="An answer drafted from your library." />}
@@ -89,7 +94,7 @@ const { name } = Astro.props;
   }
   {
     name === 'action-centre' && (
-      <Frame title="Due this week" status="4 open" capture="screen-action-centre" caption="Tasks and dates are an example.">
+      <Frame title="Due this week" status="4 open" capture="screen-action-centre" caption="Every duty with a date on it, in one queue. Tasks and dates are an example.">
         <ul class="ea-mini-list">
           <li><span>Upload apprenticeship agreements</span><span class="ea-state ea-state--held">Due in 2 days</span></li>
           <li><span>Publish the yearly performance review</span><span class="ea-state">Due in 6 days</span></li>
@@ -99,4 +104,4 @@ const { name } = Astro.props;
       </Frame>
     )
   }
-</Stage>
+</Wrap>
