@@ -107,13 +107,3 @@ const UPDATED = new Date('2026-10-21');
   <Faq />
   <Close />
 </Base>
-
-<script>
-  import { initEvidenced } from '../scripts/evidenced';
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initEvidenced, { once: true });
-  } else {
-    initEvidenced();
-  }
-</script>

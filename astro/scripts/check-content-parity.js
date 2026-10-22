@@ -158,6 +158,14 @@ const UPDATE = process.argv.includes('--update');
  * when a loss must be tolerated across several builds.
  */
 const ALLOWED_LOSSES = new Map([
+  /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: /bid/ rebuilt on design system
+     v3 (15be6f2f). Both are REWORDED section heads, the content under them
+     stays, checked on the built page. */
+  ['/bid/  heading: three moves. each one leaves a record.',
+   'The find, cite and prove mechanism it introduced is now told as plain rows in "Everything from finding the work to delivering it" ("Find contracts that suit you", "Answer every question from your own documents", "Keep track of what you promised after you win"), all three present on the built /bid/ (RULE 0-U plain words).'],
+  ['/bid/  heading: the same four steps, in the product.',
+   'The product screens carousel it headed is still on /bid/, retitled "See the screens you will use." in plain words.'],
+
   /*
    * 2026-09-06. The homepage heading "The rest of the workstation." went with
    * the section that carried it, and this is a REPLACEMENT rather than a loss.

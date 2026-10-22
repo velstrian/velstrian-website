@@ -108,8 +108,12 @@ const OLD_HOVER = `
     pointer-events: none; transform: translateX(-100%); transition: transform 0.9s linear; }
   [data-calm-probe]:hover::after { transform: translateX(100%); }
   @keyframes calm-probe-loop { from { opacity: 1; } to { opacity: 0.5; } }
-  [data-calm-probe] { animation: calm-probe-loop 1s linear infinite; }
+  [data-calm-probe] { animation: calm-probe-loop 1s linear infinite !important; }
 `;
+/* !important on the injected loop: a card inside a v3 section sits under
+   evidenced.css's `main > .ea-sec * { animation: none }`, which outranks a
+   lone attribute selector, and the self-test then failed to inject anything
+   (2026-10-22, the first time /bid/ was a v3 page). The probe must land. */
 
 const server = await serveDist(DIST, 'sheen');
 const url = (route) => server.url(route);
@@ -178,11 +182,15 @@ const MOTION = `(sel) => {
     }));
 }`;
 
-/** The resolved value of --c-border-hover, read the way the browser paints it. */
+/** The resolved value of --c-border-hover, read the way the browser paints it,
+    resolved BESIDE the probed card: v3 band role scopes (.band--light and the
+    rest) redeclare the token, so the value on body is the dark :root one and
+    is wrong for a card on a light band. */
 const HOVER_EDGE = `() => {
   const probe = document.createElement('div');
   probe.style.borderTop = '1px solid var(--c-border-hover)';
-  document.body.appendChild(probe);
+  const card = document.querySelector('[data-calm-probe]');
+  ((card && card.parentElement) || document.body).appendChild(probe);
   const v = getComputedStyle(probe).borderTopColor;
   probe.remove();
   return v;

@@ -37,3 +37,15 @@ const { tone, id, labelledby, class: cls = '', flush = false } = Astro.props;
 >
   <slot />
 </section>
+
+{/* The one entry for every v3 behaviour (reveal, sequences, carousels, tour,
+    citations, refusal). It lives here because every v3 section is a Band, so
+    Astro bundles it ONCE for any page built from them, instead of one entry
+    per page (two entries split evidenced.ts into an extra chunk and broke the
+    JS budget by 3 bytes, 2026-10-22). A bundled script is a module and runs
+    after parse, so no readiness check is needed. */}
+<script>
+  import { initEvidenced } from '../../scripts/evidenced';
+
+  initEvidenced();
+</script>
