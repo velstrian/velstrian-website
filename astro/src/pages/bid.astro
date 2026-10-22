@@ -18,7 +18,7 @@
  *   Steps          dark       how hard is it to start?     three steps
  *   BidTrust       light      am I in charge, is it safe?  hairline facts, trust strip
  *   Plans          light alt  what does it cost?           three plans, from pricing.ts
- *   BidDetail      light      the expert detail            the rules, fit reasons, all twelve capabilities
+ *   BidDetail      dark       the expert detail            the rules, fit reasons, all twelve capabilities
  *   BidFaq         light alt  words I do not know          newcomer terms first
  *   Close          gradient   what now?                    overlaps into the footer
  *
@@ -118,14 +118,3 @@ const UPDATED = new Date('2026-10-22');
   <BidFaq />
   <Close />
 </Base>
-
-{/* A bundled <script> is a module, and a module runs after the document is
-    parsed, so the readiness check the home page carries is not needed here.
-    Leaving it out keeps this entry to one import and one call: the shared
-    evidenced chunk is the code, and this file is about 50 bytes against a
-    site JS budget with under 100 bytes of headroom (check-budgets.js). */}
-<script>
-  import { initEvidenced } from '../scripts/evidenced';
-
-  initEvidenced();
-</script>

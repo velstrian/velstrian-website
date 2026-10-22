@@ -3,7 +3,7 @@
  * BidDetail: the expert detail, lower down (/bid/, strategy 0.4 "expert detail
  * lives on those pages lower down").
  *
- * A LIGHT band in three groups, every term explained in a few words the first
+ * A DARK band in three groups, every term explained in a few words the first
  * time it appears (RULE 0-U):
  *
  *   #procurement-act  the rules for public contracts: Procurement Act 2023
@@ -22,9 +22,15 @@
  * "Award history", "Quick Quote", "forwarded by email", "prior information
  * notices", "tone profiles", "AI Compliance Advisor") all render from here.
  *
- * The cards are `.surface`, the site's one card recipe (styles/surfaces.css):
- * white with a hairline on a light band, and the edge is the only thing that
- * answers a pointer (check-sheen.js reads its plain cards on this route).
+ * A DARK band, and that is a decision about the cards. They are `.surface`, the
+ * site's one card recipe (styles/surfaces.css), and on a dark band version 3
+ * says a card does not move: its edge steps to --c-border-hover and nothing
+ * else changes, the contract check-sheen.js measures on this route. On a light
+ * band .band--light rebinds --c-border-hover to dark ink, which is right for
+ * the page but is not the value the gate reads, and the light band card
+ * (.ea-card) lifts its shadow instead, which is a different hover. So the
+ * expert detail sits on the dark ground the recipe was written for, and the
+ * band rhythm stays light, light alt, dark, light alt around it.
  */
 import Band from '../evidenced/Band.astro';
 import IconTile from '../evidenced/IconTile.astro';
@@ -120,7 +126,7 @@ const CAPABILITIES = [
 ];
 ---
 
-<Band tone="light" class="bid-detail" labelledby="bid-detail-title">
+<Band tone="dark" class="bid-detail" labelledby="bid-detail-title">
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
       <h2 class="ea-h2" id="bid-detail-title">The detail, for when you need it.</h2>
