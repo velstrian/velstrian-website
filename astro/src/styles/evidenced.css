@@ -1921,8 +1921,10 @@ main > .ea-sec * {
 /* Every card shares the grid's rows (subgrid), so a name, a price, the
    allowance, the description and the button each sit on one line across the
    row whatever each card's text length. Measured before on /buy/: the two
-   buttons 56px apart. Six rows, seven when any card in the grid carries a
-   link under its button. */
+   buttons 56px apart. A subgrid cannot add rows, so every card spans as many
+   rows as the LONGEST card in the grid has children (six to nine, counted
+   with :has, a child hidden by a billing toggle included, which only leaves
+   an empty last row). */
 .ea-plan {
   display: grid;
   grid-row: span 6;
@@ -1931,8 +1933,16 @@ main > .ea-sec * {
   padding: var(--space-8);
 }
 
-.ea-plans__grid:has(.ea-plan__more) > .ea-plan {
+.ea-plans__grid:has(> .ea-plan > :nth-child(7)) > .ea-plan {
   grid-row: span 7;
+}
+
+.ea-plans__grid:has(> .ea-plan > :nth-child(8)) > .ea-plan {
+  grid-row: span 8;
+}
+
+.ea-plans__grid:has(> .ea-plan > :nth-child(9)) > .ea-plan {
+  grid-row: span 9;
 }
 
 .ea-plan > .ea-btn {
@@ -2076,7 +2086,7 @@ main > .ea-sec * {
   overflow: hidden;
   padding: clamp(var(--space-10), 5vw, 5.5rem) clamp(var(--space-6), 5vw, 5rem);
   border-radius: var(--stage-radius);
-  background: var(--stage-bloom), var(--stage-gradient);
+  background: var(--close-bloom), var(--stage-gradient);
   color: var(--ea-ink);
   box-shadow: var(--elev-floating);
 }

@@ -65,7 +65,7 @@ const PROBE = (cardSel) => {
   };
   const visible = (el) => {
     const r = el.getBoundingClientRect();
-    if (r.width < 1 || r.height < 1) return false;
+    if (r.width <= 2 || r.height <= 2) return false; // a visually hidden label is a 1px box
     const s = getComputedStyle(el);
     if (s.visibility === 'hidden' || s.display === 'none' || Number(s.opacity) <= 0.01) return false;
     if (el.closest('[hidden],[inert],[aria-hidden="true"]')) return false;

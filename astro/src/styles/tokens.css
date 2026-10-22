@@ -3567,6 +3567,14 @@
   );
   --stage-texture-strength: 0.35;
   --stage-texture-blend: soft-light;
+  /* The close band's own bloom. The stage bloom lights the TOP LEFT, which is
+     where the close band's heading and lead sit, and white text there was
+     measured at 3.5:1 (heading) and 4.46:1 (lead) before any texture. The
+     close band lights its bottom right corner instead, away from the words, and
+     deepens the left. */
+  --close-bloom:
+    radial-gradient(ellipse 50% 70% at 100% 100%, color-mix(in srgb, var(--c-white) 22%, transparent), transparent 62%),
+    radial-gradient(ellipse 70% 100% at 0% 40%, color-mix(in srgb, var(--c-ink-0) 30%, transparent), transparent 75%);
 
   /* ONE PRODUCT SCREEN SIZE (owner 2026-10-22: "screens under the cards are
      in different sizes"). Every screen on a panel stage keeps this ratio as
