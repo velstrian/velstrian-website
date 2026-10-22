@@ -1,6 +1,7 @@
-# R285-WEB-FIGMA-SCREENS-01: Figma product screens, handoff (PARTIAL, stopped for machine restart)
+# R285-WEB-FIGMA-SCREENS-01: Figma product screens, handoff
 
-Status 2026-10-22: STOPPED EARLY on the driver's instruction (machine restart). Nothing exported, nothing wired.
+Status 2026-10-22 (resumed after the restart): ALL BUILT AND EXPORTED, 10 Screens, 11 Panels, 3 coded explainer specs.
+NOT WIRED into any page: integration is a separate lane after lane Y finishes.
 
 Figma file: https://www.figma.com/design/KO4JkhUrCvvopjP8E8zQLa (team "Crow", page "Screens").
 
@@ -13,7 +14,7 @@ Figma file: https://www.figma.com/design/KO4JkhUrCvvopjP8E8zQLa (team "Crow", pa
   Tenderworks mark and Bd/By product rail, header (breadcrumb, search, bell, avatar, no beta pill), cards, chips, buttons,
   tabs, tables, bars, icons (lucide paths).
 - Screen S2 "screen/response-answer" (node 3:122, 1440x900): Velstrian Bid response workspace, question list, drafted
-  answer with two cited sources, grounding check passed. Not yet screenshot checked.
+  answer with two cited sources, source check passed. Screenshot checked and fixed on resume, see below.
 
 ## Progress, resumed 2026-10-22 after the restart
 
@@ -51,10 +52,41 @@ verbatim from `public-sector/preread.ts`), P8 requirement pack (buy-cap-request)
 (buy-cap-collect), P10 whole life costs (buy-cap-compare), P11 after award (buy-cap-decision).
 
 Coded, Figma spec only, never exported: hero answer sequence (home-hero-answer), refusal check (home-refusal-check), fit
-breakdown (home-cap-decide, bid-decide; product labels from `common/humanise.ts` fitDimension, points 22/20/18/12/12/6/10).
+breakdown (home-cap-decide, bid-decide, product labels from `common/humanise.ts` fitDimension, points 22/20/18/12/12/6/10).
 
-Proposed drops (driver's 6 per page): /bid/ drops bid-check and its carousel; /buy/ drops buy-cap-evidence and the
+Proposed drops (driver's 6 per page): /bid/ drops bid-check and its carousel, /buy/ drops buy-cap-evidence and the
 BuyDetail drawn mocks. Counting rule used: a tab set or a carousel is one visual position. Owner or driver to confirm.
+
+## Coded explainer specs (Figma only, never exported)
+
+Page "Screens", row at y=2200. Each frame shows the end state, which is also the reduced motion state, the timed
+sequence, and the rules: spec/hero-answer-sequence 17:18 (home-hero-answer), spec/refusal-check 17:117
+(home-refusal-check), spec/fit-breakdown 17:236 (home-cap-decide, bid-decide, labels from `common/humanise.ts`,
+weights 22/20/18/12/12/6/10 and bands 68/45 verified in `api/app/services/bid_fit.py`).
+
+## Content checks made on every frame
+
+- Buyer scoring is 0 to 100 per criterion everywhere (S5, P6, P7, P11). No "4 / 5" anywhere.
+- Insights has no Win rate tile and no win rate chart (tiles are Total bids, Social value delivered, Evidence completion).
+- No email forwarding, no test mode or beta pill, no "example" labels. A text scan over all 1,153 text layers found no
+  banned word, no em or en dash and no semicolon.
+- Public and private named: bid board, discover feed (private invitation upload), action centre, insights subtitle.
+- Fictional organisations only (Northfield Facilities, Riverside Borough Estates, Hollin Vale Homes and others). No
+  buyer name uses the word council.
+- Pre-read notice (S5, P7) is verbatim from `public-sector/preread.ts`. Blocked figure copy (S3) follows
+  `bid/answer-editor.ts` ungroundedFiguresBlocked, in plainer words.
+
+## JSON schema (`astro/src/data/product-screens.json`)
+
+`{ schema, figmaFile, items: [{ id, slug, kind: "screen"|"panel", product: "bid"|"buy", node, file, width, height,
+alt, slots[] }] }`. `file` is relative to the repo root. `slots` are the planned visual positions from the plan above,
+the integration lane decides final wiring.
+
+## Left for the integration lane
+
+- Export is PNG only. WebP and AVIF conversion was not done (the brief for this lane asked for PNG).
+- Proposed drops for the 6 per page cap are still a driver or owner decision (see above).
+- Wiring, captions, and removing "Example data" and "A real screen from a demo account" captions.
 
 ## Findings for the integration lane
 
