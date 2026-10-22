@@ -1324,6 +1324,14 @@
   --c-violet:      #A78BFA;
   --c-violet-deep: #7C3AED;
   --c-orchid:      #B39DFB;
+  /* The cool light in the hero aurora (R285-WEB-HERO-BACKDROP-02). Not a new
+     hue: it is the accent-nest pigment's dark value in brand.source.json,
+     the product family's blue, used here only as a light inside the slab. */
+  --c-sky:         #60A5FA;
+  /* The depth in the hero aurora: the iris-accent-deep pigment in
+     brand.source.json (same value dark and light), so the slab has a shadow
+     side and the lights read as light. */
+  --c-iris-deep:   #363E8F;
   --c-pink:        #F472B6;
   /* White is a PIGMENT here, not the ink. --c-text is the ink and it is bound
      to this one; so, under V6, is every interactive value. Having the literal
@@ -3601,27 +3609,51 @@
      a light rim fading to an ink hairline at the foot. */
   --frame-edge-top: color-mix(in srgb, var(--c-white) 92%, transparent);
   --frame-edge-bottom: color-mix(in srgb, var(--c-ink-0) 16%, transparent);
-  /* The hero's moving light (owner point 6, 2026-10-22: "something like
-     stripe has ... with motion effect", and later the same day "check hero
-     section i did not find any changes"). It began INSIDE the hero stage,
-     where the product screen covers about 80 percent of it, so nobody saw it.
-     It is now the hero BAND's own background, behind the headline, the way
-     stripe.com does it: four soft fields from the brand ramp, iris, violet,
-     orchid and deep violet, never pink or red (D256), drifting on ONE
-     transform loop (.ea-hero__mesh, styles/evidenced.css). The stage keeps
-     its still gradient, so there is exactly one moving light on the page.
-     --hero-mesh: none turns it off everywhere.
+  /* THE HERO AURORA (R285-WEB-HERO-BACKDROP-02, owner 2026-10-22: "i did
+     not liked your gradient in hero section, think something different, it
+     could be multi color or may be something else as backdrop motion design
+     but must be like top 1% ultra premium"). It replaces the soft lavender
+     corners (--hero-mesh, A-301), which read as a blur rather than a design.
 
-     The fields sit at the band's corners and behind the stage, and a still
-     veil in the band's own canvas colour (evidenced.css .ea-hero__sky::after)
-     holds the headline, lead and note at AA at every point of the loop,
-     measured by sampling the rendered pixels behind the words. */
-  --hero-mesh:
-    radial-gradient(ellipse 36% 62% at 6% 16%, color-mix(in srgb, var(--c-teal) 95%, transparent), transparent 72%),
-    radial-gradient(ellipse 34% 60% at 95% 10%, color-mix(in srgb, var(--c-orchid) 90%, transparent), transparent 72%),
-    radial-gradient(ellipse 44% 40% at 78% 72%, color-mix(in srgb, var(--c-violet-deep) 70%, transparent), transparent 72%),
-    radial-gradient(ellipse 44% 40% at 20% 76%, color-mix(in srgb, var(--c-violet) 80%, transparent), transparent 72%);
-  --hero-mesh-dur: 20s;
+     What it is: a full width slab of living colour with a crisp slanted top
+     edge, stripe.com's signature, that the product screen floats on. Five
+     colour fields from the brand ramp and one cool light (--c-sky), each on
+     its own transform loop at a different period, so the colours slide
+     through one another and the picture never visibly repeats. Above it the
+     headline sits on the plain light canvas with a fine engineered grid
+     fading out from the top centre, so the words are ink on near white at
+     every frame. Never pink, red or orange (D256).
+
+     Where it sits (components/evidenced/Aurora.astro, styles/evidenced.css):
+     under a hero that has a stage it IS the stage, starting just under the
+     reassurance line and running to the band's foot. Under a page hero with
+     no stage it is a slim slanted ribbon inside the band's bottom padding,
+     never behind words. Still under prefers-reduced-motion, held while off
+     screen or in a hidden tab (scripts/evidenced.ts initAurora). */
+  --aurora-base: linear-gradient(118deg, var(--c-iris-deep) 0%, var(--c-violet-deep) 38%, var(--c-teal-dark) 68%, var(--c-iris-deep) 100%);
+  --aurora-1: var(--c-sky);
+  --aurora-2: var(--c-orchid);
+  --aurora-3: var(--c-violet-deep);
+  --aurora-4: var(--c-teal);
+  --aurora-5: var(--c-white);
+  /* The slant of the top edge: how much lower it starts on the left. */
+  --aurora-slant: clamp(4rem, 9vw, 10rem);
+  --aurora-foot-h: clamp(1.75rem, 2.6vw, 2.5rem);
+  --aurora-foot-slant: clamp(0.5rem, 1.2vw, 1.25rem);
+  /* One period per field with no common rhythm (14, 17, 19, 23 and 29
+     seconds), so the five never line up into a repeating beat. */
+  --aurora-t1: 14s;
+  --aurora-t2: 17s;
+  --aurora-t3: 19s;
+  --aurora-t4: 23s;
+  --aurora-t5: 29s;
+  /* The engineered grid behind the headline: hairlines at 6 percent ink. */
+  --hero-grid-line: color-mix(in srgb, var(--c-ink-0) 6%, transparent);
+  --hero-grid-cell: 64px;
+  /* The hero's bottom padding and the gap above its stage, as tokens because
+     the aurora reaches exactly to both. */
+  --ea-hero-pad-b: clamp(var(--space-12), 2rem + 3vw, 5rem);
+  --ea-hero-stage-gap: clamp(var(--space-12), 2rem + 3vw, 4.5rem);
   --stage-radius: 24px;
   --stage-ink: var(--c-white);
 

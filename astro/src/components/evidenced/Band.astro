@@ -1,4 +1,6 @@
 ---
+import Aurora from './Aurora.astro';
+
 /**
  * Band: one section of a page, at one temperature.
  *
@@ -14,10 +16,12 @@
  * between items, once, never under reduced motion, and never for anything
  * already on screen at load.
  *
- * A band carrying the `ea-hero` class gets the hero's moving light behind its
- * content (.ea-hero__sky in styles/evidenced.css): one mechanism, so every v3
- * hero, on the home page, /bid/, /buy/ and any page after them, has the same
- * light without asking for it.
+ * A band carrying the `ea-hero` class gets the hero's sky behind its content
+ * (.ea-hero__sky in styles/evidenced.css): a fine grid fading out from the top
+ * centre, and the aurora ribbon at the band's foot (Aurora.astro, place
+ * "foot"). A hero whose Stage carries the full aurora hides the ribbon, so one
+ * mechanism serves every v3 hero, on the home page, /bid/, /buy/, /about/ and
+ * every page hero, without any of them asking for it.
  *
  * Ready for /bid/, /buy/ and the shared page templates: it knows nothing about
  * the home page.
@@ -41,7 +45,7 @@ const hero = cls.split(/\s+/).includes('ea-hero');
   aria-labelledby={labelledby}
   data-band={tone}
 >
-  {hero && <div class="ea-hero__sky" aria-hidden="true"><span class="ea-hero__mesh"></span></div>}
+  {hero && <div class="ea-hero__sky" aria-hidden="true"><Aurora place="foot" /></div>}
   <slot />
 </section>
 

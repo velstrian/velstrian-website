@@ -1,0 +1,30 @@
+---
+/**
+ * Aurora: the hero's living colour (R285-WEB-HERO-BACKDROP-02, owner
+ * 2026-10-22). A slab with a crisp slanted top edge, filled with the brand
+ * ramp, and five colour fields that each drift on their own loop over it.
+ * Every value is a token (tokens.css "THE HERO AURORA"), every rule is in
+ * styles/evidenced.css, and scripts/evidenced.ts initAurora holds it still
+ * while it is off screen or the tab is hidden.
+ *
+ * `place`:
+ *   stage  inside a hero Stage, where it IS the stage: full bleed, from just
+ *          under the reassurance line to the hero band's foot
+ *   foot   inside the hero band's sky, a slim ribbon in the bottom padding of
+ *          a page hero that has no stage
+ *
+ * Decorative only: aria-hidden, no text, no pointer events.
+ */
+interface Props {
+  place: 'stage' | 'foot';
+}
+const { place } = Astro.props;
+---
+
+<div class={`ea-aurora ea-aurora--${place}`} data-aurora aria-hidden="true">
+  <span class="ea-aurora__f ea-aurora__f--1"></span>
+  <span class="ea-aurora__f ea-aurora__f--2"></span>
+  <span class="ea-aurora__f ea-aurora__f--3"></span>
+  <span class="ea-aurora__f ea-aurora__f--4"></span>
+  <span class="ea-aurora__f ea-aurora__f--5"></span>
+</div>

@@ -32,8 +32,9 @@
  *      animation with infinite iterations is running. Shimmer, pulse, ping,
  *      breathe, drift, beam, edge and seam were all loops, and a loop is the
  *      thing a reader cannot stop by moving the pointer away. ONE named
- *      exception, LOOP_ALLOW below: the hero stage's drifting light, adopted
- *      by the owner on 2026-10-22 ("adopt the hero motion", row A-301). It is
+ *      exception, LOOP_ALLOW below: the hero aurora's five drifting colour
+ *      fields (R285-WEB-HERO-BACKDROP-02, owner 2026-10-22, which replaced the
+ *      A-301 drifting light). Each is
  *      matched by animation name AND element, so any other loop still fails,
  *      and it is reported STALE (a failure) the moment it stops running.
  *
@@ -64,10 +65,10 @@ const ALLOW = [];
 /* Rule 5's exceptions, matched exactly against "<animation> on <element>".
    Each one is an owner decision. Off under reduced motion is evidenced.css's
    job and rule 4's measurement does not see loops, so it is stated here. */
+const AURORA_WHY = 'owner 2026-10-22, R285-WEB-HERO-BACKDROP-02: the hero aurora replacing the A-301 mesh the owner rejected ("think something different ... top 1% ultra premium"). Five colour fields on transform loops of 14 to 29s, hero band only, paused unless on screen in a visible tab (evidenced.ts initAurora), absent under prefers-reduced-motion';
 const LOOP_ALLOW = [
-  { loop: 'ea-hero-drift on span.ea-hero__mesh',
-    reason: 'owner 2026-10-22, A-301: the hero light, moved from inside the hero stage to the hero band behind the headline the same day (the screen covered it), brand ramp only, 20s transform loop, hero band only, off under prefers-reduced-motion' },
-];
+  ['ea-aurora-a', 1], ['ea-aurora-b', 2], ['ea-aurora-c', 3], ['ea-aurora-b', 4], ['ea-aurora-a', 5],
+].map(([name, n]) => ({ loop: `${name} on span.ea-aurora__f.ea-aurora__f--${n}`, reason: AURORA_WHY }));
 const usedLoopAllow = new Set();
 
 /* The calm clock, in milliseconds. --dur-hover is --dur-fast, 0.18s. */

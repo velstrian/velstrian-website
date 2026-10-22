@@ -1,4 +1,6 @@
 ---
+import Aurora from './Aurora.astro';
+
 /**
  * Stage: the signature visual of design system version 3.
  *
@@ -9,10 +11,11 @@
  * slot holds the main screen at the raised elevation, and the `float` slot holds
  * a card that overlaps the stage edge at the floating elevation.
  *
- * The stage itself is still. The moving light lives on the hero BAND behind
- * the headline (Band.astro, .ea-hero__sky), because inside the stage the
- * screen covered about 80 percent of it and the owner saw no change. One
- * moving light per page, so the stage no longer carries its own.
+ * A panel or centre stage is still. A HERO stage is the aurora
+ * (R285-WEB-HERO-BACKDROP-02): its rounded ground is not drawn, and a full
+ * bleed slab of living colour (Aurora.astro) runs from just under the hero's
+ * reassurance line to the band's foot, so the screen and the sequence card
+ * float on moving colour, the one moving light on the page.
  *
  * `layout`:
  *   hero    a wide stage, the screen inset from the top left and running out
@@ -30,6 +33,7 @@ const hasFloat = Astro.slots.has('float');
 ---
 
 <div class={`ea-stage ea-stage--${layout} ${hasFloat ? 'ea-stage--has-float' : ''} ${cls}`.replace(/\s+/g, ' ').trim()}>
+  {layout === 'hero' && <Aurora place="stage" />}
   <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
   <div class="ea-stage__screen"><slot /></div>
   {hasFloat && <div class="ea-stage__float"><slot name="float" /></div>}

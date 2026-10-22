@@ -140,8 +140,8 @@ function onGeometry(fn: () => boolean | void): void {
     queued = false;
     if (!done && fn() === true) {
       done = true;
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
+      removeEventListener('scroll', schedule);
+      removeEventListener('resize', schedule);
     }
   };
   const schedule = () => {
@@ -149,23 +149,25 @@ function onGeometry(fn: () => boolean | void): void {
     queued = true;
     requestAnimationFrame(tick);
   };
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule, { passive: true });
   schedule();
 }
+
+const reduced = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function initRefusal(): void {
   const block = document.querySelector<HTMLElement>('[data-refusal]');
   if (!block) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (reduced()) return;
   /* Only a block that starts below the fold is armed. One already on screen
      stays as the finished frame, so nothing a reader is looking at resets. */
-  if (block.getBoundingClientRect().top < window.innerHeight) return;
+  if (block.getBoundingClientRect().top < innerHeight) return;
 
   block.dataset.play = 'armed';
   onGeometry(() => {
     const r = block.getBoundingClientRect();
-    if (r.top > window.innerHeight * 0.6 || r.bottom < 0) return false;
+    if (r.top > innerHeight * 0.6 || r.bottom < 0) return false;
     requestAnimationFrame(() => {
       block.dataset.play = 'run';
     });
@@ -173,11 +175,10 @@ export function initRefusal(): void {
   });
 }
 
-const reduced = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
  * Section entrance (version 3, check-motion.js rule 5). Every [data-reveal]
- * item that starts BELOW the fold is armed (opacity 0, a 12px drop, in
+ * item that starts BELOW the fold is armed (opacity 0, a 24px drop, in
  * styles/evidenced.css) and set to `in` the first time its top passes 85
  * percent of the window height, inside the part of the window a reader is
  * looking at (it was 92 percent, the bottom strip, R285-WEB-SCROLL-MOTION-01).
@@ -188,7 +189,7 @@ const reduced = (): boolean => window.matchMedia('(prefers-reduced-motion: reduc
 export function initReveal(): void {
   if (reduced()) return;
   const items = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
-  const vh = window.innerHeight;
+  const vh = innerHeight;
   const armed = items.filter((el) => el.getBoundingClientRect().top > vh);
   if (armed.length === 0) return;
   const perBand = new Map<Element, number>();
@@ -200,14 +201,14 @@ export function initReveal(): void {
     el.dataset.reveal = 'armed';
   });
   /* A print or a save as PDF shows everything. */
-  window.addEventListener(
+  addEventListener(
     'beforeprint',
     () => armed.forEach((el) => (el.dataset.reveal = 'in')),
     { once: true },
   );
   const pending = new Set(armed);
   onGeometry(() => {
-    const line = window.innerHeight * 0.85;
+    const line = innerHeight * 0.85;
     pending.forEach((el) => {
       if (el.getBoundingClientRect().top < line) {
         el.dataset.reveal = 'in';
@@ -242,14 +243,14 @@ export function initSequences(): void {
       return;
     }
     const r = c.getBoundingClientRect();
-    if (r.width === 0 || r.top > window.innerHeight) {
+    if (r.width === 0 || r.top > innerHeight) {
       c.dataset.seqState = 'armed';
       pending.add(c);
     }
   });
   if (pending.size === 0) return;
   const check = (): boolean => {
-    const line = window.innerHeight * 0.85;
+    const line = innerHeight * 0.85;
     pending.forEach((c) => {
       const r = c.getBoundingClientRect();
       if (r.width > 0 && r.top < line && r.bottom > 0) {
@@ -379,7 +380,30 @@ export function initTour(): void {
   });
 }
 
+/**
+ * The hero aurora (components/evidenced/Aurora.astro). Its loops are declared
+ * paused in styles/evidenced.css and run only while this marks the aurora
+ * `run`: some of it inside the window and the tab visible. Off screen or in a
+ * hidden tab it is `hold`, so it spends nothing a reader cannot see, and it
+ * resumes from the same frame. A passive scroll reader, not an observer
+ * (check-motion.js rule 3). A hidden aurora (display none) measures as zero
+ * height and stays held. Written small on purpose: this chunk ships on every
+ * route and sits inside the jsShared exception in check-budgets.js.
+ */
+export function initAurora(): void {
+  const set = () =>
+    document.querySelectorAll<HTMLElement>('[data-aurora]').forEach((s) => {
+      const r = s.getBoundingClientRect();
+      s.dataset.aurora = !document.hidden && r.height && r.bottom > 0 && r.top < innerHeight ? 'run' : 'hold';
+    });
+  /* A scroll event cannot be cancelled, so it needs no passive flag. */
+  addEventListener('scroll', set);
+  document.addEventListener('visibilitychange', set);
+  set();
+}
+
 export function initEvidenced(): void {
+  initAurora();
   initReveal();
   initSequences();
   initCarousels();
