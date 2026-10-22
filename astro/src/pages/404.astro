@@ -17,8 +17,10 @@
  * It stays crawlable so the status code is still read.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Band from '../components/evidenced/Band.astro';
+import Action from '../components/evidenced/Action.astro';
+import '../styles/evidenced.css';
 
 const title = 'Page not found | Velstrian';
 const description = 'That page does not exist. Find what you were looking for from here.';
@@ -35,58 +37,45 @@ const ROUTES = [
 ];
 ---
 
-<Base title={title} description={description} path="/404" noindex>
-  <Section
-    as="h1"
-    eyebrow="404"
+<Base title={title} description={description} path="/404" noindex typeface="evidenced" headerTone="light">
+  {/* 2026-10-22, ON DESIGN SYSTEM VERSION 3 (R285-WEB-ENTERPRISE-REDESIGN-01).
+      The same words, the same two ways out and the same seven routes. The
+      search button opens the command palette through data-cmdk-open, the same
+      hook the nav uses: the fastest route when someone knows what they want
+      and simply missed the URL. */}
+  <PageHero
+    id="not-found-title"
+    bandId="not-found"
+    label="404"
     title="That page does not exist."
-    standfirst="The address may be mistyped, or the page may have been removed. The links below are where people usually meant to go."
-    id="not-found"
+    lead="The address may be mistyped, or the page may have been removed. The links below are where people usually meant to go."
   >
-    <div class="btn-row">
-      <Button href="/">Back to the homepage</Button>
-      {/* The palette is the fastest route when someone knows what they want and
-          simply missed the URL. data-cmdk-open is the same hook the nav uses. */}
-      <button type="button" class="control ghost" data-cmdk-open>
-        Search the site<span class="visually-hidden"> (opens the search palette)</span>
-      </button>
-    </div>
+    <Action href="/">Back to the homepage</Action>
+    <Action as="button" variant="secondary" data-cmdk-open="">
+      Search the site<span class="visually-hidden"> (opens the search palette)</span>
+    </Action>
+  </PageHero>
 
-    <ul class="routes">
-      {
-        ROUTES.map((r) => (
-          <li>
-            <a href={r.href}>{r.label}</a>
-            <span>{r.note}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
+  <Band tone="light" labelledby="not-found-title">
+    <div class="ea-wrap">
+      <ul class="routes">
+        {
+          ROUTES.map((r) => (
+            <li>
+              <a href={r.href}>{r.label}</a>
+              <span>{r.note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Band>
 </Base>
 
 <style>
-
-  /* The wash, the hairline and the hover are `.control` in styles/controls.css
-     (A-52); the focus ring is the sitewide one in styles/motion.css, which the
-     rule deleted from here restated value for value. What stays is the button
-     geometry that makes this sit level with the primary beside it. */
-  .ghost {
-    min-height: var(--btn-h);
-    padding-inline: 1.5rem;
-    border-radius: var(--v3-radius-btn);
-    /* Full ink rather than `.control`'s sub default: this stands beside a
-       primary button offering the equal choice, and a quieter label would make
-       the pair read as one option and a footnote. */
-    --ctl-ink: var(--c-text);
-    font-family: var(--font-body);
-    font-size: var(--btn-fs);
-    font-weight: var(--btn-fw);
-  }
-
   .routes {
     list-style: none;
-    margin: var(--sec-gap) 0 0;
+    margin: 0 auto;
     padding: 0;
     max-width: var(--measure-prose);
   }
@@ -107,13 +96,12 @@ const ROUTES = [
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    color: var(--c-text);
+    font-size: var(--t-ea-h3);
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
     text-decoration: none;
   }
-  .routes a:hover { color: var(--c-interactive); }
+  .routes a:hover { color: var(--ea-accent-ink); }
   .routes a:focus-visible { outline: 3px solid var(--c-interactive); outline-offset: 3px; border-radius: 3px; }
 
   .routes span {

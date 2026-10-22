@@ -57,8 +57,10 @@
  * render would be answering its own question wrongly.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import SectionBand from '../components/evidenced/SectionBand.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Action from '../components/evidenced/Action.astro';
+import '../styles/evidenced.css';
 import { breadcrumbs } from '../lib/schema';
 
 const title = 'Cookie Preferences | Velstrian';
@@ -104,26 +106,23 @@ const schema = [
 ];
 ---
 
-<Base title={title} description={description} path="/cookie-preferences" schema={schema}>
-  <Section
-    as="h1"
-    eyebrow="Your choices"
+<Base title={title} description={description} path="/cookie-preferences" schema={schema} typeface="evidenced" headerTone="light">
+  <PageHero
+    id="hero-title"
+    bandId="hero"
+    label="Your choices"
     title="Cookie preferences."
-    standfirst="There is nothing to configure on this page, and that is not an oversight. This website sets no cookies, stores nothing in your browser, and loads nothing from anyone else, so there is no choice for you to make here."
-    id="hero"
+    lead="There is nothing to configure on this page, and that is not an oversight. This website sets no cookies, stores nothing in your browser, and loads nothing from anyone else, so there is no choice for you to make here."
   >
-    <div class="btn-row">
-      <Button href="/cookies/">Read the cookie policy</Button>
-      <Button href="/privacy/" variant="secondary">Read the privacy policy</Button>
+    <div slot="after">
+    <div class="ea-actions">
+      <Action href="/cookies/">Read the cookie policy</Action>
+      <Action href="/privacy/" variant="secondary">Read the privacy policy</Action>
     </div>
-  </Section>
+  </div>
+  </PageHero>
 
-  <Section
-    eyebrow="Category by category"
-    title="What this site stores."
-    standfirst="The same three categories a preference centre would offer you, each answered with what is actually set."
-    id="categories"
-  >
+  <SectionBand tone="light" eyebrow="Category by category" title="What this site stores." standfirst="The same three categories a preference centre would offer you, each answered with what is actually set." id="categories">
     <ul class="grid" role="list">
       {
         CATEGORIES.map((c) => (
@@ -143,14 +142,9 @@ const schema = [
       nothing to consent to. Your browser's own cookie and storage controls still work exactly as
       they always did. They will simply find nothing from us to clear.
     </p>
-  </Section>
+  </SectionBand>
 
-  <Section
-    eyebrow="Checked, not asserted"
-    title="How you can verify this."
-    standfirst="A claim about tracking is worth exactly as much as the reader's ability to check it, so here is how to check it."
-    id="verify"
-  >
+  <SectionBand tone="light-alt" eyebrow="Checked, not asserted" title="How you can verify this." standfirst="A claim about tracking is worth exactly as much as the reader's ability to check it, so here is how to check it." id="verify">
     <div class="solo">
       <div class="surface surface--pad">
         <h3 class="cat__h">Three things you can confirm yourself</h3>
@@ -172,14 +166,9 @@ const schema = [
         </ul>
       </div>
     </div>
-  </Section>
+  </SectionBand>
 
-  <Section
-    eyebrow="The signed-in product"
-    title="Velstrian Bid is a separate matter."
-    standfirst="This page is about this website. The product you sign in to is a different application on a different address, and it does set cookies, because it has to."
-    id="platform"
-  >
+  <SectionBand tone="light" eyebrow="The signed-in product" title="Velstrian Bid is a separate matter." standfirst="This page is about this website. The product you sign in to is a different application on a different address, and it does set cookies, because it has to." id="platform">
     <div class="solo">
       <div class="surface surface--pad">
         <h3 class="cat__h">What signing in involves</h3>
@@ -195,19 +184,14 @@ const schema = [
       None of that reaches this website. Reading velstrian.com, including this page, involves no
       account, no session and nothing stored on your device.
     </p>
-  </Section>
+  </SectionBand>
 
-  <Section
-    eyebrow="If this changes"
-    title="What we would do first."
-    standfirst="We may add analytics one day. If we do, nothing would be set before you agreed to it, this page would become a real preference centre, and the cookie policy would be updated in the same change rather than afterwards."
-    id="future"
-  >
-    <div class="btn-row">
-      <Button href="/contact/">Ask us about this</Button>
-      <Button href="/privacy/" variant="secondary">How we handle your data</Button>
+  <SectionBand tone="light-alt" eyebrow="If this changes" title="What we would do first." standfirst="We may add analytics one day. If we do, nothing would be set before you agreed to it, this page would become a real preference centre, and the cookie policy would be updated in the same change rather than afterwards." id="future">
+    <div class="ea-actions">
+      <Action href="/contact/">Ask us about this</Action>
+      <Action href="/privacy/" variant="secondary">How we handle your data</Action>
     </div>
-  </Section>
+  </SectionBand>
 </Base>
 
 <style>

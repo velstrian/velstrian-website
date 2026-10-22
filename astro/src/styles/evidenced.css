@@ -1113,9 +1113,16 @@ main > .ea-sec * {
    its top pad and the gap between them is one pad, not two (measured on
    /buy/: the boundary and the steps, both dark, stood 269px apart against
    134px everywhere else). */
+/* Band.astro renders its one module <script> after the FIRST band on a page,
+   so the first two bands are not adjacent siblings: `+ script +` covers that
+   pair (measured on /privacy/ and /contact/: the band under a page hero kept
+   its full 134px top pad behind a hero of the same tone). */
 .ea-sec[data-band='dark'] + .ea-sec[data-band='dark'],
 .ea-sec[data-band='light'] + .ea-sec[data-band='light'],
-.ea-sec[data-band='light-alt'] + .ea-sec[data-band='light-alt'] {
+.ea-sec[data-band='light-alt'] + .ea-sec[data-band='light-alt'],
+.ea-sec[data-band='dark'] + script + .ea-sec[data-band='dark'],
+.ea-sec[data-band='light'] + script + .ea-sec[data-band='light'],
+.ea-sec[data-band='light-alt'] + script + .ea-sec[data-band='light-alt'] {
   padding-top: 0;
 }
 
