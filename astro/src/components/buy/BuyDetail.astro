@@ -1,0 +1,393 @@
+---
+/**
+ * BuyDetail: expert detail, lower down (/buy/, strategy 0.4 "expert detail lives on those pages lower down").
+ *
+ * A LIGHT ALT band. Keeps every capability described in the previous buy page (RULE 0-U),
+ * explained in plain words the first time it appears:
+ *
+ *   1. Statutory duties and rules (Procurement Act 2023 s.52, s.71, PPN 026, transparency return)
+ *   2. Delivery monitoring and the 5 RAG bands
+ *   3. Sits alongside your portal, not instead of it
+ *   4. The sixteen surfaces of the buyer workspace
+ */
+import Band from '../evidenced/Band.astro';
+import IconTile from '../evidenced/IconTile.astro';
+import { PRODUCT_NAME_BUY, PRODUCT_NAME_BID } from '../../lib/brand-names';
+import { BUYER_PLANS } from '../../data/pricing';
+
+const [BUYER_PRO] = BUYER_PLANS;
+
+const RULES = [
+  {
+    heading: 'Procurement Act 2023, section 52',
+    body: 'Public contracts with an estimated value above £5m must have at least three published key performance indicators. Velstrian Buy flags this threshold, counts your published targets and shows any shortfall. Checks are advisory and are not legal advice.',
+  },
+  {
+    heading: 'Section 71 performance assessment',
+    body: 'Performance against those published targets must be assessed and published. Velstrian Buy keeps targets beside your delivery records so the assessment comes straight from the record throughout the contract.',
+  },
+  {
+    heading: 'PPN 026 and social value',
+    body: 'Social value is the extra good your supplier delivers locally. PPN 026, the guidance on the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at £1m inc VAT or above. Totals are worked out in code from a library of measures aligned to National TOMs conventions. It is not a full National TOMs implementation.',
+  },
+  {
+    heading: 'Transparency and award notice returns',
+    body: 'An award notice return is assembled across your recorded contracts for you to review and publish, and underlying reports export cleanly for committee packs or scrutiny requests.',
+  },
+];
+
+const BANDS = [
+  { value: '≥ 95%', label: 'On track', tone: 'on' },
+  { value: '80 to 94%', label: 'At risk', tone: 'risk' },
+  { value: '< 80%, no deadline passed', label: 'Not yet due', tone: 'none' },
+  { value: '< 80%, deadline passed', label: 'Breached', tone: 'breach' },
+  { value: 'Nothing committed', label: 'No data, never green', tone: 'none' },
+];
+
+const SCOPE_DOES = [
+  'Builds and publishes a social value requirement with a deterministic rubric',
+  'Locates evidence per published criterion, quoted verbatim from the response',
+  'Gives the panel one place to score against the rubric you published',
+  'Invites suppliers to respond by personal link, with a receipt for every response and one clarification register for all of them',
+  'Runs Quick RFQ for smaller requests: an RFQ pack sent by personal link and quotes collected in one place',
+  'Records awarded contracts and the commitments made in them',
+  'Rolls committed against delivered up by National TOMs theme, and flags under delivery',
+  'Assembles the Procurement Act 2023 award notice return for you to publish',
+];
+
+const SCOPE_DOES_NOT = [
+  'Score, rank or recommend a mark on any response',
+  'Replace Jaggaer, Atamis, In-tend, ProContract or Proactis as your system of record',
+  'Publish your formal tender notices. Those go on Find a Tender or through your e-sourcing portal',
+  'Hold the formal competition audit trail, which stays in your e-sourcing system',
+  'Give legal advice. The statutory checks it applies are advisory',
+  'Form or publish a view on a supplier standing',
+];
+
+const SURFACES = [
+  {
+    heading: 'Requirements',
+    body: 'Social value requirement packs. Define the measures and weighting for a tender before responses arrive.',
+  },
+  {
+    heading: 'Quick RFQ',
+    body: 'For smaller requests: describe the job, check the scope, download an RFQ pack and send it to suppliers by personal link. Each supplier uploads a quote and gets a receipt. You write the scope. The AI does not draft it.',
+  },
+  {
+    heading: 'Supplier invitations and clarifications',
+    body: 'Invite suppliers to respond by personal link. Each response gets a receipt, and clarification answers are published to all invited suppliers without saying who asked.',
+  },
+  {
+    heading: 'Evaluations',
+    body: 'Score supplier bids against a requirement rubric. Scores are evaluator set. The AI consistency check is advisory only and never changes a number.',
+  },
+  {
+    heading: 'Evaluation pre-read',
+    body: 'A reading aid that locates evidence in a response against each published criterion. It never scores.',
+  },
+  {
+    heading: 'Bid normalisation and comparison',
+    body: 'Enter each supplier price schedule to see every bid as one whole life figure over the same term and quantities, then set options side by side and record what your team judges.',
+  },
+  {
+    heading: 'Whole life costs',
+    body: 'Cost each way of delivering a requirement across its whole life, from assumptions you supply.',
+  },
+  {
+    heading: 'Pipeline',
+    body: 'Every procurement you are planning, running, evaluating, awarding or managing, with dates and value worked out from your own records.',
+  },
+  {
+    heading: 'Supplier screening',
+    body: 'Checked against public registers when a response arrives or a supplier joins an evaluation. It is not a score and never excludes a supplier. You decide.',
+  },
+  {
+    heading: 'Supplier risk',
+    body: 'Risk signals across your suppliers, with platform records kept apart from flags raised by your team.',
+  },
+  {
+    heading: 'Supplier relationship management',
+    body: 'Scorecards, review sessions and joint actions per supplier, every open action in one table, and quarterly relationship feedback.',
+  },
+  {
+    heading: 'Value realisation',
+    body: 'Savings and other value claimed against each supplier, and what finance has signed off.',
+  },
+  {
+    heading: 'Contracts',
+    body: 'Awarded contracts and their social value commitments, recorded so delivery has something to be measured against.',
+  },
+  {
+    heading: 'Suppliers',
+    body: 'Your supplier directory and rolling delivery track record across the contracts you have awarded.',
+  },
+  {
+    heading: 'Social value oversight',
+    body: 'Committed against delivered social value across your awarded contracts and suppliers, by National TOMs theme, with under-delivery raised as an alert.',
+  },
+  {
+    heading: 'Transparency and reports',
+    body: 'A Procurement Act 2023 award notice return across your contracts, plus exportable reports for committee and scrutiny.',
+  },
+];
+---
+
+<Band tone="light-alt" class="ea-detail" labelledby="buy-detail-title" id="procurement-rules">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <h2 class="ea-h2" id="buy-detail-title">Procurement rules, delivery bands, and workspace detail.</h2>
+      <p class="ea-lead">
+        The standards public and private buyers work to, explained simply. Simplicity is never a scope cut. Every capability stays in the product.
+      </p>
+    </div>
+
+    {/* Group 1: Procurement rules */}
+    <div class="buy-section" data-reveal>
+      <h3 class="ea-h3">Public procurement standards</h3>
+      <ul class="buy-cards">
+        {
+          RULES.map((r) => (
+            <li class="ea-card buy-card">
+              <h4 class="ea-h3">{r.heading}</h4>
+              <p>{r.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {/* Group 2: Delivery monitoring bands */}
+    <div class="buy-section" data-reveal>
+      <h3 class="ea-h3">Delivery monitoring: five fixed bands</h3>
+      <p class="ea-lead">
+        Delivery against commitments is banded on fixed thresholds calculated in code, per theme and per contract.
+      </p>
+      <ul class="buy-bands" role="list">
+        {
+          BANDS.map((b) => (
+            <li class={`buy-band buy-band--${b.tone}`}>
+              <span class="buy-band__val">{b.value}</span>
+              <span class="buy-band__lbl">{b.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {/* Group 3: Scope: Alongside your portal */}
+    <div class="buy-section" data-reveal>
+      <h3 class="ea-h3">Alongside your portal, not instead of it</h3>
+      <p class="ea-lead">
+        Your competition keeps running where it runs today. {PRODUCT_NAME_BUY} is the social value and evaluation layer beside it.
+      </p>
+      <div class="buy-scope">
+        <div class="ea-card buy-scope__col buy-scope__col--does">
+          <h4 class="ea-h3">What it does</h4>
+          <ul class="buy-ticks">
+            {SCOPE_DOES.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+        <div class="ea-card buy-scope__col buy-scope__col--not">
+          <h4 class="ea-h3">What it does not do</h4>
+          <ul class="buy-ticks">
+            {SCOPE_DOES_NOT.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {/* Group 4: All workspace surfaces */}
+    <div class="buy-section" data-reveal>
+      <h3 class="ea-h3">Every surface in the buyer workspace</h3>
+      <ul class="buy-cards buy-cards--3">
+        {
+          SURFACES.map((s) => (
+            <li class="ea-card buy-card">
+              <h4 class="ea-h3">{s.heading}</h4>
+              <p>{s.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {/* Onward links */}
+    <div class="buy-onward" data-reveal>
+      <div class="buy-onward__item">
+        <IconTile name="pen" />
+        <h4 class="ea-h3">Bidding for contracts instead?</h4>
+        <p>If you are a supplier answering tenders, {PRODUCT_NAME_BID} drafts answers from your own past documents.</p>
+        <a class="ea-link" href="/bid/">See Velstrian Bid</a>
+      </div>
+      <div class="buy-onward__item">
+        <IconTile name="document" />
+        <h4 class="ea-h3">Free compliance tools</h4>
+        <p>Explore our free tender compliance matrix and UK and EU tender search tools.</p>
+        <a class="ea-link" href="/tools/tender-compliance-matrix/">Open compliance matrix</a>
+      </div>
+      <div class="buy-onward__item">
+        <IconTile name="checklist" />
+        <h4 class="ea-h3">Transparent pricing</h4>
+        <p>{BUYER_PRO.name} is £{BUYER_PRO.monthly} a month, with full details and supplier plans published on our pricing page.</p>
+        <a class="ea-link" href="/pricing/">View pricing details</a>
+      </div>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .buy-section {
+    margin-top: var(--ea-head-gap);
+  }
+
+  .buy-section h3 {
+    margin-bottom: var(--space-4);
+  }
+
+  .buy-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .buy-cards--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .buy-card {
+    padding: var(--space-6);
+  }
+
+  .buy-card h4 {
+    margin-bottom: var(--space-2);
+  }
+
+  .buy-card p {
+    color: var(--ea-muted);
+  }
+
+  .buy-bands {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-3);
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+  }
+
+  .buy-band {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+    border: 1px solid var(--ea-rule);
+    border-radius: var(--radius-md);
+    background: var(--ea-card-bg);
+  }
+
+  .buy-band__val {
+    font-size: var(--t-h3);
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
+  }
+
+  .buy-band__lbl {
+    font-size: var(--t-micro);
+    color: var(--ea-muted);
+    margin-top: var(--space-1);
+  }
+
+  .buy-scope {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .buy-scope__col {
+    padding: var(--space-6);
+  }
+
+  .buy-ticks {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .buy-ticks li {
+    position: relative;
+    padding-inline-start: var(--space-5);
+    color: var(--ea-muted);
+  }
+
+  .buy-ticks li::before {
+    content: "·";
+    position: absolute;
+    inset-inline-start: var(--space-2);
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
+  }
+
+  .buy-onward {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: var(--ea-head-gap);
+    border-block: 1px solid var(--ea-rule);
+  }
+
+  .buy-onward__item {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-6);
+    border-inline-start: 1px solid var(--ea-rule);
+  }
+
+  .buy-onward__item:last-child {
+    border-inline-end: 1px solid var(--ea-rule);
+  }
+
+  .buy-onward__item p {
+    color: var(--ea-muted);
+  }
+
+  @media (max-width: 959px) {
+    .buy-cards,
+    .buy-cards--3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .buy-bands {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .buy-scope {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .buy-onward {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .buy-onward__item {
+      border-inline-end: 1px solid var(--ea-rule);
+    }
+
+    .buy-onward__item + .buy-onward__item {
+      border-top: 1px solid var(--ea-rule);
+    }
+  }
+
+  @media (max-width: 599px) {
+    .buy-cards,
+    .buy-cards--3,
+    .buy-bands {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -103,6 +103,13 @@ export { SIGNUP_URL };
  * `_annual` appended, the shape the app already accepts for Starter and Pro.
  */
 /** The sign up link for one plan and billing period, or the bare sign up page. */
+/** The annual discount a plan gives, in whole percent, worked out from its own
+    monthly and annual prices so the words can never drift from the numbers. */
+export function annualDiscountPct(plan: { monthly?: number | null; annual?: number | null }): number {
+  if (!plan.monthly || !plan.annual) return 0;
+  return Math.round((1 - plan.annual / (plan.monthly * 12)) * 100);
+}
+
 export function startHref(planKey?: string, annual = false): string {
   if (!planKey) return SIGNUP_URL;
   const token = annual ? `${planKey}_annual` : planKey;

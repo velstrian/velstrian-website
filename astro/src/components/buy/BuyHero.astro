@@ -1,0 +1,74 @@
+---
+/**
+ * BuyHero: what is this, and is it for me? (/buy/, strategy 0.3 and 0.4 row 1, visual 0.8).
+ *
+ * A LIGHT band built from the shared parts in components/evidenced/, so the
+ * product page opens the way the home page does: one plain sentence naming
+ * public AND private buyers (councils, schools, housing associations and private
+ * companies), the primary start button, "See how it works" as secondary, one
+ * reassurance line, and a product view floating on the stage beneath.
+ *
+ * The screen is a criterion evaluation with located quotes from responses and
+ * evaluator panel scores, with a sequence card over the stage edge.
+ */
+import Band from '../evidenced/Band.astro';
+import Action from '../evidenced/Action.astro';
+import Frame from '../evidenced/Frame.astro';
+import Stage from '../evidenced/Stage.astro';
+import Sequence from '../evidenced/Sequence.astro';
+import { BUYER_PLANS, startHref } from '../../data/pricing';
+import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
+
+const [BUYER_PRO] = BUYER_PLANS;
+---
+
+<Band tone="light" class="ea-hero" labelledby="buy-hero-title">
+  <div class="ea-wrap ea-hero__head">
+    <h1 class="ea-hero__title" id="buy-hero-title">Ask for what you need, collect the quotes, and compare what suppliers can back up.</h1>
+    <p class="ea-lead ea-hero__lead">
+      {PRODUCT_NAME_BUY} helps public and private buyers, for example councils, schools, housing associations and private companies buying a service, compare replies fairly.
+    </p>
+    <div class="ea-actions">
+      <Action href={startHref(BUYER_PRO.planKey)}>Start now</Action>
+      <Action href="#what-it-does" variant="secondary">See how it works</Action>
+    </div>
+    <p class="ea-hero__note">Your panel evaluates and scores. The AI never sets, changes or suggests a mark.</p>
+  </div>
+
+  <div class="ea-wrap">
+    <Stage layout="hero">
+      <Frame
+        title="Evaluation: Local employment and apprenticeships"
+        status="3 quotes received"
+        capture="buy-hero"
+        caption="A criterion evaluation, with located passages from supplier bids and panel scores entered by evaluators."
+      >
+        <div class="ea-app-split">
+          <ol class="ea-app-qs">
+            <li class="is-current"><span>Criterion 3.2 · Local employment</span><span class="ea-chip ea-chip--ok">Evaluated</span></li>
+            <li><span>Criterion 3.3 · Living wage commitment</span><span class="ea-chip ea-chip--ok">Evaluated</span></li>
+            <li><span>Criterion 4.1 · Environmental management</span><span class="ea-chip ea-chip--ok">Evaluated</span></li>
+            <li><span>Schedule B · Price schedule normalisation</span><span class="ea-chip">Completed</span></li>
+          </ol>
+          <div class="ea-app-answer">
+            <p class="ea-label">Evidence located in response · Bidder 01</p>
+            <p>Two apprenticeship starts in the first contract year, both recruited from the borough, with a named site supervisor accountable for completion. <span class="ea-src-chip">Section 4.1, page 12</span></p>
+            <p class="ea-label">Entered by your panel evaluator</p>
+            <p>Specific commitment with an accountable named supervisor and a local recruitment target. <span class="ea-chip ea-chip--ok">Panel score: 4 / 5</span></p>
+          </div>
+        </div>
+      </Frame>
+      <Sequence
+        slot="float"
+        play="load"
+        title="Facilities support, housing association"
+        steps={[
+          { label: 'Request published', detail: 'Sent to 4 suppliers by personal link' },
+          { label: '4 quotes collected', detail: 'Instant receipts issued for each' },
+          { label: 'Evidence located verbatim', detail: 'Quotes found for each criterion' },
+          { label: 'Scores entered by your panel', detail: 'Evaluator scored, AI never marks', state: 'ok' },
+        ]}
+      />
+    </Stage>
+  </div>
+</Band>

@@ -1,0 +1,30 @@
+---
+/**
+ * BuyFaq: the words a newcomer meets, explained simply, and questions asked
+ * by buyers about Velstrian Buy (/buy/, strategy 0.4 row 6).
+ *
+ * Built on the home page FAQ treatment (.ea-faq band, native <details>
+ * closed by default so every answer is in the document with no script).
+ * Questions come from components/buy/faqs.ts, which pages/buy.astro turns into
+ * FAQPage JSON-LD, so the marked up answers are always the visible ones.
+ */
+import Band from '../evidenced/Band.astro';
+import { BUY_FAQS } from './faqs';
+---
+
+<Band tone="light" class="ea-faq" labelledby="buy-faq-title" id="faq">
+  <div class="ea-wrap ea-faq__wrap">
+    <h2 class="ea-h2 ea-h2--centre" id="buy-faq-title" data-reveal>Frequently asked questions</h2>
+    <div class="ea-faq__list" data-reveal>
+      {
+        BUY_FAQS.map((item) => (
+          <details class="ea-qa">
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))
+      }
+      <p class="ea-faq__more"><a class="ea-link" href="/faq/">Read every question</a></p>
+    </div>
+  </div>
+</Band>

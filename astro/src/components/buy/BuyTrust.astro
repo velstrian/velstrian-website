@@ -1,0 +1,102 @@
+---
+/**
+ * BuyTrust: is my data safe, and what does it cost? (/buy/, strategy 0.4 row 5, visual 0.8).
+ *
+ * A LIGHT band. Hairline facts with gradient icon tiles (FactsBand), the canonical
+ * trust strip (TRUST_BADGES), and the two Velstrian Buy pricing plans from data/pricing.ts.
+ * Starting price is read from BUYER_PLANS, never typed.
+ */
+import Band from '../evidenced/Band.astro';
+import FactsBand from '../evidenced/FactsBand.astro';
+import Action from '../evidenced/Action.astro';
+import { TRUST_BADGES } from '../../data/site-facts';
+import { BUYER_PLANS, startHref, annualDiscountPct } from '../../data/pricing';
+
+const [BUYER_PRO, BUYER_PORTFOLIO] = BUYER_PLANS;
+const n = (v: number) => v.toLocaleString('en-GB');
+---
+
+<Band tone="light" class="ea-proof" labelledby="buy-trust-title" id="trust-and-pricing">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <h2 class="ea-h2 ea-h2--centre" id="buy-trust-title">Protected data, human scoring, and transparent pricing.</h2>
+      <p class="ea-lead">
+        Your procurement data is protected under UK and EU data protection laws. Evaluations are scored by your team, and prices are published up front.
+      </p>
+    </div>
+
+    <FactsBand
+      facts={[
+        { icon: 'document', value: 'Verbatim', label: 'Every quote is located word for word from the response, and dropped if not found' },
+        { icon: 'checklist', value: 'Human score', label: 'Evaluators set and enter every score. The AI never sets, changes or suggests a mark' },
+        { icon: 'shield', value: 'Advisory', label: 'Statutory checks and consistency flags are advisory and are not legal advice' },
+        { icon: 'sliders', value: `£${BUYER_PRO.monthly}/mo`, label: `Buyer Pro starts at £${BUYER_PRO.monthly} a month, ${annualDiscountPct(BUYER_PRO)}% off when paid annually. Start by card` },
+      ]}
+      strip={[...TRUST_BADGES]}
+      stripLabel="How your data is protected"
+    />
+
+    <div class="buy-plans-wrap" data-reveal>
+      <div class="ea-head-row">
+        <h3 class="ea-h2 ea-h2--centre">Two ways to buy.</h3>
+        <p class="ea-lead">Both are listed prices. Start either plan today by card, or pay for Portfolio by invoice.</p>
+      </div>
+
+      <ul class="ea-plans__grid">
+        <li class="ea-card ea-plan" data-reveal>
+          <div class="ea-plan__top">
+            <h4 class="ea-h3">{BUYER_PRO.name}</h4>
+          </div>
+          <p class="ea-plan__who">{BUYER_PRO.who}</p>
+          <p class="ea-plan__price">
+            <span class="ea-plan__amount">£{n(BUYER_PRO.monthly ?? 0)}</span>
+            <span class="ea-plan__per">a month</span>
+          </p>
+          <p class="ea-plan__inc">
+            {BUYER_PRO.seats} users, {n(BUYER_PRO.credits)} AI credits a month and {BUYER_PRO.guestEvaluators} guest evaluators.
+          </p>
+          <p class="ea-plan__gets">{BUYER_PRO.includes}</p>
+          <div class="buy-plan__action">
+            <Action href={startHref(BUYER_PRO.planKey)}>{BUYER_PRO.cta}</Action>
+          </div>
+        </li>
+
+        <li class="ea-card ea-plan ea-plan--rec" data-reveal>
+          <div class="ea-plan__top">
+            <h4 class="ea-h3">{BUYER_PORTFOLIO.name}</h4>
+            <span class="ea-plan__badge">Portfolio</span>
+          </div>
+          <p class="ea-plan__who">{BUYER_PORTFOLIO.who}</p>
+          <p class="ea-plan__price">
+            <span class="ea-plan__amount">£{n(BUYER_PORTFOLIO.monthly ?? 0)}</span>
+            <span class="ea-plan__per">a month</span>
+          </p>
+          <p class="ea-plan__inc">
+            {BUYER_PORTFOLIO.seats} users included, more by arrangement, {n(BUYER_PORTFOLIO.credits)} AI credits a month and {BUYER_PORTFOLIO.guestEvaluators} guest evaluators.
+          </p>
+          <p class="ea-plan__gets">{BUYER_PORTFOLIO.includes}</p>
+          <div class="buy-plan__action">
+            <Action href={startHref(BUYER_PORTFOLIO.planKey)} variant="primary">{BUYER_PORTFOLIO.cta}</Action>
+          </div>
+          {BUYER_PORTFOLIO.secondary && (
+            <p class="ea-plan__more">
+              <a class="ea-link" href={BUYER_PORTFOLIO.secondary.href}>{BUYER_PORTFOLIO.secondary.label}</a>
+            </p>
+          )}
+        </li>
+      </ul>
+      <p class="ea-plans__more"><a class="ea-link" href="/pricing/">Compare all supplier and buyer plans</a></p>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .buy-plans-wrap {
+    margin-top: var(--ea-head-gap);
+  }
+
+  .buy-plan__action {
+    margin-top: auto;
+    padding-top: var(--space-4);
+  }
+</style>

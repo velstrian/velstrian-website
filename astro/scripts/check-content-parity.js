@@ -158,6 +158,18 @@ const UPDATE = process.argv.includes('--update');
  * when a loss must be tolerated across several builds.
  */
 const ALLOWED_LOSSES = new Map([
+  /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: /buy/ rebuilt on design system
+     v3 (Gemini build, driver reviewed). REWORDED section heads, the content
+     under each confirmed on the built /buy/. */
+  ['/buy/  heading: fix the rubric before the responses arrive',
+   'Now "Write a clear request" in "Five clear steps, from requirement to award", and step 1 "Say what you need": the requirement and how replies are judged, settled before any supplier responds.'],
+  ['/buy/  heading: produce the return, and the reports underneath it',
+   'The award notice return, which the buyer reviews and publishes, and the statutory reports are in the expert detail band and the FAQ on /buy/.'],
+  ['/buy/  heading: four bands. no flattering rounding.',
+   'The live heading was wrong: the code has FIVE delivery bands (local source already said "Five bands", R285-WEB-CLAIMS-AUDIT-01 U6). All five (On track, At risk, Not yet due, Breached, No data never green) are in the expert detail band on /buy/.'],
+  ['/buy/  heading: the six we are asked first.',
+   'The FAQ is still on /buy/, headed "Frequently asked questions", one list feeding the visible FAQ and the FAQPage data (components/buy/faqs.ts).'],
+
   /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: /bid/ rebuilt on design system
      v3 (15be6f2f). Both are REWORDED section heads, the content under them
      stays, checked on the built page. */

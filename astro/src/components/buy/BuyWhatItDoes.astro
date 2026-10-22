@@ -1,0 +1,191 @@
+---
+/**
+ * BuyWhatItDoes: what can it do for me? (/buy/, strategy 0.4 row 2, visual 0.8).
+ *
+ * A LIGHT ALT band. The five buyer capabilities in everyday words, in the order
+ * the work happens, each beside a product screen on a stage:
+ *
+ *   1. Write a clear request (rubric in advance, Quick RFQ)
+ *   2. Collect the replies in one place (invitations, receipts, clarifications)
+ *   3. Read every reply side by side (normalisation, whole life costs)
+ *   4. See what each supplier can back up (verbatim evidence location)
+ *   5. Record your decision and why (panel scoring, delivery tracking)
+ *
+ * Alternating sides on wide screens so the eye walks down the page.
+ * Keeps every capability the previous buy page described (RULE 0-U).
+ */
+import Band from '../evidenced/Band.astro';
+import Frame from '../evidenced/Frame.astro';
+import Stage from '../evidenced/Stage.astro';
+import Sequence from '../evidenced/Sequence.astro';
+import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
+---
+
+<Band tone="light-alt" class="ea-caps" labelledby="buy-what-title" id="what-it-does">
+  <div class="ea-wrap">
+    <div class="ea-head-row" data-reveal>
+      <h2 class="ea-h2" id="buy-what-title">Five clear steps, from requirement to award.</h2>
+      <p class="ea-lead">
+        Buying a service means setting clear standards, reading bids fairly and holding the winner to their word. {PRODUCT_NAME_BUY} keeps the whole thread in one place.
+      </p>
+    </div>
+
+    {/* 1. Write a clear request */}
+    <div class="ea-panel" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Write a clear request</h3>
+        <p>
+          Build a requirement pack with a clear rubric before responses arrive, or run a Quick RFQ for smaller jobs. You set the measures, the evidence you need, and the weighting up front. You write the scope. The AI does not draft it.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Requirement pack: cleaning & facilities" status="Rubric fixed" capture="buy-cap-request" caption="Requirement measures and weightings fixed before responses arrive.">
+          <ul class="ea-mini-list">
+            <li><span>Local employment & training</span><span class="ea-state ea-state--ok">15% weighting</span></li>
+            <li><span>Environmental waste reduction</span><span class="ea-state ea-state--ok">10% weighting</span></li>
+            <li><span>Living wage & fair working terms</span><span class="ea-state ea-state--ok">10% weighting</span></li>
+            <li><span>Service delivery & staffing</span><span class="ea-state">65% weighting</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Requirement pack"
+          steps={[
+            { label: 'Measures settled', detail: 'Before responses arrive' },
+            { label: 'Weighting locked', detail: 'Reusable across competitions' },
+            { label: 'Quick RFQ ready', detail: 'Scope written by you' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    {/* 2. Collect the replies in one place */}
+    <div class="ea-panel buy-flip" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Collect the replies in one place</h3>
+        <p>
+          Invite suppliers to respond by personal link. Each supplier gets an instant receipt when they upload their quote, and the quote lands straight in your evaluation workspace. Clarification answers are published to all invited suppliers without revealing who asked.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Supplier submissions & clarifications" status="4 invited" capture="buy-cap-collect" caption="Submissions, upload receipts and clarification register in one view.">
+          <ul class="ea-mini-list">
+            <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">Uploaded · Receipt 801</span></li>
+            <li><span>Beacon Engineering</span><span class="ea-state ea-state--ok">Uploaded · Receipt 802</span></li>
+            <li><span>Crestwood Group</span><span class="ea-state ea-state--ok">Uploaded · Receipt 803</span></li>
+            <li><span>Clarification Q2 (site access)</span><span class="ea-state">Published to all 4</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Submissions inbox"
+          steps={[
+            { label: '4 suppliers invited' },
+            { label: '3 quotes uploaded', detail: 'Instant receipts issued' },
+            { label: 'Clarifications open', detail: 'Questioner names hidden' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    {/* 3. Read every reply side by side */}
+    <div class="ea-panel" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Read every reply side by side</h3>
+        <p>
+          Enter each supplier's price schedule to see every bid as one whole life figure over the same term and quantities. Compare options side by side with consistent assumptions, so you judge Whole life costs accurately across the contract.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Whole life costs: 3 year comparison" status="3 bids normalised" capture="buy-cap-compare" caption="Bid normalisation and side by side comparison across a 3 year term.">
+          <ul class="ea-mini-list">
+            <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">£142,500 whole life</span></li>
+            <li><span>Beacon Engineering</span><span class="ea-state">£156,000 whole life</span></li>
+            <li><span>Crestwood Group</span><span class="ea-state ea-state--ok">£138,000 whole life</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Price normalisation"
+          steps={[
+            { label: 'Price schedules entered' },
+            { label: 'Quantities aligned', detail: 'Over the same 3 year term' },
+            { label: 'Whole life costs ready', detail: 'Evaluated side by side' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    {/* 4. See what each supplier can back up */}
+    <div class="ea-panel buy-flip" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">See what each supplier can back up</h3>
+        <p>
+          The pre-read locates evidence in each response for every published criterion, quoted word for word with the exact page and section. If evidence cannot be found in the supplier's submission, it is dropped, never guessed. You see what they can prove in seconds.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Pre-read: Local employment criterion" status="Evidence located" capture="buy-cap-evidence" caption="Located quotes from supplier submissions, cited verbatim to section and page.">
+          <ul class="ea-mini-list">
+            <li><span>Apex: 2 apprenticeships, borough recruited</span><span class="ea-state ea-state--ok">Section 4.1, p12</span></li>
+            <li><span>Beacon: training placements explore only</span><span class="ea-state ea-state--held">No headcount, p7</span></li>
+            <li><span>Crestwood: 4 accredited apprenticeships</span><span class="ea-state ea-state--ok">Section 5.2, p18</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Verbatim evidence"
+          steps={[
+            { label: 'Response text scanned' },
+            { label: 'Verbatim quotes located', detail: 'Linked to page and section' },
+            { label: 'Missing proof dropped', detail: 'No quotes invented', state: 'ok' },
+          ]}
+        />
+      </Stage>
+    </div>
+
+    {/* 5. Record your decision and why */}
+    <div class="ea-panel" data-reveal>
+      <div class="ea-panel__copy">
+        <h3 class="ea-h3">Record your decision and why</h3>
+        <p>
+          Your panel scores against the published rubric and records the reason for every mark in one shared place. After award, track delivered commitments against what was promised across your contracts, with alerts if delivery falls behind.
+        </p>
+      </div>
+      <Stage layout="panel">
+        <Frame title="Post-award delivery & oversight" status="Contract active" capture="buy-cap-decision" caption="Tracking promised social value and performance delivery across awarded contracts.">
+          <ul class="ea-mini-list">
+            <li><span>Local apprenticeships (2 committed)</span><span class="ea-state ea-state--ok">2 hired · On track</span></li>
+            <li><span>Carbon reduction target (15% committed)</span><span class="ea-state ea-state--held">12% · At risk</span></li>
+            <li><span>Quarterly review meeting</span><span class="ea-state">Completed Q1</span></li>
+          </ul>
+        </Frame>
+        <Sequence
+          slot="float"
+          title="Portfolio oversight"
+          steps={[
+            { label: 'Scores recorded by panel' },
+            { label: 'Contract awarded' },
+            { label: 'Delivery tracked', detail: 'Alerts if targets fall behind' },
+          ]}
+        />
+      </Stage>
+    </div>
+  </div>
+</Band>
+
+<style>
+  @media (min-width: 960px) {
+    .buy-flip {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+
+    .buy-flip > .ea-panel__copy {
+      order: 2;
+    }
+  }
+
+  .ea-panel + .ea-panel {
+    margin-top: var(--ea-head-gap);
+  }
+</style>

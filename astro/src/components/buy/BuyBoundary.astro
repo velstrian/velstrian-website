@@ -1,0 +1,173 @@
+---
+/**
+ * BuyBoundary: can I trust it? (/buy/, strategy 0.4 row 3, visual 0.8).
+ *
+ * A DARK band, and the page's one slow moment.
+ * The AI reads and summarises, it never sets a mark. People score.
+ * Shown, not explained: four things asked of the pre-read, three it does,
+ * the fourth (setting a mark) stops dead at the boundary.
+ */
+import Band from '../evidenced/Band.astro';
+import Stage from '../evidenced/Stage.astro';
+import Frame from '../evidenced/Frame.astro';
+
+const BOUNDARY = [
+  { name: 'Locate evidence per criterion', src: 'Quoted verbatim from the response', ok: true },
+  { name: 'Drop what it cannot find', src: 'No quote, no card', ok: true },
+  { name: 'Flag uneven scoring', src: 'Advisory, after your panel has scored', ok: true },
+  { name: 'Set, change or suggest a mark', src: 'The panel evaluates and scores', ok: false },
+];
+---
+
+<Band tone="dark" class="ea-boundary" labelledby="buy-boundary-title" id="boundary">
+  <div class="ea-wrap ea-head-row" data-reveal>
+    <h2 class="ea-h2 ea-h2--centre" id="buy-boundary-title">The AI reads and summarises. It never sets a mark. People score.</h2>
+    <p class="ea-lead">
+      Under the Procurement Act 2023 equal treatment duty, the panel evaluates and scores every response. The pre-read is a reading aid that locates evidence in a response against each published criterion. It never scores.
+    </p>
+  </div>
+
+  <div class="ea-wrap">
+    <Stage layout="centre">
+      <Frame
+        title="Pre-read boundary"
+        status="Design constraint"
+        capture="buy-boundary-gate"
+        caption="Four things asked of the pre-read. Three it does, and setting a mark stops dead at the line."
+      >
+        <div class="buy-gate">
+          <ol class="buy-gate__list">
+            {
+              BOUNDARY.map((item) => (
+                <li class={`buy-gate__item ${item.ok ? 'buy-gate__item--ok' : 'buy-gate__item--stop'}`}>
+                  <div class="buy-gate__main">
+                    <p class="buy-gate__name">{item.name}</p>
+                    <p class="buy-gate__src">{item.src}</p>
+                  </div>
+                  <span class="buy-gate__track" aria-hidden="true">
+                    <i class="buy-gate__bar" />
+                  </span>
+                  <div class="buy-gate__verdict">
+                    {item.ok ? (
+                      <span class="ea-chip ea-chip--ok">Does</span>
+                    ) : (
+                      <span class="ea-chip ea-chip--held">
+                        <svg class="buy-gate__x" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+                          <path d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                        </svg>
+                        Never
+                      </span>
+                    )}
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </Frame>
+    </Stage>
+
+    <div class="buy-quote-wrap" data-reveal>
+      <blockquote class="ea-quote">
+        <p>
+          AI-generated reading aid, advisory only, not a score. It locates evidence to help you read faster. It does not score, rank, or recommend a mark. Under the Procurement Act 2023 (equal treatment), the panel evaluates and scores every response. No mark is set, changed, or suggested here.
+        </p>
+        <cite class="ea-label">Shown on every pre-read in the product</cite>
+      </blockquote>
+    </div>
+  </div>
+</Band>
+
+<style>
+  .buy-gate {
+    padding: var(--space-4);
+  }
+
+  .buy-gate__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .buy-gate__item {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) auto;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+    padding-block: var(--space-3);
+  }
+
+  .buy-gate__item + .buy-gate__item {
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .buy-gate__main {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .buy-gate__name {
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
+  }
+
+  .buy-gate__src {
+    font-size: var(--t-micro);
+    color: var(--ea-muted);
+  }
+
+  .buy-gate__track {
+    position: relative;
+    display: block;
+    height: 2px;
+    background: var(--ea-rule);
+    border-radius: var(--radius-full);
+  }
+
+  .buy-gate__bar {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    background: var(--ea-rule-strong);
+    border-radius: var(--radius-full);
+  }
+
+  .buy-gate__item--stop .buy-gate__bar {
+    width: 60%;
+  }
+
+  .buy-gate__verdict {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .buy-gate__x {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-inline-end: var(--space-1);
+    vertical-align: middle;
+  }
+
+  .buy-quote-wrap {
+    max-width: var(--measure);
+    margin: var(--ea-head-gap) auto 0;
+  }
+
+  .buy-quote-wrap cite {
+    display: block;
+    margin-top: var(--space-3);
+    font-style: normal;
+  }
+
+  @media (max-width: 599px) {
+    .buy-gate__item {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .buy-gate__track {
+      display: none;
+    }
+  }
+</style>

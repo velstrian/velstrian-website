@@ -5,6 +5,10 @@
  * A DARK band. Three steps, a real sequence, so they are numbered, in hairline
  * columns with a gradient icon tile each. Formats and file sizes are read from
  * site-facts.json.
+ *
+ * The default is the supplier's start (home and /bid/). A page for another
+ * reader passes its own `steps` and `action`, for example /buy/ for buyers,
+ * so a buyer is never told to download a bid.
  */
 import Band from './Band.astro';
 import IconTile from './IconTile.astro';
@@ -12,30 +16,43 @@ import Action from './Action.astro';
 import { SIGNUP_URL } from '../../data/app';
 import { TRIAL_DAYS } from '../../data/pricing';
 import { START_FORMATS, START_MAX_MB, PACK_MAX_MB } from '../../data/site-facts';
+import type { IconName } from '../../data/icons';
+
+interface Step { icon: IconName; title: string; body: string }
+interface Props {
+  steps?: Step[];
+  action?: { href: string; label: string };
+}
+
+const SUPPLIER_STEPS: Step[] = [
+  { icon: 'document', title: 'Add what you already have',
+    body: `Your past answers, and the policies and case studies that prove them, as ${START_FORMATS} files up to ${START_MAX_MB} MB each.` },
+  { icon: 'upload', title: 'Add a contract',
+    body: `Pick one from your matches, or upload one you were sent. Whole tender packs can be up to ${PACK_MAX_MB} MB a file, or just forward the email.` },
+  { icon: 'pen', title: 'Answer the questions',
+    body: 'Read each drafted answer, change what you like, then download your bid as a PDF or Word file.' },
+];
+
+const {
+  steps = SUPPLIER_STEPS,
+  action = { href: SIGNUP_URL, label: `Start ${TRIAL_DAYS} day trial` },
+} = Astro.props;
 ---
 
 <Band tone="dark" class="ea-steps" labelledby="ea-steps-title">
   <div class="ea-wrap">
     <h2 class="ea-h2" id="ea-steps-title" data-reveal>Start in three steps.</h2>
     <ol class="ea-steps__list">
-      <li class="ea-step" data-reveal>
-        <IconTile name="document" />
-        <h3 class="ea-h3"><span class="ea-step__n">1.</span> Add what you already have</h3>
-        <p>Your past answers, and the policies and case studies that prove them, as {START_FORMATS} files up to {START_MAX_MB} MB each.</p>
-      </li>
-      <li class="ea-step" data-reveal>
-        <IconTile name="upload" />
-        <h3 class="ea-h3"><span class="ea-step__n">2.</span> Add a contract</h3>
-        <p>Pick one from your matches, or upload one you were sent. Whole tender packs can be up to {PACK_MAX_MB} MB a file, or just forward the email.</p>
-      </li>
-      <li class="ea-step" data-reveal>
-        <IconTile name="pen" />
-        <h3 class="ea-h3"><span class="ea-step__n">3.</span> Answer the questions</h3>
-        <p>Read each drafted answer, change what you like, then download your bid as a PDF or Word file.</p>
-      </li>
+      {steps.map((s, i) => (
+        <li class="ea-step" data-reveal>
+          <IconTile name={s.icon} />
+          <h3 class="ea-h3"><span class="ea-step__n">{i + 1}.</span> {s.title}</h3>
+          <p>{s.body}</p>
+        </li>
+      ))}
     </ol>
     <div class="ea-actions" data-reveal>
-      <Action href={SIGNUP_URL}>Start {TRIAL_DAYS} day trial</Action>
+      <Action href={action.href}>{action.label}</Action>
     </div>
   </div>
 </Band>
