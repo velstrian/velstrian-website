@@ -102,7 +102,7 @@ export const PALETTE_ACTIONS: PaletteAction[] = [
     title: 'Ask about Velstrian Bid',
     href: '/contact/?enquiry=ppn002-bid#contact-form',
     section: 'Action',
-    hint: 'bid tender questionnaire ppn 002 supplier enquiry',
+    hint: 'bid tender questionnaire social value supplier enquiry',
     kind: 'action',
   },
   {
