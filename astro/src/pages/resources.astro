@@ -12,7 +12,7 @@
  *   1. ResourcesHero        light      what is this hub?       title, lead, two actions, no-gate reassurance
  *   2. ResourcesGrid        light alt  free tools and guides   4 varied cards (art, label, title, line), exit actions
  *   3. ResourcesStandards   dark       methodology & glossary  how rules are sourced, procurement glossary, compare link
- *   4. Close                gradient   what now?               close gradient band overlapping footer
+ *   4. Close                gradient   what now?               the home page close, public and private
  *
  * ── SEO CARRIED OVER VERBATIM ──────────────────────────────────────────────
  * Title, description, canonical and breadcrumbs schema are preserved.
@@ -23,12 +23,11 @@ import ResourcesGrid from '../components/resources/ResourcesGrid.astro';
 import ResourcesStandards from '../components/resources/ResourcesStandards.astro';
 import Close from '../components/evidenced/Close.astro';
 import '../styles/evidenced.css';
-import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 
 const title = 'Resources | Velstrian';
 const description =
-  'A free tender compliance matrix, in-depth briefings on UK public-sector bidding, and a plain-English glossary.';
+  'Free tools, plain guides to bidding for public and private work in the UK, and a glossary that explains the jargon.';
 
 const schema = [
   breadcrumbs([
@@ -52,9 +51,7 @@ const UPDATED = new Date('2026-10-22');
   <ResourcesHero />
   <ResourcesGrid />
   <ResourcesStandards />
-  <Close
-    title="Start with the workflow you need now."
-    lead="Velstrian Bid: find UK public-sector tenders, draft grounded social-value answers, and prove delivery, all in one workspace."
-    primary={{ href: SIGNUP_URL, label: START_LABEL }}
-  />
+  {/* The same close as the home page (audit S5): it said "find UK
+      public-sector tenders", which is half the market (RULE 0-U). */}
+  <Close />
 </Base>

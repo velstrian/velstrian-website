@@ -1,0 +1,58 @@
+{
+  "$comment": "Type led covers, owner decision D283 (R285-WEB-TRANSFORMATION-WT-D, 2026-10-22). ONE source for the blog, /resources/ and the per post social card. TypeCover.astro draws the page cover from it and scripts/generate-og-images.js draws /Assets/og/blog-<slug>.png from it, so the two cannot drift. Colours are NAMES of --cover-* role tokens in astro/src/styles/tokens.css, never values. A motif is SVG on a 100 by 100 box, painted only through var(--tc-ink), var(--tc-sub) and var(--tc-accent), which the generator resolves from the same tokens. A post with no entry under posts still gets a cover: its title is the line and its category picks the family. A line here carries no comma or colon: satori sets trailing punctuation as its own segment and opens a visible gap before it on the social card.",
+  "grounds": {
+    "paper": { "bg": "cover-paper", "ink": "cover-ink-on-light", "sub": "cover-sub-on-light", "accent": "cover-accent-on-light" },
+    "mist": { "bg": "cover-mist", "ink": "cover-ink-on-light", "sub": "cover-sub-on-light", "accent": "cover-accent-on-light" },
+    "iris": { "bg": "cover-iris", "ink": "cover-ink-on-dark", "sub": "cover-sub-on-dark", "accent": "cover-accent-on-iris" },
+    "night": { "bg": "cover-night", "ink": "cover-ink-on-dark", "sub": "cover-sub-on-dark", "accent": "cover-accent-on-dark" },
+    "field": { "bg": "cover-paper", "ink": "cover-ink-on-light", "sub": "cover-sub-on-light", "accent": "cover-accent-carbon" }
+  },
+  "families": {
+    "law": { "ground": "paper", "motif": "rules" },
+    "value": { "ground": "iris", "motif": "rings" },
+    "structure": { "ground": "night", "motif": "lots" },
+    "craft": { "ground": "mist", "motif": "steps" },
+    "start": { "ground": "paper", "motif": "path" },
+    "carbon": { "ground": "field", "motif": "decline" },
+    "matrix": { "ground": "night", "motif": "checklist" },
+    "finder": { "ground": "paper", "motif": "lens" },
+    "library": { "ground": "iris", "motif": "spines" }
+  },
+  "defaultFamily": "craft",
+  "categories": {
+    "Procurement Act 2023": "law",
+    "Social value": "value",
+    "PPN 026 & Social Value": "value",
+    "Frameworks": "structure",
+    "Method statements": "craft",
+    "Private sector bidding": "craft",
+    "Tender Strategy & AI": "craft",
+    "Getting started": "start",
+    "Sustainability & Compliance": "carbon"
+  },
+  "posts": {
+    "ai-tender-evaluation-uk-public-sector": "AI in tender evaluation",
+    "carbon-reduction-plan-ppn-0621-sme-guide": "Carbon Reduction Plans for small firms",
+    "find-first-public-sector-contract": "Your first public contract",
+    "frameworks-and-dps-explained": "Frameworks and DPS explained",
+    "life-after-award-kpis-contract-performance": "Life after the award",
+    "method-statement-that-scores": "Method statements that score",
+    "ppn-026-social-value-guide": "How social value is scored",
+    "ppn-026-what-has-published-and-what-has-not": "What PPN 026 has published",
+    "private-sector-rfp-pqq-guide": "Private RFPs and PQQs",
+    "procurement-act-2023-sme-guide": "The Procurement Act 2023 for small firms",
+    "regulatory-updates-2026": "PPN 026 in 2026",
+    "social-value-portal-vs-bid": "Choosing a social value tool"
+  },
+  "motifs": {
+    "rules": "<path d='M14 14H90M14 28H90M14 42H90M14 56H70M14 70H90M14 84H58' style='stroke:var(--tc-sub);stroke-width:1.4;opacity:.45;fill:none'/><path d='M6 10V88' style='stroke:var(--tc-sub);stroke-width:1.4;opacity:.45'/><path d='M14 42H90' style='stroke:var(--tc-accent);stroke-width:4;fill:none'/>",
+    "rings": "<g style='fill:none;stroke:var(--tc-sub);stroke-width:1.4;opacity:.5'><circle cx='100' cy='100' r='24'/><circle cx='100' cy='100' r='44'/><circle cx='100' cy='100' r='84'/></g><circle cx='100' cy='100' r='64' style='fill:none;stroke:var(--tc-accent);stroke-width:4'/>",
+    "lots": "<g style='fill:none;stroke:var(--tc-sub);stroke-width:1.4;opacity:.55'><rect x='8' y='14' width='18' height='18' rx='3'/><rect x='30' y='14' width='18' height='18' rx='3'/><rect x='74' y='14' width='18' height='18' rx='3'/><rect x='8' y='40' width='18' height='18' rx='3'/><rect x='52' y='40' width='18' height='18' rx='3'/><rect x='74' y='40' width='18' height='18' rx='3'/><rect x='30' y='66' width='18' height='18' rx='3'/><rect x='52' y='66' width='18' height='18' rx='3'/></g><g style='fill:var(--tc-accent)'><rect x='52' y='14' width='18' height='18' rx='3'/><rect x='30' y='40' width='18' height='18' rx='3'/><rect x='74' y='66' width='18' height='18' rx='3'/><rect x='8' y='66' width='18' height='18' rx='3'/></g>",
+    "steps": "<g style='fill:none;stroke:var(--tc-sub);stroke-width:1.4;opacity:.55'><rect x='8' y='70' width='14' height='22' rx='2'/><rect x='26' y='56' width='14' height='36' rx='2'/><rect x='44' y='42' width='14' height='50' rx='2'/><rect x='62' y='28' width='14' height='64' rx='2'/></g><rect x='80' y='10' width='14' height='82' rx='2' style='fill:var(--tc-accent)'/>",
+    "path": "<path d='M10 88C30 88 30 56 52 52S78 22 88 12' style='fill:none;stroke:var(--tc-sub);stroke-width:1.6;stroke-dasharray:3 5;opacity:.7'/><circle cx='10' cy='88' r='5' style='fill:none;stroke:var(--tc-sub);stroke-width:1.6;opacity:.7'/><circle cx='88' cy='12' r='8' style='fill:var(--tc-accent)'/>",
+    "decline": "<path d='M8 92H94' style='stroke:var(--tc-sub);stroke-width:1.4;opacity:.45'/><path d='M8 14L28 22L44 20L60 40L76 56L90 74' style='fill:none;stroke:var(--tc-accent);stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round'/><circle cx='90' cy='74' r='5' style='fill:var(--tc-accent)'/>",
+    "checklist": "<g style='fill:none;stroke:var(--tc-sub);stroke-width:1.4;opacity:.55'><rect x='8' y='10' width='12' height='12' rx='2'/><rect x='8' y='30' width='12' height='12' rx='2'/><rect x='8' y='50' width='12' height='12' rx='2'/><rect x='8' y='70' width='12' height='12' rx='2'/><path d='M28 16H92M28 36H80M28 56H88M28 76H70'/></g><g style='fill:none;stroke:var(--tc-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round'><path d='M10 16l3 3 6-7M10 36l3 3 6-7M10 56l3 3 6-7'/></g>",
+    "lens": "<g style='fill:none;stroke:var(--tc-sub);stroke-width:1.4;opacity:.45'><path d='M8 18H60M8 34H48M8 50H56M8 66H40M8 82H52'/></g><circle cx='66' cy='46' r='20' style='fill:none;stroke:var(--tc-accent);stroke-width:4'/><path d='M80 61L94 76' style='stroke:var(--tc-accent);stroke-width:5;stroke-linecap:round'/>",
+    "spines": "<g style='fill:none;stroke:var(--tc-sub);stroke-width:1.4;opacity:.5'><rect x='8' y='30' width='12' height='62' rx='2'/><rect x='24' y='18' width='12' height='74' rx='2'/><rect x='56' y='24' width='12' height='68' rx='2'/><rect x='72' y='36' width='12' height='56' rx='2'/></g><rect x='40' y='8' width='12' height='84' rx='2' style='fill:var(--tc-accent)'/>"
+  }
+}

@@ -1,51 +1,32 @@
 ---
+/**
+ * ResourceCard: one card on /resources/, a type led cover over a label, a
+ * title and one line.
+ *
+ * The cover was a Gemini 3D render per card until 2026-10-22 (a glass book,
+ * stacked translucent cards, a tilted grid, rising bars). Owner decision D283
+ * replaced the renders with the same type led cover the blog uses, so the hub
+ * and the guides read as one set and the cards cost no image bytes. The cover
+ * restates the card, so it is hidden from assistive technology and the title
+ * below it stays the card's name.
+ */
+import TypeCover from '../blog/TypeCover.astro';
+import type { Cover } from '../blog/covers';
+
 interface Props {
   href: string;
-  imageSlug: 'card-tender-finder' | 'card-compliance-matrix' | 'card-guides' | 'card-blog';
+  cover: Cover;
   label: string;
   title: string;
   description: string;
 }
 
-const { href, imageSlug, label, title, description } = Astro.props;
-
-const ALTS: Record<string, string> = {
-  'card-tender-finder':
-    'Abstract art of stacked translucent document cards on an indigo to purple gradient, one card outlined in white.',
-  'card-compliance-matrix':
-    'Abstract art of a tilted grid of small rounded squares on near black, a few filled purple as if checked off.',
-  'card-guides':
-    'Abstract art of an open book made of frosted glass casting an indigo and purple glow on a white surface.',
-  'card-blog':
-    'Abstract poster of three tall rounded bars rising in indigo to purple on near black, crossed by a thin white arc.',
-};
-
-const alt = ALTS[imageSlug] ?? '';
+const { href, cover, label, title, description } = Astro.props;
 ---
 
 <a href={href} class="ea-card res-card" data-reveal>
   <div class="res-card__art">
-    <picture>
-      <source
-        type="image/avif"
-        srcset={`/Assets/images/r285-gemini/${imageSlug}-800.avif 800w, /Assets/images/r285-gemini/${imageSlug}-1600.avif 1600w`}
-        sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
-      />
-      <source
-        type="image/webp"
-        srcset={`/Assets/images/r285-gemini/${imageSlug}-800.webp 800w, /Assets/images/r285-gemini/${imageSlug}-1600.webp 1600w`}
-        sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
-      />
-      <img
-        src={`/Assets/images/r285-gemini/${imageSlug}-1600.webp`}
-        alt={alt}
-        width="1600"
-        height="1000"
-        loading="lazy"
-        decoding="async"
-        class="res-card__img"
-      />
-    </picture>
+    <TypeCover cover={cover} flush />
   </div>
   <span class="ea-label res-card__label">{label}</span>
   <h3 class="ea-h3 res-card__title">{title}</h3>
@@ -66,12 +47,6 @@ const alt = ALTS[imageSlug] ?? '';
 
   .res-card__art {
     overflow: hidden;
-  }
-
-  .res-card__img {
-    display: block;
-    width: 100%;
-    height: auto;
   }
 
   .res-card__label {

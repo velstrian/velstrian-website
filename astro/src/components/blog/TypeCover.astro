@@ -1,0 +1,164 @@
+---
+/**
+ * TypeCover: a cover set in type, drawn from the design system (owner decision
+ * D283, R285-WEB-TRANSFORMATION-WT-D, 2026-10-22).
+ *
+ * WHAT IT REPLACES. Twelve stock photographs on /blog/ and four AI 3D renders
+ * on /resources/. The owner judged both "cheap", and they said nothing about
+ * the article: a calendar with pins, an abacus, a glass book.
+ *
+ * WHAT IT IS. The post's own words set large in the display face, the category
+ * above them, and one small motif in the corner that changes with the category
+ * (ruled lines for the Act, rings for social value, lots for frameworks, steps
+ * for method, a path for getting started, a falling line for carbon). Grounds
+ * change with the category too, so the register reads as a set, not as one
+ * card repeated twelve times. Every colour is a --cover-* role in tokens.css,
+ * bound through --tc-* here, so the cover costs no image bytes and is sharp at
+ * every size.
+ *
+ * SIZE IS READ FROM THE BOX, NOT THE VIEWPORT. The cover is a size container,
+ * so the type scales with the cover (cqi). Below 220px wide the words would be
+ * under 16px and illegible, and every place that shows a cover that small puts
+ * the title right beside it, so the small cover drops the words and shows the
+ * motif alone, larger.
+ *
+ * ALT TEXT. Every cover on the site sits next to the title it restates (the
+ * article h1, the ledger headline, the resource card title), so it is
+ * aria-hidden and adds nothing to the accessible name. Pass `label` only where
+ * a cover stands alone; it then becomes role="img" named by that label.
+ *
+ * THE SOCIAL CARD. scripts/generate-og-images.js draws the same cover, from the
+ * same covers.json and the same tokens, into /Assets/og/blog-<slug>.png.
+ */
+import type { Cover } from './covers';
+
+interface Props {
+  cover: Cover;
+  /** Accessible name, only when the cover is not beside its own title. */
+  label?: string;
+  /** Square corners and no edge, for a cover that fills the top of a card. */
+  flush?: boolean;
+  /**
+   * A banner, 3:1 from 700px of viewport up, for the top of a post. At 16:9 and
+   * a thousand pixels wide the cover filled a whole screen above the first
+   * paragraph and left most of itself empty. Below 700px it stays 16:9, where
+   * a 3:1 box is too short to hold a three line title clear of the label.
+   */
+  wide?: boolean;
+}
+
+const { cover, label, flush = false, wide = false } = Astro.props;
+---
+
+<div class="tc" data-family={cover.family} data-flush={flush ? '' : undefined} data-wide={wide ? '' : undefined} style={cover.style} role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
+  <span class="tc__kind">{cover.kind}</span>
+  <span class="tc__line">{cover.line}</span>
+  <svg class="tc__motif" viewBox="0 0 100 100" focusable="false" aria-hidden="true" set:html={cover.motif} />
+</div>
+
+<style>
+  .tc {
+    container-type: inline-size;
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--tc-bg);
+    color: var(--tc-ink);
+    /* An edge drawn in the cover's own ink, so a paper cover on a white band
+       still has a boundary and a night cover on a dark band does too. */
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tc-ink) 9%, transparent);
+  }
+
+  /* Inside a card the card owns the corners and the edge. */
+  .tc[data-flush] {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .tc__kind {
+    position: absolute;
+    top: 6.5cqi;
+    left: 6.5cqi;
+    right: 40cqi;
+    display: flex;
+    align-items: center;
+    gap: 1.4cqi;
+    font-size: clamp(calc(var(--t-ea-small) * 0.86), 1.9cqi, calc(var(--t-ea-small) * 1.3));
+    font-weight: var(--t-w-ea-strong);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: var(--tc-sub);
+  }
+
+  /* The one mark of the accent in the type: a short bar before the label. */
+  .tc__kind::before {
+    content: '';
+    flex: none;
+    width: 3.2cqi;
+    height: 0.5cqi;
+    min-height: 2px;
+    background: var(--tc-accent);
+  }
+
+  .tc__line {
+    position: absolute;
+    left: 6.5cqi;
+    bottom: 6cqi;
+    max-width: 62cqi;
+    font-family: var(--font-display);
+    /* Capped at the section heading size, so a cover at the top of a post
+       never sets its words larger than the post's own h1. The social card is
+       seen alone and keeps the full 7.2% of its width. */
+    font-size: clamp(var(--t-ea-small), 7.2cqi, var(--t-v3-h2));
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    color: var(--tc-ink);
+  }
+
+  .tc__motif {
+    position: absolute;
+    top: 6cqi;
+    right: 6.5cqi;
+    width: 24cqi;
+    height: 24cqi;
+    /* Clipped to its own box, which is also what the social card's image of
+       the same SVG does, so the two draw the same arcs. */
+    overflow: hidden;
+  }
+
+  /* The small cover: no words, the motif alone and larger. */
+  @container (max-width: 219px) {
+    .tc__kind,
+    .tc__line {
+      display: none;
+    }
+    .tc__motif {
+      top: 50%;
+      right: 50%;
+      width: 38cqi;
+      height: 38cqi;
+      transform: translate(50%, -50%);
+    }
+  }
+
+  @media (min-width: 700px) {
+    .tc[data-wide] {
+      aspect-ratio: 3 / 1;
+    }
+    .tc[data-wide] .tc__motif {
+      width: 20cqi;
+      height: 20cqi;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .tc {
+      border: 1px solid CanvasText;
+    }
+  }
+</style>

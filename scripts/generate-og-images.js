@@ -42,6 +42,7 @@
  *   node scripts/generate-og-images.js --check            Dry-run, list output
  *   node scripts/generate-og-images.js --force            Re-render even if up to date
  *   node scripts/generate-og-images.js --heroes-only      Article hero artwork only
+ *   node scripts/generate-og-images.js --blog-covers      Blog post cover cards only, no build needed
  *
  * Exit codes:
  *   0  success (or check completed)
@@ -642,6 +643,193 @@ function buildOgTree({ title, subtitle, product }) {
   );
 }
 
+// ---------- blog covers: the type led cover as the post's social card ----------
+//
+// OWNER DECISION D283 (R285-WEB-TRANSFORMATION-WT-D, 2026-10-22). Every blog post
+// shows a type led cover drawn from the design system instead of a stock
+// photograph: the post's words set large in the display face, its category as a
+// label, and one motif that changes with the category. The PAGE draws it in
+// astro/src/components/blog/TypeCover.astro. This draws the SAME cover into
+// /Assets/og/blog-<slug>.png, so a link shared on LinkedIn shows the cover the
+// reader then lands on.
+//
+// ONE SOURCE. Both read astro/src/components/blog/covers.json (the line per post,
+// the family per category, the ground per family, the motif SVG) and both colour
+// it from the --cover-* roles in astro/src/styles/tokens.css. The resolution below
+// mirrors covers.ts line for line. Satori cannot read var(), so each role is
+// followed through its var() chain to the literal tokens.css binds it to.
+//
+// ASKED FOR BY THE PAGE. astro/src/layouts/Article.astro references
+// /Assets/og/blog-<slug>.png, which puts the card in the demand set that
+// loadBuiltPages() reads, and the render loop routes any blog post route here.
+// `--blog-covers` renders the same cards straight from the content collection
+// without a build, for when only the covers changed.
+
+const COVERS = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "..", "astro", "src", "components", "blog", "covers.json"), "utf8"),
+);
+const BLOG_DIR = path.join(__dirname, "..", "astro", "src", "content", "blog");
+
+function resolveToken(name, seen = new Set()) {
+  if (seen.has(name)) throw new Error(`--${name} refers back to itself in astro/src/styles/tokens.css`);
+  seen.add(name);
+  const m = new RegExp(String.raw`^\s*--${name}:\s*([^;]+);`, "m").exec(TOKENS_CSS);
+  if (!m) throw new Error(`--${name} is not declared in astro/src/styles/tokens.css, the cover would guess a colour`);
+  const value = m[1].trim();
+  if (/^#[0-9A-Fa-f]{6}$/.test(value)) return value;
+  const ref = /^var\(--([\w-]+)\)$/.exec(value);
+  if (ref) return resolveToken(ref[1], seen);
+  throw new Error(`--${name} resolves to "${value}", which a social card cannot paint`);
+}
+
+// The post's title, category and draft flag from its frontmatter. The fields read
+// here are single line strings in every post, which the throw below keeps true.
+function readPost(file) {
+  const text = fs.readFileSync(path.join(BLOG_DIR, file), "utf8");
+  const fm = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+  if (!fm) throw new Error(`astro/src/content/blog/${file} has no frontmatter`);
+  const field = (key) => {
+    const m = new RegExp(String.raw`^${key}:\s*(.*)$`, "m").exec(fm[1]);
+    if (!m) return null;
+    const raw = m[1].trim();
+    return /^".*"$/.test(raw) ? JSON.parse(raw) : /^'.*'$/.test(raw) ? raw.slice(1, -1) : raw;
+  };
+  const title = field("title");
+  const category = field("category");
+  if (!title || !category) throw new Error(`astro/src/content/blog/${file} has no single line title or category for its cover`);
+  return { slug: file.replace(/\.md$/, ""), title, category, draft: field("draft") === "true" };
+}
+
+function blogPosts() {
+  return fs
+    .readdirSync(BLOG_DIR)
+    .filter((f) => f.endsWith(".md"))
+    .sort()
+    .map(readPost)
+    .filter((p) => !p.draft);
+}
+
+// Mirrors coverForPost() and buildCover() in astro/src/components/blog/covers.ts.
+function coverForPost(post) {
+  const familyKey = COVERS.categories[post.category] ?? COVERS.defaultFamily;
+  const family = COVERS.families[familyKey];
+  if (!family) throw new Error(`covers.json has no family "${familyKey}"`);
+  const ground = COVERS.grounds[family.ground];
+  const motif = COVERS.motifs[family.motif];
+  if (!ground || !motif) throw new Error(`covers.json family "${familyKey}" names a ground or motif it does not define`);
+  return {
+    line: COVERS.posts[post.slug] ?? post.title,
+    kind: post.category,
+    colours: {
+      bg: resolveToken(ground.bg),
+      ink: resolveToken(ground.ink),
+      sub: resolveToken(ground.sub),
+      accent: resolveToken(ground.accent),
+    },
+    motif,
+  };
+}
+
+function motifDataUri(motif, colours, size) {
+  const painted = motif
+    .replace(/var\(--tc-ink\)/g, colours.ink)
+    .replace(/var\(--tc-sub\)/g, colours.sub)
+    .replace(/var\(--tc-accent\)/g, colours.accent);
+  if (/var\(/.test(painted)) throw new Error("A cover motif uses a variable other than --tc-ink, --tc-sub and --tc-accent");
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="${size}" height="${size}">${painted}</svg>`;
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
+}
+
+// The page cover is sized in cqi (1% of its width). The card is 1200 wide, so one
+// cqi is 12px and every number below is the page's value times 12, rounded.
+function buildCoverTree({ line, kind, colours, motif }) {
+  const CQI = 12;
+  const motifSize = Math.round(24 * CQI);
+  return h(
+    "div",
+    {
+      style: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        position: "relative",
+        backgroundColor: colours.bg,
+        color: colours.ink,
+        fontFamily: "Plus Jakarta Sans",
+      },
+    },
+    h(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          top: Math.round(6.5 * CQI),
+          left: Math.round(6.5 * CQI),
+          display: "flex",
+          alignItems: "center",
+          gap: Math.round(1.4 * CQI),
+          fontSize: 23,
+          fontWeight: 600,
+          letterSpacing: 0.9,
+          textTransform: "uppercase",
+          color: colours.sub,
+        },
+      },
+      h("div", { style: { width: Math.round(3.2 * CQI), height: 6, backgroundColor: colours.accent } }),
+      kind,
+    ),
+    h("img", {
+      src: motifDataUri(motif, colours, motifSize),
+      width: motifSize,
+      height: motifSize,
+      style: { position: "absolute", top: Math.round(6 * CQI), right: Math.round(6.5 * CQI) },
+    }),
+    h(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          left: Math.round(6.5 * CQI),
+          bottom: Math.round(6 * CQI),
+          width: Math.round(62 * CQI),
+          display: "flex",
+          fontSize: Math.round(7.2 * CQI),
+          fontWeight: 800,
+          lineHeight: 1.04,
+          letterSpacing: -1.5,
+          color: colours.ink,
+        },
+      },
+      line,
+    ),
+    // The one thing the card adds to the page cover: whose it is, because a
+    // shared card is seen away from the site.
+    h(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          right: Math.round(6.5 * CQI),
+          bottom: Math.round(6 * CQI) + 6,
+          display: "flex",
+          fontSize: 22,
+          fontWeight: 600,
+          color: colours.sub,
+        },
+      },
+      SITE_CANONICAL_HOST,
+    ),
+  );
+}
+
+// The cover for a built route, or null when the route is not a blog post.
+function coverForRoute(route) {
+  const m = /^blog\/([^/]+)\/index\.html$/.exec(route);
+  if (!m) return null;
+  const post = blogPosts().find((p) => p.slug === m[1]);
+  return post ? coverForPost(post) : null;
+}
+
 // ---------- article hero artwork ----------
 //
 // WHY THIS EXISTS. Measured 2026-07-30: the eight posts under blog/ plus blog/index.html
@@ -951,6 +1139,23 @@ async function loadInterFonts(repoRoot) {
       weight: 800,
       style: "normal",
     },
+    // The site's display face, for the blog covers (D283). The site serves it as
+    // woff2 from /Assets/fonts, which satori cannot read, so the same face is
+    // fetched once as woff and cached beside Inter.
+    {
+      name: "Plus Jakarta Sans",
+      file: "PlusJakartaSans-SemiBold.woff",
+      url: "https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.0/files/plus-jakarta-sans-latin-600-normal.woff",
+      weight: 600,
+      style: "normal",
+    },
+    {
+      name: "Plus Jakarta Sans",
+      file: "PlusJakartaSans-ExtraBold.woff",
+      url: "https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.0/files/plus-jakarta-sans-latin-800-normal.woff",
+      weight: 800,
+      style: "normal",
+    },
   ];
 
   const out = [];
@@ -966,7 +1171,7 @@ async function loadInterFonts(repoRoot) {
       fs.writeFileSync(local, buf);
     }
     out.push({
-      name: "Inter",
+      name: f.name ?? "Inter",
       data: fs.readFileSync(local),
       weight: f.weight,
       style: f.style,
@@ -977,11 +1182,47 @@ async function loadInterFonts(repoRoot) {
 
 // ---------- main ----------
 
+// `--blog-covers`: every published post's cover card, straight from the content
+// collection, no build needed. Same tree and same file names as the main run.
+async function renderBlogCovers({ outDir, force }) {
+  const posts = blogPosts();
+  if (posts.length === 0) {
+    structuredLog("error", "No published blog posts found", { dir: BLOG_DIR });
+    process.exit(2);
+  }
+  const satori = (await import("satori")).default;
+  const { Resvg } = require("@resvg/resvg-js");
+  const fonts = await loadInterFonts(path.resolve(__dirname, ".."));
+  let rendered = 0;
+  let skipped = 0;
+  for (const post of posts) {
+    const outPath = path.join(outDir, `blog-${post.slug}.png`);
+    if (!force && fs.existsSync(outPath)) {
+      skipped += 1;
+      continue;
+    }
+    const cover = coverForPost(post);
+    const svg = await satori(buildCoverTree(cover), { width: 1200, height: 630, fonts });
+    const png = new Resvg(svg, { background: cover.colours.bg, fitTo: { mode: "width", value: 1200 }, font: { loadSystemFonts: false } })
+      .render()
+      .asPng();
+    fs.writeFileSync(outPath, png);
+    rendered += 1;
+    structuredLog("info", "Rendered blog cover card", { slug: post.slug, bytes: png.length });
+  }
+  if (rendered + skipped !== posts.length) {
+    structuredLog("error", "Blog cover count does not match the published posts", { rendered, skipped, posts: posts.length });
+    process.exit(3);
+  }
+  structuredLog("info", "Blog covers complete", { rendered, skipped, posts: posts.length, out_dir: outDir });
+}
+
 async function main() {
   const argv = process.argv.slice(2);
   const force = argv.includes("--force");
   const checkOnly = argv.includes("--check");
   const heroesOnly = argv.includes("--heroes-only");
+  const blogCoversOnly = argv.includes("--blog-covers");
   const slugFilter = argv.find((a) => a.startsWith("--slug="))?.slice("--slug=".length);
 
   const repoRoot = path.resolve(__dirname, "..");
@@ -991,6 +1232,11 @@ async function main() {
   // markup has one directory to reference.
   const heroDir = path.join(repoRoot, "Assets", "blog-photos");
   fs.mkdirSync(heroDir, { recursive: true });
+
+  if (blogCoversOnly) {
+    await renderBlogCovers({ outDir, force });
+    return;
+  }
 
   // Build the full page list from the built site. Every failure inside is a
   // statement about the ARTEFACT (absent, empty, untitled page, colliding slug),
@@ -1179,7 +1425,8 @@ async function main() {
     }
 
     try {
-      const svg = await satori(buildOgTree(page), {
+      const cover = coverForRoute(page.route);
+      const svg = await satori(cover ? buildCoverTree(cover) : buildOgTree(page), {
         width: 1200,
         height: 630,
         fonts,

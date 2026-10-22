@@ -160,11 +160,9 @@ const schema = [
         </div>
         {/* Wrapped rather than given a class: a class handed to a child
             component cannot be reached by this page's scoped styles (see
-            PostImage.astro). No duotone and no credit: the Pexels Licence needs
-            none and the owner asked for none. Provenance is in
-            blog/PHOTO-CREDITS.md. */}
+            PostImage.astro). A type led cover, not a photograph (D283). */}
         <div class="feat__pic">
-          <PostImage slug={featured.id} priority sizes="(min-width: 1000px) 520px, calc(100vw - 5rem)" />
+          <PostImage slug={featured.id} title={featured.data.title} category={featured.data.category} />
         </div>
       </a>
 
@@ -185,7 +183,7 @@ const schema = [
                 </div>
                 {post.data.readingTime && <span class="ea-label ledger__read">{post.data.readingTime} min</span>}
                 <div class="ledger__thumb">
-                  <PostImage slug={post.id} sizes="(min-width: 900px) 156px, 96px" />
+                  <PostImage slug={post.id} title={post.data.title} category={post.data.category} />
                 </div>
               </a>
             </li>

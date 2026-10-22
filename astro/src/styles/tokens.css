@@ -3885,3 +3885,28 @@
   --btn-s-border-hover: var(--c-white);
   --btn-s-glow: none;
 }
+
+/* ══ TYPE LED COVERS (owner decision D283, R285-WEB-TRANSFORMATION-WT-D) ════
+   The blog, /resources/ and the per post social card draw their covers from
+   these roles and nothing else (components/blog/TypeCover.astro and
+   scripts/generate-og-images.js, both fed by components/blog/covers.json).
+   Each is bound to a fixed palette literal rather than to a light or dark
+   scope role, because a cover is a picture: it looks the same on a light band,
+   on a dark band and inside a PNG. Text pairs, measured: ink on paper 19:1,
+   sub on paper 6.0:1, accent on mist 6.4:1, ink on iris 9.6:1, sub on iris
+   8.0:1, accent on night 6.8:1. The iris and carbon accents are below 4.5:1 on
+   their grounds and so paint motifs only, never text. */
+:root {
+  --cover-paper: var(--c-light-1);
+  --cover-mist: var(--c-light-2);
+  --cover-iris: var(--c-iris-deep);
+  --cover-night: var(--c-ink-0);
+  --cover-ink-on-light: var(--c-ink-0);
+  --cover-sub-on-light: var(--c-ink-2);
+  --cover-accent-on-light: var(--c-iris-ink);
+  --cover-ink-on-dark: var(--c-light-0);
+  --cover-sub-on-dark: var(--c-light-3);
+  --cover-accent-on-dark: var(--c-teal);
+  --cover-accent-on-iris: var(--c-violet);
+  --cover-accent-carbon: var(--c-green);
+}

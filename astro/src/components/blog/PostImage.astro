@@ -1,236 +1,46 @@
 ---
 /**
- * PostImage: a blog hero or thumbnail.
+ * PostImage: the cover a blog post shows on /blog/ and at the top of the post.
  *
- * ── THE PHOTOGRAPH TREATMENT WAS REMOVED ON 2026-08-04, AND WHY ─────────────
+ * ── THE PHOTOGRAPHS ARE GONE, 2026-10-22, OWNER DECISION D283 ──────────────
  *
- * This component used to carry a five-layer "approved photograph treatment"
- * quoted from Figma frames B1 (`164:3`) and A1 (`183:3`). Its argument was that
- * full-colour stock photography reads cheapest on a dark premium site, and that
- * the answer is to desaturate towards near-monochrome, as Linear does. The
- * stated net effect was that roughly 15% of the original chroma survived.
+ * Until today this component drew a licensed stock photograph per post from
+ * /Assets/blog-photos (an AVIF, WebP and JPEG ladder looked up in heroes.ts).
+ * The owner judged the stock photography "cheap" (2026-10-21), the website
+ * transformation audit (M6) measured all twelve thumbnails as generic office,
+ * calendar and Westminster scenes that said nothing about the article, and D283
+ * replaced them with a type led cover drawn from the design system. So this is
+ * now a thin wrapper over TypeCover: the post's words, its category and a motif
+ * for that category, sized by its own box and costing no image bytes.
  *
- * The owner's instruction of 2026-08-04 is the opposite one, and it is explicit:
- * the pictures are "showing faded", they "must be super visible", "must be
- * clear", and "all the images must be visble in color". That decision overrides
- * the frame, so the treatment is gone rather than tuned.
+ * The file and its name are kept so the three call sites (the featured card,
+ * the ledger row and Article.astro) stay one import, and so the history of the
+ * photograph decision above stays findable from the component that held it.
+ * blog/PHOTO-CREDITS.md keeps the provenance record of the retired photographs.
  *
- * WHAT WAS ACTUALLY CAUSING THE FADE, measured live on /blog/ with Playwright
- * before anything was changed, so that the fix removes the cause rather than
- * cancelling it out with a second effect:
+ * NO LAYOUT SHIFT. The cover is a 16:9 (or 3:1 banner) box drawn in CSS, so its height is known
+ * before any byte arrives. There is nothing to load.
  *
- *   1  `filter: grayscale(0.85) contrast(1.08) brightness(0.86)` on the <img>.
- *   2  `.pi__wash`, an overlay whose upper background layer ran
- *      `linear-gradient(146deg, rgba(29,75,78,.2), rgba(12,16,36,.78))` (at
- *      the bottom-right corner that is a 78%-opaque near-black sheet over the
- *      photograph) above a `rgba(5,7,16,.22)` flood of the page colour.
- *   3  `.pi__scrim`, a 220px band rising to `rgba(5,7,16,.94)` at the foot.
- *
- * Everything else was ruled out with measurements rather than by reading: every
- * `opacity` in the ancestor chain computed to 1, every `mix-blend-mode` and
- * `background-blend-mode` to `normal`, and the only `backdrop-filter` on the
- * page sat on the featured card BEHIND the picture, not over it. The source
- * files are not desaturated either: decoded straight from disk,
- * `uk-parliament-westminster-600w.webp` samples at mean saturation 0.201 and
- * mean luminance 147.9, which is an ordinary daylight photograph.
- *
- * ── THE SCRIM IS GONE BECAUSE THE TYPE IS GONE, NOT IN SPITE OF IT ──────────
- *
- * Layer 3 was the only one of the three with an honest job: it kept the visible
- * photographer credit legible where it overlaid the picture. The same
- * instruction retires that credit ("must not need to mention credits of
- * photographer"), and the Pexels Licence does not require one. See
- * blog/PHOTO-CREDITS.md, which keeps the provenance record whether or not the
- * page prints it. With no type over any blog picture anywhere on the site, a
- * scrim would be darkening a photograph to make nothing readable. So it is
- * removed rather than kept and compensated for, and if type is ever put back
- * over one of these pictures it gets its own backing rather than the whole
- * image being dimmed again.
- *
- * ── WHAT SURVIVES, AND WHY IT IS NOT PART OF THE PROBLEM ────────────────────
- *
- * The specular top edge and the gradient hairline stay. They are FRAME chrome:
- * a 1px light along the top edge and a 1px ring around the box. Neither covers
- * a single pixel of the photograph's interior, so neither can fade it, and
- * without them a photograph on a dark page has no edge at all.
- *
- * ── SELF-HOSTED, ALWAYS ─────────────────────────────────────────────────────
- *
- * Every candidate resolves under /Assets, so the build's zero-external-origin
- * property holds and scripts/check-csp.js stays quiet.
- * scripts/copy-assets.js copies by reachability, so a file that nothing
- * references never ships.
+ * THERE IS DELIBERATELY NO `class` PROP: Astro does not stamp a parent's scope
+ * onto a child's root, so a forwarded class renders and does nothing. Callers
+ * wrap this component in an element of their own and style that.
  */
-import { heroFor } from './heroes';
+import TypeCover from './TypeCover.astro';
+import { coverForPost } from './covers';
 
 interface Props {
-  /** Post slug. The picture and its alt text are looked up. */
+  /** Post slug, used to look up the short line in covers.json. */
   slug: string;
-  /** The `sizes` attribute. Required: a wrong one downloads the wrong file. */
-  sizes: string;
-  /** Above the fold: eager plus a high fetch priority. Default is lazy. */
-  priority?: boolean;
-  /**
-   * Rendered box geometry for the width/height attributes. These describe the
-   * BOX the browser must reserve, not the source file, which is what stops the
-   * page shifting when the picture arrives. New masters are cut at 16:9, which
-   * is this box; four older ones are 3:2 and are cropped to it by object-fit.
-   */
-  boxWidth?: number;
-  boxHeight?: number;
+  /** The post title, the line when covers.json has none for this slug. */
+  title: string;
+  /** The post category: the label, and the family the cover is drawn in. */
+  category: string;
+  /** The banner shape for the top of a post (see TypeCover). */
+  wide?: boolean;
 }
 
-/*
- * THERE IS DELIBERATELY NO `class` PROP, and it is worth knowing why.
- *
- * The first version took one and forwarded it to the root element. It rendered
- * (`class="pi ledger__thumb"` was in the shipped HTML), and it did nothing,
- * because Astro scopes a component's styles with that component's own
- * data-astro-cid and does NOT stamp the parent's cid onto a child component's
- * root. So `.ledger__thumb { grid-area: thumb }` in the page compiled to
- * `.ledger__thumb[data-astro-cid-PAGE]` and matched no element on the page.
- * The thumbnail was auto-placed instead, the grid row sized itself around it,
- * and nothing anywhere reported a problem.
- *
- * A prop that is accepted, rendered and silently inert is worse than no prop.
- * Callers wrap this component in an element of their own and style that.
- */
-
-const { slug, sizes, priority = false, boxWidth = 1600, boxHeight = 900 } = Astro.props;
-
-const hero = heroFor(slug);
-const base = `/Assets/blog-photos/${hero.file}`;
-
-/*
- * The ladder that exists on disk for every hero, in BOTH formats. Listed rather
- * than derived from a range so that adding a width means adding the file first;
- * scripts/build-blog-photos.mjs holds the matching list and is the only thing
- * that writes these files.
- *
- * AVIF IS OFFERED FIRST, AND THAT IS THE SECOND HALF OF THIS PASS. Until now
- * the component listed a WebP source and a JPEG fallback, so the AVIF
- * encodings that were already on disk for seven of the eight heroes were never
- * served to anyone. Measured across the set, AVIF is roughly half the WebP
- * bytes for the same picture.
- */
-const WIDTHS = [400, 600, 800, 1200] as const;
-const srcset = (ext: 'avif' | 'webp') =>
-  WIDTHS.map((w) => `${base}-${w}w.${ext} ${w}w`).join(', ');
+const { slug, title, category, wide = false } = Astro.props;
+const cover = coverForPost(slug, title, category);
 ---
 
-<div class="pi">
-  <div class="pi__frame">
-    <picture>
-      <source type="image/avif" srcset={srcset('avif')} sizes={sizes} />
-      <source type="image/webp" srcset={srcset('webp')} sizes={sizes} />
-      <img
-        class="pi__img"
-        src={`${base}.jpg`}
-        alt={hero.alt}
-        width={boxWidth}
-        height={boxHeight}
-        sizes={sizes}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding={priority ? 'sync' : 'async'}
-        fetchpriority={priority ? 'high' : undefined}
-      />
-    </picture>
-  </div>
-</div>
-
-<style>
-  .pi {
-    margin: 0;
-  }
-
-  .pi__frame {
-    /* The hairline itself is --grad-hairline; only the flat fallback ring needs
-       a flat colour, which a gradient token cannot supply. */
-    --pi-edge-bottom: rgba(255, 255, 255, 0.05);
-    --pi-specular: rgba(255, 255, 255, 0.85);
-
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-card);
-    /* One ratio for every blog picture, hero and thumbnail alike. */
-    aspect-ratio: 16 / 9;
-    /* Not white. An unloaded image on the light reading pane would otherwise
-       flash a bright hole in the middle of a dark band. */
-    background: var(--c-panel);
-    /* The specular and the hairline stack against this element and nothing
-       outside it. */
-    isolation: isolate;
-  }
-
-  /*
-   * NO FILTER, AND THE ABSENCE IS THE DECISION. This rule used to carry
-   * `filter: grayscale(.85) contrast(1.08) brightness(.86)` through a
-   * `.pi__img--treated` modifier, and that filter is the single largest
-   * contributor to the fade the owner reported. Named here rather than silently
-   * deleted, so the next person reading this file knows the omission was
-   * chosen.
-   */
-  .pi__img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* The specular top edge. Reads as light catching the panel edge; it is the
-     difference between a photograph in a box and a lit surface. 1px tall, so it
-     covers no part of the picture. */
-  .pi__frame::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    inset-inline: 0;
-    z-index: 1;
-    height: 1px;
-    pointer-events: none;
-    background-image: linear-gradient(90deg, transparent, var(--pi-specular), transparent);
-  }
-
-  /* The gradient hairline. A flat 1px border is the strongest PowerPoint tell
-     in the craft table, so the ring is drawn as a masked gradient rather than
-     as a border. */
-  .pi__frame::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    border-radius: inherit;
-    /* The fallback where masking is unavailable: a flat low-alpha ring, which
-       is worse than the gradient and much better than nothing. */
-    box-shadow: inset 0 0 0 1px var(--pi-edge-bottom);
-  }
-
-  @supports ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
-    .pi__frame::after {
-      box-shadow: none;
-      padding: 1px;
-      background-image: var(--grad-hairline);
-      /* Two identical masks, one clipped to the content box and one to the
-         border box, composited so only the 1px difference between them
-         survives. The shorthand is used deliberately: setting mask-image and
-         mask-clip as longhands leaves mask-origin at its initial value and the
-         ring lands a pixel off in WebKit. */
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-    }
-  }
-
-  /* Windows high-contrast paints the gradient specular to nothing useful, so
-     the picture takes a real border instead and the drawn edge stands down. */
-  @media (forced-colors: active) {
-    .pi__frame::before {
-      display: none;
-    }
-    .pi__frame {
-      border: 1px solid CanvasText;
-    }
-  }
-</style>
+<TypeCover cover={cover} wide={wide} />

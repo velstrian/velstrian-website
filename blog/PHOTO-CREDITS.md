@@ -1,5 +1,11 @@
 # Blog photo credits
 
+> **RETIRED FROM THE SITE 2026-10-22, owner decision D283 (R285-WEB-TRANSFORMATION-WT-D).** No page
+> shows any photograph listed below any more. Every blog post and every /resources/ card now carries
+> a type led cover drawn from the design system (`astro/src/components/blog/TypeCover.astro`, data in
+> `covers.json`), and `heroes.ts` is deleted. This file stays as the provenance record of what was
+> licensed, and nothing on the site credits these photographs because nothing on the site shows them.
+
 > **RESTORED 2026-09-08.** This file was deleted on 2026-09-07 by commit `d0f89f43`, "delete the
 > legacy root tree and the two workflows that audited it", as collateral rather than on purpose. It
 > is the ONLY record of where each photograph came from and under what licence, and both

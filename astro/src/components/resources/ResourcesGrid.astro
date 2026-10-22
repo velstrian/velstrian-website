@@ -4,6 +4,17 @@ import Action from '../evidenced/Action.astro';
 import ResourceCard from './ResourceCard.astro';
 import { LIVE_SOURCES } from '../../data/site-facts';
 import { RECENT_DAYS } from '../../data/tender-finder';
+import { buildCover, coverForPost } from '../blog/covers';
+
+/* Type led covers (D283). The guide card carries the post's own cover, so the
+   hub and /blog/ show the same picture for the same article. */
+const PPN_GUIDE_TITLE = 'PPN 026 Social Value: How the Model Is Scored';
+const covers = {
+  matrix: buildCover({ line: 'Every requirement line by line', kind: 'Free tool', family: 'matrix' }),
+  finder: buildCover({ line: 'Open tenders in one search', kind: 'Free tool', family: 'finder' }),
+  guide: coverForPost('ppn-026-social-value-guide', PPN_GUIDE_TITLE, 'Social value'),
+  guides: buildCover({ line: 'Guides you can act on', kind: 'Guides', family: 'library' }),
+};
 ---
 
 <Band tone="light-alt" id="tools" labelledby="tools-title">
@@ -21,28 +32,28 @@ import { RECENT_DAYS } from '../../data/tender-finder';
     <div class="res-grid">
       <ResourceCard
         href="/tools/tender-compliance-matrix/"
-        imageSlug="card-compliance-matrix"
+        cover={covers.matrix}
         label="Free tool"
         title="Tender Compliance Matrix"
         description="Paste the text of a tender and read back the requirements its wording states, each one shown with the line it came from. Nothing is uploaded and nothing is generated."
       />
       <ResourceCard
         href="/tools/tender-finder/"
-        imageSlug="card-tender-finder"
+        cover={covers.finder}
         label="Free tool"
         title="Tender Finder"
         description={`Search open notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. Filter by keyword, region, value and closing date, and follow each result to its official source.`}
       />
       <ResourceCard
         href="/blog/ppn-026-social-value-guide/"
-        imageSlug="card-guides"
+        cover={covers.guide}
         label="PPN 026"
-        title="PPN 026 Social Value: How the Model Is Scored"
+        title={PPN_GUIDE_TITLE}
         description="A minimum 10% social value weighting applies from 1 million pounds inc VAT, rising to 20% at 5 million or above. How the National TOMs measures and National TOMs proxies turn into a defensible, bid-ready score."
       />
       <ResourceCard
         href="/blog/"
-        imageSlug="card-blog"
+        cover={covers.guides}
         label="Guides"
         title="In-depth guides"
         description="Long-form analysis written in-house. Each article cites the policy note, Act or section it rests on, not somebody else's summary of it."
