@@ -26,12 +26,12 @@
    4. The carousel slide, 400ms, only when the reader asks.
    5. The primary button's light sweep, once per hover (check-sheen.js 3b).
    6. A card on a light band lifts one elevation step on hover.
-   7. The hero band's light drifts (.ea-hero__mesh), the ONE loop, adopted
-      by the owner 2026-10-22 (A-301) and named in check-sheen.js LOOP_ALLOW.
-      Transform only, inside the hero band only, never a page layer (the page
-      wash removed 2026-08-04 stays removed). It moved from inside the hero
-      stage to behind the headline the same day, because the screen covered
-      it and the owner saw no change.
+   7. The hero aurora's five colour fields drift (.ea-aurora, Aurora.astro),
+      the ONE loop (R285-WEB-HERO-BACKDROP-02, replacing the A-301 mesh the
+      owner rejected on 2026-10-22), named in check-sheen.js LOOP_ALLOW.
+      Transform only, inside the hero band only, held while off screen or in
+      a hidden tab, never a page layer (the page wash removed 2026-08-04
+      stays removed).
    Nothing else loops. Everything is off under prefers-reduced-motion.
    ============================================================================ */
 
@@ -389,7 +389,7 @@ main > .ea-sec * {
   display: grid;
   grid-template-columns: minmax(0, 1fr) clamp(15rem, 24vw, 21rem);
   padding: clamp(var(--space-8), 4vw, var(--space-16)) 0 0 clamp(var(--space-6), 4vw, var(--space-16));
-  margin-top: clamp(var(--space-12), 2rem + 3vw, 4.5rem);
+  margin-top: var(--ea-hero-stage-gap);
 }
 
 .ea-stage--hero .ea-stage__ground {
@@ -926,21 +926,22 @@ main > .ea-sec * {
 /* ══ HERO (light) ══════════════════════════════════════════════════════════ */
 .ea-hero {
   padding-top: clamp(var(--space-10), 1rem + 4vw, 5.5rem);
-  padding-bottom: clamp(var(--space-12), 2rem + 3vw, 5rem);
+  padding-bottom: var(--ea-hero-pad-b);
   overflow: hidden;
 }
 
-/* The hero's moving light, behind the headline (stripe.com's hero is the
-   model). Band.astro renders .ea-hero__sky as the first child of any band
-   carrying `ea-hero`, so the home, /bid/ and /buy/ heroes and every future
-   v3 hero share this one mechanism. Three layers, back to front:
+/* THE HERO SKY AND THE AURORA (R285-WEB-HERO-BACKDROP-02, tokens.css "THE
+   HERO AURORA"). Band.astro renders .ea-hero__sky as the first child of any
+   band carrying `ea-hero`. Back to front:
      the band's canvas (.band--light paints it)
-     the mesh, four brand fields on one transform loop, oversized so its
-       edges never show while it moves
-     the veil, still, in the band's own canvas colour: solid behind the
-       head (.ea-hero__head::before) so the words hold AA at every frame,
-       clear at the corners and round the stage, and a fade into the canvas
-       at the foot (::after) so the next band meets a clean edge. */
+     the grid, hairlines at 6 percent ink fading out from the top centre
+       (::before), held back behind the words by the head's veil below
+     the aurora, a slab of living colour with a crisp slanted top edge:
+       inside a hero Stage it is the stage (.ea-aurora--stage), on a page
+       hero with no stage a slim ribbon in the bottom padding (--foot)
+   No words ever sit on the aurora, so the headline, lead and note are ink
+   on near white at every frame (measured by sampling the rendered pixels
+   behind them at several animation times). */
 .ea-hero__sky {
   position: absolute;
   z-index: -1;
@@ -949,17 +950,16 @@ main > .ea-sec * {
   pointer-events: none;
 }
 
-.ea-hero__mesh {
-  position: absolute;
-  inset: -12% -8%;
-  background: var(--hero-mesh);
-}
-
-.ea-hero__sky::after {
+.ea-hero__sky::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 62%, var(--ea-canvas) 96%);
+  background-image:
+    linear-gradient(var(--hero-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px);
+  background-position: center top;
+  background-size: var(--hero-grid-cell) var(--hero-grid-cell);
+  mask-image: radial-gradient(ellipse 72% 62% at 50% 0%, var(--ea-canvas), transparent 78%);
 }
 
 /* The veil is sized from the HEAD, not from the band. A veil sized from the
@@ -967,7 +967,8 @@ main > .ea-sec * {
    (2.35:1), because a phone's band is tall and narrow and the corner fields
    then sit under the words. Drawn from the head's own box it covers the
    words at every width. No z-index context on the head, so this paints above
-   the sky and below the words. */
+   the sky and below the words. With the aurora it holds back the grid
+   behind the words, so the type sits on clean canvas. */
 .ea-hero__head {
   position: relative;
 }
@@ -993,20 +994,143 @@ main > .ea-sec * {
   pointer-events: none;
 }
 
-/* Written as `main > .ea-sec .ea-hero__mesh` on purpose: the section reset
+.ea-aurora {
+  position: absolute;
+  overflow: hidden;
+  background: var(--aurora-base);
+  pointer-events: none;
+}
+
+/* The stage's own grain, so the slab reads as a lit material. */
+.ea-aurora::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--stage-grain);
+  background-size: 160px 160px;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+}
+
+/* Under a hero Stage the aurora IS the stage: full bleed (the band clips it
+   at the viewport edge), from a little under the reassurance line, the
+   highest point of the slant on the right, down to the band's foot. The
+   rounded ground is not drawn here. */
+.ea-stage--hero > .ea-stage__ground {
+  display: none;
+}
+
+.ea-aurora--stage {
+  z-index: -1;
+  top: calc(var(--ea-hero-stage-gap) * -0.45);
+  bottom: calc(var(--ea-hero-pad-b) * -1);
+  left: calc(50% - 50vw);
+  width: 100vw;
+  clip-path: polygon(0 var(--aurora-slant), 100% 0, 100% 100%, 0 100%);
+}
+
+/* A page hero with no stage: a slim ribbon, no taller than the band's
+   bottom padding, so it never sits behind a word. */
+.ea-aurora--foot {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--aurora-foot-h);
+  clip-path: polygon(0 var(--aurora-foot-slant), 100% 0, 100% 100%, 0 100%);
+}
+
+.ea-hero:has(.ea-aurora--stage) .ea-aurora--foot {
+  display: none;
+}
+
+/* The five fields. Each is a soft disc of one colour, larger than the slab
+   in one direction, so its edge never shows while it moves. */
+.ea-aurora__f {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.ea-aurora__f--1 {
+  top: -55%;
+  left: 46%;
+  width: 58%;
+  height: 160%;
+  background: radial-gradient(closest-side, var(--aurora-1), transparent);
+}
+
+.ea-aurora__f--2 {
+  top: -25%;
+  left: -14%;
+  width: 52%;
+  height: 140%;
+  background: radial-gradient(closest-side, var(--aurora-2), transparent);
+}
+
+.ea-aurora__f--3 {
+  top: 28%;
+  left: 18%;
+  width: 60%;
+  height: 150%;
+  background: radial-gradient(closest-side, var(--aurora-3), transparent);
+}
+
+.ea-aurora__f--4 {
+  top: 26%;
+  left: 66%;
+  width: 46%;
+  height: 130%;
+  background: radial-gradient(closest-side, var(--aurora-4), transparent);
+}
+
+.ea-aurora__f--5 {
+  top: -30%;
+  left: 26%;
+  width: 34%;
+  height: 100%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--aurora-5) 38%, transparent), transparent);
+}
+
+/* Written as `main > .ea-sec ...` on purpose: the section reset
    `main > .ea-sec * { animation: none }` near the top of this file outranks a
-   single class, and that reset stays, it is what keeps legacy motion out. */
+   single class, and that reset stays, it is what keeps legacy motion out.
+   The loops are declared paused and run only while initAurora marks the
+   aurora `run`: on screen and in a visible tab. With no script, or under
+   reduced motion, the slab is the still first frame. */
 @media (prefers-reduced-motion: no-preference) {
-  main > .ea-sec .ea-hero__mesh {
+  main > .ea-sec .ea-aurora__f {
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+  }
+
+  main > .ea-sec .ea-aurora__f--1 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t1); }
+  main > .ea-sec .ea-aurora__f--2 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t2); }
+  main > .ea-sec .ea-aurora__f--3 { animation-name: ea-aurora-c; animation-duration: var(--aurora-t3); }
+  main > .ea-sec .ea-aurora__f--4 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t4); animation-direction: reverse; }
+  main > .ea-sec .ea-aurora__f--5 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t5); animation-direction: reverse; }
+
+  main > .ea-sec .ea-aurora[data-aurora='run'] .ea-aurora__f {
     will-change: transform;
-    animation: ea-hero-drift var(--hero-mesh-dur) ease-in-out infinite;
+    animation-play-state: running;
   }
 }
 
-@keyframes ea-hero-drift {
+@keyframes ea-aurora-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(-18%, 14%, 0) scale(1.18); }
+  66% { transform: translate3d(12%, 22%, 0) scale(0.92); }
+}
+
+@keyframes ea-aurora-b {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-  33% { transform: translate3d(5%, 4%, 0) rotate(4deg) scale(1.06); }
-  66% { transform: translate3d(-5%, -3%, 0) rotate(-3deg) scale(1.03); }
+  50% { transform: translate3d(26%, -12%, 0) rotate(30deg) scale(1.2); }
+}
+
+@keyframes ea-aurora-c {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(16%, -18%, 0); }
+  50% { transform: translate3d(-10%, -26%, 0); }
+  75% { transform: translate3d(-20%, 6%, 0); }
 }
 
 /* The head is centred over the stage: one column of type above one wide
@@ -1166,6 +1290,16 @@ main > .ea-sec * {
   color: var(--ea-ink);
 }
 
+/* Phrase values (FactsBand `words`): one size for all four, the h3 tier
+   raised to the lead, wrapping like a heading. */
+.ea-facts__cols--words .ea-facts__value {
+  font-size: var(--t-ea-lead);
+  white-space: normal;
+  line-height: var(--lh-tight);
+  letter-spacing: normal;
+  text-wrap: balance;
+}
+
 .ea-facts__label {
   font-size: var(--t-ea-small);
   line-height: 1.5;
@@ -1219,6 +1353,18 @@ main > .ea-sec * {
 .ea-sec[data-band='light'] + script + .ea-sec[data-band='light'],
 .ea-sec[data-band='light-alt'] + script + .ea-sec[data-band='light-alt'] {
   padding-top: 0;
+}
+
+/* A BAND THAT ENDS ON A ONE LINE FOOTNOTE LINK ("Compare every plan and add
+   on" under the plan cards) counts that line as part of its bottom pad, so the
+   cards above it stand one pad from the band's edge like every other band's
+   last block. Measured 2026-10-22 at 1440 (R285-WEB-REVIEW-2026-10-22 item 9):
+   the home plan cards ended 174px above the band edge against 134px for the
+   other bands' last blocks, with the small link floating in the gap, which is
+   the empty space the owner saw. The pad gives back exactly the link's line
+   and its gap, and never goes under the --space-12 floor. */
+.ea-sec:has(> .ea-wrap > .ea-plans__more:last-child) {
+  padding-bottom: max(var(--space-12), calc(var(--ea-sec-y) - var(--space-6) - 1lh));
 }
 
 /* Feature rows, one per capability, alternating sides on a wide screen so the

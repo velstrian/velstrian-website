@@ -22,14 +22,18 @@ interface Fact {
 }
 interface Props {
   facts: Fact[];
+  /** True when the values are short phrases rather than figures ("A score out
+   *  of 100"). They are set at one readable size and may wrap, instead of being
+   *  fitted as a single line figure. */
+  words?: boolean;
   strip?: string[];
   stripLabel?: string;
 }
-const { facts, strip = [], stripLabel } = Astro.props;
+const { facts, words = false, strip = [], stripLabel } = Astro.props;
 ---
 
 <div class="ea-facts">
-  <ul class="ea-facts__cols" style={`--facts-n: ${facts.length}`}>
+  <ul class={`ea-facts__cols${words ? ' ea-facts__cols--words' : ''}`} style={`--facts-n: ${facts.length}`}>
     {
       facts.map((f) => (
         <li class="ea-facts__col" data-reveal>
