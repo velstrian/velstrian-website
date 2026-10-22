@@ -9,7 +9,9 @@
  * white on the gradient.
  *
  * The default speaks to a supplier (home and /bid/). /buy/ passes its own
- * title, lead and primary action, because a buyer is not writing a bid.
+ * title, lead and primary action, because a buyer is not writing a bid. A page
+ * whose second action is not a call (/integrations/: View all pricing) passes
+ * `secondary`, which replaces Book a call.
  */
 import Action from './Action.astro';
 import { SIGNUP_URL, WALKTHROUGH_URL } from '../../data/app';
@@ -19,12 +21,14 @@ interface Props {
   title?: string;
   lead?: string;
   primary?: { href: string; label: string };
+  secondary?: { href: string; label: string; newWindow?: boolean };
 }
 
 const {
   title = 'Your next bid can start today.',
   lead = `Try it free for ${TRIAL_DAYS} days, or talk it through with us first.`,
   primary = { href: SIGNUP_URL, label: `Start ${TRIAL_DAYS} day trial` },
+  secondary = { href: WALKTHROUGH_URL, label: 'Book a call', newWindow: true },
 } = Astro.props;
 ---
 
@@ -36,7 +40,7 @@ const {
         <p class="ea-lead ea-close__lead">{lead}</p>
         <div class="ea-actions">
           <Action href={primary.href}>{primary.label}</Action>
-          <Action href={WALKTHROUGH_URL} variant="secondary" newWindow>Book a call</Action>
+          <Action href={secondary.href} variant="secondary" newWindow={secondary.newWindow ?? false}>{secondary.label}</Action>
         </div>
       </div>
     </div>

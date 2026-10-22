@@ -63,28 +63,58 @@
  * The legacy page carried GSAP, ScrollTrigger and a transformation module for
  * scroll reveals. Nothing here needs any of them: every name, every scope and
  * every claim is in the HTML and painted at first render.
+ *
+ * -- 2026-10-22: ON DESIGN SYSTEM VERSION 3 --
+ * R285-WEB-ENTERPRISE-REDESIGN-01, strategy 0.7. Every connector, scope, note,
+ * link and action is kept, on the v3 bands: PageHero, one SectionBand per
+ * section (sources, identity, outbound, webhooks, rules, hand off) alternating
+ * light and light alt, each grid the shared .ea-cards row, and the shared Close
+ * carrying Start now and View all pricing. The scope line stays monospaced
+ * because it is the evidence a security reviewer checks. The vendor marks stay
+ * withdrawn (A-37, A-38): every connector carries the same neutral tile.
  */
 import Base from '../layouts/Base.astro';
-import Section from '../components/layout/Section.astro';
-import Button from '../components/ui/Button.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import SectionBand from '../components/evidenced/SectionBand.astro';
+import Action from '../components/evidenced/Action.astro';
+import IconTile from '../components/evidenced/IconTile.astro';
+import Icon from '../components/evidenced/Icon.astro';
+import Close from '../components/evidenced/Close.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import { SIGNUP_URL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 import { SOURCES, IDENTITY, OUTBOUND, RULE_STEPS } from '../data/integrations';
 import { INTEGRATIONS_PLAN_LINE } from '../data/site-facts';
+import { PRODUCT_NAME_BID } from '../lib/brand-names';
+import '../styles/evidenced.css';
 
 const title = 'Integrations | Velstrian';
-/* Untouched from the legacy page. OA-10 records that the meta and og
-   descriptions were already correctly scoped ("pull bid documents read-only
-   from where your team keeps them") while the hero was not. */
+/* The description keeps the narrowed claim: documents are pulled read-only,
+   alerts go outward to Slack or Teams. */
 const description =
   'Sign in with your work identity, pull bid documents read-only from where your team keeps them, and send deadline alerts to Slack or Teams.';
 
+const TRAIL = [{ name: 'Home', path: '/' }];
 
 const schema = [
   breadcrumbs([
     { name: 'Home', path: '/' },
     { name: 'Integrations', path: '/integrations/' },
   ]),
+];
+
+const SSO_EXTRAS = [
+  'SCIM 2.0 provisioning, so joiners and leavers are handled by your directory',
+  'Domain verification by DNS record before a domain can be claimed',
+  'Signed assertions required. An unsigned one is rejected rather than trusted',
+  'Enforcement, so an organisation can require single sign-on and close the password route',
+];
+
+const WEBHOOK = [
+  'A URL you set, on any host you control, with no app to install at either end',
+  'An optional secret header, so the receiver can prove the request came from us',
+  'The event and the record it fired on, as JSON, in the request body',
+  'No inbound access: a webhook is something we send, never a way in',
 ];
 ---
 
@@ -94,443 +124,259 @@ const schema = [
   path="/integrations"
   image="/Assets/og/integrations.png?v=20260730"
   schema={schema}
+  typeface="evidenced"
+  headerTone="light"
 >
-  <Section
-    as="h1"
-    eyebrow="Connect your stack"
+  <PageHero
+    id="int-title"
+    bandId="hero"
+    label="Connect your stack"
     title="Works with the tools you already run."
-    standfirst="Sign in with your work identity, read documents where they live, and route alerts to your channels. We read from the systems you connect and never write back to them."
-    id="hero"
+    lead="Sign in with your work identity, read documents where they live, and route alerts to your channels. We read from the systems you connect and never write back to them."
   >
-    <div class="btn-row">
-      <Button href={SIGNUP_URL}>Start now</Button>
-      <Button href="/security/" variant="secondary">Read the security model</Button>
-    </div>
-  </Section>
+    <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Integrations" /></div>
+    <Action href={SIGNUP_URL}>Start now</Action>
+    <Action href="/security/" variant="secondary">Read the security model</Action>
+  </PageHero>
 
-  {/*
-    THE SECTION THE LEGACY PAGE PROMISED AND NEVER HAD. Every scope printed here
-    is quoted from the platform repo rather than described, because a scope is
-    something a security reviewer can check and a phrase like "read only" is
-    something they have to take on trust.
-  */}
-  <Section
+  {/* READ ONLY. Every scope printed here is quoted from the platform repo
+      (data/integrations.ts carries the file and line), because a scope is
+      something a security reviewer can check. */}
+  <SectionBand
+    tone="light"
     eyebrow="Document sources · read only"
     title="Read your documents where they live."
-    standfirst="Your answer library is already written. It is in the last thirty bids, sitting in the places your team already keeps them, and Velstrian Bid reads it there rather than asking you to upload it again."
+    standfirst={`Your answer library is already written. It is in the last thirty bids, sitting in the places your team already keeps them, and ${PRODUCT_NAME_BID} reads it there rather than asking you to upload it again.`}
     id="sources"
   >
-    {/* ONE GLYPH, DEFINED ONCE, USED BY ALL THIRTEEN CONNECTORS.
-        Owner report 2026-08-04: "few products have their logo and few dont",
-        two of thirteen rendered a vendor mark and eleven rendered a neutral dot,
-        so the row read as a grid with holes in it rather than as one set.
-        THE INCONSISTENCY WAS A CONSEQUENCE, NOT AN OVERSIGHT: seven marks were
-        withdrawn under A-37 and A-38 because they were not the vendor's current
-        artwork or were served without the licence they require. Adding logos
-        back is not available to us, so the only way to make thirteen agree is
-        for all thirteen to carry the same mark.
-        A GENERIC LINK GLYPH IS NOT A BRAND ASSET. It says "this connects",
-        which is true of every row, and it invents nothing about any vendor.
-        THE GRADIENT IS DELIBERATE AND IT IS DECORATION. The owner asked for
-        purple and green rather than the old green dot. Flat --c-verified or
-        --c-refused would be a STATUS: teal means evidenced and violet means the
-        engine refused something, and a violet SharePoint chip would say the
-        engine refused SharePoint. A gradient ACROSS the ambient ramp cannot be
-        read as either, because a status on this site is always one flat hue.
-        Same reasoning as --grad-rule, which paints the decorative divider.
-        `<use>` rather than thirteen copies of the path: one glyph, one gradient,
-        one definition, and a change reaches every row. */}
-    <svg width="0" height="0" aria-hidden="true" focusable="false" class="conn__defs">
-      <defs>
-        <linearGradient id="conn-grad" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stop-color="var(--c-ambient-start)" />
-          <stop offset="1" stop-color="var(--c-ambient-end)" />
-        </linearGradient>
-        <g id="conn-glyph" fill="none" stroke="url(#conn-grad)" stroke-width="1.75"
-           stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 13.5a3.5 3.5 0 0 0 5 0l3-3a3.54 3.54 0 0 0-5-5l-1.5 1.5" />
-          <path d="M14 10.5a3.5 3.5 0 0 0-5 0l-3 3a3.54 3.54 0 0 0 5 5l1.5-1.5" />
-        </g>
-      </defs>
-    </svg>
-
-    <ul class="grid grid--3" role="list">
+    <ul class="ea-cards" role="list">
       {
         SOURCES.map((s) => (
-          <li class="conn surface surface--pad">
-            <span class="conn__logo conn__mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false"><use href="#conn-glyph" /></svg>
-            </span>
-            <h3 class="conn__h">{s.name}</h3>
-            <p class="conn__scope">{s.scope}</p>
-            <p class="conn__note">{s.note}</p>
+          <li data-reveal>
+            <div class="ea-card ea-tcard">
+              <IconTile name="document" />
+              <h3 class="ea-h3">{s.name}</h3>
+              <p class="int-scope">{s.scope}</p>
+              <p>{s.note}</p>
+            </div>
           </li>
         ))
       }
     </ul>
-
-    <p class="note">
-      Every scope above is a read permission. Your files stay exactly where they are, as they are,
-      and your tenant settings stay as you set them.
-      SharePoint and OneDrive are granted by your own Microsoft administrator, so you can see
-      exactly what was consented to and withdraw it without asking us.
+    <p class="int-note">
+      Every scope above is a read permission. Your files stay exactly where they are, as they are, and your tenant
+      settings stay as you set them. SharePoint and OneDrive are granted by your own Microsoft administrator, so you can
+      see exactly what was consented to and withdraw it without asking us.
     </p>
-  </Section>
+  </SectionBand>
 
-  {/*
-    IDENTITY. Heading kept verbatim from the legacy page. The chips are the same
-    six providers it listed; what changed is the label under each, from "Via
-    Entra ID federation" to the SAML 2.0 the Service Provider actually speaks.
-  */}
-  <Section
+  <SectionBand
+    tone="light-alt"
     eyebrow="Identity and SSO"
     title="Use the directory you already administer."
     standfirst="Single sign-on through any SAML 2.0 identity provider, with users provisioned and deprovisioned from your directory rather than from a spreadsheet."
     id="sso"
   >
-    <ul class="grid grid--3" role="list">
+    <ul class="ea-cards" role="list">
       {
         IDENTITY.map((s) => (
-          <li class="conn surface surface--pad">
-            <span class="conn__logo conn__mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false"><use href="#conn-glyph" /></svg>
-            </span>
-            <h3 class="conn__h">{s.name}</h3>
-            <p class="conn__scope">{s.scope}</p>
-            <p class="conn__note">{s.note}</p>
+          <li data-reveal>
+            <div class="ea-card ea-tcard">
+              <IconTile name="lock" />
+              <h3 class="ea-h3">{s.name}</h3>
+              <p class="int-scope">{s.scope}</p>
+              <p>{s.note}</p>
+            </div>
           </li>
         ))
       }
     </ul>
-
-    <div class="facts">
-      <div class="surface surface--pad">
-        <h3 class="conn__h">What comes with it</h3>
-        <ul class="ticks" role="list">
-          <li>SCIM 2.0 provisioning, so joiners and leavers are handled by your directory</li>
-          <li>Domain verification by DNS record before a domain can be claimed</li>
-          <li>Signed assertions required. An unsigned one is rejected rather than trusted</li>
-          <li>Enforcement, so an organisation can require single sign-on and close the password route</li>
-        </ul>
-      </div>
+    <div class="ea-card ea-tcard int-solo" data-reveal>
+      <h3 class="ea-h3">What comes with it</h3>
+      <ul class="int-ticks" role="list">
+        {SSO_EXTRAS.map((t) => <li><Icon name="done" size={18} /><span>{t}</span></li>)}
+      </ul>
     </div>
-
-    <p class="note">
-      There is no app to install at your end and no provider-specific path in our code. You give
-      us an entity ID, a sign-on URL and a signing certificate, which is why the list above is
-      examples rather than a limit. OIDC is not supported yet, and is on
-      <a href="/roadmap/">the roadmap</a> rather than in the product.
+    <p class="int-note">
+      There is no app to install at your end and no provider-specific path in our code. You give us an entity ID, a
+      sign-on URL and a signing certificate, which is why the list above is examples rather than a limit. OIDC is not
+      supported yet, and is on <a class="ea-link" href="/roadmap/">the roadmap</a> rather than in the product.
     </p>
-  </Section>
+  </SectionBand>
 
-  {/*
-    THE WRITE CONNECTORS, UNDER THEIR OWN HEADING AND WITH THEIR OWN CLAIM.
-    These must never sit under the read-only guarantee above, and the two
-    sections must not be merged. Slack posts messages, Teams sends into a
-    channel, Drive creates files. Saying nothing about them after the live site
-    named them would read as a quiet deletion rather than a correction.
-  */}
-  <Section
+  {/* THE WRITE CONNECTORS, under their own heading and their own claim. They
+      must never sit under the read-only guarantee above. */}
+  <SectionBand
+    tone="light"
     eyebrow="Collaboration · outbound"
     title="Alerts where your team works."
     standfirst="Push a deadline or a delivery-evidence reminder straight into the channel your team already checks, and write an evidence export into a folder you choose."
     id="collaboration"
   >
-    <ul class="grid grid--3" role="list">
+    <ul class="ea-cards" role="list">
       {
         OUTBOUND.map((s) => (
-          <li class="conn surface surface--pad">
-            {/* GUARDED LIKE THE OTHER TWO GRIDS, 2026-08-04. This one used to
-                render the <img> unconditionally on the reasoning that all three
-                outbound connectors had a mark. A-38 withdrew the Teams file, and
-                an unguarded `src={undefined}` ships an <img> with no source,
-                a broken image where a placeholder belongs. An assumption about
-                today's data is not a rendering rule; every icon slot on this
-                page now asks the same question. */}
-            <span class="conn__logo conn__mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false"><use href="#conn-glyph" /></svg>
-            </span>
-            <h3 class="conn__h">{s.name}</h3>
-            <p class="conn__scope">{s.scope}</p>
-            <p class="conn__note">{s.note}</p>
+          <li data-reveal>
+            <div class="ea-card ea-tcard">
+              <IconTile name="chat" />
+              <h3 class="ea-h3">{s.name}</h3>
+              <p class="int-scope">{s.scope}</p>
+              <p>{s.note}</p>
+            </div>
           </li>
         ))
       }
     </ul>
-
-    <p class="note">
-      These three write, which is the whole point of them, so they are named here rather than
-      folded into the read-only list above. Each one goes outward to a channel or a folder you
-      configure, and none of them is a source we read from. A connector is authorised per
-      organisation and can be disconnected from the same screen it was connected on.
+    <p class="int-note">
+      These three write, which is the whole point of them, so they are named here rather than folded into the read-only
+      list above. Each one goes outward to a channel or a folder you configure, and none of them is a source we read
+      from. A connector is authorised per organisation and can be disconnected from the same screen it was connected on.
     </p>
-  </Section>
+  </SectionBand>
 
-  {/*
-    THE SECTION THAT USED TO BE TWO LOGOS.
-    The legacy heading is kept because what it promises is true; what was not
-    true was the pair of marks under it. The delivery primitive is a generic
-    webhook, in those words, at WorkflowBuilder.tsx:515-517. Naming a platform
-    here would claim a packaged app, so the section says what CrowMark sends
-    and lets the reader point it wherever they already automate.
-  */}
-  <Section
+  {/* A generic webhook, in those words (WorkflowBuilder.tsx). Naming a
+      platform here would claim a packaged app. */}
+  <SectionBand
+    tone="light-alt"
     eyebrow="Outbound webhooks"
-    title="Wire Velstrian Bid into the tools you already automate."
-    standfirst="A rule can post its event to any URL you own, so a deadline in Velstrian Bid can start a workflow in whatever your team already runs."
+    title={`Wire ${PRODUCT_NAME_BID} into the tools you already automate.`}
+    standfirst={`A rule can post its event to any URL you own, so a deadline in ${PRODUCT_NAME_BID} can start a workflow in whatever your team already runs.`}
     id="automation-platforms"
   >
-    <div class="solo">
-      <div class="surface surface--pad">
-        <h3 class="conn__h">What the webhook gives you</h3>
-        <ul class="ticks" role="list">
-          <li>A URL you set, on any host you control, with no app to install at either end</li>
-          <li>An optional secret header, so the receiver can prove the request came from us</li>
-          <li>The event and the record it fired on, as JSON, in the request body</li>
-          <li>No inbound access: a webhook is something we send, never a way in</li>
-        </ul>
-      </div>
+    <div class="ea-card ea-tcard int-solo" data-reveal>
+      <h3 class="ea-h3">What the webhook gives you</h3>
+      <ul class="int-ticks" role="list">
+        {WEBHOOK.map((t) => <li><Icon name="done" size={18} /><span>{t}</span></li>)}
+      </ul>
     </div>
-
-    <p class="note">
-      This is deliberately a plain HTTP POST rather than a badge for a named automation platform.
-      Anything that accepts an incoming webhook can receive it, and nothing on this page claims a
-      packaged integration we have not built.
+    <p class="int-note">
+      This is deliberately a plain HTTP POST rather than a badge for a named automation platform. Anything that accepts
+      an incoming webhook can receive it, and nothing on this page claims a packaged integration we have not built.
     </p>
-  </Section>
+  </SectionBand>
 
-  <Section
+  <SectionBand
+    tone="light"
     eyebrow="Automation rules"
     title="Trigger, condition, action."
     standfirst="Build a rule in the app: pick an event, set the conditions that matter, and choose what happens. No engineering ticket required."
     id="rules"
   >
-    <ol class="flow" role="list">
+    <ol class="ea-cards" role="list">
       {
         RULE_STEPS.map((s) => (
-          <li class="step surface surface--pad">
-            <p class="eyebrow step__lbl">{s.label}</p>
-            <h3 class="conn__h">{s.heading}</h3>
-            <p class="conn__note">{s.body}</p>
+          <li data-reveal>
+            <div class="ea-card ea-tcard">
+              <p class="ea-label">{s.label}</p>
+              <h3 class="ea-h3">{s.heading}</h3>
+              <p>{s.body}</p>
+            </div>
           </li>
         ))
       }
     </ol>
-
-    <p class="note">
-      One trigger runs today, and it is the deadline sweep: Velstrian Bid checks once a day for tender
-      deadlines inside the window you set and fires the rules that match. We add each
-      further trigger to this page when it runs.
+    <p class="int-note">
+      One trigger runs today, and it is the deadline sweep: {PRODUCT_NAME_BID} checks once a day for tender deadlines
+      inside the window you set and fires the rules that match. We add each further trigger to this page when it runs.
     </p>
-  </Section>
+  </SectionBand>
 
-  {/* R285-WEB-CLAIMS-AUDIT-01, capabilities M7 and M8, and row I5. All three
-      were live and absent from this page: e-sourcing packaging
-      (crowagent-platform api/app/services/bid_esourcing_connectors.py, which
-      prepares and never lodges), the CRM routes in api/app/routers/crm.py (push
-      bids, pull CRM changes back) and the MCP server in api/app/routers/mcp.py.
-      The plan line reads the integrations flag from site-facts.json, which is
-      generated from packages/pricing/catalogue.ts. No price is printed here. */}
-  <Section
+  {/* R285-WEB-CLAIMS-AUDIT-01, capabilities M7 and M8, and row I5: e-sourcing
+      packaging (prepares, never lodges), the CRM routes and the MCP server. The
+      plan line reads the integrations flag from site-facts.json. No price is
+      printed here. */}
+  <SectionBand
+    tone="light-alt"
     eyebrow="E-sourcing, CRM and agents"
     title="Hand off to the systems that own the next step."
-    standfirst="Velstrian Bid prepares the work and passes it on. It never lodges a bid for you."
+    standfirst={`${PRODUCT_NAME_BID} prepares the work and passes it on. It never lodges a bid for you.`}
     id="handoff"
   >
-    <ul class="grid grid--2" role="list">
-      <li class="card surface surface--pad">
-        <h3 class="conn__h">E-sourcing portals</h3>
-        <p class="conn__note">
-          Velstrian Bid prepares the submission pack for Jaggaer, Atamis and In-tend and checks it
-          against the portal's requirements. You submit it, in the portal, under your own account.
-        </p>
+    <ul class="ea-cards ea-cards--2" role="list">
+      <li data-reveal>
+        <div class="ea-card ea-tcard">
+          <h3 class="ea-h3">E-sourcing portals</h3>
+          <p>
+            {PRODUCT_NAME_BID} prepares the submission pack for Jaggaer, Atamis and In-tend and checks it against the
+            portal's requirements. You submit it, in the portal, under your own account.
+          </p>
+        </div>
       </li>
-      <li class="card surface surface--pad">
-        <h3 class="conn__h">Salesforce and HubSpot</h3>
-        <p class="conn__note">
-          Push your bids into the CRM with the stage mapping you set, and pull CRM changes back
-          into the bid. A change that would overwrite an edit in Velstrian Bid is held for you to
-          review rather than applied.
-        </p>
+      <li data-reveal>
+        <div class="ea-card ea-tcard">
+          <h3 class="ea-h3">Salesforce and HubSpot</h3>
+          <p>
+            Push your bids into the CRM with the stage mapping you set, and pull CRM changes back into the bid. A change
+            that would overwrite an edit in {PRODUCT_NAME_BID} is held for you to review rather than applied.
+          </p>
+        </div>
       </li>
-      <li class="card surface surface--pad">
-        <h3 class="conn__h">MCP server</h3>
-        <p class="conn__note">
-          A read and write Model Context Protocol server, so your team can work with Velstrian Bid
-          from inside its own AI tooling.
-        </p>
+      <li data-reveal>
+        <div class="ea-card ea-tcard">
+          <h3 class="ea-h3">MCP server</h3>
+          <p>
+            A read and write Model Context Protocol server, so your team can work with {PRODUCT_NAME_BID} from inside
+            its own AI tooling.
+          </p>
+        </div>
       </li>
-      <li class="card surface surface--pad">
-        <h3 class="conn__h">The Integrations package</h3>
-        <p class="conn__note">{INTEGRATIONS_PLAN_LINE}</p>
+      <li data-reveal>
+        <div class="ea-card ea-tcard">
+          <h3 class="ea-h3">The Integrations package</h3>
+          <p>{INTEGRATIONS_PLAN_LINE}</p>
+        </div>
       </li>
     </ul>
-  </Section>
+  </SectionBand>
 
-  <Section
-    eyebrow="One place"
+  <Close
     title="Connect once, bid from one place."
-    standfirst="Every connector reads only what it needs, cites the statute behind each figure, and keeps your data in the EU."
-    id="cta"
-  >
-    <div class="btn-row">
-      <Button href={SIGNUP_URL}>Start now</Button>
-      <Button href="/pricing/" variant="secondary">View all pricing</Button>
-    </div>
-  </Section>
+    lead="Every connector reads only what it needs, cites the statute behind each figure, and keeps your data in the EU."
+    primary={{ href: SIGNUP_URL, label: 'Start now' }}
+    secondary={{ href: '/pricing/', label: 'View all pricing' }}
+  />
 </Base>
 
 <style>
-
-  /* `.reg` and the company line it styled came out 2026-08-04 (O-17). It
-     repeated the footer's statutory disclosure a second time on this page. */
-
-  /* Running explanation, not a card. Cards on this site are scanned and centre
-     their content; these paragraphs are read, so they sit on the section body
-     as prose rather than being put in a box and then opted out of centring. */
-  .note {
-    margin: var(--sec-gap) auto 0;
-    max-width: 72ch;
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.7;
-    color: var(--c-text-sub);
-  }
-  /* WCAG 2.2 target size: a link sitting inside a sentence takes the inline
-     exception, so only the underline and the focus ring are added here. */
-  .note a {
-    color: var(--c-interactive);
-  }
-
-  /* `minmax(0, 1fr)`, never a bare `1fr`: a grid item's default min-width is
-     min-content, and a scope like `ChannelMessage.Send` has a floor width that
-     would otherwise push the page sideways at 390. Same reasoning as
-     pricing.astro. */
-  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(18px, 2.2vw, 30px); }
-  .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-  .solo { max-width: var(--measure-band); margin-inline: auto; }
-  .facts { max-width: var(--measure-band); margin: clamp(18px, 2.2vw, 30px) auto 0; }
-
-  .conn { min-width: 0; }
-
-  /* The slot is the same size for every connector, and a modifier may paint
-     inside it but never resize it. See the icon rule in
-     scripts/check-design-system.js, which exists because a placeholder that
-     shrank its own slot shipped.
-     ── NO OPACITY ON A VENDOR MARK ─────────────────────────────────────────
-     This rule carried `opacity: .86` until 2026-08-04. Every mark in these
-     three grids is another company's registered trade mark, and dimming one is
-     a modification: Slack's brand terms rule out changing transparency,
-     Microsoft's forbid altering the symbol, and Atlassian's require the logo
-     "depicted exactly as shown … without any modification (aside from
-     re-sizing)". The same value was removed from the homepage chip grid in
-     components/sections/Integrations.astro on the same day and for the same
-     reason. If a row reads too loud, change what is around the marks. */
-  .conn__logo {
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin: 0 auto var(--stack-1);
-    object-fit: contain;
-  }
-
-  /* The glyph replaced `.conn__dot`, a 5px radial teal disc that stood in for a
-     missing mark. It is gone rather than kept beside this: a placeholder and a
-     real mark are the fork this change exists to close.
-     drop-shadow rather than box-shadow, kept from the dot: it follows the
-     PAINTED shape, where box-shadow would ring the 24px box and halo the empty
-     corners. */
-  /* Fills the slot rather than restating it: `.conn__logo` already declares
-     24px. The homepage twin of this rule was written with the number repeated
-     and check-design-system.js failed it: a modifier paints inside the slot, it
-     does not set the box. Same shape here, so it is written the same way even
-     though this selector carries no `--` and the gate would not have caught it. */
-  .conn__mark svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 6px var(--c-ambient-glow));
-  }
-
-  /* The <defs> carrier paints nothing and must not take a grid slot. */
-  .conn__defs {
-    position: absolute;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-  }
-
-  .conn__h {
-    margin: 0 0 var(--stack-1);
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--c-text);
-  }
-
-  /* Mono, because it is a machine value quoted verbatim rather than a
-     description of one. This line is the page's per-connector evidence and it
-     may not be replaced with a friendlier phrase. */
-  .conn__scope {
-    margin: 0 0 var(--stack-1);
+  /* The scope line is the per-connector EVIDENCE, quoted from the platform, so
+     it is set in the mono face and wraps anywhere: a scope such as
+     ChannelMessage.Send has a floor width that would otherwise push the page
+     sideways at 390. */
+  .int-scope {
     font-family: var(--font-mono);
-    font-size: var(--t-micro);
+    font-size: var(--t-ea-tiny);
     line-height: 1.5;
-    color: var(--c-ambient-start);
+    color: var(--ea-accent-ink);
     overflow-wrap: anywhere;
   }
 
-  .conn__note {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.6;
-    color: var(--c-text-sub);
+  /* The notes are read, so they sit on the band as prose at the copy measure. */
+  .int-note {
+    max-width: var(--ea-copy);
+    margin-top: var(--space-8);
+    color: var(--ea-sub);
   }
 
-  .ticks {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .int-solo {
+    max-width: var(--ea-copy);
+    margin-top: var(--space-5);
+  }
+
+  .int-ticks {
     display: grid;
-    gap: 10px;
-    font-family: var(--font-body);
-    font-size: var(--t-body);
-    line-height: 1.6;
-    color: var(--c-text-sub);
-  }
-  .ticks li { padding-left: 1.4em; text-indent: -1.4em; }
-  .ticks li::before { content: '✓ '; color: var(--c-verified); }
-
-  /* ── Trigger, condition, action ───────────────────────────────────────────
-     A numbered list, so the order is in the markup rather than only in the
-     arrows. The legacy page drew two rotated arrow glyphs between the cards and
-     hid them from assistive tech, which left a screen-reader user with three
-     unordered boxes. <ol> says the same thing to everyone. */
-  .flow {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(18px, 2.2vw, 30px);
-  }
-  .step { min-width: 0; }
-  .step__lbl {
-    margin: 0 0 var(--stack-1);
-    /* O-35 / W7. A step label numbers a sequence; it asserts nothing about
-       evidence, so it may not sit in the refusal hue. Moved to the site's one
-       non-semantic emphasis token, with the badge and the you-are-here rule. */
-    color: var(--c-interactive);
+    gap: var(--space-3);
   }
 
-  @media (max-width: 1023px) {
-    .grid--3, .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .int-ticks li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    color: var(--ea-sub);
   }
 
-  @media (max-width: 719px) {
-    .grid--3, .flow { grid-template-columns: minmax(0, 1fr); }
+  .int-ticks :global(svg) {
+    flex: none;
+    margin-top: 3px;
+    color: var(--ea-accent-ink);
   }
 </style>
