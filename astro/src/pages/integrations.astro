@@ -168,6 +168,16 @@ const WEBHOOK = [
       settings stay as you set them. SharePoint and OneDrive are granted by your own Microsoft administrator, so you can
       see exactly what was consented to and withdraw it without asking us.
     </p>
+    {/* D288 (2026-10-22). The home page box says "connect SharePoint, OneDrive
+        and Confluence", so the plan and the one setup step a reader needs sit
+        here. Gated by feature bid.response_drafting, Starter and above
+        (crowagent-platform api/app/services/entitlements.py), and SharePoint and
+        OneDrive need the customer's own Entra app (content_sources.py). */}
+    <p class="int-note">
+      Connecting a document source comes with every paid {PRODUCT_NAME_BID} plan. For SharePoint and OneDrive, your
+      Microsoft administrator registers an app in your own Microsoft Entra tenant and grants it read access. Confluence
+      needs only an API token from your own account.
+    </p>
   </SectionBand>
 
   <SectionBand

@@ -1,0 +1,154 @@
+---
+/**
+ * SecurityBuiltIn: "Security built in", on the home page and at the top of
+ * /security/ (D290, R285-WEB-CLAIMS-AUDIT-01, 2026-10-22).
+ *
+ * EVERY LINE IS READ FROM site-facts.json security_controls, never typed here.
+ * Each record there carries its evidence row in crowagent-platform
+ * docs/trust/INTAKE-SECURITY-RESILIENCE-FACTS-2026-10-22.md (tables B and C),
+ * and check-site-facts.mjs fails the build when either page drops a line or
+ * any page says more than the list backs. The three automated lines use the
+ * D295 wording: no scheduled scan of the live site is claimed until D291 makes
+ * it true, and nothing says "continuous".
+ *
+ * LAYOUT. Not another row of identical cards (the home page already has the
+ * proof band and the steps). A heading column on the left, and on the right
+ * three short ledgers, each a group a first time reader recognises: where the
+ * data is, how people sign in, and what runs by itself. Plain words first, the
+ * one technical term (row level security) named once so a buyer's security
+ * reviewer can match it.
+ */
+import Band from './Band.astro';
+import Icon from './Icon.astro';
+import IconTile from './IconTile.astro';
+import { SECURITY_GROUPS } from '../../data/site-facts';
+import type { IconName } from '../../data/icons';
+
+interface Props {
+  /** The home page links on to /security/. The /security/ page itself does not. */
+  more?: boolean;
+  tone?: 'light' | 'light-alt';
+}
+const { more = false, tone = 'light' } = Astro.props;
+
+const ICONS: Record<string, IconName> = { data: 'shield', access: 'lock', platform: 'checklist' };
+---
+
+<Band tone={tone} class="ea-secure" labelledby="ea-secure-title">
+  <div class="ea-wrap ea-secure__grid">
+    <div class="ea-secure__head" data-reveal>
+      <span class="ea-label">Security</span>
+      <h2 class="ea-h2" id="ea-secure-title">Security built in.</h2>
+      <p class="ea-lead">
+        Your bids hold your best work. This is how it is kept safe, on every plan, with nothing for you to set up.
+      </p>
+      {
+        more && (
+          <p class="ea-secure__more">
+            <a class="ea-link" href="/security/">See how each part works</a>
+          </p>
+        )
+      }
+    </div>
+    <div class="ea-secure__groups">
+      {
+        SECURITY_GROUPS.map((g) => (
+          <section class="ea-secure__group" aria-labelledby={`ea-secure-${g.id}`} data-reveal>
+            <div class="ea-secure__group-head">
+              <IconTile name={ICONS[g.id] ?? 'shield'} />
+              <h3 class="ea-h3" id={`ea-secure-${g.id}`}>{g.title}</h3>
+            </div>
+            <ul class="ea-secure__list" role="list">
+              {g.controls.map((c) => (
+                <li>
+                  <Icon name="done" size={18} />
+                  <span>{c.line}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</Band>
+
+<style>
+  .ea-secure__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  .ea-secure__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .ea-secure__head .ea-h2,
+  .ea-secure__head .ea-lead,
+  .ea-secure__more {
+    margin: 0;
+  }
+
+  .ea-secure__groups {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .ea-secure__group {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .ea-secure__group-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    align-self: start;
+  }
+
+  .ea-secure__group-head .ea-h3 {
+    margin: 0;
+  }
+
+  .ea-secure__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .ea-secure__list li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: start;
+    color: var(--ea-sub);
+    line-height: 1.5;
+  }
+
+  .ea-secure__list li :global(svg) {
+    margin-top: 0.15em;
+    color: var(--ea-accent-ink);
+  }
+
+  @media (max-width: 959px) {
+    .ea-secure__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  @media (max-width: 599px) {
+    .ea-secure__group {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+    }
+  }
+</style>

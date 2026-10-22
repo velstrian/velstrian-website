@@ -10,8 +10,12 @@
  * the record, since site-facts.json lists the AI processors outside the EU and
  * the training claim was unverified). Every line restates a claim the page
  * already makes and site-facts.json backs: the morning check over the live
- * sources (Faq), the fit reasons and their total (Capabilities), forwarding
- * the email (Steps), and proof for every claim (Refusal). Under them the live
+ * sources (Faq), the fit reasons and their total (Capabilities), the ways a
+ * tender gets in (site-facts M18, the upload limits in Steps), and proof for
+ * every claim (Refusal). D288 (2026-10-22): the box was "Start with one email",
+ * but production email intake is off, so it now names the three routes that
+ * are live. Connecting a document store is on every paid plan, and that note
+ * sits on /integrations/#sources, not in this box. Under them the live
  * trust strip, the six badges word for word from TRUST_BADGES (D255), the one
  * canonical list. No security wording is written here.
  *
@@ -42,7 +46,7 @@ const fitCountWord = FACTS.fit_dimensions.count_word;
       facts={[
         { icon: 'search', value: 'New work every morning', label: `Public contracts that suit you, from ${live} official UK and EU listing sites, checked each day.` },
         { icon: 'sliders', value: `A score out of ${fitTotal}`, label: `Each match is scored on ${fitCountWord} things, like your kind of work and where it is, so you see why it suits you.` },
-        { icon: 'upload', value: 'Start with one email', label: 'Forward the tender email or upload the pack. That is all it takes.' },
+        { icon: 'upload', value: 'Bring your tenders in', label: 'Search live UK and EU notices, upload a pack, or connect SharePoint, OneDrive and Confluence. No setup call needed.' },
         { icon: 'shield', value: 'Proof for every claim', label: 'Each answer shows which of your own documents backs it up.' },
       ]}
     />

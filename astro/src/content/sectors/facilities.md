@@ -12,7 +12,7 @@ helpsHeading: "Consistent answers, mobilisation to KPI."
 steps:
   - accent: teal
     verb: "Find the work you can staff."
-    say: "New public contracts arrive every morning, already matched to the services you run and where. A managing agent or a retailer sent you a tender? Upload it, or forward the email."
+    say: "New public contracts arrive every morning, already matched to the services you run and where. A managing agent or a retailer sent you a tender? Upload it."
   - accent: violet
     verb: "Answer the staff and start up questions well."
     say: "Your answers on taking over staff and starting the service are drafted from bids you have already written, so they read the same in every tender. You approve each one."
@@ -43,7 +43,7 @@ detail:
     body: "The Procurement Act 2023 sets the rules public buyers follow. Section 52 says a public contract worth more than £5m needs at least three published targets, called key performance indicators (KPIs). Section 71 says performance against them must be assessed and published. Velstrian Bid checks these duties for you and keeps your delivery proof beside each target. The checks guide you and never block you."
 faq:
   - question: "Can I use Velstrian Bid for private FM contracts?"
-    answer: "Yes. Office landlords, managing agents, retailers and private hospitals usually send their tender straight to you. Upload it or forward the email, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
+    answer: "Yes. Office landlords, managing agents, retailers and private hospitals usually send their tender straight to you. Upload it, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
   - question: "Which FM frameworks and buyers does Velstrian Bid cover?"
     answer: "Velstrian Bid reads the FM tenders and call-offs published on the official listing sites, including work let through central government facilities management agreements and from NHS, education, council and housing buyers. You filter by CPV code (the buyer's standard label for the type of work), region and value."
   - question: "How do I answer TUPE questions in an FM bid?"

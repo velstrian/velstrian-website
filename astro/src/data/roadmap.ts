@@ -184,7 +184,7 @@ export const AI_LIVE: { heading: string; body: string; link?: { label: string; h
   },
   {
     heading: 'Two models, two jobs',
-    body: "Customer-facing drafting (Velstrian Bid bid narratives) runs on Google Gemini. Heavier reasoning and analysis tasks run on Anthropic's Claude. Both are used as data sub-processors under signed DPAs. Your prompts are not used to train their foundation models. The full list is on the",
+    body: "Customer-facing drafting (Velstrian Bid bid narratives) runs on Google Gemini. Heavier reasoning and analysis tasks run on Anthropic's Claude. Both are data sub-processors and process the text outside the EU under contract. The full list is on the",
     link: { label: 'privacy page', href: '/privacy/' },
   },
   {

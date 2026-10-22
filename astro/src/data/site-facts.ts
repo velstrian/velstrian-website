@@ -61,8 +61,7 @@ export const PACK_MAX_MB = FACTS.upload.tender_pack.max_mb;
 /** The upload sentence used on /bid/. */
 export const UPLOAD_SENTENCE =
   `Start a bid from the tender as ${START_FORMATS}, up to ${START_MAX_MB} MB a file. ` +
-  `Add the rest of the pack, including ZIP archives and PowerPoint, up to ${PACK_MAX_MB} MB a file, ` +
-  'or have a pack forwarded by email.';
+  `Add the rest of the pack, including ZIP archives and PowerPoint, up to ${PACK_MAX_MB} MB a file.`;
 
 /** "seven" */
 export const FIT_COUNT_WORD = FACTS.fit_dimensions.count_word;
@@ -88,7 +87,15 @@ export const ICO_REFERENCE = FACTS.ico.reference;
 export const DATA_HANDLING_SENTENCE =
   `Customer data is stored in the EU (${FACTS.regions.data_at_rest.provider}, ${FACTS.regions.data_at_rest.place}). ` +
   `AI drafting sends only the text needed for the task to ${listJoin(FACTS.regions.ai_processors_outside_eu)}, ` +
-  'both under data processing agreements, and neither trains on it.';
+  'which process it outside the EU under contract.';
+
+/* D290, D295. The "Security built in" lines, word for word, from one list.
+   check-site-facts.mjs fails the build when a page in `pages` drops a line or
+   when any page says what the list does not back (a scheduled scan of the
+   live site, a tested restore, a training promise). */
+export interface SecurityControl { id: string; line: string; evidence: string }
+export interface SecurityGroup { id: string; title: string; controls: SecurityControl[] }
+export const SECURITY_GROUPS: SecurityGroup[] = FACTS.security_controls.groups;
 
 /**
  * Which plans carry the Integrations package (D206), from the catalogue flags.

@@ -12,7 +12,7 @@ helpsHeading: "From notice to submission-ready, faster."
 steps:
   - accent: teal
     verb: "Find the work that fits."
-    say: "New public contracts arrive every morning, already matched to the trades, places and sizes of job you take on. A private client sent you a tender? Upload it, or forward the email."
+    say: "New public contracts arrive every morning, already matched to the trades, places and sizes of job you take on. A private client sent you a tender? Upload it."
   - accent: violet
     verb: "Answer from what you already have."
     say: "Each answer is drafted from your past bids, policies and case studies. Every pound and percentage has to come from your own records, so nothing is made up."
@@ -39,7 +39,7 @@ detail:
     body: "The Procurement Act 2023 sets the rules public buyers follow and has applied since 24 February 2025. Section 52 says a public contract worth more than £5m needs at least three published targets, called key performance indicators. Section 71 says performance against them must be assessed and published. Velstrian Bid checks these duties for you and keeps your delivery proof beside each target. The checks guide you and never block you."
 faq:
   - question: "Can I use Velstrian Bid for private construction work?"
-    answer: "Yes. Developers, main contractors and commercial property owners usually send their tender straight to you. Upload it or forward the email, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
+    answer: "Yes. Developers, main contractors and commercial property owners usually send their tender straight to you. Upload it, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
   - question: "Which construction frameworks does Velstrian Bid help me bid for?"
     answer: "Velstrian Bid reads the public tenders and framework call-offs published on the official listing sites, including works let through frameworks such as SCAPE, Pagabo, Fusion21, Procure Partnerships and NHS Shared Business Services. You filter by CPV code (the buyer's standard label for the type of work), region and value, so only the jobs you can deliver reach your list."
   - question: "How does PPN 026 social value apply to construction bids?"

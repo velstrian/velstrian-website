@@ -91,7 +91,9 @@ const ENTRIES: Entry[] = [
     heading: 'Release 2.6: whole tender packs in, one editor, six stages',
     items: [
       'Upload the whole tender pack. ZIP archives are expanded into their child documents, and PowerPoint, Excel and CSV files are read as structured content rather than flattened to text.',
-      'Email intake, so a tender pack can be forwarded straight into Velstrian Bid.',
+      /* D288 (2026-10-22): the email intake line is withdrawn. It was built in
+         this release but is switched off in production, so listing it read as
+         a feature a customer can use today. It returns when production has it. */
       'A six stage bid lifecycle replaced the old wizard, with tender first entry and a single answer editor in place of the two that came before it.',
       'The bid or no bid decision and the criteria behind it are persisted rather than lost once the bid starts.',
       'CPV codes on opportunities, and bill of quantities spreadsheets read row by row rather than sheet by sheet.',

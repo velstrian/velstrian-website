@@ -47,17 +47,18 @@
       "ISO/IEC 27001 certified",
       "certified to ISO 27001",
       "certified to ISO/IEC 27001",
-      "Cyber Essentials certified"
+      "Cyber Essentials certified",
+      "Built to ISO 27001 controls"
     ]
   },
   "trust_badges": {
-    "measured": "2026-10-21, owner instruction under D255: the six badges the live website footer shows, word for word. One list, read by the footer, /about/, /security/, /pricing/ and the contact form",
+    "measured": "2026-10-22, owner instruction under D255, badge wording D281 (\"Follows ISO/IEC 27001\" replaces \"Built to ISO 27001 controls\") and D289 (\"TLS 1.3 in transit\" and \"EU data residency\" stay). One list, read by the footer, /about/, /security/, /pricing/ and the contact form",
     "list": [
       "AES-256 at rest",
       "TLS 1.3 in transit",
       "GDPR compliant",
       "EU data residency",
-      "Built to ISO 27001 controls",
+      "Follows ISO/IEC 27001",
       "ICO registered"
     ]
   },
@@ -69,7 +70,7 @@
     ]
   },
   "processors": {
-    "measured": "2026-10-21, crowagent-platform model_registry.py (gemini-2.5-pro, gemini-2.5-flash), web/next.config.mjs (Sentry .ingest.de.sentry.io, eu.posthog.com)",
+    "measured": "2026-10-22, crowagent-platform docs/trust/AI-PROVIDER-DATA-MAP-2026-10-22.md section 2 (Gemini Developer API sets no region, Anthropic inference_geo global) and docs/legal/data-processing-agreement.md Schedule 1 items 7 and 8. Earlier read 2026-10-21: model_registry.py (gemini-2.5-pro, gemini-2.5-flash), web/next.config.mjs (Sentry .ingest.de.sentry.io, eu.posthog.com)",
     "list": [
       {
         "name": "Supabase",
@@ -113,12 +114,12 @@
       },
       {
         "name": "Google Gemini",
-        "place": "US, under DPA",
+        "place": "not region pinned, international transfer under contract",
         "purpose": "AI drafting"
       },
       {
         "name": "Anthropic Claude",
-        "place": "US, under DPA",
+        "place": "global, no UK or EU option, international transfer under contract",
         "purpose": "AI reasoning and the buyer pre-read"
       }
     ],
@@ -128,7 +129,10 @@
     ],
     "banned": [
       "Gemini 1.5",
-      "named enterprise providers"
+      "named enterprise providers",
+      "PII is stripped",
+      "zero-retention terms",
+      "Inputs not retained by the model"
     ]
   },
   "ico": {
@@ -180,7 +184,7 @@
     ]
   },
   "capabilities": {
-    "measured": "2026-10-21, WEBSITE-CLAIMS-AUDIT-2026-10-21.md capabilities M1 to M17, each re-read in crowagent-platform",
+    "measured": "2026-10-21, WEBSITE-CLAIMS-AUDIT-2026-10-21.md capabilities M1 to M17, each re-read in crowagent-platform. 2026-10-22: M9 held and M18 added by D288",
     "list": [
       {
         "id": "M1",
@@ -240,10 +244,9 @@
       },
       {
         "id": "M9",
-        "claim": "Email intake of a tender pack",
-        "evidence": "config.py tender_intake_domain",
-        "page": "/bid/",
-        "must_contain": "forwarded by email"
+        "claim": "Email intake of a tender pack. HELD by D288: production email intake is OFF (owner 2026-10-13), so no page may claim it until it is switched on in production",
+        "evidence": "crowagent-platform api/app/config.py inbound_email_intake_enabled defaults False, production variable unset (docs/release-2.8.5/production-advance-2026-10-18.md:32), INTAKE-SECURITY-RESILIENCE-FACTS-2026-10-22.md A6",
+        "page": null
       },
       {
         "id": "M10",
@@ -303,6 +306,13 @@
         "page": null,
         "must_contain": null,
         "note": "A refusal, not a capability. Enforced by check-facts.js win rate rules and by this file holding no usage figure"
+      },
+      {
+        "id": "M18",
+        "claim": "Connect SharePoint, OneDrive or Confluence to bring existing answers in, read only, on every paid Bid plan. SharePoint and OneDrive need your own Microsoft Entra app with admin consent",
+        "evidence": "crowagent-platform api/app/services/content_sources.py, routers/content_sources.py feature bid.response_drafting, entitlements.py FeaturePolicy(\"bid\", \"starter\"), INTAKE-SECURITY-RESILIENCE-FACTS-2026-10-22.md A9 (D288)",
+        "page": "/",
+        "must_contain": "SharePoint, OneDrive and Confluence"
       }
     ]
   },
@@ -363,7 +373,8 @@
   "upload": {
     "source": [
       "web/src/features/bid/intake/TenderDropzone.tsx",
-      "web/src/features/bid/rfp/TenderUploadPanel.tsx"
+      "web/src/features/bid/rfp/TenderUploadPanel.tsx",
+      "api/app/config.py"
     ],
     "start_a_bid": {
       "formats": [
@@ -387,7 +398,7 @@
       ],
       "max_mb": 100
     },
-    "email_intake": true,
+    "email_intake": false,
     "allowed_mb": [
       25,
       100
@@ -460,5 +471,104 @@
       }
     },
     "sso_every_plan": true
+  },
+  "security_controls": {
+    "measured": "2026-10-22, crowagent-platform docs/trust/INTAKE-SECURITY-RESILIENCE-FACTS-2026-10-22.md tables B and C, owner decisions D290 and D295. Each line is printed word for word on every page in pages, from this list",
+    "pages": [
+      "/",
+      "/security/"
+    ],
+    "groups": [
+      {
+        "id": "data",
+        "title": "Your data",
+        "controls": [
+          {
+            "id": "S1",
+            "line": "Encrypted in transit with TLS 1.3 and at rest with AES-256.",
+            "evidence": "B1 HSTS preload measured on app.crowagent.ai, app, API and database accept TLS 1.3 (D289). B2 Supabase AES-256 at rest, crm_vault.py AES-256-GCM"
+          },
+          {
+            "id": "S2",
+            "line": "Each organisation's data is kept separate by the database itself, using row level security.",
+            "evidence": "B3 row level security, 987 policies across 357 tables (docs/rls/prod-policies-snapshot.json)"
+          },
+          {
+            "id": "S3",
+            "line": "Stored in Ireland, in the EU, with daily backups.",
+            "evidence": "B11 Supabase eu-west-1 (get_project 2026-10-22), B15 Supabase daily backups on Pro"
+          },
+          {
+            "id": "S4",
+            "line": "Export or delete your own data whenever you like.",
+            "evidence": "B14 web/app/api/account/{export,dsar-export,delete}, gdpr_dsar_process and gdpr_deletion_process jobs"
+          }
+        ]
+      },
+      {
+        "id": "access",
+        "title": "Signing in",
+        "controls": [
+          {
+            "id": "S5",
+            "line": "Passkeys and multi factor sign in.",
+            "evidence": "B4 web/app/api/account/{mfa,passkeys,recovery-codes}"
+          },
+          {
+            "id": "S6",
+            "line": "Single sign on and SCIM user provisioning on every plan.",
+            "evidence": "B5 web/app/api/scim/v2, site-facts M13, D241"
+          },
+          {
+            "id": "S7",
+            "line": "See and end your sessions, and admins can end a member's sessions.",
+            "evidence": "B7 RPCs get_user_sessions, revoke_my_session, revoke_my_other_sessions, admin_end_member_sessions"
+          },
+          {
+            "id": "S8",
+            "line": "An audit log records who did what.",
+            "evidence": "B6 record_audit_event RPC, audit_log table, api/app/middleware/audit_log.py"
+          }
+        ]
+      },
+      {
+        "id": "platform",
+        "title": "Checked automatically",
+        "controls": [
+          {
+            "id": "S9",
+            "line": "Rate limiting on the API and strict security headers on the app.",
+            "evidence": "B8 api/app/middleware/rate_limit.py, B9 CSP with nonce, frame-ancestors none, X-Frame-Options DENY, HSTS measured on app.crowagent.ai"
+          },
+          {
+            "id": "S10",
+            "line": "Dependency vulnerability checks every week.",
+            "evidence": "D295 wording. Table C: founders portal dependency audit cron weekly Monday 09:00 UTC (apps/portal/vercel.json), GitHub Dependabot security alerts"
+          },
+          {
+            "id": "S11",
+            "line": "Security and secret checks on every code change.",
+            "evidence": "D295 wording. Table C: ci.yml npm audit --audit-level=critical (line 1395) and TruffleHog (line 1410) on every push"
+          },
+          {
+            "id": "S12",
+            "line": "Automated monitoring with daily failure alerts.",
+            "evidence": "Table C: daily_job_failure_digest 00:30, scheduler_heartbeat every 5 minutes, Sentry EU, status.velstrian.com"
+          }
+        ]
+      }
+    ],
+    "banned": [
+      "continuous scanning",
+      "continuously scanned",
+      "weekly automated security scans",
+      "weekly security scans",
+      "penetration tested",
+      "tested backups",
+      "point in time recovery",
+      "never used to train",
+      "neither trains on",
+      "No personal data used for AI training"
+    ]
   }
 }

@@ -49,6 +49,7 @@ import Facts from '../components/evidenced/Facts.astro';
 import Faq from '../components/evidenced/Faq.astro';
 import Screens from '../components/evidenced/Screens.astro';
 import Plans from '../components/evidenced/Plans.astro';
+import SecurityBuiltIn from '../components/evidenced/SecurityBuiltIn.astro';
 import Close from '../components/evidenced/Close.astro';
 import '../styles/evidenced.css';
 import { SITE, HOME_DESCRIPTION } from '../data/site';
@@ -105,6 +106,10 @@ const UPDATED = new Date('2026-10-21');
   <Refusal />
   <Screens />
   <Steps />
+  {/* D290: the question a small business asks before it pays is whether its
+      documents are safe, so the security block sits between how to start and
+      the prices. Light, between the dark steps and the light-alt plans. */}
+  <SecurityBuiltIn more />
   <Plans />
   <Faq />
   <Close />

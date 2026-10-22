@@ -122,6 +122,10 @@ const isValidDate = formatted && formatted !== 'Invalid Date';
     }
   </PageHero>
 
+  {/* D290: /security/ opens with the "Security built in" summary before the
+      document. Other legal pages pass nothing and render as before. */}
+  <slot name="before" />
+
   <Band tone="light" class="legal">
     <div class="ea-wrap legal__grid">
       {

@@ -12,7 +12,7 @@ helpsHeading: "From scheme notice to evidenced delivery."
 steps:
   - accent: teal
     verb: "Find the schemes that fit."
-    say: "New public contracts arrive every morning, already matched to the work you do and where. A developer sent you a tender for a new junction or estate roads? Upload it, or forward the email."
+    say: "New public contracts arrive every morning, already matched to the work you do and where. A developer sent you a tender for a new junction or estate roads? Upload it."
   - accent: violet
     verb: "Show how you will deliver."
     say: "Your answers on programme, risk and performance are drafted from bids you have already written, so they read the same across every scheme. You approve each one."
@@ -41,7 +41,7 @@ detail:
     body: "The Procurement Act 2023 sets the rules public buyers follow and has applied since 24 February 2025. Section 52 says a public contract worth more than £5m needs at least three published targets, called key performance indicators. Section 71 says performance against them must be assessed and published. Velstrian Bid checks these duties for you and keeps your proof beside each target over the life of a long contract. The checks guide you and never block you."
 faq:
   - question: "Can I use Velstrian Bid for private highways work?"
-    answer: "Yes. Housebuilders, developers, ports, airports and retail parks usually send their tender straight to you, for example for a new junction or estate roads. Upload it or forward the email, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
+    answer: "Yes. Housebuilders, developers, ports, airports and retail parks usually send their tender straight to you, for example for a new junction or estate roads. Upload it, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
   - question: "Which highways buyers and frameworks does Velstrian Bid cover?"
     answer: "Velstrian Bid reads the highways tenders published on the official listing sites, including work from National Highways, council highways teams and the frameworks and alliances used for maintenance, surfacing and improvement schemes. You filter by CPV code (the buyer's standard label for the type of work), region and value."
   - question: "Do highways contracts use NEC forms?"

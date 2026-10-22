@@ -166,7 +166,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'Is Velstrian Bid ready to use?',
         answer:
-          'Velstrian Bid is live and in daily use, with more being added. Tender discovery from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, document ingestion, grounded answer drafting, deterministic social value calculation, delivery tracking and Procurement Act 2023 s.52 and s.71 KPI checks all work today. See the Velstrian Bid page for what each stage covers.',
+          'Velstrian Bid is live and ready to use today, with more being added. Tender discovery from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, document ingestion, grounded answer drafting, deterministic social value calculation, delivery tracking and Procurement Act 2023 s.52 and s.71 KPI checks all work today. See the Velstrian Bid page for what each stage covers.',
         link: { label: 'Velstrian Bid page', href: '/bid/' },
       },
     ],

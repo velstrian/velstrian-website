@@ -3,7 +3,7 @@ title: "Privacy Policy | Velstrian"
 description: "How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info."
 heading: "Privacy Policy."
 eyebrow: "Legal & Data Protection"
-lastUpdated: "2026-05-17"
+lastUpdated: "2026-10-22"
 ---How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
 
 ## What this policy covers
@@ -24,7 +24,7 @@ Access, rectification, erasure, restriction, portability, and objection, exercis
 
 ### Transparent AI handling
 
-We use Google Gemini and Anthropic Claude as AI sub-processors. No personal data is used to train their foundation models.
+We use Google Gemini and Anthropic Claude as AI sub-processors. They process the text a task needs outside the EU, under contract. The sub-processors section below says where and on what terms.
 
 ## The detail, in full
 
@@ -112,18 +112,18 @@ Velstrian sets a minimal set of cookies. Analytics and non-essential cookies are
 
 We engage the following third-party sub-processors to operate the service. A Data Processing Agreement (DPA) is available on request. We ensure that all sub-processors provide sufficient guarantees to implement appropriate technical and organisational measures.
 
-Supabase EU Railway EU Vercel Edge Cloudflare Edge Stripe US/EU PostHog EU Sentry EU Brevo EU Google Gemini US Anthropic Claude US
+Supabase EU (Ireland) Railway EU (Netherlands) Vercel UK (London) Cloudflare Edge Stripe US/EU PostHog EU Sentry EU Brevo EU Google Gemini Outside the EU Anthropic Claude Outside the EU
 
-- **Supabase (EU):** Database, authentication, object storage. Essential for Velstrian platform data residency.
-- **Railway (EU):** Application hosting for the Velstrian backend and AI engines.
-- **Vercel (Edge):** Frontend hosting for app.crowagent.ai.
+- **Supabase (EU, Ireland):** Database, authentication and file storage, in AWS eu-west-1 (Ireland), with daily backups. This is where your account and bid data is stored.
+- **Railway (EU, Netherlands):** Hosting for the Velstrian API and its background worker, in europe-west4 (the Netherlands).
+- **Vercel (UK, London):** Hosting for the web application at app.crowagent.ai, in London (lhr1).
 - **Cloudflare (Edge):** DNS, CDN, DDoS protection, and Turnstile bot challenges.
 - **Stripe (US/EU):** Payment processing and subscription management.
 - **PostHog (EU):** Product analytics and session recording.
 - **Sentry (EU, Germany):** Error monitoring and performance tracking.
 - **Brevo (EU):** Transactional and marketing email delivery.
-- **Google Gemini (US):** AI narrative generation for Velstrian Bid social value drafts based on National TOMs.
-- **Anthropic, Claude (US):** AI narrative generation for drafting content, including Velstrian Bid social value bid narratives and, for existing customers only, legacy sustainability report drafting, from the inputs you provide.
+- **Google Gemini (outside the EU):** Drafting bid answers and social value narratives, reading tender and company documents, search over your library, and the chat assistants. Not region pinned, see "Google Gemini AI processing" below.
+- **Anthropic Claude (outside the EU):** The buyer pre-read of supplier responses in Velstrian Buy, and checks on the quality of drafted answers. Runs on Anthropic's global service, see "Anthropic (Claude) AI processing" below.
 
 **Integrations you connect:** You control which third-party services you link, and you can disconnect any of them at any time from your settings.
 
@@ -137,29 +137,35 @@ Where personal data is transferred outside the UK, we rely on UK IDTA or EU SCCs
 
 ## Automated decisions & AI
 
-In accordance with Article 22 UK GDPR, we confirm that Velstrian does not make any decision about you that is based solely on automated processing and that produces legal effects. Velstrian uses AI models from Google (Gemini) and Anthropic (Claude) to draft content, such as social value narratives based on TOMs data and, for existing customers, legacy sustainability report drafts. All such outputs are advisory and must be reviewed and signed off by a human before use.
+In accordance with Article 22 UK GDPR, we confirm that Velstrian does not make any decision about you that is based solely on automated processing and that produces legal effects. Velstrian uses AI models from Google (Gemini) and Anthropic (Claude) to draft content, such as bid answers and social value narratives. All such outputs are advisory and must be reviewed and signed off by a human before use.
 
 ## Subject Access Request (DSAR) procedure
 
 You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [privacy@velstrian.com](mailto:privacy@velstrian.com) with the subject line “DSAR, \[type of request\]”. Please include the email address associated with your Velstrian account and a brief description of the request. We will verify your identity where necessary and respond within one calendar month of receipt.
 
-## Google Gemini DPA
+## Google Gemini AI processing
 
-Velstrian Bid uses Google Gemini (2.5 Pro and 2.5 Flash) to assist with drafting Social Value narratives. We have signed Google’s Cloud Data Processing Addendum (DPA) to ensure data protection. Prompts and completions submitted via our API are not used to train Google's foundation models, and PII is stripped at the prompt boundary to maintain anonymity.
+Velstrian Bid and Velstrian Buy use Google Gemini (Gemini 2.5 Pro, Gemini 2.5 Flash and Gemini embeddings) to draft answers, read tender and company documents, search your library and run the chat assistants. We call it through Google's Gemini API from our own servers, under Google's Gemini API terms.
+
+What is sent: the text the task needs, which can include tender documents, your answers, your library and documents you upload, and what you type into a chat. This can contain personal data, such as a name in a CV, and we do not remove it before sending.
+
+Where it is processed: the Gemini API does not let us choose a region. Google may store or cache the text in any country where Google or its agents have facilities, so we treat it as an international transfer and rely on the safeguards in the "International data transfers" section above.
 
 ## Anthropic (Claude) AI processing
 
-Velstrian uses Anthropic's Claude models as an AI sub-processor to generate and draft content from the data you provide, including Velstrian Bid social value bid narratives and, for existing customers, legacy sustainability report drafting.
+Velstrian uses Anthropic's Claude (Claude Sonnet 4.6) as an AI sub-processor for the buyer pre-read of supplier responses in Velstrian Buy, and to check the quality of drafted answers.
 
 What data is sent
 
-The compliance inputs you enter for the task, such as procurement descriptions, National TOMs selections, and ESG figures. This data is sent to Anthropic only to produce your draft output. We do not send account credentials or billing details to Anthropic.
+The text the task needs. For the buyer pre-read that is a supplier's full response, which can include named staff, CVs, referees and subcontractors. We do not send account credentials or billing details to Anthropic.
 
 How it is used
 
-The inputs are processed only to generate your draft output, which is returned to you. You review and edit every output before use. AI drafts are advisory and are not a final compliance decision.
+The inputs are processed only to produce the output, which is returned to you. You review every output before use. AI output is advisory and is not a final decision.
 
-Anthropic acts as a data processor on our behalf under our agreement with them. Where data is transferred outside the UK, we rely on the transfer safeguards set out in the "International data transfers" section above.
+Where it is processed and under what contract
+
+Anthropic runs Claude on its global service, which offers no UK or EU location. For UK and EEA customers our contract is with Anthropic Ireland, Limited, under Anthropic's Commercial Terms, which include the EU Standard Contractual Clauses and the UK International Data Transfer Agreement. By default Anthropic does not train its models on what we send, and deletes inputs and outputs within 30 days, or up to 2 years where they are flagged for a usage policy breach. Anthropic acts as a data processor on our behalf.
 
 ## Sentry retention & error scrubbing
 

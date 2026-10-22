@@ -39,7 +39,7 @@ export const BID_FAQS: BidFaq[] = [
   },
   {
     question: 'Where do the contracts come from?',
-    answer: `Public contracts come from ${LIVE_SOURCES_DAILY}, and the source is named on every notice. ${ON_REQUEST_SENTENCE} For private work, upload the tender or request you were sent, or forward the email.`,
+    answer: `Public contracts come from ${LIVE_SOURCES_DAILY}, and the source is named on every notice. ${ON_REQUEST_SENTENCE} For private work, upload the tender or request you were sent.`,
   },
   {
     question: 'Can the AI invent a number in my bid?',

@@ -111,14 +111,28 @@ function mb(src, constName) {
   return Number(m[1]);
 }
 
+/* D288 (owner, 2026-10-22). Email intake is a production switch,
+   `inbound_email_intake_enabled`, that defaults off in config.py and is unset on
+   production (owner 2026-10-13: production email intake stays off). It was
+   typed here as `true`, so the site promised forwarding a tender email while
+   the production endpoint answered 404. Read the switch's default instead: the
+   site claims forwarding only once the platform ships it switched on. A
+   production only override that leaves the default off still reads false,
+   which errs towards saying less. */
+function emailIntake(config) {
+  const m = config.match(/^\s*inbound_email_intake_enabled\s*:\s*bool\s*=\s*(True|False)\b/m);
+  if (!m) fail(`inbound_email_intake_enabled not found in ${P.config}`);
+  return m[1] === 'True';
+}
+
 function deriveUpload() {
   const dz = read(P.dropzone);
   const panel = read(P.uploadPanel);
   return {
-    source: [P.dropzone, P.uploadPanel],
+    source: [P.dropzone, P.uploadPanel, P.config],
     start_a_bid: { formats: exts(dz, 'ACCEPTED_TENDER_EXTENSIONS'), max_mb: mb(dz, 'MAX_TENDER_FILE_SIZE') },
     tender_pack: { formats: exts(panel, 'ALLOWED_EXTENSIONS'), max_mb: mb(panel, 'MAX_FILE_SIZE') },
-    email_intake: true,
+    email_intake: emailIntake(read(P.config)),
     allowed_mb: [mb(dz, 'MAX_TENDER_FILE_SIZE'), mb(panel, 'MAX_FILE_SIZE')],
     images_accepted: false,
   };

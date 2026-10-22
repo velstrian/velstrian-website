@@ -72,7 +72,7 @@ faq:
 <div class="cmp-choose-card is-us">
 <h3>Choose Velstrian (Velstrian Bid) if</h3>
 <ul>
-<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload or forward by email.</li>
+<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload.</li>
 <li>You are a small or mid size firm that wants published pricing from {{bid.starter.monthly}} per month.</li>
 <li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
 <li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>

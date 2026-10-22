@@ -27,9 +27,9 @@ Subject rights supported end to end, with lawful basis, retention and deletion d
 
 Primary customer data is stored in the EU, in AWS eu-west-1 (Ireland). Our API runs in the EU and the web application runs in the UK. Full processing locations are listed under sub-processors below.
 
-### ISO 27001 controls
+### Follows ISO/IEC 27001
 
-Built to ISO 27001 controls. We follow ISO/IEC 27001 and review every Annex A control in our own Statement of Applicability.
+We follow ISO/IEC 27001 and review every Annex A control in our own Statement of Applicability.
 
 ### ICO Registered Data Controller
 
@@ -49,14 +49,14 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 
 ## EU data residency
 
-- Primary customer data is stored in Supabase’s EU region, AWS eu-west-1 (Ireland).
-- The Velstrian API and its background worker run in the EU, in Google Cloud europe-west4 (Netherlands).
+- Your account and bid data, sign in records and uploaded files are stored by Supabase in AWS eu-west-1 (Ireland), with daily backups.
+- The Velstrian API and its background worker run on Railway in europe-west4 (the Netherlands).
+- The web application runs on Vercel in London (lhr1).
 - Error monitoring runs in the EU (Sentry, Germany) and product analytics in the EU (PostHog EU Cloud).
-- Web application rendering runs on Vercel in London (lhr1).
 - Other processors operate under Standard Contractual Clauses (SCCs).
-- AI drafting sends only the text a task needs to Google Gemini and Anthropic Claude, both US processors under data processing agreements. No personal data is sent to AI providers for training. The full list is below and matches our [Privacy Policy](/privacy/).
+- AI is the one part that leaves the EU. We send only the text a task needs to Google Gemini and Anthropic Claude, and neither lets us choose a UK or EU location. [AI data handling](#ai-data-handling) below says where each one processes it and under what contract. The full list is below and matches our [Privacy Policy](/privacy/).
 
-<dl class="deflist"> <dt id="sub-processors">Sub-processors</dt> <dd> <dl class="deflist deflist--ledger"> <dt>Supabase</dt> <dd>EU (Ireland), database, authentication and file storage</dd> <dt>Railway</dt> <dd>EU (Netherlands), the API and background worker</dd> <dt>Vercel</dt> <dd>UK (London), web application hosting</dd> <dt>Cloudflare</dt> <dd>Global edge, SCC, DNS, CDN and bot protection</dd> <dt>Stripe</dt> <dd>US and EU, SCC, payments</dd> <dt>PostHog</dt> <dd>EU, product analytics</dd> <dt>Sentry</dt> <dd>EU (Germany), error monitoring</dd> <dt>Brevo</dt> <dd>EU, email delivery</dd> <dt>Google Gemini</dt> <dd>US, under DPA, AI drafting</dd> <dt>Anthropic Claude</dt> <dd>US, under DPA, AI reasoning and the buyer pre-read</dd> <dt>Calendly</dt> <dd>SCC, meeting scheduling links</dd> </dl> </dd> </dl>
+<dl class="deflist"> <dt id="sub-processors">Sub-processors</dt> <dd> <dl class="deflist deflist--ledger"> <dt>Supabase</dt> <dd>EU (Ireland), database, authentication and file storage</dd> <dt>Railway</dt> <dd>EU (Netherlands), the API and background worker</dd> <dt>Vercel</dt> <dd>UK (London), web application hosting</dd> <dt>Cloudflare</dt> <dd>Global edge, SCC, DNS, CDN and bot protection</dd> <dt>Stripe</dt> <dd>US and EU, SCC, payments</dd> <dt>PostHog</dt> <dd>EU, product analytics</dd> <dt>Sentry</dt> <dd>EU (Germany), error monitoring</dd> <dt>Brevo</dt> <dd>EU, email delivery</dd> <dt>Google Gemini</dt> <dd>Not region pinned, international transfer under contract, AI drafting</dd> <dt>Anthropic Claude</dt> <dd>Global, no UK or EU option, international transfer under contract, the buyer pre-read and answer quality checks</dd> <dt>Calendly</dt> <dd>SCC, meeting scheduling links</dd> </dl> </dd> </dl>
 
 ## GDPR compliance
 
@@ -95,9 +95,9 @@ We follow ISO/IEC 27001 and review every Annex A control in our own Statement of
 
 ## AI data handling
 
-AI inference runs through server-side API calls only. Customer-facing drafting uses Google Gemini. Heavier reasoning and analysis use Anthropic's Claude. Both are data sub-processors under signed DPAs. The boundaries below describe exactly what crosses to a model provider.
+AI runs through server-side API calls from our own API only. Drafting, document reading, search and the chat assistants use Google Gemini (Gemini 2.5 Pro, Gemini 2.5 Flash and Gemini embeddings). The buyer pre-read in Velstrian Buy and our checks on the quality of drafted answers use Anthropic Claude (Claude Sonnet 4.6). Both are data sub-processors. The boundaries below describe exactly what crosses to a model provider.
 
-<dl class="deflist"> <dt>What is sent</dt> <dd> <ul> <li>Prompt context for the active task.</li> <li>Public reference text where required.</li> <li>Server-side API calls only.</li> </ul> </dd> <dt>What is NOT sent</dt> <dd> <ul> <li>Customer data for training.</li> <li>Bulk exports or full org datasets.</li> <li>Authentication tokens or PII.</li> </ul> </dd> <dt>Inference &amp; retention</dt> <dd> <ul> <li>Velstrian-brokered infrastructure.</li> <li>Provider zero-retention terms.</li> <li>Inputs not retained by the model.</li> </ul> </dd> </dl>
+<dl class="deflist"> <dt>What is sent</dt> <dd> <ul> <li>The text the active task needs: tender documents, your answers, your library, documents you upload, or what you type into a chat.</li> <li>This can contain personal data, such as a name in a CV. We do not remove it before sending.</li> <li>Server-side API calls only.</li> </ul> </dd> <dt>What is NOT sent</dt> <dd> <ul> <li>Bulk exports or full organisation datasets.</li> <li>Passwords, authentication tokens or payment details.</li> </ul> </dd> <dt>Where it is processed</dt> <dd> <ul> <li>Google Gemini: the Gemini API offers no region setting, and Google may store or cache the text in any country where it or its agents have facilities.</li> <li>Anthropic Claude: Anthropic's global service, with no UK or EU option.</li> </ul> </dd> <dt>Under what contract</dt> <dd> <ul> <li>Google Gemini: Google's Gemini API terms.</li> <li>Anthropic Claude: Anthropic's Commercial Terms with Anthropic Ireland, Limited, which include the EU Standard Contractual Clauses and the UK International Data Transfer Agreement. By default Anthropic does not train on what we send, and deletes it within 30 days, or up to 2 years if it is flagged for a usage policy breach.</li> <li>We treat both as international transfers, protected as our <a href="/privacy/">Privacy Policy</a> sets out.</li> </ul> </dd> </dl>
 
 <dl class="deflist"> <dt>Model Usage &amp; Data Isolation</dt> <dd>Inference traffic is brokered through Velstrian-controlled service identities. Prompts include the minimum context required to satisfy the active task. Model responses are post-processed before storage to strip provider metadata.</dd> </dl>
 
@@ -119,7 +119,7 @@ Velstrian targets 99.5% monthly uptime, with independent public status monitorin
 
 ## Deep dives
 
-<details class="sec-acc"> <summary> Sub-processors list </summary> <div class="sec-acc-body"> <p>The same list as above, with what each one does. None receives customer data for training.</p> <ul> <li><strong>Supabase</strong> (EU, Ireland), database, authentication and file storage.</li> <li><strong>Railway</strong> (EU, Netherlands), the API and background worker.</li> <li><strong>Vercel</strong> (UK, London), web application hosting.</li> <li><strong>Cloudflare</strong> (global, SCC), DNS, CDN and DDoS protection.</li> <li><strong>Stripe</strong> (US and EU, SCC), billing and payment processing.</li> <li><strong>PostHog</strong> (EU Cloud), product analytics, event metadata.</li> <li><strong>Sentry</strong> (EU, Germany), error monitoring.</li> <li><strong>Brevo</strong> (EU), transactional email delivery.</li> <li><strong>Google Gemini</strong> (US, under DPA), AI drafting.</li> <li><strong>Anthropic Claude</strong> (US, under DPA), AI reasoning and the buyer pre-read.</li> <li><strong>Calendly</strong> (SCC), meeting scheduling links.</li> </ul> </div> </details>
+<details class="sec-acc"> <summary> Sub-processors list </summary> <div class="sec-acc-body"> <p>The same list as above, with what each one does.</p> <ul> <li><strong>Supabase</strong> (EU, Ireland), database, authentication and file storage.</li> <li><strong>Railway</strong> (EU, Netherlands), the API and background worker.</li> <li><strong>Vercel</strong> (UK, London), web application hosting.</li> <li><strong>Cloudflare</strong> (global, SCC), DNS, CDN and DDoS protection.</li> <li><strong>Stripe</strong> (US and EU, SCC), billing and payment processing.</li> <li><strong>PostHog</strong> (EU Cloud), product analytics, event metadata.</li> <li><strong>Sentry</strong> (EU, Germany), error monitoring.</li> <li><strong>Brevo</strong> (EU), transactional email delivery.</li> <li><strong>Google Gemini</strong> (not region pinned, under Google's Gemini API terms), AI drafting, document reading, search and the chat assistants.</li> <li><strong>Anthropic Claude</strong> (global, under Anthropic's Commercial Terms with Anthropic Ireland, Limited), the buyer pre-read and answer quality checks.</li> <li><strong>Calendly</strong> (SCC), meeting scheduling links.</li> </ul> </div> </details>
 
 <details class="sec-acc"> <summary> Severity levels in detail </summary> <div class="sec-acc-body"> <p>Our severity model follows CVSS 3.1 base scoring, adjusted for environmental impact across multi-tenant data isolation.</p> <ul> <li><strong>Critical:</strong> active exploitation paths affecting confidentiality or integrity of customer data.</li> <li><strong>High:</strong> escalation paths within an authenticated session.</li> <li><strong>Medium:</strong> targeted attacks requiring user interaction or constrained scope.</li> <li><strong>Low:</strong> defensive hardening, configuration drift, or informational findings.</li> </ul> </div> </details>
 
@@ -135,6 +135,6 @@ Everything above is what we can show you today. If it meets your needs, the next
 
 [Start now](https://app.crowagent.ai/signup) [Book a 30-minute demo](https://calendly.com/crowagent-platform/30min)
 
-ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. Built to ISO 27001 controls. GDPR compliant.
+ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. Follows ISO/IEC 27001. GDPR compliant.
 
 [Privacy Policy](/privacy/) [Sub-processors](#sub-processors) [Status Page](https://status.velstrian.com)

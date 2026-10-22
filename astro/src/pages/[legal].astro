@@ -14,6 +14,7 @@
  */
 import { getCollection, render } from 'astro:content';
 import Legal from '../layouts/Legal.astro';
+import SecurityBuiltIn from '../components/evidenced/SecurityBuiltIn.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('legal');
@@ -36,5 +37,6 @@ const { Content, headings } = await render(entry);
   lastUpdated={entry.data.lastUpdated}
   headings={headings}
 >
+  {entry.id === 'security' && <SecurityBuiltIn slot="before" tone="light-alt" />}
   <Content />
 </Legal>

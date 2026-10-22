@@ -143,10 +143,21 @@ const RULES = [
     why: 'A bid starts from PDF, Word, text, Excel or CSV up to 25 MB a file. The pack takes ZIP and PowerPoint up to 100 MB a file. Images are not accepted.',
     check(pages) {
       const allowed = new Set(FACTS.upload.allowed_mb);
-      return [
+      const out = [
         ...scan(pages, /\b(\d+)\s?MB\b/g, (t, m) => !allowed.has(Number(m[1]))),
         ...scan(pages, /\b(?:PNG|JPEG|JPG)\b/g, (t, m) => /upload|reads?\b|files?\b/i.test(t.slice(Math.max(0, m.index - 120), m.index + 120))),
       ];
+      /* D288. While the platform ships email intake switched off, no page may
+         offer to take a tender by email: "forward the email", "forwarded by
+         email", "the email you forwarded", "email intake", a tender+ address. */
+      if (!FACTS.upload.email_intake) {
+        out.push(
+          ...scan(pages, /\bforward(?:s|ed|ing)?\b[^.\n]{0,40}?\be-?mail/gi),
+          ...scan(pages, /\be-?mail(?:s|ed)?\b[^.\n]{0,40}?\bforward(?:s|ed|ing)?\b/gi),
+          ...scan(pages, /\be-?mail intake\b|\btender\+/gi),
+        );
+      }
+      return out;
     },
   },
   {
@@ -189,7 +200,7 @@ const RULES = [
   },
   {
     record: 'certifications',
-    why: 'D255: say what we do, positively. "Built to ISO 27001 controls", "follows ISO/IEC 27001" and "GDPR compliant" are approved. The one boundary is a certificate or attestation the company does not hold, so "ISO 27001 certified", "certified to ISO 27001", "SOC 2" and "Cyber Essentials certified" fail the build. Every page that carries the footer must show the six trust badges from trust_badges, word for word.',
+    why: 'D255: say what we do, positively. "Follows ISO/IEC 27001" (D281, which retired "Built to ISO 27001 controls") and "GDPR compliant" are approved. The one boundary is a certificate or attestation the company does not hold, so "ISO 27001 certified", "certified to ISO 27001", "SOC 2" and "Cyber Essentials certified" fail the build. Every page that carries the footer must show the six trust badges from trust_badges, word for word.',
     check(pages) {
       const out = banned(pages, FACTS.certifications.banned, 'gi');
       /* The trust strip is the footer's, read from trust_badges. A page that
@@ -272,6 +283,23 @@ const RULES = [
         for (const m of src.matchAll(/\bscore:\s*\d/gi)) {
           if (!src.slice(Math.max(0, m.index - 12), m.index).toLowerCase().includes(r.required_prefix.toLowerCase())) {
             out.push({ route: r.page, hit: 'Score:', ctx: context(src, m.index, 6) });
+          }
+        }
+      }
+      return out;
+    },
+  },
+  {
+    record: 'security_controls',
+    why: 'D290 and D295: the "Security built in" block prints only what is true today, from one list, on the home page and /security/. No scheduled scan of the live site, no tested restore, no training promise until a measurement backs it.',
+    check(pages) {
+      const r = FACTS.security_controls;
+      const out = banned(pages, r.banned, 'gi');
+      for (const route of r.pages) {
+        const p = pages.find((x) => x.route === route);
+        for (const g of r.groups) {
+          for (const c of g.controls) {
+            if (!p || !p.text.includes(c.line)) out.push({ route, hit: `${c.id} "${c.line}"`, ctx: 'security control missing from this page' });
           }
         }
       }

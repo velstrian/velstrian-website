@@ -12,7 +12,7 @@ helpsHeading: "One supplier voice, every buyer."
 steps:
   - accent: teal
     verb: "Find the work that fits."
-    say: "New public contracts arrive every morning, already matched to what you supply and where. An independent school or a nursery group sent you a tender? Upload it, or forward the email."
+    say: "New public contracts arrive every morning, already matched to what you supply and where. An independent school or a nursery group sent you a tender? Upload it."
   - accent: violet
     verb: "Say it the same way every time."
     say: "Each answer is drafted from bids you have already written, so a small single school tender and a trust wide one tell the same story."
@@ -41,7 +41,7 @@ detail:
     body: "The Procurement Act 2023 sets the rules public buyers follow. Section 52 says a public contract worth more than £5m needs at least three published targets, called key performance indicators. Section 71 says performance against them must be assessed and published. Velstrian Bid checks these duties for you and keeps your delivery proof beside each target. The checks guide you and never block you."
 faq:
   - question: "Can I use Velstrian Bid for independent schools and other private buyers?"
-    answer: "Yes. Independent schools, nursery groups and private training providers usually send their tender or request for a quote straight to you. Upload it or forward the email, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
+    answer: "Yes. Independent schools, nursery groups and private training providers usually send their tender or request for a quote straight to you. Upload it, and Velstrian Bid drafts the answers from your own documents in the same way as for a public tender."
   - question: "Which education buyers and frameworks does Velstrian Bid cover?"
     answer: "Velstrian Bid reads education tenders published on the official listing sites, including work from councils, multi-academy trusts, colleges and universities, and work let through Department for Education and central government frameworks for catering, cleaning, ICT, school management systems and estates. You filter by CPV code (the buyer's standard label for the type of work), region and value."
   - question: "How does buying differ across schools, trusts and colleges?"
