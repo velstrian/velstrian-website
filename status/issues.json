@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T11:18:39.071Z",
+  "updated": "2026-10-22T11:42:14.380Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -3135,8 +3135,8 @@
       "src": "transformation-audit-2026-10-22",
       "sev": "P2",
       "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-E bid and buy page weight and screen slots (S2 M3)",
-      "status": "OPEN",
-      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/bid/*, components/buy/*, pages/bid.astro, pages/buy.astro"
+      "status": "BUILT",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/bid/*, components/buy/*, pages/bid.astro, pages/buy.astro || BUILT 2026-10-22 in 23e8820e (local, unpushed). S2: BidDetail and BuyDetail rules, fit table, 12 capabilities and 16 workspace parts each behind one native details row, nothing removed, headings kept in summaries. Measured on dev 8093, status 200 and landed URL asserted: /bid/ 15,433 to 13,650px at 1440, 22,053 to 17,666 at 375. /buy/ 15,275 to 13,982 at 1440, 22,865 to 18,582 at 375. Overflow 0 at 320 to 1920, reveals 33/33 and 31/31 fire. M3: all 7 /buy/ capture slots still wired by key (buy-hero, buy-cap-request, -collect, -compare, -evidence, -decision, buy-boundary-gate), captures themselves are the screenshot lane. Plain words on /buy/, D275 trial note, D282 headline in evidenced/Refusal.astro (shared with /). Gates: astro check 0 errors, check-english 0, check-facts 0, check-brand-names 0, check-design-system read a stale dist built mid edit (h3.ea-label) and is fixed in source, needs the driver build to confirm. Open: Refusal citation mark .ea-mark is 24x24 (evidenced.css, gates lane)."
     },
     {
       "id": "A-320",
