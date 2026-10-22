@@ -56,17 +56,45 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { performance } = require("node:perf_hooks");
 
-// ---------- brand tokens (mirrors crowagent-brand-tokens.css) ----------
+// ---------- brand tokens and names, READ from the design system ----------
+//
+// [R285-REBRAND-05 2026-10-22] These were hex values typed here as a mirror of
+// the retired crowagent-brand-tokens.css, so the cards kept the old teal palette
+// after the site moved to design system v3, and the cards drew "CrowAgent",
+// "CrowMark" and "crowagent.ai". Every colour is now the FIRST declaration of a
+// custom property in astro/src/styles/tokens.css (the default dark :root, which
+// is what the site paints), and every name is read from astro/src/lib/brand-names.ts.
+// Satori cannot resolve var(), so the values are resolved here once. No red is
+// read (D256), and no price or host-dependent offer is drawn into any card.
+
+const TOKENS_CSS = fs.readFileSync(path.join(__dirname, "..", "astro", "src", "styles", "tokens.css"), "utf8");
+function cssToken(name) {
+  const m = new RegExp(String.raw`^\s*--${name}:\s*(#[0-9A-Fa-f]{6}|rgba?\([^)]*\))\s*;`, "m").exec(TOKENS_CSS);
+  if (!m) throw new Error(`--${name} has no literal declaration in astro/src/styles/tokens.css, the card would guess a colour`);
+  return m[1];
+}
+
+const BRAND_NAMES_TS = fs.readFileSync(path.join(__dirname, "..", "astro", "src", "lib", "brand-names.ts"), "utf8");
+function brandName(name) {
+  const m = new RegExp(`export const ${name} = "([^"]+)";`).exec(BRAND_NAMES_TS);
+  if (!m) throw new Error(`${name} not found in astro/src/lib/brand-names.ts`);
+  return m[1];
+}
+const PLATFORM_NAME = brandName("PLATFORM_NAME");
+const PRODUCT_NAME_BID = brandName("PRODUCT_NAME_BID");
+const PRODUCT_NAME_BUY = brandName("PRODUCT_NAME_BUY");
+const SITE_CANONICAL_HOST = brandName("SITE_CANONICAL_HOST");
 
 const BRAND = Object.freeze({
-  bg: "#040E1A",     // --bg / --ca-bg-page
-  surf: "#0A1F3A",    // --surf / --ca-bg-card
-  surf2: "#0D2847",   // --surf2
-  teal: "#0CC9A8",    // --teal / --ca-teal
-  cloud: "#E8F0FA",   // --cloud / --ca-text-primary
-  steel: "#B8CCE0",   // --steel
-  mist: "#8A9DB8",    // --mist / --ca-text-secondary
-  border: "rgba(12, 201, 168, 0.20)",
+  bg: cssToken("c-bg"),
+  surf: cssToken("c-panel"),
+  surf2: cssToken("c-raised"),
+  teal: cssToken("c-teal"),
+  glow: cssToken("c-teal-glow"),
+  cloud: cssToken("c-text"),
+  steel: cssToken("c-text-sub"),
+  mist: cssToken("c-text-muted"),
+  border: cssToken("c-border"),
 });
 
 // CLAUDE.md §10 product accents.
@@ -78,12 +106,12 @@ const BRAND = Object.freeze({
 // "crowesg" would have silently badged its card with a product a visitor cannot
 // buy — the same failure mode that put "CrowCyber from £99/mo" on a live card.
 const PRODUCT_ACCENT = Object.freeze({
-  crowmark:  { color: "#A78BFA", label: "CrowMark" },
-  blog:      { color: "#0CC9A8", label: "Blog" },
-  changelog: { color: "#0CC9A8", label: "Changelog" },
+  bid:       { color: BRAND.teal, label: PRODUCT_NAME_BID },
+  blog:      { color: BRAND.teal, label: "Blog" },
+  changelog: { color: BRAND.teal, label: "Changelog" },
 });
 
-const DEFAULT_PRODUCT = { color: BRAND.teal, label: "CrowAgent" };
+const DEFAULT_PRODUCT = { color: BRAND.teal, label: PLATFORM_NAME };
 
 // Four ascending bars of the canonical mark, scaled from the 64px viewBox to 56px.
 const MARK_BARS = Object.freeze([
@@ -135,7 +163,15 @@ const EXCLUDED_ROUTES = Object.freeze(["404.html"]);
 // disagrees with what already ships: astro/src/pages/glossary/index.astro and
 // astro/src/content/glossary/ppn-026.md both point at
 // /Assets/og/glossary-index.png, so the glossary index keeps that name.
-const SLUG_OVERRIDES = Object.freeze({ glossary: "glossary-index" });
+const SLUG_OVERRIDES = Object.freeze({ glossary: "glossary-index", bid: "velstrian-bid" });
+
+// [R285-REBRAND-05] CARD FILE NAMES THAT OUTLIVED THEIR PAGE. `crowmark.png` was the Bid
+// product card, named after the old product, and no route derives that slug any more (the
+// product page is /bid/). The card is now `velstrian-bid.png`, rendered from /bid/. Pages
+// that still ask for the old name get the SAME image written under it too, so a link shared
+// before the rename keeps showing the current card instead of a 404. Remove an entry once
+// no built page references the old name.
+const LEGACY_CARD_ALIASES = Object.freeze({ crowmark: "velstrian-bid" });
 
 // Every built .html under a directory, returned as forward-slash paths relative
 // to that directory so the slug derivation is identical on Windows and Linux.
@@ -201,7 +237,7 @@ function loadBuiltPages(repoRoot) {
   for (const route of allRoutes) {
     const html = fs.readFileSync(path.join(dist, route), "utf8");
     for (const m of html.matchAll(/\/Assets\/og\/([A-Za-z0-9._-]+)\.png/g)) {
-      wanted.add(m[1]);
+      wanted.add(LEGACY_CARD_ALIASES[m[1]] ?? m[1]);
     }
   }
   const routes = allRoutes.filter((r) => wanted.has(routeToSlug(r)));
@@ -248,7 +284,7 @@ function loadBuiltPages(repoRoot) {
     const full = extractTitle(html);
     if (!full) {
       throw new Error(
-        `Built page ${route} has no <title>, so its card would read the bare word "CrowAgent". ` +
+        `Built page ${route} has no <title>, so its card would read the bare platform name. ` +
           "Give the page a title in astro/src rather than a fallback here.",
       );
     }
@@ -290,7 +326,8 @@ function referencedCardSlugs(repoRoot) {
   for (const route of listBuiltPages(dist)) {
     const html = fs.readFileSync(path.join(dist, route), "utf8");
     for (const ref of html.match(/\/Assets\/og\/[A-Za-z0-9._%-]+\.png/g) ?? []) {
-      const slug = path.basename(ref).replace(/\.png$/i, "");
+      const named = path.basename(ref).replace(/\.png$/i, "");
+      const slug = LEGACY_CARD_ALIASES[named] ?? named;
       if (!wanted.has(slug)) wanted.set(slug, route);
     }
   }
@@ -346,6 +383,20 @@ function clip(input, max, fallback = "") {
   return window.slice(0, max - 1) + "…";
 }
 
+// [R285-REBRAND-05] NO PRICE IS EVER DRAWN INTO A CARD. Prices change and a PNG cannot be
+// corrected by a catalogue edit, so a card that printed "From £49/month" from the page
+// description would go on advertising a stale price wherever it was shared. Any sentence of a
+// description that names an amount of money or a per period price is dropped before render.
+const PRICE_SENTENCE = /[£$€]\s?\d|\d\s?(?:per|\/)\s?(?:month|year|mo|yr)\b/i;
+function withoutPrices(text) {
+  const s = String(text ?? "").trim();
+  if (!s) return s;
+  return (s.match(/[^.!?]+[.!?]*/g) ?? [s])
+    .map((sentence) => sentence.trim())
+    .filter((sentence) => sentence && !PRICE_SENTENCE.test(sentence))
+    .join(" ");
+}
+
 // HTML entity decode for the small set we care about (titles + descriptions).
 function decodeEntities(s) {
   return s
@@ -363,8 +414,8 @@ function decodeEntities(s) {
 function extractTitle(html) {
   const m = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html);
   if (!m) return null;
-  // Strip the trailing " - CrowAgent" / " | CrowAgent" suffix used across the site.
-  return decodeEntities(m[1].trim()).replace(/\s*[-|]\s*CrowAgent.*$/i, "").trim();
+  // Strip the trailing " | Velstrian" brand suffix used across the site.
+  return decodeEntities(m[1].trim()).replace(/\s*[-|]\s*Velstrian(?: Tenderworks)?\s*$/i, "").trim();
 }
 
 // Read a <meta> value without caring what order the attributes are written in.
@@ -411,7 +462,7 @@ function extractMetaDescription(html) {
 // correct answer for a page that is not about one product.
 function inferProduct(slug, fallback = null) {
   const s = slug.toLowerCase();
-  if (s.includes("crowmark") || s.includes("ppn") || s.includes("social-value") || s.includes("toms")) return "crowmark";
+  if (s === "velstrian-bid" || s.includes("ppn") || s.includes("social-value") || s.includes("toms")) return "bid";
   if (s.includes("changelog")) return "changelog";
   return fallback;
 }
@@ -456,7 +507,7 @@ function buildOgTree({ title, subtitle, product }) {
         flexDirection: "column",
         justifyContent: "space-between",
         backgroundColor: BRAND.bg,
-        backgroundImage: `radial-gradient(circle at 80% -10%, rgba(12,201,168,0.18), transparent 50%), linear-gradient(180deg, ${BRAND.bg} 0%, ${BRAND.surf} 100%)`,
+        backgroundImage: `radial-gradient(circle at 80% -10%, ${BRAND.glow}, transparent 50%), linear-gradient(180deg, ${BRAND.bg} 0%, ${BRAND.surf} 100%)`,
         padding: "72px 80px",
         fontFamily: "Inter",
         color: BRAND.cloud,
@@ -501,7 +552,7 @@ function buildOgTree({ title, subtitle, product }) {
         h(
           "div",
           { style: { fontSize: 28, fontWeight: 700, letterSpacing: -0.5, color: BRAND.cloud } },
-          "CrowAgent",
+          PLATFORM_NAME,
         ),
       ),
       // The badge says which product or section the card belongs to, so it earns
@@ -577,7 +628,7 @@ function buildOgTree({ title, subtitle, product }) {
       h(
         "div",
         { style: { fontSize: 22, fontWeight: 600, color: BRAND.teal } },
-        "crowagent.ai",
+        SITE_CANONICAL_HOST,
       ),
     ),
   );
@@ -977,8 +1028,8 @@ async function main() {
     // An earlier attempt shortened the SUBTITLE when the headline was long. That
     // was the wrong lever: at 68 characters per line, cutting 140 to 116 dropped
     // words without dropping a line, so it lost information and bought no space.
-    title: clip(p.title, 72, "CrowAgent"),
-    subtitle: clip(p.subtitle, 140, ""),
+    title: clip(p.title, 72, PLATFORM_NAME),
+    subtitle: clip(withoutPrices(p.subtitle), 140, ""),
     product: p.product,
   }));
 
@@ -1168,6 +1219,54 @@ async function main() {
       slugs: absent,
     });
     process.exit(3);
+  }
+
+  // [R285-REBRAND-05] The legacy card names get the current card's bytes, so a page or a
+  // shared link that still asks for the old name shows the current card, never a 404.
+  for (const [legacy, current] of Object.entries(LEGACY_CARD_ALIASES)) {
+    const from = path.join(outDir, `${current}.png`);
+    if (fs.existsSync(from)) {
+      fs.copyFileSync(from, path.join(outDir, `${legacy}.png`));
+      structuredLog("info", "Legacy card name written", { legacy, current });
+    }
+  }
+
+  // [R285-REBRAND-05] THE SITE DEFAULT CARD, `Assets/og-image.png`. Every page without its own
+  // card shares it (SITE.defaultOgImage), and it still drew the old bar chart and "CrowAgent"
+  // because nothing generated it. The wordmark already names the platform, so the headline
+  // names the two products and the subtitle is the home page description from the build.
+  const defaultCardPath = path.join(repoRoot, "Assets", "og-image.png");
+  if (!heroesOnly && !slugFilter && (force || !fs.existsSync(defaultCardPath))) {
+    try {
+      const svg = await satori(
+        buildOgTree({
+          title: `${PRODUCT_NAME_BID} · ${PRODUCT_NAME_BUY}`,
+          // The home page's own description, read from the build like every other card.
+          subtitle: clip(
+            withoutPrices(extractMetaDescription(fs.readFileSync(path.join(repoRoot, DIST_RELATIVE, "index.html"), "utf8")) ?? ""),
+            140,
+            "",
+          ),
+          product: null,
+        }),
+        { width: 1200, height: 630, fonts },
+      );
+      const png = new Resvg(svg, {
+        background: BRAND.bg,
+        fitTo: { mode: "width", value: 1200 },
+        font: { loadSystemFonts: false },
+      })
+        .render()
+        .asPng();
+      fs.writeFileSync(defaultCardPath, png);
+      structuredLog("info", "Rendered the site default card", { bytes: png.length });
+    } catch (error) {
+      structuredLog("error", "Render failed", {
+        slug: "og-image",
+        error: error instanceof Error ? error.message : String(error),
+      });
+      process.exit(3);
+    }
   }
 
   // Article hero artwork. Same skip rule as the OG cards: the slug is the cache key,
