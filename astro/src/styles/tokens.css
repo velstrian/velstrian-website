@@ -3591,6 +3591,9 @@
   --stage-screen-ratio-narrow: 20 / 27;
   --stage-hero-ratio: 5 / 3;
   --stage-float-tuck: var(--space-12);
+  /* A real capture's frame shrinks to the picture (a portrait capture is
+     narrow) but never below this, so its caption still reads in a few lines. */
+  --ea-frame-shot-min: 22rem;
 
   /* A product window's edge, lit from the top (evidenced.css .ea-frame__window):
      a light rim fading to an ink hairline at the foot. */

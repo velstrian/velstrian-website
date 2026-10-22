@@ -474,6 +474,33 @@ main > .ea-sec * {
   aspect-ratio: var(--stage-screen-ratio);
 }
 
+/* A frame that holds a picture (a real capture, or a page's own drawn screen)
+   takes the picture's OWN proportions from its width and height attributes,
+   and the stage fits it. Measured 2026-10-22 on /contact/ at 1440: the feed
+   capture is about 5:1, and inside the shared 4:3 box it drew 627 by 120 in a
+   mostly empty dark screen that read as broken. The shared ratio stays the
+   minimum for the HTML recreations only. */
+.ea-stage--panel .ea-stage__screen > .ea-frame--shot,
+.ea-stage--hero .ea-stage__screen > .ea-frame--shot {
+  aspect-ratio: auto;
+}
+
+/* The same rule across the width: a portrait capture (the question list,
+   333 by 690) drew 231px wide in a 734px dark window, two thirds of it empty.
+   The frame now shrinks to the picture and is centred on the stage, with a
+   floor so the caption still reads in a few lines. The caption does not size
+   the frame (inline-size containment), it wraps to it. */
+.ea-stage__screen > .ea-frame--shot:not(.ea-frame--drawn) {
+  width: fit-content;
+  min-width: min(100%, var(--ea-frame-shot-min));
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.ea-frame--shot:not(.ea-frame--drawn) .ea-frame__caption {
+  contain: inline-size;
+}
+
 .ea-stage__screen .ea-frame__window {
   display: flex;
   flex: 1 1 auto;
