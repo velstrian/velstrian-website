@@ -73,24 +73,26 @@ const n = (v: number) => v.toLocaleString('en-GB');
             </p>
             <p class="ea-plan__gets">{PLAIN_GETS[p.name] ?? p.includes}</p>
 
-            <div class="pricing-plan__action">
-              <div class="plan-go--m">
-                <Action href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>
-                  {START_LABEL}<span class="visually-hidden"> on the {p.name} plan, billed monthly</span>
-                </Action>
+            <div class="pricing-plan__footer">
+              <div class="pricing-plan__action">
+                <div class="plan-go--m">
+                  <Action href={startHref(p.planKey)} variant={p.recommended ? 'primary' : 'secondary'}>
+                    {START_LABEL}<span class="visually-hidden"> on the {p.name} plan, billed monthly</span>
+                  </Action>
+                </div>
+                <div class="plan-go--a">
+                  <Action href={startHref(p.planKey, true)} variant={p.recommended ? 'primary' : 'secondary'}>
+                    {START_LABEL}<span class="visually-hidden"> on the {p.name} plan, billed annually</span>
+                  </Action>
+                </div>
               </div>
-              <div class="plan-go--a">
-                <Action href={startHref(p.planKey, true)} variant={p.recommended ? 'primary' : 'secondary'}>
-                  {START_LABEL}<span class="visually-hidden"> on the {p.name} plan, billed annually</span>
-                </Action>
-              </div>
-            </div>
 
-            {p.secondary && (
-              <p class="ea-plans__more">
-                <a class="ea-link" href={p.secondary.href}>{p.secondary.label}</a>
-              </p>
-            )}
+              {p.secondary && (
+                <p class="ea-plans__more">
+                  <a class="ea-link" href={p.secondary.href}>{p.secondary.label}</a>
+                </p>
+              )}
+            </div>
           </li>
         ))
       }
@@ -111,9 +113,21 @@ const n = (v: number) => v.toLocaleString('en-GB');
     position: relative;
   }
 
+  .pricing-plan__footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: start;
+    width: 100%;
+  }
+
   .pricing-plan__action {
-    margin-top: auto;
     padding-top: var(--space-4);
+  }
+
+  .pricing-plan__footer .ea-plans__more {
+    margin-top: var(--space-3);
+    text-align: center;
   }
 
   .pricing-reassurance {
