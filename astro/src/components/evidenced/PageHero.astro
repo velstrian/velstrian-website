@@ -7,7 +7,9 @@
  * share this one hero rather than each drawing its own: a LIGHT band carrying
  * `ea-hero` (so it gets the hero's moving light from Band.astro), a short label,
  * the page's h1, one plain lead, and the page's actions in the default slot.
- * A `note` slot carries one small reassurance line under the actions.
+ * A `note` slot carries one small reassurance line under the actions, a
+ * `before` slot the visible trail above the label, and an `after` slot one row
+ * of chips under everything (the topics a tool covers).
  *
  * `size="compact"` is for reading pages (a glossary entry, a blog post, a
  * policy), where the words below are the point and a home-size headline would
@@ -33,6 +35,7 @@ const { title, id, label, lead, size = 'standard', bandId } = Astro.props;
 const hasActions = Astro.slots.has('default');
 const hasNote = Astro.slots.has('note');
 const hasBefore = Astro.slots.has('before');
+const hasAfter = Astro.slots.has('after');
 ---
 
 <Band tone="light" class={`ea-hero ea-page-hero ea-page-hero--${size}`} labelledby={id} id={bandId}>
@@ -53,6 +56,13 @@ const hasBefore = Astro.slots.has('before');
         <p class="ea-hero__note">
           <slot name="note" />
         </p>
+      )
+    }
+    {
+      hasAfter && (
+        <div class="ea-page-hero__after">
+          <slot name="after" />
+        </div>
       )
     }
   </div>

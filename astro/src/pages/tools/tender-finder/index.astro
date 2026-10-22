@@ -34,12 +34,14 @@
  * because the TED legal notice does not allow it without consent.
  */
 import Base from '../../../layouts/Base.astro';
-import Section from '../../../components/layout/Section.astro';
-import PageHeader from '../../../components/layout/PageHeader.astro';
+import PageHero from '../../../components/evidenced/PageHero.astro';
+import Band from '../../../components/evidenced/Band.astro';
+import Action from '../../../components/evidenced/Action.astro';
+import Close from '../../../components/evidenced/Close.astro';
 import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
-import Button from '../../../components/ui/Button.astro';
+import { PRODUCT_NAME_BID } from '../../../lib/brand-names';
+import '../../../styles/evidenced.css';
 import Turnstile from '../../../components/forms/Turnstile.astro';
-import FinalCta from '../../../components/sections/FinalCta.astro';
 import { SIGNUP_URL } from '../../../data/app';
 import { breadcrumbs } from '../../../lib/schema';
 import { SITE } from '../../../data/site';
@@ -95,16 +97,26 @@ const schema = [
 ];
 ---
 
-<Base title={title} description={description} path="/tools/tender-finder" schema={schema}>
-  <Section id="finder">
-    <div class="tf-crumb"><Breadcrumb trail={trail} current="Tender Finder" /></div>
-    <PageHeader
-      eyebrow="Free, no account"
-      title="Find UK and EU tenders"
-      standfirst={`Search open public sector notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. No account and no email needed.`}
-    />
+<Base
+  title={title}
+  description={description}
+  path="/tools/tender-finder"
+  schema={schema}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero
+    id="tf-title"
+    label="Free, no account"
+    title="Find UK and EU tenders"
+    lead={`Search open public sector notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. No account and no email needed.`}
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Tender Finder" /></div>
+  </PageHero>
 
-    <form class="form tf-form" id="tf-form" novalidate>
+  <Band tone="light" id="finder" labelledby="tf-title">
+    <div class="ea-wrap">
+    <form class="form tf-form ea-card" id="tf-form" novalidate>
       <div class="field">
         <label class="field__label" for="tf-keyword">Keyword</label>
         <input
@@ -168,9 +180,9 @@ const schema = [
 
       <Turnstile id="tf" />
 
-      <div class="btn-row">
-        <Button type="submit" id="tf-submit">Search tenders</Button>
-        <Button type="reset" variant="secondary">Clear</Button>
+      <div class="ea-actions tf-form__actions">
+        <Action as="button" type="submit" id="tf-submit">Search tenders</Action>
+        <Action as="button" type="reset" variant="secondary">Clear</Action>
       </div>
 
       <noscript>
@@ -211,9 +223,9 @@ const schema = [
       <h2 class="visually-hidden" id="tf-results-h" tabindex="-1">Search results</h2>
       <ol class="tf-list" id="tf-list" role="list"></ol>
 
-      <nav class="btn-row tf-pager" aria-label="Results pages">
-        <Button variant="secondary" id="tf-prev">Previous page</Button>
-        <Button variant="secondary" id="tf-next">Next page</Button>
+      <nav class="ea-actions tf-pager" aria-label="Results pages">
+        <Action as="button" variant="secondary" id="tf-prev">Previous page</Action>
+        <Action as="button" variant="secondary" id="tf-next">Next page</Action>
       </nav>
 
       <div class="tf-attr">
@@ -231,7 +243,7 @@ const schema = [
 
       <p class="tf-upsell">
         Want new matches by email and a fit score for each tender?
-        <a href={SIGNUP_URL}>Start with Velstrian Bid</a>.
+        <a href={SIGNUP_URL}>Start with {PRODUCT_NAME_BID}</a>.
       </p>
     </div>
 
@@ -258,15 +270,19 @@ const schema = [
         </p>
       </li>
     </template>
-  </Section>
+    </div>
+  </Band>
 
-  <Section
-    eyebrow="Stated plainly"
-    title="What this search covers."
-    standfirst="A free look at live notices, with the limits written down."
-    id="covers"
-  >
-    <ul class="tf-limits">
+  <Band tone="light-alt" id="covers" labelledby="covers-title">
+    <div class="ea-wrap">
+      <div class="ea-head-row" data-reveal>
+        <div class="ea-split__head">
+          <p class="ea-label">Stated plainly</p>
+          <h2 class="ea-h2" id="covers-title">What this search covers.</h2>
+        </div>
+        <p class="ea-lead">A free look at live notices, with the limits written down.</p>
+      </div>
+    <ul class="tf-limits ea-card" data-reveal>
       <li>
         Open notices only, published in the last {RECENT_DAYS} days, with a closing date still to
         come. A notice with no stated closing date is left out, because the search cannot say it is
@@ -289,21 +305,18 @@ const schema = [
         any changes and the official deadline.
       </li>
     </ul>
-  </Section>
+      <p class="tf-more" data-reveal>
+        <a class="ea-link" href="/tools/">All free tools</a>
+        <a class="ea-link" href="/tools/tender-compliance-matrix/">Tender Compliance Matrix</a>
+        <a class="ea-link" href="/bid/">Explore {PRODUCT_NAME_BID}</a>
+      </p>
+    </div>
+  </Band>
 
-  <FinalCta
-    eyebrow="Go further"
+  <Close
     title="Want these by email, scored for fit?"
-    standfirst={`Velstrian Bid saves your search, sends new matching notices by email and scores each tender for fit across ${FIT_COUNT_WORD} dimensions, so you see what is worth bidding for first.`}
-    id="product"
-    links={[
-      { label: 'All free tools', href: '/tools/' },
-      { label: 'Tender Compliance Matrix', href: '/tools/tender-compliance-matrix/' },
-    ]}
-  >
-    <Button href={SIGNUP_URL}>Start now</Button>
-    <Button href="/bid/" variant="secondary">Explore Velstrian Bid</Button>
-  </FinalCta>
+    lead={`${PRODUCT_NAME_BID} saves your search, sends new matching notices by email and scores each tender for fit across ${FIT_COUNT_WORD} dimensions, so you see what is worth bidding for first.`}
+  />
 </Base>
 
 <script>
@@ -494,10 +507,6 @@ const schema = [
 </script>
 
 <style>
-  .tf-crumb {
-    margin: 0 0 var(--stack-2);
-  }
-
   .tf-form,
   .tf-status,
   .tf-results {
@@ -566,10 +575,28 @@ const schema = [
     color: var(--c-interactive);
   }
 
+  .tf-form {
+    display: grid;
+    gap: var(--space-5);
+    padding: clamp(var(--space-6), 3vw, var(--space-10));
+  }
+
+  .tf-form__actions {
+    justify-self: start;
+    margin-top: 0;
+  }
+
+  .tf-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
   .tf-limits {
     max-width: var(--measure-band);
-    margin: 0 auto;
-    padding-inline-start: 1.2rem;
+    padding: var(--space-8) var(--space-8) var(--space-8) var(--space-12);
+    list-style: disc;
     font-family: var(--font-body);
     font-size: var(--t-body);
     line-height: 1.7;

@@ -12,22 +12,27 @@
  * A link that opens a new window says so to a screen reader.
  *
  * With `as="button"` it renders a real <button> for an in-page action such as
- * opening the tour dialog, with `data-*` passed through for the script.
+ * opening the tour dialog, with `data-*` passed through for the script. A
+ * form passes `type="submit"` or `type="reset"` and an `id` for its script
+ * (the free tools), so a form's buttons are this button too.
  */
 interface Props {
   href?: string;
   variant?: 'primary' | 'secondary' | 'quiet';
   newWindow?: boolean;
   as?: 'a' | 'button';
+  /** For `as="button"`: the button's type, `button` unless a form says otherwise. */
+  type?: 'button' | 'submit' | 'reset';
+  id?: string;
   [key: `data-${string}`]: string | undefined;
 }
-const { href, variant = 'primary', newWindow = false, as = 'a', ...rest } = Astro.props;
+const { href, variant = 'primary', newWindow = false, as = 'a', type = 'button', id, ...rest } = Astro.props;
 const data = Object.fromEntries(Object.entries(rest).filter(([k]) => k.startsWith('data-')));
 ---
 
 {
   as === 'button' ? (
-    <button type="button" class={`ea-btn ea-btn--${variant}`} {...data}>
+    <button type={type} id={id} class={`ea-btn ea-btn--${variant}`} {...data}>
       <slot name="icon" />
       <span class="ea-btn__label">
         <slot />
@@ -35,6 +40,7 @@ const data = Object.fromEntries(Object.entries(rest).filter(([k]) => k.startsWit
     </button>
   ) : (
     <a
+      id={id}
       class={`ea-btn ea-btn--${variant}`}
       href={href}
       target={newWindow ? '_blank' : undefined}

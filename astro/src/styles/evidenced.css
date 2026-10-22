@@ -195,6 +195,12 @@ main > .ea-sec * {
   width: 100%;
 }
 
+/* A script hides a button with the attribute (the free tools' pager), and a
+   class that sets display would otherwise outrank the browser's own rule. */
+.ea-btn[hidden] {
+  display: none;
+}
+
 .ea-btn {
   position: relative;
   display: inline-flex;
@@ -945,6 +951,18 @@ main > .ea-sec * {
 
 .ea-page-hero__label {
   margin-bottom: var(--space-4);
+}
+
+/* One row of chips under a page hero (PageHero `after`), centred on the head. */
+.ea-page-hero__after {
+  margin-top: var(--space-6);
+}
+
+.ea-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
 }
 
 /* The visible trail above a page hero's label (ui/Breadcrumb.astro, fed from
