@@ -109,6 +109,12 @@ const LOCK = {
   ],
   /** £0.10 per credit. Lock section 1, PUBLIC. Pence, so it stays an integer. */
   overagePencePerCredit: 10,
+  /** The extra seat add on for Pro and Buyer Pro, OWNER DECISION D196 (2026-10-10,
+      R285-TX-BILLING-SEAT-ADDON-01). Platform catalogue packages/pricing/catalogue.ts
+      SEAT_ADDON_MONTHLY_PENCE 4500, and the annual seat add on 48600 pence (45 x 10.8,
+      the lock's annual rule applied per seat). Published on /pricing/ by the billing
+      and pricing spec Part 2 (W3, W4) so "no hidden setup fees" is true. */
+  seatAddon: { monthly: 45, annual: 486 },
 };
 
 /* ── FORBIDDEN ON ANY PUBLIC SURFACE ─────────────────────────────────────────
@@ -178,7 +184,7 @@ const ALLOWED_POUNDS = [];
  */
 function checkCatalogue(cat) {
   const bad = [];
-  const { PLANS, BUYER_PLANS, CREDIT_TOPUPS, OVERAGE_PENCE_PER_CREDIT } = cat;
+  const { PLANS, BUYER_PLANS, CREDIT_TOPUPS, OVERAGE_PENCE_PER_CREDIT, SEAT_ADDON } = cat;
 
   /* [R285-P2-DROP-01] The Buyer offerings, held against D195 the same way. */
   if (!Array.isArray(BUYER_PLANS) || BUYER_PLANS.length !== LOCK.buyerPlans.length) {
@@ -286,6 +292,14 @@ function checkCatalogue(cat) {
   if (OVERAGE_PENCE_PER_CREDIT !== LOCK.overagePencePerCredit) {
     bad.push(
       `overage is ${OVERAGE_PENCE_PER_CREDIT}p a credit, lock says ${LOCK.overagePencePerCredit}p`,
+    );
+  }
+
+  /* D196: the published seat add on must be the locked one, both cadences. */
+  if (!SEAT_ADDON || SEAT_ADDON.monthly !== LOCK.seatAddon.monthly || SEAT_ADDON.annual !== LOCK.seatAddon.annual) {
+    bad.push(
+      `SEAT_ADDON is ${SEAT_ADDON ? `£${SEAT_ADDON.monthly} a month, £${SEAT_ADDON.annual} a year` : 'missing'}, ` +
+        `D196 says £${LOCK.seatAddon.monthly} a month, £${LOCK.seatAddon.annual} a year`,
     );
   }
 
@@ -412,8 +426,15 @@ function runControls() {
       { name: 'Buyer Portfolio', monthly: 999, annual: 9999, seats: 10, credits: 3000, guestEvaluators: 25 },
     ],
     OVERAGE_PENCE_PER_CREDIT: 15,
+    SEAT_ADDON: { monthly: 49, annual: 529 },
   };
   const caught = checkCatalogue(corrupt);
+  /* D196: the seat add on rule must fire on its own, named, not just add to
+     the count. The corrupt object carries the Starter price as a seat price,
+     the mistake a hand-typed £45 most plausibly turns into. */
+  if (!caught.some((c) => c.startsWith('SEAT_ADDON '))) {
+    broken.push('catalogue control: a corrupted SEAT_ADDON drew no finding. The D196 seat add on is not checked.');
+  }
   /* A correct checker reports NINE findings against that object (more since the
      Buyer rows joined it): Starter seats, then Pro seats, credits and annual, then
      Portfolio at the superseded D232 monthly and its annual, then the top-up
@@ -480,6 +501,7 @@ function runControls() {
     })),
     CREDIT_TOPUPS: LOCK.topups,
     OVERAGE_PENCE_PER_CREDIT: LOCK.overagePencePerCredit,
+    SEAT_ADDON: LOCK.seatAddon,
   };
   const falsePositives = checkCatalogue(cleanSample);
   if (falsePositives.length) {
@@ -562,6 +584,8 @@ for (const file of pages) {
         ...LOCK.buyerPlans.filter((p) => p.monthly !== null).map((p) => LOCK.annual(p.monthly)),
         ...LOCK.topups.map((t) => t.price),
         LOCK.overagePencePerCredit / 100,
+        LOCK.seatAddon.monthly,
+        LOCK.seatAddon.annual,
       ]);
 
       if (allowedValues.has(amount.value)) continue;
