@@ -612,14 +612,6 @@ const ASSERTIONS = {
  * ══════════════════════════════════════════════════════════════════════════ */
 const EXCEPTIONS = new Map([
   [
-    'singleImage:Assets/blog-photos/uk-parliament-westminster.jpg',
-    {
-      ceiling: 296 * KB,
-      why:
-        '300,939 B against 250 KB. It is the JPEG FALLBACK of a four-width AVIF/WebP ladder, so it is served only to a browser that can take neither modern format — which on this site is a browser that cannot render the CSS either. Nobody is measurably paying for it, and re-encoding it is a one-line job for whoever next runs scripts/build-blog-photos.mjs. Listed rather than fixed here because the blog photo set is under active work and re-encoding somebody else\'s asset mid-pass is how two people produce three versions of one file.',
-    },
-  ],
-  [
     'jsRouteMax:all',
     {
       ceiling: 15 * KB,
