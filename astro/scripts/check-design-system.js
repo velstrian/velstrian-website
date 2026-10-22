@@ -118,6 +118,12 @@
  *                  1.67:1 on the light pane the day it was created, with four
  *                  more between 1.96:1 and 2.52:1 behind it. Reported under the
  *                  `token` label, which is why it has no counter of its own.
+ *   9 ONE THEME    The site has one light theme (owner 2026-10-22). No source
+ *                  file reads prefers-color-scheme, writes data-theme or
+ *                  colorScheme, or declares a color-scheme other than light.
+ *                  Comments are blanked first. Red proved on Base.astro set
+ *                  back to `color-scheme: dark` and on a probe stylesheet
+ *                  holding a prefers-color-scheme query.
  *
  * ── WHAT THIS CANNOT SEE, STATED RATHER THAN IMPLIED ────────────────────────
  *
@@ -597,7 +603,7 @@ const routeList = routes(DIST).sort();
 const violations = [];   // not recorded -> failure
 const recorded = [];     // on the list -> printed, never fatal
 const seenKeys = new Set();
-const counts = { align: 0, type: 0, card: 0, token: 0, heading: 0, icon: 0, gradient: 0 };
+const counts = { align: 0, type: 0, card: 0, token: 0, heading: 0, icon: 0, gradient: 0, theme: 0 };
 
 function report(rule, where, what, detail) {
   counts[rule]++;
@@ -1232,7 +1238,7 @@ if (recorded.length) {
   const unique = [...byKey.values()];
   const design = unique.filter((x) => !isDebt(x));
   const debt = unique.filter(isDebt);
-  const order = ['align', 'type', 'card', 'token', 'heading', 'icon', 'gradient'];
+  const order = ['align', 'type', 'card', 'token', 'heading', 'icon', 'gradient', 'theme'];
   const print = (list) => {
     for (const rule of order) {
       for (const x of list.filter((y) => y.rule === rule)) {
@@ -1261,6 +1267,30 @@ if (stale.length) {
   for (const k of stale) console.log(`    ${k}`);
 }
 
+/* ── RULE 9: ONE THEME (R285-WEB-SINGLE-THEME-01, owner 2026-10-22) ────────
+ *
+ * Owner: "for website we must have only one single theme". The site is light,
+ * with dark BANDS inside it as design. A second theme is any of: a rule that
+ * reads `prefers-color-scheme`, a `data-theme` selector or attribute, a script
+ * that sets `colorScheme`, or a `color-scheme` declaration other than `light`.
+ * Base.astro said `color-scheme: dark` until this rule existed, which gave a
+ * light page a dark scrollbar and dark form controls. Comments are blanked
+ * before the scan, because tokens.css documents the platform's two themes in
+ * prose and prose is not a theme. */
+{
+  const THEME = /prefers-color-scheme|data-theme|colorScheme|color-scheme\s*:\s*(?!light\b)[a-z]/gi;
+  const blank = (m) => m.replace(/[^\n]/g, ' ');
+  for (const file of walk(SRC).filter((f) => /\.(css|astro|ts|js|mjs)$/.test(f))) {
+    const code = fs.readFileSync(file, 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, blank)
+      .replace(/<!--[\s\S]*?-->/g, blank)
+      .replace(/(^|[^:'"`])(\/\/[^\n]*)/g, (m, a, c) => a + blank(c));
+    for (const m of code.matchAll(THEME)) {
+      report('theme', rel(file), m[0], `line ${code.slice(0, m.index).split('\n').length}: a second theme path`);
+    }
+  }
+}
+
 if (violations.length) {
   /* THE GRADIENT LINE STATED THE PRE-AMENDMENT RULE UNTIL 2026-08-04. It read
      "every gradient comes from a --grad-* or --orb-* token; a mask is exempt",
@@ -1279,9 +1309,10 @@ if (violations.length) {
     heading: 'HEADINGS    one <h1> per route, no skipped levels',
     icon: 'ICON SLOT   a modifier paints inside the slot, it does not resize the box',
     gradient: 'GRADIENTS   every colour in a gradient resolves from a var(); a mask is exempt',
+    theme: 'ONE THEME   the site has one light theme: no prefers-color-scheme, data-theme or dark color-scheme',
   };
   console.error(`\ndesign-system: ${violations.length} DESIGN SYSTEM VIOLATION(S), NOT RECORDED\n`);
-  for (const rule of ['align', 'type', 'card', 'token', 'heading', 'icon', 'gradient']) {
+  for (const rule of ['align', 'type', 'card', 'token', 'heading', 'icon', 'gradient', 'theme']) {
     const group = violations.filter((v) => v.rule === rule);
     if (!group.length) continue;
     console.error(`  ${label[rule]}`);

@@ -490,7 +490,15 @@ const pageClass = `pg-${
      * rgb(5,7,14) against the concept's rgb(3,4,10) at all three viewports.
      * The per-section grounds already matched exactly; only the root did not. */
     background: var(--c-floor);
-    color-scheme: dark;
+    /* ONE THEME, LIGHT (owner 2026-10-22: "for website we must have only one
+       single theme", R285-WEB-SINGLE-THEME-01). This said `dark` from the
+       dark-ground era, so after design system v3 moved the page onto light
+       bands the browser still drew a dark scrollbar, dark form controls and a
+       dark overscroll beside white content. The site has no second theme:
+       nothing in src reads prefers-color-scheme, sets data-theme or toggles a
+       scheme, and check-design-system.js rule 9 keeps it that way. Dark bands
+       are design inside this one theme, not a theme of their own. */
+    color-scheme: light;
     /*
      * THE HEADER IS STICKY, SO EVERY ANCHOR JUMP LANDS UNDERNEATH IT.
      * Measured: header 73px, and following the skip link put #main-content at
