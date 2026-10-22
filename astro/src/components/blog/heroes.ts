@@ -151,39 +151,6 @@ export function heroFor(slug: string): Hero {
   return hero;
 }
 
-/**
- * CATEGORY ACCENT: read this before changing it.
- *
- * B1 tints each category label. The palette rule in specs/DESIGN-DECISIONS.md
- * section 3 reserves teal for verified, violet/orchid for refused or flagged
- * and cyan for interactive; a blog category is none of those, and the spec
- * flags exactly this about B1/B2/B3 ("Pick knowingly"). The owner picked B1
- * with that flag in front of them, so the tint ships.
- *
- * What is NOT arbitrary is WHICH label gets which hue. This is an explicit map
- * rather than a rotation by row index, so a category is the same colour every
- * time it appears and the colour identifies the category rather than the
- * position in the list. Cyan is absent because it is reserved for interactive.
- *
- * To retire the tint entirely, delete this map and the three `--ledger-accent`
- * branches in pages/blog/index.astro; the labels fall back to muted, which is
- * the B4 treatment.
- */
-export type CategoryAccent = 'teal' | 'violet' | 'pink';
-
-const CATEGORY_ACCENTS: Record<string, CategoryAccent> = {
-  'Social value': 'teal',
-  'Method statements': 'teal',
-  'Procurement Act 2023': 'teal',
-  'Sustainability & Compliance': 'teal',
-  'Tender Strategy & AI': 'violet',
-  Frameworks: 'violet',
-  'Getting started': 'violet',
-  'Private sector bidding': 'pink',
-  'PPN 026 & Social Value': 'pink',
-};
-
-/** Anything unmapped stays muted rather than picking a hue at random. */
-export function accentFor(category: string): CategoryAccent | null {
-  return CATEGORY_ACCENTS[category] ?? null;
-}
+/* The category accent map and accentFor() were removed 2026-10-22
+   (R285-WEB-ENTERPRISE-REDESIGN-01): nothing imported them after /blog/ moved
+   to design system v3, whose labels carry no per category hue. */

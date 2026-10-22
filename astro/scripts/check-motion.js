@@ -104,27 +104,7 @@ const HOME = 'src/styles/motion.css';
  * DELETE AN ENTRY THE MOMENT IT STOPS BEING TRUE.
  * ══════════════════════════════════════════════════════════════════════════ */
 const ALLOWED = new Map([
-  /* ── 1 TIMELINE ──────────────────────────────────────────────────────────
-   *
-   * [data-field] ambient parallax in tokens.css was retired on 2026-10-21 (D250).
-   * Now only motion.css owns scroll-driven timelines. */
 
-  ['timeline  src/pages/about.astro  animation-timeline:',
-   'DEBT: the trust-row dots, about.astro:946-962. A NAMED view timeline (--trust-row) driving six ::before dots through a five-step stagger, written for the right reason — the design sheet asked for an IntersectionObserver and the author refused it as the one-off JavaScript the charter forbids — and it is nonetheless a second scroll-driven system with its own ranges, its own stagger arithmetic and its own fallback argument. motion.css now owns exactly those three things. The dots themselves are a legitimate figure that the central arrival does not replace, so the correct fix is to lift the RANGES and the stagger step onto the shared custom properties, not to delete the effect'],
-  ['timeline  src/pages/about.astro  view-timeline-name:',
-   'DEBT: names the timeline for the entry above. Moves with it'],
-  ['timeline  src/pages/about.astro  view-timeline-axis:',
-   'DEBT: names the axis for the entry above. Moves with it'],
-  ['timeline  src/pages/about.astro  animation-range:',
-   'DEBT: the five staggered ranges for the entry above, hand-written as 12/17/22/27/32% against motion.css computing the same shape from --arrive-item-step. Moves with it'],
-
-  /* ── 2 ENTRANCE ──────────────────────────────────────────────────────────*/
-  ['entrance  src/pages/about.astro  @keyframes chip-in',
-   'DEBT, REDUCED 2026-08-03. It was `from { opacity: 0 }` on the four role chips, staggered 0.1 of a beat apart: content animated from FULLY INVISIBLE, the pattern that left 4 of 9 legacy homepage sections permanently hidden and then failed the axe gate a second time in the rebuild. The floor is now 0.35, the same value styles/motion.css uses for every arrival on the site, so nothing is ever hidden and axe has nothing to sample. WHAT REMAINS IS DUPLICATION, NOT A DEFECT: this is still a component-local entrance and motion.css owns arrival. It survives because these chips sit above the fold, where the central arrival correctly does nothing — so deleting it would remove the sequence rather than centralise it, and that is a design decision for the owner rather than a fix'],
-  ['entrance  src/pages/about.astro  @keyframes bloom-in',
-   'the hero key light on /about: two aria-hidden blurred blooms rising from 0.55 alpha on load. It is not content, it cannot be read, and 0.55 is above the central floor of 0.35 anyway. It is a LIGHT arriving rather than a block arriving, and motion.css deliberately owns only the second. Kept as design; the only thing wrong with it is that its 0.55 is written here rather than beside --arrive-floor'],
-  ['entrance  src/pages/about.astro  @keyframes dot-settle',
-   'the trust-row dot itself, from 0.4 alpha and no glow to its shipped state. A 6px mark, aria-hidden, and the fallback is the settled dot rather than the dim one, so a browser without the timeline shows the finished mark. Same argument as bloom-in: a mark settling is not a block arriving. It is listed under DEBT above only for the TIMELINE it hangs on, not for this'],
 
   /* ── 3 OBSERVER ──────────────────────────────────────────────────────────
    *
@@ -165,8 +145,6 @@ const ALLOWED = new Map([
 
   ['observer  src/scripts/motion.ts  IntersectionObserver',
    'the `data-lit` trigger, and the one copy of it that should survive. It does not reveal content: it sets data-lit="on" once on a wrapper whose only job is to start ambient light-field loops, every one of them aria-hidden and behind the text. Rest state is final state, so if it never fires the page is complete and merely still. That is the exact inversion of the sv-reveal pattern rather than a smaller dose of it. If it ever gates something a reader has to read, it becomes a violation'],
-  ['observer  src/pages/bid.astro  IntersectionObserver',
-   'DEBT: a second, inline, byte-identical copy of the `data-lit` trigger above, at bid.astro:885. Same fifteen lines, same threshold of 0.25, same unobserve. The stated reason is payload — an is:inline script avoids a module request on a route already at 97 KB against a 100 KB budget — which is a real argument for INLINING and not an argument for a second implementation. It should import the shared one or the shared one should be inlined by the layout for every route'],
 ]);
 
 /* ══════════════════════════════════════════════════════════════════════════

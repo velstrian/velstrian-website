@@ -161,8 +161,6 @@ const ALLOWED_LOSSES = new Map([
   /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: the pages after the product
      pages on design system v3 (Claude lane). REWORDED heads, the content under
      each confirmed on the built page. */
-  ['/blog/  heading: statute, in plain english.',
-   'RULE 0-U: "statute" is a word a first time bidder has to look up. Now "Procurement rules, in plain English." in the /blog/ hero, over the same featured post and the same register of every guide.'],
   ['/sectors/  heading: the statute behind your sector.',
    'RULE 0-U: "statute" is a word a first time bidder has to look up. Now "What wins work in your sector." in the /sectors/ hero, over the same lead ("Different rules, one product") and the same nine sector cards.'],
 
@@ -193,29 +191,6 @@ const ALLOWED_LOSSES = new Map([
   ['/bid/  heading: the same four steps, in the product.',
    'The product screens carousel it headed is still on /bid/, retitled "See the screens you will use." in plain words.'],
 
-  /*
-   * 2026-09-06. The homepage heading "The rest of the workstation." went with
-   * the section that carried it, and this is a REPLACEMENT rather than a loss.
-   *
-   * Owner instruction, after several days reviewing the proposal on /home-2:
-   * "i want home-2 becomes live home page by replacing the current live page".
-   * The previous homepage introduced its extra product screens with a section
-   * head reading "The rest of the workstation."; the rebuilt page presents the
-   * same five screens inside one pinned app frame that a reader scrolls
-   * through, so there is no second block to introduce and nothing to head.
-   *
-   * WHAT A READER CAN STILL DO IS THE TEST THIS GATE APPLIES, and it is
-   * unchanged: every one of those screens is still on the page, still named,
-   * still captioned, and now also reachable one at a time from the dots beside
-   * the frame. What went is a sentence that existed to say "there is more
-   * below", on a page where the more is no longer below but inside.
-   *
-   * Recorded here rather than swept up by `--update` because a baseline
-   * refresh would have erased the record of WHY the sentence went along with
-   * the sentence itself.
-   */
-  ['/  heading: the rest of the workstation.',
-   'The section head that introduced the second block of product screens on the previous homepage. The rebuilt homepage presents those same five screens inside one pinned frame the reader scrolls through, so the block it introduced no longer exists as a separate block. Every screen it pointed at is still on the page, named and captioned, and now also selectable from the dots beside the frame.'],
 
   /* 2026-10-21: R285-WEB-ENTERPRISE-REDESIGN-01 Structure Addendum (owner approved).
      Replaced repetitive mechanics, documentation-style screen-by-screen descriptions,
@@ -250,8 +225,6 @@ const ALLOWED_LOSSES = new Map([
 
   ['/  heading: qualify. draft. prove it.',
    'Replaced by outcome-led hero ("Better bids. Defensible evidence. Measurable delivery.") under R285-WEB-ENTERPRISE-REDESIGN-01.'],
-  ['/  heading: the engine that refuses to make things up.',
-   'Replaced by customer outcomes section ("What your bid and delivery teams gain.") under R285-WEB-ENTERPRISE-REDESIGN-01.'],
   ['/  heading: a figure with nothing behind it does not survive the draft.',
    'Replaced by one-tender 5-stage scenario under R285-WEB-ENTERPRISE-REDESIGN-01, where refusal scan is consolidated into the Review stage.'],
   ['/  heading: three numbers you are already held to',
@@ -276,76 +249,9 @@ const ALLOWED_LOSSES = new Map([
    'Hero workbench radio controls retired under R285-WEB-ENTERPRISE-REDESIGN-01 and owner decision D1.'],
 
 
-  /*
-   * 2026-08-31. The /security/ heading "GDPR-aligned data processing" became
-   * "GDPR compliant", and this is a CORRECTION rather than a loss.
-   *
-   * "Aligned" is the right hedge for a STANDARD nobody has certified us
-   * against. It is the wrong word for a LAW. The ICO is explicit that
-   * certification under Article 42 is voluntary and only a way to DEMONSTRATE
-   * compliance, so GDPR compliance is self assessed by design and there is no
-   * body that confers it. Hedging it read as evasive to the one audience that
-   * matters, a procurement reader, and it understated what the company can
-   * actually evidence: ICO registration, signed DPAs with every named
-   * sub-processor, EU residency, RLS on all 358 production tables and erasure
-   * implemented in code.
-   *
-   * The reader loses nothing and gains a plainer statement of the same fact.
-   */
-  ['/security/  heading: gdpr-aligned data processing',
-   'Renamed to "GDPR compliant" on 2026-08-31 by owner instruction. GDPR compliance is a legal obligation that is self assessed by design, unlike ISO 27001 where an accredited body issues a certificate, so the two must not be hedged the same way. The subject-rights content under the heading is unchanged and the DPA sentence is still there.'],
 
-  /*
-   * 2026-08-31. The /security/ heading lost the words "UK-hosted", and this is
-   * a CORRECTION RATHER THAN A LOSS, which is why it is recorded here instead
-   * of being swept up by a baseline refresh.
-   *
-   * 97f136b6 ("keep the residency claim proportionate to what residency
-   * means") replaced it deliberately. The page's own body is the evidence the
-   * old heading was an OVERCLAIM: primary customer data is in AWS eu-west-1,
-   * which is IRELAND, the API runs in the EU, and only the web application
-   * runs in the UK. A visitor reading "UK-hosted" would have formed a belief
-   * about where their data sits that the sub-processor table on the same page
-   * contradicts.
-   *
-   * THIS IS DELIBERATELY NOT A `--update` REFRESH. Refreshing the baseline
-   * would have accepted this line AND silently accepted every other loss in
-   * the same build, including ones nobody has looked at. A named entry accepts
-   * exactly one signal and leaves the rest still guarded. A baseline refresh
-   * is the widest possible waiver wearing the clothes of routine maintenance.
-   */
-  ['/security/  heading: encrypted, uk-hosted, and documented.',
-   'Replaced in 97f136b6 by "Encrypted, documented, and auditable." because "UK-hosted" was an overclaim the page itself contradicted: primary customer data is stored in AWS eu-west-1 (Ireland), the API runs in the EU, and only the web application runs in the UK. The reader loses nothing true and stops being told something false. Residency is still stated on the page, more precisely, under its own EU data residency section with the processing locations listed under sub-processors.'],
 
-  /*
-   * A-196, 2026-08-30. The PPN 002 glossary entry was deleted by owner
-   * instruction and every link to it was repointed at /glossary/ppn-026 in the
-   * same change, so 44 routes lose the same one link. ONE WILDCARD LINE RATHER
-   * THAN 44, because the `*` key exists for exactly this: a single signal that
-   * left every page at once for a single reason. Forty-four identical entries
-   * would be longer without being truer, and a reviewer would skim them.
-   *
-   * IT IS SAFE TO WILDCARD ONLY BECAUSE THE ROUTE IS ASSERTED ELSEWHERE. The
-   * retirement itself is checked in the affirmative, every run, by the
-   * RETIRED_ROUTES entry below: the page must not ship, and a rule in
-   * _redirects must still carry it. This line permits the missing LINKS. It
-   * does not permit the missing PAGE, and nothing here would stay quiet if the
-   * redirect were dropped.
-   */
-  ['*  link: /glossary/ppn-002',
-   'The PPN 002 glossary entry was deleted 2026-08-30 by owner instruction and every internal link to it was repointed at /glossary/ppn-026 in the same change. The reader loses nothing: the destination is the entry for the edition that applies to central government procurements commenced on or after 1 January 2027, and the old URL 301s there for anyone holding it. Removing our page is an editorial decision about this site and not a statement about the regulation: GOV.UK has not withdrawn, replaced or superseded PPN 002.'],
 
-  /*
-   * A-197, 2026-08-30, the rest of the PPN 002 sweep. The pillar post moved from
-   * /blog/ppn-002-social-value-guide to /blog/ppn-026-social-value-guide and
-   * every internal link moved with it in the same change, so the routes that
-   * carried a link to the old slug lose it. ONE WILDCARD LINE for the same
-   * reason as the entry above: a single signal that left several pages at once
-   * for a single reason. The PAGE is not permitted here, only the LINKS: the old
-   * route is asserted in the affirmative, every run, by RETIRED_ROUTES below.
-   */
-  ['*  link: /blog/ppn-002-social-value-guide',
-   'The social value pillar post was republished at /blog/ppn-026-social-value-guide on 2026-08-30 and every internal link was repointed in the same change. The reader loses nothing: the destination is the same article rewritten against the edition that applies from 1 January 2027, and the old URL 301s there for anyone holding it. Renaming our own URL is an editorial decision about this site and not a statement about the regulation.'],
 
   /* R285-WEB-CLAIMS-AUDIT-01, owner decision D252 (2026-10-21). Each of these
      was a claim the audit found wrong in one direction or the other, and each
@@ -369,65 +275,17 @@ const ALLOWED_LOSSES = new Map([
   ['*  link: status.crowagent.ai',
    'The public status URL moved to https://status.velstrian.com (Better Stack) on 2026-10-21 per owner decision D250. Every internal link across the footer and legal pages now points to the new status host.'],
 
-  /* The PPN 002 term card came off the glossary index in the same pass. Its
-     h3 was the term name, so the heading goes with the card. The subject is not
-     lost: PPN 026 has its own card, its own full entry at /glossary/ppn-026 and
-     its own row on /sources. */
-  ['/glossary/  heading: ppn 002',
-   'The PPN 002 term card was removed from the glossary index on 2026-08-30 by owner instruction that the site must carry no outdated regulatory detail. The card immediately above it is PPN 026, which links to the full entry for the edition that applies to central government procurements commenced on or after 1 January 2027. Removing our card is an editorial decision about this site: GOV.UK has not withdrawn, replaced or superseded PPN 002.'],
 
-  /* R285-P2-DROP-01, D195 (2026-10-09). The buyer side of /pricing said there was no price
-     and explained why. Buyer Pro is now a listed price and Buyer Portfolio is contact us, so
-     the "Buyer side" card and its FAQ question described a position the owner replaced. The
-     question is rewritten as "How is CrowMark Buyer priced?", which answers it with the price. */
-  ['/pricing/  heading: buyer side',
-   'Replaced by the Buyer Pro and Buyer Portfolio cards. The single "Contact sales" buyer card described the position D195 superseded, and the reader now sees both offerings and the Buyer Pro price.'],
-  /* R285-P2-SELF-SERVE-SIGNUP-01, D236 (2026-10-19). Sign up is self serve, so the
-     Request access step went from the website. The roadmap's closing section asked
-     the reader to request access, and it now asks them to start. */
-  ['/roadmap/  heading: request access to crowmark',
-   'Renamed "Start with CrowMark" under D236, which removed the Request access step from the app and the website. The section, its Start now button and the enquiry link beside it are all still there, so the reader loses no action, only the name of a step that no longer exists.'],
-  ['/pricing/  heading: why is there no price for the buyer side?',
-   'Rewritten as "How is CrowMark Buyer priced?" under D195, because Buyer Pro is a listed price. The old question named a position that no longer holds and would have kept it alive in search results.'],
-  /* /sources printed the previous edition's five missions from one shared
-     definition, and a record for the previous edition itself. Both came off in
-     the same pass. The heading and the two gov.uk links go with them. */
-  ['/sources/  heading: the five missions',
-   'The five missions are the PREVIOUS edition\'s model structure. PPN 026 publishes its own and this site has not sourced it, so a card naming five missions beside a record about the current floor would have been stating a structure we cannot cite. Removed 2026-08-30 rather than relabelled, because relabelling it would have been the guess the card existed to avoid.'],
   /* The PPN 002 record itself is NOT listed here, and that is measured rather
      than assumed: its h3 was "Procurement Policy Note 002, the previous edition"
      and the surviving PPN 026 card is headed "Procurement Policy Note 026", which
      clears the 0.6 heading threshold on its own. The two gov.uk links below do
      not survive, because a URL is compared exactly. Keys carry no scheme:
      normHref strips it. */
-  ['/sources/  link: www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts',
-   'The primary-source link on the PPN 002 record, removed with the record on 2026-08-30. That record described itself as retained only while a figure on this site still rested on it, and after the duty-card move (317fd5ef) and this pass, none does: the 10% homepage figure now resolves to #ppn-026, which states both weighting bands with their citation. The one sentence on it that was OURS rather than the regulation\'s, that CrowAgent stops supporting the previous edition on 31 December 2026, moved onto the PPN 026 record and is still published. /sources still links the primary source for every figure it prints, which is the whole job of the page.'],
-  ['/sources/  link: www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts/procurement-policy-note-002-the-social-value-model-html',
-   'The primary-source link on the five-missions card, removed with the card on 2026-08-30 for the reason recorded against that heading above.'],
   ['/blog/ai-tender-evaluation-uk-public-sector/  link: www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement',
    'R285-WEB-CLAIMS-AUDIT-01, 2026-10-22. The post names PPN 026 in its body but its sources list cited PPN 002 with the PPN 002 mandatory date. The owner rule is PPN 026 only, so the citation now links the PPN 026 record on gov.uk with its published and applies-from dates, the same source /sources/ cites.'],
 
-  /*
-   * THREE LOSSES THAT LANDED IN EARLIER COMMITS OF THIS SAME SWEEP AND WERE
-   * NEVER RECORDED. Found by running this gate on 2026-08-30, not by reading the
-   * diffs: 9e3d40c7 and 317fd5ef each renamed a heading off PPN 002 without an
-   * entry here, so the gate had been carrying unexplained losses since. They are
-   * written down now, with the commit that made each one, because a loss nobody
-   * recorded is indistinguishable from a loss nobody noticed.
-   */
-  ['/blog/regulatory-updates-2026/  heading: track your ppn 002 scoring',
-   'Renamed to "Track your social value scoring" in the 9e3d40c7 sweep. The closing call to action is unchanged in what it offers and its body still names PPN 026, so the reader loses a mention of the retired edition and nothing else.'],
-  ['/crowmark/  heading: deterministic ppn 002 maths',
-   'Renamed to "Deterministic social value maths" in the 9e3d40c7 sweep. The section is the same section and makes the same claim, that the arithmetic runs in code and the model never computes a figure. It names no edition now, which is deliberate: the claim is about the engine and is true under any edition.'],
-  ['/glossary/toms-framework/  heading: ppn 002',
-   'The related-term sidebar on the TOMs entry was repointed from PPN 002 to PPN 026 in the 9e3d40c7 sweep, and the sidebar title is the heading. The reader gains the entry for the edition that applies to central government procurements commenced on or after 1 January 2027 and loses a link to a page that no longer exists.'],
 
-  /* The same change renamed two headings that named the retired edition in a
-     title. The sections are still there and still say what they said. */
-  ['/resources/  heading: ppn 002 social value: how the 10% weighting works',
-   'Renamed to "PPN 026 Social Value: How the Model Is Scored" in the A-196 sweep. The card and its link are unchanged, and the 10% weighting is not restated under the new edition because that edition\'s weighting is not sourced.'],
-  ['/roadmap/  heading: ppn 002 social value (mandatory from 1 october 2025)',
-   'Renamed to "PPN 026 Social Value (applies from 1 January 2027)" in the A-196 sweep. The regulatory clock row now carries the current edition with its published date and its application date.'],
 ]);
 
 /*
