@@ -12,6 +12,8 @@
  * A capture comes from staging and a neutral demo organisation, never from a
  * customer, and its caption still says so.
  */
+import real from './product-captures.real.json';
+
 export interface Capture {
   /** Served path, for example /Assets/product-captures/bid-answer-1440.webp */
   src: string;
@@ -66,72 +68,81 @@ export interface CropView {
  *     public body by a word the site never prints, and the answer shot shows
  *     the tender citation defect. The desktop crops serve every width.
  */
-const FIND_FEED: Capture = {
-  src: '/Assets/product-captures/web/find-feed-card.webp',
-  width: 1100,
-  height: 210,
-  alt: 'A live public contract in the Velstrian Bid feed: CVG close and cleaning contract 2027 to 2029, Clyde Valley Housing Association, facilities management, Scotland, published 5 days ago, with Open in Velstrian Bid, Find on Find a Tender and Save buttons.',
-  caption: 'A real screen from a demo account: one contract from the morning feed, close up.',
-  /* wide: the card from its left edge to just past "FTS" (552px), every line
-     whole, drawn about 1.3 times its app size at 732px. phone: the title, the
-     buyer, the value, sector and region and the quote (to just past "Scotland",
-     368 by 140), about 0.85 times at 309px. The relevance pill sits at the far
-     right of a 1100px card and cannot share a readable crop with the title. */
-  view: {
-    wide: { x: 0, y: 0, w: 570, h: 210 },
-    phone: { x: 0, y: 0, w: 368, h: 140 },
-  },
-};
-const ANSWER_LIST: Capture = {
-  src: '/Assets/product-captures/web/answer-question-list.webp',
-  width: 333,
-  height: 690,
-  alt: 'The list of tender questions in Velstrian Bid, each marked AI drafted, with where the draft came from, a word count against its limit, and No source found on the answers that still need proof.',
-  caption: 'A real screen from a demo account: every question drafted, each one showing where it came from or that it still needs proof.',
-};
-const ANSWER_LIBRARY: Capture = {
-  src: '/Assets/product-captures/web/answer-from-library.webp',
-  width: 800,
-  height: 273,
-  alt: 'A drafted answer in Velstrian Bid about keeping six public buildings clean, safe and well maintained, 222 of 300 words.',
-  caption: 'A real screen from a demo account: an answer drafted from your library.',
-};
-const REFUSAL_REAL: Capture = {
-  src: '/Assets/product-captures/web/refusal-no-source.webp',
-  width: 800,
-  height: 462,
-  alt: 'Question 6 asks for a carbon cut in tonnes. The drafted answer says no carbon reduction target is recorded and sets out how a baseline will be measured instead. Below it: drafted with AI, no source recorded.',
-  caption: 'A real screen from a demo account: asked for a figure it had no proof of, it said so instead of inventing one.',
-};
+/*
+ * R285-WEB-REAL-SCREENSHOTS-01 (2026-10-22): the four hand cropped DARK captures
+ * above were replaced by LIGHT captures from the harness, written to the same
+ * file names, so their hand entries (FIND_FEED, ANSWER_LIST, ANSWER_LIBRARY,
+ * REFUSAL_REAL) were removed rather than left describing a picture that is no
+ * longer in the file. Their slots now read product-captures.real.json. The
+ * reasons above for leaving decide, check and the mobile shots out still hold,
+ * and the harness enforces them (it refuses a weak fit, a retired brand word and
+ * any word the site never prints).
+ */
 
-export const CAPTURES: Record<string, Capture | null> = {
+/*
+ * R285-WEB-REAL-SCREENSHOTS-01. The capture harness
+ * (crowagent-platform/web/e2e/product-captures/website.spec.ts) signs in to
+ * STAGING as the demo organisation, captures each slot in the light theme at
+ * 2x, writes the WebP into Assets/product-captures/web/ and records the slot,
+ * its size, its crop regions, alt and caption in product-captures.real.json.
+ * An entry there wins over the hand entry below, so a recapture is a harness
+ * run and nothing else. A slot with no entry anywhere keeps its drawn
+ * recreation and its "Example data" caption, so nothing is deleted before a
+ * real screen exists for it.
+ */
+interface RealFile {
+  entries: Record<string, Capture>;
+}
+const REAL: Record<string, Capture> = (real as RealFile).entries;
+
+const HAND: Record<string, Capture | null> = {
   'home-hero-answer': null,
   'home-who-small': null,
   'home-who-team': null,
   'home-who-buyer': null,
-  'home-cap-find': FIND_FEED,
+  'home-cap-find': null,
   'home-cap-decide': null,
-  'home-cap-answer': ANSWER_LIST,
+  'home-cap-answer': null,
   'home-cap-check': null,
   'home-cap-deliver': null,
   'home-refusal-check': null,
   /* The product carousel, components/evidenced/Screens.astro. */
   'home-car-board': null,
-  'home-car-answer': ANSWER_LIBRARY,
-  'home-car-refusal': REFUSAL_REAL,
+  'home-car-answer': null,
+  'home-car-refusal': null,
   'home-car-deliver': null,
   /* /contact/ "What you will see on the call": the call opens where most
      people start, the morning feed. */
-  'contact-call-find': FIND_FEED,
+  'contact-call-find': null,
   /* components/evidenced/ProductScreen.astro: the one screen on /compare/,
      the comparisons, /sectors/, the sector pages and /partners/. These
      replaced Figma drawings that carried the old brand inside the picture. */
-  'screen-find': FIND_FEED,
-  'screen-answer-list': ANSWER_LIST,
-  'screen-answer-library': ANSWER_LIBRARY,
+  'screen-find': null,
+  'screen-answer-list': null,
+  'screen-answer-library': null,
   'screen-evidence': null,
   'screen-buyer-requirement': null,
   'screen-buyer-delivery': null,
   'screen-insights': null,
   'screen-action-centre': null,
+  /* Slots on /about/, /bid/ and /buy/ that read a key with no entry until
+     this row registered them. Listed so the inventory and the harness name
+     the same set of slots. */
+  'about-hero': null,
+  'bid-hero': null,
+  'bid-decide': null,
+  'bid-check': null,
+  'bid-deliver': null,
+  'buy-hero': null,
+  'buy-boundary-gate': null,
+  'buy-cap-request': null,
+  'buy-cap-collect': null,
+  'buy-cap-compare': null,
+  'buy-cap-evidence': null,
+  'buy-cap-decision': null,
 };
+
+/** Every slot key, a real capture where one exists, otherwise null. */
+export const CAPTURES: Record<string, Capture | null> = Object.fromEntries(
+  Object.keys({ ...HAND, ...REAL }).map((key) => [key, REAL[key] ?? HAND[key] ?? null]),
+);

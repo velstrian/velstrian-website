@@ -1,0 +1,105 @@
+{
+  "note": "Written by crowagent-platform/web/e2e/product-captures/website.spec.ts (R285-WEB-REAL-SCREENSHOTS-01). Do not edit by hand, re-run the harness. Every entry is a real light theme capture of the neutral demo organisation on STAGING, never a customer.",
+  "generated_at": "2026-10-22T11:09:36.648Z",
+  "source": "staging-app.velstrian.com",
+  "entries": {
+    "home-car-answer": {
+      "src": "/Assets/product-captures/web/answer-from-library.webp",
+      "width": 811,
+      "height": 479,
+      "alt": "A drafted answer in Velstrian Bid to question 1 of the demo tender, about keeping six public buildings clean, safe and well maintained, written from the business’s own documents, 222 of 300 words.",
+      "caption": "A real screen from a demo account: an answer drafted from your own documents."
+    },
+    "screen-answer-library": {
+      "src": "/Assets/product-captures/web/answer-from-library.webp",
+      "width": 811,
+      "height": 479,
+      "alt": "A drafted answer in Velstrian Bid to question 1 of the demo tender, about keeping six public buildings clean, safe and well maintained, written from the business’s own documents, 222 of 300 words.",
+      "caption": "A real screen from a demo account: an answer drafted from your own documents."
+    },
+    "home-car-refusal": {
+      "src": "/Assets/product-captures/web/refusal-no-source.webp",
+      "width": 811,
+      "height": 481,
+      "alt": "Question 6 asks for a carbon cut in tonnes. The drafted answer says no carbon reduction target is recorded and explains how a baseline will be measured, instead of inventing a figure.",
+      "caption": "A real screen from a demo account: asked for a figure it had no proof of, it said so instead of inventing one."
+    },
+    "home-cap-find": {
+      "src": "/Assets/product-captures/web/find-feed-card.webp",
+      "width": 1086,
+      "height": 201,
+      "alt": "A live contract in the Velstrian Bid feed, with the buyer, the value, the sector and region, how well it suits the business, and buttons to open it, find the notice or save it.",
+      "caption": "A real screen from a demo account: one contract from the morning feed.",
+      "view": {
+        "wide": {
+          "x": 0,
+          "y": 0,
+          "w": 567,
+          "h": 201
+        },
+        "phone": {
+          "x": 0,
+          "y": 0,
+          "w": 372,
+          "h": 141
+        }
+      }
+    },
+    "contact-call-find": {
+      "src": "/Assets/product-captures/web/find-feed-card.webp",
+      "width": 1086,
+      "height": 201,
+      "alt": "A live contract in the Velstrian Bid feed, with the buyer, the value, the sector and region, how well it suits the business, and buttons to open it, find the notice or save it.",
+      "caption": "A real screen from a demo account: one contract from the morning feed.",
+      "view": {
+        "wide": {
+          "x": 0,
+          "y": 0,
+          "w": 567,
+          "h": 201
+        },
+        "phone": {
+          "x": 0,
+          "y": 0,
+          "w": 372,
+          "h": 141
+        }
+      }
+    },
+    "screen-find": {
+      "src": "/Assets/product-captures/web/find-feed-card.webp",
+      "width": 1086,
+      "height": 201,
+      "alt": "A live contract in the Velstrian Bid feed, with the buyer, the value, the sector and region, how well it suits the business, and buttons to open it, find the notice or save it.",
+      "caption": "A real screen from a demo account: one contract from the morning feed.",
+      "view": {
+        "wide": {
+          "x": 0,
+          "y": 0,
+          "w": 567,
+          "h": 201
+        },
+        "phone": {
+          "x": 0,
+          "y": 0,
+          "w": 372,
+          "h": 141
+        }
+      }
+    },
+    "home-cap-answer": {
+      "src": "/Assets/product-captures/web/answer-question-list.webp",
+      "width": 341,
+      "height": 706,
+      "alt": "The first four questions of the demo tender in Velstrian Bid, each one drafted, with a word count against its limit and where the draft came from, or a flag where it still needs proof.",
+      "caption": "A real screen from a demo account: every question drafted, each showing where it came from or that it still needs proof."
+    },
+    "screen-answer-list": {
+      "src": "/Assets/product-captures/web/answer-question-list.webp",
+      "width": 341,
+      "height": 706,
+      "alt": "The first four questions of the demo tender in Velstrian Bid, each one drafted, with a word count against its limit and where the draft came from, or a flag where it still needs proof.",
+      "caption": "A real screen from a demo account: every question drafted, each showing where it came from or that it still needs proof."
+    }
+  }
+}
