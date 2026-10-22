@@ -73,6 +73,54 @@
       "height": 900,
       "alt": "Velstrian Bid find contracts page listing new public contracts with a fit score out of 100 and a plain reason for each, plus a box for uploading the documents of a private invitation.",
       "slots": ["screen-find"]
+    },
+    {
+      "id": "S7",
+      "slug": "requirement-pack",
+      "kind": "screen",
+      "product": "buy",
+      "node": "9:134",
+      "file": "Assets/product-screens/screen-requirement-pack.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Buy requirement pack in five steps, on the questions and weights step: five questions with a plain explanation each, weights that add up to 100 percent, and help on asking for social value suppliers can be checked against.",
+      "slots": ["screen-buyer-requirement"]
+    },
+    {
+      "id": "S8",
+      "slug": "supplier-promises",
+      "kind": "screen",
+      "product": "buy",
+      "node": "9:409",
+      "file": "Assets/product-screens/screen-supplier-promises.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Buy live contract page listing what the supplier promised in their winning bid, what they have delivered so far, its status, and the proof they have sent, with a button to ask for missing proof.",
+      "slots": ["screen-buyer-delivery"]
+    },
+    {
+      "id": "S9",
+      "slug": "insights",
+      "kind": "screen",
+      "product": "bid",
+      "node": "9:715",
+      "file": "Assets/product-screens/screen-insights.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Velstrian Bid insights page with total bids, social value delivered and evidence completion, a chart of bids started each month, where bids stand by stage, bids by type of work and a suggested next step.",
+      "slots": ["screen-insights"]
+    },
+    {
+      "id": "S10",
+      "slug": "action-centre",
+      "kind": "screen",
+      "product": "bid",
+      "node": "10:119",
+      "file": "Assets/product-screens/screen-action-centre.png",
+      "width": 1440,
+      "height": 900,
+      "alt": "Action centre listing everything that needs the team, ordered by how soon it is due: a bid to sign off, an insurance certificate running out, a buyer's answer to read, proof to add and contracts to decide on, each with an owner.",
+      "slots": ["screen-action-centre"]
     }
   ]
 }

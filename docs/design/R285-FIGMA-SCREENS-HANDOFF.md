@@ -20,7 +20,8 @@ Figma file: https://www.figma.com/design/KO4JkhUrCvvopjP8E8zQLa (team "Crow", pa
 Screenshot checked and exported (1440x900 PNG, `Assets/product-screens/`, recorded in
 `astro/src/data/product-screens.json`): S1 bids board 5:119, S2 response answer 3:122 (fixed: header search wrap,
 editor header overflow, footer overlap, chips aligned), S3 no source 6:2, S4 delivery promises 7:122, S5 buyer
-evaluation 7:458, S6 discover feed 8:119. The library's header search now takes `o.search` and truncates to one line.
+evaluation 7:458, S6 discover feed 8:119, S7 requirement pack 9:134, S8 supplier promises after award 9:409, S9 insights
+(no win rate tile, no win rate chart) 9:715, S10 action centre 10:119. All 10 Screens done. The library's header search now takes `o.search` and truncates to one line.
 
 ## Size system (driver decision, replaces the brief's)
 
