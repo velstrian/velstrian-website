@@ -5,7 +5,7 @@ heading: "Encrypted, documented, and auditable."
 eyebrow: "Security & Trust"
 ---[System status: status.velstrian.com](https://status.velstrian.com)
 
-How Velstrian protects your bid documents, company data, and user accounts: enterprise encryption, UK and European data residency, and transparent AI processing boundaries.
+How Velstrian protects your bid documents, company data, and user accounts: enterprise encryption, data stored in the EU (Ireland), and transparent AI processing boundaries.
 
 Every layer, from disk to API, is named and auditable.
 
