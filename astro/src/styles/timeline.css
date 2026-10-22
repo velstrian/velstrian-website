@@ -103,7 +103,39 @@
     width: var(--tl-dot);
     height: var(--tl-dot);
     border-radius: var(--radius-pill);
-    /* The quiet default. A stop that means something says so at the call site. */
-    background: var(--c-text-muted);
+    /* LIT by default, R285-WEB-SCROLL-MOTION-02 (owner 2026-10-22: "in /about/
+       history section scroll motion is not working"). A stop is a step the
+       company took, so it carries the brand colour; a stop that means
+       something else (now, planned, a roadmap status) still says so at the
+       call site, and those unlayered rules win. Above the fill, below nothing. */
+    z-index: 1;
+    background: var(--tl-dot-lit);
   }
+
+  /* ── THE FILL, R285-WEB-SCROLL-MOTION-02 ──────────────────────────────────
+     The list draws it, like the rail: a 2px brand ramp centred on the 1px
+     track. Here it is the STILL state, drawn in full, which is what a reader
+     with reduced motion, or a browser without scroll-driven animation, sees.
+     styles/motion.css grows it from the top as the reader scrolls through
+     the list (check-motion.js rule 1: the one place a scroll timeline lives). */
+  .tl {
+    --tl-fill-w: 2px;
+    --tl-fill: var(--grad-draw-y);
+    --tl-dot-lit: var(--ea-accent);
+  }
+
+  .tl::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: calc((var(--tl-rail-w) - var(--tl-fill-w)) / 2);
+    width: var(--tl-fill-w);
+    background: var(--tl-fill);
+    transform-origin: top;
+    pointer-events: none;
+  }
+
+  /* How a stop LIGHTS as its item arrives is the v3 entrance's business and
+     lives with it, in styles/evidenced.css ("SECTION ENTRANCE", check-motion
+     rule 5: only that file and scripts/evidenced.ts write the armed state). */
 }

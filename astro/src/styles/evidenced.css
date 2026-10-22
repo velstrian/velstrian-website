@@ -2682,6 +2682,32 @@ a.ea-tcard:focus-visible {
   }
 }
 
+/* ── A timeline stop lights as its item arrives (R285-WEB-SCROLL-MOTION-02,
+   owner 2026-10-22: "in /about/ history section scroll motion is not
+   working"). The rail fill is styles/motion.css, the stop's still colour is
+   styles/timeline.css (lit). Here only the arrival: as its item settles the
+   stop starts from the rail's colour at 0.6 scale and settles once into its
+   own colour and size, half a reveal behind the item, on the reveal clock.
+   The armed state itself stays opacity and rise only (check-motion rule 5c),
+   and an armed item is invisible, so the stop needs no armed rule. The last
+   keyframe names no colour, so the stop lands on whatever colour it owns: the
+   brand colour, or a status colour (about now and planned, the roadmap
+   statuses). A scale is a drawing to check-motion rule 2, not a second
+   entrance, and it plays once. Written from `main .ea-sec` so the section
+   reset near the top of this file (`animation: none`) does not cancel it. */
+@media (prefers-reduced-motion: no-preference) {
+  main .ea-sec .tl__item[data-reveal='in'] > .tl__dot {
+    animation: tl-dot-settle var(--reveal-dur) var(--ease) backwards;
+    animation-delay: calc(var(--reveal-i, 0) * var(--reveal-step) + var(--reveal-dur) / 2);
+  }
+}
+
+@keyframes tl-dot-settle {
+  0% { transform: scale(0.6); background-color: var(--tl-rail); }
+  60% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
 /* ══ Narrow widths ═════════════════════════════════════════════════════════ */
 @media (max-width: 1099px) {
   .ea-facts__cols {

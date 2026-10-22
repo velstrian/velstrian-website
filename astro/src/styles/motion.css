@@ -1540,6 +1540,43 @@
  * shared blocks in tokens.css sit outside their layer for the same reason.
  */
 
+/* ── THE TIMELINE FILL, R285-WEB-SCROLL-MOTION-02 (owner 2026-10-22) ─────────
+ * The brand ramp on a timeline rail (styles/timeline.css .tl::after) grows
+ * from the top as the reader scrolls through the list, so a long history
+ * reads as a path being walked. Scroll driven, so it lives here (check-motion
+ * rule 1). Not parallax (D250): nothing moves against the page, one line is
+ * drawn along it, and it is tied to the scroll, so it never plays on its own
+ * and never loops (check-autoplay). The range starts when the list's top
+ * reaches the middle of the window and ends when its foot comes into view,
+ * not when the foot passes the middle: a list near the end of a page on a
+ * phone never scrolls that far, and measured at 390 on /about/ the rail
+ * stopped at 72 percent. Outside the @supports gate, or under reduced
+ * motion, the rail is simply drawn in full (timeline.css). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tl {
+      view-timeline: --tl-rail block;
+    }
+
+    /* Longhands, the same form as the arrivals above: written as the
+       shorthand, the minifier folded the timeline into it and Chrome dropped
+       the whole declaration, so the fill sat full and never moved. */
+    .tl::after {
+      animation-name: tl-rail-fill;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --tl-rail;
+      animation-range: cover 50vh exit 0%;
+    }
+  }
+}
+
+@keyframes tl-rail-fill {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
 /* The block. Rises one stacked-line gap and settles to exactly where it already
    is with no animation at all, which is Rule 01: rest state IS final state. */
 @keyframes sv-arrive {
