@@ -39,7 +39,7 @@ Velstrian Systems Ltd is registered with the Information Commissioner's Office a
 
 The detail behind each control, written for security and procurement teams. Jump to any topic, or contact us for an audit pack.
 
-<aside aria-label="Security contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Security Contact</strong> <p>For security disclosures or audit requests, contact our security team at <a href="mailto:security@velstrian.com">security@velstrian.com</a></p> </div> </aside>
+<aside aria-label="Security contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Security Contact</strong> <p>For security disclosures or audit requests, contact our security team at <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></p> </div> </aside>
 
 ## AES-256 encryption
 
@@ -64,7 +64,7 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 - A Data Processing Agreement (DPA) is available on request for customers. It is in draft pending legal review, so terms may change before signature.
 - Data subject rights supported: right to erasure, data portability, restriction of processing, and access.
 
-<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Registered with the Information Commissioner's Office as a data controller.</p> <p>Data requests: <a href="mailto:hello@velstrian.com">hello@velstrian.com</a></p> </dd> </dl>
+<dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Registered with the Information Commissioner's Office as a data controller.</p> <p>Data requests: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></p> </dd> </dl>
 
 ## Access controls
 
@@ -103,7 +103,7 @@ AI inference runs through server-side API calls only. Customer-facing drafting u
 
 ## Vulnerability disclosure
 
-Report security vulnerabilities responsibly to [security@velstrian.com](mailto:security@velstrian.com?subject=Security%20Disclosure) with the subject “Security Disclosure”. We acknowledge receipt within two business days and triage as below. These are targets we set ourselves, not a contractual service level.
+Report security vulnerabilities responsibly to [contact@velstrian.com](mailto:contact@velstrian.com?subject=Security%20Disclosure) with the subject “Security Disclosure”. We acknowledge receipt within two business days and triage as below. These are targets we set ourselves, not a contractual service level.
 
 On a narrow screen, this table scrolls sideways.
 
@@ -125,9 +125,9 @@ Velstrian targets 99.5% monthly uptime, with independent public status monitorin
 
 ## Company & regulatory details
 
-<dl class="deflist deflist--ledger"> <dt>ICO registration</dt> <dd>Registered Data Controller</dd> <dt>Company</dt> <dd>Velstrian Systems Ltd</dd> <dt>Registered</dt> <dd>England and Wales</dd> <dt>Data controller</dt> <dd>Velstrian Systems Ltd</dd> <dt>General Enquiries</dt> <dd><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></dd> <dt>Security</dt> <dd><a href="mailto:security@velstrian.com">security@velstrian.com</a></dd> </dl>
+<dl class="deflist deflist--ledger"> <dt>ICO registration</dt> <dd>Registered Data Controller</dd> <dt>Company</dt> <dd>Velstrian Systems Ltd</dd> <dt>Registered</dt> <dd>England and Wales</dd> <dt>Data controller</dt> <dd>Velstrian Systems Ltd</dd> <dt>General Enquiries</dt> <dd><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></dd> <dt>Security</dt> <dd><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></dd> </dl>
 
-<dl class="deflist"> <dt>Data request contact</dt> <dd>For erasure, portability, restriction, or access requests, email <a href="mailto:hello@velstrian.com">hello@velstrian.com</a>. We respond within statutory timeframes.</dd> </dl>
+<dl class="deflist"> <dt>Data request contact</dt> <dd>For erasure, portability, restriction, or access requests, email <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>. We respond within statutory timeframes.</dd> </dl>
 
 ## Finished your review?
 

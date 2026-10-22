@@ -101,7 +101,7 @@ Use of the Velstrian platform is conditional on staying within the boundaries be
 
 Personal data is processed in accordance with our [Privacy Policy](/privacy/). For B2B customers who require a Data Processing Agreement under Article 28 UK GDPR, request a copy using the buttons below.
 
-[Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:support@velstrian.com)
+[Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:contact@velstrian.com)
 
 ## 8. Service Availability
 
@@ -123,6 +123,6 @@ We may update these Terms from time to time. Material changes will be communicat
 
 ## 11. Contact
 
-<div class="prose-scroll" role="region" aria-label="How to reach Velstrian (table)" tabindex="0"><table class="lc-table"> <caption>How to reach Velstrian</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:hello@velstrian.com">hello@velstrian.com</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@velstrian.com">legal@velstrian.com</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:support@velstrian.com">support@velstrian.com</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.velstrian.com" target="_blank" rel="noopener noreferrer">status.velstrian.com</a></td></tr> <tr><th scope="row">Registered entity</th><td>Velstrian Systems Ltd, England &amp; Wales</td></tr> </tbody> </table></div>
+<div class="prose-scroll" role="region" aria-label="How to reach Velstrian (table)" tabindex="0"><table class="lc-table"> <caption>How to reach Velstrian</caption> <thead> <tr><th scope="col">Topic</th><th scope="col">Channel</th></tr> </thead> <tbody> <tr><th scope="row">General enquiries</th><td><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></td></tr> <tr><th scope="row">Legal &amp; DPA requests</th><td><a href="mailto:legal@velstrian.com">legal@velstrian.com</a></td></tr> <tr><th scope="row">Product support</th><td><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></td></tr> <tr><th scope="row">Status &amp; incidents</th><td><a href="https://status.velstrian.com" target="_blank" rel="noopener noreferrer">status.velstrian.com</a></td></tr> <tr><th scope="row">Registered entity</th><td>Velstrian Systems Ltd, England &amp; Wales</td></tr> </tbody> </table></div>
 
-[Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:support@velstrian.com)
+[Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:contact@velstrian.com)

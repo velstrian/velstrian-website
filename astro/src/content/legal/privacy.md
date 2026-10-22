@@ -38,7 +38,7 @@ Every clause below is written for clarity. Jump to any section, or contact our D
 
 Velstrian Systems Ltd (the "Company", "we", "us", or "our") is committed to protecting and respecting your privacy. This policy (together with our terms of use and any other documents referred to on it) sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us.
 
-For data-protection enquiries: [hello@velstrian.com](mailto:hello@velstrian.com)
+For data-protection enquiries: [contact@velstrian.com](mailto:contact@velstrian.com)
 
 ### ICO data-controller registration
 

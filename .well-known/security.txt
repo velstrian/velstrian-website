@@ -7,7 +7,7 @@
 # researchers attempting encrypted disclosure get a 404 and may fall back to
 # cleartext). Restore the Encryption: line only after pgp-key.txt is published.
 
-Contact: mailto:security@velstrian.com
+Contact: mailto:contact@velstrian.com
 Expires: 2027-04-30T23:59:59.000Z
 Preferred-Languages: en
 Canonical: https://velstrian.com/.well-known/security.txt

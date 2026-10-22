@@ -25,6 +25,13 @@ const JSON_OUT = process.argv.includes('--json');
 const LEGAL_NAME = 'Velstrian Systems Ltd';
 const COMPANY_NUMBER = '17076461';
 const ORIGIN = 'https://velstrian.com';
+// THE ONE PUBLIC MAILBOX (owner decision D280, 2026-10-22), read from the constant every
+// page reads, so this gate and the site cannot disagree. hello@, support@, sales@ and
+// security@ were retired into it: a built page that still prints one is a defect.
+const PUBLIC_EMAIL = (readFileSync(join(ROOT, 'src/lib/brand-names.ts'), 'utf8').match(
+  /export const PUBLIC_EMAIL = "([^"]+)"/,
+) || [])[1];
+const RETIRED_MAILBOXES = /\b(?:hello|support|sales|security)@velstrian\.com\b/g;
 const SOCIALS = [
   'https://www.youtube.com/@VELSTRIAN-UK',
   'https://x.com/VelstrianLtd',
@@ -120,7 +127,11 @@ if (!existsSync(join(DIST, 'index.html'))) {
   const allHtml = walk(DIST).filter((p) => p.endsWith('.html')).map((p) => readFileSync(p, 'utf8')).join('\n');
   if (!allHtml.includes(LEGAL_NAME)) add('legal-name-missing', null, `${LEGAL_NAME} appears on no built page`);
   if (!allHtml.includes(COMPANY_NUMBER)) add('company-number-missing', null, `${COMPANY_NUMBER} appears on no built page`);
-  if (!/hello@velstrian\.com/.test(allHtml)) add('email-missing', null, 'hello@velstrian.com appears on no built page');
+  if (!PUBLIC_EMAIL) add('email-constant-missing', null, 'PUBLIC_EMAIL not found in src/lib/brand-names.ts');
+  else if (!allHtml.includes(PUBLIC_EMAIL)) add('email-missing', null, `${PUBLIC_EMAIL} appears on no built page`);
+  for (const m of new Set(allHtml.match(RETIRED_MAILBOXES) || [])) {
+    add('email-retired', null, `${m} is printed on a built page, D280 retired it into ${PUBLIC_EMAIL}`);
+  }
   const sitemap = join(DIST, 'sitemap.xml');
   if (existsSync(sitemap) && !readFileSync(sitemap, 'utf8').includes(`<loc>${ORIGIN}/`)) add('sitemap-origin', sitemap, `sitemap <loc> entries do not start with ${ORIGIN}/`);
 }

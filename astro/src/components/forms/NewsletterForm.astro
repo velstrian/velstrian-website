@@ -147,6 +147,8 @@ const NOTIFY_ENDPOINT = 'https://app.crowagent.ai/api/notify';
 </p>
 
 <script>
+  /* The fallback is the one public mailbox (D280), never a typed address. */
+  import { PUBLIC_EMAIL } from '../../lib/brand-names';
   /** Same definition as the enquiry and partner forms. One rule, site-wide. */
   const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
@@ -331,7 +333,7 @@ const NOTIFY_ENDPOINT = 'https://app.crowagent.ai/api/notify';
                 timestamp: new Date().toISOString(),
               }),
             );
-            const contactEmail = form.getAttribute('data-contact-email') || 'hello@velstrian.com';
+            const contactEmail = form.getAttribute('data-contact-email') || PUBLIC_EMAIL;
             setStatus(
               'bad',
               `Something went wrong. Please try again, or email ${contactEmail}.`,

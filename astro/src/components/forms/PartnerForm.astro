@@ -264,6 +264,8 @@ const PARTNER_TYPES = [
 </form>
 
 <script>
+  /* The fallback is the one public mailbox (D280), never a typed address. */
+  import { PUBLIC_EMAIL } from '../../lib/brand-names';
 
   /** Same definition as the contact form. One rule, so blur and submit agree. */
   const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -433,7 +435,7 @@ const PARTNER_TYPES = [
               timestamp: new Date().toISOString(),
             }),
           );
-          const contactEmail = form.dataset.contactEmail || 'hello@velstrian.com';
+          const contactEmail = form.dataset.contactEmail || PUBLIC_EMAIL;
           setStatus('bad', `Something went wrong. Please email ${contactEmail} directly.`);
           setBusy(false);
           btn.textContent = 'Submit enquiry';

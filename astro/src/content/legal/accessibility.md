@@ -39,7 +39,7 @@ Until those are done, there may be barriers on this site that our testing has no
 If any part of this site prevents you from doing something, tell us:
 
 - Use the [contact form](/contact/), or
-- Email **hello@velstrian.com**
+- Email **contact@velstrian.com**
 
 Please include the page address and what you were trying to do. We aim to respond within **5 working days**. If you need something on this site in a different format, ask and we will tell you honestly whether and when we can provide it.
 

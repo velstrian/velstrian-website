@@ -310,6 +310,8 @@ const TRUST_BADGES: string[] = [
 </form>
 
 <script>
+  /* The fallback is the one public mailbox (D280), never a typed address. */
+  import { PUBLIC_EMAIL } from '../../lib/brand-names';
   /** The ONLY definition of a valid address on this page. */
   const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
@@ -530,7 +532,7 @@ const TRUST_BADGES: string[] = [
               timestamp: new Date().toISOString(),
             }),
           );
-          const contactEmail = form.dataset.contactEmail || 'hello@velstrian.com';
+          const contactEmail = form.dataset.contactEmail || PUBLIC_EMAIL;
           setStatus('bad', `Something went wrong. Please email ${contactEmail} directly.`);
           setBusy(false);
           btn.textContent = 'Send message';
