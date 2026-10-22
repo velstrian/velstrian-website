@@ -40,3 +40,8 @@ The plan is already written: `../crowagent-platform/docs/release-2.8.5/design/R2
 
 ### /about/ (`astro/src/pages/about.astro`)
 Who Velstrian is and why it exists, for a small firm deciding whether to trust us. No customer names, quotes or numbers we cannot source. Leave a clearly marked slot for a people photo in the story band (`<!-- PEOPLE PHOTO SLOT: people-small-team -->`), but do NOT reference the files in `Assets/images/r285-gemini/` yet. The driver converts and credits them first.
+
+### /resources/ (`astro/src/pages/resources.astro`)
+The resources hub, in the style of responsive.io's resource row: a grid of VARIED cards (poster art, UI art, a photo-real object), each with art on top, a short label, a plain title and one line, the whole card one link. Keep every resource, tool and link the current page carries.
+Card art is ready, encoded and credited (alt text is in `astro/src/data/image-credits.json`): `/Assets/images/r285-gemini/card-tender-finder-{800,1600}.{avif,webp}`, `card-compliance-matrix-*`, `card-guides-*`, `card-blog-*`. Use a `<picture>` with the AVIF source first, then WebP, `srcset` with the 800 and 1600 widths, `sizes` that match your grid, `width="1600" height="1000"` so nothing shifts, `loading="lazy"` and `decoding="async"`, and the alt text from image-credits.json. Map: tender finder art to the free tender finder, compliance matrix art to the Tender Compliance Matrix, guides art to the guides, blog art to the blog. Do NOT use the people photos or any `.png` original.
+Every card in a row is the same height with the title on one baseline. Do not set that height yourself: use the shared card pattern so the central fix applies.

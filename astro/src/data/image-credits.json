@@ -128,5 +128,57 @@
     "width": 2400,
     "height": 1200,
     "bytes": 17173
+  },
+  {
+    "file": "r285-gemini/card-tender-finder-1600.avif",
+    "alt": "Abstract art of stacked translucent document cards on an indigo to purple gradient, one card outlined in white.",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "Resource and tool card art. 800 and 1600 wide, AVIF and WebP.",
+    "width": 1600,
+    "height": 1000,
+    "bytes": 13335
+  },
+  {
+    "file": "r285-gemini/card-compliance-matrix-1600.avif",
+    "alt": "Abstract art of a tilted grid of small rounded squares on near black, a few filled purple as if checked off.",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "Resource and tool card art. 800 and 1600 wide, AVIF and WebP.",
+    "width": 1600,
+    "height": 1000,
+    "bytes": 32333
+  },
+  {
+    "file": "r285-gemini/card-guides-1600.avif",
+    "alt": "Abstract art of an open book made of frosted glass casting an indigo and purple glow on a white surface.",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "Resource and tool card art. 800 and 1600 wide, AVIF and WebP.",
+    "width": 1600,
+    "height": 1000,
+    "bytes": 22391
+  },
+  {
+    "file": "r285-gemini/card-blog-1600.avif",
+    "alt": "Abstract poster of three tall rounded bars rising in indigo to purple on near black, crossed by a thin white arc.",
+    "source_url": "",
+    "photographer": "Generated with Gemini for Velstrian",
+    "licence": "Owned by Velstrian Systems Ltd",
+    "licence_url": "",
+    "downloaded_at": "2026-10-22",
+    "intended_use": "Resource and tool card art. 800 and 1600 wide, AVIF and WebP.",
+    "width": 1600,
+    "height": 1000,
+    "bytes": 14429
   }
 ]
