@@ -171,8 +171,8 @@ const UPDATED = new Date('2026-10-22');
 
 <script>
   function initBillingAria() {
-    const mInput = document.getElementById("billing-monthly");
-    const aInput = document.getElementById("billing-toggle");
+    const mInput = document.getElementById("billing-monthly") as HTMLInputElement | null;
+    const aInput = document.getElementById("billing-toggle") as HTMLInputElement | null;
     const mSeg = document.querySelector(".pricing-billing__seg--m");
     const aSeg = document.querySelector(".pricing-billing__seg--a");
     function update() {
