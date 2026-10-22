@@ -544,7 +544,7 @@ main .ea-sec * {
 }
 
 /* A real capture keeps its own proportions inside the box, centred on the
-   app's dark ground, never stretched and never cropped. */
+   window's light well, never stretched and never cropped. */
 .ea-stage__screen .ea-frame__window > picture {
   display: grid;
   place-items: center;
@@ -629,11 +629,28 @@ main .ea-sec * {
   padding: clamp(var(--space-5), 2.6vw, var(--space-8));
 }
 
-/* A real capture is a dark app screen. The window takes the app's own ground
-   so a portrait crop letterboxes into it, and the caption keeps the light
+/* THE WINDOW BEHIND A CAPTURE IS THE APP'S LIGHT WELL, NOT ITS DARK GROUND
+   (R285-WEB-TRANSFORMATION-WT-H task 8). This was --ground-dark while the
+   captures were dark screens. R285-WEB-REAL-SCREENSHOTS-01 recaptured every
+   slot in the LIGHT theme and the fill stayed dark, so until the lazy file
+   painted, and for good if it failed, the home "Everything from finding the
+   work" frame drew a solid near black box (measured 734 by 259 at 1440, fill
+   rgb 15 16 18) over a white caption bar, and the portrait question list sat
+   between two black side bars. The well is the same light grey the app draws
+   around its own panels, so the box reads as a screen still loading, a
+   portrait crop letterboxes into a quiet mat, and the caption keeps its
    footer. Portrait crops keep their own width, never stretched. */
 .ea-frame--shot .ea-frame__window {
-  --frame-fill: var(--ground-dark);
+  --frame-fill: var(--ea-well);
+}
+
+/* If a capture file never arrives the browser prints its alt text inside the
+   box. It reads as a small muted description on the well, not as default
+   body text spilling across the frame. */
+.ea-frame--shot .ea-frame__shot {
+  color: var(--ea-muted);
+  font-size: var(--t-ea-tiny);
+  line-height: 1.5;
 }
 
 /* THE BOX IS SIZED BEFORE THE PICTURE ARRIVES (R285-WEB-GATES-V3-01, CLS).
