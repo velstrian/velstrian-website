@@ -44,6 +44,13 @@ export const ICONS = {
   /* Two bars and a bare play mark: the hero aurora's pause button (D293). */
   pause: '<path d="M9 6v12M15 6v12"/>',
   resume: '<path d="M8 5.5v13l10.5-6.5L8 5.5Z"/>',
+  /* R285-WEB-GEMINI-UIUX P2-2, the mega menu rows. Two columns side by side:
+     one option set against another. */
+  compare: '<rect x="3.5" y="4.5" width="7" height="15" rx="1.5"/><rect x="13.5" y="4.5" width="7" height="15" rx="1.5"/><path d="M6 9h2M6 12.5h2M16 9h2M16 12.5h2"/>',
+  /* A ruled table: requirements set out in rows and columns. */
+  table: '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/>',
+  /* An open book: the glossary. */
+  book: '<path d="M12 6.5c-1.8-1.3-4.3-2-7.5-2v13c3.2 0 5.7.7 7.5 2 1.8-1.3 4.3-2 7.5-2v-13c-3.2 0-5.7.7-7.5 2Z"/><path d="M12 6.5v13"/>',
 } as const;
 
 export type IconName = keyof typeof ICONS;

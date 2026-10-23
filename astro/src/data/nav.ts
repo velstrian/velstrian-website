@@ -60,6 +60,7 @@
 import { SITE } from './site';
 import { APP_ORIGIN, SIGNUP_URL, START_LABEL } from './app';
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../lib/brand-names';
+import type { IconName } from './icons';
 
 export interface NavLink {
   label: string;
@@ -70,8 +71,10 @@ export interface NavMenuItem extends NavLink {
   description: string;
   /** Maps to the token-based accent colour used on the row's icon. */
   accent: 'mark' | 'teal';
-  /** Which inline icon glyph NavDropdown.astro draws for this row. */
-  icon: 'dot' | 'grid' | 'arrow' | 'book';
+  /** Which glyph from the one line family (data/icons.ts) NavDropdown.astro
+   *  draws for this row. R285-WEB-GEMINI-UIUX P2-2: the rows mixed filled dots
+   *  with stroked glyphs at a 2 stroke, three icon languages in one panel. */
+  icon: IconName;
 }
 
 export interface NavMenuColumn {
@@ -108,21 +111,21 @@ const PRODUCTS: NavMenu = {
           href: '/bid/',
           description: 'Find contracts and answer them from your own documents',
           accent: 'mark',
-          icon: 'dot',
+          icon: 'pen',
         },
         {
           label: PRODUCT_NAME_BUY,
           href: '/buy/',
           description: 'Set out what you need and compare the replies you get',
           accent: 'teal',
-          icon: 'dot',
+          icon: 'checklist',
         },
         {
           label: `Compare ${PRODUCT_NAME_BID}`,
           href: '/compare/',
           description: 'How it stacks up against other bid tools',
           accent: 'teal',
-          icon: 'grid',
+          icon: 'compare',
         },
       ],
     },
@@ -165,28 +168,28 @@ const RESOURCES: NavMenu = {
           href: '/tools/tender-compliance-matrix/',
           description: 'Paste tender text, read back the requirements it states',
           accent: 'mark',
-          icon: 'dot',
+          icon: 'table',
         },
         {
           label: 'Tender Finder',
           href: '/tools/tender-finder/',
           description: 'Search open UK and EU tenders, free',
           accent: 'mark',
-          icon: 'dot',
+          icon: 'search',
         },
         {
           label: 'Free tools hub',
           href: '/tools/',
           description: 'No account, no email gate',
           accent: 'teal',
-          icon: 'arrow',
+          icon: 'right',
         },
         {
           label: 'PPN 026 explained',
           href: '/glossary/ppn-026/',
           description: 'The next edition of the Social Value Model, and the dates',
           accent: 'teal',
-          icon: 'grid',
+          icon: 'document',
         },
         {
           label: 'Procurement glossary',

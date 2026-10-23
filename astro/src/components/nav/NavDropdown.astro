@@ -83,6 +83,7 @@
  * panel does not dismiss it, and it yields to the keyboard.
  */
 import type { NavMenu } from '../../data/nav';
+import Icon from '../evidenced/Icon.astro';
 
 interface Props {
   menu: NavMenu;
@@ -142,31 +143,7 @@ const columnCount = menu.columns.length;
           {col.items.map((item) => (
             <a href={item.href} class="ca-mega-item">
               <span class="ca-mega-icon" style={`color:${ACCENT[item.accent]}`} aria-hidden="true">
-                {item.icon === 'dot' && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                    <circle cx="12" cy="12" r="5" />
-                  </svg>
-                )}
-                {item.icon === 'grid' && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="7" height="7" />
-                    <rect x="14" y="3" width="7" height="7" />
-                    <rect x="14" y="14" width="7" height="7" />
-                    <rect x="3" y="14" width="7" height="7" />
-                  </svg>
-                )}
-                {item.icon === 'arrow' && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="13 6 19 12 13 18" />
-                  </svg>
-                )}
-                {item.icon === 'book' && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22z" />
-                    <path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20" />
-                  </svg>
-                )}
+                <Icon name={item.icon} size={18} />
               </span>
               <span>
                 <strong>{item.label}</strong>
@@ -472,9 +449,17 @@ const columnCount = menu.columns.length;
     font-size: var(--t-micro);
     margin-top: 0.15rem;
   }
+  /* R285-WEB-GEMINI-UIUX P2-2. ONE ICON LANGUAGE. Every row draws a glyph from
+     the one line family (data/icons.ts, 1.75 stroke, round caps) at one size,
+     inside one tinted tile, the row accent at a low wash. The rows mixed a
+     filled dot, a 2 stroke grid and a 2 stroke arrow before. */
   .ca-mega-icon {
     flex: none;
-    display: inline-flex;
-    margin-top: 0.15rem;
+    display: inline-grid;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: var(--radius-chip);
+    background: color-mix(in srgb, currentColor 12%, transparent);
   }
 </style>
