@@ -32,9 +32,9 @@
         "from": "website --c-teal-dark"
       },
       "light": {
-        "value": "#077663",
+        "value": "#08927A",
         "from": "platform-held",
-        "why": "measured 5.22:1 against --bg (DYN-A11Y-03). Follows brand-teal, which is platform-held in light for the reason above."
+        "why": "[R285-PALETTE-TEAL-HOVER-CONTRAST-01 2026-10-23] The hover and pressed fill carries the same --on-accent label (#04121E) as the resting fill, so it is judged by that label. The previous #077663 measured 3.40:1 under it, a WCAG AA failure the brand guide found. #08927A measures 4.87:1 under the label and is still a darkening step below brand-teal #0A9A80 (5.36:1). As the light focus ring (--c-focus-ring binds --teal-d) it measures 3.23:1 on the worst light ground #E7EAF2, 3.41:1 on #EDF0F7, 3.60:1 on #F5F6FA and 3.89:1 on #FFFFFF, all over the 3:1 floor. It is the value the primary gradient dark stop already held, so no new pigment enters the palette. Follows brand-teal, which is platform-held in light for the reason above."
       }
     },
     "ground-0": {
