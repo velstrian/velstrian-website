@@ -1593,6 +1593,7 @@ function render(){
           return '<tr><td><strong>Phase ' + n + '</strong></td>' +
             '<td><strong>' + esc(t.items) + '</strong></td>' +
             '<td>' + esc(t.open) + '</td>' +
+            '<td>' + esc(t.wip || 0) + '</td>' +
             '<td>' + esc(t.built) + '</td>' +
             '<td>' + esc(t.decision) + '</td></tr>';
         };
@@ -1606,6 +1607,8 @@ function render(){
             '<th>Phase</th>' +
             '<th>Left</th>' +
             '<th>Not started</th>' +
+            /* WIP had no column, so Left (215) never equalled the visible columns (202). */
+            '<th>In progress</th>' +
             '<th>Written, waiting on the test run</th>' +
             /* [2026-08-10] NOT "needs an owner decision" — that label was WRONG, and wrong
              * in the one direction the owner has objected to twice. The bucket's own legend
@@ -1614,8 +1617,11 @@ function render(){
              * outcomes, one needs an M365 Global Admin consent. None is a ruling anyone can
              * simply take, so calling them pending decisions reads as escalation-by-default. */
             '<th>Needs you (a decision or an action)</th>' +
-          '</tr></thead><tbody>' + row(3) + row(4) + '</tbody></table></div>' +
-          '<p class="foot"><b>How to read this.</b> &ldquo;Left&rdquo; is the other three columns added ' +
+          /* Every phase the breakdown carries, never a hard-coded pair. This said
+             row(3) + row(4) from R2.6.2, so in R2.8.5 (phases 1 and 2) the table
+             rendered empty and the owner saw no split at all (2026-10-23). */
+          '</tr></thead><tbody>' + Object.keys(pb.phases).sort((a, b) => Number(a) - Number(b)).map(row).join('') + '</tbody></table></div>' +
+          '<p class="foot"><b>How to read this.</b> &ldquo;Left&rdquo; is the other four columns added ' +
           'together. <b>Only the &ldquo;Not started&rdquo; column is work still to be written</b> &mdash; ' +
           '&ldquo;Written, waiting&rdquo; is finished code that the certification run has not yet ' +
           'confirmed, and the last column is waiting on you, not on engineering &mdash; but note ' +
@@ -1628,7 +1634,9 @@ function render(){
           'wrong answer, because that count leaves out the middle two columns.</p>';
       }
       if (phases.length) {
-        html += '<div class="scroll"><table><thead><tr><th>Phase</th><th>Items</th><th>State</th></tr></thead><tbody>' +
+        /* "Items left", not "Items": the figure counts unfinished work only, so a
+           shipped phase reads 0. And NOT MERGED is said in words the owner uses. */
+        html += '<div class="scroll"><table><thead><tr><th>Phase</th><th>Items left</th><th>State</th></tr></thead><tbody>' +
           phases.map(p =>
             '<tr><td><strong>' + esc(p.phase) + '</strong> &mdash; ' + esc(p.name || '') + '</td>' +
             /* null items renders as an em dash, never as 0: a closed phase has no
@@ -1636,7 +1644,8 @@ function render(){
                must not look the same as "none". */
             '<td>' + esc(p.items === null || p.items === undefined ? '—' : p.items) + '</td>' +
             '<td><span class="pill" style="background:var(' +
-              (p.state === 'SHIPPED' ? '--fixed' : '--open') + ');color:var(--bg)">' + esc(p.state || '') + '</span>' +
+              (p.state === 'SHIPPED' ? '--fixed' : '--open') + ');color:var(--bg)">' +
+              esc(p.state === 'NOT MERGED' ? 'NOT RELEASED YET (local and staging only)' : (p.state || '')) + '</span>' +
             (p.sha ? ' <span style="font-family:ui-monospace,monospace;font-size:12px;color:var(--sub)">' +
               esc(p.sha) + (p.shipped ? ' · ' + esc(p.shipped) : '') + '</span>' : '') +
             '</td></tr>').join('') +
