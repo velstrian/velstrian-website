@@ -234,6 +234,7 @@ export const FOOTER = {
       links: [
         { label: PRODUCT_NAME_BID, href: '/bid/' },
         { label: PRODUCT_NAME_BUY, href: '/buy/' },
+        { label: 'Product walkthrough', href: '/walkthrough/' },
         { label: 'Pricing', href: '/pricing/' },
         { label: 'Integrations', href: '/integrations/' },
         { label: 'Sectors', href: '/sectors/' },

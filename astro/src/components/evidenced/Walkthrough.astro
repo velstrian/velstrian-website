@@ -1,0 +1,221 @@
+---
+/**
+ * Walkthrough: the visitor clicks through the work of a bid, one real screen
+ * at a time (R285-WEB-INTERACTIVE-WALKTHROUGH-01, an outside review ranked
+ * "experience it before signing up" as the site's P0).
+ *
+ * FIVE STEPS AND AN END. Find, decide, draft, review and deliver, each one real
+ * staging capture of the neutral demo organisation (data/product-captures.ts,
+ * written by the platform harness web/e2e/product-captures/website.spec.ts),
+ * one plain line saying what the step does for you, and one highlighted spot on
+ * the screen that the line is about. The end names the primary action.
+ * Decide, draft and review are the same demo tender. Find shows the morning
+ * feed (the demo tender came in as an uploaded pack, so it is not in a live
+ * feed), and deliver shows a demo contract that was won, because a tender in
+ * preparation has no delivery yet. The words never say otherwise.
+ *
+ * NEVER DRAWN UI. Every step reads a REAL capture and the build fails if a
+ * slot has none or holds a Figma design, so a recreation can never stand in
+ * for the product here.
+ *
+ * THE VISITOR DRIVES IT. It is the ProductCarousel mechanism (scripts/
+ * evidenced.ts initCarousels): Back and Next, the step names, the arrow keys
+ * and a swipe on a phone. No timer and no autoplay. A step's images are
+ * decoded before it slides in. Under reduced motion the slide is instant and
+ * the spot does not pulse. Without script it is a scroll strip with snap
+ * points, every step and caption in the document, and the controls stay
+ * invisible but keep their space, so turning them on shifts nothing.
+ *
+ * CROPS. Each capture shows a region (`wide` at 600px and up, `phone` below),
+ * in the capture's CSS pixels, so a wide screen stays readable on a phone. A
+ * phone region that has to end inside a line fades out at its right edge
+ * rather than cutting a word hard. The spot is placed in the same pixels, so
+ * a recapture that keeps its layout needs no edit here.
+ */
+import Action from './Action.astro';
+import { CAPTURES, type Capture, type CropView } from '../../data/product-captures';
+import { SIGNUP_URL, START_LABEL } from '../../data/app';
+import { TRIAL_DAYS } from '../../data/pricing';
+
+interface Step {
+  /** Short name in the progress row. */
+  name: string;
+  title: string;
+  /** The one plain line. */
+  say: string;
+  /** Slot key in data/product-captures.ts. Must be a real capture. */
+  capture: string;
+  wide: CropView;
+  phone: CropView;
+  /** The highlighted spot, in capture CSS pixels. `hotPhone` when the phone region is narrower. */
+  hot: CropView;
+  hotPhone?: CropView;
+  /** The phone region ends inside a line of text, so its right edge fades. */
+  fade?: boolean;
+  /** What the spot points at, for a screen reader. */
+  spot: string;
+}
+
+const STEPS: Step[] = [
+  {
+    name: 'Find',
+    title: 'Find a contract that suits you',
+    say: 'Each morning your feed shows new contracts and how well each one suits your business. Open one to start.',
+    capture: 'home-cap-find',
+    wide: { x: 0, y: 0, w: 1086, h: 201 },
+    phone: { x: 0, y: 0, w: 430, h: 201 },
+    fade: true,
+    hot: { x: 12, y: 143, w: 154, h: 45 },
+    spot: 'The button that opens the contract in Velstrian Bid.',
+  },
+  {
+    name: 'Decide',
+    title: 'Decide if it is worth bidding',
+    say: 'Before you write a word, it weighs the tender against your own past contracts and tells you the next step.',
+    capture: 'home-cap-decide',
+    wide: { x: 0, y: 0, w: 1156, h: 578 },
+    phone: { x: 8, y: 238, w: 474, h: 70 },
+    hot: { x: 24, y: 246, w: 446, h: 56 },
+    spot: 'The recommendation and the fit score for this tender.',
+  },
+  {
+    name: 'Draft',
+    title: 'Answer every question from your documents',
+    say: 'Each question is drafted from what you already have. Where it finds no proof, it says so instead of making it up.',
+    capture: 'bid-hero',
+    wide: { x: 0, y: 0, w: 1440, h: 900 },
+    phone: { x: 262, y: 246, w: 346, h: 300 },
+    hot: { x: 266, y: 380, w: 334, h: 160 },
+    spot: 'A drafted question marked no source found.',
+  },
+  {
+    name: 'Review',
+    title: 'Agree the answers with your team',
+    say: 'Colleagues comment on each answer in one place, so the final version is checked before it goes.',
+    capture: 'home-cap-check',
+    wide: { x: 0, y: 0, w: 811, h: 500 },
+    phone: { x: 8, y: 100, w: 420, h: 260 },
+    fade: true,
+    hot: { x: 24, y: 256, w: 780, h: 102 },
+    hotPhone: { x: 24, y: 256, w: 400, h: 102 },
+    spot: 'A colleague’s reply pointing to the staffing policy.',
+  },
+  {
+    name: 'Deliver',
+    title: 'Keep your promises after you win',
+    say: 'When you win, each promise from your bid becomes a target, and you record what you deliver as you go.',
+    capture: 'home-cap-deliver',
+    wide: { x: 0, y: 0, w: 1156, h: 710 },
+    phone: { x: 8, y: 0, w: 440, h: 300 },
+    fade: true,
+    hot: { x: 20, y: 88, w: 1116, h: 78 },
+    hotPhone: { x: 20, y: 88, w: 424, h: 78 },
+    spot: 'The first promise and how much of it has been delivered.',
+  },
+];
+
+function real(key: string): Capture {
+  const c = CAPTURES[key];
+  if (!c || c.source === 'figma') {
+    throw new Error(`Walkthrough: slot "${key}" has no real capture. Re-run the platform capture harness, never draw it.`);
+  }
+  return c;
+}
+
+/** The custom properties that place one region and its spot. Numbers only, the CSS does the maths. */
+function vars(prefix: string, region: CropView, hot: CropView): string[] {
+  return [
+    `--${prefix}x:${region.x}`, `--${prefix}y:${region.y}`, `--${prefix}w:${region.w}`, `--${prefix}h:${region.h}`,
+    `--${prefix}hx:${hot.x}`, `--${prefix}hy:${hot.y}`, `--${prefix}hw:${hot.w}`, `--${prefix}hh:${hot.h}`,
+  ];
+}
+
+const slides = STEPS.map((s) => {
+  const c = real(s.capture);
+  /* The harness writes an AVIF beside every WebP (website.spec.ts, captureSlot). */
+  const avif = c.src.endsWith('.webp') ? c.src.replace(/\.webp$/, '.avif') : null;
+  const style = [`--fw:${c.width}`, ...vars('w', s.wide, s.hot), ...vars('p', s.phone, s.hotPhone ?? s.hot)].join(';');
+  return { ...s, c, avif, style };
+});
+const total = slides.length + 1;
+
+interface Props {
+  /** The heading level of each step: h2 on its own page, h3 inside a titled band. */
+  level?: 'h2' | 'h3';
+}
+const { level = 'h3' } = Astro.props;
+const Heading = level;
+---
+
+<div class="ea-walk ea-car" data-car role="region" aria-roledescription="carousel" aria-label="A walkthrough of Velstrian Bid, five steps" style={`--car-n:${total}`}>
+  <div class="ea-walk__nav" data-car-controls>
+    <ol class="ea-walk__steps">
+      {
+        slides.map((s, k) => (
+          <li>
+            <button class="ea-walk__step" type="button" data-car-to={k} data-car-step aria-current={k === 0 ? 'step' : undefined}>
+              <span class="ea-walk__dot ea-num" aria-hidden="true">{k + 1}</span>
+              <span class="ea-walk__name">{s.name}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="ea-walk__bar" aria-hidden="true"><span></span></div>
+    <div class="ea-walk__move">
+      <Action as="button" variant="secondary" data-car-prev="">Back</Action>
+      <p class="visually-hidden" aria-live="polite">Screen <span data-car-n>1</span> of {total}</p>
+      <Action as="button" data-car-next="">Next</Action>
+    </div>
+  </div>
+
+  <div class="ea-car__stage">
+    <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
+    <div class="ea-car__viewport" data-car-viewport tabindex="0" aria-label="Walkthrough steps, use the arrow keys to move between them">
+      <ul class="ea-car__track" data-car-track>
+        {
+          slides.map((s, k) => (
+            <li class="ea-car__slide">
+              <div class="ea-walk__slide">
+                <div class="ea-walk__say">
+                  <p class="ea-label">Step {k + 1} of {slides.length}</p>
+                  <Heading class="ea-walk__title">{s.title}</Heading>
+                  <p class="ea-walk__line">{s.say}</p>
+                </div>
+                <figure class="ea-walk__shot on-light">
+                  <div class:list={['ea-walk__view', { 'ea-walk__view--fade': s.fade }]} style={s.style}>
+                    <picture>
+                      {s.avif && <source type="image/avif" srcset={s.avif} />}
+                      <img
+                        class="ea-walk__img"
+                        src={s.c.src}
+                        width={s.c.width}
+                        height={s.c.height}
+                        alt={s.c.alt}
+                        loading={k === 0 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    </picture>
+                    <span class="ea-walk__spot" role="img" aria-label={`Highlighted: ${s.spot}`}></span>
+                  </div>
+                  <figcaption class="ea-walk__caption">{s.c.caption}</figcaption>
+                </figure>
+              </div>
+            </li>
+          ))
+        }
+        <li class="ea-car__slide">
+          <div class="ea-walk__slide ea-walk__end">
+            <p class="ea-label">You have seen the whole journey</p>
+            <Heading class="ea-walk__end-title">From finding a contract to keeping your promises, in one place.</Heading>
+            <p class="ea-walk__line">Try it with your own documents. Card needed to start, cancel in the {TRIAL_DAYS} days and pay nothing.</p>
+            <div class="ea-actions">
+              <Action href={SIGNUP_URL}>{START_LABEL}</Action>
+              <Action as="button" variant="secondary" data-car-to="0">See it again</Action>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

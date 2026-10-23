@@ -2120,6 +2120,310 @@ main .ea-sec * {
   color: var(--ea-ink);
 }
 
+/* ══ WALKTHROUGH ═══════════════════════════════════════════════════════════
+   components/evidenced/Walkthrough.astro, R285-WEB-INTERACTIVE-WALKTHROUGH-01.
+   The product carousel mechanism with a progress row and Back and Next above
+   the stage, so the buttons never move when a step's height changes. Each step
+   is one light card on the stage: the plain line, then the real capture with
+   one highlighted spot. Every number that places a crop or a spot is data on
+   the element (capture CSS pixels), the rules here only do the maths. */
+.ea-walk__nav {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+/* Without script the controls do nothing, so they are not shown, but they keep
+   their space: turning them on shifts nothing below (CLS). */
+.ea-walk:not([data-car='on']) .ea-walk__nav {
+  visibility: hidden;
+}
+
+.ea-walk__steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ea-walk__step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: var(--ea-btn-h);
+  padding: var(--space-2);
+  border: 1px solid var(--ea-rule);
+  border-radius: var(--v3-radius-btn);
+  background: var(--ea-canvas);
+  color: var(--ea-sub);
+  font: inherit;
+  font-size: var(--t-ea-small);
+  font-weight: var(--t-w-ea-medium);
+  cursor: pointer;
+  transition: border-color var(--ea-dur-hover) ease-out, color var(--ea-dur-hover) ease-out;
+}
+
+.ea-walk__step:hover {
+  border-color: var(--ea-ink);
+  color: var(--ea-ink);
+}
+
+.ea-walk__step:focus-visible {
+  outline: var(--ea-focus);
+  outline-offset: 2px;
+}
+
+.ea-walk__step[aria-current='step'] {
+  border-color: var(--ea-accent-ink);
+  color: var(--ea-ink);
+  box-shadow: 0 0 0 3px var(--ea-accent-wash);
+}
+
+.ea-walk__dot {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--ea-well);
+  color: var(--ea-ink);
+  font-size: var(--t-ea-tiny);
+}
+
+.ea-walk__step[aria-current='step'] .ea-walk__dot {
+  background: var(--accent-ink-grad);
+  color: var(--ea-on-accent);
+}
+
+/* The progress line: how far through the steps the visitor is. Transform only. */
+.ea-walk__bar {
+  height: 3px;
+  border-radius: 3px;
+  background: var(--ea-rule);
+  overflow: hidden;
+}
+
+.ea-walk__bar > span {
+  display: block;
+  height: 100%;
+  background: var(--accent-ink-grad);
+  transform: scaleX(calc(var(--car-i, 0) / (var(--car-n) - 1)));
+  transform-origin: left center;
+  transition: transform var(--slide-dur) var(--motion-ease-step);
+}
+
+.ea-walk__move {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.ea-walk__move .ea-btn {
+  min-width: 7.5rem;
+}
+
+.ea-walk__move .ea-btn[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* One step: a light card on the stage. */
+.ea-walk__slide {
+  display: grid;
+  gap: var(--space-5);
+  padding: clamp(var(--space-4), 2.4vw, var(--space-8));
+  border-radius: var(--ea-radius-frame);
+  background: var(--ea-raised);
+  color: var(--ea-ink);
+}
+
+.ea-walk__say {
+  display: grid;
+  gap: var(--space-2);
+  max-width: var(--ea-copy);
+}
+
+.ea-walk__say > *,
+.ea-walk__end > * {
+  margin: 0;
+}
+
+.ea-walk__title,
+.ea-walk__end-title {
+  font-size: var(--t-ea-h3);
+  font-weight: var(--t-w-ea-strong);
+  line-height: 1.3;
+  color: var(--ea-ink);
+}
+
+.ea-walk__line {
+  font-size: var(--t-ea-body);
+  line-height: 1.55;
+  color: var(--ea-sub);
+}
+
+.ea-walk__shot {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--ea-rule);
+  border-radius: var(--ea-radius-frame);
+}
+
+/* The crop. --r* is the region shown, --s* the spot, both in capture pixels.
+   The box takes the region's proportions before the file arrives (CLS). */
+.ea-walk__view {
+  --rx: var(--wx);
+  --ry: var(--wy);
+  --rw: var(--ww);
+  --rh: var(--wh);
+  --sx: var(--whx);
+  --sy: var(--why);
+  --sw: var(--whw);
+  --sh: var(--whh);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--rw) / var(--rh);
+  background: var(--ea-well);
+}
+
+@media (max-width: 599px) {
+  .ea-walk__view {
+    --rx: var(--px);
+    --ry: var(--py);
+    --rw: var(--pw);
+    --rh: var(--ph);
+    --sx: var(--phx);
+    --sy: var(--phy);
+    --sw: var(--phw);
+    --sh: var(--phh);
+  }
+
+  /* The phone region ends inside a line of text, so the line fades out rather
+     than stopping on a cut word. */
+  .ea-walk__view--fade {
+    -webkit-mask-image: linear-gradient(to right, var(--c-black) 82%, transparent);
+    mask-image: linear-gradient(to right, var(--c-black) 82%, transparent);
+  }
+}
+
+.ea-walk__img {
+  position: absolute;
+  top: calc(var(--ry) / var(--rh) * -100%);
+  left: calc(var(--rx) / var(--rw) * -100%);
+  width: calc(var(--fw) / var(--rw) * 100%);
+  max-width: none;
+  height: auto;
+}
+
+.ea-walk__spot {
+  position: absolute;
+  top: calc((var(--sy) - var(--ry)) / var(--rh) * 100%);
+  left: calc((var(--sx) - var(--rx)) / var(--rw) * 100%);
+  width: calc(var(--sw) / var(--rw) * 100%);
+  height: calc(var(--sh) / var(--rh) * 100%);
+  border: 2px solid var(--ea-accent-ink);
+  border-radius: var(--v3-radius-btn);
+  box-shadow: 0 0 0 4px var(--ea-accent-wash);
+  pointer-events: none;
+}
+
+/* One ring travels out from the spot twice when its step arrives, then rests.
+   It starts and ends unseen, so it is a loop shape, not an entrance
+   (check-motion.js rule 2), and it is under five seconds, so it needs no pause. */
+.ea-walk__spot::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--ea-accent-ink);
+  border-radius: inherit;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ea-walk[data-car='on'] .ea-car__slide[aria-hidden='false'] .ea-walk__spot::after {
+    animation: ea-walk-ping calc(var(--motion-beat) * 15) var(--motion-ease-out) calc(var(--slide-dur)) 2;
+  }
+}
+
+@keyframes ea-walk-ping {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  30% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+
+.ea-walk__caption {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--ea-rule);
+  font-size: var(--t-ea-tiny);
+  line-height: 1.5;
+  color: var(--ea-muted);
+}
+
+/* The end: the primary action, and the way back to the first step. */
+.ea-walk__end {
+  justify-items: center;
+  gap: var(--space-4);
+  padding-block: clamp(var(--space-8), 6vw, var(--space-16));
+  text-align: center;
+}
+
+.ea-walk__end .ea-walk__line {
+  max-width: var(--ea-lead-w);
+}
+
+.ea-walk__end .ea-actions {
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 599px) {
+  .ea-walk__step {
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-inline: var(--space-1);
+    font-size: var(--t-ea-tiny);
+  }
+
+  .ea-walk__move .ea-btn {
+    min-width: 0;
+  }
+
+  /* Every pixel goes to the screen on a phone: a thin stage edge and a tight card. */
+  .ea-walk .ea-car__stage {
+    padding: var(--space-2);
+  }
+
+  .ea-walk__slide {
+    gap: var(--space-4);
+    padding: var(--space-3);
+  }
+
+  .ea-walk__end .ea-actions {
+    grid-auto-flow: row;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ea-walk__bar > span {
+    transition: none;
+  }
+}
+
 /* ── The app shell inside a slide ─────────────────────────────────────────── */
 .ea-app {
   overflow: hidden;

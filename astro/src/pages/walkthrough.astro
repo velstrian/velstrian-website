@@ -1,0 +1,67 @@
+---
+/**
+ * /walkthrough: click through the work of a bid before signing up
+ * (R285-WEB-INTERACTIVE-WALKTHROUGH-01).
+ *
+ * An outside review of the live site, shared by the owner on 2026-10-21,
+ * ranked this its P0: a visitor should EXPERIENCE the product, not read about
+ * it. This page is that experience, five real screens of the demo account the
+ * visitor moves through at their own pace (components/evidenced/Walkthrough.astro
+ * says what each step shows and why). The home page hero links here, beside
+ * the one minute tour, so a visitor can watch or click, whichever suits them.
+ *
+ * Its own route rather than a home page section because the walkthrough needs
+ * the whole width and the visitor's full attention, and the home page already
+ * carries a product carousel. One h1, one lead, then the walkthrough, which
+ * ends on the primary action.
+ */
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import Band from '../components/evidenced/Band.astro';
+import Walkthrough from '../components/evidenced/Walkthrough.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import { breadcrumbs } from '../lib/schema';
+import '../styles/evidenced.css';
+
+const title = 'Product walkthrough | Velstrian';
+const description =
+  'Click through five real screens of Velstrian Bid: find a contract, decide if it suits you, draft from your documents, agree it with your team and deliver.';
+
+const TRAIL = [{ name: 'Home', path: '/' }];
+
+const schema = [
+  breadcrumbs([
+    { name: 'Home', path: '/' },
+    { name: 'Product walkthrough', path: '/walkthrough/' },
+  ]),
+];
+
+/* When this page last materially changed, read into dateModified and the sitemap <lastmod>. */
+const UPDATED = new Date('2026-10-23');
+---
+
+<Base
+  title={title}
+  description={description}
+  path="/walkthrough"
+  schema={schema}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero
+    id="walk-title"
+    size="compact"
+    title="See a bid from start to finish."
+    accent="from start to finish."
+    lead="Five real screens from a demo account. Press Next, use the arrow keys, or swipe, at your own pace."
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={TRAIL} current="Product walkthrough" /></div>
+  </PageHero>
+
+  <Band tone="light-alt" flush>
+    <div class="ea-wrap">
+      <Walkthrough level="h2" />
+    </div>
+  </Band>
+</Base>
