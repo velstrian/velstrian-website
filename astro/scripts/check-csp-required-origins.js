@@ -76,6 +76,21 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
+ * R285-WEB-GEMINI-UIUX P0-2. The app host the forms post to is READ from
+ * src/data/app.ts, the one place the site writes it, rather than typed again
+ * here. So the domain switch is one constant: change APP_ORIGIN, and this gate
+ * fails until `_headers` permits the new host in connect-src and form-action.
+ * A literal here would have passed against the old host forever.
+ */
+const APP_TS = path.join(__dirname, '..', 'src', 'data', 'app.ts');
+const APP_ORIGIN_MATCH = /^export const APP_ORIGIN = '(https:\/\/[^']+)';$/m.exec(fs.readFileSync(APP_TS, 'utf8'));
+if (!APP_ORIGIN_MATCH) {
+  console.error(`csp-required: could not read APP_ORIGIN from ${APP_TS}, so the form host cannot be checked.`);
+  process.exit(1);
+}
+const APP_ORIGIN = APP_ORIGIN_MATCH[1];
+
+/**
  * Origins this site requires, the directive that governs each, and the reason
  * it is here. The reason is not decoration: an entry nobody can justify is an
  * entry that should be deleted from the policy, not defended by a gate.
@@ -115,7 +130,7 @@ const REQUIRED = [
   },
   {
     directive: 'connect-src',
-    origin: 'https://app.crowagent.ai',
+    origin: APP_ORIGIN,
     reason:
       'Where the leads go. Every form on this site posts with fetch(form.action) after ' +
       'preventDefault, so connect-src is the directive that decides whether an enquiry ' +
@@ -125,7 +140,7 @@ const REQUIRED = [
   },
   {
     directive: 'form-action',
-    origin: 'https://app.crowagent.ai',
+    origin: APP_ORIGIN,
     reason:
       'The same endpoint on the no-JavaScript path, where the browser performs a native ' +
       'submit. An origin permitted by only one of connect-src and form-action is a form ' +

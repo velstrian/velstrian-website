@@ -57,6 +57,7 @@ import Turnstile from './Turnstile.astro';
 import '../../styles/forms.css';
 import Button from '../ui/Button.astro';
 import { SITE } from '../../data/site';
+import { APP_ORIGIN } from '../../data/app';
 
 interface Props {
   /**
@@ -75,7 +76,9 @@ interface Props {
 const { id, source } = Astro.props;
 
 /** The endpoint both legacy blocks post to. See the note above. */
-const NOTIFY_ENDPOINT = 'https://app.crowagent.ai/api/notify';
+/* R285-WEB-GEMINI-UIUX P0-2: the host comes from APP_ORIGIN in data/app.ts,
+   the one place the site writes it, so the domain switch is one line. */
+const NOTIFY_ENDPOINT = `${APP_ORIGIN}/api/notify`;
 ---
 
 <form
