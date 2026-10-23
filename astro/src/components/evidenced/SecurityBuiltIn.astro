@@ -17,11 +17,21 @@
  * data is, how people sign in, and what runs by itself. Plain words first, the
  * one technical term (row level security) named once so a buyer's security
  * reviewer can match it.
+ *
+ * THE SHORT TRUST SUMMARY (R285-WEB-ENTERPRISE-REDESIGN-01, structure addendum
+ * D250 item 5). On the home page (`more`) the lead is the trust summary a
+ * first time buyer needs on the main path: who runs it (the registered
+ * company), that a person approves every answer, which AI providers draft and
+ * where they work, and the live status page. The company name and number,
+ * the AI providers and the status host are read from lib/brand-names.ts and
+ * data/site-facts.json, never typed here. /security/
+ * keeps the plain lead, because the page itself carries the detail.
  */
 import Band from './Band.astro';
 import Icon from './Icon.astro';
 import IconTile from './IconTile.astro';
-import { SECURITY_GROUPS } from '../../data/site-facts';
+import { SECURITY_GROUPS, FACTS, listJoin } from '../../data/site-facts';
+import { LEGAL_ENTITY_NAME, COMPANY_NUMBER, STATUS_URL } from '../../lib/brand-names';
 import type { IconName } from '../../data/icons';
 
 interface Props {
@@ -31,6 +41,9 @@ interface Props {
 }
 const { more = false, tone = 'light' } = Astro.props;
 
+const AI_PROVIDERS = listJoin(FACTS.regions.ai_processors_outside_eu);
+const STATUS_HOST = new URL(STATUS_URL).host;
+
 const ICONS: Record<string, IconName> = { data: 'shield', access: 'lock', platform: 'checklist' };
 ---
 
@@ -39,13 +52,25 @@ const ICONS: Record<string, IconName> = { data: 'shield', access: 'lock', platfo
     <div class="ea-secure__head" data-reveal>
       <span class="ea-label">Security</span>
       <h2 class="ea-h2" id="ea-secure-title">Security built in.</h2>
-      <p class="ea-lead">
-        Your bids hold your best work. This is how it is kept safe, on every plan, with nothing for you to set up.
-      </p>
+      {
+        more ? (
+          <p class="ea-lead">
+            {LEGAL_ENTITY_NAME}, company {COMPANY_NUMBER}, registered in England and Wales. A person approves every answer.
+            Drafting sends only the text a task needs to {AI_PROVIDERS}, outside the EU, under contract.
+          </p>
+        ) : (
+          <p class="ea-lead">
+            Your bids hold your best work. This is how it is kept safe, on every plan, with nothing for you to set up.
+          </p>
+        )
+      }
       {
         more && (
           <p class="ea-secure__more">
             <a class="ea-link" href="/security/">See how each part works</a>
+            <a class="ea-link" href={STATUS_URL} target="_blank" rel="noopener noreferrer">
+              Live status at {STATUS_HOST}<span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
           </p>
         )
       }
@@ -84,6 +109,12 @@ const ICONS: Record<string, IconName> = { data: 'shield', access: 'lock', platfo
   .ea-secure__head {
     display: grid;
     gap: var(--space-4);
+  }
+
+  .ea-secure__more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
   }
 
   .ea-secure__head .ea-h2,

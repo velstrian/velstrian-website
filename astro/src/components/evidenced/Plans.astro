@@ -12,7 +12,7 @@
  */
 import Band from './Band.astro';
 import Action from './Action.astro';
-import { PLANS, TRIAL_DAYS, startHref, START_LABEL } from '../../data/pricing';
+import { PLANS, TRIAL_NOTE, startHref, START_LABEL } from '../../data/pricing';
 
 const PLAIN: Record<string, { who: string; gets: string }> = {
   Starter: { who: 'You bid on your own', gets: 'Find contracts, draft answers from your past answers, download as Word or PDF.' },
@@ -26,7 +26,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
       <h2 class="ea-h2" id="ea-plans-title">Simple prices, shown up front.</h2>
-      <p class="ea-lead">Your first {TRIAL_DAYS} days are free. A card is needed to start, and you can cancel any time in the trial.</p>
+      <p class="ea-lead">{TRIAL_NOTE} Cancel any time in the trial.</p>
     </div>
     <ul class="ea-plans__grid">
       {
