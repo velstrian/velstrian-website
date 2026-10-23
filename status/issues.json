@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T23:28:49.166Z",
+  "updated": "2026-10-23T00:14:32.071Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -3209,6 +3209,46 @@
       "title": "R285-WEB-GEMINI-AUDIT 2026-10-23 claims: mobile menu has no trial button, tender finder Turnstile fails locally, section rhythm and 250px gaps, capture CLS, nav polish and scrollbars",
       "status": "WIP",
       "note": "crow-builder lane verifying every claim in a browser before fixing (earlier Gemini audits had invented findings). Local only, gate chain once at the end."
+    },
+    {
+      "id": "A-329",
+      "src": "gemini-audit-2026-10-23",
+      "sev": "P1",
+      "title": "R285-WEB-GEMINI-AUDIT-1 Mobile menu: Start now fell off screen at 390, now pinned at the menu foot",
+      "status": "FIXED",
+      "note": "Measured at 390x600 and 390x844 on :8093: Start now below the fold when opened, both actions at y 922 to 1030 with both menus open. Sticky action row, Start now first from START_LABEL and SIGNUP_URL. After: both at y 528 to 576 in every state. Commit 66f6396f."
+    },
+    {
+      "id": "A-330",
+      "src": "gemini-audit-2026-10-23",
+      "sev": "P1",
+      "title": "R285-WEB-GEMINI-AUDIT-2 Tender finder: first Search press refused with 'security check is still loading'",
+      "status": "FIXED",
+      "note": "Reproduced on :8093 (not live: /tools/tender-finder/ is 404 on crowagent.ai). Check loads on first focus, the button press is that focus. Press now held and sent when the Turnstile callback fires. Dev hosts get the Cloudflare test key 1x00000000000000000000AA. After: one press sends the search. Commit 5823bddb."
+    },
+    {
+      "id": "A-331",
+      "src": "gemini-audit-2026-10-23",
+      "sev": "P2",
+      "title": "R285-WEB-GEMINI-AUDIT-3 Section rhythm: 269 to 316px of empty space between light bands at 1440",
+      "status": "FIXED",
+      "note": "Measured on /, /bid/, /buy/: 134px pad a side. Now clamp(var(--space-12), 6vw, var(--space-20)), 80px a side at 1440, 48px at 390. Gap 160 to 208px. Dark bands kept, a deliberate Band.astro device. Commit 6c7b9e91."
+    },
+    {
+      "id": "A-332",
+      "src": "gemini-audit-2026-10-23",
+      "sev": "P3",
+      "title": "R285-WEB-GEMINI-AUDIT-5 Nav menu glass and scrollbars from the Gemini proposal",
+      "status": "FIXED",
+      "note": "The light header menu was 82 percent glass with the dark ground shadow at 45 percent near black. It now uses Gemini's 88 percent glass, a blur of 20px at 180 percent saturation and a three part shadow, all tokenised, with solid and reduced transparency fallbacks. The palette list and the mobile drawer scrollbars use --ea-rule-strong. Commit 6c7b9e91."
+    },
+    {
+      "id": "A-333",
+      "src": "gemini-audit-2026-10-23",
+      "sev": "P3",
+      "title": "R285-WEB-GEMINI-AUDIT-6 Hero aurora: Gemini ambient fields and grain",
+      "status": "FIXED",
+      "note": "Five fields and periods 24/28/32/20r/26r as tokens, grain as SVG data URI background at 4 percent overlay, fields feathered by mask. A/B frames under the same load: no regression, 0 long tasks. check-cwv CLS 0 on 48 routes x 2 widths. Commit 6c7b9e91."
     }
   ],
   "directives": [
@@ -3278,5 +3318,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 329
+  "nextId": 334
 }
