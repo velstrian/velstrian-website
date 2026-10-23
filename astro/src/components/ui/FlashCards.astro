@@ -334,9 +334,18 @@ const n = cards.length;
   /* The card on show carries an accent ring outside its edge. Every card stays
      readable: the highlight teaches the order, it never hides a step. A ring
      and not the border, so the card's own hover (the edge, D294) still answers
-     the pointer on the card on show. */
+     the pointer on the card on show.
+
+     AN OUTLINE, NOT A BOX-SHADOW (2026-10-23, lane E1). It was
+     `box-shadow: 0 0 0 2px`, and a card carries no shadow (D294, check-sheen
+     rule 1, "cards calm"). check-sheen probes the first card on /bid/, which
+     is step 1 of this block: when the timer started between its rest reading
+     and its hover reading, as it did under a loaded machine, the card read
+     `box-shadow: none -> 0 0 0 2px` and the gate went red. An outline draws
+     the same ring, lifts nothing and is not a shadow. */
   .fc[data-fc='on'] [data-current] .fc__card {
-    box-shadow: 0 0 0 2px var(--ea-accent);
+    outline: 2px solid var(--ea-accent);
+    outline-offset: 0;
   }
 
   /* The time left on the card on show, drawn only while the steps run. */
