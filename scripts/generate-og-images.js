@@ -731,7 +731,7 @@ function buildCoverTree({ line, kind, colours, motif }) {
         position: "relative",
         backgroundColor: colours.bg,
         color: colours.ink,
-        fontFamily: "Plus Jakarta Sans",
+        fontFamily: "Manrope",
       },
     },
     h(
@@ -1102,18 +1102,20 @@ async function loadInterFonts(repoRoot) {
     },
     // The site's display face, for the blog covers (D283). The site serves it as
     // woff2 from /Assets/fonts, which satori cannot read, so the same face is
-    // fetched once as woff and cached beside Inter.
+    // fetched once as woff and cached beside Inter, at generation time only.
+    // [D309 / D315, owner 2026-10-23] Manrope, the Quantum V display face, SIL OFL 1.1,
+    // the static Fontsource cut of the same family the site self hosts.
     {
-      name: "Plus Jakarta Sans",
-      file: "PlusJakartaSans-SemiBold.woff",
-      url: "https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.0/files/plus-jakarta-sans-latin-600-normal.woff",
+      name: "Manrope",
+      file: "Manrope-SemiBold.woff",
+      url: "https://cdn.jsdelivr.net/npm/@fontsource/manrope@5.3.0/files/manrope-latin-600-normal.woff",
       weight: 600,
       style: "normal",
     },
     {
-      name: "Plus Jakarta Sans",
-      file: "PlusJakartaSans-ExtraBold.woff",
-      url: "https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.0/files/plus-jakarta-sans-latin-800-normal.woff",
+      name: "Manrope",
+      file: "Manrope-ExtraBold.woff",
+      url: "https://cdn.jsdelivr.net/npm/@fontsource/manrope@5.3.0/files/manrope-latin-800-normal.woff",
       weight: 800,
       style: "normal",
     },

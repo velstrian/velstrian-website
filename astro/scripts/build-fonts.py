@@ -217,10 +217,16 @@ MONO_FEATURES = "ccmp,calt,locl,mark"
 # file, wght axis to keep or None for a static face, layout features to keep
 PLAN = [
     ("Inter-var.woff2", "wght=400:800", SANS_FEATURES),
-    ("JetBrainsMono-var.woff2", "wght=400:700", MONO_FEATURES),
-    ("PlusJakartaSans-600.woff2", None, DISPLAY_FEATURES),
-    ("PlusJakartaSans-700.woff2", None, DISPLAY_FEATURES),
-    ("PlusJakartaSans-800.woff2", None, DISPLAY_FEATURES),
+    # [D309 / D315, 2026-10-23] Quantum V. The display face is Manrope and the mono DM Mono,
+    # both static. Manrope was first instanced from @fontsource-variable/manrope 5.3.0 to static
+    # 600, 700 and 800 (fontTools.varLib.instancer --static), DM Mono taken from
+    # @fontsource/dm-mono 5.3.0 at 400 and 500 (the family stops at 500). Each then went
+    # through this subset step, so a re-run here is the idempotent subset only.
+    ("DMMono-400.woff2", None, MONO_FEATURES),
+    ("DMMono-500.woff2", None, MONO_FEATURES),
+    ("Manrope-600.woff2", None, DISPLAY_FEATURES),
+    ("Manrope-700.woff2", None, DISPLAY_FEATURES),
+    ("Manrope-800.woff2", None, DISPLAY_FEATURES),
 ]
 
 

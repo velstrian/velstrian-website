@@ -59,7 +59,8 @@ export const OG_CARD_LINE = `Find public and private contracts and write bids fr
  * generator runs. ogImageUrl() puts it on every card URL, so no page and no
  * frontmatter carries its own.
  */
-export const OG_VERSION = '20261022';
+// [D315 R285-REBRAND-05] Bumped: the cards were redrawn on 2026-10-23 in Quantum V and Manrope.
+export const OG_VERSION = '20261023';
 
 /** A card URL, absolute, with the current OG_VERSION and any older one removed.
  *  A URL that is not one of our own /Assets/ images is returned as it is. */

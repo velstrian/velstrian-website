@@ -137,7 +137,7 @@
  * end to end below rather than the ones carried in a note.
  *
  * THE RATIO IS AN ADVANCE-WIDTH ONE, not an x-height one, for exactly the
- * reason recorded against the shipped Jakarta values further down this file:
+ * reason recorded against the Jakarta values this file carried until 2026-10-23:
  * x-height matching keeps the fallback the same apparent SIZE and says nothing
  * about horizontal room, and horizontal room is what decides whether a
  * paragraph re-wraps when the real face arrives. xAvgCharWidth is not used
@@ -218,7 +218,8 @@
   line-gap-override: 0%;
 }
 
-/* -- WHY JAKARTA IS `optional` AND INTER IS NOT ----------------------------
+/* -- WHY THE DISPLAY FACE IS `optional` AND INTER IS NOT (written for Jakarta,
+ *    unchanged for Manrope) ----------------------------
  *
  * ADDED 2026-08-31 to fix a hero fault, not a performance one. The homepage h1
  * runs a staggered reveal, and `swap` meant the real face arrived DURING it.
@@ -245,359 +246,218 @@
  * animated, so a swap there is an ordinary reflow rather than a paint fault,
  * and putting body copy on `optional` would let a whole page load render in the
  * fallback to solve a problem body copy does not have. */
+/* ── MANROPE, THE QUANTUM V DISPLAY FACE (D309, self hosted under D315, 2026-10-23)
+ *
+ * Replaces Plus Jakarta Sans, same three weights, same `optional` display rule
+ * (the reason is above), same unicode-range. Source: @fontsource-variable/manrope
+ * 5.3.0 (SIL OFL 1.1, no Reserved Font Name, licence in
+ * Assets/fonts/Manrope-OFL-LICENSE.md), instanced to static 600, 700 and 800 with
+ * fontTools.varLib.instancer --static and subset with the KEEP range and the
+ * DISPLAY features of scripts/build-fonts.py. 12,764, 12,868 and 12,328 bytes. */
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Manrope';
   font-style: normal;
   font-weight: 600;
   font-display: optional;
-  src: url('/Assets/fonts/PlusJakartaSans-600.woff2') format('woff2');
+  src: url('/Assets/fonts/Manrope-600.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0300-0304, U+0308, U+0309, U+0323, U+0329, U+2000-206F,
     U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Manrope';
   font-style: normal;
   font-weight: 700;
   font-display: optional;
-  src: url('/Assets/fonts/PlusJakartaSans-700.woff2') format('woff2');
+  src: url('/Assets/fonts/Manrope-700.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0300-0304, U+0308, U+0309, U+0323, U+0329, U+2000-206F,
     U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Manrope';
   font-style: normal;
   font-weight: 800;
   font-display: optional;
-  src: url('/Assets/fonts/PlusJakartaSans-800.woff2') format('woff2');
+  src: url('/Assets/fonts/Manrope-800.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0300-0304, U+0308, U+0309, U+0323, U+0329, U+2000-206F,
     U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* ── 'Jakarta Fallback': RE-DERIVED 2026-08-05, A-100 / A-131 ───────────────
+/* ── 'Manrope Fallback': DERIVED 2026-10-23 (D315), BY THE METHOD THE JAKARTA
+ *    BANDS RECORDED, WHICH THIS FILE CARRIED UNTIL TODAY ─────────────────────
  *
- * THE CONTROL RAN FIRST AND IT PASSED, which is the only reason these numbers
- * moved. The shipped values documented their own working in
- * Assets/css/fonts-selfhosted.css:93-95, and that arithmetic reproduces to the
- * last digit:
- *     size-adjust      = (514/1000)/(1062/2048) = 99.1214%  -> 99.12%  ✓
- *     ascent-override  = (964/1000)/0.9912      = 97.2558%  -> 97.25%  ✓
- *     descent-override = (266/1000)/0.9912      = 26.8361%  -> 26.84%  ✓
- * So the method that produced them is recoverable and this pass does not
- * disagree with whoever produced them about the arithmetic. What it disagrees
- * with is THE INPUTS, and the disagreement is checkable against the binaries
- * this repo actually ships, by two independent routes each:
- *     Arial x-height 1062/2048   CORRECT (OS/2 sxHeight and the 'x' outline agree)
- *     Jakarta unitsPerEm 1000    CORRECT
- *     Jakarta x-height 514       WRONG. Measured 541 / 544 / 546 at 600 / 700 /
- *                                800. 514 is 541 with two digits transposed.
- *     Jakarta ascent 964         WRONG. Measured 1038, in hhea AND OS/2 sTypo.
- *     Jakarta descent 266        WRONG. Measured 222, in hhea AND OS/2 sTypo.
- * Three of the five inputs describe no face in Assets/fonts/.
+ * WHAT IS KEPT. The structure the Jakarta derivation (A-100, A-131) proved right:
+ * an ADVANCE-WIDTH size-adjust, never an x-height one and never xAvgCharWidth,
+ * one band per real weight against local('Arial') Regular, a separate DejaVu
+ * family for Linux, and vertical overrides equal to the face's own metrics over
+ * each band's size-adjust. The notes on why local('sans-serif') is inert, why
+ * 'Arial Bold' is not used, and why synthetic bold changes the paint and not the
+ * advance all still hold and are in git history beside the Jakarta values.
  *
- * AND THE FORMULA ANSWERS THE WRONG QUESTION. `size-adjust` was derived as an
- * X-HEIGHT ratio. X-height matching keeps the fallback looking the same SIZE.
- * It says nothing about how much horizontal room the text takes, and the whole
- * purpose recorded for this face is that text-width-dependent layout must not
- * re-wrap when the real face arrives. That is an ADVANCE-WIDTH objective.
- * Correcting only the transposed input still would not have got there: a
- * corrected x-height derivation gives 544/1000 over 1062/2048 = 104.91%, where
- * width matching at the same weight needs 108.81%. The input errors cost about
- * 5.4pp and the choice of formula about 3.9pp, independently.
+ * HOW THE ARIAL BANDS WERE MEASURED. fontTools, summing hmtx advances over the
+ * real heading text of the built site (h1 to h4 of every page in astro/dist,
+ * 27,228 characters), Manrope at each static weight against Arial Regular:
+ *      600  106.70%      700  108.55%      800  110.43%
+ * THE CONTROL RAN FIRST. The same script over the retired Plus Jakarta files
+ * gave 107.49 / 108.62 / 109.71 against the shipped, Chromium validated 107.61 /
+ * 108.81 / 109.96, so the method sits within 0.25pp of a layout measurement.
+ * VALIDATED IN CHROMIUM, 2026-10-23, and the declared values below are the
+ * Chromium ones. The 676 distinct h1 to h4 strings of the built site (19,268
+ * characters) laid out at 40px and summed by getBoundingClientRect().width:
+ *   raw gap, Manrope over local('Arial') with no override
+ *      600  106.31%      700  108.15%      800  110.01%
+ *   residual of the fontTools bands above, fallback over real: 1.0036, 1.0037
+ *   and 1.0038 (the fallback ran 0.37% wide at every weight)
+ * so each band now declares the raw Chromium gap, which is what size-adjust has
+ * to cancel. The line box measured 1.37em in the real face and in every band.
  *
- * HOW THE REPLACEMENTS WERE DERIVED, by two methods that had to agree:
- *   1. fontTools, summing hmtx advances over the site's real heading character
- *      frequency, 20,274 characters over 736 headings taken from the built
- *      output, and separately over a flat Latin-1 set as a shape check.
- *   2. Chromium, laying out the 570 distinct real heading strings from the same
- *      build at 400px and summing getBoundingClientRect().width, so shaping and
- *      kerning are included rather than assumed.
- * The two agree to within 0.13pp at every weight. A-100's standing warning is
- * respected: xAvgCharWidth is NOT used anywhere in this derivation. It cannot
- * be, because Arial reports the old weighted-lowercase definition and modern
- * faces the all-glyphs one. For the record of how badly it misleads, that ratio
- * claims Inter is 38.27% wider than Arial where real text measures 6.9%.
+ * VERTICAL. Manrope sets USE_TYPO_METRICS, sTypo and hhea both 2132 / -600 / 0
+ * per 2000, so 1.066 ascent, 0.300 descent, no line gap, a 1.366em line box
+ * (Jakarta's was 1.260em). Each band declares 1.066 and 0.300 over its own
+ * size-adjust, the relation recorded and confirmed in Chromium for Jakarta.
  *
- * MEASURED RATIO OF PLUS JAKARTA SANS TO local('Arial'), which is what
- * size-adjust has to cancel:
- *      600  107.61%      700  108.81%      800  109.96%
- * The spread across the real weight range is 2.35pp, so no single number serves
- * all three. Rather than pick a compromise, this declares one band per real
- * face, mirroring the three Plus Jakarta Sans @font-face blocks above, so each
- * band is exact. Measured usage across 9 built routes is 6,419 characters at
- * 700, 1,161 at 800 and ZERO at 600, so the 700 band carries 84.7% of it.
- *
- * ascent/descent/line-gap follow from the size-adjust of their own band, using
- * the same relation the shipped values used and which was confirmed by
- * measuring a line box in Chromium: the overrides are multiplied by
- * size-adjust, so a target of A must be declared as A / size-adjust.
- * Plus Jakarta Sans sets USE_TYPO_METRICS and its sTypo ascent/descent/lineGap
- * are 1038 / -222 / 0 per 1000, giving a 1.260em line box, which Chromium
- * confirms. line-gap-override: 0% is therefore CORRECT and is the one shipped
- * value that survives, now verified rather than assumed. The other two do not
- * survive: 97.25% and 26.84% under 99.12% produce a 1.230em line box against
- * the real face's 1.260em, 2.4% short, and an ascent-to-descent ratio of 3.62
- * against the real 4.68, which puts the baseline in the wrong place inside the
- * box. That second error still bites even though line-height is explicit on
- * 99.6% of this site's text (measured: 35,385 characters explicit against 136
- * at `normal`), because half-leading is distributed using ascent and descent.
- *
- * THE BLOCKER THAT HELD THIS ITEM WAS NOT REAL, and that is worth recording so
- * nobody re-orders work around it again. The claim was that the missing
- * `font-weight` descriptor meant the browser synthesised a bold from Arial
- * Regular, and that a re-derivation done first would have measured the
- * synthesis. Measured in Chromium, on the same 570 strings: the advance width
- * of this face is IDENTICAL at 400, 600, 700 and 800, to the last float bit,
- * both with and without the weight descriptor. Synthetic bold in Blink changes
- * the paint, not the advance. Screenshot ink confirms both halves: without the
- * descriptor, weight 700 paints 39% more ink at exactly the same 888px advance;
- * with it, 700 and 800 are pixel-identical to 400. So the weight fix was a real
- * fix to a real defect, it just was not a precondition for this one. The width
- * answer would have been the same number yesterday.
- *
- * WHAT THIS DOES NOT FIX. `ch` is the advance of '0', and Plus Jakarta Sans's
- * digits are far wider relative to its lowercase than Arial's are: matching
- * `ch` at 700 would need 127.30%, against 108.81% for text. Those two
- * objectives are 18.5pp apart and no single size-adjust reconciles them. Text
- * wins here, because A-92 already moved the headings that drove the CLS finding
- * off `ch` and onto em (see headings.css, 15.576em and 11.328em), so their
- * measure no longer moves on swap at all. The `ch` measures that remain on this
- * font are one 18ch cap in crowmark.css and a couple of small ones in
- * labels.css; for those, this change still helps rather than hurts, taking the
- * jump from 28.4% down to 17.0%. Getting them to zero means moving them to em
- * too, not tuning this descriptor.
- *
- * `local('sans-serif')` in the src below is INERT. local() matches a face by
- * full name or PostScript name and 'sans-serif' is a generic keyword, not the
- * name of any face, so it can never match. It is left alone rather than tidied
- * because it is out of this item's scope, but it should not be read as doing
- * anything. `local('Helvetica Neue')` is very nearly unreachable for the same
- * reason it always was: Arial ships on macOS too, so the first entry wins
- * there. If it ever were reached, these overrides would be wrong for it, since
- * they are derived against Arial.
- *
- * Deriving against local('Arial Bold') for the 700 and 800 bands would need a
- * far smaller correction, 101.46% and 102.50% measured, and would paint a real
- * bold rather than Arial Regular. It is NOT done here: 'Arial Bold' resolving
- * by name could not be verified on macOS or Linux from this machine, and a
- * band that silently fell through to Arial Regular would carry a 7pp error.
- * A known-uniform face beats a better one that might not be there.
- * ========================================================================= */
+ * THE DEJAVU BANDS ARE DERIVED, NOT MEASURED. No DejaVu Sans file is on this
+ * machine and the owner approved only the two Quantum V font downloads, so the
+ * Linux ratio is the measured Manrope to Arial ratio times the Arial to DejaVu
+ * ratio implied by the measured Jakarta bands (95.36/107.61, 96.41/108.81 and
+ * 97.42/109.96 are all 0.886 within 0.0002, so that ratio belongs to Arial and
+ * DejaVu rather than to Jakarta):
+ *      600  94.21%       700  95.82%       800  97.46%
+ * (the Chromium Arial bands times 0.8862, 0.8860 and 0.8860). Linux CLS (check-cwv in CI) is where an error here would show. Open item. */
 
-/* Band 1 of 3, mirroring PlusJakartaSans-600 above. Unused on any route
- * measured, and declared so that a weight below 650 cannot fall through to a
- * band derived against the wrong face. */
 @font-face {
-  font-family: 'Jakarta Fallback';
+  font-family: 'Manrope Fallback';
   src: local('Arial'), local('Helvetica Neue'), local('sans-serif');
   font-weight: 1 649;
-  size-adjust: 107.61%;
-  ascent-override: 96.46%;   /* 1.038 / 1.0761 */
-  descent-override: 20.63%;  /* 0.222 / 1.0761 */
+  size-adjust: 106.31%;
+  ascent-override: 100.27%;  /* 1.066 / 1.0631 */
+  descent-override: 28.22%;  /* 0.300 / 1.0631 */
   line-gap-override: 0%;
 }
 
-/* Band 2 of 3, mirroring PlusJakartaSans-700. Carries 84.7% of the display
- * text on this site. Residual after this override, measured in Chromium over
- * the 570 real heading strings: 0.99998 against the real face. */
 @font-face {
-  font-family: 'Jakarta Fallback';
+  font-family: 'Manrope Fallback';
   src: local('Arial'), local('Helvetica Neue'), local('sans-serif');
   font-weight: 650 749;
-  size-adjust: 108.81%;
-  ascent-override: 95.40%;   /* 1.038 / 1.0881 */
-  descent-override: 20.40%;  /* 0.222 / 1.0881 */
+  size-adjust: 108.15%;
+  ascent-override: 98.57%;   /* 1.066 / 1.0815 */
+  descent-override: 27.74%;  /* 0.300 / 1.0815 */
   line-gap-override: 0%;
 }
 
-/* Band 3 of 3, mirroring PlusJakartaSans-800, and open at the top so a weight
- * above 800 matches here rather than nowhere. Residual measured: 1.00001. */
 @font-face {
-  font-family: 'Jakarta Fallback';
+  font-family: 'Manrope Fallback';
   src: local('Arial'), local('Helvetica Neue'), local('sans-serif');
   font-weight: 750 1000;
-  size-adjust: 109.96%;
-  ascent-override: 94.40%;   /* 1.038 / 1.0996 */
-  descent-override: 20.19%;  /* 0.222 / 1.0996 */
+  size-adjust: 110.01%;
+  ascent-override: 96.90%;   /* 1.066 / 1.1001 */
+  descent-override: 27.27%;  /* 0.300 / 1.1001 */
   line-gap-override: 0%;
 }
 
-/* ── 'Jakarta Fallback DejaVu': DERIVED 2026-10-17, THE LINUX BANDS ─────────
- *
- * Same gap as 'Inter Fallback DejaVu' above: on Linux local('Arial') does not
- * resolve, so 'Jakarta Fallback' is skipped and headings fell to an unmatched
- * DejaVu Sans. Same method as the Arial bands: 628 real heading strings
- * (18,007 characters) from the built output, laid out in Chromium at 400px,
- * Plus Jakarta Sans against DejaVu Sans Regular, which is what local() returns
- * at every weight (synthetic bold changes the paint, not the advance, as the
- * Arial note records):
- *     600  95.36%      700  96.41%      800  97.42%
- * Validated with these descriptors: residual 1.00005, 0.99999 and 0.99996,
- * and the line box lands on 1.2600em, Jakarta's own. Overrides are 1.038 and
- * 0.222 over each band's size-adjust. A separate family rather than a fourth
- * src in 'Jakarta Fallback', because one band cannot carry two faces' numbers. */
 @font-face {
-  font-family: 'Jakarta Fallback DejaVu';
+  font-family: 'Manrope Fallback DejaVu';
   src: local('DejaVu Sans');
   font-weight: 1 649;
-  size-adjust: 95.36%;
-  ascent-override: 108.85%;  /* 1.038 / 0.9536 */
-  descent-override: 23.28%;  /* 0.222 / 0.9536 */
+  size-adjust: 94.21%;
+  ascent-override: 113.15%;  /* 1.066 / 0.9421 */
+  descent-override: 31.84%;  /* 0.300 / 0.9421 */
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'Jakarta Fallback DejaVu';
+  font-family: 'Manrope Fallback DejaVu';
   src: local('DejaVu Sans');
   font-weight: 650 749;
-  size-adjust: 96.41%;
-  ascent-override: 107.67%;  /* 1.038 / 0.9641 */
-  descent-override: 23.03%;  /* 0.222 / 0.9641 */
+  size-adjust: 95.82%;
+  ascent-override: 111.25%;  /* 1.066 / 0.9582 */
+  descent-override: 31.31%;  /* 0.300 / 0.9582 */
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'Jakarta Fallback DejaVu';
+  font-family: 'Manrope Fallback DejaVu';
   src: local('DejaVu Sans');
   font-weight: 750 1000;
-  size-adjust: 97.42%;
-  ascent-override: 106.55%;  /* 1.038 / 0.9742 */
-  descent-override: 22.79%;  /* 0.222 / 0.9742 */
+  size-adjust: 97.46%;
+  ascent-override: 109.38%;  /* 1.066 / 0.9746 */
+  descent-override: 30.78%;  /* 0.300 / 0.9746 */
   line-gap-override: 0%;
 }
 
-/* ── ONE VARIABLE FACE, DECLARING ITS REAL AXIS ───────────────────────────────
+/* ── DM MONO, THE QUANTUM V TECHNICAL FACE (D309, self hosted under D315) ────
  *
- * This was two @font-face blocks pinned at 400 and 500, both pointing at the
- * SAME variable file. That under-declared the face: the file is named -var and
- * reading its fvar table directly gives a wght axis of 400 to 800, so six of
- * those eight hundred units were unreachable. A browser asked for 700 would not
- * have used the font's own bold, it would have synthesised one by smearing the
- * 500 - which is exactly what labels.css now asks for, so this had to be fixed
- * before that weight could be trusted.
- *
- * Note how Inter directly above already does this correctly with `100 900`. The
- * mono was the odd one out rather than the pattern.
- *
- * DERIVED FROM THE FILE, NOT ASSUMED. The obvious guess for JetBrains Mono's
- * range is 100-800; the actual floor in this build's copy is 400. Declaring
- * 100 400 lower than the face carries would let the browser synthesise a THIN,
- * which is the same defect in the other direction. A-100 is on this board
- * precisely because a font metric was taken on trust once before.
- *
- * ── NOW `400 700`, 2026-09-01, AND THE PARAGRAPHS ABOVE ARE HISTORY ─────────
- *
- * The note above is kept because the rule it sets is the right one and this
- * change obeys it: the file's fvar now reads 400 to 700, so the declaration
- * reads 400 to 700. What changed is the FILE, not a re-reading of it. MEASURED
- * in Chromium across all 45 built routes, this site paints JetBrains Mono at
- * 400, 500 and 700 and at nothing else, 4,036 then 6,383 then 3,999 characters,
- * so the 700 to 800 stretch was carried on every page that loads mono and
- * reached by nothing. Clipping it took the file from 31,432 to 28,728 bytes.
- *
- * Also note that the line above about Inter declaring `100 900` correctly is now
- * out of date in its example rather than in its point: Inter declares `400 800`
- * for the same reason this declares `400 700`.
- *
- * THE LARGEST REMAINING SAVING ON THIS SITE'S FONTS IS IN THIS FILE AND IS NOT
- * TAKEN. Dropping `calt` would take it from 28,728 to 14,396 bytes. `calt` is
- * what renders // and __ as ligatures in a monospaced face, and both MEASURED as
- * present in mono text on this site, so removing it changes what a reader sees
- * and is an owner decision rather than an engineering one. JetBrains Mono is not
- * preloaded either, so none of those 14,332 bytes block first paint. */
+ * Replaces JetBrains Mono. Source: @fontsource/dm-mono 5.3.0, SIL OFL 1.1, no
+ * Reserved Font Name, licence in Assets/fonts/DMMono-OFL-LICENSE.md. The family
+ * ships STATIC weights only and stops at 500, so this site carries 400 and 500,
+ * subset with the KEEP range and the MONO features of scripts/build-fonts.py,
+ * 14,256 and 14,468 bytes. Measured on 2026-09-01 the site painted mono at 400,
+ * 500 and 700. A 700 request now matches the 500 face and the browser
+ * synthesises the bold, because DM Mono has no 700. Recorded on R285-REBRAND-05
+ * as an open design call (keep the synthesis, or set those labels to 500).
+ * Not preloaded, as before. */
 @font-face {
-  font-family: 'JetBrains Mono';
+  font-family: 'DM Mono';
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 400;
   font-display: swap;
-  src: url('/Assets/fonts/JetBrainsMono-var.woff2') format('woff2');
+  src: url('/Assets/fonts/DMMono-400.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0300-0304, U+0308, U+0309, U+0323, U+0329, U+2000-206F,
     U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* ── 'JetBrains Fallback': DERIVED 2026-10-17, R285-P2-WEBSITE-ASTRO-GATES-RED-IN-CI-01
- *
- * THE MONO FACE WAS THE LAST OF THE THREE WITH NO METRIC FALLBACK, and it is
- * the one that failed check-cwv in CI on every run since 2026-08-19 while the
- * same build passed on Windows.
- *
- * MEASURED, NOT REASONED. The GitHub runner is Ubuntu, where `monospace`
- * resolves to DejaVu Sans Mono and `local('Segoe UI')` and `local('Arial')`
- * resolve to nothing. With that font set emulated over the built dist (DejaVu
- * served as an installed face, the Windows faces withheld), check-cwv's own
- * measurement reproduces the CI failure on exactly the two routes CI names:
- *     /compare/crowmark-vs-cleantender/ @390  0.1394 here, 0.1368 in CI
- *     /compare/crowmark-vs-mytender-io/ @390  0.1394 here, 0.1368 in CI
- *     /compare/crowmark-vs-autogenai/   @390  0      here, under 0.0001 in CI
- * The mover is the breadcrumb leaf, set in the `.meta` mono label. CROWMARK VS
- * CLEANTENDER in JetBrains Mono is 193.20px and the row has 0.58px to spare at
- * 390. DejaVu Sans Mono is 1233/2048 of an em per glyph against JetBrains
- * Mono's 600/1000, 0.34% wider, so the leaf measured 193.78px in the fallback,
- * did not fit, and wrapped onto a second line. When JetBrains Mono swapped in
- * it fitted again, the leaf jumped 138px right and 34px up, and the whole page
- * below it rose 34px. The two longest competitor names are the only two rows
- * that close to the edge, which is why AutogenAI and SwiftBid never failed.
- * Windows never saw it because its `monospace` is Consolas, 7.4% NARROWER, so
- * the fallback fitted and the swap only widened a row that still had room.
- *
- * A MONOSPACED FACE HAS ONE ADVANCE, so the match is exact by construction
- * rather than fitted to sample text the way the Inter and Jakarta bands are.
- * size-adjust is JetBrains Mono's 0.6em over the fallback's own advance, read
- * from each binary's hmtx with fontTools:
- *     DejaVu Sans Mono  1233/2048  ->  0.6 / 0.60205 = 99.66%
- *     Consolas          1126/2048  ->  0.6 / 0.54980 = 109.13%
- *     Courier New       1229/2048  ->  0.6 / 0.60010 = 99.98%
- * The vertical overrides carry JetBrains Mono's own hhea and sTypo metrics,
- * 1020 / -300 / 0 per 1000 with USE_TYPO_METRICS set, divided by each band's
- * size-adjust, the same relation the Jakarta note above records.
- *
- * VALIDATED IN CHROMIUM, the same way the other two were. 836 mono text runs
- * (13,006 characters) taken from nine built routes at 1440 and 390, each laid
- * out at its real size, weight, case and letter-spacing:
- *     DejaVu band   0.99859 of the real width   (unmatched DejaVu 1.00214)
- *     Consolas band 0.99960                     (unmatched Consolas 0.92609)
- *     Courier band  0.99945
- * and every band lands its line box on 1.3200em, JetBrains Mono's own, where
- * the unmatched faces sit at 1.1700em.
- *
- * ONE FAMILY PER REAL FACE, for the reason 'Inter Fallback' gives: one local()
- * cannot carry two platforms' numbers. DejaVu first, because it is what Linux
- * paints, then Consolas for Windows, then Courier New, which ships on Windows
- * and macOS alike and so is what a Mac reaches. Menlo is NOT in the chain
- * although it descends from DejaVu, because it could not be measured from this
- * machine, which is the rule the Inter note set for SF Pro.
- *
- * NO unicode-range, because these faces carry no file, so check-font-coverage
- * skips them exactly as it skips the Inter and Jakarta fallbacks. */
 @font-face {
-  font-family: 'JetBrains Fallback';
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/Assets/fonts/DMMono-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0300-0304, U+0308, U+0309, U+0323, U+0329, U+2000-206F,
+    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ── 'DM Mono Fallback': DERIVED 2026-10-23 FROM THE JETBRAINS BANDS ─────────
+ *
+ * A monospaced face has ONE advance, so the match is exact by construction.
+ * DM Mono's advance is 600/1000, read from its hmtx with fontTools, which is
+ * exactly JetBrains Mono's, so every size-adjust below is the measured
+ * JetBrains value unchanged (DejaVu Sans Mono 1233/2048, Consolas 1126/2048,
+ * Courier New 1229/2048, see the 2026-10-17 derivation in git history). Only
+ * the vertical metrics move: DM Mono's hhea and sTypo are 992 / -310 / 0 per
+ * 1000 and it does NOT set USE_TYPO_METRICS (Windows then reads usWin, also
+ * 992 / 310), so a 1.302em line box. Ascent and descent are those over each
+ * band's size-adjust. One family per real face, DejaVu, Consolas, Courier, for
+ * the reason the Inter note gives. No unicode-range, these carry no file. */
+@font-face {
+  font-family: 'DM Mono Fallback';
   src: local('DejaVu Sans Mono');
   size-adjust: 99.66%;
-  ascent-override: 102.35%; /* 1.020 / 0.9966 */
-  descent-override: 30.10%; /* 0.300 / 0.9966 */
+  ascent-override: 99.54%; /* 0.992 / 0.9966 */
+  descent-override: 31.11%; /* 0.310 / 0.9966 */
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'JetBrains Fallback Consolas';
+  font-family: 'DM Mono Fallback Consolas';
   src: local('Consolas');
   size-adjust: 109.13%;
-  ascent-override: 93.47%; /* 1.020 / 1.0913 */
-  descent-override: 27.49%; /* 0.300 / 1.0913 */
+  ascent-override: 90.90%; /* 0.992 / 1.0913 */
+  descent-override: 28.41%; /* 0.310 / 1.0913 */
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'JetBrains Fallback Courier';
+  font-family: 'DM Mono Fallback Courier';
   src: local('Courier New');
   size-adjust: 99.98%;
-  ascent-override: 102.02%; /* 1.020 / 0.9998 */
-  descent-override: 30.00%; /* 0.300 / 0.9998 */
+  ascent-override: 99.22%; /* 0.992 / 0.9998 */
+  descent-override: 31.01%; /* 0.310 / 0.9998 */
   line-gap-override: 0%;
 }
 

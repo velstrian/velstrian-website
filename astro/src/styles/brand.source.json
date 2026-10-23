@@ -316,6 +316,17 @@
         "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
+    "signal-bid-ui": {
+      "role": "The Velstrian Bid signal as the UI paints it (--bid): the product rail tile, Bid washes and Bid text. Light is the measured text step #7E22CE, the same value signal-bid carries. Dark is a pinker step of the ribbonViolet family, #D08BFF, because the pack violet #A477FF sat too close to the dark Iris accent #8C85FF for token-distinctness (dE00), see 67e41bcf1. The pack signal-bid above stays the artwork value. Label on a --bid fill is --on-mark: dark #04121E 7.94:1, light #FFFFFF 6.98:1. As text it is held by quantum-v-contrast.",
+      "dark": {
+        "value": "#D08BFF",
+        "from": "packages/tokens/brand/quantum-v (D309), measured step, 67e41bcf1"
+      },
+      "light": {
+        "value": "#7E22CE",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      }
+    },
     "signal-buy": {
       "role": "Velstrian Buy product signal, signalCyan. Light text step measured: #0E776C, 4.51:1 on the deepest inset (signalCyan is 1.80:1 on white).",
       "dark": {
@@ -900,6 +911,30 @@
       ]
     },
     "--ca-fg-on-brand": {
+      "template": "{hex:on-accent}",
+      "blocks": [
+        "root",
+        "light",
+        "dark"
+      ]
+    },
+    "--bid": {
+      "template": "{hex:signal-bid-ui}",
+      "blocks": [
+        "root",
+        "light",
+        "dark"
+      ]
+    },
+    "--buy": {
+      "template": "{hex:signal-buy}",
+      "blocks": [
+        "root",
+        "light",
+        "dark"
+      ]
+    },
+    "--on-buy": {
       "template": "{hex:on-accent}",
       "blocks": [
         "root",

@@ -2593,7 +2593,8 @@
      had to be kept in step with its source by hand, and it was not.
      It goes BEFORE system-ui: a fallback that sits after the generic families
      is never reached. */
-  --font-display: 'Plus Jakarta Sans', 'Jakarta Fallback', 'Jakarta Fallback DejaVu', system-ui, -apple-system, sans-serif;
+  /* [D309 / D315] Manrope, the Quantum V display face, with its metric fallbacks (fonts.css). */
+  --font-display: 'Manrope', 'Manrope Fallback', 'Manrope Fallback DejaVu', system-ui, -apple-system, sans-serif;
   /* The two metric fallbacks sit BEFORE system-ui, which is the whole point of
      A-152: system-ui is what this stack fell through to, and it reflowed every
      paragraph on swap because nothing corrected its metrics. Segoe first, then
@@ -2605,7 +2606,8 @@
      stacks above give. Without them the swap re-wrapped the compare page
      breadcrumb at 390 on Linux and failed check-cwv in CI. The derivation is in
      styles/fonts.css. */
-  --font-mono:    'JetBrains Mono', 'JetBrains Fallback', 'JetBrains Fallback Consolas', 'JetBrains Fallback Courier', ui-monospace, monospace;
+  /* [D309 / D315] DM Mono, the Quantum V technical face. */
+  --font-mono:    'DM Mono', 'DM Mono Fallback', 'DM Mono Fallback Consolas', 'DM Mono Fallback Courier', ui-monospace, monospace;
 
   /* ── Motion ─────────────────────────────────────────────────────────────
      One easing curve and three durations for the whole site. Anything that

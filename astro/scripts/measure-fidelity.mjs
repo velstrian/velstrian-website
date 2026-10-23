@@ -167,11 +167,11 @@ const MAP = [
  * close. */
 const FONT_FACES = `
 @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:block;src:url('/Assets/fonts/Inter-var.woff2') format('woff2')}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:600;font-display:block;src:url('/Assets/fonts/PlusJakartaSans-600.woff2') format('woff2');unicode-range:U+0000-00FF}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:700;font-display:block;src:url('/Assets/fonts/PlusJakartaSans-700.woff2') format('woff2');unicode-range:U+0000-00FF}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:block;src:url('/Assets/fonts/PlusJakartaSans-800.woff2') format('woff2');unicode-range:U+0000-00FF}
-@font-face{font-family:'Jakarta Fallback';src:local('Arial'),local('Helvetica Neue'),local('sans-serif');size-adjust:99.12%;ascent-override:97.25%;descent-override:26.84%;line-gap-override:0%}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:block;src:url('/Assets/fonts/JetBrainsMono-var.woff2') format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:600;font-display:block;src:url('/Assets/fonts/Manrope-600.woff2') format('woff2');unicode-range:U+0000-00FF}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:700;font-display:block;src:url('/Assets/fonts/Manrope-700.woff2') format('woff2');unicode-range:U+0000-00FF}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:800;font-display:block;src:url('/Assets/fonts/Manrope-800.woff2') format('woff2');unicode-range:U+0000-00FF}
+@font-face{font-family:'Manrope Fallback';src:local('Arial');size-adjust:108.55%;ascent-override:98.20%;descent-override:27.64%;line-gap-override:0%}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:block;src:url('/Assets/fonts/DMMono-400.woff2') format('woff2')}
 `;
 
 /* Tolerances. A sub-pixel difference is a rounding artefact of two different
@@ -562,7 +562,7 @@ console.log('');
 console.log(`${deltas} delta(s) and ${missing} unmatched selector(s) over ${cells} compared value(s), at ${VIEWPORTS.map((v) => v.w).join(' / ')}.`);
 console.log(`Scored against the concept RENDERED IN THE BUILT TYPEFACE. ${typeface} box dimension(s)`);
 console.log('moved between the concept as authored and that control: those are Segoe UI against');
-console.log('Inter and Plus Jakarta Sans, and no CSS change can close them.');
+console.log('Inter and Manrope, and no CSS change can close them.');
 if (missing) console.log('An unmatched selector is a MAPPING defect in this script, not a fidelity result. Fix the map.');
 
 if (jsonOut) {

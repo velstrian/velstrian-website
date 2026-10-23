@@ -257,9 +257,9 @@ const pageClass = `pg-${
        ~ still happens. That failure is silent and looks like the preload simply
        ~ not working.
        ~
-       ~ ONLY THE TWO FACES ABOVE THE FOLD. Jakarta 700 is the headline, 11.0 kB.
-       ~ Inter-var is the standfirst and the buttons, 32.8 kB. Jakarta 600 and
-       ~ 800 and JetBrains Mono are deliberately NOT preloaded: preloading a
+       ~ ONLY THE TWO FACES ABOVE THE FOLD. Manrope 700 is the headline, 12.9 kB
+       ~ (D315, was Jakarta 700 at 11.0 kB). Inter-var is the standfirst and the
+       ~ buttons, 32.8 kB. Manrope 600 and 800 and DM Mono are deliberately NOT preloaded: preloading a
        ~ face the first screen does not use spends bandwidth competing with the
        ~ two that it does.
        ~
@@ -273,7 +273,7 @@ const pageClass = `pg-${
     {evidenced ? (
       <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/VelstrianDocumentSerif-400.woff2" />
     ) : (
-      <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/PlusJakartaSans-700.woff2" />
+      <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/Manrope-700.woff2" />
     )}
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/Inter-var.woff2" />
 

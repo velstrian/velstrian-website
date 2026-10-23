@@ -670,7 +670,7 @@ const MEASURE = `(() => {
     out.labels.push({
       s: sig(el),
       recipe: [
-        face === 'Inter' || face === 'Plus Jakarta Sans' ? 'display face' : face,
+        face === 'Inter' || face === 'Manrope' ? 'display face' : face, // [D315] Manrope replaced Plus Jakarta Sans
         px(cs.fontSize) + 'px',
         'lh' + px(cs.lineHeight),
         'track' + px(cs.letterSpacing),
