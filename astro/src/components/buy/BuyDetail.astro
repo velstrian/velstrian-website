@@ -20,6 +20,11 @@
  * default and with no script. Each row keeps its heading element inside the
  * summary, because check-content-parity.js tracks the headings.
  *
+ * 2026-10-23, D305 lane E1: the sixteen workspace parts are now FlashCards
+ * (components/ui/FlashCards.astro, manual, no script), as the twelve
+ * capabilities on /bid/ are: a one line headline and one plain sentence each,
+ * with the same full text behind "Read in full". The rules keep their rows.
+ *
  * The five delivery bands stay open because they ARE the structure, a scale
  * read left to right. What it does set against what it does not is one tap,
  * under its heading "Alongside your portal, not instead of it." and the one
@@ -28,6 +33,7 @@
  */
 import Band from '../evidenced/Band.astro';
 import IconTile from '../evidenced/IconTile.astro';
+import FlashCards, { type FlashCard } from '../ui/FlashCards.astro';
 import { PRODUCT_NAME_BUY, PRODUCT_NAME_BID } from '../../lib/brand-names';
 import { BUYER_PLANS } from '../../data/pricing';
 
@@ -83,71 +89,95 @@ const SCOPE_DOES_NOT = [
 const SURFACES = [
   {
     heading: 'Requirements',
+    summary: 'Set what you will measure, and how much each part counts.',
     body: 'Social value requirement packs. Set what you will measure and how much each part counts, before any reply arrives.',
   },
   {
     heading: 'Quick RFQ',
+    summary: 'A short request for quotes for a smaller job, sent by personal link.',
     body: 'For smaller requests: describe the job, check the scope, download a request for quotes and send it to suppliers by personal link. Each supplier uploads a quote and gets a receipt. You write the scope. The AI does not draft it.',
   },
   {
     heading: 'Supplier invitations and clarifications',
+    summary: 'Invite suppliers by personal link, and send every answer to all of them.',
     body: 'Invite suppliers to respond by personal link. Each reply gets a receipt, and the answer to any supplier question is published to every invited supplier without saying who asked.',
   },
   {
     heading: 'Evaluations',
+    summary: 'Your evaluators score each bid against the guide you published.',
     body: 'Score supplier bids against the scoring guide for the requirement. Your evaluators set every score. The AI check for uneven scoring only advises and never changes a number.',
   },
   {
     heading: 'Evaluation pre-read',
+    summary: 'A first read of each reply that finds the proof for each question.',
     body: 'A first read of each reply that finds the proof for each published question. It never scores.',
   },
   {
     heading: 'Prices side by side',
+    summary: 'See every bid as one total cost, over the same term and the same work.',
     body: 'Enter each supplier price schedule to see every bid as one whole life cost, the total over the same term and the same amount of work, then set options side by side and record what your team judges.',
   },
   {
     heading: 'Whole life costs',
+    summary: 'Cost each way of delivering the work across its whole life.',
     body: 'Cost each way of delivering a requirement across its whole life, from assumptions you supply.',
   },
   {
     heading: 'Pipeline',
+    summary: 'Every purchase you are planning or running, in one list.',
     body: 'Every procurement you are planning, running, scoring, awarding or managing, with dates and value worked out from your own records.',
   },
   {
     heading: 'Supplier screening',
+    summary: 'Public register checks on each supplier, and the decision stays yours.',
     body: 'Checked against public registers when a reply arrives or a supplier joins an evaluation. It is not a score and never excludes a supplier. You decide.',
   },
   {
     heading: 'Supplier risk',
+    summary: 'Risk signals across all your suppliers, in one view.',
     body: 'Risk signals across your suppliers, with platform records kept apart from flags raised by your team.',
   },
   {
     heading: 'Working with your suppliers',
+    summary: 'Scorecards, review meetings and shared actions for each supplier.',
     body: 'Supplier relationship management in one place: scorecards, review meetings and shared actions per supplier, every open action in one table, and feedback each quarter.',
   },
   {
     heading: 'Savings you can show',
+    summary: 'The savings claimed against each supplier, and what finance signed off.',
     body: 'Value realisation: the savings and other value claimed against each supplier, and what finance has signed off.',
   },
   {
     heading: 'Contracts',
+    summary: 'Each awarded contract and the social value promised in it.',
     body: 'Awarded contracts and their social value promises, recorded so delivery has something to be measured against.',
   },
   {
     heading: 'Suppliers',
+    summary: 'Your supplier list, with each supplier’s delivery record.',
     body: 'Your supplier directory and each supplier’s delivery record across the contracts you have awarded.',
   },
   {
     heading: 'Social value oversight',
+    summary: 'Social value promised against delivered, with an alert when it falls behind.',
     body: 'Social value promised against delivered across your awarded contracts and suppliers, by National TOMs theme, with under delivery raised as an alert.',
   },
   {
     heading: 'Transparency and reports',
+    summary: 'The award notice return and reports for committee, ready to export.',
     body: 'A Procurement Act 2023 award notice return across your contracts, plus reports to export for committee and scrutiny.',
   },
 ];
-const half = Math.ceil(SURFACES.length / 2);
-const SURFACE_COLS = [SURFACES.slice(0, half), SURFACES.slice(half)];
+/* The sixteen as flash cards (D305 lane E1, 2026-10-23, the /bid/ pilot
+   carried over): a one line headline and one plain sentence on show, the full
+   text one tap away in the card's own <details>, still in the HTML. Manual, so
+   no script. */
+const SURFACE_CARDS: FlashCard[] = SURFACES.map((s, k) => ({
+  id: `part-${k + 1}`,
+  title: s.heading,
+  summary: s.summary,
+  body: s.body,
+}));
 ---
 
 <Band tone="light-alt" class="ea-detail" labelledby="buy-detail-title" id="procurement-rules">
@@ -228,18 +258,7 @@ const SURFACE_COLS = [SURFACES.slice(0, half), SURFACES.slice(half)];
       <h3 class="ea-h3">Every part of the buyer workspace</h3>
       <p class="buy-group__intro">All {SURFACES.length} parts, from writing the request to reporting on delivery.</p>
       <div class="buy-surfaces">
-        {
-          SURFACE_COLS.map((col) => (
-            <div class="buy-rows">
-              {col.map((s) => (
-                <details class="ea-qa">
-                  <summary><h4 class="buy-row__h">{s.heading}</h4></summary>
-                  <p>{s.body}</p>
-                </details>
-              ))}
-            </div>
-          ))
-        }
+        <FlashCards label={`Every part of ${PRODUCT_NAME_BUY}`} cards={SURFACE_CARDS} columns={4} />
       </div>
     </div>
 
@@ -315,9 +334,6 @@ const SURFACE_COLS = [SURFACES.slice(0, half), SURFACES.slice(half)];
   }
 
   .buy-surfaces {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 var(--space-8);
     margin-top: var(--space-5);
   }
 
@@ -425,16 +441,9 @@ const SURFACE_COLS = [SURFACES.slice(0, half), SURFACES.slice(half)];
 
   @media (max-width: 959px) {
     .buy-group,
-    .buy-surfaces,
     .buy-scope,
     .buy-onward {
       grid-template-columns: minmax(0, 1fr);
-    }
-
-    /* Two stacked columns of rows read as one list: the seam between them
-       loses its doubled rule. */
-    .buy-surfaces > .buy-rows + .buy-rows > .ea-qa:first-child {
-      border-top: 0;
     }
 
     .buy-onward__item {

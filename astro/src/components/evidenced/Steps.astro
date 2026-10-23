@@ -23,10 +23,11 @@ interface Props {
   steps?: Step[];
   action?: { href: string; label: string };
   /**
-   * Show the steps as FlashCards in steps mode (D305 lane C pilot, /bid/ only):
-   * the highlight walks the three steps once and rests, with a pause button,
-   * and never moves under reduced motion or on a phone. Off by default, so
-   * the home page and /buy/ are unchanged until the owner judges the pilot.
+   * Show the steps as FlashCards in steps mode (D305, piloted on /bid/ by lane
+   * C and carried to /buy/ by lane E1): the highlight walks the three steps
+   * once and rests, with a pause button, and never moves under reduced motion
+   * or on a phone. Off by default, so a page opts in, and a page carries one
+   * steps block at most (check-autoplay.mjs counts them).
    */
   flash?: boolean;
 }

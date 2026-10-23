@@ -71,7 +71,8 @@
  *
  * Section 3 drives components/ui/FlashCards.astro in steps mode on /bid/: it
  * advances once and rests, the pause works from the keyboard, hover suspends
- * it, and reduced motion and a phone never start it.
+ * it, and reduced motion and a phone never start it. Section 4 (lane E1)
+ * holds every built page to one steps block and drives the /buy/ block.
  *
  * Exit 0 clean, 1 on any failure. Reads dist/, so build first.
  */
@@ -423,6 +424,55 @@ for (const [name, opts] of [
   });
   check('g: the manual block carries no controls and is never driven', Boolean(m && m.cards > 0 && m.controls === 0 && !m.on),
     m ? `${m.cards} cards, ${m.controls} controls, driven=${m.on}` : 'no manual block in #features');
+  await ctx.close();
+}
+
+/* ── 4. ONE STEPS BLOCK PER PAGE, AND THE /buy/ BLOCK RUNS (D305 lane E1) ──
+ *
+ * Driver decision D2 under D305: at most one play once block on a page, so a
+ * reader never has two things moving at once. Counted over every built page,
+ * not only the pages known to carry one, so a second block added anywhere
+ * fails here. Then /buy/, the second page to carry the steps band, is opened
+ * and must start on card 1 with its pause shown and move to card 2 on its own:
+ * a page that passes `flash` and ships no running block is caught.
+ *
+ *   h  no built page carries more than one steps block
+ *   i  /buy/ starts on card 1 with a pause control, then advances to card 2 */
+console.log(`
+  one steps block per page, and /buy/ (D305 lane E1)`);
+{
+  const pages = [];
+  const walk = (d) => {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith('.html')) pages.push(p);
+    }
+  };
+  walk(DIST);
+  const many = pages
+    .map((p) => [path.relative(DIST, p), (fs.readFileSync(p, 'utf8').match(/data-fc-mode="steps"/g) || []).length])
+    .filter(([, n]) => n > 1);
+  check('h: no page carries more than one steps block', pages.length > 0 && many.length === 0,
+    many.length ? many.map(([p, n]) => `${p} has ${n}`).join(', ') : `${pages.length} pages read`);
+}
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference' });
+  const page = await ctx.newPage();
+  await page.goto(`${base}/buy/`, { waitUntil: 'load' });
+  await page.mouse.move(0, 0);
+  await page.evaluate((sel) => document.querySelector(sel)?.scrollIntoView({ block: 'center', behavior: 'instant' }), FC);
+  await page.waitForTimeout(500);
+  const s0 = await fcState(page);
+  let s1 = null;
+  if (s0 && s0.on) {
+    const iv = Number(await page.evaluate((sel) => document.querySelector(sel).dataset.fcInterval, FC));
+    await page.waitForTimeout(iv + 800);
+    s1 = await fcState(page);
+  }
+  check('i: /buy/ starts on card 1 with a pause control, then advances to card 2',
+    Boolean(s0 && s0.on && s0.cur === 0 && s0.shown && s1 && s1.cur === 1),
+    s0 ? `on=${s0.on} shown=${s0.shown} card ${s0.cur + 1} -> ${s1 ? s1.cur + 1 : 'not run'}` : 'no steps block on /buy/');
   await ctx.close();
 }
 

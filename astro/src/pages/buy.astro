@@ -13,7 +13,7 @@
  *   1. BuyHero        light      what is this, is it for me?   stage, sequence
  *   2. BuyWhatItDoes  light alt  what does it do for me?       five capabilities, five stages
  *   3. BuyBoundary    dark       can I trust it?               the one slow moment (AI reads, people score)
- *   4. Steps          dark       how hard is it to start?      three steps
+ *   4. Steps          dark       how hard is it to start?      three steps, as play once flash cards (D305 lane E1)
  *   5. BuyTrust       light      is my data safe, what cost?   hairline facts, trust strip, buyer plans
  *   6. BuyDetail      light alt  expert detail                 procurement rules, 5 RAG bands, portal scope, surfaces
  *   7. BuyFaq         light      words I do not know           newcomer terms first
@@ -90,7 +90,7 @@ const UPDATED = new Date('2026-10-22');
   <BuyHero />
   <BuyWhatItDoes />
   <BuyBoundary />
-  <Steps steps={BUYER_STEPS} action={buyerStart} />
+  <Steps steps={BUYER_STEPS} action={buyerStart} flash />
   <BuyTrust />
   <BuyDetail />
   <BuyFaq />
