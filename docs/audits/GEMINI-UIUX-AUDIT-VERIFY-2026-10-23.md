@@ -265,3 +265,41 @@ Three claims inside one row.
 7. P2-13 cookie page: Recommended: leave it, the page is honest.
 8. P3-2 audience photos: Recommended: keep the photographs.
 9. P3-6 View Transitions: Recommended: do not add, it costs the shared script line and re-init work.
+
+---
+
+## WEB-FIX lane outcome (2026-10-23, crow-builder, local commits only, nothing pushed)
+
+Measured on the dev server `http://localhost:8093` with Playwright Chromium 147, every page asserted 200 at its landed URL first. Driver decisions applied where the rows above said OWNER: P1-3 option B, P2-13 reframe, P3-6 CSS only view transitions, P2-12 labels stay with a border tidy.
+
+| Id | Commit | Before | After |
+|---|---|---|---|
+| P0-1 API | platform `f8f47576d` | no test named the marketing origins | `api/tests/test_public_hosts.py`: production CORS names `https://velstrian.com` and `https://www.velstrian.com` (and both crowagent.ai twins), a localhost `ALLOWED_ORIGINS` is dropped in production and accepted outside it. 21 passed, red proved by widening the production branch and dropping the apex. The tree already derives the list (`api/app/public_hosts.py:56`). The live API still answers 400 until the R2.8.5 promote redeploys it. No staging website origin exists, so none was added. |
+| P0-1 web | `35cbb8ca` | CORS blocked, `net::ERR_FAILED`, a red one line status | dev only `server.proxy` in `astro.config.mjs` sends `/api/v1/bid/free/` to `https://api-staging.velstrian.com` (override `DEV_API_ORIGIN`), the page posts same origin under `import.meta.env.DEV` only. 200 through the proxy and 20 real notices at 1440 and 390. A 503 now shows a card with Try again and Start now that takes focus. No sample tenders. |
+| P0-2 host | `cde6c1d5` | `app.crowagent.ai` typed in `ContactForm.astro:184`, `NewsletterForm.astro:78` and twice in `check-csp-required-origins.js` | all read `APP_ORIGIN` from `data/app.ts`. Guard red proved with `APP_ORIGIN = https://app.velstrian.com` (fails connect-src and form-action), green 9 of 9 restored. |
+| P0-3 | `17404611` | menu `rgb(9,11,18)` on light pages, overscroll `auto` | `rgb(255,255,255)` with ink `rgb(12,14,21)` on `/`, `/pricing/`, `/about/` at 390x844, `overscroll-behavior: contain`, safe area insets on top, sides and the close button (bottom was already on the action row). |
+| P1-6 | `e7c00bd3` and `612bfc1f` | `Cancel in the {TRIAL_DAYS} days` and four FAQ answers with two other endings | `Cancel within {TRIAL_DAYS} days and pay nothing` everywhere. |
+| P1-3 | `612bfc1f` | three hero actions, two of them buttons | option B: Start now is the one filled button, the tour stays quiet, the walkthrough is an `.ea-link` with the right arrow, 44px high. |
+| P2-2 | `e4f55f22` | filled dot beside 2 stroke glyphs at 14px | every row draws `Icon.astro` (1.75 stroke) at 18px in a 32px accent tinted tile, 8 of 8 rows measured identical. Three glyphs added to `data/icons.ts`: compare, table, book. |
+| P2-3, P2-4 | `eb8bb745` | outlines blink between segments, prices swap `display` | one sliding pill over two equal columns (213px travel at 1440), prices share one grid cell and crossfade, tabular numerals, card heights unchanged, the swap recipe exists once in `pricing.astro`. Reduce: 0s. |
+| P2-5 | `f7ab161f` | snaps | `::details-content` grows 73 to 334px over the `--dur` clock, native details kept, inside `@supports` and no-preference. Placed in `motion.css`. |
+| P2-6, P3-7 | `976e794c` | 209px column heading as the badge, resting list started with Home, a miss showed only text | short tags derived from the address (widest 73px), five quick jumps at rest and under the no match message. |
+| P2-8 | `066c682b` | contents only with key points, 9 of 12 posts had none | contents on every post of 4 or more sections. From 80rem an open list sticks in the left gutter (top 96 after scroll), paragraph still 602px at x419. |
+| P2-11 | `10577184` | emptying the box left the old matrix | an input listener clears it and a cleared card offers the next step, never on first load. |
+| P2-12 | `6c35e3d3` | field edge `rgb(233,234,238)` on white, no hover | edge `--ea-rule-strong`, hover `--c-text-muted`, focus ring unchanged. Labels stay. |
+| P2-13 | `5f477ddd` | read as a settings screen with no settings, and three sentences no longer true | leads with "We use no tracking cookies, so there is nothing to switch off", four cards state what is kept (one session value `ea_motion` on Pause, Turnstile once a form is used). No toggles, URL kept. |
+| P3-4 | `0a2b3b47` | `aria-label` over empty anchors | visually hidden text, same accessible names. |
+| P3-6 | `fe44916d` | none | `@view-transition { navigation: auto }` in `motion.css` inside no-preference, `--dur-fast` root fade, header named so it holds still. No ClientRouter, no JS. `pagereveal` carries a transition on `/` to `/pricing/`, none under reduce. |
+
+### P0-2, the domain switch in full
+
+1. `astro/src/data/app.ts`: `APP_ORIGIN = 'https://app.velstrian.com'`. The header, plan buttons, contact form and newsletter form all follow.
+2. `_headers`: add `https://app.velstrian.com` to `connect-src` and `form-action` (keep the old host through the overlap).
+3. Run `node astro/scripts/check-csp-required-origins.js`. It now reads `APP_ORIGIN` and fails until step 2 is done.
+4. KNOWN REMAINDER, not yet one line: seven markdown files carry a literal `https://app.crowagent.ai/signup` link (`content/blog/frameworks-and-dps-explained.md`, `method-statement-that-scores.md`, `ppn-026-social-value-guide.md`, `private-sector-rfp-pqq-guide.md`, `regulatory-updates-2026.md`, `social-value-portal-vs-bid.md`, `content/legal/security.md`). Filed as a board row.
+
+### Still open from this lane
+
+- P0-1 production: the live API still refuses `https://velstrian.com` until the R2.8.5 promote redeploys it (owner approved, not done by this lane).
+- A-391: seven markdown files hardcode the app signup host (the P0-2 remainder above).
+- A-392: `/cookies` (`content/legal/cookies.md:18`) still says the site sets "no session storage, and no requests to anyone else", which `/cookie-preferences/` now corrects. It is a legal document, so the wording is the owner's to approve.
