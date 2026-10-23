@@ -13,6 +13,13 @@
  *
  * Alternating sides on wide screens so the eye walks down the page.
  * Keeps every capability the previous buy page described (RULE 0-U).
+ *
+ * 2026-10-23, A-343 (D305): each paragraph and caption cut to one short plain
+ * line, because /buy/ first view words had risen to 1,661. Nothing is lost: the
+ * detail each one dropped (Quick RFQ explained, the scope is yours, answers sent
+ * without saying who asked, the whole life cost, no proof means nothing shown
+ * and delivery alerts) is in the workspace cards and the
+ * scope list of BuyDetail, one tap away, and in the Sequence steps beside each.
  */
 import Band from '../evidenced/Band.astro';
 import Frame from '../evidenced/Frame.astro';
@@ -26,7 +33,7 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
     <div class="ea-head-row" data-reveal>
       <h2 class="ea-h2" id="buy-what-title">Five steps, from asking to choosing.</h2>
       <p class="ea-lead">
-        Buying a service means saying what you need, reading every reply fairly and holding the winner to their word. {PRODUCT_NAME_BUY} keeps all of it in one place.
+        {PRODUCT_NAME_BUY} keeps it all in one place.
       </p>
     </div>
 
@@ -35,11 +42,11 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Write a clear request</h3>
         <p>
-          Write down what you need and how you will judge the replies, before any supplier answers. For a smaller job, send a Quick RFQ, a short request for quotes. You write the scope. The AI does not draft it.
+          Set your scoring before anyone replies, or send a Quick RFQ.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="What you need: cleaning and facilities" status="Scoring fixed" capture="buy-cap-request" caption="What you will score, and how much each part counts, fixed before replies arrive.">
+        <Frame title="What you need: cleaning and facilities" status="Scoring fixed" capture="buy-cap-request" caption="Scoring fixed before replies arrive.">
           <ul class="ea-mini-list">
             <li><span>Local jobs and training</span><span class="ea-state ea-state--ok">15% weighting</span></li>
             <li><span>Less waste</span><span class="ea-state ea-state--ok">10% weighting</span></li>
@@ -64,11 +71,11 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Collect the replies in one place</h3>
         <p>
-          Send each supplier their own link. They upload their reply, get a receipt straight away, and the reply lands in one place for your team. When a supplier asks a question, your answer goes to every supplier, without saying who asked.
+          Each supplier gets a personal link, a receipt and every answer.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="Replies and questions" status="4 invited" capture="buy-cap-collect" caption="Every reply, its receipt, and the questions suppliers asked, in one view.">
+        <Frame title="Replies and questions" status="4 invited" capture="buy-cap-collect" caption="All replies, one view.">
           <ul class="ea-mini-list">
             <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">Uploaded · Receipt 801</span></li>
             <li><span>Beacon Engineering</span><span class="ea-state ea-state--ok">Uploaded · Receipt 802</span></li>
@@ -93,11 +100,11 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Read every reply side by side</h3>
         <p>
-          Enter each supplier's prices and see every bid as one total cost over the same years and the same amount of work, the whole life cost. Like is compared with like, side by side.
+          Every bid as one total cost, like for like.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="Total cost over 3 years" status="3 bids lined up" capture="buy-cap-compare" caption="Three bids turned into one total each, over the same 3 years.">
+        <Frame title="Total cost over 3 years" status="3 bids lined up" capture="buy-cap-compare" caption="One 3 year total each.">
           <ul class="ea-mini-list">
             <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">£142,500 over 3 years</span></li>
             <li><span>Beacon Engineering</span><span class="ea-state">£156,000 over 3 years</span></li>
@@ -121,11 +128,11 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">See what each supplier can back up</h3>
         <p>
-          A first read of every reply finds the proof for each question you asked, quoted word for word with its page and section. If the reply has no proof, nothing is shown. It is never guessed. You see what each supplier can prove before you read the rest.
+          Each supplier's proof, word for word, with its page.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="First read: local jobs" status="Proof found" capture="buy-cap-evidence" caption="Quotes found in each reply, word for word, with the section and page.">
+        <Frame title="First read: local jobs" status="Proof found" capture="buy-cap-evidence" caption="Section and page shown.">
           <ul class="ea-mini-list">
             <li><span>Apex: 2 apprenticeships, borough recruited</span><span class="ea-state ea-state--ok">Section 4.1, p12</span></li>
             <li><span>Beacon: mentions training, no numbers</span><span class="ea-state ea-state--held">No number, p7</span></li>
@@ -149,11 +156,11 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       <div class="ea-panel__copy">
         <h3 class="ea-h3">Record your decision and why</h3>
         <p>
-          Your panel scores each reply against the questions you published and writes down the reason for every mark, in one shared place. After you choose, you check the winner delivers what they promised, with an alert if they fall behind.
+          Your panel scores and says why, then tracks delivery.
         </p>
       </div>
       <Stage layout="panel">
-        <Frame title="After you choose: delivery" status="Contract running" capture="buy-cap-decision" caption="What the winner promised, and what they have delivered so far.">
+        <Frame title="After you choose: delivery" status="Contract running" capture="buy-cap-decision" caption="Promised against delivered.">
           <ul class="ea-mini-list">
             <li><span>Local apprenticeships (2 committed)</span><span class="ea-state ea-state--ok">2 hired · On track</span></li>
             <li><span>Carbon reduction target (15% committed)</span><span class="ea-state ea-state--held">12% · At risk</span></li>
