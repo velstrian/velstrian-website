@@ -9,8 +9,23 @@
  * "2010 to 2025 founding team experience" milestone is removed, because it
  * could not be confirmed. The company card now carries the trading name, a
  * link to the public Companies House record so anyone can verify the company,
- * the registered office as the central REGISTERED_OFFICE constant (town and
- * postcode only, already published on /privacy/), and the one public mailbox.
+ * and the one public mailbox.
+ *
+ * 2026-10-23, R285-WEB-CLAIMS-AUDIT-01 (owner answers to D252 item 8):
+ *   - the experience milestone comes back as "Since 2010", now that the owner
+ *     has confirmed it: the founders and the team bring experience going back
+ *     to 2010. Nothing about fields or employers is said, because nothing more
+ *     was confirmed;
+ *   - "Reading the rules first" is gone: it dated work before the company;
+ *   - March 2026 says founded, then research and building. No rename is
+ *     called out, because nothing ever traded under another name;
+ *   - May 2026 is a PRIVATE BETA with selected users, not live production,
+ *     and it is the current (now) row, so the history rail keeps its one live
+ *     mark (scripts/check-status-pulse.mjs). "Open to every customer" is the
+ *     planned row for October to November 2026;
+ *   - NO registered office is shown here (owner). The address is still
+ *     disclosed once on /privacy/, which is where the trading disclosure duty
+ *     is met, see the note above the copyright line in footer/Footer.astro.
  */
 import Band from '../evidenced/Band.astro';
 import {
@@ -18,7 +33,6 @@ import {
   COMPANY_NUMBER,
   LEGAL_ENTITY_NAME,
   PLATFORM_NAME,
-  REGISTERED_OFFICE,
 } from '../../lib/brand-names';
 
 const COMPANIES_HOUSE = `https://find-and-update.company-information.service.gov.uk/company/${COMPANY_NUMBER}`;
@@ -35,23 +49,29 @@ interface Milestone {
 
 const TIMELINE: Milestone[] = [
   {
-    when: 'Jan to Feb 2026',
-    heading: 'Reading the rules first',
-    body: 'Before the company existed, we studied the rules the product is built on: the Social Value Model, and the duties in the Procurement Act 2023 to set and review performance targets.',
+    when: 'Since 2010',
+    heading: 'The experience behind it',
+    body: 'The founders and the team behind Velstrian bring experience going back to 2010.',
     status: 'done',
   },
   {
     when: 'March 2026',
     heading: 'Velstrian founded',
-    body: 'Incorporated in England and Wales, and renamed Velstrian Systems Ltd on 20 October 2026. Engine prototyping begins.',
+    body: 'Incorporated in England and Wales. Since then we have studied the market, listened to the problems firms meet when they bid, and built the platform that solves them.',
     status: 'done',
     link: { label: 'The registration on Companies House', href: COMPANIES_HOUSE },
   },
   {
     when: 'May 2026',
-    heading: 'Platform live',
-    body: 'Velstrian Bid in live production.',
+    heading: 'Private beta with selected users',
+    body: 'Selected users bid with Velstrian Bid on real work, and what they tell us shapes every release.',
     status: 'now',
+  },
+  {
+    when: 'October to November 2026',
+    heading: 'Open to every customer',
+    body: 'Velstrian Bid opens to every customer in October 2026 once it is ready, and by November 2026 at the latest.',
+    status: 'planned',
   },
   {
     when: 'Q4 2026',
@@ -63,7 +83,7 @@ const TIMELINE: Milestone[] = [
 
 const STATUS_LABEL: Record<Status, string> = {
   done: 'Delivered',
-  now: 'Live now',
+  now: 'Happening now',
   planned: 'Planned',
 };
 
@@ -72,10 +92,6 @@ const COMPANY = [
   { label: 'Registered in', value: 'England and Wales' },
   { label: 'Company number', value: COMPANY_NUMBER, mono: true },
   { label: 'Founded', value: 'March 2026' },
-  /* REVIEW: registered office address needs owner confirmation before publishing.
-     Only the town and postcode are shown (REGISTERED_OFFICE, already on /privacy/).
-     The street line is NOT published here: it may be a private residence. */
-  { label: 'Registered office', value: REGISTERED_OFFICE },
 ];
 ---
 
@@ -121,7 +137,6 @@ const COMPANY = [
           <div class="surface surface--pad company-card" id="company" data-reveal>
             <span class="ea-label">Company details</span>
             <h2 class="ea-h3 company-card__title">{LEGAL_ENTITY_NAME}</h2>
-            <!-- REVIEW: registered office address needs owner confirmation before publishing -->
             <dl class="company-list">
               {
                 COMPANY.map((c) => (

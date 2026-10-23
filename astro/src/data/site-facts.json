@@ -145,10 +145,22 @@
     ]
   },
   "product_status": {
-    "measured": "2026-10-21, D252 (6): Velstrian Bid is live",
-    "bid": "live",
+    "measured": "2026-10-23, owner answers to D252 item 8, superseding D252 (6): Velstrian Bid has been in private beta with selected users since May 2026 and opens to every customer in October 2026 depending on readiness, or by November 2026 at the latest. The company was founded in March 2026 and never traded under another name, so no page calls out a rename",
+    "bid": "private_beta",
+    "beta_since": "May 2026",
+    "opens_to_everyone": "October to November 2026",
+    "page": "/about/",
+    "must_contain": "Private beta with selected users",
+    "beta_allowed_as": "private beta",
     "banned": [
-      "beta"
+      "live production",
+      "live in production",
+      "in production since",
+      "live since May",
+      "Platform live",
+      "renamed Velstrian",
+      "formerly CrowAgent",
+      "formerly known as CrowAgent"
     ]
   },
   "ai_advisor": {

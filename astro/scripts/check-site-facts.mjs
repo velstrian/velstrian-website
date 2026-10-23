@@ -252,8 +252,15 @@ const RULES = [
   },
   {
     record: 'product_status',
-    why: 'Velstrian Bid is live (D252 (6)). No page and no llms file calls it beta.',
-    check: (pages) => scan(pages, /\bbeta\b/gi),
+    why: 'Velstrian Bid has been in private beta with selected users since May 2026 and opens to every customer in October to November 2026 (owner, D252 item 8, 2026-10-23, superseding D252 (6)). No page and no llms file claims live production, and no page calls out a rename. "beta" appears only as "private beta", and /about/ states it.',
+    check(pages) {
+      const s = FACTS.product_status;
+      const out = banned(pages, s.banned, 'gi');
+      out.push(...scan(pages, /\bbeta\b/gi, (t, m) => !t.slice(Math.max(0, m.index - 8), m.index + 4).toLowerCase().includes(s.beta_allowed_as)));
+      const p = pages.find((x) => x.route === s.page);
+      if (!p || !p.text.includes(s.must_contain)) out.push({ route: s.page, hit: s.must_contain, ctx: 'the private beta milestone is missing' });
+      return out;
+    },
   },
   {
     record: 'ai_advisor',

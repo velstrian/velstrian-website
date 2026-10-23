@@ -46,7 +46,6 @@ import {
   LEGAL_ENTITY_NAME,
   PLATFORM_NAME,
   PRODUCT_NAME_BID,
-  REGISTERED_OFFICE,
 } from '../lib/brand-names';
 import { WALKTHROUGH_URL } from '../data/app';
 
@@ -223,11 +222,6 @@ const UPDATED = new Date('2026-10-22');
                 </div>
               ))
             }
-            <!-- REVIEW: registered office address needs owner confirmation before publishing -->
-            <div class="ct-list__row">
-              <dt>Registered office</dt>
-              <dd>{REGISTERED_OFFICE}</dd>
-            </div>
           </dl>
           <a class="ct-list__link ct-mailbox__link" href={COMPANIES_HOUSE} target="_blank" rel="noopener noreferrer">
             Check us on Companies House<span class="visually-hidden"> (opens in a new window)</span>
