@@ -398,6 +398,18 @@ export function initTour(): void {
   const open = document.querySelector<HTMLElement>('[data-tour-open]');
   if (!dialog || !open) return;
   const video = dialog.querySelector('video');
+  /* Owner 2026-10-23: the tour plays at 1.25x by default. defaultPlaybackRate
+     survives the src load that preload="none" defers, and playbackRate is set
+     again on loadedmetadata because some browsers reset it there. The reader
+     can still change speed from the native controls. */
+  const TOUR_RATE = 1.25;
+  if (video) {
+    video.defaultPlaybackRate = TOUR_RATE;
+    video.playbackRate = TOUR_RATE;
+    video.addEventListener('loadedmetadata', () => {
+      video.playbackRate = TOUR_RATE;
+    }, { once: true });
+  }
   open.addEventListener('click', () => dialog.showModal());
   dialog.addEventListener('close', () => {
     if (video) video.pause();
