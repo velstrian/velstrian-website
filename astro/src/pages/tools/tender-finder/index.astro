@@ -356,9 +356,12 @@ const schema = [
   const prev = byId<HTMLButtonElement>('tf-prev');
   const next = byId<HTMLButtonElement>('tf-next');
   let busy = false;
-  /* The page a pager button asked for. Read by the submit handler during the
-     synchronous dispatch of requestSubmit() and cleared straight after, so a
-     submit the Turnstile gate refused cannot leave a stale page behind. */
+  /* The page a pager button asked for. The Turnstile gate may HOLD a press
+     while the check runs and send it a moment later (R285-WEB-GEMINI-AUDIT-2),
+     so this is no longer cleared straight after requestSubmit(): it is cleared
+     by the submit handler that actually runs the search, and a press of the
+     Search button (which Enter in a field also fires) sets it back to page 1,
+     so a pager press the gate gave up on cannot leave a stale page behind. */
   let want = 0;
 
   const say = (key: string, state: 'busy' | 'ok' | 'bad', page = 1, n = 0) => {
@@ -441,9 +444,11 @@ const schema = [
     b.addEventListener('click', () => {
       want = Number(b.dataset.page) || 1;
       form.requestSubmit();
-      want = 0;
     });
   }
+  submit.addEventListener('click', () => {
+    want = 0;
+  });
 
   form.addEventListener('reset', () => {
     results.hidden = true;
@@ -455,6 +460,7 @@ const schema = [
     if (busy) return;
     const paged = want > 0;
     const page = want || 1;
+    want = 0;
     const fd = new FormData(form);
     const body: Record<string, string | number> = { page, page_size: PAGE_SIZE };
     for (const [k, v] of fd) {

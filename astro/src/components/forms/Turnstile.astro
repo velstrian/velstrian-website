@@ -93,10 +93,32 @@ const { id } = Astro.props;
 
 /** The ONE definition of each key. Previously typed out in two components. */
 const SITEKEY = '0x4AAAAAADML7D0t7OQT4B4R';
-/** Cloudflare's always-passes key. Localhost only. */
-const SITEKEY_LOCAL = '1x00000000000000000000AA';
+/**
+ * Cloudflare's published always-passes TEST key (visible widget), from
+ * developers.cloudflare.com/turnstile/troubleshooting/testing/. It mints the
+ * dummy token XXXX.DUMMY.TOKEN.XXXX, which every production secret REJECTS, so
+ * serving it on a development host cannot open a bypass. It stops a dev,
+ * preview or LAN address from loading the production widget, which Cloudflare
+ * refuses to render there (error 110200, domain not allowed) and which left
+ * the form saying "loading" until the ten second give up.
+ *
+ * WHICH HOSTS GET IT is decided in the script below by a pattern for
+ * development addresses (local names, private network addresses and
+ * Cloudflare Pages previews), NOT by a list of production names. A list of
+ * production names would have to be written into every page that carries a
+ * form, and check-brand-names fails any page that names the old domain while
+ * the rebrand is in flight. Every other host gets the production key, so a new
+ * production domain needs no change here, only its entry on the widget.
+ */
+const SITEKEY_TEST = '1x00000000000000000000AA';
 
-const PENDING = 'The security check is still loading. Please try again in a moment.';
+/**
+ * R285-WEB-GEMINI-AUDIT-2. Pressing the button is very often the FIRST focus
+ * in the form, so the check only starts loading at that moment and the first
+ * press used to be refused with "try again". The press is now held and sent
+ * by itself the moment the check passes, so the wording says so.
+ */
+const PENDING = 'Running a quick security check. This will send by itself as soon as it finishes.';
 const FAILED =
   `The security check could not load, so this form cannot be sent. Please email ${SITE.email} and we will pick it up from there.`;
 ---
@@ -105,15 +127,18 @@ const FAILED =
   {/*
     `.cf-turnstile` is Cloudflare's own implicit-render hook: their script finds
     every element carrying it and renders a widget into it. `data-sitekey` is
-    deliberately NOT set here. It is written at load time so the localhost key
-    is used during development without a second markup path.
+    deliberately NOT set here. It is written at load time so the test key is
+    used on every non-production host without a second markup path.
+    `data-callback` names the global the script below defines, so a press held
+    while the check was running is sent the moment it passes.
   */}
   <div
     class="cf-turnstile"
     data-turnstile
     data-err={`${id}-turnstile-err`}
     data-sitekey-prod={SITEKEY}
-    data-sitekey-local={SITEKEY_LOCAL}
+    data-sitekey-test={SITEKEY_TEST}
+    data-callback="__turnstilePassed"
   >
   </div>
   {/*
@@ -142,7 +167,14 @@ const FAILED =
    * this once and wires both.
    */
   const SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-  const LOCAL = /^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/;
+  /**
+   * Development addresses, which get Cloudflare's test key: local names
+   * (localhost, *.localhost, *.local, *.test), loopback, IPv6 loopback,
+   * private network IPv4 (10/8, 172.16/12, 192.168/16) and Cloudflare Pages
+   * preview hosts (*.pages.dev). Everything else is production.
+   */
+  const DEV_HOST =
+    /^(localhost|0\.0\.0\.0|\[::1\]|127(\.\d+){3}|10(\.\d+){3}|192\.168(\.\d+){2}|172\.(1[6-9]|2\d|3[01])(\.\d+){2}|.+\.(localhost|local|test|pages\.dev))$/;
   /** Milliseconds after which "still loading" stops being a true statement. */
   const GIVE_UP_AFTER = 10_000;
 
@@ -150,15 +182,40 @@ const FAILED =
   let requested = false;
   let requestedAt = 0;
   let failed = false;
+  /** Forms whose submit was held because the check had not passed yet. */
+  const waiting = new Set<HTMLFormElement>();
+
+  const tokenOf = (form: HTMLFormElement) =>
+    form.querySelector<HTMLInputElement>('[name="cf-turnstile-response"]')?.value ?? '';
+
+  /**
+   * Cloudflare calls this (named by `data-callback`) with the token when a
+   * widget passes. It does not say WHICH widget, so every held form that now
+   * carries a token is sent. The hidden input is written by Cloudflare's own
+   * script, and the order of that write against this call is not documented,
+   * so the token is copied into an empty input first rather than trusted to
+   * be there already.
+   */
+  (window as Window & { __turnstilePassed?: (token: string) => void }).__turnstilePassed = (
+    token: string
+  ) => {
+    for (const form of [...waiting]) {
+      const input = form.querySelector<HTMLInputElement>('[name="cf-turnstile-response"]');
+      if (input && !input.value && token) input.value = token;
+      if (!tokenOf(form)) continue;
+      waiting.delete(form);
+      form.requestSubmit();
+    }
+  };
 
   function requestTurnstile(holders: HTMLElement[]) {
     if (requested) return;
     requested = true;
     requestedAt = Date.now();
 
-    const isLocal = LOCAL.test(location.hostname);
+    const isDev = DEV_HOST.test(location.hostname);
     for (const h of holders) {
-      const key = isLocal ? h.dataset.sitekeyLocal : h.dataset.sitekeyProd;
+      const key = isDev ? h.dataset.sitekeyTest : h.dataset.sitekeyProd;
       if (key) h.setAttribute('data-sitekey', key);
     }
 
@@ -199,9 +256,8 @@ const FAILED =
       form.addEventListener(
         'submit',
         (e) => {
-          const token =
-            form.querySelector<HTMLInputElement>('[name="cf-turnstile-response"]')?.value ?? '';
-          if (token) {
+          if (tokenOf(form)) {
+            waiting.delete(form);
             if (err) err.hidden = true;
             return;
           }
@@ -220,6 +276,18 @@ const FAILED =
             const giveUp = failed || (requestedAt > 0 && Date.now() - requestedAt > GIVE_UP_AFTER);
             if (giveUp && err.dataset.msgFailed) err.textContent = err.dataset.msgFailed;
             err.hidden = false;
+            if (!giveUp) {
+              // Hold the press. If the check has not passed by the give up
+              // point, say so in words the reader can act on, and stop
+              // holding, so a late token never sends a form they gave up on.
+              waiting.add(form);
+              const wait = Math.max(0, GIVE_UP_AFTER - (Date.now() - requestedAt));
+              window.setTimeout(() => {
+                if (!waiting.has(form)) return;
+                waiting.delete(form);
+                if (err.dataset.msgFailed) err.textContent = err.dataset.msgFailed;
+              }, wait);
+            }
           }
         },
         true
