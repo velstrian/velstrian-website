@@ -2,6 +2,12 @@
 title: "Social Value Scoring for UK Bids: The Complete Guide to PPN 026"
 seoTitle: "PPN 026 social value scoring for UK bidders"
 description: "Social value scoring for UK bids under PPN 026, the edition of the Social Value Model that applies to central government procurements commencing from 1 January 2027, with the weightings, the evidence requirements and the pitfalls."
+keyPoints:
+  - "PPN 026 applies to central government procurements commenced on or after 1 January 2027, at 1 million pounds inc VAT or above."
+  - "The date the procurement was commenced decides the edition, not the date you submit your bid."
+  - "The minimum social value weighting is 10% from 1 million pounds inc VAT to 5 million, and 20% at 5 million or above."
+  - "A weighting is the share of the marks social value carries, not a score you must reach. Read the figure in the tender in front of you."
+  - "Commit to something measurable, evidence it in the unit the buyer counts in, and keep the record from day one of delivery."
 publishDate: 2026-04-01
 updatedDate: 2026-08-30
 category: "Social value"

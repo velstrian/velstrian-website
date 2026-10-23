@@ -79,6 +79,14 @@ interface Props {
    * why a headline and a search-result line are different objects.
    */
   seoTitle?: string;
+  /*
+   * "In short", the summary first block (D305 lane E3, 2026-10-23). Three to
+   * five plain sentences from the post's frontmatter, shown above the body.
+   * The body is never hidden: guides are for reading and for search.
+   */
+  keyPoints?: string[];
+  /* The rendered Markdown's headings, for the "Jump to a section" contents. */
+  headings?: { depth: number; slug: string; text: string }[];
 }
 
 const {
@@ -95,7 +103,13 @@ const {
   authorType,
   faq,
   seoTitle,
+  keyPoints,
+  headings = [],
 } = Astro.props;
+
+/* The contents list is the post's own h2 sections, read from the rendered
+   Markdown, so it cannot drift from the body. Shown with the key points. */
+const sections = headings.filter((h) => h.depth === 2);
 
 /*
  * THE SLUG AND THE SOCIAL CARD, worked out before anything uses them.
@@ -278,6 +292,37 @@ const canonicalUrl = routeUrl(path);
         />
       </div>
       <div class="art__col">
+        {/* SUMMARY FIRST (D305 lane E3, 2026-10-23). A first time reader from
+            a small firm meets the answer in a few lines before the long read,
+            and a contents list lets them jump to the one section they need.
+            The article body below is unchanged and fully open. The contents
+            sit behind the site's one disclosure recipe, a native <details>. */}
+        {keyPoints && keyPoints.length > 0 && (
+          <aside class="art__short" aria-labelledby="art-short-title">
+            <h2 class="ea-h3 art__short-h" id="art-short-title">In short</h2>
+            <ul class="art__short-list">
+              {keyPoints.map((k) => (
+                <li>{k}</li>
+              ))}
+            </ul>
+            {sections.length > 2 && (
+              <details class="art__toc">
+                <summary>
+                  <span>Jump to a section</span>
+                </summary>
+                <nav aria-label="Sections of this guide">
+                  <ol class="art__toc-list">
+                    {sections.map((h) => (
+                      <li>
+                        <a class="ea-link" href={`#${h.slug}`}>{h.text}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              </details>
+            )}
+          </aside>
+        )}
         <ShareRow title={title} url={canonicalUrl} position="top" />
         <div class="article-body ea-longform">
           <slot />
@@ -291,6 +336,57 @@ const canonicalUrl = routeUrl(path);
 </Base>
 
 <style>
+  /* ── IN SHORT (D305 lane E3) ────────────────────────────────────────────
+     A calm box on the reading column: the one card's edge and ground, no
+     hover, because it is not a control. Tokens only (RULE 0-C). */
+  .art__short {
+    display: grid;
+    gap: var(--space-3);
+    margin-block-end: var(--space-8);
+    padding: var(--space-6);
+    border: 1px solid var(--ea-rule);
+    border-inline-start: 3px solid var(--ea-accent);
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+  }
+
+  .art__short-h {
+    margin: 0;
+    color: var(--ea-ink);
+  }
+
+  .art__short-list {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding-inline-start: 1.25em;
+    list-style: disc;
+    color: var(--ea-sub);
+  }
+
+  .art__toc {
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .art__toc summary {
+    font-size: var(--t-ea-small);
+    font-weight: var(--t-w-ea-medium);
+    color: var(--ea-ink);
+  }
+
+  .art__toc summary:focus-visible {
+    outline: var(--ea-focus);
+    outline-offset: 2px;
+  }
+
+  .art__toc-list {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0 0 var(--space-3) 1.5em;
+    list-style: decimal;
+  }
+
   .art {
     --art-hero-w: min(100% - 2 * var(--gutter), calc(var(--measure) * 25 / 29));
   }

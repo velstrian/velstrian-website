@@ -2,6 +2,12 @@
 title: "Frameworks and DPS explained: G-Cloud, lots and call-offs"
 seoTitle: "Frameworks and DPS explained for UK bidders"
 description: "G-Cloud, these frameworks and DPS explained simply: how to get onto one, how call-off competitions work, and what changed under the Procurement Act 2023."
+keyPoints:
+  - "A framework is a fixed list of suppliers, appointed once and closed to new entrants until it is run again."
+  - "A DPS is an open, electronic list that qualified suppliers can join at any point in its life."
+  - "Buyers draw work from either through a call-off: a direct award or a mini-competition among the appointed suppliers."
+  - "Lots split by size, specialism or region mean you compete against a relevant part of the market, not all of it."
+  - "A call-off competition is usually faster and lighter than a full open tender."
 publishDate: 2026-07-29
 category: "Frameworks"
 readingTime: 11

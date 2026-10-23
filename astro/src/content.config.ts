@@ -72,6 +72,14 @@ const blog = defineCollection({
      * eventually does.
      */
     faq: z.array(faqEntry).optional(),
+    /*
+     * "IN SHORT", THE SUMMARY FIRST BLOCK (D305 lane E3, 2026-10-23). Three to
+     * five plain sentences shown above the body of a long guide, so a reader
+     * from a small firm gets the answer before the 2,000 to 3,000 words that
+     * explain it. Each point restates something the body says and sources;
+     * it never adds a claim of its own. Optional: a short post needs none.
+     */
+    keyPoints: z.array(z.string()).min(3).max(5).optional(),
   }),
 });
 

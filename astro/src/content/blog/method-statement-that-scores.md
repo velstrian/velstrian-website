@@ -2,6 +2,12 @@
 title: "How to write a method statement that actually scores"
 seoTitle: "How to write a method statement that scores"
 description: "How to write a UK tender method statement that scores: answer the exact question, structure approach and risk clearly, and evidence every claim you make."
+keyPoints:
+  - "A method statement explains, in specific and checkable detail, how you will deliver the contract if you win it."
+  - "It is often the largest single part of the quality score, so a weak one can lose a bid with the best price."
+  - "Restate the requirement in your own words, set out a clear approach and back every claim with an example or a figure."
+  - "Say what could go wrong and how you will manage it."
+  - "Buyers want the lowest risk way to the outcome they need, described clearly, not elegant prose."
 publishDate: 2026-07-29
 category: "Method statements"
 readingTime: 12
