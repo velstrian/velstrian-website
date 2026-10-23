@@ -1,5 +1,6 @@
 import {
   TRIAL_DAYS,
+  TRIAL_CREDITS,
   CREDIT_TOPUPS,
   OVERAGE_PENCE_LABEL,
   PLANS,
@@ -27,12 +28,12 @@ export const PRICING_PAGE_FAQS: PricingFaq[] = [
   {
     question: 'Is there a free trial?',
     answer:
-      `Yes. Choose a plan and select ${START_LABEL} to begin your ${TRIAL_DAYS} day trial. Your first ${TRIAL_DAYS} days are free, on Starter features for 1 user with 30 AI credits. A card is required to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and you pay nothing. There is one free trial per organisation and work email domain.`,
+      `Yes. Choose a plan and select ${START_LABEL} to begin your ${TRIAL_DAYS} day trial. Your first ${TRIAL_DAYS} days are free, on Starter features for 1 user with ${TRIAL_CREDITS} AI credits. A card is required to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and you pay nothing. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'How does the 7 day trial work?',
     answer:
-      `Choose a plan and select ${START_LABEL}. Your first ${TRIAL_DAYS} days are free, on the Starter features for 1 user with 30 AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
+      `Choose a plan and select ${START_LABEL}. Your first ${TRIAL_DAYS} days are free, on the Starter features for 1 user with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'What happens when my AI credits run out?',

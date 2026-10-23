@@ -11,7 +11,7 @@
  */
 import Band from '../evidenced/Band.astro';
 import Action from '../evidenced/Action.astro';
-import { PLANS, TRIAL_DAYS, SEAT_ADDON, startHref, annualDiscountPct, START_LABEL } from '../../data/pricing';
+import { PLANS, TRIAL_DAYS, TRIAL_CREDITS, SEAT_ADDON, startHref, annualDiscountPct, START_LABEL } from '../../data/pricing';
 
 const PLAIN_WHO: Record<string, string> = {
   Starter: 'You bid on your own',
@@ -104,7 +104,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
 
     <div class="pricing-reassurance" data-reveal>
       <p class="ea-lead pricing-reassurance__lead">
-        Your first {TRIAL_DAYS} days are free, on the Starter features for 1 user with 30 AI credits. A card is
+        Your first {TRIAL_DAYS} days are free, on the Starter features for 1 user with {TRIAL_CREDITS} AI credits. A card is
         needed to start, held securely by Stripe and never stored by us. Cancel in the {TRIAL_DAYS} days and pay nothing.
         Annual savings: pay yearly and save 10 percent with annual billing.
       </p>
