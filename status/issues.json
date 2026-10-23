@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T04:15:17.273Z",
+  "updated": "2026-10-23T04:21:36.053Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -3159,8 +3159,8 @@
       "src": "owner 2026-10-22",
       "sev": "P1",
       "title": "R285-WEB-REAL-SCREENSHOTS-01 real product screens replace drawn mock ups: 8 of 35 slots real, harness built",
-      "status": "WIP",
-      "note": "Owner 2026-10-22: use real product screenshots. Inventory of every product picture (35 slot keys, 34 with a real platform screen today) in docs/design/R285-REAL-SCREENSHOTS-PLAN.md. Harness crowagent-platform/web/e2e/product-captures/website.spec.ts signs in to staging as the demo org, captures light theme at 2x, writes Assets/product-captures/web and astro/src/data/product-captures.real.json, refuses production, retired brand words, council and weak fit states. Captured now from staging: find-feed-card, answer-question-list, answer-from-library, refusal-no-source (8 slots). The other 27 keep the drawn recreation with Example data until seed 02 (written, not applied) and the staging promote. Steps in plan section 6."
+      "status": "BUILT",
+      "note": "Owner 2026-10-22: use real product screenshots. Inventory of every product picture (35 slot keys, 34 with a real platform screen today) in docs/design/R285-REAL-SCREENSHOTS-PLAN.md. Harness crowagent-platform/web/e2e/product-captures/website.spec.ts signs in to staging as the demo org, captures light theme at 2x, writes Assets/product-captures/web and astro/src/data/product-captures.real.json, refuses production, retired brand words, council and weak fit states. Captured now from staging: find-feed-card, answer-question-list, answer-from-library, refusal-no-source (8 slots). The other 27 keep the drawn recreation with Example data until seed 02 (written, not applied) and the staging promote. Steps in plan section 6. || 2026-10-23: 25 of 35 slots REAL (staging 8ede933df, harness 13 of 13 slots), 7 FIGMA designs labelled Example data. Product design. (about-hero, home-who-small, screen-buyer-delivery, buy-cap-collect, buy-cap-compare, buy-cap-evidence, buy-cap-decision), 3 live animated blocks kept (home-hero-answer, home-refusal-check, buy-boundary-gate, driver decision), 0 drawn. Gate chain 43 of 43. Website commits 44ef6293 and d6e8456b, LOCAL ONLY, nothing pushed. Tour video V1 wired. Reasons per slot in docs/design/R285-REAL-SCREENSHOTS-PLAN.md section 8."
     },
     {
       "id": "A-323",
