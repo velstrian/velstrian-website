@@ -84,7 +84,7 @@
     transition: border-color var(--dur) var(--ease);
   }
 
-  /* The pointer gets an answer before the click, one step toward the ink the
+  /* The pointer gets an answer before the click, one step towards the ink the
      focused border takes. */
   .field__input:hover:not(:focus-visible) {
     border-color: var(--c-text-muted);

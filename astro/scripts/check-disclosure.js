@@ -415,6 +415,19 @@ const MEASURE = `(() => {
 
   const out = [];
   for (const s of document.querySelectorAll('summary')) {
+    /* R285-WEB-GEMINI-UIUX P2-8. A WHOLE DISCLOSURE ABSENT AT THIS WIDTH IS
+       NOT A DISCLOSURE WITHOUT AN AFFORDANCE. The post contents is a closed
+       <details> below 80rem and an open list above it (layouts/Article.astro),
+       so at 1440 the <details> itself is display none and so is everything it
+       holds: there is nothing a reader could open. Only the <details> being
+       unrendered counts, so a summary hidden on its own while its disclosure
+       still paints is reported exactly as before. These are counted and
+       printed, and the same element is measured in full at 390. */
+    const host = s.parentElement;
+    if (host && host.tagName === 'DETAILS' && getComputedStyle(host).display === 'none') {
+      out.push({ s: sig(s), absent: true });
+      continue;
+    }
     const cs = getComputedStyle(s);
     const box = s.getBoundingClientRect();
     const row = {
@@ -538,13 +551,18 @@ const usedNoMark = new Set();
 const usedSmall = new Set();
 const usedRecipe = new Set();
 let disclosures = 0;
+/* Disclosures whose <details> is display none at a width (see MEASURE). */
+const absentAtWidth = new Set();
 const routesWithAny = new Set();
 
 for (const vp of VIEWPORTS) {
   const page = await browser.newPage({ viewport: { width: vp.w, height: vp.h } });
   for (const route of all) {
     await page.goto(server.url(route), { waitUntil: 'load' });
-    const found = await page.evaluate(MEASURE);
+    const measured = await page.evaluate(MEASURE);
+    const absent = measured.filter((d) => d.absent);
+    for (const d of absent) absentAtWidth.add(`${vp.w}  ${route}  ${d.s}`);
+    const found = measured.filter((d) => !d.absent);
     if (!found.length) continue;
     routesWithAny.add(route);
     /* Counted on the first viewport only: the same control measured twice is
@@ -610,6 +628,11 @@ console.log(
   `disclosure: ${disclosures} <summary> element(s) on ${routesWithAny.size} route(s), measured at ` +
   VIEWPORTS.map((v) => v.w).join(' and ')
 );
+console.log(
+  `  ${absentAtWidth.size} disclosure(s) not rendered at a width (the whole <details> is display none), ` +
+  'measured at the other width instead:'
+);
+for (const k of [...absentAtWidth].slice(0, 3)) console.log(`    ${k}`);
 console.log('  colour is outside the recipe fingerprint on purpose: hue carries meaning on this');
 console.log('  site and styles/tokens.css owns the palette. Rule 1 asserts the only thing about');
 console.log('  the ink that is not negotiable, which is that a reader can see it.');

@@ -158,6 +158,16 @@ const UPDATE = process.argv.includes('--update');
  * when a loss must be tolerated across several builds.
  */
 const ALLOWED_LOSSES = new Map([
+  /* 2026-10-24, R285-WEB-GEMINI-UIUX P2-13 (driver decision): /cookie-preferences/
+     reframed in plain words. REWORDED heads, the answer under each confirmed on
+     the dev page. */
+  ['/cookie-preferences/  heading: what this site stores.',
+   'Now "What this site keeps, and why." over the same category cards, which grew from three to four to state the one session value and the form security check honestly.'],
+  ['/cookie-preferences/  heading: analytics and performance',
+   'Now "Counting visits", the same card and the same answer, in the words a small business reader uses (RULE 0-U).'],
+  ['/cookie-preferences/  heading: personalisation and functional',
+   'Now "One setting, for this visit". The old answer, nothing remembered, was no longer true: scripts/evidenced.ts keeps ea_motion in session storage when a reader pauses the hero background, and the card says so.'],
+
   /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: the pages after the product
      pages on design system v3 (Claude lane). REWORDED heads, the content under
      each confirmed on the built page. */
