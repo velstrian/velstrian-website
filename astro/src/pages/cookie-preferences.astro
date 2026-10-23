@@ -52,6 +52,24 @@
  * page updated afterwards. The consent gate goes in first, or the page and the
  * behaviour disagree in the direction that matters.
  *
+ * ── REFRAMED 2026-10-23, R285-WEB-GEMINI-UIUX P2-13 (driver decision) ────
+ *
+ * The page opened on "Cookie preferences." and "nothing to configure", so a
+ * reader who came to switch something off met what looked like a settings
+ * screen with its settings missing. It now leads with the answer in plain
+ * words, then says exactly what the site does keep and why. Still no toggles:
+ * a switch that controls nothing is the defect described above. The URL stays,
+ * because /cookies and the footer link here.
+ *
+ * AND IT STOPPED OVERCLAIMING, measured the same day. Three sentences were no
+ * longer true: "stores nothing in your browser" (scripts/evidenced.ts keeps
+ * one session storage value, `ea_motion`, when a reader pauses the hero
+ * background), "loads nothing from anyone else" and "every request goes to
+ * velstrian.com" (components/forms/Turnstile.astro loads Cloudflare Turnstile
+ * from challenges.cloudflare.com once a reader starts filling in a form), and
+ * "the build fails if any external origin appears", which the A-57 note above
+ * already records as not what check-csp.js does. Each is now stated as it is.
+ *
  * ── NO JAVASCRIPT ───────────────────────────────────────────────────────────
  * Which is the point. A page about not running scripts that needed a script to
  * render would be answering its own question wrongly.
@@ -72,7 +90,7 @@ const title = 'Cookie Preferences | Velstrian';
  * version of this claim with the widest reach.
  */
 const description =
-  'This website sets no cookies, no local storage and no tracking of any kind, so there is nothing here to switch off. What that means, category by category.';
+  'Velstrian uses no tracking cookies, so there is nothing to switch off. Here is the little this website does keep in your browser, and why.';
 
 /*
  * The three categories, in the legacy page's order. `state` is the answer, and
@@ -82,19 +100,24 @@ const description =
  */
 const CATEGORIES: { heading: string; state: string; body: string }[] = [
   {
-    heading: 'Strictly necessary cookies',
-    state: 'None set',
-    body: 'These would be the ones that keep you signed in or protect a form. This site has no sign-in and no session, so it sets none.',
+    heading: 'Tracking and advertising',
+    state: 'None',
+    body: 'No cookie on this website follows you, and no advertising tag is loaded. There is nothing that builds a picture of you across visits or across other sites.',
   },
   {
-    heading: 'Analytics and performance',
-    state: 'None set',
+    heading: 'Counting visits',
+    state: 'None',
     body: 'There is no analytics script on this website. Nothing counts your visit, and there is no identifier to switch off.',
   },
   {
-    heading: 'Personalisation and functional',
-    state: 'None set',
-    body: 'Nothing is remembered between visits. Every page you load is the same page everybody else loads.',
+    heading: 'One setting, for this visit',
+    state: 'Only if you press Pause',
+    body: 'If you pause the moving background at the top of a page, we keep that one choice in your browser while this tab is open, so it stays paused as you move around. It is called ea_motion and goes when you close the tab.',
+  },
+  {
+    heading: 'A security check on forms',
+    state: 'Only on a form',
+    body: 'When you start filling in a form, Cloudflare Turnstile loads to check you are a person and not a bot. It is a security check, not tracking, and nothing loads until you use the form.',
   },
 ];
 
@@ -110,9 +133,9 @@ const schema = [
   <PageHero
     id="hero-title"
     bandId="hero"
-    label="Your choices"
-    title="Cookie preferences."
-    lead="There is nothing to configure on this page, and that is not an oversight. This website sets no cookies, stores nothing in your browser, and loads nothing from anyone else, so there is no choice for you to make here."
+    label="Cookie preferences"
+    title="Nothing to switch off."
+    lead="We use no tracking cookies, so there is nothing to switch off. Below is the little this website does keep in your browser, and why, in plain words."
   >
     <div slot="after">
     <div class="ea-actions">
@@ -122,7 +145,7 @@ const schema = [
   </div>
   </PageHero>
 
-  <SectionBand tone="light" eyebrow="Category by category" title="What this site stores." standfirst="The same three categories a preference centre would offer you, each answered with what is actually set." id="categories">
+  <SectionBand tone="light" eyebrow="Category by category" title="What this site keeps, and why." standfirst="Four things a privacy minded visitor asks about, each answered with what really happens." id="categories">
     <ul class="grid" role="list">
       {
         CATEGORIES.map((c) => (
@@ -139,8 +162,8 @@ const schema = [
 
     <p class="note">
       You do not need to opt out of anything, and there is no banner to dismiss because there is
-      nothing to consent to. Your browser's own cookie and storage controls still work exactly as
-      they always did. They will simply find nothing from us to clear.
+      nothing to agree to. Your browser's own cookie and storage controls still work exactly as
+      they always did.
     </p>
   </SectionBand>
 
@@ -150,18 +173,18 @@ const schema = [
         <h3 class="cat__h">Three things you can confirm yourself</h3>
         <ul class="ticks" role="list">
           <li>
-            Open your browser's developer tools, go to Application or Storage, and look at
-            Cookies, Local Storage and Session Storage for this domain. All three are empty.
+            Open your browser's developer tools, go to Application or Storage, and look at this
+            site. Cookies and Local Storage are empty. Session Storage is empty too, unless you
+            pressed Pause, when it holds the one value ea_motion.
           </li>
           <li>
             Open the Network tab and reload. Every request goes to velstrian.com. There is no
             analytics endpoint, no tag manager, no embedded video and no web font from anyone
-            else.
+            else. The one exception is a page with a form, where the security check loads from
+            Cloudflare once you start typing.
           </li>
           <li>
-            View the page source. There is no third-party script tag to find, because the build
-            refuses to publish one: a check in our build pipeline fails the whole deploy if any
-            external origin appears in the output.
+            View the page source. There is no analytics or advertising script to find.
           </li>
         </ul>
       </div>
@@ -182,7 +205,7 @@ const schema = [
 
     <p class="note">
       None of that reaches this website. Reading velstrian.com, including this page, involves no
-      account, no session and nothing stored on your device.
+      account and no sign in.
     </p>
   </SectionBand>
 
@@ -222,7 +245,7 @@ const schema = [
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(18px, 2.2vw, 30px);
   }
 
