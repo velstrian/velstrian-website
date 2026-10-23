@@ -86,12 +86,12 @@ const PHOTOS = [
     left: 0.5,
   },
   {
-    base: "reading-a-proposal-at-a-desk",
-    source: "pexels-cedric-fauntleroy-8154455.jpg",
-    /* 6562x4369 landscape, the "I buy services" panel. Same treatment again:
-       the centred window keeps her, the open document, the laptop and the window. */
-    top: 0,
-    left: 0.5,
+    base: "working-on-a-laptop-at-a-desk",
+    source: "pexels-mizuno-k-12902863.jpg",
+    /* 4000x6000 portrait, the "I buy services" panel. Full width, so the 4:3
+       window is placed by `top`: it runs from just above her head to the desk
+       in front of her hands, leaving out the ceiling and the table edge. */
+    top: 0.27,
   },
 ];
 

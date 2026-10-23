@@ -39,21 +39,22 @@ site.
 | `site-paperwork-in-hi-vis` | https://www.pexels.com/photo/woman-engineer-writing-down-on-paper-8488034/ | Kindel Media | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | A woman in a yellow hard hat and hi-vis vest sits on a building site filling in a form on a clipboard. Page date 25 June 2021. | `/sectors/construction/`, under the "Who asks you to bid" heading (`person` in `astro/src/content/sectors/construction.md`) |
 | `small-team-working-at-an-office-table` | https://www.pexels.com/photo/group-of-women-talking-in-an-office-8837459/ | Yan Krukau | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | Four women work together at a table in a small office: one on a tablet, one writing while two look over a document with her. No readable trade mark. Page date 20 July 2021, page showed the Free badge on 2026-10-23. Chosen by the owner from three they proposed. | Home page, the "I run a small business" panel of the audience band (`astro/src/components/evidenced/Audience.astro`) |
 | `team-lead-running-a-meeting` | https://www.pexels.com/photo/colleagues-in-a-meeting-7693734/ | Yan Krukau | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | A team lead in a check blazer leans over a white office table to go through the work with three colleagues, one of them at a laptop, under a skylight. No readable trade mark (the laptop lid is plain). Page date 28 April 2021, page showed the Free badge on 2026-10-23. Same photographer as the small team photograph, so the light and colour match. | Home page, the "I lead a growing team" panel of the audience band |
-| `reading-a-proposal-at-a-desk` | https://www.pexels.com/photo/woman-with-red-and-black-headscarf-reading-a-paperwork-8154455/ | Cedric Fauntleroy | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | A woman in a headscarf reads through one open document at a white desk by a window, a plain laptop beside her, plants on shelves behind. Natural light, one document and no clutter, no readable names, logos or sector signs, so it reads as public or private alike. Page date 1 June 2021, page showed the Free badge on 2026-10-23. Chosen after the owner rejected the first buyer photograph. | Home page, the "I buy services" panel of the audience band |
+| `working-on-a-laptop-at-a-desk` | https://www.pexels.com/photo/woman-typing-on-laptop-12902863/ | Mizuno K | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | A woman in a cream blazer sits at a long white office desk typing on a laptop, hands on the keyboard and eyes on the screen, tall windows behind and a colleague standing by them (cropped at the shoulder). No readable screen, names, logos or sector signs, no paperwork pile, so it reads as public or private alike. Page date 19 July 2022, page showed the Free badge on 2026-10-23. Chosen on the owner's brief after two rejections: a woman working on a laptop, without a headscarf. | Home page, the "I buy services" panel of the audience band |
 
 Originals as downloaded, unedited: `originals/pexels-kindel-media-8488034.jpg` (5184x3888, 1,080,287 B)
 , `originals/pexels-mizuno-k-12912118.jpg` (4000x6000, 3,348,600 B) and
 `originals/pexels-yan-krukau-8837459.jpg` (6000x4000, 2,365,314 B), `originals/pexels-yan-krukau-7693734.jpg`
-(6000x4000, 2,458,287 B) and `originals/pexels-cedric-fauntleroy-8154455.jpg` (6562x4369, 3,078,456 B). They are never served:
+(6000x4000, 2,458,287 B) and `originals/pexels-mizuno-k-12902863.jpg` (4000x6000, 4,385,014 B). They are never served:
 `astro/scripts/copy-assets.js` copies only files the built pages reference.
 
 Edits, which the licence permits: each is cut to 4:3 and resized to 1200x900 and 600x450 by
 `scripts/build-people-photos.mjs`, AVIF and WebP, with the blog's encoder settings
 (`scripts/photo-encoders.mjs`). The construction photograph keeps the full frame. The home photograph
 is a landscape original, so the 4:3 window is the full height and centred, which keeps all four people
-and trims only the window frame and the edge of a chair. The two other home photographs get the same treatment (full
-height, centred 4:3 window, `left: 0.5`, no blur), so the three audience cards share one crop, one size
-and one processing. No colour, brightness or retouching change. Alt text lives in `astro/src/data/image-credits.json`.
+and trims only the window frame and the edge of a chair. The team photograph gets the same treatment (full height, centred 4:3
+window, `left: 0.5`, no blur). The buyer photograph is a portrait original, so its 4:3 window is the
+full width placed by `top: 0.27`, from just above her head to the desk. All three audience cards share
+one ratio, one size and one processing, with no colour change. No colour, brightness or retouching change. Alt text lives in `astro/src/data/image-credits.json`.
 
 ## Looked at and rejected, 2026-10-23
 
@@ -81,6 +82,10 @@ further Pexels search were downloaded and viewed, except where the row says othe
 | Pexels 4276427, builder on a lift platform | FRACO and PABCO trade marks readable. |
 | Pexels 7857531, woman among parcels | Posed smile at nothing, reads as staged. |
 | Pexels 12911217, woman with papers at a computer | Natural, the same shoot as the photograph in use. Kept as the reserve. |
+| Pexels 8154455 (Cedric Fauntleroy), woman in a headscarf reading a document by a window | Committed for the buyer card in 46ffbe40 and rejected by the owner on 2026-10-23: the brief is a woman working on a PC or laptop, without a headscarf. Original, derivatives and credit removed in the follow up commit. Its derivatives were never deployed. |
+| Pexels 5668871 (Sora Shimazaki), woman typing at a window desk | Shortlisted. Cooler blue light than the set and a stack of folders in front. |
+| Pexels 7859490 (Greta Hoffman), woman typing in a studio | Shortlisted. Natural, but a sewing machine and craft kit make it a maker's studio, not a buyer's desk. |
+| Pexels 7979445 (Kindel Media), woman typing in a blazer | Hard sun, a teal colour grade and a patterned laptop skin. |
 | Pexels 8428049 (Kampus Production), older man in a suit reading papers at a desk | Wired for the buyer card on 2026-10-23 and rejected by the owner on the home page: the buyer card should show a woman. Never committed, derivatives deleted. Replaced by 8154455. |
 | Pexels 8190827 (Kampus Production), team lead standing at a meeting | Tried first for the team card on 2026-10-23 and looked at on the built page: darker and warmer than the other two, a busy glass office behind and a colleague's back filling the front, so it broke the set. Replaced by 7693734. |
 | Pexels 7876895 and its shoot (Karola G), team at a whiteboard | Bright and natural, but two readable Apple logos, a posed hand on the head and, in sibling frames, shouting and phone calls. |
