@@ -2896,8 +2896,16 @@ a.ea-tcard:focus-visible {
   max-width: var(--measure-prose);
 }
 
+/* STICKY ONLY INSIDE A SPLIT. The head is held in view while the copy BESIDE
+   it scrolls, which needs a column of its own. The same head class is also
+   used as a plain head block straight inside .ea-wrap with a card grid BELOW
+   it (/glossary/ "Keep reading", the related posts band on every blog post).
+   There the sticky box's containing block is the whole wrap, so the heading
+   stuck under the site header and the white cards scrolled up over it: 83px
+   of overlap at 1440, owner screenshot 2026-10-23. Scoped to the split, the
+   only layout where sticking is the design. */
 @media (min-width: 960px) {
-  .ea-split__head {
+  .ea-split > .ea-split__head {
     position: sticky;
     top: calc(var(--v3-header-h) + var(--space-8));
   }
@@ -3085,9 +3093,21 @@ a.ea-tcard:focus-visible {
 }
 
 /* ══ CLOSE: the gradient band over the change into the footer ══════════════ */
+/* THE PANEL STRADDLES THE LIGHT TO DARK CHANGE, BY DESIGN. It does not sit on
+   the footer's seam. With no bottom pad the panel's lower edge WAS the band's
+   lower edge, so the footer's 3px seam (.ca-footer-hairline) ran along the
+   rounded corners and under the panel's shadow: 0px between them on every
+   route at 1440 and 390, owner screenshot 2026-10-23. The band now keeps one
+   head gap of dark ground under the panel, and the change from light to dark
+   is measured over the panel alone, so it still falls at the panel's middle. */
 .ea-close.ea-sec {
-  padding-block: 0;
-  background: linear-gradient(to bottom, var(--ea-canvas) 50%, var(--ground-dark) 50%);
+  --close-foot: var(--ea-head-gap);
+  padding-block: 0 var(--close-foot);
+  background: linear-gradient(
+    to bottom,
+    var(--ea-canvas) calc((100% - var(--close-foot)) / 2),
+    var(--ground-dark) calc((100% - var(--close-foot)) / 2)
+  );
 }
 
 .ea-close__panel {

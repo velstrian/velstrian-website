@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T17:28:24.592Z",
+  "updated": "2026-10-23T20:17:13.005Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -3345,6 +3345,22 @@
       "title": "Website V1 tour video re-recorded at full frame from staging, live notice buyer names blurred",
       "status": "BUILT",
       "note": "The 720p tour cut was recorded with the old top left crop. Re-recorded with the fixed recorder, 61.8 s, 1.94 MB, 251 kb/s, H.264 1280 by 720, AAC 48 kHz mono, captions word for word, max line 42, no cue over 2 lines. Frames read by eye: no council, real buyer name, old brand, PPN 002 or win rate. Gate chain 43 of 43 PASS (1229 s) on a tree holding c9bea911, 94eed270 and 3dcdb192 (A-334), then the source gates, astro check (227 files), astro build and check-budgets re-run PASS on f824ba07. Local only. || STATUS CHECK 2026-10-23 (RULE 0-V): LOCAL ONLY, NOT LIVE. Measured with git merge-base --is-ancestor against origin/main a4f4345a (git ls-remote origin main agrees): the commit(s) named here are not ancestors of it, website main is 206 commits ahead, and https://crowagent.ai/ answers 200 with the old CrowAgent title, so nothing in this row is visible to a reader until the owner approves a push."
+    },
+    {
+      "id": "A-346",
+      "src": "owner screenshot 2026-10-23",
+      "sev": "P2",
+      "title": "Glossary and blog posts: cards scroll over the 'Keep reading' heading",
+      "status": "FIXED",
+      "note": "Cause: astro/src/styles/evidenced.css (min-width 960px block, was line 2899) made EVERY .ea-split__head position sticky. /glossary/ and RelatedPosts (every blog post) use that head straight inside .ea-wrap with a card grid below, so the sticky containing block was the whole wrap: the heading docked under the site header and the white cards scrolled up over it. Static boxes show a 56px gap at 1440, the overlap only exists while scrolling, worst 83px at 1440 on /glossary/ and 12 blog posts (0 at 390, sticky is off below 960). Not the A-209 descender margin and not the font change. Fix: sticky scoped to .ea-split > .ea-split__head, the only layout where the head stands beside its copy. After: 0px overlap at 1440 and 390. Guard: check-shared-blocks.js now fails any sticky element holding a heading with a later sibling stacked under it, on every route at 1440/834/390. Red on the pre-fix dist (13 routes), green in the full chain 43 passed 0 failed."
+    },
+    {
+      "id": "A-347",
+      "src": "owner screenshot 2026-10-23",
+      "sev": "P2",
+      "title": "Closing call to action panel rests on the footer seam on every page",
+      "status": "FIXED",
+      "note": "Design or defect: the panel STRADDLING the light to dark change is the design (Close.astro header comment, evidenced.css CLOSE block). The panel sitting ON the footer's 3px seam is a defect: .ea-close.ea-sec had padding-block 0 (evidenced.css, was line 3089), so the panel's lower edge was the band's lower edge and .ca-footer-hairline (Footer.astro:36, :401) ran along its rounded corners and under its shadow. Measured 0px between panel bottom and seam on /, /bid/, /buy/, /pricing/, /about/, /glossary/ at 1440 and 390. Fix: one --ea-head-gap of dark ground under the panel, with the light to dark stop measured over the panel alone so it still falls at the panel middle. After: 56px at 1440, 32px at 390 on all six routes. Guard: check-shared-blocks.js rule 3 asserts the seam gap is at least the band's bottom pad on every close route at 1440/834/390. Red on the pre-fix dist (111 failures, 37 routes x 3 widths), green in the full chain 43 passed 0 failed."
     }
   ],
   "directives": [
@@ -3414,5 +3430,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 346
+  "nextId": 348
 }

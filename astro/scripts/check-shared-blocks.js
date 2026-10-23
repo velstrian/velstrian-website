@@ -292,7 +292,36 @@ const MEASURE = `((roles) => {
     'animationName', 'animationDuration', 'animationTimingFunction', 'animationIterationCount',
   ];
 
-  const out = { present: false, recipes: {}, geometry: null, problems: [] };
+  const out = { present: false, recipes: {}, geometry: null, problems: [], stickyUnder: [] };
+
+  /* ── A STICKY HEAD WITH CONTENT STACKED UNDER IT (owner report 2026-10-23) ─
+   *
+   * Measured on every route, whether or not the block is on it, because this
+   * is the one gate that already loads every route at every width. A head
+   * (a sticky element holding a heading) is meant to stay beside the copy it
+   * introduces. When a later sibling starts BELOW it in the same parent, that
+   * sibling scrolls up over the docked head: /glossary/ and every blog post
+   * drew 83px of card over "Go deeper on the rules." at 1440. The computed
+   * position is what is read, never a selector, so a new head that sticks in
+   * the wrong place fails here whatever its class. */
+  for (const el of document.querySelectorAll('main *')) {
+    if (getComputedStyle(el).position !== 'sticky') continue;
+    if (!el.querySelector('h1, h2, h3, h4')) continue;
+    const hb = el.getBoundingClientRect();
+    if (hb.height === 0) continue;
+    let sib = el.nextElementSibling;
+    while (sib) {
+      const sb = sib.getBoundingClientRect();
+      const across = Math.min(hb.right, sb.right) - Math.max(hb.left, sb.left);
+      if (sb.height > 0 && across > 0 && sb.top >= hb.bottom - 1) {
+        const name = (el.className || el.tagName).toString().trim().split(/\\s+/)[0];
+        out.stickyUnder.push('.' + name + ' "' + (el.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 40) + '"');
+        break;
+      }
+      sib = sib.nextElementSibling;
+    }
+  }
+
   const root = document.querySelector(roles[0]);
   if (!root) return out;
   out.present = true;
@@ -327,6 +356,21 @@ const MEASURE = `((roles) => {
       .map((r) => document.querySelector(r))
       .filter(Boolean)
       .reduce((m, el) => Math.max(m, el.scrollWidth - el.clientWidth), 0),
+    /* THE PANEL CLEARS THE FOOTER SEAM (owner report 2026-10-23). The panel
+       straddles the light to dark change by design, and it must not rest on
+       the footer's 3px seam: with no pad under it the seam ran along its
+       rounded corners, 0px apart on every route. Null when either is absent,
+       which the route floor above already catches. */
+    seamGap: (() => {
+      const panel = document.querySelector('.ea-close__panel');
+      const seam = document.querySelector('.ca-footer-hairline');
+      if (!panel || !seam) return null;
+      const band = panel.closest('.ea-close');
+      return {
+        gap: Math.round((seam.getBoundingClientRect().top - panel.getBoundingClientRect().bottom) * 10) / 10,
+        pad: band ? parseFloat(getComputedStyle(band).paddingBottom) : 0,
+      };
+    })(),
   };
   return out;
 })`;
@@ -395,6 +439,7 @@ for (const b of BLOCKS) {
   const recipes = new Map(); // "role @width" -> Map(fingerprint -> Set(route))
   const routesWith = new Set();
   const geometryProblems = [];
+  const stickyProblems = [];
   const roleProblems = new Set();
 
   for (const width of WIDTHS) {
@@ -402,6 +447,9 @@ for (const b of BLOCKS) {
     for (const route of all) {
       await page.goto(server.url(route), { waitUntil: 'load' });
       const m = await page.evaluate(`(${MEASURE})(${JSON.stringify(b.roles)})`);
+      for (const s of m.stickyUnder) {
+        stickyProblems.push(`${route} @${width}  sticky head ${s} has content stacked under it, which scrolls over the heading`);
+      }
       if (!m.present) continue;
       routesWith.add(route);
       for (const p of m.problems) roleProblems.add(`${route} @${width}  ${p}`);
@@ -421,6 +469,9 @@ for (const b of BLOCKS) {
       }
       if (g.wordOverflow > 0) {
         geometryProblems.push(`${where}  ${g.wordOverflow}px of WORDS overflow a role of .${b.prefix}`);
+      }
+      if (g.seamGap && (g.seamGap.pad <= 0 || g.seamGap.gap < g.seamGap.pad - 1)) {
+        geometryProblems.push(`${where}  the panel sits ${g.seamGap.gap}px above the footer seam, it needs its band pad of ${g.seamGap.pad}px (a pad of 0 puts the seam along the panel's corners)`);
       }
     }
     await page.close();
@@ -473,6 +524,12 @@ for (const b of BLOCKS) {
 
   console.log(`    rule 3 — words held: ${geometryProblems.length ? geometryProblems.length + ' problem(s)' : 'no page scroll and no role overflowing its words'}`);
   for (const p of geometryProblems) {
+    failed = true;
+    console.error(`shared-blocks: ${p}`);
+  }
+
+  console.log(`    sticky heads:         ${stickyProblems.length ? stickyProblems.length + ' problem(s)' : 'no sticky head on any route has content stacked under it'}`);
+  for (const p of stickyProblems) {
     failed = true;
     console.error(`shared-blocks: ${p}`);
   }
