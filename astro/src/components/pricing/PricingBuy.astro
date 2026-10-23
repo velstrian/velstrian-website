@@ -43,17 +43,20 @@ const n = (v: number) => v.toLocaleString('en-GB');
         </div>
         <p class="ea-plan__who">For a busy buyer comparing replies</p>
 
-        {/* Monthly price */}
-        <p class="ea-plan__price plan-price--m">
-          <span class="ea-plan__amount">£{BUYER_PRO.monthly}</span>
-          <span class="ea-plan__per">a month</span>
-        </p>
+        {/* Both prices share one cell, so the switch crossfades them (pricing.astro). */}
+        <div class="plan-prices">
+          {/* Monthly price */}
+          <p class="ea-plan__price plan-price--m">
+            <span class="ea-plan__amount">£{BUYER_PRO.monthly}</span>
+            <span class="ea-plan__per">a month</span>
+          </p>
 
-        {/* Annual price */}
-        <p class="ea-plan__price plan-price--a">
-          <span class="ea-plan__amount">£{n(BUYER_PRO.annual ?? 0)}</span>
-          <span class="ea-plan__per">a year ({annualDiscountPct(BUYER_PRO)}% off)</span>
-        </p>
+          {/* Annual price */}
+          <p class="ea-plan__price plan-price--a">
+            <span class="ea-plan__amount">£{n(BUYER_PRO.annual ?? 0)}</span>
+            <span class="ea-plan__per">a year ({annualDiscountPct(BUYER_PRO)}% off)</span>
+          </p>
+        </div>
 
         <p class="ea-plan__inc">
           {BUYER_PRO.seats} users (add more for £{SEAT_ADDON.monthly} a month each), {n(BUYER_PRO.credits)} AI credits a month and {BUYER_PRO.guestEvaluators} guest evaluators
@@ -84,17 +87,20 @@ const n = (v: number) => v.toLocaleString('en-GB');
         </div>
         <p class="ea-plan__who">Large authorities, groups and multi entity buyers</p>
 
-        {/* Monthly price */}
-        <p class="ea-plan__price plan-price--m">
-          <span class="ea-plan__amount">£{BUYER_PORTFOLIO.monthly}</span>
-          <span class="ea-plan__per">a month</span>
-        </p>
+        {/* Both prices share one cell, so the switch crossfades them (pricing.astro). */}
+        <div class="plan-prices">
+          {/* Monthly price */}
+          <p class="ea-plan__price plan-price--m">
+            <span class="ea-plan__amount">£{BUYER_PORTFOLIO.monthly}</span>
+            <span class="ea-plan__per">a month</span>
+          </p>
 
-        {/* Annual price */}
-        <p class="ea-plan__price plan-price--a">
-          <span class="ea-plan__amount">£{n(BUYER_PORTFOLIO.annual ?? 0)}</span>
-          <span class="ea-plan__per">a year ({annualDiscountPct(BUYER_PORTFOLIO)}% off)</span>
-        </p>
+          {/* Annual price */}
+          <p class="ea-plan__price plan-price--a">
+            <span class="ea-plan__amount">£{n(BUYER_PORTFOLIO.annual ?? 0)}</span>
+            <span class="ea-plan__per">a year ({annualDiscountPct(BUYER_PORTFOLIO)}% off)</span>
+          </p>
+        </div>
 
         <p class="ea-plan__inc">
           {BUYER_PORTFOLIO.seats} users included (more by arrangement), {n(BUYER_PORTFOLIO.credits)} AI credits a month and {BUYER_PORTFOLIO.guestEvaluators} guest evaluators
@@ -148,36 +154,6 @@ const n = (v: number) => v.toLocaleString('en-GB');
     font-size: var(--t-ea-small);
   }
 
-  /* Annual / Monthly display toggled by #billing-toggle */
-  .plan-price--m {
-    display: flex;
-  }
-
-  .plan-price--a {
-    display: none;
-  }
-
-  .plan-go--m {
-    display: block;
-  }
-
-  .plan-go--a {
-    display: none;
-  }
-
-  :global(#billing-toggle:checked) ~ * .plan-price--m {
-    display: none;
-  }
-
-  :global(#billing-toggle:checked) ~ * .plan-price--a {
-    display: flex;
-  }
-
-  :global(#billing-toggle:checked) ~ * .plan-go--m {
-    display: none;
-  }
-
-  :global(#billing-toggle:checked) ~ * .plan-go--a {
-    display: block;
-  }
+  /* The monthly and annual swap is one recipe, in pages/pricing.astro
+     (R285-WEB-GEMINI-UIUX P2-3), shared with the other plan list. */
 </style>

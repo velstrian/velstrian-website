@@ -143,7 +143,7 @@ const UPDATED = new Date('2026-10-22');
     <PricingPlans>
       <div class="pricing-billing" slot="toggle">
         <label for="billing-monthly" class="pricing-billing__seg pricing-billing__seg--m">Monthly</label>
-        <label for="billing-toggle" class="pricing-billing__seg pricing-billing__seg--a">Annual billing · Save {SAVE_PCT}%</label>
+        <label for="billing-toggle" class="pricing-billing__seg pricing-billing__seg--a">Annual<span class="pricing-billing__long"> billing</span> · Save {SAVE_PCT}%</label>
       </div>
     </PricingPlans>
     <PricingCredits />
@@ -176,35 +176,76 @@ const UPDATED = new Date('2026-10-22');
     position: relative;
   }
 
+  /* R285-WEB-GEMINI-UIUX P2-4. A SEGMENTED CONTROL WITH ONE SLIDING PILL. The
+     two segments are equal columns, so the selected pill is one shape that
+     moves between them rather than two outlines that blink on and off. It is
+     the ::before of the track, painted under the labels, and the checked radio
+     before the track (the `~ *` reach every price rule already uses) moves it.
+     Pill width is half the track less the padding and half the gap, and it
+     travels one column plus the gap. --dur falls to 0.01ms under reduced
+     motion (tokens.css), and the rule below also stops it outright. */
   .pricing-billing {
-    display: inline-flex;
-    gap: var(--space-1);
-    padding: var(--space-1);
+    --seg-pad: var(--space-1);
+    --seg-gap: var(--space-1);
+    position: relative;
+    isolation: isolate;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--seg-gap);
+    padding: var(--seg-pad);
     border: 1px solid var(--ea-rule);
     border-radius: var(--radius-pill);
     background: var(--ea-well);
   }
 
+  .pricing-billing::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset-block: var(--seg-pad);
+    inset-inline-start: var(--seg-pad);
+    inline-size: calc(50% - var(--seg-pad) - var(--seg-gap) / 2);
+    border-radius: var(--radius-pill);
+    background: var(--ea-accent-wash);
+    box-shadow: 0 0 0 1px var(--ea-accent);
+    transition: transform var(--dur) var(--ease);
+  }
+
+  :global(#billing-toggle:checked ~ * .pricing-billing)::before {
+    transform: translateX(calc(100% + var(--seg-gap)));
+  }
+
   .pricing-billing__seg {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     min-height: var(--ea-btn-h);
     padding-inline: var(--space-5);
-    border: 1px solid transparent;
     border-radius: var(--radius-pill);
     font-size: var(--t-ea-small);
     font-weight: var(--t-w-ea-medium);
     color: var(--ea-muted);
+    text-align: center;
     cursor: pointer;
-    transition: var(--transition-hover), color var(--ea-dur-hover) ease-out;
+    transition: color var(--ea-dur-hover) ease-out;
+  }
+
+  /* Equal columns on a phone leave each segment about 170px, which wrapped the
+     annual label onto two lines. The word "billing" adds nothing the control
+     does not already say, so it goes below 30rem and the label stays one line. */
+  @media (max-width: 30rem) {
+    .pricing-billing__long {
+      display: none;
+    }
+  }
+
+  .pricing-billing__seg:hover {
+    color: var(--ea-ink);
   }
 
   :global(#billing-monthly:checked ~ * .pricing-billing__seg--m),
   :global(#billing-toggle:checked ~ * .pricing-billing__seg--a) {
-    border-color: var(--ea-accent);
-    background: var(--ea-accent-wash);
     color: var(--ea-accent-ink);
-    box-shadow: 0 0 0 1px var(--ea-accent);
     font-weight: var(--t-w-ea-strong);
   }
 
@@ -212,6 +253,68 @@ const UPDATED = new Date('2026-10-22');
   :global(#billing-toggle:focus-visible ~ * .pricing-billing__seg--a) {
     outline: var(--ea-focus);
     outline-offset: 2px;
+  }
+
+  /* R285-WEB-GEMINI-UIUX P2-3. THE PRICES CROSSFADE. Both prices of a plan sit
+     in one grid cell (.plan-prices in PricingPlans.astro and PricingBuy.astro),
+     so the card does not change height, and the one not chosen is faded and
+     hidden from the accessibility tree by visibility, which waits for the fade
+     to finish before it applies. Figures use tabular numerals so a price does
+     not shift sideways as its digits change. The monthly and annual start
+     buttons swap outright: a link should never be half visible. This is the one
+     copy of the swap, both plan lists read it. */
+  :global(.plan-prices) {
+    display: grid;
+  }
+
+  :global(.plan-prices > .ea-plan__price) {
+    grid-area: 1 / 1;
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease),
+      visibility 0s linear 0s;
+  }
+
+  :global(.plan-prices .ea-plan__amount) {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :global(.plan-prices > .plan-price--a),
+  :global(#billing-toggle:checked ~ * .plan-prices > .plan-price--m) {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(calc(-1 * var(--space-1)));
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease),
+      visibility 0s linear var(--dur);
+  }
+
+  :global(#billing-toggle:checked ~ * .plan-prices > .plan-price--a) {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease),
+      visibility 0s linear 0s;
+  }
+
+  :global(.plan-go--a),
+  :global(#billing-toggle:checked ~ * .plan-go--m) {
+    display: none;
+  }
+
+  :global(#billing-toggle:checked ~ * .plan-go--a) {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* The price fade needs no line here: every duration it uses is --dur,
+       which tokens.css sets to 0.01ms under reduce, so the swap is instant. */
+    .pricing-billing::before {
+      transition: none;
+    }
   }
 
   .pricing-sources {
