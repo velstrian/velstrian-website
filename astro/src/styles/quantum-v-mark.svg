@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title">
+  <title id="title">Velstrian Quantum V interlocking ribbon mark</title>
+  <rect x="5" y="5" width="110" height="110" rx="28" fill="#090B12"/>
+  <path d="M23 27h23l16 37 18-37h22L63 101H51L23 27Z" fill="#6C63FF"/>
+  <path d="M80 27h22L63 101 51 78l29-51Z" fill="#31D7C5"/>
+  <path d="M35 27h11l16 37-11 21-28-58h12Z" fill="#A477FF" opacity=".8"/>
+</svg>

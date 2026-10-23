@@ -122,13 +122,13 @@ const PRODUCT_ACCENT = Object.freeze({
 
 const DEFAULT_PRODUCT = { color: BRAND.teal, label: PLATFORM_NAME };
 
-// Four ascending bars of the canonical mark, scaled from the 64px viewBox to 56px.
-const MARK_BARS = Object.freeze([
-  { height: 12.50, from: "#60a5fa", to: "#2563eb" },
-  { height: 17.85, from: "#60a5fa", to: "#2563eb" },
-  { height: 23.21, from: "#22c55e", to: "#3b82f6" },
-  { height: 29.75, from: "#22c55e", to: "#3b82f6" },
-]);
+// [R285-REBRAND-05 . D309, owner 2026-10-23] THE MARK IS QUANTUM V, the owner's canonical pack file
+// (astro/src/styles/quantum-v-mark.svg, a byte copy of crowagent-platform/packages/tokens/brand/
+// quantum-v/quantum-v-mark.svg). It is drawn as the file itself, never redrawn in boxes.
+const QUANTUM_V_MARK_URI = `data:image/svg+xml;base64,${fs
+  .readFileSync(path.join(__dirname, "..", "astro", "src", "styles", "quantum-v-mark.svg"))
+  .toString("base64")}`;
+const markImage = (size) => h("img", { src: QUANTUM_V_MARK_URI, width: size, height: size, style: { width: size, height: size } });
 
 // ---------- the page set: the BUILT Astro site ----------
 
@@ -529,35 +529,8 @@ function buildOgTree({ title, subtitle, product }) {
       h(
         "div",
         { style: { display: "flex", alignItems: "center", gap: 18 } },
-        // Canonical 4-bar mark (mirrors Assets/logo/crowagent-mark.svg, scaled 64 -> 56).
-        h(
-          "div",
-          {
-            style: {
-              width: 56,
-              height: 56,
-              borderRadius: 12.25,
-              backgroundColor: "#FCFDFF",
-              border: "1.3px solid rgba(15,23,42,0.20)",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-start",
-              gap: 2.9,
-              padding: "0 9.6px 9.6px 9.6px",
-              boxSizing: "border-box",
-            },
-          },
-          ...MARK_BARS.map((bar) =>
-            h("div", {
-              style: {
-                width: 5.25,
-                height: bar.height,
-                borderRadius: 1.75,
-                backgroundImage: `linear-gradient(180deg, ${bar.from} 0%, ${bar.to} 100%)`,
-              },
-            }),
-          ),
-        ),
+        // [D309] The Quantum V mark, the pack file itself.
+        markImage(56),
         h(
           "div",
           { style: { fontSize: 28, fontWeight: 700, letterSpacing: -0.5, color: BRAND.cloud } },
@@ -895,9 +868,11 @@ const ARTICLE_HEROES = [
 // difference at all. Caught by rendering both and looking at them. A hash gives
 // independence, and independence is not what is wanted here: what is wanted is that
 // no two heroes in the set collide, which only an assignment over the set can promise.
+// [R285-REBRAND-05 . D309] The two ramps are the Quantum V ribbons (quantumIris, ribbonViolet,
+// signalCyan, irisDeep), so a hero reads as the mark at poster scale.
 const HERO_PALETTES = [
-  { warm: ["#22C55E", "#3B82F6"], cool: ["#60A5FA", "#2563EB"], glowA: "rgba(12,201,168,0.30)", glowB: "rgba(167,139,250,0.26)" },
-  { warm: ["#A78BFA", "#6366F1"], cool: ["#0CC9A8", "#0EA5E9"], glowA: "rgba(167,139,250,0.30)", glowB: "rgba(12,201,168,0.24)" },
+  { warm: ["#A477FF", "#6C63FF"], cool: ["#31D7C5", "#6C63FF"], glowA: "rgba(108,99,255,0.30)", glowB: "rgba(164,119,255,0.26)" },
+  { warm: ["#6C63FF", "#4D45DC"], cool: ["#31D7C5", "#A477FF"], glowA: "rgba(164,119,255,0.30)", glowB: "rgba(49,215,197,0.24)" },
 ];
 // palette x mirrored. Beyond this many heroes two would have to share a look, so the
 // generator refuses rather than shipping a near-duplicate.
@@ -1021,7 +996,7 @@ function buildHeroTree({ slug, variant }) {
       },
       ...bars,
     ),
-    // The four-bar mark, vertically centred so it falls inside the blog index's
+    // [D309] The Quantum V mark, vertically centred so it falls inside the blog index's
     // 1600/380 crop band as well as the full-bleed article hero.
     h(
       "div",
@@ -1032,27 +1007,10 @@ function buildHeroTree({ slug, variant }) {
           top: Math.round(HERO_H / 2) - 48,
           width: 96,
           height: 96,
-          borderRadius: 21,
-          backgroundColor: "#FCFDFF",
-          border: "2px solid rgba(15,23,42,0.20)",
           display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "flex-start",
-          gap: 5,
-          padding: "0 16px 16px 16px",
-          boxSizing: "border-box",
         },
       },
-      ...MARK_BARS.map((bar) =>
-        h("div", {
-          style: {
-            width: 9,
-            height: Math.round(bar.height * 1.71),
-            borderRadius: 3,
-            backgroundImage: `linear-gradient(180deg, ${bar.from} 0%, ${bar.to} 100%)`,
-          },
-        }),
-      ),
+      markImage(96),
     ),
     // Teal keyline under the mark. Sits inside the brand plate, clear of the ridge, and
     // stays inside the index crop band so the left third is never a bare gradient.
@@ -1064,7 +1022,7 @@ function buildHeroTree({ slug, variant }) {
         width: 232,
         height: 4,
         borderRadius: 4,
-        backgroundImage: `linear-gradient(${mirrored ? 270 : 90}deg, ${BRAND.teal} 0%, rgba(12,201,168,0) 100%)`,
+        backgroundImage: `linear-gradient(${mirrored ? 270 : 90}deg, ${BRAND.teal} 0%, rgba(108,99,255,0) 100%)`,
       },
     }),
   );

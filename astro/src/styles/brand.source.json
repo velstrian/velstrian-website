@@ -3,126 +3,137 @@
   "version": 1,
   "generatedBy": "packages/tokens/scripts/gen-brand.mjs",
   "provenance": {
-    "decision": "OWNER 2026-08-11: 'colour theme and branding must freez as we have in website'. The WEBSITE is canonical and FROZEN for brand colour. The platform moves to it. Where the two disagree, the website's value wins.",
-    "dark": "crowagent-website/astro/src/styles/tokens.css - the V6 hue shelf and ground ladder, which is what crowagent.ai actually serves.",
-    "light": "crowagent-website/concepts/platform-theme/theme.css [data-mode='light'] - the website-authored, contrast-measured light column for the platform (contrast.mjs / ratios.json in that directory, zero failures).",
-    "note": "The astro dark ladder is one revision NEWER than the concept's dark column (floor 02040A vs 03040A, canvas 050814 vs 05070E, panel 0B1024 vs 0C1020). The shipping astro values win. Every one of the three is DARKER than the concept's, so every contrast ratio the concept measured against light ink improves rather than regresses."
+    "decision": "OWNER D309 2026-10-23: Quantum V is the final Velstrian brand pack and must be updated everywhere. The pack is committed verbatim at packages/tokens/brand/quantum-v/ and every pigment below reads from it. Supersedes the 2026-08-11 website freeze and the 2026-10-18 Carbon and Iris default (both were the brand of their day, the pack replaces them).",
+    "dark": "quantum-v-tokens.css [data-theme='dark'] and quantum-v-brand.json themes.darkBackground",
+    "light": "quantum-v-tokens.css :root and quantum-v-brand.json themes.lightBackground",
+    "note": "Where the pack gives no rung (deepest ground, deepest inset, strong secondary ink, hover, accent as text) the step is DERIVED by the palettes.css rules or MEASURED for contrast, and says so in its own entry. Contrast table: docs/release-2.8.5/design/QUANTUM-V-ROLLOUT-MAP-2026-10-23.md section 5a."
   },
   "voidedAudit": {
     "what": "The platform UI/UX audit brief section 3 names rgb(4,14,26) (#040E1A) as the foundation to preserve.",
     "status": "VOID ON COLOUR - owner 2026-08-11. That audit ran against the platform's CURRENT theme with a tool that had no knowledge of the brand change, so it DESCRIBES the defect rather than stating the target. #040E1A is not a preserve-target."
   },
   "pigments": {
-    "brand-teal": {
-      "role": "the brand teal. Platform --teal.",
+    "on-accent": {
+      "role": "the label on the accent fill. Dark: deepSpace on #8C85FF (6.47:1) and on the hover #A49EFF (8.34:1). Light: white on irisDeep (6.56:1) and on the hover #3F38C4 (8.16:1). Platform --on-accent.",
       "dark": {
-        "value": "#2DD4BF",
-        "from": "website --c-teal"
-      },
-      "light": {
-        "value": "#0A9A80",
-        "from": "platform-held",
-        "why": "NOT the website's derived light teal #0F766E. Platform --teal in light is a FILL that carries --on-accent (#04121E) as its label: #04121E on #0F766E measures 3.43:1 and fails WCAG AA, where #04121E on #0A9A80 measures 5.4:1. #0F766E is teal-as-INK and only becomes correct once the V6 control-neutrality work lands (ADOPTION.md A4/A5), which is a separate programme. Light is NOT flattened onto the dark value."
-      }
-    },
-    "brand-teal-deep": {
-      "role": "the teal hover / pressed step. Platform --teal-d.",
-      "dark": {
-        "value": "#0CC9A8",
-        "from": "website --c-teal-dark"
-      },
-      "light": {
-        "value": "#08927A",
-        "from": "platform-held",
-        "why": "[R285-PALETTE-TEAL-HOVER-CONTRAST-01 2026-10-23] The hover and pressed fill carries the same --on-accent label (#04121E) as the resting fill, so it is judged by that label. The previous #077663 measured 3.40:1 under it, a WCAG AA failure the brand guide found. #08927A measures 4.87:1 under the label and is still a darkening step below brand-teal #0A9A80 (5.36:1). As the light focus ring (--c-focus-ring binds --teal-d) it measures 3.23:1 on the worst light ground #E7EAF2, 3.41:1 on #EDF0F7, 3.60:1 on #F5F6FA and 3.89:1 on #FFFFFF, all over the 3:1 floor. It is the value the primary gradient dark stop already held, so no new pigment enters the palette. Follows brand-teal, which is platform-held in light for the reason above."
-      }
-    },
-    "ground-0": {
-      "role": "deepest recessed ground. Platform --bg-deep.",
-      "dark": {
-        "value": "#02040A",
-        "from": "website --c-floor"
-      },
-      "light": {
-        "value": "#E7EAF2",
-        "from": "website --c-floor (light column)"
-      }
-    },
-    "ground-1": {
-      "role": "the page / working canvas. Platform --bg.",
-      "dark": {
-        "value": "#050814",
-        "from": "website --c-bg"
-      },
-      "light": {
-        "value": "#F5F6FA",
-        "from": "website --c-bg (light column)"
-      }
-    },
-    "ground-2": {
-      "role": "cards. Platform --surf.",
-      "dark": {
-        "value": "#0B1024",
-        "from": "website --c-panel"
+        "value": "#090B12",
+        "from": "packages/tokens/brand/quantum-v (D309) white"
       },
       "light": {
         "value": "#FFFFFF",
-        "from": "website --c-raised / --c-panel (light column, both #FFFFFF)"
+        "from": "packages/tokens/brand/quantum-v (D309) white"
+      }
+    },
+    "brand-teal": {
+      "role": "the brand accent (name kept so no binding moves). Platform --teal, which the product paints as a FILL and also AS TEXT (--c-interactive, --c-brand). Dark: the measured lighter Iris step #8C85FF under the deepSpace label, text safe on every dark ground (4.91:1 or better). Light: irisDeep under a white label.",
+      "dark": {
+        "value": "#8C85FF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#4D45DC",
+        "from": "packages/tokens/brand/quantum-v (D309)",
+        "why": "Accessibility (D309). quantumIris #6C63FF measures 4.32:1 under white and 3.46:1 to 4.56:1 as text on the dark grounds, so neither mode can use it for small text or a small label. LIGHT is irisDeep #4D45DC (6.56:1 under white, 5.46:1 or better as text). DARK is the lighter Iris step #8C85FF (deepSpace label 6.47:1, text 4.91:1 or better). quantumIris keeps the focus glow, tints, washes and large accents through brand-iris, and the mark itself is unchanged."
+      }
+    },
+    "brand-teal-deep": {
+      "role": "the accent hover and pressed step. Platform --teal-d. Dark: one step lighter again, #A49EFF, deepSpace label 8.34:1. Light: #3F38C4, white label 8.16:1.",
+      "dark": {
+        "value": "#A49EFF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#3F38C4",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      }
+    },
+    "ground-0": {
+      "role": "deepest recessed ground. Platform --bg-deep. Dark: deepSpace mixed 50% toward black. Light: equals ground-4 (palettes.css rule).",
+      "dark": {
+        "value": "#050609",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#E9EAEE",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      }
+    },
+    "ground-1": {
+      "role": "the page canvas. Platform --bg. deepSpace and cloud.",
+      "dark": {
+        "value": "#090B12",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#F4F5F8",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      }
+    },
+    "ground-2": {
+      "role": "cards. Platform --surf. --qv-surface.",
+      "dark": {
+        "value": "#12151E",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#FFFFFF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "ground-3": {
-      "role": "elevated / inset wells and tracks. Platform --surf2.",
+      "role": "raised wells and tracks. Platform --surf2. --qv-surface-soft.",
       "dark": {
-        "value": "#0F131F",
-        "from": "website --c-raised"
+        "value": "#181C27",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#EDF0F7",
-        "from": "website --c-lit (light column)"
+        "value": "#F0F1F5",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "ground-4": {
-      "role": "deepest inset / pressed / row-hover. Platform --surf3 AND --surf4, which collapse.",
+      "role": "deepest inset, pressed, row hover. Platform --surf3 and --surf4. Light: surface-soft mixed 3% toward text (palettes.css rule). Dark: measured, #1C2029, the lightest inset on which danger red #F04B4B still reads at 4.51:1 (the 5% rule gave #232732 and 4.13:1).",
       "dark": {
-        "value": "#191E2C",
-        "from": "website --c-lit"
+        "value": "#1C2029",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#E7EAF2",
-        "from": "website --c-floor (light column)"
+        "value": "#E9EAEE",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "ink-0": {
-      "role": "primary text. Platform --cloud.",
+      "role": "primary text. Platform --cloud. --qv-text.",
       "dark": {
-        "value": "#F8F9FB",
-        "from": "website --c-text (owner decision 2026-10-13, R285-P2-PREMIUM-TYPE-01, no longer the --c-white pigment)"
+        "value": "#F7F8FB",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#0B0E19",
-        "from": "website --c-text (light column)"
+        "value": "#0C0E15",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "ink-1": {
-      "role": "strong secondary text. Platform --steel.",
+      "role": "strong secondary text. Platform --steel. text mixed 40% toward text-muted, the palettes.css rule.",
       "dark": {
-        "value": "#D2DBEE",
-        "from": "website --c-text-sub"
+        "value": "#D8DAE1",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#2B3245",
-        "from": "website --c-text-sub (light column)"
+        "value": "#30333C",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "ink-2": {
-      "role": "muted secondary / tertiary text. Platform --mist AND --dim-c, which collapse.",
+      "role": "muted text. Platform --mist and --dim-c. Dark is --qv-text-muted.",
       "dark": {
-        "value": "#A9B6D2",
-        "from": "website --c-text-muted"
+        "value": "#A9ADBA",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#5A6478",
-        "from": "website --c-text-muted (light column)"
+        "value": "#5F636E",
+        "from": "packages/tokens/brand/quantum-v (D309)",
+        "why": "The pack muted #676B77 measures 4.43:1 on the deepest light inset #E9EAEE, below 4.5:1. #5F636E is the measured step (5.00:1 there, 5.51:1 on cloud)."
       }
     },
     "accent-nest": {
@@ -150,124 +161,170 @@
       }
     },
     "iris-accent": {
-      "role": "Carbon and Iris accent FILL. Platform iris --teal. Carries a white label at 4.70:1 in dark.",
+      "role": "The WEBSITE accent FILL (--c-teal-dark), which carries a WHITE label on the site. irisDeep in both modes, 6.56:1 under white. The platform fill (brand-teal) takes a deepSpace label in dark instead, so the two differ by design.",
       "dark": {
-        "value": "#5E6AD2",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#4D45DC",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#434EAF",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#4D45DC",
+        "from": "packages/tokens/brand/quantum-v (D309)",
+        "why": "Accessibility (D309). quantumIris #6C63FF measures 4.32:1 under white and 3.46:1 to 4.56:1 as text on the dark grounds, so neither mode can use it for small text or a small label. LIGHT is irisDeep #4D45DC (6.56:1 under white, 5.46:1 or better as text). DARK is the lighter Iris step #8C85FF (deepSpace label 6.47:1, text 4.91:1 or better). quantumIris keeps the focus glow, tints, washes and large accents through brand-iris, and the mark itself is unchanged."
       }
     },
     "iris-accent-text": {
-      "role": "Carbon and Iris accent AS TEXT. Platform iris --ca-teal-text. The website --c-teal, which the site paints as text and as the verified accent.",
+      "role": "The website binding of brand-accent-text (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#8B95E5",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#8C85FF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#434EAF",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#4D45DC",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-accent-deep": {
-      "role": "Carbon and Iris hover and pressed step. Platform iris --teal-d.",
+      "role": "The website binding of brand-teal-deep (the website names its accent set iris). Same value by construction.",
       "dark": {
-        "value": "#363E8F",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#A49EFF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#363E8F",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#3F38C4",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ground-0": {
-      "role": "Carbon deepest ground. Platform iris --bg-deep.",
+      "role": "The website binding of ground-0 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#040505",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#050609",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#EAECEE",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#E9EAEE",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ground-1": {
-      "role": "Carbon page canvas. Platform iris --bg.",
+      "role": "The website binding of ground-1 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#08090A",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#090B12",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#F9FAFB",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#F4F5F8",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ground-2": {
-      "role": "Carbon card. Platform iris --surf.",
+      "role": "The website binding of ground-2 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#0F1012",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#12151E",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
         "value": "#FFFFFF",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ground-3": {
-      "role": "Carbon raised well. Platform iris --surf2.",
+      "role": "The website binding of ground-3 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#16181D",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#181C27",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#F1F3F5",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#F0F1F5",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ground-4": {
-      "role": "Carbon deepest inset. Platform iris --surf3.",
+      "role": "The website binding of ground-4 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#212328",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#1C2029",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#EAECEE",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#E9EAEE",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ink-0": {
-      "role": "Carbon primary text. Platform iris --cloud.",
+      "role": "The website binding of ink-0 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#F7F8F8",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#F7F8FB",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#090A0B",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#0C0E15",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ink-1": {
-      "role": "Carbon strong secondary text. Platform iris --steel.",
+      "role": "The website binding of ink-1 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#CBCED2",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#D8DAE1",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#2A2D33",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#30333C",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     },
     "iris-ink-2": {
-      "role": "Carbon muted text. Platform iris --mist.",
+      "role": "The website binding of ink-2 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#8A8F98",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (dark)"
+        "value": "#A9ADBA",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
-        "value": "#5C626E",
-        "from": "packages/tokens/src/palettes.css [data-palette=iris], from crowagent-website/status/enterprise-brand-color.html theme-07 (light)"
+        "value": "#5F636E",
+        "from": "packages/tokens/brand/quantum-v (D309)",
+        "why": "The pack muted #676B77 measures 4.43:1 on the deepest light inset #E9EAEE, below 4.5:1. #5F636E is the measured step (5.00:1 there, 5.51:1 on cloud)."
+      }
+    },
+    "brand-iris": {
+      "role": "quantumIris #6C63FF. Focus ring, glows, tints, large accents. Never small text on light (3.96:1 on cloud).",
+      "dark": {
+        "value": "#6C63FF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#6C63FF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      }
+    },
+    "brand-accent-text": {
+      "role": "the accent used AS TEXT. Dark: measured lighter Iris step #8C85FF, 6.47:1 on deepSpace and 4.91:1 on the deepest inset. Light: irisDeep, 6.02:1 on cloud.",
+      "dark": {
+        "value": "#8C85FF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#4D45DC",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      }
+    },
+    "signal-bid": {
+      "role": "Velstrian Bid product signal, ribbonViolet. A label and UI signal only, the parent mark never changes. Light text step measured: #7E22CE, 5.81:1 on the deepest inset and AA as text on its own violet wash, and far enough from irisDeep (token-distinctness dE00) that Bid never reads as the interactive colour. Platform light --bid, --bid-text and --ca-mark-text.",
+      "dark": {
+        "value": "#A477FF",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#7E22CE",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      }
+    },
+    "signal-buy": {
+      "role": "Velstrian Buy product signal, signalCyan. Light text step measured: #0E776C, 4.51:1 on the deepest inset (signalCyan is 1.80:1 on white).",
+      "dark": {
+        "value": "#31D7C5",
+        "from": "packages/tokens/brand/quantum-v (D309)"
+      },
+      "light": {
+        "value": "#0E776C",
+        "from": "packages/tokens/brand/quantum-v (D309)"
       }
     }
   },
@@ -443,7 +500,7 @@
       ]
     },
     "--ca-teal-text": {
-      "template": "{hex:brand-teal}",
+      "template": "{hex:brand-accent-text}",
       "blocks": [
         "root",
         "dark"
@@ -538,7 +595,7 @@
       ]
     },
     "--teal-dim": {
-      "template": "rgba({rgb:brand-teal}, 0.10)",
+      "template": "rgba({rgb:brand-iris}, 0.10)",
       "blocks": [
         "root",
         "light",
@@ -546,9 +603,9 @@
       ]
     },
     "--teal-glow": {
-      "template": "rgba({rgb:brand-teal}, 0.18)",
+      "template": "rgba({rgb:brand-iris}, 0.18)",
       "templates": {
-        "light": "rgba({rgb:brand-teal}, 0.16)"
+        "light": "rgba({rgb:brand-iris}, 0.16)"
       },
       "blocks": [
         "root",
@@ -557,82 +614,82 @@
       ]
     },
     "--teal-04": {
-      "template": "rgba({rgb:brand-teal}, 0.04)",
+      "template": "rgba({rgb:brand-iris}, 0.04)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--teal-08": {
-      "template": "rgba({rgb:brand-teal}, 0.08)",
+      "template": "rgba({rgb:brand-iris}, 0.08)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--teal-10": {
-      "template": "rgba({rgb:brand-teal}, 0.10)",
+      "template": "rgba({rgb:brand-iris}, 0.10)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--teal-12": {
-      "template": "rgba({rgb:brand-teal}, 0.12)",
+      "template": "rgba({rgb:brand-iris}, 0.12)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--teal-15": {
-      "template": "rgba({rgb:brand-teal}, 0.15)",
+      "template": "rgba({rgb:brand-iris}, 0.15)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--teal-20": {
-      "template": "rgba({rgb:brand-teal}, 0.20)",
+      "template": "rgba({rgb:brand-iris}, 0.20)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--teal-30": {
-      "template": "rgba({rgb:brand-teal}, 0.30)",
+      "template": "rgba({rgb:brand-iris}, 0.30)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--teal-40": {
-      "template": "rgba({rgb:brand-teal}, 0.40)",
+      "template": "rgba({rgb:brand-iris}, 0.40)",
       "blocks": [
         "root"
       ]
     },
     "--teal-45": {
-      "template": "rgba({rgb:brand-teal}, 0.45)",
+      "template": "rgba({rgb:brand-iris}, 0.45)",
       "blocks": [
         "root"
       ]
     },
     "--teal-60": {
-      "template": "rgba({rgb:brand-teal}, 0.60)",
+      "template": "rgba({rgb:brand-iris}, 0.60)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--ca-teal-soft": {
-      "template": "rgba({rgb:brand-teal}, 0.08)",
+      "template": "rgba({rgb:brand-iris}, 0.08)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--mark-p-soft": {
-      "template": "rgba({rgb:brand-teal}, 0.10)",
+      "template": "rgba({rgb:brand-iris}, 0.10)",
       "blocks": [
         "root"
       ]
@@ -702,21 +759,21 @@
       ]
     },
     "--glass-border": {
-      "template": "rgba({rgb:brand-teal}, 0.20)",
+      "template": "rgba({rgb:brand-iris}, 0.20)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--glass-border-hover": {
-      "template": "rgba({rgb:brand-teal}, 0.32)",
+      "template": "rgba({rgb:brand-iris}, 0.32)",
       "blocks": [
         "root",
         "dark"
       ]
     },
     "--shadow-teal": {
-      "template": "0 8px 24px rgba({rgb:brand-teal}, 0.18)",
+      "template": "0 8px 24px rgba({rgb:brand-iris}, 0.18)",
       "blocks": [
         "root",
         "dark"
@@ -792,7 +849,7 @@
       ]
     },
     "--chart-tooltip-border": {
-      "template": "rgba({rgb:brand-teal}, 0.35)",
+      "template": "rgba({rgb:brand-iris}, 0.35)",
       "blocks": [
         "root",
         "dark"
@@ -825,6 +882,30 @@
         "root",
         "dark"
       ]
+    },
+    "--on-accent": {
+      "template": "{hex:on-accent}",
+      "blocks": [
+        "root",
+        "light",
+        "dark"
+      ]
+    },
+    "--ca-on-accent": {
+      "template": "{hex:on-accent}",
+      "blocks": [
+        "root",
+        "light",
+        "dark"
+      ]
+    },
+    "--ca-fg-on-brand": {
+      "template": "{hex:on-accent}",
+      "blocks": [
+        "root",
+        "light",
+        "dark"
+      ]
     }
   },
   "platformConstantBindings": {
@@ -840,14 +921,14 @@
     "SURFACE_TOKENS.obsidian": "{hex:ground-1}",
     "BRAND_COLOR_TOKENS.accent": "{hex:brand-teal}",
     "BRAND_COLOR_TOKENS.accentHover": "{hex:brand-teal-deep}",
-    "BRAND_COLOR_TOKENS.accentSoft": "rgba({rgb:brand-teal}, 0.10)",
-    "BRAND_COLOR_TOKENS.accentGlow": "rgba({rgb:brand-teal}, 0.18)",
-    "BRAND_COLOR_TOKENS.accent04": "rgba({rgb:brand-teal}, 0.04)",
-    "BRAND_COLOR_TOKENS.accent08": "rgba({rgb:brand-teal}, 0.08)",
-    "BRAND_COLOR_TOKENS.accent20": "rgba({rgb:brand-teal}, 0.20)",
-    "BRAND_COLOR_TOKENS.accent30": "rgba({rgb:brand-teal}, 0.30)",
-    "BRAND_COLOR_TOKENS.accent40": "rgba({rgb:brand-teal}, 0.40)",
-    "BRAND_COLOR_TOKENS.accent45": "rgba({rgb:brand-teal}, 0.45)",
+    "BRAND_COLOR_TOKENS.accentSoft": "rgba({rgb:brand-iris}, 0.10)",
+    "BRAND_COLOR_TOKENS.accentGlow": "rgba({rgb:brand-iris}, 0.18)",
+    "BRAND_COLOR_TOKENS.accent04": "rgba({rgb:brand-iris}, 0.04)",
+    "BRAND_COLOR_TOKENS.accent08": "rgba({rgb:brand-iris}, 0.08)",
+    "BRAND_COLOR_TOKENS.accent20": "rgba({rgb:brand-iris}, 0.20)",
+    "BRAND_COLOR_TOKENS.accent30": "rgba({rgb:brand-iris}, 0.30)",
+    "BRAND_COLOR_TOKENS.accent40": "rgba({rgb:brand-iris}, 0.40)",
+    "BRAND_COLOR_TOKENS.accent45": "rgba({rgb:brand-iris}, 0.45)",
     "TEXT_SCALE_TOKENS.cloud": "{hex:ink-0}",
     "TEXT_SCALE_TOKENS.steel": "{hex:ink-1}",
     "TEXT_SCALE_TOKENS.mist": "{hex:ink-2}",
@@ -867,22 +948,22 @@
     "CA_ALIAS_TOKENS.bgCard": "{hex:ground-2}",
     "CA_ALIAS_TOKENS.accent": "{hex:brand-teal}",
     "CA_ALIAS_TOKENS.accentHover": "{hex:brand-teal-deep}",
-    "CA_ALIAS_TOKENS.accentGlow": "rgba({rgb:brand-teal}, 0.18)",
+    "CA_ALIAS_TOKENS.accentGlow": "rgba({rgb:brand-iris}, 0.18)",
     "CA_ALIAS_TOKENS.textPrimary": "{hex:ink-0}",
     "CA_ALIAS_TOKENS.textSecondary": "{hex:ink-2}",
     "CA_ALIAS_TOKENS.border": "rgba({rgb:ink-1}, 0.08)",
     "SEMANTIC_FG_TOKENS.onSurface": "{hex:ink-0}",
     "SEMANTIC_FG_TOKENS.onCard": "{hex:ink-0}",
     "SEMANTIC_FG_TOKENS.onGlass": "{hex:ink-0}",
-    "SEMANTIC_FG_TOKENS.onBrand": "{hex:ground-1}",
+    "SEMANTIC_FG_TOKENS.onBrand": "{hex:on-accent}",
     "SEMANTIC_FG_TOKENS.disabled": "rgba({rgb:ink-0}, 0.5)",
     "SEMANTIC_FG_TOKENS.glassBackdrop": "rgba({rgb:ground-2}, 0.94)",
-    "SHADOW_TOKENS.shadowAccent": "0 0 32px rgba({rgb:brand-teal}, 0.22)",
+    "SHADOW_TOKENS.shadowAccent": "0 0 32px rgba({rgb:brand-iris}, 0.22)",
     "GLASS_MORPHISM_TOKENS.glassBg": "rgba({rgb:ground-2}, 0.55)",
     "GLASS_MORPHISM_TOKENS.glassBgStrong": "rgba({rgb:ground-2}, 0.72)",
-    "GLASS_MORPHISM_TOKENS.glassBorder": "rgba({rgb:brand-teal}, 0.12)",
-    "GLASS_MORPHISM_TOKENS.glassBorderHover": "rgba({rgb:brand-teal}, 0.22)",
-    "BRAND_COLOR_TOKENS.accent12": "rgba({rgb:brand-teal}, 0.12)",
+    "GLASS_MORPHISM_TOKENS.glassBorder": "rgba({rgb:brand-iris}, 0.12)",
+    "GLASS_MORPHISM_TOKENS.glassBorderHover": "rgba({rgb:brand-iris}, 0.22)",
+    "BRAND_COLOR_TOKENS.accent12": "rgba({rgb:brand-iris}, 0.12)",
     "_lightGroupNote": "LIGHT_THEME_TOKENS is the PRINT / light canvas the PDF, DOCX and XLSX generators paint on, and it is the ONE colour group in constants.ts that is not dark. Bound with the @light mode suffix. MEASURED 2026-08-11, before these bindings existed: ten of its twelve colour keys disagreed with the reconciled [data-theme=\"light\"] block in tokens.css that they cite in their own comments (bg #F6F8FB vs #F5F6FA, bgDeep #EEF2F7 vs #E7EAF2, surf2 #F2F5F9 vs #EDF0F7, surf3 #E9EEF5 vs #E7EAF2, surf4 #DFE6F0 vs #E7EAF2, cloud #14181F vs #0B0E19, steel #3A4655 vs #2B3245, mist #586577 vs #5A6478, dimC #6B7688 vs #5A6478). Only teal/tealD already agreed. An UNBOUND key is invisible to the drift guard, so this group drifted silently while every bound key was green. gridPrint, inkPrint, ragRed, ragGreen, ragRedTint, ragAmberTint and coralPrint are deliberately NOT bound: brand.source.json records no counterpart for them, they ship on customer documents today, and inventing one would breach RULE 0-C. They are named here so their absence is a recorded decision rather than an oversight.",
     "LIGHT_THEME_TOKENS.bg": "{hex:ground-1@light}",
     "LIGHT_THEME_TOKENS.bgDeep": "{hex:ground-0@light}",
@@ -897,8 +978,8 @@
     "LIGHT_THEME_TOKENS.accent": "{hex:brand-teal@light}",
     "LIGHT_THEME_TOKENS.accentHover": "{hex:brand-teal-deep@light}",
     "CHART_COLOURS.accent": "{hex:brand-teal}",
-    "CHART_COLOURS.accentSoft": "rgba({rgb:brand-teal}, 0.15)",
-    "CHART_COLOURS.accentBorder": "rgba({rgb:brand-teal}, 0.35)",
+    "CHART_COLOURS.accentSoft": "rgba({rgb:brand-iris}, 0.15)",
+    "CHART_COLOURS.accentBorder": "rgba({rgb:brand-iris}, 0.35)",
     "CHART_COLOURS.surf": "{hex:ground-2}",
     "CHART_COLOURS.surf2": "{hex:ground-3}",
     "CHART_COLOURS.steel": "{hex:ink-1}",

@@ -267,27 +267,13 @@ const ALLOWED = new Map([
     'literal-markup  src/layouts/Base.astro  paints chromatic colour literals in SVG presentation attributes',
     'THE SAFARI PINNED-TAB MASK COLOUR. `color` on <link rel="mask-icon"> is an HTML ' +
       'attribute read before any stylesheet is parsed, so it CANNOT reference a custom ' +
-      'property - there is no form of this tag that names a role. The value is --c-teal ' +
-      'carried verbatim from the legacy tag so the pinned-tab glyph survives the ' +
-      'deploy-source switch unchanged. If --c-teal moves, this must be moved by hand.',
+      'property - there is no form of this tag that names a role. [D309] The value is the ' +
+      'Quantum V quantumIris #6C63FF, the pack ribbon colour, so the pinned glyph reads as the ' +
+      'mark. If the pack moves, this must be moved by hand.',
   ],
-  [
-    'literal-markup  src/components/nav/Nav.astro  paints chromatic colour literals in SVG presentation attributes',
-    'THE CROWAGENT MARK. A logo is fixed artwork, not a themed surface: its blue-to-green ' +
-      'bars, its near-white plate and its hairline are the brand pack, and they are the same ' +
-      'colours on a dark page, on a light one and on somebody else\'s letterhead. A mark that ' +
-      're-tinted with the palette would stop being the mark. Tokenising it would also be ' +
-      'actively wrong here, because the shelf it would have to reference is the site palette, ' +
-      'which is precisely the thing a logo must not follow.',
-  ],
-  [
-    'literal-markup  src/components/footer/Footer.astro  paints chromatic colour literals in SVG presentation attributes',
-    'THE CROWAGENT MARK, again — the same SVG as Nav.astro, copied rather than shared. Same ' +
-      'argument: a logo is fixed artwork and does not follow the palette. The duplication is a ' +
-      'real finding in its own right and belongs to whoever consolidates the mark into one ' +
-      'component; it is recorded here rather than fixed here so that this entry can be deleted ' +
-      'in one move when it is.',
-  ],
+  /* [R285-REBRAND-05 . D309] The Nav and Footer mark entries are gone: both now render the one
+     Quantum V pack file through components/brand/QuantumVMark.astro, which paints no literal in
+     component source, so the duplication finding above is closed too. */
 ]);
 
 /* ══════════════════════════════════════════════════════════════════════════

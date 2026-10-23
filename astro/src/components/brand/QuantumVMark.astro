@@ -1,0 +1,18 @@
+---
+/**
+ * [R285-REBRAND-05 . D309, owner 2026-10-23] The Velstrian mark, Quantum V.
+ *
+ * The SVG is the owner's canonical pack file, copied byte for byte into
+ * src/styles/quantum-v-mark.svg from crowagent-platform/packages/tokens/brand/quantum-v/
+ * (the same one source the platform reads). Its geometry and colours are never
+ * redrawn here. Only the accessible name is dropped, because every caller wraps the
+ * mark in a link or a span that already carries the name.
+ */
+import mark from '../../styles/quantum-v-mark.svg?raw';
+
+const svg = mark
+  .replace(/<title[^>]*>[^<]*<\/title>\s*/, '')
+  .replace('role="img" aria-labelledby="title"', 'aria-hidden="true" focusable="false"');
+---
+
+<Fragment set:html={svg} />

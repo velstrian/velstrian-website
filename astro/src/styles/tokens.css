@@ -1209,11 +1209,13 @@
   /* [R285-P2-BRAND-DEFAULT-CARBON-IRIS-01] OWNER DECISION 2026-10-18, Carbon and Iris is the
      default primary everywhere. The ground ladder is the Carbon ladder, bound in
      brand.source.json websiteBindings to the iris-ground pigments. */
-  --c-floor:      #040505;
-  --c-bg:         #08090A;
-  --c-raised:     #16181D;
-  --c-lit:        #212328;
-  --c-panel:      #0F1012;
+  /* [R285-REBRAND-05 . D309, owner 2026-10-23] SUPERSEDED BY QUANTUM V. The ladder is the pack
+     deepSpace ladder, bound in brand.source.json to the same pigments the platform reads. */
+  --c-floor:      #050609;
+  --c-bg:         #090B12;
+  --c-raised:     #181C27;
+  --c-lit:        #1C2029;
+  --c-panel:      #12151E;
   /* Live's card is a WHITE tint at 5%, not a navy fill at 55%. That is why its
      cards read as glass over the page rather than as panels laid on it, and it
      is what makes `saturate(1.6)` in the backdrop filter do visible work. */
@@ -1318,9 +1320,11 @@
      TEXT and as the verified accent, so it takes the iris text rung #8B95E5 (6.8:1 on
      --c-panel). --c-teal-dark is the iris fill #5E6AD2. The glow is the iris --teal-45 rung.
      The token NAMES stay, so no component changes. */
-  --c-teal:        #8B95E5;
-  --c-teal-dark:   #5E6AD2;
-  --c-teal-glow:   rgba(94, 106, 210, 0.45);
+  /* [R285-REBRAND-05 . D309] Quantum V. --c-teal is the measured Iris text step #8C85FF (6.00:1 on
+     --c-panel), --c-teal-dark the irisDeep fill under a white label (6.56:1), the glow quantumIris. */
+  --c-teal:        #8C85FF;
+  --c-teal-dark:   #4D45DC;
+  --c-teal-glow:   rgba(108, 99, 255, 0.45);
   /* [R285-REBRAND-VELSTRIAN-01] Owner 2026-10-19: "instead of teal use default however i
      would like to keep purple as well". --c-cyan was #22D3EE, the last teal family hue on the
      shelf, and it reached the reader as --c-ambient-mid: the middle stop of the hero headline
@@ -1340,7 +1344,7 @@
   /* The depth in the hero aurora: the iris-accent-deep pigment in
      brand.source.json (same value dark and light), so the slab has a shadow
      side and the lights read as light. */
-  --c-iris-deep:   #363E8F;
+  --c-iris-deep:   #3F38C4;
   --c-pink:        #F472B6;
   /* White is a PIGMENT here, not the ink. --c-text is the ink and it is bound
      to this one; so, under V6, is every interactive value. Having the literal
@@ -1826,9 +1830,9 @@
    * is set per orb on the element instead, which is what the deployed site
    * does. */
   --orb-1: radial-gradient(circle, #7C3AED, rgba(0, 0, 0, 0) 66%);
-  --orb-2: radial-gradient(circle, #5E6AD2, rgba(0, 0, 0, 0) 66%);
+  --orb-2: radial-gradient(circle, #4D45DC, rgba(0, 0, 0, 0) 66%);
   --orb-3: radial-gradient(circle, #B39DFB, rgba(0, 0, 0, 0) 68%);
-  --orb-4: radial-gradient(circle, #8B95E5, rgba(0, 0, 0, 0) 68%);
+  --orb-4: radial-gradient(circle, #8C85FF, rgba(0, 0, 0, 0) 68%);
 
   /* FOUR EXPLICIT TOKENS RATHER THAN ONE RECIPE WITH KNOBS, and the reason is
      measured rather than stylistic. The knob version (one --grad-orb carrying
@@ -2560,9 +2564,9 @@
      and the platform's Slate and Iris palettes already use a soft white. Interactive
      glyphs keep --c-white. #F8F9FB on --c-bg #05070E is 18.9:1. The platform reads this
      through brand/brand.source.json ink-0. */
-  --c-text:       #F7F8F8;
-  --c-text-sub:   #CBCED2;
-  --c-text-muted: #8A8F98;
+  --c-text:       #F7F8FB;
+  --c-text-sub:   #D8DAE1;
+  --c-text-muted: #A9ADBA;
 
   /* ── Type families ──────────────────────────────────────────────────────*/
   /* A-92. 'Jakarta Fallback' was DECLARED in styles/fonts.css and named in no
@@ -3567,14 +3571,16 @@
    both temperatures: --c-violet on dark, --c-mark-ink on light.
    ============================================================================ */
 :root {
+  /* [R285-REBRAND-05 . D309] the Quantum V light column: white card, cloud page, surface soft,
+     the deepest inset, and the pack inks (muted deepened to #5F636E for 5.00:1 on the inset). */
   --c-light-0: #FFFFFF;
-  --c-light-1: #F9FAFB;
-  --c-light-2: #F1F3F5;
-  --c-light-3: #EAECEE;
-  --c-ink-0: #090A0B;
-  --c-ink-1: #2A2D33;
-  --c-ink-2: #5C626E;
-  --c-iris-ink: #434EAF;
+  --c-light-1: #F4F5F8;
+  --c-light-2: #F0F1F5;
+  --c-light-3: #E9EAEE;
+  --c-ink-0: #0C0E15;
+  --c-ink-1: #30333C;
+  --c-ink-2: #5F636E;
+  --c-iris-ink: #4D45DC;
   --c-mark-ink: #6D28D9;
   /* The at risk state on a light ground, the same ochre family as --c-amber
      darkened to read as text: 5.47:1 on --c-light-0 and 5.2:1 on

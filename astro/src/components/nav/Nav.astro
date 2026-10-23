@@ -1,4 +1,5 @@
 ---
+import QuantumVMark from '../brand/QuantumVMark.astro';
 /**
  * Nav.astro: the sitewide primary navigation.
  *
@@ -90,24 +91,7 @@ const menus = NAV.menus.map((menu) => ({
   <nav class="ca-nav-row" aria-label="Main navigation">
     <a href={NAV.logo.href} class="ca-logo" aria-label={NAV.logo.ariaLabel}>
       <span class="ca-logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" focusable="false">
-          <defs>
-            <linearGradient id="caMarkBlue-nav" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#60a5fa"></stop>
-              <stop offset="1" stop-color="#2563eb"></stop>
-            </linearGradient>
-            <linearGradient id="caMarkTeal-nav" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#22c55e"></stop>
-              <stop offset="1" stop-color="#3b82f6"></stop>
-            </linearGradient>
-          </defs>
-          <rect x="4" y="4" width="56" height="56" rx="14" fill="#FCFDFF" stroke="rgba(15,23,42,.20)" stroke-width="1.5"></rect>
-          <rect x="15" y="48.4" width="34" height="1.2" rx="0.6" fill="#94a3b8" opacity="0.35"></rect>
-          <rect x="15" y="34.72" width="6" height="14.28" rx="2" fill="url(#caMarkBlue-nav)"></rect>
-          <rect x="24.33" y="28.6" width="6" height="20.4" rx="2" fill="url(#caMarkBlue-nav)"></rect>
-          <rect x="33.67" y="22.48" width="6" height="26.52" rx="2" fill="url(#caMarkTeal-nav)"></rect>
-          <rect x="43" y="15" width="6" height="34" rx="2" fill="url(#caMarkTeal-nav)"></rect>
-        </svg>
+        <QuantumVMark />
       </span>
       <span class="ca-logo-word">{SITE.name}</span>
     </a>
@@ -591,7 +575,8 @@ const menus = NAV.menus.map((menu) => ({
     text-decoration: none;
     color: var(--c-text);
   }
-  .ca-logo-mark svg {
+  /* [D309] :global, because the mark is injected markup (QuantumVMark) and carries no scope. */
+  .ca-logo-mark :global(svg) {
     display: block;
     width: 32px;
     height: 32px;
