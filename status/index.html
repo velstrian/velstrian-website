@@ -2475,9 +2475,16 @@ async function load(){
                       'stats','legendbox','warn','unreadable','updated']) {
       const el = document.getElementById(id); if (el) el.hidden = true;
     }
-    const pbHead = document.getElementById('pbhead'); if (pbHead) pbHead.hidden = true;
-    const pbTop = document.getElementById('pbtop'); if (pbTop) pbTop.hidden = true;
-    const pbList = document.getElementById('pbitems'); if (pbList) pbList.hidden = true;
+    /* [2026-10-23] #pbhead, #pbtop and #pbitems are NOT hidden by attribute
+       here. They used to be, and nothing ever cleared it: the issue branch below
+       restores its own list but not these, and the global
+       `[hidden]{display:none !important}` beats `body.pbmode #pbtop{display:flex}`.
+       So the Master Hub, which is where `/` and every page's back link land,
+       left the Platform tab showing the tab row and the deploy panel with no
+       header, summary or items until a refresh. Measured: pbhead, pbtop and pbitems all 0x0 with hidden set after
+       Master Hub then Platform, 1140 wide on a cold #platform load. The
+       `body.mastermode` rule above already hides them, which is the contract the
+       pbmode block states: CSS owns these three, not the attribute. */
     document.getElementById('issuetable').hidden = true;
     document.getElementById('docbody').hidden = true;
     const swEl = document.getElementById('docswitch');
