@@ -7,13 +7,15 @@
  * components/ui/TabSwitcher.astro, so with no script every panel is simply
  * shown in order and every tab is a link to its panel.
  *
- * ONE REAL PERSON, 2026-10-23 (owner direction D305, R285-WEB-IMAGERY-AND-DISCLOSURE-01
- * lane D). The small business panel carries a licensed photograph of someone
- * sorting paperwork at a desk at home, so a visitor sees a person like them and
- * not only a screen. It sits under the copy and smaller than the product view,
- * so the face never competes with the screen. No caption names her or calls
- * her a customer: the Pexels Licence bars implying endorsement. Licence log:
- * Assets/people/PHOTO-CREDITS.md.
+ * REAL PEOPLE, 2026-10-23 (owner direction D305, R285-WEB-IMAGERY-AND-DISCLOSURE-01
+ * lane D, amended the same day by R285-WEB-AUDIENCE-PHOTOS-01). EVERY panel
+ * carries one licensed photograph of people like the reader: a small team at a
+ * table, a team lead running a meeting, a buyer reading through proposals. One
+ * card with a face and two without read as unfinished, so the three share one
+ * structure, one size and one crop. Each sits under the copy and smaller than
+ * the product view, so the face never competes with the screen. No caption
+ * names anyone or calls them a customer: the Pexels Licence bars implying
+ * endorsement. Licence log: Assets/people/PHOTO-CREDITS.md.
  */
 import TabSwitcher from '../ui/TabSwitcher.astro';
 import Frame from './Frame.astro';
@@ -74,6 +76,14 @@ import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
           everyone reuses. Everyone sees what is done and what is left.
         </p>
         <a class="ea-link" href="/bid/">See {PRODUCT_NAME_BID}</a>
+        <div class="who-person">
+          <Photo
+            dir="people"
+            name="team-lead-running-a-meeting"
+            widths={[600, 1200]}
+            sizes="(min-width: 960px) 22.5rem, calc(100vw - 2rem)"
+          />
+        </div>
       </div>
       <Stage layout="centre">
         <Frame title="Who is doing what" status="8 of 12 answered" capture="home-who-team" caption="Names and progress are an example.">
@@ -95,6 +105,14 @@ import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
           team does the scoring, never the AI.
         </p>
         <a class="ea-link" href="/buy/">See {PRODUCT_NAME_BUY}</a>
+        <div class="who-person">
+          <Photo
+            dir="people"
+            name="reading-a-proposal-at-a-desk"
+            widths={[600, 1200]}
+            sizes="(min-width: 960px) 22.5rem, calc(100vw - 2rem)"
+          />
+        </div>
       </div>
       <Stage layout="centre">
         <Frame title="Reply from supplier B" status="Proof found" capture="home-who-buyer" caption="The supplier, the claim and the document are an example.">

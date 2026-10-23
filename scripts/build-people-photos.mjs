@@ -3,8 +3,10 @@
  * build-people-photos.mjs: the ONE place a people photograph's derivatives are made.
  *
  * Added 2026-10-23, owner direction D305, R285-WEB-IMAGERY-AND-DISCLOSURE-01 lane D:
- * a few real people at work so a visitor connects, at most three on the whole
- * site. Each source is a licensed original kept in Assets/people/originals/ and
+ * a few real people at work so a visitor connects. Amended 2026-10-23 (driver
+ * decision on the owner's report that one card of three looked inconsistent):
+ * one photograph per home audience card, plus the construction sector page.
+ * Each source is a licensed original kept in Assets/people/originals/ and
  * logged in Assets/people/PHOTO-CREDITS.md with its source page and licence.
  *
  * WHAT IT EMITS, per photograph, into Assets/people/:
@@ -71,6 +73,23 @@ const PHOTOS = [
     source: "pexels-yan-krukau-8837459.jpg",
     /* 6000x4000 landscape. A centred 4:3 window keeps all four people and the
        laptop, trimming only the window frame and the edge of the last chair. */
+    top: 0,
+    left: 0.5,
+  },
+  {
+    base: "team-lead-running-a-meeting",
+    source: "pexels-yan-krukau-7693734.jpg",
+    /* 6000x4000 landscape, the "I lead a growing team" panel. Same treatment
+       as the small team photograph above: full height, centred 4:3 window,
+       which keeps the lead leaning in to help and the three colleagues at the table. */
+    top: 0,
+    left: 0.5,
+  },
+  {
+    base: "reading-a-proposal-at-a-desk",
+    source: "pexels-cedric-fauntleroy-8154455.jpg",
+    /* 6562x4369 landscape, the "I buy services" panel. Same treatment again:
+       the centred window keeps her, the open document, the laptop and the window. */
     top: 0,
     left: 0.5,
   },

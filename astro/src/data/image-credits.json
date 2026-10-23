@@ -195,5 +195,33 @@
     "width": 1200,
     "height": 900,
     "bytes": 59299
+  },
+  {
+    "file": "team-lead-running-a-meeting-1200.avif",
+    "dir": "people",
+    "alt": "A team lead leans over an office table to go through the work with three colleagues, one of them at a laptop.",
+    "source_url": "https://www.pexels.com/photo/colleagues-in-a-meeting-7693734/",
+    "photographer": "Yan Krukau",
+    "licence": "Pexels Licence",
+    "licence_url": "https://www.pexels.com/license/",
+    "downloaded_at": "2026-10-23",
+    "intended_use": "Home page, the I lead a growing team panel of the audience band. A real person at work, illustrative, never presented as a customer or staff. Log: Assets/people/PHOTO-CREDITS.md.",
+    "width": 1200,
+    "height": 900,
+    "bytes": 73082
+  },
+  {
+    "file": "reading-a-proposal-at-a-desk-1200.avif",
+    "dir": "people",
+    "alt": "A woman in a headscarf reads through a document at a bright office desk by a window, her laptop open beside her.",
+    "source_url": "https://www.pexels.com/photo/woman-with-red-and-black-headscarf-reading-a-paperwork-8154455/",
+    "photographer": "Cedric Fauntleroy",
+    "licence": "Pexels Licence",
+    "licence_url": "https://www.pexels.com/license/",
+    "downloaded_at": "2026-10-23",
+    "intended_use": "Home page, the I buy services panel of the audience band. A real person at work, illustrative, never presented as a customer or staff. Log: Assets/people/PHOTO-CREDITS.md.",
+    "width": 1200,
+    "height": 900,
+    "bytes": 39527
   }
 ]
