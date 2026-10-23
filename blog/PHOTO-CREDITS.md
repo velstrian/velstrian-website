@@ -1,10 +1,15 @@
 # Blog photo credits
 
-> **RETIRED FROM THE SITE 2026-10-22, owner decision D283 (R285-WEB-TRANSFORMATION-WT-D).** No page
-> shows any photograph listed below any more. Every blog post and every /resources/ card now carries
-> a type led cover drawn from the design system (`astro/src/components/blog/TypeCover.astro`, data in
-> `covers.json`), and `heroes.ts` is deleted. This file stays as the provenance record of what was
-> licensed, and nothing on the site credits these photographs because nothing on the site shows them.
+> **RESTORED 2026-10-23, owner direction D305 (R285-WEB-IMAGERY-AND-DISCLOSURE-01).** The photographs
+> below are back on /blog/ and at the top of each post, as a hybrid: a post registered in
+> `astro/src/components/blog/heroes.ts` shows its photograph, and a post with no entry shows its
+> designed cover (`TypeCover.astro`, data in `covers.json`). The per post social card stays the type
+> led cover for every post (D305 decision D5). Between 2026-10-22 (D283, commit `c4379ba6`) and this
+> date no page showed these photographs, and the live site kept them because that change was never
+> pushed. One file is new: `uk-parliament-westminster-v2`, a 16:9 re-cut of the Westminster
+> photograph (1600x900, centre, JPEG q82 mozjpeg, 251,022 B) made because the original jpg is
+> 300,939 B against the 250 KB single image budget and its URL is immutable. Same photograph, same
+> photographer, same licence as the `uk-parliament-westminster` row below.
 
 > **RESTORED 2026-09-08.** This file was deleted on 2026-09-07 by commit `d0f89f43`, "delete the
 > legacy root tree and the two workflows that audited it", as collateral rather than on purpose. It

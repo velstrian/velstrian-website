@@ -147,6 +147,14 @@ const PHOTOS = [
   { base: "writing-a-tender-response", derive: true },
   { base: "social-value-in-the-community", derive: true },
   { base: "bid-team-reviewing-proposal", derive: true },
+
+  /* A NEW NAME, NOT A RE-ENCODE, 2026-10-23 (D305, R285-WEB-IMAGERY-AND-DISCLOSURE-01).
+     `uk-parliament-westminster.jpg` is 300,939 B, over the 250 KB single image
+     budget in astro/scripts/check-budgets.js, and it is published `immutable`,
+     so its bytes cannot move. This master was cut once from that jpg to the
+     16:9 the frame renders (1600x900, centre, JPEG q82 mozjpeg, 251,022 B) and
+     the set below is derived from it. heroes.ts points at this name. */
+  { base: "uk-parliament-westminster-v2", derive: true },
 ];
 
 const force = process.argv.includes("--force");

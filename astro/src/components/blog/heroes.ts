@@ -1,0 +1,158 @@
+/**
+ * heroes.ts: the picture each blog post carries, and the accent its category
+ * is drawn in.
+ *
+ * WHY THIS IS A MODULE AND NOT FRONTMATTER. The pictures live in
+ * `Assets/blog-photos/` with a 400/600/800/1200 ladder in both WebP and AVIF
+ * plus a JPEG fallback, written by `scripts/build-blog-photos.mjs` and nothing
+ * else. Their provenance and licence are recorded in `blog/PHOTO-CREDITS.md`.
+ * What never existed was anything in the Astro build that REFERENCED them,
+ * which is why `scripts/copy-assets.js` (which copies by reachability, not
+ * wholesale) never copied one into `dist/`. The pictures were licensed,
+ * resized, laddered, credited and then left on the floor.
+ *
+ * ── THERE IS NO `credit` FIELD, AND THERE IS NO `kind` FIELD ────────────────
+ *
+ * Both were here until 2026-08-04 and both existed only to drive rendering that
+ * has since gone.
+ *
+ * `credit` was rendered as a visible caption over the picture. The owner's
+ * instruction of 2026-08-04 is that the blog images "must not need to mention
+ * credits of photographer", and the Pexels Licence agrees: "Attribution is not
+ * required." Keeping a second, half-populated copy of the provenance here would
+ * be two records of one fact that can disagree, so there is one record and it
+ * is `blog/PHOTO-CREDITS.md`. No credit on the page and no record kept are
+ * different things; the record is kept.
+ *
+ * `kind` distinguished photographs from generated brand artwork, and existed so
+ * that the duotone treatment could be skipped for artwork. The treatment is
+ * gone (see PostImage.astro) and so are the two artwork heroes: on the same
+ * instruction, every post now carries a photograph. Nothing downstream can tell
+ * the difference any more, so the field would be data nothing reads.
+ *
+ * The alt text is not decorative. It describes what is IN the photograph, in
+ * British English, and never claims anything about a customer, a client or live
+ * data.
+ *
+ * ── RESTORED 2026-10-23, OWNER DIRECTION D305, AND A MISSING ENTRY NO LONGER THROWS ──
+ *
+ * Commit c4379ba6 (D283, 2026-10-22) deleted this file and put a type led cover
+ * on every post. D305 restores the photographs as a HYBRID: a post with an
+ * entry here shows its photograph, and a post with no entry shows its designed
+ * cover (TypeCover, data in covers.json). So the old throwing `heroFor()` is
+ * replaced by `heroOrNull()`, and a missing entry means "draw the cover", which
+ * still cannot ship a hole because covers.ts has a fallback for any slug. The
+ * social card stays the type led cover for every post (D305 decision D5).
+ */
+
+export interface Hero {
+  /**
+   * Basename under /Assets/blog-photos, no extension. The ladder is derived.
+   * The name describes the PICTURE, not the post. Filenames named after
+   * whichever article first used them are how one photograph ended up as the
+   * hero of three unrelated posts. See the note in blog/PHOTO-CREDITS.md.
+   */
+  file: string;
+  /** What the photograph shows. */
+  alt: string;
+}
+
+export const HEROES: Record<string, Hero> = {
+  'procurement-act-2023-sme-guide': {
+    /* `-v2`, 2026-10-23: the original jpg is 300,939 B, over the 250 KB single
+       image budget, and its URL is immutable, so a 16:9 re-cut ships under a
+       new name. See scripts/build-blog-photos.mjs and blog/PHOTO-CREDITS.md. */
+    file: 'uk-parliament-westminster-v2',
+    alt: 'The Houses of Parliament and Elizabeth Tower seen from Westminster Bridge',
+  },
+  'method-statement-that-scores': {
+    file: 'writing-a-tender-response',
+    alt: 'Close-up of two people at a desk working through a printed document with a pen',
+  },
+  'ppn-026-social-value-guide': {
+    file: 'social-value-in-the-community',
+    alt: 'Volunteers in matching shirts handing out food and water at a community aid table',
+  },
+  'private-sector-rfp-pqq-guide': {
+    file: 'bid-team-reviewing-proposal',
+    alt: 'Three colleagues around a meeting table reviewing printed documents and a laptop',
+  },
+  /*
+   * REPLACED 2026-08-04. Was `regulatory-updates-2026`, ring binders and loose
+   * papers on a meeting-room table, which is a photograph of any office at all.
+   * A guide to what changed in the procurement rules is better served by the
+   * building the rules come out of.
+   */
+  'regulatory-updates-2026': {
+    file: 'hm-treasury-whitehall',
+    alt: 'The colonnaded stone facade and royal coat of arms of a Whitehall government building against a clear blue sky',
+  },
+  /*
+   * REPLACED 2026-08-04. Was `social-value-portal-vs-crowmark`, two iMacs on a
+   * designer's desk, one of them unmistakably running a design tool, which is a
+   * wrong-subject photograph on a piece comparing two social value reporting
+   * platforms.
+   */
+  'social-value-portal-vs-bid': {
+    file: 'reviewing-charts-together',
+    alt: 'Two colleagues holding printed reports of bar charts side by side, one pointing at a row with a pencil',
+  },
+  /*
+   * ITS OWN PHOTOGRAPH, AND THAT IS THE RULE RATHER THAN A PREFERENCE. This
+   * entry briefly shared `reviewing-charts-together` with the post above,
+   * because on 2026-09-08 the pool held exactly ten masters for ten posts.
+   * The owner's instruction that every post carries a different picture is
+   * the same one commit `9c5827ef` already acted on once, when eight posts
+   * were sharing four photographs, so a reuse here was a regression and not
+   * a compromise. A new master was licensed instead. See A-276.
+   */
+  'ppn-026-what-has-published-and-what-has-not': {
+    file: 'pins-marking-dates-on-a-calendar',
+    alt: 'A calendar page marked with four red push pins and one date circled in red pen',
+  },
+  'life-after-award-kpis-contract-performance': {
+    file: 'clipboard-check-in-a-stockroom',
+    alt: 'A person in a dark jacket and lanyard holding a clipboard of ruled forms with a pen, standing beside stockroom shelving with a bright window behind',
+  },
+  /*
+   * REPLACED 2026-08-04, and this one retires a deliberate decision rather than
+   * a weak picture, so the decision is written down.
+   *
+   * These last two posts carried generated Velstrian brand artwork instead of a
+   * photograph, on the argument recorded in blog/PHOTO-CREDITS.md that neither
+   * subject had an honest photographic match. That argument was made while
+   * every photograph on the page was being desaturated to near-monochrome by
+   * the old treatment, which made a drawn graphic and a treated photograph look
+   * like the same kind of object. With the treatment gone they no longer do,
+   * and a register of eight entries in which six are full-colour photographs
+   * and two are abstract bar graphics reads as two of them failing to load.
+   *
+   * The artwork and its generator are untouched (`npm run build:og` still
+   * renders them), so this is reversible by putting the two `file` values back.
+   */
+  'frameworks-and-dps-explained': {
+    file: 'office-files-on-shelves',
+    alt: 'Shelves of red and blue lever-arch files, each with a handwritten label on its spine',
+  },
+  'find-first-public-sector-contract': {
+    file: 'workshop-owner-at-a-laptop',
+    alt: 'A tradesperson typing on a laptop at a workbench, with hand tools and offcuts beside it',
+  },
+  'carbon-reduction-plan-ppn-0621-sme-guide': {
+    file: 'carbon-reduction-plan-ppn-0621-sme-guide',
+    alt: 'Clean green infrastructure with modern solar panels and contemporary sustainable office architecture',
+  },
+  'ai-tender-evaluation-uk-public-sector': {
+    file: 'ai-tender-evaluation-uk-public-sector',
+    alt: 'Professional business laptop displaying compliance analytics and digital procurement data charts',
+  },
+};
+
+/** The photograph registered for a post, or null when the post takes its designed cover. */
+export function heroOrNull(slug: string): Hero | null {
+  return HEROES[slug] ?? null;
+}
+
+/* The category accent map and accentFor() were removed 2026-10-22
+   (R285-WEB-ENTERPRISE-REDESIGN-01): nothing imported them after /blog/ moved
+   to design system v3, whose labels carry no per category hue. */

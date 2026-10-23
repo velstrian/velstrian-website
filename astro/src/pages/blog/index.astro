@@ -160,9 +160,16 @@ const schema = [
         </div>
         {/* Wrapped rather than given a class: a class handed to a child
             component cannot be reached by this page's scoped styles (see
-            PostImage.astro). A type led cover, not a photograph (D283). */}
+            PostImage.astro). The post's photograph, or its designed cover
+            when none is registered (D305 hybrid). */}
         <div class="feat__pic">
-          <PostImage slug={featured.id} title={featured.data.title} category={featured.data.category} />
+          <PostImage
+            slug={featured.id}
+            title={featured.data.title}
+            category={featured.data.category}
+            priority
+            sizes="(min-width: 1000px) 600px, calc(100vw - 5rem)"
+          />
         </div>
       </a>
 
@@ -183,7 +190,7 @@ const schema = [
                 </div>
                 {post.data.readingTime && <span class="ea-label ledger__read">{post.data.readingTime} min</span>}
                 <div class="ledger__thumb">
-                  <PostImage slug={post.id} title={post.data.title} category={post.data.category} />
+                  <PostImage slug={post.id} title={post.data.title} category={post.data.category} sizes="(min-width: 900px) 156px, 96px" />
                 </div>
               </a>
             </li>

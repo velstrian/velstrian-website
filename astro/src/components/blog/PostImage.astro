@@ -1,25 +1,30 @@
 ---
 /**
- * PostImage: the cover a blog post shows on /blog/ and at the top of the post.
+ * PostImage: the picture a blog post shows on /blog/ and at the top of the post.
  *
- * ── THE PHOTOGRAPHS ARE GONE, 2026-10-22, OWNER DECISION D283 ──────────────
+ * ── A HYBRID, 2026-10-23, OWNER DIRECTION D305 ─────────────────────────────
  *
- * Until today this component drew a licensed stock photograph per post from
- * /Assets/blog-photos (an AVIF, WebP and JPEG ladder looked up in heroes.ts).
- * The owner judged the stock photography "cheap" (2026-10-21), the website
- * transformation audit (M6) measured all twelve thumbnails as generic office,
- * calendar and Westminster scenes that said nothing about the article, and D283
- * replaced them with a type led cover drawn from the design system. So this is
- * now a thin wrapper over TypeCover: the post's words, its category and a motif
- * for that category, sized by its own box and costing no image bytes.
+ * A post registered in heroes.ts shows its licensed photograph. A post with no
+ * entry shows its designed cover (TypeCover, data in covers.json). Every post
+ * published before 2026-10-23 has a photograph, so a designed cover appears for
+ * a post added from now on until somebody licenses a photograph for it, and
+ * that post can never ship with a hole in its row.
  *
- * The file and its name are kept so the three call sites (the featured card,
- * the ledger row and Article.astro) stay one import, and so the history of the
- * photograph decision above stays findable from the component that held it.
- * blog/PHOTO-CREDITS.md keeps the provenance record of the retired photographs.
+ * History, kept because it explains the shape. Until 2026-10-22 this component
+ * drew only photographs, through a five layer "treatment" that was removed on
+ * 2026-08-04 because it faded every picture (the owner: the pictures "must be
+ * clear" and "visible in color"). Commit c4379ba6 (D283, 2026-10-22) replaced
+ * every photograph with a type led cover. D305 brings the photographs back for
+ * the posts that have one and keeps the cover for the posts that do not. The
+ * social card stays the type led cover for every post (D305 decision D5).
  *
- * NO LAYOUT SHIFT. The cover is a 16:9 (or 3:1 banner) box drawn in CSS, so its height is known
- * before any byte arrives. There is nothing to load.
+ * The photograph is shown with NO filter and NO overlay. The only chrome is a
+ * 1px edge drawn ABOVE the picture by a pseudo element, which covers no part
+ * of the photograph's interior, so it cannot fade it.
+ *
+ * SELF HOSTED. Every candidate resolves under /Assets, so the build's zero
+ * external origin property holds. scripts/copy-assets.js copies by
+ * reachability, so a file nothing references never ships.
  *
  * THERE IS DELIBERATELY NO `class` PROP: Astro does not stamp a parent's scope
  * onto a child's root, so a forwarded class renders and does nothing. Callers
@@ -27,20 +32,116 @@
  */
 import TypeCover from './TypeCover.astro';
 import { coverForPost } from './covers';
+import { heroOrNull } from './heroes';
 
 interface Props {
-  /** Post slug, used to look up the short line in covers.json. */
+  /** Post slug: looks up the photograph, or the cover's short line. */
   slug: string;
-  /** The post title, the line when covers.json has none for this slug. */
+  /** The post title, the cover's line when covers.json has none for this slug. */
   title: string;
-  /** The post category: the label, and the family the cover is drawn in. */
+  /** The post category: the cover's label and family. */
   category: string;
-  /** The banner shape for the top of a post (see TypeCover). */
+  /** The `sizes` attribute for a photograph. Required: a wrong one downloads the wrong file. */
+  sizes: string;
+  /** Above the fold: eager plus a high fetch priority. Default is lazy. */
+  priority?: boolean;
+  /**
+   * Rendered box geometry for the width and height attributes. They describe
+   * the BOX the browser reserves, not the source file, which is what stops the
+   * page shifting when the picture arrives.
+   */
+  boxWidth?: number;
+  boxHeight?: number;
+  /** The banner shape for a designed cover at the top of a post (see TypeCover). */
   wide?: boolean;
 }
 
-const { slug, title, category, wide = false } = Astro.props;
-const cover = coverForPost(slug, title, category);
+const {
+  slug,
+  title,
+  category,
+  sizes,
+  priority = false,
+  boxWidth = 1600,
+  boxHeight = 900,
+  wide = false,
+} = Astro.props;
+
+const hero = heroOrNull(slug);
+const cover = hero ? null : coverForPost(slug, title, category);
+const base = hero ? `/Assets/blog-photos/${hero.file}` : '';
+
+/*
+ * The ladder on disk for every hero, in BOTH formats, written by
+ * scripts/build-blog-photos.mjs and nothing else. Listed rather than derived so
+ * adding a width means adding the file first. AVIF is offered first: measured
+ * across the set it is roughly half the WebP bytes for the same picture.
+ */
+const WIDTHS = [400, 600, 800, 1200] as const;
+const srcset = (ext: 'avif' | 'webp') => WIDTHS.map((w) => `${base}-${w}w.${ext} ${w}w`).join(', ');
 ---
 
-<TypeCover cover={cover} wide={wide} />
+{
+  hero ? (
+    <div class="pi">
+      <picture>
+        <source type="image/avif" srcset={srcset('avif')} sizes={sizes} />
+        <source type="image/webp" srcset={srcset('webp')} sizes={sizes} />
+        <img
+          class="pi__img"
+          src={`${base}.jpg`}
+          alt={hero.alt}
+          width={boxWidth}
+          height={boxHeight}
+          sizes={sizes}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding={priority ? 'sync' : 'async'}
+          fetchpriority={priority ? 'high' : undefined}
+        />
+      </picture>
+    </div>
+  ) : (
+    cover && <TypeCover cover={cover} wide={wide} />
+  )
+}
+
+<style>
+  .pi {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    /* One ratio for every blog photograph, hero and thumbnail alike. */
+    aspect-ratio: 16 / 9;
+    /* The colour an unloaded picture shows, so a slow network sees a quiet
+       panel and not a white hole. */
+    background: var(--cover-mist);
+    isolation: isolate;
+  }
+
+  /* No filter, and the absence is the decision (see the note above). */
+  .pi__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* The edge, drawn in the cover ink like TypeCover's, so a photograph and a
+     designed cover in the same register share one boundary. Above the picture,
+     1px, no fill. */
+  .pi::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cover-ink-on-light) 9%, transparent);
+  }
+
+  @media (forced-colors: active) {
+    .pi {
+      border: 1px solid CanvasText;
+    }
+  }
+</style>

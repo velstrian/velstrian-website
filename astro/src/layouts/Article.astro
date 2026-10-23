@@ -263,9 +263,19 @@ const canonicalUrl = routeUrl(path);
 
     <Band tone="light" class="art__pane">
       <div class="art__hero">
-        {/* A type led cover drawn from the design system (D283), the same
-            one the social card carries. */}
-        <PostImage slug={slug} title={title} category={category} wide />
+        {/* The post's photograph, or its designed cover when none is
+            registered (D305 hybrid). No credit prop: the Pexels Licence needs
+            none and the owner asked for none, provenance stays in
+            blog/PHOTO-CREDITS.md. The social card is the type led cover either
+            way (D305 decision D5). */}
+        <PostImage
+          slug={slug}
+          title={title}
+          category={category}
+          wide
+          priority
+          sizes="(min-width: 1100px) 1104px, calc(100vw - 2.5rem)"
+        />
       </div>
       <div class="art__col">
         <ShareRow title={title} url={canonicalUrl} position="top" />
