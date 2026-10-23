@@ -74,6 +74,21 @@
  * it, and reduced motion and a phone never start it. Section 4 (lane E1)
  * holds every built page to one steps block and drives the /buy/ block.
  *
+ * ── 2026-10-23: THE SCREENS MOVE AGAIN, AND PLAY MUST WORK (R285-WEB-AUTOPLAY-01)
+ *
+ * Owner: "screens are not automatically switching into the sections, tried
+ * play and pause button as well". Measured on :8093 at 1440: the hero answer
+ * screen, the capability tabs and the product screens carousel had no timer
+ * at all, and the /bid/ steps block, once paused, showed "run" after play was
+ * clicked and then sat on card 1 for 16 seconds against a 7 second interval,
+ * because focus on its own play button suspended it. Every automatic advance
+ * is now scripts/autoplay.ts, and section 5 drives each one with a REAL
+ * POINTER that stays on the button after the click, the way a person presses
+ * it: it must move on its own, pause must hold it, play must move it again,
+ * the painted step must match the step the device reports, and no two blocks
+ * may run at once. Section 1's "carousel never advances" became "a reader's
+ * press stops it for good".
+ *
  * Exit 0 clean, 1 on any failure. Reads dist/, so build first.
  */
 import { chromium } from 'playwright';
@@ -137,9 +152,9 @@ console.log('autoplay: verifying motion behaviour and WCAG 2.2.2 compliance on /
  *   product sequences   .ea-seq: the hero card plays once on load, the
  *                       capability cards once in view, each ending at
  *                       data-seq-state="run" and never cycling back
- *   the carousel        [data-car]: NO AUTOPLAY. It stays on screen 1 for
- *                       longer than WCAG 2.2.2's five seconds untouched, and
- *                       moves only when a reader presses next
+ *   the carousel        [data-car]: moves on its own (section 5), and a
+ *                       reader's press on next moves it and stops the timer
+ *                       for good
  *   reduced motion      nothing is armed at all: no hidden step, no hidden
  *                       section, no refusal mid frame
  *
@@ -164,14 +179,16 @@ console.log('\n  version 3 motion moments on / (strategy 0.8)');
   check('refusal check halts, no loop (WCAG 2.2.2)', refusalLater === refusalAfter, `${refusalAfter} -> ${refusalLater}`);
 
   await page.evaluate(() => document.querySelector('[data-car]')?.scrollIntoView({ block: 'center', behavior: 'instant' }));
-  const carStart = await page.evaluate(() => document.querySelector('[data-car-n]')?.textContent ?? null);
-  await page.waitForTimeout(6500);
-  const carLater = await page.evaluate(() => document.querySelector('[data-car-n]')?.textContent ?? null);
-  check('carousel never advances on its own (6.5s untouched)', carStart === '1' && carLater === '1', `${carStart} -> ${carLater}`);
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(400);
   await page.click('[data-car-next]');
+  await page.mouse.move(0, 0);
   await page.waitForTimeout(600);
   const carNext = await page.evaluate(() => document.querySelector('[data-car-n]')?.textContent ?? null);
   check('carousel moves when the reader presses next', carNext === '2', `screen ${carNext}`);
+  await page.waitForTimeout(8000);
+  const carKept = await page.evaluate(() => [document.querySelector('[data-car-n]')?.textContent, document.querySelector('[data-car]')?.dataset.autoplay]);
+  check('a reader press stops the carousel for good', carKept[0] === '2' && carKept[1] === 'stop', `screen ${carKept[0]}, autoplay=${carKept[1]}`);
   await page.close();
 }
 {
@@ -476,10 +493,131 @@ console.log(`
   await ctx.close();
 }
 
+/* ── 5. EVERY AUTOMATIC ADVANCE MOVES, PAUSES AND PLAYS AGAIN (R285-WEB-AUTOPLAY-01)
+ *
+ * Every block run by scripts/autoplay.ts, on a fresh page each, at 1440 with
+ * motion allowed, scrolled to the middle of the window with the pointer away:
+ *
+ *   j  it advances on its own within one interval, and the step PAINTED on
+ *      screen (the slide shown, the panel shown, the question visible, the
+ *      current card) is the step the device reports. A frozen block fails, and
+ *      so does a counter that moves over a screen that does not.
+ *   k  a real pointer click on pause stops it: nothing moves for an interval
+ *   l  a real pointer click on play, WITH THE POINTER LEFT ON THE BUTTON,
+ *      moves it again within one interval. This is the defect the owner hit.
+ *   m  no two blocks on the page run at once, sampled through j to l
+ *   n  under reduced motion and at 390px wide nothing runs and no pause
+ *      button is shown
+ *
+ * Red proven against mutated copies of dist (AUTOPLAY_DIST): with the timer
+ * never armed (j fails), with hover on the controls holding the block again
+ * (l fails), and with the painted step decoupled from the device (j fails). */
+const AUTO = [
+  { route: '/', sel: '[data-rot]', kind: 'rot', toggle: '[data-rot-toggle]' },
+  { route: '/', sel: '.ea-caps__layout[data-tabs-scope]', kind: 'tabs', toggle: '[data-tabs-toggle]' },
+  { route: '/', sel: '[data-car]', kind: 'car', toggle: '[data-car-toggle]' },
+  { route: '/bid/', sel: '[data-car]', kind: 'car', toggle: '[data-car-toggle]' },
+  { route: '/bid/', sel: FC, kind: 'fc', toggle: '[data-fc-toggle]' },
+  { route: '/buy/', sel: FC, kind: 'fc', toggle: '[data-fc-toggle]' },
+];
+/** The step the device reports, the step actually painted, and the state. */
+const autoState = (page, b) => page.evaluate(({ sel, kind }) => {
+  const r = document.querySelector(sel);
+  if (!r) return null;
+  let painted = -1;
+  if (kind === 'rot') painted = [...r.querySelectorAll('[data-rot-item]')].findIndex((x) => getComputedStyle(x).opacity === '1' && !x.inert);
+  if (kind === 'tabs') painted = [...r.querySelectorAll('[role=tabpanel]')].findIndex((x) => !x.hidden && x.getBoundingClientRect().height > 0);
+  if (kind === 'car') {
+    const vp = r.querySelector('[data-car-viewport]').getBoundingClientRect();
+    painted = [...r.querySelector('[data-car-track]').children].findIndex((x) => Math.abs(x.getBoundingClientRect().left - vp.left) < 2);
+  }
+  if (kind === 'fc') painted = [...r.querySelectorAll('[data-fc-card]')].findIndex((x) => x.hasAttribute('data-current'));
+  return {
+    state: r.dataset.autoplay ?? null,
+    step: r.dataset.autoplayStep === undefined ? -1 : Number(r.dataset.autoplayStep),
+    painted,
+    running: document.querySelectorAll('[data-autoplay="run"]').length,
+  };
+}, b);
+const clickCentre = async (page, loc) => {
+  const box = await loc.boundingBox();
+  if (!box) return false;
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  return true;
+};
+
+console.log(`
+  every automatic advance moves, pauses and plays again (R285-WEB-AUTOPLAY-01)`);
+for (const b of AUTO) {
+  const name = `${b.route} ${b.kind}`;
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference' });
+  const page = await ctx.newPage();
+  const res = await page.goto(`${base}${b.route}`, { waitUntil: 'load' });
+  if (res?.status() !== 200) {
+    check(`${name} answers 200`, false, `status ${res?.status()}`);
+    await ctx.close();
+    continue;
+  }
+  await page.evaluate((sel) => document.querySelector(sel)?.scrollIntoView({ block: 'center', behavior: 'instant' }), b.sel);
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(700);
+  /* One 7 second dwell plus room for the slide to settle before it is read. */
+  const IV = 7000 + 900;
+  let most = 0;
+  const s0 = await autoState(page, b);
+  await page.waitForTimeout(IV);
+  const s1 = await autoState(page, b);
+  most = Math.max(most, s0?.running ?? 0, s1?.running ?? 0);
+  check(`${name} j: it advances on its own, and the painted step is the reported one`,
+    Boolean(s0 && s1 && s1.step > s0.step && s1.painted === s1.step && s0.painted === s0.step),
+    s0 && s1 ? `step ${s0.step} -> ${s1.step}, painted ${s0.painted} -> ${s1.painted}, state ${s0.state} -> ${s1.state}` : 'no block on the page');
+  const toggle = page.locator(`${b.sel} ${b.toggle}`).first();
+  if (s1 && (await toggle.isVisible())) {
+    await clickCentre(page, toggle);
+    const p0 = await autoState(page, b);
+    await page.waitForTimeout(IV);
+    const p1 = await autoState(page, b);
+    check(`${name} k: a pointer click on pause stops it`, p0.state === 'stop' && p1.step === p0.step,
+      `state ${p0.state}, step ${p0.step} -> ${p1.step}`);
+    /* The pointer stays on the button, as a person's does after a click. */
+    await clickCentre(page, toggle);
+    const q0 = await autoState(page, b);
+    await page.waitForTimeout(IV);
+    const q1 = await autoState(page, b);
+    most = Math.max(most, q0.running, q1.running);
+    const moved = q1.step !== q0.step && q1.painted === q1.step;
+    check(`${name} l: a pointer click on play moves it again, pointer still on the button`, q0.state === 'run' && moved,
+      `state ${q0.state} -> ${q1.state}, step ${q0.step} -> ${q1.step}, painted ${q1.painted}`);
+  } else {
+    check(`${name} k, l: a pause and play button is shown`, false, 'no visible toggle');
+  }
+  check(`${name} m: never two blocks running at once`, most <= 1, `${most} running at the most`);
+  await ctx.close();
+
+  for (const [label, opts] of [
+    ['reduced motion', { viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }],
+    ['390px wide', { viewport: { width: 390, height: 844 }, reducedMotion: 'no-preference' }],
+  ]) {
+    const c2 = await browser.newContext(opts);
+    const p2 = await c2.newPage();
+    await p2.goto(`${base}${b.route}`, { waitUntil: 'load' });
+    await p2.evaluate((sel) => document.querySelector(sel)?.scrollIntoView({ block: 'center', behavior: 'instant' }), b.sel);
+    await p2.waitForTimeout(1500);
+    const r = await p2.evaluate(({ sel, toggle: t }) => {
+      const el = document.querySelector(sel);
+      const tg = el?.querySelector(t);
+      return el ? { state: el.dataset.autoplay ?? 'none', shown: Boolean(tg && !tg.hidden && tg.getBoundingClientRect().height > 0) } : null;
+    }, b);
+    check(`${name} n: ${label}, nothing runs and no pause button`, Boolean(r && r.state === 'none' && !r.shown),
+      r ? `autoplay=${r.state}, pause shown=${r.shown}` : 'no block on the page');
+    await c2.close();
+  }
+}
+
 await browser.close();
 server.close();
 
-console.log(`\n  ${checks} behavioural check(s): the v3 motion moments on /, and the hero aurora on ${HERO_ROUTES.length} routes`);
+console.log(`\n  ${checks} behavioural check(s): the v3 motion moments on /, the hero aurora on ${HERO_ROUTES.length} routes, and ${AUTO.length} automatic advances`);
 if (failures.length) {
   console.error(`\nautoplay: ${failures.length} failure(s)`);
   for (const f of failures) console.error(`  - ${f}`);

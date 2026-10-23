@@ -2111,6 +2111,54 @@ main .ea-sec * {
   cursor: default;
 }
 
+/* ── The pause and play icon of every automatic advance ─────────────────
+   scripts/autoplay.ts writes data-autoplay on the block, and the button shows
+   pause while it can move and play once it has stopped. */
+.ea-auto__play {
+  display: none;
+}
+
+[data-autoplay='stop'] .ea-auto__pause {
+  display: none;
+}
+
+[data-autoplay='stop'] .ea-auto__play {
+  display: block;
+}
+
+/* ── The hero answer screen, three questions in one cell ─────────────────
+   Every question sits in the same grid cell, so the screen is as tall as the
+   tallest at every width and nothing below it shifts when one changes. Only
+   the current one is painted. The others carry inert and aria-hidden in the
+   HTML, so they are out of the accessibility tree with or without script.
+   Opacity, not visibility: visibility would also hide every .visually-hidden
+   label inside them, which check-render.js rightly fails. */
+.ea-rot__items {
+  display: grid;
+}
+
+.ea-rot__items > [data-rot-item] {
+  grid-area: 1 / 1;
+}
+
+.ea-rot__items > [data-rot-item]:not([data-current]) {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ea-rot[data-rot='on'] .ea-rot__items > [data-rot-item] {
+    transition: opacity var(--slide-dur) var(--ea-ease);
+  }
+}
+
+.ea-rot__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
 .ea-car__count {
   min-width: 4ch;
   font-size: var(--t-ea-small);

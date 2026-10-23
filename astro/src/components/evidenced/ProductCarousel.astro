@@ -4,13 +4,20 @@
  * (strategy 0.8, "carousels of product").
  *
  * Arrows, a "2 / 4" counter, swipe, and the arrow keys when focus is inside.
- * NO AUTOPLAY: nothing moves until the reader asks, so there is no timer, no
- * pause control and nothing to fight a screen reader. A slide moves in 300ms
- * (--slide-dur), and instantly under reduced motion.
+ * A slide moves in 300ms (--slide-dur), and instantly under reduced motion.
+ *
+ * `autoplay` (owner report 2026-10-23, "screens are not automatically
+ * switching"): the screens move on by themselves, once through, and rest on
+ * the last. A pause and play button comes first in the controls. The timer is
+ * the site's one automatic advance, scripts/autoplay.ts, so it never starts
+ * under reduced motion or on a phone, holds while hovered, focused or off
+ * screen, and stops for good when the reader moves a screen themselves.
+ * Without `autoplay` (the /walkthrough/ click through) nothing moves until the
+ * reader asks.
  *
  * WITHOUT SCRIPT it is a horizontal scroll strip with snap points, so every
  * slide is reachable by swipe or scroll and every caption is in the document.
- * scripts/evidenced.ts initCarousels turns it into the paged control and only
+ * scripts/carousel.ts initCarousels turns it into the paged control and only
  * then shows the arrows and counter.
  *
  * Slides are the default slot, each a <li class="ea-car__slide">, usually an
@@ -21,8 +28,10 @@ import Icon from './Icon.astro';
 interface Props {
   label: string;
   count: number;
+  /** Move through the screens once on their own, with a pause button. */
+  autoplay?: boolean;
 }
-const { label, count } = Astro.props;
+const { label, count, autoplay = false } = Astro.props;
 ---
 
 <div class="ea-car" data-car role="region" aria-roledescription="carousel" aria-label={label}>
@@ -35,8 +44,19 @@ const { label, count } = Astro.props;
     </div>
   </div>
   <div class="ea-car__controls" data-car-controls hidden>
+    {autoplay && (
+      <button class="ea-car__btn" type="button" data-car-toggle aria-label="Pause the screens" hidden>
+        <Icon name="pause" size={20} class="ea-auto__pause" />
+        <Icon name="resume" size={20} class="ea-auto__play" />
+      </button>
+    )}
     <button class="ea-car__btn" type="button" data-car-prev aria-label="Previous screen"><Icon name="left" size={20} /></button>
     <p class="ea-car__count" aria-live="polite"><span data-car-n>1</span> / {count}</p>
     <button class="ea-car__btn" type="button" data-car-next aria-label="Next screen"><Icon name="right" size={20} /></button>
   </div>
 </div>
+
+<script>
+  import { initCarousels } from '../../scripts/carousel';
+  initCarousels();
+</script>

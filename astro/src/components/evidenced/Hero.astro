@@ -21,6 +21,7 @@ import Frame from './Frame.astro';
 import Stage from './Stage.astro';
 import Sequence from './Sequence.astro';
 import TourDialog from './TourDialog.astro';
+import Icon from './Icon.astro';
 import { SIGNUP_URL, START_LABEL } from '../../data/app';
 import { TRIAL_DAYS } from '../../data/pricing';
 ---
@@ -51,45 +52,105 @@ import { TRIAL_DAYS } from '../../data/pricing';
         capture="home-hero-answer"
         caption="A drafted answer, with each claim linked to the document that proves it."
       >
-        <div class="ea-answer" data-cite-root>
-          <svg class="ea-cite-svg" data-cite-svg aria-hidden="true" focusable="false"></svg>
-          <div class="ea-answer__work" data-cite-pane>
-            <p class="ea-label">The question</p>
-            <blockquote class="ea-quote ea-answer__question">
-              <p>Tell us how you will keep the service running when a member of staff is off sick.</p>
-            </blockquote>
-            <p class="ea-label">Your answer</p>
-            <div class="ea-answer__text">
-              <p>
-                We keep two trained cover staff on call for every site, so a visit is never <span class="ea-nowrap">missed.<a
-                  class="ea-mark"
-                  href="#ea-hero-src-1"
-                  data-cite-from="h1"><span aria-hidden="true">1</span><span class="visually-hidden">Source 1, staffing policy, page 3</span></a></span>
-              </p>
-              <p>
-                Cover staff have the same checks and training as our regular <span class="ea-nowrap">team.<a
-                  class="ea-mark"
-                  href="#ea-hero-src-2"
-                  data-cite-from="h2"><span aria-hidden="true">2</span><span class="visually-hidden">Source 2, training record</span></a></span>
-              </p>
+        {/* Three questions of the six, moving on by themselves once through
+            (owner report 2026-10-23), on the site's one automatic advance,
+            scripts/autoplay.ts, through scripts/rotator.ts. They share
+            one grid cell, so the screen is always as tall as the tallest and
+            nothing below it moves when a question changes. Without script,
+            and under reduced motion until the reader presses next, question
+            4 shows as it always has. */}
+        <div class="ea-rot" data-rot role="group" aria-roledescription="carousel" aria-label="Answers to three of the six questions">
+          <div class="ea-rot__items">
+            <div class="ea-answer ea-rot__item" data-cite-root data-rot-item data-current data-rot-title="Question 4 of 6: cover when staff are off" data-rot-status="2 claims checked">
+              <svg class="ea-cite-svg" data-cite-svg aria-hidden="true" focusable="false"></svg>
+              <div class="ea-answer__work" data-cite-pane>
+                <p class="ea-label">The question</p>
+                <blockquote class="ea-quote ea-answer__question">
+                  <p>Tell us how you will keep the service running when a member of staff is off sick.</p>
+                </blockquote>
+                <p class="ea-label">Your answer</p>
+                <div class="ea-answer__text">
+                  <p>
+                    We keep two trained cover staff on call for every site, so a visit is never <span class="ea-nowrap">missed.<a
+                      class="ea-mark"
+                      href="#ea-hero-src-1"
+                      data-cite-from="h1"><span aria-hidden="true">1</span><span class="visually-hidden">Source 1, staffing policy, page 3</span></a></span>
+                  </p>
+                  <p>
+                    Cover staff have the same checks and training as our regular <span class="ea-nowrap">team.<a
+                      class="ea-mark"
+                      href="#ea-hero-src-2"
+                      data-cite-from="h2"><span aria-hidden="true">2</span><span class="visually-hidden">Source 2, training record</span></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="ea-answer__sources">
+                <p class="ea-label">Checked against your documents</p>
+                <article class="ea-sheet" id="ea-hero-src-1" data-cite-sheet aria-label="Source 1">
+                  <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">1</span>Staffing policy, page 3</p>
+                  <p class="ea-sheet__text">
+                    <mark data-cite-to="h1">Two trained cover operatives are kept on call for each site</mark> and can attend
+                    the same day.
+                  </p>
+                </article>
+                <article class="ea-sheet" id="ea-hero-src-2" data-cite-sheet aria-label="Source 2">
+                  <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">2</span>Training record, cover team</p>
+                  <p class="ea-sheet__text">
+                    <mark data-cite-to="h2">All cover staff complete the same induction and checks as permanent staff</mark>
+                    before their first shift.
+                  </p>
+                </article>
+              </div>
+            </div>
+            <div class="ea-answer ea-rot__item" data-cite-root data-rot-item inert aria-hidden="true" data-rot-title="Question 5 of 6: what your customers say" data-rot-status="1 claim held back">
+              <svg class="ea-cite-svg" data-cite-svg aria-hidden="true" focusable="false"></svg>
+              <div class="ea-answer__work" data-cite-pane>
+                <p class="ea-label">The question</p>
+                <blockquote class="ea-quote ea-answer__question">
+                  <p>Tell us how happy your customers are with your work.</p>
+                </blockquote>
+                <p class="ea-label">Your answer</p>
+                <div class="ea-answer__text">
+                  <p>
+                    Nine in ten of our sites stay with us after their first <span class="ea-nowrap">year.<a
+                      class="ea-mark"
+                      href="#ea-hero-src-3"
+                      data-cite-from="h3"><span aria-hidden="true">1</span><span class="visually-hidden">Source 1, contract register</span></a></span>
+                  </p>
+                  <p class="ea-app-answer__held"><span class="ea-chip ea-chip--held">Held back</span> No proof found for "rated 4.9 out of 5". Add a document, or change the sentence.</p>
+                </div>
+              </div>
+              <div class="ea-answer__sources">
+                <p class="ea-label">Checked against your documents</p>
+                <article class="ea-sheet" id="ea-hero-src-3" data-cite-sheet aria-label="Source 1">
+                  <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">1</span>Contract register</p>
+                  <p class="ea-sheet__text">
+                    <mark data-cite-to="h3">18 of our 20 sites renewed after the first year</mark> of the contract.
+                  </p>
+                </article>
+              </div>
+            </div>
+            <div class="ea-answer ea-rot__item" data-rot-item inert aria-hidden="true" data-rot-title="Question 6 of 6: your price" data-rot-status="Yours to fill in">
+              <div class="ea-answer__work">
+                <p class="ea-label">The question</p>
+                <blockquote class="ea-quote ea-answer__question">
+                  <p>What is your price for the first year?</p>
+                </blockquote>
+                <p class="ea-label">Your answer</p>
+                <div class="ea-answer__text">
+                  <p><span class="ea-chip">Yours to fill in</span> Your price is left for you to add. Nothing is written for you here.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="ea-answer__sources">
-            <p class="ea-label">Checked against your documents</p>
-            <article class="ea-sheet" id="ea-hero-src-1" data-cite-sheet aria-label="Source 1">
-              <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">1</span>Staffing policy, page 3</p>
-              <p class="ea-sheet__text">
-                <mark data-cite-to="h1">Two trained cover operatives are kept on call for each site</mark> and can attend
-                the same day.
-              </p>
-            </article>
-            <article class="ea-sheet" id="ea-hero-src-2" data-cite-sheet aria-label="Source 2">
-              <p class="ea-sheet__doc"><span class="ea-sheet__n" aria-hidden="true">2</span>Training record, cover team</p>
-              <p class="ea-sheet__text">
-                <mark data-cite-to="h2">All cover staff complete the same induction and checks as permanent staff</mark>
-                before their first shift.
-              </p>
-            </article>
+          <div class="ea-rot__controls" data-rot-controls hidden>
+            <button class="ea-car__btn" type="button" data-rot-toggle aria-label="Pause the answers" hidden>
+              <Icon name="pause" size={20} class="ea-auto__pause" />
+              <Icon name="resume" size={20} class="ea-auto__play" />
+            </button>
+            <button class="ea-car__btn" type="button" data-rot-prev aria-label="Previous question"><Icon name="left" size={20} /></button>
+            <p class="ea-car__count" aria-live="polite">Question <span data-rot-n>4</span> of 6</p>
+            <button class="ea-car__btn" type="button" data-rot-next aria-label="Next question"><Icon name="right" size={20} /></button>
           </div>
         </div>
       </Frame>
@@ -107,3 +168,8 @@ import { TRIAL_DAYS } from '../../data/pricing';
     </Stage>
   </div>
 </Band>
+
+<script>
+  import { initRotators } from '../../scripts/rotator';
+  initRotators();
+</script>

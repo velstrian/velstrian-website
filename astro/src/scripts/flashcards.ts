@@ -15,8 +15,11 @@
  *     press will do ("Pause the steps", "Play the steps"), so it carries no
  *     aria-pressed. Play after the last step starts again from the first.
  *   - previous or next: a reader's choice, so the timer stops for good.
- *   - hover, focus inside the block, or a hidden tab: suspended, and it
- *     carries on from the same card when they end. None of those is a choice.
+ *   - hover, focus inside the cards, a hidden tab or the block off screen:
+ *     suspended, and it carries on from the same card when they end. Hover
+ *     and focus on the block's own buttons never suspend it: until
+ *     2026-10-23 they did, so clicking play suspended the block it had just
+ *     started (measured on /bid/, "run" and card 1 for 16 seconds).
  * While it moves, the list is aria-live="off". Stopped, it is "polite".
  *
  * Geometry is read on scroll and resize, never through an observer
@@ -24,8 +27,7 @@
  * the page and readable whatever the timer is doing.
  */
 
-const narrow = (): boolean => matchMedia('(max-width: 699px)').matches;
-const reduced = (): boolean => matchMedia('(prefers-reduced-motion: reduce)').matches;
+import { autoplay } from './autoplay';
 
 function init(root: HTMLElement): void {
   const controls = root.querySelector<HTMLElement>('[data-fc-controls]');
@@ -36,105 +38,61 @@ function init(root: HTMLElement): void {
   const list = root.querySelector<HTMLElement>('[data-fc-list]');
   const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-fc-card]'));
   if (!controls || !toggle || !prev || !next || !count || !list || cards.length < 2) return;
-  if (reduced() || narrow()) return;
 
-  const ms = Number(root.dataset.fcInterval) || 7000;
   const last = cards.length - 1;
   let i = 0;
-  let stopped = false; // the reader paused, chose a card, or the run ended
-  let held = false; // hover, focus or a hidden tab, which only suspend
-  let timer = 0;
+  let run = false;
 
   const paint = () => {
-    const running = !stopped && !held;
-    root.dataset.fcPlay = stopped ? 'stop' : 'run';
-    list.setAttribute('aria-live', running ? 'off' : 'polite');
-    toggle.setAttribute('aria-label', stopped ? 'Play the steps' : 'Pause the steps');
     count.textContent = String(i + 1);
     prev.setAttribute('aria-disabled', String(i === 0));
     next.setAttribute('aria-disabled', String(i === last));
+    list.setAttribute('aria-live', run ? 'off' : 'polite');
     cards.forEach((c, k) => {
       c.toggleAttribute('data-current', k === i);
       c.removeAttribute('data-tick');
     });
-    if (running) {
+    if (run) {
       /* Two frames, so the bar paints empty before it starts to fill. */
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        if (!stopped && !held) cards[i].setAttribute('data-tick', '');
+        if (run) cards[i].setAttribute('data-tick', '');
       }));
     }
   };
 
-  const clear = () => {
-    clearTimeout(timer);
-    timer = 0;
-  };
-
-  const arm = () => {
-    clear();
-    if (stopped || held) return;
-    timer = window.setTimeout(() => {
-      i += 1;
-      if (i >= last) {
-        i = last;
-        stopped = true;
-      }
+  /* The timer, the pause button and every rule about when it may move are
+     the shared device in scripts/autoplay.ts. This file only paints a card. */
+  const ap = autoplay({
+    root,
+    controls,
+    toggle,
+    steps: cards.length,
+    interval: Number(root.dataset.fcInterval),
+    labels: { pause: 'Pause the steps', play: 'Play the steps' },
+    show: (k) => {
+      i = k;
+    },
+    paint: (state, k) => {
+      i = k;
+      run = state === 'run';
+      root.dataset.fcPlay = state === 'held' ? 'hold' : state;
       paint();
-      arm();
-    }, ms);
-  };
+    },
+  });
+  if (!ap) return;
 
   const go = (to: number) => {
     i = Math.max(0, Math.min(last, to));
-    stopped = true;
-    clear();
+    ap.chose(i);
     paint();
     if (root.dataset.fcLayout === 'snap') cards[i].scrollIntoView({ block: 'nearest', inline: 'start' });
   };
-
-  const hold = (on: boolean) => {
-    held = on || document.hidden;
-    paint();
-    arm();
-  };
-
-  toggle.addEventListener('click', () => {
-    if (stopped) {
-      if (i === last) i = 0;
-      stopped = false;
-    } else {
-      stopped = true;
-    }
-    paint();
-    arm();
-  });
   prev.addEventListener('click', () => go(i - 1));
   next.addEventListener('click', () => go(i + 1));
-  root.addEventListener('pointerenter', () => hold(true));
-  root.addEventListener('pointerleave', () => hold(root.contains(document.activeElement)));
-  root.addEventListener('focusin', () => hold(true));
-  root.addEventListener('focusout', (e) => {
-    if (!root.contains(e.relatedTarget as Node | null)) hold(root.matches(':hover'));
-  });
-  document.addEventListener('visibilitychange', () => hold(root.contains(document.activeElement) || root.matches(':hover')));
 
   root.dataset.fc = 'on';
-  root.dataset.fcPlay = 'wait';
-  controls.hidden = false;
+  root.dataset.fcPlay ??= 'wait';
   cards[0].setAttribute('data-current', '');
-
-  /* Start once the block is in view, read on scroll and resize. */
-  const seen = () => {
-    const r = root.getBoundingClientRect();
-    if (r.width === 0 || r.top > innerHeight * 0.75 || r.bottom < 0) return;
-    removeEventListener('scroll', seen);
-    removeEventListener('resize', seen);
-    paint();
-    arm();
-  };
-  addEventListener('scroll', seen, { passive: true });
-  addEventListener('resize', seen, { passive: true });
-  seen();
 }
 
 export function initFlashCards(): void {

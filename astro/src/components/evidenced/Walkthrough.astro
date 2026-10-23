@@ -19,7 +19,7 @@
  * for the product here.
  *
  * THE VISITOR DRIVES IT. It is the ProductCarousel mechanism (scripts/
- * evidenced.ts initCarousels): Back and Next, the step names, the arrow keys
+ * carousel.ts initCarousels): Back and Next, the step names, the arrow keys
  * and a swipe on a phone. No timer and no autoplay. A step's images are
  * decoded before it slides in. Under reduced motion the slide is instant and
  * the spot does not pulse. Without script it is a scroll strip with snap
@@ -219,3 +219,8 @@ const Heading = level;
     </div>
   </div>
 </div>
+
+<script>
+  import { initCarousels } from '../../scripts/carousel';
+  initCarousels();
+</script>
