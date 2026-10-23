@@ -148,7 +148,10 @@ const menus = NAV.menus.map((menu) => ({
   </nav>
 </header>
 
-<div class="ca-mob-menu" id="mob-menu" role="dialog" aria-label="Mobile navigation menu" aria-modal="true">
+<!-- R285-WEB-GEMINI-UIUX P0-3. The sheet is a sibling of the header, not a
+     child, so it never inherited the header's `on-light` scope and painted the
+     dark root tokens over a light page. It now takes the same tone class. -->
+<div class={tone === 'light' ? 'ca-mob-menu on-light' : 'ca-mob-menu'} id="mob-menu" role="dialog" aria-label="Mobile navigation menu" aria-modal="true">
   <button type="button" class="ca-mob-close" aria-label="Close menu" data-mob-close>
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
       <path d="M6 6l12 12M18 6L6 18"></path>
@@ -821,8 +824,17 @@ const menus = NAV.menus.map((menu) => ({
     inset: 0;
     z-index: 200;
     background: var(--c-bg);
+    color: var(--c-text);
     padding: 1.5rem;
+    /* R285-WEB-GEMINI-UIUX P0-3. Leave the notch and the rounded corners clear
+       on a phone in landscape, and stop a fling at the end of the menu from
+       scrolling the page behind it. The bottom inset lives on the sticky
+       action row below. */
+    padding-top: calc(1.5rem + env(safe-area-inset-top, 0px));
+    padding-left: calc(1.5rem + env(safe-area-inset-left, 0px));
+    padding-right: calc(1.5rem + env(safe-area-inset-right, 0px));
     overflow-y: auto;
+    overscroll-behavior: contain;
     /* R285-WEB-GEMINI-AUDIT-5, Gemini's scrollbar, the same as the palette
        list in CommandPalette.astro: the menu scrolls once Products and
        Resources are both open, and a default OS scrollbar was the one
@@ -842,8 +854,8 @@ const menus = NAV.menus.map((menu) => ({
   }
   .ca-mob-close {
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
+    top: calc(1.25rem + env(safe-area-inset-top, 0px));
+    right: calc(1.25rem + env(safe-area-inset-right, 0px));
     width: 44px;
     height: 44px;
     display: inline-flex;
