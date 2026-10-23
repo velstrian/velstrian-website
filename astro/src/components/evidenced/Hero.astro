@@ -38,10 +38,16 @@ import { TRIAL_DAYS } from '../../data/pricing';
           walkthrough, five real screens the visitor clicks through, beside the
           one minute tour, so a visitor can try it or watch it. It replaced an
           in-page jump to the capability tabs, which sit just below anyway. */}
-      <Action href="/walkthrough/" variant="secondary">Try the walkthrough</Action>
+      {/* R285-WEB-GEMINI-UIUX P1-3, driver decision option B: one button that
+          looks like the next step. The walkthrough is a text link with an
+          arrow, and the tour stays the quiet button, so Start now is the only
+          filled control in the hero (RULE 0-U, one primary action). */}
       <TourDialog />
+      <a class="ea-link ea-hero__walk" href="/walkthrough/">
+        Try the walkthrough<Icon name="right" size={18} />
+      </a>
     </div>
-    <p class="ea-hero__note">No bid team needed. Card needed to start, cancel in the {TRIAL_DAYS} days and pay nothing.</p>
+    <p class="ea-hero__note">No bid team needed. Card needed to start, cancel within {TRIAL_DAYS} days and pay nothing.</p>
   </div>
 
   <div class="ea-wrap">
@@ -173,3 +179,11 @@ import { TRIAL_DAYS } from '../../data/pricing';
   import { initRotators } from '../../scripts/rotator';
   initRotators();
 </script>
+
+<style>
+  /* The arrow sits a small step after the words and moves with the link's
+     own colour. */
+  .ea-hero__walk {
+    gap: var(--space-2);
+  }
+</style>
