@@ -6,11 +6,20 @@
  * Each tab is two sentences and one product view floating on a stage. The switch is the site's one switcher,
  * components/ui/TabSwitcher.astro, so with no script every panel is simply
  * shown in order and every tab is a link to its panel.
+ *
+ * ONE REAL PERSON, 2026-10-23 (owner direction D305, R285-WEB-IMAGERY-AND-DISCLOSURE-01
+ * lane D). The small business panel carries a licensed photograph of someone
+ * sorting paperwork at a desk at home, so a visitor sees a person like them and
+ * not only a screen. It sits under the copy and smaller than the product view,
+ * so the face never competes with the screen. No caption names her or calls
+ * her a customer: the Pexels Licence bars implying endorsement. Licence log:
+ * Assets/people/PHOTO-CREDITS.md.
  */
 import TabSwitcher from '../ui/TabSwitcher.astro';
 import Frame from './Frame.astro';
 import Band from './Band.astro';
 import Stage from './Stage.astro';
+import Photo from '../ui/Photo.astro';
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
 ---
 
@@ -37,6 +46,14 @@ import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
           your past answers, checked against your documents. You start with something to edit, not a blank page.
         </p>
         <a class="ea-link" href="/bid/">See {PRODUCT_NAME_BID}</a>
+        <div class="who-person">
+          <Photo
+            dir="people"
+            name="sorting-paperwork-at-a-home-desk"
+            widths={[600, 1200]}
+            sizes="(min-width: 960px) 22.5rem, calc(100vw - 2rem)"
+          />
+        </div>
       </div>
       <Stage layout="centre">
         <Frame title="Contracts that suit you" status="3 new today" capture="home-who-small" caption="Contract names are an example.">
@@ -94,3 +111,12 @@ import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
     </div>
   </div>
 </Band>
+
+<style>
+  /* Smaller than the product view beside it, so the screen stays the subject. */
+  .who-person {
+    width: 100%;
+    max-width: var(--ea-person-w);
+    margin-top: var(--space-4);
+  }
+</style>

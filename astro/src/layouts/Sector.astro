@@ -32,6 +32,14 @@
  * The product screen (ProductScreen, by the `screen` name in the Markdown)
  * sits in a Frame on a Stage like every other
  * product view on the site, its own caption saying it is a drawing.
+ *
+ * ── ONE REAL PERSON, OPTIONAL (2026-10-23, D305) ────────────────────────────
+ * R285-WEB-IMAGERY-AND-DISCLOSURE-01 lane D. A sector may name `person` in its
+ * frontmatter: a licensed photograph of someone at work, shown under the
+ * context heading, smaller than the product screen further down so it never
+ * competes with it. No caption names the person or calls them a customer,
+ * because the Pexels Licence bars implying endorsement. Licence log:
+ * Assets/people/PHOTO-CREDITS.md.
  */
 import Base from './Base.astro';
 import PageHero from '../components/evidenced/PageHero.astro';
@@ -40,6 +48,7 @@ import Action from '../components/evidenced/Action.astro';
 import ProductScreen, { type ScreenName } from '../components/evidenced/ProductScreen.astro';
 import Close from '../components/evidenced/Close.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import Photo from '../components/ui/Photo.astro';
 import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { TRIAL_NOTE } from '../data/pricing';
 import { PRODUCT_NAME_BID } from '../lib/brand-names';
@@ -83,6 +92,8 @@ interface Props {
   finalCtaSub: string;
   faq: FaqItem[];
   detail: DetailItem[];
+  /** A file stem in Assets/people, optional. */
+  person?: string;
 }
 
 const {
@@ -104,6 +115,7 @@ const {
   finalCtaSub,
   faq,
   detail,
+  person,
 } = Astro.props;
 
 /* The one row every sector shares, from site-facts.ts, never typed. */
@@ -156,6 +168,13 @@ if (faq.length) {
       <div class="ea-split__head" data-reveal>
         <p class="ea-label">{contextEyebrow}</p>
         <h2 class="ea-h2" id="sector-context-title">{contextHeading}</h2>
+        {
+          person && (
+            <div class="sector-person">
+              <Photo dir="people" name={person} widths={[600, 1200]} sizes="(min-width: 960px) 22.5rem, calc(100vw - 2rem)" />
+            </div>
+          )
+        }
       </div>
       <div class="ea-split__body prose" data-reveal>
         <slot />
@@ -290,6 +309,13 @@ if (faq.length) {
     margin: 0;
     font: inherit;
     color: inherit;
+  }
+
+  /* Smaller than the product screen below it, so the screen stays the subject. */
+  .sector-person {
+    width: 100%;
+    max-width: var(--ea-person-w);
+    margin-top: var(--space-3);
   }
 
   .sector-faq__label {

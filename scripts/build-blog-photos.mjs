@@ -75,11 +75,11 @@ const MASTER_H = 900;
  * scripts/convert-shots.mjs uses for product screens) and is indistinguishable
  * on photography while landing ~25% smaller; a screenshot of flat UI panels and
  * a photograph do not want the same quantiser.
+ *
+ * The values live in photo-encoders.mjs since 2026-10-23, shared with
+ * build-people-photos.mjs, so the two photo sets cannot drift apart.
  */
-const JPEG = { quality: 82, mozjpeg: true };
-const WEBP_MASTER = { quality: 82, effort: 6 };
-const WEBP_RUNG = { quality: 76, effort: 6 };
-const AVIF = { quality: 60, effort: 6 };
+import { JPEG, WEBP_MASTER, WEBP_RUNG, AVIF } from "./photo-encoders.mjs";
 
 /**
  * Every hero, and where its pixels come from.

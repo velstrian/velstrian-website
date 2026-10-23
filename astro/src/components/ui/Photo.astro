@@ -7,6 +7,11 @@
  * page. `name` is the file stem under Assets/images (for example
  * "r285-gemini/people-small-team"), and the credits entry is the larger AVIF.
  * Width and height are always set, so the page never shifts as it loads.
+ *
+ * `dir` is the folder under /Assets, "images" by default. The people
+ * photographs (2026-10-23, R285-WEB-IMAGERY-AND-DISCLOSURE-01 lane D) live in
+ * Assets/people with their own licence log, and their credits entries carry
+ * "dir": "people" so a file name in one folder can never answer for another.
  */
 import CREDITS from '../../data/image-credits.json';
 
@@ -16,13 +21,16 @@ interface Props {
   sizes: string;
   class?: string;
   eager?: boolean;
+  dir?: 'images' | 'people';
 }
 
-const { name, widths, sizes, class: cls = '', eager = false } = Astro.props;
+const { name, widths, sizes, class: cls = '', eager = false, dir = 'images' } = Astro.props;
 const [small, large] = widths;
-const credit = CREDITS.find((c) => c.file === `${name}-${large}.avif`);
-if (!credit) throw new Error(`Photo: no image-credits.json entry for ${name}-${large}.avif`);
-const base = `/Assets/images/${name}`;
+const credit = CREDITS.find(
+  (c) => c.file === `${name}-${large}.avif` && ('dir' in c ? c.dir : 'images') === dir,
+);
+if (!credit) throw new Error(`Photo: no image-credits.json entry for ${dir}/${name}-${large}.avif`);
+const base = `/Assets/${dir}/${name}`;
 const set = (ext: string) => `${base}-${small}.${ext} ${small}w, ${base}-${large}.${ext} ${large}w`;
 ---
 

@@ -8,6 +8,7 @@ heroTitleAccent: "construction works, public and private."
 heroDescription: "Velstrian Bid finds construction contracts that suit your firm and helps you answer them from your own documents, whether the client is a council, a school, a housing association, a developer or a main contractor. Bid for more work without hiring a bid team."
 contextEyebrow: "Who asks you to bid"
 contextHeading: "More frameworks, tighter margins, more to prove."
+person: "site-paperwork-in-hi-vis"
 helpsHeading: "From notice to submission-ready, faster."
 steps:
   - accent: teal

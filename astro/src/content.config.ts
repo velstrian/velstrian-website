@@ -147,6 +147,11 @@ const sectors = defineCollection({
        frameworks and contract forms a first time bidder does not need to
        start, each behind one tap, every term explained where it appears. */
     detail: z.array(z.object({ heading: z.string(), body: z.string() })).min(1),
+    /* Optional: one licensed photograph of a real person at work, by its file
+       stem in Assets/people (ui/Photo.astro, alt text in data/image-credits.json,
+       licence in Assets/people/PHOTO-CREDITS.md). At most three people
+       photographs on the whole site (D305, R285-WEB-IMAGERY-AND-DISCLOSURE-01). */
+    person: z.string().optional(),
   }),
 });
 

@@ -3503,6 +3503,9 @@
   --ea-close-w: 16em;
   --ea-answer-w: 34rem;
   --ea-stage-w: 28rem;
+  /* A people photograph beside a product view: smaller than the screen so the
+     face never becomes the subject (R285-WEB-IMAGERY-AND-DISCLOSURE-01 lane D). */
+  --ea-person-w: 22.5rem;
   --ea-frame-narrow: 60rem;
   --ea-cite-gutter: clamp(2.75rem, 1rem + 4vw, 4.5rem);
 
