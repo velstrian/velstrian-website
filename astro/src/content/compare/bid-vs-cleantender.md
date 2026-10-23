@@ -35,6 +35,29 @@ faq:
 
 <p class="cmp-lead"><strong>Velstrian Bid helps small and mid size firms in any sector find and answer tenders, for public and private work, from {{bid.starter.monthly}} per month. CleanTender is a soft facilities-management specialist, with a free tier and Pro at &pound;99 per month, tuned for cleaning, security, grounds, waste and catering bids.</strong> Both publish their pricing, so this is not a transparency contest. It is a question of scope and depth, and this page sets out both honestly with dated sources.</p>
 
+<h2 id="which-should-you-choose">Which should you choose?</h2>
+<div class="cmp-choose">
+<div class="cmp-choose-card">
+<h3>Choose CleanTender if</h3>
+<ul>
+<li>Cleaning, security, grounds, waste or catering is most or all of what you bid.</li>
+<li>You want sector vocabulary such as BICSc, SIA ACS, COSHH and TUPE built in.</li>
+<li>You want a fast qualification scan to decide whether to bid.</li>
+<li>Pro at &pound;99 per month with unlimited drafts fits your budget.</li>
+</ul>
+</div>
+<div class="cmp-choose-card is-us">
+<h3>Choose Velstrian (Velstrian Bid) if</h3>
+<ul>
+<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload.</li>
+<li>You bid across more than one sector on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED.</li>
+<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>
+<li>You need social value maths done in code, not just a drafted section.</li>
+<li>You want post-award delivery evidence under the Procurement Act 2023.</li>
+</ul>
+</div>
+</div>
+
 <h2 id="at-a-glance">At a glance</h2>
 <p class="rt-hint">Scroll the table sideways</p>
 <div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and CleanTender">
@@ -60,60 +83,49 @@ faq:
 </table>
 </div>
 
-<h2 id="which-should-you-choose">Which should you choose?</h2>
-<div class="cmp-choose">
-<div class="cmp-choose-card">
-<h3>Choose CleanTender if</h3>
-<ul>
-<li>Cleaning, security, grounds, waste or catering is most or all of what you bid.</li>
-<li>You want sector vocabulary such as BICSc, SIA ACS, COSHH and TUPE built in.</li>
-<li>You want a fast qualification scan to decide whether to bid.</li>
-<li>Pro at &pound;99 per month with unlimited drafts fits your budget.</li>
-</ul>
-</div>
-<div class="cmp-choose-card is-us">
-<h3>Choose Velstrian (Velstrian Bid) if</h3>
-<ul>
-<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload.</li>
-<li>You bid across more than one sector on Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED.</li>
-<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>
-<li>You need social value maths done in code, not just a drafted section.</li>
-<li>You want post-award delivery evidence under the Procurement Act 2023.</li>
-</ul>
-</div>
-</div>
-
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>Traceability</h3>
+<p class="cmp-sum-line">Can every figure in a draft be traced back to your own records?</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: Traceability</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>Every &pound; and % in a draft is checked against a set of allowed figures computed from your own data, and the draft is rejected if a figure is not in that set. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a named person to approve it before you submit.</dd>
 <dt class="meta">CleanTender</dt>
 <dd>Not stated publicly. The sources at the foot of this page describe Selection Questionnaire drafting with soft-FM vocabulary, a 0 to 100 qualification scan and a Compliance Vault. They document no check of this kind.</dd>
 </dl>
+</details>
 </div>
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>Data governance</h3>
+<p class="cmp-sum-line">Where your data is kept, and how it is protected.</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: Data governance</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR compliant, ICO registered, and follows ISO/IEC 27001. <a href="/security/">Security</a> sets out each control.</dd>
 <dt class="meta">CleanTender</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
+</details>
 </div>
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>UK regulatory alignment</h3>
+<p class="cmp-sum-line">How each tool handles the UK rules a public buyer checks.</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: UK regulatory alignment</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>A PPN 017 AI-use disclosure on every AI-assisted draft, social value calculated in code against the weighting the buyer published rather than by the AI, and post-award delivery evidence against Procurement Act 2023 sections 52 and 71.</dd>
 <dt class="meta">CleanTender</dt>
 <dd>A TOMs and social value section is included in the Selection Questionnaire drafting, per the dated sources at the foot of this page. PPN 017 disclosure and the sections 52 and 71 post-award duties are not stated.</dd>
 </dl>
+</details>
 </div>
 </div>
-<p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The CleanTender lines repeat only what the vendor's published material or the dated sources at the foot of this page actually state. Where something is not published, this page says so rather than inferring it. The full table follows.</p>
+<p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The CleanTender lines repeat only what the vendor's published material or the dated sources at the foot of this page actually state. Where something is not published, this page says so rather than inferring it. The full table is above.</p>
 
 <div data-cmp-screen></div>
 
@@ -185,12 +197,15 @@ faq:
 
 <h2 id="sources">Sources</h2>
 <div class="cmp-sources">
+<details class="cmp-sources-more">
+<summary><span>Read the 4 sources, each dated and linked</span></summary>
 <ol>
 <li>CleanTender pricing (free tier, Pro &pound;99/month or &pound;990/year), curated soft-FM feed, 0 to 100 qualification scan in under 30 seconds, Selection Questionnaire sections and sector vocabulary, Compliance Vault, and target of 4 to 12 bids a year. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>CleanTender soft-FM scope and free contract-directory access. CleanTender, "AI Bid Management Software: Best UK Options (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk</a></li>
 <li>Velstrian Bid capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71. Bid fit score with seven reasons (first party). Velstrian, <a href="/bid/">Velstrian Bid product page</a>.</li>
 <li>Velstrian Bid pricing: Starter {{bid.starter.monthly}}/month, Pro {{bid.pro.monthly}}/month, Portfolio {{bid.portfolio.monthly}}/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
+</details>
 </div>
 
 <h2 id="related">Related comparisons</h2>

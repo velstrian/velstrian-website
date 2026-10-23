@@ -35,29 +35,6 @@ faq:
 
 <p class="cmp-lead"><strong>Velstrian Bid helps small and mid size firms find and answer tenders, for public and private work, from {{bid.starter.monthly}} per month. AutogenAI is an enterprise AI bid-writing engine sold on request to bid teams of five or more.</strong> They aim at different buyers. This page compares them feature by feature, states Velstrian Bid's prices, marks any figure AutogenAI does not publish as Not published, and lists every source with a date.</p>
 
-<h2 id="at-a-glance">At a glance</h2>
-<p class="rt-hint">Scroll the table sideways</p>
-<div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and AutogenAI">
-<table class="cmp-table">
-<caption class="visually-hidden">Velstrian Bid compared with AutogenAI across category, features and pricing</caption>
-<thead>
-<tr><th scope="col">Feature</th><th scope="col" class="cmp-us-col">Velstrian Bid</th><th scope="col">AutogenAI</th></tr>
-</thead>
-<tbody>
-<tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite</td><td>Enterprise AI bid-writing engine</td></tr>
-<tr><th scope="row">Finds public contracts for you (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td><span class="cmp-no">Not built in</span>. Bring your own pipeline</td></tr>
-<tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Yes, retrieval over your content library</td></tr>
-<tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, a fixed check in code</td><td>Not stated publicly</td></tr>
-<tr><th scope="row">A note on every draft saying AI helped write it (the PPN 017 disclosure public buyers expect)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
-<tr><th scope="row">Social value (the local good you do) added up in code</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, worked out in code</td><td>General engine, not a dedicated calculator</td></tr>
-<tr><th scope="row">Proof of delivery after you win (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Procurement Act 2023 alignment stated</td></tr>
-<tr><th scope="row">Published price</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td><span class="cmp-no">No</span></td></tr>
-<tr><th scope="row">Starting price</th><td class="cmp-us">{{bid.starter.monthly}}/month</td><td>Not published (enterprise, quote on request)</td></tr>
-<tr><th scope="row">Best for</th><td class="cmp-us">Small and mid size firms bidding for public and private work</td><td>Enterprise bid teams of 5+</td></tr>
-</tbody>
-</table>
-</div>
-
 <h2 id="which-should-you-choose">Which should you choose?</h2>
 <div class="cmp-choose">
 <div class="cmp-choose-card">
@@ -81,37 +58,72 @@ faq:
 </div>
 </div>
 
+<h2 id="at-a-glance">At a glance</h2>
+<p class="rt-hint">Scroll the table sideways</p>
+<div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and AutogenAI">
+<table class="cmp-table">
+<caption class="visually-hidden">Velstrian Bid compared with AutogenAI across category, features and pricing</caption>
+<thead>
+<tr><th scope="col">Feature</th><th scope="col" class="cmp-us-col">Velstrian Bid</th><th scope="col">AutogenAI</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">Category</th><td class="cmp-us">UK bid and tender management suite</td><td>Enterprise AI bid-writing engine</td></tr>
+<tr><th scope="row">Finds public contracts for you (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td><span class="cmp-no">Not built in</span>. Bring your own pipeline</td></tr>
+<tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Yes, retrieval over your content library</td></tr>
+<tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, a fixed check in code</td><td>Not stated publicly</td></tr>
+<tr><th scope="row">A note on every draft saying AI helped write it (the PPN 017 disclosure public buyers expect)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
+<tr><th scope="row">Social value (the local good you do) added up in code</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, worked out in code</td><td>General engine, not a dedicated calculator</td></tr>
+<tr><th scope="row">Proof of delivery after you win (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Procurement Act 2023 alignment stated</td></tr>
+<tr><th scope="row">Published price</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td><span class="cmp-no">No</span></td></tr>
+<tr><th scope="row">Starting price</th><td class="cmp-us">{{bid.starter.monthly}}/month</td><td>Not published (enterprise, quote on request)</td></tr>
+<tr><th scope="row">Best for</th><td class="cmp-us">Small and mid size firms bidding for public and private work</td><td>Enterprise bid teams of 5+</td></tr>
+</tbody>
+</table>
+</div>
+
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>Traceability</h3>
+<p class="cmp-sum-line">Can every figure in a draft be traced back to your own records?</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: Traceability</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>Every &pound; and % in a draft is checked against a set of allowed figures computed from your own data, and the draft is rejected if a figure is not in that set. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a named person to approve it before you submit.</dd>
 <dt class="meta">AutogenAI</dt>
 <dd>Not stated publicly. The sources at the foot of this page describe retrieval over a content library the customer builds from its own past bids, and an automated compliance review. They document no check of this kind.</dd>
 </dl>
+</details>
 </div>
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>Data governance</h3>
+<p class="cmp-sum-line">Where your data is kept, and how it is protected.</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: Data governance</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR compliant, ICO registered, and follows ISO/IEC 27001. <a href="/security/">Security</a> sets out each control.</dd>
 <dt class="meta">AutogenAI</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
+</details>
 </div>
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>UK regulatory alignment</h3>
+<p class="cmp-sum-line">How each tool handles the UK rules a public buyer checks.</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: UK regulatory alignment</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>A PPN 017 AI-use disclosure on every AI-assisted draft, social value calculated in code against the weighting the buyer published rather than by the AI, and post-award delivery evidence against Procurement Act 2023 sections 52 and 71.</dd>
 <dt class="meta">AutogenAI</dt>
 <dd>Procurement Act 2023 alignment is stated in the dated comparison at the foot of this page. PPN 017 disclosure and a dedicated social value calculation are not stated publicly.</dd>
 </dl>
+</details>
 </div>
 </div>
-<p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The AutogenAI lines repeat only what the vendor's published material or the dated sources at the foot of this page actually state. Where something is not published, this page says so rather than inferring it. The full table follows.</p>
+<p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The AutogenAI lines repeat only what the vendor's published material or the dated sources at the foot of this page actually state. Where something is not published, this page says so rather than inferring it. The full table is above.</p>
 
 <div data-cmp-screen></div>
 
@@ -184,6 +196,8 @@ faq:
 
 <h2 id="sources">Sources</h2>
 <div class="cmp-sources">
+<details class="cmp-sources-more">
+<summary><span>Read the 5 sources, each dated and linked</span></summary>
 <ol>
 <li>AutogenAI pricing and positioning (enterprise, on request; bid teams of 5+; no built-in tender discovery; Procurement Act 2023 alignment). CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>AutogenAI listing showing no vendor-published price. GetApp UK, AutogenAI, accessed 26 July 2026. <a href="https://www.getapp.co.uk/software/2072629/autogenai" target="_blank" rel="noopener noreferrer">getapp.co.uk/software/2072629/autogenai</a></li>
@@ -191,6 +205,7 @@ faq:
 <li>Velstrian Bid capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). Velstrian, <a href="/bid/">Velstrian Bid product page</a>.</li>
 <li>Velstrian Bid pricing: Starter {{bid.starter.monthly}}/month, Pro {{bid.pro.monthly}}/month, Portfolio {{bid.portfolio.monthly}}/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
+</details>
 </div>
 
 <h2 id="related">Related comparisons</h2>

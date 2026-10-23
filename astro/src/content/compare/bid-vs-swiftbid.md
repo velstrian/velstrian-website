@@ -35,6 +35,29 @@ faq:
 
 <p class="cmp-lead"><strong>Velstrian Bid is a subscription that helps small and mid size firms find and answer tenders, for public and private work, from {{bid.starter.monthly}} per month. SwiftBid is a per-bid AI writing service, charged at &pound;149 to &pound;749 a bid with no subscription.</strong> They price in completely different ways, so the honest comparison is about how often you bid and what you need around the draft. This page sets out both, states Velstrian Bid's prices, and dates every source.</p>
 
+<h2 id="which-should-you-choose">Which should you choose?</h2>
+<div class="cmp-choose">
+<div class="cmp-choose-card">
+<h3>Choose SwiftBid if</h3>
+<ul>
+<li>You bid only once or twice a year and do not want a subscription.</li>
+<li>You want the option of a human expert reviewing a one-off, high-stakes bid.</li>
+<li>You already know which tender you are bidding and just need the draft written.</li>
+<li>A fixed price per bid is easier for you to approve than a monthly plan.</li>
+</ul>
+</div>
+<div class="cmp-choose-card is-us">
+<h3>Choose Velstrian (Velstrian Bid) if</h3>
+<ul>
+<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload.</li>
+<li>You bid regularly and want continuous access rather than paying per bid.</li>
+<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
+<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>
+<li>You need social value added up in code and proof of delivery after you win.</li>
+</ul>
+</div>
+</div>
+
 <h2 id="at-a-glance">At a glance</h2>
 <p class="rt-hint">Scroll the table sideways</p>
 <div class="cmp-scroll" tabindex="0" role="region" aria-label="Comparison table, Velstrian Bid and SwiftBid">
@@ -59,60 +82,49 @@ faq:
 </table>
 </div>
 
-<h2 id="which-should-you-choose">Which should you choose?</h2>
-<div class="cmp-choose">
-<div class="cmp-choose-card">
-<h3>Choose SwiftBid if</h3>
-<ul>
-<li>You bid only once or twice a year and do not want a subscription.</li>
-<li>You want the option of a human expert reviewing a one-off, high-stakes bid.</li>
-<li>You already know which tender you are bidding and just need the draft written.</li>
-<li>A fixed price per bid is easier for you to approve than a monthly plan.</li>
-</ul>
-</div>
-<div class="cmp-choose-card is-us">
-<h3>Choose Velstrian (Velstrian Bid) if</h3>
-<ul>
-<li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload.</li>
-<li>You bid regularly and want continuous access rather than paying per bid.</li>
-<li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
-<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>
-<li>You need social value added up in code and proof of delivery after you win.</li>
-</ul>
-</div>
-</div>
-
 <h2 id="what-buyers-check-first">What buyers check first</h2>
 <div class="cmp-sum">
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>Traceability</h3>
+<p class="cmp-sum-line">Can every figure in a draft be traced back to your own records?</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: Traceability</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>Every &pound; and % in a draft is checked against a set of allowed figures computed from your own data, and the draft is rejected if a figure is not in that set. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a named person to approve it before you submit.</dd>
 <dt class="meta">SwiftBid</dt>
 <dd>Not stated publicly. The sources at the foot of this page describe per-bid AI drafting from documents you supply, with optional human expert review at the Premium tier. They document no check of this kind.</dd>
 </dl>
+</details>
 </div>
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>Data governance</h3>
+<p class="cmp-sum-line">Where your data is kept, and how it is protected.</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: Data governance</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>AES-256 at rest, TLS 1.3 in transit, customer data stored in the EU (Ireland), UK GDPR compliant, ICO registered, and follows ISO/IEC 27001. <a href="/security/">Security</a> sets out each control.</dd>
 <dt class="meta">SwiftBid</dt>
 <dd>Not documented in the sources at the foot of this page. This page states nothing about it.</dd>
 </dl>
+</details>
 </div>
 <div class="cmp-sum-card surface surface--pad surface--row">
 <h3>UK regulatory alignment</h3>
+<p class="cmp-sum-line">How each tool handles the UK rules a public buyer checks.</p>
+<details class="cmp-sum-more">
+<summary><span>Read in full<span class="visually-hidden">: UK regulatory alignment</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
 <dd>A PPN 017 AI-use disclosure on every AI-assisted draft, social value calculated in code against the weighting the buyer published rather than by the AI, and post-award delivery evidence against Procurement Act 2023 sections 52 and 71.</dd>
 <dt class="meta">SwiftBid</dt>
 <dd>The sources at the foot of this page state no position on PPN 017 disclosure, social value calculation or the Procurement Act 2023 post-award duties.</dd>
 </dl>
+</details>
 </div>
 </div>
-<p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The SwiftBid lines repeat only what the third-party sources at the foot of this page actually state, and those sources note that SwiftBid publishes no equivalent primary page we could verify directly. Where something is not published, this page says so rather than inferring it. The full table follows.</p>
+<p class="cmp-sum-note">Velstrian Bid's lines are first party and checkable against the product. The SwiftBid lines repeat only what the third-party sources at the foot of this page actually state, and those sources note that SwiftBid publishes no equivalent primary page we could verify directly. Where something is not published, this page says so rather than inferring it. The full table is above.</p>
 
 <div data-cmp-screen></div>
 
@@ -184,12 +196,15 @@ faq:
 
 <h2 id="sources">Sources</h2>
 <div class="cmp-sources">
+<details class="cmp-sources-more">
+<summary><span>Read the 4 sources, each dated and linked</span></summary>
 <ol>
 <li>SwiftBid per-bid pricing (&pound;149 Basic, &pound;349 Standard, &pound;749 Premium), no tender discovery feed, optional human expert review and 6-hour turnaround at Premium, and target of 1 to 4 bids a year. These figures are reported by a dated third-party comparison. SwiftBid does not publish an equivalent primary pricing page we could verify directly. CleanTender, "7 Best AI Tender Software for UK Contracts (2026)", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/ai-tender-software" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/ai-tender-software</a></li>
 <li>Per-bid versus subscription break-even (three SwiftBid Standard bids at roughly &pound;1,047). CleanTender, "Bid writer vs AI bid tool: which wins for UK SMEs", 29 April 2026. <a href="https://cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool" target="_blank" rel="noopener noreferrer">cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool</a></li>
 <li>Velstrian Bid capabilities, figure-grounding, PPN 017, PPN 026 and Procurement Act 2023 s.52 / s.71 (first party). Velstrian, <a href="/bid/">Velstrian Bid product page</a>.</li>
 <li>Velstrian Bid pricing: Starter {{bid.starter.monthly}}/month ({{bid.starter.annual}}/year), Pro {{bid.pro.monthly}}/month, Portfolio {{bid.portfolio.monthly}}/month (first party). Velstrian, <a href="/pricing/?product=mark">Pricing</a>.</li>
 </ol>
+</details>
 </div>
 
 <h2 id="related">Related comparisons</h2>

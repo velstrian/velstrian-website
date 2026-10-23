@@ -24,6 +24,17 @@
  * removed: every sentence, source and competitor figure is still in the
  * document, so search engines and the gates read it. The concession section
  * stays OPEN on purpose, a balanced comparison never hides where we lose.
+ *
+ * ── THE VERDICT FIRST, BOTH SIDES ONE TAP AWAY (D305 lane E2, 2026-10-23) ──
+ * A first time reader meets the answer before the detail: the lead, then
+ * "Which should you choose?", then the table. Each of the three "What buyers
+ * check first" cards shows its heading and one plain line, and both sides of
+ * it sit behind "Read in full" in a native <details> (the site's one summary
+ * recipe in styles/blocks.css). The sources list is one tap away under its own
+ * heading. Every word, figure, source and link is still in the HTML, so the
+ * gates, search engines and find in page read all of it. The line on each card
+ * frames the question, never a verdict on the named rival, for the legal
+ * reason under "THE THREE SUMMARY CARDS" below.
  */
 import Base from './Base.astro';
 import PageHero from '../components/evidenced/PageHero.astro';
@@ -467,6 +478,35 @@ if (Astro.slots.has('screen')) {
   }
   .cmp-body .cmp-sum-dl {
     margin: 0;
+  }
+  /* The plain line under each card's heading, then both sides one tap away
+     (D305 lane E2). The summary takes the shared recipe from blocks.css, so
+     only its type and the rule above it are set here. */
+  .cmp-body .cmp-sum-line {
+    margin: 0 0 1rem;
+    font-size: var(--t-body);
+    line-height: 1.55;
+  }
+  .cmp-body .cmp-sum-more {
+    margin-top: auto;
+    border-top: 1px solid var(--c-border);
+  }
+  .cmp-body .cmp-sum-more > summary,
+  .cmp-body .cmp-sources-more > summary {
+    font-size: var(--t-body);
+    font-weight: 700;
+    color: var(--c-text);
+  }
+  .cmp-body .cmp-sum-more > summary:focus-visible,
+  .cmp-body .cmp-sources-more > summary:focus-visible {
+    outline: var(--ea-focus);
+    outline-offset: 2px;
+  }
+  .cmp-body .cmp-sum-more[open] > .cmp-sum-dl {
+    padding-bottom: 0.5rem;
+  }
+  .cmp-body .cmp-sources-more[open] > ol {
+    margin-top: 0.75rem;
   }
   /* The vendor name is a column header for the statement under it, so it takes
      `.meta` at the call site, which is the same mono micro-label the table's
