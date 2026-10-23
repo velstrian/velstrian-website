@@ -349,6 +349,53 @@ const columnCount = menu.columns.length;
     }
   }
 
+  /* ── THE LIGHT HEADER'S MENU, R285-WEB-GEMINI-AUDIT-5 ─────────────────────
+   *
+   * Gemini's frosted sheet, adopted by the owner 2026-10-23, with every value
+   * a token (tokens.css "THE NAV MENU GLASS"). Measured before it, the menu on
+   * the light header was 82 percent white under a 16px blur with the dark
+   * ground's shadow, 0 24px 60px at 45 percent near black: a grey smear under
+   * a white sheet. Now a crisper 88 percent sheet, a 20px blur at 180 percent
+   * saturation, a white rim and a three part shadow at 5 to 10 percent.
+   *
+   * SCOPED TO THE LIGHT HEADER (.on-light, Nav.astro `tone`), because a page
+   * that opens on a dark band keeps a dark header, where a white sheet would
+   * carry white text. That header keeps the dark glass above.
+   *
+   * --radius-frame (12px) is the radius: Gemini named `--radius-xl`, which this
+   * system does not have, and 12px is what that name means in the utility
+   * scale Gemini writes in.
+   *
+   * THE SOLID FALLBACK: the rim, ring, shadow and radius apply everywhere, the
+   * translucency and blur only where backdrop-filter exists. Without it the
+   * sheet is the light role's own solid --c-panel, white, so text never sits
+   * on unblurred page content. */
+  :global(.on-light) .ca-mega {
+    border: 1px solid var(--glass-menu-edge);
+    border-radius: var(--radius-frame);
+    box-shadow: var(--shadow-glass-menu);
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :global(.on-light) .ca-mega {
+      background: var(--glass-menu-fill);
+      -webkit-backdrop-filter: var(--blur-glass-menu);
+      backdrop-filter: var(--blur-glass-menu);
+    }
+  }
+
+  /* R285-WEB-GEMINI-AUDIT-5. A reader who asked the system for less
+     transparency gets the solid panel, the same one an engine without
+     backdrop-filter draws. Placed after the glass rule so it wins on order. */
+  @media (prefers-reduced-transparency: reduce) {
+    .ca-mega,
+    :global(.on-light) .ca-mega {
+      background: var(--c-panel);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
   /*
    * OPEN STATE HAS EXACTLY ONE OWNER, AND IT IS JAVASCRIPT.
    *

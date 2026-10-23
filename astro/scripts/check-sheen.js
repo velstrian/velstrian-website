@@ -65,7 +65,7 @@ const ALLOW = [];
    Each one is an owner decision. Off under reduced motion is evidenced.css's
    job and rule 4's measurement does not see loops, so it is stated here. */
 /* THE HERO AURORA, AND NOTHING ELSE (D293, owner 2026-10-22). Its five
-   colour fields loop on 14 to 29 second periods, transform only, inside the
+   colour fields loop on 20 to 32 second periods (Gemini's, R285-WEB-GEMINI-AUDIT-6, which also swapped fields 4 and 5 onto ea-aurora-a and -b), transform only, inside the
    hero band only. R285-WEB-GATES-V3-01 had made them drift once and settle,
    which emptied this list. The owner chose the other answer to WCAG 2.2.2:
    it keeps moving and every hero that draws it carries a pause button, which
@@ -73,7 +73,7 @@ const ALLOW = [];
    element, and STALE (a failure) the moment one stops running. */
 const AURORA_WHY = 'owner D293 2026-10-22: hero aurora keeps moving, pause control in every hero band (check-autoplay), off under reduced motion';
 const LOOP_ALLOW = [
-  ['ea-aurora-a', 1], ['ea-aurora-b', 2], ['ea-aurora-c', 3], ['ea-aurora-b', 4], ['ea-aurora-a', 5],
+  ['ea-aurora-a', 1], ['ea-aurora-b', 2], ['ea-aurora-c', 3], ['ea-aurora-a', 4], ['ea-aurora-b', 5],
 ].map(([name, n]) => ({ loop: `${name} on span.ea-aurora__f.ea-aurora__f--${n}`, reason: AURORA_WHY }));
 const usedLoopAllow = new Set();
 

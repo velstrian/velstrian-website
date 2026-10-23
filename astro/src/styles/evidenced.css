@@ -1060,11 +1060,15 @@ main .ea-sec * {
 .ea-aurora::after {
   content: '';
   position: absolute;
+  z-index: 2;
   inset: 0;
-  background-image: var(--stage-grain);
-  background-size: 160px 160px;
-  opacity: 0.14;
+  /* Gemini's grain (tokens.css --aurora-grain): the 4 percent sits inside the
+     tile, so the layer itself is fully opaque. A pseudo element rather than a
+     sixth span, so the markup and the field count stay as they were. */
+  background-image: var(--aurora-grain);
+  background-size: 200px 200px;
   mix-blend-mode: overlay;
+  pointer-events: none;
 }
 
 /* Under a hero Stage the aurora IS the stage: full bleed (the band clips it
@@ -1099,18 +1103,33 @@ main .ea-sec * {
 }
 
 /* The five fields. Each is a soft disc of one colour, larger than the slab
-   in one direction, so its edge never shows while it moves. */
+   in one direction, so its edge never shows while it moves.
+
+   FEATHERED, NOT ROUNDED (R285-WEB-GEMINI-AUDIT-6). The fields were clipped
+   with border-radius: 50%, which was invisible while each fill faded to
+   nothing at its own closest side. Gemini's fills are circles sized to the
+   far corner, so they still carry colour where the oval clip cuts them, and
+   at 1440 that drew a hard arc across the right of the slab. A radial mask
+   fades each field out over its outer edge instead, so no field can show a
+   rim whatever its fill. The mask is rasterised with the layer once, and the
+   loops only move the layer, so nothing repaints per frame. */
 .ea-aurora__f {
   position: absolute;
-  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(closest-side, var(--c-black) 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, var(--c-black) 55%, transparent 100%);
 }
+
+/* THE FIELDS, R285-WEB-GEMINI-AUDIT-6 (Gemini's ambient design, adopted by
+   the owner 2026-10-23). Gemini gave each field's colour and falloff; the
+   geometry below is unchanged. Every colour is a token (tokens.css, beside
+   --aurora-t1). */
 
 .ea-aurora__f--1 {
   top: -55%;
   left: 46%;
   width: 58%;
   height: 160%;
-  background: radial-gradient(closest-side, var(--aurora-1), transparent);
+  background: var(--aurora-field-1);
 }
 
 .ea-aurora__f--2 {
@@ -1118,7 +1137,7 @@ main .ea-sec * {
   left: -14%;
   width: 52%;
   height: 140%;
-  background: radial-gradient(closest-side, var(--aurora-2), transparent);
+  background: var(--aurora-field-2);
 }
 
 .ea-aurora__f--3 {
@@ -1126,7 +1145,7 @@ main .ea-sec * {
   left: 18%;
   width: 60%;
   height: 150%;
-  background: radial-gradient(closest-side, var(--aurora-3), transparent);
+  background: var(--aurora-field-3);
 }
 
 .ea-aurora__f--4 {
@@ -1134,7 +1153,7 @@ main .ea-sec * {
   left: 66%;
   width: 46%;
   height: 130%;
-  background: radial-gradient(closest-side, var(--aurora-4), transparent);
+  background: var(--aurora-field-4);
 }
 
 .ea-aurora__f--5 {
@@ -1142,7 +1161,7 @@ main .ea-sec * {
   left: 26%;
   width: 34%;
   height: 100%;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--aurora-5) 38%, transparent), transparent);
+  background: var(--aurora-field-5);
 }
 
 /* Written as `main .ea-sec ...` on purpose: the section reset
@@ -1164,9 +1183,10 @@ main .ea-sec * {
   main .ea-sec .ea-aurora__f--1 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t1); }
   main .ea-sec .ea-aurora__f--2 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t2); }
   main .ea-sec .ea-aurora__f--3 { animation-name: ea-aurora-c; animation-duration: var(--aurora-t3); }
-  main .ea-sec .ea-aurora__f--4 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t4); animation-direction: reverse; }
-  main .ea-sec .ea-aurora__f--5 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t5); animation-direction: reverse; }
+  main .ea-sec .ea-aurora__f--4 { animation-name: ea-aurora-a; animation-duration: var(--aurora-t4); animation-direction: reverse; }
+  main .ea-sec .ea-aurora__f--5 { animation-name: ea-aurora-b; animation-duration: var(--aurora-t5); animation-direction: reverse; }
 
+  /* will-change on the five moving fields only, and only while they run. */
   main .ea-sec .ea-aurora[data-aurora='run'] .ea-aurora__f {
     will-change: transform;
     animation-play-state: running;

@@ -182,6 +182,17 @@ import { SITE } from '../../data/site';
     }
   }
 
+  /* R285-WEB-GEMINI-AUDIT-5. A reader who asked the system for less
+     transparency gets the solid panel, the same one an engine without
+     backdrop-filter draws. Placed after the glass rule so it wins on order. */
+  @media (prefers-reduced-transparency: reduce) {
+    .cmdk__panel {
+      background: var(--c-panel);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
   /*
    * TWO SURFACES DELIBERATELY LEFT SOLID, recorded here because "why is this
    * one not glass" is the question this pass will otherwise be asked twice.
@@ -252,6 +263,25 @@ import { SITE } from '../../data/site';
     padding: 6px;
     max-height: min(52vh, 440px);
     overflow-y: auto;
+    /* R285-WEB-GEMINI-AUDIT-5, Gemini's scrollbar adopted by the owner
+       2026-10-23. Gemini wrote it for `.cmdk__panel`, but the panel clips
+       (overflow: hidden) and THIS list is what scrolls, so it lands here. The
+       list scrolls once a query matches more rows than fit, and it drew the
+       platform's default bar, a grey gutter in the OS colour over a glass
+       panel. Thin, inked from the section rule token. The standard
+       properties win in engines that have them (Chromium 121+, Firefox,
+       Safari 18.2+), the -webkit- rules serve older WebKit and Blink. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--ea-rule-strong) transparent;
+  }
+
+  .cmdk__list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .cmdk__list::-webkit-scrollbar-thumb {
+    background: var(--ea-rule-strong);
+    border-radius: var(--radius-pill);
   }
 
   .cmdk__list :global([role='option']) {

@@ -747,6 +747,8 @@
   /* R285-WEB-ENTERPRISE-REDESIGN-01: the larger steps the enterprise brief's
      space scale names (64, 96), used by styles/evidenced.css. */
   --space-16: 64px;
+  /* R285-WEB-GEMINI-AUDIT-3: the section rhythm's ceiling (--ea-sec-y). */
+  --space-20: 80px;
   --space-24: 96px;
 
   /* ── Vertical rhythm ────────────────────────────────────────────────────
@@ -2715,6 +2717,21 @@
   --shadow-card:  var(--gloss-inset), 0 1px 2px rgba(0, 0, 0, 0.28), 0 14px 36px -14px rgba(0, 0, 0, 0.55);
   --shadow-panel: var(--gloss-inset), 0 24px 60px rgba(2, 4, 10, 0.45);
   --blur-glass:   blur(16px) saturate(1.6);   /* live's exact backdrop filter */
+  /* ── THE NAV MENU GLASS, R285-WEB-GEMINI-AUDIT-5 (Gemini's values, adopted
+     by the owner 2026-10-23). A lighter, more frosted sheet than the shared
+     glass above: 88 percent white, a 20px blur at 180 percent saturation, a
+     white rim, and a three part shadow (a 5 percent black hairline ring, then
+     two soft slate lifts). Every value is Gemini's, written against tokens:
+     --c-slate-900 is Gemini's rgba(15, 23, 42) ink. */
+  --c-black: #000000;
+  --c-slate-900: #0F172A;
+  --glass-menu-fill: color-mix(in srgb, var(--c-white) 88%, transparent);
+  --glass-menu-edge: color-mix(in srgb, var(--c-white) 70%, transparent);
+  --blur-glass-menu: blur(20px) saturate(180%);
+  --shadow-glass-menu:
+    0 0 0 1px color-mix(in srgb, var(--c-black) 5%, transparent),
+    0 12px 32px -4px color-mix(in srgb, var(--c-slate-900) 10%, transparent),
+    0 24px 60px -8px color-mix(in srgb, var(--c-slate-900) 8%, transparent);
 
   /* ── The five-layer ladder, and the 1px gradient hairline ────────────────
      Both are in specs/DESIGN-DECISIONS.md's craft table and both were used by
@@ -3460,7 +3477,15 @@
   /* Layout. Sections are separated by space, never by boxes. */
   --ea-measure: var(--measure);
   --ea-gutter: clamp(1rem, 0.4rem + 2.6vw, 2rem);
-  --ea-sec-y: clamp(4.5rem, 3rem + 6vw, 9rem);
+  /* R285-WEB-GEMINI-AUDIT-3, the Gemini rhythm adopted by the owner
+     2026-10-23. Was clamp(4.5rem, 3rem + 6vw, 9rem), 134px a side at 1440.
+     Every band pads top AND bottom, so where a white band meets the faint
+     light-alt tint the last block of one stood 269 to 316px from the heading
+     of the next (measured on /, /bid/ and /buy/ at 1440), a screen height of
+     nothing on a laptop. The tint, or the dark ground, already marks the edge,
+     so the space only has to separate. Now 48px on a phone, 6vw between, and
+     80px a side from 1334px up. */
+  --ea-sec-y: clamp(var(--space-12), 6vw, var(--space-20));
   --ea-head-gap: clamp(2rem, 1.4rem + 2.4vw, 3.5rem);
   --ea-copy: 38rem;
   --ea-lead-w: 36rem;
@@ -3642,23 +3667,39 @@
      that button and measures that every loop stops. The loops are held while
      off screen or in a hidden tab (scripts/evidenced.ts initAurora). */
   --aurora-base: linear-gradient(118deg, var(--c-iris-deep) 0%, var(--c-violet-deep) 38%, var(--c-teal-dark) 68%, var(--c-iris-deep) 100%);
-  --aurora-1: var(--c-sky);
-  --aurora-2: var(--c-orchid);
-  --aurora-3: var(--c-violet-deep);
-  --aurora-4: var(--c-teal);
-  --aurora-5: var(--c-white);
   /* The slant of the top edge: how much lower it starts on the left. */
   --aurora-slant: clamp(4rem, 9vw, 10rem);
   --aurora-foot-h: clamp(1.75rem, 2.6vw, 2.5rem);
   --aurora-foot-slant: clamp(0.5rem, 1.2vw, 1.25rem);
-  /* One period per field with no common rhythm (14, 17, 19, 23 and 29
-     seconds), so the five never line up into a repeating beat. Slow on
+  /* One period per field with no short common rhythm (24, 28, 32, 20 and
+     26 seconds, two of them run in reverse), so the five never line up into
+     a visible beat. Slow on
      purpose: calm, and transform only, so the compositor carries it. */
-  --aurora-t1: 14s;
-  --aurora-t2: 17s;
-  --aurora-t3: 19s;
-  --aurora-t4: 23s;
-  --aurora-t5: 29s;
+  --aurora-t1: 24s;
+  --aurora-t2: 28s;
+  --aurora-t3: 32s;
+  --aurora-t4: 20s;
+  --aurora-t5: 26s;
+  /* R285-WEB-GEMINI-AUDIT-6, the Gemini ambient fields adopted by the owner
+     2026-10-23. The periods above are Gemini's (24, 28, 32, 20 reversed and
+     26 reversed seconds). Each field is a circle of one brand colour with a
+     half strength shoulder, so neighbouring fields melt into one another.
+     Every colour is a token: --c-teal-dark is #5E6AD2 and --c-teal #8B95E5
+     exactly, so Gemini's rgba(94, 106, 210, a) and rgba(139, 149, 229, a)
+     are those tokens mixed with transparent at the same alpha, and its one
+     new colour, #4338CA, is named --c-indigo-deep. */
+  --c-indigo-deep: #4338CA;
+  --aurora-field-1: radial-gradient(circle at 50% 50%, var(--c-teal-dark) 0%, color-mix(in srgb, var(--c-teal-dark) 40%, transparent) 45%, transparent 70%);
+  --aurora-field-2: radial-gradient(circle at 40% 60%, var(--c-teal) 0%, color-mix(in srgb, var(--c-teal) 30%, transparent) 50%, transparent 75%);
+  --aurora-field-3: radial-gradient(circle at 60% 40%, var(--c-indigo-deep) 0%, color-mix(in srgb, var(--c-indigo-deep) 35%, transparent) 45%, transparent 70%);
+  --aurora-field-4: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--c-teal) 25%, transparent) 0%, transparent 60%);
+  --aurora-field-5: radial-gradient(circle at 70% 70%, var(--c-teal-dark) 0%, color-mix(in srgb, var(--c-teal-dark) 20%, transparent) 55%, transparent 75%);
+  /* Gemini's grain: fractal noise, base frequency 0.75, three octaves,
+     desaturated, drawn at 4 percent and laid on with overlay. Delivered as an
+     SVG data URI used as a background image, so the browser rasterises the
+     tile once and composites a bitmap, never a live filter over the moving
+     fields. img-src allows data: (_headers). */
+  --aurora-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
   /* The engineered grid behind the headline: hairlines at 6 percent ink. */
   --hero-grid-line: color-mix(in srgb, var(--c-ink-0) 6%, transparent);
   --hero-grid-cell: 64px;
@@ -3761,6 +3802,20 @@
      <Button> paints with are restated here to pick up the light roles. */
   --grad-action: linear-gradient(135deg, var(--c-interactive-fill), var(--c-interactive-fill-lit));
   --grad-ramp: linear-gradient(var(--ramp-angle, 180deg), var(--ramp-from, var(--c-lit)), var(--ramp-to, var(--c-raised)) var(--ramp-end, 100%));
+  /* R285-WEB-GEMINI-AUDIT-5. The card and panel shadows are composites too,
+     so they were still the DARK ground recipe on a light band: the nav menu
+     on the light header measured `0 24px 60px rgba(2, 4, 10, 0.45)` on white,
+     a heavy grey smear under a glass panel, and a white specular inset that
+     cannot show on white. On a light ground the lift comes from a soft ink
+     shadow at the same geometry family as --elev-floating, at a fraction of
+     the weight, and the inset is dropped. Same two names, so every consumer
+     (menus, palette, cards on light bands) changes here and nowhere else. */
+  --shadow-card:
+    0 1px 2px color-mix(in srgb, var(--c-ink-0) 6%, transparent),
+    0 10px 28px -12px color-mix(in srgb, var(--c-ink-0) 14%, transparent);
+  --shadow-panel:
+    0 2px 6px color-mix(in srgb, var(--c-ink-0) 6%, transparent),
+    0 24px 48px -16px color-mix(in srgb, var(--c-ink-0) 18%, transparent);
 
   /* The state and accent roles, so a component that paints a state (a
      verified dot, a refused mark, an at risk figure, an ambient accent) reads
