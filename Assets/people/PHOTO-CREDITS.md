@@ -35,17 +35,18 @@ site.
 | File stem | Source page | Photographer | Licence | Fetched | What it shows | Where it is used |
 | --- | --- | --- | --- | --- | --- | --- |
 | `site-paperwork-in-hi-vis` | https://www.pexels.com/photo/woman-engineer-writing-down-on-paper-8488034/ | Kindel Media | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | A woman in a yellow hard hat and hi-vis vest sits on a building site filling in a form on a clipboard. Page date 25 June 2021. | `/sectors/construction/`, under the "Who asks you to bid" heading (`person` in `astro/src/content/sectors/construction.md`) |
-| `sorting-paperwork-at-a-home-desk` | https://www.pexels.com/photo/woman-sitting-behind-a-desk-and-looking-through-papers-12912118/ | Mizuno K | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | A woman at a desk at home sorts through a pile of papers beside her laptop, bookshelves behind. Page date 20 July 2022, Sony ILCE-7M3. | Home page, the "I run a small business" panel of the audience band (`astro/src/components/evidenced/Audience.astro`) |
+| `small-team-working-at-an-office-table` | https://www.pexels.com/photo/group-of-women-talking-in-an-office-8837459/ | Yan Krukau | Pexels Licence, https://www.pexels.com/license/ | 2026-10-23 | Four women work together at a table in a small office: one on a tablet, one writing while two look over a document with her. No readable trade mark. Page date 20 July 2021, page showed the Free badge on 2026-10-23. Chosen by the owner from three they proposed. | Home page, the "I run a small business" panel of the audience band (`astro/src/components/evidenced/Audience.astro`) |
 
 Originals as downloaded, unedited: `originals/pexels-kindel-media-8488034.jpg` (5184x3888, 1,080,287 B)
-and `originals/pexels-mizuno-k-12912118.jpg` (4000x6000, 3,348,600 B). They are never served:
+, `originals/pexels-mizuno-k-12912118.jpg` (4000x6000, 3,348,600 B) and
+`originals/pexels-yan-krukau-8837459.jpg` (6000x4000, 2,365,314 B). They are never served:
 `astro/scripts/copy-assets.js` copies only files the built pages reference.
 
 Edits, which the licence permits: each is cut to 4:3 and resized to 1200x900 and 600x450 by
 `scripts/build-people-photos.mjs`, AVIF and WebP, with the blog's encoder settings
 (`scripts/photo-encoders.mjs`). The construction photograph keeps the full frame. The home photograph
-is a portrait original, so the 4:3 window starts 30% down, from just above her head to the desk. No
-colour, brightness or retouching change. Alt text lives in `astro/src/data/image-credits.json`.
+is a landscape original, so the 4:3 window is the full height and centred, which keeps all four people
+and trims only the window frame and the edge of a chair. No colour, brightness or retouching change. Alt text lives in `astro/src/data/image-credits.json`.
 
 ## Looked at and rejected, 2026-10-23
 
@@ -63,7 +64,9 @@ further Pexels search were downloaded and viewed, except where the row says othe
 | Pexels 7495291, office team meeting | Creative studio set dressing, reads as staged. |
 | Unsplash GoDbzYs7cJU, woman at a desk | Not viewable: Unsplash served a bot check to every request, so it could not be looked at and was not used. |
 | Shortlist 1 to 4, the blog photographs (Pexels 5973975, 12234106, 7841499, 12903101) | Not reused: each already heads a blog post, so a reader would meet the same picture twice, and 5973975 is cropped with no face. Not re-viewed for this pass. |
-| Pexels 5973964, joiner at a laptop | Natural, but a Marshall amplifier logo is readable behind him. |
+| Pexels 5973964, joiner at a laptop | First rejected for the readable Marshall amplifier logo. Tried on the home page on 2026-10-23 with the logo blurred, and the owner did not like it: a team reads more like a small business than one person. Never shipped. |
+| Pexels 15543212, women in a conference room | Owner proposed. The photographer is Walls.io and its own product and logo fill the screen: a company advert and a readable trade mark. |
+| Pexels 7675016, three people at a desk | Owner proposed. All three face the same way in profile, nobody interacts, and the table is dressed with ceramic props. |
 | Pexels 4491881, woodworker at a laptop | Natural, but the dust mask dates it to 2020 and hides the face. |
 | Pexels 8960941, 8960933, 8961300 | Same staged shoot as 8961065, posed pointing, a Schuko socket in 8961300. |
 | Pexels 8293666, man in hard hat with clipboard | Posed portrait looking at the camera. |
@@ -71,6 +74,12 @@ further Pexels search were downloaded and viewed, except where the row says othe
 | Pexels 4276427, builder on a lift platform | FRACO and PABCO trade marks readable. |
 | Pexels 7857531, woman among parcels | Posed smile at nothing, reads as staged. |
 | Pexels 12911217, woman with papers at a computer | Natural, the same shoot as the photograph in use. Kept as the reserve. |
+
+## Retired
+
+| File stem | Used | Why retired |
+| --- | --- | --- |
+| `sorting-paperwork-at-a-home-desk` (Pexels 12912118, Mizuno K) | Home page audience band, 2026-10-23 | The owner asked for a different home photograph on 2026-10-23: a person buried in paper reads as the problem, not the help. The derivatives stay in this folder because /Assets/* is served immutable, but no page references them, so `copy-assets.js` no longer ships them. |
 
 `/about/` deliberately has no people photograph. It is the page about who is behind the company, so
 any face there reads as "our team", which is the endorsement and employment implication the licence

@@ -44,6 +44,14 @@ const RATIO = 3 / 4;
  * `top` is where the 4:3 window starts, as a fraction of the original height.
  * It is set per photograph because a portrait original needs a window placed on
  * the person, and the default centre would cut through the face or the desk.
+ *
+ * `left` does the same across a landscape original, which is wider than 4:3, so
+ * the window is the full height and slides sideways. Both clamp to the frame.
+ *
+ * `blur` lists boxes, as fractions of the original, that are blurred before the
+ * crop. It exists for a readable trade mark in the background, which the people
+ * photo rules in Assets/people/PHOTO-CREDITS.md do not allow. The Pexels Licence
+ * permits modifying the photo.
  */
 const PHOTOS = [
   {
@@ -57,6 +65,14 @@ const PHOTOS = [
     /* 4000x6000 portrait. The window runs from just above her head to the
        laptop and the papers on the desk, and leaves out the plants above. */
     top: 0.3,
+  },
+  {
+    base: "small-team-working-at-an-office-table",
+    source: "pexels-yan-krukau-8837459.jpg",
+    /* 6000x4000 landscape. A centred 4:3 window keeps all four people and the
+       laptop, trimming only the window frame and the edge of the last chair. */
+    top: 0,
+    left: 0.5,
   },
 ];
 
@@ -90,12 +106,29 @@ async function run() {
       continue;
     }
     const meta = await sharp(src).metadata();
-    const width = meta.width;
+    const width = Math.min(meta.width, Math.round(meta.height / RATIO));
     const height = Math.round(width * RATIO);
     const top = Math.min(Math.round(meta.height * photo.top), meta.height - height);
-    const master = await sharp(src)
-      .rotate()
-      .extract({ left: 0, top, width, height })
+    const left = Math.round((meta.width - width) * (photo.left ?? 0));
+    let base = sharp(src).rotate();
+    if (photo.blur?.length) {
+      const full = await base.toBuffer();
+      const patches = await Promise.all(
+        photo.blur.map(async (b) => {
+          const box = {
+            left: Math.round(meta.width * b.x),
+            top: Math.round(meta.height * b.y),
+            width: Math.round(meta.width * b.w),
+            height: Math.round(meta.height * b.h),
+          };
+          const input = await sharp(full).extract(box).blur(40).toBuffer();
+          return { input, left: box.left, top: box.top };
+        })
+      );
+      base = sharp(await sharp(full).composite(patches).toBuffer());
+    }
+    const master = await base
+      .extract({ left, top, width, height })
       .resize(LARGE, Math.round(LARGE * RATIO))
       .toBuffer();
 
