@@ -35,6 +35,14 @@
       once (WCAG 2.2.2, check-autoplay presses it and measures). Transform
       only, inside the hero band only, held while off screen or in a hidden
       tab, never a page layer (the page wash removed 2026-08-04 stays removed).
+   8. A button gives under the finger, --press-scale, on press only, never on
+      hover (R285-WEB-PREMIUM-COLOUR-MOTION-01).
+   9. A product screen on a panel or centre stage travels --depth-shift
+      against the page as it scrolls past, scroll driven, in styles/motion.css
+      (check-motion.js rule 1), transform only, never on the hero stage.
+   Every timing above reads the tokens in tokens.css THE PREMIUM COLOUR AND
+   MOTION SYSTEM: one beat (--motion-beat), two curves (--motion-ease-out to
+   arrive, --motion-ease-step to travel), the site's four durations.
    Nothing else loops. Everything is off under prefers-reduced-motion.
    ============================================================================ */
 
@@ -58,6 +66,12 @@ main .ea-sec * {
 .ea-sec {
   position: relative;
   isolation: isolate;
+  /* The stage's light leak (.ea-stage::before) spills past the stage on
+     purpose and must never reach past the band: measured before this line,
+     5 to 74px of sideways scroll at 1440 and 26px at 390 on /, /bid/, /buy/,
+     /about/ and /contact/. `clip`, not `hidden`, so the band does not become
+     a scroll container and nothing sticky inside it is affected. */
+  overflow-x: clip;
   padding-block: var(--ea-sec-y);
   color: var(--ea-ink);
   font-family: var(--font-ui);
@@ -116,6 +130,32 @@ main .ea-sec * {
   letter-spacing: var(--ls-hero);
   color: var(--ea-ink);
   text-wrap: balance;
+}
+
+/* THE ACCENT PHRASE (R285-WEB-PREMIUM-COLOUR-MOTION-01). The one phrase a key
+   heading is about carries the brand gradient, --accent-ink-grad, whose two
+   stops are both certified text inks on the band they sit on (tokens.css).
+   One per heading, on the hero h1 of a page and the refusal headline only, so
+   it stays a signature rather than a template.
+   The colour goes first, so an engine without background-clip text paints the
+   phrase in the first stop, which is AA on its own. The padding enlarges the
+   painted area below the baseline without changing the line box, so a
+   descender is never cut (check-heading-ink.js records why that matters), and
+   `clone` gives each wrapped line the whole ramp. */
+.ea-accent {
+  color: var(--accent-ink-from);
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .ea-accent {
+    padding-block: 0.06em 0.14em;
+    background-image: var(--accent-ink-grad);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .ea-h2 {
@@ -244,7 +284,16 @@ main .ea-sec * {
   transition:
     background-color var(--ea-dur-hover) ease-out,
     border-color var(--ea-dur-hover) ease-out,
-    color var(--ea-dur-hover) ease-out;
+    color var(--ea-dur-hover) ease-out,
+    transform var(--ea-dur-hover) var(--motion-ease-out);
+}
+
+/* THE PRESS. The one answer a button gives the finger, the same --press-scale
+   Button.astro and motion.css read. Not a hover: check-sheen.js rule 3 holds
+   the hover to colour only, and a press is the moment after it. --press-scale
+   is 1 under reduced motion (tokens.css), so nothing moves there. */
+.ea-btn:active {
+  transform: scale(var(--press-scale));
 }
 
 .ea-btn__label {
@@ -352,6 +401,20 @@ main .ea-sec * {
 .ea-stage {
   position: relative;
   isolation: isolate;
+}
+
+/* THE LIGHT LEAK (R285-WEB-PREMIUM-COLOUR-MOTION-01). A soft indigo into
+   purple glow spilling past the stage's edge, so a product screen reads as lit
+   from behind rather than pasted on. Two radial washes, --screen-halo in
+   tokens.css, no filter and no blur, so it costs one paint and no motion. A
+   hero stage is lit by the aurora instead and draws none. */
+.ea-stage:not(.ea-stage--hero)::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  inset: -18% -12%;
+  background: var(--screen-halo);
+  pointer-events: none;
 }
 
 .ea-stage__ground {
@@ -1867,39 +1930,46 @@ main .ea-sec * {
 }
 
 .ea-check[data-play='run'] .ea-fig--found {
-  transition: background-size var(--ea-dur-step) var(--ea-ease);
+  transition: background-size var(--ea-dur-step) var(--motion-ease-step);
 }
 
+/* ON THE BEAT (R285-WEB-PREMIUM-COLOUR-MOTION-01). Every delay below is a
+   whole number of --motion-beat, the reveal stagger, and every duration is a
+   token on the site's scale. They used to be private millisecond
+   figures (the delays were 280, 680, 640, 1500, 1150, 1250, 1550 and 1650). Every delay
+   moved by 40ms or less and every duration by 60ms or less, so the moment
+   keeps its order and its length, about 1.9 seconds, and now counts on the
+   same clock as the entrance and the steps. */
 .ea-check[data-play='run'] .ea-cite-line {
-  transition: stroke-dashoffset 420ms var(--ea-ease) 280ms;
+  transition: stroke-dashoffset var(--seq-step) var(--motion-ease-step) calc(var(--motion-beat) * 3);
 }
 
 .ea-check[data-play='run'] .ea-cite-dot {
-  transition: opacity 160ms ease-out 680ms;
+  transition: opacity var(--dur-fast) ease-out calc(var(--motion-beat) * 8);
 }
 
 .ea-check[data-play='run'] .ea-sheet mark {
-  transition: background-color 240ms ease-out 640ms;
+  transition: background-color var(--dur) ease-out calc(var(--motion-beat) * 8);
 }
 
 .ea-check[data-play='run'] .ea-check__pending {
-  transition: opacity 200ms ease-out 1500ms;
+  transition: opacity var(--dur-fast) ease-out calc(var(--motion-beat) * 19);
 }
 
 .ea-check[data-play='run'] .ea-fig--struck {
-  transition: color 200ms ease-out 1150ms;
+  transition: color var(--dur-fast) ease-out calc(var(--motion-beat) * 14);
 }
 
 .ea-check[data-play='run'] .ea-fig--struck::after {
-  transition: transform 260ms var(--ea-ease) 1250ms;
+  transition: transform var(--ea-dur-step) var(--motion-ease-step) calc(var(--motion-beat) * 16);
 }
 
 .ea-check[data-play='run'] .ea-check__s--held {
-  transition: color 300ms ease-out 1550ms;
+  transition: color var(--dur) ease-out calc(var(--motion-beat) * 19);
 }
 
 .ea-check[data-play='run'] .ea-check__final {
-  transition: opacity 260ms ease-out 1650ms;
+  transition: opacity var(--dur) ease-out calc(var(--motion-beat) * 21);
 }
 
 /* ══ THE STEPPED MOMENT (.ea-moment) ══════════════════════════════════════

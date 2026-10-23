@@ -1955,7 +1955,7 @@
      whoever holds that file. */
   @media (prefers-reduced-motion: no-preference) {
     main :where(button, summary, [role='button']):active {
-      transform: scale(0.98);
+      transform: scale(var(--press-scale));
     }
   }
 
@@ -2353,3 +2353,63 @@
   }
 }
 
+
+/* ============================================================================
+   THE DEPTH ON PRODUCT SCREENS (R285-WEB-PREMIUM-COLOUR-MOTION-01, D307)
+
+   A product screen and the card floating over it travel a little against the
+   page as it scrolls past, --depth-shift either side of rest, while the stage's
+   gradient ground stays put. That difference is the depth: the UI reads as a
+   layer held above a lit surface rather than a picture printed on it. The
+   screen and its card move together, so the card never slides over the
+   screen's own words.
+
+   WHY IT LIVES HERE. check-motion.js rule 1 allows a scroll driven timeline in
+   this file and nowhere else. It is the same mechanism as the scroll progress
+   bar and the /bid/ deadline bar above: `view()` is geometry, so there is no
+   script, no observer and no main thread work, and nothing waits to arrive.
+   The resting place is the element's own position, so without support, under
+   reduced motion (--depth-shift is 0px there too, tokens.css), or before the
+   timeline exists, the screen simply sits where the layout put it.
+
+   WHY THIS SPECIFICITY. styles/evidenced.css sets `main .ea-sec *` to
+   `animation: none`, unlayered, to stop the version 2 arrival reaching a v3
+   band. `main .ea-sec .ea-stage__screen` outranks it on purpose and reaches
+   only the stage. A hero stage is excluded: the hero screen is the page's
+   largest paint and the aurora already lights it.
+
+   Transform only, linear on the scroll so it never eases against the reader's
+   own hand, and the travel is 16px over a whole pass of the window. It is
+   depth, not a reveal: nothing starts hidden and nothing is withheld.
+   ============================================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The timeline is the STAGE's pass through the window, named on the
+       stage and read by its two children, so the moving element never
+       measures its own moving box. */
+    main .ea-sec .ea-stage:not(.ea-stage--hero) {
+      view-timeline-name: --ea-stage;
+      view-timeline-axis: block;
+    }
+
+    main .ea-sec .ea-stage:not(.ea-stage--hero) > .ea-stage__screen,
+    main .ea-sec .ea-stage:not(.ea-stage--hero) > .ea-stage__float {
+      /* Longhands and no duration, so lightningcss cannot fold them into an
+         `animation` shorthand Chrome rejects (see .sv-progress above). */
+      animation-name: ea-depth;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --ea-stage;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes ea-depth {
+  from {
+    transform: translateY(var(--depth-shift));
+  }
+  to {
+    transform: translateY(calc(var(--depth-shift) * -1));
+  }
+}

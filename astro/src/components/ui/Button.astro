@@ -142,8 +142,10 @@ const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boo
        platform press value styles/motion.css restored from
        sovereign-primitives.css:44-46. The reduced-motion block at the foot of
        this file rebinds it to 1. There is no hover scale and no hover lift
-       since 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01). */
-    --btn-scale-press: 0.98;
+       since 2026-10-21 (R285-WEB-ENTERPRISE-REDESIGN-01). The value is the
+       site's one --press-scale (tokens.css, R285-WEB-PREMIUM-COLOUR-MOTION-01),
+       shared with .ea-btn and every control in styles/motion.css. */
+    --btn-scale-press: var(--press-scale);
     /* THE SAME LIGHT AS A CARD, AND IT IS THE SAME TOKEN. Owner report,
        2026-08-02: "the shiny animations on buttons are missing". They were.
        styles/surfaces.css gave every card a specular top-light, a border

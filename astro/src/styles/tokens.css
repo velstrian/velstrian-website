@@ -3869,7 +3869,9 @@
 .band--light,
 .band--light-alt,
 .band--dark {
-  background: var(--ea-canvas);
+  /* --band-glow (THE PREMIUM COLOUR AND MOTION SYSTEM, foot of this file) is
+     none on a plain light band, so that band paints exactly as before. */
+  background: var(--band-glow), var(--ea-canvas);
 }
 
 .band--light-alt {
@@ -3986,4 +3988,105 @@
   --cover-accent-on-dark: var(--c-teal);
   --cover-accent-on-iris: var(--c-violet);
   --cover-accent-carbon: var(--c-green);
+}
+
+/* ============================================================================
+   THE PREMIUM COLOUR AND MOTION SYSTEM
+   (R285-WEB-PREMIUM-COLOUR-MOTION-01, owner 2026-10-23: "use colours plus
+   motion to look things ultra premium", decision D307)
+
+   ONE SYSTEM, NOT FOUR. Every value below is a ROLE bound to a pigment the
+   palette above already holds (the Carbon and Iris brand, brand.source.json).
+   No new hue is introduced, so brand.source.json is unchanged and the platform
+   copy stays byte identical. Components read these names and nothing else.
+
+   COLOUR
+   --accent-ink-grad   the gradient on the one phrase a key heading is about
+                       (the hero h1 of each page, the refusal headline). Both
+                       stops are text inks certified on their ground:
+                       light   #434EAF to #6D28D9, 7.12:1 and 7.10:1 on
+                               white, 6.82:1 and 6.80:1 on --c-light-1
+                       dark    #8B95E5 to #A78BFA, 7.14:1 and 7.32:1 on
+                               #08090A, 6.82:1 and 6.99:1 on --c-panel
+                       (WCAG 2.x relative luminance, computed 2026-10-23)
+                       stage   flat white, 4.7:1 or better on every stop
+   --screen-halo       the light leak behind a product screen on a stage,
+                       indigo into purple, spilling past the stage edge. Each
+                       wash reaches transparent (70% of its radius) inside
+                       its own box, so the layer never shows a straight edge.
+   --band-glow         the soft wash of light at the top of a band, so a run
+                       of bands changes colour temperature with a gradient
+                       rather than a cut. none on a plain light band.
+
+   MOTION. A section may choose how many beats its figure is long. It may not
+   choose how long a beat is or how the light eases.
+   --motion-beat       80ms, the one unit of choreography. It IS the reveal
+                       stagger, so the entrance, the refusal moment and the
+                       steps count on one clock.
+   --motion-ease-out   the settle curve, --ease. Every entrance and press.
+   --motion-ease-step  the step curve, --ea-ease. A line drawn, a sweep, a
+                       slide: motion that travels rather than arrives.
+   --press-scale       the press on every button and control, 0.98, the value
+                       Button.astro and motion.css each held privately.
+   --depth-shift       the parallax travel of a product screen across a full
+                       pass of the window, transform only, scroll driven in
+                       styles/motion.css (check-motion.js rule 1), none under
+                       reduced motion.
+   The hero aurora (D293) is the slow ambient tier on its own 20 to 32 second
+   periods, behind its pause control, and stays the one loop on the site.
+   ============================================================================ */
+:root {
+  --accent-ink-from: var(--c-teal);
+  --accent-ink-to: var(--c-violet);
+  --accent-ink-grad: linear-gradient(100deg, var(--accent-ink-from), var(--accent-ink-to));
+
+  --screen-halo:
+    radial-gradient(ellipse 50% 50% at 40% 45%, color-mix(in srgb, var(--c-teal-dark) 34%, transparent), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 62% 58%, color-mix(in srgb, var(--c-violet-deep) 28%, transparent), transparent 72%);
+
+  --band-glow: none;
+
+  --motion-beat: var(--reveal-step);
+  --motion-ease-out: var(--ease);
+  --motion-ease-step: var(--ea-ease);
+  --press-scale: 0.98;
+  --depth-shift: 16px;
+}
+
+.band--light,
+.band--light-alt,
+.on-light {
+  --accent-ink-from: var(--c-iris-ink);
+  --accent-ink-to: var(--c-mark-ink);
+  --accent-ink-grad: linear-gradient(100deg, var(--accent-ink-from), var(--accent-ink-to));
+  --screen-halo:
+    radial-gradient(ellipse 50% 50% at 40% 45%, color-mix(in srgb, var(--c-teal-dark) 22%, transparent), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 62% 58%, color-mix(in srgb, var(--c-violet-deep) 16%, transparent), transparent 72%);
+}
+
+.band--light {
+  --band-glow: none;
+}
+
+.band--light-alt {
+  --band-glow: radial-gradient(ellipse 70% 42% at 50% 0%, color-mix(in srgb, var(--c-teal-dark) 6%, transparent), transparent 72%);
+}
+
+.band--dark {
+  --accent-ink-from: var(--c-teal);
+  --accent-ink-to: var(--c-violet);
+  --accent-ink-grad: linear-gradient(100deg, var(--accent-ink-from), var(--accent-ink-to));
+  --band-glow: radial-gradient(ellipse 72% 46% at 50% 0%, color-mix(in srgb, var(--c-teal-dark) 18%, transparent), transparent 72%);
+}
+
+.band--stage {
+  --accent-ink-grad: linear-gradient(var(--stage-ink), var(--stage-ink));
+  --band-glow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --press-scale: 1;
+    --depth-shift: 0px;
+  }
 }
