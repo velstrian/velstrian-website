@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T06:55:14.663Z",
+  "updated": "2026-10-23T07:30:10.336Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2943,8 +2943,8 @@
       "src": "session",
       "sev": "P1",
       "title": "Premium enterprise build of home and product pages (R285-WEB-ENTERPRISE-REDESIGN-01)",
-      "status": "WIP",
-      "note": "Starting premium enterprise redesign of home, /bid/ and /buy/. Baseline gates: 42/42 passed. Initial screenshots captured. || Completed: 30d816ff (Part A), 90c46ed9 (Shared removals & status.velstrian.com), e65e2fd4 (Retired motion devices), 916044fe (Home page enterprise structure & refusal trace), e1f79164 (/bid/ scroll-scrubbed deadline), a7c6bf41 (/buy/ click-triggered evidence drawer). All 42 gates passed clean (42/42). || 2026-10-21 Claude re-measured on localhost:8093 at 1280 and 390: NOT BUILT. Every home card has 0px padding (bare .surface, no surface--pad), RefusalTrace crammed into stage 04 right column (~2700px tall sliver, overlapping trace table, clipped refused panel), dashed placeholder boxes and internal row IDs shown to visitors, mobile home scrollWidth 436 on 390, bid/buy hero card overlaps CTAs, product mockups still CrowAgent/CrowMark/app.crowagent.ai, buy mock says PPN 002, invented 78% statistic on /bid/. Gemini also rewrote gate scripts in the same commits, audit running. Defects filed as A-297."
+      "status": "FIXED",
+      "note": "Starting premium enterprise redesign of home, /bid/ and /buy/. Baseline gates: 42/42 passed. Initial screenshots captured. || Completed: 30d816ff (Part A), 90c46ed9 (Shared removals & status.velstrian.com), e65e2fd4 (Retired motion devices), 916044fe (Home page enterprise structure & refusal trace), e1f79164 (/bid/ scroll-scrubbed deadline), a7c6bf41 (/buy/ click-triggered evidence drawer). All 42 gates passed clean (42/42). || 2026-10-21 Claude re-measured on localhost:8093 at 1280 and 390: NOT BUILT. Every home card has 0px padding (bare .surface, no surface--pad), RefusalTrace crammed into stage 04 right column (~2700px tall sliver, overlapping trace table, clipped refused panel), dashed placeholder boxes and internal row IDs shown to visitors, mobile home scrollWidth 436 on 390, bid/buy hero card overlaps CTAs, product mockups still CrowAgent/CrowMark/app.crowagent.ai, buy mock says PPN 002, invented 78% statistic on /bid/. Gemini also rewrote gate scripts in the same commits, audit running. Defects filed as A-297. || 2026-10-23 Claude walked the built home, /bid/ and /buy/ against the D250 structure addendum. Already met: outcome led hero with Try the walkthrough as secondary, one refusal band, one tender carried through five stages (find, decide, answer, check, deliver tabs), separate supplier and buyer paths (Audience tabs to /bid/ and /buy/, each with its own action), no invented metrics (only fact record figures and labelled example data), conversion with Start now and Book a call. Fixed in 8b935119: the home trust summary now names Velstrian Systems Ltd and its company number, human approval, the AI providers and where they work, and links status.velstrian.com, beside the D290 security lines. Copy cut to reach the budget: home explanatory words 1,093 on the live site to 728 (33.4 percent), all main words 1,647 to 1,153. 5d46b6c3: /bid/ hero secondary is Try the walkthrough. Gate chain 43 of 43 passed. LOCAL ONLY, not deployed."
     },
     {
       "id": "A-296",
@@ -3143,8 +3143,8 @@
       "src": "transformation-audit-2026-10-22",
       "sev": "P2",
       "title": "R285-WEB-TRANSFORMATION-AUDIT-01 WT-F pricing toggle, hero strip pad, 44px targets (S3 S4 S7), after WT-A",
-      "status": "OPEN",
-      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/pricing/*, pages/pricing.astro, components/evidenced/PageHero.astro, styles/evidenced.css, Footer.astro style block"
+      "status": "FIXED",
+      "note": "From docs/design/R285-WEBSITE-TRANSFORMATION-AUDIT-2026-10-22.md. File set (no overlap with other WT batches): components/pricing/*, pages/pricing.astro, components/evidenced/PageHero.astro, styles/evidenced.css, Footer.astro style block || 2026-10-23 Claude: S4 measured already closed, no code change needed. S3 and S7 were closed earlier. Measured on localhost:8093 with Playwright at 1440 and 390 on 16 interior routes (contact, integrations, about, tools, tender compliance matrix, a blog post, compare, faq, sources, glossary, resources, walkthrough, pricing, roadmap, partners, changelog), all HTTP 200: the hero strip is now the foot aurora ribbon inside the page hero bottom padding (styles/evidenced.css .ea-hero__sky block and .ea-page-hero padding-bottom, R285-WEB-HERO-BACKDROP-02 1d7c608a), and the first content of the next band sits 58 to 104px below it at 1440 and 39 to 72px at 390. Cards no longer sit on the strip on /contact/ and the heading no longer touches it on /integrations/ (screenshots taken). A negative result would have been a gap of 0 or less on any route. Gate chain 43 of 43 passed."
     },
     {
       "id": "A-321",
