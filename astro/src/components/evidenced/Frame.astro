@@ -103,7 +103,9 @@ const cropStyle = view
       )
     }
     <figcaption class="ea-frame__caption" id={captionId}>
-      {shot ? shot.caption : <><span class="ea-frame__example">Example data.</span> {caption}</>}
+      {/* A Figma design (product-captures.ts source figma) is example data, so it keeps the
+          page caption behind the same Example data label a recreation carries. */}
+      {shot && captured?.source !== 'figma' ? shot.caption : <><span class="ea-frame__example">Example data.</span> {captured?.source === 'figma' ? 'Product design. ' : ''}{caption}</>}
     </figcaption>
   </div>
 </figure>

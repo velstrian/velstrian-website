@@ -186,3 +186,29 @@ public notice, as the earlier one was. The answer is worded "drafted from your o
   `buy-cap-decision`, `screen-buyer-delivery`, `buy-boundary-gate`, `home-refusal-check`.
 - The phone crop of the feed card keeps the separator dot after "Scotland" (a CSS drawn dot the
   text measure cannot see), as the earlier hand crop did.
+
+## 8. Run of 2026-10-23: 25 REAL, 7 FIGMA, 3 live blocks, 0 drawn
+
+Staging web `8ede933df`, seed 02 applied, then `03_requirement_rubric_shape.sql` (the requirement
+pack's rubric was in a shape the product never writes, so its page threw "workspace could not be
+loaded", and its route id `open_tender` is not a declared route, now `open_procedure`) and
+`seed4.spec.ts` through the product (three social value commitments with a first delivery on the
+won bid, the fit re-assessed on five past bids, three supplier bids with panel scores and prices).
+No AI call was made by any seed or capture (measured in `ai_calls` for both demo organisations).
+
+Harness fixes, each measured on a failed slot: the phone crop is now checked per feed card and a
+card that cannot give one is skipped (a 13px crop had also overwritten the served file before the
+check threw, files are now written only after every check), comments, decide, bid list, delivery,
+action centre, requirement pack and evaluation take a region built from the screen's own parts,
+insights take the outcomes row, not the win rate cards, a new whole screen slot serves `bid-hero`,
+and any email address is blurred where it stands.
+
+| Source | Slots |
+|---|---|
+| REAL (25) | `home-cap-find`, `contact-call-find`, `screen-find`, `home-cap-answer`, `screen-answer-list`, `home-car-answer`, `screen-answer-library`, `home-car-refusal`, `home-cap-check`, `bid-check`, `home-cap-decide`, `bid-decide`, `home-car-board`, `home-who-team`, `home-cap-deliver`, `bid-deliver`, `home-car-deliver`, `screen-evidence`, `screen-insights`, `screen-action-centre`, `buy-cap-request`, `screen-buyer-requirement`, `buy-hero`, `home-who-buyer`, `bid-hero` |
+| FIGMA (7), each labelled "Example data. Product design." | `about-hero` (screen-response-answer: no single screen, owner question kept open), `home-who-small` (panel-feed: the live feed's cards name real buyers, a three card region was not built), `screen-buyer-delivery` and `buy-cap-decision` (supplier promises after award: the demo buyer has no awarded contract), `buy-cap-evidence` (the pre read needs a supplier document and an AI call), `buy-cap-collect` (needs invited supplier replies), `buy-cap-compare` (panel-whole-life-costs: the scores and prices now exist, the award ranking panel can be captured next) |
+| Live block kept (3) | `home-hero-answer` (the hero's live citation answer, and the real answer's source chip still cites the tender, R285-BID-ANSWER-SOURCES-01), `home-refusal-check` and `buy-boundary-gate` (the animated refusal checks, check-autoplay). Driver decision 2026-10-23: a frame that holds a live or animated block keeps it, a Figma design fills only a slot that would show a drawn mock up |
+| Drawn | none |
+
+The Figma designs are served from `Assets/product-screens/web/`, written by
+`astro/scripts/build-product-screens.mjs`. A real capture always wins over a design for the same slot.

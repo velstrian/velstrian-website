@@ -58,6 +58,7 @@ const RAIL: IconName[] = ['search', 'pen', 'chat', 'checklist', 'document'];
     )
   }
   <figcaption class="ea-frame__caption">
-    {shot ? shot.caption : <><span class="ea-frame__example">Example data.</span> {caption}</>}
+    {/* A Figma design is example data: same label as a recreation (product-captures.ts). */}
+    {shot && shot.source !== 'figma' ? shot.caption : <><span class="ea-frame__example">Example data.</span> {shot?.source === 'figma' ? 'Product design. ' : ''}{caption}</>}
   </figcaption>
 </figure>

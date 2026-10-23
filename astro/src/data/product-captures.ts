@@ -13,6 +13,7 @@
  * customer, and its caption still says so.
  */
 import real from './product-captures.real.json';
+import screens from './product-screens.json';
 
 export interface Capture {
   /** Served path, for example /Assets/product-captures/bid-answer-1440.webp */
@@ -35,6 +36,14 @@ export interface Capture {
    * its layout. Each region ends where whole words end, never mid line.
    */
   view?: { wide: CropView; phone: CropView };
+  /**
+   * Where the picture comes from. Absent or 'real' is a real capture from the
+   * demo account on staging. 'figma' is a product design with example data
+   * (R285-WEB-FIGMA-SCREENS-01), served only for a slot with no real capture,
+   * and its frame prints "Example data. Product design." before the page's own
+   * caption so it is never read as a real screen.
+   */
+  source?: 'real' | 'figma';
 }
 
 /** A region of a capture: left, top, width and height in CSS pixels. */
@@ -142,7 +151,56 @@ const HAND: Record<string, Capture | null> = {
   'buy-cap-decision': null,
 };
 
-/** Every slot key, a real capture where one exists, otherwise null. */
+/*
+ * R285-WEB-REAL-SCREENSHOTS-01 (2026-10-23): a slot the harness cannot capture
+ * from staging today shows the closest Figma design instead of a drawn HTML
+ * recreation. REAL always wins: a slot listed here that later gains a real
+ * capture shows the capture, with no edit here. The reason each slot has no
+ * real capture yet is in docs/design/R285-REAL-SCREENSHOTS-PLAN.md. Only a slot
+ * that would otherwise show a drawn mock up is listed: a slot whose frame holds a
+ * live or animated block (the home hero citations, the refusal checks) keeps it
+ * (driver decision 2026-10-23, check-autoplay and check-app-contrast). The served
+ * WebP files are written by scripts/build-product-screens.mjs from the PNG
+ * masters listed in product-screens.json.
+ */
+const FIGMA_FOR_SLOT: Record<string, string> = {
+  'about-hero': 'screen-response-answer',
+  'home-who-small': 'panel-feed',
+  'screen-buyer-delivery': 'screen-supplier-promises',
+  'buy-cap-collect': 'panel-submissions',
+  'buy-cap-compare': 'panel-whole-life-costs',
+  'buy-cap-evidence': 'screen-buyer-evaluation',
+  'buy-cap-decision': 'panel-after-award',
+};
+
+interface ScreenItem {
+  slug: string;
+  kind: 'screen' | 'panel';
+  width: number;
+  height: number;
+  alt: string;
+}
+const ITEMS: ScreenItem[] = (screens as { items: ScreenItem[] }).items;
+
+function figma(slug: string): Capture {
+  const item = ITEMS.find((i) => `${i.kind}-${i.slug}` === slug);
+  if (!item) throw new Error(`product-screens.json has no Figma item "${slug}"`);
+  // A panel is exported at 2x (1200 by 900 for a 600 by 450 panel), a screen at 1x.
+  const scale = item.kind === 'panel' ? 2 : 1;
+  return {
+    src: `/Assets/product-screens/web/${item.kind}-${item.slug}.webp`,
+    width: item.width / scale,
+    height: item.height / scale,
+    alt: item.alt,
+    caption: '',
+    source: 'figma',
+  };
+}
+const FIGMA: Record<string, Capture> = Object.fromEntries(
+  Object.entries(FIGMA_FOR_SLOT).map(([key, slug]) => [key, figma(slug)]),
+);
+
+/** Every slot key: a real capture where one exists, then a Figma design, otherwise null. */
 export const CAPTURES: Record<string, Capture | null> = Object.fromEntries(
-  Object.keys({ ...HAND, ...REAL }).map((key) => [key, REAL[key] ?? HAND[key] ?? null]),
+  Object.keys({ ...HAND, ...REAL }).map((key) => [key, REAL[key] ?? FIGMA[key] ?? HAND[key] ?? null]),
 );
