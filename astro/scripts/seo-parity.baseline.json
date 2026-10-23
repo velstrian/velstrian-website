@@ -1,15 +1,15 @@
 {
-  "capturedAt": "2026-10-20T21:37:04.416Z",
-  "capturedFromCommit": "a4f786ba1259a3d3cd1664bd343ff0ba96685bb7",
-  "distFingerprint": "sha256:7fe7c08f72b5b7b7",
-  "routeCount": 47,
+  "capturedAt": "2026-10-23T07:29:52.668Z",
+  "capturedFromCommit": "8b9351193843306a00f87d1090628974b55c2db2",
+  "distFingerprint": "sha256:dc4931d7100f9afb",
+  "routeCount": 49,
   "routes": {
     "/": {
-      "title": "Velstrian | Bid software: supplier, buyer, public, private",
-      "description": "Velstrian serves both sides of procurement, public and private. Suppliers answer tenders, RFPs and PQQs from bids already written. Buyers find the evidence.",
+      "title": "Velstrian | Simple bid software for suppliers and buyers",
+      "description": "Velstrian Bid helps small firms find public and private contracts and write bids from their own documents. Velstrian Buy helps buyers compare replies.",
       "canonical": "https://velstrian.com/",
-      "ogTitle": "Velstrian | Bid software: supplier, buyer, public, private",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogTitle": "Velstrian | Simple bid software for suppliers and buyers",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -20,15 +20,16 @@
     },
     "/about/": {
       "title": "About Us | Velstrian",
-      "description": "Written for bid teams and readable by the people scoring them. Velstrian Systems Ltd: company details, history, what we stand for and the statutes we build against.",
+      "description": "Written for the people who write bids, and readable by the people who score them. Velstrian Systems Ltd: company details, history, what we stand for and the statutes we build against.",
       "canonical": "https://velstrian.com/about/",
       "ogTitle": "About Us | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
-        "Organization"
+        "Organization",
+        "WebPage"
       ]
     },
     "/accessibility/": {
@@ -36,7 +37,7 @@
       "description": "Velstrian",
       "canonical": "https://velstrian.com/accessibility/",
       "ogTitle": "Accessibility | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -49,7 +50,7 @@
       "description": "Find UK tenders, draft answers cited to the regulations and your own bids, and evidence delivery after award. From £49/month.",
       "canonical": "https://velstrian.com/bid/",
       "ogTitle": "Velstrian Bid | Bid and tender software for UK suppliers",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -65,7 +66,7 @@
       "description": "Plain-English guides on PPN 026 social value and UK public procurement. Statute-cited resources for UK bidders from Velstrian.",
       "canonical": "https://velstrian.com/blog/",
       "ogTitle": "Procurement guides for UK suppliers | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -79,7 +80,7 @@
       "description": "How UK contracting authorities use AI and automated compliance tools to screen tenders under the Procurement Act 2023, and how SME bidders can structure responses.",
       "canonical": "https://velstrian.com/blog/ai-tender-evaluation-uk-public-sector/",
       "ogTitle": "AI tender evaluation in UK public procurement | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-ai-tender-evaluation-uk-public-sector.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -94,7 +95,7 @@
       "description": "A plain-English guide to PPN 06/21 and Carbon Reduction Plans for UK SME bidders: Scope 1, 2, and mandatory Scope 3 emissions reporting and net zero targets.",
       "canonical": "https://velstrian.com/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
       "ogTitle": "PPN 06/21 &amp; Carbon Reduction Plans for SMEs | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-carbon-reduction-plan-ppn-0621-sme-guide.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -109,7 +110,7 @@
       "description": "Where to look for UK public sector tenders, how to read one, SQ versus ITT, the bid or no-bid call, and the first-timer mistakes that lose winnable work.",
       "canonical": "https://velstrian.com/blog/find-first-public-sector-contract/",
       "ogTitle": "Find and win your first UK public contract | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-find-first-public-sector-contract.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -124,7 +125,7 @@
       "description": "G-Cloud, these frameworks and DPS explained simply: how to get onto one, how call-off competitions work, and what changed under the Procurement Act 2023.",
       "canonical": "https://velstrian.com/blog/frameworks-and-dps-explained/",
       "ogTitle": "Frameworks and DPS explained for UK bidders | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-frameworks-and-dps-explained.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -139,7 +140,7 @@
       "description": "Winning is not the end of the bid. Under the Procurement Act 2023 the indicators are published before the contract is signed, and the assessment against them is published at least every 12 months. Here is what that means for the promises you made.",
       "canonical": "https://velstrian.com/blog/life-after-award-kpis-contract-performance/",
       "ogTitle": "After the award: KPIs and published assessments | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-life-after-award-kpis-contract-performance.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -154,7 +155,7 @@
       "description": "How to write a UK tender method statement that scores: answer the exact question, structure approach and risk clearly, and evidence every claim you make.",
       "canonical": "https://velstrian.com/blog/method-statement-that-scores/",
       "ogTitle": "How to write a method statement that scores | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-method-statement-that-scores.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -169,7 +170,7 @@
       "description": "Social value scoring for UK bids under PPN 026, the edition of the Social Value Model that applies to central government procurements commencing from 1 January 2027, with the weightings, the evidence requirements and the pitfalls.",
       "canonical": "https://velstrian.com/blog/ppn-026-social-value-guide/",
       "ogTitle": "PPN 026 social value scoring for UK bidders | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-ppn-026-social-value-guide.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -184,7 +185,7 @@
       "description": "PPN 026 sets two outcomes and six model award criteria, and five of the documents you need to bid against it have not been published yet. A standing record of what exists today, what is still expected, and the dates that bind.",
       "canonical": "https://velstrian.com/blog/ppn-026-what-has-published-and-what-has-not/",
       "ogTitle": "PPN 026: what has published, and what has not | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-ppn-026-what-has-published-and-what-has-not.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -199,7 +200,7 @@
       "description": "How private sector RFPs and PQQs differ from public procurement, what corporate buyers actually score, and how to respond well with no statutory rulebook.",
       "canonical": "https://velstrian.com/blog/private-sector-rfp-pqq-guide/",
       "ogTitle": "Corporate RFPs and PQQs: how to respond | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-private-sector-rfp-pqq-guide.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -214,7 +215,7 @@
       "description": "A plain-English guide to the Procurement Act 2023 for SME bidders: the February 2025 go-live, MAT replacing MEAT, and the Central Digital Platform.",
       "canonical": "https://velstrian.com/blog/procurement-act-2023-sme-guide/",
       "ogTitle": "Procurement Act 2023: a guide for SME bidders | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-procurement-act-2023-sme-guide.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -229,7 +230,7 @@
       "description": "PPN 026 was published on 5 August 2026 and applies to central government procurements commenced on or after 1 January 2027. What UK public sector bidders should check.",
       "canonical": "https://velstrian.com/blog/regulatory-updates-2026/",
       "ogTitle": "PPN 026 in 2026: what changed | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-regulatory-updates-2026.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -244,7 +245,7 @@
       "description": "A straight comparison of Social Value Portal and Velstrian Bid on social value work: who each one is built for, what each does well, and where neither will suit you.",
       "canonical": "https://velstrian.com/blog/social-value-portal-vs-bid/",
       "ogTitle": "Social Value Portal vs Velstrian Bid compared | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/blog-social-value-portal-vs-bid.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -254,11 +255,11 @@
       ]
     },
     "/buy/": {
-      "title": "Velstrian Buy | UK social value oversight | Velstrian",
-      "description": "Publish a social value requirement with a deterministic rubric, locate evidence in bids verbatim and track delivery after award. Your panel scores, not the AI.",
+      "title": "Velstrian Buy | Compare supplier quotes fairly | Velstrian",
+      "description": "For public and private buyers. Say what you need, collect every supplier reply in one place, see the proof in each, word for word, and track delivery after award. Your panel scores, not the AI.",
       "canonical": "https://velstrian.com/buy/",
-      "ogTitle": "Velstrian Buy | UK social value oversight | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogTitle": "Velstrian Buy | Compare supplier quotes fairly | Velstrian",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -273,7 +274,7 @@
       "description": "Public release notes for Velstrian Bid. Every shipped change, in one feed.",
       "canonical": "https://velstrian.com/changelog/",
       "ogTitle": "Changelog | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -286,13 +287,14 @@
       "description": "Side-by-side comparisons of Velstrian Bid against AutogenAI, mytender.io, CleanTender and SwiftBid. A dated source for every competitor figure.",
       "canonical": "https://velstrian.com/compare/",
       "ogTitle": "Compare Velstrian Bid with UK bid software | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
         "CollectionPage",
-        "Organization"
+        "Organization",
+        "WebPage"
       ]
     },
     "/compare/bid-vs-autogenai/": {
@@ -300,7 +302,7 @@
       "description": "Velstrian Bid against AutogenAI: published SME pricing from £49 a month versus an enterprise engine sold on request. Every figure sourced.",
       "canonical": "https://velstrian.com/compare/bid-vs-autogenai/",
       "ogTitle": "Velstrian Bid vs AutogenAI: bid software, honestly",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -316,7 +318,7 @@
       "description": "Velstrian Bid against CleanTender: a sector-agnostic bid suite versus a soft-FM specialist. Both publish prices, so the question is scope.",
       "canonical": "https://velstrian.com/compare/bid-vs-cleantender/",
       "ogTitle": "Velstrian Bid vs CleanTender: bid software, honestly",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -332,7 +334,7 @@
       "description": "Velstrian Bid against mytender.io: published pricing and figure-grounding versus a private-cloud drafting platform. Every figure sourced and dated.",
       "canonical": "https://velstrian.com/compare/bid-vs-mytender-io/",
       "ogTitle": "Velstrian Bid vs mytender.io: bid software, honestly",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -348,7 +350,7 @@
       "description": "Velstrian Bid against SwiftBid: subscribe from £49 a month, or pay £149 to £749 per bid. The break-even worked through, with dated sources.",
       "canonical": "https://velstrian.com/compare/bid-vs-swiftbid/",
       "ogTitle": "Velstrian Bid vs SwiftBid: bid software, honestly",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -364,12 +366,13 @@
       "description": "Book a 30-minute call, send an enquiry, or email us. UK team, replying within three to five business days.",
       "canonical": "https://velstrian.com/contact/",
       "ogTitle": "Contact Velstrian | Book a demo or ask a question",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
-        "Organization"
+        "Organization",
+        "WebPage"
       ]
     },
     "/cookie-preferences/": {
@@ -377,7 +380,7 @@
       "description": "This website sets no cookies, no local storage and no tracking of any kind, so there is nothing here to switch off. What that means, category by category.",
       "canonical": "https://velstrian.com/cookie-preferences/",
       "ogTitle": "Cookie Preferences | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -390,7 +393,7 @@
       "description": "How Velstrian uses cookies. This website sets none. The signed-in Velstrian platform sets the items listed here, with the reason and lifetime for each.",
       "canonical": "https://velstrian.com/cookies/",
       "ogTitle": "Cookie Policy | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -403,7 +406,7 @@
       "description": "Plans, pricing, AI credits, security and the rules Velstrian Bid reads. Answers to the questions UK bid teams ask most.",
       "canonical": "https://velstrian.com/faq/",
       "ogTitle": "Velstrian Bid FAQ | Bid software questions answered | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -418,14 +421,15 @@
       "description": "Plain-English definitions of UK public procurement and bidding terms: PPN 026, PPN 017, Find a Tender, frameworks, MAT, standstill, TUPE and more.",
       "canonical": "https://velstrian.com/glossary/",
       "ogTitle": "UK Procurement Glossary | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/glossary-index.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/glossary-index.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
         "CollectionPage",
         "DefinedTermSet",
-        "Organization"
+        "Organization",
+        "WebPage"
       ]
     },
     "/glossary/ppn-026/": {
@@ -433,7 +437,7 @@
       "description": "PPN 026, the next edition of the Social Value Model. Published on GOV.UK 5 August 2026, applying to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above.",
       "canonical": "https://velstrian.com/glossary/ppn-026/",
       "ogTitle": "PPN 026 - Procurement Policy Note 026 | Velstrian Glossary",
-      "ogImage": "https://velstrian.com/Assets/og/glossary-index.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/glossary-index.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -447,7 +451,7 @@
       "description": "TOMs framework explained. The standard UK scoring structure for social value in public procurement, using National TOMs proxy values.",
       "canonical": "https://velstrian.com/glossary/toms-framework/",
       "ogTitle": "TOMs Framework - Themes, Outcomes, Measures | Velstrian Glossary",
-      "ogImage": "https://velstrian.com/Assets/og/glossary-toms-framework.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/glossary-toms-framework.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -461,7 +465,7 @@
       "description": "Sign in with your work identity, pull bid documents read-only from where your team keeps them, and send deadline alerts to Slack or Teams.",
       "canonical": "https://velstrian.com/integrations/",
       "ogTitle": "Integrations | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/integrations.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/integrations.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -474,7 +478,7 @@
       "description": "Partner with Velstrian. Bid agencies, law firms and public sector advisors get a tracked referral link, a named account contact and a priority support channel.",
       "canonical": "https://velstrian.com/partners/",
       "ogTitle": "Partners | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -487,7 +491,7 @@
       "description": "Velstrian pricing: Velstrian Bid from £49 a month, Pro £149, Portfolio £549, Velstrian Buy from £299 and Buyer Portfolio £699. Annual billing saves 10%. Start today by card.",
       "canonical": "https://velstrian.com/pricing/",
       "ogTitle": "Velstrian Bid pricing | Plans from £49 a month | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -503,7 +507,7 @@
       "description": "How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.",
       "canonical": "https://velstrian.com/privacy/",
       "ogTitle": "Privacy Policy | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -513,15 +517,16 @@
     },
     "/resources/": {
       "title": "Resources | Velstrian",
-      "description": "A free tender compliance matrix, in-depth briefings on UK public-sector bidding, and a plain-English glossary.",
+      "description": "Free tools, plain guides to bidding for public and private work in the UK, and a glossary that explains the jargon.",
       "canonical": "https://velstrian.com/resources/",
       "ogTitle": "Resources | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
-        "Organization"
+        "Organization",
+        "WebPage"
       ]
     },
     "/roadmap/": {
@@ -529,7 +534,7 @@
       "description": "See what Velstrian has shipped, what is in flight, and what is coming next for Velstrian Bid, across public sector tenders and private sector bids.",
       "canonical": "https://velstrian.com/roadmap/",
       "ogTitle": "Velstrian Bid roadmap | Shipped, in flight and next | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/roadmap.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/roadmap.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -542,21 +547,22 @@
       "description": "See the statute behind your sector. Velstrian helps UK teams find, win and evidence public sector tenders, cited to the regulation that applies to you.",
       "canonical": "https://velstrian.com/sectors/",
       "ogTitle": "By Sector | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
         "CollectionPage",
-        "Organization"
+        "Organization",
+        "WebPage"
       ]
     },
     "/sectors/construction/": {
-      "title": "Construction Bid Software | Public Works Tenders | Velstrian",
-      "description": "Velstrian Bid helps UK construction firms find public works tenders on Contracts Finder and Find a Tender, and evidence social value under PPN 026, the next edition of the Social Value Model.",
+      "title": "Construction Bid Software | Public and Private Works | Velstrian",
+      "description": "Velstrian Bid helps small and mid size UK construction firms find public works tenders, answer private clients",
       "canonical": "https://velstrian.com/sectors/construction/",
-      "ogTitle": "Construction Bid Software | Public Works Tenders | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogTitle": "Construction Bid Software | Public and Private Works | Velstrian",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -566,11 +572,11 @@
       ]
     },
     "/sectors/education/": {
-      "title": "Education Bid Software | School and MAT Tenders | Velstrian",
-      "description": "Velstrian Bid helps suppliers to schools, academy trusts and colleges find education tenders and evidence social value under PPN 026, the next edition of the Social Value Model.",
+      "title": "Education Bid Software | School, Trust and College Tenders | Velstrian",
+      "description": "Velstrian Bid helps small and mid size suppliers win work from schools, academy trusts, colleges, universities and independent schools, and show social value under PPN 026.",
       "canonical": "https://velstrian.com/sectors/education/",
-      "ogTitle": "Education Bid Software | School and MAT Tenders | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogTitle": "Education Bid Software | School, Trust and College Tenders | Velstrian",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -581,10 +587,10 @@
     },
     "/sectors/facilities/": {
       "title": "Facilities Management Bid Software | FM Tenders | Velstrian",
-      "description": "Velstrian Bid helps UK facilities management providers find FM tenders, answer TUPE and mobilisation questions, and evidence social value under PPN 026.",
+      "description": "Velstrian Bid helps small and mid size facilities management providers find FM tenders, answer staff transfer and start up questions, and win private contracts as well as public ones.",
       "canonical": "https://velstrian.com/sectors/facilities/",
       "ogTitle": "Facilities Management Bid Software | FM Tenders | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -595,10 +601,10 @@
     },
     "/sectors/highways/": {
       "title": "Highways Bid Software | Roads and Maintenance | Velstrian",
-      "description": "Velstrian Bid helps UK highways and infrastructure firms find road and term maintenance tenders, evidence social value under PPN 026 and track KPIs.",
+      "description": "Velstrian Bid helps small and mid size highways firms find road and maintenance tenders, answer developers",
       "canonical": "https://velstrian.com/sectors/highways/",
       "ogTitle": "Highways Bid Software | Roads and Maintenance | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og/crowmark.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -612,7 +618,7 @@
       "description": "How Velstrian stores and protects your bid data: AES-256 at rest, TLS 1.3 in transit, where each layer is stored and processed, and what we send to AI providers.",
       "canonical": "https://velstrian.com/security/",
       "ogTitle": "Security | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -625,7 +631,7 @@
       "description": "Every figure Velstrian publishes, traced to the statute, policy note or framework it comes from, with a link to the primary source.",
       "canonical": "https://velstrian.com/sources/",
       "ogTitle": "Sources | Every figure traced to the statute | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -638,7 +644,7 @@
       "description": "Velstrian Systems Ltd terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes.",
       "canonical": "https://velstrian.com/terms/",
       "ogTitle": "Terms of Service | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
@@ -647,17 +653,18 @@
       ]
     },
     "/tools/": {
-      "title": "Free UK Tender Tools: Tender Compliance Matrix | Velstrian",
-      "description": "A free tool for UK public sector bidders: paste tender text and read back the requirements the wording states, including the social value weighting, each with the line it came from. No account required.",
+      "title": "Free UK Tender Tools: Tender Finder and Compliance Matrix | Velstrian",
+      "description": "Two free tools for UK public sector bidders: search open UK and EU tenders, and paste tender text to read back the requirements its wording states, each with the line it came from. No account required.",
       "canonical": "https://velstrian.com/tools/",
-      "ogTitle": "Free UK Tender Tools: Tender Compliance Matrix | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogTitle": "Free UK Tender Tools: Tender Finder and Compliance Matrix | Velstrian",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
         "ItemList",
-        "Organization"
+        "Organization",
+        "WebPage"
       ]
     },
     "/tools/tender-compliance-matrix/": {
@@ -665,13 +672,41 @@
       "description": "Free tender compliance matrix for UK bidders. Paste tender text and get the requirements the wording states, each with the line it was read from. Rule based, no upload, no account.",
       "canonical": "https://velstrian.com/tools/tender-compliance-matrix/",
       "ogTitle": "Tender Compliance Matrix | Free, no account | Velstrian",
-      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20260730",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
       "lang": "en-GB",
       "robots": "index, follow",
       "schema": [
         "BreadcrumbList",
         "Organization",
         "WebApplication"
+      ]
+    },
+    "/tools/tender-finder/": {
+      "title": "Free UK and EU Tender Finder | No account | Velstrian",
+      "description": "Search open UK and EU public sector tenders from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, published in the last 30 days. Filter by keyword, region, value and closing date. Free, no account.",
+      "canonical": "https://velstrian.com/tools/tender-finder/",
+      "ogTitle": "Free UK and EU Tender Finder | No account | Velstrian",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
+      "lang": "en-GB",
+      "robots": "index, follow",
+      "schema": [
+        "BreadcrumbList",
+        "Organization",
+        "WebApplication"
+      ]
+    },
+    "/walkthrough/": {
+      "title": "Product walkthrough | Velstrian",
+      "description": "Click through five real screens of Velstrian Bid: find a contract, decide if it suits you, draft from your documents, agree it with your team and deliver.",
+      "canonical": "https://velstrian.com/walkthrough/",
+      "ogTitle": "Product walkthrough | Velstrian",
+      "ogImage": "https://velstrian.com/Assets/og-image.png?v=20261022",
+      "lang": "en-GB",
+      "robots": "index, follow",
+      "schema": [
+        "BreadcrumbList",
+        "Organization",
+        "WebPage"
       ]
     }
   }
