@@ -28,6 +28,12 @@
  * Each row keeps its heading element inside the summary, because the headings
  * are what check-content-parity.js tracks.
  *
+ * 2026-10-23, D305 lane C PILOT: the twelve capabilities are now FlashCards
+ * (components/ui/FlashCards.astro, manual, no script), a one line headline and
+ * one plain sentence each, with the same full text behind "Read in full". The
+ * rules and the fit reasons keep their rows. /bid/ is the one pilot page the
+ * owner judges before the cards go anywhere else.
+ *
  * The rows replace a grid of identical cards with a reading layout: the group's
  * label and one plain sentence on the left, the rows on the right.
  *
@@ -44,6 +50,7 @@
  */
 import Band from '../evidenced/Band.astro';
 import IconTile from '../evidenced/IconTile.astro';
+import FlashCards, { type FlashCard } from '../ui/FlashCards.astro';
 import {
   FACTS,
   LIVE_SOURCES,
@@ -87,56 +94,74 @@ const RULES = [
 const CAPABILITIES = [
   {
     heading: 'UK and EU tender discovery',
+    summary: 'New public contracts, refreshed daily, with the source named on every notice.',
     body: `New contracts from ${LIVE_SOURCES}, refreshed daily, with the source named on every notice. ${ON_REQUEST_SENTENCE} Filter by sector, value and region and save the ones worth a bid. You also see prior information notices and the end dates of frameworks and dynamic purchasing systems (standing lists of approved suppliers), the early signs that a tender is on its way.`,
   },
   {
     heading: 'Bid or no-bid, with reasons',
+    summary: 'A score for how well each tender suits you, with the reason behind every part.',
     body: `A ${FIT_COUNT_WORD} part score (${FIT_DIMENSIONS}) shows how well a published tender suits you, gives the reason behind each part, and suggests go for it, look again or pass. It reads the tender rather than predicting the award, and the decision stays yours.`,
   },
   {
     heading: 'Award history',
+    summary: 'See who won similar work before, at what value, and against how many bidders.',
     body: 'More than 100,000 published contract awards from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED: who won similar work, at what value, and against how many bidders. It sits beside the notice you are reading.',
   },
   {
     heading: 'Tender document reading, done for you',
+    summary: 'Upload the tender pack and the requirements are pulled out for you.',
     body: `${UPLOAD_SENTENCE} The requirements and clauses are pulled out so an answer can point at the exact wording it answers. A scanned PDF with no text in it is flagged as needing OCR, which turns a picture of text into text, rather than guessed at.`,
   },
   {
     heading: 'Cited answer drafting',
+    summary: 'Answers drafted from the rules, the tender and your own library, each with its source.',
     body: 'Answers draw on three kinds of source, kept apart: the rules, the tender’s own wording and your answer library. Your win themes, the points you want the buyer to remember, go into every answer. Each first draft is reviewed and improved against the tender’s scoring rules, and a draft with a number your data does not support is rejected. Every answer carries its citation, the document it came from.',
   },
   {
     heading: 'Answer marking against the scoring rules',
+    summary: 'See which part of an answer is thin against the scoring rules before you send it.',
     body: 'Each drafted answer is marked for how fully it covers the tender’s published scoring rules, so you can see which part is thin before you send it. It reports coverage, never a likely mark or a chance of winning.',
   },
   {
     heading: 'SQ and PQQ from one master set',
+    summary: 'Answer the standard questions about your business from one master set you keep up to date.',
     body: 'The standard questions about your business that come before the tender itself (a selection questionnaire, SQ, or the older pre-qualification questionnaire, PQQ): accreditations, insurance, finances, policies, case studies and named staff, answered from one master set you keep up to date. Offered above the Procurement Act 2023 section 85 threshold, where those questions arise.',
   },
   {
     heading: 'Social value maths, done in code',
+    summary: 'Social value added up in code, with the weighting the buyer published applied.',
     body: 'Social value is added up in code, with the units checked, from a curated catalogue of measures. The weighting the buyer published is applied, never guessed.',
   },
   {
     heading: 'Private sector quotes',
+    summary: 'Turn a request for a quote into a priced quotation from your own rate card.',
     body: 'Quick Quote takes a buyer’s request for a quote, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. You write the scope. The AI does not draft it.',
   },
   {
     heading: 'Answer library, tone profiles and learnings',
+    summary: 'Each bid starts from what the last one taught you.',
     body: 'A reusable answer library, tone profiles for how your business writes, lessons recorded from each debrief, bid analytics and board reports, so each bid starts from what the last one taught you.',
   },
   {
     heading: 'Evidence vault, after award',
+    summary: 'Record what you delivered against each promise, with a plain verdict on each piece.',
     body: 'Record what you delivered against each promise. Each piece of evidence gets one of three plain verdicts: consistent, a difference to look into, or could not check. Checks against Companies House, UKAS and Cyber Essentials, a report for the customer, and a round trip back into the buyer’s own Word or Excel file.',
   },
   {
     heading: 'AI Compliance Advisor',
+    summary: 'Ask a procurement or social value question in plain words and see the sources behind the answer.',
     body: 'Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, if you agree, from your own bids and commitments. It shows only rule references it can match to its sources, and flags any money figure or percentage it cannot trace for you to check.',
   },
 ];
-/* Two columns of rows on a wide screen, one list below 960px. */
-const half = Math.ceil(CAPABILITIES.length / 2);
-const CAPABILITY_COLS = [CAPABILITIES.slice(0, half), CAPABILITIES.slice(half)];
+/* The twelve as flash cards (D305 lane C pilot, 2026-10-23): a one line
+   headline and one plain sentence on show, the full text one tap away in the
+   card's own <details>, still in the HTML. Manual, so no script. */
+const CAPABILITY_CARDS: FlashCard[] = CAPABILITIES.map((c, k) => ({
+  id: `cap-${k + 1}`,
+  title: c.heading,
+  summary: c.summary,
+  body: c.body,
+}));
 ---
 
 <Band tone="light" class="bid-detail" labelledby="bid-detail-title">
@@ -193,18 +218,7 @@ const CAPABILITY_COLS = [CAPABILITIES.slice(0, half), CAPABILITIES.slice(half)];
           All {CAPABILITIES.length} parts of the product, from finding the work to proving you delivered it.
         </p>
       </div>
-      <div class="bid-cols">
-        {CAPABILITY_COLS.map((col) => (
-          <div class="bid-rows">
-            {col.map((c) => (
-              <details class="ea-qa bid-row">
-                <summary><h3 class="bid-row__h">{c.heading}</h3></summary>
-                <p>{c.body}</p>
-              </details>
-            ))}
-          </div>
-        ))}
-      </div>
+      <FlashCards label={`Everything ${PRODUCT_NAME_BID} does today`} cards={CAPABILITY_CARDS} columns={3} />
     </div>
 
     <ul class="bid-onward surface" data-reveal>
@@ -243,16 +257,10 @@ const CAPABILITY_COLS = [CAPABILITIES.slice(0, half), CAPABILITIES.slice(half)];
     margin-top: var(--ea-head-gap);
   }
 
-  /* The twelve capabilities take the full width, the label above and two
-     columns of rows under it, so twelve rows stand six high. */
+  /* The twelve capabilities take the full width, the label above and the
+     flash cards under it, three across on a wide screen. */
   .bid-group--wide {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .bid-cols {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 var(--space-8);
   }
 
   .bid-group__side {
@@ -334,15 +342,8 @@ const CAPABILITY_COLS = [CAPABILITIES.slice(0, half), CAPABILITIES.slice(half)];
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .bid-onward,
-    .bid-cols {
+    .bid-onward {
       grid-template-columns: minmax(0, 1fr);
-    }
-
-    /* Two stacked columns of rows read as one list: the seam loses its
-       doubled rule. */
-    .bid-cols > .bid-rows + .bid-rows > .ea-qa:first-child {
-      border-top: 0;
     }
 
     .bid-onward__item + .bid-onward__item {

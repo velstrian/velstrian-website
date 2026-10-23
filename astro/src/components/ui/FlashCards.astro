@@ -1,0 +1,391 @@
+---
+/**
+ * FlashCards: a set of short cards, each with the full text one tap away
+ * (owner direction D305, R285-WEB-IMAGERY-AND-DISCLOSURE-01 lane C, 2026-10-23).
+ *
+ * WHAT IT IS FOR. A small firm reading /bid/ meets about 3,300 words. A card
+ * gives them a one line headline and one plain sentence, and "Read in full"
+ * opens the rest. The full text is a native <details>, so it is in the HTML
+ * that search engines, find in page and screen readers read, and it opens with
+ * no script at all. The mark is the site's one disclosure recipe (`summary`
+ * and `summary::after` in styles/blocks.css, measured by check-disclosure.js).
+ *
+ * TWO MODES (driver decision D2 under D305):
+ *
+ *   manual  the default, and ZERO JAVASCRIPT. The cards sit still. A reader
+ *           opens what they want.
+ *   steps   for ORDERED content only (how it works, the steps to start). The
+ *           highlight moves from one card to the next ONCE, every `interval`
+ *           ms, and rests on the last card. It never loops. A visible pause
+ *           and play button comes first in the block, hover and focus suspend
+ *           it, previous and next stop it for good, and there is NO automatic
+ *           advance under prefers-reduced-motion or on a narrow screen. That is
+ *           WCAG 2.2.2 and the APG carousel pattern, and it is the `.ea-seq`
+ *           play once precedent with a reader's pause added. The script is
+ *           scripts/flashcards.ts, rendered only when a block is in steps mode,
+ *           and check-autoplay.mjs drives it on /bid/.
+ *
+ * TWO LAYOUTS:
+ *
+ *   grid  cards in a grid that stacks to one column on a phone.
+ *   snap  one row with CSS scroll snap: swipe, scroll or the arrow keys once
+ *         the row has focus. Stacks to the grid on a phone as well.
+ *
+ * THE CONTROLS ARE HIDDEN UNTIL THE SCRIPT IS RUNNING A TIMER, as in
+ * ProductCarousel, so a reader is never shown a pause button that pauses
+ * nothing (check-autoplay rule f). They carry `.control`, the one small control
+ * response in styles/controls.css, which check-controls.js measures.
+ *
+ * Colours, spacing and type are tokens only (RULE 0-C). The card is `.ea-card`,
+ * the one card (D294), so its hover is the calm edge check-sheen.js measures.
+ */
+import Icon from '../evidenced/Icon.astro';
+import IconTile from '../evidenced/IconTile.astro';
+import FlashCardsTimer from './FlashCardsTimer.astro';
+import type { IconName } from '../../data/icons';
+
+export interface FlashCard {
+  /** Stable id, used for the card's anchor. */
+  id: string;
+  /** The one line headline. */
+  title: string;
+  /** One plain sentence, always visible. */
+  summary: string;
+  /** The full text, behind "Read in full". */
+  body?: string;
+  icon?: IconName;
+  href?: string;
+  /** The link's words. Required with `href`, because "Read more" says nothing. */
+  hrefLabel?: string;
+}
+
+interface Props {
+  /** Accessible name of the block. Never the word "carousel". */
+  label: string;
+  cards: FlashCard[];
+  mode?: 'manual' | 'steps';
+  /** Milliseconds per step, steps mode only, clamped to 5,000 to 12,000. */
+  interval?: number;
+  layout?: 'snap' | 'grid';
+  /** Number the cards "Step 1 of 3". Defaults to on in steps mode. */
+  numbered?: boolean;
+  /** Columns on a wide screen, grid layout. */
+  columns?: 2 | 3 | 4;
+}
+
+const {
+  label,
+  cards,
+  mode = 'manual',
+  interval = 7000,
+  layout = 'grid',
+  numbered = mode === 'steps',
+  columns = 3,
+} = Astro.props;
+
+if (/carousel/i.test(label)) {
+  throw new Error(`FlashCards: the label "${label}" names the widget. Name what the cards are about.`);
+}
+for (const c of cards) {
+  if (c.href && !c.hrefLabel) throw new Error(`FlashCards: card "${c.id}" has a link with no words.`);
+}
+
+const steps = mode === 'steps';
+const ms = Math.min(12000, Math.max(5000, interval));
+const n = cards.length;
+---
+
+<div
+  class="fc"
+  data-fc-layout={layout}
+  data-fc-mode={mode}
+  data-fc={steps ? '' : undefined}
+  data-fc-interval={steps ? ms : undefined}
+  style={`--fc-cols: ${columns}; --fc-ms: ${ms}ms`}
+  role={steps ? 'region' : 'group'}
+  aria-roledescription={steps ? 'carousel' : undefined}
+  aria-label={label}
+>
+  {
+    steps && (
+      <div class="fc__controls" data-fc-controls hidden>
+        <button class="control fc__btn" type="button" data-fc-toggle aria-label="Pause the steps">
+          <Icon name="pause" size={20} class="fc__pause" />
+          <Icon name="resume" size={20} class="fc__play" />
+        </button>
+        <button class="control fc__btn" type="button" data-fc-prev aria-label="Previous step">
+          <Icon name="left" size={20} />
+        </button>
+        <p class="fc__count">
+          Step <span data-fc-n>1</span> of {n}
+        </p>
+        <button class="control fc__btn" type="button" data-fc-next aria-label="Next step">
+          <Icon name="right" size={20} />
+        </button>
+      </div>
+    )
+  }
+  <div
+    class="fc__viewport"
+    tabindex={layout === 'snap' ? 0 : undefined}
+    aria-label={layout === 'snap' ? `${label}, scroll or use the arrow keys to see every card` : undefined}
+  >
+    <ol class="fc__list" data-fc-list aria-live={steps ? 'polite' : undefined}>
+      {
+        cards.map((c, i) => (
+          <li class="fc__item" id={`fc-${c.id}`} data-fc-card>
+            <article class="ea-card fc__card">
+              {c.icon && <IconTile name={c.icon} />}
+              {numbered && (
+                <p class="ea-label fc__n">
+                  Step {i + 1} of {n}
+                </p>
+              )}
+              <h3 class="ea-h3 fc__title">{c.title}</h3>
+              <p class="fc__summary">{c.summary}</p>
+              {c.body && (
+                <details class="fc__more">
+                  <summary>
+                    <span>
+                      Read in full<span class="visually-hidden">: {c.title}</span>
+                    </span>
+                  </summary>
+                  <p class="fc__body">{c.body}</p>
+                </details>
+              )}
+              {c.href && (
+                <a class="ea-link fc__link" href={c.href}>
+                  {c.hrefLabel}
+                </a>
+              )}
+              {steps && (
+                <span class="fc__bar" aria-hidden="true">
+                  <span />
+                </span>
+              )}
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</div>
+
+{/* Rendered only for a steps block: Astro renders a component's script where
+    the component renders, so a page with manual cards ships no script. */}
+{steps && <FlashCardsTimer />}
+
+<style>
+  .fc {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .fc__list {
+    display: grid;
+    grid-template-columns: repeat(var(--fc-cols), minmax(0, 1fr));
+    gap: var(--space-5);
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fc__item {
+    display: flex;
+    min-width: 0;
+  }
+
+  .fc__card {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+    overflow: hidden;
+    padding: clamp(var(--space-6), 2.5vw, var(--space-8));
+    color: var(--ea-ink);
+  }
+
+  /* A card that ends on "Read in full" ends on a 44px row, which already
+     carries its own air, so the card's foot padding steps down. */
+  .fc__card:has(> .fc__more:last-child) {
+    padding-bottom: var(--space-3);
+  }
+
+  .fc__n {
+    margin: 0;
+    color: var(--ea-accent-ink);
+  }
+
+  .fc__title {
+    margin: 0;
+    color: var(--ea-ink);
+  }
+
+  .fc__summary {
+    margin: 0;
+    color: var(--ea-sub);
+  }
+
+  /* "Read in full" sits at the foot of every card, so a row of cards reads
+     as a row whatever the summary lengths. The mark is the shared recipe. */
+  .fc__more {
+    margin-top: auto;
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .fc__more summary {
+    font-size: var(--t-ea-small);
+    font-weight: var(--t-w-ea-medium);
+    color: var(--ea-ink);
+  }
+
+  .fc__more summary:focus-visible {
+    outline: var(--ea-focus);
+    outline-offset: 2px;
+  }
+
+  .fc__body {
+    margin: 0;
+    padding-bottom: var(--space-2);
+    color: var(--ea-muted);
+  }
+
+  .fc__link {
+    margin-top: auto;
+  }
+
+  .fc__more + .fc__link {
+    margin-top: 0;
+  }
+
+  /* ── snap: one row, swiped or scrolled ─────────────────────────────────── */
+  .fc[data-fc-layout='snap'] .fc__viewport {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    padding-block: 2px;
+  }
+
+  .fc[data-fc-layout='snap'] .fc__list {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(18rem, calc((100% - var(--space-5) * (var(--fc-cols) - 1)) / var(--fc-cols)));
+  }
+
+  .fc[data-fc-layout='snap'] .fc__item {
+    scroll-snap-align: start;
+  }
+
+  .fc__viewport:focus-visible {
+    outline: var(--ea-focus);
+    outline-offset: 4px;
+  }
+
+  /* ── steps: the controls and the moving highlight ──────────────────────── */
+  .fc__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .fc__controls[hidden] {
+    display: none;
+  }
+
+  .fc__btn {
+    display: inline-grid;
+    place-items: center;
+    width: var(--v3-btn-h);
+    height: var(--v3-btn-h);
+    padding: 0;
+    border-radius: var(--v3-radius-btn);
+  }
+
+  .fc__btn[aria-disabled='true'] {
+    color: var(--ea-muted);
+    cursor: default;
+  }
+
+  .fc__count {
+    margin: 0 0 0 var(--space-2);
+    font-size: var(--t-ea-small);
+    font-weight: var(--t-w-ea-medium);
+    font-variant-numeric: tabular-nums;
+    color: var(--ea-ink);
+  }
+
+  /* The icons are Icon.astro's own <svg>, outside this component's scope, so
+     they are reached with :global under the block's own class. */
+  .fc__btn :global(.fc__play) {
+    display: none;
+  }
+
+  .fc[data-fc-play='stop'] .fc__btn :global(.fc__pause) {
+    display: none;
+  }
+
+  .fc[data-fc-play='stop'] .fc__btn :global(.fc__play) {
+    display: block;
+  }
+
+  /* The card on show carries an accent ring outside its edge. Every card stays
+     readable: the highlight teaches the order, it never hides a step. A ring
+     and not the border, so the card's own hover (the edge, D294) still answers
+     the pointer on the card on show. */
+  .fc[data-fc='on'] [data-current] .fc__card {
+    box-shadow: 0 0 0 2px var(--ea-accent);
+  }
+
+  /* The time left on the card on show, drawn only while the steps run. */
+  .fc__bar {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--ea-rule);
+    opacity: 0;
+  }
+
+  .fc__bar > span {
+    display: block;
+    height: 100%;
+    background: var(--stage-gradient);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fc[data-fc-play='run'] [data-current] .fc__bar {
+      opacity: 1;
+    }
+
+    .fc[data-fc-play='run'] [data-current][data-tick] .fc__bar > span {
+      transform: scaleX(1);
+      transition: transform var(--fc-ms) linear;
+    }
+  }
+
+  /* ── narrower screens ──────────────────────────────────────────────────── */
+  @media (max-width: 1023px) {
+    .fc[data-fc-layout='grid'] .fc__list {
+      grid-template-columns: repeat(min(var(--fc-cols), 2), minmax(0, 1fr));
+    }
+  }
+
+  /* A phone stacks every block. No automatic advance here either (the script
+     checks the same width), because a moving card on a small screen is the
+     case the evidence argues hardest against. */
+  @media (max-width: 699px) {
+    .fc[data-fc-layout] .fc__list {
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-flow: row;
+    }
+
+    .fc[data-fc-layout='snap'] .fc__viewport {
+      overflow: visible;
+    }
+  }
+</style>

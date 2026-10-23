@@ -1,0 +1,14 @@
+---
+/**
+ * FlashCardsTimer: the script of a FlashCards block in steps mode, and nothing
+ * else. FlashCards.astro renders this component only for a steps block, and
+ * Astro renders a component's script only where the component renders, so a
+ * page that shows manual cards ships no script for them (D305 lane C).
+ */
+---
+
+<script>
+  import { initFlashCards } from '../../scripts/flashcards';
+
+  initFlashCards();
+</script>

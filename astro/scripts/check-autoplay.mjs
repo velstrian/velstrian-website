@@ -67,6 +67,12 @@
  * window after an interaction is more than two intervals. Slow, and that is
  * the right trade for a gate that has to be believed.
  *
+ * ── 2026-10-23: FLASH CARD STEPS, PLAY ONCE (D305, driver decision D2) ──────
+ *
+ * Section 3 drives components/ui/FlashCards.astro in steps mode on /bid/: it
+ * advances once and rests, the pause works from the keyboard, hover suspends
+ * it, and reduced motion and a phone never start it.
+ *
  * Exit 0 clean, 1 on any failure. Reads dist/, so build first.
  */
 import { chromium } from 'playwright';
@@ -295,6 +301,129 @@ for (const route of HERO_ROUTES) {
   check(`${route} e: reduced motion, no loop and no pause control`, rl.length === 0 && rc.length === 0,
     `loops=${rl.length} visible pause controls=${rc.length}`);
   await rctx.close();
+}
+
+/* ── 3. FLASH CARDS IN STEPS MODE, PLAY ONCE (D305, driver decision D2) ─────
+ *
+ * components/ui/FlashCards.astro in steps mode, driven by scripts/flashcards.ts,
+ * piloted on /bid/ (the "Start in three steps" band). Asserted here, by
+ * behaviour, on a fresh page each time:
+ *
+ *   a  it starts when it reaches the window, on card 1, with a pause control
+ *      shown, at least 44 by 44px
+ *   b  it advances on its own, one card per interval
+ *   c  it rests on the LAST card and stays there: no loop (WCAG 2.2.2)
+ *   d  the pause button, pressed from the keyboard, stops it, and the label
+ *      then offers play
+ *   e  hovering the block suspends it
+ *   f  under reduced motion and at 390px wide it never starts and shows no
+ *      pause control
+ *   g  a manual block (the twelve capabilities, #features) never moves and
+ *      carries no controls
+ *
+ * Focus is dropped after pressing, for the reason in this file's header. */
+const FC_ROUTE = '/bid/';
+const FC = '.fc[data-fc-mode="steps"]';
+const fcState = (page) => page.evaluate((sel) => {
+  const r = document.querySelector(sel);
+  if (!r) return null;
+  const c = r.querySelector('[data-fc-controls]');
+  const t = r.querySelector('[data-fc-toggle]');
+  const tb = t ? t.getBoundingClientRect() : { width: 0, height: 0 };
+  return {
+    on: r.dataset.fc === 'on',
+    play: r.dataset.fcPlay ?? null,
+    cur: [...r.querySelectorAll('[data-fc-card]')].findIndex((x) => x.hasAttribute('data-current')),
+    last: r.querySelectorAll('[data-fc-card]').length - 1,
+    shown: Boolean(c && !c.hidden && c.getBoundingClientRect().height > 0),
+    w: Math.round(tb.width), h: Math.round(tb.height),
+    label: t ? t.getAttribute('aria-label') : null,
+  };
+}, FC);
+const fcOpen = async (opts) => {
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference', ...opts });
+  const page = await ctx.newPage();
+  await page.goto(`${base}${FC_ROUTE}`, { waitUntil: 'load' });
+  await page.mouse.move(0, 0);
+  await page.evaluate((sel) => document.querySelector(sel)?.scrollIntoView({ block: 'center', behavior: 'instant' }), FC);
+  await page.waitForTimeout(500);
+  return { ctx, page };
+};
+
+console.log(`
+  flash cards in steps mode on ${FC_ROUTE} (D305, WCAG 2.2.2)`);
+{
+  const { ctx, page } = await fcOpen({});
+  const s0 = await fcState(page);
+  check('a: a steps block starts on card 1 with a pause control shown', Boolean(s0 && s0.on && s0.cur === 0 && s0.shown && s0.w >= 44 && s0.h >= 44),
+    s0 ? `on=${s0.on} card=${s0.cur + 1} shown=${s0.shown} ${s0.w}x${s0.h}` : 'no steps block on the page');
+  if (s0 && s0.on) {
+    const iv = Number(await page.evaluate((sel) => document.querySelector(sel).dataset.fcInterval, FC));
+    await page.waitForTimeout(iv + 800);
+    const s1 = await fcState(page);
+    check('b: it advances on its own, one card per interval', s1.cur === 1, `card ${s0.cur + 1} -> ${s1.cur + 1} after ${iv + 800}ms`);
+    await page.waitForTimeout(iv * (s0.last - 1) + 800);
+    const s2 = await fcState(page);
+    await page.waitForTimeout(iv + 800);
+    const s3 = await fcState(page);
+    check('c: it rests on the last card and never loops', s2.cur === s0.last && s3.cur === s0.last && s3.play === 'stop',
+      `card ${s2.cur + 1} -> ${s3.cur + 1} of ${s0.last + 1}, play=${s3.play}`);
+  }
+  await ctx.close();
+}
+{
+  const { ctx, page } = await fcOpen({});
+  const s0 = await fcState(page);
+  if (s0 && s0.on) {
+    await page.locator(`${FC} [data-fc-toggle]`).focus();
+    await page.keyboard.press('Space');
+    await page.evaluate(() => document.activeElement && document.activeElement.blur());
+    const iv = Number(await page.evaluate((sel) => document.querySelector(sel).dataset.fcInterval, FC));
+    await page.waitForTimeout(iv + 800);
+    const s1 = await fcState(page);
+    check('d: the keyboard press on pause stops it, and offers play', s1.cur === s0.cur && s1.play === 'stop' && s1.label === 'Play the steps',
+      `card ${s0.cur + 1} -> ${s1.cur + 1}, play=${s1.play}, label "${s1.label}"`);
+  } else {
+    check('d: the keyboard press on pause stops it', false, 'no running steps block to press');
+  }
+  await ctx.close();
+}
+{
+  const { ctx, page } = await fcOpen({});
+  const s0 = await fcState(page);
+  if (s0 && s0.on) {
+    await page.hover(FC);
+    const iv = Number(await page.evaluate((sel) => document.querySelector(sel).dataset.fcInterval, FC));
+    await page.waitForTimeout(iv + 800);
+    const s1 = await fcState(page);
+    check('e: hovering the block suspends it', s1.cur === s0.cur, `card ${s0.cur + 1} -> ${s1.cur + 1} under the pointer`);
+  } else {
+    check('e: hovering the block suspends it', false, 'no running steps block to hover');
+  }
+  await ctx.close();
+}
+for (const [name, opts] of [
+  ['reduced motion', { reducedMotion: 'reduce' }],
+  ['390px wide', { viewport: { width: 390, height: 844 } }],
+]) {
+  const { ctx, page } = await fcOpen(opts);
+  const s0 = await fcState(page);
+  await page.waitForTimeout(7800);
+  const s1 = await fcState(page);
+  check(`f: ${name}, it never starts and shows no pause control`, Boolean(s0 && !s1.on && !s1.shown && s1.cur <= 0),
+    s1 ? `on=${s1.on} shown=${s1.shown} card=${s1.cur + 1}` : 'no steps block on the page');
+  await ctx.close();
+}
+{
+  const { ctx, page } = await fcOpen({});
+  const m = await page.evaluate(() => {
+    const r = document.querySelector('#features .fc[data-fc-mode="manual"]');
+    if (!r) return null;
+    return { cards: r.querySelectorAll('[data-fc-card]').length, controls: r.querySelectorAll('[data-fc-controls], button').length, on: r.hasAttribute('data-fc') };
+  });
+  check('g: the manual block carries no controls and is never driven', Boolean(m && m.cards > 0 && m.controls === 0 && !m.on),
+    m ? `${m.cards} cards, ${m.controls} controls, driven=${m.on}` : 'no manual block in #features');
+  await ctx.close();
 }
 
 await browser.close();

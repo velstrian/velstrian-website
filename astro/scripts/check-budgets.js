@@ -341,7 +341,19 @@ const BUDGETS = {
      one kept tight. 36 leaves roughly 11 percent above today. A THIRD island
      appearing is a real change in shape and should be argued here rather than
      absorbed. */
-  jsTotal: 36 * KB,
+  /* ── RAISED 36 to 60 KB, 2026-10-23, OWNER DECISION D307, under D305 ──────
+     The owner raised the total for premium motion. The total was 36,822 B,
+     42 bytes under the old line. MEASURED AFTER THE FIRST MOTION SCRIPT
+     LANDED, 2026-10-23: still 36,822 B across 8 files, because Astro inlined
+     the FlashCards steps timer (scripts/flashcards.ts, 2,195 B) as a deferred
+     module in the one page that renders a steps block (/bid/), so it counts in
+     that page's HTML budget and not here. EVERY OTHER BUDGET IS UNCHANGED, and that is what keeps
+     this raise honest: jsShared still holds what every reader downloads on
+     every route, jsRouteMax still holds the heaviest single island, and
+     check-cwv still fails the build on CLS, LCP or TBT at 1440 and 390. Motion
+     scripts load deferred or on interaction, animate transform and opacity
+     only, and keep the reduced motion and pause rules (check-autoplay). */
+  jsTotal: 60 * KB,
 
   /* Every route loads this. It is the number that describes what a typical
      reader actually downloads, and the one that must stay small. 9,282 B

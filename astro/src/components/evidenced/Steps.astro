@@ -15,12 +15,20 @@ import IconTile from './IconTile.astro';
 import Action from './Action.astro';
 import { SIGNUP_URL, START_LABEL } from '../../data/app';
 import { START_FORMATS, START_MAX_MB, PACK_MAX_MB } from '../../data/site-facts';
+import FlashCards from '../ui/FlashCards.astro';
 import type { IconName } from '../../data/icons';
 
 interface Step { icon: IconName; title: string; body: string }
 interface Props {
   steps?: Step[];
   action?: { href: string; label: string };
+  /**
+   * Show the steps as FlashCards in steps mode (D305 lane C pilot, /bid/ only):
+   * the highlight walks the three steps once and rests, with a pause button,
+   * and never moves under reduced motion or on a phone. Off by default, so
+   * the home page and /buy/ are unchanged until the owner judges the pilot.
+   */
+  flash?: boolean;
 }
 
 const SUPPLIER_STEPS: Step[] = [
@@ -35,21 +43,29 @@ const SUPPLIER_STEPS: Step[] = [
 const {
   steps = SUPPLIER_STEPS,
   action = { href: SIGNUP_URL, label: START_LABEL },
+  flash = false,
 } = Astro.props;
+const cards = steps.map((s, i) => ({ id: `start-${i + 1}`, title: s.title, summary: s.body, icon: s.icon }));
 ---
 
 <Band tone="dark" class="ea-steps" labelledby="ea-steps-title">
   <div class="ea-wrap">
     <h2 class="ea-h2" id="ea-steps-title" data-reveal>Start in three steps.</h2>
-    <ol class="ea-steps__list">
-      {steps.map((s, i) => (
-        <li class="ea-step" data-reveal>
-          <IconTile name={s.icon} />
-          <h3 class="ea-h3"><span class="ea-step__n">{i + 1}.</span> {s.title}</h3>
-          <p>{s.body}</p>
-        </li>
-      ))}
-    </ol>
+    {flash ? (
+      <div class="ea-steps__flash" data-reveal>
+        <FlashCards label="The three steps to start" cards={cards} mode="steps" interval={7000} columns={3} />
+      </div>
+    ) : (
+      <ol class="ea-steps__list">
+        {steps.map((s, i) => (
+          <li class="ea-step" data-reveal>
+            <IconTile name={s.icon} />
+            <h3 class="ea-h3"><span class="ea-step__n">{i + 1}.</span> {s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    )}
     <div class="ea-actions" data-reveal>
       <Action href={action.href}>{action.label}</Action>
     </div>
