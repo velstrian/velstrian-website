@@ -4,7 +4,7 @@
  * R285-WEB-ENTERPRISE-REDESIGN-01, strategy section 0.8 "Imagery and media".
  * The three promo drafts were judged too slow and are being re-cut from the
  * real product captures. When the re-cut lands, set `src` (and `poster`) here
- * and every "Watch the 90 second tour" button on the site appears, opening
+ * and every "Watch the tour" button on the site appears, opening
  * components/evidenced/TourDialog.astro. While `src` is null the button and the
  * dialog are not rendered at all, so a reader never meets a control that plays
  * nothing.
@@ -23,9 +23,16 @@ export interface TourVideo {
   captions: string | null;
 }
 
+/*
+ * R285-WEB-PROMO-VIDEOS-01 (2026-10-23): V1 "Velstrian Bid in 60 seconds", a real
+ * recording of the staging demo organisation, voiced and captioned word for word.
+ * Built by crowagent-platform/scripts/media (videos.json, build_videos.py), which
+ * writes these three files, so a re-cut or a new logo is a rebuild and nothing
+ * here changes. The cut runs just under a minute, so the label says one minute.
+ */
 export const TOUR_VIDEO: TourVideo = {
-  src: null,
-  poster: null,
-  label: 'Watch the 90 second tour',
-  captions: null,
+  src: '/Assets/video/velstrian-bid-in-60-seconds.mp4',
+  poster: '/Assets/video/velstrian-bid-in-60-seconds-poster.webp',
+  label: 'Watch the one minute tour',
+  captions: '/Assets/video/velstrian-bid-in-60-seconds.vtt',
 };
