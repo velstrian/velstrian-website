@@ -344,6 +344,28 @@ export default defineConfig({
   vite: {
     // Dev only, see the note at the head of this file. Adds nothing to `dist`.
     plugins: [serveRepoAssetsInDev()],
+    // R285-WEB-GEMINI-UIUX P0-1. DEV ONLY, Vite applies `server.proxy` to `astro dev`
+    // and never to a build. In dev the tender finder posts to its own origin
+    // (`import.meta.env.DEV` in pages/tools/tender-finder/index.astro), and this
+    // forwards the call server to server, so no CORS check applies. The target is
+    // the STAGING API, which carries the free search route. The production API is
+    // never a dev target: its CORS list refuses localhost by design
+    // (crowagent-platform api/app/main.py), and local traffic belongs on staging
+    // (RULE 0-P). DEV_API_ORIGIN overrides it, for a platform API run locally.
+    server: {
+      proxy: {
+        '/api/v1/bid/free/': {
+          target: process.env.DEV_API_ORIGIN || 'https://api-staging.velstrian.com',
+          changeOrigin: true,
+          secure: true,
+          configure: (proxy) => {
+            // The browser's Origin is localhost. The call is server to server now,
+            // so drop it rather than ask the API to judge an origin it never sees.
+            proxy.on('proxyReq', (req) => req.removeHeader('origin'));
+          },
+        },
+      },
+    },
     css: {
       postcss: { plugins: [] },
     },

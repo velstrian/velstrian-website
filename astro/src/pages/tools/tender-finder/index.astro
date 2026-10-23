@@ -219,6 +219,32 @@ const schema = [
       <span class="form__status-text"></span>
     </p>
 
+    {/*
+      R285-WEB-GEMINI-UIUX P0-1. WHEN THE SEARCH CANNOT BE REACHED, SAY WHAT TO DO
+      NEXT. A one line red status was all a reader got, with nothing to press. The
+      panel is the shared card recipe with one primary action, try again, and two
+      ways forward that do not depend on this search working. It shows only for
+      the "not available" outcome. The errors a reader can fix themselves (a bad
+      keyword, the hourly limit) keep the plain status line. No sample tenders are
+      shown in its place: this tool says it searches real notices, so it never
+      draws invented ones.
+    */}
+    <div class="surface surface--pad tf-down" id="tf-down" hidden>
+      <h2 class="card-h tf-down__h" id="tf-down-h" tabindex="-1">We could not reach the tender search</h2>
+      <p class="tf-down__p">
+        This is on our side, not yours, and it is usually back within a few minutes. Your filters
+        are still set, so you can try again straight away.
+      </p>
+      <div class="ea-actions tf-down__actions">
+        <Action as="button" id="tf-retry">Try again</Action>
+        <Action href={SIGNUP_URL} variant="secondary">{START_LABEL}</Action>
+      </div>
+      <p class="tf-down__more">
+        Once you sign up, {PRODUCT_NAME_BID} sends new matches to you by email. Or look at the
+        notices directly on {LIVE_SOURCES}.
+      </p>
+    </div>
+
     <div class="tf-results" id="tf-results" hidden>
       <h2 class="visually-hidden" id="tf-results-h" tabindex="-1">Search results</h2>
       <ol class="tf-list" id="tf-list" role="list"></ol>
@@ -350,6 +376,12 @@ const schema = [
   const status = byId<HTMLElement>('tf-status');
   const statusText = status.querySelector('.form__status-text') as HTMLElement;
   const results = byId<HTMLElement>('tf-results');
+  const down = byId<HTMLElement>('tf-down');
+  /* In `astro dev` the search posts to the dev server's own origin and the dev
+     proxy in astro.config.mjs forwards it to the staging API, because no API
+     allows a localhost origin cross origin. `import.meta.env.DEV` is replaced at
+     build time, so the built page calls API_ORIGIN and nothing else. */
+  const apiBase = import.meta.env.DEV ? '' : API_ORIGIN;
   const list = byId<HTMLOListElement>('tf-list');
   const row = byId<HTMLTemplateElement>('tf-row');
   const submit = byId<HTMLButtonElement>('tf-submit');
@@ -369,7 +401,15 @@ const schema = [
     statusText.textContent = (status.dataset[key] ?? '')
       .replace('{n}', String(n))
       .replace('{p}', String(page));
-    status.hidden = false;
+    const unreachable = key === 'e503';
+    /* The panel says it in full and takes focus, so its heading is what a screen
+       reader hears. The one line status would only repeat it above the panel. */
+    status.hidden = unreachable;
+    down.hidden = !unreachable;
+    if (unreachable) {
+      results.hidden = true;
+      byId('tf-down-h').focus();
+    }
   };
 
   const money = (amount: number, currency: string) => {
@@ -453,6 +493,12 @@ const schema = [
   form.addEventListener('reset', () => {
     results.hidden = true;
     status.hidden = true;
+    down.hidden = true;
+  });
+
+  byId<HTMLButtonElement>('tf-retry').addEventListener('click', () => {
+    want = 0;
+    form.requestSubmit();
   });
 
   form.addEventListener('submit', async (e) => {
@@ -476,7 +522,7 @@ const schema = [
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 20000);
     try {
-      const res = await fetch(`${API_ORIGIN}${TENDER_SEARCH_PATH}`, {
+      const res = await fetch(`${apiBase}${TENDER_SEARCH_PATH}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -534,6 +580,32 @@ const schema = [
 
   .tf-results {
     margin-block-start: var(--stack-2);
+  }
+
+  /* The unreachable panel sits on the same measure as the form above it. */
+  .tf-down {
+    max-width: var(--measure-band);
+    margin: var(--stack-2) auto 0;
+  }
+
+  .tf-down__h:focus {
+    outline: none;
+  }
+
+  .tf-down__p,
+  .tf-down__more {
+    margin: var(--stack-1) 0 0;
+    font-family: var(--font-body);
+    color: var(--c-text-sub);
+  }
+
+  .tf-down__more {
+    font-size: var(--t-micro);
+    color: var(--c-text-muted);
+  }
+
+  .tf-down__actions {
+    margin-top: var(--stack-2);
   }
 
   .tf-list {
