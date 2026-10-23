@@ -240,12 +240,16 @@ const menus = NAV.menus.map((menu) => ({
       ))
     }
   </nav>
-  <div class="ca-mob-ctas">
+  {/* R285-WEB-GEMINI-AUDIT-1, Gemini's action row: the primary action first,
+      Sign in beside it, both from NAV.actions (START_LABEL and SIGNUP_URL in
+      data/pricing, the app login in data/app), pinned to the foot of the menu
+      by the CSS below. */}
+  <div class="ca-mob-actions">
+    <Button href={NAV.actions.cta.href} size="md" class="ca-mob-btn">{NAV.actions.cta.label}</Button>
     {/* Same correction as the desktop sign-in above, and the same reason. */}
-    <Button href={NAV.actions.signIn.href} variant="secondary" target="_blank">
+    <Button href={NAV.actions.signIn.href} variant="secondary" target="_blank" class="ca-mob-btn">
       {NAV.actions.signIn.label}
     </Button>
-    <Button href={NAV.actions.cta.href} size="md">{NAV.actions.cta.label}</Button>
   </div>
 </div>
 
@@ -829,6 +833,19 @@ const menus = NAV.menus.map((menu) => ({
     background: var(--c-bg);
     padding: 1.5rem;
     overflow-y: auto;
+    /* R285-WEB-GEMINI-AUDIT-5, Gemini's scrollbar, the same as the palette
+       list in CommandPalette.astro: the menu scrolls once Products and
+       Resources are both open, and a default OS scrollbar was the one
+       unbranded thing on it. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--ea-rule-strong) transparent;
+  }
+  .ca-mob-menu::-webkit-scrollbar {
+    width: 6px;
+  }
+  .ca-mob-menu::-webkit-scrollbar-thumb {
+    background: var(--ea-rule-strong);
+    border-radius: var(--radius-pill);
   }
   .ca-mob-menu.open {
     display: block;
@@ -847,6 +864,14 @@ const menus = NAV.menus.map((menu) => ({
     border-radius: 50%;
     color: var(--c-text);
     cursor: pointer;
+  }
+  /* R285-WEB-GEMINI-AUDIT-1. The close button took the nav's 3px white ring,
+     the brightest mark on a dark sheet. It now takes the system focus ring,
+     --ea-focus, the same ring every v3 control draws. Two class specificity,
+     so it outranks the shared nav ring above on weight, not on order. */
+  .ca-mob-menu .ca-mob-close:focus-visible {
+    outline: var(--ea-focus);
+    outline-offset: 3px;
   }
   /* ── THE SEARCH ROW, A-267 ────────────────────────────────────────────────
    *
@@ -954,10 +979,47 @@ const menus = NAV.menus.map((menu) => ({
     display: flex;
     align-items: center;
   }
-  .ca-mob-ctas {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 2rem;
+  /* ── THE ACTIONS ARE PINNED TO THE FOOT OF THE MENU, R285-WEB-GEMINI-AUDIT-1 ──
+   *
+   * MEASURED BEFORE THIS CHANGE, 390 wide, :8093. The two actions sat in the
+   * flow after the last link. At 390 by 844 with the menu just opened, Start
+   * now ended at y 639, but at a 600 tall viewport (a small phone with its
+   * browser bars showing) it was below the fold and only Sign in showed. With
+   * Products and Resources both open the menu scrolled to 1054 against 844,
+   * and BOTH actions sat at y 922 to 1030, off screen. The primary action on
+   * the one screen a phone reader uses to move around the site was the first
+   * thing to fall off it.
+   *
+   * NOW the row is sticky at the bottom of the menu, which is the scroll
+   * container, so the links scroll under it and the two actions never leave
+   * the screen whatever is expanded. Side by side rather than stacked, so the
+   * pinned strip costs one 48px row of a small screen, not two. The primary
+   * action comes first and is the wider of the two (Gemini's row).
+   *
+   * The menu's own bottom padding moved INTO this row: a sticky box stops at
+   * the scroll container's edge, so padding left under it would show the links
+   * scrolling through a gap beneath the actions. The safe area inset keeps the
+   * row clear of the home indicator on a phone with no bottom bezel. */
+  .ca-mob-menu {
+    padding-bottom: 0;
+  }
+  .ca-mob-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+    margin-inline: calc(-1 * var(--space-6));
+    padding: var(--space-4) var(--space-6) calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+    background: var(--c-bg);
+    border-top: 1px solid var(--c-border);
+  }
+  /* Each action fills its column, so the two read as one row of equal
+     height with the labels centred. */
+  .ca-mob-btn {
+    width: 100%;
+    justify-content: center;
   }
 </style>
