@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AI provider data map</title><link rel="stylesheet" href="legal.css"></head>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/trust/AI-PROVIDER-DATA-MAP-2026-10-22.md</code> at <code>9280aada4</code>. A read only copy, edit the source, not this page.</p>
+<h1>AI provider data map, 2026-10-22</h1>
+<p>Row R285-TRUST-AI-PROVIDER-DATA-MAP-01. Velstrian Systems Ltd, platform Velstrian Tenderworks, products Velstrian Bid and Velstrian Buy. Status: DRAFT for owner review. Not legal advice. It supersedes nothing silently: it re-measures <code>docs/trust/R285-AI-PROVIDER-DATA-MAP-2026-10-21.md</code> and adds the call site table, the bypass check and the two billing tier readings.</p>
+<h2>1. How this was measured and what it cannot see</h2>
+<p>Measured 2026-10-22.</p>
+<ul>
+<li>Corpus scanned: <code>api/app/**/*.py</code> (Grep, scoped, count mode so nothing was truncated), <code>apps/portal/src</code> and <code>web/src</code> for vendor SDK or vendor host strings. <code>api/tests</code> was excluded.</li>
+<li>Call sites: <code>AIClient(</code> occurs 49 times in 38 files under <code>api/app</code> (includes the class definition and a docstring example in <code>services/ai/client.py:534</code> and <code>:539</code>). The <code>surface=</code> literal list was read alongside it.</li>
+<li>Bypass check: provider SDK imports and the SDK send methods (<code>models.generate_content</code>, <code>generate_content_stream</code>, <code>embed_content</code>) were searched. Every send method sits in <code>api/app/services/ai/provider_calls.py</code> (lines 604, 762, 869, 958), the provider layer of <code>AIClient</code>. The Anthropic client is built only in the same file (lines 283 and 385).</li>
+<li>Provider terms were read from the providers&#39; own pages with WebFetch on 2026-10-22. The fetch tool summarises, so the quoted fragments are as returned. Counsel should re-read each page before it goes into a contract.</li>
+<li><strong>What it cannot see:</strong> which billing tier the production Gemini key is on (a Google console fact, not in the repo). Production Railway variable values, so a per surface model override cannot be ruled out (<code>AI_MODEL_&lt;SURFACE&gt;</code>, <code>surface_policy.py:1233-1236</code> per the 21 October read). The exact prompt fields of each call site were not opened, so the data classes in section 3 are inferred from the surface name and file. Whether the Azure OCR variables are set in production. The portal prompt contents.</li>
+</ul>
+<h2>2. Findings in one table</h2>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Models in code</th>
+<th>Trains on API data</th>
+<th>Retention at provider</th>
+<th>Region</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Google Gemini Developer API</td>
+<td><code>gemini-2.5-pro</code>, <code>gemini-2.5-flash</code>, <code>gemini-embedding-001</code> (<code>surface_policy.py</code> lines 1276, 1293, 1430, 1565)</td>
+<td>Depends on tier. See section 4. <strong>OWNER CHECK</strong></td>
+<td>Paid: logged &quot;for a limited period of time&quot; for abuse detection, no number on the page. Unpaid: the page does not describe abuse logging</td>
+<td>Not selectable. API key client, no Vertex, no location setting</td>
+</tr>
+<tr>
+<td>Anthropic Claude API</td>
+<td><code>claude-sonnet-4-6</code> (<code>buy_preread</code> line 1469, <code>bid_eval_judge</code> line 1557) and <code>claude-haiku-4-5</code> (<code>copilot_intent</code> line 1582)</td>
+<td>No by default</td>
+<td>Deleted within 30 days. Policy violations up to 2 years, classifier scores up to 7 years</td>
+<td><code>global</code> default. <code>us</code> optional. Nothing for UK or EU</td>
+</tr>
+<tr>
+<td>Azure Document Intelligence (OCR, not a language model)</td>
+<td>prebuilt layout</td>
+<td>Not stated on the page read, no claim made</td>
+<td>24 hours then deleted</td>
+<td>Region of the Azure resource. <strong>OWNER CHECK</strong></td>
+</tr>
+</tbody></table>
+<h2>3. Every AI call site, by surface</h2>
+<p><strong>One entry point.</strong> All chat and embedding calls in the API go through <code>AIClient</code>. The provider is chosen from the model name inside the provider layer. No other module imports an AI vendor SDK except <code>gemini_rag.py</code>, which builds its own <code>genai.Client</code> at startup (<code>gemini_rag.py:18</code>, <code>:1025</code>) but sends nothing through it, and <code>routers/health.py:515</code>, which lists Gemini models with the key as a liveness probe and carries no customer text.</p>
+<p><strong>Bypasses found (a finding in itself):</strong></p>
+<ol>
+<li><code>gemini_rag.py</code> keeps a second, unused-for-sending Gemini client object. Its own comment (lines 1028-1035) says the accessor was deleted. Risk is low but a future caller could use it and skip the ledger. Recommendation: remove the second client so the provider layer is the only holder.</li>
+<li><code>routers/health.py:515</code> calls the Google models list endpoint directly with the key. No customer data, but it is a direct vendor call outside <code>AIClient</code>.</li>
+<li>The founders portal (<code>apps/portal/src/lib/ai/client.ts</code>, <code>claude-client.ts</code>) has its own TypeScript AIClient to Anthropic. <code>client.ts:537-543</code> refuses Gemini surfaces there. That is a second client, not a bypass of policy, but it is outside the Python ledger path. Portal is internal only.</li>
+<li>No OpenAI, Cohere, Mistral or similar import exists in <code>api/app</code>. The six files that matched a loose word search (<code>bid_ocr.py</code>, <code>chunking.py</code>, <code>gemini_response.py</code>, <code>truncation.py</code>, <code>bid_answer_marker.py</code>, <code>bid_requirement_extractor.py</code>) were not opened beyond <code>bid_ocr.py</code>, so a hit in the other five is unconfirmed as prose.</li>
+</ol>
+<p><strong>Surfaces, files and what customer text goes out.</strong> Data class is inferred from the surface name and the file, not from reading each prompt.</p>
+<table>
+<thead>
+<tr>
+<th>Surface (provider)</th>
+<th>Where</th>
+<th>Customer text sent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bid_narrative</code>, <code>bid_response_draft</code>, <code>bid_exec_summary</code>, <code>bid_win_theme_draft</code>, <code>bid_agent</code>, <code>bid_diagram</code> (Gemini 2.5 Pro)</td>
+<td><code>bid_narrator.py</code>, <code>bid_response_agent.py</code>, <code>bid_exec_summary.py</code>, <code>bid_win_theme_drafter.py</code>, <code>bid_agent.py</code>, <code>bid_diagram.py</code>, <code>bid_local_area.py</code>, <code>routers/bid_response.py</code>, <code>routers/bid_win_themes.py</code>, <code>routers/bid/delivery.py</code>, <code>mcp/tools.py:560</code></td>
+<td>Tender requirements, the supplier&#39;s own answers, library content, company profile</td>
+</tr>
+<tr>
+<td><code>bid_rfp_extract</code>, <code>bid_library_import</code> (Gemini 2.5 Pro)</td>
+<td><code>routers/bid_rfp.py:755</code>, <code>bid_requirement_extractor.py</code>, <code>bid_requirement_autostart.py</code>, <code>bid_library_import.py</code></td>
+<td>Uploaded tender documents and library documents</td>
+</tr>
+<tr>
+<td><code>bid_rag_query</code>, <code>bid_rag_rerank</code> (Pro, Flash)</td>
+<td><code>gemini_rag.py:1189</code>, <code>retrieval.py</code></td>
+<td>The user&#39;s question plus retrieved passages from the regulatory corpus and the customer library</td>
+</tr>
+<tr>
+<td>Field and metadata extraction (Gemini 2.5 Flash): <code>bid_claim_backing</code>, <code>bid_debrief_extract</code>, <code>bid_field_extract</code>, <code>bid_kpi_prose_extract</code>, <code>evidence_metadata_extract</code>, <code>bid_tone_guidance_draft</code>, <code>bid_proof_span_link</code>, <code>bid_tender_ask</code>, <code>bid_tender_briefing</code>, <code>bid_tender_change_impact</code>, <code>bid_tender_alert_read</code></td>
+<td><code>bid_claim_backing.py</code>, <code>bid_debrief_extractor.py</code>, <code>bid_ai_field_extract.py</code>, <code>bid_social_value_ai.py</code>, <code>accounts_reading_ai.py</code>, <code>company_profile_reading.py</code>, <code>buyer_readings_ai.py</code>, <code>evidence_metadata_extract.py</code>, <code>bid_tender_kpis_ai.py</code>, <code>bid_tone_guidance_ai.py</code>, <code>bid_proof_spans.py</code>, <code>bid_tender_ask.py</code>, <code>bid_tender_briefing.py</code>, <code>bid_tender_change_impact.py</code>, <code>bid_tender_alert_reader.py</code>, <code>routers/bid/bids.py:179</code></td>
+<td>Uploaded company documents (accounts, policies, certificates), debriefs, tender text. Likely personal data: named staff, CVs</td>
+</tr>
+<tr>
+<td>Buy surfaces (Gemini 2.5 Flash): <code>buy_priority_extract</code>, <code>buy_requirement_suggest</code>, <code>buy_requirement_narrative</code>, <code>buy_rfq_scope</code>, <code>bid_quote_scope</code>, <code>buy_eval_consistency</code>, <code>buy_award_letter</code>, <code>buy_tender_pack_review</code></td>
+<td><code>routers/buy.py</code> (lines 1568, 1721, 1921, 2134), <code>buyer_priority_extract.py</code>, <code>quick_scope.py:581-583</code>, <code>buy_tender_pack_quality.py</code></td>
+<td>Buyer requirements, evaluation scores and notes, supplier responses under evaluation, award details</td>
+</tr>
+<tr>
+<td><code>buy_preread</code> (Claude Sonnet 4.6)</td>
+<td><code>buy_preread.py:815</code></td>
+<td>A supplier&#39;s full response text, which can hold named personnel, CVs, referees and subcontractors (<code>docs/legal/data-processing-agreement.md</code>, Schedule 1 item 7)</td>
+</tr>
+<tr>
+<td><code>bid_eval_judge</code> (Claude Sonnet 4.6)</td>
+<td><code>services/eval/judges.py:402</code></td>
+<td>Draft answers being graded. Internal quality evaluation</td>
+</tr>
+<tr>
+<td><code>copilot_intent</code> (Claude Haiku 4.5)</td>
+<td>classifier surface in <code>surface_policy.py:1582</code></td>
+<td>The user&#39;s assistant message. Call site not located in this scan, the surface is listed in the policy tables only. Haiku held for eval before production enablement per the comment at <code>surface_policy.py:1158</code></td>
+</tr>
+<tr>
+<td><code>chatbot_public</code> (Gemini 2.5 Flash)</td>
+<td><code>routers/public.py:328</code></td>
+<td>Unauthenticated visitor text</td>
+</tr>
+<tr>
+<td><code>chatbot_app</code>, <code>advisor_chat</code>, <code>onboarding_agent</code>, <code>copilot_answer</code> (Flash)</td>
+<td><code>routers/advisor.py</code>, <code>routers/onboarding_agent.py:493</code></td>
+<td>Signed in user chat and onboarding answers</td>
+</tr>
+<tr>
+<td><code>regulatory_monitor</code>, <code>scheduler_insight</code> (Flash)</td>
+<td><code>tasks/scheduler.py:652</code>, <code>regulatory_monitor.py:185</code>, via <code>gemini_rag.py:1286</code></td>
+<td>Platform generated prompts about regulation. No customer text expected</td>
+</tr>
+<tr>
+<td>Embeddings <code>bid_library_embedding</code>, <code>bid_chunk_embedding</code>, <code>bid_query_embedding</code> (<code>gemini-embedding-001</code>)</td>
+<td><code>bid_library_embeddings.py:294</code>, <code>:319</code>, <code>retrieval.py</code></td>
+<td>The customer&#39;s library text and search queries</td>
+</tr>
+<tr>
+<td>Portal <code>portal_*</code> surfaces (Claude)</td>
+<td><code>apps/portal/src/app/api/**</code></td>
+<td>Founders&#39; internal operations. Prompt contents not examined</td>
+</tr>
+</tbody></table>
+<p><strong>Redaction and logging.</strong> No personal data redaction is applied before a prompt leaves. The input sanitiser is for prompt injection and length (<code>input_sanitiser.py</code>, module docstring per the 21 October read). The <code>ai_calls</code> ledger row stores surface, provider, model, token counts, cost, latency and error, and no prompt or response text (<code>client.py:1777-1795</code> per the 21 October read, not re-opened today).</p>
+<h2>4. Provider terms, read 2026-10-22</h2>
+<h3>Google Gemini API</h3>
+<p>Source: <a href="https://ai.google.dev/gemini-api/terms">https://ai.google.dev/gemini-api/terms</a> (page says last updated 2026-04-28 UTC, effective 23 March 2026). Read 2026-10-22.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Unpaid Services (free tier)</th>
+<th>Paid Services</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Used to improve Google products</td>
+<td>Yes: &quot;Google uses the content you submit to the Services and any generated responses to provide, improve&quot;</td>
+<td>No: &quot;Google doesn&#39;t use your prompts (including associated system instructions, cached content, and files&quot;</td>
+</tr>
+<tr>
+<td>Human review</td>
+<td>&quot;human reviewers may read, annotate, and process your API input and output&quot;, disconnected from account, key and project</td>
+<td>Not mentioned on the page</td>
+</tr>
+<tr>
+<td>Abuse logging</td>
+<td>Not described for unpaid</td>
+<td>&quot;Google logs prompts and responses for a limited period of time, solely for detecting and preventing violations&quot;, period not stated</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>Not stated for unpaid</td>
+<td>&quot;may be stored transiently or cached in any country in which Google or its agents maintain facilities&quot;</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Grounding with Google Search stores prompts and output for 30 days on both tiers. No Google Search grounding tool was found in <code>provider_calls.py</code> on 21 October and it was not searched again today.</li>
+<li>The same page says: &quot;You may use only Paid Services when making API Clients available to users in the European Economic Area&quot;, with the same restriction for Switzerland and the UK. <strong>This is a contractual requirement for our market, not only a privacy preference.</strong> If the key is on the free tier we are outside the terms for UK and EEA users.</li>
+<li>Billing page, <a href="https://ai.google.dev/gemini-api/docs/billing">https://ai.google.dev/gemini-api/docs/billing</a> (last updated 2026-09-28 UTC): &quot;New accounts begin on the Free Tier&quot;. Upgrading means &quot;linking a billing account and prepaying to add a minimum of $5&quot;. Paid tier is described as ensuring &quot;your prompts and responses are not used to improve Google products&quot;.</li>
+<li><strong>OWNER CHECK, never assumed: which tier is the production <code>GEMINI_API_KEY</code>, and the staging key?</strong> The repo cannot show it.</li>
+<li>The unpaid UK, EEA and Switzerland sentence on the terms page says the paid data terms &quot;apply to all Services, including Google AI Studio and unpaid quota&quot;, per the fetch summary. I could not tell from the summary whether that makes the free tier safe for UK users, so I make no claim from it. Counsel should read that clause in full.</li>
+</ul>
+<h3>Anthropic Claude API</h3>
+<ul>
+<li>Training: &quot;By default, we will not use your inputs or outputs from our commercial products&quot; to train models. Exceptions are feedback or bug reports submitted to Anthropic, and explicit opt in. Source: <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training</a>, read 2026-10-22.</li>
+<li>Retention: &quot;we automatically delete inputs and outputs on our backend within 30 days of receipt or generation&quot;. Flagged usage policy violations up to 2 years, classification scores up to 7 years. Zero data retention applies &quot;when you and we have agreed otherwise&quot;. Page dated July 1, 2026. Source: <a href="https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data">https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data</a>, read 2026-10-22.</li>
+<li>Region: <code>inference_geo</code> accepts <code>global</code> (default) or <code>us</code>. Workspace geo is <code>us</code> only. US only inference is priced at 1.1 times. The parameter is supported on Claude 4.6 and later, and returns a 400 on Haiku 4.5. Source: <a href="https://platform.claude.com/docs/en/build-with-claude/data-residency">https://platform.claude.com/docs/en/build-with-claude/data-residency</a> (canonical <code>manage-claude/data-residency</code>), read 2026-10-22. The code sets no <code>inference_geo</code>, so inference is global (<code>provider_calls.py:316-324</code> per the 21 October read).</li>
+</ul>
+<h3>Azure Document Intelligence</h3>
+<p>Not re-fetched today. As read 2026-10-21 by the previous lane: data and results kept 24 hours after analysis then deleted, processed in the region of the resource. <a href="https://learn.microsoft.com/en-us/legal/cognitive-services/document-intelligence/data-privacy-security">https://learn.microsoft.com/en-us/legal/cognitive-services/document-intelligence/data-privacy-security</a>. Treat as one day old and re-read before contract use.</p>
+<ul>
+<li><strong>MEASURED 2026-10-22 (driver, Railway get-service-config variable NAMES, never values): no <code>AZURE_*</code> variable exists on the production API service (<code>crowagent-platform</code>) or on staging (<code>crowagent-platform-staging</code>), and no <code>AI_MODEL_*</code> override exists on production.</strong> So scanned documents are not sent to Azure in either environment and OCR is off, and every surface runs the model <code>surface_policy.py</code> names. Earlier record: a 2026-08-24 cost document recorded <code>AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT</code> and <code>_KEY</code> as &quot;absent from BOTH Railway services&quot; (<code>docs/release-2.7.1/COST-ASSESSMENT-AIAUDIT-2026-08-24.md:28</code>). If that is still true, scanned documents are not sent to Azure at all, the DPA row for Azure (<code>data-processing-agreement.md</code>, item 11) would describe a processor that is not used today, and OCR is silently off. I did not read Railway variable values (they hold secrets).</li>
+</ul>
+<h2>5. Gaps and recommendations</h2>
+<ol>
+<li><strong>Gemini billing tier unknown. P1.</strong> Recommend: owner opens the Google AI Studio or Cloud console billing page for the project behind the production key and the staging key, records tier and date here. If free, upgrade before any buyer pack, because the terms bar free tier for UK and EEA users and Google may human review the data.</li>
+<li><strong>Gemini is not region pinned.</strong> Recommend: say so plainly in the DPA and trust page (already done in DPA clause 7). Vertex AI with an EU or UK location is a build and cost item needing its own RULE 0-G cost statement. Do not claim EU or UK processing.</li>
+<li><strong>No personal data redaction before prompts.</strong> Recommend: disclose now. Redaction on tender responses with CVs is a later build.</li>
+<li><strong>Anthropic has no UK or EU option.</strong> Recommend: accept the 30 day deletion and no training baseline. Zero data retention is by agreement only.</li>
+<li><strong>Azure OCR is NOT live (measured 2026-10-22, see above).</strong> Recommend: the DPA and sub-processor list drop Azure until OCR is switched on, and switching it on carries a region decision (UK South or EU) and a RULE 0-G cost statement.</li>
+<li><strong>Second Gemini client in <code>gemini_rag.py</code> and direct health probe.</strong> Recommend: remove the unused client in a normal product change so the ledger path is the only one. Not done here (no code changes in this lane).</li>
+<li><strong>Per call prompt field list is inferred.</strong> Recommend: a follow up lane opens each of the 38 files and tabulates real fields before a security questionnaire arrives.</li>
+<li><strong>Portal prompts unmeasured.</strong> Recommend: low priority, internal only.</li>
+<li><strong>Google abuse log retention in days is not published on the pages read.</strong> Recommend: publish no number.</li>
+</ol>
+<h2>6. Owner checks (summary)</h2>
+<ul>
+<li>Gemini billing tier of the production key and the staging key. <strong>CLOSED 2026-10-23 for production, owner verified (D314):</strong> the production Gemini API (<code>GEMINI_API_KEY</code>) and the Anthropic Claude API are on active, billing enabled paid accounts, not free tiers. The owner&#39;s statement covers production. The staging key was not named in it.</li>
+</ul>
+<h2>7. Update 2026-10-23 (row R285-TRUST-AI-PROVIDER-DATA-MAP-01)</h2>
+<ul>
+<li>Corrected: the app page <code>/sub-processors</code> Anthropic purpose now names the quality checks on drafted answers (<code>bid_eval_judge</code>), matching section 2 and DPA Schedule 1 item 7.</li>
+<li>Checked consistent: the website privacy and security pages (<code>crowagent-website/astro/src/content/legal/privacy.md</code> lines 146 to 168, <code>security.md</code> line 99) say Gemini is not region pinned, Claude is global with no UK or EU option, 30 day deletion and no training by default. No wording there claims EU or UK Gemini processing.</li>
+<li>Azure OCR is off in both environments (section 4). DPA item 11 now says so and leaves the list-now-or-later choice to the owner.</li>
+<li>Still the owner&#39;s, in one sitting: (1) Gemini billing tier of the production and staging keys, (2) list Azure now or only when OCR is switched on, (3) Anthropic zero retention is not needed, confirm that default.</li>
+</ul>
+<h2>8. Measured 2026-10-23 by the evidence lane (read only tools)</h2>
+<p>Each line names the measurement and how it could have failed.</p>
+<ul>
+<li><strong>Gemini billing tier: NOT MEASURABLE from here, still the owner&#39;s.</strong> Tried: the connected tool list holds no Google AI Studio or Google Cloud billing connector (the Google Drive connector reads files only), and the Railway MCP returns variable values to a session token, so reading <code>GEMINI_API_KEY</code> to match a console row was not attempted and must not be. Had a billing connector existed the reading would have shown a linked billing account or none. The owner reads the AI Studio API keys page, steps in <code>docs/release-2.8.5/OWNER-ACTIONS-GUIDE-2026-10-23.md</code> section 6.</li>
+<li><strong>Railway service layout:</strong> one project <code>velstrian-platform</code> (workspace Velstrian Tenderworks), one environment <code>production</code>, three services <code>crowagent-platform</code>, <code>crowagent-platform-staging</code> and <code>crowagent-worker</code> (Railway MCP list tools). The worker service is not covered by the 2026-10-22 variable name check in section 4, which named the production API and staging only. Whether <code>AZURE_*</code> or <code>AI_MODEL_*</code> names exist on <code>crowagent-worker</code> is NOT measured, because listing variables would expose values.</li>
+<li><strong>Website and app consistency</strong> from section 7 stands and was not re-read today.</li>
+<li>Still the owner&#39;s, unchanged: (1) Gemini billing tier of both keys, (2) list Azure now or when OCR is on, (3) confirm the Anthropic default. Reply line is in the owner guide section 6.</li>
+</ul>
+<h2>9. Owner verified 2026-10-23 (D314)</h2>
+<ul>
+<li><strong>Gemini billing tier: CLOSED.</strong> The owner verified on 2026-10-23 that the production Gemini API (<code>GEMINI_API_KEY</code>) is on an active, billing enabled paid account, not the free tier. The paid service terms in section 4 therefore apply: Google does not use prompts or responses to improve its products, and the terms condition that only paid services are offered to UK and EEA users is met for production.</li>
+<li><strong>Anthropic: CLOSED.</strong> The owner verified the production Anthropic Claude API is on an active, billing enabled paid account. No training by default and deletion within 30 days apply as read in section 4.</li>
+<li>So the DPA statements that customer data is not used for model training are confirmed accurate. DPA Schedule 1 items 7 and 8 record this, and both now state the restricted transfer mechanism: the UK International Data Transfer Agreement (IDTA) or the EU Standard Contractual Clauses (SCCs) with the UK Addendum.</li>
+<li><strong>Azure (gap 5): decided.</strong> DPA item 11 lists Azure as dormant and optional, activated only if specific document intelligence features are enabled by the customer. The app page <code>/sub-processors</code> carries the same row.</li>
+<li>Not part of the owner statement, so still open: the staging Gemini key tier (staging carries test data only under RULE 0-P), and the Anthropic zero retention default (section 7 item 3).</li>
+</ul>
+</main></body></html>

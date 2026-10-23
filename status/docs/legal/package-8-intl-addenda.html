@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>International DPA addenda, package 8 (draft)</title><link rel="stylesheet" href="legal.css"></head>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/release-2.8.5/legal/PACKAGE-8-INTL-DPA-ADDENDA-DRAFT-2026-10-23.md</code> at <code>9280aada4</code>. A read only copy, edit the source, not this page.</p>
+<h1>Package 8: international DPA addenda (US, Canada, Australia, New Zealand, Singapore)</h1>
+<p><strong>DRAFT FOR COUNSEL REVIEW. Not legal advice. Not approved. Creates no obligation until a qualified lawyer has reviewed it, the owner has ratified every open point, and it is executed.</strong></p>
+<p>Row: R285-INTL-PRIVATE-RFP-GLOBAL-01 (package 8, decision D248). Date: 2026-10-23.
+Company: Velstrian Systems Ltd (company number 17076461, ICO registration C1901492, trading as Velstrian Tenderworks). Contact for this paper: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>.</p>
+<h2>1. What this paper is and how to use it</h2>
+<p>D248 lets Velstrian sell the private RFP response product and Quick Quote to business customers in the US, Canada, Australia, New Zealand and Singapore (and Ireland, which sits under EU GDPR and is already covered by the existing DPA). The existing DPA (<code>docs/legal/data-processing-agreement.md</code>) is written under UK GDPR and EU GDPR only. The inventory row H1 in <code>docs/intl/UK-ONLY-ASSUMPTIONS-INVENTORY-2026-10-22.md</code> records that no other privacy law is named anywhere in <code>web/app/(legal)</code>.</p>
+<p>This paper gives counsel a starting draft for one short addendum per jurisdiction. Each addendum sits on top of the existing DPA, so the UK DPA is not rewritten. The owner&#39;s remaining steps are in section 9 (decisions) and the lawyer&#39;s questions are marked <strong>COUNSEL</strong> throughout.</p>
+<p><strong>Status of each source.</strong> Every legal statement below carries a source link or the words &quot;not verified here&quot;. Search results were read on 2026-10-23. Statutes change, so counsel should confirm each point against the current text.</p>
+<h2>2. What the existing documents say (the baseline every addendum builds on)</h2>
+<p>Measured by reading the files, not from memory.</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Existing position</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Roles</td>
+<td>Customer is controller, Velstrian is processor, Velstrian is independent controller only for its own account and billing records</td>
+<td>DPA clause 1</td>
+</tr>
+<tr>
+<td>Instructions</td>
+<td>Documented instructions, including on transfers</td>
+<td>clause 3</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Encryption in transit and at rest, row level security, MFA step up, audit log</td>
+<td>clause 5.2</td>
+</tr>
+<tr>
+<td>Sub-processors</td>
+<td>General written authorisation for the 17 entries in Schedule 1 (18 until Companies House left on 2026-10-23, D314), 30 days notice of changes, 14 days to object (both marked owner to confirm)</td>
+<td>clause 6</td>
+</tr>
+<tr>
+<td>Transfers</td>
+<td>UK IDTA, or EU SCCs plus UK Addendum, for US headquartered sub-processors. Data Privacy Framework only where a sub-processor is certified</td>
+<td>clause 7</td>
+</tr>
+<tr>
+<td>Breach notice to customer</td>
+<td>Without undue delay and, in any event, within 48 hours after becoming aware (owner decision D314, 2026-10-23, was 72 hours)</td>
+<td>clause 8.2</td>
+</tr>
+<tr>
+<td>Return and deletion</td>
+<td>30 day return window, 14 day account deletion grace, active deletion within 30 days after that, backup purge 30 to 90 days, audit log up to 7 years, billing records 7 years in the policy, the DPA clause 9.2 and the public retention page (owner decision D314, 2026-10-23)</td>
+<td><code>docs/legal/data-return-and-deletion-policy.md</code> and <code>web/app/(legal)/retention/page.tsx:65-74</code></td>
+</tr>
+<tr>
+<td>Audit</td>
+<td>Documents and questionnaire first, on site once per 12 months on 30 days notice</td>
+<td>clause 10</td>
+</tr>
+<tr>
+<td>Liability</td>
+<td>General cap the greater of 12 months of fees or £2,500, and a separate data protection cap the lesser of £250,000 or the insurance proceeds actually recovered (owner decision D314, 2026-10-23, was 12 months of fees or GBP 1,000)</td>
+<td>DPA clause 11 and the Terms, section 6</td>
+</tr>
+<tr>
+<td>Governing law</td>
+<td>England and Wales</td>
+<td>DPA section 0</td>
+</tr>
+</tbody></table>
+<p><strong>Where the data actually goes (Schedule 1).</strong> Supabase stores customer data in Ireland (<code>eu-west-1</code>). Vercel functions run in London (<code>lhr1</code>). Railway runs the API in Amsterdam. Brevo (email, France), PostHog (EU), Sentry (Germany) and Upstash (Ireland) are EU. The US facing items are Stripe, Cloudflare, Tawk.to, Calendly, and the two AI providers. Anthropic cannot be region pinned (global or US only). Google Gemini is not region pinned. Vercel and Railway state that their own primary processing is in the United States. So for every non UK customer the honest picture is: stored in Ireland, processed in the UK and EU, with some processing in the US. This is the fact each transfer clause below has to describe truthfully.</p>
+<h2>3. Common terms all five addenda share (so they stay short)</h2>
+<p>Counsel can fold these into one master international addendum with a short schedule per country. Recommended.</p>
+<ol>
+<li><strong>Same roles, same Schedule 1.</strong> The customer is the business or controller (called &quot;organisation&quot; in Singapore, &quot;agency&quot; in New Zealand, &quot;APP entity&quot; in Australia). Velstrian is the processor, service provider, agent or data intermediary, whichever word the local law uses. The 18 entry Schedule 1 applies unchanged, and the sub-processor notice process in clause 6.4 applies unchanged.</li>
+<li><strong>No sale, no sharing, no other use.</strong> Velstrian uses customer personal data only to provide the Services, does not sell it, and does not combine it with other data. This is a CCPA must have (section 4) and good practice everywhere. It is also true today, because the Anthropic and Google paid terms in Schedule 1 say inputs are not used for training. <strong>COUNSEL:</strong> confirm the Gemini billing tier fact (Schedule 1 item 8 still carries an owner to confirm marker).</li>
+<li><strong>Breach notice.</strong> One number for every addendum. See decision D-A below.</li>
+<li><strong>Assistance.</strong> Velstrian helps the customer answer access, correction and deletion requests, using the in product export and delete features described in the return and deletion policy.</li>
+<li><strong>Return and deletion.</strong> Local law mostly says &quot;keep only as long as needed&quot;, which the 30 day return window and the deletion timeline already meet. Each addendum notes only what differs.</li>
+<li><strong>Governing law.</strong> England and Wales stays the choice of law for the contract (the supplier&#39;s own choice as a UK company, inventory section H). <strong>COUNSEL:</strong> confirm that local mandatory privacy law still applies to the customer whatever the contract says, and whether any country needs a local law or forum clause (Quebec is the likeliest, see section 5).</li>
+<li><strong>Liability.</strong> Each addendum is subject to the Terms cap. <strong>COUNSEL:</strong> see the liability point in <code>DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md</code>, because a customer in a regulated market may ask for a higher data protection cap.</li>
+</ol>
+<h2>4. United States</h2>
+<p><strong>Law and status.</strong></p>
+<ul>
+<li>California: the CCPA as amended by the CPRA. Service provider is defined at Civil Code section 1798.140(ag), and the contract content is set by the regulation at 11 CCR section 7051. Source: <a href="https://www.cppa.ca.gov/regulations/pdf/cppa_regs.pdf">CPPA regulations</a> and a <a href="https://prighter.com/resources/laws/ccpa-regulations/sections/7051">reading of section 7051</a>.</li>
+<li>Other states with general privacy laws (for example Virginia and Colorado) also require a processor contract. Not verified here, because the searches did not return those statutes. <strong>COUNSEL:</strong> list which state laws apply to a business customer&#39;s staff and contact data (several states exclude employment and business to business data, and California does not as far as these searches show. Not verified here).</li>
+<li>There is no federal general privacy law that applies. Sector laws (health, children, financial) are out of scope because the DPA tells customers not to submit special category data (Schedule 2).</li>
+</ul>
+<p><strong>What changes versus the UK DPA.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>UK DPA</th>
+<th>US addendum adds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Wording</td>
+<td>Controller, processor, Art. 28</td>
+<td>&quot;Business&quot; and &quot;service provider&quot;. State that Velstrian is a service provider and not a third party</td>
+</tr>
+<tr>
+<td>Purposes</td>
+<td>Subject matter and nature in clause 2</td>
+<td>The contract must name the specific business purposes and say disclosure is limited to them, with no generic reference to the whole contract (section 7051(a)(2) per <a href="https://prighter.com/resources/laws/ccpa-regulations/sections/7051">the reading cited above</a>)</td>
+</tr>
+<tr>
+<td>Prohibitions</td>
+<td>Instructions only</td>
+<td>No selling or sharing, no use outside the direct business relationship, no use for another commercial purpose, and no cross context behavioural advertising (per the same source)</td>
+</tr>
+<tr>
+<td>Compliance</td>
+<td>Art. 28 duties</td>
+<td>Velstrian complies with the CCPA and gives the same level of privacy protection the business owes (per the same source)</td>
+</tr>
+<tr>
+<td>Consumer requests</td>
+<td>Clause 8.1</td>
+<td>Velstrian helps with requests to know, delete, correct and opt out. Velstrian passes on any request it receives directly</td>
+</tr>
+<tr>
+<td>Audit and notice</td>
+<td>Clause 10</td>
+<td>A right to take reasonable steps to stop and remediate unauthorised use, and a duty for Velstrian to tell the business if it can no longer meet its CCPA duties. <strong>Not verified here</strong>, because the search stopped before section 7051(a)(6) onward. <strong>COUNSEL:</strong> supply the exact required list from the regulation text</td>
+</tr>
+<tr>
+<td>Sub-processors</td>
+<td>Clause 6</td>
+<td>Flow the same terms down in writing, and tell the business of any new service provider</td>
+</tr>
+</tbody></table>
+<p><strong>Transfer mechanism.</strong> The CCPA has no export restriction. Data is stored in Ireland and processed in the UK, EU and US. No UK or EU style transfer tool is needed for US customers, and the existing UK IDTA and SCC arrangements stay in place only for Velstrian&#39;s own sub-processor chain.</p>
+<p><strong>Breach notice.</strong> California requires a business that only maintains data it does not own to tell the owner &quot;immediately following discovery&quot;, and the owner then handles consumer notice, which the statute sets at 30 calendar days from discovery subject to stated delays. Source: <a href="https://california.public.law/codes/ca_civ_code_section_1798.82">Civil Code section 1798.82</a>. <strong>COUNSEL:</strong> the search found older wording (&quot;most expedient time possible&quot;) beside the 30 day wording, so check the current code. All US states have their own breach laws (not verified here), so the addendum should say Velstrian will give the customer what it needs to meet whichever state law applies.</p>
+<p><strong>Retention.</strong> US tax and record rules for Velstrian&#39;s own invoicing do not apply to a UK company issuing GBP invoices (the invoices follow UK VAT rules, <code>retention/page.tsx:68</code>). The customer&#39;s own record duties are theirs. Add one sentence: Velstrian deletes or returns data on the same schedule as the UK policy, and the customer may ask for deletion at any time.</p>
+<p><strong>Sub-processor terms.</strong> As Schedule 1. The CCPA treats a disclosure to a recipient without a compliant contract as potentially a sale or sharing (<a href="https://prighter.com/resources/laws/ccpa-regulations/sections/7051">same source</a>), so the flow down in writing is the item to prove. <strong>COUNSEL:</strong> confirm that the Anthropic and Google standard terms count as a compliant service provider contract for CCPA.</p>
+<p><strong>Open point.</strong> Velstrian is a UK company with no US presence. <strong>COUNSEL:</strong> confirm the CCPA applies to the customer, and that Velstrian needs no US registration. Data broker registration is not relevant because Velstrian does not sell data.</p>
+<h2>5. Canada (PIPEDA and Quebec Law 25)</h2>
+<p><strong>Law and status.</strong></p>
+<ul>
+<li>PIPEDA covers private sector commercial activity across Canada, and has a breach regime. Quebec has its own act (Law 25) that applies in Quebec. Alberta and British Columbia have their own private sector acts (not verified here).</li>
+<li>Source for breach rules: <a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/">OPC guidance</a> and the <a href="https://laws-lois.justice.gc.ca/eng/regulations/SOR-2018-64/page-1.html">Breach of Security Safeguards Regulations</a>.</li>
+</ul>
+<p><strong>What changes versus the UK DPA.</strong></p>
+<ul>
+<li><strong>PIPEDA treats the customer as accountable for data it hands to a processor.</strong> The OPC says the organisation stays responsible for personal information transferred to a third party for processing, and should have contracts to address the breach provisions, notification and record keeping (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/">OPC guidance</a>). So the addendum gives the customer a clear contractual hook: comparable protection, breach help, and records. The &quot;comparable level of protection&quot; wording of the PIPEDA principle was <strong>not verified here</strong>. <strong>COUNSEL:</strong> quote Schedule 1, Principle 4.1.3 of PIPEDA.</li>
+<li><strong>Quebec is stricter and needs its own section.</strong> Practitioner guidance says that before communicating personal information outside Quebec, the organisation must run a privacy impact assessment and rely mainly on contractual safeguards (<a href="https://www.blg.com/en/insights/2022/12/cross-border-transfers-of-personal-information-outside-quebec">BLG</a>, <a href="https://iabcanada.com/wp-content/uploads/2022/06/IAB-Canada_BPG-Que-Cross-Border-Transfer-Guidance_June-2022.pdf">IAB Canada</a>). One commentator reads this as covering even hosting elsewhere in Canada (not the statute, verify). Velstrian&#39;s job is to give a Quebec customer the facts the assessment needs: where data is stored (Ireland), where it is processed (UK, EU, US), who the 18 sub-processors are, and the contractual safeguards. This paper does that in a one page table that counsel can attach.</li>
+</ul>
+<p><strong>Transfer mechanism.</strong> Neither PIPEDA nor Law 25 requires a named transfer tool like the SCCs. PIPEDA relies on accountability and contract. Quebec relies on the assessment and contract. The addendum contains: (a) a statement of locations, (b) a promise to apply protection comparable to the customer&#39;s, (c) the sub-processor flow down, and (d) help with the Quebec assessment on request. <strong>COUNSEL:</strong> confirm no prescribed standard clauses exist for either regime.</p>
+<p><strong>Breach notice.</strong> PIPEDA: the customer reports to the OPC and notifies individuals &quot;as soon as feasible&quot; where there is a real risk of significant harm, and keeps a record of every breach for 24 months (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/">OPC</a>). Velstrian therefore tells the customer fast enough for that, and keeps its own record of any breach affecting Canadian customer data for 24 months. Quebec&#39;s incident reporting to the Commission d&#39;accès was <strong>not verified here</strong>. <strong>COUNSEL:</strong> supply the Quebec timing and content.</p>
+<p><strong>Retention.</strong> PIPEDA expects data kept only as long as needed. Existing schedule fits. The 24 month breach record is new and should be added to Velstrian&#39;s internal records plan (a tracker item, not a code change).</p>
+<p><strong>Sub-processor terms.</strong> As Schedule 1. Quebec customers may want the right to object. The 14 day objection window in clause 6.4 serves.</p>
+<p><strong>Language point (not verified here).</strong> Quebec law may require contract documents to be offered in French. <strong>COUNSEL:</strong> confirm whether a French version of the addendum and DPA is needed before a Quebec customer signs.</p>
+<h2>6. Australia (Privacy Act 1988 and the Australian Privacy Principles)</h2>
+<p><strong>Law and status.</strong></p>
+<ul>
+<li>The Privacy Act binds APP entities (most organisations above the small business turnover threshold, plus others). <strong>COUNSEL:</strong> confirm the current threshold and whether the small business exemption still stands, because many Australian SME customers may fall outside it. Not verified here.</li>
+<li>APP 8 and section 16C govern disclosure to an overseas recipient. Velstrian is outside Australia, so a customer sending data to Velstrian is making an overseas disclosure. Source: <a href="https://www.oaic.gov.au/privacy/australian-privacy-principles-guidelines/chapter-8-app-8-cross-border-disclosure-of-personal-information/">OAIC APP guidelines chapter 8</a> (updated October 2025).</li>
+</ul>
+<p><strong>What changes versus the UK DPA.</strong></p>
+<ul>
+<li>Before disclosing overseas, the customer must take reasonable steps to ensure Velstrian does not breach the APPs (other than APP 1), and under section 16C the customer stays accountable for Velstrian&#39;s acts that would breach the APPs (<a href="https://www.oaic.gov.au/privacy/australian-privacy-principles-guidelines/chapter-8-app-8-cross-border-disclosure-of-personal-information/">OAIC</a>). So the addendum is the customer&#39;s &quot;reasonable steps&quot;: Velstrian agrees to handle the data in line with the APPs, to apply the clause 5 security measures, and to flow the same promise to sub-processors.</li>
+<li>Exceptions to APP 8.1 exist (substantially similar law with enforcement, or informed consent). Velstrian should not rely on UK GDPR being &quot;substantially similar&quot; in its own paperwork. That judgement belongs to the customer. <strong>COUNSEL:</strong> decide whether to say anything on this.</li>
+</ul>
+<p><strong>Transfer mechanism.</strong> Contract. There are no mandated Australian clauses (not verified here). The OAIC says a contract binding the recipient to the APPs is the usual reasonable step. State the locations and the sub-processor chain, as in section 5.</p>
+<p><strong>Breach notice.</strong> The Notifiable Data Breaches scheme requires an entity that suspects an eligible breach to assess it within 30 calendar days and notify when it is eligible. Secondary sources only (<a href="https://www.lexmundi.com/guides/data-privacy-guide/jurisdictions/asia-pacific/australia/">Lex Mundi guide</a>). <strong>COUNSEL:</strong> confirm the primary text in Part IIIC and how it treats a processor holding the data. Velstrian&#39;s promise is to tell the customer quickly enough that the customer can start its 30 day clock without delay.</p>
+<p><strong>Retention.</strong> APP 11 deals with security and destruction of information no longer needed (not verified here, <strong>COUNSEL</strong> to confirm). The existing deletion timeline fits. Add the certification of deletion on request (already in the return and deletion policy, 30 days).</p>
+<p><strong>Sub-processor terms.</strong> As Schedule 1.</p>
+<h2>7. New Zealand (Privacy Act 2020)</h2>
+<p><strong>Law and status.</strong> The Privacy Act 2020 applies to agencies. IPP 12 governs disclosure outside New Zealand. Sources: <a href="https://privacy.org.nz/news/statements-media-releases/new-principle-for-disclosing-personal-information-overseas">Privacy Commissioner on IPP 12</a>, <a href="https://privacy.org.nz/assets/New-order/Privacy-Act-2020/Resources/Privacy-Act-2020-information-sheet-3.pdf">information sheet 3</a>.</p>
+<p><strong>What changes versus the UK DPA.</strong></p>
+<ul>
+<li><strong>Agent status is the key point.</strong> The Commissioner&#39;s guidance says sending information to an overseas provider that holds or processes it only on the sender&#39;s behalf is generally not treated as a disclosure under IPP 12, although the New Zealand agency remains responsible for how that agent handles it (<a href="https://privacy.org.nz/assets/New-order/Privacy-Act-2020/Resources/Privacy-Act-2020-information-sheet-3.pdf">search summary of information sheet 3</a>). So the addendum must make clear that Velstrian holds the data only as the customer&#39;s agent, uses it only for the customer, and does not use it for its own purposes. If Velstrian were ever to use the data for its own purposes (for example product analytics beyond account administration), it may fall into IPP 12 disclosure. <strong>COUNSEL:</strong> check Velstrian&#39;s own use of usage data under the independent controller clause 1.3.</li>
+<li>If IPP 12 does apply, the options are a recipient subject to the Act, comparable laws, agreement to protect the information (model clauses), a prescribed country, or authorised consent (<a href="https://privacy.org.nz/news/statements-media-releases/new-principle-for-disclosing-personal-information-overseas">Commissioner</a>). The prescribed country list was not confirmed as of today.</li>
+</ul>
+<p><strong>Transfer mechanism.</strong> Agent clause first. As a fallback, the addendum includes the &quot;agreement to protect the information to a comparable standard&quot; wording, which covers the model clause route.</p>
+<p><strong>Breach notice.</strong> A notifiable breach must be reported to the Privacy Commissioner &quot;as soon as practicable&quot;, the Commissioner expects within 72 hours of becoming aware it is notifiable, and failure to notify is an offence with a fine up to NZD 10,000 (<a href="https://www.privacy.org.nz/resources-and-learning/knowledge-base/view/536/">Privacy Commissioner guidance</a>, <a href="https://www.raineycollins.co.nz/your-resources/articles/privacy-mandatory-reporting">Rainey Collins summary</a>). Because the customer&#39;s 72 hour expectation starts when its own people identify the criteria, a processor notice window of 72 hours is too slow. This is the strongest reason for decision D-A.</p>
+<p><strong>Retention.</strong> IPP 9 (keep no longer than needed, not verified here). Existing schedule fits.</p>
+<p><strong>Sub-processor terms.</strong> As Schedule 1.</p>
+<h2>8. Singapore (Personal Data Protection Act 2012)</h2>
+<p><strong>Law and status.</strong> The PDPA applies to organisations. A processor is a &quot;data intermediary&quot;. Under section 4(3) the customer has the same obligations for data processed on its behalf by a data intermediary as if it had processed it itself, including the transfer limitation obligation (<a href="https://www.pdpc.gov.sg/-/media/Files/PDPC/PDF-Files/Commissions-Decisions/GD_Supernova-Pte-Ltd_06102022.pdf">PDPC decision</a>). Which obligations bind the intermediary directly was not settled by these results. <strong>COUNSEL:</strong> confirm that the protection and retention obligations apply directly to Velstrian.</p>
+<p><strong>What changes versus the UK DPA.</strong></p>
+<ul>
+<li><strong>Transfer Limitation Obligation (section 26).</strong> Personal data may leave Singapore only if the recipient is bound by legally enforceable obligations to give a comparable standard of protection. Under the 2021 regulations the transferring organisation must take appropriate steps before the transfer to ensure that (<a href="https://www.pdpc.gov.sg/-/media/Files/PDPC/PDF-Files/Commissions-Decisions/GD_Supernova-Pte-Ltd_06102022.pdf">PDPC decision above</a>). The DPA itself, signed with Velstrian, is the legally enforceable obligation for the first hop. The onward hops (Supabase, Anthropic and the rest) need the same flow down.</li>
+<li><strong>Ready made clauses.</strong> The PDPC publishes a <a href="https://www.pdpc.gov.sg/-/media/files/pdpc/pdf-files/resource-for-organisation/guide-on-data-protection-clauses-for-agreements-relating-to-the-processing-of-personal-data-1-feb-2021.pdf">guide on data protection clauses for processing agreements</a> and a <a href="https://www.pdpc.gov.sg/-/media/files/pdpc/pdf-files/other-guides/singapore-guidance-for-use-of-asean-mccs.pdf">guidance note on the ASEAN Model Contractual Clauses</a>. <strong>COUNSEL:</strong> decide whether to build the Singapore addendum on the PDPC sample clauses. Recommended, because a Singapore customer&#39;s own advisers will recognise them.</li>
+</ul>
+<p><strong>Transfer mechanism.</strong> Contract that meets the PDPC test, plus a table of recipient locations.</p>
+<p><strong>Breach notice.</strong> A data intermediary that has reason to believe a breach occurred must tell the organisation &quot;without undue delay&quot; (section 26C(3)). The organisation has up to 30 calendar days to assess, then must notify the PDPC as soon as practicable and no later than 3 calendar days after it assesses the breach as notifiable (section 26D(1)). Source: <a href="https://sso.agc.gov.sg/Act/PDPA2012?ProvIds=P16A-">PDPA on Singapore Statutes Online</a> and the <a href="https://www.pdpc.gov.sg/-/media/files/pdpc/pdf-files/other-guides/guide-on-managing-and-notifying-data-breaches-under-the-pdpa-15-mar-2021.pdf">PDPC breach guide</a>. The PDPC sample clauses have the contractor tell the customer immediately.</p>
+<p><strong>Retention.</strong> The retention limitation applies. Existing schedule fits.</p>
+<p><strong>Sub-processor terms.</strong> As Schedule 1.</p>
+<h2>9. Decisions for the owner (each a question, one recommended answer)</h2>
+<p><strong>D-A. One breach notice number for all addenda.</strong> Options: (a) keep 72 hours everywhere, (b) &quot;without undue delay and within 48 hours&quot; everywhere, (c) different numbers per country. Recommended: (b). <strong>Decided 2026-10-23, D314: (b) for the UK DPA clause 8.2.</strong> Reasons: New Zealand&#39;s regulator expects the customer to report within 72 hours of awareness, Singapore requires &quot;without undue delay&quot;, and a processor notice that uses the whole 72 hours leaves the customer no time. This also changes DPA clause 8.2 (marked owner to confirm already), so the UK customers get the same promise. Check the incident process can meet 48 hours before signing.</p>
+<p><strong>D-B. One master addendum with five short country schedules, or five separate addenda.</strong> Recommended: one master addendum, five schedules. Less to maintain, one signature.</p>
+<p><strong>D-C. Which markets first.</strong> Options: (a) paper all five before the first non UK paid customer, (b) paper each country when its first paying customer appears. Recommended: (b) for Australia, New Zealand and Singapore, and (a) for the US and Canada, because the US and Canada are the largest and Quebec is the most paperwork heavy. This matches the inventory recommendation of &quot;before the first non UK paid customer&quot; (inventory section 9 item 2).</p>
+<p><strong>D-C2. Quebec.</strong> Options: (a) include Quebec in the Canada schedule and offer a French copy, (b) say in sales material that Quebec customers are not served yet. Recommended: (b) until counsel confirms the French language point, because a missing French contract is a cheap thing to avoid.</p>
+<p><strong>D-D. Who pays and how much.</strong> Counsel fees are real money and need the RULE 0-G cost statement before any engagement. No figure is stated here because none was researched. Ask two or three firms for a fixed fee for &quot;review five short addenda built on an existing DPA&quot;.</p>
+<p><strong>D-E. Say so in sales material meanwhile.</strong> Option (b) in the inventory is to ship with the DPA as is and say so. Recommended: allow it for the first pilots only if the sales copy says plainly &quot;UK and EU GDPR DPA available now, local law addenda on request&quot;.</p>
+<h2>10. Questions for counsel (consolidated)</h2>
+<ol>
+<li>Confirm each law statement in sections 4 to 8 against the current text. Items marked &quot;not verified here&quot; are the gaps.</li>
+<li>Do the Anthropic and Google standard terms satisfy a CCPA service provider contract, a PDPA enforceable obligation and an APP 8 reasonable step, or is a signed DPA with each needed?</li>
+<li>Does Velstrian&#39;s own use of usage data (clause 1.3 independent controller) take it outside the New Zealand agent status?</li>
+<li>Is a French version needed for Quebec?</li>
+<li>Retention: billing records are 7 years everywhere (owner decision D314, 2026-10-23). Audit log &quot;up to 7 years&quot; is under review in the policy (owner action item 5).</li>
+<li>Governing law and forum. Keep England and Wales, or add local language for any of the five?</li>
+<li>Liability: does any addendum need its own data protection cap (see the sign off pack)?</li>
+</ol>
+<h2>11. Corpus and method</h2>
+<p>Read: <code>docs/legal/data-processing-agreement.md</code> (all 440 lines), <code>docs/legal/data-return-and-deletion-policy.md</code> (policy sections 3 to 6), <code>web/app/(legal)/retention/page.tsx</code> (schedule rows), <code>docs/intl/UK-ONLY-ASSUMPTIONS-INVENTORY-2026-10-22.md</code> (section H and section 9), the Terms liability clause in <code>crowagent-website/astro/src/content/legal/terms.md</code>. Web: the pages linked inline, found by search, with summaries read rather than full statutes. A statement the searches did not support is marked &quot;not verified here&quot;. No code, test or build was run.</p>
+</main></body></html>

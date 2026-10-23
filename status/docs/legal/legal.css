@@ -1,0 +1,10 @@
+:root{color-scheme:dark light}
+body{font:15px/1.65 system-ui,sans-serif;background:Canvas;color:CanvasText;margin:0}
+main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+a{color:LinkText}
+code,pre{font-family:ui-monospace,monospace;font-size:.88em}
+pre{overflow-x:auto;padding:12px;border:1px solid GrayText;border-radius:8px}
+table{border-collapse:collapse;display:block;overflow-x:auto}
+th,td{border:1px solid GrayText;padding:6px 10px;text-align:left;vertical-align:top}
+blockquote{margin:12px 0;padding:4px 14px;border-left:3px solid GrayText}
+.src{font-size:.82em;color:GrayText;border-bottom:1px solid GrayText;padding-bottom:10px}

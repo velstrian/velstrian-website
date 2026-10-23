@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Service level agreement (draft)</title><link rel="stylesheet" href="legal.css"></head>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/legal/service-level-agreement.md</code> at <code>1b69f46b6</code>. A read only copy, edit the source, not this page.</p>
+<h1>Service Level Agreement (SLA)</h1>
+<blockquote>
+<p><strong>DRAFT — pending legal review and owner sign-off.</strong> <code>[MB-004]</code></p>
+<p>This document is a drafting aid prepared for review and execution by Velstrian Systems Ltd&#39;s owner and
+legal adviser. It is <strong>not</strong> legally approved and creates no binding obligation until it has been
+reviewed, all <code>[DEFAULT — owner to confirm]</code> items have been ratified by the owner, and it has been
+executed. Do not publish, rely on, or incorporate it into a customer contract before then. Pre-filled
+defaults are clearly labelled <code>[DEFAULT — owner to confirm]</code>; they make the document complete and
+usable but are <strong>not</strong> ratified and do <strong>not</strong> make it legally approved.</p>
+<p><strong>Consolidation note.</strong> This is the single canonical SLA. It <strong>consolidates and supersedes</strong> the
+earlier draft at <code>docs/legal/SLA.md</code> (now a superseded stub). Reconcile any customer-specific
+execution against this document only.</p>
+</blockquote>
+<hr>
+<h2>0. Provider</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Provider</td>
+<td><strong>Velstrian Systems Ltd</strong> (&quot;<strong>Velstrian</strong>&quot;, &quot;<strong>we</strong>&quot;)</td>
+</tr>
+<tr>
+<td>Company number</td>
+<td><strong>17076461</strong></td>
+</tr>
+<tr>
+<td>Registered office</td>
+<td><strong>Reading, Berkshire, RG1 6SP</strong></td>
+</tr>
+<tr>
+<td>Legal contact</td>
+<td><strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong></td>
+</tr>
+<tr>
+<td>Support contact</td>
+<td><strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong></td>
+</tr>
+<tr>
+<td>Services covered</td>
+<td>Velstrian Bid and Velstrian Buy (the &quot;<strong>Services</strong>&quot;)</td>
+</tr>
+<tr>
+<td>Governing law</td>
+<td>England &amp; Wales</td>
+</tr>
+</tbody></table>
+<p>This SLA forms part of the agreement between Velstrian and the customer (&quot;<strong>Customer</strong>&quot;, &quot;<strong>you</strong>&quot;)
+and applies to <strong>paid subscriptions</strong>. Free trials, free-tier tools, and beta or &quot;coming soon&quot;
+features are provided <strong>as-is</strong> and are not covered by this SLA unless expressly stated otherwise.
+This SLA is intended to be <strong>SME-appropriate and proportionate</strong>; it does not offer enterprise-grade
+guarantees except where an enterprise tier is expressly agreed.</p>
+<hr>
+<h2>1. Uptime commitment</h2>
+<p>1.1 Velstrian will use commercially reasonable efforts to make the Services <strong>Available</strong> for at
+least the <strong>Uptime Commitment</strong> below in each calendar month, measured under clause 2 and excluding
+the events in clause 3:</p>
+<table>
+<thead>
+<tr>
+<th>Plan tier</th>
+<th>Monthly Uptime Commitment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Standard</strong> (all paid plans by default)</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> 99.5% / month</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong> (where expressly agreed)</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> 99.9% / month</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Context for the owner&#39;s decision (not a contractual term):</p>
+<ul>
+<li><strong>99.5%/month</strong> ≈ up to ~3h 39m of allowed downtime per 30-day month — a common, defensible SME
+starting point.</li>
+<li><strong>99.9%/month</strong> ≈ up to ~43m 50s of allowed downtime per 30-day month — harder to meet on a
+small infrastructure footprint and increases service-credit exposure.</li>
+</ul>
+</blockquote>
+<p>1.2 &quot;<strong>Available</strong>&quot; means the core application responds to authenticated requests and serves its
+primary functions. A degradation limited to a single non-core feature, or to an optional integration
+provided by a third party, is not treated as unavailability of the whole Service.</p>
+<hr>
+<h2>2. Measurement</h2>
+<p>2.1 <strong>Measurement window.</strong> Uptime is measured per <strong>calendar month (UTC)</strong>.</p>
+<p>2.2 <strong>Monthly Uptime Percentage</strong> =
+<code>((Total minutes in month − Excluded minutes − Downtime minutes) ÷ (Total minutes in month − Excluded minutes)) × 100</code>,
+where &quot;Downtime minutes&quot; are minutes during which the Service was not Available, excluding the events
+in clause 3.</p>
+<p>2.3 <strong>Source of truth.</strong> Availability is measured by Velstrian Tenderworks&#39; monitoring and reflected on the
+public <strong>status page at <code>https://status.velstrian.com</code></strong> (reached from <code>https://app.crowagent.ai/status</code>,
+which redirects there). Monitoring probes the app (<code>https://app.crowagent.ai</code>), the marketing site
+(<code>https://crowagent.ai</code>) and the API health endpoint (<code>https://api.crowagent.ai/healthz</code>) at 5-minute
+intervals and raises an incident after 2 consecutive failed checks (≈10 minutes). Customers may
+reference the status page for incident history (uptime shown over the last 90 days).</p>
+<p>2.4 <strong>Downtime start/stop.</strong> An incident begins when the Service is first confirmed unavailable (by
+monitoring or a verified Customer report) and ends when service is restored.</p>
+<hr>
+<h2>3. Exclusions</h2>
+<p>The following do <strong>not</strong> count as Downtime and are excluded from the Uptime calculation:</p>
+<p>3.1 <strong>Scheduled maintenance</strong> for which Velstrian gives at least <strong>[DEFAULT — owner to confirm]</strong> 48
+hours advance notice via the status page and/or email, scheduled where practicable during a low-usage
+window (<strong>[DEFAULT — owner to confirm]</strong> 22:00–06:00 UK time, weekends).</p>
+<p>3.2 <strong>Emergency maintenance</strong> reasonably required to address a security vulnerability or imminent
+risk to the Service, undertaken with as much notice as is practicable. (Velstrian operates a
+production-only deployment model; urgent security patches may be deployed with minimal notice.)</p>
+<p>3.3 <strong>Force majeure</strong> — events beyond Velstrian Tenderworks&#39; reasonable control (internet backbone failures,
+DDoS attacks, acts of government, natural disasters, widespread cloud-provider outages).</p>
+<p>3.4 <strong>Third-party / Sub-Processor outages</strong> outside Velstrian Tenderworks&#39; reasonable control, including
+failures of the underlying hosting (Vercel, Railway), database (Supabase), CDN/WAF (Cloudflare),
+email (Brevo), payments (Stripe), AI providers (Anthropic, Google), or analytics (PostHog), and
+outages of optional Customer-connected integrations (e.g. Xero, QuickBooks, Sage, Microsoft 365,
+Google Workspace, Companies House, EPC register).</p>
+<p>3.5 <strong>Customer-caused issues</strong> — the Customer&#39;s own network or equipment; misuse or use contrary to
+the documentation or acceptable-use terms; the Customer&#39;s own configuration changes; suspension for
+non-payment; or exceeding published rate/usage limits (e.g. the export/deletion rate limits).</p>
+<p>3.6 <strong>Beta, trial, free-tier, and clearly-labelled experimental or &quot;coming soon&quot; features.</strong></p>
+<hr>
+<h2>4. Support</h2>
+<p>4.1 <strong>Channel.</strong> Support is provided by email/ticket to <strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong>.
+<strong>[DEFAULT — owner to confirm]</strong> email/ticket to <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> is the primary channel; confirm
+whether an in-product support widget/ticketing is also or instead offered.</p>
+<p>4.2 <strong>Support hours.</strong> <strong>[DEFAULT — owner to confirm]</strong> business hours 09:00–17:30 UK time,
+Monday–Friday, excluding UK public holidays. The targets below are measured within support hours.</p>
+<p>4.3 <strong>Severity levels and target initial response times</strong> (time to a human acknowledgement, not time
+to resolution):</p>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Description</th>
+<th>Target initial response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S1 — Critical</strong></td>
+<td>Service wholly unavailable/unusable for most users, no workaround; or a confirmed security incident affecting Customer data</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> within 4 business hours</td>
+</tr>
+<tr>
+<td><strong>S2 — High</strong></td>
+<td>Major feature unavailable or seriously impaired; significant impact, partial workaround may exist</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> within 1 business day</td>
+</tr>
+<tr>
+<td><strong>S3 — Normal</strong></td>
+<td>Minor feature issue, limited impact, or a question with a reasonable workaround</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> within 2 business days</td>
+</tr>
+<tr>
+<td><strong>S4 — Low</strong></td>
+<td>Cosmetic issue, documentation query, or feature request</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> within 5 business days</td>
+</tr>
+</tbody></table>
+<p>4.4 Response targets are objectives, not guarantees, and do not carry service credits (credits relate
+to uptime under clause 5). Velstrian assigns the initial severity and may reasonably re-classify based
+on investigation.</p>
+<hr>
+<h2>5. Service credits</h2>
+<p>5.1 If the Monthly Uptime Percentage for a Service falls below the applicable Uptime Commitment in a
+calendar month, the Customer&#39;s <strong>sole and exclusive remedy</strong> is a <strong>service credit</strong> against a future
+invoice, on request, per the schedule below.</p>
+<p>5.2 <strong>Service-credit schedule</strong> (percentage of the affected monthly subscription fee for the affected
+Service):</p>
+<table>
+<thead>
+<tr>
+<th>Monthly Uptime Percentage</th>
+<th>Service credit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Below Commitment but ≥ 99.0%</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> 5%</td>
+</tr>
+<tr>
+<td>≥ 95.0% and &lt; 99.0%</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> 10%</td>
+</tr>
+<tr>
+<td>&lt; 95.0%</td>
+<td><strong>[DEFAULT — owner to confirm]</strong> 25%</td>
+</tr>
+</tbody></table>
+<p>5.3 <strong>Claim process.</strong> To receive a credit the Customer must submit a request to <strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong>
+within <strong>[DEFAULT — owner to confirm]</strong> 30 days of the end of the affected month, including the
+dates/times of unavailability. Velstrian validates the claim against its monitoring and status-page
+records.</p>
+<p>5.4 <strong>Cap.</strong> Total service credits in any single month will not exceed <strong>[DEFAULT — owner to confirm]</strong>
+100% of that month&#39;s fee for the affected Service.</p>
+<p>5.5 Service credits are non-refundable, have no cash value, apply only to future invoices, and are not
+available while the Customer&#39;s account is in arrears.</p>
+<hr>
+<h2>6. Escalation path</h2>
+<p>6.1 Standard route: raise a ticket at <strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong> with the severity, impact, and any
+error detail. For a suspected outage, check <code>https://status.velstrian.com</code> first — an active incident
+means Velstrian is already engaged.</p>
+<p>6.2 If an <strong>S1</strong> issue is not acknowledged within the S1 target in clause 4.3, or the Customer is
+dissatisfied with progress, the Customer may escalate to <strong>[DEFAULT — owner to confirm]</strong> the Velstrian
+operations owner at <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>.</p>
+<p>6.3 Velstrian will provide status updates on an active S1/S2 incident at reasonable intervals
+(target: roughly every <strong>[DEFAULT — owner to confirm]</strong> 30–60 minutes for S1) via the ticket and/or the
+status page until resolution.</p>
+<hr>
+<h2>7. General</h2>
+<p>7.1 This SLA does not apply during free trials, to free tools, or to features labelled beta or
+&quot;coming soon&quot;.</p>
+<p>7.2 Velstrian may update this SLA <strong>prospectively</strong>; material adverse changes will be notified before
+they take effect and <strong>[DEFAULT — owner to confirm]</strong> will not apply to the Customer&#39;s current paid term
+until renewal.</p>
+<p>7.3 Nothing in this SLA limits liability that cannot be limited under applicable law.</p>
+<hr>
+<h2>Owner action items (<code>[DEFAULT — owner to confirm]</code>) in this document</h2>
+<blockquote>
+<p>Defaults have been pre-filled inline (each labelled <code>[DEFAULT — owner to confirm]</code>) so the document is
+complete and usable; the owner must still ratify each before execution.</p>
+</blockquote>
+<ol>
+<li>Standard and enterprise uptime targets (clause 1.1; defaults 99.5% / 99.9%).</li>
+<li>Scheduled-maintenance notice period (default 48h) and maintenance window (clause 3.1).</li>
+<li>Primary support channel — email vs in-product widget (clause 4.1).</li>
+<li>Support hours (clause 4.2).</li>
+<li>Initial-response targets per severity S1–S4 (clause 4.3).</li>
+<li>Service-credit percentages (defaults 5% / 10% / 25%), claim window (default 30 days), and monthly cap (default 100%) (clauses 5.2–5.4).</li>
+<li>Named escalation contact and S1 update cadence (clauses 6.2–6.3).</li>
+<li>SLA change-control approach (clause 7.2).</li>
+</ol>
+</main></body></html>

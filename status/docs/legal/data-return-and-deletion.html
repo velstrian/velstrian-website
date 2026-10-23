@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Data return and deletion policy (draft)</title><link rel="stylesheet" href="legal.css"></head>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/legal/data-return-and-deletion-policy.md</code> at <code>9280aada4</code>. A read only copy, edit the source, not this page.</p>
+<h1>Data Return and Deletion Policy</h1>
+<blockquote>
+<p><strong>DRAFT — pending legal review and owner sign-off.</strong> <code>[MB-009]</code></p>
+<p>This document is a drafting aid prepared for review and execution by Velstrian Systems Ltd&#39;s owner and
+legal adviser. It is <strong>not</strong> legally approved and creates no binding obligation until it has been
+reviewed, all <code>[DEFAULT — owner to confirm]</code> items have been ratified by the owner, and it has been
+executed. Do not publish, rely on, or incorporate it into a customer contract before then. Pre-filled
+defaults are clearly labelled <code>[DEFAULT — owner to confirm]</code>; they make the document complete and
+usable but are <strong>not</strong> ratified and do <strong>not</strong> make it legally approved.</p>
+<p><strong>Consolidation note.</strong> This is the single canonical data return &amp; deletion policy. It <strong>consolidates
+and supersedes</strong> the earlier draft at <code>docs/legal/data-return-and-deletion.md</code> (now a superseded
+stub). Reconcile any customer-specific execution against this document only.</p>
+</blockquote>
+<hr>
+<h2>0. Provider</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Provider</td>
+<td><strong>Velstrian Systems Ltd</strong> (&quot;<strong>Velstrian</strong>&quot;)</td>
+</tr>
+<tr>
+<td>Company number</td>
+<td><strong>17076461</strong></td>
+</tr>
+<tr>
+<td>ICO registration</td>
+<td><strong>C1901492</strong></td>
+</tr>
+<tr>
+<td>Registered office</td>
+<td><strong>Reading, Berkshire, RG1 6SP</strong></td>
+</tr>
+<tr>
+<td>Legal / privacy contact</td>
+<td><strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong></td>
+</tr>
+<tr>
+<td>Support contact</td>
+<td><strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong></td>
+</tr>
+<tr>
+<td>Governing law</td>
+<td>England &amp; Wales; <strong>UK GDPR</strong> and the <strong>Data Protection Act 2018</strong> (and <strong>EU GDPR</strong> where applicable)</td>
+</tr>
+</tbody></table>
+<p>This policy explains how a Customer exports (returns) its data, how long Velstrian retains data, and
+how and when data is deleted — including the right to erasure under <strong>Article 17</strong> and the right to
+data portability under <strong>Article 20</strong>. It supports and is referenced by the Data Processing Agreement
+(<code>docs/legal/data-processing-agreement.md</code>, clause 9) and applies to Velstrian Bid and Velstrian Buy.</p>
+<p>This policy is grounded in the platform&#39;s <strong>actual, shipped</strong> export and deletion mechanisms, cited
+below so the commitments match what the software does.</p>
+<hr>
+<h2>1. How the Customer exports (returns) its data</h2>
+<p>1.1 <strong>Self-service in-product export (Art. 20 portability).</strong> Authenticated users can export their
+account and organisation data on demand. The export is produced as a <strong>ZIP archive</strong>
+(<code>application/zip</code>) containing <strong>one JSON file per data table plus a <code>manifest.json</code> and a
+<code>README.txt</code></strong>, and is downloaded directly over TLS.</p>
+<ul>
+<li>Mechanism: <code>GET /v1/user/export</code> → <code>export_data</code> (<code>api/app/routers/user.py:286</code>), which calls
+<code>build_gdpr_zip</code> (<code>api/app/services/account_deletion.py:404</code>). The download filename is
+<code>crowagent-gdpr-export-&lt;timestamp&gt;.zip</code>.</li>
+<li>Web surfaces: <code>web/app/api/account/export</code>, <code>web/app/api/user/data-export</code>, and
+<code>web/app/api/account/export/request</code> / <code>export/list</code> for the asynchronous DSAR pipeline.</li>
+<li><strong>Coverage.</strong> The archive covers the user&#39;s profile and organisation records plus the product
+content tables — assets/properties, compliance results, reports, monitoring alerts, notifications,
+Velstrian Bid contracts / measures / narratives / missions, evidence items and log, subscriptions,
+activity log, AI-usage records, API-key <strong>metadata</strong>, and NPS responses (see the <code>_EXPORT_TABLES</code>
+list at <code>api/app/services/account_deletion.py:311</code>). A <code>manifest.json</code> records the schema version
+and per-table row counts.</li>
+<li><strong>Secrets are excluded.</strong> Raw API-key values are never included — only key metadata is exported
+(<code>api/app/services/account_deletion.py:533</code>).</li>
+<li><strong>Completeness guarantee.</strong> A read failure on any table aborts the whole export rather than
+silently delivering a partial archive (<code>GdprExportError</code>,
+<code>api/app/services/account_deletion.py:518-530</code>), so a Subject Access export is complete or it fails
+loudly.</li>
+</ul>
+<p>1.2 <strong>Sensitive-action protection.</strong> Because a full export is a bulk-PII operation, the endpoint
+requires an <strong>MFA (AAL2) step-up</strong> where the user has MFA enrolled
+(<code>require_aal2_for_sensitive_action</code>, <code>api/app/routers/user.py:295</code>) and is <strong>rate-limited to 5
+exports per day</strong> (<code>api/app/routers/user.py:287</code>).</p>
+<p>1.3 <strong>Encrypted asynchronous (DSAR) export.</strong> For subject-access requests fulfilled asynchronously,
+the archive is written to storage <strong>AES-256 encrypted</strong> (<code>pyzipper</code>) with a fresh, high-entropy
+CSPRNG passphrase (<code>generate_export_passphrase</code>, <code>api/app/services/account_deletion.py:38</code>) that is
+delivered <strong>out of band</strong> in the export-ready email — the passphrase never appears in the object key,
+filename, or signed URL.</p>
+<p>1.4 <strong>Formats.</strong> Structured data is exported as <strong>JSON</strong> (per the mechanism above); generated
+documents/reports are available in their native product format (e.g. <strong>PDF</strong>, and <strong>DOCX</strong> where a
+product offers branded document export). <strong>[DEFAULT — owner to confirm]</strong> JSON is the canonical
+structured-export format, additionally offered as <strong>CSV</strong> where a product already exposes it (e.g.
+<code>web/app/api/core/export-csv</code>, <code>web/app/api/properties/export-csv</code>); confirm this canonical
+customer-facing format list.</p>
+<p>1.5 <strong>Assisted / bulk export.</strong> Where a bulk or full-account export exceeds the self-service feature,
+the Customer may request an assisted export by emailing <strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong>; Velstrian will
+provide it within <strong>[DEFAULT — owner to confirm]</strong> 14 days of a verified request.</p>
+<hr>
+<h2>2. Return window on termination</h2>
+<p>2.1 On termination or expiry, the Customer may export or request return of its data for a period of
+<strong>[DEFAULT — owner to confirm]</strong> 30 days from the effective termination date (the &quot;<strong>Return Window</strong>&quot;). During the Return Window the account is retained in a <strong>read-only / retrieval
+state</strong> to allow export via the mechanisms in clause 1.</p>
+<p>2.2 The Customer is responsible for completing its exports within the Return Window. Velstrian will
+give reasonable notice of the Return Window&#39;s start and end.</p>
+<p>2.3 On request during the Return Window, Velstrian will assist with return of the data in the formats
+set out in clause 1.4.</p>
+<hr>
+<h2>3. Deletion timeline and mechanism (Art. 17 erasure)</h2>
+<p>3.1 <strong>Two deletion paths ship in the platform:</strong></p>
+<ul>
+<li><p><strong>(a) Grace-scheduled deletion (default self-service).</strong> When a user requests account deletion, the
+account is <strong>soft-deleted immediately</strong> (the user is locked out) and a <strong>hard delete is scheduled
+14 days later</strong>, giving a grace/undo window. The user receives an email confirming the scheduled
+erasure date with a <strong>cancel</strong> link, and can cancel any time within the 14 days.</p>
+<ul>
+<li>Mechanism: <code>enqueue_deletion_request</code> writes a <code>deletion_requests</code> row with
+<code>scheduled_for = now + 14 days</code> and sets <code>profiles.deleted_at = NOW()</code>
+(<code>api/app/services/deletion_service.py:317</code>, grace constant <code>_GRACE_PERIOD_DAYS = 14</code> at
+<code>:60-61</code>). Cancellation via <code>cancel_deletion_request</code> (<code>:397</code>) restores the profile. A scheduler,
+<code>process_due_deletion_requests</code> (<code>:694</code>), hard-deletes rows whose <code>scheduled_for</code> has elapsed.</li>
+<li>Web surfaces: <code>web/app/api/account/delete/request</code>, <code>web/app/api/account/delete/cancel</code>,
+<code>web/app/api/account/cancel-deletion</code>, and the completion email cron
+<code>web/app/api/cron/account-deleted-emails</code>.</li>
+</ul>
+</li>
+<li><p><strong>(b) Immediate deletion.</strong> A direct, no-grace erasure path that runs the destructive cascade
+synchronously after re-authentication.</p>
+<ul>
+<li>Mechanism: <code>POST /v1/user/delete</code> → <code>delete_account</code> (<code>api/app/routers/user.py:49</code>). It requires
+a <strong>password reconfirmation</strong> (<code>api/app/routers/user.py:91-111</code>) and an <strong>MFA (AAL2) step-up</strong>
+(<code>:57</code>), is <strong>rate-limited to 3/hour</strong> (<code>:50</code>), <strong>cancels Stripe subscriptions before</strong> the
+database delete (<code>:119</code>), runs the cascade, deletes the auth user, revokes tokens, and emails a
+confirmation.</li>
+</ul>
+</li>
+</ul>
+<p>3.2 <strong>Hard-delete mechanics (both paths).</strong> Erasure runs the SECURITY DEFINER <code>atomic_delete_user</code>
+RPC in a single transaction, cascading all org-scoped and user-scoped rows
+(<code>api/app/services/deletion_service.py:506</code>; <code>api/app/routers/user.py:152</code>), then deletes the
+<code>auth.users</code> row, <strong>globally revokes refresh tokens</strong>, and records still-unexpired access tokens in
+<code>revoked_tokens</code> so the request proxy refuses them for the remainder of their short lifetime
+(<code>api/app/routers/user.py:198-235</code>; <code>api/app/services/token_revocation.py</code>).</p>
+<p>3.3 <strong>Active-system deletion timing.</strong> Path (b) deletes from active production systems
+<strong>immediately</strong>; path (a) does so at the end of the <strong>14-day grace window</strong>. In all cases active-system
+deletion completes no later than <strong>[DEFAULT — owner to confirm]</strong> 30 days after the grace window / a
+verified deletion instruction.</p>
+<p>3.4 <strong>Audit-log handling (Art. 17 vs Art. 5(1)(d) accuracy).</strong> Velstrian retains a minimal,
+<strong>anonymised</strong> audit record of security-relevant actions. On erasure, personally identifying
+information is scrubbed from the immutable <code>audit_log</code> via the <code>anonymise_audit_log_for_user</code> RPC
+(<code>api/app/services/deletion_service.py:472</code>); only organisation reference, action and timestamp are
+retained, for up to <strong>[DEFAULT — owner to confirm]</strong> 7 years (per the platform code&#39;s current
+retention setting).
+The final erasure event itself is recorded against a one-way salted <strong>pseudonym</strong>, never the raw user
+identifier (<code>_deletion_subject_pseudonym</code>, <code>api/app/services/deletion_service.py:90</code>), so the erased
+identity is not re-introduced into the ledger. If anonymisation cannot be completed, the request is
+honestly marked <code>completed_with_warnings</code> and the confirmation email does <strong>not</strong> claim the audit PII
+was removed (<code>api/app/services/deletion_service.py:259-314</code>).</p>
+<hr>
+<h2>4. Backup handling and purge lag</h2>
+<p>4.1 After active-system deletion, Customer data may persist in <strong>encrypted, access-controlled
+backups</strong> and will be purged on the normal backup-rotation cycle, no later than <strong>[DEFAULT — owner to
+confirm]</strong> 30–90 days after active-system deletion.</p>
+<p>4.2 During that window the backup data is retained <strong>solely for disaster recovery</strong>, is not used for
+any other purpose, and is protected by the security measures in the DPA. If a backup containing
+deleted data is restored for recovery, Velstrian re-applies the deletion.</p>
+<p>4.3 <strong>Sub-processor deletion.</strong> Velstrian instructs its Sub-Processors (see the DPA Schedule 1) to
+delete Customer data in line with this policy, subject to each Sub-Processor&#39;s own backup cycles.
+Stripe subscription data is cancelled/removed as part of the deletion flow (clause 3.1(b)); Stripe
+retains billing records it is required to keep as a payments provider.</p>
+<hr>
+<h2>5. Legal-retention exceptions</h2>
+<p>5.1 Velstrian may retain limited data beyond the periods above where required by UK/EU law or for the
+establishment, exercise or defence of legal claims, for example:</p>
+<ul>
+<li>billing, invoicing and tax records to meet UK statutory accounting/tax obligations —
+<strong>7 years</strong> (per HMRC / Companies Act norms, owner decision D314, 2026-10-23, the same period as
+the public retention page and the DPA clause 9.2); and</li>
+<li>minimal, anonymised security and audit-log entries — <strong>[DEFAULT — owner to confirm]</strong> up to 7 years
+(per the platform code default; see clause 3.4).</li>
+</ul>
+<p>5.2 Any retained data is minimised, isolated, access-restricted, and deleted once the legal basis for
+retention ends.</p>
+<hr>
+<h2>6. Certification of deletion</h2>
+<p>6.1 On the Customer&#39;s written request, Velstrian will provide <strong>written certification</strong> that Customer
+data has been deleted in accordance with this policy, confirming the date of active-system deletion
+and the expected/actual date of backup purge.</p>
+<p>6.2 Certification is provided within <strong>[DEFAULT — owner to confirm]</strong> 30 days of a verified request to
+<strong><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></strong>.</p>
+<hr>
+<h2>7. Mapping to in-product features</h2>
+<table>
+<thead>
+<tr>
+<th>Obligation</th>
+<th>In-product mechanism</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Portability / export</strong> (Art. 20)</td>
+<td>ZIP export (JSON per table + manifest); AAL2-gated, 5/day</td>
+<td><code>api/app/routers/user.py:286</code>; <code>account_deletion.py:404</code></td>
+</tr>
+<tr>
+<td>Encrypted async <strong>DSAR</strong> export</td>
+<td>AES-256 archive, out-of-band passphrase</td>
+<td><code>account_deletion.py:38</code>, <code>:404</code>; <code>web/app/api/account/dsar-export</code></td>
+</tr>
+<tr>
+<td><strong>Erasure</strong> (Art. 17) — grace path</td>
+<td>14-day scheduled delete + cancel, soft-delete lockout</td>
+<td><code>deletion_service.py:60</code>, <code>:317</code>, <code>:397</code>, <code>:694</code></td>
+</tr>
+<tr>
+<td><strong>Erasure</strong> (Art. 17) — immediate path</td>
+<td>password + AAL2 + Stripe cancel + cascade + token revoke</td>
+<td><code>routers/user.py:49</code></td>
+</tr>
+<tr>
+<td>Cascade hard-delete</td>
+<td><code>atomic_delete_user</code> RPC (single transaction)</td>
+<td><code>deletion_service.py:506</code>; <code>routers/user.py:152</code></td>
+</tr>
+<tr>
+<td>Audit anonymisation</td>
+<td><code>anonymise_audit_log_for_user</code>; pseudonymised final event</td>
+<td><code>deletion_service.py:472</code>, <code>:90</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>[DEFAULT — owner to confirm]</strong> the export and delete features are exposed in the account Settings
+UI (default assumed location: <strong>Settings → Privacy / Security → Delete account</strong> and the adjacent data
+export control); confirm the exact customer-facing labels/locations in the shipped UI so this mapping
+matches the live product wording.</p>
+</blockquote>
+<hr>
+<h2>Owner action items (<code>[DEFAULT — owner to confirm]</code>) in this document</h2>
+<blockquote>
+<p>Defaults have been pre-filled inline (each labelled <code>[DEFAULT — owner to confirm]</code>) so the document is
+complete and usable; the owner must still ratify each before execution.</p>
+</blockquote>
+<ol>
+<li>Canonical structured-export format list — default = JSON + CSV where already exposed (clause 1.4).</li>
+<li>Assisted / bulk-export turnaround (default 14 days) (clause 1.5).</li>
+<li>Return Window length (default 30 days) (clause 2.1).</li>
+<li>Active-system deletion SLA after grace/instruction (default 30 days) (clause 3.3).</li>
+<li>Audit-log retention period (code states up to 7 years) (clauses 3.4, 5.1).</li>
+<li>Backup retention / purge-lag period (default 30–90 days) (clause 4.1).</li>
+<li>Statutory billing/tax retention period (clause 5.1). <strong>Resolved D314, 2026-10-23:</strong> 7 years.</li>
+<li>Certification turnaround (default 30 days) (clause 6.2).</li>
+<li>In-product feature labels/locations for the mapping table (clause 7).</li>
+</ol>
+</main></body></html>

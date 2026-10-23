@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Owner actions guide</title><link rel="stylesheet" href="legal.css"></head>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/release-2.8.5/OWNER-ACTIONS-GUIDE-2026-10-23.md</code> at <code>c05839e8a</code>. A read only copy, edit the source, not this page.</p>
+<h1>Owner actions guide, step by step</h1>
+<p>Date: 2026-10-23. For the owner of Velstrian Systems Ltd, trading as Velstrian Tenderworks. Contact: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>.</p>
+<p>This guide covers every action that only you can do. Each section says why it matters, how long it takes, the steps (each step says where to go and what to click or read), and the exact short message to send back to Claude. Nothing here is legal advice.</p>
+<p>Three rules that apply to every section:</p>
+<ul>
+<li>Never paste a key, password or token into chat. Where a key is involved, you copy it from one dashboard straight into another.</li>
+<li>Nothing here needs a push or a deploy. Where something would cost money, the section says so and waits for your yes.</li>
+<li>If a screen looks different from what is described, stop and reply with a screenshot description. Dashboards change, and Claude will adjust the steps.</li>
+</ul>
+<h2>Order of work</h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Action</th>
+<th>Time</th>
+<th>Urgency</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>DPA and liability cap sign off</td>
+<td>30 minutes</td>
+<td>Not urgent, no paying customers yet. Target next week</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ask your insurer what cover you hold</td>
+<td>15 minutes</td>
+<td>Needed for section 1 decision 3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ICO name change call</td>
+<td>15 minutes</td>
+<td>This week</td>
+</tr>
+<tr>
+<td>4</td>
+<td>International privacy addenda (package 8), no law firm path</td>
+<td>5 minutes now</td>
+<td>Decision only, work waits for the first customer outside the UK</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Export control rating request</td>
+<td>45 minutes</td>
+<td>Before the first non UK sale</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Gemini billing tier and Azure listing</td>
+<td>10 minutes</td>
+<td>Before any buyer pack goes out</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Security evidence pack owner items</td>
+<td>60 minutes in total, can be split</td>
+<td>Before any buyer pack goes out</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Roll the Stripe keys after the Node patch</td>
+<td>20 minutes</td>
+<td>At the release, after Claude says the patch is live</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Delete the folder C:\c</td>
+<td>2 minutes</td>
+<td>Any time</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>1. DPA and liability cap sign off</h2>
+<p>Rows: R285-TRUST-DPA-FINAL-01 and R285-TRUST-LIABILITY-CAP-01.</p>
+<h3>Your questions answered</h3>
+<p><strong>Do you review documents, the website, or contact a DPA office to change the name?</strong> None of those three, and there is no office to contact. The DPA (Data Processing Agreement) is Velstrian&#39;s own contract template. You give it to business customers who ask for one, and it says how you look after their data. It is not a registration with a regulator, so nothing needs changing &quot;at&quot; an office. The ICO name change is a separate matter and is section 3.</p>
+<p><strong>What you read</strong> is the short summary, not the full contract. Open <code>docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md</code> and read only section 3 (the 12 open points, skim them), section 4 (the cap options table) and section 6 (the reply lines). That is about two pages. The full contract at <code>docs/legal/data-processing-agreement.md</code> (440 lines) is for a lawyer, not for you.</p>
+<p><strong>You make four decisions</strong>, listed below. The website does not change as part of this. Claude changes the Terms only after your separate yes.</p>
+<p><strong>Why this is not urgent:</strong> you have no paying customers, and a DPA is only sent when a customer asks for one. A week is plenty.</p>
+<h3>Why it matters</h3>
+<p>Business buyers often ask for a DPA before they sign. Having it settled means you can answer in one email instead of stalling a deal.</p>
+<h3>Time</h3>
+<p>About 30 minutes, plus the insurer call in section 2.</p>
+<h3>Steps</h3>
+<ol>
+<li>Open <code>docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md</code> in your editor.</li>
+<li>Read section 4, the table of cap options. In plain words:<ul>
+<li>A means keep the limit as it is today (12 months of fees paid, or GBP 1,000 if that is more).</li>
+<li>B means keep that limit but add a higher, separate limit for data protection problems.</li>
+<li>C means agree a different limit with each large customer.</li>
+</ul>
+</li>
+<li>Decide four things, using the recommended answer if you have no strong view:<ul>
+<li><strong>Decision 1, breach notice wording.</strong> The draft promises to tell a customer about a data breach &quot;within 72 hours&quot;. A customer has its own 72 hour clock to tell its regulator, so 72 hours leaves them nothing. Options: (a) keep 72 hours, (b) &quot;without undue delay and within 48 hours&quot;. Recommended: (b). Only choose it if you can really tell a customer inside 48 hours. If a breach happened today you would read the alert, check it and email the customer. Two days is realistic for that.</li>
+<li><strong>Decision 2, liability cap.</strong> Options A, B or C above. Recommended: B, with no figure stated until decision 3 is done.</li>
+<li><strong>Decision 3, insurer check.</strong> Do section 2 first. The higher data protection limit in option B should not exceed what your insurance covers.</li>
+<li><strong>Decision 4, how long to keep billing records.</strong> The deletion policy says 6 years and the public retention page says 7 years. Pick one. Recommended: 7 years, because the public page already says it, so only one document changes.</li>
+</ul>
+</li>
+<li>Decide whether a lawyer reads it before you publish (see section 4 for the cheap route). Recommended: not yet, because no customer has asked. The DPA keeps its DRAFT banner until a customer asks or a lawyer has read it. The banner is honest and costs nothing.</li>
+<li>Send the reply below.</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p>Copy this and fill the brackets:</p>
+<p><code>DPA decisions: breach notice [48 hours / 72 hours], liability option [A / B / C], billing records [6 / 7] years. Keep the DRAFT banner until the first customer asks.</code></p>
+<p>Claude then updates the DPA text, the retention page and the policy to match, keeps both tracker rows OPEN until a lawyer or you remove the DRAFT banner, and asks for a separate yes before touching the Terms.</p>
+<p>If you later want the formal approval line, the exact wording is in section 6 of the pack. Do not send that line unless a lawyer has actually reviewed, because it says &quot;counsel review attached&quot;.</p>
+<hr>
+<h2>2. Ask your insurer what cover you hold</h2>
+<p>Row: R285-OWNER-INSURER-01 (new).</p>
+<h3>Why it matters</h3>
+<p>Option B in section 1 only helps if your insurance would pay for a data protection claim. Claude does not know your policy, and the repo holds no policy document.</p>
+<h3>Time</h3>
+<p>15 minutes by phone or email.</p>
+<h3>Steps</h3>
+<ol>
+<li>Find your business insurance policy schedule (the page with the cover limits). It may be in your email or with the broker who arranged it.</li>
+<li>Call or email the insurer or broker. Say: &quot;We are a small software company. Please confirm in writing: (a) do we hold professional indemnity cover and what is the limit, (b) do we hold cyber or data breach cover and what is the limit, (c) are claims from customers in the US, Canada, Australia, New Zealand and Singapore covered or excluded, (d) what name is on the policy, and can it be changed to Velstrian Systems Ltd?&quot;</li>
+<li>If you hold no cyber cover, ask for a quote. Do not buy anything yet. A purchase is a recurring cost and needs the RULE 0-G cost statement first (what it costs per month and year, who can cancel it, and what breaks without it). Claude will write that statement once you have a quote.</li>
+<li>Save the written answer in your own records. Do not put the policy number in chat.</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p><code>Insurer: PI limit GBP [x], cyber limit GBP [x or none], overseas claims [covered / excluded / unknown], name change [done / needed].</code></p>
+<hr>
+<h2>3. ICO name change call</h2>
+<p>Row: R285-REBRAND-13-REGISTRATIONS-AND-LISTINGS. Full detail: <code>docs/release-2.8.5/legal/ICO-NAME-CHANGE-PACK-2026-10-23.md</code>.</p>
+<h3>Why it matters</h3>
+<p>The ICO register must carry the new company name. The ICO is the UK data protection regulator and your data protection fee registration is C1901492. The name cannot be changed online. The ICO page says to call 0303 123 1113 or email (source: <a href="https://ico.org.uk/for-organisations/data-protection-fee/change/">https://ico.org.uk/for-organisations/data-protection-fee/change/</a>, read 2026-10-23 and recorded in the pack).</p>
+<h3>Time</h3>
+<p>10 to 15 minutes.</p>
+<h3>Steps</h3>
+<ol>
+<li>Gather these first (five minutes):<ul>
+<li>Registration reference: C1901492.</li>
+<li>Your security number, from your original ICO email or letter. If you cannot find it, use the email route below.</li>
+<li>The Companies House acceptance letter for the name change, and the new certificate if one was issued.</li>
+<li>Company number 17076461 and registered office Reading, Berkshire, RG1 6SP.</li>
+</ul>
+</li>
+<li>Search the ICO public register at <a href="https://ico.org.uk/ESDWebPages/SearchHelp">https://ico.org.uk/ESDWebPages/SearchHelp</a> for C1901492 and write down exactly how the old name appears today.</li>
+<li>Call 0303 123 1113 and say:<blockquote>
+<p>&quot;Hello. I am calling to change the organisation name on a data protection fee registration. Our registration reference is C1901492. Our company has changed its legal name at Companies House, and I need the name on the register changed to Velstrian Systems Ltd. The Companies House number is 17076461 and it stays the same company, so it is a name change and not a new organisation.&quot;</p>
+</blockquote>
+</li>
+<li>Before the call ends, ask:<ol>
+<li>Does the registration number stay the same?</li>
+<li>Will the public register show the new name, and by when?</li>
+<li>Does the fee, renewal date or Direct Debit change?</li>
+<li>Should I email the Companies House paperwork, and to which address?</li>
+<li>Can I add Velstrian Tenderworks as a trading name online afterwards?</li>
+<li>Please send written confirmation to <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>.</li>
+</ol>
+</li>
+<li>Write down the date, the adviser&#39;s name and any case number.</li>
+<li>If you prefer email: open the ICO page above, use the email address shown there, send from <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> with the subject &quot;Organisation name change, registration C1901492&quot;, attach the Companies House letter, and use the email text in section 4 of the pack. Do not include the security number unless the ICO page asks for it.</li>
+<li>After the ICO confirms, sign in as the nominated contact on the same ICO page and add the trading name Velstrian Tenderworks (up to five are allowed).</li>
+<li>In a few days, search the register again and check the new name shows.</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p><code>ICO name change: called on [date], case number [x], register now shows [yes / not yet], trading name added [yes / no].</code></p>
+<hr>
+<h2>4. International privacy addenda (package 8): do you need a law firm?</h2>
+<p>Row: R285-INTL-PRIVATE-RFP-GLOBAL-01. Full draft: <code>docs/release-2.8.5/legal/PACKAGE-8-INTL-DPA-ADDENDA-DRAFT-2026-10-23.md</code>.</p>
+<h3>Why a law firm was suggested, in plain words</h3>
+<p>Claude can draft the paper and has. Claude cannot give legal advice and cannot take legal responsibility if a draft is wrong. Privacy laws in other countries carry real fines, and a few points in the draft are marked &quot;not verified here&quot; because the primary text was not read. A lawyer&#39;s job is to confirm those points and stand behind the answer. That is the only reason. It is not required before you have a customer there.</p>
+<h3>The no law firm path (recommended)</h3>
+<p>This path is genuinely usable. It costs nothing until it is needed.</p>
+<p><strong>Step A. Do nothing now.</strong> Until a customer outside the UK is about to pay, no addendum is needed. Your existing DPA already covers UK and EU GDPR, which includes Ireland. Meanwhile your sales pages should say plainly: &quot;UK and EU GDPR data processing agreement available now, local law addenda on request.&quot; Claude can add that line when you say yes (it is decision D-E in the draft).</p>
+<p><strong>Step B. When the first customer outside the UK is close to signing, use the official templates and the draft.</strong> Be clear about what each template is for, because they are often confused:</p>
+<ul>
+<li>The <strong>UK IDTA and the UK Addendum to the EU SCCs</strong> are published by the ICO. They are the tools for a UK business that sends personal data out of the UK to a country without UK adequacy. The ICO says you can choose either, you cannot drop the mandatory clauses, and you must also complete a transfer risk assessment (source: <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/appropriate-safeguards/what-are-standard-data-protection-clauses-the-uk-idta-and-the-addendum/">https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/appropriate-safeguards/what-are-standard-data-protection-clauses-the-uk-idta-and-the-addendum/</a>). For you this covers Velstrian&#39;s own sending to US providers such as Anthropic and Google, and your DPA clause 7 already points at it. It is not the document a customer in Australia signs to send data to you.</li>
+<li>The <strong>EU standard contractual clauses</strong> (Commission Implementing Decision 2021/914) are for a data exporter in the EU sending to an importer outside the EU that the GDPR does not already cover (source: <a href="https://lawplayer.com/eu/act/32021D0914">https://lawplayer.com/eu/act/32021D0914</a>, a secondary copy of the decision, so confirm on EUR-Lex). Velstrian sits in the UK, and a secondary list of the Commission&#39;s adequacy decisions includes the UK (source: <a href="https://www.dastra.eu/en/blog/the-list-of-countries-deemed-adequate-for-gdpr-transfers-table/59031">https://www.dastra.eu/en/blog/the-list-of-countries-deemed-adequate-for-gdpr-transfers-table/59031</a>, undated, so confirm on the Commission page <a href="https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_lv">https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_lv</a>). If that holds, an Irish or other EU customer needs your DPA and no SCCs. Do not rely on this until you or a lawyer has checked the Commission page.</li>
+</ul>
+<p>Which country can rely on what (all from the package 8 draft, with its sources):</p>
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th>What the customer needs from you</th>
+<th>Official free template?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ireland, EU</td>
+<td>The existing DPA</td>
+<td>Covered above</td>
+</tr>
+<tr>
+<td>United States</td>
+<td>Service provider wording if the customer is covered by the California law (CCPA). No export tool is needed</td>
+<td>I found no official template, so this is where a lawyer helps most</td>
+</tr>
+<tr>
+<td>Canada</td>
+<td>A contract and accountability wording. Quebec is stricter (impact assessment, possibly a French contract)</td>
+<td>No prescribed clauses found, not verified here. Recommend telling Quebec buyers you do not serve Quebec yet</td>
+</tr>
+<tr>
+<td>Australia</td>
+<td>A contract that binds you to the Australian Privacy Principles (APP 8)</td>
+<td>No mandated clauses found, not verified here</td>
+</tr>
+<tr>
+<td>New Zealand</td>
+<td>A clause stating you hold the data only as the customer&#39;s agent</td>
+<td>No prescribed clauses found</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td>A contract meeting the PDPC test</td>
+<td>Yes. The PDPC publishes sample clauses (<a href="https://www.pdpc.gov.sg/-/media/files/pdpc/pdf-files/resource-for-organisation/guide-on-data-protection-clauses-for-agreements-relating-to-the-processing-of-personal-data-1-feb-2021.pdf">https://www.pdpc.gov.sg/-/media/files/pdpc/pdf-files/resource-for-organisation/guide-on-data-protection-clauses-for-agreements-relating-to-the-processing-of-personal-data-1-feb-2021.pdf</a>)</td>
+</tr>
+</tbody></table>
+<p>Claude can fill in the draft addendum for the one country in question the moment that customer appears. That is a document edit, not a code change.</p>
+<p><strong>Step C. A lawyer is worth paying for in these cases only:</strong></p>
+<ul>
+<li>A large contract, where the cost of a mistake clearly exceeds the fee. You decide the line.</li>
+<li>Any Quebec customer.</li>
+<li>A customer who insists, or whose own lawyers send a mark up.</li>
+<li>Any point in the draft marked COUNSEL that the customer&#39;s contract depends on.</li>
+</ul>
+<p><strong>How to get a fixed fee quote cheaply:</strong></p>
+<ol>
+<li>Open Find a Solicitor at <a href="https://solicitors.lawsociety.org.uk/">https://solicitors.lawsociety.org.uk/</a> (the Law Society of England and Wales directory, which lets you search by area of practice and location, see <a href="https://www.lawsociety.org.uk/public/for-public-visitors/using-a-solicitor/help-using-fas">https://www.lawsociety.org.uk/public/for-public-visitors/using-a-solicitor/help-using-fas</a>).</li>
+<li>Choose the data protection or commercial area and a location, and tick accredited specialists if offered.</li>
+<li>Email two or three firms the same one paragraph: &quot;Please quote a fixed fee, in writing, to review one short international addendum for a UK software company that already has a UK GDPR data processing agreement. Countries: [the one country needed]. The draft is attached. State what is included and what is not.&quot;</li>
+<li>Compare the written fixed fees. I found no published prices for this work, so no figure is stated here.</li>
+<li>Before you instruct anyone, Claude writes the RULE 0-G cost statement: trigger is your request, one off fee GBP [quote], recurring cost none, what breaks without it (a delayed sale in that country), and how to stop (do not sign the engagement letter).</li>
+</ol>
+<h3>Time</h3>
+<p>Five minutes to choose now. The rest waits for a customer.</p>
+<h3>Decision for you (one recommended answer)</h3>
+<ul>
+<li>Option 1, recommended: wait for the first customer outside the UK, use the draft plus the official templates, and take a fixed fee quote only for large, Quebec or insisted on cases.</li>
+<li>Option 2: pay a firm now to review all five addenda. Costs real money with no customer yet.</li>
+<li>Option 3: do nothing and never involve a lawyer. Not recommended, because a wrong draft could leave you exposed to a fine you cannot see.</li>
+</ul>
+<h3>What to reply to Claude</h3>
+<p><code>Package 8: option [1 / 2 / 3]. Add the sales line &quot;UK and EU GDPR DPA available now, local law addenda on request&quot;: [yes / no]. Breach notice uses the answer I gave in section 1.</code></p>
+<hr>
+<h2>5. Export control rating request</h2>
+<p>Row: R285-INTL-EXPORT-RATING-01. Draft: <code>docs/research/R285-ECJU-RATING-REQUEST-DRAFT-2026-10-21.md</code>.</p>
+<h3>Why it matters</h3>
+<p>You plan to sell software to customers abroad. The Export Control Joint Unit (ECJU) is the UK body that can say in writing whether your software is on the control list. Most business software is not. A written rating means you can answer a customer&#39;s compliance question with a document. The tracker records no fee for the request.</p>
+<h3>Time</h3>
+<p>About 45 minutes the first time, mostly registering.</p>
+<h3>Steps</h3>
+<ol>
+<li>Open <a href="https://www.gov.uk/guidance/uk-strategic-export-controls">https://www.gov.uk/guidance/uk-strategic-export-controls</a> and read the &quot;check if your items are listed&quot; part (the draft recorded it as updated 23 April 2026).</li>
+<li>Run the goods checker for &quot;software&quot; and &quot;information security&quot;. Save a screenshot or the result page.</li>
+<li>Open the SPIRE export licensing system from that gov.uk page. If your company has no SPIRE account, register one. SPIRE may ask for a named individual, so enter your own details there, not in any document Claude writes.</li>
+<li>Start a &quot;control list classification&quot; enquiry.</li>
+<li>Paste the enquiry text from the draft file (section headed &quot;Enquiry text&quot;) and attach the goods checker result. The draft describes two products in one enquiry, Velstrian Bid and Velstrian Buy.</li>
+<li>Submit and save the reference number.</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p><code>ECJU enquiry submitted on [date], reference [x]</code> or <code>ECJU not yet, I am stuck at [step]</code>.</p>
+<hr>
+<h2>6. Gemini billing tier and Azure listing</h2>
+<p>Row: R285-TRUST-AI-PROVIDER-DATA-MAP-01. Draft: <code>docs/trust/AI-PROVIDER-DATA-MAP-2026-10-22.md</code>.</p>
+<h3>Why it matters</h3>
+<p>Google&#39;s terms say paid tier prompts are not used to improve Google products, and the free tier is different (source: <a href="https://ai.google.dev/gemini-api/docs/billing">https://ai.google.dev/gemini-api/docs/billing</a>, as read in the data map). Your DPA and the privacy page say your customers&#39; text is not used for training. That sentence is only true if the production key is on a paid tier. The repo cannot show this, only Google&#39;s console can.</p>
+<h3>Time</h3>
+<p>10 minutes.</p>
+<h3>Steps</h3>
+<ol>
+<li>Open <a href="https://aistudio.google.com/">https://aistudio.google.com/</a> and sign in with the Google account that owns the project.</li>
+<li>Open the API keys page. For each key, read the project name and the plan or tier shown beside it (free tier or paid). If the page shows only project names, open the billing page linked in the Google documentation above and read whether a billing account is linked to that project.</li>
+<li>To know which key is production and which is staging, open the Railway dashboard (<a href="https://railway.com">https://railway.com</a>), choose the API service in each environment, open Variables, and compare the last four characters of <code>GEMINI_API_KEY</code> with the key list in AI Studio. Look only at the last four characters. Do not copy or share the full value.</li>
+<li>If production is on the free tier: link a billing account to that project. Google describes this as linking billing and prepaying a minimum of 5 US dollars (same page). That is a real cost, so tell Claude first and Claude writes the RULE 0-G statement. Do not upgrade before replying.</li>
+<li>Azure Document Intelligence (DPA Schedule 1 item 11) is not enabled today. Decide whether to list it now marked &quot;not currently enabled&quot; or only when OCR is switched on. Recommended: list it now, marked not enabled. Customers prefer to see it in advance rather than receive a change notice later.</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p><code>Gemini production: [paid / free], staging: [paid / free], checked [date]. Azure: [list now / list when enabled].</code></p>
+<hr>
+<h2>7. Security evidence pack owner items</h2>
+<p>Row: R285-TRUST-SECURITY-EVIDENCE-PACK-01. Draft: <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> (see section 8 of it for the 2026-10-23 update).</p>
+<h3>Why it matters</h3>
+<p>Buyers ask for evidence of how you protect their data. The pack is ready, but seven items are only yours. Until they are done, Claude may not say &quot;tested backups&quot; or give a recovery window.</p>
+<h3>Time</h3>
+<p>About 60 minutes in total. Each item stands alone, so you can do them on different days.</p>
+<h3>Steps, one per item</h3>
+<ol>
+<li><strong>Timed restore test.</strong> Claude restores a backup to a scratch project and records how long it took. That might create a billable Supabase project, so it needs your yes first. Claude will send the RULE 0-G cost statement. Recommended: yes, because it closes the loudest gap. Reply <code>Restore test: yes</code> or <code>no</code>.</li>
+<li><strong>Dependabot alerts 405 and 406.</strong> Open the platform repository on GitHub, choose Security, then Dependabot. Open alerts 405 and 406 (the <code>braces</code> package, no upstream fix). Choose Dismiss and pick the reason &quot;Risk is tolerable to this project&quot;, with the comment &quot;mitigated by local patch&quot;. Recommended: dismiss, so the open count shows real exposure. Reply <code>Dependabot 405 and 406: dismissed</code> or <code>leave open</code>.</li>
+<li><strong>Supabase point in time recovery.</strong> Open <a href="https://supabase.com/dashboard">https://supabase.com/dashboard</a>, choose the production project, then Database, then Backups. Read whether Point in Time Recovery is switched on and what window it shows. Do not turn it on without telling Claude, because it is a paid add-on. Reply <code>PITR: on, window [x]</code> or <code>off</code>.</li>
+<li><strong>Approve the Statement of Applicability (SoA).</strong> Claude will ask once items 1 and 3 are done, so the approved text is accurate. Nothing to do yet.</li>
+<li><strong>Sentry, UptimeRobot and the status page.</strong> Open each dashboard, confirm that Sentry alert rules exist (Sentry, then Alerts), that UptimeRobot monitors show Up for the app and the API, and that the public status page loads. Reply <code>Sentry [live / not], UptimeRobot [live / not], status page [live / not]</code>.</li>
+<li><strong>Push for the nine fixed alerts.</strong> This is part of the R2.8.5 production release. Do not reply now. You approve it with the release sha prefix line when Claude asks, together with its cost statement.</li>
+<li><strong>Penetration test.</strong> A penetration test is a paid external service. Recommended: do not commission yet. Tell buyers plainly it is not done and has a review date. Reply <code>Pen test: not yet, review in [month]</code> or <code>get quotes</code>.</li>
+</ol>
+<p>Also, <strong>write a short incident note for 2026-10-22</strong> before the key rotation sentence is published. It is a few lines in your own words, kept in <code>docs/</code> by Claude once you send it. Cover: what happened (the hosting incident), what you rotated and on what date, what you reviewed in the logs, and what you found. No key values.</p>
+<h3>What to reply to Claude</h3>
+<p>One message with the answers to items 1, 2, 3, 5 and 7 and the incident note text.</p>
+<hr>
+<h2>8. Roll the Stripe keys after the Node patch</h2>
+<p>Row: R285-OWNER-STRIPEKEYS-01 (new). Related: R285-NODE-CVE-2026-111497-01.</p>
+<h3>Why it matters</h3>
+<p>Node.js published a security release on 21 October 2026. Your 22 October key rotation was done on a machine still running the unpatched version. Rolling the Stripe keys again once the machine and the deployed servers are patched is the clean finish. Your notes record that production currently uses Stripe test mode keys, so the keys involved are the test keys. No customer payments are at risk.</p>
+<h3>Time</h3>
+<p>About 20 minutes, done after Claude tells you the patch is live.</p>
+<h3>Do not start until</h3>
+<p>Claude replies that Node is at 24.22.1 or higher on the machine, the release has deployed and the runtime is checked. The Vercel variable change only takes effect on a deploy, so doing it at release time avoids an extra production deploy (the deploy budget for the release is limited).</p>
+<h3>Steps</h3>
+<ol>
+<li>Open <a href="https://dashboard.stripe.com/apikeys">https://dashboard.stripe.com/apikeys</a> and check the Test mode switch matches the keys production uses.</li>
+<li>Find the Secret key row. Open its menu and choose Roll key. Stripe asks when the old key stops working. Choose a delay such as 24 hours, so nothing breaks while you update the two places below.</li>
+<li>Copy the new secret key. Go directly to the next steps without pasting it into chat or a file.</li>
+<li>Railway: open <a href="https://railway.com">https://railway.com</a>, choose the API service for production, open Variables, edit <code>STRIPE_SECRET_KEY</code>, paste the new value, save. Railway restarts the service.</li>
+<li>Vercel: open <a href="https://vercel.com">https://vercel.com</a>, choose the project <code>crowagent-platform-web</code>, then Settings, then Environment Variables. If <code>STRIPE_SECRET_KEY</code> exists there for Production, edit it and paste the new value. If it does not exist, nothing to do.</li>
+<li>Webhook signing secret: in Stripe open Developers, then Webhooks, choose the endpoint, and choose Roll secret. Copy the new signing secret into <code>STRIPE_WEBHOOK_SECRET</code> in Railway (and Vercel if the variable exists there). Choose the same delay.</li>
+<li>Tell Claude. Claude then checks a test event arrives and the old keys are no longer in use. Only after that, in Stripe, expire the old keys immediately if the delay has not already done so.</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p><code>Stripe keys rolled on [date] (secret key and webhook secret), old keys expire [when].</code> Never include a key value.</p>
+<hr>
+<h2>9. Delete the folder C:\c</h2>
+<p>Row: R285-OWNER-DELETEC-01 (new).</p>
+<h3>Why it matters</h3>
+<p>A temporary working copy of the repository was made under C:\c (the worktree <code>wt-hf</code>). It wastes disk space and can confuse git. Claude does not delete folders outside the repository on its own.</p>
+<h3>Time</h3>
+<p>2 minutes.</p>
+<h3>Steps</h3>
+<ol>
+<li>Close any File Explorer window or editor tab open inside C:\c.</li>
+<li>Open PowerShell.</li>
+<li>Run this first line, which tells git to forget the worktree:
+<code>git -C &quot;C:\Users\bhave\Crowagent Repo\crowagent-platform&quot; worktree remove C:/c/wt-hf</code>
+If git refuses and mentions changes, stop and send Claude the message. Do not add force.</li>
+<li>Run this second line, which deletes the folder for good:
+<code>Remove-Item -Recurse -Force C:\c</code></li>
+<li>Check it is gone: run <code>Test-Path C:\c</code>. It should print <code>False</code>.</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p><code>C:\c deleted.</code></p>
+</main></body></html>

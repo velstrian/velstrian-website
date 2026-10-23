@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Security evidence pack</title><link rel="stylesheet" href="legal.css"></head>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> at <code>223696dcb</code>. A read only copy, edit the source, not this page.</p>
+<h1>Security evidence pack, 2026-10-22</h1>
+<p>Row R285-TRUST-SECURITY-EVIDENCE-PACK-01. Velstrian Systems Ltd, platform Velstrian Tenderworks, products Velstrian Bid and Velstrian Buy. Status: DRAFT for owner review, nothing has been sent to anyone. It re-checks <code>docs/trust/R285-SECURITY-EVIDENCE-PACK-2026-10-21.md</code> and records what changed in one day.</p>
+<h2>1. How this was measured and what it cannot see</h2>
+<p>Measured 2026-10-22.</p>
+<ul>
+<li>Read this session: <code>docs/compliance/RISK-REGISTER.md</code> (restore lines), <code>STATEMENT-OF-APPLICABILITY.md</code> (header and controls A.5.35, A.8.8, A.8.13 to A.8.16, A.8.24 and the owner check table), <code>docs/legal/data-processing-agreement.md</code> Schedule 1 rows, <code>docs/rls/README.md</code> and the <code>_meta</code> of <code>docs/rls/prod-policies-snapshot.json</code>, <code>web/public/.well-known/security.txt</code>, <code>.github/workflows/weekly-security-scan.yml</code> header, <code>web/src/shared/lib/proxy/security-headers.ts:533</code>, and <code>site-facts.json</code> regions.</li>
+<li>Measured live: GitHub Dependabot alerts through <code>gh api</code> (11 open, counted and classified). Nothing in Supabase, Railway, Vercel or Sentry was queried.</li>
+<li>Carried forward unchanged from the 21 October pack and not re-opened today: access control files, the RLS workflow step list, incident procedure contents, the patching document, the penetration test price sources. Those lines are tagged <strong>[21 Oct]</strong>.</li>
+<li>Documents changed on 21 and 22 October by the DPA lane (commits <code>5525b467f</code>, <code>1840481ce</code>, <code>42e45d70f</code>, <code>7ec79c25a</code>, <code>7937c1e7b</code>, <code>994ce6244</code>). So some 21 October statements are now out of date, noted below.</li>
+<li><strong>What it cannot see:</strong> whether any control runs in production beyond what the repo shows, the Supabase plan tier and actual PITR window, whether a Sentry alert rule is live, whether the UptimeRobot monitors and status page are live (the SoA lists all three as unverified, lines 219 to 224), and what a hostile tester would find. No tests, builds or gates were run.</li>
+</ul>
+<h2>2. What we claim and what we do not</h2>
+<ul>
+<li><strong>No certification is held</strong> (D250). <code>STATEMENT-OF-APPLICABILITY.md</code> header: &quot;Certification status: None. Velstrian Systems Ltd holds no ISO/IEC 27001 certificate.&quot;</li>
+<li>The SoA is v1.1, issued 2026-08-31, and is &quot;Not yet approved by top management&quot;.</li>
+<li>Positive wording that is true today: &quot;We follow the ISO/IEC 27001:2022 Annex A controls and track them in our own Statement of Applicability. No certificate is held.&quot; Do not write SOC 2, Cyber Essentials or &quot;certified&quot;.</li>
+</ul>
+<h2>3. Evidence by area</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>What exists</th>
+<th>Evidence</th>
+<th>Gap</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Access control</td>
+<td>Roles and a capability matrix. Tenant derived from the verified identity, never the request body. Anonymous refusal tests. MFA AAL2 control</td>
+<td><code>docs/rbac-capability-matrix.md</code>, <code>api/app/dependencies/service_auth.py:106-118</code>, <code>web/__tests__/security/*</code> <strong>[21 Oct]</strong></td>
+<td>Backend runs as <code>service_role</code>, which bypasses RLS (SoA A.8.2 Partial). No privileged account register. Segregation of duties not implemented (A.5.3). MFA behaviour is an auth provider setting the owner must verify live</td>
+</tr>
+<tr>
+<td>Tenant isolation</td>
+<td>Row level security. Production snapshot 987 policies across 357 tables, captured 2026-09-13 (<code>prod-policies-snapshot.json</code> <code>_meta</code>). Parity and shape gates run on migration pull requests</td>
+<td><code>docs/rls/README.md</code>, <code>.github/workflows/rls-parity.yml</code>, <code>scripts/rls/*.mjs</code> <strong>[21 Oct]</strong></td>
+<td>The snapshot is 39 days old against a 7 day freshness rule. README now says so. The policy to grant pairing check is not wired into CI. The gates prove definitions are consistent, they are not an adversarial test</td>
+</tr>
+<tr>
+<td>Encryption</td>
+<td>HSTS <code>max-age=63072000; includeSubDomains; preload</code> (<code>security-headers.ts:533</code>). SoA A.8.24 records authenticated encryption with per record initialisation vectors for the credential vault</td>
+<td><code>web/src/shared/lib/proxy/security-headers.ts:533</code>, SoA line 160</td>
+<td>No cryptographic policy and no key rotation schedule for the vault key (A.8.24 Partial). Encryption at rest of the database is the vendor&#39;s default and I did not read Supabase&#39;s page today, so no claim is made beyond &quot;vendor managed&quot;</td>
+</tr>
+<tr>
+<td>Backup and restore</td>
+<td>Supabase point in time recovery. Documented RPO 1 hour and RTO under 2 hours (<code>docs/BCP.md</code>, <code>docs/BACKUP_RESTORE.md:6</code>)</td>
+<td><code>docs/BACKUP_RESTORE.md</code></td>
+<td><strong>No restore has ever been tested.</strong> <code>RISK-REGISTER.md:135</code> and SoA A.8.13. Searched for restore evidence in <code>docs/release-2.8*</code>: hits were unrelated (&quot;restored to teal&quot;, test walks), none is a database restore. Plan tier unconfirmed (SoA owner check, line 220). No replica or failover (A.8.14 Not implemented)</td>
+</tr>
+<tr>
+<td>Incident response</td>
+<td>Written procedure, severity SEC-1 to SEC-3, 72 hour breach clock. <code>security.txt</code> in <code>web/public/.well-known/</code> now lists <code>Contact: mailto:contact@velstrian.com</code>, expires 2027-05-03</td>
+<td><code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code> <strong>[21 Oct]</strong>, <code>security.txt:7-8</code></td>
+<td>Two people, no on call rota. No tabletop exercise or live use found. No ticket queue behind the mailbox. The <code>apps/portal</code> copy of <code>security.txt</code> was not re-checked today</td>
+</tr>
+<tr>
+<td>Logging and monitoring</td>
+<td>Structured application, audit and job logging. <code>audit_log</code> 778 rows and <code>job_runs</code> 37,511 rows measured 2026-08-31 (SoA A.8.15 Implemented). Sentry for errors, PII scrubbing log filter (<code>api/app/log_scrubbing.py</code>) <strong>[21 Oct]</strong></td>
+<td>SoA lines 151 to 152</td>
+<td>No alerting on authentication anomalies, privilege changes or bulk data access (A.8.16). Sentry alert rules are hand made with no alert as code. UptimeRobot and status page liveness unverified</td>
+</tr>
+<tr>
+<td>Sub-processors</td>
+<td>12 rows in the DPA schedule: Supabase, Vercel, Railway, Brevo, Stripe, Cloudflare, Anthropic, Google Gemini, PostHog, Sentry, Azure Document Intelligence, Companies House (<code>data-processing-agreement.md:325-344</code>)</td>
+<td>DPA Schedule 1, AI detail in <code>AI-PROVIDER-DATA-MAP-2026-10-22.md</code></td>
+<td>DPA is a draft pending legal review. Open markers at DPA lines 419 to 421 (Gemini billing tier, Azure region, Anthropic zero retention)</td>
+</tr>
+<tr>
+<td>Data residency</td>
+<td>Supabase production <code>eu-west-1</code> Ireland, Railway <code>europe-west4</code> Netherlands, Vercel <code>lhr1</code> London (<code>crowagent-website/astro/src/data/site-facts.json</code> lines 7, 12, 17, measured 21 October)</td>
+<td>site-facts.json</td>
+<td><strong>AI is not residency controlled.</strong> Gemini is not region pinned and Claude offers only global or US. Cloudflare and Stripe are global. Say this plainly</td>
+</tr>
+<tr>
+<td>Vulnerability management</td>
+<td>14 day remediation commitment for high and critical <strong>[21 Oct]</strong>. <code>npm audit --audit-level=critical</code> is a hard CI step. TruffleHog on push. Dependabot security alerts are on</td>
+<td><code>docs/security/patching-and-vulnerability-remediation.md</code>, <code>.github/workflows/ci.yml</code> <strong>[21 Oct]</strong></td>
+<td>See section 4</td>
+</tr>
+<tr>
+<td>Statement of Applicability</td>
+<td>Exists, v1.1. 93 controls, 84 applicable, 8 Implemented, 53 Partial, 23 Not implemented, 9 Not applicable</td>
+<td><code>docs/compliance/STATEMENT-OF-APPLICABILITY.md</code> (counts per the 21 October read)</td>
+<td>Not approved by top management. Not independently reviewed. Contains one statement now false, see section 4</td>
+</tr>
+<tr>
+<td>Policy, risk, audit</td>
+<td>Approved policy v1.0, risk register of 15 risks, one internal audit (10 nonconformities, 3 observations), one management review</td>
+<td><code>docs/compliance/</code> <strong>[21 Oct]</strong></td>
+<td>Internal audit is not independent</td>
+</tr>
+</tbody></table>
+<h2>4. Vulnerability management, measured</h2>
+<p><strong>Dependabot, measured 2026-10-22 with <code>gh api repos/crowagent/crowagent-platform/dependabot/alerts?state=open</code>:</strong> 11 open. Severity: 3 high, 6 medium, 2 low. This matches the brief.</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Severity</th>
+<th>Scope</th>
+<th>Manifest</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vite</td>
+<td>high, medium, medium</td>
+<td>development</td>
+<td><code>package-lock.json</code></td>
+</tr>
+<tr>
+<td>braces</td>
+<td>high</td>
+<td>development</td>
+<td><code>web/package-lock.json</code></td>
+</tr>
+<tr>
+<td>braces</td>
+<td>high</td>
+<td><strong>runtime</strong></td>
+<td><code>pnpm-lock.yaml</code></td>
+</tr>
+<tr>
+<td>sanitize-html</td>
+<td>medium (4), low (2) counted together across rows</td>
+<td><strong>runtime</strong></td>
+<td><code>pnpm-lock.yaml</code>, <code>web/package-lock.json</code></td>
+</tr>
+</tbody></table>
+<p>Reading it: two of the three high alerts are build tooling (vite, braces in <code>web</code>). The third high alert, <code>braces</code> in <code>pnpm-lock.yaml</code>, is flagged runtime by GitHub. Whether that path is reachable at runtime was not examined. The 14 day commitment is for high and critical, so if the third alert is older than 14 days it breaches our own written commitment (the SoA already records a measured breach). The alert dates were not pulled.</p>
+<p><strong>Remediation, same day (R285-TRUST-SECURITY-EVIDENCE-PACK-01, local commit on <code>main</code>, not yet pushed).</strong> Alert dates and patched versions pulled per alert:</p>
+<table>
+<thead>
+<tr>
+<th>Alert</th>
+<th>Package</th>
+<th>Manifest</th>
+<th>Severity</th>
+<th>Created</th>
+<th>Patched in</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>457, 458, 452</td>
+<td>vite 8.2.2</td>
+<td><code>package-lock.json</code> (root, dev)</td>
+<td>high, medium, medium</td>
+<td>2026-10-21</td>
+<td>8.2.4</td>
+<td>Fixed. Root <code>devDependencies.vite</code> raised to <code>^8.2.4</code>, lock resolves exactly 8.2.4. The pnpm and <code>web</code> trees resolve vite 8.1.3, outside the affected range (8.2.0 to 8.2.3), so they were left alone</td>
+</tr>
+<tr>
+<td>450, 453, 455</td>
+<td>sanitize-html 2.17.7</td>
+<td><code>web/package-lock.json</code> (runtime)</td>
+<td>low, medium, medium</td>
+<td>2026-10-20 to 21</td>
+<td>2.18.0</td>
+<td>Fixed. Direct dependency raised to <code>^2.18.0</code> in <code>web/package.json</code>, resolves 2.18.1 (same minor, same dependency set)</td>
+</tr>
+<tr>
+<td>451, 454, 456</td>
+<td>sanitize-html 2.17.7</td>
+<td><code>pnpm-lock.yaml</code> (runtime, portal)</td>
+<td>low, medium, medium</td>
+<td>2026-10-20 to 21</td>
+<td>2.18.0</td>
+<td>Fixed. Direct dependency raised to <code>^2.18.0</code> in <code>apps/portal/package.json</code>, resolves 2.18.1</td>
+</tr>
+<tr>
+<td>405, 406</td>
+<td>braces 3.0.3</td>
+<td><code>pnpm-lock.yaml</code> (runtime), <code>web/package-lock.json</code> (dev)</td>
+<td>high</td>
+<td>2026-10-03</td>
+<td>none upstream</td>
+<td>Cannot close by upgrade. 3.0.3 is still the latest release and no fixed version exists. Mitigated since 2026-10-17 by the local nesting cap in <code>patches/braces@3.0.3.patch</code> (pnpm) and <code>vendor/braces-3.0.3-patched.tgz</code> (web npm override), owner decision R285-P2-VULN-01. The alert matches on version, so it stays open until upstream ships a fix or the owner dismisses it as mitigated. It is 19 days old, past the 14 day commitment, which the mitigation answers but the alert does not show</td>
+</tr>
+</tbody></table>
+<p>The nine fixed alerts close only when <code>main</code> on GitHub carries the commit, which needs an owner approved push.</p>
+<p><strong>Stale statements to fix before a buyer reads them:</strong></p>
+<ul>
+<li>SoA A.8.8 (line 144) says &quot;a weekly scan against the running application&quot; exists. The <code>schedule:</code> trigger was removed from <code>weekly-security-scan.yml</code> and the OWASP ZAP workflow runs on <code>workflow_dispatch</code> only (header lines 3 to 7 of <code>weekly-security-scan.yml</code>). The patching document says weekly too. Honest wording: run by hand before each release. The DPA lane&#39;s commit <code>1840481ce</code> corrected the compliance set per its message, but the SoA row still reads weekly at this date. Confirm and fix.</li>
+<li>Dependabot version update pull requests are off by design for cost (<code>.github/dependabot.yml</code>) <strong>[21 Oct]</strong>. Security alerts are separate and are on, since 11 alerts exist.</li>
+<li>No static analysis (SoA A.8.29) <strong>[21 Oct]</strong>.</li>
+</ul>
+<h2>5. Penetration test (gap, not commissioned)</h2>
+<ul>
+<li>Status: never commissioned (SoA A.5.35, <code>MANAGEMENT-REVIEW.md</code> &quot;Real money, not yet quoted&quot;). ZAP is an automated scan and must not be called a penetration test.</li>
+<li><strong>RULE 0-G cost note:</strong> a penetration test is a paid external service and one-off spend. Indicative UK ranges from vendor blogs read on 21 October, not quotes: web application test about £5,000 to £20,000 (<a href="https://kolonell.com/en/blog/web-app-penetration-test-cost-before-launch-london-2026">https://kolonell.com/en/blog/web-app-penetration-test-cost-before-launch-london-2026</a>), CREST day rates £1,000 to £1,500 (<a href="https://mecanik.dev/en/posts/penetration-testing-cost-uk-budgeting-guide/">https://mecanik.dev/en/posts/penetration-testing-cost-uk-budgeting-guide/</a>), retest adds 30 to 60 percent. Not re-read today. Two products, an API and a multi tenant database would sit at the top. No recurring cost if done once, but buyers may ask for an annual test. Nothing is commissioned or requested by this lane. Free quotes are the only action that costs nothing.</li>
+</ul>
+<h2>6. Gaps and recommendations (questions for the owner, recommended option first)</h2>
+<ol>
+<li><strong>Restore never tested. P1.</strong> Recommend: one timed restore on staging to a scratch project, recorded against the 2 hour RTO. If it creates a billable project it needs your RULE 0-G approval first. It closes the loudest gap and lets the buyer wording say &quot;tested&quot;.</li>
+<li><strong>Open Dependabot alerts, 3 high. P1.</strong> Lockfiles updated locally on 2026-10-22 (section 4): 9 of 11 fixed and waiting on a push. The 2 <code>braces</code> alerts have no upstream fix and are mitigated by the local patch. Question for the owner: dismiss alerts 405 and 406 on GitHub as &quot;tolerable risk, mitigated by patch&quot; (recommended, so the open count reflects real exposure), or leave them open until upstream releases a fix.</li>
+<li><strong>SoA A.8.8 says weekly scan, which is false.</strong> Recommend: correct the row to &quot;run by hand before each release&quot;. Do not re-enable a timer without a cost statement.</li>
+<li><strong>RLS snapshot 39 days old.</strong> Recommend: owner approves one read only capture against production before the next migration pull request.</li>
+<li><strong>Penetration test.</strong> Recommend: record as a known gap with a review date, say so to buyers, and obtain two or three free quotes later. Do not commission yet.</li>
+<li><strong>Plan tier and PITR window unconfirmed.</strong> Recommend: owner reads the Supabase billing tier and records it in the SoA and <code>BACKUP_RESTORE.md</code>.</li>
+<li><strong>Approve the SoA.</strong> Recommend: approve after items 3 and 6 so the approved text is accurate.</li>
+<li><strong>Sentry alert rules, UptimeRobot monitors, status page.</strong> Recommend: owner confirms each is live. Cost nothing.</li>
+<li><strong>AI data flows.</strong> Blocks any claim about where customer text goes. See <code>AI-PROVIDER-DATA-MAP-2026-10-22.md</code>, notably the Gemini billing tier.</li>
+<li><strong>Privileged credential register, workstation disk encryption, key rotation schedule.</strong> Owner actions, no spend.</li>
+<li><strong>Static analysis.</strong> Recommend: disclose for now. Adding a scanner workflow is a RULE 0-G decision.</li>
+</ol>
+<h2>7. Safe buyer wording today</h2>
+<p>&quot;Velstrian follows the ISO/IEC 27001:2022 Annex A controls and tracks them in its own Statement of Applicability. No certificate is held. Tenant data is separated by row level security that is compared with production on every database change. Production data sits in Ireland, with the application servers in the Netherlands and London. We have a written incident response procedure and a published security contact. We have not yet commissioned an independent penetration test.&quot;</p>
+<p>Do not add &quot;weekly scanning&quot; or &quot;tested backups&quot; until gaps 1 and 3 are closed.</p>
+<h2>8. Update 2026-10-23 (row R285-TRUST-SECURITY-EVIDENCE-PACK-01)</h2>
+<ul>
+<li><strong>Scans are weekly again.</strong> Section 4 and gap 3 are out of date. Owner decision D291 restored the Monday schedule: <code>weekly-security-scan.yml</code> cron <code>0 9 * * 1</code> and <code>security-scan.yml</code> cron <code>0 8 * * 1</code> (read 2026-10-23). The SoA A.8.8 row and <code>docs/security/patching-and-vulnerability-remediation.md</code> were corrected to say so. Safe buyer wording may now say &quot;automated weekly scans of the running application and our dependencies&quot;. Cost, about 30 billed minutes a month, is recurring and the owner can disable it in GitHub.</li>
+<li><strong>Supabase plan measured:</strong> organisation VELSTRIAN SYSTEMS LIMITED is on the Pro plan (Supabase management API, 2026-10-23). Daily backups are part of Pro. Whether the point in time recovery add-on is switched on is not visible there, so keep saying &quot;daily backups&quot; and do not state a PITR window until the owner reads the project add-on page. No restore has been tested.</li>
+<li><strong>Web application region:</strong> Vercel functions run in <code>lhr1</code> London. Production header <code>X-Vercel-Id: lhr1::lhr1</code> with cache MISS, 2026-10-23. The older <code>iad1</code> text on the <code>/sub-processors</code> page and DPA item 2 was wrong and is corrected.</li>
+<li><strong>Next.js</strong> is on 16.4.2 (<code>web/package.json</code> line 78), the security upgrade.</li>
+<li><strong>Keys:</strong> the credential vault key is <code>PLATFORM_SECRET_KEY</code> (AES-256-GCM, <code>secret-vault.ts</code>) and webhook secrets use <code>WEBHOOK_SIGNING_ENC_KEY</code> (<code>webhook_secret_crypto.py</code>). After the Railway incident the owner rotated the platform keys on 2026-10-22. That is the owner&#39;s statement, no rotation record is in the repository. Wording that is true: &quot;after a hosting incident on 2026-10-22 we rotated all keys and found no sign of misuse in the logs we reviewed&quot;. Do not publish it until the owner has a written incident note to point to.</li>
+<li><strong>Dependabot:</strong> 9 of 11 alerts are fixed in the local tree and wait on an owner approved push. Unchanged otherwise.</li>
+<li>Still the owner&#39;s: (1) one timed restore on staging, with the RULE 0-G yes if it creates a billable project, (2) dismiss alerts 405 and 406 as mitigated or leave them open, (3) confirm the Supabase PITR add-on, (4) approve the SoA after those, (5) confirm Sentry alert rules, UptimeRobot and the status page are live, (6) approve a push for the nine fixed alerts, (7) decide on a penetration test quote request.</li>
+</ul>
+<h2>9. Measured 2026-10-23 by the evidence lane (read only tools)</h2>
+<p>Each line names the measurement and how it could have failed.</p>
+<ul>
+<li><strong>Dependabot, <code>gh api .../dependabot/alerts?state=open</code>, authenticated as the platform GitHub account: 17 open, not 11.</strong> Alerts 450 to 458 are the nine fixed in the local tree and still open on GitHub because main has not been pushed. Alerts 405 and 406 (braces, high) are unchanged. Six are new, 459 to 464, all <code>vite</code> created 2026-10-22 (GHSA-698v-4r3x-3vcv medium, GHSA-587h-7wmj-h5pm high, GHSA-r825-w8mm-5pxw medium), affected 8.0.0 to 8.1.5, patched 8.1.6, scope development. The committed <code>web/package-lock.json</code> already resolves vite 8.3.5 (<code>git show HEAD:web/package-lock.json</code>), so 459, 461 and 463 close on push. <code>pnpm-lock.yaml</code> still resolves vite 8.1.3 (lines 226, 237, 251), so 460, 462 and 464 stay open until that lock is raised, a dependency change for a build lane and not made here. After a push the expected remainder is 405, 406, 460, 462 and 464, three of them high (405, 406, 462). This supersedes &quot;9 of 11 fixed&quot;. Could have failed: the query only lists alerts the token can see, the token has <code>repo</code> scope.</li>
+<li><strong>Supabase plan, <code>get_organization</code>: organisation VELSTRIAN SYSTEMS LIMITED plan <code>pro</code>.</strong> Project <code>gujtuecjzfiqsdnzgyvo</code> named velstrian-platform, region eu-west-1, status ACTIVE_HEALTHY, Postgres 17.6. <strong>PITR add-on: NOT MEASURABLE.</strong> The project and organisation calls return no add-on field, so an absent add-on and an unreadable one look the same. The owner reads Database, Backups in the dashboard (guide section 7 item 3).</li>
+<li><strong>Sentry alert rules, <code>find_alert_rules</code> on org <code>crowagent-ltd</code> (region de): 4 issue alert rules, all enabled, 0 metric monitors.</strong> Three are &quot;Send a notification for high priority issues&quot; (ids 430320 last fired 2026-10-22, 430322 last fired 2026-10-18, 779218 last fired 2026-09-25) and one is &quot;Send a notification when pull requests are ready&quot; (never fired). So rules exist, are enabled and have fired in the last day. This does not show who receives the notification. No metric monitor means no threshold alert, which matches the SoA A.8.16 gap.</li>
+<li><strong>Status page, <code>curl https://status.velstrian.com</code>: HTTP 200, &quot;All services are online&quot;, last updated 2026-10-23 17:59 UTC, 100 percent uptime shown for two monitors named <code>app.crowagent.ai</code> and <code>crowagent.ai</code>, &quot;Powered by Better Stack&quot;.</strong> <code>https://status.crowagent.ai</code> answers 301 to <code>https://status.velstrian.com/</code>. <strong>UptimeRobot: no connector exists, so whether any UptimeRobot monitor is live is NOT measured.</strong> The page is Better Stack, so buyer wording should say &quot;status page&quot; unless the owner confirms UptimeRobot exists.</li>
+<li><strong>Still the owner&#39;s, no tool path here:</strong> the timed restore (billable project yes), dismiss 405 and 406, read the PITR add-on, approve the SoA, the push, the penetration test decision, the written incident note. Reply lines are in the owner guide section 7.</li>
+</ul>
+</main></body></html>
