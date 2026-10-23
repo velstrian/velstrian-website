@@ -20,15 +20,20 @@
  * without saying who asked, the whole life cost, no proof means nothing shown
  * and delivery alerts) is in the workspace cards and the
  * scope list of BuyDetail, one tap away, and in the Sequence steps beside each.
+ *
+ * 2026-10-23, R285-WEB-PREMIUM-CARDS-01 (owner: "Stripe style bento card with
+ * one side gradient colorful"): the five rows are one bento, all five seen at
+ * once. Every heading and paragraph is word for word, and what the Sequence
+ * steps said survives as each tile's short points, so nothing is dropped. The
+ * request screen is a real staging capture, the other four are the product
+ * designs data/product-captures.ts registers, each captioned as such.
  */
 import Band from '../evidenced/Band.astro';
-import Frame from '../evidenced/Frame.astro';
-import Stage from '../evidenced/Stage.astro';
-import Sequence from '../evidenced/Sequence.astro';
+import Bento from '../ui/Bento.astro';
 import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
 ---
 
-<Band tone="light-alt" class="ea-caps" labelledby="buy-what-title" id="what-it-does">
+<Band tone="light-alt" class="ea-caps" labelledby="buy-what-title" id="what-it-does" wedge="left">
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
       <h2 class="ea-h2" id="buy-what-title">Five steps, from asking to choosing.</h2>
@@ -37,146 +42,50 @@ import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
       </p>
     </div>
 
-    {/* 1. Write a clear request */}
-    <div class="ea-panel ea-panel--row" data-reveal>
-      <div class="ea-panel__copy">
-        <h3 class="ea-h3">Write a clear request</h3>
-        <p>
-          Set your scoring before anyone replies, or send a Quick RFQ.
-        </p>
-      </div>
-      <Stage layout="panel">
-        <Frame title="What you need: cleaning and facilities" status="Scoring fixed" capture="buy-cap-request" caption="Scoring fixed before replies arrive.">
-          <ul class="ea-mini-list">
-            <li><span>Local jobs and training</span><span class="ea-state ea-state--ok">15% weighting</span></li>
-            <li><span>Less waste</span><span class="ea-state ea-state--ok">10% weighting</span></li>
-            <li><span>Fair pay and working terms</span><span class="ea-state ea-state--ok">10% weighting</span></li>
-            <li><span>The service and its staff</span><span class="ea-state">65% weighting</span></li>
-          </ul>
-        </Frame>
-        <Sequence
-          slot="float"
-          title="Requirement pack"
-          steps={[
-            { label: 'Questions settled', detail: 'Before any reply arrives' },
-            { label: 'Scoring fixed', detail: 'Reuse it next time' },
-            { label: 'Quick RFQ ready', detail: 'Written by you' },
-          ]}
-        />
-      </Stage>
-    </div>
-
-    {/* 2. Collect the replies in one place */}
-    <div class="ea-panel ea-panel--row ea-panel--flip" data-reveal>
-      <div class="ea-panel__copy">
-        <h3 class="ea-h3">Collect the replies in one place</h3>
-        <p>
-          Each supplier gets a personal link, a receipt and every answer.
-        </p>
-      </div>
-      <Stage layout="panel">
-        <Frame title="Replies and questions" status="4 invited" capture="buy-cap-collect" caption="All replies, one view.">
-          <ul class="ea-mini-list">
-            <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">Uploaded · Receipt 801</span></li>
-            <li><span>Beacon Engineering</span><span class="ea-state ea-state--ok">Uploaded · Receipt 802</span></li>
-            <li><span>Crestwood Group</span><span class="ea-state ea-state--ok">Uploaded · Receipt 803</span></li>
-            <li><span>Question 2 (site access)</span><span class="ea-state">Answer sent to all 4</span></li>
-          </ul>
-        </Frame>
-        <Sequence
-          slot="float"
-          title="Replies"
-          steps={[
-            { label: '4 suppliers invited' },
-            { label: '3 replies uploaded', detail: 'Each got a receipt' },
-            { label: '1 question answered', detail: 'Sent to all, names hidden' },
-          ]}
-        />
-      </Stage>
-    </div>
-
-    {/* 3. Read every reply side by side */}
-    <div class="ea-panel ea-panel--row" data-reveal>
-      <div class="ea-panel__copy">
-        <h3 class="ea-h3">Read every reply side by side</h3>
-        <p>
-          Every bid as one total cost, like for like.
-        </p>
-      </div>
-      <Stage layout="panel">
-        <Frame title="Total cost over 3 years" status="3 bids lined up" capture="buy-cap-compare" caption="One 3 year total each.">
-          <ul class="ea-mini-list">
-            <li><span>Apex Infrastructure</span><span class="ea-state ea-state--ok">£142,500 over 3 years</span></li>
-            <li><span>Beacon Engineering</span><span class="ea-state">£156,000 over 3 years</span></li>
-            <li><span>Crestwood Group</span><span class="ea-state ea-state--ok">£138,000 over 3 years</span></li>
-          </ul>
-        </Frame>
-        <Sequence
-          slot="float"
-          title="Prices lined up"
-          steps={[
-            { label: 'Prices entered' },
-            { label: 'Same amount of work', detail: 'Over the same 3 years' },
-            { label: 'Totals ready', detail: 'Side by side' },
-          ]}
-        />
-      </Stage>
-    </div>
-
-    {/* 4. See what each supplier can back up */}
-    <div class="ea-panel ea-panel--row ea-panel--flip" data-reveal>
-      <div class="ea-panel__copy">
-        <h3 class="ea-h3">See what each supplier can back up</h3>
-        <p>
-          Each supplier's proof, word for word, with its page.
-        </p>
-      </div>
-      <Stage layout="panel">
-        <Frame title="First read: local jobs" status="Proof found" capture="buy-cap-evidence" caption="Section and page shown.">
-          <ul class="ea-mini-list">
-            <li><span>Apex: 2 apprenticeships, borough recruited</span><span class="ea-state ea-state--ok">Section 4.1, p12</span></li>
-            <li><span>Beacon: mentions training, no numbers</span><span class="ea-state ea-state--held">No number, p7</span></li>
-            <li><span>Crestwood: 4 accredited apprenticeships</span><span class="ea-state ea-state--ok">Section 5.2, p18</span></li>
-          </ul>
-        </Frame>
-        <Sequence
-          slot="float"
-          title="Proof, word for word"
-          steps={[
-            { label: 'Every reply read' },
-            { label: 'Quotes found', detail: 'With page and section' },
-            { label: 'No proof, nothing shown', detail: 'Nothing is invented', state: 'done' },
-          ]}
-        />
-      </Stage>
-    </div>
-
-    {/* 5. Record your decision and why */}
-    <div class="ea-panel ea-panel--row" data-reveal>
-      <div class="ea-panel__copy">
-        <h3 class="ea-h3">Record your decision and why</h3>
-        <p>
-          Your panel scores and says why, then tracks delivery.
-        </p>
-      </div>
-      <Stage layout="panel">
-        <Frame title="After you choose: delivery" status="Contract running" capture="buy-cap-decision" caption="Promised against delivered.">
-          <ul class="ea-mini-list">
-            <li><span>Local apprenticeships (2 committed)</span><span class="ea-state ea-state--ok">2 hired · On track</span></li>
-            <li><span>Carbon reduction target (15% committed)</span><span class="ea-state ea-state--held">12% · At risk</span></li>
-            <li><span>Quarterly review meeting</span><span class="ea-state">Completed Q1</span></li>
-          </ul>
-        </Frame>
-        <Sequence
-          slot="float"
-          title="After you choose"
-          steps={[
-            { label: 'Panel scores recorded' },
-            { label: 'Contract awarded' },
-            { label: 'Delivery tracked', detail: 'Alerts if targets fall behind' },
-          ]}
-        />
-      </Stage>
-    </div>
+    <Bento
+      tiles={[
+        {
+          size: 'lg',
+          flood: 'end',
+          kicker: 'Step 1',
+          title: 'Write a clear request',
+          body: 'Set your scoring before anyone replies, or send a Quick RFQ.',
+          capture: 'buy-cap-request',
+          points: ['Questions settled before any reply arrives', 'Scoring fixed, reuse it next time', 'A Quick RFQ, written by you'],
+        },
+        {
+          kicker: 'Step 2',
+          title: 'Collect the replies in one place',
+          body: 'Each supplier gets a personal link, a receipt and every answer.',
+          capture: 'buy-cap-collect',
+          points: ['A receipt for every reply', 'Questions answered to all, names hidden'],
+        },
+        {
+          kicker: 'Step 3',
+          title: 'Read every reply side by side',
+          body: 'Every bid as one total cost, like for like.',
+          capture: 'buy-cap-compare',
+          points: ['The same amount of work over the same 3 years'],
+        },
+        {
+          size: 'half',
+          flood: 'end',
+          kicker: 'Step 4',
+          title: "See what each supplier can back up",
+          body: "Each supplier's proof, word for word, with its page.",
+          capture: 'buy-cap-evidence',
+          points: ['Quotes found with page and section', 'No proof, nothing shown. Nothing is invented'],
+        },
+        {
+          size: 'half',
+          flood: 'end',
+          kicker: 'Step 5',
+          title: 'Record your decision and why',
+          body: 'Your panel scores and says why, then tracks delivery.',
+          capture: 'buy-cap-decision',
+          points: ['Panel scores recorded', 'Alerts if delivery targets fall behind'],
+        },
+      ]}
+    />
   </div>
 </Band>

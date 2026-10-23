@@ -43,8 +43,15 @@ interface Props {
   class?: string;
   /** Tight top, for a band that follows a hero with no gap of its own. */
   flush?: boolean;
+  /**
+   * A slanted seam at this band's TOP (styles/premium.css, spec section 5):
+   * the band's own ground cuts up into the band before it on a 3 degree
+   * slope. `left` rises from the left edge, `right` from the right. Three
+   * seams site wide, so it is opt in.
+   */
+  wedge?: 'left' | 'right';
 }
-const { tone, id, labelledby, class: cls = '', flush = false } = Astro.props;
+const { tone, id, labelledby, class: cls = '', flush = false, wedge } = Astro.props;
 const hero = cls.split(/\s+/).includes('ea-hero');
 const MOTION_LABEL = 'Pause background motion';
 ---
@@ -54,6 +61,7 @@ const MOTION_LABEL = 'Pause background motion';
   id={id}
   aria-labelledby={labelledby}
   data-band={tone}
+  data-wedge={wedge}
 >
   {hero && <div class="ea-hero__sky" aria-hidden="true"><Aurora place="foot" /></div>}
   <slot />
@@ -75,6 +83,8 @@ const MOTION_LABEL = 'Pause background motion';
     after parse, so no readiness check is needed. */}
 <script>
   import { initEvidenced } from '../../scripts/evidenced';
+  import { initPremium } from '../../scripts/premium';
 
   initEvidenced();
+  initPremium();
 </script>

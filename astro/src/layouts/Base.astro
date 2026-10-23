@@ -81,6 +81,11 @@ import '../styles/controls.css';
    below and to `.surface` above, and because it must apply to every route with
    no page opting in. Zero JavaScript; see the header of the file. */
 import '../styles/motion.css';
+/* The premium card system, the bento, the rail and the wedge
+   (R285-WEB-PREMIUM-CARDS-01). Loaded LAST, after every sheet that draws a
+   card, because it builds on them. One file, so a wash, a flood, a rail or a
+   wedge has exactly one definition (see the file header). */
+import '../styles/premium.css';
 /* styles/effects.css held the looping micro-animations (shimmer, CTA pulse,
    edge ring, status ping, footer seam). All five were removed on 2026-10-21,
    R285-WEB-ENTERPRISE-REDESIGN-01, and the file went with them. */

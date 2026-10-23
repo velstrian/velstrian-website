@@ -1,0 +1,102 @@
+---
+/**
+ * Bento: a feature grid of mixed tile sizes, each tile flooded with the
+ * Quantum V gradient from ONE side (R285-WEB-PREMIUM-CARDS-01, owner
+ * 2026-10-23: "Stripe style bento card with one side gradient colorful").
+ *
+ * The words sit on the calm white side of the tile and a real product screen
+ * sits in the gradient side, cropped by the tile's edge. Every screen is a
+ * capture or product design already registered in data/product-captures.ts,
+ * never a drawing made here. A product design carries the "Example data"
+ * line its Frame prints, a real capture carries none (D296). A tile
+ * with no registered screen is words only.
+ *
+ * Sizes on a six column grid: `lg` is four columns by two rows, `half` three
+ * columns, `wide` six, and the default two. `flood: 'end'` pours the colour
+ * in from the right with the words held to the left 46%, for a short wide
+ * tile. Every other tile floods from its foot. Below 720px every tile is one
+ * column and floods from its foot.
+ *
+ * All styling is in styles/premium.css (.ea-bento). Contrast of every word on
+ * the surface under it is measured pixel by pixel by check-app-contrast.js.
+ */
+import { CAPTURES } from '../../data/product-captures';
+
+export interface BentoTile {
+  title: string;
+  body: string;
+  kicker?: string;
+  /** A key in data/product-captures.ts. */
+  capture?: string;
+  size?: 'lg' | 'half' | 'wide' | 'sm';
+  flood?: 'end' | 'foot';
+  /** Where the screen is cropped from, as an object-position. */
+  focus?: string;
+  /** Short plain points under the words, for detail that must not be lost. */
+  points?: string[];
+}
+
+interface Props {
+  tiles: BentoTile[];
+  /** Heading level of each tile title. */
+  level?: 3 | 4;
+  class?: string;
+}
+
+const { tiles, level = 3, class: cls = '' } = Astro.props;
+const H = `h${level}` as 'h3' | 'h4';
+
+const shots = tiles.map((t) => {
+  const c = t.capture ? CAPTURES[t.capture] : null;
+  if (!c) return null;
+  return {
+    ...c,
+    avif: c.src.replace(/\.webp$/, '.avif'),
+    /* D296: no label on a real capture, its alt says what it shows. A product
+       design keeps the label its Frame prints (data/product-captures.ts). */
+    note: c.source === 'figma' ? 'Example data. Product design.' : null,
+  };
+});
+---
+
+<ul class={`ea-bento ${cls}`.trim()} role="list">
+  {
+    tiles.map((t, i) => {
+      const shot = shots[i];
+      const flood = t.flood ?? 'foot';
+      return (
+        <li class={`ea-bento__tile ea-bento__tile--${t.size ?? 'sm'}`} data-flood={flood} data-reveal>
+          <div class="ea-bento__copy">
+            {t.kicker && <p class="ea-bento__kicker">{t.kicker}</p>}
+            <H class="ea-h3">{t.title}</H>
+            <p>{t.body}</p>
+            {t.points && (
+              <ul class="ea-bento__points" role="list">
+                {t.points.map((pt) => <li>{pt}</li>)}
+              </ul>
+            )}
+            {shot?.note && <p class="ea-bento__cap">{shot.note}</p>}
+          </div>
+          {shot && (
+            <figure class="ea-bento__art">
+              <div class="ea-bento__shot">
+                <picture>
+                  <source type="image/avif" srcset={shot.avif} />
+                  <img
+                    src={shot.src}
+                    width={shot.width}
+                    height={shot.height}
+                    alt={shot.alt}
+                    loading="lazy"
+                    decoding="async"
+                    style={t.focus ? `object-position:${t.focus}` : undefined}
+                  />
+                </picture>
+              </div>
+            </figure>
+          )}
+        </li>
+      );
+    })
+  }
+</ul>

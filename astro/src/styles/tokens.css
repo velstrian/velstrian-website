@@ -4101,3 +4101,113 @@
     --depth-shift: 0px;
   }
 }
+
+/* ============================================================================
+   PREMIUM CARDS, BENTO, RAILS AND WEDGES
+   (R285-WEB-PREMIUM-CARDS-01, docs/design/PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23.md,
+   owner 2026-10-23: "cards too flat and white", "Stripe style bento card with
+   one side gradient colorful", "colours plus motion", hover lift D321)
+
+   PIGMENTS. The three Quantum V hues at full strength (brand-iris,
+   signal-bid dark, signal-buy dark) and the six wash peaks, every one a
+   pigment in brand.source.json bound through websiteBindings, so
+   check-brand-drift and gen-brand --check fail the moment one moves here
+   alone. A wash peak is the CORNER pixel of a tinted card: the contrast
+   table in the spec section 3.2 is measured on it, so no wash may be laid
+   stronger than its peak and none ever sits on the cloud page (--c-light-1),
+   where muted and Buy text fall under 4.5:1.
+
+   ROLES. The dark values are the :root default because the site's ground is
+   dark. The light scopes at the foot of this block rebind them.
+     --card-wash          the corner wash a Tier 2 card carries, Iris by default,
+                          violet on /bid/, cyan on /buy/ (styles/premium.css)
+     --card-shadow-tint   the Stripe idea: depth is a brand tinted shadow
+     --elev-card-tinted   a Tier 2 card at rest
+     --elev-card-lift     the same card under the pointer, deeper and Iris
+     --card-lift          the hover lift, 6px, translate only (D321), 0 under
+                          reduced motion
+     --bento-flood-end    the Stripe bento flood from the END side of a tile,
+                          Iris into violet into cyan, every layer transparent
+                          by 55% of the tile so the text side stays the card
+     --bento-flood-foot   the same flood from the foot of a tile
+     --rail-*             the scroll snap rail
+     --wedge-*            the slanted seam between two bands
+   ============================================================================ */
+:root {
+  --qv-iris: #6C63FF;
+  --qv-violet: #A477FF;
+  --qv-cyan: #31D7C5;
+  --wash-iris-light: #F0EFFF;
+  --wash-violet-light: #F6F1FF;
+  --wash-cyan-light: #DEF9F6;
+  --wash-iris-dark: #202142;
+  --wash-violet-dark: #292542;
+  --wash-cyan-dark: #15282F;
+}
+
+:root {
+  --card-wash-iris: var(--wash-iris-dark);
+  --card-wash-violet: var(--wash-violet-dark);
+  --card-wash-cyan: var(--wash-cyan-dark);
+  --card-wash-reach: 78%;
+  --card-shadow-tint: color-mix(in srgb, var(--qv-iris) 26%, transparent);
+  --card-shadow-deep: color-mix(in srgb, var(--qv-iris) 38%, transparent);
+  --elev-card-tinted:
+    0 1px 2px color-mix(in srgb, var(--c-floor) 30%, transparent),
+    0 14px 34px -14px var(--card-shadow-tint);
+  --elev-card-lift:
+    0 2px 6px color-mix(in srgb, var(--c-floor) 30%, transparent),
+    0 28px 56px -18px var(--card-shadow-deep);
+  --elev-card-feature:
+    0 2px 6px color-mix(in srgb, var(--c-floor) 30%, transparent),
+    0 32px 70px -22px var(--card-shadow-deep);
+  --card-lift: -6px;
+  --card-lift-dur: 260ms;
+  --card-rim: linear-gradient(135deg, var(--qv-iris), var(--qv-violet) 55%, var(--qv-cyan));
+  --spot-ink: color-mix(in srgb, var(--qv-iris) 22%, transparent);
+  --spot-size: 280px;
+
+  --bento-ground: var(--c-raised);
+  --bento-flood-end:
+    radial-gradient(62% 75% at 100% 0%, color-mix(in srgb, var(--qv-cyan) 88%, transparent), transparent 70%),
+    radial-gradient(72% 90% at 100% 100%, color-mix(in srgb, var(--qv-violet) 92%, transparent), transparent 72%),
+    linear-gradient(270deg, var(--qv-iris) 0%, color-mix(in srgb, var(--qv-iris) 62%, transparent) 24%, transparent 50%);
+  --bento-flood-foot:
+    radial-gradient(75% 62% at 0% 100%, color-mix(in srgb, var(--qv-cyan) 88%, transparent), transparent 70%),
+    radial-gradient(90% 72% at 100% 100%, color-mix(in srgb, var(--qv-violet) 92%, transparent), transparent 72%),
+    linear-gradient(0deg, var(--qv-iris) 0%, color-mix(in srgb, var(--qv-iris) 62%, transparent) 22%, transparent 48%);
+  --bento-gap: var(--space-5);
+
+  --rail-gap: var(--space-5);
+  --rail-card-w: clamp(264px, 78vw, 340px);
+  --rail-peek-fade: linear-gradient(90deg, #000 0, #000 calc(100% - 48px), transparent 100%);
+
+  --wedge-depth: clamp(28px, 4vw, 56px);
+}
+
+.band--light,
+.band--light-alt,
+.on-light {
+  --card-wash-iris: var(--wash-iris-light);
+  --card-wash-violet: var(--wash-violet-light);
+  --card-wash-cyan: var(--wash-cyan-light);
+  --card-shadow-tint: color-mix(in srgb, var(--qv-iris) 20%, transparent);
+  --card-shadow-deep: color-mix(in srgb, var(--qv-iris) 30%, transparent);
+  --elev-card-tinted:
+    0 1px 2px color-mix(in srgb, var(--c-ink-0) 6%, transparent),
+    0 14px 34px -14px var(--card-shadow-tint);
+  --elev-card-lift:
+    0 2px 6px color-mix(in srgb, var(--c-ink-0) 7%, transparent),
+    0 28px 56px -18px var(--card-shadow-deep);
+  --elev-card-feature:
+    0 2px 6px color-mix(in srgb, var(--c-ink-0) 8%, transparent),
+    0 32px 70px -22px var(--card-shadow-deep);
+  --spot-ink: color-mix(in srgb, var(--qv-iris) 9%, transparent);
+  --bento-ground: var(--c-light-0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --card-lift: 0px;
+  }
+}

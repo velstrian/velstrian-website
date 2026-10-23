@@ -1,0 +1,540 @@
+/* ============================================================================
+   premium.css: the premium card system, the bento, the rail and the wedge.
+
+   R285-WEB-PREMIUM-CARDS-01, docs/design/PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23.md
+   with the owner's amendments of 2026-10-23: the Stripe style bento with one
+   side flooded in gradient, arrow buttons on the rails, and the hover lift
+   (D321, which amends the 2026-10-21 calm hover contract).
+
+   ONE PLACE. Every rule that paints a wash, a flood, a rail or a wedge is in
+   this file, and every colour it uses is a token from the PREMIUM CARDS block
+   at the foot of styles/tokens.css. A component names the class and nothing
+   else. Imported once, by layouts/Base.astro, so every route reads one copy.
+
+   UNLAYERED, like evidenced.css, and written one class heavier than the rules
+   it builds on (`.ea-card:not(.ea-card--plain)`), because evidenced.css sets
+   `background` as a shorthand and would otherwise reset the wash whichever
+   sheet the bundler emits first.
+
+   ── THE TIERS (spec section 4) ──────────────────────────────────────────────
+   1 PLAIN    `.ea-card--plain`, and every card in a lookup or legal context
+              (FAQ rows, glossary, legal prose). White and a hairline.
+   2 TINTED   every other `.ea-card`: the white card with one corner wash, a
+              brand tinted shadow and the lift. The hue says which product:
+              Iris for the platform, violet on /bid/, cyan on /buy/, or
+              `data-wash` on the card itself.
+   3 FEATURE  `.ea-card--feature`: the stage gradient, white ink, at most one
+              per group. `.ea-card--rim` draws the Quantum V gradient edge on
+              a key white card (the recommended plan).
+
+   ── WHAT MOVES (D321, check-sheen.js rule 1) ────────────────────────────────
+   Under a fine pointer a card rises by --card-lift (6px) with a deeper Iris
+   shadow, its edge steps to --c-border-hover, and a soft spotlight follows
+   the pointer inside it (scripts/premium.ts writes --spot-x and --spot-y).
+   `translate` and `opacity` only, so nothing reflows (no CLS). Under reduced
+   motion the lift is 0 and the spotlight never shows. Nothing loops.
+   ============================================================================ */
+
+/* ── TIER 2, THE DEFAULT CARD ──────────────────────────────────────────────── */
+.ea-card:not(.ea-card--plain) {
+  --card-wash: var(--card-wash-iris);
+  --card-wash-pos: 0% 0%;
+  --transition-hover:
+    border-color var(--dur-hover) var(--ease-hover),
+    translate var(--card-lift-dur) var(--ease),
+    box-shadow var(--card-lift-dur) var(--ease);
+  position: relative;
+  isolation: isolate;
+  background-color: var(--ea-raised);
+  background-image: radial-gradient(120% 90% at var(--card-wash-pos), var(--card-wash), transparent var(--card-wash-reach));
+  box-shadow: var(--elev-card-tinted);
+}
+
+/* The second card of each pair takes its wash from the other top corner, so
+   a row of three never reads as stripes. */
+.ea-card:not(.ea-card--plain):nth-child(even),
+:nth-child(even) > .ea-card:not(.ea-card--plain):only-child {
+  --card-wash-pos: 100% 0%;
+}
+
+.pg-bid .ea-card:not(.ea-card--plain),
+.ea-card[data-wash='violet']:not(.ea-card--plain) {
+  --card-wash: var(--card-wash-violet);
+}
+
+.pg-buy .ea-card:not(.ea-card--plain),
+.ea-card[data-wash='cyan']:not(.ea-card--plain) {
+  --card-wash: var(--card-wash-cyan);
+}
+
+.ea-card[data-wash='iris']:not(.ea-card--plain) {
+  --card-wash: var(--card-wash-iris);
+}
+
+/* TIER 1 BY CONTEXT. A reader looking something up gets no colour. */
+:is(.ea-qa, .prose, .pg-glossary, .pg-faq) .ea-card {
+  background-image: none;
+  box-shadow: none;
+}
+
+/* ── THE SPOTLIGHT ─────────────────────────────────────────────────────────── */
+.ea-card:not(.ea-card--plain)::before,
+.ea-bento__tile::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(var(--spot-size) circle at var(--spot-x, 50%) var(--spot-y, 0%), var(--spot-ink), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--card-lift-dur) var(--ease);
+}
+
+/* ── THE LIFT (D321) ───────────────────────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .ea-card:not(.ea-card--plain):hover,
+  .ea-bento__tile:hover {
+    translate: 0 var(--card-lift);
+    box-shadow: var(--elev-card-lift);
+  }
+
+  .ea-card:not(.ea-card--plain):hover::before,
+  .ea-bento__tile:hover::before {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ea-card:not(.ea-card--plain)::before,
+  .ea-bento__tile::before {
+    display: none;
+  }
+}
+
+/* ── TIER 3 AND THE RIM ────────────────────────────────────────────────────── */
+.ea-card.ea-card--feature {
+  --ea-ink: var(--stage-ink);
+  --ea-sub: var(--stage-ink);
+  --ea-muted: var(--stage-ink);
+  --ea-accent-ink: var(--stage-ink);
+  border-color: transparent;
+  background-color: var(--stage-from);
+  background-image: var(--stage-bloom), var(--stage-gradient);
+  box-shadow: var(--elev-card-feature);
+  color: var(--stage-ink);
+}
+
+.ea-card.ea-card--rim,
+.ea-card.ea-card--rim:hover {
+  border-color: transparent;
+  background:
+    radial-gradient(120% 90% at 0% 0%, var(--card-wash), transparent var(--card-wash-reach)) padding-box,
+    linear-gradient(var(--ea-raised), var(--ea-raised)) padding-box,
+    var(--card-rim) border-box;
+}
+
+/* ── THE BENTO ─────────────────────────────────────────────────────────────── */
+.ea-bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: minmax(17rem, auto);
+  grid-auto-flow: row dense;
+  gap: var(--bento-gap);
+  margin: var(--space-10) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ea-bento__tile {
+  --transition-hover:
+    border-color var(--dur-hover) var(--ease-hover),
+    translate var(--card-lift-dur) var(--ease),
+    box-shadow var(--card-lift-dur) var(--ease);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-column: span 2;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid var(--ea-rule);
+  border-radius: var(--v3-radius-card);
+  background-color: var(--bento-ground);
+  background-image: var(--bento-flood-foot);
+  box-shadow: var(--elev-card-tinted);
+  transition: var(--transition-hover);
+}
+
+.ea-bento__tile--lg {
+  grid-column: span 4;
+  grid-row: span 2;
+}
+
+.ea-bento__tile--half {
+  grid-column: span 3;
+}
+
+.ea-bento__tile--wide {
+  grid-column: span 6;
+}
+
+@media (hover: hover) {
+  .ea-bento__tile:hover {
+    border-color: var(--c-border-hover);
+  }
+}
+
+/* The END flood: the tile's colour pours in from the right and the words sit
+   on the white left half, never past 46% of the tile. */
+.ea-bento__tile[data-flood='end'] {
+  grid-template-columns: minmax(0, 46%) minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  background-image: var(--bento-flood-end);
+}
+
+.ea-bento__copy {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: clamp(var(--space-6), 2.4vw, var(--space-8));
+  color: var(--ea-sub);
+}
+
+.ea-bento__tile[data-flood='foot'] .ea-bento__copy {
+  max-width: 34rem;
+}
+
+.ea-bento__copy > .ea-h3 {
+  margin: 0;
+}
+
+.ea-bento__copy > p {
+  margin: 0;
+  color: var(--ea-sub);
+  font-size: var(--t-ea-body);
+  line-height: 1.55;
+}
+
+.ea-bento__tile--lg .ea-bento__copy > .ea-h3 {
+  font-size: var(--t-v3-h3, var(--t-ea-h3));
+}
+
+.ea-bento__copy > .ea-bento__kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ea-accent-ink);
+}
+
+/* The product screen sits in the gradient and runs off the tile's edge, the
+   way a real window would be cropped by the card. It is held back from the
+   copy side and from the tile's top, so the colour frames it rather than
+   hiding under it. */
+.ea-bento__art {
+  position: relative;
+  align-self: end;
+  justify-self: end;
+  width: calc(100% - clamp(var(--space-8), 8%, var(--space-16)));
+  margin: 0;
+  padding: var(--space-6) 0 0;
+}
+
+.ea-bento__tile[data-flood='end'] .ea-bento__art {
+  align-self: center;
+  width: calc(100% - var(--space-6));
+  padding-block: var(--space-8);
+}
+
+.ea-bento__shot {
+  display: block;
+  overflow: hidden;
+  height: clamp(9rem, 14vw, 12rem);
+  border: 1px solid color-mix(in srgb, var(--c-white) 80%, transparent);
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: var(--space-3) 0 0 0;
+  background: var(--c-light-0);
+  box-shadow: 0 24px 48px -20px color-mix(in srgb, var(--c-ink-0) 45%, transparent);
+}
+
+.ea-bento__tile--lg .ea-bento__shot {
+  height: clamp(14rem, 26vw, 23rem);
+}
+
+.ea-bento__tile--lg[data-flood='end'] .ea-bento__shot {
+  height: clamp(18rem, 30vw, 27rem);
+}
+
+.ea-bento__tile[data-flood='end'] .ea-bento__shot {
+  border-bottom: 1px solid color-mix(in srgb, var(--c-white) 80%, transparent);
+  border-radius: var(--space-3) 0 0 var(--space-3);
+}
+
+.ea-bento__shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+}
+
+.ea-bento__copy > .ea-bento__cap {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ea-muted);
+}
+
+.band--dark .ea-bento__tile {
+  --bento-ground: var(--c-raised);
+}
+
+@media (max-width: 1100px) {
+  .ea-bento__tile--lg {
+    grid-column: span 6;
+    grid-row: span 1;
+  }
+
+  .ea-bento__tile {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 720px) {
+  .ea-bento {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+  }
+
+  .ea-bento__tile,
+  .ea-bento__tile--lg,
+  .ea-bento__tile--half,
+  .ea-bento__tile--wide,
+  .ea-bento__tile[data-flood='end'] {
+    grid-column: auto;
+    grid-row: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    background-image: var(--bento-flood-foot);
+  }
+
+  .ea-bento__tile[data-flood='end'] .ea-bento__art {
+    align-self: end;
+    width: calc(100% - var(--space-8));
+    padding-block: 0;
+  }
+
+  .ea-bento__tile .ea-bento__shot {
+    height: 11rem;
+    border-bottom: 0;
+    border-radius: var(--space-3) 0 0 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .ea-card:not(.ea-card--plain),
+  .ea-bento__tile {
+    background-image: none;
+  }
+}
+
+/* ── THE RAIL (spec section 6, owner amendment: arrow buttons) ─────────────── */
+.ea-rail {
+  position: relative;
+}
+
+.ea-rail__track {
+  display: flex;
+  gap: var(--rail-gap);
+  margin: 0;
+  padding: var(--space-3) var(--space-1) var(--space-6);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--space-1);
+  scrollbar-width: none;
+  list-style: none;
+  -webkit-mask-image: var(--rail-peek-fade);
+  mask-image: var(--rail-peek-fade);
+}
+
+.ea-rail__track::-webkit-scrollbar {
+  display: none;
+}
+
+.ea-rail__track > li {
+  display: flex;
+  flex: 0 0 var(--rail-card-w);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.ea-rail__track > li > * {
+  flex: 1 1 auto;
+}
+
+.ea-rail__track:focus-visible {
+  outline: var(--ea-focus);
+  outline-offset: 4px;
+}
+
+.ea-rail[data-rail-end='true'] .ea-rail__track {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ea-rail__track {
+    scroll-behavior: smooth;
+  }
+}
+
+.ea-rail__nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.ea-rail__nav[hidden] {
+  display: none;
+}
+
+.ea-rail__btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--ea-rule-strong);
+  border-radius: 999px;
+  background: var(--ea-raised);
+  color: var(--ea-ink);
+  cursor: pointer;
+  transition: border-color var(--dur-hover) var(--ease-hover), background-color var(--dur-hover) var(--ease-hover), opacity var(--dur-hover) var(--ease-hover);
+}
+
+@media (hover: hover) {
+  .ea-rail__btn:hover:not(:disabled) {
+    border-color: var(--c-border-hover);
+  }
+}
+
+.ea-rail__btn:focus-visible {
+  outline: var(--ea-focus);
+  outline-offset: 2px;
+}
+
+.ea-rail__btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Three or fewer cards: the same list is the grid, one component, two layouts. */
+.ea-rail--grid .ea-rail__track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+@media print {
+  .ea-rail__track {
+    flex-wrap: wrap;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .ea-rail__nav {
+    display: none;
+  }
+}
+
+/* ── THE WEDGE (spec section 5) ────────────────────────────────────────────────
+   A slanted seam. The band carrying `data-wedge` draws a slab of its own
+   ground above its top edge, cut on a 3 degree slope, so it eats into the
+   band before it. Content is never clipped or slanted. The slab rises from the
+   LEFT, so it never reaches the hero's pause control at the bottom right. */
+.band[data-wedge] {
+  position: relative;
+}
+
+.band[data-wedge]::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset-inline: 0;
+  bottom: 100%;
+  height: var(--wedge-depth);
+  background: var(--ea-canvas);
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+
+.band[data-wedge='right']::after {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+@media (forced-colors: active) {
+  .band[data-wedge]::after {
+    display: none;
+  }
+}
+
+@media print {
+  .band[data-wedge]::after {
+    display: none;
+  }
+}
+
+.ea-bento__points {
+  display: grid;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-ea-small);
+  color: var(--ea-sub);
+}
+
+.ea-bento__points > li {
+  position: relative;
+  padding-inline-start: var(--space-5);
+}
+
+.ea-bento__points > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.45em;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 999px;
+  background: var(--card-rim);
+}
+
+/* The recommended plan keeps its accent role (evidenced.css .ea-plan--rec)
+   and gains the Quantum V rim and the feature depth. Its price stays on the
+   white card, never on a gradient (spec section 7, pricing). */
+.ea-card.ea-plan--rec,
+.ea-card.ea-plan--rec:hover {
+  border-color: transparent;
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--card-wash), transparent var(--card-wash-reach)) padding-box,
+    linear-gradient(var(--ea-raised), var(--ea-raised)) padding-box,
+    var(--card-rim) border-box;
+  box-shadow: var(--elev-card-feature);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ea-card.ea-plan--rec:hover {
+    box-shadow: var(--elev-card-lift), var(--elev-card-feature);
+  }
+}

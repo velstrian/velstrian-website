@@ -337,6 +337,72 @@
         "value": "#0E776C",
         "from": "packages/tokens/brand/quantum-v (D309)"
       }
+    },
+    "wash-iris-light": {
+      "role": "The corner wash on a white card at its PEAK pixel, website only. quantumIris #6C63FF at 10% over #FFFFFF. Body inks measured on it: ink-0 16.98, ink-1 11.11, muted 5.29, Buy text 4.77. A wash sits on a white card only, never on the cloud page.",
+      "dark": {
+        "value": "#F0EFFF",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      },
+      "light": {
+        "value": "#F0EFFF",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      }
+    },
+    "wash-violet-light": {
+      "role": "The Bid corner wash at its peak, website only. ribbonViolet #A477FF at 10% over #FFFFFF. ink-1 11.38, muted 5.42, Buy text 4.89.",
+      "dark": {
+        "value": "#F6F1FF",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      },
+      "light": {
+        "value": "#F6F1FF",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      }
+    },
+    "wash-cyan-light": {
+      "role": "The Buy corner wash at its peak, website only. signalCyan #31D7C5 at 16% over #FFFFFF. ink-1 11.41, muted 5.43, Buy text 4.90.",
+      "dark": {
+        "value": "#DEF9F6",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      },
+      "light": {
+        "value": "#DEF9F6",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      }
+    },
+    "wash-iris-dark": {
+      "role": "The corner wash on a dark card at its peak, website only. quantumIris at 16% over #12151E. Mist 6.90, Iris text 5.09.",
+      "dark": {
+        "value": "#202142",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      },
+      "light": {
+        "value": "#202142",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      }
+    },
+    "wash-violet-dark": {
+      "role": "The Bid wash on a dark card at its peak, website only. ribbonViolet at 16% over #12151E. Mist 6.52, Iris text 4.81.",
+      "dark": {
+        "value": "#292542",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      },
+      "light": {
+        "value": "#292542",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      }
+    },
+    "wash-cyan-dark": {
+      "role": "The Buy wash on a dark card at its peak, website only. signalCyan at 10% over #12151E. Mist 6.81, Iris text 5.02.",
+      "dark": {
+        "value": "#15282F",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      },
+      "light": {
+        "value": "#15282F",
+        "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
+      }
     }
   },
   "ladderNotes": {
@@ -381,7 +447,16 @@
     "--c-lit": "iris-ground-4",
     "--c-text": "iris-ink-0",
     "--c-text-sub": "iris-ink-1",
-    "--c-text-muted": "iris-ink-2"
+    "--c-text-muted": "iris-ink-2",
+    "--qv-iris": "brand-iris",
+    "--qv-violet": "signal-bid",
+    "--qv-cyan": "signal-buy",
+    "--wash-iris-light": "wash-iris-light",
+    "--wash-violet-light": "wash-violet-light",
+    "--wash-cyan-light": "wash-cyan-light",
+    "--wash-iris-dark": "wash-iris-dark",
+    "--wash-violet-dark": "wash-violet-dark",
+    "--wash-cyan-dark": "wash-cyan-dark"
   },
   "platformBindings": {
     "_file": "crowagent-platform/packages/tokens/src/tokens.css",

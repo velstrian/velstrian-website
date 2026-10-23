@@ -17,12 +17,18 @@
  * real card and reads what the browser does. What it now requires is the
  * contract in styles/tokens.css, the one card hover:
  *
- *   1  CARD, ONE CHANGE. Hovering a card moves its edge to --c-border-hover and
- *      changes NOTHING else that paints: no transform, no translate, no scale,
- *      no box-shadow, no background, no filter, and no ::before or ::after
- *      layer appearing or moving.
+ *   1  CARD, THE EDGE AND THE LIFT. Hovering a card moves its edge to
+ *      --c-border-hover. Since D321 (owner 2026-10-23, amending the
+ *      2026-10-21 contract) a v3 `.ea-card` also rises by `translate` 4 to
+ *      8px straight up with a deeper shadow, and its spotlight may fade in on
+ *      ::before (opacity and gradient position only). NOTHING else paints:
+ *      no transform, no scale, no sideways move, no background, no filter,
+ *      no ::after layer, and no ::before that moves. A lift outside the band
+ *      fails, and under reduced motion the lift and the spotlight must not
+ *      happen at all.
  *   2  CARD, CALM CLOCK. The only transitions that run are on the border
- *      colour, between 150 and 200ms, and no CSS animation starts.
+ *      colour, between 150 and 200ms, and the D321 lift (translate,
+ *      box-shadow, the spotlight's opacity), and no CSS animation starts.
  *   3  BUTTON, PLAIN COLOUR. Hovering a primary and a secondary button changes
  *      colour only: no transform, no translate, no scale, no box-shadow, no
  *      filter, no pseudo-element layer and no animation.
@@ -99,6 +105,30 @@ const BUTTONS = [
 
 /* Paint properties a hover may never change, and the ones it may. */
 const CARD_MAY_CHANGE = new Set(['borderTop', 'borderRight', 'borderBottom', 'borderLeft']);
+/* D321: the lift a v3 card may add, on top of the edge. `translate` is then
+   held to LIFT by liftProblem(), the shadow may deepen, and the spotlight on
+   ::before may fade in and follow the pointer. */
+const LIFT_MAY_CHANGE = new Set([...CARD_MAY_CHANGE, 'translate', 'shadow', 'beforeOpacity', 'beforeBg']);
+const LIFT = { min: 4, max: 8 };
+const LIFT_TRANSITION_OK = /^border-(top|right|bottom|left)-color$|^border-color$|^translate$|^box-shadow$|^opacity$/;
+/* The lift, read off `translate`. Null when the hover kept to the D321 band
+   (or, under reduced motion, did not lift at all), otherwise what is wrong. */
+function liftProblem(rest, lit, reduced, required) {
+  const px = (v) => (v === 'none' ? [0, 0] : v.split(/\s+/).map((n) => parseFloat(n) || 0).concat([0, 0]).slice(0, 2));
+  const [x0, y0] = px(rest.translate);
+  const [x1, y1] = px(lit.translate);
+  const dx = x1 - x0;
+  const dy = y1 - y0;
+  if (reduced) {
+    if (dx || dy) return `moved ${dx}px, ${dy}px under reduced motion`;
+    if (rest.beforeOpacity !== lit.beforeOpacity) return `spotlight showed under reduced motion (${rest.beforeOpacity} -> ${lit.beforeOpacity})`;
+    return null;
+  }
+  if (dx) return `moved sideways ${dx}px`;
+  if (!dy) return required ? 'no lift: a v3 card rises 4 to 8px on hover (D321)' : null;
+  if (-dy < LIFT.min || -dy > LIFT.max) return `lift of ${-dy}px is outside the D321 band of ${LIFT.min} to ${LIFT.max}px`;
+  return null;
+}
 const BUTTON_MAY_CHANGE = new Set([
   'borderTop', 'borderRight', 'borderBottom', 'borderLeft', 'bg', 'bgImage', 'color',
 ]);
@@ -109,7 +139,7 @@ const TRANSITION_OK = /^border-(top|right|bottom|left)-color$|^border-color$|^ba
 /* The old hover, put back for the self-test. Every line is one of the effects
    this redesign removed, so each rule must catch at least one of them. */
 const OLD_HOVER = `
-  [data-calm-probe]:hover { transform: translateY(-2px) !important;
+  [data-calm-probe]:hover { transform: translateY(-2px) !important; translate: 0 -14px !important; scale: 1.04 !important;
     box-shadow: 0 22px 50px -14px rgba(255,255,255,.3) !important; }
   [data-calm-probe]::after { content: ''; position: absolute; inset: 0;
     pointer-events: none; transform: translateX(-100%); transition: transform 0.9s linear; }
@@ -155,6 +185,7 @@ const SNAP = `(sel) => {
     const s = getComputedStyle(el, p);
     return [s.content, s.opacity, s.transform, s.backgroundImage, s.backgroundPosition].join(' | ');
   };
+  const before = getComputedStyle(el, '::before');
   return {
     borderTop: cs.borderTopColor,
     borderRight: cs.borderRightColor,
@@ -169,7 +200,9 @@ const SNAP = `(sel) => {
     color: cs.color,
     filter: cs.filter,
     opacity: cs.opacity,
-    before: pseudo('::before'),
+    beforeLayer: [before.content, before.transform, before.translate, before.scale, before.inset, before.width, before.height].join(' | '),
+    beforeOpacity: before.opacity,
+    beforeBg: before.backgroundImage,
     after: pseudo('::after'),
   };
 }`;
@@ -335,11 +368,16 @@ async function measure(page) {
   } else {
     await page.addStyleTag({ content: OLD_HOVER });
     const m = await measure(page);
-    const caughtFlash = m.hovered && flashes(m.rest, m.lit, CARD_MAY_CHANGE).length > 0;
+    const caughtFlash = m.hovered && flashes(m.rest, m.lit, LIFT_MAY_CHANGE).length > 0;
+    const caughtLift = m.hovered && liftProblem(m.rest, m.lit, false, true) !== null;
     const caughtLoop = (await loops(page)).some((l) => l.startsWith('calm-probe-loop'));
     if (!caughtFlash) {
       preflight.push('RULE 1 DID NOT FIRE. A 2px lift, a cast glow and a travelling ::after band were put ' +
         `back on ${sig} and the gate saw no change beyond the edge. A clean run below would mean nothing.`);
+    }
+    if (!caughtLift) {
+      preflight.push('RULE 1 (D321 LIFT) DID NOT FIRE. A 14px lift was put back on ' +
+        `${sig} and the lift band of ${LIFT.min} to ${LIFT.max}px did not reject it.`);
     }
     if (!caughtLoop) {
       preflight.push('RULE 5 DID NOT FIRE. An infinite animation was injected and the loop sweep did not report it.');
@@ -375,13 +413,20 @@ for (const reduced of [false, true]) {
         preflight.push(`${probe} (${sig}): the pointer could not be brought onto the card in three attempts`);
         continue;
       }
-      const flash = flashes(m.rest, m.lit, CARD_MAY_CHANGE);
-      rec(probe, 'one change only', flash.length === 0,
-        flash.length ? `${sig}: ${flash.join('; ')}` : `${sig}: nothing but the edge changed`);
+      const lifts = kind === 'ea-card';
+      const flash = flashes(m.rest, m.lit, lifts ? LIFT_MAY_CHANGE : CARD_MAY_CHANGE);
+      rec(probe, lifts ? 'edge and D321 lift only' : 'one change only', flash.length === 0,
+        flash.length ? `${sig}: ${flash.join('; ')}` : `${sig}: ${lifts ? 'only the edge, the lift and the spotlight changed' : 'nothing but the edge changed'}`);
+      if (lifts) {
+        const lp = liftProblem(m.rest, m.lit, reduced, true);
+        rec(probe, reduced ? 'no lift, no spotlight' : `lifts ${LIFT.min} to ${LIFT.max}px straight up`, lp === null,
+          `${sig}: ${lp || `translate ${m.rest.translate} -> ${m.lit.translate}`}`);
+      }
       rec(probe, 'edge steps to --c-border-hover', m.lit.borderTop === want && m.rest.borderTop !== want,
         `${sig}: ${m.rest.borderTop} -> ${m.lit.borderTop} (token resolves to ${want})`);
       const anims = m.moving.filter((a) => a.kind !== 'CSSTransition');
-      const badProps = m.moving.filter((a) => a.kind === 'CSSTransition' && !TRANSITION_OK.test(a.name));
+      const okProp = lifts && !reduced ? LIFT_TRANSITION_OK : TRANSITION_OK;
+      const badProps = m.moving.filter((a) => a.kind === 'CSSTransition' && !okProp.test(a.name));
       rec(probe, 'no animation, colour transitions only', !anims.length && !badProps.length,
         [...anims, ...badProps].map((a) => `${a.kind} ${a.name}${a.pseudo}`).join(', ') || 'none');
       if (!reduced) {
@@ -548,7 +593,7 @@ server.close();
  * ══════════════════════════════════════════════════════════════════════════ */
 const pad = (s, n) => String(s).padEnd(n);
 console.log('\n' + '='.repeat(104));
-console.log('CALM HOVER: one edge step on a card, a plain colour on a button, and nothing that loops');
+console.log('CALM HOVER: an edge step and the D321 lift on a card, a plain colour on a button, and nothing that loops');
 console.log('='.repeat(104));
 
 console.log(`\n  ${ALLOW.length} recorded exception(s):`);
