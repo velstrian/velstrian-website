@@ -71,13 +71,23 @@
        control at everywhere a button appears. */
     min-height: 54px;
     padding: 0 1rem;
-    border: 1px solid var(--c-border);
+    /* R285-WEB-GEMINI-UIUX P2-12. The edge took --c-border, the card hairline,
+       which on a light page measured rgb(233,234,238) on white: the field all
+       but vanished until it had focus. --ea-rule-strong is the system's own
+       stronger rule, set in every scope, so the box reads as a box at rest. */
+    border: 1px solid var(--ea-rule-strong, var(--c-border));
     border-radius: var(--radius-chip);
     background: var(--c-card);
     color: var(--c-text);
     font-family: var(--font-body);
     font-size: var(--t-body);
     transition: border-color var(--dur) var(--ease);
+  }
+
+  /* The pointer gets an answer before the click, one step toward the ink the
+     focused border takes. */
+  .field__input:hover:not(:focus-visible) {
+    border-color: var(--c-text-muted);
   }
 
   .field__input--area {
