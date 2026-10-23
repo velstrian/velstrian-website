@@ -108,8 +108,12 @@ const {
 } = Astro.props;
 
 /* The contents list is the post's own h2 sections, read from the rendered
-   Markdown, so it cannot drift from the body. Shown with the key points. */
+   Markdown, so it cannot drift from the body.
+   R285-WEB-GEMINI-UIUX P2-8: it was shown only beside key points, so a nine
+   section post with none had no contents at all. Now any post of four or more
+   sections carries it, and a post with key points keeps it from three. */
 const sections = headings.filter((h) => h.depth === 2);
+const showToc = sections.length >= 4 || (!!keyPoints && keyPoints.length > 0 && sections.length > 2);
 
 /*
  * THE SLUG AND THE SOCIAL CARD, worked out before anything uses them.
@@ -305,23 +309,43 @@ const canonicalUrl = routeUrl(path);
                 <li>{k}</li>
               ))}
             </ul>
-            {sections.length > 2 && (
-              <details class="art__toc">
-                <summary>
-                  <span>Jump to a section</span>
-                </summary>
-                <nav aria-label="Sections of this guide">
-                  <ol class="art__toc-list">
-                    {sections.map((h) => (
-                      <li>
-                        <a class="ea-link" href={`#${h.slug}`}>{h.text}</a>
-                      </li>
-                    ))}
-                  </ol>
-                </nav>
-              </details>
-            )}
           </aside>
+        )}
+        {/* R285-WEB-GEMINI-UIUX P2-8. TWO FORMS OF ONE LIST, ONE SHOWN AT A TIME.
+            In the reading column it is the site's one disclosure recipe, a
+            native <details>, closed, so it costs a phone one line. On a wide
+            screen the gutter beside the 36.8em measure is wide enough to hold
+            it, so it stands open there and stays in view while the reader
+            scrolls. A <details> cannot be held open by CSS, so the wide form is
+            its own <nav>. Each is display:none outside its width, which keeps
+            exactly one of them in the accessibility tree. */}
+        {showToc && (
+          <details class="art__toc art__toc--inline">
+            <summary>
+              <span>Jump to a section</span>
+            </summary>
+            <nav aria-label="Sections of this guide">
+              <ol class="art__toc-list">
+                {sections.map((h) => (
+                  <li>
+                    <a class="ea-link" href={`#${h.slug}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </details>
+        )}
+        {showToc && (
+          <nav class="art__toc art__toc--side" aria-labelledby="art-toc-side-h">
+            <p class="art__toc-h" id="art-toc-side-h">On this page</p>
+            <ol class="art__toc-list">
+              {sections.map((h) => (
+                <li>
+                  <a class="ea-link" href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
         )}
         <ShareRow title={title} url={canonicalUrl} position="top" />
         <div class="article-body ea-longform">
@@ -366,6 +390,65 @@ const canonicalUrl = routeUrl(path);
 
   .art__toc {
     border-top: 1px solid var(--ea-rule);
+  }
+
+  /* On its own, with no In short box around it, the inline list keeps the same
+     gap below it as that box. */
+  .art__toc--inline {
+    margin-block-end: var(--space-8);
+    border-bottom: 1px solid var(--ea-rule);
+  }
+
+  .art__toc--side {
+    display: none;
+  }
+
+  .art__toc-h {
+    margin: 0 0 var(--space-3);
+    font-size: var(--t-ea-small);
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
+  }
+
+  /* Wide enough that the gutter holds a 15rem list beside the reading column
+     with room either side. The column keeps its own width (the max-width
+     above less its padding, which stays on the grid): it becomes the middle
+     track of three, the outer two share what is left, and the list sits
+     in the first, stuck under the header while the article scrolls past. */
+  @media (min-width: 80rem) {
+    .art__col:has(.art__toc--side) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) min(100%, calc(var(--measure) * 0.47)) minmax(0, 1fr);
+      max-width: none;
+    }
+
+    .art__col:has(.art__toc--side) > * {
+      grid-column: 2;
+    }
+
+    .art__col:has(.art__toc--side) > .art__toc--side {
+      display: block;
+      grid-column: 1;
+      grid-row: 1 / span 8;
+      align-self: start;
+      justify-self: end;
+      position: sticky;
+      top: calc(var(--v3-header-h) + var(--space-6));
+      inline-size: min(15rem, 100% - var(--space-8));
+      max-block-size: calc(100vh - var(--v3-header-h) - var(--space-12));
+      overflow-y: auto;
+      margin-inline-end: var(--space-8);
+      padding-block-start: var(--space-3);
+      font-size: var(--t-ea-small);
+    }
+
+    .art__toc--side .art__toc-list {
+      padding-block-end: 0;
+    }
+
+    .art__toc--inline {
+      display: none;
+    }
   }
 
   .art__toc summary {
