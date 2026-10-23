@@ -2413,3 +2413,47 @@
     transform: translateY(calc(var(--depth-shift) * -1));
   }
 }
+
+/* ── PAGE TO PAGE, R285-WEB-GEMINI-UIUX P3-6 (driver decision, 2026-10-23) ──
+ *
+ * A short crossfade between pages, done by the browser and nothing else. The
+ * CSS cross document view transition is opt in on both pages, and every page
+ * loads this file, so every same origin navigation fades. Browsers without it
+ * navigate exactly as before.
+ *
+ * ZERO JAVASCRIPT ON PURPOSE. Astro's ClientRouter would give the same fade
+ * through a soft navigation, at about 42 KB of router source on every route
+ * against a jsShared line with 0.4 KB of headroom (check-budgets.js), and it
+ * would rerun every page script on `astro:page-load`. A real navigation keeps
+ * every script, the D305 play once rules and the aurora pause exactly as
+ * they are.
+ *
+ * ONE MOTION DEVICE. The fade takes --dur-fast and --ease, the site's own
+ * clock, and stays subtle: only the root fades, nothing slides.
+ *
+ * THE HEADER HOLDS STILL. It is the same bar on both pages and sticks to the
+ * top of the viewport on both, so it gets its own name and the browser keeps
+ * it in place instead of fading the bar into itself. The hero pause button
+ * sits inside the page and fades with it, which is right: it belongs to the
+ * page it controls.
+ *
+ * REDUCED MOTION: no transition at all, not a faster one. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: var(--dur-fast);
+    animation-timing-function: var(--ease);
+  }
+
+  #ca-nav {
+    view-transition-name: site-header;
+  }
+
+  ::view-transition-group(site-header) {
+    animation-duration: 0s;
+  }
+}
