@@ -48,7 +48,7 @@ export const BUY_FAQS: FaqItem[] = [
   {
     question: 'How is social value handled on the buyer side?',
     answer:
-      'You write the requirement with its scoring guide fixed in advance, so what you measure and how much each part counts are settled before replies arrive rather than argued afterwards. After award, the promises on each contract are added up against delivery by theme and rated red, amber or green: on track at 95% or above, at risk from 80%, breached below 80%. A contract with nothing promised shows as no data rather than green. Measures are aligned to National TOMs conventions (Themes, Outcomes and Measures, a UK framework for counting social value). It is not a full National TOMs implementation.',
+      'You write the requirement with its scoring guide fixed in advance, so what you measure and how much each part counts are settled before replies arrive rather than argued afterwards. After award, the promises on each contract are added up against delivery by theme and rated red, amber or green: on track at 95% or above, at risk from 80%, and below 80% not yet due until its deadline passes, then breached. A contract with nothing promised shows as no data rather than green. Measures are aligned to National TOMs conventions (Themes, Outcomes and Measures, a UK framework for counting social value). It is not a full National TOMs implementation.',
   },
   {
     question: 'Are the quotes it shows us real, or generated?',
