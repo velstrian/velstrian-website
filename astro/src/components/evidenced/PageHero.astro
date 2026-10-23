@@ -22,6 +22,13 @@ import Band from './Band.astro';
 
 interface Props {
   title: string;
+  /**
+   * The closing phrase of `title` the heading is about, painted in the brand
+   * gradient (.ea-accent, R285-WEB-PREMIUM-COLOUR-MOTION-01). It must be the
+   * END of the title, word for word, or the title renders flat. The words and
+   * the accessible name are unchanged either way.
+   */
+  accent?: string;
   /** Id of the h1, also the band's accessible name. */
   id: string;
   label?: string;
@@ -31,7 +38,8 @@ interface Props {
   bandId?: string;
 }
 
-const { title, id, label, lead, size = 'standard', bandId } = Astro.props;
+const { title, id, label, lead, size = 'standard', bandId, accent } = Astro.props;
+const split = accent && title.endsWith(accent) && title.length > accent.length ? title.length - accent.length : -1;
 const hasActions = Astro.slots.has('default');
 const hasNote = Astro.slots.has('note');
 const hasBefore = Astro.slots.has('before');
@@ -42,7 +50,7 @@ const hasAfter = Astro.slots.has('after');
   <div class="ea-wrap ea-hero__head">
     {hasBefore && <slot name="before" />}
     {label && <p class="ea-label ea-page-hero__label">{label}</p>}
-    <h1 class="ea-hero__title" id={id}>{title}</h1>
+    <h1 class="ea-hero__title" id={id}>{split > 0 ? <>{title.slice(0, split)}<span class="ea-accent">{accent}</span></> : title}</h1>
     {lead && <p class="ea-lead ea-hero__lead">{lead}</p>}
     {
       hasActions && (
