@@ -107,56 +107,67 @@ const description =
 const RULES = [
   {
     term: 'Obligation wording',
+    short: 'Lines that say what someone must or must not do.',
     detail:
       'Lines containing "must", "shall", "is or are required to", "is or are expected to", "is or are obliged to", "will be required", "will be expected", "undertakes to", "agrees to", "warrants that", "responsible for", "is or are not permitted", "is or are prohibited from", "on no account", "it is a condition", "assumes liability or responsibility", or "indemnifies". A trigger anywhere in the line counts, so a clause that separates it from its verb with a long aside, as in "the Bidder is, subject to Schedule B, entirely responsible for licensing", is still read. Prohibitions count: "must not" is an obligation, and reading it as anything else would report the opposite of what the document says.',
   },
   {
     term: 'Numbered questions',
+    short: 'Numbered instructions, the questions you have to answer.',
     detail:
       'A numbered line that opens with an instruction, such as "Q4 Provide evidence of public liability insurance" or "3.6 Demonstrate how you will meet the requirement". A question schedule states its requirements as instructions rather than with the word "must", so a rule that reads only obligation wording skips the part of the pack you actually have to answer. The leading number is required: an instruction without one is treated as prose, because the numbering is the evidence that it is a question rather than a sentence.',
   },
   {
     term: 'Numbered references',
+    short: 'Clause and question numbers, in every common style.',
     detail:
       'Leading question and clause numbers such as 1.1, 4.2.3, Q1 and SQ2, part-lettered and roman numbering such as A.1.1, B.1.1.ii, C.1.2 and IV.2.b(iii), lettered sub-clauses such as 3.4.a and 3.2.1.b.iv, and stacked parentheses such as A.1.3(a), 1.01.01(A) and 1.1.1(a)(iv)(A). A leading section mark or bullet is stepped over, so "§ 2.1.3" and "- 5.1.a" are read as 2.1.3 and 5.1.a. A numbered line on its own is a heading rather than a requirement, so it earns a row only when the line also states an obligation, an instruction, a limit or a weighting. A number that is not a clause is not read as one: a figure written 2025.10 stays a figure, and a line opening "500 words" is not a reference to clause 500.',
   },
   {
     term: 'Pass or fail wording',
+    short: 'Lines the document itself marks as decisive.',
     detail:
       'Lines that mark themselves as decisive: "pass/fail", "is mandatory", "a mandatory requirement", "a minimum requirement", "fail or failure to comply, provide, submit, meet or respond", "will be rejected, excluded or disqualified", "will not be accepted", "will not proceed", "will result in disqualification, exclusion or rejection", "deemed non-compliant", "shall be excluded", "grounds for exclusion", "strictly prohibited". The rule reads the marker the document wrote. It does not judge how serious anything is, and it does not mean the rows without it are safe.',
   },
   {
     term: 'Closing dates and times',
+    short: 'Dates and times the document calls a deadline.',
     detail:
       'A date or a time on a line that also says it is a closing point: "deadline", "closing date or time", "must be received, submitted, returned or uploaded", "no later than", "due by or on", "returned by", "expires at or on", "cut-off". The cue is required because a pack is full of dates that are not deadlines, such as a contract start or a reporting period. "By" and "before" also count as cues, but only when a number follows them, and only a real date or time found nearby produces a row, so "increased by 20%" states no deadline. Both date orders are read, "14 March 2026" and "September 30, 2026", along with clock times to the second. Nothing is converted into a calendar date: "14/03/2026" and "3 February" are shown exactly as the document wrote them, because guessing a year or a date order would put a figure of our invention next to a real quote.',
   },
   {
     term: 'Who the line is about',
+    short: 'The party a line opens with, such as the buyer.',
     detail:
       'Where a line OPENS with a named party, that party is reported beside the row: Bidder, Tenderer, Supplier, Contractor, Sub-contractor, Consultant, Provider, Vendor, Buyer, Authority, Client, Customer, Department, Employer, Council, Trust, Agency, Purchaser. This is read from the sentence, not decided: the subject of "The Buyer shall provide building access" is a fact about the wording in the same way the word "shall" is. Rows are never dropped on this basis, because an obligation on the buyer is a dependency you may need to price or query rather than something to ignore. A line that does not open with a party carries no subject, and that means only that it does not open with one. It never means the requirement is yours.',
   },
   {
     term: 'Flattened tables',
+    short: 'Rows of a compliance table pasted out of a PDF.',
     detail:
       'A numbered line that reads as a row of a compliance table rather than a sentence: it carries a reference, it carries a cell that is either an upper case token such as YES, NO, MANDATORY or REQUIRED or two or more pipe characters, and it does not end in sentence punctuation. A response matrix pasted out of a PDF arrives as text with its columns collapsed, and every row of it is something you have to answer. Upper case is the evidence and it is deliberate: prose writes "yes" and a table cell writes "YES". The three tests together are what separate "A.1 YES Method Statement" from "4.2 NO changes will be permitted after the deadline."',
   },
   {
     term: 'Response limits',
+    short: 'Word, page and character limits.',
     detail:
       'Word, page, character and side counts, written any of the three ways a tender pack writes them: "no more than 500 words", "500 word limit", "1,000 characters or fewer".',
   },
   {
     term: 'Percentage weightings',
+    short: 'Scoring weightings, found and added up for you.',
     detail:
       'Percentages within three lines of a mention of weighting, evaluation, scoring, criteria, marks or award, where the line itself either reads as a criteria row ("Quality 60%") or mentions evaluation in its own right ("quality will be weighted at 60%"). Both tests are needed: nearness alone reads a VAT rate or a retention percentage sitting under an award criteria heading as though it were a criterion. A criteria row is a short label and a number, so "Quality 60%" and "Quality 60%, Price 30%, Social Value 10%" are read and "Payment terms allow a 2% early settlement discount and VAT is charged at 20%" is not. A percentage in brackets, as in "Technical Merit (60%)", is allowed a longer label, because a bracketed figure is an aside attached to the phrase before it, which is what a weighting is. The tool adds up what it found and shows the total. A pack listing sub-criteria as well as top-level criteria sums to well over 100, which is normal and is not a fault in the document.',
   },
   {
     term: 'Quoted wording',
+    short: 'Wording that is only quoted is not read as a requirement.',
     detail:
       'A trigger word that appears only inside double quotation marks is read as the document naming a phrase rather than using it, and does not make the line a requirement. A definitions section reading: the phrase "must comply" indicates a mandatory requirement, is describing wording rather than stating an obligation. If the same or another trigger also appears outside the quotation marks, the line is a requirement as normal, so a clause reading: the Bidder must state "Compliant" or "Non-Compliant", keeps its obligation. Only trigger words are treated this way. Figures are not: a limit written inside quotation marks is still a limit the document states. A line that both quotes a phrase and defines one, as in: the phrase "is strictly prohibited" denotes a zero-tolerance policy, is read as a glossary entry and produces no row at all. Both halves are required, so a clause that merely contains quotation marks keeps its requirement.',
   },
   {
     term: 'Wrapped lines',
+    short: 'A sentence broken across two lines is read as one.',
     detail:
       'Text copied from a PDF breaks wherever the column ended, not where the sentence did. A line that does not end in punctuation and is followed by a line starting in lower case is read as one statement, because English does not begin a sentence with a lower case letter. Without this a limit written "no more than 2,000" on one line and "words" on the next is not found at all.',
   },
@@ -795,14 +806,22 @@ Section 5: Submission and Compliance
           <li class="surface surface--pad surface--row rulespec__rule">
             <p class="meta rulespec__n">{String(i + 1).padStart(2, '0')}</p>
             <h3 class="card-h rulespec__h">{r.term}</h3>
-            <p class="rulespec__body">
-              {/* Odd indices are the quoted runs. See `tokens` in the
-                  frontmatter for why that is a property of the split rather
-                  than an assumption about the text. */}
-              {tokens(r.detail).map((part, j) =>
-                j % 2 ? <code class="rulespec__tok">{part}</code> : part,
-              )}
-            </p>
+            <p class="rulespec__short">{r.short}</p>
+            <details class="rulespec__more">
+              <summary>
+                <span>
+                  Read in full<span class="visually-hidden">: {r.term}</span>
+                </span>
+              </summary>
+              <p class="rulespec__body">
+                {/* Odd indices are the quoted runs. See `tokens` in the
+                    frontmatter for why that is a property of the split rather
+                    than an assumption about the text. */}
+                {tokens(r.detail).map((part, j) =>
+                  j % 2 ? <code class="rulespec__tok">{part}</code> : part,
+                )}
+              </p>
+            </details>
           </li>
         ))
       }
@@ -841,7 +860,16 @@ Section 5: Submission and Compliance
             <li class="surface surface--pad surface--row limits__item">
               <span class="limits__mark" aria-hidden="true"></span>
               <p class="limits__h">{c.head}</p>
-              {c.body && <p class="limits__body">{c.body}</p>}
+              {c.body && (
+                <details class="limits__more">
+                  <summary>
+                    <span>
+                      Why<span class="visually-hidden">: {c.head}</span>
+                    </span>
+                  </summary>
+                  <p class="limits__body">{c.body}</p>
+                </details>
+              )}
             </li>
           );
         })
@@ -1782,6 +1810,49 @@ Section 5: Submission and Compliance
     font-size: var(--t-caption);
     line-height: 1.75;
     color: var(--c-text-sub);
+  }
+
+  /* THE RULE IN ONE LINE, THE SPECIFICATION ONE TAP AWAY (D305, lane E3,
+     2026-10-23). A small firm came here for the tool above, and eleven cards
+     of 60 to 180 words each set about 1,300 words between it and the limits.
+     Each rule now shows its name and one plain line, and the full
+     specification sits in a native <details> on the site's one disclosure
+     recipe (`summary` and `summary::after` in styles/blocks.css). It is still
+     in the HTML, so search, find in page and the "published in full" promise
+     hold. The limits below take the same shape: the claim stays on show, the
+     reasoning is behind "Why". */
+  .rulespec__short {
+    margin: 0;
+    max-width: 68ch;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.6;
+    color: var(--c-text-sub);
+  }
+
+  .rulespec__more,
+  .limits__more {
+    margin-top: var(--stack-1);
+    border-top: 1px solid var(--c-border);
+  }
+
+  .rulespec__more summary,
+  .limits__more summary {
+    font-family: var(--font-body);
+    font-size: var(--t-caption);
+    font-weight: 500;
+    color: var(--c-text);
+  }
+
+  .rulespec__more summary:focus-visible,
+  .limits__more summary:focus-visible {
+    outline: var(--ea-focus);
+    outline-offset: 2px;
+  }
+
+  .rulespec__more .rulespec__body,
+  .limits__more .limits__body {
+    padding-bottom: var(--stack-1);
   }
 
   /* QUOTED DOCUMENT TEXT, SET AS WHAT IT IS. Every double-quoted run in these
