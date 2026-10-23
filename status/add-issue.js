@@ -97,7 +97,7 @@ const title = arg('title');
 const note = arg('note');
 const src = arg('src', 'session');
 
-const VALID_SEV = ['P1', 'P2', 'P3'];
+const VALID_SEV = ['P0', 'P1', 'P2', 'P3'];
 /* Taken from the file's own `legend`, so this cannot drift from it. */
 const board = JSON.parse(fs.readFileSync(P, 'utf8'));
 const VALID_STATUS = Object.keys(board.legend);
