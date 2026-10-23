@@ -449,6 +449,23 @@ const schema = [
       matrix follows it in document order and the summary says so.
     */}
     <div role="status" aria-live="polite">
+      {/* R285-WEB-GEMINI-UIUX P2-11. THE CLEARED STATE. Emptying the box by hand
+          used to leave the old matrix on screen under an empty field, and Clear
+          left a blank space with nothing to do next. Both now show this card,
+          which says the old result has gone and offers the next step. It never
+          shows on first load, for the reason the note above gives about empty
+          cards. It sits inside the status region so the change is announced. */}
+      <div id="matrix-cleared" class="result surface surface--pad tmx-cleared" hidden>
+        <p class="meta result__kicker">Ready for the next tender</p>
+        <p class="result__lead">
+          The box is empty, so the last matrix has gone. Paste the next section of tender text, or
+          press one of the samples above to see how it works.
+        </p>
+        <div class="ea-actions">
+          <Action href="#tenderText" variant="secondary">Paste tender text</Action>
+        </div>
+      </div>
+
       <div id="matrix-result" class="result surface surface--pad" hidden>
         <p class="meta result__kicker">What these rules matched</p>
 
@@ -920,7 +937,8 @@ Section 5: Submission and Compliance
     const list = byId('matrix-rows');
     const err = byId('matrix-err');
     const tpl = byId('matrix-row') as HTMLTemplateElement | null;
-    if (!form || !input || !panel || !list || !err || !tpl) return;
+    const cleared = byId('matrix-cleared');
+    if (!form || !input || !panel || !list || !err || !tpl || !cleared) return;
 
     const put = (id: string, text: string) => {
       const node = byId(id);
@@ -1186,6 +1204,7 @@ Section 5: Submission and Compliance
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       clearError();
+      cleared.hidden = true;
 
       /*
        * The offending field is NAMED, marked and focused. `.field__input
@@ -1411,8 +1430,22 @@ Section 5: Submission and Compliance
       /* The browser clears the field; this clears everything the browser does
          not know about. A reset that leaves the matrix on screen under an empty
          box reads as the tool having ignored the reset. */
+      const had = currentMatrix !== null;
       clearResult();
       clearError();
+      if (had) cleared.hidden = false;
+    });
+
+    /* Emptying the box by hand is a clear too (R285-WEB-GEMINI-UIUX P2-11).
+       Typing again takes the cleared card away, the matrix waits for Build. */
+    input.addEventListener('input', () => {
+      if (input.value.trim()) {
+        cleared.hidden = true;
+      } else if (currentMatrix) {
+        clearResult();
+        clearError();
+        cleared.hidden = false;
+      }
     });
   }
 
