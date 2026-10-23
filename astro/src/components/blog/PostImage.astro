@@ -54,6 +54,11 @@ interface Props {
   boxHeight?: number;
   /** The banner shape for a designed cover at the top of a post (see TypeCover). */
   wide?: boolean;
+  /**
+   * The cover sits right beside a headline that already says what its line
+   * would say (the featured card on /blog/), so it shows its motif alone.
+   */
+  quiet?: boolean;
 }
 
 const {
@@ -65,6 +70,7 @@ const {
   boxWidth = 1600,
   boxHeight = 900,
   wide = false,
+  quiet = false,
 } = Astro.props;
 
 const hero = heroOrNull(slug);
@@ -101,7 +107,7 @@ const srcset = (ext: 'avif' | 'webp') => WIDTHS.map((w) => `${base}-${w}w.${ext}
       </picture>
     </div>
   ) : (
-    cover && <TypeCover cover={cover} wide={wide} />
+    cover && <TypeCover cover={cover} wide={wide} quiet={quiet} />
   )
 }
 

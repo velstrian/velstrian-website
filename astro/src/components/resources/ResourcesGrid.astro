@@ -4,15 +4,17 @@ import Action from '../evidenced/Action.astro';
 import ResourceCard from './ResourceCard.astro';
 import { LIVE_SOURCES } from '../../data/site-facts';
 import { RECENT_DAYS } from '../../data/tender-finder';
-import { buildCover, coverForPost } from '../blog/covers';
+import { buildCover } from '../blog/covers';
 
-/* Type led covers (D283). The guide card carries the post's own cover, so the
-   hub and /blog/ show the same picture for the same article. */
+/* Type led covers (D283). Every tile draws its own motif (D305 lane B,
+   2026-10-23): the guide tile used to carry the blog post's cover, so the same
+   art appeared twice across the site, and /blog/ now shows that post's
+   photograph anyway. Here it draws the weighting bars instead. */
 const PPN_GUIDE_TITLE = 'PPN 026 Social Value: How the Model Is Scored';
 const covers = {
   matrix: buildCover({ line: 'Requirements line by line', kind: 'Free tool', family: 'matrix' }),
   finder: buildCover({ line: 'Open tenders in one search', kind: 'Free tool', family: 'finder' }),
-  guide: coverForPost('ppn-026-social-value-guide', PPN_GUIDE_TITLE, 'Social value'),
+  guide: buildCover({ line: 'How social value is scored', kind: 'Social value', family: 'value', motif: 'weighting' }),
   guides: buildCover({ line: 'Guides you can act on', kind: 'Guides', family: 'library' }),
 };
 ---
@@ -21,11 +23,11 @@ const covers = {
   <div class="ea-wrap">
     <div class="ea-head-row" data-reveal>
       <div>
-        <p class="ea-label res-eyebrow">Free tools</p>
-        <h2 class="ea-h2" id="tools-title">Free tender compliance matrix</h2>
+        <p class="ea-label res-eyebrow">Start here</p>
+        <h2 class="ea-h2" id="tools-title">Free tools and guides</h2>
       </div>
       <p class="ea-lead">
-        Search open UK and EU tenders, then read back what a tender requires, the same way Velstrian Bid does internally. No account, no email gate, no credit card. Use them, then start Velstrian Bid if you want alerts, fit scores and the full audit trail.
+        Search open UK and EU tenders, read back what a tender requires the same way Velstrian Bid does, and learn the rules in plain words. No account, no email gate, no credit card. Use them, then start Velstrian Bid if you want alerts, fit scores and the full audit trail.
       </p>
     </div>
 

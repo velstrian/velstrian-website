@@ -714,11 +714,14 @@ function coverForPost(post) {
   const familyKey = COVERS.categories[post.category] ?? COVERS.defaultFamily;
   const family = COVERS.families[familyKey];
   if (!family) throw new Error(`covers.json has no family "${familyKey}"`);
+  // A post entry is { line, motif } since D305 lane B (2026-10-23), or a bare line.
+  const entry = COVERS.posts[post.slug];
+  const motifKey = (entry && typeof entry === "object" && entry.motif) || family.motif;
   const ground = COVERS.grounds[family.ground];
-  const motif = COVERS.motifs[family.motif];
-  if (!ground || !motif) throw new Error(`covers.json family "${familyKey}" names a ground or motif it does not define`);
+  const motif = COVERS.motifs[motifKey];
+  if (!ground || !motif) throw new Error(`covers.json family "${familyKey}" names a ground or motif "${motifKey}" it does not define`);
   return {
-    line: COVERS.posts[post.slug] ?? post.title,
+    line: (typeof entry === "string" ? entry : entry && entry.line) || post.title,
     kind: post.category,
     colours: {
       bg: resolveToken(ground.bg),

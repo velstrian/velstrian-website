@@ -23,7 +23,10 @@ type Family = { ground: string; motif: string };
 const GROUNDS = COVERS.grounds as Record<string, Ground>;
 const FAMILIES = COVERS.families as Record<string, Family>;
 const CATEGORIES = COVERS.categories as Record<string, string>;
-const POSTS = COVERS.posts as Record<string, string>;
+/* A post is `{ line, motif }` (D305 lane B, 2026-10-23) so every post draws its
+   own motif. A bare string is still accepted as the line. */
+type PostEntry = string | { line: string; motif?: string };
+const POSTS = COVERS.posts as Record<string, PostEntry>;
 const MOTIFS = COVERS.motifs as Record<string, string>;
 
 export interface Cover {
@@ -37,29 +40,36 @@ export interface Cover {
   style: string;
   /** The motif as SVG children for a 0 0 100 100 viewBox. */
   motif: string;
+  /** The motif key, written to data-motif so a test can see that no two posts share one. */
+  motifName: string;
 }
 
 export function familyForCategory(category: string): string {
   return CATEGORIES[category] ?? COVERS.defaultFamily;
 }
 
-export function buildCover(input: { line: string; kind: string; family: string }): Cover {
+export function buildCover(input: { line: string; kind: string; family: string; motif?: string }): Cover {
   const family = FAMILIES[input.family];
   if (!family) throw new Error(`TypeCover: no family "${input.family}" in components/blog/covers.json`);
   const ground = GROUNDS[family.ground];
   if (!ground) throw new Error(`TypeCover: family "${input.family}" names a ground "${family.ground}" that covers.json does not define`);
-  const motif = MOTIFS[family.motif];
-  if (!motif) throw new Error(`TypeCover: family "${input.family}" names a motif "${family.motif}" that covers.json does not define`);
+  const motifKey = input.motif ?? family.motif;
+  const motif = MOTIFS[motifKey];
+  if (!motif) throw new Error(`TypeCover: "${input.family}" asks for a motif "${motifKey}" that covers.json does not define`);
   return {
     line: input.line,
     kind: input.kind,
     family: input.family,
     style: `--tc-bg: var(--${ground.bg}); --tc-ink: var(--${ground.ink}); --tc-sub: var(--${ground.sub}); --tc-accent: var(--${ground.accent})`,
     motif,
+    motifName: motifKey,
   };
 }
 
 /** The cover for a blog post, from its slug, title and category. */
 export function coverForPost(slug: string, title: string, category: string): Cover {
-  return buildCover({ line: POSTS[slug] ?? title, kind: category, family: familyForCategory(category) });
+  const entry = POSTS[slug];
+  const line = typeof entry === 'string' ? entry : (entry?.line ?? title);
+  const motif = typeof entry === 'string' ? undefined : entry?.motif;
+  return buildCover({ line, kind: category, family: familyForCategory(category), motif });
 }

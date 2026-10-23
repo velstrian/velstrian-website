@@ -45,12 +45,18 @@ interface Props {
    * a 3:1 box is too short to hold a three line title clear of the label.
    */
   wide?: boolean;
+  /**
+   * The motif alone, large and centred (D305 lane B, 2026-10-23). For a cover
+   * that sits right beside a headline saying the same thing, such as the
+   * featured card on /blog/, where the cover's own words only repeated it.
+   */
+  quiet?: boolean;
 }
 
-const { cover, label, flush = false, wide = false } = Astro.props;
+const { cover, label, flush = false, wide = false, quiet = false } = Astro.props;
 ---
 
-<div class="tc" data-family={cover.family} data-flush={flush ? '' : undefined} data-wide={wide ? '' : undefined} style={cover.style} role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
+<div class="tc" data-family={cover.family} data-motif={cover.motifName} data-quiet={quiet ? '' : undefined} data-flush={flush ? '' : undefined} data-wide={wide ? '' : undefined} style={cover.style} role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
   <span class="tc__kind">{cover.kind}</span>
   <span class="tc__line">{cover.line}</span>
   <svg class="tc__motif" viewBox="0 0 100 100" focusable="false" aria-hidden="true" set:html={cover.motif} />
@@ -140,19 +146,68 @@ const { cover, label, flush = false, wide = false } = Astro.props;
     .tc__motif {
       top: 50%;
       right: 50%;
-      width: 38cqi;
-      height: 38cqi;
+      width: 44cqi;
+      height: 44cqi;
       transform: translate(50%, -50%);
     }
   }
 
+  /* The quiet cover: the words would repeat the headline beside it, so the
+     motif fills the box instead of sitting small in a corner. */
+  .tc[data-quiet] .tc__kind,
+  .tc[data-quiet] .tc__line {
+    display: none;
+  }
+  .tc[data-quiet] .tc__motif {
+    top: 50%;
+    right: 50%;
+    width: 40cqi;
+    height: 40cqi;
+    transform: translate(50%, -50%);
+  }
+
+  /*
+   * THE BANNER SHARES ONE AXIS, D305 lane B, 2026-10-23. Measured before this
+   * rule at 1103 by 368: the title sat in the lower left and the motif in the
+   * top right corner, so a one line title (10 of 12 posts) left about half the
+   * banner empty and the two never lined up. Now the label and title are one
+   * block and the motif sits beside it, both centred on the banner's middle,
+   * so the motif reads as the title's mark rather than a stray corner.
+   */
   @media (min-width: 700px) {
     .tc[data-wide] {
       aspect-ratio: 3 / 1;
+      display: grid;
+      /* Percentages, not cqi, on this element: cqi on the container itself
+         resolves against the NEXT container up, which pushed the motif in
+         from the right edge on the first render. Its children use cqi. */
+      grid-template-columns: minmax(0, 1fr) 25%;
+      grid-template-rows: auto auto;
+      align-content: center;
+      column-gap: 8%;
+      padding-inline: 7%;
+    }
+    .tc[data-wide] .tc__kind,
+    .tc[data-wide] .tc__line,
+    .tc[data-wide] .tc__motif {
+      position: static;
+    }
+    .tc[data-wide] .tc__kind {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .tc[data-wide] .tc__line {
+      grid-column: 1;
+      grid-row: 2;
+      max-width: 52cqi;
+      margin-top: 2.6cqi;
     }
     .tc[data-wide] .tc__motif {
-      width: 20cqi;
-      height: 20cqi;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: center;
+      width: 24cqi;
+      height: 24cqi;
     }
   }
 
