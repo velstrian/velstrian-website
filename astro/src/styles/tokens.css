@@ -751,6 +751,13 @@
   --space-20: 80px;
   --space-24: 96px;
 
+  /* R285-WEB-STICKY-HEADER-OFFSET-01 (2026-10-23): the sticky header's row height, the
+     ONE value the header and every sticky element under it read. Six rules used
+     calc(var(--v3-header-h) + var(--space-8)) but the token was never defined, so each
+     computed top: auto and nothing stuck (measured on /about/: the company card in the
+     history band scrolled away). Nav.astro's .ca-nav-row min-block-size reads it too. */
+  --v3-header-h: 4.5rem;
+
   /* ── Vertical rhythm ────────────────────────────────────────────────────
      ══════════════════════════════════════════════════════════════════════════
      THE vh KEYING IS GONE, 2026-08-31, AND THE PARAGRAPH BELOW IT IS WHY IT WAS
