@@ -2457,3 +2457,45 @@
     animation-duration: 0s;
   }
 }
+
+/* ── THE QUESTION LISTS OPEN SMOOTHLY, R285-WEB-GEMINI-UIUX P2-5 ───────────
+ *
+ * Every FAQ on the site is a native <details class="ea-qa"> (Faq.astro,
+ * PricingFaq.astro, BidFaq.astro, BuyFaq.astro, the sector pages, /faq/), and
+ * it snapped open. It stays native, so the keyboard, find in page and a
+ * screen reader's expanded state are untouched, and no script is added. The
+ * answer box is the element's own ::details-content, which grows from 0 to its
+ * natural height and fades in on the site's clock. interpolate-size lets a
+ * length animate to `auto`.
+ *
+ * GRACEFUL WHERE IT IS MISSING. A browser without ::details-content skips the
+ * whole block and the answer snaps open exactly as before. A browser with
+ * ::details-content but no interpolate-size fades the answer and jumps the
+ * height. Neither can leave an answer hidden: the open state is `auto` and
+ * full opacity, and closed is the browser's own hidden state.
+ *
+ * Here and not in evidenced.css because it is motion, and motion lives in
+ * this file. --dur and --ease, so reduced motion would make it instant
+ * anyway, and the whole block is also inside no-preference. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports selector(::details-content) {
+    .ea-qa {
+      interpolate-size: allow-keywords;
+    }
+
+    .ea-qa::details-content {
+      block-size: 0;
+      overflow: clip;
+      opacity: 0;
+      transition:
+        block-size var(--dur) var(--ease),
+        opacity var(--dur) var(--ease),
+        content-visibility var(--dur) allow-discrete;
+    }
+
+    .ea-qa[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+}
