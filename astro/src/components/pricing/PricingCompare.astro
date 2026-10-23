@@ -8,6 +8,13 @@
  * - The statutory rows (Procurement Act 2023 sections 52 and 71, PPN 026, PPN 017) with plain labels.
  * - Sizing left to components, table scrollable.
  * - Page counting details and row counting explanation.
+ *
+ * 2026-10-23, D305 lane E2: the feature table is OPEN. People choosing a plan
+ * need it, so it sits in the band with nothing to click. The three blocks that
+ * explain how credits are counted (what each plan includes, reading a tender by
+ * page, spreadsheets by rows) are one tap each, as `.ea-qa` rows with their
+ * heading in the summary, the site's one disclosure recipe. Every word and
+ * table is still in the HTML.
  */
 import Band from '../evidenced/Band.astro';
 import {
@@ -33,12 +40,6 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
     </div>
 
     <div class="pricing-compare__details-wrap" data-reveal>
-      <details class="ea-qa pricing-disclosure">
-        <summary class="ea-h3 pricing-disclosure__summary">
-          Compare every feature across Velstrian Bid plans
-        </summary>
-
-        <div class="pricing-disclosure__content">
           <h3 class="ea-h3 pricing-compare__subheading">Velstrian Bid</h3>
 
           <div class="pricing-table-scroll" tabindex="0" role="region" aria-label="Velstrian Bid features by plan, scrollable">
@@ -87,7 +88,9 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
           </p>
 
           <div class="pricing-credits-deep-dive">
-            <h4 class="ea-h3">What each plan includes</h4>
+            <p class="ea-label pricing-compare__how">How AI credits are counted</p>
+            <details class="ea-qa">
+            <summary><h4 class="pricing-row__h">What each plan includes</h4></summary>
             <div class="pricing-table-scroll" tabindex="0" role="region" aria-label="AI credits per plan, scrollable">
               <table class="ea-mini-table pricing-table">
                 <caption class="visually-hidden">AI credits included per plan, per calendar month</caption>
@@ -115,8 +118,10 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
               Re-drafting the same answer is free for the first three re-drafts each month. The
               fourth costs one credit. A generation that fails is not charged.
             </p>
+            </details>
 
-            <h4 class="ea-h3 pricing-table__title">Reading a tender document is charged by page</h4>
+            <details class="ea-qa">
+            <summary><h4 class="pricing-row__h">Reading a tender document is charged by page</h4></summary>
             <p class="pricing-compare__body">
               Uploading a tender document and extracting its requirements costs
               3 credits per 10 pages, rounded up. A 10 page invitation to tender costs 3 credits.
@@ -147,14 +152,15 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
                 </tbody>
               </table>
             </div>
+            </details>
 
-            <h4 class="ea-h3 pricing-table__title">Why spreadsheets are counted by rows, not by sheets</h4>
+            <details class="ea-qa">
+            <summary><h4 class="pricing-row__h">Why spreadsheets are counted by rows, not by sheets</h4></summary>
             <p class="pricing-compare__body">
               A sheet is not a page. A 5,000 row pricing schedule sitting on a single Excel sheet holds roughly 17 times the text of a 10 page PDF, and the AI work scales with how much text there is to read. Counting that as one page would charge the same for 17 times the work, so we count 50 rows as one page instead. CSV files are counted exactly like Excel files. We only count the rows we actually read, a sheet we read is never counted as nothing, and a generation that fails is not charged at all.
             </p>
+            </details>
           </div>
-        </div>
-      </details>
     </div>
   </div>
 </Band>
@@ -162,18 +168,6 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
 <style>
   .pricing-compare__details-wrap {
     margin-top: var(--space-8);
-  }
-
-  .pricing-disclosure {
-    padding-bottom: var(--space-6);
-  }
-
-  .pricing-disclosure__summary {
-    user-select: none;
-  }
-
-  .pricing-disclosure__content {
-    margin-top: var(--space-6);
   }
 
   .pricing-compare__subheading {
@@ -212,9 +206,17 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
     border-top: 1px solid var(--ea-rule);
   }
 
-  .pricing-table__title {
-    margin-top: var(--space-6);
-    margin-bottom: var(--space-2);
+  .pricing-compare__how {
+    margin: 0 0 var(--space-3);
+    color: var(--ea-accent-ink);
+  }
+
+  /* The heading keeps its element for the outline and for content parity, and
+     takes the row's own type from `.ea-qa summary`. */
+  .pricing-row__h {
+    margin: 0;
+    font: inherit;
+    color: inherit;
   }
 
   .pricing-compare__body {

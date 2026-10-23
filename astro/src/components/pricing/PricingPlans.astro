@@ -106,7 +106,7 @@ const n = (v: number) => v.toLocaleString('en-GB');
       <p class="ea-lead pricing-reassurance__lead">
         Your first {TRIAL_DAYS} days are free, on the Starter features for 1 user with {TRIAL_CREDITS} AI credits. A card is
         needed to start, held securely by Stripe and never stored by us. Cancel in the {TRIAL_DAYS} days and pay nothing.
-        Annual savings: pay yearly and save 10 percent with annual billing.
+        Annual savings: pay yearly and save {annualDiscountPct(PLANS[0])} percent with annual billing.
       </p>
     </div>
   </div>
