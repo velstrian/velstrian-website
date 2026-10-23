@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T01:27:01.301Z",
+  "updated": "2026-10-23T02:53:18.515Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -3257,6 +3257,30 @@
       "title": "R285-WEB-STICKY-HEADER-OFFSET-01 history section company card does not stay pinned while the timeline scrolls (and 5 other sticky panels)",
       "status": "FIXED",
       "note": "Root cause measured: --v3-header-h was used by 6 rules and never defined, so top computed to auto. Defined once in tokens.css (4.5rem) and read by the nav row. /about/ card now pins at 104px through the timeline and releases at the end. Local only, website gate run owed."
+    },
+    {
+      "id": "A-335",
+      "src": "R285-WEB-IMAGERY-AND-DISCLOSURE-01",
+      "sev": "P1",
+      "title": "Lane A: blog photos restored as a hybrid, photo or designed cover (D305)",
+      "status": "BUILT",
+      "note": "a2dca954, local only. heroes.ts back from c4379ba6^ with heroOrNull, PostImage draws the AVIF and WebP ladder when a hero is registered and TypeCover otherwise, sizes measured at the three call sites (feature 582px, ledger 156px, post 1103px at 1440). Westminster re-cut 16:9 as uk-parliament-westminster-v2 (251,022 B, under the 250 KB single image budget, the 300,939 B original is immutable). Shots: scratchpad imagery/laneA-after, all 12 posts serve their photo at 1440 and 390. Gate chain 41 of 43 PASS, the two FAILs are not this lane."
+    },
+    {
+      "id": "A-336",
+      "src": "R285-WEB-IMAGERY-AND-DISCLOSURE-01",
+      "sev": "P1",
+      "title": "Lane B: designed covers finished, a motif per post, shared axis banners, quiet featured cover (D305)",
+      "status": "BUILT",
+      "note": "317c66d0, local only. 12 distinct post motifs (7 new: gauge, timeline, compare, calendar, nodes, pages, weighting for the resources guide tile), frameworks off the black ground, banner label, title and motif on one centred axis, featured cover drops the words its headline says, carbon chart thicker with axes, resources section reads Free tools and guides. Social cards regenerated from covers.json (never live). Ledger covers stay hidden under 480px by the recorded decision in blog/index.astro. Shots: imagery/laneB-v2 and og-sheet.png."
+    },
+    {
+      "id": "A-337",
+      "src": "R285-WEB-IMAGERY-AND-DISCLOSURE-01",
+      "sev": "P1",
+      "title": "Lane C: FlashCards component, manual at zero JS and play once steps, piloted on /bid/ (D305, D307)",
+      "status": "BUILT",
+      "note": "8168feff, local only. ui/FlashCards.astro plus scripts/flashcards.ts. /bid/: Start in three steps in steps mode, the twelve capabilities as manual cards with Read in full. check-autoplay section 3, 11 behavioural checks all ok (advance once, rest on last, keyboard pause, hover suspends, none under reduced motion or at 390, manual never driven). jsTotal budget 60 KB per D307, measured 36,822 B (timer 2,195 B inlined on /bid/ only). Owner to judge the pilot before lanes E1 to E4."
     }
   ],
   "directives": [
@@ -3326,5 +3350,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 335
+  "nextId": 338
 }
