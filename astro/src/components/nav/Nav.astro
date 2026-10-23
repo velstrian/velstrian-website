@@ -147,7 +147,12 @@ const menus = NAV.menus.map((menu) => ({
           `target="_blank" rel="noopener noreferrer"` on the same two links.
           A silently ignored prop, found by `astro check` and by nothing else.
           Button fills in rel="noopener noreferrer" whenever target is _blank. */}
-      <Button href={NAV.actions.signIn.href} variant="secondary" size="sm" class="ca-nav-login" target="_blank">
+      {/* [R285-WEB-SIGNIN-SAME-TAB-01, driver decision 2026-10-23] Sign in now opens in the
+          SAME tab, like Start now beside it. The new tab above was parity with the old
+          nav script, never a design choice. Same tab is the norm for a product's own
+          sign in (back button works, no orphan marketing tab, WCAG G201 expects a
+          warning on new windows), and two buttons in one header behaved differently. */}
+      <Button href={NAV.actions.signIn.href} variant="secondary" size="sm" class="ca-nav-login">
         {NAV.actions.signIn.label}
       </Button>
       <Button href={NAV.actions.cta.href} size="sm" class="ca-nav-cta">{NAV.actions.cta.label}</Button>
@@ -246,8 +251,8 @@ const menus = NAV.menus.map((menu) => ({
       by the CSS below. */}
   <div class="ca-mob-actions">
     <Button href={NAV.actions.cta.href} size="md" class="ca-mob-btn">{NAV.actions.cta.label}</Button>
-    {/* Same correction as the desktop sign-in above, and the same reason. */}
-    <Button href={NAV.actions.signIn.href} variant="secondary" target="_blank" class="ca-mob-btn">
+    {/* Same tab, as the desktop sign in above (R285-WEB-SIGNIN-SAME-TAB-01). */}
+    <Button href={NAV.actions.signIn.href} variant="secondary" class="ca-mob-btn">
       {NAV.actions.signIn.label}
     </Button>
   </div>
