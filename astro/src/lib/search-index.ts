@@ -19,11 +19,42 @@ import { FOOTER } from '../data/footer';
 export interface SearchEntry {
   title: string;
   href: string;
-  /** Grouping label shown against the result. */
+  /** Grouping label. Matched on, so "software" still finds the products. */
   section: string;
+  /** The short tag the palette shows against the result (R285-WEB-GEMINI-UIUX
+   *  P2-6). The section labels are column headings, up to 24 characters, and
+   *  sat beside the title as a second, louder title. */
+  tag: string;
   /** Extra words to match on that are not in the title. */
   hint?: string;
+  /** A quick jump, offered before anything is typed and when nothing matches. */
+  quick?: true;
 }
+
+/**
+ * R285-WEB-GEMINI-UIUX P3-7. THE QUICK JUMPS: the places a first time reader
+ * most often wants, offered in the resting list and again when a search finds
+ * nothing, so an empty result is never a dead end. By address, so a renamed
+ * page keeps its place.
+ */
+const QUICK_HREFS = new Set(['/bid/', '/buy/', '/tools/tender-compliance-matrix/', '/tools/tender-finder/', '/pricing/']);
+
+/**
+ * The tag for an address. Ordered, first match wins, and anything else on the
+ * site is a plain Page. Derived from the address, never typed per entry, so a
+ * new route gets a tag without anybody remembering to give it one.
+ */
+const TAGS: ReadonlyArray<readonly [RegExp, string]> = [
+  [/^\/bid\//, 'Bid'],
+  [/^\/buy\//, 'Buy'],
+  [/^\/compare\//, 'Compare'],
+  [/^\/tools\//, 'Tool'],
+  [/^\/glossary\//, 'Glossary'],
+  [/^\/blog\/./, 'Guide'],
+  [/^\/sectors\/./, 'Sector'],
+  [/^\/(security|privacy|terms|cookies|cookie-preferences|accessibility|modern-slavery|legal)\//, 'Legal'],
+];
+const tagFor = (href: string) => TAGS.find(([re]) => re.test(href))?.[1] ?? 'Page';
 
 /** Collection id -> the label a reader would recognise. */
 const COLLECTION_SECTIONS: Record<string, string> = {
@@ -38,7 +69,9 @@ export async function buildSearchIndex(): Promise<SearchEntry[]> {
   const seen = new Set<string>();
   const out: SearchEntry[] = [];
 
-  const add = (entry: SearchEntry) => {
+  const add = (fields: Omit<SearchEntry, 'tag'>) => {
+    const entry: SearchEntry = { ...fields, tag: tagFor(fields.href) };
+    if (QUICK_HREFS.has(fields.href)) entry.quick = true;
     // Normalise the trailing slash for dedupe only. The href itself is left
     // exactly as authored, because these are live indexed URLs.
     const key = entry.href.replace(/\/$/, '') || '/';

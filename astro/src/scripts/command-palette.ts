@@ -29,7 +29,12 @@ interface Entry {
   title: string;
   href: string;
   section: string;
+  /** Short tag shown against a route row (lib/search-index.ts). Action rows
+   *  carry none and show their section, "Action". */
+  tag?: string;
   hint?: string;
+  /** A quick jump (lib/search-index.ts), shown at rest and on no match. */
+  quick?: true;
   /** Set only on the action rows (data/palette-actions.ts), first in the index. */
   kind?: 'action';
   /** Opens in a new tab. True for the one target that is not on this origin. */
@@ -149,6 +154,7 @@ export function initCommandPalette(): void {
      * elsewhere, so 40 never crosses a band.
      */
     const q = input!.value.trim().toLowerCase();
+    const picks = entries.filter((e) => e.quick);
     results = q
       ? entries
           .map((e) => ({ e, s: score(e, q) }))
@@ -164,7 +170,11 @@ export function initCommandPalette(): void {
          * highest-intent things this site can offer them are the ones that
          * carry an intent into the page.
          */
-        entries.filter((e) => e.kind).slice(0, RESTING_ACTIONS).concat(entries.filter((e) => !e.kind).slice(0, 8 - RESTING_ACTIONS));
+        entries.filter((e) => e.kind).slice(0, RESTING_ACTIONS).concat(picks.slice(0, 8 - RESTING_ACTIONS));
+    /* R285-WEB-GEMINI-UIUX P3-7. Nothing matched: say so, and offer the quick
+       jumps under the message rather than an empty panel. */
+    const miss = !!q && !results.length;
+    if (miss) results = picks;
 
     active = 0;
     /*
@@ -201,16 +211,18 @@ export function initCommandPalette(): void {
           `<a role="option" id="cmdk-opt-${i}" aria-selected="${i === 0}" data-i="${i}" ` +
           `href="${escapeHtml(e.href)}"${target}${cls} tabindex="-1">` +
           `<span class="cmdk__t">${escapeHtml(e.title)}</span>` +
-          `<span class="meta cmdk__s">${escapeHtml(e.section)}</span></a>`
+          `<span class="meta cmdk__s">${escapeHtml(e.tag ?? e.section)}</span></a>`
         );
       })
       .join('');
 
-    empty!.hidden = results.length > 0;
+    empty!.hidden = !miss;
     syncActive();
-    status!.textContent = q
-      ? `${results.length} result${results.length === 1 ? '' : 's'} for ${q}`
-      : `${results.length} suggestions`;
+    status!.textContent = miss
+      ? `No results for ${q}, ${results.length} suggestions`
+      : q
+        ? `${results.length} result${results.length === 1 ? '' : 's'} for ${q}`
+        : `${results.length} suggestions`;
   }
 
   function escapeHtml(s: string) {

@@ -73,13 +73,15 @@ import { SITE } from '../../data/site';
 
       {/* A div, not a <ul>. The options ARE the anchors (see the render function),
         and an <a> is not valid content for a <ul> outside an <li>. */}
-    <div class="cmdk__list" id="cmdk-list" role="listbox" aria-labelledby="cmdk-label"></div>
-
     {/* Three states share this line: the index arriving, the index having
         failed to arrive, and a query that matched nothing. They are three
         different facts and the script says which one it is, because an index
-        that never loaded is not "no matches". */}
-    <p class="cmdk__empty" hidden>No matches. Try a product name, a sector, or "PPN".</p>
+        that never loaded is not "no matches". It sits ABOVE the list because a
+        query that matched nothing now lists the quick jumps under it
+        (R285-WEB-GEMINI-UIUX P3-7), so the message reads first. */}
+    <p class="cmdk__empty" hidden>No matches. Try one of these, a product name, a sector, or "PPN".</p>
+
+    <div class="cmdk__list" id="cmdk-list" role="listbox" aria-labelledby="cmdk-label"></div>
 
     <p class="visually-hidden" role="status" aria-live="polite" data-cmdk-status></p>
   </div>
