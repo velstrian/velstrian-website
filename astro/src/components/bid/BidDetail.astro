@@ -94,68 +94,71 @@ const RULES = [
 const CAPABILITIES = [
   {
     heading: 'UK and EU tender discovery',
-    summary: 'New public contracts, refreshed daily, with the source named on every notice.',
+    summary: 'New public contracts daily, each with its source.',
     body: `New contracts from ${LIVE_SOURCES}, refreshed daily, with the source named on every notice. ${ON_REQUEST_SENTENCE} Filter by sector, value and region and save the ones worth a bid. You also see prior information notices and the end dates of frameworks and dynamic purchasing systems (standing lists of approved suppliers), the early signs that a tender is on its way.`,
   },
   {
     heading: 'Bid or no-bid, with reasons',
-    summary: 'A score for how well each tender suits you, with the reason behind every part.',
+    summary: 'How well each tender suits you, and why.',
     body: `A ${FIT_COUNT_WORD} part score (${FIT_DIMENSIONS}) shows how well a published tender suits you, gives the reason behind each part, and suggests go for it, look again or pass. It reads the tender rather than predicting the award, and the decision stays yours.`,
   },
   {
     heading: 'Award history',
-    summary: 'See who won similar work before, at what value, and against how many bidders.',
+    summary: 'Who won similar work, and for how much.',
     body: 'More than 100,000 published contract awards from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED: who won similar work, at what value, and against how many bidders. It sits beside the notice you are reading.',
   },
   {
     heading: 'Tender document reading, done for you',
-    summary: 'Upload the tender pack and the requirements are pulled out for you.',
+    summary: 'Upload the tender pack, get the requirements back.',
     body: `${UPLOAD_SENTENCE} The requirements and clauses are pulled out so an answer can point at the exact wording it answers. A scanned PDF with no text in it is flagged as needing OCR, which turns a picture of text into text, rather than guessed at.`,
   },
   {
     heading: 'Cited answer drafting',
-    summary: 'Answers drafted from the rules, the tender and your own library, each with its source.',
+    summary: 'Answers drafted from your documents, each with its source.',
     body: 'Answers draw on three kinds of source, kept apart: the rules, the tender’s own wording and your answer library. Your win themes, the points you want the buyer to remember, go into every answer. Each first draft is reviewed and improved against the tender’s scoring rules, and a draft with a number your data does not support is rejected. Every answer carries its citation, the document it came from.',
   },
   {
     heading: 'Answer marking against the scoring rules',
-    summary: 'See which part of an answer is thin against the scoring rules before you send it.',
+    summary: 'Spot a thin answer before you send it.',
     body: 'Each drafted answer is marked for how fully it covers the tender’s published scoring rules, so you can see which part is thin before you send it. It reports coverage, never a likely mark or a chance of winning.',
   },
   {
     heading: 'SQ and PQQ from one master set',
-    summary: 'Answer the standard questions about your business from one master set you keep up to date.',
+    summary: 'Standard business questions, answered from one master set.',
     body: 'The standard questions about your business that come before the tender itself (a selection questionnaire, SQ, or the older pre-qualification questionnaire, PQQ): accreditations, insurance, finances, policies, case studies and named staff, answered from one master set you keep up to date. Offered above the Procurement Act 2023 section 85 threshold, where those questions arise.',
   },
   {
     heading: 'Social value maths, done in code',
-    summary: 'Social value added up in code, with the weighting the buyer published applied.',
+    summary: 'Social value added up in code, weighting applied.',
     body: 'Social value is added up in code, with the units checked, from a curated catalogue of measures. The weighting the buyer published is applied, never guessed.',
   },
   {
     heading: 'Private sector quotes',
-    summary: 'Turn a request for a quote into a priced quotation from your own rate card.',
+    summary: 'A priced quotation from your own rate card.',
     body: 'Quick Quote takes a buyer’s request for a quote, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. You write the scope. The AI does not draft it.',
   },
   {
     heading: 'Answer library, tone profiles and learnings',
-    summary: 'Each bid starts from what the last one taught you.',
+    summary: 'Each bid learns from the last one.',
     body: 'A reusable answer library, tone profiles for how your business writes, lessons recorded from each debrief, bid analytics and board reports, so each bid starts from what the last one taught you.',
   },
   {
     heading: 'Evidence vault, after award',
-    summary: 'Record what you delivered against each promise, with a plain verdict on each piece.',
+    summary: 'Record what you delivered against each promise.',
     body: 'Record what you delivered against each promise. Each piece of evidence gets one of three plain verdicts: consistent, a difference to look into, or could not check. Checks against Companies House, UKAS and Cyber Essentials, a report for the customer, and a round trip back into the buyer’s own Word or Excel file.',
   },
   {
     heading: 'AI Compliance Advisor',
-    summary: 'Ask a procurement or social value question in plain words and see the sources behind the answer.',
+    summary: 'Ask a procurement question in plain words.',
     body: 'Ask a procurement or social value question in plain words. The Advisor answers from a regulatory brief and, if you agree, from your own bids and commitments. It shows only rule references it can match to its sources, and flags any money figure or percentage it cannot trace for you to check.',
   },
 ];
 /* The twelve as flash cards (D305 lane C pilot, 2026-10-23): a one line
    headline and one plain sentence on show, the full text one tap away in the
-   card's own <details>, still in the HTML. Manual, so no script. */
+   card's own <details>, still in the HTML. Manual, so no script.
+   TRIMMED 2026-10-23 (D305 trim lane): each sentence cut to about eight
+   plain words, because the cards raised first view words. The detail it
+   dropped is in the card body, word for word. */
 const CAPABILITY_CARDS: FlashCard[] = CAPABILITIES.map((c, k) => ({
   id: `cap-${k + 1}`,
   title: c.heading,

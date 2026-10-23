@@ -89,89 +89,92 @@ const SCOPE_DOES_NOT = [
 const SURFACES = [
   {
     heading: 'Requirements',
-    summary: 'Set what you will measure, and how much each part counts.',
+    summary: 'Set what you measure and how much it counts.',
     body: 'Social value requirement packs. Set what you will measure and how much each part counts, before any reply arrives.',
   },
   {
     heading: 'Quick RFQ',
-    summary: 'A short request for quotes for a smaller job, sent by personal link.',
+    summary: 'A short request for quotes for smaller jobs.',
     body: 'For smaller requests: describe the job, check the scope, download a request for quotes and send it to suppliers by personal link. Each supplier uploads a quote and gets a receipt. You write the scope. The AI does not draft it.',
   },
   {
     heading: 'Supplier invitations and clarifications',
-    summary: 'Invite suppliers by personal link, and send every answer to all of them.',
+    summary: 'Personal links, and every answer sent to all.',
     body: 'Invite suppliers to respond by personal link. Each reply gets a receipt, and the answer to any supplier question is published to every invited supplier without saying who asked.',
   },
   {
     heading: 'Evaluations',
-    summary: 'Your evaluators score each bid against the guide you published.',
+    summary: 'Your evaluators score against the published guide.',
     body: 'Score supplier bids against the scoring guide for the requirement. Your evaluators set every score. The AI check for uneven scoring only advises and never changes a number.',
   },
   {
     heading: 'Evaluation pre-read',
-    summary: 'A first read of each reply that finds the proof for each question.',
+    summary: 'Finds the proof for each question you asked.',
     body: 'A first read of each reply that finds the proof for each published question. It never scores.',
   },
   {
     heading: 'Prices side by side',
-    summary: 'See every bid as one total cost, over the same term and the same work.',
+    summary: 'Every bid as one total cost, like for like.',
     body: 'Enter each supplier price schedule to see every bid as one whole life cost, the total over the same term and the same amount of work, then set options side by side and record what your team judges.',
   },
   {
     heading: 'Whole life costs',
-    summary: 'Cost each way of delivering the work across its whole life.',
+    summary: 'Each option costed across its whole life.',
     body: 'Cost each way of delivering a requirement across its whole life, from assumptions you supply.',
   },
   {
     heading: 'Pipeline',
-    summary: 'Every purchase you are planning or running, in one list.',
+    summary: 'Every purchase you are running, in one list.',
     body: 'Every procurement you are planning, running, scoring, awarding or managing, with dates and value worked out from your own records.',
   },
   {
     heading: 'Supplier screening',
-    summary: 'Public register checks on each supplier, and the decision stays yours.',
+    summary: 'Public register checks, and you decide.',
     body: 'Checked against public registers when a reply arrives or a supplier joins an evaluation. It is not a score and never excludes a supplier. You decide.',
   },
   {
     heading: 'Supplier risk',
-    summary: 'Risk signals across all your suppliers, in one view.',
+    summary: 'Risk signals across your suppliers, in one view.',
     body: 'Risk signals across your suppliers, with platform records kept apart from flags raised by your team.',
   },
   {
     heading: 'Working with your suppliers',
-    summary: 'Scorecards, review meetings and shared actions for each supplier.',
+    summary: 'Scorecards, reviews and shared actions.',
     body: 'Supplier relationship management in one place: scorecards, review meetings and shared actions per supplier, every open action in one table, and feedback each quarter.',
   },
   {
     heading: 'Savings you can show',
-    summary: 'The savings claimed against each supplier, and what finance signed off.',
+    summary: 'Savings claimed, and what finance signed off.',
     body: 'Value realisation: the savings and other value claimed against each supplier, and what finance has signed off.',
   },
   {
     heading: 'Contracts',
-    summary: 'Each awarded contract and the social value promised in it.',
+    summary: 'Each contract and its social value promises.',
     body: 'Awarded contracts and their social value promises, recorded so delivery has something to be measured against.',
   },
   {
     heading: 'Suppliers',
-    summary: 'Your supplier list, with each supplier’s delivery record.',
+    summary: 'Each supplier’s delivery record, in one list.',
     body: 'Your supplier directory and each supplier’s delivery record across the contracts you have awarded.',
   },
   {
     heading: 'Social value oversight',
-    summary: 'Social value promised against delivered, with an alert when it falls behind.',
+    summary: 'Promised against delivered, with an alert.',
     body: 'Social value promised against delivered across your awarded contracts and suppliers, by National TOMs theme, with under delivery raised as an alert.',
   },
   {
     heading: 'Transparency and reports',
-    summary: 'The award notice return and reports for committee, ready to export.',
+    summary: 'The award notice return and committee reports.',
     body: 'A Procurement Act 2023 award notice return across your contracts, plus reports to export for committee and scrutiny.',
   },
 ];
 /* The sixteen as flash cards (D305 lane E1, 2026-10-23, the /bid/ pilot
    carried over): a one line headline and one plain sentence on show, the full
    text one tap away in the card's own <details>, still in the HTML. Manual, so
-   no script. */
+   no script.
+   TRIMMED 2026-10-23 (D305 trim lane): each sentence cut to about eight
+   plain words, because the cards raised first view words. The detail it
+   dropped is in the card body, word for word. */
 const SURFACE_CARDS: FlashCard[] = SURFACES.map((s, k) => ({
   id: `part-${k + 1}`,
   title: s.heading,
