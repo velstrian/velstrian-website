@@ -23,16 +23,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crowagent/crowagent-website.git"
+    "url": "git+https://github.com/crowagent/velstrian-website.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/crowagent/crowagent-website/issues"
+    "url": "https://github.com/crowagent/velstrian-website/issues"
   },
-  "homepage": "https://github.com/crowagent/crowagent-website#readme",
+  "homepage": "https://github.com/crowagent/velstrian-website#readme",
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
     "@playwright/test": "^1.59.1",

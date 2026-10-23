@@ -44,7 +44,12 @@ export const START_LABEL = 'Start now';
  * proxy is needed. Written once here (R285-WEB-FREE-TENDER-FINDER-01), it was
  * typed into PartnerForm.astro before.
  */
-export const API_ORIGIN = 'https://crowagent-platform-production.up.railway.app';
+// [R285-REBRAND-INFRA-01] D299 (owner 2026-10-23): the API has its own custom domain, the
+// same value as PRIMARY_API_ORIGIN in the platform's packages/server-infra/src/public-hosts.mjs.
+// TRANSITION: the Railway generated host still serves until the cutover is verified, so
+// `_headers` and check-csp-required-origins.js keep it allowed beside this one. Remove those
+// legacy entries after the cutover.
+export const API_ORIGIN = 'https://api.velstrian.com';
 
 /**
  * The 30 minute walkthrough booking page. Typed into three page files before

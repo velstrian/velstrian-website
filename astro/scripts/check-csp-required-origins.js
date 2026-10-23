@@ -133,6 +133,23 @@ const REQUIRED = [
   },
   {
     directive: 'connect-src',
+    origin: 'https://api.velstrian.com',
+    reason:
+      'R285-REBRAND-INFRA-01, D299 2026-10-23. The API custom domain, API_ORIGIN in ' +
+      'src/data/app.ts. PartnerForm.astro and the free tender finder call it from the ' +
+      'browser, so losing it refuses every partner enquiry and every tender search silently.',
+  },
+  {
+    directive: 'form-action',
+    origin: 'https://api.velstrian.com',
+    reason:
+      'The same endpoint on the no-JavaScript path. An origin permitted by only one of ' +
+      'connect-src and form-action is a form that works in exactly one of the two situations.',
+  },
+  // [R285-REBRAND-INFRA-01] TRANSITION ONLY: the Railway generated host below stays required
+  // until the D299 cutover is verified, then both entries go.
+  {
+    directive: 'connect-src',
     origin: 'https://crowagent-platform-production.up.railway.app',
     reason:
       'R281-PARTNERS-ENQUIRY-DECISION-01, 2026-09-03. PartnerForm.astro posts here via ' +

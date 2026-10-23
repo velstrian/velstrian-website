@@ -12,8 +12,8 @@
  * at once: the enquiry now lands first party in the `partner_enquiries`
  * Supabase table, and Velstrian ops is alerted by email from the same request.
  *
- * ENDPOINT is `https://crowagent-platform-production.up.railway.app`, the same
- * Railway host the platform's own production frontend calls
+ * ENDPOINT is API_ORIGIN, `https://api.velstrian.com` since D299 (R285-REBRAND-INFRA-01),
+ * the same API the platform's own production frontend calls
  * (`NEXT_PUBLIC_API_URL` in `web/.env.example`), so this form reaches the
  * identical backend the app does rather than a second copy of it. The route is
  * PUBLIC (`/api/v1/partners/enquiry` is in `EXEMPT_PATHS`,
