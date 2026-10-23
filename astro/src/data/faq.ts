@@ -253,7 +253,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           // D236 (2026-10-19): the trial is no longer requested. A first
           // CrowMark plan starts with 14 free days at Starter, as the
           // platform's create-checkout route provisions it (BILL-TRIAL-002).
-          `Yes. Your first ${TRIAL_DAYS} days are free, on the ${TRIAL_SCOPE}, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
+          `Yes. Your first ${TRIAL_DAYS} days are free, on the ${TRIAL_SCOPE}, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within ${TRIAL_DAYS} days and pay nothing. There is one free trial per organisation and work email domain.`,
         link: { label: START_LABEL, href: SIGNUP_URL },
       },
       {

@@ -604,7 +604,7 @@ export const PRICING_FAQS: Faq[] = [
        omission as the removed "no card taken" lines, just by silence rather
        than by a false sentence. */
     answer:
-      `Choose a plan and select ${START_LABEL}. Your first ${TRIAL_DAYS} days are free, on the ${FAQ_STARTER.name} features for ${usersLabel(FAQ_STARTER.seats)} with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within the ${TRIAL_DAYS} days and nothing is charged. There is one free trial per organisation and work email domain.`,
+      `Choose a plan and select ${START_LABEL}. Your first ${TRIAL_DAYS} days are free, on the ${FAQ_STARTER.name} features for ${usersLabel(FAQ_STARTER.seats)} with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within ${TRIAL_DAYS} days and pay nothing. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'How do I get access?',
