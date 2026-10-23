@@ -2449,7 +2449,11 @@ async function renderDocView(spec, host){
   applyDocState();
 }
 
+let loadSeq = 0;
 async function load(){
+  /* Any load, including the master hub and document boards, supersedes an issue
+     fetch still in flight. */
+  loadSeq++;
   /* [R27-ARCH-01] A DOCUMENT board renders prose, not rows. Branch first, because
      everything below assumes an issue list: the filters, the severity table and
      the deploy panel are all meaningless for a document, and leaving them on
@@ -2540,16 +2544,24 @@ async function load(){
   document.getElementById('docbody').innerHTML = '';
 
   const file = spec.file;
+  /* [2026-10-23] Only the newest load may draw. The 10 second poll and a tab
+     switch can both be in flight, and an older fetch that resolved last used to
+     overwrite the new tab with the old tab's data (seen once as Website rows in
+     Platform mode). A superseded load now discards its result. */
+  const mySeq = ++loadSeq;
   try{
     const r=await fetch(file+'?t='+Date.now());
     if(!r.ok) throw new Error('HTTP '+r.status);
-    DATA=await r.json(); renderTabs(); render();
+    const fresh = await r.json();
+    if (mySeq !== loadSeq) return;
+    DATA=fresh; renderTabs(); render();
     /* The derived board says so on its face. A reader must never mistake a
        generated view for the record it was generated from. */
     document.getElementById('srcnote').textContent = board==='platform'
       ? 'DERIVED from the R' + (DATA.release || '?') + ' tracker and defect register. Re-run status/build-platform-board.js after editing either. Those documents win any disagreement.'
       : '';
   }catch(err){
+    if (mySeq !== loadSeq) return;
     renderTabs();
     document.getElementById('rows').innerHTML =
       '<tr><td colspan="4">Could not load '+esc(file)+': '+esc(err.message)+
