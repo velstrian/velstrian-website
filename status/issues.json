@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T23:14:40.736Z",
+  "updated": "2026-10-23T23:16:24.183Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -555,8 +555,8 @@
       "src": "gemini-uiux-audit-2026-10-23",
       "sev": "P1",
       "title": "R285-WEB-GEMINI-UIUX-WEBFIX: verified audit rows P0-1 website half, P0-2 host centralisation, P0-3, P1-6, P2-2, P2-3, P2-4, P2-5, P2-6, P2-8, P2-11, P3-4, P3-7",
-      "status": "OPEN",
-      "note": "New lane WEB-FIX. Per id evidence, files and one line fixes in docs/audits/GEMINI-UIUX-AUDIT-VERIFY-2026-10-23.md. Highlights: P0-3 mobile menu is dark on light pages because on-light is only on the header (Nav.astro:90 vs :151). P0-1 local fails by CORS on the production API, add a dev proxy, no offline fixture. P1-6 is three files (Hero.astro:44, Walkthrough.astro:211, PricingPlans.astro:108). Start Hero.astro edits after the AUTOPLAY lane commits. 8 of 34 audit rows are FALSE and need no work."
+      "status": "FIXED",
+      "note": "New lane WEB-FIX. Per id evidence, files and one line fixes in docs/audits/GEMINI-UIUX-AUDIT-VERIFY-2026-10-23.md. Highlights: P0-3 mobile menu is dark on light pages because on-light is only on the header (Nav.astro:90 vs :151). P0-1 local fails by CORS on the production API, add a dev proxy, no offline fixture. P1-6 is three files (Hero.astro:44, Walkthrough.astro:211, PricingPlans.astro:108). Start Hero.astro edits after the AUTOPLAY lane commits. 8 of 34 audit rows are FALSE and need no work. || WEB-FIX lane done 2026-10-24, local commits only. P0-3 17404611, P0-1 web 35cbb8ca and platform f8f47576d, P0-2 cde6c1d5, P2-2 e4f55f22, P2-3 P2-4 eb8bb745, P1-6 e7c00bd3 and 612bfc1f, P1-3 612bfc1f, P2-6 P3-7 976e794c, P2-8 066c682b, P2-11 10577184, P3-4 0a2b3b47, P2-13 5f477ddd, P3-6 fe44916d, P2-12 6c35e3d3, P2-5 f7ab161f. Before and after measurements per id in docs/audits/GEMINI-UIUX-AUDIT-VERIFY-2026-10-23.md, WEB-FIX lane outcome. Follow ups filed: A-391 markdown signup host, A-392 /cookies wording. Production API redeploy for velstrian.com CORS ships with the R2.8.5 promote."
     },
     {
       "id": "A-352",
@@ -875,8 +875,8 @@
       "src": "gemini-uiux-audit-2026-10-23",
       "sev": "P2",
       "title": "R285-WEB-GEMINI-UIUX P2-13 follow up: /cookies says the site sets no session storage and makes no requests to anyone else",
-      "status": "OPEN",
-      "note": "content/legal/cookies.md:18. Measured 2026-10-23: scripts/evidenced.ts:317 keeps one sessionStorage value ea_motion when a reader pauses the hero background, and components/forms/Turnstile.astro loads challenges.cloudflare.com once a form is used. /cookie-preferences/ was corrected in 5f477ddd. The legal page wording is the owner's to approve, so it was not edited. Proposed: This website sets no cookies and no tracking. It keeps one value for the visit if you pause the moving background, and loads Cloudflare's security check when you use a form."
+      "status": "FIXED",
+      "note": "content/legal/cookies.md:18. Measured 2026-10-23: scripts/evidenced.ts:317 keeps one sessionStorage value ea_motion when a reader pauses the hero background, and components/forms/Turnstile.astro loads challenges.cloudflare.com once a form is used. /cookie-preferences/ was corrected in 5f477ddd. The legal page wording is the owner's to approve, so it was not edited. Proposed: This website sets no cookies and no tracking. It keeps one value for the visit if you pause the moving background, and loads Cloudflare's security check when you use a form. | FIXED 2026-10-24, owner approved the wording (\"yes do this\"): /cookies now says no tracking cookies, the Pause choice is one session value ea_motion for the visit, and Cloudflare Turnstile loads only when a form is used. Description, sections 1, 3, 5 and 6 aligned, lastUpdated 2026-10-24."
     }
   ],
   "directives": [

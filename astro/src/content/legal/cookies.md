@@ -1,11 +1,11 @@
 ---
 title: "Cookie Policy | Velstrian"
-description: "How Velstrian uses cookies. This website sets none. The signed-in Velstrian platform sets the items listed here, with the reason and lifetime for each."
+description: "How Velstrian uses cookies. This website sets no tracking cookies. The signed-in Velstrian platform sets the items listed here, with the reason and lifetime for each."
 heading: "Cookie Policy."
-lastUpdated: "2026-08-03"
+lastUpdated: "2026-10-24"
 ---Full statutory disclosure for Velstrian Systems Ltd. UK GDPR and PECR aligned transparency.
 
-Cookies are small files that websites place on your device. This website does not place any. The Velstrian platform you sign in to does, and every one of them is named below.
+Cookies are small files that websites place on your device. This website places no tracking cookies. The Velstrian platform you sign in to does, and every one of them is named below.
 
 ## 1. What cookies are, in plain English
 
@@ -15,7 +15,12 @@ We follow the Privacy and Electronic Communications Regulations (PECR) for stora
 
 ## 2. Every cookie we use
 
-**This website, velstrian.com, sets nothing.** No cookies, no local storage, no session storage, and no requests to anyone else. There is no consent banner on it because there is nothing to ask you about, and no analytics because none is installed. You can confirm all of that yourself in about ten seconds. The [cookie preferences](/cookie-preferences/) page shows you how.
+**This website, velstrian.com, sets no tracking cookies.** Two small things are worth knowing:
+
+- **If you press Pause** on the moving background, your browser remembers that choice for this visit only. It is one session storage value named `ea_motion`, kept inside your browser, never sent to us, and gone when you close the browser.
+- **When you use a form**, Cloudflare Turnstile checks you are not a bot. It loads from Cloudflare only at that point, never before.
+
+There is no consent banner on this website because nothing here needs your consent, and no analytics because none is installed. You can confirm all of that yourself in about ten seconds. The [cookie preferences](/cookie-preferences/) page shows you how.
 
 The table below is the **Velstrian platform**, the signed-in application you reach at a separate address. Items marked **Consent-gated** are not set unless you agree in the platform's own consent banner. Where a row names no expiry, the item lasts for the browser session and is gone when you close it.
 
@@ -27,7 +32,7 @@ On a narrow screen, this table scrolls sideways.
 
 We group cookies into three plain-English categories so you can choose what you are comfortable with. On this website all three are empty. The descriptions below are what each one means inside the platform.
 
-- **Strictly necessary:** Always on. Keep you signed in, remember a trusted device, protect against bots, and remember your consent choice. The platform would not work without them. This website sets none of them, because it has no sign-in and no session.
+- **Strictly necessary:** Always on. Keep you signed in, remember a trusted device, protect against bots, and remember your consent choice. The platform would not work without them. This website sets none of them, because it has no sign-in. The only thing it keeps is your Pause choice for the visit, described in section 2.
 - **Analytics:** Optional and off by default. Helps us understand which pages are used and where people get stuck. Hosted on PostHog EU cloud, inside the platform only. There is no analytics script of any kind on this website.
 - **Marketing and scheduler:** Optional. Loads the Calendly demo scheduler inside the platform's support page. On this website, "book a call" is an ordinary link to calendly.com, so nothing from Calendly loads or is stored until you choose to follow it.
 
@@ -45,7 +50,7 @@ No. Velstrian does not sell personal data and does not use cookies for advertisi
 
 ### How long do cookies last?
 
-On this website, nothing is stored, so nothing has a lifetime. On the platform: your consent choice is kept until you clear it; sign-in items last for your session, except the remember-this-device cookie, which lasts 30 days; Cloudflare security cookies typically expire within 30 minutes; and PostHog identifiers last 365 days, and only if you have accepted analytics.
+On this website, the only stored item is your Pause choice, which lasts until you close the browser. On the platform, your consent choice is kept until you clear it. Sign-in items last for your session, except the remember-this-device cookie, which lasts 30 days. Cloudflare security cookies typically expire within 30 minutes. PostHog identifiers last 365 days, and only if you have accepted analytics.
 
 ### What happens if I reject all optional cookies?
 
@@ -53,7 +58,7 @@ The platform will work perfectly for your core tasks. You will still be able to 
 
 ## 6. How to change your choices
 
-**On this website there is nothing to change**, because nothing is set. The [cookie preferences](/cookie-preferences/) page sets that out category by category and shows you how to confirm it for yourself.
+**On this website there is nothing to change**, because no cookie is set. Your Pause choice clears itself when you close the browser. The [cookie preferences](/cookie-preferences/) page sets that out category by category and shows you how to confirm it for yourself.
 
 Inside the platform, the consent banner appears the first time you use it and your choice can be changed at any time from the same control. You can also block or delete cookies in your browser settings, though on the platform that may sign you out and interrupt the secure session.
 
