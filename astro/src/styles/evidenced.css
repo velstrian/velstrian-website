@@ -2245,10 +2245,13 @@ main .ea-sec * {
   transition: transform var(--slide-dur) var(--motion-ease-step);
 }
 
+/* Back and Next sit together, centred under the step list (Gemini P2-10). At
+   1440 they were 1,040px apart, one at each edge, so going back meant crossing
+   the page. */
 .ea-walk__move {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--space-4);
 }
 
