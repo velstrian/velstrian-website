@@ -59,15 +59,40 @@ import IconTile from '../evidenced/IconTile.astro';
 </Band>
 
 <style>
+  /* The two columns share their ROWS through subgrid, so the icon, eyebrow,
+     heading, lead and card of Methodology line up with Glossary's even when
+     one heading wraps and the other does not. Without it the two cards
+     started at different heights and ended at different heights, owner
+     report 2026-10-24 ("looks odd as both are in different sizes"). The row
+     gap is zero because each child keeps its own spacing below. */
   .res-standards-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(var(--space-8), 3rem + 2vw, var(--space-12));
+    grid-template-rows: repeat(5, auto);
+    column-gap: clamp(var(--space-8), 3rem + 2vw, var(--space-12));
+    row-gap: 0;
+  }
+
+  .res-col {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-items: start;
+  }
+
+  .res-col > .res-panel {
+    align-self: stretch;
   }
 
   @media (max-width: 899px) {
     .res-standards-grid {
       grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: none;
+      row-gap: clamp(var(--space-8), 3rem + 2vw, var(--space-12));
+    }
+
+    .res-col {
+      display: block;
     }
   }
 
@@ -86,7 +111,7 @@ import IconTile from '../evidenced/IconTile.astro';
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    padding: var(--space-6);
+    padding: var(--blk-pad);
   }
 
   .res-panel__h {
@@ -109,11 +134,13 @@ import IconTile from '../evidenced/IconTile.astro';
     line-height: var(--lh-ea-body);
   }
 
+  /* The action sits at the foot of each card, whatever the copy above it. */
   .res-panel__links {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-4);
-    margin-top: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-2);
   }
 
   .res-examples {
@@ -124,7 +151,8 @@ import IconTile from '../evidenced/IconTile.astro';
   }
 
   .res-panel__action {
-    margin-top: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-2);
   }
 
   .res-onward {
