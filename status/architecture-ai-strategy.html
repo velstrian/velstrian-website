@@ -1,18 +1,24 @@
 <!--
   ═══════════════════════════════════════════════════════════════════════════
   [R285-P3-AI-STRATEGY-PAGE-01] AI STRATEGY, ARCHITECTURE, CAPABILITIES AND
-  LIFECYCLE. Written 24 October 2026 on owner instruction: produce a page in
-  #architecture for AI strategy, architecture, capabilities and lifecycle,
-  covering every aspect of Velstrian, with honest and strategic suggestions.
+  LIFECYCLE. Written 24 October 2026 on owner instruction, revised the same day
+  on owner feedback: "why chatgpt openai model is missing? i want this must
+  include each and every aspect which will shape products and platform like
+  top 1% ... call out all the work items and let decide all ... without silent
+  deferred". Revision 2 adds OpenAI throughout and eleven new sections, files
+  every gap as a tracker row and shows every recorded and open decision.
 
-  SOURCES, AND NOTHING ELSE. Every claim on this page comes from two committed
-  files in crowagent-platform/docs/release-2.8.5/ai-strategy/:
-    EXTERNAL-RESEARCH-2026-10-24.md   (commit 1bb2d1d5f)
-    INTERNAL-AI-AUDIT-2026-10-24.md   (commit 2d18cfc2a)
-  plus the design paper docs/release-2.8.5/design/MODEL-CHOICE-MULTI-PROVIDER-
-  DESIGN-2026-10-24.md and decisions D314, D322 and D328 to D339 in
-  docs/release-2.8.4/scope/DECISION-GATES.md. Where those files disagree the
-  page says so. The owner HOLD D339 binds: this page plans, it builds nothing.
+  SOURCES, AND NOTHING ELSE. Every claim on this page comes from committed
+  files in crowagent-platform:
+    docs/release-2.8.5/ai-strategy/EXTERNAL-RESEARCH-2026-10-24.md (1bb2d1d5f)
+    docs/release-2.8.5/ai-strategy/INTERNAL-AI-AUDIT-2026-10-24.md (2d18cfc2a)
+    docs/release-2.8.5/design/MODEL-CHOICE-MULTI-PROVIDER-DESIGN-2026-10-24.md
+    docs/release-2.8.4/scope/DECISION-GATES.md, D322 and D328 to D349
+    docs/legal/data-processing-agreement.md (regions, items 7 and 8)
+    packages/pricing/catalogue.ts (plan prices and credits, read 24 Oct 2026)
+  plus module headers read in api/app/services and api/app/routers for the
+  capability map in section 2. Where the files disagree the page says so.
+  D339 binds: this page plans, it builds nothing.
 
   Fragment injected by index.html. No style block, no script element, no colour
   literal (check-board-contract.js). SVG colours are set through classes only.
@@ -23,117 +29,185 @@
   <p class="kicker">AI strategy</p>
   <p class="title">How Velstrian uses AI, how we keep it honest, and what to do next</p>
   <p class="lede">Velstrian Bid and Velstrian Buy use AI to read tenders, draft answers from your own
-  documents and check what was written. This page says what the AI does today, how good it is, what
-  customers would really gain from a choice of models, how a model is tested before anyone sees it,
-  and how the AI gets better over time without using customer data. Plain words first. The expert
-  detail sits behind the plus signs.</p>
-  <p class="dated">Updated 24 October 2026. Built from the internal AI audit (commit
-  <code>2d18cfc2a</code>, tree <code>07bb08bc9</code>), the external research (commit
-  <code>1bb2d1d5f</code>, web pages read 24 October 2026), the model choice design paper and
-  decisions D322 and D328 to D339. <b>All new model work is on hold under D339</b> (owner, 24 October
-  2026, "let me think first"). This page is a plan. Nothing on it has been built because of it, and
-  every decision in section 11 is a question, not a record.</p>
+  documents and check what was written, for public and private work. This page says what the AI does
+  today, what a top 1 percent product would do for a small firm and for a buyer, how the AI is run as a
+  service day to day, how models from Google, Anthropic and OpenAI fit in, what it costs, and every
+  decision that is still open. Plain words first. The expert detail sits behind the plus signs.</p>
+  <p class="dated">Updated 24 October 2026, revision 2. Built from the internal AI audit (commit
+  <code>2d18cfc2a</code>), the external research (commit <code>1bb2d1d5f</code>, vendor pages read
+  24 October 2026), the model choice design paper, the DPA and the pricing catalogue, and decisions D322
+  and D328 to D349. <b>All new model work is on hold under D339</b> (owner, 24 October 2026, "let me
+  think first"). Fixes to the AI already running are not new model work and go ahead. Section 21 lists
+  every decision: 23 recorded, 18 still open.</p>
 </div>
 
 <div class="kpi">
   <div><b>3.1 of 5</b><span>audit score across 10 dimensions. Careful and honest, thinly measured</span></div>
   <div><b>1 provider</b><span>Google Gemini 2.5 runs almost every customer AI feature, with no second provider behind it</span></div>
-  <div><b>5 of 5</b><span>production models are legacy by their vendors' own labels</span></div>
-  <div><b>0 P0</b><span>no live customer harm found. 24 gaps, 8 of them P1</span></div>
-  <div><b>0</b><span>controlled studies showing that letting users pick a model improves results</span></div>
+  <div><b>3 vendors</b><span>Google and Anthropic in use. OpenAI agreed as a sub-processor (D329), not connected, on hold</span></div>
+  <div><b>23 decided</b><span>D322, D328 to D349 recorded. 18 decisions still open, in the order to ask</span></div>
+  <div><b>0 P0</b><span>no live customer harm found. 24 audit gaps, now joined by 39 new rows from this review</span></div>
 </div>
 
 <details class="toc">
   <summary>On this page</summary>
   <ol>
-    <li><a href="#as-summary">The verdict, and the five things that matter most</a></li>
-    <li><a href="#as-gain">What customers gain from more than one model, and what they do not</a></li>
+    <li><a href="#as-summary">The verdict, and what matters most</a></li>
+    <li><a href="#as-vision">Product AI vision for Bid and Buy</a></li>
+    <li><a href="#as-engine">The intelligence engine, and why it is ours</a></li>
     <li><a href="#as-today">Today: every AI feature and the audit scorecard</a></li>
-    <li><a href="#as-offer">The recommended offering: three plain levels</a></li>
-    <li><a href="#as-life">The permanent model and provider lifecycle</a></li>
+    <li><a href="#as-providers">The three providers, OpenAI included</a></li>
+    <li><a href="#as-gain">What customers gain from more than one model</a></li>
+    <li><a href="#as-offer">The offering: Auto and three plain levels</a></li>
+    <li><a href="#as-money">Commercials: credits, plans and margin</a></li>
+    <li><a href="#as-life">The model and provider lifecycle</a></li>
+    <li><a href="#as-resil">Resilience and vendor strategy</a></li>
     <li><a href="#as-halluc">Stopping invented facts</a></li>
-    <li><a href="#as-learn">Getting better over time without customer data</a></li>
+    <li><a href="#as-trust">Trust you can see on the screen</a></li>
+    <li><a href="#as-kpi">Quality metrics, targets and the dashboard</a></li>
+    <li><a href="#as-learn">Getting better without customer data</a></li>
     <li><a href="#as-rag">The search engine behind every answer</a></li>
-    <li><a href="#as-gov">Governance and risk</a></li>
-    <li><a href="#as-missed">What may have been missed</a></li>
-    <li><a href="#as-dec">Decisions for the owner</a></li>
-    <li><a href="#as-road">Roadmap, cost and what is on hold</a></li>
+    <li><a href="#as-data">Data and privacy</a></li>
+    <li><a href="#as-sec">AI security</a></li>
+    <li><a href="#as-a11y">Accessibility and inclusion of AI output</a></li>
+    <li><a href="#as-ops">The AI operating model</a></li>
+    <li><a href="#as-gov">Governance, risk and the backlog</a></li>
+    <li><a href="#as-dec">Decisions: recorded and open</a></li>
+    <li><a href="#as-road">Roadmap, rows and what is on hold</a></li>
   </ol>
 </details>
 
 <!-- ═══ 1. SUMMARY ═══ -->
-<h2 id="as-summary"><span class="n">Section 1</span>The verdict, and the five things that matter most</h2>
+<h2 id="as-summary"><span class="n">Section 1</span>The verdict, and what matters most</h2>
 
 <div class="verdict">
   <h3>The honest verdict</h3>
   <p>The AI is careful and honest. It refuses any number the supplier never gave, it drops a tender
   requirement it cannot quote word for word, and it returns nothing rather than guessing when your
-  documents hold no evidence. It is held back by three things: almost nothing is measured, one
-  provider carries nearly everything, and an invented certificate or client is only noted, not
-  stopped. <b>A menu of models would fix none of those three.</b> Quality comes from our own search
-  and checks, which work the same whatever model writes the text.</p>
+  documents hold no evidence. It is held back by four things: almost nothing is measured, one provider
+  carries nearly everything, an invented certificate or client is only noted, and nobody yet owns AI
+  quality as a running service. <b>A menu of models would fix none of the four.</b> Quality comes from
+  our own search, knowledge and checks, which work the same whatever model writes the text. That is
+  where the effort goes.</p>
 </div>
 
 <div class="cards">
   <div class="card"><span class="no">1. Biggest risk</span><h4>One provider, legacy models</h4>
-  <p>Gemini 2.5 runs nearly every customer feature. Google limits 2.5 to past users and gives no
-  notice period in days. An outage or access loss stops almost all customer AI at once.</p></div>
-  <div class="card"><span class="no">2. Fix now</span><h4>Invented credentials are only noted</h4>
-  <p>A draft saying "We hold ISO 27001" when you do not can be copied into a bid with a note beside
-  it. The check is a fixed list of 18 names on 3 drafting features. This is not new model work.</p></div>
-  <div class="card warn"><span class="no">3. Fix now</span><h4>The claim check is a button</h4>
-  <p>The only check that reads every claim against your evidence runs when you press it. Make it run
-  after every draft and show "backed by 9 of your documents".</p></div>
-  <div class="card warn"><span class="no">4. Measure</span><h4>Search quality is unknown</h4>
-  <p>The search is well built and has never been scored. The cut off was fitted on 10 rows from one
-  organisation. The 90 percent target has never produced a number.</p></div>
-  <div class="card ok"><span class="no">5. Keep it simple</span><h4>Auto first, three plain levels</h4>
-  <p>Every comparable product defaults to Auto. Starter gets Auto only. Pro and Portfolio may pick
-  Fast, Standard or Best. Frontier models only on Portfolio. Vendor names behind an advanced panel.</p></div>
+  <p>Gemini 2.5 runs nearly every customer feature. Google limits 2.5 to past users and gives no notice
+  period in days. Claude is already in the DPA and could stand behind it, once D339 lifts.</p></div>
+  <div class="card ok"><span class="no">2. Decided, to build</span><h4>Credential cards, never a block</h4>
+  <p>D341: a credential your record does not show gets a card beside the sentence: we hold it,
+  underway, remove, or keep with a comment. Recorded for the PPN 017 statement.</p></div>
+  <div class="card ok"><span class="no">3. Decided, to build</span><h4>Every draft checked, "backed by N"</h4>
+  <p>D342: claim backing runs after every draft and shows how many of your documents back it. The cost
+  per draft is measured and shown before it is switched on.</p></div>
+  <div class="card warn"><span class="no">4. Missing</span><h4>Nobody owns AI quality yet</h4>
+  <p>No weekly review, no incident runbook, no support playbook for "the AI got it wrong". Section 19
+  proposes a model for a tiny team. Decision AI QUALITY OWNER.</p></div>
+  <div class="card warn"><span class="no">5. Missing</span><h4>No targets, no dashboard</h4>
+  <p>Search recall has never scored. No quality target is agreed per feature. Section 13 proposes
+  targets and a free PostHog dashboard with counts only.</p></div>
+  <div class="card ok"><span class="no">6. Keep it simple</span><h4>Auto first, three plain levels</h4>
+  <p>Every comparable product defaults to Auto. Fast, Standard and Best on the first screen. Vendor
+  names, OpenAI included, behind an advanced panel.</p></div>
 </div>
 
-<!-- ═══ 2. CUSTOMER GAIN ═══ -->
-<h2 id="as-gain"><span class="n">Section 2</span>What customers gain from more than one model, and what they do not</h2>
+<!-- ═══ 2. PRODUCT VISION ═══ -->
+<h2 id="as-vision"><span class="n">Section 2</span>Product AI vision for Bid and Buy</h2>
 
-<p>The research looked for evidence that letting business users choose a model improves what they
-get. It found none. Vendors argue it does and publish no data. What is known points the other way
-for non experts: users overestimate how accurate AI answers are, and longer answers raise their
-confidence without raising accuracy. A small business owner who picks a "better" model cannot tell
-from the draft whether it was better.</p>
+<p>Our customers are small and mid size organisations that write bids themselves, often with no bid
+team, for public and private work. Buyers are busy people, not procurement specialists. Top 1 percent
+means the AI does the hard reading and checking for them, says plainly what it is not sure of, and
+never writes something they cannot stand behind. The tables below set what that looks like against
+what is built today. A row named in the last column is open work, and a new capability waits on
+decision <b>PRODUCT AI ROADMAP</b>.</p>
 
+<h3>Velstrian Bid, for the supplier</h3>
 <div class="tblwrap">
 <table class="doc-tbl">
-  <thead><tr><th>Real gain for the customer</th><th>Why it holds</th></tr></thead>
+  <thead><tr><th>Capability</th><th>Top 1 percent looks like</th><th>Today</th><th>Gap and row</th></tr></thead>
   <tbody>
-    <tr><td><b>The AI keeps working when one provider fails</b></td><td>Today a Gemini outage stops almost all customer AI. A second provider behind the same checks is the largest single benefit, and the customer never has to choose anything to get it</td></tr>
-    <tr><td><b>A second opinion from a different vendor</b></td><td>A model tends to rate its own family's writing higher (self preference bias, measured in published studies). A checker from another vendor catches different mistakes</td></tr>
-    <tr><td><b>Speed or depth when it matters</b></td><td>A quick summary does not need the most expensive model. A final executive summary might. Three plain levels let a user say so</td></tr>
-    <tr><td><b>A buyer or policy that names a vendor</b></td><td>Some organisations allow only certain AI providers. An admin control that limits providers serves them</td></tr>
-    <tr><td><b>Fewer surprises when vendors change</b></td><td>Models are retired on vendor timetables. A registry and a test gate mean a retirement becomes a planned swap, not an outage</td></tr>
+    <tr><td><b>Bid or no bid</b></td><td>"Should we go for this?" in one screen: fit, who usually wins, what evidence you lack, with the reasons</td><td><span class="pill p-good">built</span> A rule based fit check (<code>bid_fit.py</code>) and the published award record of who won similar work (<code>bid_award_holders.py</code>)</td><td>The reasons sit on separate screens and do not name your missing evidence. R285-P3-AI-BID-DECISION-SHEET-01</td></tr>
+    <tr><td><b>Buyer priorities</b></td><td>The buyer's stated priorities read from the pack and used in every draft</td><td><span class="pill p-warn">partial</span> A priorities store exists. The reader <code>buy_priority_extract</code> ships switched off</td><td>R285-P3-AI-OFF-SURFACES-DECISION-01</td></tr>
+    <tr><td><b>Compliance matrix</b></td><td>Every requirement listed, quoted from the tender, with a known accuracy</td><td><span class="pill p-good">built</span> Requirement reader with quote matching, and the free Tender Compliance Matrix</td><td>No enforced accuracy floor yet, D347. R285-P3-AI-EVAL-GATE-ENFORCE-EXTRACT-01</td></tr>
+    <tr><td><b>Win themes</b></td><td>Themes built from buyer priorities and your proof</td><td><span class="pill p-good">built</span> <code>bid_win_theme_draft</code></td><td>No test case and no credential check. R285-P3-AI-GOLDEN-COVERAGE-GAPS-01, R285-P3-AI-CREDENTIAL-REGISTER-01</td></tr>
+    <tr><td><b>Answers from your documents</b></td><td>Every answer drafted from your library, every claim backed or flagged</td><td><span class="pill p-good">built</span> Drafting with the figure check that blocks</td><td>Claim backing on every draft, D342. R285-P3-AI-CLAIM-BACKING-AUTOMATIC-01</td></tr>
+    <tr><td><b>Social value</b></td><td>PPN 026 answers with real measures, for public work, and plain commitments for private work</td><td><span class="pill p-good">built</span> PPN 026 drafting and method statement</td><td>Private sector cases are thin, 2 of 11 test scenarios. R285-P3-AI-GOLDEN-COVERAGE-GAPS-01</td></tr>
+    <tr><td><b>Pricing support</b></td><td>Help to build a price, never an invented rate</td><td><span class="pill p-good">built</span> Quick Quote. Owner rule: "AI NEVER invents a price, a rate or a legal term"</td><td>Keep the rule. The AI scopes, people price. No new row</td></tr>
+    <tr><td><b>Answer library and reuse</b></td><td>The strongest past answer offered for a new question, with its age and score</td><td><span class="pill p-good">built</span> Answer Library with versions, expiry and import. Debrief scores traced to answers as an observation</td><td>No "best past answer for this question" suggestion. R285-P3-AI-LIBRARY-REUSE-SUGGEST-01</td></tr>
+    <tr><td><b>Review workflow</b></td><td>Pink, Red and Gold reviews with an AI marker that scores like an evaluator</td><td><span class="pill p-good">built</span> Colour team review stages and a rule based self mark (<code>bid_answer_marker.py</code>)</td><td>An AI review that marks against the buyer's own criteria with reasons. R285-P3-AI-REVIEW-ASSIST-01</td></tr>
+    <tr><td><b>Learning from outcomes</b></td><td>Your wins and losses turned into guidance for your next bid</td><td><span class="pill p-good">built</span> Win and loss signals from your own outcomes (<code>bid_outcome_signals.py</code>)</td><td>Never tested. R285-P3-AI-GOLDEN-COVERAGE-GAPS-01</td></tr>
+    <tr><td><b>Debrief analysis</b></td><td>The buyer's debrief read and turned into fixes for the library</td><td><span class="pill p-good">built</span> <code>bid_debrief_extract</code></td><td>Deep test, R285-P3-AI-DEEP-TEST-DOCUMENT-USE-01</td></tr>
+    <tr><td><b>Ask about a tender</b></td><td>"What does clause 7 mean for us?" answered with the quote</td><td><span class="pill p-none">off</span> <code>bid_tender_ask</code> ships switched off</td><td>R285-P3-AI-OFF-SURFACES-DECISION-01</td></tr>
   </tbody>
 </table>
 </div>
 
+<h3>Velstrian Buy, for the buyer</h3>
 <div class="tblwrap">
 <table class="doc-tbl">
-  <thead><tr><th>Not a real gain</th><th>Why</th></tr></thead>
+  <thead><tr><th>Capability</th><th>Top 1 percent looks like</th><th>Today</th><th>Gap and row</th></tr></thead>
   <tbody>
-    <tr><td>"Pick the best model and get fewer mistakes"</td><td>A better model lowers the error rate, it does not remove it. Legal research tools sold as hallucination free were measured wrong 17 to 33 percent of the time. Our checks after the model matter more than the model</td></tr>
-    <tr><td>A long list of vendors and versions</td><td>It moves the risk and the cost onto the user, who cannot judge the result. No bid writing tool in the research showed a model picker at all</td></tr>
-    <tr><td>Showing the model's own confidence score</td><td>Weaker models were found more overconfident. Showing how many of your documents back a claim is honest. A model's self score is not</td></tr>
+    <tr><td><b>Requirement builder</b></td><td>Plain requirement wording and measures, checked for the law that applies</td><td><span class="pill p-good">built</span> <code>buy_requirement_suggest</code> and <code>buy_requirement_narrative</code> with a legal guardrail</td><td>No registered prompt version. R285-P3-AI-PROMPT-REGISTRY-GAPS-01</td></tr>
+    <tr><td><b>Tender pack review</b></td><td>The pack checked before it goes out: gaps, unclear weights, missing dates</td><td><span class="pill p-good">built</span> <code>buy_tender_pack_review</code></td><td>No test case. R285-P3-AI-DEEP-TEST-BUY-01</td></tr>
+    <tr><td><b>Evaluation support</b></td><td>Every reply read and summarised against each criterion, with quotes</td><td><span class="pill p-good">built</span> <code>buy_preread</code> on Claude Sonnet 4.6, no fallback</td><td>R285-P3-AI-DEEP-TEST-BUY-01, fallback on hold D339</td></tr>
+    <tr><td><b>Consistency checks</b></td><td>Scores that disagree between evaluators flagged with the reason</td><td><span class="pill p-good">built</span> <code>buy_eval_consistency</code></td><td>The bias test set cannot vary yet. R285-P3-AI-DEEP-TEST-BUY-01</td></tr>
+    <tr><td><b>Fairness</b></td><td>Reasons per criterion, a human decides, no ranking of people, bidders cannot steer the AI</td><td><span class="pill p-warn">partial</span> Decision support by design</td><td>R285-P3-BUY-AI-FAIRNESS-01, R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td><b>Award letters</b></td><td>Award and regret letters drafted from the scores, with reasons</td><td><span class="pill p-good">built</span> <code>buy_award_letter</code> with the figure check</td><td>No registered prompt. R285-P3-AI-PROMPT-REGISTRY-GAPS-01</td></tr>
+    <tr><td><b>Market sounding</b></td><td>Who could supply this, from the published record</td><td><span class="pill p-good">built</span> Rule based, from published award notices</td><td>No AI needed. No new row</td></tr>
+    <tr><td><b>Private quick quotes</b></td><td>A short request for quotes scoped in minutes</td><td><span class="pill p-none">off</span> <code>buy_rfq_scope</code> ships switched off</td><td>R285-P3-AI-OFF-SURFACES-DECISION-01</td></tr>
+    <tr><td><b>Contract management</b></td><td>After award: track promises, KPIs and changes, flag drift in plain words</td><td><span class="pill p-warn">partial</span> A promise ledger and rate card leakage check exist, rule based. No AI reads the contract after award</td><td>R285-P3-AI-BUY-CONTRACT-MANAGEMENT-01</td></tr>
   </tbody>
 </table>
 </div>
 
-<!-- ═══ 3. TODAY ═══ -->
-<h2 id="as-today"><span class="n">Section 3</span>Today: every AI feature and the audit scorecard</h2>
+<div class="callout"><b>Public and private, said once and meant everywhere.</b> Every capability above
+serves both. The private side is where testing is thinnest (2 of 11 scenarios), so private cases are
+part of every deep test row, not a separate project.</div>
+
+<!-- ═══ 3. ENGINE ═══ -->
+<h2 id="as-engine"><span class="n">Section 3</span>The intelligence engine, and why it is ours</h2>
+
+<p>"Our AI engine has the intelligence to do smart work" is true only if the intelligence lives in
+things we own, not in a model we rent. Four layers make it true. Each one helps every model and every
+customer at once, and none of them needs customer content (D344).</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Layer</th><th>What it holds</th><th>Today</th><th>Gap and row</th></tr></thead>
+  <tbody>
+    <tr><td><b>1. Procurement knowledge</b></td><td>PPN notes, the Procurement Act 2023, PPN 026 social value measures, sector norms, each with its source and date</td><td><span class="pill p-good">built</span> A regulatory corpus with its own search (<code>rag_service.py</code>) and generated regulated constants</td><td>No coverage map, no named owner for freshness, no "what changed" check. R285-P3-AI-KNOWLEDGE-BASE-PROCUREMENT-01</td></tr>
+    <tr><td><b>2. Public tender intelligence</b></td><td>What buyers ask, how they weight, who wins, from Open Government Licence notices</td><td><span class="pill p-good">built</span> Published award notices from Find a Tender, Contracts Finder and Public Contracts Scotland (<code>bid_awards.py</code>)</td><td>Not yet turned into buyer patterns (typical questions and weights by sector). R285-P3-AI-PUBLIC-TENDER-INTELLIGENCE-01</td></tr>
+    <tr><td><b>3. Patterns across many bids</b></td><td>Which kinds of question fail the checks, where drafts get rewritten, with counts only</td><td><span class="pill p-none">none</span></td><td>Content free counts, D344. Cross customer outcome patterns need decision CROSS CUSTOMER PATTERNS. R285-P3-AI-CROSS-CUSTOMER-PATTERNS-01, R285-P3-AI-ONLINE-QUALITY-SIGNALS-01</td></tr>
+    <tr><td><b>4. A provider neutral evidence layer</b></td><td>Numbered sources, quotes with offsets, one prompt contract per feature, checks after the model in code</td><td><span class="pill p-warn">partial</span> The checks are model independent. Evidence is packed differently per feature</td><td>R285-P3-AI-EVIDENCE-PACK-NEUTRAL-01. Per provider prompt variants wait on D339</td></tr>
+  </tbody>
+</table>
+</div>
+
+<details>
+  <summary>Why this is the moat, and what a competitor cannot copy quickly</summary>
+  <div class="dbody">
+  <p>Any competitor can rent the same models at the same prices. What they cannot rent is a dated
+  procurement knowledge base checked against its sources, a test set built from real public tenders,
+  checks that refuse invented figures and credentials, and counts from many bids showing where drafts
+  go wrong. Those compound with use. The model is the replaceable part, which is also why a second
+  provider is cheap to add once the evidence layer is neutral.</p>
+  <p>Honest limit: layers 2 and 3 are only as good as their measurement. Until recall and the deep tests
+  have numbers (sections 13 and 15), "smart" is a design, not a measured result, and public copy should
+  say what the AI does, not how accurate it is (website rule: no AI accuracy figures).</p>
+  </div>
+</details>
+
+<!-- ═══ 4. TODAY ═══ -->
+<h2 id="as-today"><span class="n">Section 4</span>Today: every AI feature and the audit scorecard</h2>
 
 <p>The platform names <b>56 AI surfaces</b> (a surface is one AI feature with its own model, budget
 and checks). About <b>37 are live</b> for customers or background jobs, 10 serve the internal
 founders portal, 6 are dead with no caller, and 1 is used only by tests. The models are
 <code>gemini-2.5-pro</code>, <code>gemini-2.5-flash</code>, <code>claude-sonnet-4-6</code>,
 <code>claude-haiku-4-5</code> and <code>claude-opus-4-8</code>, plus <code>gemini-embedding-001</code>
-for search.</p>
+for search. No OpenAI model runs anywhere: the client raises an error on any id that is not Claude or
+Gemini (<code>client.py:346-361</code>).</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
@@ -142,7 +216,7 @@ for search.</p>
     <tr><td><b>Bid: write your answers.</b> One tender question, social value answer, method statement, executive summary, win themes, delivery diagram</td><td>Gemini 2.5 Pro, falls back to Flash</td><td>Figure check <span class="pill p-good">blocks</span> on all. Certificate name check <span class="pill p-warn">advises</span> on 3 of 6. Diagram rewrites an unsupported TUPE step</td><td>5 of 6 covered. Win themes has none</td></tr>
     <tr><td><b>Bid: read the tender.</b> List every requirement, plain words briefing, what a tender change means, ask about a tender</td><td>Requirements on Pro, the rest on Flash</td><td>Requirement quotes must match the source at 0.92 or the item is dropped. Briefing checks figures and dates</td><td>Covered except change impact. Extraction gate only observes</td></tr>
     <tr><td><b>Bid: use your documents.</b> Fill profile fields, tag evidence, import past answers, read alert emails and buyer debriefs</td><td>Flash, import on Pro</td><td>Quote matching and the injection fence. Several ship switched off</td><td>Evidence tagging and alert reading have none</td></tr>
-    <tr><td><b>Bid: check the claims.</b> Claim backing, and linking sentences to proof</td><td>Flash</td><td>Deterministic claim matching. <span class="pill p-warn">On demand only</span></td><td>Claim backing covered</td></tr>
+    <tr><td><b>Bid: check the claims.</b> Claim backing, and linking sentences to proof</td><td>Flash</td><td>Deterministic claim matching. <span class="pill p-warn">On demand only</span> until D342 is built</td><td>Claim backing covered</td></tr>
     <tr><td><b>Search your library.</b> Rewrite the question, rerank results, turn text into vectors</td><td>Pro, Flash, gemini-embedding-001</td><td>Rerank ships off. Nothing returned when nothing clears the cut off</td><td>Recall never scored</td></tr>
     <tr><td><b>Advisor.</b> The in app bid and compliance advisor, and the setup helper</td><td>Flash</td><td>Unconfirmed number check, pasted text treated as data (fixed 24 October), list completeness</td><td>Advisor covered. Setup helper has none and no registered prompt</td></tr>
     <tr><td><b>Buy.</b> Supplier reply pre read, requirement wording and measures, scoring consistency, award letter, tender pack review</td><td>Pre read on Claude Sonnet 4.6 with no fallback. The rest on Flash</td><td>Citation check, figure check, legal guardrail</td><td>All covered except pack review. Consistency bias cannot yet be varied</td></tr>
@@ -222,13 +296,155 @@ not against the effort spent. Not inflated here: the mean is <b>3.1</b>.</p>
   </div>
 </details>
 
-<!-- ═══ 4. OFFERING ═══ -->
-<h2 id="as-offer"><span class="n">Section 4</span>The recommended offering: three plain levels</h2>
+<!-- ═══ 5. PROVIDERS ═══ -->
+<h2 id="as-providers"><span class="n">Section 5</span>The three providers, OpenAI included</h2>
 
-<p>The owner's idea and the research agree. Comparable products default to Auto, put choice behind a
-control, and gate it by plan (Notion, GitHub Copilot, Microsoft 365 Copilot, Glean). GitHub Copilot
-shows three tiers, not vendors. Under the simplicity rule for small firms, the first screen names
-levels, and vendor names live in an advanced panel.</p>
+<p><b>Why OpenAI was missing.</b> The first version of this page named OpenAI only once, as a later
+frontier option, because D339 pauses all new model work and OpenAI has legal steps before any call:
+a DPA entry, a 30 day customer notice and a review of the transfer basis (D329). That reasoning
+explained the timing, not the absence. OpenAI is now covered on the same footing as Google and
+Anthropic. Velstrian would use the <b>OpenAI API</b>, which serves the same models as ChatGPT under
+business terms. The consumer ChatGPT app has different terms and is never used for customer content.</p>
+
+<h3>The OpenAI line up, read from OpenAI's pages on 24 October 2026</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Model</th><th>Status on the pages read</th><th class="num">USD in, out per million tokens</th><th>Context, output</th><th>Proposed level</th><th class="num">Weight (D331)</th></tr></thead>
+  <tbody>
+    <tr><td><b>GPT-6 Luna</b> <span class="sm">gpt-6-luna</span></td><td>Current, on the models page</td><td class="num">0.10, 0.50 (cached in 0.01)</td><td>1.05M, 128K</td><td>Fast</td><td class="num">1</td></tr>
+    <tr><td><b>GPT-6.1 Sol</b> <span class="sm">gpt-6.1-sol</span></td><td>Current, on the models page</td><td class="num">2.00, 10.00 (cached in 0.10)</td><td>1.05M, 128K</td><td>Standard</td><td class="num">1</td></tr>
+    <tr><td><b>GPT-6 Astra</b> <span class="sm">gpt-6-astra</span></td><td>Current, on the models page</td><td class="num">10.00, 50.00 (cached in 1.00)</td><td>1.05M, 128K</td><td>Best, frontier</td><td class="num">5</td></tr>
+    <tr><td><b>GPT-5.6 Terra</b> <span class="sm">gpt-5.6-terra</span></td><td>Priced, not on the models page</td><td class="num">2.00, 12.00</td><td>[Unverified]</td><td>Standard, if wanted</td><td class="num">1</td></tr>
+    <tr><td><b>GPT-5.6 Sol</b> <span class="sm">gpt-5.6-sol</span></td><td>Priced, not on the models page</td><td class="num">4.00, 20.00</td><td>[Unverified]</td><td>Best, if wanted</td><td class="num">2</td></tr>
+    <tr><td><b>GPT-6 Sol</b> <span class="sm">gpt-6-sol</span></td><td>Priced, not on the models page</td><td class="num">2.00, 10.00</td><td>[Unverified]</td><td>Not proposed, 6.1 Sol supersedes it on the page read</td><td class="num">1</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="sm">Sources: <code>developers.openai.com/api/docs/models</code>, <code>/pricing</code>,
+<code>/deprecations</code> and <code>/guides/your-data</code>, seen 24 October 2026 (design paper 1.4,
+research 8.1). Weights from the design paper table 4.4 under D331. Every model is a <b>candidate</b>,
+shown to nobody until it passes the quality gate (D322). Reasoning effort settings: Astra and Sol take
+low to max, Luna also takes none.</p>
+
+<details>
+  <summary>OpenAI facts that could not be confirmed, marked [Unverified]</summary>
+  <div class="dbody">
+  <p>[Unverified] the names of OpenAI's billing and project spend limit settings (the billing pages
+  were not read). [Unverified] the OpenAI DPA terms and the UK transfer mechanism (needs legal review
+  under D329). [Unverified] OpenAI's sub-processor list (the page answered 403). [Unverified] the
+  structured output interface on the current models, an adapter task to confirm before building.
+  [Unverified] why <code>gpt-6-sol</code> and the 5.6 models are priced but absent from the models page.
+  OpenAI also lists restricted access models (<code>gpt-rosalind-*</code>, <code>*-cyber</code>) that
+  need approval and are excluded. Older models such as <code>gpt-5</code> and <code>o3</code> shut down
+  on 11 December 2026, and <code>gpt-4.1</code> and <code>gpt-4o</code> on 14 January 2027, so none is
+  proposed.</p>
+  </div>
+</details>
+
+<h3>All three providers side by side</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th></th><th>Google (Gemini)</th><th>Anthropic (Claude)</th><th>OpenAI (GPT)</th></tr></thead>
+  <tbody>
+    <tr><td><b>Used today</b></td><td>About 36 customer surfaces, embeddings, both chatbots</td><td><code>buy_preread</code> and the internal portal</td><td>Nothing. Not connected</td></tr>
+    <tr><td><b>In the DPA</b></td><td>Yes, Schedule 1 item 8</td><td>Yes, item 7 (corrected 24 October to <code>buy_preread</code> only)</td><td>Agreed to add (D329). Not added, on hold D339</td></tr>
+    <tr><td><b>Fast</b></td><td>Gemini 3.6 Flash, 0.75 and 3.75, doubles 1 Jan 2027</td><td>Haiku 5.5, 0.10 and 0.50</td><td>GPT-6 Luna, 0.10 and 0.50</td></tr>
+    <tr><td><b>Standard</b></td><td>Gemini 3.8 Flash, 0.75 and 3.75, doubles 1 Jan 2027</td><td>Sonnet 5.5, 2 and 10</td><td>GPT-6.1 Sol, 2 and 10</td></tr>
+    <tr><td><b>Best, Pro and up</b></td><td>Gemini 4 Argon later (4 and 20 from 1 Dec 2026)</td><td>Opus 5.5, 4 and 20</td><td>GPT-5.6 Sol, 4 and 20</td></tr>
+    <tr><td><b>Frontier</b></td><td>none</td><td>Fable 5.1, 10 and 50</td><td>GPT-6 Astra, 10 and 50</td></tr>
+    <tr><td><b>Notice before retirement</b></td><td>"Advance notice", no number</td><td>At least 60 days</td><td>At least 6 months for general models, 2 weeks for previews</td></tr>
+    <tr><td><b>Model list API</b></td><td>Limits, no lifecycle field</td><td>Lifecycle, retirement date and capabilities</td><td>A shutdown date only</td></tr>
+    <tr><td><b>Training on our data</b></td><td>No, on the paid service (D314 verified production)</td><td>No, per commercial terms</td><td>No by default</td></tr>
+    <tr><td><b>Where it processes</b></td><td>May cache in any country it operates</td><td>Global or US only</td><td>US by default. EU processing and UK storage by approval only</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>What OpenAI adds that Anthropic and Google do not, honestly</h3>
+<div class="cards">
+  <div class="card ok"><h4>A third, independent checker</h4>
+  <p>A model tends to rate its own family's writing higher. With Google writing and Claude as the
+  second provider, OpenAI is a judge from a family that wrote neither draft. Useful for the quality gate
+  and the second opinion.</p></div>
+  <div class="card ok"><h4>The only EU processing route</h4>
+  <p>OpenAI is the one provider that documents EU processing (<code>eu.api.openai.com</code>), by
+  approval. D336 says do not apply now. It is the option if a buyer insists.</p></div>
+  <div class="card ok"><h4>The longest notice</h4>
+  <p>Six months before a general model retires, against 60 days for Anthropic and no number for Google.
+  The least churn of the three.</p></div>
+  <div class="card warn"><h4>No price or proven quality edge</h4>
+  <p>Its price points match Anthropic's at every level. Nobody has measured it on our tasks. A buyer
+  policy that names OpenAI is plausible, as Microsoft 365 Copilot defaults to it, but no such buyer has
+  been found.</p></div>
+  <div class="card warn"><h4>Not needed for resilience</h4>
+  <p>The biggest risk, one provider, is fixed by putting Claude behind Gemini. Claude is already in the
+  DPA. OpenAI is a third adapter, a third deprecation feed, a DPA entry, a notice and a legal review.</p></div>
+  <div class="card"><h4>The honest view</h4>
+  <p>Worth adding, second. Anthropic fallback first, then OpenAI as the independent judge and a choice
+  for Pro and Portfolio, only if its family eval passes. Decision OPENAI SEQUENCE.</p></div>
+</div>
+
+<h3>The OpenAI path, step by step (all on hold under D339)</h3>
+<div class="step"><div class="num">1</div><div class="body"><b>Account and limit (D330).</b>
+<span>The owner creates the OpenAI organisation under Velstrian Tenderworks and sets a low monthly
+project limit before the first eval, figure chosen at the time. Any rise is a new decision. The key is a
+Railway secret only, never Vercel, never printed. R285-P3-AI-OPENAI-ACCOUNT-01.</span></div></div>
+<div class="step"><div class="num">2</div><div class="body"><b>DPA and notice (D329).</b>
+<span>Add OpenAI to Schedule 1 with purpose, location and safeguards, after a legal review of the
+transfer basis. Send the clause 6.4 notice, 30 days by default (the figure is still a default, decision
+SUB-PROCESSOR NOTICE). Update the data use sentence that names two providers today. OpenAI stays off for
+existing organisations until the notice has run. R285-P3-TRUST-OPENAI-DPA-NOTICE-01.</span></div></div>
+<div class="step"><div class="num">3</div><div class="body"><b>Adapter.</b>
+<span>An OpenAI adapter behind <code>AIClient</code>, a pinned <code>openai</code> package, dated price
+rows, and the <code>ai_calls</code> provider check widened to accept <code>openai</code> (a migration,
+written and never applied by a lane). R285-P3-AI-OPENAI-ADAPTER-01.</span></div></div>
+<div class="step"><div class="num">4</div><div class="body"><b>Eval, capped.</b>
+<span>Luna, 6.1 Sol and Astra on the drafting family, about GBP 6, cap GBP 25 for all four families
+(design paper phase 2). One manual run with its own cost line, no timer. R285-P3-AI-OPENAI-EVAL-01.</span></div></div>
+<div class="step"><div class="num">5</div><div class="body"><b>Approve and show.</b>
+<span>Only models that pass are visible, in the advanced panel, and only to organisations whose notice
+has run. Switching OpenAI off is a registry flag or an allow list change, no code change.</span></div></div>
+
+<!-- ═══ 6. CUSTOMER GAIN ═══ -->
+<h2 id="as-gain"><span class="n">Section 6</span>What customers gain from more than one model</h2>
+
+<p>The research looked for evidence that letting business users choose a model improves what they
+get. It found none. Vendors argue it does and publish no data. What is known points the other way
+for non experts: users overestimate how accurate AI answers are, and longer answers raise their
+confidence without raising accuracy. A small business owner who picks a "better" model cannot tell
+from the draft whether it was better.</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Real gain for the customer</th><th>Why it holds</th></tr></thead>
+  <tbody>
+    <tr><td><b>The AI keeps working when one provider fails</b></td><td>Today a Gemini outage stops almost all customer AI. A second provider behind the same checks is the largest single benefit, and the customer never has to choose anything to get it</td></tr>
+    <tr><td><b>A second opinion from a different vendor</b></td><td>A model tends to rate its own family's writing higher (self preference bias, measured in published studies). A checker from another vendor catches different mistakes. Three vendors make an independent judge always available</td></tr>
+    <tr><td><b>Speed or depth when it matters</b></td><td>A quick summary does not need the most expensive model. A final executive summary might. Three plain levels let a user say so</td></tr>
+    <tr><td><b>A buyer or policy that names a vendor</b></td><td>Some organisations allow only certain AI providers. An admin control that limits providers serves them</td></tr>
+    <tr><td><b>Fewer surprises when vendors change</b></td><td>Models are retired on vendor timetables. A registry and a test gate mean a retirement becomes a planned swap, not an outage</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Not a real gain</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>"Pick the best model and get fewer mistakes"</td><td>A better model lowers the error rate, it does not remove it. Legal research tools sold as hallucination free were measured wrong 17 to 33 percent of the time. Our checks after the model matter more than the model</td></tr>
+    <tr><td>A long list of vendors and versions</td><td>It moves the risk and the cost onto the user, who cannot judge the result. No bid writing tool in the research showed a model picker at all</td></tr>
+    <tr><td>Showing the model's own confidence score</td><td>Weaker models were found more overconfident. Showing how many of your documents back a claim is honest. A model's self score is not</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ═══ 7. OFFERING ═══ -->
+<h2 id="as-offer"><span class="n">Section 7</span>The offering: Auto and three plain levels</h2>
+
+<p>Comparable products default to Auto, put choice behind a control, and gate it by plan (Notion,
+GitHub Copilot, Microsoft 365 Copilot, Glean). GitHub Copilot shows three tiers, not vendors. Under the
+simplicity rule for small firms, the first screen names levels, and vendor names, OpenAI's included,
+live in an advanced panel. D322 already decides that only models that pass their family eval are shown.</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
@@ -236,51 +452,109 @@ levels, and vendor names live in an advanced panel.</p>
   <tbody>
     <tr><td><b>Starter</b></td><td>No choice. Auto picks the right model for each task</td><td>Fewest decisions for the smallest firms. Nothing to get wrong</td></tr>
     <tr><td><b>Pro</b></td><td>Auto by default. May choose <b>Fast</b>, <b>Standard</b> or <b>Best</b></td><td>Speed or depth when it matters, at a credit weight shown before the call</td></tr>
-    <tr><td><b>Portfolio</b></td><td>As Pro, and <b>Best</b> also includes the frontier models</td><td>A frontier answer costs about 9.5 pence of AI against 50 pence charged at pack price. That margin is thin, so a plan gate is simpler than a confirm step</td></tr>
+    <tr><td><b>Portfolio</b></td><td>As Pro. Whether <b>Best</b> also includes the frontier models only here is decision FRONTIER TIERS</td><td>The owner proposes frontier on Portfolio only. D334 records Pro and Portfolio</td></tr>
   </tbody>
 </table>
 </div>
 
-<div class="callout bad"><b>This differs from a recorded decision.</b> D334 says frontier models are
-available on Pro and Portfolio with a confirm step. The owner now suggests Portfolio only. D334 stays
-as recorded until the owner decides (section 11, decision 11, FRONTIER TIERS).</div>
+<div class="callout bad"><b>This differs from a recorded decision.</b> D334 (owner chose against the
+paper's recommendation) says frontier models, Fable 5.1 and GPT-6 Astra, are available on Pro and
+Portfolio only, locked on Starter with an upgrade reason, with the 5 credit confirm step and the per
+organisation premium cap. The owner now proposes Portfolio only. D334 stays as recorded until the owner
+decides FRONTIER TIERS (section 21).</div>
 
 <h3>Which models sit behind each level (candidates, none tested yet)</h3>
-<p>Keep the list small: one or two models per level, from the two providers already in the data
-processing agreement (Google and Anthropic). OpenAI joins only after D329's legal review and when
-D339 lifts. Every name below is a <b>candidate</b>. It is shown to nobody until it passes the quality
-gate in section 5 (D322).</p>
-
 <div class="tblwrap">
 <table class="doc-tbl">
-  <thead><tr><th>Level</th><th>Today</th><th>Candidates</th><th class="num">Price in, out (USD per million tokens)</th><th class="num">Credit weight (D331)</th></tr></thead>
+  <thead><tr><th>Level</th><th>Today</th><th>Google</th><th>Anthropic</th><th>OpenAI</th><th class="num">Weight</th></tr></thead>
   <tbody>
-    <tr><td><b>Fast</b></td><td>gemini-2.5-flash</td><td>Gemini 3.6 Flash, Claude Haiku 5.5</td><td class="num">0.75, 3.75 (doubles 1 Jan 2027) and 0.10, 0.50</td><td class="num">1</td></tr>
-    <tr><td><b>Standard</b></td><td>gemini-2.5-pro</td><td>Claude Sonnet 5.5, Gemini 3.8 Flash</td><td class="num">2, 10 and 0.75, 3.75 (doubles 1 Jan 2027)</td><td class="num">1</td></tr>
-    <tr><td><b>Best</b>, Pro and Portfolio</td><td>none</td><td>Claude Opus 5.5</td><td class="num">4, 20</td><td class="num">2</td></tr>
-    <tr><td><b>Best</b>, Portfolio only</td><td>none</td><td>Claude Fable 5.1 (later GPT-6 Astra)</td><td class="num">10, 50</td><td class="num">5</td></tr>
+    <tr><td><b>Fast</b></td><td>gemini-2.5-flash</td><td>Gemini 3.6 Flash</td><td>Claude Haiku 5.5</td><td>GPT-6 Luna</td><td class="num">1</td></tr>
+    <tr><td><b>Standard</b></td><td>gemini-2.5-pro</td><td>Gemini 3.8 Flash</td><td>Claude Sonnet 5.5</td><td>GPT-6.1 Sol</td><td class="num">1</td></tr>
+    <tr><td><b>Best</b></td><td>none</td><td>Gemini 4 Argon, later</td><td>Claude Opus 5.5</td><td>GPT-5.6 Sol</td><td class="num">2</td></tr>
+    <tr><td><b>Best, frontier</b></td><td>none</td><td>none</td><td>Claude Fable 5.1</td><td>GPT-6 Astra</td><td class="num">5</td></tr>
   </tbody>
 </table>
 </div>
 
 <details>
-  <summary>Why Gemini 4 Argon is not proposed, and other notes on the list</summary>
+  <summary>Notes on the list: Argon, tokenisers and how a level is chosen</summary>
   <div class="dbody">
   <p>Gemini 4 Argon doubles from 2 and 10 to 4 and 20 on 1 December 2026, which puts it at Opus 5.5
-  prices. One Best model per provider is enough to start, so it can join later if its tests justify
-  it. Claude 4.7 and later produce about 30 percent more tokens for the same text than Sonnet 4.6, so
-  a per token comparison across generations understates the newer models' cost. The level a model
-  sits in is set by a person at approval from its measured results, never from its price. Prices are
-  from the vendor pages read on 24 October 2026 (research section 8).</p>
+  prices. One Best model per provider is enough to start. Claude 4.7 and later produce about 30 percent
+  more tokens for the same text than Sonnet 4.6, so a per token comparison across generations
+  understates the newer models' cost. Thinking tokens bill as output on all three providers. The level
+  a model sits in is set by a person at approval from its measured results, never from its price. Auto
+  never picks a provider an organisation has not allowed, and OpenAI is off for existing organisations
+  until their notice has run (D329).</p>
   </div>
 </details>
 
-<!-- ═══ 5. LIFECYCLE ═══ -->
-<h2 id="as-life"><span class="n">Section 5</span>The permanent model and provider lifecycle</h2>
+<!-- ═══ 8. COMMERCIALS ═══ -->
+<h2 id="as-money"><span class="n">Section 8</span>Commercials: credits, plans and margin</h2>
+
+<p>Customers pay in credits they already understand. A credit weight says how many credits one answer
+uses. D331 fixed the rule: weight follows cost against today's standard model inside a 1.5x band,
+whole numbers only. Economy and standard models are 1, Opus 5.5 and GPT-5.6 Sol are 2, the frontier
+models are 5.</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Plan (catalogue, 24 Oct 2026)</th><th class="num">Price a month</th><th class="num">Credits a month</th><th class="num">Price per credit</th><th>Model choice</th></tr></thead>
+  <tbody>
+    <tr><td><b>Starter</b></td><td class="num">GBP 49</td><td class="num">200</td><td class="num">24.5p</td><td>Auto only</td></tr>
+    <tr><td><b>Pro</b></td><td class="num">GBP 149</td><td class="num">750</td><td class="num">19.9p</td><td>Fast, Standard, Best. Frontier per D334 or FRONTIER TIERS</td></tr>
+    <tr><td><b>Portfolio</b></td><td class="num">GBP 549</td><td class="num">3,000</td><td class="num">18.3p</td><td>As Pro, plus frontier</td></tr>
+    <tr><td><b>Top up packs and overage</b></td><td class="num">GBP 10 per 100</td><td class="num">n/a</td><td class="num">10p</td><td>Same weights. Overage is capped per organisation (GBP 50 default in the feasibility study, not re-measured)</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="sm">Plan price per credit ignores seats and everything else the plan includes, so it is an
+upper bound on what a credit earns. The lowest real rate is the 10 pence pack and overage price, used
+for margin below.</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Level and model</th><th class="num">AI cost per answer</th><th class="num">Weight</th><th class="num">Charged at 10p</th><th class="num">AI cost share</th></tr></thead>
+  <tbody>
+    <tr><td>Fast: Haiku 5.5 or GPT-6 Luna</td><td class="num">GBP 0.0010</td><td class="num">1</td><td class="num">10p</td><td class="num">1 percent</td></tr>
+    <tr><td>Fast: Gemini 3.6 Flash, to 31 Dec 2026, then from 1 Jan 2027</td><td class="num">0.0071, then 0.0142</td><td class="num">1</td><td class="num">10p</td><td class="num">7, then 14 percent</td></tr>
+    <tr><td>Today: Gemini 2.5 Pro</td><td class="num">0.0154</td><td class="num">1</td><td class="num">10p</td><td class="num">15 percent</td></tr>
+    <tr><td>Standard: Sonnet 5.5 or GPT-6.1 Sol</td><td class="num">0.0190</td><td class="num">1</td><td class="num">10p</td><td class="num">19 percent</td></tr>
+    <tr><td>Best: Opus 5.5 or GPT-5.6 Sol</td><td class="num">0.0379</td><td class="num">2</td><td class="num">20p</td><td class="num">19 percent</td></tr>
+    <tr><td>Frontier: Fable 5.1 or GPT-6 Astra</td><td class="num">0.0948</td><td class="num">5</td><td class="num">50p</td><td class="num">19 percent</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout"><b>A correction to the first version of this page.</b> It called the frontier
+margin thin. By the D331 formula every level keeps the AI cost near or under 19 percent of pack revenue,
+because the weight rises with cost. The real exposure is elsewhere: the table assumes 6,000 tokens in
+and 1,200 out with no thinking tokens, and thinking models bill thinking as output, which can multiply
+the output side. So margin must be measured from the ledger, not assumed. R285-P3-AI-COMMERCIAL-MARGIN-MODEL-01.
+The case for frontier on Portfolio only rests on simplicity and on keeping the premium cap meaningful,
+not on margin.</div>
+
+<details>
+  <summary>How model choice touches pricing, and what stays the same</summary>
+  <div class="dbody">
+  <p>No Stripe object changes: overage is already one meter unit per credit, so a weight 2 call is two
+  units. The reservation that holds the worst case before a call must price the chosen model, not the
+  default, or a frontier choice could overrun a daily ceiling. A per organisation premium cap (credits
+  spent at weight 2 or more) bounds a heavy user, its default is decision PREMIUM CAP. If a chosen model
+  falls back to a cheaper one, the user pays the lower weight and is told. Website pricing copy for all
+  of this is prepared locally and held (D337, on hold D339). D240 measured 1.3 pence of AI per charged
+  credit on a small sample, inside the band.</p>
+  </div>
+</details>
+
+<!-- ═══ 9. LIFECYCLE ═══ -->
+<h2 id="as-life"><span class="n">Section 9</span>The model and provider lifecycle</h2>
 
 <p>Vendors retire and reprice models on their own timetable, so changing a model has to be a routine
-chore with a gate, not an emergency. One path, the same for every model and every provider.
-<b>Nothing here is built. All of it is on hold under D339.</b></p>
+chore with a gate, not an emergency. One path, the same for every model and all three providers.
+<b>Nothing here is built. All of it is on hold under D339.</b> The rules it follows are recorded:
+D322 (only passed models are shown), D328 (models come from the registry), D332 (drafting family eval
+budget about GBP 10), D333 (lists pulled on demand, never on a timer) and D335 (legacy migration).</p>
 
 <figure>
   <svg class="fig" viewBox="0 0 900 330" role="img" aria-labelledby="as-life-t">
@@ -292,7 +566,7 @@ chore with a gate, not an emergency. One path, the same for every model and ever
       <marker id="lf-a" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-aim" d="M0,0 L8,4 L0,8 z"/></marker>
       <marker id="lf-w" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-warn" d="M0,0 L8,4 L0,8 z"/></marker>
     </defs>
-    <text class="cap" x="30" y="22">ONE PATH FOR EVERY MODEL</text>
+    <text class="cap" x="30" y="22">ONE PATH FOR EVERY MODEL, THREE PROVIDERS</text>
     <text class="lbl-warn" x="690" y="22">ALL ON HOLD, D339</text>
 
     <rect class="r" x="30" y="36" rx="10" width="190" height="96"/>
@@ -353,65 +627,85 @@ chore with a gate, not an emergency. One path, the same for every model and ever
 
 <div class="step"><div class="num">1</div><div class="body"><b>Discover, on demand.</b>
 <span>A script and an admin button read the three providers' model lists. No timer, because a timer
-spends money while nobody watches (D333, RULE 0-G). A new model found this way is shown to nobody.</span></div></div>
+spends money while nobody watches (D333, RULE 0-G). A new model found this way is shown to nobody.
+OpenAI's list gives only a shutdown date, so its prices and limits are entered by a person.</span></div></div>
 <div class="step"><div class="num">2</div><div class="body"><b>Register.</b>
 <span>Saved as a <code>candidate</code> with its limits, its retirement date and a dated price row.
 Prices change on known dates, so a price without a date is a defect.</span></div></div>
 <div class="step"><div class="num">3</div><div class="body"><b>Quality gate.</b>
-<span>Deterministic checks first, because they are free and cannot be flattered: does the adapter
-answer, does the figure check pass, does the claim check find zero invented claims. Then the golden
-set for that family of features (drafting, extraction, ranking, chat). Scored by a judge from a
-different vendor than the writer, with answer order swapped. The pass rule is relative: match or beat
-the current approved model on our own cases, with <b>zero</b> regressions on the figure and claim
-checks. Cheap family first, and a model that fails it skips the rest. Run by hand with a stated cap
-(D332 approved about GBP 10 for the drafting family, the full matrix is about GBP 39).</span></div></div>
+<span>Deterministic checks first, because they are free and cannot be flattered. Then the golden set
+for that family of features (drafting, extraction, ranking, chat). Scored by a judge from a different
+vendor than the writer, with answer order swapped. The pass rule is relative: match or beat the current
+approved model on our own cases, with <b>zero</b> regressions on the figure and claim checks. Run by
+hand with a stated cap. Never on OpenAI's Evals platform, which shuts on 30 November 2026.</span></div></div>
 <div class="step"><div class="num">4</div><div class="body"><b>Approve.</b>
-<span>A person signs it off and the sign off is recorded. Only then is the model visible, and only
-for the families it passed (D322). It must also have its provider in the data processing agreement (D328).</span></div></div>
+<span>A person signs it off and the sign off is recorded. Only then is the model visible, only for the
+families it passed (D322), and only if its provider is in DPA Schedule 1 (D328).</span></div></div>
 <div class="step"><div class="num">5</div><div class="body"><b>Serve and monitor.</b>
 <span>Each call names the model, the prompt version and why it was chosen. Content free signals per
-feature (how often the figure check fires, how many claims lack backing). A fallback chain across two
-providers, and the user told when the fallback served them.</span></div></div>
+feature. A fallback chain across two providers, and the user told when the fallback served them.</span></div></div>
 <div class="step"><div class="num">6</div><div class="body"><b>Deprecate.</b>
 <span>On a vendor notice, a price step that breaks the credit weight, or failing checks. Users who
 had chosen it move to Auto with a one line notice.</span></div></div>
 <div class="step"><div class="num">7</div><div class="body"><b>Retire.</b>
 <span>Hidden and never called again. The record stays so an old bid can still say which model wrote it.</span></div></div>
 
-<h3>Churn already on the calendar</h3>
-<div class="tblwrap">
-<table class="doc-tbl">
-  <thead><tr><th>Date</th><th>What changes</th><th>Effect on Velstrian today</th></tr></thead>
-  <tbody>
-    <tr><td>15 Oct 2026, passed</td><td>Claude Haiku 4.5 "not sooner than" retirement date</td><td>Internal portal and one dead surface only. D335 put it first in the migration queue</td></tr>
-    <tr><td>21 Oct 2026</td><td>Anthropic removed <code>temperature</code>, <code>top_p</code> and <code>top_k</code>. Setting them returns an error</td><td>Guarded on 24 October (<code>1ee6efa59</code>), the SDK pin holds it. A routine SDK upgrade would have broken every Claude feature</td></tr>
-    <tr><td>30 Nov 2026</td><td>Claude Sonnet 4.5 retires. OpenAI Evals platform shuts</td><td>Not used here. Do not build on OpenAI Evals</td></tr>
-    <tr><td>1 Dec 2026</td><td>Gemini 4 Argon price doubles</td><td>Not used. Affects any plan to adopt it</td></tr>
-    <tr><td>1 Jan 2027</td><td>Gemini 3.6 and 3.8 Flash prices double</td><td>Affects the Fast and Standard candidates</td></tr>
-    <tr><td>No date given</td><td>Gemini 2.5 limited to past users</td><td>The real exposure: it carries almost every customer feature</td></tr>
-    <tr><td>14 May 2028</td><td><code>gemini-embedding-001</code> shuts down</td><td>Every document must be embedded again. A planned job</td></tr>
-  </tbody>
-</table>
-</div>
-
 <details>
   <summary>What the lifecycle deliberately leaves out</summary>
   <div class="dbody">
   <p><b>No live canary or shadow traffic.</b> Sending 5 percent of real traffic to an untested model
   puts customers at risk and needs volume Velstrian does not have. The cheaper equivalent is an
-  offline replay of the golden set before approval. Shadow testing doubles spend on every shadowed
-  call and waits until usage justifies it.</p>
+  offline replay of the golden set before approval. D349 puts canary in the backlog.</p>
   <p><b>No aliases.</b> Always call an explicit id from the registry, never "latest". Whether an
   undated Anthropic 5.x id can change underneath us is not stated by Anthropic, so the id is the unit
   that passes the gate.</p>
   <p><b>The eval budget goes to the harness first.</b> D308 shows the bigger cost is test reliability
-  (986 of 1,709 rows failed before reaching the model), not model calls. The design paper sized the
-  eval burden from model cost alone, and the audit disagrees.</p>
+  (986 of 1,709 rows failed before reaching the model), not model calls. D343 fixes the harness offline
+  first so live spend buys real signal.</p>
   </div>
 </details>
 
-<!-- ═══ 6. HALLUCINATION ═══ -->
-<h2 id="as-halluc"><span class="n">Section 6</span>Stopping invented facts</h2>
+<!-- ═══ 10. RESILIENCE ═══ -->
+<h2 id="as-resil"><span class="n">Section 10</span>Resilience and vendor strategy</h2>
+
+<p>Today one vendor carries almost everything. A top 1 percent team plans for a provider outage, a
+price step and a retirement before each happens, and knows how it would leave each vendor.</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Provider</th><th>What depends on it</th><th>If it fails today</th><th>Exit plan</th><th>Effort</th></tr></thead>
+  <tbody>
+    <tr><td><b>Google</b></td><td>About 36 customer surfaces, all embeddings, both chatbots</td><td>Almost all customer AI stops. Pro falls to Flash only inside Google</td><td>Drafting and reading move to Claude after the family eval (Claude is in the DPA). Embeddings are the hard part: every chunk must be embedded again with another model, which may need a new sub-processor</td><td class="num">L</td></tr>
+    <tr><td><b>Anthropic</b></td><td><code>buy_preread</code> and the internal portal</td><td>The buyer pre read stops. No fallback</td><td>Pre read moves to Gemini after its eval. Portal moves with it</td><td class="num">M</td></tr>
+    <tr><td><b>OpenAI</b></td><td>Nothing</td><td>Nothing</td><td>Keep it optional and behind the same contract, so it never becomes the only route</td><td class="num">n/a</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Churn already on the calendar</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Date</th><th>What changes</th><th>Effect on Velstrian today</th></tr></thead>
+  <tbody>
+    <tr><td>15 Oct 2026, passed</td><td>Claude Haiku 4.5 "not sooner than" retirement date</td><td>Internal portal and one dead surface only. D335 puts it first in the migration queue</td></tr>
+    <tr><td>21 Oct 2026</td><td>Anthropic removed <code>temperature</code>, <code>top_p</code> and <code>top_k</code></td><td>Guarded on 24 October (<code>1ee6efa59</code>), the SDK pin holds it</td></tr>
+    <tr><td>23 Oct 2026, passed</td><td>OpenAI shut <code>o4-mini</code>, <code>o3-mini</code>, <code>o1</code>, <code>o1-pro</code></td><td>Not used. Shows OpenAI churn is real too</td></tr>
+    <tr><td>30 Nov 2026</td><td>Claude Sonnet 4.5 retires. OpenAI Evals platform shuts</td><td>Not used here. Do not build on OpenAI Evals</td></tr>
+    <tr><td>1 Dec 2026</td><td>Gemini 4 Argon price doubles</td><td>Not used. Affects any plan to adopt it</td></tr>
+    <tr><td>11 Dec 2026</td><td>OpenAI <code>gpt-5</code>, <code>o3</code> and siblings shut down</td><td>Not used, not proposed</td></tr>
+    <tr><td>1 Jan 2027</td><td>Gemini 3.6 and 3.8 Flash prices double</td><td>Fast and Standard Google candidates cost twice as much</td></tr>
+    <tr><td>14 Jan 2027</td><td>OpenAI <code>gpt-4.1</code> and <code>gpt-4o</code> shut down</td><td>Not used, not proposed</td></tr>
+    <tr><td>No date given</td><td>Gemini 2.5 limited to past users</td><td>The real exposure: it carries almost every customer feature</td></tr>
+    <tr><td>14 May 2028</td><td><code>gemini-embedding-001</code> shuts down</td><td>Every document must be embedded again. A planned job</td></tr>
+  </tbody>
+</table>
+</div>
+<p>The calendar is kept by hand and reviewed at each release boundary, never by a timer.
+R285-P3-AI-CHURN-CALENDAR-01 keeps it current, R285-P3-AI-PROVIDER-EXIT-PLAN-01 writes the exit plan
+for each provider in full, and R285-P3-AI-SECOND-PROVIDER-FALLBACK-01 builds the fallback once D339 lifts.</p>
+
+<!-- ═══ 11. HALLUCINATION ═══ -->
+<h2 id="as-halluc"><span class="n">Section 11</span>Stopping invented facts</h2>
 
 <div class="callout bad"><b>Nothing removes hallucination completely.</b> Never say "hallucination
 free". Tools sold on that claim were measured wrong 17 to 33 percent of the time, and in one stress
@@ -422,8 +716,9 @@ invented fact <b>cannot reach a bid unseen</b>.</div>
   <svg class="fig" viewBox="0 0 900 300" role="img" aria-labelledby="as-hl-t">
     <title id="as-hl-t">Layers that stop an invented fact: your documents feed a search that returns
     nothing when there is no evidence, the draft is written inside an injection fence, then checks run
-    after the model, the figure check and quote matching block today, the certificate check only
-    advises and claim backing runs on demand, and the user sees how many documents back the draft.</title>
+    after the model, the figure check and quote matching block today, credential cards (D341) and
+    automatic claim backing (D342) are decided and to build, and the user sees how many documents back
+    the draft.</title>
     <defs>
       <marker id="hl-a" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh" d="M0,0 L8,4 L0,8 z"/></marker>
     </defs>
@@ -458,17 +753,17 @@ invented fact <b>cannot reach a bid unseen</b>.</div>
     <text class="sm" x="570" y="100">the tender at 0.92</text>
     <text class="lbl-ok" x="570" y="130">BLOCKS TODAY</text>
 
-    <rect class="r-bad" x="380" y="166" rx="8" width="160" height="110"/>
-    <text class="hd" x="394" y="192">Certificates</text>
-    <text class="sm" x="394" y="214">18 names, 3 features</text>
-    <text class="sm" x="394" y="230">Target: your register</text>
-    <text class="lbl-bad" x="394" y="260">ONLY ADVISES</text>
+    <rect class="r-info" x="380" y="166" rx="8" width="160" height="110"/>
+    <text class="hd" x="394" y="192">Credential cards</text>
+    <text class="sm" x="394" y="214">Hold, underway, remove,</text>
+    <text class="sm" x="394" y="230">or keep with a comment</text>
+    <text class="lbl-info" x="394" y="260">DECIDED D341</text>
 
-    <rect class="r-bad" x="556" y="166" rx="8" width="160" height="110"/>
+    <rect class="r-info" x="556" y="166" rx="8" width="160" height="110"/>
     <text class="hd" x="570" y="192">Claim backing</text>
     <text class="sm" x="570" y="214">Every claim vs evidence</text>
-    <text class="sm" x="570" y="230">Target: after every draft</text>
-    <text class="lbl-bad" x="570" y="260">ON DEMAND ONLY</text>
+    <text class="sm" x="570" y="230">after every draft</text>
+    <text class="lbl-info" x="570" y="260">DECIDED D342</text>
 
     <path class="e" d="M716,91 L736,91" marker-end="url(#hl-a)"/>
     <path class="e" d="M716,221 L736,221" marker-end="url(#hl-a)"/>
@@ -481,79 +776,132 @@ invented fact <b>cannot reach a bid unseen</b>.</div>
     <text class="sm" x="754" y="144">flagged in place</text>
     <text class="sm" x="754" y="174">Which model wrote it</text>
     <text class="sm" x="754" y="204">AI use statement</text>
-    <text class="sm" x="754" y="220">for the buyer</text>
+    <text class="sm" x="754" y="220">for the buyer (D346)</text>
     <text class="lbl-aim" x="754" y="260">TO BUILD</text>
   </svg>
-  <figcaption>Green blocks today. Red is the hole. Iris is what the customer should see once the holes close.</figcaption>
+  <figcaption>Green blocks today. Blue is decided and waiting to be built. Iris is what the customer sees once both land.</figcaption>
 </figure>
 
 <div class="tblwrap">
 <table class="doc-tbl">
   <thead><tr><th>Layer</th><th>Today</th><th>How it closes</th><th>Row</th></tr></thead>
   <tbody>
-    <tr><td><b>Grounding in your documents</b></td><td><span class="pill p-good">built</span> Search returns nothing when nothing clears the cut off</td><td>Measure it (section 8)</td><td>R285-P3-AI-RAG-RECALL-LABELS-01</td></tr>
+    <tr><td><b>Grounding in your documents</b></td><td><span class="pill p-good">built</span> Search returns nothing when nothing clears the cut off</td><td>Measure it on synthetic organisations (D348)</td><td>R285-P3-AI-RAG-RECALL-LABELS-01</td></tr>
     <tr><td><b>Figure check</b></td><td><span class="pill p-good">blocks</span> on about 20 services, seen firing in D308</td><td>Keep. It was too strict on "Employees: 38", fixed 24 October in the safe direction</td><td>existing rows</td></tr>
-    <tr><td><b>A register of what you hold</b> (H1 to H3)</td><td><span class="pill p-bad">advises</span> A fixed list of 18 names misses Royal Warrant, SSIP, Achilles, NHS DSPT, CQC, Gas Safe, NICEIC, G-Cloud. Runs on 3 features only</td><td>Build a credential register from your own record. Anything not in it blocks the draft, or asks you to confirm, on every drafting feature</td><td>R285-P3-AI-CREDENTIAL-BLOCK-01, R285-P3-AI-CREDENTIAL-REGISTER-01</td></tr>
-    <tr><td><b>Mandatory claim backing</b> (H4, H5)</td><td><span class="pill p-bad">on demand</span> A made up reference client is caught only if you press the button</td><td>Run after every draft and show "backed by N of your documents"</td><td>R285-P3-AI-CLAIM-BACKING-AUTOMATIC-01</td></tr>
-    <tr><td><b>Honest gaps</b></td><td><span class="pill p-good">built</span> Drafts now say when a contract falls short of the ask (fixed 24 October)</td><td>Score "not in your documents" as a correct answer in every test</td><td>R285-P3-AI-GOLDEN-COVERAGE-GAPS-01</td></tr>
-    <tr><td><b>Injection fence</b> (H6)</td><td><span class="pill p-warn">partial</span> Universal guard and fences. Reworded planted instructions fixed only in the advisor. D308 extraction failed its injection case 3 times</td><td>Extend the advisor fix to extraction and drafting, then test with planted documents</td><td>R285-P3-AI-DOC-INSTRUCTION-ENFORCE-01, R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td><b>Credentials you do not hold</b> (H1 to H3)</td><td><span class="pill p-bad">advises</span> A fixed list of 18 names, 3 features only</td><td><b>D341:</b> never held or blocked. Any credential shaped claim on every drafting feature gets a card: we hold it (adds it to your register), underway (reworded to "working towards, expected by"), remove, or keep with a required comment. All recorded</td><td>R285-P3-AI-CREDENTIAL-BLOCK-01, R285-P3-AI-CREDENTIAL-REGISTER-01</td></tr>
+    <tr><td><b>Mandatory claim backing</b> (H4, H5)</td><td><span class="pill p-bad">on demand</span> A made up reference client is caught only if you press the button</td><td><b>D342:</b> runs after every draft and shows "Backed by N of your documents". Cost per draft measured on staging first</td><td>R285-P3-AI-CLAIM-BACKING-AUTOMATIC-01</td></tr>
+    <tr><td><b>Honest gaps</b></td><td><span class="pill p-good">built</span> Drafts now say when a contract falls short of the ask</td><td>Score "not in your documents" as a correct answer in every test</td><td>R285-P3-AI-GOLDEN-COVERAGE-GAPS-01</td></tr>
+    <tr><td><b>Injection fence</b> (H6)</td><td><span class="pill p-warn">partial</span> Reworded planted instructions fixed only in the advisor</td><td>Extend to extraction and drafting, then test with planted documents (D345)</td><td>R285-P3-AI-DOC-INSTRUCTION-ENFORCE-01, R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
     <tr><td><b>Website chatbot</b> (H7)</td><td><span class="pill p-bad">none</span> No check after the model</td><td>Check prices and product facts against the generated product facts file</td><td>R285-P3-AI-PUBLIC-CHATBOT-CHECK-01</td></tr>
-    <tr><td><b>Silent downgrade</b> (H8)</td><td><span class="pill p-bad">silent</span> Pro falls to Flash on overload or budget and the user is not told</td><td>Say so on the draft</td><td>R285-P3-AI-FALLBACK-VISIBLE-01</td></tr>
-    <tr><td><b>Requirement list accuracy</b> (H9)</td><td><span class="pill p-warn">observe</span> No enforced accuracy floor</td><td>Enforce once the 8 real annotated documents score an F1</td><td>R285-P3-AI-EVAL-GATE-ENFORCE-EXTRACT-01</td></tr>
+    <tr><td><b>Silent downgrade</b> (H8)</td><td><span class="pill p-bad">silent</span> Pro falls to Flash and the user is not told</td><td>Say so on the draft</td><td>R285-P3-AI-FALLBACK-VISIBLE-01</td></tr>
+    <tr><td><b>Requirement list accuracy</b> (H9)</td><td><span class="pill p-warn">observe</span> No enforced accuracy floor</td><td><b>D347:</b> score the 8 labelled documents, the owner approves the floor, then a low reading warns and offers a re-read</td><td>R285-P3-AI-EVAL-GATE-ENFORCE-EXTRACT-01</td></tr>
     <tr><td><b>Second opinion from another vendor</b></td><td><span class="pill p-none">none</span></td><td>A cheaper model from a different vendor checks high value drafts. Plausible, not measured by anyone yet</td><td>R285-P3-AI-CROSS-MODEL-VERIFY-01, on hold</td></tr>
   </tbody>
 </table>
 </div>
 
-<div class="callout">The design paper says checking after the draft "is already the design". For
-figures, yes. For certificates and references the audit found it is not: a closed list, advisory, on
-3 drafting features. The audit is right on this point and the plan follows the audit.</div>
+<!-- ═══ 12. TRUST UX ═══ -->
+<h2 id="as-trust"><span class="n">Section 12</span>Trust you can see on the screen</h2>
 
-<!-- ═══ 7. LEARNING ═══ -->
-<h2 id="as-learn"><span class="n">Section 7</span>Getting better over time without customer data</h2>
+<p>A non expert cannot judge a model. They can judge evidence. Every trust signal below shows what the
+AI used and what a person confirmed, in plain words, never a model's own confidence score.</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Signal</th><th>What the user sees</th><th>Status</th><th>Row</th></tr></thead>
+  <tbody>
+    <tr><td><b>Backed by N</b></td><td>"Backed by 9 of your documents." Unbacked claims highlighted in place with a reason</td><td>Decided D342</td><td>R285-P3-AI-CLAIM-BACKING-AUTOMATIC-01</td></tr>
+    <tr><td><b>Credential cards</b></td><td>A card beside the sentence with four plain choices</td><td>Decided D341</td><td>R285-P3-AI-CREDENTIAL-BLOCK-01</td></tr>
+    <tr><td><b>Plain refusals</b></td><td>"We could not find this in your documents. Add a case study to answer it." Every refusal says what to do next</td><td>Mixed today, not audited as a set</td><td>R285-P3-AI-TRUST-UX-REFUSAL-COPY-01</td></tr>
+    <tr><td><b>Written on the backup model</b></td><td>One line when a fallback wrote the draft</td><td>Open</td><td>R285-P3-AI-FALLBACK-VISIBLE-01</td></tr>
+    <tr><td><b>Which model wrote it</b></td><td>"Written by Auto (Claude Sonnet 5.5). 1 credit." in small type</td><td>On hold D339</td><td>R285-P3-AI-THREE-LEVELS-PICKER-01</td></tr>
+    <tr><td><b>How we used AI in this bid</b></td><td>One click PPN 017 statement: which sections were AI drafted, what a person checked or confirmed</td><td>Decided D346, built after D341 and D342</td><td>R285-P3-AI-PPN017-USE-STATEMENT-01</td></tr>
+    <tr><td><b>How Velstrian uses AI</b></td><td>A plain public page: what the AI does, the checks, no training on your content, the providers</td><td>Not written</td><td>R285-P3-AI-PUBLIC-AI-PAGE-01</td></tr>
+    <tr><td><b>Getting good answers</b></td><td>A short in app guide: which documents to upload first, what "not in your documents" means</td><td>Not written</td><td>R285-P3-AI-USER-GUIDANCE-01</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ═══ 13. KPI ═══ -->
+<h2 id="as-kpi"><span class="n">Section 13</span>Quality metrics, targets and the dashboard</h2>
+
+<p>What is not measured cannot be claimed. Every figure below is a proposed target for decision
+QUALITY TARGETS, marked provisional until the first deep test run (D343) gives a baseline. None of them
+is ever published as an accuracy claim (website rule).</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Surface family</th><th>Measure</th><th>Proposed target</th><th>Today</th></tr></thead>
+  <tbody>
+    <tr><td><b>Drafting</b></td><td>Invented figures reaching a bid</td><td>0</td><td>The figure check blocks</td></tr>
+    <tr><td></td><td>Unheld credentials without a person's choice</td><td>0 (D341)</td><td>Only noted</td></tr>
+    <tr><td></td><td>Unsupported claim rate, shown to the user</td><td>Every unsupported claim flagged. Rate under 5 percent after evidence is added, provisional</td><td>Not measured</td></tr>
+    <tr><td></td><td>Edit distance from draft to final, as a number</td><td>Baseline first, then falling release on release</td><td>Not measured</td></tr>
+    <tr><td></td><td>Time to the first accepted draft</td><td>Baseline from the WS14 task study, then falling</td><td>Not measured</td></tr>
+    <tr><td><b>Tender reading</b></td><td>Requirement extraction F1 on the 8 labelled documents</td><td>Floor set by the owner from the first figure (D347)</td><td>Not scored</td></tr>
+    <tr><td><b>Search</b></td><td>Recall at 5 on labelled pairs</td><td>90 percent (SC-R28-16)</td><td>Never scored</td></tr>
+    <tr><td></td><td>Faithfulness, claims supported by retrieved text</td><td>95 percent, provisional</td><td>Numbers only today</td></tr>
+    <tr><td><b>Buy</b></td><td>Reasons shown per criterion, human decision recorded</td><td>100 percent</td><td>To verify, R285-P3-BUY-AI-FAIRNESS-01</td></tr>
+    <tr><td><b>Chatbot</b></td><td>Wrong price or product fact</td><td>0 after the fact check</td><td>No check</td></tr>
+    <tr><td><b>All</b></td><td>User rating, thumbs up share (opt in)</td><td>80 percent, provisional</td><td>No rating loop</td></tr>
+    <tr><td></td><td>Win rate where the customer records outcomes</td><td>Reported to that customer only, never a target, never public</td><td>Signals exist per organisation</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>The dashboard</h3>
+<p>One PostHog dashboard, free tier only, fed by content free events: surface, model, prompt version,
+whether the figure check fired, the backed share as a band, edit distance as a number, rating, fallback
+used. Never the text of a prompt, a draft or a document. Server events must carry the environment tag
+first (R285-P2-SERVER-EVENTS-NO-CA-ENV-01). The event volume is measured and stated before it is
+switched on, so it stays inside the free tier. Decision AI DASHBOARD. R285-P3-AI-QUALITY-DASHBOARD-01
+and R285-P3-AI-QUALITY-KPI-TARGETS-01.</p>
+
+<!-- ═══ 14. LEARNING ═══ -->
+<h2 id="as-learn"><span class="n">Section 14</span>Getting better without customer data</h2>
 
 <p>Velstrian uses hosted models, so there is nothing of our own to train. "Getting better" means
-better search, better prompts, better checks and a bigger test set, all of which help every model and
-every customer at once. When a customer uploads bid documents, Velstrian is the processor. Using that
-content to improve the service for others would be a new purpose of our own, and the ICO says a
-processor that sets its own purposes becomes a controller. So the rule is simple: <b>customer content
-is never used for improvement by default</b>.</p>
+better search, knowledge, prompts, checks and a bigger test set, all of which help every model and
+every customer at once. <b>D344 is recorded:</b> customer content is never used to improve the service
+by default. Improvement comes from content free signals and public tender data. A separate, explicit,
+revocable opt in lets a customer share examples. Velstrian stays a processor under the ICO test.</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
   <thead><tr><th>Source</th><th>What it gives</th><th>Status</th></tr></thead>
   <tbody>
-    <tr><td><b>Content free signals</b></td><td>Counts only, never text: how often the figure check fires per feature, share of drafts with unbacked claims, edit distance between draft and final stored as a number, time to the first accepted draft</td><td>Not built. R285-P3-AI-ONLINE-QUALITY-SIGNALS-01</td></tr>
-    <tr><td><b>Opt in signals</b></td><td>Thumbs up or down, "this was wrong", and a separate tick box "you may use this example to improve the service", off by default</td><td>Opt in consent already exists for test annotations (defaults false). Rating loop not built. R285-P3-AI-USEFULNESS-RATING-01</td></tr>
-    <tr><td><b>Public tender data</b></td><td>Find a Tender and Contracts Finder are under the Open Government Licence v3.0, with attribution. Build synthetic questions, golden cases and buyer criteria checklists from public notices</td><td>8 real Contracts Finder documents already annotated. Check the licence per dataset. R285-P3-AI-OGL-EVAL-CORPUS-01</td></tr>
-    <tr><td><b>Test corpus growth</b></td><td>Every new case improves the measured result of every model. Add private sector, Welsh and long pack cases</td><td>R285-P3-AI-GOLDEN-COVERAGE-GAPS-01</td></tr>
-    <tr><td><b>Across many bids and evaluations</b></td><td>The signals above, summed across every organisation, show which kinds of question fail most often. That is the "intelligence from many executions" that needs no customer text</td><td>Follows from the signals row</td></tr>
+    <tr><td><b>Content free signals</b></td><td>Counts only, never text: figure check fire rate per feature, share of drafts with unbacked claims, edit distance as a number, time to the first accepted draft</td><td>Decided D344, to build. R285-P3-AI-ONLINE-QUALITY-SIGNALS-01</td></tr>
+    <tr><td><b>Opt in signals</b></td><td>Thumbs up or down, "this was wrong", and a separate tick box to share the example, off by default</td><td>Decided D344, to build. R285-P3-AI-USEFULNESS-RATING-01</td></tr>
+    <tr><td><b>Public tender data</b></td><td>Find a Tender and Contracts Finder under the Open Government Licence v3.0, with attribution. Synthetic organisations, golden cases and buyer criteria checklists</td><td>D348 uses it for recall labels. R285-P3-AI-OGL-EVAL-CORPUS-01</td></tr>
+    <tr><td><b>Test corpus growth</b></td><td>Private sector, Welsh, long packs, every live surface</td><td>D343. R285-P3-AI-GOLDEN-COVERAGE-GAPS-01</td></tr>
+    <tr><td><b>Patterns across organisations</b></td><td>Which question types fail most, summed across organisations. Whether outcome counts may be pooled is open</td><td>Decision CROSS CUSTOMER PATTERNS. R285-P3-AI-CROSS-CUSTOMER-PATTERNS-01</td></tr>
   </tbody>
 </table>
 </div>
 
 <div class="callout"><b>Not realistic at this size:</b> differential privacy and federated learning.
-Both exist to train your own model on usage data, and Velstrian trains no model. They are not needed.
-The research found no primary source to cost them and recommends skipping them.</div>
+Both exist to train your own model on usage data, and Velstrian trains no model.</div>
 
-<!-- ═══ 8. RAG ═══ -->
-<h2 id="as-rag"><span class="n">Section 8</span>The search engine behind every answer</h2>
+<!-- ═══ 15. RAG ═══ -->
+<h2 id="as-rag"><span class="n">Section 15</span>The search engine behind every answer</h2>
 
 <p>Every draft starts with a search of your library and the tender. The answer can only be as good as
-what the search finds, whatever model writes it. The design is sound. Its quality is not known.</p>
+what the search finds, whatever model writes it. The design is sound. Its quality is not known yet.
+D348 decides how it is measured: synthetic demo organisations built from public notices, labelled by
+the driver, spot checked by the owner, no customer data.</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
   <thead><tr><th>Part</th><th>Today</th><th>Target</th><th>Row</th></tr></thead>
   <tbody>
-    <tr><td>Splitting documents</td><td>Follows headings, clauses, sheets and slides. About 2,000 characters per piece. Coverage is proven</td><td>Tune the size once recall is measured</td><td>R285-P3-AI-RAG-RECALL-LABELS-01</td></tr>
-    <tr><td>Contextual headers</td><td><span class="pill p-bad">not built</span> The piece is embedded without its document title or heading path, although the path is stored</td><td>Add title and heading path to the embedded text</td><td>R285-P3-AI-RAG-CONTEXT-HEADERS-01</td></tr>
+    <tr><td>Splitting documents</td><td>Follows headings, clauses, sheets and slides. About 2,000 characters per piece</td><td>Tune the size once recall is measured</td><td>R285-P3-AI-RAG-RECALL-LABELS-01</td></tr>
+    <tr><td>Contextual headers</td><td><span class="pill p-bad">not built</span> The piece is embedded without its title or heading path</td><td>Add title and heading path to the embedded text</td><td>R285-P3-AI-RAG-CONTEXT-HEADERS-01</td></tr>
     <tr><td>Task types</td><td><span class="pill p-bad">not set</span> Documents and questions are embedded the same way</td><td>Separate document and query task types, then embed again</td><td>R285-P3-AI-RAG-CONTEXT-HEADERS-01</td></tr>
     <tr><td>Rerank</td><td><span class="pill p-none">off</span> By an owner costed decision</td><td>Decide on measured recall, not before</td><td>R285-P3-AI-RAG-RECALL-LABELS-01</td></tr>
-    <tr><td>Measured recall</td><td><span class="pill p-bad">never scored</span> The 90 percent Recall@5 target has no number. Zero labels ingested</td><td>Several hundred labelled pairs across three organisations, then score</td><td>R285-P3-AI-RAG-RECALL-LABELS-01</td></tr>
-    <tr><td>Cut off (similarity floor)</td><td>0.55, fitted on 10 rows from one organisation. The file says "either well chosen or lucky"</td><td>Calibrate on the labels</td><td>R285-P3-AI-RAG-FLOOR-CALIBRATE-01</td></tr>
+    <tr><td>Measured recall</td><td><span class="pill p-bad">never scored</span> Zero labels ingested</td><td>Labelled pairs on synthetic organisations (D348), then score</td><td>R285-P3-AI-RAG-RECALL-LABELS-01</td></tr>
+    <tr><td>Cut off (similarity floor)</td><td>0.55, fitted on 10 rows from one organisation</td><td>Calibrate on the labels</td><td>R285-P3-AI-RAG-FLOOR-CALIBRATE-01</td></tr>
     <tr><td>Freshness</td><td><span class="pill p-good">on</span> Three year staleness, factor 0.6. Parameters assumed</td><td>Check against labels</td><td>R285-P3-AI-RAG-FLOOR-CALIBRATE-01</td></tr>
-    <tr><td>Tenant separation</td><td><span class="pill p-good">built</span> Three layers: the query, a row by row recheck, row level security</td><td>Keep</td><td></td></tr>
+    <tr><td>Tenant separation</td><td><span class="pill p-good">built</span> Three layers: the query, a row by row recheck, row level security</td><td>Keep, and test it in the OWASP pass</td><td>R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
     <tr><td>Embedding model</td><td><code>gemini-embedding-001</code>, 768 dimensions, independent of the drafting model</td><td>Plan the move to <code>gemini-embedding-2</code> before 14 May 2028</td><td>R285-P3-AI-EMBEDDING-2-PLAN-01, on hold</td></tr>
   </tbody>
 </table>
@@ -562,166 +910,359 @@ what the search finds, whatever model writes it. The design is sound. Its qualit
 <details>
   <summary>Why contextual headers and task types are named work, not tuning</summary>
   <div class="dbody">
-  <p>The design paper listed corpus ingest as "not read" and proposed tuning k values. The audit read
-  it: <code>chunk_ingest.py:727</code> embeds <code>chunk.content</code> only, and
+  <p><code>chunk_ingest.py:727</code> embeds <code>chunk.content</code> only, and
   <code>provider_calls.py:901-904</code> sets only the output dimension. Both changes keep the same
   embedding model, so they are not new model work and are not held by D339. Embedding every document
-  again costs embedding spend, which needs a cost statement before it runs. The production library
-  held 10 rows at the last measurement, so the cost today is small, but it was not computed.</p>
+  again costs embedding spend, which needs a cost statement before it runs.</p>
   </div>
 </details>
 
-<!-- ═══ 9. GOVERNANCE ═══ -->
-<h2 id="as-gov"><span class="n">Section 9</span>Governance and risk</h2>
+<!-- ═══ 16. DATA ═══ -->
+<h2 id="as-data"><span class="n">Section 16</span>Data and privacy</h2>
+
+<p>Say exactly what is true, positively, and claim nothing we do not have. Your data is stored in the
+EU. The AI providers process it under their business terms, and none of them trains on it.</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
-  <thead><tr><th>Area</th><th>What applies</th><th>Proportionate response</th></tr></thead>
+  <thead><tr><th>Question</th><th>Google</th><th>Anthropic</th><th>OpenAI (when added)</th></tr></thead>
   <tbody>
-    <tr><td><b>UK GDPR and the ICO</b></td><td>Velstrian is the processor for uploaded bid documents. Neither provider trains on paid API content. No region control on either provider</td><td>Customer content off by default for improvement. Correct the DPA where it names Anthropic surfaces with no caller (only the buyer pre read uses Anthropic). Confirm Anthropic's current retention against the DPA's 30 days</td></tr>
-    <tr><td><b>PPN 017</b></td><td>Buyers in central government may ask bidders whether they used AI and to confirm it was checked. AI use is not prohibited and the answers should not be scored</td><td>A one click "How we used AI in this bid" statement from data already logged. A record, with the bidder responsible for the content</td></tr>
-    <tr><td><b>EU AI Act</b></td><td>Can reach a UK provider when output is used in the EU. Annex III does not name tender writing or tender evaluation on the research's reading, which is not legal advice</td><td>Keep Buy as decision support with a human decision. Take legal advice before any EU facing claim</td></tr>
-    <tr><td><b>OWASP Top 10 for LLM applications</b></td><td>The best free checklist. LLM01 prompt injection through uploaded documents matters most for Bid and Buy</td><td>An internal pass, planted documents first, scored 0 to 3 per item, published in plain words</td></tr>
-    <tr><td><b>NIST AI RMF</b></td><td>Free framework, a generative AI profile with 12 risk categories</td><td>A one page risk register per product</td></tr>
-    <tr><td><b>ISO/IEC 42001</b></td><td>Consultancy estimates of 15,000 to 40,000 USD for a small firm before staff time</td><td>Not now. Align informally, certify only when a customer asks</td></tr>
-    <tr><td><b>Provider concentration</b></td><td>One provider carries almost every customer feature</td><td>Second provider fallback, the top lifecycle item, on hold under D339</td></tr>
-    <tr><td><b>Buy fairness</b></td><td>PPN 017 warns against discriminating between suppliers in how AI answers are used. Solely automated significant decisions need human review, challenge and explanation</td><td>Reasons per criterion, a human decision, never rank individual people, test a bidder planting instructions in a reply</td></tr>
+    <tr><td><b>Where your data is stored</b></td><td colspan="3">Supabase, AWS <code>eu-west-1</code> (Ireland). Web functions in Vercel <code>lhr1</code> (London). DPA clause 7.2 and Schedule 1</td></tr>
+    <tr><td><b>Where AI processing happens</b></td><td>Not region pinned. Paid data "may be stored transiently or cached in any country" Google operates</td><td><code>global</code> or <code>us</code> only on the first party API</td><td>US by default. EU processing and UK storage only with OpenAI's approval, not applied for (D336)</td></tr>
+    <tr><td><b>Training on your content</b></td><td>No, on the paid service. Production verified paid (D314). Staging key still to check, R285-P3-TRUST-GEMINI-STAGING-PAID-01 (decision GEMINI PAID TIER)</td><td>No, per commercial terms</td><td>No by default</td></tr>
+    <tr><td><b>Retention</b></td><td>Logged "for a limited period" for abuse and legal reasons, no number on the page read</td><td>DPA says 30 days. To check against current terms, R285-P3-TRUST-ANTHROPIC-RETENTION-01</td><td>Abuse logs up to 30 days</td></tr>
+    <tr><td><b>Zero data retention</b></td><td>None in code</td><td>Addendum not taken, by owner decision recorded in the DPA</td><td>By OpenAI approval only, not applied for</td></tr>
+    <tr><td><b>Transfer basis</b></td><td colspan="3">Restricted transfers under the IDTA or SCCs with the UK Addendum (DPA). OpenAI's basis needs legal review first (D329)</td></tr>
+    <tr><td><b>Customer notice</b></td><td colspan="3">A new sub-processor triggers DPA clause 6.4, 30 days by default, figure to confirm (decision SUB-PROCESSOR NOTICE)</td></tr>
   </tbody>
 </table>
 </div>
-
-<!-- ═══ 10. MISSED ═══ -->
-<h2 id="as-missed"><span class="n">Section 10</span>What may have been missed</h2>
 
 <div class="cards">
-  <div class="card warn"><h4>A bidder can attack Buy through its own reply</h4>
-  <p>Buy reads replies that suppliers wrote. A hidden instruction in a PDF could try to inflate that
-  supplier's comparison. Test it before Buy is sold widely.</p></div>
-  <div class="card warn"><h4>Churn is routine, not rare</h4>
-  <p>Three price steps and two retirements fall inside the next 10 weeks. Plan a migration chore every
-  quarter and store dated prices.</p></div>
-  <div class="card warn"><h4>Cost that never reaches the ledger</h4>
-  <p>When a ledger write fails the spend is logged and lost. D308 recorded GBP 2.83 against a true GBP
-  4.18. The ceiling still holds, every cost report reads low.</p></div>
-  <div class="card warn"><h4>Low volume features are never judged</h4>
-  <p>The weekly health check needs 20 calls a week for a verdict. Only 1 of 28 features reaches that,
-  so a quiet feature can be broken for life unseen.</p></div>
-  <div class="card ok"><h4>An opening competitors did not show</h4>
-  <p>Buyers are being told to ask about AI use. A one page statement from what we already log answers
-  that question honestly in one click.</p></div>
-  <div class="card warn"><h4>Data residency honesty</h4>
-  <p>No provider offers UK processing on the APIs used. Google may cache paid data in any country it
-  operates. Claim only what we have, some buyers will ask.</p></div>
-  <div class="card warn"><h4>Test results tied to no commit</h4>
-  <p>Every D308 row says "dirty tree". Run golden tests from a committed tree so a result maps to a sha.</p></div>
-  <div class="card warn"><h4>Private sector and Welsh are barely tested</h4>
-  <p>The product sells to private buyers too, and 2 of 11 test scenarios mention them. No Welsh case exists.</p></div>
+  <div class="card warn"><h4>Personal data in prompts</h4>
+  <p>The provider data map found no redaction before prompts leave. CVs and case studies carry names.
+  Measure what personal data reaches each surface and send only what the task needs.
+  R285-P3-AI-PROMPT-PII-MINIMISE-01.</p></div>
+  <div class="card warn"><h4>Honest residency wording</h4>
+  <p>Some buyers will ask where AI runs. One plain statement for the security page and the DPA, stored
+  in the EU, processed by named providers, no training. R285-P3-TRUST-AI-RESIDENCY-WORDING-01.</p></div>
+  <div class="card ok"><h4>Already sound</h4>
+  <p>Paid accounts, no training, opt in only for test samples (consent defaults false), three layers of
+  tenant separation, per organisation spend ceilings.</p></div>
 </div>
 
-<details>
-  <summary>Where the two source files disagree, and what this page follows</summary>
-  <div class="dbody">
-  <p><b>Gemini paid tier.</b> The research says to confirm the Gemini key is on the paid service,
-  because Google's no training promise depends on it. The audit says the owner verified both
-  production accounts as paid and billing enabled (D314). Production is therefore confirmed. The data
-  map row R285-TRUST-AI-PROVIDER-DATA-MAP-01 still asks for both keys, so the staging key is the open
-  check.</p>
-  <p><b>Eval shape.</b> The research says the existing setup "already matches" the mature eval pattern.
-  The audit agrees on shape and finds it weak in practice: the gate only observes, samples are small
-  and harness faults outnumbered model results. This page follows the audit on the state.</p>
-  <p><b>Lifecycle priority.</b> The design paper ranks Haiku 4.5 as the urgent legacy model. The audit
-  ranks Gemini 2.5 higher, because it carries almost every customer feature while Haiku 4.5 serves
-  only internal and dead surfaces. D335 still says Haiku first. Both orders are offered in decision 8.</p>
-  <p><b>DPA Anthropic list.</b> The feasibility study relied on the DPA naming Anthropic for
-  <code>bid_eval_judge</code> and <code>copilot_intent</code>. Neither has a production caller, so the
-  DPA text should rest on <code>buy_preread</code> alone.</p>
-  </div>
-</details>
+<!-- ═══ 17. SECURITY ═══ -->
+<h2 id="as-sec"><span class="n">Section 17</span>AI security</h2>
 
-<!-- ═══ 11. DECISIONS ═══ -->
-<h2 id="as-dec"><span class="n">Section 11</span>Decisions for the owner</h2>
-
-<p>The owner's order (24 October 2026): <b>decisions first, then spec and design, then
-implementation</b>, and every existing AI capability is tested deeply. None of the decisions below is
-recorded. They are listed in the order recommended for asking, safest and most valuable first, with
-the model choice questions last because D339 holds them anyway. Every tracker row whose scope waits
-on one carries <code>AWAITING OWNER DECISION</code> and its short name.</p>
+<p><b>D345 is recorded:</b> a full internal OWASP LLM Top 10 pass, starting with instructions planted
+in uploaded documents for Bid and Buy, live staging probes under D343, the scorecard published in the
+security evidence pack, no external audit for now. Each item is scored 0 (not tested) to 3 (tested and
+passing with a repeatable test).</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
-  <thead><tr><th>#</th><th>Short name and question</th><th>Options</th><th>Recommendation</th></tr></thead>
+  <thead><tr><th>OWASP item</th><th>Where it bites Velstrian</th><th>Today</th><th>Row</th></tr></thead>
   <tbody>
-    <tr><td class="num">1</td><td><b>CREDENTIAL BEHAVIOUR.</b> What happens when a draft names a certificate or partner you do not hold?</td><td>A. Block the draft. B. Hold it until you confirm, or add the credential to your record. C. Keep today's note</td><td><b>B.</b> Nothing invented reaches a bid unseen, and a real credential the register missed costs one click, not a lost draft</td></tr>
-    <tr><td class="num">2</td><td><b>CLAIM BACKING ON EVERY DRAFT.</b> Run the claim check automatically and show "backed by N"?</td><td>A. Yes, after a cost statement. B. Keep the button</td><td><b>A.</b> Flash under a GBP 10 daily ceiling. The cost per draft was not measured and must be stated before it is switched on</td></tr>
-    <tr><td class="num">3</td><td><b>DEEP TEST BUDGET.</b> How deeply to test every live AI family on today's models</td><td>A. Offline cases first (free), then one capped staging run per family, each approved. B. One large run for everything. C. Offline only</td><td><b>A.</b> The harness, not the model, failed 986 of 1,709 D308 rows, so fix and prove it cheaply before spending</td></tr>
-    <tr><td class="num">4</td><td><b>CUSTOMER CONTENT POLICY.</b> May customer content improve the service?</td><td>A. Off by default, content free signals, a separate explicit opt in. B. Use content under legitimate interests</td><td><b>A.</b> Close to today (consent defaults false) and keeps Velstrian the processor, not a controller</td></tr>
-    <tr><td class="num">5</td><td><b>OWASP PASS.</b> Test the AI against the OWASP LLM Top 10?</td><td>A. Internal pass, planted documents first, published scorecard. B. Buy an external audit. C. Neither</td><td><b>A.</b> Live injection tests call today's models on staging and need their own small cost approval</td></tr>
-    <tr><td class="num">6</td><td><b>PPN 017 STATEMENT.</b> Build "How we used AI in this bid"?</td><td>A. Yes, after decisions 1 and 2 are built. B. Yes, now. C. No</td><td><b>A.</b> It reports what was backed, so it is only honest once claim backing runs on every draft</td></tr>
-    <tr><td class="num">7</td><td><b>EXTRACT GATE ENFORCE.</b> Make the requirement extraction test block a release?</td><td>A. Enforce once the 8 annotated documents score an F1, at a floor the owner approves. B. Keep observing</td><td><b>A.</b> The requirement list every bid is built on has no accuracy floor today</td></tr>
-    <tr><td class="num">8</td><td><b>RECALL LABELLING.</b> Who labels the search test pairs?</td><td>A. The driver, on synthetic organisations built from public tenders. B. The owner, on staging data. C. Both</td><td><b>A</b> first, then a small owner check. No customer data needed</td></tr>
-    <tr><td class="num">9</td><td><b>GOVERNANCE SKIPS.</b> Skip ISO 42001, an external audit and live canary for now, and keep a one page risk register?</td><td>A. Skip the three, keep the register. B. Start one of the three</td><td><b>A.</b> Tens of thousands of dollars for certification, no buyer requirement found, no traffic for a canary</td></tr>
-    <tr><td class="num">10</td><td><b>GEMINI PAID TIER.</b> Is the no training promise covered?</td><td>A. Treat production as confirmed by D314, check the staging key. B. Check both again</td><td><b>A.</b> D314 covers production. The data map row still asks for both keys</td></tr>
-    <tr><td class="num">11</td><td><b>FRONTIER TIERS.</b> Who may choose models, and who gets frontier ones? (against D334)</td><td>A. Keep D334: Pro and Portfolio with a confirm step. B. Starter Auto only, Pro chooses, frontier on Portfolio only. C. Every plan with a confirm step</td><td><b>B.</b> About 9.5 pence of AI against 50 pence at pack price, and a plan gate is simpler than a confirm step</td></tr>
-    <tr><td class="num">12</td><td><b>THREE PLAIN LEVELS.</b> How choice looks on screen</td><td>A. Fast, Standard, Best, vendor names in an advanced panel. B. The design paper's picker grouped by provider</td><td><b>A.</b> Matches Copilot's tiers and the simplicity rule</td></tr>
-    <tr><td class="num">13</td><td><b>D339 LIFT ORDER.</b> When the hold lifts, what goes first?</td><td>A. D335 order, Haiku 4.5 first. B. Gemini 2.5 migration and a second provider fallback first, then the registry and quality gate</td><td><b>B.</b> Gemini 2.5 is the real customer exposure. Haiku 4.5 touches internal and dead surfaces only</td></tr>
+    <tr><td>LLM01 Prompt injection</td><td>Tender packs, policies and bidder replies written by third parties. A bidder planting instructions to inflate their Buy comparison</td><td>Fences, a word filter, advisor fix only</td><td>R285-P3-AI-DOC-INSTRUCTION-ENFORCE-01</td></tr>
+    <tr><td>LLM02 Sensitive information</td><td>Personal data in prompts, one organisation's text in another's answer</td><td>Three layer tenancy, no redaction</td><td>R285-P3-AI-PROMPT-PII-MINIMISE-01</td></tr>
+    <tr><td>LLM03 Supply chain</td><td>Provider SDKs and their API version changes</td><td>SDK pinned, temperature guard (<code>1ee6efa59</code>)</td><td>R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td>LLM04 Data poisoning</td><td>A poisoned past answer imported into the library, a bad public notice in the corpus</td><td>Figure check on import</td><td>R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td>LLM05 Output handling</td><td>AI text rendered in the editor and exports</td><td>Not assessed</td><td>R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td>LLM06 Excessive agency</td><td><code>bid_agent</code> loops with tools</td><td>Not assessed</td><td>R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td>LLM07 System prompt leakage</td><td>The public chatbot answers anyone</td><td>Rules only in the prompt</td><td>R285-P3-AI-PUBLIC-CHATBOT-CHECK-01</td></tr>
+    <tr><td>LLM08 Vector weaknesses</td><td>Search across tenants</td><td>Three layers built</td><td>R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td>LLM09 Misinformation</td><td>Invented figures, credentials, clients</td><td>Figure check blocks, D341 and D342 to build</td><td>Section 11 rows</td></tr>
+    <tr><td>LLM10 Unbounded consumption</td><td>Abuse of AI routes, the anonymous chatbot</td><td>Worst case reservation, daily ceilings, chatbot 10 an hour per address</td><td>R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
   </tbody>
 </table>
 </div>
 
-<!-- ═══ 12. ROADMAP ═══ -->
-<h2 id="as-road"><span class="n">Section 12</span>Roadmap, cost and what is on hold</h2>
+<p><b>Secrets:</b> provider keys live on Railway only, never in Vercel or the repo, and are never
+printed. A hook enforces it. All keys were rotated after the 22 October Railway incident. An OpenAI key
+follows the same rule when it exists (D330).</p>
+
+<!-- ═══ 18. ACCESSIBILITY ═══ -->
+<h2 id="as-a11y"><span class="n">Section 18</span>Accessibility and inclusion of AI output</h2>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Aspect</th><th>Top 1 percent</th><th>Today</th><th>Row</th></tr></thead>
+  <tbody>
+    <tr><td><b>Plain English to the user</b></td><td>Briefings, advisor replies and refusals written at a plain reading level, checked by code. Bid answers follow the buyer's register instead</td><td>Tone profiles exist for bid answers. No reading level check on text addressed to the user</td><td>R285-P3-AI-PLAIN-ENGLISH-OUTPUT-01, decision READING LEVEL</td></tr>
+    <tr><td><b>Welsh</b></td><td>Draft in Welsh when a Welsh public body requires it, tested</td><td>The advisor translates your own content, Welsh included (owner 2026-10-14). Welsh drafting was deferred to the first Welsh sector customer (an earlier owner decision, FUTURE SCOPE). No Welsh test case</td><td>R285-P3-AI-WELSH-OUTPUT-01, decision WELSH TRIGGER</td></tr>
+    <tr><td><b>Screen readers</b></td><td>AI text arrives as real headings, lists and tables. Streaming is announced politely. Unbacked claims marked by icon and words, never colour alone</td><td>Not measured for AI output</td><td>R285-P3-AI-OUTPUT-A11Y-01</td></tr>
+    <tr><td><b>No expertise assumed</b></td><td>Jargon (ITT, PPN 026, TUPE) explained the first time the AI uses it</td><td>Not checked</td><td>R285-P3-AI-PLAIN-ENGLISH-OUTPUT-01</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ═══ 19. OPERATING MODEL ═══ -->
+<h2 id="as-ops"><span class="n">Section 19</span>The AI operating model</h2>
+
+<p>AI is a service that changes underneath us, so it needs an owner, a weekly look, a change process
+and a plan for a bad day. This is sized for a tiny team: the owner and the AI driver session, with no
+paid pager, no scheduled job and no timer.</p>
+
+<figure>
+  <svg class="fig" viewBox="0 0 900 340" role="img" aria-labelledby="as-ops-t">
+    <title id="as-ops-t">The AI operating model. A loop of four steps: signals from the ledger, the
+    dashboard, user flags and Sentry feed a weekly AI review, which decides a change to a prompt or a
+    model, which passes the quality gate, which ships at a release boundary with a customer note, and
+    the signals start again. Below, the incident path: detect, contain, tell customers, fix, and add a
+    test case so it cannot come back.</title>
+    <defs>
+      <marker id="op-a" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-aim" d="M0,0 L8,4 L0,8 z"/></marker>
+      <marker id="op-b" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-bad" d="M0,0 L8,4 L0,8 z"/></marker>
+    </defs>
+    <text class="cap" x="30" y="22">EVERY WEEK</text>
+    <text class="lbl-warn" x="880" y="22" text-anchor="end">TO SET UP, DECISION AI QUALITY OWNER</text>
+
+    <rect class="r-info" x="30" y="36" rx="10" width="190" height="104"/>
+    <text class="hd" x="46" y="62">1 Signals</text>
+    <text class="sm" x="46" y="84">Ledger and dashboard</text>
+    <text class="sm" x="46" y="102">"This was wrong" flags</text>
+    <text class="sm" x="46" y="120">Sentry errors</text>
+
+    <rect class="r-aim" x="250" y="36" rx="10" width="190" height="104"/>
+    <text class="hd" x="266" y="62">2 Weekly review</text>
+    <text class="sm" x="266" y="84">30 minutes, owner</text>
+    <text class="sm" x="266" y="102">and the driver</text>
+    <text class="sm" x="266" y="120">Pick one fix</text>
+
+    <rect class="r-warn" x="470" y="36" rx="10" width="190" height="104"/>
+    <text class="hd" x="486" y="62">3 Change and gate</text>
+    <text class="sm" x="486" y="84">New prompt version</text>
+    <text class="sm" x="486" y="102">Golden family run</text>
+    <text class="sm" x="486" y="120">Cost line first</text>
+
+    <rect class="r-ok" x="690" y="36" rx="10" width="190" height="104"/>
+    <text class="hd" x="706" y="62">4 Ship</text>
+    <text class="sm" x="706" y="84">At a release boundary</text>
+    <text class="sm" x="706" y="102">"What changed" note</text>
+    <text class="sm" x="706" y="120">Notice if a new vendor</text>
+
+    <path class="e-aim" d="M220,88 L246,88" marker-end="url(#op-a)"/>
+    <path class="e-aim" d="M440,88 L466,88" marker-end="url(#op-a)"/>
+    <path class="e-aim" d="M660,88 L686,88" marker-end="url(#op-a)"/>
+    <path class="e-aim" d="M785,140 C785,170 125,170 125,144" marker-end="url(#op-a)"/>
+
+    <text class="cap" x="30" y="206">ON A BAD DAY</text>
+    <rect class="r-bad" x="30" y="220" rx="10" width="150" height="86"/>
+    <text class="hd" x="44" y="246">Detect</text>
+    <text class="sm" x="44" y="268">Flag, alert, support</text>
+    <rect class="r-bad" x="205" y="220" rx="10" width="150" height="86"/>
+    <text class="hd" x="219" y="246">Contain</text>
+    <text class="sm" x="219" y="268">Surface off or</text>
+    <text class="sm" x="219" y="286">fallback</text>
+    <rect class="r-bad" x="380" y="220" rx="10" width="150" height="86"/>
+    <text class="hd" x="394" y="246">Tell</text>
+    <text class="sm" x="394" y="268">Affected organisations</text>
+    <text class="sm" x="394" y="286">from the ledger</text>
+    <rect class="r-bad" x="555" y="220" rx="10" width="150" height="86"/>
+    <text class="hd" x="569" y="246">Fix</text>
+    <text class="sm" x="569" y="268">Root cause, gate</text>
+    <rect class="r-ok" x="730" y="220" rx="10" width="150" height="86"/>
+    <text class="hd" x="744" y="246">Never again</text>
+    <text class="sm" x="744" y="268">A golden case added</text>
+    <path class="e-bad" d="M180,263 L201,263" marker-end="url(#op-b)"/>
+    <path class="e-bad" d="M355,263 L376,263" marker-end="url(#op-b)"/>
+    <path class="e-bad" d="M530,263 L551,263" marker-end="url(#op-b)"/>
+    <path class="e-bad" d="M705,263 L726,263" marker-end="url(#op-b)"/>
+    <text class="sm" x="30" y="330">No timer and no paid pager: the review is a person's habit, alerts use Sentry already in place.</text>
+  </svg>
+  <figcaption>The weekly loop keeps quality moving. The incident path makes a bad day short and stops it repeating.</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Part</th><th>Proposed</th><th>Row</th></tr></thead>
+  <tbody>
+    <tr><td><b>Who owns AI quality</b></td><td>The owner is accountable: approves spend, model changes and customer messages. The driver session runs the weekly review, writes the changes and runs the gates. Lanes build and walk</td><td>R285-P3-AI-OPS-QUALITY-OWNER-01, decision AI QUALITY OWNER</td></tr>
+    <tr><td><b>Model change process</b></td><td>A prompt change is a new prompt version, a golden family run on the current model, a ledger record and a note. A model change is the lifecycle in section 9. Nothing reaches customers without passing</td><td>R285-P3-AI-OPS-CHANGE-PROCESS-01</td></tr>
+    <tr><td><b>Release cadence</b></td><td>Prompts ship inside release phase boundaries with everything else. Model changes at most once a quarter as a planned chore, unless a vendor retirement or a P0 forces one</td><td>R285-P3-AI-OPS-RELEASE-CADENCE-01</td></tr>
+    <tr><td><b>Incident runbook</b></td><td>Three named cases. <b>Bad output</b>: switch the surface off, find who received it from the ledger, tell them, add a case. <b>Provider outage</b>: a plain "AI drafting is paused, your work is saved" message, fallback once built. <b>Data leak</b>: treat as a security incident, assess the 72 hour ICO duty, tell controllers per the DPA, rotate keys</td><td>R285-P3-AI-OPS-INCIDENT-RUNBOOK-01</td></tr>
+    <tr><td><b>"The AI got it wrong"</b></td><td>A support macro: find the draft's ledger row (model, prompt version, why chosen), rerun the claim check, classify (search miss, model error, check gap, missing evidence), reply in plain words, add a golden case. Whether the credit is refunded is decision WRONG ANSWER REFUND</td><td>R285-P3-AI-OPS-SUPPORT-PLAYBOOK-01</td></tr>
+    <tr><td><b>Telling customers about model changes</b></td><td>An in app "What changed in the AI" line for any default model or prompt change. The 30 day DPA notice for a new provider. The "Written by" line on every answer</td><td>R285-P3-AI-OPS-MODEL-CHANGE-NOTICE-01, decision MODEL CHANGE NOTICE</td></tr>
+    <tr><td><b>On call for a tiny team</b></td><td>UK business hours, the owner as first contact. Sentry alerts on AI route error spikes and a check of provider status pages. Out of hours, the daily ceilings bound spend and the surfaces fail closed with a plain message</td><td>R285-P3-AI-OPS-ON-CALL-01, decision AI QUALITY OWNER</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ═══ 20. GOVERNANCE ═══ -->
+<h2 id="as-gov"><span class="n">Section 20</span>Governance, risk and the backlog</h2>
+
+<p><b>D349 is recorded:</b> Velstrian does not host its own model and is a young startup with limited funding, so no ISO
+42001, no external AI audit, no canary traffic and no separate risk register programme now. Each sits
+in the backlog as a tracked row with the trigger "revisit at about GBP 1 million revenue, or earlier if
+a buyer contract requires it". The free controls stay: the OWASP pass (D345) and the quality testing
+(D343).</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Area</th><th>What applies</th><th>Response</th><th>Row</th></tr></thead>
+  <tbody>
+    <tr><td><b>UK GDPR and the ICO</b></td><td>Velstrian is the processor for uploaded bid documents</td><td>D344. DPA item 7 corrected to <code>buy_preread</code> on 24 October</td><td>R285-P3-TRUST-DPA-ANTHROPIC-SURFACES-01, R285-TRUST-DPA-FINAL-01</td></tr>
+    <tr><td><b>PPN 017</b></td><td>Buyers may ask bidders how they used AI and to confirm it was checked. Answers are not scored</td><td>D346, the one click statement</td><td>R285-P3-AI-PPN017-USE-STATEMENT-01</td></tr>
+    <tr><td><b>EU AI Act</b></td><td>Can reach a UK provider when output is used in the EU. Annex III does not name tender writing or evaluation on the research's reading, not legal advice</td><td>Buy stays decision support. Legal advice before any EU facing claim</td><td>R285-P3-AI-BACKLOG-EU-AI-ACT-ADVICE-01</td></tr>
+    <tr><td><b>ISO/IEC 42001</b></td><td>15,000 to 40,000 USD for a small firm before staff time</td><td>Backlog, D349</td><td>R285-P3-AI-BACKLOG-ISO42001-01</td></tr>
+    <tr><td><b>External AI audit</b></td><td>No accredited standard found</td><td>Backlog, D349. The internal OWASP pass stands</td><td>R285-P3-AI-BACKLOG-EXTERNAL-AUDIT-01</td></tr>
+    <tr><td><b>Live canary and shadow traffic</b></td><td>Needs volume, doubles spend on shadowed calls</td><td>Backlog, D349. Offline replay instead</td><td>R285-P3-AI-BACKLOG-CANARY-01</td></tr>
+    <tr><td><b>Risk register (NIST AI RMF)</b></td><td>A free framework</td><td>Backlog, D349</td><td>R285-P3-AI-RISK-REGISTER-01</td></tr>
+    <tr><td><b>Buy fairness</b></td><td>Solely automated significant decisions need human review and explanation</td><td>Reasons per criterion, a human decision, never rank people</td><td>R285-P3-BUY-AI-FAIRNESS-01</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>What this review added that a top 1 percent team has</h3>
+<p>Eleven new sections against the first version: product AI vision for Bid and Buy (2), the
+intelligence engine (3), OpenAI on equal footing (5), commercials and margin (8), resilience and exit
+plans (10), trust UX (12), quality metrics and the dashboard (13), data and privacy (16), AI security
+(17), accessibility and inclusion (18) and the AI operating model (19). Beyond the owner's list it adds
+built features that ship switched off and are never offered, personal data minimisation in prompts, a public
+"How Velstrian uses AI" page, in app guidance for getting good answers, a review assistant that marks
+like an evaluator, buyer contract management, a hand kept churn calendar and the margin correction.</p>
+
+<details>
+  <summary>Where the source files disagree, and what this page follows</summary>
+  <div class="dbody">
+  <p><b>Gemini paid tier.</b> The research says to confirm the Gemini key is on the paid service. D314
+  confirms production. The staging key is the open check (decision GEMINI PAID TIER).</p>
+  <p><b>Eval shape.</b> The research says the setup "already matches" the mature pattern. The audit
+  agrees on shape and finds it weak in practice. This page follows the audit.</p>
+  <p><b>Lifecycle priority.</b> D335 says Haiku 4.5 first. The audit ranks Gemini 2.5 higher. Both
+  orders are offered in D339 LIFT ORDER.</p>
+  <p><b>Frontier margin.</b> The research called it thin. The D331 formula keeps every level near 19
+  percent of pack revenue. This page follows the arithmetic and names thinking tokens as the real risk.</p>
+  <p><b>DPA Anthropic list.</b> Corrected in the DPA on 24 October (<code>280dc8cfc</code>). The tracker
+  row now says so.</p>
+  </div>
+</details>
+
+<!-- ═══ 21. DECISIONS ═══ -->
+<h2 id="as-dec"><span class="n">Section 21</span>Decisions: recorded and open</h2>
+
+<p>The owner's order (24 October 2026): <b>decisions first, then spec and design, then
+implementation</b>. Open decisions are listed in the order recommended for asking: the ones that are
+free and unblock work under D339 first, the model choice questions last because D339 holds them anyway.
+Every tracker row whose scope waits on one carries <code>AWAITING OWNER DECISION</code> and its name.</p>
+
+<h3>Open, in the order to ask (18)</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>#</th><th>Name and question</th><th>Options</th><th>Recommendation</th></tr></thead>
+  <tbody>
+    <tr><td class="num">1</td><td><b>AI QUALITY OWNER.</b> Who owns AI quality and is on call?</td><td>A. Owner accountable, driver runs a weekly 30 minute review, UK business hours on call with Sentry alerts. B. Name a separate AI lead later, nothing until then</td><td><b>A.</b> Free, and without an owner no metric gets acted on</td></tr>
+    <tr><td class="num">2</td><td><b>QUALITY TARGETS.</b> Adopt the section 13 targets?</td><td>A. Adopt as provisional, confirm after the first D343 run. B. Set none until measured</td><td><b>A.</b> A target turns a measurement into a decision. Provisional keeps it honest</td></tr>
+    <tr><td class="num">3</td><td><b>AI DASHBOARD.</b> Content free AI events into PostHog?</td><td>A. Yes, free tier only, volume stated first. B. Ledger queries only</td><td><b>A.</b> PostHog is in the DPA and EU hosted. No text ever leaves</td></tr>
+    <tr><td class="num">4</td><td><b>MODEL CHANGE NOTICE.</b> How are customers told about AI changes?</td><td>A. In app "What changed" line for default changes, the DPA notice for a new vendor. B. Email for every change. C. Only the DPA notice</td><td><b>A.</b> Plain, quiet, and true</td></tr>
+    <tr><td class="num">5</td><td><b>SUB-PROCESSOR NOTICE.</b> Confirm the DPA clause 6.4 notice period</td><td>A. 30 days. B. Another figure</td><td><b>A.</b> Already the default, and common practice</td></tr>
+    <tr><td class="num">6</td><td><b>WRONG ANSWER REFUND.</b> Refund the credit when the AI got it wrong?</td><td>A. Support refunds by hand after the macro check. B. Automatic on a confirmed unbacked claim. C. Never</td><td><b>A.</b> Simple for a tiny team, safe from abuse. Revisit at volume</td></tr>
+    <tr><td class="num">7</td><td><b>PRODUCT AI ROADMAP.</b> Approve the section 2 gap rows into this release?</td><td>A. All, in the roadmap order, each specified before build. B. Choose a subset</td><td><b>A.</b> None needs a new model, all serve SMEs directly</td></tr>
+    <tr><td class="num">8</td><td><b>OFF SURFACES.</b> 7 built AI features (11 surfaces) ship with a zero budget. What to do with each?</td><td>A. Deep test each, then switch on the ones that pass with a cost line. B. Delete the ones nobody needs. C. Leave off</td><td><b>A.</b> They are paid for and invisible, a silent drop of built work</td></tr>
+    <tr><td class="num">9</td><td><b>CROSS CUSTOMER PATTERNS.</b> May outcome counts be pooled across organisations?</td><td>A. Public data and each organisation's own outcomes only. B. Also pooled counts with a floor of 10 organisations and a DPA notice</td><td><b>A</b> now, B when there are enough customers to hide any one</td></tr>
+    <tr><td class="num">10</td><td><b>READING LEVEL.</b> Check plain English on AI text addressed to the user?</td><td>A. Yes, a code check on briefings, advisor and refusals, bid answers exempt. B. No check</td><td><b>A.</b> RULE 0-U made measurable</td></tr>
+    <tr><td class="num">11</td><td><b>WELSH TRIGGER.</b> Keep Welsh drafting deferred to the first Welsh sector customer?</td><td>A. Keep the trigger, add Welsh test cases now for the translation that exists. B. Build Welsh drafting now</td><td><b>A.</b> Respects the earlier decision and tests what already ships</td></tr>
+    <tr><td class="num">12</td><td><b>GEMINI PAID TIER.</b> Is the staging key on the paid service too?</td><td>A. Treat production as confirmed by D314, check the staging key. B. Check both again</td><td><b>A.</b> One owner check</td></tr>
+    <tr><td class="num">13</td><td><b>PREMIUM CAP.</b> Default per organisation cap on weight 2 and above</td><td>A. 20 percent of the plan's monthly credits, admin can change. B. No default cap</td><td><b>A.</b> D334 already requires a cap, this sets its default</td></tr>
+    <tr><td class="num">14</td><td><b>FRONTIER TIERS.</b> Who gets frontier models (against D334)?</td><td>A. Keep D334: Pro and Portfolio with a confirm step. B. Starter Auto only, Pro chooses, frontier on Portfolio only. C. Every plan with a confirm step</td><td><b>B.</b> Simpler, and keeps the cap meaningful. Margin is similar at every level</td></tr>
+    <tr><td class="num">15</td><td><b>THREE PLAIN LEVELS.</b> How choice looks on screen</td><td>A. Fast, Standard, Best, vendor names in an advanced panel. B. The design paper's picker grouped by provider</td><td><b>A.</b> Matches Copilot's tiers and the simplicity rule</td></tr>
+    <tr><td class="num">16</td><td><b>OPENAI SEQUENCE.</b> When does OpenAI join, given D329 and D330?</td><td>A. With the first wave, alongside Anthropic. B. After the Anthropic fallback, as judge and Pro choice, only if its eval passes. C. Not at all, revisit if a buyer asks</td><td><b>B.</b> Resilience comes from Claude, already in the DPA. OpenAI adds an independent judge and the only EU route</td></tr>
+    <tr><td class="num">17</td><td><b>D339 SCOPE.</b> Lift the hold, all of it or part?</td><td>A. Keep the full hold. B. Lift for the second provider fallback with Claude only. C. Lift all</td><td><b>B.</b> The biggest risk on the page, no new vendor, no picker</td></tr>
+    <tr><td class="num">18</td><td><b>D339 LIFT ORDER.</b> When the hold lifts, what goes first?</td><td>A. D335 order, Haiku 4.5 first. B. Gemini 2.5 migration and fallback first, then registry and gate, then OpenAI</td><td><b>B.</b> Gemini 2.5 is the real customer exposure</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Recorded (23), shown so they are never asked again</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Number</th><th>What the owner decided</th></tr></thead>
+  <tbody>
+    <tr><td>D322</td><td>The picker shows every model that passes its family eval, hides the rest, previews off by default</td></tr>
+    <tr><td>D328</td><td>Models come from the approved registry, Auto is the default, only passed models with a DPA listed provider serve customers. Until the registry ships, <code>DEFAULT_MODELS</code> is the registry</td></tr>
+    <tr><td>D329</td><td>Add OpenAI to the DPA, off for existing organisations until the 30 day notice and a legal review of the transfer basis</td></tr>
+    <tr><td>D330</td><td>The owner creates the OpenAI account and sets a low monthly project limit before the first eval, any rise is a new decision</td></tr>
+    <tr><td>D331</td><td>Credit weights by the cost formula in a 1.5x band, whole numbers: economy and standard 1, Opus 2, frontier 5</td></tr>
+    <tr><td>D332</td><td>Approve the drafting family eval only, about GBP 10. Each paid run still needs its own approval</td></tr>
+    <tr><td>D333</td><td>Model lists pulled on demand by a script and an admin button, never on a timer</td></tr>
+    <tr><td>D334</td><td>Frontier models on Pro and Portfolio only, locked on Starter, with the cap and the confirm step</td></tr>
+    <tr><td>D335</td><td>Migrate the five legacy ids after the drafting evals pass, Haiku 4.5 first</td></tr>
+    <tr><td>D336</td><td>Do not apply for OpenAI EU processing now, raise it when a customer asks</td></tr>
+    <tr><td>D337</td><td>Prepare pricing and security copy for model choice locally and hold it</td></tr>
+    <tr><td>D338</td><td>Unconfirmed Perplexity and Poe patterns are internal reference only, never quoted</td></tr>
+    <tr><td>D339</td><td>All new model work paused: no picker, registry, OpenAI, new evals, copy or migration. Current models and the D308 eval unaffected</td></tr>
+    <tr><td>D340</td><td>Every website and platform issue is fixed in R2.8.5. Portal P2 and P3 move to the next release as tracked rows</td></tr>
+    <tr><td>D341</td><td>Unheld credentials get an advisory card with four choices, never a hold or a block, all recorded</td></tr>
+    <tr><td>D342</td><td>Claim backing on every draft with "Backed by N", cost per draft measured first</td></tr>
+    <tr><td>D343</td><td>Real deep testing, offline and live, quality over cost, each live run stated and confirmed, never on a timer</td></tr>
+    <tr><td>D344</td><td>Customer content never used to improve the service by default, a separate explicit opt in</td></tr>
+    <tr><td>D345</td><td>A full internal OWASP LLM Top 10 pass, planted documents first, scorecard published</td></tr>
+    <tr><td>D346</td><td>The PPN 017 statement, built after D341 and D342</td></tr>
+    <tr><td>D347</td><td>The extraction gate enforces at a floor the owner approves from the measured F1. <i>The floor itself waits on that measurement</i></td></tr>
+    <tr><td>D348</td><td>Recall measured on synthetic organisations from public notices, labelled by the driver, spot checked by the owner</td></tr>
+    <tr><td>D349</td><td>No ISO 42001, external audit, canary or risk register programme now, all in the backlog until about GBP 1 million revenue</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="sm">D340 is a release scope decision, listed because it decides that the portal AI deep test
+moves to the next release as a tracked row. D323 to D327 are not AI decisions.</p>
+
+<!-- ═══ 22. ROADMAP ═══ -->
+<h2 id="as-road"><span class="n">Section 22</span>Roadmap, rows and what is on hold</h2>
 
 <p>Fixing holes in the models already running is <b>not</b> new model work, so it is safe under
 D339. Sizes from the audit: S under a day, M a few days, L a week or more. A paid AI call in any phase
-needs its own cost approval first. Each phase runs in the owner's order: the decisions in section 11,
-then a spec and design per workstream (rows <code>R285-P3-AI-SPEC-*</code>, eight workstreams), then
-the build.</p>
+needs its own cost line first. Each workstream runs decisions, then a spec (rows
+<code>R285-P3-AI-SPEC-*</code>), then the build.</p>
 
-<div class="callout fix"><b>Every live AI capability is tested deeply first.</b> Ten rows, one per
-family from the audit inventory: <code>R285-P3-AI-DEEP-TEST-BID-DRAFTING-01</code>,
+<div class="callout fix"><b>Every live AI capability is tested deeply first (D343).</b> Nine rows for
+this release, one per family: <code>R285-P3-AI-DEEP-TEST-BID-DRAFTING-01</code>,
 <code>-TENDER-READING-01</code>, <code>-DOCUMENT-USE-01</code>, <code>-CLAIM-CHECKS-01</code>,
-<code>-SEARCH-01</code>, <code>-ADVISOR-01</code>, <code>-BUY-01</code>, <code>-PUBLIC-CHATBOT-01</code>,
-<code>-BACKGROUND-01</code> and <code>-PORTAL-01</code>. Accuracy against labelled truth, invented fact
-and credential probes, planted instruction probes, private sector and edge cases, from a committed
-tree. Offline cases are free. Live staging runs wait on DEEP TEST BUDGET.</div>
+<code>-SEARCH-01</code>, <code>-ADVISOR-01</code>, <code>-BUY-01</code>, <code>-PUBLIC-CHATBOT-01</code>
+and <code>-BACKGROUND-01</code>. The portal family moves to the next release under D340 as a tracked
+row. Offline cases first, then live staging runs, each with its cost stated and a one line owner
+confirmation.</div>
 
 <div class="qgrid">
-  <div class="q a"><h4>Phase A, safe now</h4><p>Close the holes in today's AI</p></div>
-  <div class="q d"><h4>Phase B, safe now</h4><p>Measure what we have</p></div>
-  <div class="q c"><h4>Phase C, on hold D339</h4><p>New models and the lifecycle</p></div>
+  <div class="q a"><h4>Phase A, safe now</h4><p>Close the holes in today's AI, set up the operating model</p></div>
+  <div class="q d"><h4>Phase B, safe now</h4><p>Measure, and build the product gaps once approved</p></div>
+  <div class="q c"><h4>Phase C, on hold D339</h4><p>New models, OpenAI and the lifecycle</p></div>
+  <div class="q b"><h4>Backlog, D349</h4><p>Governance programmes, revisit at about GBP 1 million revenue</p></div>
 </div>
 
 <div class="tblwrap">
 <table class="doc-tbl">
   <thead><tr><th>Phase</th><th>Item</th><th>Size</th><th>Cost</th><th>Row</th></tr></thead>
   <tbody>
-    <tr><td><span class="pill p-good">A</span></td><td>Unsupplied certificate or partner blocks the draft</td><td>S</td><td>none</td><td>R285-P3-AI-CREDENTIAL-BLOCK-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Credential register on every drafting feature</td><td>M</td><td>none</td><td>R285-P3-AI-CREDENTIAL-REGISTER-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Claim backing after every draft, "backed by N"</td><td>M</td><td>Flash per draft, to state</td><td>R285-P3-AI-CLAIM-BACKING-AUTOMATIC-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Close the unrecorded cost gap</td><td>S</td><td>none</td><td>R285-P3-AI-UNLEDGERED-COST-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Correct the DPA Anthropic surfaces</td><td>S</td><td>none</td><td>R285-P3-TRUST-DPA-ANTHROPIC-SURFACES-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Tell the user when the fallback wrote the draft</td><td>S</td><td>none</td><td>R285-P3-AI-FALLBACK-VISIBLE-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Register prompts for 8 live features, delete 6 dead ones</td><td>S, S</td><td>none</td><td>R285-P3-AI-PROMPT-REGISTRY-GAPS-01, R285-P3-AI-DEAD-SURFACES-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Planted instruction defence for extraction and drafting, chatbot fact check</td><td>M, S</td><td>none to build</td><td>R285-P3-AI-DOC-INSTRUCTION-ENFORCE-01, R285-P3-AI-PUBLIC-CHATBOT-CHECK-01</td></tr>
-    <tr><td><span class="pill p-good">A</span></td><td>Buy fairness check, Anthropic retention check, risk register</td><td>S each</td><td>none</td><td>R285-P3-BUY-AI-FAIRNESS-01, R285-P3-TRUST-ANTHROPIC-RETENTION-01, R285-P3-AI-RISK-REGISTER-01</td></tr>
-    <tr><td><span class="pill p-info">B</span></td><td>Live recheck of the 24 October fixes and the 52 open D308 repetitions</td><td>S</td><td>under the D308 approval</td><td>R285-AI-GOLDEN-REBRAND-01 (existing)</td></tr>
-    <tr><td><span class="pill p-info">B</span></td><td>Recall labels, contextual headers and task types, floor calibration</td><td>M, M, S</td><td>re-embed, to state</td><td>R285-P3-AI-RAG-RECALL-LABELS-01, R285-P3-AI-RAG-CONTEXT-HEADERS-01, R285-P3-AI-RAG-FLOOR-CALIBRATE-01</td></tr>
-    <tr><td><span class="pill p-info">B</span></td><td>Golden gaps, public tender corpus, committed tree runs, extraction gate enforced</td><td>M, M, S, S</td><td>run cost to state</td><td>R285-P3-AI-GOLDEN-COVERAGE-GAPS-01, R285-P3-AI-OGL-EVAL-CORPUS-01, R285-P3-AI-EVAL-COMMITTED-TREE-01, R285-P3-AI-EVAL-GATE-ENFORCE-EXTRACT-01</td></tr>
-    <tr><td><span class="pill p-info">B</span></td><td>OWASP pass, content free signals, opt in rating, PPN 017 statement</td><td>M each</td><td>staging calls, to state</td><td>R285-P3-AI-OWASP-LLM-PASS-01, R285-P3-AI-ONLINE-QUALITY-SIGNALS-01, R285-P3-AI-USEFULNESS-RATING-01, R285-P3-AI-PPN017-USE-STATEMENT-01</td></tr>
-    <tr><td><span class="pill p-warn">C</span></td><td>Model registry as data with dated prices, and the quality gate</td><td>L, L</td><td>about GBP 10 drafting family (D332)</td><td>R285-P3-AI-MODEL-REGISTRY-DATA-01, R285-P3-AI-MODEL-QUALITY-GATE-01</td></tr>
-    <tr><td><span class="pill p-warn">C</span></td><td>Legacy model migration and a second provider fallback</td><td>L, M</td><td>golden runs per family</td><td>R285-P3-AI-LEGACY-MODEL-MIGRATION-01, R285-P3-AI-SECOND-PROVIDER-FALLBACK-01</td></tr>
-    <tr><td><span class="pill p-warn">C</span></td><td>Three plain levels, cross vendor second opinion, embedding 2 plan</td><td>M, M, M</td><td>per call, to state</td><td>R285-P3-AI-THREE-LEVELS-PICKER-01, R285-P3-AI-CROSS-MODEL-VERIFY-01, R285-P3-AI-EMBEDDING-2-PLAN-01</td></tr>
+    <tr><td><span class="pill p-good">A</span></td><td>Credential cards and register on every drafting feature (D341)</td><td>S, M</td><td>none</td><td>R285-P3-AI-CREDENTIAL-BLOCK-01, R285-P3-AI-CREDENTIAL-REGISTER-01</td></tr>
+    <tr><td><span class="pill p-good">A</span></td><td>Claim backing after every draft, "Backed by N" (D342)</td><td>M</td><td>Flash per draft, measured first</td><td>R285-P3-AI-CLAIM-BACKING-AUTOMATIC-01</td></tr>
+    <tr><td><span class="pill p-good">A</span></td><td>Unrecorded cost, fallback shown, prompts registered, dead surfaces removed</td><td>S each</td><td>none</td><td>R285-P3-AI-UNLEDGERED-COST-01, R285-P3-AI-FALLBACK-VISIBLE-01, R285-P3-AI-PROMPT-REGISTRY-GAPS-01, R285-P3-AI-DEAD-SURFACES-01</td></tr>
+    <tr><td><span class="pill p-good">A</span></td><td>Planted instruction defence, chatbot fact check, OWASP pass (D345)</td><td>M, S, M</td><td>staging probes, stated</td><td>R285-P3-AI-DOC-INSTRUCTION-ENFORCE-01, R285-P3-AI-PUBLIC-CHATBOT-CHECK-01, R285-P3-AI-OWASP-LLM-PASS-01</td></tr>
+    <tr><td><span class="pill p-good">A</span></td><td>Operating model: owner, change process, cadence, runbook, playbook, notices, on call</td><td>S each</td><td>none</td><td>R285-P3-AI-OPS-QUALITY-OWNER-01 to R285-P3-AI-OPS-ON-CALL-01 (7 rows)</td></tr>
+    <tr><td><span class="pill p-good">A</span></td><td>Data and trust: Anthropic retention, residency wording, personal data in prompts, Buy fairness, refusal copy</td><td>S, S, M, S, S</td><td>none</td><td>R285-P3-TRUST-ANTHROPIC-RETENTION-01, R285-P3-TRUST-AI-RESIDENCY-WORDING-01, R285-P3-AI-PROMPT-PII-MINIMISE-01, R285-P3-BUY-AI-FAIRNESS-01, R285-P3-AI-TRUST-UX-REFUSAL-COPY-01</td></tr>
+    <tr><td><span class="pill p-info">B</span></td><td>Deep tests, golden gaps, committed tree runs, extraction floor (D343, D347)</td><td>M each</td><td>live runs, stated</td><td>R285-P3-AI-DEEP-TEST-* (9), R285-P3-AI-GOLDEN-COVERAGE-GAPS-01, R285-P3-AI-EVAL-COMMITTED-TREE-01, R285-P3-AI-EVAL-GATE-ENFORCE-EXTRACT-01</td></tr>
+    <tr><td><span class="pill p-info">B</span></td><td>Search: recall labels (D348), headers and task types, floor</td><td>M, M, S</td><td>re-embed, stated</td><td>R285-P3-AI-RAG-RECALL-LABELS-01, R285-P3-AI-RAG-CONTEXT-HEADERS-01, R285-P3-AI-RAG-FLOOR-CALIBRATE-01</td></tr>
+    <tr><td><span class="pill p-info">B</span></td><td>Metrics: targets, dashboard, content free signals, opt in rating (D344)</td><td>S, M, M, M</td><td>free tier</td><td>R285-P3-AI-QUALITY-KPI-TARGETS-01, R285-P3-AI-QUALITY-DASHBOARD-01, R285-P3-AI-ONLINE-QUALITY-SIGNALS-01, R285-P3-AI-USEFULNESS-RATING-01</td></tr>
+    <tr><td><span class="pill p-info">B</span></td><td>Engine: knowledge base, public tender intelligence, cross customer patterns, neutral evidence pack, public corpus</td><td>M, L, M, M, M</td><td>embedding, stated</td><td>R285-P3-AI-KNOWLEDGE-BASE-PROCUREMENT-01, R285-P3-AI-PUBLIC-TENDER-INTELLIGENCE-01, R285-P3-AI-CROSS-CUSTOMER-PATTERNS-01, R285-P3-AI-EVIDENCE-PACK-NEUTRAL-01, R285-P3-AI-OGL-EVAL-CORPUS-01</td></tr>
+    <tr><td><span class="pill p-info">B</span></td><td>Product gaps: decision sheet, library reuse, review assist, contract management, off surfaces, PPN 017 statement (D346)</td><td>M, M, M, L, M, M</td><td>per feature, stated</td><td>R285-P3-AI-BID-DECISION-SHEET-01, R285-P3-AI-LIBRARY-REUSE-SUGGEST-01, R285-P3-AI-REVIEW-ASSIST-01, R285-P3-AI-BUY-CONTRACT-MANAGEMENT-01, R285-P3-AI-OFF-SURFACES-DECISION-01, R285-P3-AI-PPN017-USE-STATEMENT-01</td></tr>
+    <tr><td><span class="pill p-info">B</span></td><td>Inclusion and guidance: plain English, Welsh, accessible output, public AI page, in app guide, margin, churn calendar, exit plans</td><td>S to M</td><td>none</td><td>R285-P3-AI-PLAIN-ENGLISH-OUTPUT-01, R285-P3-AI-WELSH-OUTPUT-01, R285-P3-AI-OUTPUT-A11Y-01, R285-P3-AI-PUBLIC-AI-PAGE-01, R285-P3-AI-USER-GUIDANCE-01, R285-P3-AI-COMMERCIAL-MARGIN-MODEL-01, R285-P3-AI-CHURN-CALENDAR-01, R285-P3-AI-PROVIDER-EXIT-PLAN-01</td></tr>
+    <tr><td><span class="pill p-warn">C</span></td><td>Registry with dated prices, quality gate, legacy migration, second provider fallback</td><td>L, L, L, M</td><td>about GBP 10 drafting family (D332)</td><td>R285-P3-AI-MODEL-REGISTRY-DATA-01, R285-P3-AI-MODEL-QUALITY-GATE-01, R285-P3-AI-LEGACY-MODEL-MIGRATION-01, R285-P3-AI-SECOND-PROVIDER-FALLBACK-01</td></tr>
+    <tr><td><span class="pill p-warn">C</span></td><td>OpenAI: account, DPA and notice, adapter, eval</td><td>S, M, M, S</td><td>about GBP 6, cap GBP 25</td><td>R285-P3-AI-OPENAI-ACCOUNT-01, R285-P3-TRUST-OPENAI-DPA-NOTICE-01, R285-P3-AI-OPENAI-ADAPTER-01, R285-P3-AI-OPENAI-EVAL-01</td></tr>
+    <tr><td><span class="pill p-warn">C</span></td><td>Three levels, plan tiers, premium cap, second opinion, embedding 2</td><td>M, S, S, M, M</td><td>per call, stated</td><td>R285-P3-AI-THREE-LEVELS-PICKER-01, R285-P3-AI-OFFERING-TIERS-01, R285-P3-AI-PREMIUM-CAP-DEFAULT-01, R285-P3-AI-CROSS-MODEL-VERIFY-01, R285-P3-AI-EMBEDDING-2-PLAN-01</td></tr>
+    <tr><td><span class="pill p-bad">Backlog</span></td><td>ISO 42001, external audit, canary, risk register, EU AI Act advice</td><td>n/a</td><td>none until the trigger</td><td>R285-P3-AI-BACKLOG-ISO42001-01, R285-P3-AI-BACKLOG-EXTERNAL-AUDIT-01, R285-P3-AI-BACKLOG-CANARY-01, R285-P3-AI-RISK-REGISTER-01, R285-P3-AI-BACKLOG-EU-AI-ACT-ADVICE-01</td></tr>
   </tbody>
 </table>
 </div>
 
 <div class="callout good"><b>Simplified for a first time user.</b> The page leads with one verdict and
-five cards, names AI features by what they do for you rather than by code name, and offers three
-words (Fast, Standard, Best) instead of a list of vendors. Every surface name, score and source sits
-behind a plus sign for the expert reader. Nothing was dropped to make it short.</div>
+six cards, names AI features by what they do for you rather than by code name, offers three words
+(Fast, Standard, Best) instead of a list of vendors, and puts every decision in one table with a
+recommendation. Every surface name, price and source sits behind a plus sign or in a table for the
+expert reader. Nothing was dropped to make it short.</div>
 
-<p class="sm">Prepared by Velstrian Tenderworks, 24 October 2026. Sources:
+<p class="sm">Prepared by Velstrian Tenderworks, 24 October 2026, revision 2. Sources:
 <code>crowagent-platform/docs/release-2.8.5/ai-strategy/INTERNAL-AI-AUDIT-2026-10-24.md</code>,
-<code>EXTERNAL-RESEARCH-2026-10-24.md</code> in the same folder, the model choice design paper and
+<code>EXTERNAL-RESEARCH-2026-10-24.md</code> in the same folder, the model choice design paper,
+<code>docs/legal/data-processing-agreement.md</code>, <code>packages/pricing/catalogue.ts</code> and
 <code>docs/release-2.8.4/scope/DECISION-GATES.md</code>. Where this page and those files disagree, the
 files win.</p>
