@@ -326,6 +326,26 @@ const RULES = [
       return out;
     },
   },
+  {
+    record: 'ai_use',
+    why: 'A-417: /ai/ prints every line of the record word for word, a line marked coming says will or coming so it never reads as built, no page promises the AI is never wrong (D359, D371), and no page that lists providers names one that is not in DPA Schedule 1 (OpenAI waits on the D329 notice).',
+    check(pages) {
+      const r = FACTS.ai_use;
+      const out = banned(pages, r.banned, 'gi');
+      const p = pages.find((x) => x.route === r.page);
+      for (const g of r.groups) {
+        for (const l of g.lines) {
+          if (!p || !p.text.includes(l.line)) out.push({ route: r.page, hit: `${l.id} "${l.line}"`, ctx: 'AI use line missing from this page' });
+          if (l.status === 'coming' && !/\b(will|coming)\b/i.test(l.line)) out.push({ route: r.page, hit: l.id, ctx: 'a coming line must say will or coming' });
+        }
+      }
+      for (const route of r.provider_pages) {
+        const pp = pages.find((x) => x.route === route);
+        if (pp) out.push(...banned([pp], r.not_yet_providers));
+      }
+      return out;
+    },
+  },
 ];
 
 /* ── NAMED EXCEPTIONS ───────────────────────────────────────────────────── */

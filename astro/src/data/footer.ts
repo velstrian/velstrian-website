@@ -277,6 +277,7 @@ export const FOOTER = {
       title: 'Legal',
       links: [
         { label: 'Security', href: '/security/' },
+        { label: 'How we use AI', href: '/ai/' },
         { label: 'Privacy', href: '/privacy/' },
         { label: 'Terms', href: '/terms/' },
         { label: 'Cookies', href: '/cookies/' },

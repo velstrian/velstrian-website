@@ -111,3 +111,19 @@ export const INTEGRATIONS_PLAN_LINE = (() => {
     `It is included on ${listJoin(where('included'))}, a paid add-on on ${listJoin(where('addon'))}, and not offered on ${listJoin(where('none'))}.`
   );
 })();
+
+/* A-417. The lines /ai/ prints, word for word, from one list. Each carries
+   its evidence in site-facts.json ai_use, and check-site-facts.mjs fails the
+   build when the page drops a line, when a coming line stops saying so, or
+   when a provider page names one that is not in DPA Schedule 1. */
+export interface AiUseLine { id: string; status: 'now' | 'coming'; line: string; evidence: string }
+export interface AiUseGroup { id: string; title: string; lines: AiUseLine[] }
+export const AI_USE_GROUPS = FACTS.ai_use.groups as AiUseGroup[];
+export function aiUseGroup(id: string): AiUseGroup {
+  const g = AI_USE_GROUPS.find((x) => x.id === id);
+  if (!g) throw new Error(`site-facts: ai_use group ${id} not found`);
+  return g;
+}
+
+/** "Google Gemini and Anthropic Claude", the AI sub-processors in DPA Schedule 1 today. */
+export const AI_PROVIDERS = listJoin(FACTS.regions.ai_processors_outside_eu);

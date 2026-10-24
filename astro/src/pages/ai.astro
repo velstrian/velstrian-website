@@ -1,0 +1,374 @@
+---
+/**
+ * /ai/: how Velstrian uses AI, in plain words (A-417, platform row
+ * R285-P3-AI-PUBLIC-AI-PAGE-01, AI strategy page section 12).
+ *
+ * WHO IT IS FOR. A small firm deciding whether to let AI near its bids, and a
+ * buyer asking a supplier how AI was used (RULE 0-U). One idea per band, plain
+ * words first, public and private work named together.
+ *
+ * EVERY CLAIM IS READ FROM site-facts.json ai_use, never typed here. Each line
+ * carries its evidence there, and check-site-facts.mjs fails the build when
+ * this page drops a line, when a line marked coming stops saying will or
+ * coming, or when a provider page names OpenAI before the D329 notice has run.
+ * A line marked coming is an owner decision that is not built yet (D341,
+ * D342, D344 opt in, D346, D366, D367, D371). It is shown with a "Coming
+ * next" chip and worded in the future tense, so nothing reads as built.
+ *
+ * THE PROVIDERS AND THE REGION come from regions.ai_processors_outside_eu and
+ * DATA_HANDLING_SENTENCE, the same records /security/ and the home page read,
+ * so the three pages cannot disagree.
+ *
+ * WHAT IS LEFT OUT ON PURPOSE. No accuracy figure and no win rate (website
+ * CLAUDE.md rule 5), and no promise that the AI never makes a mistake or that
+ * a wrong answer is refunded (D359, D371). Positive tone, no disclaimers (D255).
+ *
+ * STORYLINE:
+ *   1. PageHero    light      what is this?             AI reads and drafts, you decide
+ *   2. Does        light alt  what does it do for me?   Bid and Buy, side by side
+ *   3. Models      light      do I have to choose?      Auto, and the levels by plan
+ *   4. Checks      dark       can I trust the draft?    the checks, now and coming next
+ *   5. Data        light      what happens to my data?  training, improvement, region, providers
+ *   6. Control     light alt  who has the last word?    you, and PPN 017
+ *   7. Close       gradient   what now?                 the one primary action
+ *
+ * NO JAVASCRIPT. Every word is in the document at first paint.
+ */
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/evidenced/PageHero.astro';
+import SectionBand from '../components/evidenced/SectionBand.astro';
+import Icon from '../components/evidenced/Icon.astro';
+import IconTile from '../components/evidenced/IconTile.astro';
+import Close from '../components/evidenced/Close.astro';
+import '../styles/evidenced.css';
+import { breadcrumbs } from '../lib/schema';
+import { aiUseGroup, AI_PROVIDERS, DATA_HANDLING_SENTENCE } from '../data/site-facts';
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../lib/brand-names';
+import type { IconName } from '../data/icons';
+
+const title = 'How Velstrian uses AI | Velstrian';
+const description =
+  `What the AI does in ${PRODUCT_NAME_BID} and ${PRODUCT_NAME_BUY}, the checks it runs on every draft, ` +
+  `how your data is handled, and how you stay in control, in plain words.`;
+
+const schema = [
+  breadcrumbs([
+    { name: 'Home', path: '/' },
+    { name: 'How Velstrian uses AI', path: '/ai/' },
+  ]),
+];
+
+const UPDATED = new Date('2026-10-24');
+
+const bid = aiUseGroup('bid');
+const buy = aiUseGroup('buy');
+const models = aiUseGroup('models');
+const checks = aiUseGroup('checks');
+const data = aiUseGroup('data');
+const control = aiUseGroup('control');
+
+const PRODUCTS: { group: typeof bid; icon: IconName; who: string }[] = [
+  { group: bid, icon: 'pen', who: 'For suppliers answering public tenders and private requests for proposal.' },
+  { group: buy, icon: 'checklist', who: 'For public bodies and private companies running a tender.' },
+];
+
+/* The plan ladder for the model levels. Starter stays on Auto, Pro may pick
+   Fast or Standard, Portfolio adds Best (D366, D367). Plan names only, never
+   a price: prices live on /pricing/ from the catalogue. */
+const LEVELS: { plan: string; levels: string }[] = [
+  { plan: 'Starter', levels: 'Auto' },
+  { plan: 'Pro', levels: 'Auto, Fast or Standard' },
+  { plan: 'Portfolio', levels: 'Auto, Fast, Standard or Best' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  path="/ai"
+  schema={schema}
+  updatedAt={UPDATED}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero
+    id="ai-hero-title"
+    bandId="ai-hero"
+    label="AI at Velstrian"
+    title="How Velstrian uses AI."
+    accent="uses AI."
+    lead="AI reads the paperwork and writes the first draft from your own documents. You check it, change it and decide what is sent, for public and private work alike."
+  />
+
+  <SectionBand
+    tone="light-alt"
+    eyebrow="What it does for you"
+    title="The reading and the first draft, done for you."
+    standfirst="The same care on both sides of a tender, whether you are bidding or buying."
+    id="ai-does"
+  >
+    <ul class="ea-cards ea-cards--2 ai-products" role="list">
+      {
+        PRODUCTS.map(({ group, icon, who }) => (
+          <li>
+            <section class="ea-card ea-tcard" aria-labelledby={`ai-${group.id}`} data-reveal>
+              <div class="ai-products__head">
+                <IconTile name={icon} />
+                <h3 class="ea-h3" id={`ai-${group.id}`}>{group.title}</h3>
+              </div>
+              <p>{who}</p>
+              <ul class="ai-list" role="list">
+                {group.lines.map((l) => (
+                  <li>
+                    <Icon name="done" size={18} />
+                    <span>{l.line}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </li>
+        ))
+      }
+    </ul>
+  </SectionBand>
+
+  <SectionBand
+    tone="light"
+    eyebrow="Choosing the model"
+    title="Auto picks the right model for each task."
+    standfirst="Simple work goes to a quick model and harder work to a stronger one, without you lifting a finger."
+    id="ai-models"
+  >
+    <div class="ai-split">
+      <ul class="ai-ledger" role="list">
+        {
+          models.lines.map((l) => (
+            <li>
+              <Icon name={l.status === 'now' ? 'done' : 'right'} size={18} />
+              <span>{l.line}</span>
+              {l.status === 'coming' && <span class="ea-chip">Coming next</span>}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="ea-card ai-levels" data-reveal>
+        <p class="ea-label">Model levels by plan, coming next</p>
+        <dl class="ai-levels__list">
+          {
+            LEVELS.map((r) => (
+              <div class="ai-levels__row">
+                <dt>{r.plan}</dt>
+                <dd>{r.levels}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </SectionBand>
+
+  <SectionBand
+    tone="dark"
+    eyebrow="The checks it runs"
+    title="Every claim can be traced to your own documents."
+    standfirst="The AI works from what you have actually done, and you can see which of your documents support each claim."
+    id="ai-checks"
+  >
+    <ul class="ai-ledger ai-ledger--wide" role="list">
+      {
+        checks.lines.map((l) => (
+          <li>
+            <Icon name={l.status === 'now' ? 'done' : 'right'} size={18} />
+            <span>{l.line}</span>
+            {l.status === 'coming' && <span class="ea-chip">Coming next</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </SectionBand>
+
+  <SectionBand
+    tone="light"
+    eyebrow="Your data"
+    title="Your bids stay yours."
+    standfirst={DATA_HANDLING_SENTENCE}
+    id="ai-data"
+  >
+    <div class="ai-split">
+      <ul class="ai-ledger" role="list">
+        {
+          data.lines.map((l) => (
+            <li>
+              <Icon name="shield" size={18} />
+              <span>{l.line}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="ea-card ai-providers" data-reveal>
+        <p class="ea-label">AI providers today</p>
+        <p class="ai-providers__names">{AI_PROVIDERS}</p>
+        <p class="ai-providers__note">Each one is a sub-processor under contract, listed with every other service we use.</p>
+        <a class="ea-link" href="/security/#sub-processors">See every sub-processor</a>
+      </div>
+    </div>
+  </SectionBand>
+
+  <SectionBand
+    tone="light-alt"
+    eyebrow="You stay in control"
+    title="You have the last word on every answer."
+    standfirst="The AI does the groundwork. What goes to the buyer is always your decision."
+    id="ai-control"
+  >
+    <ul class="ai-ledger ai-ledger--wide" role="list">
+      {
+        control.lines.map((l) => (
+          <li>
+            <Icon name={l.status === 'now' ? 'done' : 'right'} size={18} />
+            <span>{l.line}</span>
+            {l.status === 'coming' && <span class="ea-chip">Coming next</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </SectionBand>
+
+  <Close
+    title="See it draft from your own documents."
+    lead="Upload a tender and read the first draft before you decide anything."
+  />
+</Base>
+
+<style>
+  .ai-products {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-products__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .ai-products__head .ea-h3,
+  .ai-products p {
+    margin: 0;
+  }
+
+  .ai-list,
+  .ai-ledger {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .ai-list li,
+  .ai-ledger li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: start;
+    color: var(--ea-sub);
+    line-height: 1.5;
+  }
+
+  .ai-list li :global(svg),
+  .ai-ledger li :global(svg) {
+    margin-top: 0.15em;
+    color: var(--ea-accent-ink);
+  }
+
+  .ai-ledger .ea-chip {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .ai-ledger--wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-12);
+  }
+
+  .ai-ledger--wide li {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--ea-rule);
+  }
+
+  .ai-split {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  .ai-levels,
+  .ai-providers {
+    margin: 0;
+    padding: var(--blk-pad);
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .ai-levels p,
+  .ai-levels__list {
+    margin: 0;
+  }
+
+  .ai-levels__list {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .ai-levels__row {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--ea-rule);
+  }
+
+  .ai-levels__row:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .ai-levels dt {
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
+  }
+
+  .ai-levels dd {
+    margin: 0;
+    color: var(--ea-sub);
+  }
+
+  .ai-providers p {
+    margin: 0;
+  }
+
+  .ai-providers__names {
+    font-size: var(--t-ea-h3);
+    font-weight: var(--t-w-ea-strong);
+    color: var(--ea-ink);
+  }
+
+  .ai-providers__note {
+    color: var(--ea-sub);
+  }
+
+  @media (max-width: 959px) {
+    .ai-split,
+    .ai-ledger--wide {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+    }
+
+    .ai-ledger--wide {
+      gap: var(--space-4);
+    }
+  }
+</style>

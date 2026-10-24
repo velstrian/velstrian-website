@@ -582,5 +582,85 @@
       "neither trains on",
       "No personal data used for AI training"
     ]
+  },
+  "ai_use": {
+    "measured": "2026-10-24, A-417 (platform row R285-P3-AI-PUBLIC-AI-PAGE-01). Each line re-read against crowagent-platform: api/app/services/ai/surface_policy.py DEFAULT_MODELS (one model per task, bid_* on Gemini 2.5 Pro or Flash, buy_preread on Claude), docs/legal/data-processing-agreement.md Schedule 1 items 7 and 8 (Anthropic (Claude) and Google (Gemini), the only AI sub-processors today), owner decisions D314 and D350 (production and staging Gemini and Anthropic keys are paid accounts, so neither provider trains on what we send), D344 (customer content never used to improve the service by default), and status/architecture-ai-strategy.html section 3 for what is built today. Lines marked coming are owner decisions not yet built (D341, D342, D344 opt in, D346, D366, D367, D371 notice) and are worded in the future tense. OpenAI is onboarded by D368 but is not in Schedule 1 until the D329 sub-processor notice has run, so no page names it as a provider",
+    "page": "/ai/",
+    "groups": [
+      {
+        "id": "bid",
+        "title": "In Velstrian Bid",
+        "lines": [
+          { "id": "B1", "status": "now", "line": "Reads the tender pack and lists every question and requirement the buyer sets.", "evidence": "surface bid_rfp_extract" },
+          { "id": "B2", "status": "now", "line": "Drafts each answer from your own documents and past answers, for a public tender or a private company's request for proposal.", "evidence": "surface bid_narrative, answer library, web/src/features/bid/rfp/TenderUploadPanel.tsx" },
+          { "id": "B3", "status": "now", "line": "Suggests win themes from what the buyer values and the proof you hold.", "evidence": "surface bid_win_theme_draft" },
+          { "id": "B4", "status": "now", "line": "Answers your procurement and social value questions in the AI Compliance Advisor.", "evidence": "site-facts ai_advisor, api/app/routers/advisor.py" }
+        ]
+      },
+      {
+        "id": "buy",
+        "title": "In Velstrian Buy",
+        "lines": [
+          { "id": "U1", "status": "now", "line": "Reads every bid before your panel meets and points out what to check. It never scores. Your panel does.", "evidence": "surface buy_preread, advisory and never scores (site-facts buy_panel_score)" },
+          { "id": "U2", "status": "now", "line": "Helps write the requirement wording in your tender pack, which you approve before anything is published.", "evidence": "surfaces buy_requirement_narrative and buy_requirement_suggest, web/src/shared/i18n/messages/public-sector/builder.ts narrativeDraft" },
+          { "id": "U3", "status": "now", "line": "Drafts award letters for you to review and send.", "evidence": "web/app/(dashboard)/buyer/evaluations/[id]/page.tsx award letter, ai or template source" }
+        ]
+      },
+      {
+        "id": "models",
+        "title": "Choosing the model",
+        "lines": [
+          { "id": "M1", "status": "now", "line": "Auto is the default. Velstrian picks the right model for each task, so there is nothing to set up.", "evidence": "surface_policy.py DEFAULT_MODELS routes each task to its own model, D371" },
+          { "id": "M2", "status": "coming", "line": "Pro will let you choose Fast or Standard yourself, and Portfolio will add Best. Starter stays on Auto.", "evidence": "D366 and D367, the picker is not built" }
+        ]
+      },
+      {
+        "id": "checks",
+        "title": "The checks it runs",
+        "lines": [
+          { "id": "C1", "status": "now", "line": "Check any draft against your documents with one click, and see which claims they support.", "evidence": "surface bid_claim_backing, on demand today (AI strategy page section 3)" },
+          { "id": "C2", "status": "coming", "line": "This check will run on every draft by itself and show \"Backed by N of your documents\".", "evidence": "D342, not switched on" },
+          { "id": "C3", "status": "now", "line": "Money figures and percentages that are not in your records are flagged.", "evidence": "site-facts ai_advisor does, drafting figure check (AI strategy page section 3)" },
+          { "id": "C4", "status": "now", "line": "Common certifications and accreditations that your records do not show are flagged for you to confirm.", "evidence": "credential check, a fixed list of 18 names, advisory (AI strategy page section 3, H1 to H3)" },
+          { "id": "C5", "status": "coming", "line": "This will cover any credential in every draft, and you choose: we hold it, it is underway, remove it, or keep it with a note.", "evidence": "D341, not built" },
+          { "id": "C6", "status": "now", "line": "Instructions hidden inside a tender pack or an uploaded document are fenced off and ignored. The AI reads your files as content to work from.", "evidence": "universal injection guard and fences on 17 modules (AI strategy page section 3, LLM01)" }
+        ]
+      },
+      {
+        "id": "data",
+        "title": "Your data",
+        "lines": [
+          { "id": "D1", "status": "now", "line": "Your content is not used to train AI models.", "evidence": "DPA Schedule 1 items 7 and 8, paid accounts verified D314 (production) and D350 (production and staging)" },
+          { "id": "D2", "status": "now", "line": "Your content is not used to improve the service. A choice to share examples with us is coming, and it stays off unless you turn it on.", "evidence": "D344, the opt in is not built, so nothing is shared today" }
+        ]
+      },
+      {
+        "id": "control",
+        "title": "You stay in control",
+        "lines": [
+          { "id": "K1", "status": "now", "line": "You review, edit and approve every answer, and you submit it yourself.", "evidence": "a person approves every answer (SecurityBuiltIn lead), site-facts M7 never lodges" },
+          { "id": "K2", "status": "now", "line": "Anything the AI writes is marked AI drafted, so you always know.", "evidence": "web/src/shared/ui/AiChip.tsx, common/ai-output.ts chipDrafted" },
+          { "id": "K3", "status": "coming", "line": "Every AI draft will carry a short note: \"AI drafted from your documents. Check before you submit.\"", "evidence": "D371 (3), not built" },
+          { "id": "K4", "status": "now", "line": "Every AI drafted answer carries a PPN 017 note, the government guidance on telling a buyer that AI helped.", "evidence": "the same claim /bid/ prints" },
+          { "id": "K5", "status": "coming", "line": "Velstrian Bid will write a full \"How we used AI in this bid\" statement from what actually happened, ready for any buyer who asks.", "evidence": "D346, built after D341 and D342" }
+        ]
+      }
+    ],
+    "not_yet_providers": [
+      "OpenAI"
+    ],
+    "provider_pages": [
+      "/ai/",
+      "/security/",
+      "/privacy/"
+    ],
+    "banned": [
+      "never makes mistakes",
+      "never wrong",
+      "always accurate",
+      "100% accurate",
+      "guaranteed accurate",
+      "hallucination free"
+    ]
   }
 }
