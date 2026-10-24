@@ -36,6 +36,17 @@
    ============================================================================ */
 
 /* ── TIER 2, THE DEFAULT CARD ──────────────────────────────────────────────── */
+/* ── NO CORNER WASH BY DEFAULT, owner 2026-10-24 ─────────────────────────────
+   Owner: "i did not liked card top corner gradient as i was expecting
+   something similar like stripe ... not every card also must not have
+   gradient corner instead you must check where it looks good". Read off
+   stripe.com on 2026-10-24 (home, pricing, payments at 1440 and 390): the
+   colour lives in ONE place a page, a hero ribbon or one bento art panel,
+   at full strength and fading to white. Every other card is plain white with
+   a hairline, and the pricing page has no tinted card at all. So the default
+   card is plain here too. The wash is opt in through ONE class,
+   `.ea-card--wash`, for the single card a page is built around (the featured
+   guide on /blog/). The lift and the spotlight stay, owner decision D321. */
 .ea-card:not(.ea-card--plain, form) {
   --card-wash: var(--card-wash-iris);
   --card-wash-pos: 0% 0%;
@@ -46,8 +57,12 @@
   position: relative;
   isolation: isolate;
   background-color: var(--ea-raised);
-  background-image: radial-gradient(120% 90% at var(--card-wash-pos), var(--card-wash), transparent var(--card-wash-reach));
+  background-image: none;
   box-shadow: var(--elev-card-tinted);
+}
+
+.ea-card.ea-card--wash:not(.ea-card--plain, form) {
+  background-image: radial-gradient(120% 90% at var(--card-wash-pos), var(--card-wash), transparent var(--card-wash-reach));
 }
 
 /* The second card of each pair takes its wash from the other top corner, so
@@ -136,11 +151,12 @@
   color: var(--stage-ink);
 }
 
+/* The rim is the emphasis, so the inside stays plain white like every other
+   card (owner 2026-10-24, no corner wash). */
 .ea-card.ea-card--rim,
 .ea-card.ea-card--rim:hover {
   border-color: transparent;
   background:
-    radial-gradient(120% 90% at 0% 0%, var(--card-wash), transparent var(--card-wash-reach)) padding-box,
     linear-gradient(var(--ea-raised), var(--ea-raised)) padding-box,
     var(--card-rim) border-box;
 }
@@ -546,11 +562,13 @@
    and the badge in the brand gradient. Its price stays on the white card,
    never on a gradient (spec section 7, pricing). The 2px edge is static, so
    nothing shifts. */
+/* 2026-10-24: the top wash inside it is gone (owner, no corner gradients,
+   Stripe's pricing page tints no card at all). The rim and the glow carry the
+   emphasis on their own. */
 .ea-card.ea-plan--rec,
 .ea-card.ea-plan--rec:hover {
   border: 2px solid transparent;
   background:
-    radial-gradient(120% 70% at 50% 0%, var(--card-wash), transparent var(--card-wash-reach)) padding-box,
     linear-gradient(var(--ea-raised), var(--ea-raised)) padding-box,
     var(--card-rim) border-box;
   box-shadow:
