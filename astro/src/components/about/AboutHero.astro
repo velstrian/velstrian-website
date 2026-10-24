@@ -164,12 +164,23 @@ const ROLES = [
     background: var(--c-refused);
   }
 
+  /* One sentence that wraps as text. The shared .ea-hero__note is inline-flex
+     (it puts a tick beside its words on /resources/), and .ea-link is
+     inline-flex too, so here the sentence and the link became two flex items
+     side by side and the link squeezed into a four line column at 1440. */
   .ea-hero__note {
-    max-width: 44ch;
+    display: block;
+    max-width: 62ch;
+    text-wrap: balance;
     margin-top: var(--space-2);
     font-size: var(--t-micro);
     line-height: var(--lh-ea-snug);
     color: var(--ea-muted);
+  }
+
+  .ea-hero__note .ea-link {
+    display: inline;
+    min-height: 0;
   }
 
   @media (max-width: 599px) {
