@@ -270,6 +270,270 @@ for (const s of SCREENS) {
   if (!fails.length) console.log(`    ok    lowest ${out.rows[0].cr}:1 on .${out.rows[0].cls}`);
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+ * THE WASHES AND THE BENTO FLOODS, MEASURED IN PIXELS
+ * (R285-WEB-PREMIUM-CARDS-01, spec section 9: "add the wash peaks as rendered
+ * backgrounds and fail below 4.5")
+ *
+ * A wash and a flood are gradients that fade to transparent, so the stack
+ * reading above walks straight through them to the white card and would pass
+ * a flood laid under every word. The only honest ground is what the reader
+ * sees, so this one READS THE PIXELS: every element that holds its own text
+ * inside a washed card, a bento tile or a resource cover is recorded (its
+ * colour, size and weight), the words are made transparent, the element's box
+ * is photographed, and the WORST pixel under the words is the ground. A box is
+ * the whole line box, so a gradient that reaches anywhere under a paragraph is
+ * caught, which is stricter than the glyphs need.
+ *
+ * HOW IT COULD FAIL, AND THE GUARD AGAINST IT. If the words were not hidden the
+ * worst pixel would be a glyph and every line would fail; if the selector
+ * matched nothing every line would pass. So a floor applies, and before the
+ * site is measured a SELF TEST floods one tile with full strength Iris under
+ * its words and requires this measurement to fail it.
+ * ══════════════════════════════════════════════════════════════════════════ */
+const sharp = (await import('sharp')).default;
+const WASHED = [
+  { route: '/', sel: '.ea-bento__tile' },
+  { route: '/bid/', sel: '.ea-bento__tile' },
+  { route: '/buy/', sel: '.ea-bento__tile' },
+  { route: '/pricing/', sel: '.ea-card:not(.ea-card--plain)' },
+  { route: '/integrations/', sel: '.ea-card:not(.ea-card--plain)' },
+  { route: '/resources/', sel: '.res-card .tc' },
+];
+const PX_FLOOR = 40;
+/* The words go transparent, and so do the element's own ::before and ::after
+   (a list dot, a cover's accent bar): they are drawn beside the words, not
+   under them, and photographing them would report a mark as a ground. */
+const HIDE = '[data-px] { color: transparent !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important; } [data-px]::before, [data-px]::after, [data-px]::marker { visibility: hidden !important; } [data-px-clip] { background-image: none !important; } #ca-nav, .ea-motion { visibility: hidden !important; }';
+
+const TAG = (sel) => {
+  const parse = (c) => {
+    let m = c.match(/^color\(srgb\s+([\d.eE+-]+)\s+([\d.eE+-]+)\s+([\d.eE+-]+)(?:\s*\/\s*([\d.eE+-]+))?\s*\)$/);
+    if (m) return [+m[1] * 255, +m[2] * 255, +m[3] * 255, m[4] === undefined ? 1 : +m[4]];
+    m = c.match(/^rgba?\(([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.%]+))?\)$/);
+    if (m) return [+m[1], +m[2], +m[3], m[4] === undefined ? 1 : (m[4].endsWith('%') ? parseFloat(m[4]) / 100 : +m[4])];
+    return null;
+  };
+  const out = [];
+  let i = 0;
+  for (const root of document.querySelectorAll(sel)) {
+    for (const el of [root, ...root.querySelectorAll('*')]) {
+      const own = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
+      if (!own) continue;
+      const cs = getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.display === 'none' || +cs.opacity === 0) continue;
+      if (el.closest('.visually-hidden, [aria-hidden="true"]:not(.tc)')) continue;
+      const r = el.getBoundingClientRect();
+      if (r.width < 2 || r.height < 2) continue;
+      const fg = parse(cs.color);
+      if (!fg || fg[3] === 0) continue;
+      el.setAttribute('data-px', String(i));
+      /* A gradient label (.eyebrow) paints its ink with background-clip: text,
+         so its background IS the ink. Photographing it with the words hidden
+         would still show the gradient glyphs, so that background is dropped
+         for the photograph and the ground behind the label is what is read. */
+      if ((cs.backgroundClip || cs.webkitBackgroundClip || '').includes('text')) el.setAttribute('data-px-clip', '');
+      /* The CONTENT box, inside the border and the padding: a pill's rounded
+         corners and a capsule's own edge are not under its words. */
+      const px = (v) => parseFloat(v) || 0;
+      const inset = {
+        l: px(cs.borderLeftWidth) + px(cs.paddingLeft),
+        t: px(cs.borderTopWidth) + px(cs.paddingTop),
+        r: px(cs.borderRightWidth) + px(cs.paddingRight),
+        b: px(cs.borderBottomWidth) + px(cs.paddingBottom),
+      };
+      out.push({
+        i: i++,
+        inset,
+        fg,
+        size: parseFloat(cs.fontSize),
+        weight: +cs.fontWeight || 400,
+        cls: [...el.classList].filter((c) => !/^astro-/.test(c)).join('.') || el.tagName.toLowerCase(),
+        sample: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 30),
+      });
+    }
+  }
+  return out;
+};
+
+const lumOf = (c) => {
+  const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+  return 0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2]);
+};
+const ratioOf = (a, b) => { const x = lumOf(a), y = lumOf(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+const hexOf = (c) => '#' + c.slice(0, 3).map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
+
+/** The worst pixel of an element's box against its own text colour. */
+async function worstUnder(pg, t) {
+  const loc = pg.locator(`[data-px="${t.i}"]`);
+  /* A card inside a rail is brought to the rail's start first, where its snap
+     point is, so it is photographed whole rather than cut by the track. */
+  await loc.evaluate((el) => el.scrollIntoView({ block: 'center', inline: 'start', behavior: 'instant' })).catch(() => null);
+  await pg.waitForTimeout(60);
+  let png;
+  /* Two attempts: a lazy screen landing above can move the element while the
+     first waits for it to hold still. A second failure is reported. */
+  for (let attempt = 0; attempt < 2 && !png; attempt++) {
+    try {
+      png = await loc.screenshot({ animations: 'disabled', timeout: 15000 });
+    } catch (err) {
+      if (attempt === 1) return { error: err instanceof Error ? err.message.split('\n')[0] : String(err) };
+    }
+  }
+  const { data, info } = await sharp(png).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const x0 = Math.min(info.width - 1, Math.round(t.inset.l));
+  const y0 = Math.min(info.height - 1, Math.round(t.inset.t));
+  const x1 = Math.max(x0 + 1, info.width - Math.round(t.inset.r));
+  const y1 = Math.max(y0 + 1, info.height - Math.round(t.inset.b));
+  let worst = Infinity;
+  let at = null;
+  for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) {
+    const p = y * info.width + x;
+    /* A pixel the page did not paint opaque is under a fade mask (a rail's
+       edge), where the words fade with it. Skipped, never counted as black. */
+    if (data[p * 4 + 3] < 250) continue;
+    const px = [data[p * 4], data[p * 4 + 1], data[p * 4 + 2]];
+    /* Text with alpha is composited over the pixel it sits on. */
+    const fg = t.fg.slice(0, 3).map((v, k) => v * t.fg[3] + px[k] * (1 - t.fg[3]));
+    const cr = ratioOf(fg, px);
+    if (cr < worst) { worst = cr; at = px; }
+  }
+  return { cr: Math.round(worst * 100) / 100, bg: at ? hexOf(at) : '?' };
+}
+
+const need = (t) => (t.size >= 24 || (t.size >= 18.66 && t.weight >= 700) ? 3 : 4.5);
+
+/* SELF TEST: a full strength flood under the words must fail. */
+{
+  const pg = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+  await pg.goto(base + '/', { waitUntil: 'load' });
+  const tagged = await pg.evaluate(TAG, '.ea-bento__tile');
+  const body = tagged.find((t) => t.cls === 'p' || t.size < 18);
+  if (!body) {
+    violations.push('wash self test: no small text in a .ea-bento__tile on /, so the pixel measurement could not be proved');
+  } else {
+    await pg.addStyleTag({ content: HIDE + ' .ea-bento__tile { background-image: linear-gradient(var(--qv-iris), var(--qv-iris)) !important; }' });
+    const m = await worstUnder(pg, body);
+    if (m.error || !(m.cr < need(body))) {
+      violations.push(`wash self test DID NOT FIRE: full strength Iris was laid under "${body.sample}" and the pixel measurement read ${m.cr ?? m.error}:1. A clean run below would mean nothing`);
+      console.log(`  FAIL  self test: a full Iris flood under the words read ${m.cr ?? m.error}:1`);
+    } else {
+      console.log(`  ok    self test: a full Iris flood under "${body.sample}" reads ${m.cr}:1 on ${m.bg}, caught`);
+    }
+  }
+  await pg.close();
+}
+
+let pxMeasured = 0;
+for (const width of [1440, 390]) {
+  const pg = await browser.newPage({ viewport: { width, height: 1000 }, reducedMotion: 'reduce' });
+  for (const w of WASHED) {
+    const res = await pg.goto(base + w.route, { waitUntil: 'load' });
+    if (!res || res.status() !== 200) {
+      violations.push(`wash: ${w.route} answered ${res ? res.status() : 'nothing'}, so its washed cards were not measured`);
+      continue;
+    }
+    const tagged = await pg.evaluate(TAG, w.sel);
+    if (!tagged.length) {
+      violations.push(`stale: ${w.sel} matched no text on ${w.route} at ${width}. Either the treatment is gone (delete the entry) or it was renamed and this gate is blind`);
+      continue;
+    }
+    await pg.addStyleTag({ content: HIDE });
+    let worstRow = null;
+    let fails = 0;
+    for (const t of tagged) {
+      const m = await worstUnder(pg, t);
+      if (m.error) {
+        violations.push(`wash: ${w.route} at ${width}, .${t.cls} "${t.sample}" could not be photographed: ${m.error}`);
+        continue;
+      }
+      pxMeasured += 1;
+      if (!worstRow || m.cr < worstRow.cr) worstRow = { ...m, t };
+      if (m.cr < need(t)) {
+        fails += 1;
+        violations.push(`wash: ${w.route} at ${width}, .${t.cls} ${hexOf(t.fg)} on its worst pixel ${m.bg} is ${m.cr}:1, and ${Math.round(t.size)}px/${t.weight} text needs ${need(t)}:1, e.g. "${t.sample}". The wash or flood under it is past its cap (tokens.css PREMIUM CARDS)`);
+      }
+    }
+    console.log(`  ${w.route} at ${width}  ${w.sel}  ${tagged.length} text element(s), ${fails} below threshold` +
+      (worstRow ? `, worst ${worstRow.cr}:1 (.${worstRow.t.cls} on ${worstRow.bg})` : ''));
+  }
+  await pg.close();
+}
+if (pxMeasured < PX_FLOOR) {
+  violations.push(`wash floor: ${pxMeasured} washed text element(s) measured, and every rule above passes trivially below ${PX_FLOOR}`);
+}
+console.log(`\n  ${pxMeasured} washed or flooded text element(s) measured in pixels`);
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * THE FORM FIELD EDGE, WCAG 1.4.11 (R285-WEB-GEMINI-UIUX P2-12)
+ *
+ * A field at rest is identified by its edge alone, so the edge owes 3:1
+ * against BOTH colours it separates: the field's own fill and the ground
+ * outside it. Read resolved off the rendered page, translucent layers
+ * composited down to the first opaque one. Self test first: the old edge
+ * (--ea-rule-strong, about 1.5:1) is put back on one field and must fail.
+ * ══════════════════════════════════════════════════════════════════════════ */
+const FIELD_ROUTES = ['/contact/', '/faq/', '/glossary/', '/tools/tender-finder/', '/tools/tender-compliance-matrix/'];
+const FIELD_SEL = 'main :is(.field__input, input[type=search], input[type=text], input[type=email], textarea, select)';
+const FIELD_MEASURE = (sel) => {
+  const parse = (c) => {
+    let m = c.match(/^color\(srgb\s+([\d.eE+-]+)\s+([\d.eE+-]+)\s+([\d.eE+-]+)(?:\s*\/\s*([\d.eE+-]+))?\s*\)$/);
+    if (m) return [+m[1] * 255, +m[2] * 255, +m[3] * 255, m[4] === undefined ? 1 : +m[4]];
+    m = c.match(/^rgba?\(([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.%]+))?\)$/);
+    if (m) return [+m[1], +m[2], +m[3], m[4] === undefined ? 1 : (m[4].endsWith('%') ? parseFloat(m[4]) / 100 : +m[4])];
+    return null;
+  };
+  const over = (f, g) => f.slice(0, 3).map((v, i) => v * f[3] + g[i] * (1 - f[3]));
+  const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+  const L = (c) => 0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2]);
+  const ratio = (a, b) => { const x = L(a), y = L(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const ground = (el) => {
+    const layers = [];
+    for (let n = el; n; n = n.parentElement) {
+      const c = parse(getComputedStyle(n).backgroundColor);
+      if (c && c[3] > 0) { layers.push(c); if (c[3] === 1) break; }
+    }
+    let acc = layers.length && layers[layers.length - 1][3] === 1 ? layers.pop().slice(0, 3) : [255, 255, 255];
+    for (let i = layers.length - 1; i >= 0; i--) acc = over(layers[i], acc);
+    return acc;
+  };
+  return [...document.querySelectorAll(sel)].filter((el) => el.getBoundingClientRect().width > 0 && getComputedStyle(el).borderTopStyle !== 'none').map((el) => {
+    const cs = getComputedStyle(el);
+    const outside = el.parentElement ? ground(el.parentElement) : [255, 255, 255];
+    const inside = ground(el);
+    const edge = parse(cs.borderTopColor) || [0, 0, 0, 0];
+    const e = over(edge, outside);
+    const cr = Math.min(ratio(e, outside), ratio(e, inside));
+    return { cls: [...el.classList].filter((c) => !/^astro-/.test(c)).join('.') || el.tagName.toLowerCase(), cr: Math.round(cr * 100) / 100, w: parseFloat(cs.borderTopWidth) };
+  });
+};
+{
+  const pg = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+  await pg.goto(base + '/contact/', { waitUntil: 'load' });
+  await pg.addStyleTag({ content: '.field__input { border-color: var(--ea-rule-strong) !important; }' });
+  const probe = (await pg.evaluate(FIELD_MEASURE, FIELD_SEL)).filter((r) => r.cls.includes('field__input'));
+  if (!probe.length || probe.every((r) => r.cr >= 3)) {
+    violations.push(`field edge self test DID NOT FIRE: the old 1.5:1 edge was put back on /contact/ and ${probe.length ? `the lowest read ${Math.min(...probe.map((r) => r.cr))}:1` : 'no field was found'}`);
+  } else {
+    console.log(`  ok    field self test: the old edge reads ${Math.min(...probe.map((r) => r.cr))}:1 on /contact/, caught`);
+  }
+  let fields = 0;
+  for (const width of [1440, 390]) {
+    await pg.setViewportSize({ width, height: 1000 });
+    for (const route of FIELD_ROUTES) {
+      const res = await pg.goto(base + route, { waitUntil: 'load' });
+      if (!res || res.status() !== 200) { violations.push(`field: ${route} answered ${res ? res.status() : 'nothing'}`); continue; }
+      const rows = await pg.evaluate(FIELD_MEASURE, FIELD_SEL);
+      fields += rows.length;
+      const bad = rows.filter((r) => r.cr < 3);
+      console.log(`  ${route} at ${width}  ${rows.length} field(s), lowest edge ${rows.length ? Math.min(...rows.map((r) => r.cr)) : '-'}:1`);
+      for (const r of bad) violations.push(`field: ${route} at ${width}, .${r.cls} edge is ${r.cr}:1 against its fill or its ground, and a control's edge needs 3:1 (WCAG 1.4.11). The edge is --field-edge in tokens.css`);
+    }
+  }
+  if (fields < 8) violations.push(`field floor: ${fields} field(s) measured, the rule passes trivially below 8`);
+  await pg.close();
+}
+
 await browser.close();
 server.close();
 

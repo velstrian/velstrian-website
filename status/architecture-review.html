@@ -3,7 +3,8 @@
      A copy that can drift is a defect, so status/check-architecture-copy.mjs compares
      the two and fails if they diverge. Edit the SOURCE, then re-copy.
      [R285-REBRAND refresh 2026-10-24] Re-synced after the Velstrian rebrand: title, product
-     framing and the live app and portal host labels moved to velstrian.com. The review body
+     framing, headings and visible labels moved to Velstrian Tenderworks, Velstrian Bid and
+     Velstrian Buy, and the live app and portal host labels to velstrian.com. The review body
      remains the Release 2.7 revalidation of 2026-08-16 and its measured figures carry that date. -->
 <!-- Contents re-measured against production 2026-08-19; prod commit 37173e87. -->
 <!DOCTYPE html>
@@ -705,8 +706,8 @@
                 <div class="logo-group">
                     <div class="logo-icon">C</div>
                     <div class="logo-text">
-                        <h1>CrowAgent Platform Architecture Review</h1>
-                        <p>Flagship: CrowMark Bid & Tender Intelligence</p>
+                        <h1>Velstrian Tenderworks Platform Architecture Review</h1>
+                        <p>Flagship: Velstrian Bid, Bid and Tender Intelligence</p>
                     </div>
                 </div>
 
@@ -731,7 +732,7 @@
                         <span>🏗️</span> Architecture &amp; AI Deep-Dive
                     </button>
                     <button class="tab-btn" onclick="switchTab('benchmark-tab')">
-                        <span>📊</span> CrowMark Capability &amp; Top 5 Rating
+                        <span>📊</span> Velstrian Bid Capability &amp; Top 5 Rating
                     </button>
                     <button class="tab-btn" onclick="switchTab('pricing-tab')">
                         <span>💷</span> Pricing Decision &amp; Four-Surface Parity
@@ -811,7 +812,7 @@
                     <ul class="feature-list">
                         <li class="feature-item">
                             <span class="feature-icon">✓</span>
-                            <div><strong>Product isolation, corrected:</strong> the dead products are removed from every type union, not archived to standalone repos as this said. The registry holds <span class="code-path">crowmark</span> and <span class="code-path">council</span> (displaying as CrowMark Buyer) and nothing else.</div>
+                            <div><strong>Product isolation, corrected:</strong> the dead products are removed from every type union, not archived to standalone repos as this said. The registry holds <span class="code-path">crowmark</span> and <span class="code-path">council</span> (displaying as Velstrian Buy) and nothing else.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">✓</span>
@@ -823,7 +824,7 @@
                         </li>
                         <li class="feature-item">
                             <span style="color:var(--warning)">!</span>
-                            <div><strong>Retained engines, one confirmed and one overstated.</strong> The PPN 006 Carbon Reduction Plan engine is real and inside CrowMark (<span class="code-path">api/app/services/crowmark_carbon_plan.py</span>), with the mandatory Scope-3 categories fenced as a frozen set at import. The &ldquo;Cyber Essentials due-diligence verifier&rdquo; is <strong>one of four consistency checks</strong> with the states <span class="code-path">consistent / unverifiable / discrepancy</span>, explicitly not a judgement. Calling it a verifier overstates it.</div>
+                            <div><strong>Retained engines, one confirmed and one overstated.</strong> The PPN 006 Carbon Reduction Plan engine is real and inside Velstrian Bid (<span class="code-path">api/app/services/crowmark_carbon_plan.py</span>), with the mandatory Scope-3 categories fenced as a frozen set at import. The &ldquo;Cyber Essentials due-diligence verifier&rdquo; is <strong>one of four consistency checks</strong> with the states <span class="code-path">consistent / unverifiable / discrepancy</span>, explicitly not a judgement. Calling it a verifier overstates it.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">&#10003;</span>
@@ -940,7 +941,7 @@
                     <span class="code-path">supabase/migrations/20260530120001_council_foundations.sql</span>; a bare-name search
                     misses it because migrations carry date prefixes, which is worth recording as the false-negative it would have
                     produced. One caveat: <span class="code-path">esg_carbon_engine.py</span> survives only because
-                    <span class="code-path">carbon_service.py</span> imports it, and is marked KEEP rather than being a CrowMark
+                    <span class="code-path">carbon_service.py</span> imports it, and is marked KEEP rather than being a Velstrian Bid
                     engine.
                 </p>
             </div>
@@ -1176,10 +1177,10 @@
                 </div>
             </div>
 
-            <!-- Section 5: AI Capabilities in Platform for CrowMark -->
+            <!-- Section 5: AI Capabilities in Platform for Velstrian Bid -->
             <div class="section-header" style="margin-top: 3.5rem;">
                 <div class="section-tag">Core AI Intelligence</div>
-                <h2 class="section-title">Platform AI Capabilities Engine for CrowMark</h2>
+                <h2 class="section-title">Platform AI Capabilities Engine for Velstrian Bid</h2>
                 <p class="section-desc">
                     Comprehensive overview of the specialized AI systems powering precision bid drafting, compliance verification, and advisory evaluation.
                 </p>
@@ -1364,8 +1365,8 @@
                     &mdash; unauthenticated, 2026-08-19 20:31 UTC, HTTP 200.
                 </p>
                 <p style="color:var(--text-main);margin-top:.5rem">
-                    <span class="code-path">source: "stripe"</span> &middot; CrowMark Starter 49 / 44 &middot; CrowMark Pro 149 / 134 &middot;
-                    CrowMark Portfolio <span class="code-path">{ pricing: "contact_sales", sales_only: true }</span>
+                    <span class="code-path">source: "stripe"</span> &middot; Velstrian Bid Starter 49 / 44 &middot; Velstrian Bid Pro 149 / 134 &middot;
+                    Velstrian Bid Portfolio <span class="code-path">{ pricing: "contact_sales", sales_only: true }</span>
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
                     <strong>All four defects the section at the foot of the Pricing tab named are absent from the served payload:</strong>
@@ -1583,7 +1584,7 @@
                     pushed</strong>. The deploy carried 25 commits of R2.7 / R2.7.1 work.
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
-                    <strong>Reported but not verified here:</strong> that all 69 CrowMark QA audit findings are closed and that
+                    <strong>Reported but not verified here:</strong> that all 69 Velstrian Bid QA audit findings are closed and that
                     the UI/UX audit is largely closed. Individual CA-numbered commits are visible in the deployed range
                     (CA-005, CA-006, CA-008, CA-009, CA-022, CA-027, CA-040, CA-047 among them), which evidences <em>work</em>,
                     not <em>completeness</em>. <strong>No denominator was re-counted, so 69 of 69 is UNVERIFIED on this page.</strong>
@@ -1861,7 +1862,7 @@
                     <p style="color:#fbbf24;margin-top:.75rem">
                         <strong>Corrected count.</strong> The unnamed list holds <strong>24 product routes</strong>, of which
                         <strong>23 are <span class="code-path">/crowmark/*</span> and one is
-                        <span class="code-path">/public-sector/reports</span></strong>, so &ldquo;24 CrowMark routes&rdquo; is off
+                        <span class="code-path">/public-sector/reports</span></strong>, so &ldquo;24 Velstrian Bid routes&rdquo; is off
                         by one. Four of the 24 are legitimately unnamed (three retired redirects and a tokenised guest link), so
                         <strong>20</strong> are live bookmarkable pages with no registry entry. Denominator: about 56 product
                         routes.
@@ -1927,7 +1928,7 @@
                     <br><strong>2.</strong> The results directory is <strong>gitignored</strong>. The artefacts backing both figures
                     are not committed, so this claim rests on files that a clean checkout does not have.
                     <br><strong>3.</strong> <strong>&ldquo;Colour contrast had never been measured&rdquo; is overstated.</strong>
-                    It is accurate for the CrowMark and buyer routes in both themes; axe has been run on other surfaces in prior
+                    It is accurate for the Velstrian Bid and buyer routes in both themes; axe has been run on other surfaces in prior
                     releases and axe includes the contrast rule. Stated as an absolute it is false.
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
@@ -1994,7 +1995,7 @@
                     </p>
                     <p style="color:var(--text-main);margin-top:.75rem">
                         Entitlement-gated on delivery tracking and the opportunity feed, with a reachability test, and reachable
-                        from the CrowMark header menu.
+                        from the Velstrian Bid header menu.
                     </p>
                     <p style="color:var(--text-main);margin-top:.75rem">
                         <strong>The reason it is here is the reason it nearly was not.</strong> The panel and its typed client had
@@ -2012,9 +2013,9 @@
             
             <div class="section-header">
                 <div class="section-tag">Market & Capability Benchmark</div>
-                <h2 class="section-title">CrowMark Capability Analysis & Top 5 Rating Scorecard</h2>
+                <h2 class="section-title">Velstrian Bid Capability Analysis & Top 5 Rating Scorecard</h2>
                 <p class="section-desc">
-                    This tab described itself as an &ldquo;honest comparative evaluation of CrowMark today against the leading
+                    This tab described itself as an &ldquo;honest comparative evaluation of Velstrian Bid today against the leading
                     global AI bid, tender and RFP management solutions&rdquo;.
                 </p>
             </div>
@@ -2050,7 +2051,7 @@
 
             <p class="section-desc" style="margin-top:1.5rem">
                 <strong>One factual correction inside the refuted material</strong>, because a wrong number about our own product
-                is a different class of error from an unsourced score. The row below listed CrowMark as
+                is a different class of error from an unsourced score. The row below listed Velstrian Bid as
                 &ldquo;&pound;49 to &pound;399 / mo&rdquo;. <strong>&pound;399 is a retired price.</strong> The published ladder is
                 <strong>Starter &pound;49, Pro &pound;149, Portfolio quote-only</strong>, verified against the live pricing
                 endpoint and the marketing site on 2026-08-16. It is corrected in the table.
@@ -2077,7 +2078,7 @@
                     <div class="card-header">
                         <div class="card-title">
                             <div class="card-icon">🏆</div>
-                            CrowMark Overall Market Rating
+                            Velstrian Bid Overall Market Rating
                         </div>
                         <span class="pill pill-rose" style="font-size: 1rem;"><s>9.3 / 10.0</s> REFUTED</span>
                     </div>
@@ -2143,7 +2144,7 @@
                     <thead>
                         <tr>
                             <th>Evaluation Criterion</th>
-                            <th class="crowmark-col">CrowMark (Today)</th>
+                            <th class="crowmark-col">Velstrian Bid (Today)</th>
                             <th>Loopio</th>
                             <th>Responsive (RFPIO)</th>
                             <th>AutoRFP.ai</th>
@@ -2250,7 +2251,7 @@
                 <div class="section-tag">Competitor Deep Dives</div>
                 <h2 class="section-title">Head-to-Head Product Comparisons</h2>
                 <p class="section-desc">
-                    <span class="pill pill-rose">REFUTED</span> Every strength, weakness, price band and &ldquo;CrowMark
+                    <span class="pill pill-rose">REFUTED</span> Every strength, weakness, price band and &ldquo;Velstrian Bid
                     Advantage&rdquo; below is unsourced. The competitor positioning may well be broadly right, and that is exactly
                     the problem: a plausible unsourced claim is harder to catch than an implausible one. Retained on the record.
                 </p>
@@ -2268,7 +2269,7 @@
                     <ul class="feature-list" style="margin-top: 0.75rem;">
                         <li class="feature-item"><strong>Strengths:</strong> Deep content library management, extensive integrations with Salesforce & Slack.</li>
                         <li class="feature-item"><strong>Weaknesses:</strong> Quote-only pricing, zero UK public procurement feeds, no PPN 002/006 statutory frameworks.</li>
-                        <li class="feature-item"><strong>CrowMark Advantage:</strong> 10x cheaper entry, native GOV.UK tender discovery, verbatim citation grounding.</li>
+                        <li class="feature-item"><strong>Velstrian Bid Advantage:</strong> 10x cheaper entry, native GOV.UK tender discovery, verbatim citation grounding.</li>
                     </ul>
                 </div>
 
@@ -2283,7 +2284,7 @@
                     <ul class="feature-list" style="margin-top: 0.75rem;">
                         <li class="feature-item"><strong>Strengths:</strong> AI proposal generation, multi-language support, complex project management.</li>
                         <li class="feature-item"><strong>Weaknesses:</strong> Steep learning curve, expensive for SMEs, lacks buyer-side advisory pre-read.</li>
-                        <li class="feature-item"><strong>CrowMark Advantage:</strong> Self-serve onboarding, built-in UK social value scoring, Word copilot.</li>
+                        <li class="feature-item"><strong>Velstrian Bid Advantage:</strong> Self-serve onboarding, built-in UK social value scoring, Word copilot.</li>
                     </ul>
                 </div>
 
@@ -2298,7 +2299,7 @@
                     <ul class="feature-list" style="margin-top: 0.75rem;">
                         <li class="feature-item"><strong>Strengths:</strong> Fast setup, clean modern interface, automated draft generation.</li>
                         <li class="feature-item"><strong>Weaknesses:</strong> Lacks UK public procurement discovery, no PPN social value calculations.</li>
-                        <li class="feature-item"><strong>CrowMark Advantage:</strong> Transparent £49/mo Starter tier, Procurement Act compliance, 7-source grounding.</li>
+                        <li class="feature-item"><strong>Velstrian Bid Advantage:</strong> Transparent £49/mo Starter tier, Procurement Act compliance, 7-source grounding.</li>
                     </ul>
                 </div>
 
@@ -2313,7 +2314,7 @@
                     <ul class="feature-list" style="margin-top: 0.75rem;">
                         <li class="feature-item"><strong>Strengths:</strong> Sophisticated LLM prose generation for complex bid narratives.</li>
                         <li class="feature-item"><strong>Weaknesses:</strong> Prohibitively expensive for UK SMEs, requires high-touch sales process.</li>
-                        <li class="feature-item"><strong>CrowMark Advantage:</strong> Published SME pricing (£49 and £149, top tier quote-only), and a dual-sided buyer and supplier platform. <span style="color:var(--text-dim);font-size:.75rem">CORRECTED, said "£49-£399/mo"</span></li>
+                        <li class="feature-item"><strong>Velstrian Bid Advantage:</strong> Published SME pricing (£49 and £149, top tier quote-only), and a dual-sided buyer and supplier platform. <span style="color:var(--text-dim);font-size:.75rem">CORRECTED, said "£49-£399/mo"</span></li>
                     </ul>
                 </div>
             </div>
@@ -2360,7 +2361,7 @@
                     <span class="code-path">packages/pricing/catalogue.ts</span> (lines 231&ndash;283). The eight competing seat
                     declarations catalogued in Section 3 are gone as DECLARATIONS: the surviving files derive from the catalogue
                     instead of restating it. <span class="code-path">web/src/shared/lib/billing/seat-limits.ts:144&ndash;166</span>
-                    builds CrowMark's row by calling <span class="code-path">catalogueSeatLimit()</span> and holds no literal.
+                    builds Velstrian Bid's row by calling <span class="code-path">catalogueSeatLimit()</span> and holds no literal.
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
                     <strong>What was NOT re-measured today, named rather than glossed.</strong> The live Stripe account was not
@@ -2377,11 +2378,11 @@
                     <div class="card-header"><div class="card-title"><span class="card-icon">&#128230;</span> Products sellable</div></div>
                     <div style="font-size:2.2rem;font-weight:800;color:var(--secondary-light);line-height:1">1</div>
                     <p style="color:var(--text-muted);margin-top:.4rem">
-                        CrowMark. <span class="pill pill-emerald">VERIFIED 2026-08-16</span> Confirmed by fetching
+                        Velstrian Bid. <span class="pill pill-emerald">VERIFIED 2026-08-16</span> Confirmed by fetching
                         <span class="code-path">app.crowagent.ai/api/public/pricing</span>: the response carries exactly one
                         product key, <span class="code-path">crowmark</span>.
                         <strong>Correction:</strong> the platform holds <em>two</em> products in
-                        <span class="code-path">web/src/shared/product/registry.ts</span>, CrowMark and the Public Sector
+                        <span class="code-path">web/src/shared/product/registry.ts</span>, Velstrian Bid and the Public Sector
                         edition (internal key <span class="code-path">council</span>). One is sellable; two exist.
                     </p>
                 </div>
@@ -2390,7 +2391,7 @@
                     <div style="font-size:2.2rem;font-weight:800;color:#fbbf24;line-height:1">19 &rarr; 10</div>
                     <p style="color:var(--text-muted);margin-top:.4rem">
                         <span class="pill pill-amber">CORRECTED</span> 19 active prices on 2026-08-09. The nine Buyer and Public
-                        Sector prices were archived that day under lock §2.4, leaving ten: six CrowMark subscription prices,
+                        Sector prices were archived that day under lock §2.4, leaving ten: six Velstrian Bid subscription prices,
                         three credit top-ups and one metered overage. The top-ups and the overage are now <strong>published</strong>
                         on <span class="code-path">crowagent.ai/pricing/</span>, which they were not.
                         <strong>Not re-read on 2026-08-16</strong>, see the note above.
@@ -2446,7 +2447,7 @@
                 <div class="section-tag">Section 1</div>
                 <h2 class="section-title">What Product Ladders Exist</h2>
                 <p class="section-desc">
-                    Post-R2.6.2 the portfolio is CrowMark and its Public Sector edition. Core, CrowCyber, CrowCash, CrowESG and
+                    Post-R2.6.2 the portfolio is Velstrian Bid and its Public Sector edition. Core, CrowCyber, CrowCash, CrowESG and
                     the CSRD Checker are decommissioned. But &ldquo;decommissioned&rdquo; has meant different things on different
                     surfaces, and two ladders existed in the money system that existed nowhere else.
                 </p>
@@ -2471,13 +2472,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>CrowMark supplier</strong><br><span style="color:var(--text-dim);font-size:.8rem">Free &middot; Starter &middot; Pro &middot; Portfolio</span></td>
+                            <td><strong>Velstrian Bid supplier</strong><br><span style="color:var(--text-dim);font-size:.8rem">Free &middot; Starter &middot; Pro &middot; Portfolio</span></td>
                             <td class="crowmark-col">6 (3 tiers &times; 2 cadences)</td>
                             <td>&#9989;</td><td>&#9989;</td><td>&#9989;</td>
                             <td><span class="score-pill score-high">REAL PRODUCT</span></td>
                         </tr>
                         <tr>
-                            <td><strong>CrowMark Buyer</strong><br><span style="color:var(--text-dim);font-size:.8rem">Essentials &middot; Pro &middot; Enterprise, private sector</span></td>
+                            <td><strong>Velstrian Buy</strong><br><span style="color:var(--text-dim);font-size:.8rem">Essentials &middot; Pro &middot; Enterprise, private sector</span></td>
                             <td class="crowmark-col">0 active <span style="color:var(--text-dim);font-size:.8rem">(was 6, archived 2026-08-09)</span></td>
                             <td>&#10060;</td><td>&#10060;</td><td>&#10060;</td>
                             <td><span class="score-pill score-mid">ARCHIVED</span><br><span style="color:var(--text-dim);font-size:.75rem">was &ldquo;STRIPE ONLY&rdquo;</span></td>
@@ -2551,7 +2552,7 @@
                 <p class="section-desc">
                     <span class="pill pill-rose">SECOND CORRECTION 2026-08-16</span> The version of this page you are reading
                     said the key &ldquo;displays as <strong>Public Sector</strong>&rdquo;. <strong>That is now wrong too.</strong>
-                    The buyer-side product is named <strong>CrowMark Buyer</strong>, declared once at
+                    The buyer-side product is named <strong>Velstrian Buy</strong>, declared once at
                     <span class="code-path">web/src/shared/product/registry.ts:145</span> and read through
                     <span class="code-path">productLabel()</span>. The registry states the reason directly at
                     <span class="code-path">:48&ndash;53</span>: it is named for the side of the table the user sits on, they
@@ -2579,17 +2580,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>CrowMark Starter</strong></td><td>&pound;49</td><td>&pound;529</td>
+                            <td><strong>Velstrian Bid Starter</strong></td><td>&pound;49</td><td>&pound;529</td>
                             <td class="crowmark-col">&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td>
                             <td><span class="score-pill score-high">PRICE PARITY</span></td>
                         </tr>
                         <tr>
-                            <td><strong>CrowMark Pro</strong></td><td>&pound;149</td><td>&pound;1,609</td>
+                            <td><strong>Velstrian Bid Pro</strong></td><td>&pound;149</td><td>&pound;1,609</td>
                             <td class="crowmark-col">&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td>
                             <td><span class="score-pill score-high">PRICE PARITY</span></td>
                         </tr>
                         <tr>
-                            <td><strong>CrowMark Portfolio</strong></td><td>quote</td><td>quote</td>
+                            <td><strong>Velstrian Bid Portfolio</strong></td><td>quote</td><td>quote</td>
                             <td class="crowmark-col">&#9989; <span style="color:var(--text-dim);font-size:.75rem">active, for sales to quote against</span></td>
                             <td><span class="pill pill-emerald">contact_sales</span></td>
                             <td><span class="pill pill-emerald">Contact sales</span></td><td>&#9989;</td>
@@ -2614,19 +2615,19 @@
                             <td><span class="score-pill score-mid">ARCHIVED 2026-08-09</span></td>
                         </tr>
                         <tr>
-                            <td><strong>CrowMark Buyer, small</strong><br><span style="color:var(--text-dim);font-size:.8rem">key <span class="code-path">council_small</span></span></td>
+                            <td><strong>Velstrian Buy, small</strong><br><span style="color:var(--text-dim);font-size:.8rem">key <span class="code-path">council_small</span></span></td>
                             <td>n/a</td><td>&pound;3,600</td>
                             <td class="crowmark-col">&#10060;</td><td>&#10060;</td><td>&#10060;</td><td>&#10060;</td>
                             <td><span class="score-pill score-mid">ARCHIVED 2026-08-09</span></td>
                         </tr>
                         <tr>
-                            <td><strong>CrowMark Buyer, standard</strong><br><span style="color:var(--text-dim);font-size:.8rem">key <span class="code-path">council_standard</span></span></td>
+                            <td><strong>Velstrian Buy, standard</strong><br><span style="color:var(--text-dim);font-size:.8rem">key <span class="code-path">council_standard</span></span></td>
                             <td>n/a</td><td>&pound;9,600</td>
                             <td class="crowmark-col">&#10060; <span style="color:var(--text-dim);font-size:.75rem">had <span class="code-path">tax_behavior</span> unset</span></td><td>&#10060;</td><td>&#10060;</td><td>&#10060;</td>
                             <td><span class="score-pill score-mid">ARCHIVED</span><br><span style="color:var(--text-dim);font-size:.75rem">defect resolved by archiving</span></td>
                         </tr>
                         <tr>
-                            <td><strong>CrowMark Buyer, county</strong><br><span style="color:var(--text-dim);font-size:.8rem">key <span class="code-path">council_county</span></span></td>
+                            <td><strong>Velstrian Buy, county</strong><br><span style="color:var(--text-dim);font-size:.8rem">key <span class="code-path">council_county</span></span></td>
                             <td>n/a</td><td>&pound;19,200</td>
                             <td class="crowmark-col">&#10060; <span style="color:var(--text-dim);font-size:.75rem">had <span class="code-path">tax_behavior</span> unset</span></td><td>&#10060;</td><td>&#10060;</td><td>&#10060;</td>
                             <td><span class="score-pill score-mid">ARCHIVED</span><br><span style="color:var(--text-dim);font-size:.75rem">defect resolved by archiving</span></td>
@@ -2705,7 +2706,7 @@
                 <p class="section-desc">
                     The owner&rsquo;s decision is <strong>Starter = 1 user, Pro = 5 users, Portfolio = 10 users</strong>. A prior
                     consolidation recorded 1 and 5 as &ldquo;understated&rdquo;, raised them to 3 and 10, and the marketing site
-                    was changed to advertise 3 and 10. This section catalogued every place a CrowMark seat number was declared.
+                    was changed to advertise 3 and 10. This section catalogued every place a Velstrian Bid seat number was declared.
                 </p>
                 <p class="section-desc">
                     <span class="pill pill-emerald">CLOSED 2026-08-09, revalidated 2026-08-16</span>
@@ -2765,7 +2766,7 @@
                             <td><strong><span class="code-path">organisations.product_context[].seats_limit</span></strong><br><span style="color:var(--text-dim);font-size:.8rem">re-queried on PRODUCTION 2026-08-16</span></td>
                             <td class="crowmark-col">null</td><td>&ndash;</td><td>null</td>
                             <td>stored data</td>
-                            <td><span class="score-pill score-mid">NO LONGER DISAGREES</span><br><span style="color:var(--text-dim);font-size:.75rem">the 2 and the 1000 are gone from CrowMark rows; see the note below on where 1000 still lives</span></td>
+                            <td><span class="score-pill score-mid">NO LONGER DISAGREES</span><br><span style="color:var(--text-dim);font-size:.75rem">the 2 and the 1000 are gone from Velstrian Bid rows; see the note below on where 1000 still lives</span></td>
                         </tr>
                         <tr>
                             <td><strong><span class="code-path">crowagent.ai/pricing/</span></strong><br><span style="color:var(--text-dim);font-size:.8rem">live rendered text, re-fetched 2026-08-16 (HTTP 200, 80,278 bytes)</span></td>
@@ -2946,9 +2947,9 @@
             <div class="fact-box" style="border-left-color:#10b981">
                 <div class="fact-title"><span>&#9989;</span> The free tier question was the fifth open question. It has been answered</div>
                 <p style="color:var(--text-muted)">
-                    The finding was that the platform shipped a Free CrowMark tier with a real seat count and
+                    The finding was that the platform shipped a Free Velstrian Bid tier with a real seat count and
                     <span class="code-path">CREDIT_ALLOWANCES.crowmark.free = 15</span>, while the marketing site stated
-                    <em>&ldquo;CrowMark is a paid product and there is no free plan.&rdquo;</em> The 15-credit allowance appeared on
+                    <em>&ldquo;Velstrian Bid is a paid product and there is no free plan.&rdquo;</em> The 15-credit allowance appeared on
                     no public surface, a negative that was controlled against a
                     <span class="code-path">200 credits</span> search returning three hits.
                 </p>
@@ -2961,7 +2962,7 @@
                     CHANGED live behaviour rather than transcribing an existing figure.
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
-                    Re-fetched 2026-08-16, the site still says <em>&ldquo;CrowMark is a paid product and there is no free
+                    Re-fetched 2026-08-16, the site still says <em>&ldquo;Velstrian Bid is a paid product and there is no free
                     plan&rdquo;</em>. The difference is that the sentence is now literally true rather than merely asserted.
                 </p>
             </div>
@@ -2972,7 +2973,7 @@
                     Live Stripe metadata on the unpublished Buyer ladder read
                     <span class="code-path">buyer_essentials &rarr; seats: "3"</span> and
                     <span class="code-path">buyer_pro &rarr; seats: "10"</span>. The same pair is what the consolidation raised
-                    CrowMark Starter and Pro to, and <span class="code-path">SEAT_LIMITS.council</span> carried 3 and 10 as well.
+                    Velstrian Bid Starter and Pro to, and <span class="code-path">SEAT_LIMITS.council</span> carried 3 and 10 as well.
                 </p>
                 <p style="color:var(--text-main);margin-top:.75rem">
                     <strong>Still not established, and deliberately left that way.</strong> Nothing measured since has connected
@@ -3003,9 +3004,9 @@
                     <span class="code-path">seats_limit: 1000</span>.
                 </p>
                 <p style="color:var(--text-main);margin-top:.75rem">
-                    <strong>This is where the 1000 sentinel went.</strong> The CrowMark rows now carry
-                    <span class="code-path">seats_limit: null</span>, so the figure this page reported as a CrowMark disagreement
-                    is gone from CrowMark. It survives on slots the registry does not know about.
+                    <strong>This is where the 1000 sentinel went.</strong> The Velstrian Bid rows now carry
+                    <span class="code-path">seats_limit: null</span>, so the figure this page reported as a Velstrian Bid disagreement
+                    is gone from Velstrian Bid. It survives on slots the registry does not know about.
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
                     The registry anticipates exactly this (<span class="code-path">registry.ts:33&ndash;38</span>): the database
@@ -3084,7 +3085,7 @@
                         <tr><td>Pro</td><td class="crowmark-col">750</td><td>&pound;149</td><td>&pound;15.00</td><td>90%</td><td><span class="pill pill-emerald">accepted estimate 2026-08-09</span></td></tr>
                         <tr><td>Portfolio</td><td class="crowmark-col">3,000</td><td>contact sales</td><td>&pound;60.00</td><td>&ge;89% at the quoted price</td><td><span class="pill pill-emerald">accepted estimate 2026-08-09</span></td></tr>
                         <tr><td>Trial (14 days)</td><td class="crowmark-col">50</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="pill pill-emerald">owner decision 2026-08-05</span></td></tr>
-                        <tr><td>CrowMark Buyer, all tiers</td><td class="crowmark-col">no published number</td><td>ladder archived</td><td>n/a</td><td>n/a</td><td><span class="pill pill-amber">unpriced pending a single quoted ladder</span></td></tr>
+                        <tr><td>Velstrian Buy, all tiers</td><td class="crowmark-col">no published number</td><td>ladder archived</td><td>n/a</td><td>n/a</td><td><span class="pill pill-amber">unpriced pending a single quoted ladder</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -3150,7 +3151,7 @@
                         &ldquo;Public Sector&rdquo;.
                     </p>
                     <p style="color:var(--text-main);margin-top:.75rem">
-                        <strong>The buyer-side product is CrowMark Buyer.</strong> Declared once, at
+                        <strong>The buyer-side product is Velstrian Buy.</strong> Declared once, at
                         <span class="code-path">registry.ts:145</span>, read through <span class="code-path">productLabel()</span>,
                         guarded by <span class="code-path">web/__tests__/infra/product-label-is-centralised.test.ts</span>. The
                         registry gives the reason at <span class="code-path">:47&ndash;53</span>: it is named for the side of the
@@ -3185,14 +3186,14 @@
                     <thead><tr><th>Occurrence</th><th class="crowmark-col">Class</th><th>Seen by a customer?</th><th>Cost to change</th></tr></thead>
                     <tbody>
                         <tr>
-                            <td><strong>Stripe product name</strong> <span class="code-path">prod_Up9CZpAwYboTXk</span> = &ldquo;CrowMark Council&rdquo;<br>
-                            <span style="color:var(--text-dim);font-size:.8rem">description: &ldquo;CrowMark Council Edition, &hellip; for UK local authorities. Annual, per-authority tiers (Small / Standard / County).&rdquo;</span></td>
+                            <td><strong>Stripe product name</strong> <span class="code-path">prod_Up9CZpAwYboTXk</span> = &ldquo;Velstrian Bid Council&rdquo;<br>
+                            <span style="color:var(--text-dim);font-size:.8rem">description: &ldquo;Velstrian Bid Council Edition, &hellip; for UK local authorities. Annual, per-authority tiers (Small / Standard / County).&rdquo;</span></td>
                             <td class="crowmark-col"><span class="pill pill-rose">(b) customer-facing</span></td>
                             <td><strong>Yes</strong>, product name renders on Stripe invoices, receipts and Checkout</td>
                             <td><span class="score-pill score-high">FREE</span>, <span class="code-path">name</span> is mutable</td>
                         </tr>
                         <tr>
-                            <td><strong>Stripe nicknames</strong>, &ldquo;Council County (annual)&rdquo;, &ldquo;Council Standard (annual)&rdquo;, &ldquo;CrowMark Council Small authority&rdquo;</td>
+                            <td><strong>Stripe nicknames</strong>, &ldquo;Council County (annual)&rdquo;, &ldquo;Council Standard (annual)&rdquo;, &ldquo;Velstrian Bid Council Small authority&rdquo;</td>
                             <td class="crowmark-col"><span class="pill pill-amber">(a) internal</span></td>
                             <td>No, dashboard label only</td>
                             <td><span class="score-pill score-high">FREE</span>, mutable</td>
@@ -3229,7 +3230,7 @@
                         </tr>
                         <tr>
                             <td><strong>i18n VALUES, UI routes, tier display names, email and PDF labels</strong><br>
-                            <span style="color:var(--text-dim);font-size:.8rem">tiers already display Small / Standard / <strong>Large</strong>; UI route is <span class="code-path">/public-sector</span>; emails and PDFs say &ldquo;CrowMark Public Sector&rdquo;</span></td>
+                            <span style="color:var(--text-dim);font-size:.8rem">tiers already display Small / Standard / <strong>Large</strong>; UI route is <span class="code-path">/public-sector</span>; emails and PDFs say &ldquo;Velstrian Bid Public Sector&rdquo;</span></td>
                             <td class="crowmark-col"><span class="pill pill-emerald">already fixed</span></td>
                             <td>Yes, and correct</td>
                             <td><span class="score-pill score-high">NONE</span>, done, and test-pinned</td>
@@ -3288,9 +3289,9 @@
                     </p>
                     <p style="color:#fbbf24;margin-top:.75rem">
                         <span class="pill pill-amber">SHARPENED 2026-08-16</span> The label this card called correct,
-                        &ldquo;CrowMark Public Sector&rdquo;, is now itself a banned string. The guard
+                        &ldquo;Velstrian Bid Public Sector&rdquo;, is now itself a banned string. The guard
                         <span class="code-path">product-label-is-centralised.test.ts:70</span> matches
-                        <span class="code-path">/CrowMark\s+Public\s+Sector/i</span> as a <em>former</em> brand string and
+                        <span class="code-path">/Velstrian Bid\s+Public\s+Sector/i</span> as a <em>former</em> brand string and
                         carries an EMPTY <span class="code-path">KNOWN_DEBT</span> array at <span class="code-path">:99</span>.
                     </p>
                     <p style="color:var(--text-muted);margin-top:.75rem">
@@ -3526,7 +3527,7 @@
                     </p>
                     <p style="color:var(--text-muted);margin-top:.75rem">
                         <strong>1. The product is no longer a public-sector product.</strong> It is
-                        <strong>CrowMark Buyer</strong>, and the registry now states that a sector label
+                        <strong>Velstrian Buy</strong>, and the registry now states that a sector label
                         &ldquo;excludes private-sector buyers doing the identical job&rdquo;. A sizing axis built on
                         <em>authority type</em> inherits exactly that exclusion, so option 3&rsquo;s public-sector half is now in
                         tension with the product&rsquo;s own name.
@@ -3586,7 +3587,7 @@
                     <div class="rec-title"><span>&#129517;</span> A structural observation, separate from the choice</div>
                     <p style="color:var(--text-muted)">
                         There is a strong argument that <strong>&ldquo;Public Sector&rdquo; should not be a product ladder at all.</strong>
-                        Measured, it is not really a different product from CrowMark Buyer; both are the buy-side of a
+                        Measured, it is not really a different product from Velstrian Buy; both are the buy-side of a
                         procurement, both are advisory, and both size on seats plus assessment volume. The only genuine differences
                         are the <strong>billing mechanics</strong> (annual, invoice/PO, no self-serve checkout) and the
                         <strong>regulatory content</strong> (PPN 002, social value).
@@ -3612,7 +3613,7 @@
                         <span class="pill pill-emerald">THE STRUCTURE WON, and by a third route</span> The observation was that
                         the two buy-side ladders differ only by <em>payment method</em> and <em>content pack</em>, which are not a
                         product line. The product registry has since collapsed them without being asked to: there is exactly one
-                        buy-side product, <strong>CrowMark Buyer</strong>, at
+                        buy-side product, <strong>Velstrian Buy</strong>, at
                         <span class="code-path">registry.ts:136&ndash;152</span>, and both Stripe ladders were archived on the same
                         day. <strong>Three independent passes reaching the same structure is stronger evidence than two</strong>,
                         though it is still evidence about the shape and not about whether to sell it.
@@ -3634,7 +3635,7 @@
                     </p>
                     <p style="color:var(--text-main);margin-top:.75rem">
                         The one free action available immediately, under every branch: <strong>rename the Stripe product
-                        &ldquo;CrowMark Council&rdquo;</strong> and its local-authority-only description. That string reaches invoices,
+                        &ldquo;Velstrian Bid Council&rdquo;</strong> and its local-authority-only description. That string reaches invoices,
                         <span class="code-path">name</span> is mutable, and no branch of any decision keeps it.
                     </p>
                     <p style="color:var(--text-main);margin-top:.75rem">
@@ -3647,7 +3648,7 @@
                     </p>
                     <p style="color:#fbbf24;margin-top:.75rem">
                         <strong>The one free action could not be re-verified on 2026-08-16.</strong> Whether the Stripe product
-                        name still reads &ldquo;CrowMark Council&rdquo; is unknown to this revalidation, because the Stripe
+                        name still reads &ldquo;Velstrian Bid Council&rdquo; is unknown to this revalidation, because the Stripe
                         integration returned an expired token. It is stated as unknown rather than assumed done. One
                         <span class="code-path">GET /v1/products</span> settles it.
                     </p>
@@ -3677,7 +3678,7 @@
                     <span class="pill pill-emerald">DECIDED: FREE IS A STATE</span> Lock §2.2. Zero credits, unpublished, occupied
                     by an organisation before it subscribes. The 15 was the pre-lock estimate and is gone from
                     <span class="code-path">packages/pricing/catalogue.ts:236</span>. The marketing claim
-                    <em>&ldquo;CrowMark is a paid product and there is no free plan&rdquo;</em> is now literally true rather than
+                    <em>&ldquo;Velstrian Bid is a paid product and there is no free plan&rdquo;</em> is now literally true rather than
                     merely asserted, which was the whole complaint.
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
@@ -3741,8 +3742,8 @@
                         </tr>
                         <tr>
                             <td><strong>Was: new, not yet filed</strong></td><td class="crowmark-col"><span class="score-pill score-mid">P2</span></td>
-                            <td>The platform ships a Free CrowMark tier (1 seat, 15 credits) that the marketing site explicitly denies:
-                            <em>&ldquo;CrowMark is a paid product and there is no free plan.&rdquo;</em></td>
+                            <td>The platform ships a Free Velstrian Bid tier (1 seat, 15 credits) that the marketing site explicitly denies:
+                            <em>&ldquo;Velstrian Bid is a paid product and there is no free plan.&rdquo;</em></td>
                             <td><span class="score-pill score-high">CLOSED</span> by <strong>G</strong>. Free is a state at 0 credits, unpublished</td>
                         </tr>
                         <tr>
@@ -4024,7 +4025,7 @@
                     <strong>What is true a week later.</strong> The decisions were taken the same day and executed. Eight of eleven
                     register rows are closed, the eight seat declarations are one, the Terms and the marketing site agree with the
                     code, Free is a state, the credit figures are accepted rather than assumed, and the buy-side product is named
-                    <strong>CrowMark Buyer</strong> for the side of the table its user sits on.
+                    <strong>Velstrian Buy</strong> for the side of the table its user sits on.
                 </p>
                 <p style="color:var(--text-main);margin-top:.75rem">
                     <strong>And the lesson arrived by a different door.</strong> A second unauthenticated pricing endpoint, in the
@@ -4113,7 +4114,7 @@
                     ],
                     datasets: [
                         {
-                            label: 'CrowMark (Today)',
+                            label: 'Velstrian Bid (Today)',
                             data: [9.8, 9.7, 9.5, 8.6, 9.9, 8.4, 9.2, 9.0],
                             backgroundColor: 'rgba(99, 102, 241, 0.25)',
                             borderColor: '#6366f1',

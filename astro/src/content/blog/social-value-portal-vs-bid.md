@@ -95,7 +95,7 @@ Whether you use SVP, Velstrian Bid, or another approach entirely, the important 
 
 Contract profiling, TOMs measure selection, AI narrative drafting, and evidence tracking. Starter is £49 a month for 1 user, Pro £149 for 5. Sign up and start by card, held securely by Stripe and never stored by us.
 
-[Start now](https://app.crowagent.ai/signup)
+[Start now](app:/signup)
 
 ### Related articles
 

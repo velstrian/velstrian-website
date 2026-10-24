@@ -261,7 +261,7 @@
 .h-stage__n {
   font-family: var(--font-mono);
   font-size: var(--t-stat);
-  font-weight: 700;
+  font-weight: 500;
   color: var(--c-text-muted);
   line-height: 1;
 }

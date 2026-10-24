@@ -6,7 +6,7 @@ eyebrow: "Accessibility"
 lastUpdated: "9 August 2026"
 ---
 
-This statement covers the Velstrian marketing website at [velstrian.com](https://velstrian.com/). The application at `app.crowagent.ai` is a separate product and is **not** covered here. It has its own statement, published at [app.crowagent.ai/accessibility](https://app.crowagent.ai/accessibility), and neither statement should be read as evidence for the other: the two are different codebases, tested in different ways, on different dates.
+This statement covers the Velstrian marketing website at [velstrian.com](https://velstrian.com/). The application at `app.crowagent.ai` is a separate product and is **not** covered here. It has its own statement, published at [app.crowagent.ai/accessibility](app:/accessibility), and neither statement should be read as evidence for the other: the two are different codebases, tested in different ways, on different dates.
 
 ## Conformance status
 

@@ -73,9 +73,11 @@
     padding: 0 1rem;
     /* R285-WEB-GEMINI-UIUX P2-12. The edge took --c-border, the card hairline,
        which on a light page measured rgb(233,234,238) on white: the field all
-       but vanished until it had focus. --ea-rule-strong is the system's own
-       stronger rule, set in every scope, so the box reads as a box at rest. */
-    border: 1px solid var(--ea-rule-strong, var(--c-border));
+       but vanished until it had focus. --ea-rule-strong then measured about
+       1.5:1, still under the WCAG 1.4.11 floor of 3:1 for a control's edge, so
+       the edge is its own role, --field-edge (tokens.css), 3:1 or better on
+       both temperatures and measured by check-app-contrast.js. */
+    border: 1px solid var(--field-edge);
     border-radius: var(--radius-chip);
     background: var(--c-card);
     color: var(--c-text);

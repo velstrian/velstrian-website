@@ -398,7 +398,8 @@
  * 14,256 and 14,468 bytes. Measured on 2026-09-01 the site painted mono at 400,
  * 500 and 700. A 700 request now matches the 500 face and the browser
  * synthesises the bold, because DM Mono has no 700. Recorded on R285-REBRAND-05
- * as an open design call (keep the synthesis, or set those labels to 500).
+ * as an open design call, closed 2026-10-24 (R285-WEB-PREMIUM-CARDS-01): every
+ * mono label that asked for 700 now asks for 500, so nothing is synthesised.
  * Not preloaded, as before. */
 @font-face {
   font-family: 'DM Mono';

@@ -1638,25 +1638,6 @@ main .ea-sec * {
   margin-top: calc(var(--space-2) * -1);
 }
 
-/* What it does: the list of capabilities on the left, the chosen one's
-   stage on the right. */
-.ea-caps__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: clamp(var(--space-8), 1rem + 3vw, var(--space-16));
-  align-items: start;
-}
-
-.ea-panel--stack {
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-6);
-  margin-top: 0;
-}
-
-.ea-panel--stack .ea-panel__copy {
-  max-width: var(--ea-copy);
-}
-
 /* Small product screens inside a stage. */
 .ea-mini-table {
   width: 100%;
@@ -3164,9 +3145,18 @@ a.ea-tcard:focus-visible {
   overflow: hidden;
   padding: clamp(var(--space-10), 5vw, 5.5rem) clamp(var(--space-6), 5vw, 5rem);
   border-radius: var(--stage-radius);
-  background: var(--close-bloom), var(--stage-gradient);
+  /* R285-WEB-PREMIUM-CARDS-01 (owner 2026-10-23, "other premium effects on
+     cards and other sections"): the Quantum V rim and a cyan light at the top
+     right, over the stage it already paints. White ink is unchanged on the
+     deep side (4.7:1 or better, tokens.css stage note). */
+  border: 1px solid transparent;
+  background:
+    radial-gradient(ellipse 45% 60% at 100% 0%, color-mix(in srgb, var(--qv-cyan) 34%, transparent), transparent 70%) padding-box,
+    var(--close-bloom) padding-box,
+    var(--stage-gradient) padding-box,
+    var(--card-rim) border-box;
   color: var(--ea-ink);
-  box-shadow: var(--elev-floating);
+  box-shadow: var(--elev-floating), 0 40px 90px -30px var(--card-shadow-deep);
 }
 
 .ea-close__panel::before {
@@ -3329,7 +3319,6 @@ a.ea-tcard:focus-visible {
   }
 
   .ea-panel,
-  .ea-caps__layout,
   .ea-head-row {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-6);

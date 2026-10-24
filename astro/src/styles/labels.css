@@ -353,8 +353,13 @@ thead th,
    * and 500, so a browser asked for 700 would have smeared a faux bold. Reading
    * the fvar table of Assets/fonts/JetBrainsMono-var.woff2 directly gives a
    * wght axis of 400-800, so the face carries a true 700 and the @font-face was
-   * simply under-declaring its own range. It now declares 400 800. */
-  font-weight: 700;
+   * simply under-declaring its own range. It now declares 400 800.
+   *
+   * 2026-10-24, R285-WEB-PREMIUM-CARDS-01: SUPERSEDED BY D309. The mono face
+   * is now DM Mono, which ships static weights and STOPS AT 500, so a 700
+   * request here made the browser synthesise a faux bold. 500 is the heaviest
+   * real weight the face has, and every mono label on the site takes it. */
+  font-weight: 500;
   line-height: var(--lh-tight);
   text-transform: uppercase;
 }

@@ -339,35 +339,35 @@
       }
     },
     "wash-iris-light": {
-      "role": "The corner wash on a white card at its PEAK pixel, website only. quantumIris #6C63FF at 10% over #FFFFFF. Body inks measured on it: ink-0 16.98, ink-1 11.11, muted 5.29, Buy text 4.77. A wash sits on a white card only, never on the cloud page.",
+      "role": "The corner wash on a white card at its PEAK pixel, website only. quantumIris #6C63FF at 20% over #FFFFFF (raised from 10% on 2026-10-24, owner: the 10% wash could not be seen). Body inks measured on it: ink-0 15.00, ink-1 9.82, muted 4.67, Iris text 5.11, Bid text 5.43. A wash sits on a white card only, never on the cloud page.",
       "dark": {
-        "value": "#F0EFFF",
+        "value": "#E2E0FF",
         "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
       },
       "light": {
-        "value": "#F0EFFF",
+        "value": "#E2E0FF",
         "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
       }
     },
     "wash-violet-light": {
-      "role": "The Bid corner wash at its peak, website only. ribbonViolet #A477FF at 10% over #FFFFFF. ink-1 11.38, muted 5.42, Buy text 4.89.",
+      "role": "The Bid corner wash at its peak, website only. ribbonViolet #A477FF at 22% over #FFFFFF (raised from 10% on 2026-10-24). ink-1 10.06, muted 4.79, Bid text 5.57.",
       "dark": {
-        "value": "#F6F1FF",
+        "value": "#EBE1FF",
         "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
       },
       "light": {
-        "value": "#F6F1FF",
+        "value": "#EBE1FF",
         "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
       }
     },
     "wash-cyan-light": {
-      "role": "The Buy corner wash at its peak, website only. signalCyan #31D7C5 at 16% over #FFFFFF. ink-1 11.41, muted 5.43, Buy text 4.90.",
+      "role": "The Buy corner wash at its peak, website only. signalCyan #31D7C5 at 22% over #FFFFFF (raised from 16% on 2026-10-24). ink-1 10.94, muted 5.21, Buy text 4.70.",
       "dark": {
-        "value": "#DEF9F6",
+        "value": "#D2F6F2",
         "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
       },
       "light": {
-        "value": "#DEF9F6",
+        "value": "#D2F6F2",
         "from": "DERIVED, PREMIUM-CARDS-AND-RAILS-SPEC-2026-10-23 section 3.1"
       }
     },

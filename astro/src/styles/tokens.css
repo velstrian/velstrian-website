@@ -4137,9 +4137,9 @@
   --qv-iris: #6C63FF;
   --qv-violet: #A477FF;
   --qv-cyan: #31D7C5;
-  --wash-iris-light: #F0EFFF;
-  --wash-violet-light: #F6F1FF;
-  --wash-cyan-light: #DEF9F6;
+  --wash-iris-light: #E2E0FF;
+  --wash-violet-light: #EBE1FF;
+  --wash-cyan-light: #D2F6F2;
   --wash-iris-dark: #202142;
   --wash-violet-dark: #292542;
   --wash-cyan-dark: #15282F;
@@ -4162,7 +4162,7 @@
     0 2px 6px color-mix(in srgb, var(--c-floor) 30%, transparent),
     0 32px 70px -22px var(--card-shadow-deep);
   --card-lift: -6px;
-  --card-lift-dur: 260ms;
+  --card-lift-dur: var(--dur);
   --card-rim: linear-gradient(135deg, var(--qv-iris), var(--qv-violet) 55%, var(--qv-cyan));
   --spot-ink: color-mix(in srgb, var(--qv-iris) 22%, transparent);
   --spot-size: 280px;
@@ -4182,12 +4182,26 @@
   --rail-card-w: clamp(264px, 78vw, 340px);
   --rail-peek-fade: linear-gradient(90deg, #000 0, #000 calc(100% - 48px), transparent 100%);
 
-  --wedge-depth: clamp(28px, 4vw, 56px);
+  /* 3 degrees across the window (tan 3deg is about 5.2%), 28px on a phone. */
+  --wedge-depth: clamp(28px, 5.2vw, 80px);
+
+  /* The Quantum V tile keyline on a dark ground (platform
+     QUANTUM_V_TILE_KEYLINE, b8fe4adfd): quantumIris, 4.56:1 on the tile and
+     3.78:1 or better on every dark ground. Width in viewBox units of 120. */
+  /* The form field edge at rest (R285-WEB-GEMINI-UIUX P2-12, WCAG 1.4.11):
+     3:1 or better against the field on both temperatures, measured by
+     check-app-contrast.js. Dark: about 4.2:1 on the glass card. */
+  --field-edge: color-mix(in srgb, var(--c-text) 45%, transparent);
+  --mark-keyline: var(--qv-iris);
+  --mark-keyline-w: 3;
 }
 
 .band--light,
 .band--light-alt,
 .on-light {
+  --mark-keyline: none;
+  /* Light: ink at 50% on white, 3.6:1. */
+  --field-edge: color-mix(in srgb, var(--c-ink-0) 50%, transparent);
   --card-wash-iris: var(--wash-iris-light);
   --card-wash-violet: var(--wash-violet-light);
   --card-wash-cyan: var(--wash-cyan-light);

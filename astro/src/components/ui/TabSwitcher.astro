@@ -99,20 +99,13 @@ interface Props {
    * selected tab paints its own fill. Off by default.
    */
   stack?: 'narrow';
-  /**
-   * `autoplay` (owner report 2026-10-23, "screens are not automatically
-   * switching"): the tabs move on by themselves, once through, resting on the
-   * last, with a pause and play button under the list. The timer is the
-   * site's one automatic advance, scripts/autoplay.ts: never under reduced
-   * motion or on a phone, held while hovered, focused or off screen, and
-   * stopped for good the moment the reader picks a tab. Hover and focus count
-   * over the closest `[data-tabs-scope]`, so a call site can include its
-   * panels. Off by default, so /pricing and the audience tabs never move.
-   */
-  autoplay?: boolean;
+  /* `autoplay` (2026-10-23) WAS REMOVED ON 2026-10-24 with its only caller,
+     the home page Capabilities tabs, which the bento replaced (owner,
+     R285-WEB-PREMIUM-CARDS-01). The pages that load tabs.ts no longer fetch
+     scripts/autoplay.ts for it. */
 }
 
-const { label, tabs, defaultId, orientation = 'horizontal', stack, autoplay = false } = Astro.props;
+const { label, tabs, defaultId, orientation = 'horizontal', stack } = Astro.props;
 const vertical = orientation === 'vertical';
 
 const fallbackId = defaultId ?? tabs[0]?.id;
@@ -157,7 +150,6 @@ const offSelectors = tabs
   .filter((t) => t.id !== fallbackId && SAFE_ID.test(t.id))
   .map((t) => `#${t.id}:not([role="tabpanel"]){display:none}`)
   .join('');
-import Icon from '../evidenced/Icon.astro';
 ---
 
 <div class="tabsw" data-tabs data-tabs-label={label} data-orientation={vertical ? 'vertical' : undefined} data-stack={stack}>
@@ -198,15 +190,6 @@ import Icon from '../evidenced/Icon.astro';
     ))
   }
 </div>
-{/* Outside the tablist, which may hold only tabs. Hidden until a timer runs. */}
-{autoplay && (
-  <div class="tabsw__auto" data-tabs-auto hidden>
-    <button class="control tabsw__toggle" type="button" data-tabs-toggle aria-label="Pause moving through the tabs">
-      <Icon name="pause" size={20} class="ea-auto__pause" />
-      <Icon name="resume" size={20} class="ea-auto__play" />
-    </button>
-  </div>
-)}
 
 {/* Emitted unconditionally: with a single tab `offSelectors` is empty and this
     appends an inert stylesheet, which is cheaper to reason about than a
@@ -238,19 +221,6 @@ import Icon from '../evidenced/Icon.astro';
 */}
 
 <style>
-  .tabsw__auto {
-    margin-top: var(--space-3);
-  }
-
-  .tabsw__toggle {
-    display: inline-grid;
-    place-items: center;
-    width: var(--v3-btn-h);
-    height: var(--v3-btn-h);
-    padding: 0;
-    border-radius: var(--v3-radius-btn);
-  }
-
   /* The `.tabsw-auto` wrapper, the stepper buttons and the phone fade that was
      scoped to them were removed on 2026-10-17 with their only caller,
      ProductScreens.astro. Measured before and after on /pricing at 1440 and

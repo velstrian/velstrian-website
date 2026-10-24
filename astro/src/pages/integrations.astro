@@ -78,6 +78,7 @@ import PageHero from '../components/evidenced/PageHero.astro';
 import SectionBand from '../components/evidenced/SectionBand.astro';
 import Action from '../components/evidenced/Action.astro';
 import IconTile from '../components/evidenced/IconTile.astro';
+import Rail from '../components/ui/Rail.astro';
 import Icon from '../components/evidenced/Icon.astro';
 import Close from '../components/evidenced/Close.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
@@ -189,10 +190,10 @@ const WEBHOOK = [
     standfirst="Single sign on through any SAML 2.0 identity provider, with users provisioned and deprovisioned from your directory rather than from a spreadsheet."
     id="sso"
   >
-    <ul class="ea-cards" role="list">
+    <Rail label="Identity providers" count={IDENTITY.length}>
       {
         IDENTITY.map((s) => (
-          <li data-reveal>
+          <li>
             <div class="ea-card ea-tcard">
               <IconTile name="lock" />
               <h3 class="ea-h3">{s.name}</h3>
@@ -202,7 +203,7 @@ const WEBHOOK = [
           </li>
         ))
       }
-    </ul>
+    </Rail>
     <div class="ea-card ea-tcard int-solo" data-reveal>
       <h3 class="ea-h3">What comes with it</h3>
       <ul class="int-ticks" role="list">

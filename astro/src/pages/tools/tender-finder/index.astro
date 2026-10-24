@@ -116,6 +116,9 @@ const schema = [
 
   <Band tone="light" id="finder" labelledby="tf-title">
     <div class="ea-wrap">
+    {/* The search has its own heading, so the outcome panels below (h3) sit under
+       an h2 and never jump a level from the page h1 (check-design-system). */}
+    <h2 class="visually-hidden" id="tf-search-h">Search open tenders</h2>
     <form class="form tf-form ea-card" id="tf-form" novalidate>
       <div class="field">
         <label class="field__label" for="tf-keyword">Keyword</label>

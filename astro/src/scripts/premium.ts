@@ -12,6 +12,12 @@
  *    follows the pointer inside a card (--spot-x and --spot-y). One delegated
  *    listener, written once per frame. Never on touch.
  *
+ * 3. THE NAV'S TEMPERATURE (R285-WEB-GEMINI-UIUX P1-2). A page that opens on
+ *    a light band renders its header in the light scope (Nav.astro `tone`).
+ *    While a dark band or a stage is under the bar, the scope comes off and
+ *    the opaque bar paints the dark roles, and it goes back over a light
+ *    band. Read once per frame on scroll, from the point just under the bar.
+ *
  * Nothing here starts a timer or a loop, so check-autoplay sees no change.
  */
 
@@ -53,7 +59,7 @@ function initRail(root: HTMLElement): void {
   update();
 }
 
-const SPOT = '.ea-card:not(.ea-card--plain), .ea-bento__tile';
+const SPOT = '.ea-card:not(.ea-card--plain, form), .ea-bento__tile';
 
 function initSpotlight(): void {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || reduced()) return;
@@ -85,6 +91,29 @@ function initSpotlight(): void {
   );
 }
 
+function initNavTone(): void {
+  const nav = document.getElementById('ca-nav');
+  if (!nav || !nav.classList.contains('on-light')) return;
+  let queued = false;
+  const update = (): void => {
+    queued = false;
+    const y = nav.getBoundingClientRect().bottom + 1;
+    const under = document.elementFromPoint(window.innerWidth / 2, y);
+    // An open menu or the palette sits over the page: keep the bar as it is.
+    if (!under || nav.contains(under)) return;
+    const band = under.closest('.band, footer');
+    nav.classList.toggle('on-light', !(band && band.matches('.band--dark, .band--stage, footer')));
+  };
+  const queue = (): void => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue, { passive: true });
+  update();
+}
+
 let started = false;
 
 export function initPremium(): void {
@@ -92,4 +121,5 @@ export function initPremium(): void {
   started = true;
   document.querySelectorAll<HTMLElement>('[data-rail]').forEach(initRail);
   initSpotlight();
+  initNavTone();
 }

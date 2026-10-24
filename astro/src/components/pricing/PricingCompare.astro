@@ -25,6 +25,10 @@ import {
 } from '../../data/pricing';
 
 const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
+/* The recommended plan's column, read from PLANS rather than assumed, so the
+   tint follows the plan if the recommendation ever moves. 1 based, plus one
+   for the feature column. */
+const REC_COL = PLANS.findIndex((p) => p.recommended) + 2;
 ---
 
 <Band tone="light-alt" class="pricing-compare" id="compare" labelledby="compare-title">
@@ -42,8 +46,8 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
     <div class="pricing-compare__details-wrap" data-reveal>
           <h3 class="ea-h3 pricing-compare__subheading">Velstrian Bid</h3>
 
-          <div class="pricing-table-scroll" tabindex="0" role="region" aria-label="Velstrian Bid features by plan, scrollable">
-            <table class="ea-mini-table pricing-table">
+          <div class="pricing-table-scroll pricing-table-scroll--sticky" tabindex="0" role="region" aria-label="Velstrian Bid features by plan, scrollable">
+            <table class="ea-mini-table pricing-table pricing-table--compare" data-rec-col={REC_COL > 1 ? REC_COL : undefined}>
               <caption class="visually-hidden">Velstrian Bid features by plan</caption>
               <thead>
                 <tr>
@@ -183,6 +187,42 @@ const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
 
   .pricing-table {
     min-width: 32rem;
+  }
+
+  /* R285-WEB-GEMINI-UIUX P1-8. The plan header sticks under the nav while the
+     reader scrolls the comparison. A sticky cell sticks to its nearest scroll
+     container, and `overflow-x: auto` on the wrapper made the wrapper that
+     container, so a sticky header there stuck to nothing. Where the table
+     fits (48rem and up, the table's min width is 32rem) the wrapper stops
+     scrolling and the header sticks to the page. Below that the wrapper keeps
+     its sideways scroll and the header scrolls with the table. */
+  @media (min-width: 48rem) {
+    .pricing-table-scroll--sticky {
+      overflow: visible;
+    }
+
+    .pricing-table--compare thead th {
+      position: sticky;
+      top: var(--v3-header-h);
+      z-index: 1;
+      background: var(--ea-raised);
+      box-shadow: inset 0 -1px 0 var(--ea-rule);
+    }
+  }
+
+  /* The recommended plan's column carries a faint Iris wash, header to foot
+     (spec section 7, pricing). The wash is the light peak, 4.77:1 or better
+     for every ink the table uses. */
+  .pricing-table--compare[data-rec-col='2'] :is(th, td):nth-child(2),
+  .pricing-table--compare[data-rec-col='3'] :is(th, td):nth-child(3),
+  .pricing-table--compare[data-rec-col='4'] :is(th, td):nth-child(4) {
+    background-color: var(--card-wash-iris);
+  }
+
+  .pricing-table--compare[data-rec-col='2'] thead th:nth-child(2),
+  .pricing-table--compare[data-rec-col='3'] thead th:nth-child(3),
+  .pricing-table--compare[data-rec-col='4'] thead th:nth-child(4) {
+    color: var(--ea-accent-ink);
   }
 
   .pricing-tick {

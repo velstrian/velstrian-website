@@ -526,7 +526,7 @@
   font-family: var(--font-mono);
   font-size: var(--t-micro);
   color: var(--c-verified);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .pg-bid .bid-timeline__title {
@@ -563,7 +563,7 @@
 .pg-bid .bid-timeline__badge--target {
   background: color-mix(in srgb, var(--c-verified) 25%, transparent);
   color: var(--c-text);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 @media (max-width: 860px) {
@@ -844,7 +844,7 @@
   font-family: var(--font-mono);
   line-height: var(--lh-tight);
   font-size: var(--t-h4);
-  font-weight: 700;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
   color: var(--tone, var(--c-text));
 }

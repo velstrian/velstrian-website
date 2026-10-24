@@ -7,12 +7,22 @@
  * (the same one source the platform reads). Its geometry and colours are never
  * redrawn here. Only the accessible name is dropped, because every caller wraps the
  * mark in a link or a span that already carries the name.
+ *
+ * [R285-FILED-BRAND-DARK-MARK-TILE-01, platform b8fe4adfd] THE DARK GROUND TILE
+ * KEYLINE. On a dark ground (--c-bg #090B12, the tile's own deepSpace) the tile
+ * vanished and the ribbons floated. The tile gets the class `ca-mark-keyline`,
+ * and styles/premium.css strokes it in --mark-keyline (quantumIris, the
+ * brand-iris pigment in brand.source.json, the platform's
+ * QUANTUM_V_TILE_KEYLINE colour) at 3 of 120 units, and drops the stroke in
+ * the light scope, where the dark tile already has its edge. The fill and the
+ * pack geometry are unchanged.
  */
 import mark from '../../styles/quantum-v-mark.svg?raw';
 
 const svg = mark
   .replace(/<title[^>]*>[^<]*<\/title>\s*/, '')
-  .replace('role="img" aria-labelledby="title"', 'aria-hidden="true" focusable="false"');
+  .replace('role="img" aria-labelledby="title"', 'aria-hidden="true" focusable="false"')
+  .replace('<rect ', '<rect class="ca-mark-keyline" ');
 ---
 
 <Fragment set:html={svg} />

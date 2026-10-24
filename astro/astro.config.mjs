@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { APP_ORIGIN } from './src/data/app.ts';
 
 /**
  * Serve `/Assets/...` from the repository root DURING DEV ONLY.
@@ -174,9 +175,39 @@ function rehypeContentCards() {
   };
 }
 
+/**
+ * THE APP HOST IN CONTENT IS ONE LINE (A-391). A Markdown link to the app is
+ * written `app:/signup`, never with a host, and this turns it into
+ * `${APP_ORIGIN}/signup` from src/data/app.ts, so moving the app to a new
+ * domain is the one constant there. A content link that still names an app
+ * host outright FAILS THE BUILD here, which is the guard: a hand typed host
+ * is exactly what would be missed on the day the domain moves. Prose that
+ * mentions the host as words (the legal pages, A-392) is not a link and is
+ * the owner's wording, so it is not touched.
+ */
+const APP_HOST_LINK = /^https?:\/\/app\.[a-z0-9.-]+/i;
+function rehypeAppOrigin() {
+  return (tree, file) => {
+    const walk = (node) => {
+      if (node.type === 'element' && node.tagName === 'a' && node.properties && typeof node.properties.href === 'string') {
+        const href = node.properties.href;
+        if (href.startsWith('app:/')) node.properties.href = APP_ORIGIN + href.slice(4);
+        else if (APP_HOST_LINK.test(href)) {
+          throw new Error(`A-391: ${file?.path ?? 'content'} links to ${href}. Write it as app:${href.replace(APP_HOST_LINK, '')} so the app host stays one line in src/data/app.ts.`);
+        }
+      }
+      if (node.type === 'raw' && typeof node.value === 'string' && /href="https?:\/\/app\./i.test(node.value)) {
+        throw new Error(`A-391: ${file?.path ?? 'content'} has raw HTML linking to an app host. Use a Markdown link to app:/<path>.`);
+      }
+      (node.children || []).forEach(walk);
+    };
+    walk(tree);
+  };
+}
+
 export default defineConfig({
   site: 'https://velstrian.com', // R285-REBRAND-VELSTRIAN-01: velstrian.com is the primary origin (owner 2026-10-18)
-  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards] },
+  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, rehypeAppOrigin] },
   output: 'static',
   trailingSlash: 'ignore',
   // HTML whitespace is collapsed under HTML rules, which is what this site has

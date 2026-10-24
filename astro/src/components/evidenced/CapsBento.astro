@@ -7,9 +7,10 @@
  * A LIGHT band. One large tile for the job a small business came for, writing
  * the answers from its own documents, and four smaller ones in the order the
  * work happens. Every screen is a real capture from the demo account on
- * staging (data/product-captures.real.json), never a drawing. The step by step
- * detail of each one follows in Capabilities, so a reader skims here and goes
- * deeper there. Every number is read from site-facts.json.
+ * staging (data/product-captures.real.json), never a drawing. It REPLACED the
+ * tabbed Capabilities band on 2026-10-24 (owner: the bento replaces it), so
+ * all five are seen at once with no tab to press. The detail of each lives on
+ * /bid/. Every number is read from site-facts.json.
  */
 import Band from './Band.astro';
 import Bento from '../ui/Bento.astro';
@@ -19,7 +20,7 @@ const live = FACTS.sources.live.length;
 const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 0);
 ---
 
-<Band tone="light" class="ea-caps-bento" labelledby="ea-bento-title" id="at-a-glance">
+<Band tone="light" class="ea-caps-bento" labelledby="ea-bento-title" id="what-it-does">
   <div class="ea-wrap">
     <h2 class="ea-h2" id="ea-bento-title" data-reveal>Everything from finding the work to delivering it.</h2>
     <p class="ea-lead" data-reveal>Public or private, small or large. Five jobs, one place, in the order the work happens.</p>
@@ -29,19 +30,19 @@ const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 
           size: 'lg',
           flood: 'end',
           kicker: 'Write',
-          title: 'Answer every question from your own documents',
-          body: 'Each answer is drafted from your past bids, policies and case studies, and every claim shows where it came from.',
+          title: 'Answer from your past answers',
+          body: 'Each answer is drafted from your past bids, policies and case studies, and every claim shows where it came from in your own documents.',
           capture: 'home-car-answer',
         },
         {
           kicker: 'Find',
-          title: 'Contracts that suit you, every morning',
+          title: 'Find contracts that suit you',
           body: `Checked across ${live} official listing sites. Private tenders? Upload them.`,
           capture: 'home-cap-find',
         },
         {
           kicker: 'Decide',
-          title: 'Know which ones to go for',
+          title: 'Decide which ones to go for',
           body: `A score out of ${fitTotal}, with the reasons, before you spend a day on it.`,
           capture: 'home-cap-decide',
         },
@@ -49,7 +50,7 @@ const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 
           size: 'half',
           flood: 'end',
           kicker: 'Check',
-          title: 'Get a colleague to read it',
+          title: 'Get a colleague to check it',
           body: `Invite reviewers at no seat cost: ${GUEST_REVIEWERS.starter} on Starter, ${GUEST_REVIEWERS.pro} on Pro.`,
           capture: 'home-cap-check',
         },
@@ -57,7 +58,7 @@ const fitTotal = FACTS.fit_dimensions.dimensions.reduce((a, d) => a + d.points, 
           size: 'half',
           flood: 'end',
           kicker: 'Deliver',
-          title: 'Keep the promises you made',
+          title: 'Keep track of what you promised',
           body: 'Once you win, your bid becomes a checklist with dates, so nothing slips.',
           capture: 'home-cap-deliver',
         },

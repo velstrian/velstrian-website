@@ -514,7 +514,6 @@ console.log(`
  * (l fails), and with the painted step decoupled from the device (j fails). */
 const AUTO = [
   { route: '/', sel: '[data-rot]', kind: 'rot', toggle: '[data-rot-toggle]' },
-  { route: '/', sel: '.ea-caps__layout[data-tabs-scope]', kind: 'tabs', toggle: '[data-tabs-toggle]' },
   { route: '/', sel: '[data-car]', kind: 'car', toggle: '[data-car-toggle]' },
   { route: '/bid/', sel: '[data-car]', kind: 'car', toggle: '[data-car-toggle]' },
   { route: '/bid/', sel: FC, kind: 'fc', toggle: '[data-fc-toggle]' },

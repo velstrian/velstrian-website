@@ -12,7 +12,7 @@
    else. Imported once, by layouts/Base.astro, so every route reads one copy.
 
    UNLAYERED, like evidenced.css, and written one class heavier than the rules
-   it builds on (`.ea-card:not(.ea-card--plain)`), because evidenced.css sets
+   it builds on (`.ea-card:not(.ea-card--plain, form)`), because evidenced.css sets
    `background` as a shorthand and would otherwise reset the wash whichever
    sheet the bundler emits first.
 
@@ -36,7 +36,7 @@
    ============================================================================ */
 
 /* ── TIER 2, THE DEFAULT CARD ──────────────────────────────────────────────── */
-.ea-card:not(.ea-card--plain) {
+.ea-card:not(.ea-card--plain, form) {
   --card-wash: var(--card-wash-iris);
   --card-wash-pos: 0% 0%;
   --transition-hover:
@@ -52,22 +52,22 @@
 
 /* The second card of each pair takes its wash from the other top corner, so
    a row of three never reads as stripes. */
-.ea-card:not(.ea-card--plain):nth-child(even),
-:nth-child(even) > .ea-card:not(.ea-card--plain):only-child {
+.ea-card:not(.ea-card--plain, form):nth-child(even),
+:nth-child(even) > .ea-card:not(.ea-card--plain, form):only-child {
   --card-wash-pos: 100% 0%;
 }
 
-.pg-bid .ea-card:not(.ea-card--plain),
-.ea-card[data-wash='violet']:not(.ea-card--plain) {
+.pg-bid .ea-card:not(.ea-card--plain, form),
+.ea-card[data-wash='violet']:not(.ea-card--plain, form) {
   --card-wash: var(--card-wash-violet);
 }
 
-.pg-buy .ea-card:not(.ea-card--plain),
-.ea-card[data-wash='cyan']:not(.ea-card--plain) {
+.pg-buy .ea-card:not(.ea-card--plain, form),
+.ea-card[data-wash='cyan']:not(.ea-card--plain, form) {
   --card-wash: var(--card-wash-cyan);
 }
 
-.ea-card[data-wash='iris']:not(.ea-card--plain) {
+.ea-card[data-wash='iris']:not(.ea-card--plain, form) {
   --card-wash: var(--card-wash-iris);
 }
 
@@ -78,7 +78,7 @@
 }
 
 /* ── THE SPOTLIGHT ─────────────────────────────────────────────────────────── */
-.ea-card:not(.ea-card--plain)::before,
+.ea-card:not(.ea-card--plain, form)::before,
 .ea-bento__tile::before {
   content: '';
   position: absolute;
@@ -93,22 +93,33 @@
 
 /* ── THE LIFT (D321) ───────────────────────────────────────────────────────── */
 @media (hover: hover) and (pointer: fine) {
-  .ea-card:not(.ea-card--plain):hover,
+  .ea-card:not(.ea-card--plain, form):hover,
   .ea-bento__tile:hover {
     translate: 0 var(--card-lift);
     box-shadow: var(--elev-card-lift);
   }
 
-  .ea-card:not(.ea-card--plain):hover::before,
+}
+
+/* The spotlight shows only when motion is allowed (check-sheen.js rule 4). */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ea-card:not(.ea-card--plain, form):hover::before,
   .ea-bento__tile:hover::before {
     opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ea-card:not(.ea-card--plain)::before,
+  .ea-card:not(.ea-card--plain, form)::before,
   .ea-bento__tile::before {
     display: none;
+  }
+
+  /* Nothing travels under reduced motion: the lift is 0 (tokens.css) and the
+     only transition left is the edge colour (check-transitions.js). */
+  .ea-card:not(.ea-card--plain, form),
+  .ea-bento__tile {
+    --transition-hover: border-color var(--dur-hover) var(--ease-hover);
   }
 }
 
@@ -209,7 +220,7 @@
   margin: 0;
 }
 
-.ea-bento__copy > p {
+.ea-bento__copy > p:not(.eyebrow, .ea-label) {
   margin: 0;
   color: var(--ea-sub);
   font-size: var(--t-ea-body);
@@ -220,13 +231,11 @@
   font-size: var(--t-v3-h3, var(--t-ea-h3));
 }
 
+/* The capsule hugs its words: the copy column is a grid, which would
+   blockify it to the full track (labels.css, "A CAPSULE MUST SHRINK"). */
 .ea-bento__copy > .ea-bento__kicker {
+  justify-self: start;
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--ea-accent-ink);
 }
 
@@ -253,7 +262,7 @@
   display: block;
   overflow: hidden;
   height: clamp(9rem, 14vw, 12rem);
-  border: 1px solid color-mix(in srgb, var(--c-white) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--stage-ink) 80%, transparent);
   border-right: 0;
   border-bottom: 0;
   border-radius: var(--space-3) 0 0 0;
@@ -270,7 +279,7 @@
 }
 
 .ea-bento__tile[data-flood='end'] .ea-bento__shot {
-  border-bottom: 1px solid color-mix(in srgb, var(--c-white) 80%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--stage-ink) 80%, transparent);
   border-radius: var(--space-3) 0 0 var(--space-3);
 }
 
@@ -284,11 +293,6 @@
 
 .ea-bento__copy > .ea-bento__cap {
   margin: var(--space-2) 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--ea-muted);
 }
 
 .band--dark .ea-bento__tile {
@@ -330,6 +334,13 @@
     padding-block: 0;
   }
 
+  /* One column: the copy can run long, so it carries the tile's own ground
+     down to its last line and then lets the flood through, which keeps every
+     word on white however many lines it takes (check-app-contrast.js). */
+  .ea-bento__copy {
+    background: linear-gradient(180deg, var(--bento-ground) 0%, var(--bento-ground) calc(100% - var(--space-6)), transparent 100%);
+  }
+
   .ea-bento__tile .ea-bento__shot {
     height: 11rem;
     border-bottom: 0;
@@ -338,7 +349,7 @@
 }
 
 @media (forced-colors: active) {
-  .ea-card:not(.ea-card--plain),
+  .ea-card:not(.ea-card--plain, form),
   .ea-bento__tile {
     background-image: none;
   }
@@ -350,16 +361,13 @@
 }
 
 .ea-rail__track {
-  display: flex;
-  gap: var(--rail-gap);
-  margin: 0;
-  padding: var(--space-3) var(--space-1) var(--space-6);
+  margin: 0 calc(var(--space-2) * -1);
+  padding: var(--space-3) var(--space-2) var(--space-8);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--space-1);
+  scroll-padding-inline: var(--space-2);
   scrollbar-width: none;
-  list-style: none;
   -webkit-mask-image: var(--rail-peek-fade);
   mask-image: var(--rail-peek-fade);
 }
@@ -368,14 +376,22 @@
   display: none;
 }
 
-.ea-rail__track > li {
+.ea-rail__list {
+  display: flex;
+  gap: var(--rail-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ea-rail__list > li {
   display: flex;
   flex: 0 0 var(--rail-card-w);
   min-width: 0;
   scroll-snap-align: start;
 }
 
-.ea-rail__track > li > * {
+.ea-rail__list > li > * {
   flex: 1 1 auto;
 }
 
@@ -416,7 +432,7 @@
   background: var(--ea-raised);
   color: var(--ea-ink);
   cursor: pointer;
-  transition: border-color var(--dur-hover) var(--ease-hover), background-color var(--dur-hover) var(--ease-hover), opacity var(--dur-hover) var(--ease-hover);
+  transition: border-color var(--dur-hover) var(--ease-hover), background-color var(--dur-hover) var(--ease-hover);
 }
 
 @media (hover: hover) {
@@ -436,17 +452,22 @@
 }
 
 /* Three or fewer cards: the same list is the grid, one component, two layouts. */
-.ea-rail--grid .ea-rail__track {
+.ea-rail--grid .ea-rail__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-  overflow: visible;
-  -webkit-mask-image: none;
-  mask-image: none;
+  align-items: stretch;
+}
+
+.ea-rail--grid .ea-rail__list > li {
+  flex: none;
 }
 
 @media print {
-  .ea-rail__track {
+  .ea-rail__list {
     flex-wrap: wrap;
+  }
+
+  .ea-rail__track {
     overflow: visible;
     -webkit-mask-image: none;
     mask-image: none;
@@ -521,20 +542,120 @@
 }
 
 /* The recommended plan keeps its accent role (evidenced.css .ea-plan--rec)
-   and gains the Quantum V rim and the feature depth. Its price stays on the
-   white card, never on a gradient (spec section 7, pricing). */
+   and gains an unmistakable Quantum V rim, 2px, with an Iris glow outside it
+   and the badge in the brand gradient. Its price stays on the white card,
+   never on a gradient (spec section 7, pricing). The 2px edge is static, so
+   nothing shifts. */
 .ea-card.ea-plan--rec,
 .ea-card.ea-plan--rec:hover {
-  border-color: transparent;
+  border: 2px solid transparent;
   background:
-    radial-gradient(120% 90% at 50% 0%, var(--card-wash), transparent var(--card-wash-reach)) padding-box,
+    radial-gradient(120% 70% at 50% 0%, var(--card-wash), transparent var(--card-wash-reach)) padding-box,
     linear-gradient(var(--ea-raised), var(--ea-raised)) padding-box,
     var(--card-rim) border-box;
-  box-shadow: var(--elev-card-feature);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--qv-iris) 12%, transparent),
+    var(--elev-card-feature);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .ea-card.ea-plan--rec:hover {
-    box-shadow: var(--elev-card-lift), var(--elev-card-feature);
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--qv-iris) 16%, transparent),
+      var(--elev-card-lift);
   }
+}
+
+.ea-card.ea-plan--rec .ea-plan__badge {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--btn-brand-from), var(--btn-brand-to));
+  color: var(--stage-ink);
+}
+
+/* ── THE DARK BANDS, SOFTENED (R285-WEB-GEMINI-UIUX P1-1) ──────────────────────
+   The bands stay (the light and dark rhythm is the system, strategy 0.8), and
+   the razor edge goes: a dark band gains depth from a violet light rising at
+   its foot, and a hairline of light on its top and bottom edges, so it reads as
+   a lit surface set into the page rather than a slab cut out of it. A band
+   with a wedge keeps its top edge clean, the slope is its edge. */
+.ea-sec.band--dark {
+  background:
+    var(--band-glow),
+    radial-gradient(ellipse 80% 55% at 50% 100%, color-mix(in srgb, var(--qv-violet) 12%, transparent), transparent 72%),
+    var(--ea-canvas);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--stage-ink) 9%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--stage-ink) 6%, transparent);
+}
+
+.ea-sec.band--dark[data-wedge] {
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--stage-ink) 6%, transparent);
+}
+
+/* A wedged band's top glow would end in a straight line under the slab, so a
+   wedged band carries no top glow and the slope is its only top edge. */
+.ea-sec.band[data-wedge] {
+  --band-glow: none;
+}
+
+/* ── THE AURORA PAUSE CONTROL SITS INSIDE THE HERO (P1-4) ─────────────────────
+   It sat in the hero's bottom corner, on the aurora ribbon, and read as stuck
+   on the seam. Top right of the hero, clear of the ribbon and of every wedge,
+   still 44 by 44 and still hidden until scripts/evidenced.ts shows it. */
+.ea-sec.ea-hero > .ea-motion {
+  top: var(--space-4);
+  bottom: auto;
+}
+
+/* ── RESOURCE COVERS, ONE HUE EACH (P1-7) ─────────────────────────────────────
+   The four covers on /resources/ were one flat indigo. Each now keeps its
+   deep iris ground under the words and takes a light of its own hue from the
+   top right corner, behind its motif, so the row reads as four things rather
+   than one thing four times. White words sit on the deep side (8.16:1 on
+   --c-iris-deep, measured by check-app-contrast.js on the rendered cover). */
+.res-card .res-card__art > .tc {
+  --res-hue: var(--qv-violet);
+  background:
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--res-hue) 92%, transparent), transparent 64%),
+    radial-gradient(55% 80% at 100% 100%, color-mix(in srgb, var(--res-hue) 40%, transparent), transparent 70%),
+    var(--tc-bg);
+}
+
+.res-card .res-card__art > .tc[data-family='matrix'] {
+  --res-hue: var(--qv-cyan);
+}
+
+.res-card .res-card__art > .tc[data-family='finder'] {
+  --res-hue: var(--c-sky);
+}
+
+.res-card .res-card__art > .tc[data-family='library'] {
+  --res-hue: var(--qv-iris);
+}
+
+/* ── THE NAV OVER A DARK BAND (P1-2) ──────────────────────────────────────────
+   The bar stays OPAQUE (Nav.astro, "THE FILL WENT 72% -> 100%", owner
+   2026-08-31). What changes is its temperature: scripts/premium.ts takes the
+   light scope off the header while a dark band or a stage is under it, so it
+   paints the dark roles, and puts it back over a light band. The change eases
+   over --dur-slow, and snaps under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  #ca-nav,
+  #ca-nav::before {
+    transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+
+  #ca-nav .ca-logo-word,
+  #ca-nav .ca-nav-links > :is(a, li > a, li > button) {
+    transition: color var(--dur) var(--ease);
+  }
+}
+
+/* ── THE QUANTUM V TILE KEYLINE (R285-FILED-BRAND-DARK-MARK-TILE-01) ──────────
+   components/brand/QuantumVMark.astro marks the tile. On a dark ground the
+   tile is the page's own colour, so it takes the quantumIris keyline; the
+   light scope sets --mark-keyline to none. */
+.ca-mark-keyline {
+  stroke: var(--mark-keyline);
+  stroke-width: var(--mark-keyline-w);
 }

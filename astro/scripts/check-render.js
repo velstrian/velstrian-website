@@ -1233,6 +1233,12 @@ await page.addInitScript(MEASURE_TINY);
 const all = routesOf(DIST);
 const violations = [];
 const tinyTargets = new Map();
+/* R285-WEB-PREMIUM-CARDS-01 (spec section 6.1): a rail bleeds sideways and a
+   bento reflows to one column, so on any route that draws either, the page
+   itself must not scroll sideways at 390. A rail scrolls inside its own track,
+   never the document. Route -> the overflow measured. */
+const sidewaysAt390 = new Map();
+let railRoutes = 0;
 const unequalRows = new Map();
 const bespokeButtons = new Map();
 const unmappedFigures = new Set();
@@ -1473,6 +1479,16 @@ for (const route of all) {
      unaffected by a translate and does not need the wait, which is why it
      stays in front of it. */
   await page.waitForTimeout(500);
+  {
+    const w = await page.evaluate(() => ({
+      has: !!document.querySelector('.ea-rail, .ea-bento'),
+      over: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    }));
+    if (w.has) {
+      railRoutes += 1;
+      if (w.over > 1) sidewaysAt390.set(route, w.over);
+    }
+  }
   /* A-243. The target rule runs here too. The viewport is already at 390 for
      the alignment pass, so this is a second evaluate and not a second load. */
   for (const t of await page.evaluate('window.__measureTiny()')) {
@@ -1570,6 +1586,14 @@ render: ${unequalRows.size} row(s) with buttons of unequal width
  * Reported separately from alignment because it is a separate rule with a
  * separate standard behind it, and because one component repeated across 43
  * routes is one defect rather than 43. */
+console.log(`render: ${railRoutes} route(s) draw a rail or a bento, ${sidewaysAt390.size} scroll sideways at 390`);
+if (sidewaysAt390.size) {
+  console.error('');
+  console.error('render: the page scrolls sideways at 390 on a route with a rail or a bento:');
+  for (const [r, px] of sidewaysAt390) console.error(`  ${r}   ${px}px wider than the viewport`);
+  console.error('  A rail scrolls inside .ea-rail__track, never the document (styles/premium.css).');
+}
+
 if (tinyTargets.size) {
   console.error(`
 render: ${tinyTargets.size} target(s) below the 24px WCAG 2.5.8 minimum
@@ -1841,6 +1865,7 @@ if (
   badLandmark.length ||
   leftBlocks.size ||
   tinyTargets.size ||
+  sidewaysAt390.size ||
   unequalRows.size ||
   bespokeButtons.size ||
   unmappedFigures.size ||

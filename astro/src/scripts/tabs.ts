@@ -109,8 +109,6 @@
    thing this file exists to own.
    ========================================================================== */
 
-import { autoplay, type Autoplay } from './autoplay';
-
 /** A tab and the panel it controls, resolved once at set-up. */
 interface Pair {
   tab: HTMLAnchorElement;
@@ -338,12 +336,6 @@ function setUp(group: HTMLElement): void {
   const panelFor = (id: string): Pair | undefined =>
     pairs.find((p) => p.panel.id === id);
 
-  /* Set below when the switcher was rendered with `autoplay`. Every selection
-     the reader makes goes through `chosen`, which stops the timer for good. */
-  let ap: Autoplay | null = null;
-  const chosen = (id: string): void => {
-    ap?.chose(pairs.findIndex((p) => p.panel.id === id));
-  };
 
   group.addEventListener('click', (event) => {
     const tab = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[data-tab]');
@@ -357,7 +349,6 @@ function setUp(group: HTMLElement): void {
     if (!id || !panelFor(id)) return;
     event.preventDefault();
     select(id, false);
-    chosen(id);
     writeHash(id);
   });
 
@@ -409,7 +400,6 @@ function setUp(group: HTMLElement): void {
     const id = pairs[next].panel.id;
     /* A key press moves focus with the selection, per the roving tabindex. */
     select(id, true);
-    chosen(id);
     writeHash(id);
   });
 
@@ -434,7 +424,6 @@ function setUp(group: HTMLElement): void {
       const owner = pairs.find(({ panel }) => panel === target || panel.contains(target));
       if (!owner || !owner.panel.hidden) return;
       select(owner.panel.id, false);
-      chosen(owner.panel.id);
     },
     true,
   );
@@ -445,7 +434,6 @@ function setUp(group: HTMLElement): void {
     const hit = panelFor(decodeURIComponent(window.location.hash.slice(1)));
     if (hit) {
       select(hit.panel.id, false);
-      chosen(hit.panel.id);
     }
   });
 
@@ -453,26 +441,6 @@ function setUp(group: HTMLElement): void {
   const fallback =
     pairs.find(({ tab }) => tab.dataset.tabDefault !== undefined) ?? pairs[0];
   select((fromHash ?? fallback).panel.id, false);
-
-  /* AUTOPLAY IS BACK, 2026-10-23, OPT IN (TabSwitcher `autoplay`). Owner:
-     "screens are not automatically switching into the sections". The timer is
-     the shared device in scripts/autoplay.ts, not a copy of the one removed
-     on 2026-10-17. A URL that names a panel is the reader's choice, so the
-     timer never starts over it. */
-  const auto = group.nextElementSibling;
-  const toggle = auto instanceof HTMLElement && auto.matches('[data-tabs-auto]')
-    ? auto.querySelector<HTMLButtonElement>('[data-tabs-toggle]')
-    : null;
-  if (toggle && auto instanceof HTMLElement && !fromHash) {
-    ap = autoplay({
-      root: group.closest<HTMLElement>('[data-tabs-scope]') ?? group,
-      controls: auto,
-      toggle,
-      steps: pairs.length,
-      labels: { pause: 'Pause moving through the tabs', play: 'Play through the tabs' },
-      show: (k) => select(pairs[k].panel.id, false),
-    });
-  }
 
   /*
    * ── AND IT IS RE-MEASURED, BECAUSE A PILL IS NOT A FIXED WIDTH ─────────────
@@ -510,6 +478,7 @@ function setUp(group: HTMLElement): void {
   }
 
   /* The autoplay removed on 2026-10-17 (R285-P2-WEBSITE-ASTRO-GATES-RED-IN-CI-01)
-     went with its only caller. The opt in timer above, added 2026-10-23, is
-     the shared device and check-autoplay.mjs drives it on the home page. */
+     went with its only caller. The opt in timer added 2026-10-23 went the same
+     way on 2026-10-24 with the home page Capabilities tabs, which the bento
+     replaced (R285-WEB-PREMIUM-CARDS-01). */
 }

@@ -34,6 +34,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { WEBP_MASTER, WEBP_RUNG, AVIF } from "./photo-encoders.mjs";
 
+/* 2026-10-24, R285-WEB-PREMIUM-CARDS-01: the five audience photos took the
+   whole build to 14.5 MB against the 14.3 MB budget (check-budgets.js). They
+   are shown at card width, never full bleed, so they take the shared settings
+   one step lighter rather than the budget being raised. Same dimensions on the
+   page, same two widths. */
+const PEOPLE_WEBP_MASTER = { ...WEBP_MASTER, quality: 70 };
+const PEOPLE_WEBP_RUNG = { ...WEBP_RUNG, quality: 68 };
+const PEOPLE_AVIF = { ...AVIF, quality: 50 };
+
 const OUT = path.resolve("Assets/people");
 const SRC = path.join(OUT, "originals");
 
@@ -153,8 +162,8 @@ async function run() {
 
     for (const w of [SMALL, LARGE]) {
       const rung = () => sharp(master).resize(w);
-      const webp = w === LARGE ? WEBP_MASTER : WEBP_RUNG;
-      await emit(rung().avif(AVIF), path.join(OUT, `${photo.base}-${w}.avif`));
+      const webp = w === LARGE ? PEOPLE_WEBP_MASTER : PEOPLE_WEBP_RUNG;
+      await emit(rung().avif(PEOPLE_AVIF), path.join(OUT, `${photo.base}-${w}.avif`));
       await emit(rung().webp(webp), path.join(OUT, `${photo.base}-${w}.webp`));
     }
     for (const w of [SMALL, LARGE]) {
