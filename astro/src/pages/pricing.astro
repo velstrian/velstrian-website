@@ -143,7 +143,10 @@ const UPDATED = new Date('2026-10-22');
     <PricingPlans>
       <div class="pricing-billing" slot="toggle">
         <label for="billing-monthly" class="pricing-billing__seg pricing-billing__seg--m">Monthly</label>
-        <label for="billing-toggle" class="pricing-billing__seg pricing-billing__seg--a">Annual<span class="pricing-billing__long"> billing</span> · Save {SAVE_PCT}%</label>
+        {/* One inner span: the segment is inline-flex, so bare text plus the
+            .pricing-billing__long span became two flex items and the leading
+            space of " billing" was dropped, which read "Annualbilling". */}
+        <label for="billing-toggle" class="pricing-billing__seg pricing-billing__seg--a"><span>Annual<span class="pricing-billing__long"> billing</span> · Save {SAVE_PCT}%</span></label>
       </div>
     </PricingPlans>
     <PricingCredits />
