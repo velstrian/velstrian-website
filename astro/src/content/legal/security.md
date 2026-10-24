@@ -41,7 +41,7 @@ Velstrian Systems Ltd is registered with the Information Commissioner's Office a
 
 The detail behind each control, written for security and procurement teams. Jump to any topic, or contact us for an audit pack.
 
-<aside aria-label="Security contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Security Contact</strong> <p>For security disclosures or audit requests, contact our security team at <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></p> </div> </aside>
+<aside aria-label="Security contact" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Security contact</p> <p>For security disclosures or audit requests, contact our security team at <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></p> </div> </aside>
 
 ## AES-256 encryption
 

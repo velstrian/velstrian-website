@@ -32,7 +32,7 @@ Tap any card to jump straight to the full clause. The complete agreement follows
 
 The complete agreement, written in plain language. Jump to any clause, or contact us for a Data Processing Agreement.
 
-<aside aria-label="Legal contact" class="legal-aside"> <div class="legal-aside__card"> <strong>Legal contact</strong> <p>For DPA or contract requests, email <a href="mailto:legal@velstrian.com">legal@velstrian.com</a></p> </div> </aside>
+<aside aria-label="Legal contact" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Legal contact</p> <p>For DPA or contract requests, email <a href="mailto:legal@velstrian.com">legal@velstrian.com</a></p> </div> </aside>
 
 ## 1. Parties and Agreement
 

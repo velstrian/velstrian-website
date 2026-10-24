@@ -30,7 +30,7 @@ We use Google Gemini and Anthropic Claude as AI sub-processors. They process the
 
 Every clause below is written for clarity. Jump to any section, or contact our Data Protection Officer with a question.
 
-<aside aria-label="Data Protection Officer" class="legal-aside"> <div class="legal-aside__card"> <strong>Data Protection Officer</strong> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
+<aside aria-label="Data Protection Officer" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Data Protection Officer</p> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
 
 ## Data controller
 

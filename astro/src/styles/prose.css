@@ -541,9 +541,12 @@
     color: var(--c-text-sub);
   }
 
-  /* The label recipe is `.eyebrow` in styles/labels.css, which the aside now
-     carries. This block held a fifth tracking value (0.12em) for the same
-     object. */
+  /* The label recipe is `.ea-label` in styles/evidenced.css, the label every
+     v3 page uses. It was `.eyebrow`, the spectrum capsule, on /cookies only,
+     and the other three cards drew bold text instead (owner report
+     2026-10-24, "not sure if correct"). All four now carry the one plain
+     label: the pale spectrum ink on a white card read weaker than the plain
+     label beside every other heading on the site. */
   .prose .legal-aside__label {
     margin: 0 0 var(--stack-1);
     color: var(--c-ambient-start);
@@ -555,9 +558,12 @@
     line-height: 1.6;
   }
 
-  /* The company name. First paragraph after the label, so it is identified by
-     position rather than by a utility class that no longer resolves. */
-  .prose .legal-aside__label + p {
+  /* The company name on /cookies. It WAS found by position, as the first
+     paragraph after the label, back when only /cookies had a label. On
+     2026-10-24 the other three legal cards took the same label (owner report,
+     one aside drew a capsule and three drew bold text), and their first
+     paragraph is a sentence, not a name, so the name is now named by class. */
+  .prose .legal-aside__name {
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--c-text);
