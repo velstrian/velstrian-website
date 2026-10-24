@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T23:16:24.183Z",
+  "updated": "2026-10-24T06:45:44.949Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -867,8 +867,8 @@
       "src": "gemini-uiux-audit-2026-10-23",
       "sev": "P2",
       "title": "R285-WEB-GEMINI-UIUX P0-2 remainder: seven markdown files hardcode https://app.crowagent.ai/signup",
-      "status": "OPEN",
-      "note": "Found by the WEB-FIX lane while centralising APP_ORIGIN (cde6c1d5). content/blog frameworks-and-dps-explained, method-statement-that-scores, ppn-026-social-value-guide, private-sector-rfp-pqq-guide, regulatory-updates-2026, social-value-portal-vs-bid, and content/legal/security.md carry a literal [Start now](https://app.crowagent.ai/signup). At the domain switch these do not follow APP_ORIGIN. Fix: a remark or rehype step that rewrites the signup href to SIGNUP_URL, or a token the content pipeline expands, plus a guard that fails on a literal app host in content."
+      "status": "BUILT",
+      "note": "Found by the WEB-FIX lane while centralising APP_ORIGIN (cde6c1d5). content/blog frameworks-and-dps-explained, method-statement-that-scores, ppn-026-social-value-guide, private-sector-rfp-pqq-guide, regulatory-updates-2026, social-value-portal-vs-bid, and content/legal/security.md carry a literal [Start now](https://app.crowagent.ai/signup). At the domain switch these do not follow APP_ORIGIN. Fix: a remark or rehype step that rewrites the signup href to SIGNUP_URL, or a token the content pipeline expands, plus a guard that fails on a literal app host in content. || 2026-10-24 verified on the built site: content links are written app:/signup and rehypeAppOrigin in astro.config.mjs resolves them to APP_ORIGIN, a hand typed app host fails the build. Full chain 43 of 43 green (A3)."
     },
     {
       "id": "A-392",
@@ -877,6 +877,54 @@
       "title": "R285-WEB-GEMINI-UIUX P2-13 follow up: /cookies says the site sets no session storage and makes no requests to anyone else",
       "status": "FIXED",
       "note": "content/legal/cookies.md:18. Measured 2026-10-23: scripts/evidenced.ts:317 keeps one sessionStorage value ea_motion when a reader pauses the hero background, and components/forms/Turnstile.astro loads challenges.cloudflare.com once a form is used. /cookie-preferences/ was corrected in 5f477ddd. The legal page wording is the owner's to approve, so it was not edited. Proposed: This website sets no cookies and no tracking. It keeps one value for the visit if you pause the moving background, and loads Cloudflare's security check when you use a form. | FIXED 2026-10-24, owner approved the wording (\"yes do this\"): /cookies now says no tracking cookies, the Pause choice is one session value ea_motion for the visit, and Cloudflare Turnstile loads only when a form is used. Description, sections 1, 3, 5 and 6 aligned, lastUpdated 2026-10-24."
+    },
+    {
+      "id": "A-393",
+      "src": "owner-review-2026-10-24",
+      "sev": "P1",
+      "title": "R285-WEB-CARDS-01: one card system, padding and radius from tokens, guarded",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, local only, commit d91dd991. Inventory (Playwright, 49 routes, 1440 and 390): 15 card recipes at 1440 before, 9 after, one radius (12px) instead of 12 and 16. --radius-card reads --v3-radius-card, --blk-pad clamp(24px,2.5vw,32px), every card class on a --blk-pad tier, grid 3/2/1 with a 16 to 24px gap. Guard: check-design-system rule 3b, red proved by 18 violations. Full chain 43 of 43 green (A3). Remaining distinct shapes are deliberate tiers: standard, recommended rim, picture card, large panel, plain lookup, resource cover, tender finder limits."
+    },
+    {
+      "id": "A-394",
+      "src": "owner-review-2026-10-24",
+      "sev": "P1",
+      "title": "R285-WEB-NO-CORNER-WASH-01: cards plain by default, Stripe style, wash opt in",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, commit 6dbb35d7. Owner: no card top corner gradient, learn from Stripe. Stripe measured: 4 gradient surfaces of 37 boxes on its home page, 0 of 31 on pricing, 0 of 46 on payments. Tier 2 card carries no wash, .ea-card--wash is the one opt in (only the featured guide on /blog/), the recommended plan keeps rim and glow with a plain inside. Bento floods and stage panels kept, they are Stripe's art panel pattern."
+    },
+    {
+      "id": "A-395",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "R285-WEB-RESOURCES-CARDS-01: /resources/ Methodology and Glossary cards one size, close panel spaced from the band above",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, commits 92768ff6 (subgrid rows, equal height, actions pinned) and d91dd991 (the close band keeps one head gap above the panel on every route, one recipe, check-shared-blocks green). Screenshots in the lane report."
+    },
+    {
+      "id": "A-396",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "R285-WEB-ABOUT-BUTTONS-01: /about/ Bid and Buy buttons share a baseline",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, commit 1df5edc7. Card is a flex column with the action pinned to its foot."
+    },
+    {
+      "id": "A-397",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "R285-WEB-LEGAL-LABEL-01: legal contact cards carry one plain label",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, commit ec247ef2. The /cookies/ Corporate Information spectrum capsule was the only legal card with a label. All four now carry .ea-label in sentence case."
+    },
+    {
+      "id": "A-398",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "R285-WEB-BLOG-INDEX-01: blog index as a grid of picture cards with summaries",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, commit 628a5df7. Category, title and summary clamped to three lines, date and reading time at the foot, featured guide kept with the wash. No filter chips: 12 posts, 9 categories."
     }
   ],
   "directives": [
@@ -946,5 +994,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 393
+  "nextId": 399
 }
