@@ -204,14 +204,15 @@ const n = cards.length;
     gap: var(--space-3);
     min-width: 0;
     overflow: hidden;
-    padding: clamp(var(--space-6), 2.5vw, var(--space-8));
+    padding: var(--blk-pad);
     color: var(--ea-ink);
   }
 
   /* A card that ends on "Read in full" ends on a 44px row, which already
-     carries its own air, so the card's foot padding steps down. */
+     carries its own air, so the card's foot padding steps down, to the
+     smallest card tier rather than a number of its own (2026-10-24). */
   .fc__card:has(> .fc__more:last-child) {
-    padding-bottom: var(--space-3);
+    padding-bottom: var(--blk-pad-2xs);
   }
 
   .fc__n {

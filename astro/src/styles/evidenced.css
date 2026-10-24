@@ -2814,7 +2814,9 @@ main .ea-sec * {
   --cards-cols: 3;
   display: grid;
   grid-template-columns: repeat(var(--cards-cols), minmax(0, 1fr));
-  gap: var(--space-5);
+  /* 16px between cards on a phone, 24px on a desktop (the 2026-10-24 card
+     standard). It was a flat 20px, under the desktop floor. */
+  gap: clamp(var(--space-4), 1.7vw, var(--space-6));
   align-items: stretch;
 }
 
@@ -2836,9 +2838,49 @@ main .ea-sec * {
   flex-direction: column;
   gap: var(--space-3);
   min-width: 0;
-  padding: clamp(var(--space-6), 2.5vw, var(--space-8));
+  padding: var(--blk-pad);
   color: var(--ea-ink);
   text-decoration: none;
+}
+
+/* A text card that leads with a picture (the blog). The picture runs to the
+   card's edges with no padding, at the 16:9 PostImage already draws, and the
+   words take the card padding below it. The meta line sits at the foot, so a
+   row of these ends on one line however long each title runs. */
+.ea-tcard.ea-tcard--media {
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ea-tcard__media {
+  border-bottom: 1px solid var(--ea-rule);
+}
+
+.ea-tcard__media :where(picture, img, figure, div) {
+  border-radius: 0;
+}
+
+.ea-tcard__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--blk-pad);
+}
+
+.ea-tcard__meta {
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+/* Long text in a card ends after three lines, so a row stays even. */
+.ea-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
 }
 
 .ea-tcard p {
@@ -2952,7 +2994,16 @@ a.ea-tcard:focus-visible {
   }
 }
 
+/* Three across, then two on a tablet, then one on a phone. A three card row
+   went straight to one column at 959px, so a tablet showed one card per
+   screen with half the width empty. */
 @media (max-width: 959px) {
+  .ea-cards {
+    --cards-cols: 2;
+  }
+}
+
+@media (max-width: 599px) {
   .ea-cards,
   .ea-cards--2,
   .ea-cards--4 {
@@ -2979,7 +3030,7 @@ a.ea-tcard:focus-visible {
   grid-row: span 6;
   grid-template-rows: subgrid;
   gap: var(--space-3);
-  padding: var(--space-8);
+  padding: var(--blk-pad);
 }
 
 .ea-plans__grid:has(> .ea-plan > :nth-child(7)) > .ea-plan {
@@ -3129,14 +3180,18 @@ a.ea-tcard:focus-visible {
    route at 1440 and 390, owner screenshot 2026-10-23. The band now keeps one
    head gap of dark ground under the panel, and the change from light to dark
    is measured over the panel alone, so it still falls at the panel's middle. */
+/* AND ONE HEAD GAP ABOVE IT, 2026-10-24. With no top pad the panel's top edge
+   WAS the band's top edge, so after a DARK band (/resources/) it sat flush on
+   that band's lower edge, 0px between them, owner report 2026-10-24
+   ("connected with above section"). A variant only after dark bands was tried
+   and check-shared-blocks rejected it, rightly: a shared block draws one
+   recipe on every route. So every route now keeps the same head gap above the
+   panel as below it, and with equal gaps the light to dark change is simply
+   the band's middle, which is still the panel's middle. */
 .ea-close.ea-sec {
   --close-foot: var(--ea-head-gap);
-  padding-block: 0 var(--close-foot);
-  background: linear-gradient(
-    to bottom,
-    var(--ea-canvas) calc((100% - var(--close-foot)) / 2),
-    var(--ground-dark) calc((100% - var(--close-foot)) / 2)
-  );
+  padding-block: var(--close-foot);
+  background: linear-gradient(to bottom, var(--ea-canvas) 50%, var(--ground-dark) 50%);
 }
 
 .ea-close__panel {

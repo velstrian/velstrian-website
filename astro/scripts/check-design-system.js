@@ -632,6 +632,7 @@ function report(rule, where, what, detail) {
  */
 const insideSurface = new Map();
 const tagsForClass = new Map();
+const onCard = new Set();
 let surfacesTotal = 0;
 let surfacesCentred = 0;
 const structuralSurfaces = new Map(); // route -> count
@@ -686,6 +687,12 @@ for (const route of routeList) {
    * unreachable since, and the comment was still offering it as one of two ways
    * a card may keep its left edge. Deleted rather than annotated: dead code in a
    * gate reads as a live hole to whoever is deciding whether to trust it. */
+  /* Rule 3b's index: every class written on the SAME element as a card. */
+  for (const n of nodes) {
+    if (!n.cls.includes('ea-card') && !n.cls.includes('surface')) continue;
+    for (const c of n.cls) if (!c.startsWith('astro-')) onCard.add(c);
+  }
+
   nodes.forEach((n, i) => {
     if (!n.cls.includes('surface')) return;
     surfacesTotal++;
@@ -1002,6 +1009,32 @@ for (const r of rules) {
       if (!/--radius-(card|panel)/.test(radius)) faults.push(`radius ${radius} is not --radius-card`);
       if (!/--blk-pad/.test(padding)) faults.push(`padding ${padding} is not --blk-pad`);
       if (faults.length) report('card', r.file, r.selector, `${faults.join('; ')} (line ${r.line})`);
+    }
+  }
+
+  /* ── RULE 3b: a card's padding is a token (owner card standard 2026-10-24) ─
+   *
+   * Rule 3 only sees a rule that states radius, padding and paint TOGETHER.
+   * Most card padding is written on its own, on a page class that sits beside
+   * `.ea-card` or `.surface` (`.res-panel`, `.variant-card`, `.nl-card`), and
+   * the card inventory of 2026-10-24 measured 7 different interiors from 20px
+   * to 48px because of exactly that. So: a rule whose LAST compound names a
+   * class that is written on a card element, and that sets padding, must take
+   * it from a --blk-pad tier, or be 0 (a card whose picture runs to the edge
+   * pads its body instead). The tiers carry the 24px desktop / 20px phone
+   * floor, so a literal cannot slip under it. A PROPERTY, not a count. */
+  {
+    /* Brackets out first, so `.fc__card:has(> .fc__more)` is read as a rule on
+       `.fc__card` and not on whatever the :has() argument ends with. */
+    const last = r.selector.split(',').map((s) => s.trim().replace(/\([^()]*\)/g, '').split(/[\s>+~]+/).pop() || '');
+    const named = r.classes.filter((c) => onCard.has(c) && last.some((l) => new RegExp(`\\.${c}(?![\\w-])`).test(l)));
+    if (named.length) {
+      for (const prop of ['padding', 'padding-block', 'padding-inline', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right']) {
+        const v = decl(r.decls, prop);
+        if (!v) continue;
+        if (/--blk-pad/.test(v) || /^0(px)?$/.test(v.trim())) continue;
+        report('card', r.file, `${r.selector} ${prop}`, `${prop}: ${v} on card class .${named[0]} is not a --blk-pad tier (line ${r.line})`);
+      }
     }
   }
 

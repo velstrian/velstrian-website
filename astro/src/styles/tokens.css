@@ -647,7 +647,14 @@
    * only ever used where there is no padding, so the frame is outside rule 3 by
    * construction and the small card is inside it and satisfies it. */
   --radius-panel:   20px;  /* a panel that HOLDS cards */
-  --radius-card:    16px;  /* a card */
+  /* ── ONE CARD RADIUS, 2026-10-24 ──────────────────────────────────────
+   * The v3 redesign (R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-22) drew every
+   * `.ea-card` at --v3-radius-card, 12px, while `.surface` cards kept this 16px
+   * from the August concept. Measured 2026-10-24 on the built site: the two ran
+   * side by side on 25 routes, so one page showed two card shapes. The newer
+   * design governs, so this name now READS the v3 value rather than holding a
+   * second one. Change it in one place, --v3-radius-card. */
+  --radius-card:    var(--v3-radius-card);  /* a card */
   --radius-card-sm: 14px;  /* a small card in a dense row */
   --radius-frame:   12px;  /* a device frame: a window, not a container */
   --radius-chip:    10px;
@@ -1001,7 +1008,13 @@
    * the concept's is: at 16px there is nothing left to give back on a phone. */
   --blk-pad-lg:  clamp(20px, 3vw, 40px);   /* a panel that HOLDS cards: the showcase */
   --blk-pad-md:  clamp(20px, 3vw, 36px);   /* a panel that holds cards in a ROW: the pipeline */
-  --blk-pad:     clamp(22px, 3vw, 34px);   /* a card. The default */
+  /* --blk-pad, 2026-10-24: ONE card interior. It was clamp(22px, 3vw, 34px)
+     while `.ea-tcard` wrote clamp(24px, 2.5vw, 32px) by hand, so a `.surface`
+     card and an `.ea-card` beside it differed by 2px a side at every width, 7
+     padding values over the card inventory. Both now read this, which is the
+     card standard the owner set on 2026-10-24: 24px on a phone, 32px on a
+     desktop, never less. */
+  --blk-pad:     clamp(var(--space-6), 2.5vw, var(--space-8));   /* a card. The default */
   --blk-pad-sm:  clamp(20px, 2.4vw, 28px); /* a card inside a card */
   --blk-pad-xs:  22px;                     /* a small card in a dense row */
   --blk-pad-2xs: 16px;                     /* a slab quoted INSIDE a card */

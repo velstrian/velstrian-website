@@ -659,7 +659,7 @@ const schema = [
   .tf-form {
     display: grid;
     gap: var(--space-5);
-    padding: clamp(var(--space-6), 3vw, var(--space-10));
+    padding: var(--blk-pad-lg);
   }
 
   .tf-form__actions {
@@ -676,7 +676,7 @@ const schema = [
 
   .tf-limits {
     max-width: var(--measure-band);
-    padding: var(--space-8) var(--space-8) var(--space-8) var(--space-12);
+    padding: var(--blk-pad) var(--blk-pad) var(--blk-pad) calc(var(--blk-pad) + var(--space-4));
     list-style: disc;
     font-family: var(--font-body);
     font-size: var(--t-body);
