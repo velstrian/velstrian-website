@@ -1,5 +1,5 @@
 ---
-title: "PPN 026 in 2026: What Changed (and What Didn't)"
+title: "PPN 026 in 2026: what changed (and what didn't)"
 seoTitle: "PPN 026 in 2026: what changed"
 description: "PPN 026 was published on 5 August 2026 and applies to central government procurements commenced on or after 1 January 2027. What UK public sector bidders should check."
 publishDate: 2026-04-02
