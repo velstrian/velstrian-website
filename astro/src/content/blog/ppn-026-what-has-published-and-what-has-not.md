@@ -3,7 +3,7 @@ title: "PPN 026 tracker: what has published, and what has not"
 seoTitle: "PPN 026: what has published, and what has not"
 description: "PPN 026 sets two outcomes and six model award criteria, and five of the documents you need to bid against it have not been published yet. A standing record of what exists today, what is still expected, and the dates that bind."
 publishDate: 2026-09-08
-category: "PPN 026 & Social Value"
+category: "PPN 026 & social value"
 readingTime: 8
 author: "Velstrian Regulatory Desk"
 authorType: "Organization"

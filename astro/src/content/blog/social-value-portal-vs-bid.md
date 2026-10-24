@@ -3,7 +3,7 @@ title: "Social Value Portal vs Velstrian Bid: which is right for your business?"
 seoTitle: "Social Value Portal vs Velstrian Bid compared"
 description: "A straight comparison of Social Value Portal and Velstrian Bid on social value work: who each one is built for, what each does well, and where neither will suit you."
 publishDate: 2026-04-10
-category: "PPN 026 & Social Value"
+category: "PPN 026 & social value"
 readingTime: 8
 draft: false
 ---

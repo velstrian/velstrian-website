@@ -3,7 +3,7 @@ title: "PPN 06/21 & Carbon Reduction Plans: a guide for SME bidders"
 seoTitle: "PPN 06/21 & Carbon Reduction Plans for SMEs"
 description: "A plain-English guide to PPN 06/21 and Carbon Reduction Plans for UK SME bidders: Scope 1, 2, and mandatory Scope 3 emissions reporting and net zero targets."
 publishDate: 2026-08-05
-category: "Sustainability & Compliance"
+category: "Sustainability & compliance"
 readingTime: 7
 draft: false
 faq:

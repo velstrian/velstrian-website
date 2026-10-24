@@ -74,13 +74,13 @@
   "categories": {
     "Procurement Act 2023": "law",
     "Social value": "value",
-    "PPN 026 & Social Value": "value",
+    "PPN 026 & social value": "value",
     "Frameworks": "structure",
     "Method statements": "craft",
     "Private sector bidding": "craft",
-    "Tender Strategy & AI": "craft",
+    "Tender strategy & AI": "craft",
     "Getting started": "start",
-    "Sustainability & Compliance": "carbon"
+    "Sustainability & compliance": "carbon"
   },
   "posts": {
     "ai-tender-evaluation-uk-public-sector": {
