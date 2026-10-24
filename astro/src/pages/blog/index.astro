@@ -196,7 +196,7 @@ const schema = [
                     slug={post.id}
                     title={post.data.title}
                     category={post.data.category}
-                    sizes="(min-width: 960px) 400px, (min-width: 600px) 50vw, 100vw"
+                    sizes="(min-width: 960px) 400px, (min-width: 600px) 50vw, calc(100vw - 4rem)"
                   />
                 </div>
                 <div class="ea-tcard__body">
@@ -301,6 +301,22 @@ const schema = [
     align-items: center;
     gap: 0.6rem;
     color: var(--ea-muted);
+  }
+
+  /* R285-WEB-BLOG-LCP-01. The first paint on /blog/ waits on style and
+     layout for the whole page: Lighthouse mobile put style and layout at
+     1.9 s of main thread work once the guides became twelve picture cards
+     (628a5df7), against 0.9 s before, and the featured summary (the LCP
+     element) paints only after it. Each card below the fold now skips its
+     rendering until it nears the screen. `auto` in the intrinsic size keeps
+     the card's real height once it has been drawn, so the scrollbar and the
+     layout do not jump on the way back up. The design is unchanged. */
+  .bl-grid > li {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 30rem;
+    /* Paint containment clips at the item box, which would cut the card's
+       shadow. The clip margin gives the shadow room. */
+    overflow-clip-margin: var(--space-10);
   }
 
   @media (hover: hover) {
