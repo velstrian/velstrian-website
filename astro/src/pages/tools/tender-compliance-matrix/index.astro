@@ -456,7 +456,7 @@ const schema = [
           shows on first load, for the reason the note above gives about empty
           cards. It sits inside the status region so the change is announced. */}
       <div id="matrix-cleared" class="result surface surface--pad tmx-cleared" hidden>
-        <p class="meta result__kicker">Ready for the next tender</p>
+        <p class="ea-label result__kicker">Ready for the next tender</p>
         <p class="result__lead">
           The box is empty, so the last matrix has gone. Paste the next section of tender text, or
           press one of the samples above to see how it works.
@@ -467,7 +467,7 @@ const schema = [
       </div>
 
       <div id="matrix-result" class="result surface surface--pad" hidden>
-        <p class="meta result__kicker">What these rules matched</p>
+        <p class="ea-label result__kicker">What these rules matched</p>
 
         <p class="result__lead" id="r-found" hidden>
           Requirements matched: <b id="r-total">0</b>. Each row below carries the line it was read
@@ -1497,6 +1497,9 @@ Section 5: Submission and Compliance
     margin-top: var(--sec-gap);
   }
 
+  /* The plain card label, `.ea-label` in sentence case, as on every other
+     card (R285-WEB-BENTO-LABEL-01, the decision of ec247ef2). It was `.meta`,
+     a mono capitals line, on these two cards only. */
   .result__kicker {
     margin: 0 0 var(--stack-1);
     color: var(--c-ambient-start);

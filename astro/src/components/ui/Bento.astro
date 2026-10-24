@@ -67,7 +67,7 @@ const shots = tiles.map((t) => {
       return (
         <li class={`ea-bento__tile ea-bento__tile--${t.size ?? 'sm'}`} data-flood={flood} data-reveal>
           <div class="ea-bento__copy">
-            {t.kicker && <p class="eyebrow ea-bento__kicker">{t.kicker}</p>}
+            {t.kicker && <p class="ea-label ea-bento__kicker">{t.kicker}</p>}
             <H class="ea-h3">{t.title}</H>
             <p>{t.body}</p>
             {t.points && (

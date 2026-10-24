@@ -247,8 +247,12 @@
   font-size: var(--t-v3-h3, var(--t-ea-h3));
 }
 
-/* The capsule hugs its words: the copy column is a grid, which would
-   blockify it to the full track (labels.css, "A CAPSULE MUST SHRINK"). */
+/* The kicker is the plain `.ea-label`, sentence case, the label every card
+   on the site carries (R285-WEB-BENTO-LABEL-01, owner 2026-10-24, the same
+   decision as the legal cards in ec247ef2). It WAS `.eyebrow`, the pale
+   spectrum capsule, which read weaker on a white tile than the plain label
+   on the blog, About and partners cards. `.eyebrow` stays for the label that
+   introduces a section heading, which is what it is for. */
 .ea-bento__copy > .ea-bento__kicker {
   justify-self: start;
   margin: 0;
