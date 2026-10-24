@@ -61,10 +61,14 @@ const VARIANTS = [
     margin-top: var(--space-10);
   }
 
+  /* A column with the action pinned to the foot, so both buttons share one
+     baseline however long each card's text runs. With align-content: start
+     the button sat straight under the text, and Bid's longer text put "See the
+     supplier side" lower than "See the buyer side", owner report 2026-10-24. */
   .variant-card {
-    padding: clamp(var(--space-6), 4vw, var(--space-8));
-    display: grid;
-    align-content: start;
+    padding: var(--blk-pad);
+    display: flex;
+    flex-direction: column;
     gap: var(--space-4);
   }
 
@@ -80,7 +84,8 @@ const VARIANTS = [
   }
 
   .variant-card__action {
-    margin-top: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-2);
   }
 
   @media (max-width: 767px) {
