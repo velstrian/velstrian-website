@@ -2353,7 +2353,7 @@ function renderTabs(){
       el.textContent = h;
     }
   }
-  document.title = 'Velstrian Tenderworks: ' + h;
+  document.title = h.startsWith('Velstrian Tenderworks') ? h : 'Velstrian Tenderworks: ' + h;
   /* [R28-BOARD-NAV-01] The standfirst follows the selection too. See the comment
      on #boardsub in the markup: it described the website board on every board. */
   const subEl = document.getElementById('boardsub');
