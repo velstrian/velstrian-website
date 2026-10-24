@@ -112,7 +112,12 @@ const {
    R285-WEB-GEMINI-UIUX P2-8: it was shown only beside key points, so a nine
    section post with none had no contents at all. Now any post of four or more
    sections carries it, and a post with key points keeps it from three. */
-const sections = headings.filter((h) => h.depth === 2);
+/* The list is an <ol>, so it numbers itself. A post whose headings carry their
+   own number ("1. Which edition applies") read "1. 1. Which edition" in the
+   contents, so the heading number is dropped from the entry, not the body. */
+const sections = headings
+  .filter((h) => h.depth === 2)
+  .map((h) => ({ ...h, text: h.text.replace(/^\d+\.\s+/, '') }));
 const showToc = sections.length >= 4 || (!!keyPoints && keyPoints.length > 0 && sections.length > 2);
 
 /*
