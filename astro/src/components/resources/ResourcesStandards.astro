@@ -132,9 +132,7 @@ const TERMS = [
     <div class="res-onward" data-reveal>
       <p class="res-compare">
         Weighing up your options?{' '}
-        <a class="ea-link" href="/compare/">
-          See how Velstrian Bid compares to AutogenAI, mytender.io, CleanTender and SwiftBid
-        </a>.{' '}
+        <a class="ea-link" href="/compare/">See how Velstrian Bid compares to AutogenAI, mytender.io, CleanTender and SwiftBid</a>.{' '}
         <a class="ea-link" href="/pricing/">View all pricing</a>.
       </p>
     </div>
@@ -263,6 +261,16 @@ const TERMS = [
     font-size: var(--t-ea-body);
     line-height: var(--lh-ea-body);
     color: var(--ea-muted);
+  }
+
+  /* The two links sit inside one sentence, so they flow as text. .ea-link is
+     inline-flex for a tap target, which makes each link one unbreakable box:
+     at 390 the line broke after the box and the full stop of the first link,
+     then ". View all pricing.", started a line. Inline links in a sentence
+     are exempt from the 2.5.8 target size (inline exception). */
+  .res-compare .ea-link {
+    display: inline;
+    min-height: 0;
   }
 
 </style>
