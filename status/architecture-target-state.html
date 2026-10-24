@@ -43,14 +43,13 @@
   <p class="lede">Three questions, three different answers. The internal portal <b>separates</b>.
   Buyer and Supplier <b>stay together</b>. Customer tenancy stays <b>pooled</b>, with the seam for a
   dedicated database built before anyone asks for one.</p>
-  <p class="dated">Every number on this page was counted on production on 29 August 2026. Nothing
-  is estimated. Where a figure is not here, it was not measured, and it is left out rather than
-  guessed. Corrected on 4 October 2026: the dead project is gone, the two crossing foreign keys were
-  re-read on production and are still there, and the portal now sits behind Cloudflare Access.
-  Refreshed on 9 October 2026: the foreign keys and Supabase projects were counted again on
-  production (callout below and the measurement section), the dead repository is now deleted, and
-  the credential model changed with the 8 October key rotation. The single onboarding source for every AI tool is
-  <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
+  <p class="dated">Updated 24 October 2026. The app and portal hosts now read velstrian.com from
+  <code>packages/server-infra/src/public-hosts.mjs</code> (owner 2026-10-23), with the old
+  crowagent.ai hosts still answering during the overlap, so the diagrams name the velstrian hosts.
+  The foreign key counts, file counts and the two crossing <code>platform_connector_*</code> keys
+  were last measured on production on 9 October 2026 and were not re-counted today, so they carry
+  that date. First counted on production 29 August 2026, nothing estimated. The single onboarding
+  source for every AI tool is <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
 </div>
 
 <div class="callout">
@@ -65,8 +64,8 @@
   its own, revocable on its own, before any database split. A third Supabase project is
   a new cloud resource, so it needs the RULE 0-G cost statement and the owner's approval first. The
   portal and the app now have separate auth by owner decision (12 September), and Cloudflare Access
-  answers first on <code>portal.crowagent.ai</code>, <code>staging-portal.crowagent.ai</code> and
-  <code>staging-app.crowagent.ai</code>, so the access half of the portal split already holds at
+  answers first on <code>portal.velstrian.com</code>, <code>staging-portal.velstrian.com</code> and
+  <code>staging-app.velstrian.com</code>, so the access half of the portal split already holds at
   the edge. The database half does not.
 </div>
 
@@ -134,12 +133,12 @@
 
     <rect class="r-ok"   x="40"  y="30" rx="10" width="256" height="72"/>
     <text class="hd"  x="56" y="56">crowagent-platform-web</text>
-    <text class="sm"  x="56" y="76">app.crowagent.ai</text>
+    <text class="sm"  x="56" y="76">app.velstrian.com</text>
     <text class="sm"  x="56" y="92">Vercel · lhr1 London</text>
 
     <rect class="r-warn" x="336" y="30" rx="10" width="256" height="72"/>
     <text class="hd"  x="352" y="56">crowagent-portal</text>
-    <text class="sm"  x="352" y="76">portal.crowagent.ai</text>
+    <text class="sm"  x="352" y="76">portal.velstrian.com</text>
     <text class="sm"  x="352" y="92">Vercel · lhr1 London</text>
 
     <rect class="r-ghost" x="632" y="30" rx="10" width="228" height="72"/>
@@ -211,7 +210,7 @@
 
     <rect class="r-ok"  x="40"  y="30" rx="10" width="256" height="72"/>
     <text class="hd"  x="56" y="56">crowagent-platform-web</text>
-    <text class="sm"  x="56" y="76">app.crowagent.ai</text>
+    <text class="sm"  x="56" y="76">app.velstrian.com</text>
     <text class="sm"  x="56" y="92">Vercel · lhr1 London</text>
 
     <rect class="r-aim" x="336" y="30" rx="10" width="256" height="72"/>
@@ -472,7 +471,7 @@ joined, and those nine keys are the product rather than debt.</p>
 </details>
 
 <div class="callout">
-  <b>The open question is a product one, not an architecture one.</b> Whether CrowMark is two tools
+  <b>The open question is a product one, not an architecture one.</b> Whether Velstrian Bid is two tools
   that share a codebase or one two-sided network is worth deciding, and the architecture already
   supports both answers. With no real customers yet, nothing is locked in, and the nine keys cost
   nothing to keep and would be expensive to recreate.
@@ -586,7 +585,7 @@ joined, and those nine keys are the product rather than debt.</p>
   package publishing are one-time costs that rise the moment a real customer arrives.
 </div>
 
-<p class="src">Prepared by Crow Agent, 29 August 2026. Foreign key counts, import counts and file
+<p class="src">First prepared 29 August 2026, refreshed by Velstrian Tenderworks 24 October 2026. Foreign key counts, import counts and file
 counts were measured against production and the working tree on that date. No dates are attached to
 the steps: sizing is done by reading the code, and steps 4 to 6 should be measured when they are
 started rather than estimated now.</p>

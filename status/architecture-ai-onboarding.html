@@ -22,11 +22,13 @@
   <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>. This page is the map of that guide:
   which file each tool reads, what each role may do, and the deployment, testing, pipeline,
   secret and working rules that bind all of them.</p>
-  <p class="dated">Written 9 October 2026 from the guide, the entry files and the measurements of
-  the 8 October session (production ship of <code>9031f5fd1</code>, the full key rotation and the
-  two incidents it caused). Canonical rule text: <code>crowagent-platform/ENGINEERING-STANDARDS.md</code>,
-  with detailed wording in the workspace <code>CLAUDE.md</code>. Where this page and the guide
-  disagree, the guide wins.</p>
+  <p class="dated">Updated 24 October 2026, measured from <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>,
+  the entry files (<code>CLAUDE.md</code>, <code>AGENTS.md</code>, <code>GEMINI.md</code>,
+  <code>.kiro/steering/</code>), <code>ENGINEERING-STANDARDS.md</code> and
+  <code>crowagent-platform/package.json</code>. First written 9 October 2026. Production tip today is
+  <code>b6eb7dadc</code> (Release 2.8.5 phase 2, shipped 18 October 2026, phase 3 in progress).
+  Canonical rule text: <code>crowagent-platform/ENGINEERING-STANDARDS.md</code>, with detailed wording in
+  the workspace <code>CLAUDE.md</code>. Where this page and the guide disagree, the guide wins.</p>
 </div>
 
 <div class="kpi">
@@ -81,7 +83,7 @@ still describes an older transformation spec, and the guide overrides it.</div>
   <tbody>
     <tr><td><b>Driver</b></td><td>the desktop Claude Code session</td><td>write briefs, decide HOW, commit by pathspec, run <code>staging:promote</code>, walk journeys in a real browser, apply migrations with approval, push and promote with the owner's per push approval, fix a P0 on live production at once and tell the owner</td><td>spend without a cost statement, push without approval, decide scope</td></tr>
     <tr><td><b>Build or verification slice</b></td><td>Kiro, a Claude subagent or cloud session</td><td>work the slice its brief names, edit only the paths named, run targeted tests, write its report</td><td>git of any kind, push, deploy, migrations, <code>vercel.json</code>, the tracker, any key or variable</td></tr>
-    <tr><td><b>Staging walker</b></td><td>Google Gemini</td><td>walk <code>staging-app.crowagent.ai</code> with DevTools at 1280x800 and 390x844, record console, network, accessibility and layout findings</td><td>change code, data or settings outside the test accounts, touch production, send real email, buy anything</td></tr>
+    <tr><td><b>Staging walker</b></td><td>Google Gemini</td><td>walk the staging app (<code>staging-app.velstrian.com</code>, with <code>staging-app.crowagent.ai</code> still answering during the domain overlap) with DevTools at 1280x800 and 390x844, record console, network, accessibility and layout findings</td><td>change code, data or settings outside the test accounts, touch production, send real email, buy anything</td></tr>
   </tbody>
 </table>
 </div>
@@ -125,10 +127,10 @@ never reported as done. Only the driver deploys, rolls back or promotes.</p></di
   <tbody>
     <tr><td><b>RULE 0-T</b> targeted only</td><td>run the files that cover the change plus their guard. A full suite is a certification act at the end of a release, never a way to check a fix</td></tr>
     <tr><td><b>RULE 0-CERT</b></td><td>certification is a property of the log: green, against the current tree, with a collected count comparable to its siblings. Close the gap since the last green run, never rerun everything</td></tr>
-    <tr><td><b>RULE 0-L</b> shared machine</td><td>measure free RAM first, never start heavy work below 2 GB free, one heavyweight (<code>next build</code>, full <code>tsc</code>, a test shard) at a time, never kill a process you did not start</td></tr>
+    <tr><td><b>RULE 0-L</b> shared machine</td><td>measure free RAM first, never start heavy work below 1 GB free (owner, 16 October 2026, replacing the earlier 2 GB), one heavyweight (<code>next build</code>, full <code>tsc</code>, a test shard) at a time, never kill a process you did not start</td></tr>
     <tr><td>Read the count</td><td>a starved run prints a normal looking green over nothing. Read the collected count, never the colour</td></tr>
     <tr><td>Where tests run</td><td>this machine first, always. Test users, seeds, probes and Playwright runs belong on staging only, never production. Tests mock the AI client, a real paid AI call from a test is a defect</td></tr>
-    <tr><td>Commands</td><td>API: <code>./.venv/Scripts/python.exe -m pytest &lt;files&gt; -p no:cacheprovider -n 0</code> from <code>api/</code>. Web: <code>./node_modules/.bin/vitest run &lt;one file&gt;</code> from <code>web/</code>. Staging e2e: <code>--config=playwright.discovery.config.ts</code> with <code>BASE_URL=https://staging-app.crowagent.ai</code></td></tr>
+    <tr><td>Commands</td><td>API: <code>./.venv/Scripts/python.exe -m pytest &lt;files&gt; -p no:cacheprovider -n 0</code> from <code>api/</code>. Web: <code>./node_modules/.bin/vitest run &lt;one file&gt;</code> from <code>web/</code>. Staging e2e: <code>--config=playwright.discovery.config.ts</code> with <code>BASE_URL=https://staging-app.velstrian.com</code></td></tr>
   </tbody>
 </table>
 </div>
@@ -141,9 +143,9 @@ never reported as done. Only the driver deploys, rolls back or promotes.</p></di
   <tbody>
     <tr><td><b>RULE 0-G</b></td><td>CI, gate and test work is never a work item of its own, only the guard inside a product fix. Never push to see whether CI passes</td></tr>
     <tr><td>Cost first</td><td>anything that can spend money (a timer, a workflow, a deploy, a paid API or AI call, a cloud resource) needs a cost statement in numbers and explicit owner approval before the work. Recurring cost is a liability, never coverage</td></tr>
-    <tr><td>No timers</td><td>no GitHub workflow has a <code>schedule:</code> trigger, and none may be added. A new Vercel cron, Railway job or pg_cron job needs the same cost statement and approval</td></tr>
+    <tr><td>Scheduled work</td><td>two workflows carry a weekly <code>schedule:</code> trigger, both re-enabled under D291 (owner, 22 October 2026): <code>security-scan.yml</code> (OWASP ZAP, Mondays) and <code>weekly-security-scan.yml</code> (dependency audit, Mondays), together about 30 billed minutes a month, near USD 0.25, both allowlisted in <code>scripts/staging/billing-allowlist.json</code>. Any other <code>schedule:</code> trigger, Vercel cron, Railway job or pg_cron job needs the cost statement and approval first, and a retimed or added schedule fails <code>pnpm billing:audit</code></td></tr>
     <tr><td>Gates locally</td><td><code>pnpm gates:local</code> runs the cheap half of CI on this machine for zero Actions minutes. Both promote scripts run it at the sha</td></tr>
-    <tr><td>Billing audit</td><td><code>pnpm billing:audit</code> before every promotion. A FAIL row is a P0. 16 of 16 PASS on 8 October 2026</td></tr>
+    <tr><td>Billing audit</td><td><code>pnpm billing:audit</code> before every promotion, a read only sweep of the repo plus live Vercel, GitHub and Railway. A FAIL row is a P0</td></tr>
     <tr><td>Free tiers</td><td>Brevo, PostHog and Cloudflare stay free. Never propose a paid plan, add on or trial, not even as an option</td></tr>
   </tbody>
 </table>
@@ -190,11 +192,11 @@ Env file backups were all deleted on 8 October because several held live keys. N
     <tr><td>Full scope</td><td>never skip, defer, simplify or silently drop. If something cannot be done, stop and say exactly why. Scope verdicts are the owner's, so present them as questions</td></tr>
     <tr><td><b>RULE 0-V</b> measure before claiming</td><td>a grep is a claim, not a finding. Name the measurement and how it could have failed. Assert the status code and landed URL before measuring a page</td></tr>
     <tr><td><b>RULE 0-R</b> one live tracker</td><td>new work goes in the highest <code>RELEASE-*-TRACKER.md</code>. Work with no row is a silent drop</td></tr>
-    <tr><td>Two products only</td><td>CrowMark and CrowMark Buyer. Never build CrowAgent Core, CrowCash, CrowCyber, CrowESG or CSRD Checker. Never "council" or "PPN 002" in anything a user reads</td></tr>
+    <tr><td>Two products only</td><td>Velstrian Bid (internal key <code>crowmark</code>) and Velstrian Buy (internal key <code>council</code>). Never build CrowAgent Core, CrowCash, CrowCyber, CrowESG or CSRD Checker. Never "council" or "PPN 002" in anything a user reads</td></tr>
     <tr><td><b>RULE 0-C</b> design tokens</td><td>colour, type and spacing come from the central tokens only. A hardcoded value is a defect</td></tr>
     <tr><td><b>RULE 0-S</b> style</td><td>no semicolons, no em or en dashes in prose, no banned vocabulary, British English, in chat, commits, comments, docs and copy alike</td></tr>
     <tr><td>Code quality</td><td>no <code>@ts-ignore</code>, no <code>eslint-disable</code>, no empty catch, no <code>any</code>, structured JSON logging, <code>getUser()</code> never <code>getSession()</code>, RLS on every tenant table, AI calls through the shared <code>AIClient</code></td></tr>
-    <tr><td>Identity</td><td>everything is authored as <code>Crow Agent &lt;crowagent.platform@gmail.com&gt;</code>. Never the owner's personal name or email. A pre-commit hook enforces it</td></tr>
+    <tr><td>Identity</td><td>everything new is authored as <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code> (go forward from 20 October 2026, R285-REBRAND-12, replacing the former <code>Crow Agent</code> identity). Never the owner's personal name or email. Commits before that date keep the old identity and history is never rewritten. A pre-commit hook enforces it</td></tr>
     <tr><td>Git</td><td>another session may share the index, so commit by pathspec, never <code>git add .</code>. Never force push a protected branch or rewrite history</td></tr>
   </tbody>
 </table>
@@ -228,7 +230,7 @@ October 2026. Full detail: onboarding guide section 3.8.</p>
 <table class="doc-tbl">
   <thead><tr><th>Layer</th><th>Binds</th><th>What it refuses</th><th>Proof</th></tr></thead>
   <tbody>
-    <tr><td><b>Git pre-commit</b>, <code>scripts/guardrails/guardrails.mjs</code> from <code>.husky/</code> (platform, website) and <code>.githooks/</code> (workspace root)</td><td>every tool, because every tool commits through git</td><td>a non Crow Agent author or the owner's personal identity, any added secret value, deleting or renaming a rule file, removing any RULE identifier, gutting a rule file, any change to a hook or the checker</td><td>7 unit tests, 7 end to end cases in a throwaway repository, and a planted key refused by all three live hooks</td></tr>
+    <tr><td><b>Git pre-commit</b>, <code>scripts/guardrails/guardrails.mjs</code> from <code>.husky/</code> (platform, website) and <code>.githooks/</code> (workspace root)</td><td>every tool, because every tool commits through git</td><td>an author that is not the current Velstrian Tenderworks identity or that carries the owner's personal name or Gmail, any added secret value, deleting or renaming a rule file, removing any RULE identifier, gutting a rule file, any change to a hook or the checker</td><td>7 unit tests, 7 end to end cases in a throwaway repository, and a planted key refused by all three live hooks</td></tr>
     <tr><td><b>Git pre-push</b></td><td>every tool</td><td>a push to platform <code>main</code>, <code>railway-production</code> or <code>staging</code>, or to website <code>main</code> (a production deploy), without the owner's approval text naming the sha7</td><td>website guard: refused without approval, passed with it, other branches unaffected</td></tr>
     <tr><td><b>Claude Code PreToolUse hooks</b></td><td>every Claude session, which cannot skip them</td><td>secrets on a command line or printed, credential files printed, <code>--no-verify</code> and hook rewiring, force push, <code>git add .</code>, approval variables set by the agent, direct Vercel, Railway, Supabase CLI, <code>gh</code> and <code>wrangler</code> deploys or changes, deleting rule files, MCP deploy and variable tools, and any edit to the guards themselves</td><td>43 cases, plus live refusals of <code>git add -A</code> and an edit to a guard file</td></tr>
     <tr><td><b>GitHub, server side</b> (push ruleset, owner approved 9 October 2026, $0)</td><td>every push from every tool, which no client flag can skip</td><td>A push to <code>crowagent-platform</code> that changes a rule file, a hook, the guardrail checker or a workflow (push ruleset 24758190, no bypass). The owner disables the ruleset for an approved rule change and re-enables it straight after</td><td>settings read back from the API, billing products identical before and after</td></tr>
@@ -247,6 +249,6 @@ added on a guess. Only the owner may set <code>CA_RULES_CHANGE_APPROVAL</code>,
 <code>CA_GUARDRAILS_CHANGE_APPROVAL</code> or <code>CA_PUSH_APPROVAL</code>, in the owner's own
 shell.</div>
 
-<p class="sm">Prepared by Crow Agent, 9 October 2026. Source of every rule:
+<p class="sm">Prepared by Velstrian Tenderworks, 24 October 2026. Source of every rule:
 <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>, <code>ENGINEERING-STANDARDS.md</code>
 and the workspace <code>CLAUDE.md</code>. This page is the map, those files are the territory.</p>

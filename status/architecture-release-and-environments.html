@@ -24,23 +24,25 @@
   the same commit, recorded in a ledger, and pushed by one script that refuses to run without a
   verified record, a green billing audit and the owner's approval text. No push by hand, no
   dashboard deploy, no merge button.</p>
-  <p class="dated">Measured 4 September 2026 from the Vercel REST API, the Railway API and CLI,
-  both Supabase projects, the Stripe API and the GitHub CLI. First production promotion through
-  this path: commit <code>ca75732d</code>, 4 September 00:33 UTC. Corrected on 4 October 2026
-  against <code>promote-staging.mjs</code>, <code>promote-production.mjs</code>,
-  <code>scripts/vercel-build-ignore.sh</code>, the live Railway API and a curl of every host.
-  <b>Refreshed on 9 October 2026</b> after the production promotion of <code>9031f5fd1</code> (8
-  October), the full key rotation and the two incidents it caused: Stripe, Supabase keys, the
-  portal ignore command, the variable stores and the key runbooks (D and E) were re-measured. The
-  single onboarding source for every AI tool is
-  <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
+  <p class="dated">Updated 24 October 2026, measured from
+  <code>crowagent-platform/packages/server-infra/src/public-hosts.mjs</code> and its Python twin
+  <code>api/app/public_hosts.py</code> (the app, portal and API hosts),
+  <code>crowagent-platform/infra/deploy-services.json</code> and
+  <code>packages/server-infra/src/deploy-targets.mjs</code> (the Railway services and Vercel
+  projects), <code>docs/ENVIRONMENT-PROMOTION-MANDATE.md</code>, the two scheduled workflow files,
+  and <code>RELEASE-2.8.5-TRACKER.md</code>. Production tip today is <code>b6eb7dadc</code>
+  (Release 2.8.5 phase 2, shipped 18 October 2026, phase 3 in progress). The live Vercel, Railway,
+  Supabase, Stripe and GitHub console figures below were last measured on the dates they name and
+  were not re-read today, so they are marked with their measurement date. First production promotion
+  through this path: commit <code>ca75732d</code>, 4 September 2026. The single onboarding source for
+  every AI tool is <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
 </div>
 
 <div class="kpi">
   <div><b>3</b><span>environments: local, staging, production. Nothing else exists</span></div>
   <div><b>$0</b><span>extra per month for staging. Vercel custom environments on the plan already paid for</span></div>
   <div><b>1</b><span>command, <code>pnpm billing:audit</code>, run before every promotion. Any FAIL row is a P0</span></div>
-  <div><b>0</b><span>scheduled GitHub workflows left running. Seven were disabled on 3 September</span></div>
+  <div><b>2</b><span>scheduled GitHub workflows run, both weekly security scans re-enabled under D291. Every other schedule stays off</span></div>
 </div>
 
 <div class="callout good">
@@ -72,9 +74,9 @@
   <thead><tr><th>Environment</th><th>Front end</th><th>Database</th><th>API</th><th>Stripe</th><th>Who uses it</th></tr></thead>
   <tbody>
     <tr><td><b>Local</b></td><td><code>next dev</code> on 3000, <code>next start</code> on 3001</td><td>Supabase staging <code>ipgrnwvfnumgvnxkpxsc</code></td><td>Railway <code>crowagent-platform-staging</code></td><td>sandbox, test mode</td><td>agents, engineers</td></tr>
-    <tr><td><b>Staging</b></td><td><code>staging-app.crowagent.ai</code>, Vercel custom environment <code>staging</code> on <code>crowagent-platform-web</code></td><td>Supabase staging</td><td>Railway <code>crowagent-platform-staging</code>, branch <code>api-staging</code></td><td>sandbox, test mode</td><td>beta testers in one of five beta tenants, every automated test, every experiment</td></tr>
-    <tr><td><b>Staging portal</b></td><td><code>staging-portal.crowagent.ai</code>, Vercel custom environment <code>staging</code> on <code>crowagent-portal</code></td><td>Supabase staging</td><td>Railway staging service</td><td>sandbox, test mode</td><td>founders and core team only</td></tr>
-    <tr><td><b>Production</b></td><td><code>app.crowagent.ai</code>, Vercel production. Portal at <code>portal.crowagent.ai</code></td><td>Supabase production <code>gujtuecjzfiqsdnzgyvo</code></td><td>Railway <code>crowagent-platform</code> and <code>crowagent-worker</code>, branch <code>railway-production</code></td><td><b>LIVE</b>, owner decision 9 October 2026. See the note below</td><td>the four platform accounts in one organisation, and paying customers</td></tr>
+    <tr><td><b>Staging</b></td><td><code>staging-app.velstrian.com</code>, with <code>staging-app.crowagent.ai</code> still answering during the domain overlap. Vercel custom environment <code>staging</code> on project <code>crowagent-platform-web</code></td><td>Supabase staging</td><td>Railway <code>crowagent-platform-staging</code> at <code>api-staging.velstrian.com</code></td><td>sandbox, test mode</td><td>beta testers in one of five beta tenants, every automated test, every experiment</td></tr>
+    <tr><td><b>Staging portal</b></td><td><code>staging-portal.velstrian.com</code> (overlap <code>staging-portal.crowagent.ai</code>). Vercel custom environment <code>staging</code> on project <code>crowagent-portal</code></td><td>Supabase staging</td><td>Railway staging service</td><td>sandbox, test mode</td><td>founders and core team only</td></tr>
+    <tr><td><b>Production</b></td><td><code>app.velstrian.com</code>, Vercel production. Portal at <code>portal.velstrian.com</code>. Both the old <code>crowagent.ai</code> hosts are accepted during the overlap and retire once the redirect is in place</td><td>Supabase production <code>gujtuecjzfiqsdnzgyvo</code></td><td>Railway <code>crowagent-platform</code> and <code>crowagent-worker</code> at <code>api.velstrian.com</code>, branch <code>railway-production</code></td><td><b>LIVE</b>, owner decision 9 October 2026. See the note below</td><td>the four platform accounts in one organisation, and paying customers</td></tr>
   </tbody>
 </table>
 </div>
@@ -137,7 +139,7 @@ working tree is refused.</p>
 <div class="step"><div class="num">3</div><div class="body">
   <b>The script proves the surface before it records anything.</b>
   <span>Deployment READY in the <code>staging</code> custom environment with no git metadata, then
-  <code>https://staging-app.crowagent.ai/login</code> is smoke tested. Since 13 September every
+  <code>https://staging-app.velstrian.com/login</code> is smoke tested. Since 13 September every
   staging host sits behind Cloudflare Access, so a plain request answers a 302 to the Access login.
   The script records that honestly as <code>smokeReachedApp: false</code> rather than failing or
   pretending. Prove <code>x-ca-env: staging</code> and <code>x-robots-tag: noindex</code> yourself
@@ -148,7 +150,7 @@ working tree is refused.</p>
 <div class="step"><div class="num">4</div><div class="body">
   <b>Prove the change on staging, targeted.</b>
   <span>The e2e gates that cover the change, run against the staging URL, for example
-  <code>BASE_URL=https://staging-app.crowagent.ai npx playwright test e2e/&lt;file&gt; --project=chromium
+  <code>BASE_URL=https://staging-app.velstrian.com npx playwright test e2e/&lt;file&gt; --project=chromium
   --no-deps</code>. RULE 0-T: the files that cover it, one invocation, never the whole suite.
   Beta testers do their pass here.</span>
 </div></div>
@@ -216,7 +218,7 @@ working tree is refused.</p>
 <div class="step"><div class="num">5</div><div class="body">
   <b>Audit after the push, every time.</b>
   <span>The script verifies every target against the pushed sha and exits 1 on a partial deploy,
-  which is never reported as done. Then the product proof on <code>app.crowagent.ai</code>:
+  which is never reported as done. Then the product proof on <code>app.velstrian.com</code>:
   <code>x-ca-env: production</code>, no beta banner, and the gate that covered the change run
   against production. Record it on the tracker row.</span>
 </div></div>
@@ -265,9 +267,9 @@ Bitwarden, legacy price ids and others).</p>
 <p><code>pnpm billing:audit</code> runs <code>scripts/staging/billing-leak-audit.mjs</code>, each check
 red proved in its test file. <code>--quick</code> runs the repo checks without the network and is
 what the pre-push hook uses. Any FAIL row is a P0. A <code>DIVERGE</code> row is an unpromoted cost
-cut, not a leak (D105). Run live on 8 October 2026: 16 checks, 16 PASS, 0 FAIL, 0 DIVERGE (two
-DIVERGE rows that read stale 13 September records were retired once the cron cuts shipped). The
-list below groups those checks.</p>
+cut, not a leak (D105). The audit was last read live on 8 October 2026 with every row PASS and no
+FAIL or DIVERGE, and it has not been re-run for this refresh, so treat that as its last measured
+state. The list below groups those checks.</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
@@ -275,7 +277,7 @@ list below groups those checks.</p>
   <tbody>
     <tr><td>root and portal ignore commands</td><td>the scripts are executed with a non main ref and with main</td><td>a preview build could bill</td></tr>
     <tr><td>portal cron allowlist</td><td><code>apps/portal/vercel.json</code> against <code>billing-allowlist.json</code></td><td>a new timer was added without the RULE 0-G statement</td></tr>
-    <tr><td>workflow schedules, files and live</td><td>every workflow file, and <code>gh api</code> for the live state</td><td>a scheduled workflow exists or is active</td></tr>
+    <tr><td>workflow schedules, files and live</td><td>every workflow file, and <code>gh api</code> for the live state, against the allowlist in <code>billing-allowlist.json</code></td><td>a scheduled workflow outside the two allowlisted weekly security scans exists or is active, or an allowlisted one was retimed</td></tr>
     <tr><td>build machines, both projects</td><td>Vercel project <code>resourceConfig</code></td><td>Elastic, on-demand concurrency, or a non Standard machine: builds start billing</td></tr>
     <tr><td>custom environments</td><td>branch matchers on every custom environment</td><td>a push could build staging</td></tr>
     <tr><td>non production deployments, 7 days</td><td>every deployment of both projects</td><td>a preview that is not CANCELED, or a staging upload that came from git rather than the CLI</td></tr>
@@ -293,12 +295,13 @@ any infrastructure change, and weekly by hand. A timer would be the thing it exi
 
 <div class="step"><div class="num">A</div><div class="body">
   <b>Stripe live cutover, done 4 September.</b>
-  <span>Live webhook endpoint created for <code>app.crowagent.ai/api/stripe/webhooks</code>, the
-  archived live CrowMark product reactivated (its lookup keyed prices would have failed checkout),
-  live secret key pasted by the owner into Vercel and Railway, live webhook secret and mode written
-  by the cutover script, one promotion. Staging stays on the sandbox for ever. Measured 8 and 9
-  October: the production key is live but the mode flag reads test, see section 1. That
-  disagreement is the owner's to settle.</span>
+  <span>Live webhook endpoint created for the production app <code>/api/stripe/webhooks</code> route
+  (<code>app.crowagent.ai</code> at cutover, now <code>app.velstrian.com</code> after the domain move),
+  the archived live product reactivated (its lookup keyed prices would have failed checkout, and the
+  Stripe lookup keys are deliberately kept under D298), live secret key pasted by the owner into
+  Vercel and Railway, live webhook secret and mode written by the cutover script, one promotion.
+  Staging stays on the sandbox for ever. Measured 8 and 9 October: the production key is live but the
+  mode flag reads test, see section 1. That disagreement is the owner's to settle.</span>
 </div></div>
 
 <div class="step"><div class="num">B</div><div class="body">
@@ -341,10 +344,11 @@ any infrastructure change, and weekly by hand. A timer would be the thing it exi
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <h2 id="rel-testaccess"><span class="n">Section 7</span>Testing on staging: credentials and headless access</h2>
 
-<p>Added 2 October 2026 (R2.8.4). The staging URL is <code>https://staging-app.crowagent.ai</code>
-with a hyphen, not a dot. An earlier version of this page wrote <code>staging.app.crowagent.ai</code>,
-which does not reach the app (it answered 403 on 4 October). The canonical promotion mandate always
-had the hyphen, and this page has been corrected to match it.</p>
+<p>Added 2 October 2026 (R2.8.4), host updated 24 October 2026. The staging URL is
+<code>https://staging-app.velstrian.com</code>, with <code>https://staging-app.crowagent.ai</code>
+still answering during the domain overlap. The label is a hyphen, not a dot. An earlier version of
+this page wrote <code>staging.app.crowagent.ai</code>, which does not reach the app (it answered 403
+on 4 October). The canonical promotion mandate always had the hyphen, and this page matches it.</p>
 
 <div class="callout">
   <b>Staging has up to THREE gates in series, and a headless test must satisfy each one that is
@@ -369,7 +373,7 @@ had the hyphen, and this page has been corrected to match it.</p>
 <code>web/playwright.discovery.config.ts</code> injects the Cloudflare service token and the Vercel
 bypass as <code>extraHTTPHeaders</code>, and its specs sign in with <code>signInWithPassword</code>
 and write the session cookies (<code>web/e2e/_supabase-session-cookie.ts</code>). Run a discovery
-spec from <code>web/</code> with <code>BASE_URL=https://staging-app.crowagent.ai npx playwright test
+spec from <code>web/</code> with <code>BASE_URL=https://staging-app.velstrian.com npx playwright test
 --config=playwright.discovery.config.ts e2e/r284-discovery/&lt;spec&gt;</code>. The AI cost-measurement
 runner <code>api/tests/ai_golden/live_eval_r283_http.py</code> signs in the same way, and from
 R2.8.4 it also sends the Cloudflare service-token headers on every app-host call, because without
@@ -387,12 +391,15 @@ them the app's first edge gate 302s the request before it reaches the BFF.</p>
 <p class="sm">Measured on 4 October 2026 and again on 9 October 2026, unchanged, by curl with no credential: <code>staging-app</code>,
 <code>staging-portal</code> and <code>portal</code> answer a 302 to Cloudflare Access,
 <code>app.crowagent.ai/login</code> answers 200, and the old two level host
-<code>staging.app.crowagent.ai</code> answers 403. Test accounts by environment variable name, and
+<code>staging.app.crowagent.ai</code> answers 403. Those readings were taken against the
+<code>crowagent.ai</code> hosts before the app and portal moved to <code>velstrian.com</code> and were
+not re-run for this refresh, so the behaviour of the <code>velstrian.com</code> hosts is not verified
+here. Test accounts by environment variable name, and
 which tenant each one signs in to, are in <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>
 section 9.</p>
 
 <p class="sm">Ledger: <code>scripts/staging/promotions.jsonl</code>. Tracker: the highest
-<code>RELEASE-&lt;version&gt;-TRACKER.md</code> on disk (R2.8.4 at the time of writing), rows
+<code>RELEASE-&lt;version&gt;-TRACKER.md</code> on disk (<code>RELEASE-2.8.5-TRACKER.md</code> today), rows
 <code>R284-AI-SWITCH-*</code> and the R2.8.4 discovery findings. The original environment and
 promotion scaffolding is on the historical <code>RELEASE-2.8.2-TRACKER.md</code> under
 <code>R282-STAGING-*</code>, <code>R282-PROMOTION-SCRIPTS-01</code>, <code>R282-BILLING-*</code>,

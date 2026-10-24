@@ -66,9 +66,13 @@
   <p class="title">Tenancy and data isolation</p>
   <p class="lede">Can a public body or a large enterprise be given its own database, and should it
   be? The decision is recorded now, and only one value is reachable.</p>
-  <p class="dated">Written against the code on 16 August 2026, catalogue figures re-counted 18
-  August. Every figure is drawn from the working tree or from production on those dates, and the
-  evidence for each is folded under the claim it supports.</p>
+  <p class="dated">Updated 24 October 2026. The product names were refreshed to Velstrian Bid and
+  Velstrian Buy (the internal keys <code>crowmark</code> and <code>council</code> are kept, D298),
+  the app host now reads velstrian.com from <code>packages/server-infra/src/public-hosts.mjs</code>,
+  and the migration count was re-counted at 1,067 files. The tenancy and row level security
+  analysis itself was written against the code on 16 August 2026 with catalogue figures re-counted
+  18 August, and that code level analysis was not re-measured today, so its figures carry their
+  August dates and the evidence stays folded under each claim. Prepared by Velstrian Tenderworks.</p>
 </div>
 
 <details class="toc">
@@ -302,8 +306,8 @@
           <marker id="tnm1c" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-warn" d="M0,0 L8,4 L0,8 z"/></marker>
         </defs>
 
-        <text class="cap" x="24" y="18">SUPPLIER PRODUCT &middot; CROWMARK</text>
-        <text class="cap" x="470" y="18">BUYER PRODUCT &middot; CROWMARK BUYER</text>
+        <text class="cap" x="24" y="18">SUPPLIER PRODUCT &middot; VELSTRIAN BID</text>
+        <text class="cap" x="470" y="18">BUYER PRODUCT &middot; VELSTRIAN BUY</text>
 
         <rect class="r" x="24" y="28" width="392" height="46" rx="8"/>
         <text class="hd" x="40" y="50">Supplier tenants</text>
@@ -347,7 +351,7 @@
 
         <rect class="r" x="170" y="336" width="560" height="112" rx="10"/>
         <text class="hd" x="190" y="362">One Supabase project &middot; gujtuecjzfiqsdnzgyvo</text>
-        <text class="sm" x="190" y="384">515 row-level security policies across 309 tables &middot; 653 migrations</text>
+        <text class="sm" x="190" y="384">515 row-level security policies across 309 tables (16 Aug) &middot; 1,067 migrations (24 Oct)</text>
         <text class="sm" x="190" y="404">13 organisations, isolation_tier pooled for every one of them</text>
         <text class="lbl-bad" x="190" y="430">AWS eu-west-1 (IRELAND). NO CUSTOMER DATA IS IN A UK REGION.</text>
       </svg>
@@ -376,10 +380,10 @@
           <table>
             <thead><tr><th>Product</th><th>Internal key</th><th>Route</th><th>Sold to</th><th>Price</th></tr></thead>
             <tbody>
-              <tr><td><b>CrowMark</b></td><td><code>crowmark</code></td><td><code>/crowmark</code></td>
+              <tr><td><b>Velstrian Bid</b></td><td><code>crowmark</code></td><td><code>/crowmark</code></td>
                   <td>Suppliers writing bids, public and private</td>
                   <td>&pound;49 / &pound;149 / &pound;549 per month</td></tr>
-              <tr><td><b>CrowMark Buyer</b></td><td><code>council</code> (legacy, never user-visible)</td>
+              <tr><td><b>Velstrian Buy</b></td><td><code>council</code> (legacy, never user-visible)</td>
                   <td><code>/public-sector</code></td><td>Buyers evaluating incoming bids</td>
                   <td>&pound;3,600 / &pound;9,600 / &pound;19,200 per year</td></tr>
             </tbody>
@@ -391,7 +395,7 @@
             <code>web/src/features/public-sector/PublicSectorCheckoutButton.tsx:31-33</code>
           </p>
           <p class="note">
-            Two caveats on those prices. The &pound;549 CrowMark tier is configured for post-demo
+            Two caveats on those prices. The &pound;549 Velstrian Bid tier is configured for post-demo
             checkout and is not published on the marketing site. All three buyer prices are
             <code>active:false</code> in live Stripe, so the buyer ladder is archived and that
             product is sold by quote rather than self-serve checkout.
@@ -402,7 +406,7 @@
             organisation from server-trusted membership, reads the entitlement from the
             <code>product_context</code> JSONB on the organisation, and applies a registry kill
             switch that fails closed on an unknown key. Product visibility is driven by
-            <code>product_context</code>; the CrowMark tier within that product is resolved from
+            <code>product_context</code>; the Velstrian Bid tier within that product is resolved from
             <code>product_subscriptions</code>, with <code>product_context.crowmark.tier</code> as
             a read cache.
           </p>
@@ -475,7 +479,7 @@
               <tr><td>Distinct tables carrying at least one policy</td><td><b>309</b></td><td>Same snapshot</td></tr>
               <tr><td>Public-schema tables in prod, RLS enabled</td><td><b>314</b>, RLS on <b>100%</b></td>
                   <td>Re-read from prod 18 August 2026. The earlier "approx. 280" was never reconciled against the 309 above; this count is exact and the 100% holds</td></tr>
-              <tr><td>Committed migrations</td><td><b>653</b></td><td><code>supabase/migrations/*.sql</code></td></tr>
+              <tr><td>Committed migrations</td><td><b>1,067</b> (re-counted 24 Oct 2026)</td><td><code>supabase/migrations/*.sql</code></td></tr>
               <tr><td>Primary storage region</td><td><code>eu-west-1</code> (AWS Ireland)</td>
                   <td>Published residency page and the tenant-model migration default</td></tr>
               <tr><td>Organisations sharing the production project</td><td><b>13</b></td>
@@ -1401,8 +1405,8 @@
 </details>
 
 <p class="updated" style="margin-top:26px">
-  Prepared by Crow Agent, 16 August 2026. Code claims were verified against the working tree on
-  that date and carry file and line references. External claims carry a source URL. Where the text
+  First prepared 16 August 2026, refreshed by Velstrian Tenderworks 24 October 2026. Code claims were verified against the working tree on
+  16 August and carry file and line references. External claims carry a source URL. Where the text
   reasons rather than cites, it says so. Interaction on this page is CSS only, because the board
   injects this file with <code>innerHTML</code>, which does not run scripts.
 </p>

@@ -20,17 +20,18 @@
   portal are Next.js on Vercel, the API is FastAPI on Railway, the site is Astro on Cloudflare
   Pages. Everything is verified on this machine first, promoted to staging, then to production by
   one script. CI is a backstop that fires on the push, never a test runner.</p>
-  <p class="dated">Commands read from <code>package.json</code> (root, web, portal, astro), the API
-  <code>Procfile</code>, <code>.github/workflows</code> and <code>web/playwright.config.ts</code> on
-  4 September 2026. Corrected on 4 October 2026 against the scripts, the workflow files and the
-  live Railway API. <b>Refreshed on 9 October 2026</b>: the portal ignore fix, the env file
-  clean up, the secrets rules and the new AI onboarding page. The single onboarding source for every AI tool is
-  <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>, and where this page and that guide
-  disagree, the guide is the newer measurement.</p>
+  <p class="dated">Updated 24 October 2026. Commands re-read that day from <code>package.json</code>
+  (root, web, portal, astro), the API <code>Procfile</code>, <code>.github/workflows</code> and
+  <code>web/playwright.config.ts</code>. The app, portal and API hosts now read velstrian.com from
+  <code>packages/server-infra/src/public-hosts.mjs</code> (the old crowagent.ai hosts still answer
+  during the overlap), Node is pinned to <code>^24.22.1</code> in the root <code>engines</code>, and
+  two weekly security scans carry a schedule again (D291). First written 4 September 2026. The single
+  onboarding source for every AI tool is <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>,
+  and where this page and that guide disagree, the guide is the newer measurement.</p>
 </div>
 
 <div class="kpi">
-  <div><b>4</b><span>workflow files carry a push trigger on main, three of them path filtered. Nothing runs on a timer</span></div>
+  <div><b>4</b><span>workflow files carry a push trigger on main, three of them path filtered. Two weekly security scans run on a timer</span></div>
   <div><b>0</b><span>pushes per session by default. One approval is one push</span></div>
   <div><b>3000 / 3001 / 3100</b><span>web dev, web production bundle, portal dev. Board on 8099</span></div>
   <div><b>1 file</b><span>is the unit of a test run. A full suite is a certification act, run once</span></div>
@@ -57,10 +58,10 @@
 <table class="doc-tbl">
   <thead><tr><th>Deployable</th><th>Code</th><th>Local</th><th>Staging</th><th>Production</th></tr></thead>
   <tbody>
-    <tr><td><b>Platform web</b> (app.crowagent.ai)</td><td><code>crowagent-platform/web</code>, Next.js 16, npm</td><td><code>next dev</code> on 3000, <code>next start</code> on 3001</td><td><code>staging-app.crowagent.ai</code>, Vercel custom environment</td><td>Vercel <code>crowagent-platform-web</code></td></tr>
-    <tr><td><b>Founders portal</b> (portal.crowagent.ai)</td><td><code>crowagent-platform/apps/portal</code>, Next.js, pnpm workspace</td><td><code>pnpm dev</code> on 3100 (the script says 3000, run it with <code>-p 3100</code> beside the web app)</td><td><code>staging-portal.crowagent.ai</code>, custom environment <code>staging</code> on <code>crowagent-portal</code>, promoted with <code>--project portal</code></td><td>Vercel <code>crowagent-portal</code></td></tr>
-    <tr><td><b>API</b></td><td><code>crowagent-platform/api</code>, FastAPI, Python</td><td><code>uvicorn app.main:app --reload --port 8000</code></td><td>Railway service <code>crowagent-platform-staging</code>, branch <code>api-staging</code></td><td>Railway <code>crowagent-platform</code> plus <code>crowagent-worker</code>, both from branch <code>railway-production</code></td></tr>
-    <tr><td><b>Marketing site</b> (crowagent.ai)</td><td><code>crowagent-website/astro</code>, Astro 7</td><td><code>npm run dev</code> (8093 for the Home 2.0 preview)</td><td>none</td><td>Cloudflare Pages, a push to <code>main</code> IS the deploy</td></tr>
+    <tr><td><b>Platform web</b> (app.velstrian.com)</td><td><code>crowagent-platform/web</code>, Next.js 16, npm</td><td><code>next dev</code> on 3000, <code>next start</code> on 3001</td><td><code>staging-app.velstrian.com</code>, Vercel custom environment</td><td>Vercel <code>crowagent-platform-web</code></td></tr>
+    <tr><td><b>Founders portal</b> (portal.velstrian.com)</td><td><code>crowagent-platform/apps/portal</code>, Next.js, pnpm workspace</td><td><code>pnpm dev</code> on 3100 (the script says 3000, run it with <code>-p 3100</code> beside the web app)</td><td><code>staging-portal.velstrian.com</code>, custom environment <code>staging</code> on <code>crowagent-portal</code>, promoted with <code>--project portal</code></td><td>Vercel <code>crowagent-portal</code></td></tr>
+    <tr><td><b>API</b> (api.velstrian.com)</td><td><code>crowagent-platform/api</code>, FastAPI, Python</td><td><code>uvicorn app.main:app --reload --port 8000</code></td><td>Railway service <code>crowagent-platform-staging</code> at <code>api-staging.velstrian.com</code>, branch <code>api-staging</code></td><td>Railway <code>crowagent-platform</code> plus <code>crowagent-worker</code> at <code>api.velstrian.com</code>, both from branch <code>railway-production</code></td></tr>
+    <tr><td><b>Marketing site</b> (crowagent.ai)</td><td><code>crowagent-website/astro</code>, Astro 7</td><td><code>npm run dev</code> (8093 for the Home 2.0 preview)</td><td>none</td><td>Cloudflare Pages, a push to <code>main</code> IS the deploy. Stays on crowagent.ai until the owner releases it to velstrian.com</td></tr>
     <tr><td><b>Status board</b></td><td><code>crowagent-website/status</code></td><td><code>start-tracker.cmd</code> on 8099</td><td colspan="2">local only, reads the highest <code>RELEASE-*-TRACKER.md</code></td></tr>
   </tbody>
 </table>
@@ -126,7 +127,7 @@ talks to production.</p>
   invocation for API pytest. On <code>web/</code> vitest a multi file run fails to start workers
   here, so run those one file at a time and read each collected count. A full suite is a
   certification act at the end of a release, never a way to check a fix. Check free RAM first and
-  never start a heavyweight below 2 GB free (RULE 0-L).
+  never start a heavyweight below 1 GB free (owner, 16 October 2026) (RULE 0-L).
 </div>
 
 <div class="tblwrap">
@@ -136,10 +137,10 @@ talks to production.</p>
     <tr><td>Web types</td><td><code>web/</code> <code>npx tsc --noEmit -p tsconfig.json</code> and <code>npm run type-check:tests</code></td><td>both tsconfigs before a promotion. Never pipe the command, the pipe's exit code is what you would read</td></tr>
     <tr><td>Web unit tests</td><td><code>web/</code> <code>./node_modules/.bin/vitest run &lt;one file&gt;</code></td><td>use the project binary, never <code>npx vitest</code>, which resolves a pnpm store copy whose workers never start. On <code>web/</code> run one file per invocation. No flag combination is reliable here: if the collected count is zero or short, switch between <code>--pool=threads</code> and <code>--pool=forks</code> and run again. Vitest can exit 0 with zero tests collected, read the count</td></tr>
     <tr><td>Web e2e, one gate</td><td><code>web/</code> <code>BASE_URL=http://127.0.0.1:3001 npx playwright test e2e/&lt;spec&gt; --project=chromium --no-deps</code></td><td>projects: <code>security-headers-unauth</code>, <code>critical-journeys</code>, <code>a11y-public</code>, <code>axe-authed</code>, <code>responsive-authed</code>, <code>mobile-overflow</code>, <code>crowmark-scenarios</code> and more in <code>playwright.config.ts</code>. Authenticated projects need the <code>setup</code> project and a staging account, and the saved auth state expires silently</td></tr>
-    <tr><td>Against staging</td><td><code>BASE_URL=https://staging-app.crowagent.ai</code> with the same command. For headless discovery that must clear all three staging gates, use <code>--config=playwright.discovery.config.ts</code>, which injects the Cloudflare Access service token and the Vercel bypass and signs in with the E2E Supabase account</td><td>this is the run that verifies a promotion. The discovery config's service token is valid to Sep 2027, so it does not expire daily like the saved browser auth state. Never run concurrent Playwright logins against production Supabase</td></tr>
+    <tr><td>Against staging</td><td><code>BASE_URL=https://staging-app.velstrian.com</code> with the same command. For headless discovery that must clear all three staging gates, use <code>--config=playwright.discovery.config.ts</code>, which injects the Cloudflare Access service token and the Vercel bypass and signs in with the E2E Supabase account</td><td>this is the run that verifies a promotion. The discovery config's service token is valid to Sep 2027, so it does not expire daily like the saved browser auth state. Never run concurrent Playwright logins against production Supabase</td></tr>
     <tr><td>Portal</td><td><code>apps/portal/</code> <code>pnpm vitest run &lt;files&gt;</code>, <code>pnpm tsc --noEmit</code>, <code>pnpm build</code></td><td>portal build validation also runs in CI on every push to main</td></tr>
     <tr><td>API</td><td><code>api/</code> <code>./.venv/Scripts/python.exe -m pytest &lt;files&gt; -p no:cacheprovider -n 0</code></td><td>targeted, the venv always. <code>pytest.ini</code> already sets <code>-q</code>. <code>scripts/run_affected_tests.py</code> maps a changed file to its tests</td></tr>
-    <tr><td>Local quality gates</td><td>root <code>pnpm gates:local</code>, list with <code>pnpm gates:local:list</code></td><td>33 gates, about 1,000 seconds, zero Actions minutes. Both promote scripts run them at the sha in a clean checkout. Waive one promotion with <code>CA_SKIP_QUALITY_GATES=1</code>, which the record announces</td></tr>
+    <tr><td>Local quality gates</td><td>root <code>pnpm gates:local</code>, list with <code>pnpm gates:local:list</code></td><td>33 gates, about 774 seconds (measured D143, 22 September 2026, run <code>pnpm gates:local:list</code> for the live figure), zero Actions minutes. Both promote scripts run them at the sha in a clean checkout. Waive one promotion with <code>CA_SKIP_QUALITY_GATES=1</code>, which the record announces</td></tr>
     <tr><td>Website</td><td><code>crowagent-website/astro/</code> <code>npm run build</code> is the local certification gate chain, <code>npm run build:deploy</code> is what Cloudflare runs</td><td>an em dash in user facing copy fails the deploy</td></tr>
     <tr><td>Brand and design tokens</td><td>root <code>pnpm brand:tokens:check</code>, <code>pnpm brand:superseded</code>, <code>bash scripts/brand-lint.sh</code></td><td>RULE 0-C: a hardcoded colour, radius or font is a defect. Tokens live in <code>packages/tokens</code></td></tr>
     <tr><td>Billing leaks</td><td>root <code>pnpm billing:audit</code> (live) or <code>pnpm billing:audit:quick</code></td><td>any FAIL is a P0, a DIVERGE row is an unpromoted cost cut rather than a leak. Runs inside the production promotion, and the quick form runs in the pre-push hook</td></tr>
@@ -175,7 +176,7 @@ talks to production.</p>
 
 <div class="step"><div class="num">1</div><div class="body">
   <b>Apply through the Supabase MCP, never the CLI and never <code>db push</code>.</b>
-  <span>Either re-runs about a thousand already applied migrations (1,004 files on 4 October),
+  <span>Either re-runs about a thousand already applied migrations (1,067 files on 24 October 2026),
   several with <code>DROP TABLE</code>. Write migrations in ASCII only, and ship any migration that
   changes what deployed code reads or writes in the same promotion as that code.
   Prefer <code>execute_sql</code> for DDL. After ANY apply, write the migration file into
@@ -241,7 +242,7 @@ talks to production.</p>
   <span>The script itself verifies web and portal READY from the deployments it uploaded, and
   Railway <code>crowagent-platform</code> and <code>crowagent-worker</code> on the sha when
   <code>api/</code> changed. A partial deploy exits 1 and is never reported as done. Then the
-  change is proven on <code>app.crowagent.ai</code> and written on the tracker row. Website: a push
+  change is proven on <code>app.velstrian.com</code> and written on the tracker row. Website: a push
   to <code>main</code> is a Cloudflare deploy and needs its own approval.</span>
 </div></div>
 
@@ -259,7 +260,7 @@ talks to production.</p>
     <tr><td><code>ci.yml</code>, <code>crowagent-platform-ci.yml</code></td><td>pull request only</td><td>the promotion path opens no pull request, so neither fires on a promotion. <code>pnpm gates:local</code> runs their cheap half on this machine instead</td></tr>
     <tr><td>Vercel builds</td><td>none from git on web</td><td>the web ignore script skips every git ref. The portal's ignore command now skips them too (<code>0745f7464</code>, 4 of 4 CANCELED on 8 October). A changed variable reaches production only on the next build. Production web and portal are source uploads made by <code>promote-production.mjs</code>, built on the fixed Standard machine, unbilled. Every other branch lands CANCELED</td></tr>
     <tr><td>Railway</td><td>push to <code>railway-production</code>, made only by the promote script when <code>api/</code> changed</td><td><code>crowagent-platform</code> and <code>crowagent-worker</code> redeploy. Staging is <code>crowagent-platform-staging</code> on <code>api-staging</code>, and a push there has been measured not to redeploy, so read the Railway deployment list</td></tr>
-    <tr><td>Scheduled workflows</td><td>none</td><td>seven were still running nightly and weekly on 3 September, mostly red. All disabled and their triggers removed. The audit fails if one returns</td></tr>
+    <tr><td>Scheduled workflows</td><td>two, both weekly</td><td><code>security-scan.yml</code> (OWASP ZAP) runs Mondays 08:00 UTC and <code>weekly-security-scan.yml</code> (dependency audit) Mondays 09:00 UTC, restored under D291 (22 October 2026), together about 30 billed minutes a month and both allowlisted. Every other schedule stays off and the audit fails if one outside the allowlist returns</td></tr>
   </tbody>
 </table>
 </div>
@@ -281,13 +282,13 @@ genuinely cannot run locally.</p>
     <tr><td>RULE 0-B and 0-G</td><td>a push is the only Actions consuming act and needs its own approval. CI, gate and test work is never a work item of its own</td></tr>
     <tr><td>RULE 0-C</td><td>the central design system is the only source of colour, type and spacing. Check the import graph, not the docstring</td></tr>
     <tr><td>RULE 0-D</td><td>a local build is not a deploy rehearsal unless it reproduces the install. Staging is the rehearsal</td></tr>
-    <tr><td>RULE 0-L</td><td>the machine is shared with the owner. Measure free RAM before every fan out, never below 2 GB free, one heavyweight at a time, never kill a process you did not start</td></tr>
+    <tr><td>RULE 0-L</td><td>the machine is shared with the owner. Measure free RAM before every fan out, never below 1 GB free, one heavyweight at a time, never kill a process you did not start</td></tr>
     <tr><td>RULE 0-P</td><td>code reaches production only by promotion through staging</td></tr>
     <tr><td>RULE 0-R</td><td>new work goes in the highest release tracker on disk. Closed releases are history</td></tr>
     <tr><td>RULE 0-S</td><td>no semicolons or parenthetical dashes in prose, no banned vocabulary, in commits, comments and docs alike</td></tr>
     <tr><td>RULE 0-T and 0-CERT</td><td>targeted regression while building. Certification is a property of the log: green, current tree, comparable collection</td></tr>
     <tr><td>RULE 0-V</td><td>a grep is a claim. Name the measurement and how it could have failed before stating a finding</td></tr>
-    <tr><td>Identity</td><td>every generated artefact is authored by <code>Crow Agent</code>, <code>crowagent.platform@gmail.com</code>. The pre-commit hook enforces it</td></tr>
+    <tr><td>Identity</td><td>every new generated artefact is authored by <code>Velstrian Tenderworks</code>, <code>platform@velstrian.com</code> (go forward from 20 October 2026, replacing <code>Crow Agent</code>). The pre-commit hook enforces it and refuses the owner's personal identity</td></tr>
     <tr><td>Secrets</td><td>never put a key on a command line, never print one, never paste one. Rotate in the order create, place everywhere, rebuild, prove, then revoke. Onboarding guide section 3.7, and the AI onboarding page beside this one</td></tr>
   </tbody>
 </table>
@@ -295,7 +296,8 @@ genuinely cannot run locally.</p>
 
 <p class="sm">For how a headless test clears the three staging gates and which credential satisfies each,
 see the Release and environments page, section 7 (testing on staging). The staging URL is
-<code>https://staging-app.crowagent.ai</code> with a hyphen.</p>
+<code>https://staging-app.velstrian.com</code> with a hyphen, and the old
+<code>https://staging-app.crowagent.ai</code> still answers during the domain overlap.</p>
 
 <p class="sm">Every AI tool starts at <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>, which
 also holds the test accounts by variable name, the AI roles and the glossary.

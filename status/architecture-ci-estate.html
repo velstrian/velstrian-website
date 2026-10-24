@@ -32,38 +32,42 @@
   <p class="lede">GitHub costs about ten times Railway. The bill is not the crons and never was, it
   is the two workflows that gate a merge, billed per job with round up. The cap is now $15 a month
   with stop usage on, which is the backstop rather than the fix.</p>
-  <p class="dated">Measured 29 August 2026 from the live GitHub API, the GitHub organisation billing
-  console, the Railway console, the production Supabase <code>cron.job</code> table and the Railway
-  scheduler source. Triggers, workflow counts and cron counts re-read on 4 October 2026 from the
-  workflow files of both repositories and the production database. The money figures are the August
-  snapshot. <b>Refreshed on 9 October 2026</b>: Actions usage for September and October read from
-  the GitHub organisation billing API, gating job counts and required checks re-read, the
-  production <code>pg_cron</code> jobs re-listed, and the scheduler counted by
-  <code>pnpm billing:audit</code>. The single onboarding source for every AI tool is
+  <p class="dated">Updated 24 October 2026. Triggers, workflow counts and the schedule state re-read
+  that day from every workflow file in both repositories (29 in <code>crowagent-platform</code>, 4 in
+  <code>crowagent-website</code>) and from <code>scripts/staging/billing-allowlist.json</code>. The
+  one change since 9 October: under D291 (owner, 22 October 2026) two weekly security scans had their
+  Monday <code>schedule:</code> trigger restored, so the count is no longer zero. The money figures
+  below are the August snapshot with the September and October billing reads named beside them, and
+  were not re-read today. First measured 29 August 2026 from the live GitHub API, the GitHub
+  organisation billing console, the Railway console and the production Supabase <code>cron.job</code>
+  table. The single onboarding source for every AI tool is
   <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
 </div>
 
 <div class="callout good">
-  <b>What changed since this page was written (4 October 2026).</b> No workflow in either
-  repository has a <code>schedule:</code> trigger any more: the last seven were disabled on 3
-  September. <code>ci.yml</code> and <code>crowagent-platform-ci.yml</code> run on pull requests
-  only, and the promotion path (<code>pnpm prod:promote</code>) pushes <code>main</code> with no
-  pull request, so neither runs on a promotion. Their cheap half runs on this machine as
+  <b>What changed since this page was written.</b> <code>ci.yml</code> and
+  <code>crowagent-platform-ci.yml</code> run on pull requests only, and the promotion path
+  (<code>pnpm prod:promote</code>) pushes <code>main</code> with no pull request, so neither runs on a
+  promotion and neither gates a deploy. Their cheap half runs on this machine as
   <code>pnpm gates:local</code>, 33 gates, zero Actions minutes. A push to <code>main</code> fires at
-  most four workflow files, three of them path filtered.
-  <b>9 October 2026:</b> the bill has collapsed. Actions used 1,270 minutes in September, $8.53
-  gross and <b>$0.37 billed</b>, and 105 minutes in October to date, $0 billed, against 10,658
-  minutes and $39.80 billed in August. The required checks on <code>main</code> are still
-  <code>Run Tests</code> and <code>All CI Gates Pass</code>. The two gating workflows now carry 17
-  jobs (7 and 10), down from 21. The 8 October push of <code>9031f5fd1</code> built nothing from git
-  on Vercel: all 4 git deployments settled CANCELED.
+  most four workflow files, three of them path filtered. <b>Scheduled work (24 October 2026):</b>
+  after a spell at zero, two weekly security scans were switched back on under D291 (owner, 22
+  October). <code>security-scan.yml</code> (OWASP ZAP) runs Mondays at 08:00 UTC and
+  <code>weekly-security-scan.yml</code> (dependency audit) Mondays at 09:00 UTC, together about 30
+  billed minutes a month, near USD 0.25, both allowlisted in
+  <code>scripts/staging/billing-allowlist.json</code>. Every other schedule stays off.
+  <b>Billing, 9 October 2026:</b> Actions used 1,270 minutes in September, $8.53 gross and
+  <b>$0.37 billed</b>, and 105 minutes in October to that date, $0 billed, against 10,658 minutes and
+  $39.80 billed in August. The required checks on <code>main</code> are <code>Run Tests</code> and
+  <code>All CI Gates Pass</code>. The two gating workflows carried 17 jobs (7 and 10) on 9 October,
+  down from 21.
 </div>
 
 <div class="kpi">
   <div><b style="color:var(--open)">$52</b><span>GitHub per month in August, all in. Railway was $5</span></div>
   <div><b>76%</b><span>of August Actions minutes were the TWO workflows that gate merges</span></div>
   <div><b>$0.37</b><span>GitHub Actions billed in September 2026 (1,270 min), $0 so far in October</span></div>
-  <div><b>0 / 29 + 4</b><span>scheduled workflows / workflow files in the platform and the website on 9 October</span></div>
+  <div><b>2 / 29 + 4</b><span>scheduled workflows (both weekly security scans, D291) / workflow files in the platform and the website on 24 October</span></div>
 </div>
 
 <div class="callout bad">
@@ -169,7 +173,7 @@ the August snapshot.</p>
     <tr><td><code>a11y-and-auth-flows.yml</code></td><td>PR</td><td class="num">19</td><td>no</td><td><span class="pill p-move">Railway</span></td></tr>
     <tr><td><code>donotbuild-scan.yml</code></td><td>push to main or staging, PR, skips markdown and docs only changes</td><td class="num">11</td><td>no</td><td><span class="pill p-move">Fold into the gate</span></td></tr>
     <tr><td><code>portal-e2e.yml</code></td><td>dispatch only. Schedule removed 3 September</td><td class="num">9</td><td>no</td><td><span class="pill p-keep">Done, no timer</span></td></tr>
-    <tr><td><code>security-scan.yml</code> OWASP ZAP</td><td>dispatch only. Schedule removed 3 September</td><td class="num">9</td><td>no</td><td><span class="pill p-keep">Done, run by hand before a release</span></td></tr>
+    <tr><td><code>security-scan.yml</code> OWASP ZAP</td><td>weekly schedule Mondays 08:00 UTC (restored under D291, 22 October 2026), and dispatch</td><td class="num">9</td><td>no</td><td><span class="pill p-keep">Allowlisted, about 5 billed minutes a run</span></td></tr>
     <tr><td><code>regime-threshold-scan.yml</code></td><td>push to main or <code>release/**</code> touching the regulated constant and market spec files</td><td class="num">6</td><td>no</td><td><span class="pill p-move">Fold into the gate</span></td></tr>
     <tr><td><code>lighthouse-nightly.yml</code></td><td>dispatch only. Schedule removed 3 September</td><td class="num">6</td><td>no</td><td><span class="pill p-keep">Done, no timer</span></td></tr>
     <tr><td><code>stripe-price-drift.yml</code></td><td>dispatch only</td><td class="num">&lt;5</td><td>no</td><td><span class="pill p-keep">MOVED to Railway</span></td></tr>
@@ -177,7 +181,8 @@ the August snapshot.</p>
     <tr><td>Website <code>robots-guard</code></td><td>push to website main, dispatch. Schedule removed</td><td class="num">separate repo</td><td>no</td><td><span class="pill p-keep">MOVED to Railway</span></td></tr>
     <tr><td><code>no-untracked-todos.yml</code></td><td>push to main touching <code>web/app</code>, <code>web/lib</code> or <code>web/src</code>, PR</td><td class="num">&lt;5</td><td>no</td><td><span class="pill p-move">Fold into the gate</span></td></tr>
     <tr><td><code>migration-apply-check.yml</code>, <code>rls-parity.yml</code>, <code>ui-audit.yml</code>, <code>eval-gate.yml</code></td><td>PR only, path filtered</td><td class="num">&lt;5 each</td><td>no</td><td><span class="pill p-move">Fold into the gate</span></td></tr>
-    <tr><td><code>perf-cdp-nightly.yml</code>, <code>weekly-security-scan.yml</code></td><td>dispatch only. Schedules removed 3 September</td><td class="num">&lt;5 each</td><td>no</td><td><span class="pill p-keep">Done, no timer</span></td></tr>
+    <tr><td><code>weekly-security-scan.yml</code> dependency audit</td><td>weekly schedule Mondays 09:00 UTC (restored under D291, 22 October 2026), and dispatch</td><td class="num">&lt;5</td><td>no</td><td><span class="pill p-keep">Allowlisted, about 2 billed minutes a run</span></td></tr>
+    <tr><td><code>perf-cdp-nightly.yml</code></td><td>dispatch only. Schedule removed 3 September</td><td class="num">&lt;5</td><td>no</td><td><span class="pill p-keep">Done, no timer</span></td></tr>
     <tr><td><code>portal-lighthouse.yml</code></td><td>PR touching <code>apps/portal</code>, dispatch. Schedule removed 3 September</td><td class="num">&lt;5</td><td>no</td><td><span class="pill p-move">Fold into the gate</span></td></tr>
     <tr><td><code>e2e-core-journeys.yml</code>, <code>e2e-critical-journeys.yml</code>, <code>portal-e2e-pr.yml</code></td><td>PR only, path filtered</td><td class="num">&lt;5 each</td><td>no</td><td><span class="pill p-move">Fold into the gate</span></td></tr>
     <tr><td>dispatch only utilities (<code>ai-golden-eval</code>, <code>brevo-bootstrap</code>, <code>cf-pages-redeploy-marketing</code>, <code>cloudflare-bootstrap</code>, <code>email-worker-deploy</code>, <code>portal-env-bootstrap</code>, <code>post-deploy-verify</code>)</td><td>manual</td><td class="num">0 idle</td><td>no</td><td><span class="pill p-free">Free until run. Each run needs its own ask</span></td></tr>
@@ -311,10 +316,12 @@ free or already paid for. This is the part of the estate that is working.</p>
 </div></div>
 
 <div class="step"><div class="num">3</div><div class="body">
-  <b>Move the remaining scheduled audits to Railway. DONE.</b>
-  <span>On 3 September every remaining <code>schedule:</code> trigger was removed and the
-  workflows disabled, and <code>pnpm billing:audit</code> now fails if one returns. No GitHub
-  workflow in either repository runs on a timer.</span>
+  <b>Keep scheduled work off GitHub, with two named exceptions.</b>
+  <span>On 3 September every <code>schedule:</code> trigger was removed. Two were restored under D291
+  (owner, 22 October 2026): the weekly OWASP ZAP scan and the weekly dependency audit, together about
+  30 billed minutes a month and both allowlisted. <code>pnpm billing:audit</code> fails if any
+  schedule outside that allowlist returns, or if an allowlisted one is retimed. Every other workflow
+  runs on a pull request, a push or by hand.</span>
 </div></div>
 
 <div class="step"><div class="num">4</div><div class="body">
@@ -431,7 +438,7 @@ outstanding that costs nothing.</p>
   </ol>
 </div>
 
-<p class="src">Prepared by Crow Agent, 29 August 2026. Run minutes from <code>gh run list</code> over
+<p class="src">First prepared 29 August 2026, refreshed by Velstrian Tenderworks 24 October 2026. Run minutes from <code>gh run list</code> over
 an 8 day window. Billed minutes, storage and seats from the GitHub organisation billing console.
 Railway usage from the Railway console over 7 days. Cron inventory from the production
 <code>cron.job</code> table and <code>api/app/tasks/scheduler.py</code>.</p>

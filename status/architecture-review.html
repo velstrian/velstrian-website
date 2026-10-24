@@ -1,17 +1,17 @@
-<!-- [R27-ARCH-01] COPY of crowagent-platform/tools/arch-visualizer/index.html, sha256:b2ae41eaaa794e32714ec378d59e00d99158e4397c37dcc5f66443e005b190e5.
+<!-- [R27-ARCH-01] architecture-review.html is a COPY of crowagent-platform/tools/arch-visualizer/index.html.
      It lives here because the status server serves crowagent-website/status only.
      A copy that can drift is a defect, so status/check-architecture-copy.mjs compares
      the two and fails if they diverge. Edit the SOURCE, then re-copy.
-     [R27-ARCH-04 2026-08-16] Re-synced after the Release 2.7 revalidation.
-     [STAT-004 2026-08-22] Re-synced after the board cross-links were moved off the
-     .tab-btn class, which switchTab() clears. -->
+     [R285-REBRAND refresh 2026-10-24] Re-synced after the Velstrian rebrand: title, product
+     framing and the live app and portal host labels moved to velstrian.com. The review body
+     remains the Release 2.7 revalidation of 2026-08-16 and its measured figures carry that date. -->
 <!-- Contents re-measured against production 2026-08-19; prod commit 37173e87. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrowAgent Platform & CrowMark Architecture Review (revalidated for Release 2.7, 2026-08-16)</title>
+    <title>Velstrian Tenderworks Platform Architecture Review (body revalidated for Release 2.7, 2026-08-16, hosts and names refreshed 2026-10-24)</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -702,17 +702,16 @@
     <header>
         <div class="header-container" style="flex-direction:column;align-items:stretch;gap:1rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
-                <a href="/" style="text-decoration:none;color:inherit" class="logo-group" title="Back to Master Hub">
+                <div class="logo-group">
                     <div class="logo-icon">C</div>
                     <div class="logo-text">
                         <h1>CrowAgent Platform Architecture Review</h1>
                         <p>Flagship: CrowMark Bid & Tender Intelligence</p>
                     </div>
-                </a>
+                </div>
 
                 <!-- Top-level Board Switcher (matches status dashboard tabs) -->
                 <div class="nav-tabs" style="background:rgba(12,17,29,0.85);border-color:rgba(255,255,255,0.12)">
-                    <a href="/" class="board-tab" style="text-decoration:none;font-weight:700;color:#2DD4BF">Master Hub</a>
                     <a href="/#website" class="board-tab" style="text-decoration:none">Website</a>
                     <a href="/#platform" class="board-tab" style="text-decoration:none">Platform &amp; Portal</a>
                     <a href="/#tenancy" class="board-tab" style="text-decoration:none">Tenancy &amp; Isolation</a>
@@ -751,16 +750,28 @@
                 <div class="section-tag">Executive Architectural Briefing</div>
                 <h2 class="section-title">Platform Evolution: Release 2.6 to Release 2.7</h2>
                 <p class="section-desc">
-                    CrowAgent has moved from a multi-product SME compliance monorepo to a platform built around
-                    <strong>CrowMark</strong>, the UK public and private sector bid management suite, and its buy-side sibling
-                    <strong>CrowMark Buyer</strong>.
+                    <span class="pill pill-amber">REFRESHED 2026-10-24</span> The company is now
+                    <strong>Velstrian Systems Ltd</strong> and the platform identity is
+                    <strong>Velstrian Tenderworks</strong>. The two products are
+                    <strong>Velstrian Bid</strong> (the supplier bid and tender suite, internal key
+                    <span class="code-path">crowmark</span>) and <strong>Velstrian Buy</strong> (the buy side sibling,
+                    internal key <span class="code-path">council</span>). The internal keys, table names and routes keep
+                    the old spelling on purpose (D298). The body of this review below was revalidated for Release 2.7 on
+                    2026-08-16 and its measured figures carry that date, so it names the old product words in places that
+                    were not re-measured today. Production tip today is <span class="code-path">b6eb7dadc</span> (Release
+                    2.8.5 phase 2).
+                </p>
+                <p class="section-desc">
+                    Velstrian has moved from a multi-product SME compliance monorepo to a platform built around
+                    <strong>Velstrian Bid</strong>, the UK public and private sector bid management suite, and its buy-side sibling
+                    <strong>Velstrian Buy</strong>.
                 </p>
                 <p class="section-desc">
                     <span class="pill pill-amber">CORRECTED 2026-08-16</span> This section previously described the target as
-                    &ldquo;100% dedicated to CrowMark&rdquo;. <strong>There are two products, not one.</strong>
+                    &ldquo;100% dedicated to one product&rdquo;. <strong>There are two products, not one.</strong>
                     <span class="code-path">web/src/shared/product/registry.ts</span> is the single source of truth for what
                     exists and it holds exactly <span class="code-path">crowmark</span> and
-                    <span class="code-path">council</span>, the latter displaying as <strong>CrowMark Buyer</strong>. Every
+                    <span class="code-path">council</span>, the latter displaying as <strong>Velstrian Buy</strong>. Every
                     decommissioned product is <em>removed</em> from the type unions rather than disabled, so the compiler rather
                     than a runtime check refuses a call site that names one.
                 </p>
@@ -835,9 +846,9 @@
                 <div class="mermaid">
                     graph TD
                     subgraph Client Layer
-                        WEB["Next.js 16 Web App<br/>(app.crowagent.ai)"]
+                        WEB["Next.js 16 Web App<br/>(app.velstrian.com)"]
                         ADDIN["Word Office Add-in<br/>(word-addin/)"]
-                        PORTAL["Internal Admin Portal<br/>(portal.crowagent.ai)"]
+                        PORTAL["Internal Admin Portal<br/>(portal.velstrian.com)"]
                     end
 
                     subgraph API & Gateway Layer
