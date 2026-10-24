@@ -98,8 +98,12 @@ name: Astro gates
 # ahead of the source that names them, which is the order that keeps every
 # intermediate HEAD buildable.
 
+# [R285-WEB-CI-ASTRO-GATES-ANY-BRANCH-01, owner approved 2026-10-24] push is main only. It had no
+# branch filter, so a push to ANY branch touching astro/ or Assets/ fired this job and billed it.
+# Review branches (D390) run these gates locally with `cd astro && npm run build`, for GBP 0.
 on:
   push:
+    branches: [main]
     paths:
       - 'astro/**'
       - 'Assets/**'
