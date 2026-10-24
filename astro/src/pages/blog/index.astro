@@ -10,6 +10,16 @@
  *   2. Guides    light     what should I read  the featured post, then every other post
  *   3. Close     gradient  what now?           into the footer
  *
+ * 2026-10-24, owner: "/blog/ need improvement as this page can be better".
+ * The ruled ledger below the featured card became a grid of picture cards,
+ * the site's shared text card (`.ea-cards`, `.ea-tcard--media`): picture,
+ * category, title, the post's own summary, then date and reading time pinned
+ * to the foot. The ledger showed a title alone, so a reader had to open a
+ * post to learn what it was about. Every post, date, category, reading time
+ * and picture is kept. Still NO FILTER CHIPS, for the reason recorded below:
+ * twelve posts carry nine categories, so a chip bar would still be nearly one
+ * chip per post.
+ *
  * The h1 was "Statute, in plain English." and is now "Procurement rules, in
  * plain English." (RULE 0-U: "statute" is a word a first time bidder has to
  * look up). Recorded in check-content-parity.js ALLOWED_LOSSES.
@@ -86,15 +96,14 @@ const FEATURED_SLUG = 'ppn-026-what-has-published-and-what-has-not';
 const featured = posts.find((p) => p.id === FEATURED_SLUG) ?? posts[0];
 const rest = posts.filter((p) => p.id !== featured.id);
 
+/* The reading time a post declares, or one worked out from its word count at
+   220 words a minute when it declares none, so every card can show one. */
+const readMinutes = (post: (typeof posts)[number]) =>
+  post.data.readingTime ?? Math.max(1, Math.round((post.body ?? '').split(/\s+/).filter(Boolean).length / 220));
+
 const longDate = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
   month: 'long',
-  year: 'numeric',
-});
-/* "02 Apr 2026". Uppercased in CSS, so the accessible name keeps normal case. */
-const shortDate = new Intl.DateTimeFormat('en-GB', {
-  day: '2-digit',
-  month: 'short',
   year: 'numeric',
 });
 
@@ -137,7 +146,7 @@ const schema = [
 
   <Band tone="light" labelledby="bl-title">
     <div class="ea-wrap">
-      <a class="ea-card feat" href={`/blog/${featured.id}/`} data-reveal>
+      <a class="ea-card ea-card--wash feat" href={`/blog/${featured.id}/`} data-reveal>
         <div class="feat__text">
           <p class="ea-label feat__kicker">
             <span class="feat__kicker-lead">Featured</span>
@@ -174,24 +183,33 @@ const schema = [
         </div>
       </a>
 
-      {/* The register's own heading, so the rows do not read as children of the
-          featured post. Not drawn: the ruled list is plainly a list. */}
+      {/* The guides' own heading, so the cards do not read as children of the
+          featured post. Not drawn: a grid of cards is plainly a list. */}
       <h2 class="visually-hidden">All guides</h2>
-      <ol class="ledger">
+      <ol class="ea-cards bl-grid">
         {
           rest.map((post) => (
-            <li class="ledger__row">
-              <a class="ledger__link" href={`/blog/${post.id}/`}>
-                <time class="ea-label ledger__date" datetime={post.data.publishDate.toISOString()}>
-                  {shortDate.format(post.data.publishDate)}
-                </time>
-                <div class="ledger__main">
-                  <span class="ea-label ledger__cat">{post.data.category}</span>
-                  <h3 class="ea-h3 ledger__title">{post.data.title}</h3>
+            <li>
+              <a class="ea-card ea-tcard ea-tcard--media" href={`/blog/${post.id}/`}>
+                <div class="ea-tcard__media">
+                  <PostImage
+                    slug={post.id}
+                    title={post.data.title}
+                    category={post.data.category}
+                    sizes="(min-width: 960px) 400px, (min-width: 600px) 50vw, 100vw"
+                  />
                 </div>
-                {post.data.readingTime && <span class="ea-label ledger__read">{post.data.readingTime} min</span>}
-                <div class="ledger__thumb">
-                  <PostImage slug={post.id} title={post.data.title} category={post.data.category} sizes="(min-width: 900px) 156px, 96px" />
+                <div class="ea-tcard__body">
+                  <p class="ea-label bl-card__cat">{post.data.category}</p>
+                  <h3 class="ea-h3 bl-card__title ea-clamp-3">{post.data.title}</h3>
+                  <p class="bl-card__desc ea-clamp-3">{post.data.description}</p>
+                  <p class="ea-label ea-tcard__meta bl-card__meta">
+                    <time datetime={post.data.publishDate.toISOString()}>
+                      {longDate.format(post.data.publishDate)}
+                    </time>
+                    <span aria-hidden="true">&middot;</span>
+                    <span>{readMinutes(post)} min read</span>
+                  </p>
                 </div>
               </a>
             </li>
@@ -208,7 +226,7 @@ const schema = [
   .feat {
     position: relative;
     z-index: 1;
-    padding: clamp(var(--space-6), 3vw, var(--space-10));
+    padding: var(--blk-pad-lg);
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
@@ -257,137 +275,38 @@ const schema = [
     color: var(--c-text-muted);
   }
 
-  /* ── The ledger ─────────────────────────────────────────────────────────
-     A rule ABOVE each row rather than below the last, so the register closes
-     on a headline instead of on a stray line. */
-  /* The `position: relative` + `z-index` pair is LOAD-BEARING and outlived the
-     rails it was first written for: it makes `.ledger` a stacking context, and
-     `.ledger__link::before` (the lit hover band) sits at `z-index: -1`. With
-     no stacking context here that negative layer escapes past the register and
-     paints behind the page instead of behind the row. */
-  .ledger {
-    --ledger-thumb: 156px;
-    position: relative;
-    z-index: 1;
-    list-style: none;
+  /* ── The guides ──────────────────────────────────────────────────────
+     The shared text card grid (`.ea-cards`, `.ea-tcard--media` in
+     evidenced.css): three across, two on a tablet, one on a phone, every card
+     the same height with its date pinned to the foot. */
+  .bl-card__cat {
+    color: var(--ea-accent-ink);
+  }
+
+  .bl-card__title {
     margin: 0;
-    padding: 0;
-  }
-
-  /*
-   * NOTHING SPANS A ROW. The first build of this row put the date, the reading
-   * time and the picture in a single grid cell each, spanning two rows so the
-   * category could sit above the headline. Measured, the 88px thumbnail became
-   * the whole of row one and drove the headline 94px below its own kicker.
-   * Pairing the kicker and the headline in one cell instead means every track
-   * is sized by exactly the thing that sits in it.
-   */
-  .ledger__link {
-    position: relative;
-    border-top: 1px solid var(--c-border);
-    display: grid;
-    grid-template-columns:
-      minmax(0, 9.5rem) minmax(0, 1fr)
-      minmax(0, 6.5rem) var(--ledger-thumb);
-    grid-template-areas: 'date main read thumb';
-    align-items: start;
-    column-gap: var(--stack-2);
-    padding-block: var(--blk-pad);
-    text-decoration: none;
-    color: inherit;
-  }
-
-  /* ── O-42 · THE REGISTER CLOSES ON ITS LAST ENTRY ───────────────────────
-   *
-   * THE RULE IS DRAWN ABOVE EACH ROW, which is stated above as a deliberate
-   * choice, and the row's padding is symmetric so the rule sits clear of the
-   * content on both sides of it. On the LAST row there is no rule underneath,
-   * so its bottom padding is clearance for a line that does not exist, and it
-   * lands directly on top of the section's own closing space.
-   *
-   * MEASURED AT 1440 BEFORE THIS RULE: 130.4px from the last headline to the
-   * footer, against 91.5px on 31 of the 43 routes. The sitewide figure being
-   * `--sec-pad-y` plus the 6px the footer's own edge takes. /blog was carrying
-   * 29.8px of row padding and about 10px of thumbnail overhang on top of it,
-   * and the overhang is content: the picture in a row is taller than two lines
-   * of headline, so the last WORD on the page finishes above the last pixel.
-   *
-   * Removing the padding leaves the section's standard closing space as the
-   * whole of the gap, which is what every other route ends on. Only the last
-   * row is touched, so the rhythm between entries is unchanged. */
-  .ledger__row:last-child .ledger__link {
-    padding-bottom: 0;
-  }
-
-  .ledger__main {
-    grid-area: main;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-
-  /*
-   * The whole row is the target, so the hover has to read as the row lighting
-   * up. The lit band is a pseudo-element that OVERHANGS the row on both sides,
-   * which is what stops it reading as a selected table cell, and it fades
-   * rather than animating padding: growing the padding on hover would reflow
-   * the grid under the pointer.
-   */
-  .ledger__link::before {
-    content: '';
-    position: absolute;
-    inset-block: 0;
-    inset-inline: calc(var(--stack-1) * -1);
-    z-index: -1;
-    border-radius: var(--radius-chip);
-    background-color: var(--c-card);
-    opacity: 0;
-    transition: opacity var(--dur) var(--ease);
-  }
-
-  @media (hover: hover) {
-    .ledger__link:hover::before {
-      opacity: 1;
-    }
-    .ledger__link:hover .ledger__title {
-      color: var(--c-interactive);
-    }
-  }
-
-  .ledger__link:focus-visible {
-    outline: 3px solid var(--c-interactive);
-    outline-offset: -3px;
-    border-radius: var(--radius-chip);
-  }
-
-  .ledger__date {
-    grid-area: date;
-    color: var(--c-text-muted);
-  }
-
-  .ledger__cat {
-    color: var(--c-text-muted);
-  }
-
-  .ledger__title {
-    font-family: var(--font-display);
-    font-size: var(--t-h4);
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: var(--c-text);
-    margin: 0;
+    color: var(--ea-ink);
     transition: color var(--dur) var(--ease);
   }
 
-  .ledger__read {
-    grid-area: read;
-    color: var(--c-text-muted);
-    padding-block-start: 0.1rem;
+  .bl-card__desc {
+    margin: 0;
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
   }
 
-  .ledger__thumb {
-    grid-area: thumb;
+  .bl-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--ea-muted);
+  }
+
+  @media (hover: hover) {
+    a.ea-tcard:hover .bl-card__title {
+      color: var(--ea-accent-ink);
+    }
   }
 
   /* ── Narrow ─────────────────────────────────────────────────────────────
@@ -398,46 +317,6 @@ const schema = [
   @media (max-width: 899px) {
     .feat {
       grid-template-columns: minmax(0, 1fr);
-    }
-
-    .ledger {
-      --ledger-thumb: 96px;
-    }
-
-    /* Still nothing spans: the headline block and the picture take row one,
-       and the two mono fields drop to a meta line under them. */
-    .ledger__link {
-      grid-template-columns: minmax(0, 1fr) var(--ledger-thumb);
-      grid-template-areas:
-        'main thumb'
-        'date read';
-      row-gap: 0.75rem;
-    }
-
-    .ledger__date,
-    .ledger__read {
-      padding-block-start: 0;
-    }
-    .ledger__date {
-      grid-area: date;
-    }
-    .ledger__read {
-      grid-area: read;
-      justify-self: end;
-    }
-  }
-
-  /* Below 480px the picture starts squeezing the headline into three or four
-     lines, at which point the picture is costing more than it gives. */
-  @media (max-width: 479px) {
-    .ledger__link {
-      grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas:
-        'main main'
-        'date read';
-    }
-    .ledger__thumb {
-      display: none;
     }
   }
 
