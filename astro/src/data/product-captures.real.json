@@ -1,6 +1,6 @@
 {
   "note": "Written by crowagent-platform/web/e2e/product-captures/website.spec.ts (R285-WEB-REAL-SCREENSHOTS-01). Do not edit by hand, re-run the harness. Every entry is a real light theme capture of the neutral demo organisation on STAGING, never a customer.",
-  "generated_at": "2026-10-24T08:17:14.102Z",
+  "generated_at": "2026-10-24T09:55:54.050Z",
   "source": "staging-app.velstrian.com",
   "entries": {
     "home-car-answer": {
@@ -130,11 +130,11 @@
       "caption": "A real screen from a demo account: should you bid, judged on your own track record, with the next step to take."
     },
     "bid-decide": {
-      "src": "/Assets/product-captures/web/decide-fit.webp",
-      "width": 1156,
-      "height": 578,
-      "alt": "The bid or no bid fit for the demo tender in Velstrian Bid: a score out of 100 with a review recommendation, high confidence from five recorded past contracts, and the next step to take before committing budget.",
-      "caption": "A real screen from a demo account: should you bid, judged on your own track record, with the next step to take."
+      "src": "/Assets/product-captures/web/decide-fit-tile.webp",
+      "width": 546,
+      "height": 257,
+      "alt": "The bid or no bid fit for the demo tender in Velstrian Bid: Review, a fit score out of 100, the reason in one line and high confidence from five recorded past contracts.",
+      "caption": "A real screen from a demo account: should you bid, judged on your own track record."
     },
     "home-cap-deliver": {
       "src": "/Assets/product-captures/web/delivery-after-win.webp",
@@ -144,10 +144,10 @@
       "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     },
     "bid-deliver": {
-      "src": "/Assets/product-captures/web/delivery-after-win.webp",
-      "width": 1156,
-      "height": 711,
-      "alt": "Delivery tracking for a won demo contract in Velstrian Bid: each social value promise made in the bid, how much of it has been delivered so far, and whether it is on track.",
+      "src": "/Assets/product-captures/web/delivery-tile.webp",
+      "width": 287,
+      "height": 173,
+      "alt": "Delivery tracking for a won demo contract in Velstrian Bid: the promises made in the bid, how many are at risk or behind, and how much of the first one has been delivered so far.",
       "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     },
     "home-car-deliver": {
@@ -235,11 +235,25 @@
       "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     },
     "buy-cap-evidence": {
-      "src": "/Assets/product-captures/web/buy-evaluation.webp",
-      "width": 1156,
-      "height": 523,
-      "alt": "An evaluation in Velstrian Buy for the demo buyer: three supplier bids recorded, the award weightings checked against the lock taken when the pack was published, and the panel score for the first bid.",
-      "caption": "A real screen from a demo account: the evaluation, with the weightings checked and the panel scoring each bid."
+      "src": "/Assets/product-captures/web/buy-evaluation-tile.webp",
+      "width": 563,
+      "height": 357,
+      "alt": "An evaluation in Velstrian Buy for the demo buyer: the award weightings checked against the lock taken when the pack was published, and the panel score and price for the first bid.",
+      "caption": "A real screen from a demo account: the weightings checked and the panel scoring each bid."
+    },
+    "home-tile-decide": {
+      "src": "/Assets/product-captures/web/decide-fit-tile.webp",
+      "width": 546,
+      "height": 257,
+      "alt": "The bid or no bid fit for the demo tender in Velstrian Bid: Review, a fit score out of 100, the reason in one line and high confidence from five recorded past contracts.",
+      "caption": "A real screen from a demo account: should you bid, judged on your own track record."
+    },
+    "home-tile-deliver": {
+      "src": "/Assets/product-captures/web/delivery-tile.webp",
+      "width": 287,
+      "height": 173,
+      "alt": "Delivery tracking for a won demo contract in Velstrian Bid: the promises made in the bid, how many are at risk or behind, and how much of the first one has been delivered so far.",
+      "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     }
   }
 }

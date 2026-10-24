@@ -115,6 +115,12 @@ const HAND: Record<string, Capture | null> = {
   'home-cap-check': null,
   'home-cap-deliver': null,
   'home-refusal-check': null,
+  /* The bento tiles (components/evidenced/CapsBento.astro). Their own keys,
+     because /walkthrough/ shows home-cap-decide and home-cap-deliver full
+     width, and a tile about 320 wide needs a tighter crop to stay readable
+     (R285-WEB-BENTO-CROP-01). */
+  'home-tile-decide': null,
+  'home-tile-deliver': null,
   /* The product carousel, components/evidenced/Screens.astro. */
   'home-car-board': null,
   'home-car-answer': null,
