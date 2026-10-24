@@ -365,7 +365,11 @@ const BUDGETS = {
      ordinary drift does not turn the gate red, not enough to hide a new
      sitewide script. Anything that pushes past 12 is a new thing on every page
      and should be argued rather than absorbed. */
-  jsShared: 12 * KB,
+  /* RAISED 12 to 16 KB, 2026-10-24, OWNER DECISION D352. The site is wholly on design system
+     v3, so the v3 Band script (scripts/evidenced.ts) is on every route and the shared chunk is
+     15.6 KB. What a typical reader downloads did not grow, the intersection did. 16 is the owner's
+     ceiling: anything past it is a new sitewide script and is argued, not absorbed. */
+  jsShared: 16 * KB,
 
   /* The heaviest single route's own island, which only a visitor to that route
      requests. The Tender Compliance Matrix is the site's one interactive tool
@@ -629,14 +633,6 @@ const EXCEPTIONS = new Map([
       ceiling: 15 * KB,
       why:
         '13.7 KB against 13.0 KB budget for the Tender Compliance Matrix interactive tool island (A-266).',
-    },
-  ],
-  [
-    'jsShared:all',
-    {
-      ceiling: 16 * KB,
-      why:
-        '15.6 KB against 12 KB, R285-WEB-ENTERPRISE-REDESIGN-01, 2026-10-22. NOTHING NEW REACHED A READER. jsShared counts only chunks referenced by EVERY route, and the v3 Band script (5.8 KB raw, scripts/evidenced.ts: reveal and the hero light) was already on 48 of 49 routes. /partners/ was the last page off design system v3, and moving it on made the chunk sitewide, so the intersection grew while what a typical reader downloads did not move. The owner decides whether 12 KB is still the right ceiling for a site that is now wholly v3, or whether evidenced.ts and the Base chunk are trimmed back under it. Delete this entry once that is answered.',
     },
   ],
 ]);
