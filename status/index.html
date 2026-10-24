@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>CrowAgent status</title>
+<title>Velstrian Tenderworks status</title>
+<!-- [R285-REBRAND] Favicon is the Quantum V mark. The data URI is URL encoded, so
+     the brand hex sits as %23xxxxxx and the one source for these values stays the
+     :root brand tokens above. -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20120%20120'%3E%3Crect%20x='5'%20y='5'%20width='110'%20height='110'%20rx='28'%20fill='%23090B12'/%3E%3Cpath%20d='M23%2027h23l16%2037%2018-37h22L63%20101H51L23%2027Z'%20fill='%236C63FF'/%3E%3Cpath%20d='M80%2027h22L63%20101%2051%2078l29-51Z'%20fill='%2331D7C5'/%3E%3Cpath%20d='M35%2027h11l16%2037-11%2021-28-58h12Z'%20fill='%23A477FF'%20opacity='.8'/%3E%3C/svg%3E">
 <!-- [R283-BOARD-PLATFORM-ARTIFACT-01] IBM Plex Sans and Mono, the typefaces of the
      owner's published board artifact. Used only by the Platform tab. Offline the
      stacks fall back to the system faces and nothing else changes. -->
@@ -13,10 +17,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
   :root{
-    --bg:#05070E; --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.11);
-    --text:#fff; --sub:#A9B6D2; --teal:#2DD4BF;
+    /* [R285-REBRAND Velstrian Quantum V] The brand palette, defined ONCE here and
+       reused through var() everywhere, including the header mark and the favicon.
+       Values are the canonical Quantum V pack (packages/tokens BRAND_MARK_TOKENS
+       and the brand guide): Deep Space ground, the three ribbons, and the two mode
+       accents. The logo tile and ribbons never follow the theme, so the mark reads
+       the same on light and dark. */
+    --brand-tile:#090B12; --brand-iris:#6C63FF; --brand-cyan:#31D7C5; --brand-violet:#A477FF;
+    --brand-accent:#8C85FF; --brand-accent-hover:#A49EFF; --brand-ink-light:#4D45DC;
+
+    --bg:#090B12; --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.11);
+    --text:#fff; --sub:#A9B6D2; --teal:#8C85FF;
     --p0:#FF6B6B; --p1:#FFB454; --p2:#7C8BA8; --p3:#64748B;
-    --fixed:#2DD4BF; --built:#5EC8F0; --wip:#FFB454; --open:#FF6B6B;
+    --fixed:#31D7C5; --built:#5EC8F0; --wip:#FFB454; --open:#FF6B6B;
     --decision:#C792EA; --hold:#7C8BA8; --norepro:#8FA3C0;
     /* CORRECTED and DECIDED were declared in the legend from the start and had
        no colour, which meant the page could not show them — see the note above
@@ -64,7 +77,7 @@
        tokens above this note changed, so the other tabs keep their palette. */
     --pb-bg:#F3F5F9; --pb-panel:#FFFFFF; --pb-panel2:#EEF2F7; --pb-ink:#0F1B2E;
     --pb-muted:#5B6B82; --pb-line:#DCE3EC;
-    --pb-accent:#0E8C7F; --pb-accent-soft:#D7F1EE;
+    --pb-accent:#4D45DC; --pb-accent-soft:#E7E6FB;
     --pb-fixed:#15803D; --pb-fixed-bg:#DCFCE7; --pb-built:#1D4ED8; --pb-built-bg:#DBEAFE;
     --pb-wip:#B45309; --pb-wip-bg:#FEF3C7; --pb-open:#B91C1C; --pb-open-bg:#FEE2E2;
     --pb-decision:#6D28D9; --pb-decision-bg:#EDE9FE;
@@ -73,7 +86,7 @@
 
     --pb-bg-dk:#0A1322; --pb-panel-dk:#101C31; --pb-panel2-dk:#15233C; --pb-ink-dk:#E6EDF7;
     --pb-muted-dk:#93A3BC; --pb-line-dk:#22324F;
-    --pb-accent-dk:#2DD4BF; --pb-accent-soft-dk:#0F3A3A;
+    --pb-accent-dk:#8C85FF; --pb-accent-soft-dk:#211E3A;
     --pb-fixed-dk:#4ADE80; --pb-fixed-bg-dk:#0F2E1E; --pb-built-dk:#7FA7FF; --pb-built-bg-dk:#15254A;
     --pb-wip-dk:#FBBF24; --pb-wip-bg-dk:#3A2A0A; --pb-open-dk:#F87171; --pb-open-bg-dk:#3A1414;
     --pb-decision-dk:#C4B5FD; --pb-decision-bg-dk:#2A1F4A;
@@ -99,6 +112,19 @@
        font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
        padding:32px var(--gutter) 80px}
   .wrap{max-width:var(--measure);margin:0 auto}
+  /* [R285-REBRAND] The persistent Velstrian brand lockup. Colour comes only from
+     the :root brand tokens through the SVG fills, so nothing here holds a literal.
+     The keyline on the tile is switched off on a light ground, where the dark tile
+     already has an edge. */
+  .brandlock{display:inline-flex;align-items:center;gap:12px;text-decoration:none;
+             margin:0 0 18px;line-height:1}
+  .brandmark{width:34px;height:34px;display:block;flex:none}
+  .brandword{font-size:17px;font-weight:500;color:var(--text);letter-spacing:.01em}
+  .brandword strong{font-weight:700}
+  body.pbmode .brandword,body.mastermode .brandword,body.archmode .brandword,
+  body.webmode .brandword{color:var(--pb-ink)}
+  body.pbmode .brandmark rect[stroke],body.mastermode .brandmark rect[stroke],
+  body.archmode .brandmark rect[stroke],body.webmode .brandmark rect[stroke]{stroke:none}
 
   /* [R27-ARCH-03] The architecture review is a 164KB document with its own layout.
      Inside the 1180px wrapper it rendered in a column narrower than it was
@@ -1198,12 +1224,27 @@
 </head>
 <body>
 <div class="wrap">
+  <!-- [R285-REBRAND] Persistent Velstrian brand lockup, shown above every tab. The
+       mark is the canonical Quantum V geometry (packages/tokens quantum-v-mark). Its
+       fills reference the :root brand tokens, so no colour literal lives here and the
+       mark never follows the page theme. In dark mode the tile keeps a thin Iris
+       keyline so it stays visible on Deep Space. -->
+  <a class="brandlock" href="#master" aria-label="Velstrian Tenderworks home">
+    <svg class="brandmark" viewBox="0 0 120 120" role="img" aria-label="Velstrian Quantum V mark">
+      <rect x="5" y="5" width="110" height="110" rx="28" fill="var(--brand-tile)" stroke="var(--brand-iris)" stroke-width="3"/>
+      <path d="M23 27h23l16 37 18-37h22L63 101H51L23 27Z" fill="var(--brand-iris)"/>
+      <path d="M80 27h22L63 101 51 78l29-51Z" fill="var(--brand-cyan)"/>
+      <path d="M35 27h11l16 37-11 21-28-58h12Z" fill="var(--brand-violet)" opacity=".8"/>
+    </svg>
+    <span class="brandword">Velstrian <strong>Tenderworks</strong></span>
+  </a>
+
   <!-- [R283-BOARD-PLATFORM-ARTIFACT-01] The Platform tab header, drawn like the
        owner's published board. It sits ABOVE the navigation for the same reason
        the heading below does, and it is invisible on every other tab. -->
   <header class="pb" id="pbhead">
     <div>
-      <h1 class="pb-h1">CrowAgent <span id="pbrel">Release</span></h1>
+      <h1 class="pb-h1">Velstrian Tenderworks <span id="pbrel">Release</span></h1>
       <p class="pb-sub" id="pbsub"></p>
     </div>
     <div class="pb-stamp">Last updated<br><strong class="pb-mono" id="pbstamp"></strong><span class="pb-age" id="pbage"></span></div>
@@ -2192,7 +2233,7 @@ document.getElementById('filters').addEventListener('click',e=>{
 const BOARDS = {
   master: {
     label: 'Master Hub',
-    heading: 'CrowAgent: Master Hub (Release 2.8.5)',
+    heading: 'Velstrian Tenderworks: Master Hub (Release 2.8.5)',
     blurb: 'Unified directory of all status trackers, technical architecture blueprints, rebrand specifications, and environment endpoints.'
   },
   website:  { file: 'issues.json',   label: 'Website',
@@ -2301,7 +2342,7 @@ function renderTabs(){
   const el = document.getElementById('boardheading');
   if (el) {
     if (board === 'master') {
-      el.innerHTML = 'CrowAgent: <span>Master Hub (Release 2.8.5)</span>';
+      el.innerHTML = 'Velstrian Tenderworks: <span>Master Hub (Release 2.8.5)</span>';
     } else if (board === 'architecture' && h.includes(': ')) {
       const parts = h.split(': ');
       el.innerHTML = esc(parts[0]) + ': <span>' + esc(parts[1]) + '</span>';
@@ -2312,7 +2353,7 @@ function renderTabs(){
       el.textContent = h;
     }
   }
-  document.title = 'CrowAgent: ' + h;
+  document.title = 'Velstrian Tenderworks: ' + h;
   /* [R28-BOARD-NAV-01] The standfirst follows the selection too. See the comment
      on #boardsub in the markup: it described the website board on every board. */
   const subEl = document.getElementById('boardsub');
@@ -2672,7 +2713,7 @@ function renderMasterHub() {
       <div class="hub-bar" style="margin-top:0">
         <div>
           <h2>Platform, Website &amp; Architecture Directory</h2>
-          <p>Unified directory for the CrowAgent / Velstrian workspace. All status trackers, technical architecture blueprints, rebrand specifications, and environment endpoints are indexed below. Every page includes a return link back to this master directory.</p>
+          <p>Unified directory for the Velstrian Tenderworks workspace. All status trackers, technical architecture blueprints, rebrand specifications, and environment endpoints are indexed below. Every page includes a return link back to this master directory.</p>
         </div>
       </div>
       <div class="hub-bar" style="margin-top:14px">
@@ -2731,7 +2772,7 @@ function renderMasterHub() {
               <h4 class="hub-card-title">Target Architecture</h4>
               <span class="hub-badge teal">Diagrams &amp; Metrics</span>
             </div>
-            <p class="hub-card-desc">Visual system diagrams: what runs today, what to build, separation between Platform and CrowMark, and measured coupling numbers.</p>
+            <p class="hub-card-desc">Visual system diagrams: what runs today, what to build, separation between Platform and Velstrian Bid, and measured coupling numbers.</p>
           </div>
           <div class="hub-card-footer">
             <span>View Architecture &rarr;</span>
@@ -2815,7 +2856,7 @@ function renderMasterHub() {
               <h4 class="hub-card-title">Architecture Review Visualizer</h4>
               <span class="hub-badge teal">Standalone App</span>
             </div>
-            <p class="hub-card-desc">Interactive 3D/Mermaid deep-dive into platform components, CrowMark capabilities, and benchmark metrics with Chart.js analytics.</p>
+            <p class="hub-card-desc">Interactive 3D/Mermaid deep-dive into platform components, Velstrian Bid capabilities, and benchmark metrics with Chart.js analytics.</p>
           </div>
           <div class="hub-card-footer">
             <span>Launch Visualizer &rarr;</span>
@@ -2869,7 +2910,7 @@ function renderMasterHub() {
               <h4 class="hub-card-title">Live Marketing Site</h4>
               <span class="hub-badge green">Production</span>
             </div>
-            <p class="hub-card-desc">Official CrowAgent marketing site hosted on Cloudflare Pages. Built from astro/dist on push to main.</p>
+            <p class="hub-card-desc">Official Velstrian marketing site hosted on Cloudflare Pages. Built from astro/dist on push to main. The site stays on crowagent.ai until the owner releases it to velstrian.com.</p>
           </div>
           <div class="hub-card-footer">
             <span>Visit crowagent.ai &rarr;</span>
@@ -2911,7 +2952,7 @@ function renderMasterHub() {
               <h4 class="hub-card-title">Production Platform App</h4>
               <span class="hub-badge green">Production</span>
             </div>
-            <p class="hub-card-desc">Flagship CrowMark Bid &amp; Tender Intelligence SaaS platform in production.</p>
+            <p class="hub-card-desc">Flagship Velstrian Bid and Tender Intelligence SaaS platform in production.</p>
           </div>
           <div class="hub-card-footer">
             <span>Visit Production App &rarr;</span>
