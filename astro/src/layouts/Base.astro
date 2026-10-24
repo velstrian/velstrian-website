@@ -119,6 +119,16 @@ interface Props {
    * not pass it are unchanged.
    */
   typeface?: 'evidenced';
+  /**
+   * R285-P2-PERF-PUBLIC-PAGES-LCP-TBT-01 (website half), 2026-10-24. The
+   * document serif is preloaded ONLY where the first screen paints it. It was
+   * preloaded on every evidenced page, so 18,564 B at High priority competed
+   * with Inter on the critical path of 46 routes that never draw it. Measured
+   * on the built site at 1440 and 390 over all 49 sitemap routes: painted in
+   * the first viewport on / only, below the fold on /bid/ (it loads from its
+   * @font-face there, unpreloaded), and on no other route.
+   */
+  preloadSerif?: boolean;
   /** Version 3: the header takes the light role scope when the page opens on a
    *  light band (components/nav/Nav.astro `tone`). */
   headerTone?: 'light';
@@ -146,6 +156,7 @@ const {
   twitterDescription,
   ladder,
   typeface,
+  preloadSerif = false,
   headerTone,
 } = Astro.props;
 const evidenced = typeface === 'evidenced';
@@ -276,7 +287,7 @@ const pageClass = `pg-${
        ~ scripts/check-font-coverage.js. Preloaded weight went from 60,500 to
        ~ 43,816 bytes, 27.6 percent, and no page lost a single glyph. -->
     {evidenced ? (
-      <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/VelstrianDocumentSerif-400.woff2" />
+      preloadSerif && <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/VelstrianDocumentSerif-400.woff2" />
     ) : (
       <link rel="preload" as="font" type="font/woff2" crossorigin href="/Assets/fonts/Manrope-700.woff2" />
     )}
