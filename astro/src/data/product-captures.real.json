@@ -1,6 +1,6 @@
 {
   "note": "Written by crowagent-platform/web/e2e/product-captures/website.spec.ts (R285-WEB-REAL-SCREENSHOTS-01). Do not edit by hand, re-run the harness. Every entry is a real light theme capture of the neutral demo organisation on STAGING, never a customer.",
-  "generated_at": "2026-10-23T03:23:51.868Z",
+  "generated_at": "2026-10-24T08:17:14.102Z",
   "source": "staging-app.velstrian.com",
   "entries": {
     "home-car-answer": {
@@ -34,7 +34,7 @@
         "wide": {
           "x": 0,
           "y": 0,
-          "w": 567,
+          "w": 570,
           "h": 201
         },
         "phone": {
@@ -55,7 +55,7 @@
         "wide": {
           "x": 0,
           "y": 0,
-          "w": 567,
+          "w": 570,
           "h": 201
         },
         "phone": {
@@ -76,7 +76,7 @@
         "wide": {
           "x": 0,
           "y": 0,
-          "w": 567,
+          "w": 570,
           "h": 201
         },
         "phone": {
@@ -90,35 +90,35 @@
     "home-cap-answer": {
       "src": "/Assets/product-captures/web/answer-question-list.webp",
       "width": 341,
-      "height": 706,
+      "height": 736,
       "alt": "The first four questions of the demo tender in Velstrian Bid, each one drafted, with a word count against its limit and where the draft came from, or a flag where it still needs proof.",
       "caption": "A real screen from a demo account: every question drafted, each showing where it came from or that it still needs proof."
     },
     "screen-answer-list": {
       "src": "/Assets/product-captures/web/answer-question-list.webp",
       "width": 341,
-      "height": 706,
+      "height": 736,
       "alt": "The first four questions of the demo tender in Velstrian Bid, each one drafted, with a word count against its limit and where the draft came from, or a flag where it still needs proof.",
       "caption": "A real screen from a demo account: every question drafted, each showing where it came from or that it still needs proof."
     },
     "screen-action-centre": {
       "src": "/Assets/product-captures/web/action-centre.webp",
       "width": 1156,
-      "height": 735,
+      "height": 691,
       "alt": "The Velstrian action centre for the demo business: every task with a date on it in one queue, grouped by when it is due, each with a button to open it.",
       "caption": "A real screen from a demo account: everything due, in one queue."
     },
     "home-cap-check": {
       "src": "/Assets/product-captures/web/question-comments.webp",
       "width": 811,
-      "height": 500,
+      "height": 339,
       "alt": "A comment thread on question 4 of the demo bid: a question about naming the cover staff for each site and a reply pointing to the staffing policy.",
       "caption": "A real screen from a demo account: comments on one question, where the team agrees the answer."
     },
     "bid-check": {
       "src": "/Assets/product-captures/web/question-comments.webp",
       "width": 811,
-      "height": 500,
+      "height": 339,
       "alt": "A comment thread on question 4 of the demo bid: a question about naming the cover staff for each site and a reply pointing to the staffing policy.",
       "caption": "A real screen from a demo account: comments on one question, where the team agrees the answer."
     },
@@ -139,28 +139,28 @@
     "home-cap-deliver": {
       "src": "/Assets/product-captures/web/delivery-after-win.webp",
       "width": 1156,
-      "height": 710,
+      "height": 711,
       "alt": "Delivery tracking for a won demo contract in Velstrian Bid: each social value promise made in the bid, how much of it has been delivered so far, and whether it is on track.",
       "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     },
     "bid-deliver": {
       "src": "/Assets/product-captures/web/delivery-after-win.webp",
       "width": 1156,
-      "height": 710,
+      "height": 711,
       "alt": "Delivery tracking for a won demo contract in Velstrian Bid: each social value promise made in the bid, how much of it has been delivered so far, and whether it is on track.",
       "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     },
     "home-car-deliver": {
       "src": "/Assets/product-captures/web/delivery-after-win.webp",
       "width": 1156,
-      "height": 710,
+      "height": 711,
       "alt": "Delivery tracking for a won demo contract in Velstrian Bid: each social value promise made in the bid, how much of it has been delivered so far, and whether it is on track.",
       "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     },
     "screen-evidence": {
       "src": "/Assets/product-captures/web/delivery-after-win.webp",
       "width": 1156,
-      "height": 710,
+      "height": 711,
       "alt": "Delivery tracking for a won demo contract in Velstrian Bid: each social value promise made in the bid, how much of it has been delivered so far, and whether it is on track.",
       "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
     },
@@ -219,6 +219,27 @@
       "height": 900,
       "alt": "The Velstrian Bid questions screen for the demo tender: the list of tender questions, each drafted with a word count, and question 1 open beside it with its drafted answer.",
       "caption": "A real screen from a demo account: a tender's questions, each one drafted, with the answer open beside the list."
+    },
+    "about-hero": {
+      "src": "/Assets/product-captures/web/questions-screen.webp",
+      "width": 1440,
+      "height": 900,
+      "alt": "The Velstrian Bid questions screen for the demo tender: the list of tender questions, each drafted with a word count, and question 1 open beside it with its drafted answer.",
+      "caption": "A real screen from a demo account: a tender's questions, each one drafted, with the answer open beside the list."
+    },
+    "screen-buyer-delivery": {
+      "src": "/Assets/product-captures/web/delivery-after-win.webp",
+      "width": 1156,
+      "height": 711,
+      "alt": "Delivery tracking for a won demo contract in Velstrian Bid: each social value promise made in the bid, how much of it has been delivered so far, and whether it is on track.",
+      "caption": "A real screen from a demo account: after you win, every promise and how far it has been delivered."
+    },
+    "buy-cap-evidence": {
+      "src": "/Assets/product-captures/web/buy-evaluation.webp",
+      "width": 1156,
+      "height": 523,
+      "alt": "An evaluation in Velstrian Buy for the demo buyer: three supplier bids recorded, the award weightings checked against the lock taken when the pack was published, and the panel score for the first bid.",
+      "caption": "A real screen from a demo account: the evaluation, with the weightings checked and the panel scoring each bid."
     }
   }
 }
