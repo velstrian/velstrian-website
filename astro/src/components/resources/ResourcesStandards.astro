@@ -2,6 +2,58 @@
 import Band from '../evidenced/Band.astro';
 import Action from '../evidenced/Action.astro';
 import IconTile from '../evidenced/IconTile.astro';
+
+/* The methodology card's rules, each as /sources/ records it. */
+const RULES = [
+  {
+    name: 'Procurement Act 2023, section 52',
+    meaning: 'A public contract over 5 million pounds must have at least 3 published targets.',
+    href: '/sources/#s52',
+  },
+  {
+    name: 'Procurement Act 2023, section 71',
+    meaning: 'The buyer checks the contract against those targets at least once every 12 months.',
+    href: '/sources/#s71',
+  },
+  {
+    name: 'National TOMs',
+    meaning: 'The measures our social value totals are aligned to. A way of counting, not a law.',
+    href: '/sources/#national-toms',
+  },
+];
+
+/* The glossary card's examples. Plain one line meanings, each the short form
+   of its full entry on /glossary/, and each true of private work as much as
+   public except PPN 026, which says plainly that it is for central
+   government contracts (data/faq.ts). */
+const TERMS = [
+  {
+    name: 'ITT (invitation to tender)',
+    meaning: 'The pack a buyer sends asking you to bid, with the questions to answer.',
+    href: '/glossary/',
+  },
+  {
+    name: 'Award criteria',
+    meaning: 'How the buyer marks your answers, for example on price, quality and social value.',
+    href: '/glossary/',
+  },
+  {
+    name: 'Framework agreement',
+    meaning: 'An approved list of suppliers. Once you are on it, you can win work without a full tender each time.',
+    href: '/glossary/',
+  },
+  {
+    name: 'PPN 026',
+    meaning:
+      'The government rules for scoring social value on central government contracts of 1 million pounds or more, from 1 January 2027.',
+    href: '/glossary/ppn-026/',
+  },
+  {
+    name: 'Selection Questionnaire (SQ)',
+    meaning: 'The first questions a buyer asks to check your business is suitable, before the main tender.',
+    href: '/glossary/',
+  },
+];
 ---
 
 <Band tone="dark" id="methodology" labelledby="methodology-title">
@@ -22,6 +74,22 @@ import IconTile from '../evidenced/IconTile.astro';
           <p class="res-panel__body">
             The 10% minimum weighting, the five missions and eight policy outcomes beneath them, the publication and mandatory dates, and where PPN 06/20 still applies.
           </p>
+          {/* The other rules a figure on this site rests on, each with its plain
+              meaning and its entry on /sources/, so this card carries as much as
+              the Glossary card beside it. Each meaning is the one /sources/
+              records. */}
+          <dl class="res-terms">
+            {
+              RULES.map((t) => (
+                <div class="res-term">
+                  <dt>
+                    <a class="ea-link" href={t.href}>{t.name}</a>
+                  </dt>
+                  <dd>{t.meaning}</dd>
+                </div>
+              ))
+            }
+          </dl>
           <div class="res-panel__links">
             <a class="ea-link" href="/sources/">Read every figure and its source</a>
             <a class="ea-link" href="/glossary/ppn-026/">PPN 026 glossary definition</a>
@@ -34,11 +102,26 @@ import IconTile from '../evidenced/IconTile.astro';
         <p class="ea-label res-col__eyebrow">Glossary</p>
         <h2 class="ea-h2" id="glossary-title">Glossary of procurement terms</h2>
         <p class="ea-lead res-col__lead">
-          Plain-English definitions of the regulations, frameworks and acronyms that come up in UK public-sector bidding.
+          Plain-English meanings of the words and acronyms you meet when you bid for public and private work.
         </p>
 
+        {/* Five real terms with a one line meaning each, so the card holds as
+            much as Methodology beside it rather than one italic line stretched
+            to its height (owner report 2026-10-24, the card "looks empty").
+            Each meaning is the plain short form of its entry on /glossary/. */}
         <div class="ea-card res-panel">
-          <p class="res-examples">PPN 026, National TOMs, the Procurement Act 2023, and more.</p>
+          <dl class="res-terms">
+            {
+              TERMS.map((t) => (
+                <div class="res-term">
+                  <dt>
+                    <a class="ea-link" href={t.href}>{t.name}</a>
+                  </dt>
+                  <dd>{t.meaning}</dd>
+                </div>
+              ))
+            }
+          </dl>
           <div class="res-panel__action">
             <Action href="/glossary/" variant="secondary">Browse the glossary</Action>
           </div>
@@ -143,11 +226,23 @@ import IconTile from '../evidenced/IconTile.astro';
     padding-top: var(--space-2);
   }
 
-  .res-examples {
+  .res-terms {
+    display: grid;
+    gap: var(--space-4);
     margin: 0;
+  }
+
+  .res-term > dt {
     font-size: var(--t-ea-body);
-    font-style: italic;
+    font-weight: var(--t-w-ea-medium);
+    line-height: var(--lh-ea-body);
+  }
+
+  .res-term > dd {
+    margin: var(--space-1) 0 0;
     color: var(--ea-muted);
+    font-size: var(--t-ea-body);
+    line-height: var(--lh-ea-body);
   }
 
   .res-panel__action {
