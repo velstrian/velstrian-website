@@ -150,3 +150,109 @@ The table below records identified sentences across all 48 pages of the website,
 2. **Normalize commercial work:** Bidding is not exclusive to local councils and government departments. Positioning Velstrian as the go-to tool for private RFPs, commercial subcontracts, and public tenders doubles the product's perceived addressable value.
 3. **Keep sentences under 20 words:** Busy business owners skim on phones between client meetings. Short sentences increase comprehension and trust.
 4. **Never promise compliance:** Software provides structure, evidence, and speed. It cannot guarantee compliance or winning bids. Maintaining this boundary protects brand integrity and adheres strictly to our verified facts.
+
+---
+
+## 5. Verification record (2026-10-24, website follow-up lane)
+
+Each row above was treated as a claim and checked against the current page. Method: every route was fetched from the dev server on http://localhost:8093 (all returned 200), scripts, styles and comments were stripped, and the quoted sentence was searched for in the text. Every hit was then read at its source in `astro/src`. A rewrite was applied only where it kept every fact, matched `site-facts.json`, and touched no legal wording, quotation or regulation title. PPN 026 is always described as applying to central government contracts (`data/faq.ts`).
+
+Result: 95 rows. 33 quoted sentences were found on the page, and one more (row 76) only in part. 23 rows applied (most adapted to keep a fact the proposal dropped), 11 rejected with a reason. 61 rows quoted a sentence that is not on the page and were rejected.
+
+| Row | Page | Verdict |
+| :--- | :--- | :--- |
+| 1 | `/` | Rejected. The heading names the acronyms a reader meets in a real tender email, and the answer below explains each one in one read. The rewrite drops the words people search for and invents "quote forms". |
+| 2 | `/` | Applied, corrected. Now "On central government contracts it is scored using rules called PPN 026." The proposed rewrite dropped the name and said all buyers use national rules, which is wrong for private work. PPN 026 applies to central government contracts (data/faq.ts). |
+| 3 | `/about/` | Applied, adapted. Now "Every bid, public or private, passes through four people, and each wants something different. You might write it, sign it off, score it or deliver the work." Keeps "public or private" and the four roles, which the proposed rewrite changed. |
+| 4 | `/about/` | Rejected. The figure states the threshold (over 5 million pounds) and the count (at least 3 targets), and the source line is the legal citation linked to /sources/. The rewrite drops both facts, and regulation references are not changed. |
+| 5 | `/about/` | Applied, adapted. Now two sentences: the figure comes from your own records with its source shown, and a missing figure is listed as a gap. "Links to your uploaded files" in the proposal is narrower than "your own records", so it was not used. |
+| 6 | `/about/` | Rejected. The link opens the PPN 026 definition, and the reader will meet the name PPN 026 in the tender pack. The label already promises plain words. |
+| 7 | `/about/` | Applied, adapted. Reordered so the 10% reads first: "must give at least 10% of the score to social value, the good a supplier does locally". The proposal dropped 1 January, the 1 million pound threshold and "central", so it was not used as written. |
+| 8 | `/about/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 9 | `/about/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 10 | `/about/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 11 | `/bid/` | Applied, adapted. Split in two, keeping "with dates": "Once you win, the promises in your bid become a checklist with dates. The proof sits beside each one, so your report to the customer is ready when they ask." |
+| 12 | `/bid/` | Rejected. "Procurement Act 2023, section 52" is the heading of a rule card that names the law, and the plain explanation is the body under it. Regulation titles are not changed. |
+| 13 | `/bid/` | Applied, adapted. Split into "PPN 026 is the next edition of the Social Value Model. It applies to central government procurements commenced on or after 1 January 2027, at 1 million pounds inc VAT or above." The proposal dropped the date, the threshold and "central government". |
+| 14 | `/bid/` | Applied, adapted. Split so the TOMs meaning is its own sentence: "National TOMs (Themes, Outcomes and Measures) is a common UK way to count social value." "Clients trust" in the proposal is an unproven claim and was not used. |
+| 15 | `/bid/` | Rejected. Read without the "Read in full" control text the sentence is about 20 words, and the portal names are the coverage fact, read from site-facts.json. The proposal drops them. |
+| 16 | `/bid/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 17 | `/bid/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 18 | `/bid/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 19 | `/bid/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 20 | `/bid/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 21 | `/buy/` | Applied, adapted (on /pricing/, which renders this link on /buy/ too). The link now reads "Talk to us about frameworks (approved supplier lists)", so the term is explained where it appears and not replaced. Same in the purchase order note. |
+| 22 | `/buy/` | Rejected. Same rule card heading as row 12. Regulation titles are not changed. |
+| 23 | `/buy/` | Applied, adapted. Same split as row 14. "Recognised UK benchmarks" in the proposal drops the precise "aligned to National TOMs conventions" claim, which the FAQ qualifies as not a full TOMs implementation. |
+| 24 | `/buy/` | Applied, adapted. Three short sentences keeping the meaning of an award notice return, review and publish, and the committee and scrutiny exports. "Compiled automatically" in the proposal overstates it, so it was not used. |
+| 25 | `/buy/` | Applied, adapted. Now "For smaller jobs, describe the work and check the scope. Then download a request for quotes and send it to suppliers by personal link." Keeps the download step the proposal dropped. |
+| 26 | `/buy/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 27 | `/buy/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 28 | `/buy/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 29 | `/pricing/` | Applied, adapted. See row 21. The term "frameworks" is kept and explained in brackets. |
+| 30 | `/pricing/` | Applied, adapted. Now "Contract targets check: targets set and published (Procurement Act 2023, section 52)". Plain words lead, the legal reference stays. |
+| 31 | `/pricing/` | Applied, adapted. Now "Performance review check: performance assessed and published (Procurement Act 2023, section 71)". Plain words lead, the legal reference stays. |
+| 32 | `/pricing/` | Applied. Now "10-page tender document (ITT) = 3 credits". The pricing FAQ that says the same was aligned. |
+| 33 | `/pricing/` | Applied, adapted. Split in two, keeping the "roughly 17 times" figure the proposal dropped. |
+| 34 | `/pricing/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 35 | `/pricing/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 36 | `/pricing/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 37 | `/pricing/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 38 | `/faq/` | Applied in another form. The question keeps the name people search for, and the answer now opens with what it is: "PPN 026 sets out how central government buyers score social value, the good your business does locally." |
+| 39 | `/faq/` | Applied, adapted. Now "Which edition applies depends on when the procurement was commenced, not when you write your bid." The proposal said "the date a client publishes a tender", which is not the legal test. |
+| 40 | `/faq/` | Applied, adapted. Two sentences keeping that you set the buyer's published weighting, the total is worked out in code, and the AI use note (PPN 017) is for you to approve. |
+| 41 | `/faq/` | Applied, adapted. The list is now everyday words ("finding tenders", "reading your documents", "drafting answers from them", "working out social value in code") with the portal names and the s.52 and s.71 checks kept. |
+| 42 | `/faq/` | Applied, adapted. The sentence is from data/faq.ts, misquoted in the audit. Split in two, keeping what the trial does not include, because that is what the reader needs to know before starting. |
+| 43 | `/faq/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 44 | `/faq/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 45 | `/walkthrough/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 46 | `/walkthrough/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 47 | `/walkthrough/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 48 | `/integrations/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 49 | `/integrations/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 50 | `/compare/` | Rejected. The title is already plain, and it is the page's search title, guarded by the SEO parity baseline. |
+| 51 | `/compare/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 52 | `/compare/bid-vs-autogenai/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 53 | `/compare/bid-vs-autogenai/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 54 | `/compare/bid-vs-cleantender/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 55 | `/compare/bid-vs-mytender-io/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 56 | `/compare/bid-vs-swiftbid/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 57 | `/tools/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 58 | `/tools/tender-compliance-matrix/` | Rejected. This is the result panel of the tool, hidden until a document is checked, with each label beside its number. Read with the tags stripped it looks like one string, which is not how it renders. |
+| 59 | `/tools/tender-compliance-matrix/` | Rejected. The plain one line meaning ("Lines that say what someone must or must not do") is shown, and the full word list sits behind "Read in full" for readers who want the exact rule. The proposal would drop which words count. |
+| 60 | `/tools/tender-compliance-matrix/` | Applied, adapted. Split in two, keeping the example clause. The proposal dropped the example. |
+| 61 | `/tools/tender-compliance-matrix/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 62 | `/tools/tender-finder/` | Rejected. This is the options of a country drop down, read as text with the tags stripped. |
+| 63 | `/tools/tender-finder/` | Applied, adapted. Split in two: saves your search and emails you new matching notices, then scores each for fit across seven dimensions. "Daily" in the proposal is not a stated fact and was not used. |
+| 64 | `/sectors/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 65 | `/sectors/construction/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 66 | `/sectors/construction/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 67 | `/sectors/education/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 68 | `/sectors/facilities/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 69 | `/sectors/highways/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 70 | `/glossary/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 71 | `/glossary/ppn-026/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 72 | `/glossary/toms-framework/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 73 | `/blog/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 74 | `/blog/find-first-public-sector-contract/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 75 | `/blog/find-first-public-sector-contract/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 76 | `/blog/frameworks-and-dps-explained/` | Rejected. The page says something different ("an arrangement between one or more contracting authorities and a group of suppliers"). The quoted sentence is not on the page. |
+| 77 | `/blog/frameworks-and-dps-explained/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 78 | `/blog/procurement-act-2023-sme-guide/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 79 | `/blog/carbon-reduction-plan-ppn-0621-sme-guide/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 80 | `/blog/method-statement-that-scores/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 81 | `/blog/social-value-portal-vs-bid/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 82 | `/blog/private-sector-rfp-pqq-guide/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 83 | `/resources/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 84 | `/sources/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 85 | `/changelog/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 86 | `/roadmap/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 87 | `/contact/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 88 | `/partners/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 89 | `/security/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 90 | `/security/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 91 | `/privacy/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 92 | `/terms/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 93 | `/cookies/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 94 | `/accessibility/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |
+| 95 | `/cookie-preferences/` | Rejected. The quoted sentence is not on the page: not in the rendered HTML from localhost:8093 and not in astro/src. Nothing to rewrite. |

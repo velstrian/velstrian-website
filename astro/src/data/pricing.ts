@@ -285,7 +285,7 @@ export const BUYER_PLANS: BuyerPlan[] = [
     cta: START_LABEL,
     planKey: 'buyer_portfolio',
     secondary: {
-      label: 'Talk to us about frameworks',
+      label: 'Talk to us about frameworks (approved supplier lists)',
       href: '/contact/?product=buy&tier=portfolio#contact-form',
     },
   },
@@ -478,11 +478,11 @@ export const COMPARE_LEAD: CompareRow[] = [
 export const COMPARE_MORE: CompareRow[] = [
   { feature: 'Post-award delivery tracking and monthly reports', cells: [false, true, true] },
   {
-    feature: 'Section 52 check: indicators set and published (Procurement Act 2023)',
+    feature: 'Contract targets check: targets set and published (Procurement Act 2023, section 52)',
     cells: [false, true, true],
   },
   {
-    feature: 'Section 71 check: performance assessed and published (Procurement Act 2023)',
+    feature: 'Performance review check: performance assessed and published (Procurement Act 2023, section 71)',
     cells: [false, true, true],
   },
 ];
@@ -499,7 +499,7 @@ export interface CreditPageRow {
  * CREDIT_BILLING_UNITS.crowmark_rfp_extract = 10 pages, rounded up.
  */
 export const CREDIT_PAGES: CreditPageRow[] = [
-  { doc: 'PDF', unit: 'One page', example: '10-page ITT = 3 credits' },
+  { doc: 'PDF', unit: 'One page', example: '10-page tender document (ITT) = 3 credits' },
   { doc: 'PowerPoint', unit: 'One slide', example: '12-slide briefing = 6 credits' },
   { doc: 'Word or plain text', unit: 'The whole document', example: 'Response template = 3 credits' },
   {

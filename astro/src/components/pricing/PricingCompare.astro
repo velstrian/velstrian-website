@@ -161,7 +161,7 @@ const REC_COL = PLANS.findIndex((p) => p.recommended) + 2;
             <details class="ea-qa">
             <summary><h4 class="pricing-row__h">Why spreadsheets are counted by rows, not by sheets</h4></summary>
             <p class="pricing-compare__body">
-              A sheet is not a page. A 5,000 row pricing schedule sitting on a single Excel sheet holds roughly 17 times the text of a 10 page PDF, and the AI work scales with how much text there is to read. Counting that as one page would charge the same for 17 times the work, so we count 50 rows as one page instead. CSV files are counted exactly like Excel files. We only count the rows we actually read, a sheet we read is never counted as nothing, and a generation that fails is not charged at all.
+              A sheet is not a page. A 5,000 row pricing schedule on one Excel sheet holds roughly 17 times the text of a 10 page PDF. The AI work grows with how much text there is to read. Counting that as one page would charge the same for 17 times the work, so we count 50 rows as one page instead. CSV files are counted exactly like Excel files. We only count the rows we actually read, a sheet we read is never counted as nothing, and a generation that fails is not charged at all.
             </p>
             </details>
           </div>

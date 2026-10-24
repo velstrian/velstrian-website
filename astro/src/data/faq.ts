@@ -151,12 +151,12 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'What is PPN 026?',
         answer:
-          'PPN 026 (Procurement Policy Note 026) is the next edition of the UK government Social Value Model, published on GOV.UK on 5 August 2026. It applies to central government procurements commenced on or after 1 January 2027, at 1 million pounds inc VAT or above. The date that decides which edition applies is when the procurement was commenced, not when the proposal was written, so a bid drafted today is most likely scored under this one.',
+          'PPN 026 (Procurement Policy Note 026) sets out how central government buyers score social value, the good your business does locally. It is the next edition of the UK government Social Value Model, published on GOV.UK on 5 August 2026. It applies to central government procurements commenced on or after 1 January 2027, at 1 million pounds inc VAT or above. Which edition applies depends on when the procurement was commenced, not when you write your bid. So a bid drafted today is most likely scored under this one.',
       },
       {
         question: `What is the ${PPN026.fig} minimum?`,
         answer:
-          'The buyer publishes the social value weighting in its own tender documents, and many local authorities and NHS trusts set a higher one than central government requires. Velstrian Bid lets you model the weighting your buyer published, calculates the social-value total in code, and drafts the narrative with a PPN 017 AI-transparency disclosure for you to approve.',
+          'The buyer publishes the social value weighting in its own tender documents, and many local authorities and NHS trusts set a higher one than central government requires. In Velstrian Bid you set the weighting your buyer published and it works out the social value total in code. It then drafts the supporting text, with a note saying AI helped (the disclosure PPN 017 asks for), for you to approve.',
       },
       {
         question: 'How is social value scored?',
@@ -166,7 +166,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: 'Is Velstrian Bid ready to use?',
         answer:
-          'Velstrian Bid is live and ready to use today, with more being added. Tender discovery from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, document ingestion, grounded answer drafting, deterministic social value calculation, delivery tracking and Procurement Act 2023 s.52 and s.71 KPI checks all work today. See the Velstrian Bid page for what each stage covers.',
+          'Velstrian Bid is live and ready to use today, with more being added. All of this works today: finding tenders from Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, reading your documents, drafting answers from them, working out social value in code, tracking delivery, and the Procurement Act 2023 s.52 and s.71 KPI checks. See the Velstrian Bid page for what each stage covers.',
         link: { label: 'Velstrian Bid page', href: '/bid/' },
       },
     ],
@@ -253,7 +253,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
           // D236 (2026-10-19): the trial is no longer requested. A first
           // CrowMark plan starts with 14 free days at Starter, as the
           // platform's create-checkout route provisions it (BILL-TRIAL-002).
-          `Yes. Your first ${TRIAL_DAYS} days are free, on the ${TRIAL_SCOPE}, so delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of it. A card is needed to start, held securely by Stripe and never stored by us. Cancel within ${TRIAL_DAYS} days and pay nothing. There is one free trial per organisation and work email domain.`,
+          `Yes. Your first ${TRIAL_DAYS} days are free, on the ${TRIAL_SCOPE}. Delivery tracking, monthly social value reports and the section 52 and section 71 checks are not part of the trial. A card is needed to start, held securely by Stripe and never stored by us. Cancel within ${TRIAL_DAYS} days and pay nothing. There is one free trial per organisation and work email domain.`,
         link: { label: START_LABEL, href: SIGNUP_URL },
       },
       {
