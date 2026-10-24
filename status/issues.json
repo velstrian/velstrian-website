@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T08:47:16.249Z",
+  "updated": "2026-10-24T10:26:05.071Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -965,6 +965,54 @@
       "title": "R285-WEB-PLAIN-ENGLISH-01: apply the Gemini plain English audit of 2026-10-24 (0d7076ca)",
       "status": "BUILT",
       "note": "BUILT 2026-10-24, commit 6fb7194c. 95 rows checked against the rendered pages: 61 quoted sentences not on the site (rejected), 23 applied, 11 rejected with a reason. Verdict per row in section 5 of docs/audits/PLAIN-ENGLISH-AUDIT-2026-10-24.md."
+    },
+    {
+      "id": "A-404",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "R285-WEB-BENTO-CROP-01: Decide, Deliver and Buy evidence bento tiles unreadable at tile size",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, website 5e5ece06, platform harness e4f1da342. Tiles crop with object-fit cover at 314 to 377 CSS px over captures 1156 wide, so words drew 4 to 5 px tall. Tile slots now captured in a narrow window on staging (demo orgs): decide-fit-tile 546x257, delivery-tile 287x173, buy-evaluation-tile 563x357. Find, Write, Check, Buy request and the three Figma Buy panels measured readable and left alone. Screenshots viewed at 1440 and 390."
+    },
+    {
+      "id": "A-405",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "R285-WEB-ABOUT-NOTE-01: /about/ hero company line split into a narrow four line link column",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, 39d4062b. Shared .ea-hero__note and .ea-link are both inline-flex, so sentence and link became two flex items. Now one sentence, two lines at 1440, three at 390."
+    },
+    {
+      "id": "A-406",
+      "src": "owner-review-2026-10-24",
+      "sev": "P3",
+      "title": "R285-WEB-RESOURCES-STOP-01: /resources/ at 390 started a line with a full stop",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, b23e1a75. Inline-flex links were unbreakable boxes, the break fell before the full stop. Links in the sentence now flow inline, stray space removed."
+    },
+    {
+      "id": "A-407",
+      "src": "owner-review-2026-10-24",
+      "sev": "P3",
+      "title": "R285-WEB-BLOG-CATEGORY-CASE-01: blog category labels in Title Case",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, f1f8d133. Tender strategy & AI, Sustainability & compliance, PPN 026 & social value. covers.json family keys moved with them."
+    },
+    {
+      "id": "A-408",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "R285-WEB-BLOG-LCP-01: /blog/ mobile LCP regressed after the picture card grid",
+      "status": "BUILT",
+      "note": "BUILT 2026-10-24, 97d2518d. LCP element is the featured summary text, held by style and layout. 3465 ms not reproduced on calm load: before 2267 to 2335 ms at CPU 14 percent. Grid items get content-visibility auto. After 2124 and 2125 ms, one run 2390 at CPU 42 to 71 percent. Re-measure on a calm box before calling it closed."
+    },
+    {
+      "id": "A-409",
+      "src": "owner-review-2026-10-24",
+      "sev": "P2",
+      "title": "Platform StatBar draws no fill below 640 px (delivery progress bar invisible on phones)",
+      "status": "OPEN",
+      "note": "Found 2026-10-24 by the capture harness at 420 and 600 wide. web/src/features/bid/ui/StatBar.tsx: the progressbar div has flex-1 inside a flex-col row below sm, so its height basis is 0 and the bar collapses. Likely fix: sm:flex-1. Platform product row, not fixed by the website lane."
     }
   ],
   "directives": [
@@ -1034,5 +1082,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 404
+  "nextId": 410
 }
