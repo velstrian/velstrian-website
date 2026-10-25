@@ -1,0 +1,468 @@
+---
+/**
+ * StripeCard: Bespoke institutional cards for Velstrian, inspired by top-tier
+ * enterprise presentation while adhering strictly to Velstrian's Quantum V brand
+ * design tokens and color rules (no red/orange, no hardcoded chromatic literals,
+ * authentic Quantum Iris, Violet & Cyan palette, editorial serif typography).
+ *
+ * Designed with minimal luxury: pure atmospheric color glow and refined corner
+ * lighting geometry (zero clip-art cubes/hexagons).
+ */
+
+export interface Props {
+  /** Institutional eyebrow label (e.g. "Statutory Spotlight · PPN 026") */
+  kicker?: string;
+  /** Primary card title */
+  title: string;
+  /** Descriptive body copy */
+  description: string;
+  /** Target link URL */
+  href?: string;
+  /** Action link text (e.g. "Read the statutory briefing", "Explore agent protocol") */
+  linkText?: string;
+  /**
+   * Bespoke Velstrian abstract art themes (minimal color & corner light design):
+   * - 'statutory-horizon': Expansive Quantum Iris & Violet horizon caustics (for glossary spotlight)
+   * - 'iris-flow': Minimal Quantum Iris & Violet corner wash with diagonal specular rays
+   * - 'cyan-aurora': Minimal Quantum Cyan & Iris corner bloom with concentric orbital arcs
+   * - 'protocol-stream': Distinct flowing data stream in Quantum Cyan & Iris (for integrations)
+   */
+  art?: 'statutory-horizon' | 'iris-flow' | 'cyan-aurora' | 'protocol-stream';
+  /** Presentation variant: 'horizontal' (split), 'compact' (grid), 'banner' (spotlight) */
+  variant?: 'horizontal' | 'compact' | 'banner';
+  /** Heading level. 2 where the card is the first thing under the page's h1, 3 under a section heading. */
+  level?: 2 | 3;
+  /** Additional custom class names */
+  class?: string;
+}
+
+const {
+  kicker,
+  title,
+  description,
+  href,
+  linkText = 'Read briefing',
+  art = 'statutory-horizon',
+  variant = 'horizontal',
+  level = 3,
+  class: cls = '',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+const Heading = level === 2 ? 'h2' : 'h3';
+/* Gradient and filter ids are document wide, so two cards drawing the same art
+   on one page would share (and fight over) one set. Each card scopes its ids
+   to its own art and title, which is stable from build to build. */
+const uid = `${art}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+---
+
+<div class={`stripe-card-wrapper ${cls}`.trim()}>
+  <Tag
+    href={href}
+    class={`stripe-card stripe-card--${variant} stripe-card--${art}`}
+    data-stripe-card
+  >
+    <!-- Content pane with Velstrian editorial typography -->
+    <div class="stripe-card__content">
+      {kicker && <p class="stripe-card__kicker">{kicker}</p>}
+      <Heading class="stripe-card__title">{title}</Heading>
+      <p class="stripe-card__desc">{description}</p>
+      {
+        href && (
+          <span class="stripe-card__link">
+            <span>{linkText}</span>
+            <svg
+              class="stripe-card__arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3.5 8H12.5M8.5 4L12.5 8L8.5 12"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        )
+      }
+    </div>
+
+    <!-- Bespoke Quantum V Abstract Art: Pure Color & Minimal Corner Lighting (Zero Cubes / Hexagons) -->
+    <div class="stripe-card__art" aria-hidden="true">
+      {
+        art === 'statutory-horizon' && (
+          <svg
+            class="stripe-art-svg"
+            viewBox="0 0 520 340"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <linearGradient id={`${uid}-sh-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--qv-iris)" stop-opacity="0.1" />
+                <stop offset="55%" stop-color="var(--qv-violet)" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="var(--qv-iris)" stop-opacity="0.9" />
+              </linearGradient>
+              <linearGradient id={`${uid}-sh-wave-1`} x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="var(--qv-cyan)" stop-opacity="0.8" />
+                <stop offset="50%" stop-color="var(--qv-iris)" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="var(--qv-violet)" stop-opacity="0.3" />
+              </linearGradient>
+              <linearGradient id={`${uid}-sh-wave-2`} x1="10%" y1="100%" x2="90%" y2="0%">
+                <stop offset="0%" stop-color="var(--qv-iris)" stop-opacity="0.9" />
+                <stop offset="65%" stop-color="var(--qv-violet)" stop-opacity="0.75" />
+                <stop offset="100%" stop-color="var(--qv-cyan)" stop-opacity="0.4" />
+              </linearGradient>
+              <radialGradient id={`${uid}-sh-glow`} cx="80%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="var(--qv-iris)" stop-opacity="0.8" />
+                <stop offset="50%" stop-color="var(--qv-violet)" stop-opacity="0.45" />
+                <stop offset="100%" stop-color="var(--qv-iris)" stop-opacity="0" />
+              </radialGradient>
+              <filter id={`${uid}-sh-blur`} x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="30" />
+              </filter>
+            </defs>
+
+            <!-- Atmospheric Iris glow -->
+            <rect width="520" height="340" fill={`url(#${uid}-sh-bg)`} />
+            <circle cx="410" cy="130" r="180" fill={`url(#${uid}-sh-glow)`} filter={`url(#${uid}-sh-blur)`} />
+
+            <!-- Pure minimal flowing light waves -->
+            <path
+              d="M120 340 C 230 280, 300 170, 410 70 C 455 30, 495 10, 520 0 L 520 340 Z"
+              fill={`url(#${uid}-sh-wave-1)`}
+              opacity="0.85"
+            />
+            <path
+              d="M170 340 C 265 270, 340 155, 450 50 C 480 25, 505 12, 520 0 L 520 340 Z"
+              fill={`url(#${uid}-sh-wave-2)`}
+              opacity="0.75"
+            />
+
+            <!-- Precision specular ridge lines -->
+            <path d="M100 340 C 210 270, 300 135, 430 35" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.75" />
+            <path d="M140 340 C 245 265, 335 130, 465 30" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.5" />
+            <path d="M180 340 C 280 260, 370 125, 500 25" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.35" />
+
+            <!-- Luminous focal glint -->
+            <circle cx="430" cy="35" r="4" fill="var(--qv-cyan)" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="300" cy="135" r="3" fill="currentColor" opacity="0.85" />
+          </svg>
+        )
+      }
+
+      {
+        art === 'iris-flow' && (
+          <svg
+            class="stripe-art-svg"
+            viewBox="0 0 520 340"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <linearGradient id={`${uid}-if-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--c-floor)" stop-opacity="0.08" />
+                <stop offset="55%" stop-color="var(--qv-violet)" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="var(--qv-iris)" stop-opacity="0.9" />
+              </linearGradient>
+              <radialGradient id={`${uid}-if-corner-glow`} cx="85%" cy="20%" r="70%">
+                <stop offset="0%" stop-color="var(--qv-iris)" stop-opacity="0.85" />
+                <stop offset="45%" stop-color="var(--qv-violet)" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="var(--qv-iris)" stop-opacity="0" />
+              </radialGradient>
+              <filter id={`${uid}-if-blur`} x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="28" />
+              </filter>
+            </defs>
+
+            <!-- Soft corner atmosphere -->
+            <rect width="520" height="340" fill={`url(#${uid}-if-bg)`} />
+            <circle cx="440" cy="80" r="190" fill={`url(#${uid}-if-corner-glow)`} filter={`url(#${uid}-if-blur)`} />
+
+            <!-- Elegant minimal diagonal specular light gleams -->
+            <line x1="260" y1="340" x2="520" y2="80" stroke="currentColor" stroke-width="1.8" opacity="0.8" stroke-linecap="round" />
+            <line x1="310" y1="340" x2="520" y2="130" stroke="currentColor" stroke-width="1.2" opacity="0.55" stroke-linecap="round" />
+            <line x1="360" y1="340" x2="520" y2="180" stroke="currentColor" stroke-width="0.8" opacity="0.35" stroke-linecap="round" />
+            <line x1="410" y1="340" x2="520" y2="230" stroke="currentColor" stroke-width="0.6" opacity="0.2" stroke-linecap="round" />
+
+            <!-- Refined corner micro glint -->
+            <circle cx="440" cy="80" r="3.5" fill="currentColor" opacity="0.95" />
+            <circle cx="440" cy="80" r="8" stroke="currentColor" stroke-width="0.8" opacity="0.4" />
+          </svg>
+        )
+      }
+
+      {
+        art === 'cyan-aurora' && (
+          <svg
+            class="stripe-art-svg"
+            viewBox="0 0 520 340"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <linearGradient id={`${uid}-ca-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--c-floor)" stop-opacity="0.08" />
+                <stop offset="50%" stop-color="var(--qv-iris)" stop-opacity="0.45" />
+                <stop offset="100%" stop-color="var(--qv-cyan)" stop-opacity="0.85" />
+              </linearGradient>
+              <radialGradient id={`${uid}-ca-aurora-glow`} cx="85%" cy="20%" r="70%">
+                <stop offset="0%" stop-color="var(--qv-cyan)" stop-opacity="0.8" />
+                <stop offset="40%" stop-color="var(--qv-iris)" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="var(--qv-violet)" stop-opacity="0" />
+              </radialGradient>
+              <filter id={`${uid}-ca-blur`} x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="28" />
+              </filter>
+            </defs>
+
+            <!-- Celestial Cyan & Iris corner atmosphere -->
+            <rect width="520" height="340" fill={`url(#${uid}-ca-bg)`} />
+            <circle cx="440" cy="80" r="190" fill={`url(#${uid}-ca-aurora-glow)`} filter={`url(#${uid}-ca-blur)`} />
+
+            <!-- Minimal concentric orbital light arcs in corner -->
+            <path d="M 280 0 A 240 240 0 0 1 520 240" stroke="currentColor" stroke-width="1.8" opacity="0.75" fill="none" stroke-linecap="round" />
+            <path d="M 340 0 A 180 180 0 0 1 520 180" stroke="currentColor" stroke-width="1.2" opacity="0.5" fill="none" stroke-linecap="round" />
+            <path d="M 400 0 A 120 120 0 0 1 520 120" stroke="currentColor" stroke-width="0.8" opacity="0.35" fill="none" stroke-linecap="round" />
+
+            <!-- Orbital anchor node -->
+            <circle cx="450" cy="70" r="4" fill="var(--qv-cyan)" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="380" cy="140" r="3" fill="currentColor" opacity="0.8" />
+          </svg>
+        )
+      }
+
+      {
+        art === 'protocol-stream' && (
+          <svg
+            class="stripe-art-svg"
+            viewBox="0 0 520 340"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <linearGradient id={`${uid}-ps-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--c-floor)" stop-opacity="0.12" />
+                <stop offset="50%" stop-color="var(--qv-violet)" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="var(--qv-cyan)" stop-opacity="0.88" />
+              </linearGradient>
+              <linearGradient id={`${uid}-ps-stream-1`} x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="var(--qv-cyan)" stop-opacity="0.9" />
+                <stop offset="50%" stop-color="var(--qv-iris)" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="var(--qv-violet)" stop-opacity="0.2" />
+              </linearGradient>
+              <radialGradient id={`${uid}-ps-glow`} cx="80%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="var(--qv-cyan)" stop-opacity="0.65" />
+                <stop offset="45%" stop-color="var(--qv-iris)" stop-opacity="0.45" />
+                <stop offset="100%" stop-color="var(--qv-violet)" stop-opacity="0" />
+              </radialGradient>
+              <filter id={`${uid}-ps-blur`} x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="30" />
+              </filter>
+            </defs>
+
+            <!-- Dynamic Protocol Stream (Integration & Agentic flow) -->
+            <rect width="520" height="340" fill={`url(#${uid}-ps-bg)`} />
+            <circle cx="420" cy="120" r="180" fill={`url(#${uid}-ps-glow)`} filter={`url(#${uid}-ps-blur)`} />
+
+            <!-- Parallel stream ribbons -->
+            <path
+              d="M140 340 C 240 280, 310 170, 420 70 C 460 30, 495 10, 520 0 L 520 340 Z"
+              fill={`url(#${uid}-ps-stream-1)`}
+              opacity="0.8"
+            />
+
+            <!-- Stream caustics & pulse lines -->
+            <path d="M110 340 C 220 270, 305 135, 435 35" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.75" />
+            <path d="M150 340 C 255 265, 345 130, 470 30" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.5" />
+            <path d="M190 340 C 290 260, 380 125, 505 25" stroke="currentColor" stroke-width="0.8" opacity="0.35" stroke-linecap="round" />
+
+            <!-- Protocol transmission glints -->
+            <circle cx="435" cy="35" r="4.5" fill="var(--qv-cyan)" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="310" cy="135" r="3.5" fill="currentColor" opacity="0.9" />
+            <circle cx="220" cy="270" r="2.5" fill="var(--qv-cyan)" opacity="0.8" />
+          </svg>
+        )
+      }
+    </div>
+  </Tag>
+</div>
+
+<style>
+  /* REVIEWED 2026-10-25 (R285-WEB-FEATURE-CARDS-01, docs/website-reviews/
+     2026-10-25-feature-cards-review.md). What changed from the first draft,
+     and why:
+       - The hover now follows the calm card contract every other card on the
+         site keeps (D294, check-sheen rule 1): the edge moves one step and the
+         link underlines. The draft also lifted the card 3px, swapped in a
+         bigger shadow and zoomed the art, three more motions, none of them on
+         --transition-hover, so they jumped rather than eased.
+       - No resting shadow, for the same contract.
+       - The decorative lines and glints drew in the literal `white`. They now
+         draw in currentColor, set once below from --stage-ink, the role for ink on the brand gradient.
+       - Stacked on a narrow column the art was a 190px block of gradient
+         between two cards. It is now a short band, so a phone reader scrolls
+         past words, not decoration. */
+  .stripe-card-wrapper {
+    container-type: inline-size;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stripe-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+    border: 1px solid var(--ea-rule);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-hover);
+    height: 100%;
+    width: 100%;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    a.stripe-card:hover {
+      border-color: var(--c-border-hover);
+    }
+
+    a.stripe-card:hover .stripe-card__link > span {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+
+  a.stripe-card:focus-visible {
+    outline: var(--ea-focus);
+    outline-offset: 2px;
+  }
+
+  .stripe-card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: clamp(var(--space-6), 3.5vw, var(--space-8));
+    z-index: 3;
+    min-width: 0;
+    height: 100%;
+  }
+
+  .stripe-card__kicker {
+    display: inline-flex;
+    align-self: flex-start;
+    font-size: var(--t-ea-tiny);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ea-accent-ink);
+    margin: 0 0 var(--space-3);
+  }
+
+  .stripe-card__title {
+    font-family: var(--font-serif);
+    font-size: var(--t-ea-h3);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--c-text);
+    margin: 0 0 var(--space-3);
+    letter-spacing: -0.015em;
+  }
+
+  .stripe-card__desc {
+    font-family: var(--font-sans);
+    font-size: var(--t-ea-body);
+    line-height: 1.6;
+    color: var(--ea-sub);
+    margin: 0 0 var(--space-5);
+    max-width: 56ch;
+  }
+
+  .stripe-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--t-ea-body);
+    font-weight: 600;
+    color: var(--ea-accent-ink);
+    margin-top: auto;
+  }
+
+  .stripe-card__arrow {
+    flex-shrink: 0;
+  }
+
+  /* The art: decoration only, feathered into the card body. */
+  .stripe-card__art {
+    position: relative;
+    overflow: hidden;
+    min-height: var(--space-16);
+    z-index: 1;
+    /* Ink on the brand gradient: the same role the product stage uses. */
+    color: var(--stage-ink);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
+  }
+
+  .stripe-art-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Side by side once the card is wide enough for the art to be a pane. */
+  @container (min-width: 580px) {
+    .stripe-card--horizontal {
+      grid-template-columns: minmax(0, 1.4fr) minmax(220px, 1fr);
+      min-height: 240px;
+    }
+
+    .stripe-card--banner {
+      grid-template-columns: minmax(0, 1.55fr) minmax(260px, 1.1fr);
+      min-height: 260px;
+    }
+  }
+
+  @container (min-width: 500px) {
+    .stripe-card--compact {
+      grid-template-columns: minmax(0, 1.35fr) minmax(170px, 0.95fr);
+    }
+
+    .stripe-card__art {
+      min-height: 100%;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 26%);
+      mask-image: linear-gradient(to right, transparent 0%, black 26%);
+    }
+  }
+
+  /* A horizontal or banner card between 500 and 580 still stacks, so its art
+     stays a band there. */
+  @container (max-width: 579px) {
+    .stripe-card--horizontal .stripe-card__art,
+    .stripe-card--banner .stripe-card__art {
+      min-height: var(--space-16);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 60%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stripe-card {
+      transition: none;
+    }
+  }
+</style>

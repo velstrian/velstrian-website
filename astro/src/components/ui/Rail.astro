@@ -1,0 +1,57 @@
+---
+/**
+ * Rail: a sideways row of comparable cards (R285-WEB-PREMIUM-CARDS-01, spec
+ * section 6, with the owner's 2026-10-23 amendment: arrow buttons).
+ *
+ * The cards are a real list inside a scroll container that snaps card by card
+ * (native CSS scroll snap, the recipe Stripe ships on /blog). The container is
+ * a named region with a tab stop, so the arrow keys scroll it with no script,
+ * and a focused card scrolls itself into view. A fade at the right edge says
+ * there is more. Previous and next buttons ship hidden and show only when
+ * scripts/premium.ts has run AND the row overflows, each scrolling one card,
+ * disabled at its end. Nothing moves on its own (D305, WCAG 2.2.2).
+ *
+ * `count` is the number of cards. Three or fewer render as the same list laid
+ * out as a grid, with no region and no buttons, because three cards fit side
+ * by side and hiding one would only make the reader scroll for it.
+ *
+ * Styling: styles/premium.css (.ea-rail). The caller passes <li> children.
+ */
+import Icon from '../evidenced/Icon.astro';
+
+interface Props {
+  /** What the cards are, for the region name, for example "Identity providers". */
+  label: string;
+  count: number;
+  class?: string;
+}
+
+const { label, count, class: cls = '' } = Astro.props;
+const rail = count > 3;
+---
+
+{
+  rail ? (
+    <div class={`ea-rail ${cls}`.trim()} data-rail>
+      <div class="ea-rail__track" role="region" tabindex="0" aria-label={`${label}, scroll sideways for more`}>
+        <ul class="ea-rail__list" role="list">
+          <slot />
+        </ul>
+      </div>
+      <div class="ea-rail__nav" hidden>
+        <button class="ea-rail__btn" type="button" data-rail-prev aria-label={`Previous: ${label}`}>
+          <Icon name="left" size={20} />
+        </button>
+        <button class="ea-rail__btn" type="button" data-rail-next aria-label={`Next: ${label}`}>
+          <Icon name="right" size={20} />
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div class={`ea-rail ea-rail--grid ${cls}`.trim()}>
+      <ul class="ea-rail__list" role="list">
+        <slot />
+      </ul>
+    </div>
+  )
+}

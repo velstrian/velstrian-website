@@ -220,6 +220,16 @@ export const AI_NEXT: { status: PhaseStatus; heading: string; body: string }[] =
     body: 'Shipped. Ask procurement and social value questions in plain words. The Advisor answers from official regulations and, with your permission, from your past bids. Every citation is matched to official guidance, and any unverified figure is flagged for you to check.',
   },
   {
+    /* R285-WEB-MCP-CARD-01, 2026-10-25. Built and switched off:
+       crowagent-platform api/app/mcp/agent_tools.py, mounted behind
+       MCP_SERVER_ENABLED, which defaults off (api/app/config.py). The two MCP
+       connections that ARE live are on /integrations/#mcp. No date, because
+       none is committed. */
+    status: 'progress',
+    heading: 'Agent access for AI assistants',
+    body: 'Built, and not switched on yet. A read only connection that lets an AI assistant search your answer library and read your bids, with exactly the permissions of the person whose API key it uses. Today, AI assistants connect through the two MCP connections described on the integrations page.',
+  },
+  {
     status: 'research',
     heading: 'Live procurement regulatory updates',
     body: 'A live feed for changes to UK public procurement rules. Key updates to PPN 026 and the Procurement Act 2023 will appear in your Velstrian Bid dashboard with a clear summary of what changed and what it means for your bids. In research.',

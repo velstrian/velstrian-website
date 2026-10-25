@@ -75,6 +75,7 @@
  */
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/evidenced/PageHero.astro';
+import Band from '../components/evidenced/Band.astro';
 import SectionBand from '../components/evidenced/SectionBand.astro';
 import Action from '../components/evidenced/Action.astro';
 import IconTile from '../components/evidenced/IconTile.astro';
@@ -82,6 +83,7 @@ import Rail from '../components/ui/Rail.astro';
 import Icon from '../components/evidenced/Icon.astro';
 import Close from '../components/evidenced/Close.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import StripeCard from '../components/ui/StripeCard.astro';
 import { SIGNUP_URL, START_LABEL } from '../data/app';
 import { breadcrumbs } from '../lib/schema';
 import { SOURCES, IDENTITY, OUTBOUND, RULE_STEPS } from '../data/integrations';
@@ -139,6 +141,29 @@ const WEBHOOK = [
     <Action href={SIGNUP_URL}>{START_LABEL}</Action>
     <Action href="/security/" variant="secondary">Read the security model</Action>
   </PageHero>
+
+  <Band tone="light" flush class="int-spotlight-band">
+    <div class="ea-wrap">
+      {/* R285-WEB-MCP-CARD-01. The first draft linked to /roadmap/, which
+          never mentions MCP, and claimed "certified read scopes" and "zero
+          context leakage". What is live (crowagent-platform api/app/routers/
+          mcp.py, api/app/mcp/server.py): a read only MCP connector and a read
+          and write MCP server, both behind a Velstrian API key on a plan with
+          the Integrations package. The agent access server (api/app/mcp/
+          agent_tools.py) is built and switched off (MCP_SERVER_ENABLED
+          defaults off), so it is on /roadmap/ and not here. */}
+      <StripeCard
+        kicker="Featured integration · AI assistants"
+        title="Work on your bids from your AI assistant"
+        description={`Connect an AI assistant such as Claude to ${PRODUCT_NAME_BID} over the Model Context Protocol (MCP). Use the read only connector to look things up, or the read and write server to work on your bids. Both use a Velstrian API key you create.`}
+        href="#mcp"
+        linkText="See the two MCP connections"
+        art="protocol-stream"
+        variant="banner"
+        level={2}
+      />
+    </div>
+  </Band>
 
   {/* READ ONLY. Every scope printed here is quoted from the platform repo
       (data/integrations.ts carries the file and line), because a scope is
@@ -324,12 +349,14 @@ const WEBHOOK = [
           </p>
         </div>
       </li>
-      <li data-reveal>
+      <li data-reveal id="mcp" class="int-anchor">
         <div class="ea-card ea-tcard">
-          <h3 class="ea-h3">MCP server</h3>
+          <h3 class="ea-h3">AI assistants, over MCP</h3>
           <p>
-            A read and write Model Context Protocol server, so your team can work with {PRODUCT_NAME_BID} from inside
-            its own AI tooling.
+            Two Model Context Protocol (MCP) connections let an AI assistant such as Claude work with
+            {PRODUCT_NAME_BID}. The read only connector looks up your bids and answers. The read and write server can
+            also work on them. Each acts for your organisation through a Velstrian API key you create, and reads only
+            your own organisation's data.
           </p>
         </div>
       </li>
@@ -351,6 +378,15 @@ const WEBHOOK = [
 </Base>
 
 <style>
+  .int-spotlight-band {
+    padding-bottom: clamp(var(--space-6), 4vw, var(--space-10));
+  }
+
+  /* The featured card links here, so the sticky header must not cover it. */
+  .int-anchor {
+    scroll-margin-top: var(--space-24);
+  }
+
   /* The scope line is the per-connector EVIDENCE, quoted from the platform, so
      it is set in the mono face and wraps anywhere: a scope such as
      ChannelMessage.Send has a floor width that would otherwise push the page

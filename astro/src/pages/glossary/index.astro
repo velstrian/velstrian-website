@@ -20,6 +20,7 @@ import PageHero from '../../components/evidenced/PageHero.astro';
 import Band from '../../components/evidenced/Band.astro';
 import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import StripeCard from '../../components/ui/StripeCard.astro';
 import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
 import '../../styles/evidenced.css';
@@ -258,6 +259,19 @@ const schema = [
   <Band tone="light" class="gx-index" labelledby="index-heading">
     <div class="ea-wrap">
       <h2 class="visually-hidden" id="index-heading">Term index</h2>
+
+      <div class="gx-spotlight">
+        <StripeCard
+          kicker="Statutory Spotlight · PPN 026"
+          title="Procurement Act 2023 and the PPN 026 transition"
+          description="Plain-English legal briefing on the statutory shifts reshaping UK public bidding: Most Advantageous Tender (MAT) scoring, transparent supplier registers, and published KPIs."
+          href="/glossary/ppn-026/"
+          linkText="Read full transition guide"
+          art="statutory-horizon"
+          variant="banner"
+        />
+      </div>
+
       <div class="gx-toolbar">
         <div class="gx-search">
           <label for="gq" class="visually-hidden">Search glossary terms</label>
@@ -336,18 +350,26 @@ const schema = [
       </div>
       <ul class="ea-cards ea-cards--2 gx-cross" role="list">
         <li data-reveal>
-          <a class="ea-card ea-tcard" href="/resources/">
-            <h3 class="ea-h3">Resources</h3>
-            <p>In-depth guides, the free tender compliance matrix and the sources behind every figure.</p>
-            <span class="ea-tcard__more">Browse resources</span>
-          </a>
+          <StripeCard
+            kicker="Intelligence and analysis"
+            title="Regulatory blog"
+            description="Deep analysis of PPN policy shifts, statutory thresholds, and UK public procurement deadlines."
+            href="/blog/"
+            linkText="Read the blog"
+            art="iris-flow"
+            variant="compact"
+          />
         </li>
         <li data-reveal>
-          <a class="ea-card ea-tcard" href="/blog/">
-            <h3 class="ea-h3">Regulatory blog</h3>
-            <p>Analysis of PPN changes and UK public procurement deadlines.</p>
-            <span class="ea-tcard__more">Read the blog</span>
-          </a>
+          <StripeCard
+            kicker="Toolkit and benchmarks"
+            title="Procurement resources"
+            description="In-depth guides, the free tender compliance matrix, and the primary sources behind every figure."
+            href="/resources/"
+            linkText="Browse resources"
+            art="cyan-aurora"
+            variant="compact"
+          />
         </li>
       </ul>
     </div>
@@ -457,6 +479,9 @@ const schema = [
 </script>
 
 <style>
+  .gx-spotlight {
+    margin-bottom: clamp(30px, 4vw, 46px);
+  }
   .gx-toolbar {
     max-width: var(--measure-band);
     margin: 0 auto clamp(30px, 4vw, 46px);
@@ -590,6 +615,11 @@ const schema = [
 
   .gx-cross {
     margin-top: var(--ea-head-gap);
+    align-items: stretch;
+  }
+  .gx-cross li {
+    display: flex;
+    height: 100%;
   }
 
   @media (prefers-reduced-motion: reduce) {
