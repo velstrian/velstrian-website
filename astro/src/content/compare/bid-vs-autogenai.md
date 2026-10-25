@@ -8,7 +8,7 @@ updatedDate: 2026-07-26
 competitor: "AutogenAI"
 eyebrow: "Honest comparison"
 heroDescription: "A bid suite for small and mid size firms, public and private work, with published pricing, set against an enterprise AI bid-writing engine. What each one does, where each one wins, and every competitor figure sourced."
-ogImage: "/Assets/og/crowmark.png"
+ogImage: "/Assets/og/velstrian-bid.png"
 ogImageAlt: "Velstrian Bid vs AutogenAI comparison"
 ctaHeadline: "See the price."
 ctaSubLine1: "Published pricing from {{bid.starter.monthly}}/month."
@@ -127,7 +127,7 @@ faq:
 
 <div data-cmp-screen></div>
 
-<h2 id="where-crowmark-loses">Where Velstrian Bid loses honestly</h2>
+<h2 id="where-bid-loses">Where Velstrian Bid loses honestly</h2>
 <p>A balanced comparison has to concede the gaps. AutogenAI is a larger, better-funded company with a longer track record and an engine built for high-volume, multi-sector enterprise bidding. If you need that breadth, dedicated account management at enterprise scale, or a content engine tuned across many industries, AutogenAI is the more established option, and Velstrian Bid, as a newer product for small and mid size firms, is not trying to be that. Velstrian Bid is deliberately focused: small and mid size firms bidding for public and private work, grounded answers, social value and delivery evidence. The two are not mutually exclusive. Some teams run an enterprise engine for the largest proposals and Velstrian Bid for UK tender discovery, social-value scoring and post-award evidence.</p>
 
 <h2 id="the-longer-read">The longer read</h2>
@@ -142,7 +142,7 @@ faq:
     </div>
   </details>
   <details>
-    <summary><h3 id="what-is-crowmark">What is Velstrian Bid?</h3></summary>
+    <summary><h3 id="what-is-bid">What is Velstrian Bid?</h3></summary>
     <div class="cfaq-a cmp-read">
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 

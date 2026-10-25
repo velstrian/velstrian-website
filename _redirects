@@ -229,10 +229,12 @@ https://www.crowagent.ai/*  https://velstrian.com/:splat  301
 # signatures, ad copy and third-party posts, i.e. the ones with no second chance.
 # All three of /get-crowagent-core, /start-trial and /sign-in were among the 17
 # rules found dead at the bottom of this file on 2026-07-30.
-/status                       https://status.crowagent.ai                                  302
-/start-trial                  https://app.crowagent.ai/signup                              302
-/sign-in                      https://app.crowagent.ai/login                               302
-/get-crowmark                 https://app.crowagent.ai/marketplace?highlight=crowmark      302
+# A-294 2026-10-25: targets moved to app.velstrian.com and status.velstrian.com.
+# /marketplace on the app answers 308 to /products, so /get-crowmark goes there direct.
+/status                       https://status.velstrian.com   302
+/start-trial                  https://app.velstrian.com/signup   302
+/sign-in                      https://app.velstrian.com/login   302
+/get-crowmark                 https://app.velstrian.com/products   302
 /get-cyber-essentials         /crowmark/                                                   301
 /get-crowcash                 /crowmark/                                                   301
 # RETARGETED 2026-07-30: was `-> /products`, which is itself a 301 to /crowmark.

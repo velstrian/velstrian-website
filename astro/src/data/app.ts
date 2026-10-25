@@ -1,9 +1,17 @@
 /**
  * app.ts: where the Velstrian app lives, written once.
  *
- * The app keeps its own host through the Velstrian rebrand. People sign in and
- * sign up there, so the header, the plan buttons on /pricing and every Start
- * now link read these two constants rather than typing the host again.
+ * People sign in and sign up there, so the header, the plan buttons on /pricing
+ * and every Start now link read these two constants rather than typing the host
+ * again.
+ *
+ * A-294 (2026-10-25): the app moved to its Velstrian host, the same value as
+ * PRIMARY_APP_ORIGIN in the platform's packages/server-infra/src/public-hosts.mjs.
+ * Measured before the change: https://app.velstrian.com/ and
+ * https://app.crowagent.ai/ both answered 307 to /login, /signup answered 200,
+ * and /api/contact/submit, /api/notify and /api/csp-report answered 204 to a
+ * CORS preflight on the new host. check-csp-required-origins.js reads this
+ * line, so `_headers` must permit the host in connect-src and form-action.
  *
  * Kept in its own file with no imports, because the command palette script is
  * inlined into every page and carries a byte budget: importing SITE there would
@@ -13,7 +21,7 @@
  * every Start now button. A plan is chosen with `?plan=<token>`, built by
  * startHref() in data/pricing.ts.
  */
-export const APP_ORIGIN = 'https://app.crowagent.ai';
+export const APP_ORIGIN = 'https://app.velstrian.com';
 
 export const SIGNUP_URL = `${APP_ORIGIN}/signup`;
 

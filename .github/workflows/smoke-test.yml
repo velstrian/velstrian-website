@@ -121,15 +121,15 @@ jobs:
           fi
           echo "PASS: no Supabase references on marketing site"
 
-      - name: Check app.crowagent.ai is accessible
+      - name: Check app.velstrian.com is accessible
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://app.crowagent.ai/login)
-          echo "app.crowagent.ai/login HTTP status: $STATUS"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://app.velstrian.com/login)
+          echo "app.velstrian.com/login HTTP status: $STATUS"
           if [ "$STATUS" = "000" ]; then
-            echo "CRITICAL: app.crowagent.ai is unreachable"
+            echo "CRITICAL: app.velstrian.com is unreachable"
             exit 1
           fi
-          echo "PASS: app.crowagent.ai is reachable (status $STATUS)"
+          echo "PASS: app.velstrian.com is reachable (status $STATUS)"
 
       - name: Notify on failure
         if: failure()

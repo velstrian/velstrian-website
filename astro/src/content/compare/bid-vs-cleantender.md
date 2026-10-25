@@ -8,7 +8,7 @@ updatedDate: 2026-07-26
 competitor: "CleanTender"
 eyebrow: "Honest comparison"
 heroDescription: "A soft-FM specialist against a sector-agnostic bid suite. Both publish their prices, so the real question is scope. Every competitor fact is sourced and dated."
-ogImage: "/Assets/og/crowmark.png"
+ogImage: "/Assets/og/velstrian-bid.png"
 ogImageAlt: "Velstrian Bid vs CleanTender comparison"
 ctaHeadline: "Bid wider."
 ctaSubLine1: "Every sector, published pricing from {{bid.starter.monthly}}/month."
@@ -129,7 +129,7 @@ faq:
 
 <div data-cmp-screen></div>
 
-<h2 id="where-crowmark-loses">Where Velstrian Bid loses honestly</h2>
+<h2 id="where-bid-loses">Where Velstrian Bid loses honestly</h2>
 <p>For a pure soft-FM contractor, CleanTender is the more specialised tool. Its vocabulary is tuned to cleaning and security bids, its curated feed filters out the noise of other sectors, and its qualification scan gives a fast bid or no-bid signal from a contract pack in under 30 seconds. Velstrian Bid's advantage is breadth and depth on the compliance side: every sector, a hard figure-grounding gate, social value maths done in code and post-award delivery evidence. If you only ever bid for cleaning contracts, that breadth is not worth much to you, and CleanTender may simply be the better fit. A soft-FM supplier who also bids in other categories could reasonably run both.</p>
 
 <h2 id="the-longer-read">The longer read</h2>
@@ -143,7 +143,7 @@ faq:
     </div>
   </details>
   <details>
-    <summary><h3 id="what-is-crowmark">What is Velstrian Bid?</h3></summary>
+    <summary><h3 id="what-is-bid">What is Velstrian Bid?</h3></summary>
     <div class="cfaq-a cmp-read">
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. Unlike a sector specialist, it is sector-agnostic: it tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED across any category, refreshed every morning at 06:00 UTC. It drafts answers grounded in the supplier's own submitted bids, and its defining rule is figure-grounding, so before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 <p>Velstrian Bid calculates social value in code against the weighting the buyer published rather than only drafting it as a questionnaire section, and after award it tracks each commitment to a delivery percentage with a RAG status, captures evidence, issues monthly reports and checks the Procurement Act 2023 KPI duties in sections 52 and 71. Its bid-fit and coverage marking, by contrast, is still in development and not in the released product, so on the fit-scan row above CleanTender is genuinely ahead today.</p>

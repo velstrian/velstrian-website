@@ -49,9 +49,9 @@ const OLD_SOCIALS = [
 ];
 // Hosts that stay on crowagent.ai in this round (owner decision 2026-10-18: website and
 // email move now, the app moves later in its own migration). A reader can see these and
-// that is correct until the app migration lands.
+// that is correct until the app migration lands. A-294 (2026-10-25): the app moved, so
+// app.crowagent.ai left this list and a built page naming it is now a violation.
 const KEPT_HOSTS = [
-  'app.crowagent.ai',
   'calendly.com/crowagent-platform',
   'crowagent-platform-production.up.railway.app', // the API host the partner form posts to, moves with the app
 ];
@@ -87,7 +87,9 @@ if (!existsSync(join(DIST, 'index.html'))) {
     const isHeaders = file.endsWith('_headers');
     const isRedirects = file.endsWith('_redirects');
     // Mask the hosts that legitimately stay, so the brand rules below only see the rest.
-    let masked = raw;
+    // A comment line in _headers is never served to a reader, and the history notes there
+    // name the hosts they named at the time. Only the header values are checked.
+    let masked = isHeaders ? raw.split('\n').filter((l) => !/^\s*#/.test(l)).join('\n') : raw;
     for (const h of KEPT_HOSTS) masked = masked.split(h).join('__KEPT_HOST__');
 
     // 1. Old brand in reader visible output. "formerly CrowAgent" is allowed once per page
@@ -116,8 +118,8 @@ if (!existsSync(join(DIST, 'index.html'))) {
       if (canon && !canon[1].startsWith(ORIGIN)) add('canonical-origin', file, canon[1]);
       for (const m of raw.match(/"@id":"https?:\/\/(?:www\.)?crowagent\.ai[^"]*"/g) || []) add('jsonld-origin', file, m);
     }
-    if (isHeaders && /https:\/\/(?:www\.)?crowagent\.ai(?![a-z.-])/.test(raw.replace(/https:\/\/(app|status)\.crowagent\.ai/g, ''))) {
-      add('headers-origin', file, 'bare crowagent.ai origin left in _headers, use velstrian.com (app. and status. may stay)');
+    if (isHeaders && /https:\/\/(?:www\.)?crowagent\.ai(?![a-z.-])/.test(raw.replace(/https:\/\/status\.crowagent\.ai/g, ''))) {
+      add('headers-origin', file, 'bare crowagent.ai origin left in _headers, use velstrian.com (status. may stay)');
     }
   }
 

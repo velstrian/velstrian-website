@@ -10,7 +10,7 @@
  * the reader sees changes: the palette showed nothing until that file had
  * loaded anyway, and it tells an action from a route by `kind`, as before.
  */
-import { SIGNUP_URL, START_LABEL } from './app';
+import { SIGNUP_URL, START_LABEL, WALKTHROUGH_URL } from './app';
 
 export interface PaletteAction {
   title: string;
@@ -92,7 +92,7 @@ export const PALETTE_ACTIONS: PaletteAction[] = [
   },
   {
     title: 'Book a 30-minute call',
-    href: 'https://calendly.com/crowagent-platform/30min',
+    href: WALKTHROUGH_URL,
     section: 'Action',
     hint: 'demo meeting walkthrough talk to sales schedule calendar',
     kind: 'action',

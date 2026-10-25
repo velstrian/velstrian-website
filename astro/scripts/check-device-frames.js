@@ -107,7 +107,7 @@ const FRAMES = [
     /* The file that emits the selector. Read to tell a RENAME from a frame
        nobody renders (see THE FLOORS). */
     component: 'src/components/ui/Carousel.astro',
-    why: 'ui/Carousel.astro draws a browser: three traffic lights and the address app.crowagent.ai',
+    why: 'ui/Carousel.astro draws a browser: three traffic lights and the app address from APP_ORIGIN',
   },
 ];
 

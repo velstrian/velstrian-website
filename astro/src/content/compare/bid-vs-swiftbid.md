@@ -8,7 +8,7 @@ updatedDate: 2026-07-26
 competitor: "SwiftBid"
 eyebrow: "Honest comparison"
 heroDescription: "Pay per bid, or subscribe. Which model fits depends on how often you bid. Every competitor figure is sourced and dated."
-ogImage: "/Assets/og/crowmark.png"
+ogImage: "/Assets/og/velstrian-bid.png"
 ogImageAlt: "Velstrian Bid vs SwiftBid comparison"
 ctaHeadline: "Bid often."
 ctaSubLine1: "One subscription, from {{bid.starter.monthly}}/month."
@@ -128,7 +128,7 @@ faq:
 
 <div data-cmp-screen></div>
 
-<h2 id="where-crowmark-loses">Where Velstrian Bid loses honestly</h2>
+<h2 id="where-bid-loses">Where Velstrian Bid loses honestly</h2>
 <p>For genuinely occasional bidders, SwiftBid's per-bid model is the more sensible spend: no subscription, a fixed cost per bid, and at Premium the option of a human expert on the draft, which Velstrian Bid's self-serve software does not provide. If you write one bid this year and none next year, a monthly subscription is poor value and SwiftBid is the honest recommendation. Velstrian Bid earns its keep when bidding is a regular activity, and when tender discovery, social value maths done in code and post-award delivery evidence are worth having in one place. The two can also be combined: subscribe to Velstrian Bid for the ongoing work and commission SwiftBid for a single high-stakes bid.</p>
 
 <h2 id="the-longer-read">The longer read</h2>
@@ -142,7 +142,7 @@ faq:
     </div>
   </details>
   <details>
-    <summary><h3 id="what-is-crowmark">What is Velstrian Bid?</h3></summary>
+    <summary><h3 id="what-is-bid">What is Velstrian Bid?</h3></summary>
     <div class="cfaq-a cmp-read">
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It is a subscription, which gives you continuous access to tender discovery, drafting, social-value scoring and delivery evidence rather than a per-bid transaction. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, refreshed every morning at 06:00 UTC, and drafts answers grounded in the supplier's own submitted bids. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 

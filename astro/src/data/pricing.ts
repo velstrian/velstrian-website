@@ -101,6 +101,11 @@ export { SIGNUP_URL, START_LABEL };
  * VALID_CHECKOUT_PLANS in app/(onboarding)/onboarding/action-types.ts). The
  * monthly token is the plan's `planKey`. The annual token is the same with
  * `_annual` appended, the shape the app already accepts for Starter and Pro.
+ *
+ * A-294 (2026-10-25): the Velstrian Bid tokens are `bid_<tier>`. The platform
+ * renamed its product key (R285-REBRAND-11), and parsePlanToken in
+ * web/src/features/billing/v2/plan-token.ts returns null for `crowmark_<tier>`,
+ * so the old tokens did not carry the chosen plan through sign up.
  */
 /** The sign up link for one plan and billing period, or the bare sign up page. */
 /** The extra seat add on for Pro and Buyer Pro, in pounds. Source of truth:
@@ -175,7 +180,7 @@ export const PLANS: Plan[] = [
     credits: 200,
     includes: 'Tender feed, cited drafting, social value calculation and PDF or DOCX export.',
     cta: START_LABEL,
-    planKey: 'crowmark_starter',
+    planKey: 'bid_starter',
   },
   {
     name: 'Pro',
@@ -188,7 +193,7 @@ export const PLANS: Plan[] = [
     credits: 750,
     includes: 'Everything in Starter, plus delivery tracking, monthly reports and the section 52 and 71 checks.',
     cta: START_LABEL,
-    planKey: 'crowmark_pro',
+    planKey: 'bid_pro',
     recommended: true,
   },
   {
@@ -212,7 +217,7 @@ export const PLANS: Plan[] = [
     includes: 'Everything in Pro, plus the Integrations package, branded exports and a named contact.',
     moreSeatsByArrangement: true,
     cta: 'Buy Portfolio',
-    planKey: 'crowmark_portfolio',
+    planKey: 'bid_portfolio',
     secondary: {
       label: 'Talk to us about contracts',
       href: '/contact/?tier=portfolio#contact-form',

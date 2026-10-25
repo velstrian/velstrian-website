@@ -241,10 +241,21 @@ const PHONE_CROPS: Record<string, CropView> = {
   'buy-evaluation.webp': { x: 0, y: 0, w: 400, h: 523 },
   // All bids: the first three bids with sector, value and status.
   'bid-list.webp': { x: 0, y: 320, w: 420, h: 385 },
+  // A-294 lane X5 (2026-10-25): the Figma feed panel on the home page ("Contracts
+  // that suit you"), 600 by 450 with the card inset 21px, drew at 0.54 at 390. The
+  // region is the card's left side: the heading, each contract's source, name, buyer,
+  // value and closing date, ending below the third contract. The fit circles sit
+  // 560px across and cannot share a legible phone width with the names, so the
+  // right edge fades as on the other crops. The region runs 55px past the longest
+  // line so the fade (--shot-fade, 16% of the box) never lands on a word. It
+  // draws at about 0.86 at 390.
+  'panel-feed.webp': { x: 21, y: 21, w: 375, h: 340 },
 };
 
+/* A Figma design takes a phone crop too (A-294 lane X5): its frame already prints
+   "Example data. Product design." and the crop changes only which part shows. */
 function withPhoneCrop(c: Capture | null): Capture | null {
-  if (!c || c.view || c.source === 'figma') return c;
+  if (!c || c.view) return c;
   const phone = PHONE_CROPS[c.src.split('/').pop() ?? ''];
   return phone ? { ...c, view: { phone } } : c;
 }

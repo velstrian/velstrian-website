@@ -8,7 +8,7 @@ updatedDate: 2026-07-26
 competitor: "mytender.io"
 eyebrow: "Honest comparison"
 heroDescription: "Two UK-built bid writing tools for small and mid size firms. One publishes its pricing and grounds every figure. The other is a private-cloud drafting platform. Every competitor fact is sourced."
-ogImage: "/Assets/og/crowmark.png"
+ogImage: "/Assets/og/velstrian-bid.png"
 ogImageAlt: "Velstrian Bid vs mytender.io comparison"
 ctaHeadline: "See the price."
 ctaSubLine1: "Published pricing from {{bid.starter.monthly}}/month."
@@ -129,7 +129,7 @@ faq:
 
 <div data-cmp-screen></div>
 
-<h2 id="where-crowmark-loses">Where Velstrian Bid loses honestly</h2>
+<h2 id="where-bid-loses">Where Velstrian Bid loses honestly</h2>
 <p>mytender.io leads on one thing Velstrian Bid does not offer: a Virtual Private Cloud deployment model, which some security teams insist on. Both connect to SharePoint, Salesforce and Google Drive for teams that manage their proposal content there. It is also further along on general drafting-workspace collaboration. Velstrian Bid's focus is narrower and different: UK and EU tender discovery, public and private tenders answered the same way, grounded answers with a hard figure-grounding gate, social value maths done in code, and post-award delivery evidence under the Procurement Act 2023. The honest read is that they overlap on drafting but diverge on everything either side of it, and a team could reasonably run both.</p>
 
 <h2 id="the-longer-read">The longer read</h2>
@@ -144,7 +144,7 @@ faq:
     </div>
   </details>
   <details>
-    <summary><h3 id="what-is-crowmark">What is Velstrian Bid?</h3></summary>
+    <summary><h3 id="what-is-bid">What is Velstrian Bid?</h3></summary>
     <div class="cfaq-a cmp-read">
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 

@@ -186,12 +186,21 @@ function rehypeContentCards() {
  * the owner's wording, so it is not touched.
  */
 const APP_HOST_LINK = /^https?:\/\/app\.[a-z0-9.-]+/i;
-function rehypeAppOrigin() {
+/*
+ * A-294 (2026-10-25): the origin is passed as the plugin's OPTION, not read from
+ * the import inside it. Astro keeps rendered Markdown in .astro/data-store.json
+ * and clears that cache only when the serialised config changes. A function
+ * serialises to nothing, so with the origin read inside it, moving APP_ORIGIN
+ * left seven pages linking to the old app host from the cache, caught by
+ * check-brand-names. As an option the origin is part of the config digest, so a
+ * host change clears the cache by itself.
+ */
+function rehypeAppOrigin({ origin }) {
   return (tree, file) => {
     const walk = (node) => {
       if (node.type === 'element' && node.tagName === 'a' && node.properties && typeof node.properties.href === 'string') {
         const href = node.properties.href;
-        if (href.startsWith('app:/')) node.properties.href = APP_ORIGIN + href.slice(4);
+        if (href.startsWith('app:/')) node.properties.href = origin + href.slice(4);
         else if (APP_HOST_LINK.test(href)) {
           throw new Error(`A-391: ${file?.path ?? 'content'} links to ${href}. Write it as app:${href.replace(APP_HOST_LINK, '')} so the app host stays one line in src/data/app.ts.`);
         }
@@ -207,7 +216,7 @@ function rehypeAppOrigin() {
 
 export default defineConfig({
   site: 'https://velstrian.com', // R285-REBRAND-VELSTRIAN-01: velstrian.com is the primary origin (owner 2026-10-18)
-  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, rehypeAppOrigin] },
+  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, [rehypeAppOrigin, { origin: APP_ORIGIN }]] },
   output: 'static',
   // R285-WEB-COMPARE-SCREEN-01 (owner report 2026-10-25). The dark floating bar the owner saw over the
   // product screen captions on :8093 was Astro's own dev toolbar, which only `astro dev` injects. The
