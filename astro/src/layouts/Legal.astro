@@ -61,10 +61,12 @@ interface Props {
   heading: string;
   eyebrow?: string;
   lastUpdated?: string;
+  version?: string;
+  effectiveDate?: string;
   headings: MarkdownHeading[];
 }
 
-const { title, description, path, heading, eyebrow, lastUpdated, headings } = Astro.props;
+const { title, description, path, heading, eyebrow, lastUpdated, version, effectiveDate, headings } = Astro.props;
 
 /** h2 only. h3 in these documents are sub-clauses and would swamp the rail. */
 const toc = headings.filter((h) => h.depth === 2);
@@ -96,6 +98,18 @@ const formatted = lastUpdated
     })
   : null;
 const isValidDate = formatted && formatted !== 'Invalid Date';
+
+/* D448: the version and effective date a person agrees to, shown exactly as the
+   platform records them. Same rule as above, nothing is invented: a page whose
+   front matter carries no version shows no version line. */
+const effectiveFormatted = effectiveDate
+  ? new Date(effectiveDate).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+  : null;
+const isValidEffective = effectiveFormatted && effectiveFormatted !== 'Invalid Date';
 ---
 
 <Base title={title} description={description} path={path} schema={schema} typeface="evidenced" headerTone="light">
@@ -117,6 +131,13 @@ const isValidDate = formatted && formatted !== 'Invalid Date';
       isValidDate && (
         <p slot="after" class="ea-label legal__stamp">
           Last updated <time datetime={lastUpdated}>{formatted}</time>
+        </p>
+      )
+    }
+    {
+      version && isValidEffective && (
+        <p slot="after" class="ea-label legal__stamp" data-legal-version={version}>
+          Version {version}, in force from <time datetime={effectiveDate}>{effectiveFormatted}</time>
         </p>
       )
     }

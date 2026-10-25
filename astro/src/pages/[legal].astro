@@ -35,6 +35,8 @@ const { Content, headings } = await render(entry);
   heading={entry.data.heading}
   eyebrow={entry.data.eyebrow}
   lastUpdated={entry.data.lastUpdated}
+  version={entry.data.version}
+  effectiveDate={entry.data.effectiveDate}
   headings={headings}
 >
   {entry.id === 'security' && <SecurityBuiltIn slot="before" tone="light-alt" />}

@@ -2,7 +2,9 @@
 title: "Terms of Service | Velstrian"
 description: "Velstrian Systems Ltd terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes."
 heading: "Terms of Service."
-lastUpdated: "2026-10-23"
+lastUpdated: "2026-10-25"
+version: "2026-10-25"
+effectiveDate: "2026-10-25"
 ---
 ## The six clauses customers ask about
 
@@ -38,6 +40,8 @@ The complete agreement, written in plain language. Jump to any clause, or contac
 
 These Terms of Service (“Terms”) form a legally binding agreement between **Velstrian Systems Ltd** (a private company limited by shares incorporated in England and Wales, “Velstrian”, “we”, “us”) and the individual or organisation accessing or using the Velstrian platform (“Customer”, “you”). By creating an account or using the platform, you agree to these Terms.
 
+These Terms include the [Acceptable Use rules](#acceptable-use) in section 3 and the [Data Processing Agreement](#data-processing-agreement) described in section 7. People who only answer, sign or review through a link someone sent them have their own short [Terms for suppliers and guests](/supplier-terms/).
+
 ## 2. Subscription and Access
 
 - Access to the platform is provided on a subscription basis as described on our Pricing page.
@@ -53,6 +57,8 @@ These Terms of Service (“Terms”) form a legally binding agreement between **
 ### Subscription rules at a glance
 
 <div class="prose-scroll" role="region" aria-label="Subscription mechanics (table)" tabindex="0"><table class="lc-table"> <caption>Subscription mechanics</caption> <thead> <tr><th scope="col">Item</th><th scope="col">Detail</th></tr> </thead> <tbody> <tr><th scope="row">Billing cycle</th><td>Monthly or annual, in advance</td></tr> <tr><th scope="row">Currency</th><td>GBP</td></tr> <tr><th scope="row">Payment processor</th><td>Stripe</td></tr> <tr><th scope="row">Cancellation</th><td>Self-serve from Settings → Billing, any time</td></tr> <tr><th scope="row">Effective date of cancellation</th><td>End of current billing period</td></tr> <tr><th scope="row">Refunds</th><td>Not issued for partial periods</td></tr> <tr><th scope="row">Pricing changes</th><td>30 days' written notice to subscribers</td></tr> </tbody> </table></div>
+
+<div id="acceptable-use" class="legal-anchor"></div>
 
 ## 3. Acceptable Use
 
@@ -97,9 +103,11 @@ Use of the Velstrian platform is conditional on staying within the boundaries be
 
 <details class="lc-details" id="liability-detail"> <summary>Liability, full clause text</summary> <div class="lc-details__body"> <p>To the maximum extent permitted by applicable law, for general commercial breach, bugs and service interruptions, Velstrian's aggregate liability to you under or in connection with these Terms shall not exceed the greater of (a) the total subscription fees paid by you in the 12 months preceding the claim, or (b) £2,500.</p> <p>For data protection and security breaches under our Data Processing Agreement, a separate and distinct cap applies: Velstrian's liability is capped at the greater of (a) a floor equal to the greater of the total subscription fees paid by you in the 12 months preceding the claim or £2,500, and (b) the actual proceeds recovered under Velstrian's Cyber / Technology Professional Indemnity insurance policy for that claim, and in any event shall not exceed £250,000.</p> <p>Velstrian shall not be liable for any indirect, consequential, special, or punitive damages, including loss of profits, loss of revenue, loss of business, loss of data, or business interruption.</p> <p>Velstrian gives no indemnity to you for regulatory fines or penalties imposed by any supervisory authority (for example the ICO).</p> <p>Nothing in these Terms limits liability for death or personal injury caused by negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded by law.</p> </div> </details>
 
+<div id="data-processing-agreement" class="legal-anchor"></div>
+
 ## 7. Data Processing
 
-Personal data is processed in accordance with our [Privacy Policy](/privacy/). For B2B customers who require a Data Processing Agreement under Article 28 UK GDPR, request a copy using the buttons below.
+Personal data is processed in accordance with our [Privacy Policy](/privacy/). If we process personal data on your behalf, our [Data Processing Agreement](app:/dpa) forms part of these Terms. It sets out how we handle that data for you under Article 28 UK GDPR. If you would like a copy for your records, request one using the buttons below.
 
 [Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:contact@velstrian.com)
 

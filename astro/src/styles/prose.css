@@ -73,6 +73,13 @@
     scroll-margin-top: 96px; /* clears the sticky header when jumped to */
   }
 
+  /* A stable, unnumbered jump target placed just before a numbered clause
+     (D448). The platform links to /terms/#acceptable-use and similar, and
+     those links must survive a clause being renumbered. */
+  .prose .legal-anchor {
+    scroll-margin-top: 96px;
+  }
+
   .prose h3 {
     margin-top: var(--stack-2);
     margin-bottom: 0;

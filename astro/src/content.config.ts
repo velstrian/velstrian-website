@@ -224,6 +224,16 @@ const legal = defineCollection({
     /** The page's own hero kicker, e.g. "Legal & Data Protection". */
     eyebrow: z.string().optional(),
     lastUpdated: z.string().optional(),
+    /*
+     * THE VERSION AND EFFECTIVE DATE A PERSON AGREES TO (D448, 2026-10-25).
+     * The platform records the version string beside every acceptance, so the
+     * page has to show the same string the record holds. Optional, because the
+     * cookie, security and accessibility pages are statements, not agreements.
+     * When set, both are shown under the title. Change the version whenever the
+     * wording changes, so the platform can ask people to agree again.
+     */
+    version: z.string().optional(),
+    effectiveDate: z.string().optional(),
   }),
 });
 

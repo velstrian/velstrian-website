@@ -4,6 +4,8 @@ description: "How Velstrian Systems Ltd collects, uses, and protects personal da
 heading: "Privacy Policy."
 eyebrow: "Legal & Data Protection"
 lastUpdated: "2026-10-25"
+version: "2026-10-25"
+effectiveDate: "2026-10-25"
 ---How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
 
 ## What this policy covers
