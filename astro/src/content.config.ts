@@ -234,6 +234,12 @@ const legal = defineCollection({
      */
     version: z.string().optional(),
     effectiveDate: z.string().optional(),
+    /*
+     * D442 (2026-10-25): the Terms and the Data Processing Agreement ship as
+     * DRAFT. When this is set, the page shows a Draft notice above the
+     * document carrying this sentence. Remove it when the wording is final.
+     */
+    draftNotice: z.string().optional(),
   }),
 });
 

@@ -63,10 +63,11 @@ interface Props {
   lastUpdated?: string;
   version?: string;
   effectiveDate?: string;
+  draftNotice?: string;
   headings: MarkdownHeading[];
 }
 
-const { title, description, path, heading, eyebrow, lastUpdated, version, effectiveDate, headings } = Astro.props;
+const { title, description, path, heading, eyebrow, lastUpdated, version, effectiveDate, draftNotice, headings } = Astro.props;
 
 /** h2 only. h3 in these documents are sub-clauses and would swamp the rail. */
 const toc = headings.filter((h) => h.depth === 2);
@@ -148,6 +149,19 @@ const isValidEffective = effectiveFormatted && effectiveFormatted !== 'Invalid D
   <slot name="before" />
 
   <Band tone="light" class="legal">
+    {/* D442: a document still in draft says so before anything else, in
+        plain words, so nobody mistakes it for final wording. The sentence
+        comes from the page's front matter, the layout adds only the label. */}
+    {
+      draftNotice && (
+        <div class="ea-wrap">
+          <aside class="legal__draft" role="note" aria-labelledby="legal-draft-label" data-legal-draft>
+            <p class="ea-label legal__draft-label" id="legal-draft-label">Draft</p>
+            <p class="legal__draft-text">{draftNotice}</p>
+          </aside>
+        </div>
+      )
+    }
     <div class="ea-wrap legal__grid">
       {
         toc.length > 0 && (
@@ -173,6 +187,31 @@ const isValidEffective = effectiveFormatted && effectiveFormatted !== 'Invalid D
 </Base>
 
 <style>
+  /* The draft notice. --c-at-risk is the central token for the middle state,
+     neither verified nor refused, and on a light band it resolves to the
+     ochre ink that reads at AA. No new brand value is introduced. */
+  .legal__draft {
+    margin: 0 0 var(--stack-2);
+    padding: var(--space-4) var(--space-6);
+    border: 1px solid var(--c-at-risk);
+    border-left-width: 4px;
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+  }
+
+  .legal__draft-label {
+    margin: 0 0 var(--space-2);
+    color: var(--c-at-risk);
+  }
+
+  .legal__draft-text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--c-text);
+  }
+
   .legal__grid {
     display: grid;
     grid-template-columns: 240px minmax(0, 1fr);
