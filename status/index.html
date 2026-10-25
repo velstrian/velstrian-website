@@ -1182,6 +1182,17 @@
   .pb-note{padding:0 12px 12px;color:var(--pb-muted);font-size:13px;overflow-wrap:anywhere}
   .pb-empty{padding:20px;text-align:center;color:var(--pb-muted)}
   .pb-foot{font-size:12px;color:var(--pb-muted)}
+  /* [R285-BOARD-OWNER-REVIEW-HTML-01] Owner review section and row links. */
+  .pb-review{border-left:4px solid var(--pb-decision)}
+  .pb-review li{flex-wrap:wrap}
+  .pb-revtitle{flex:1 1 260px;min-width:0}
+  .pb-revlinks{display:flex;flex-wrap:wrap;gap:8px}
+  .pb-revlink{display:inline-flex;align-items:center;min-height:32px;padding:4px 12px;
+    border:1px solid var(--pb-decision);border-radius:999px;background:var(--pb-decision-bg);
+    color:var(--pb-decision);font-size:13px;font-weight:600;text-decoration:none}
+  .pb-revlink:hover{text-decoration:underline}
+  .pb-revlink:focus-visible{outline:2px solid var(--pb-accent);outline-offset:2px}
+  .pb-rowlinks{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 12px}
 
   /* Master Hub (CrowAgent Standards: matching Platform & Architecture) */
   #masterhub{margin:0;display:flex;flex-direction:column;gap:22px}
@@ -1289,6 +1300,13 @@
        the top, and before the generator notices and the deploy panel, which keep
        their place above the item filters. -->
   <div class="pb" id="pbtop">
+    <!-- [R285-BOARD-OWNER-REVIEW-HTML-01, D451] Documents waiting on the owner,
+         each opened as a readable HTML page from status/review/. First on the
+         tab because it is the owner's own queue. Hidden when nothing is mapped. -->
+    <section class="pb-panel pb-review" aria-labelledby="pbh-rev" id="pbreview" hidden>
+      <h2 class="pb-h2" id="pbh-rev">Owner review: documents to read and decide</h2>
+      <ul class="pb-plain" id="pbreviewlist"></ul>
+    </section>
     <section class="pb-panel" aria-label="Progress per owner prompt" id="prompt-progress"></section>
     <section class="pb-panel" aria-labelledby="pbh-sum">
       <h2 class="pb-h2" id="pbh-sum">Where the release stands</h2>
@@ -2008,7 +2026,48 @@ function pbRow(i) {
     sev: i.sev || '', lane: lane || i.lane || '', verdict: i.status || '',
     date: i.changed || (i.changedAt ? String(i.changedAt).slice(0, 10) : ''),
     at: i.changedAt || '', latest: i.note || '',
+    docs: Array.isArray(i.reviewDocs) ? i.reviewDocs : [],
   };
+}
+
+/* [R285-BOARD-OWNER-REVIEW-HTML-01, D451] The owner reads approval documents
+   as HTML, never as raw markdown. Pages are rendered by render-owner-review.js
+   on every board rebuild. The chip value is not a verdict, so it cannot collide
+   with one. */
+const PB_REVIEW = '__owner_review__';
+function pbReviewLinks(docs, cls) {
+  const wrap = pbEl('span', cls);
+  docs.forEach(doc => {
+    const a = pbEl('a', 'pb-revlink', 'Review document: ' + doc.title);
+    a.href = doc.href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    wrap.append(a);
+  });
+  return wrap;
+}
+function pbRenderReview(rows) {
+  const host = document.getElementById('pbreview');
+  const ul = document.getElementById('pbreviewlist');
+  const byId = new Map(rows.map(r => [r.id, r]));
+  const entries = (DATA.ownerReview || []).filter(e => e.docs && e.docs.length);
+  ul.textContent = '';
+  host.hidden = !entries.length;
+  entries.forEach(e => {
+    const r = byId.get(e.row);
+    const li = pbEl('li');
+    const t = pbEl('span', 'pb-revtitle');
+    t.append(pbEl('span', 'pb-id pb-mono', e.row), document.createTextNode('  '));
+    if (r) {
+      const p = pbEl('span', 'pb-pill', r.verdict);
+      p.style.setProperty('--pb-pc', 'var(' + pbCol(r.verdict)[0] + ')');
+      p.style.setProperty('--pb-pbg', 'var(' + pbCol(r.verdict)[1] + ')');
+      t.append(p, document.createTextNode('  '));
+    }
+    t.append(pbEl('br'), document.createTextNode(r ? r.title : (e.title || '')));
+    li.append(pbEl('span', 'pb-dot block'), t, pbReviewLinks(e.docs, 'pb-revlinks'));
+    ul.append(li);
+  });
 }
 
 function pbFillList(id, items, cls, empty) {
@@ -2104,6 +2163,8 @@ function renderPb(ageMs, mins) {
     byTime.slice(0, 10).map(r => ({when: pbShortTime(r.at) || r.date, id: r.id, status: r.verdict, text: ''})),
     '', 'No changes yet.');
 
+  pbRenderReview(rows);
+
   const mx = document.getElementById('pbmatrix');
   mx.textContent = '';
   const thead = pbEl('thead'), hr = pbEl('tr');
@@ -2129,13 +2190,13 @@ function renderPb(ageMs, mins) {
   });
   mx.append(thead, tb);
 
-  const key = present.join('|');
+  const key = present.join('|') + (rows.some(r => r.docs.length) ? '|' + PB_REVIEW : '');
   if (key !== pbChipKey) {
     pbChipKey = key;
     const chips = document.getElementById('pbchips');
     chips.textContent = '';
-    ['', ...present].forEach(v => {
-      const b = pbEl('button', 'pb-chip', v || 'All');
+    ['', ...present, ...(rows.some(r => r.docs.length) ? [PB_REVIEW] : [])].forEach(v => {
+      const b = pbEl('button', 'pb-chip', v === PB_REVIEW ? 'Owner review' : (v || 'All'));
       b.type = 'button';
       b.dataset.v = v;
       chips.append(b);
@@ -2156,7 +2217,8 @@ function pbRenderList() {
   document.querySelectorAll('#pbchips .pb-chip').forEach(c =>
     c.setAttribute('aria-pressed', String(c.dataset.v === pbState.v)));
   const qq = String(pbState.q || '').trim().toLowerCase();
-  const list = rows.filter(r => (!pbState.v || r.verdict === pbState.v) &&
+  const list = rows.filter(r => (!pbState.v ||
+      (pbState.v === PB_REVIEW ? r.docs.length > 0 : r.verdict === pbState.v)) &&
       (!pbState.s || r.sev === pbState.s) &&
       (!qq || (r.id + ' ' + r.title + ' ' + r.latest).toLowerCase().includes(qq)))
     .sort((a, b) => ((PB_RANK[a.verdict] ?? 6) - (PB_RANK[b.verdict] ?? 6)) ||
@@ -2183,6 +2245,7 @@ function pbRenderList() {
     m.append(p, pbEl('span', 'pb-sev', r.sev), dt);
     s.append(m);
     d.append(s, pbEl('div', 'pb-note', r.latest || 'No note yet.'));
+    if (r.docs.length) d.append(pbReviewLinks(r.docs, 'pb-rowlinks'));
     frag.append(d);
   });
   box.append(frag);

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Engine design rules R1 to R7</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Engine design rules R1 to R7</h1>
+<p><span class="rv-row">R285-P3-AI-OPERATING-MODEL-DOC-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/ai-quality/ENGINE-DESIGN-RULES.md</code>, rendered from <code>50e9b27ae</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-OPERATING-MODEL-DOC-01 &middot; OPEN</span><span class="rtitle">AI operating model and engine design rules documents written (spec 17 and spec 19 section 3)</span><p>SPECIFIED, NOT BUILT. D409 (nothing deferred) and D408. docs/release-2.8.5/ai-quality/OPERATING-MODEL.md and ENGINE-DESIGN-RULES.md written 2026-10-24 night from specs 17 and 19, no invention. Open: owner read.</p></div></section>
+<article class="doc">
+<h1>Engine design rules R1 to R7</h1>
+<p><strong>Date:</strong> 2026-10-24. <strong>Source:</strong> <code>specs/platform-systems/ai-quality/19-INTELLIGENCE-ENGINE-SPEC.md</code> section 3 (<code>REQ-R285-AIQ-ENGINE-DESIGN-RULES</code>).
+<strong>Approved by:</strong> D372 (R1), D408 (T1 to T21 as written), spec 7 criteria for R2 (<code>REQ-R285-AIQ-T18-INJECTION-HARDENING</code>, D345).
+This file restates the rules so a builder can read them before the first tool or multi step flow lands. The spec stays canonical.
+If this file and the spec disagree, the spec wins and this file is corrected.</p>
+<h2>R1 Workflow, not autonomous agents (D372)</h2>
+<p>Code decides the path of a bid. A model never chooses the next step. Parallelism is allowed only for independent stages
+(extraction chunks, evidence search per question). Check: no <code>tools=</code>, <code>function_declarations</code> or <code>tool_config</code> appears in
+<code>api/app/services</code> or <code>api/app/routers</code> without a row that cites R2.</p>
+<h2>R2 Plan Then Execute and Context Minimisation</h2>
+<p>The plan and any tool list are fixed from trusted input before untrusted text is read. A step that reads a tender pack or a
+supplier reply returns typed data only. A deterministic reducer combines per chunk results. This rule is written before the first
+tool lands (spec 19 T18 criterion, <code>buy_eval_consistency.py</code> is the model).
+Enforced in code (D411): <code>api/app/services/ai/plan_then_execute.py</code> freezes a plan with a digest and refuses a changed plan
+or an unlisted tool. The bulk draft freezes its questions, order, approved outlines and start state at enqueue and the worker
+verifies the digest before any credit is spent. Supplier text is masked of the bidder&#39;s name before the Buy pre-read reads
+it, and every draft is checked against the text its model calls were shown (<code>draft_response</code>, the shared planted
+instruction guard).</p>
+<h2>R3 The deterministic result always wins</h2>
+<p>A model verdict never overrides a gate (<code>api/app/services/eval/judges.py</code> rule). The figure gate, credential cards and
+commitment checks run after every model step.</p>
+<h2>R4 Quote or drop</h2>
+<p>Any model verdict about evidence carries a verbatim quote that the code finds in the source, or it is discarded.</p>
+<h2>R5 Organisation scoped memory</h2>
+<p>Every memory item (style rule, assessment score, graph node, library fact) is keyed by <code>organisation_id</code> and read through the
+same tenancy re-check as retrieval (<code>retrieval.py:859</code>). No tenant content sits in a prompt prefix shared by design.</p>
+<h2>R6 Stable prefix first</h2>
+<p>Prompts put the stable shared block first and the question last so caching can hit (T12). A test asserts the stable block
+precedes any per question text for each drafting surface.</p>
+<h2>R7 Plain words in front, detail behind</h2>
+<p>Every engine signal reaches the user as one plain statement with one action (RULE 0-U). Jargon, model names and section numbers
+appear only behind a tooltip or an advanced panel.</p>
+<h2>How to use this file</h2>
+<p>Before building any T item, name which rules bind it in the PR body. A change that breaks a rule needs a written owner approval
+quoted in the PR.</p>
+
+</article>
+</main></body></html>

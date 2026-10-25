@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Security evidence pack, 2026-10-25 refresh</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Security evidence pack, 2026-10-25 refresh</h1>
+<p><span class="rv-row">R285-TRUST-SECURITY-EVIDENCE-PACK-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md</code>, rendered from <code>2d2636b4e</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-TRUST-SECURITY-EVIDENCE-PACK-01 &middot; WIP</span><span class="rtitle">A security evidence pack a buyer can read before a sales call: access control, tenant isolation, backup restore, incident response, vulnerability management, penetration testing</span><p>refreshed pack written at docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md (Dependabot re-measured 15 open all fixed in the local tree and closing on the release push, 676 commits ahead of origin/main, AI section added, buyer wording updated). Agent work is done. Owner items remain: timed restore, PITR read, SoA approval, Sentry AI alert, the release push, pen test decision, key rotation note.</p></div></section>
+<article class="doc">
+<h1>Security evidence pack, 2026-10-25 refresh</h1>
+<p><strong>Row:</strong> <code>R285-TRUST-SECURITY-EVIDENCE-PACK-01</code>. <strong>Velstrian Systems Ltd</strong>, platform Velstrian Tenderworks, products Velstrian Bid and Velstrian Buy. <strong>Status: DRAFT for owner review, nothing has been sent to anyone.</strong>
+This refreshes <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> (sections 1 to 9 there stay valid unless corrected here). It adds the 2026-10-25 measurements, the AI section, the owner reply lines and the buyer wording. It claims no certificate (D250).</p>
+<h2>1. What was measured today and how it could have failed</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Measurement</th>
+<th>Result</th>
+<th>How it could have failed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gh api repos/crowagent/crowagent-platform/dependabot/alerts?state=open</code>, 2026-10-25</td>
+<td><strong>15 open.</strong> Severity: 3 high (462, 461, 457), 10 medium, 2 low (451, 450). Packages: vite 9 (all development scope), sanitize-html 6 (all runtime scope). <strong>Alerts 405 and 406 (braces, high) are no longer in the open list.</strong> I did not look up whether they were dismissed or closed</td>
+<td>An auth failure or a changed repository path would return an error or an empty list, it returned 15 rows with numbers</td>
+</tr>
+<tr>
+<td>Local trees, <code>package-lock.json</code> JSON read</td>
+<td>Root vite 8.2.4, <code>web/package-lock.json</code> vite 8.3.5 and sanitize-html 2.18.1. <code>git show HEAD:pnpm-lock.yaml</code> lines 34, 226, 237, 251: vite 8.3.5, and lines 6133 and 13426: sanitize-html 2.18.1</td>
+<td>A lockfile read does not prove the install resolves the same, the release checklist <code>pnpm install --frozen-lockfile</code> does</td>
+</tr>
+<tr>
+<td><code>git rev-list --count origin/main..HEAD</code></td>
+<td>676 commits ahead of the remote default branch</td>
+<td>A wrong ref would error</td>
+</tr>
+<tr>
+<td>So why are the alerts still open</td>
+<td>GitHub reads the remote default branch, which does not carry these lockfiles. They close when the release push lands. <strong>That push waits on the owner&#39;s approval</strong> (<code>R285-OWNER-API-STAGING-PUSH-APPROVAL-01</code> and the website row) and a production deploy</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>Scan schedule, <code>.github/workflows/weekly-security-scan.yml:16</code> and <code>security-scan.yml:15</code></td>
+<td>Cron <code>0 9 * * 1</code> and <code>0 8 * * 1</code> (Mondays), under owner decision D291. SoA row A.8.8 (<code>docs/compliance/STATEMENT-OF-APPLICABILITY.md:144</code>) says the same</td>
+<td>A removed schedule would show no cron line</td>
+</tr>
+<tr>
+<td><code>curl https://status.velstrian.com</code></td>
+<td>HTTP 200</td>
+<td>A dead page would give a non 2xx code</td>
+</tr>
+<tr>
+<td><code>web/public/.well-known/security.txt</code></td>
+<td>Contact <code>mailto:contact@velstrian.com</code>, Expires 2027-05-03. <strong>Canonical and Policy still point at <code>crowagent.ai</code></strong> (lines 9 and 10)</td>
+<td>This is the rebrand leftover. It is a finding, not changed in this lane</td>
+</tr>
+</tbody></table></div>
+<p><strong>Not re-measured today:</strong> Supabase plan and PITR add-on (plan <code>pro</code>, add-on unreadable, from 2026-10-23), Sentry rules (4 issue rules, no metric monitor, from 2026-10-23), RLS snapshot age, the timed restore (never done). Those lines stand as dated in the 2026-10-22 pack section 9.</p>
+<h2>2. Evidence by area (summary, detail in the 2026-10-22 pack section 3)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>State</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Access control</td>
+<td>Roles and capability matrix. Backend uses a service role that bypasses RLS (SoA A.8.2 Partial)</td>
+<td><code>docs/rbac-capability-matrix.md</code>, <code>api/app/dependencies/service_auth.py</code></td>
+</tr>
+<tr>
+<td>Tenant isolation</td>
+<td>Row level security. Production snapshot 987 policies on 357 tables, captured 2026-09-13, older than the 7 day freshness rule</td>
+<td><code>docs/rls/README.md</code>, <code>.github/workflows/rls-parity.yml</code></td>
+</tr>
+<tr>
+<td>Backup and restore</td>
+<td>Daily backups on the Supabase Pro plan. <strong>No restore has been tested.</strong> PITR window unknown</td>
+<td><code>docs/BACKUP_RESTORE.md</code>, SoA A.8.13</td>
+</tr>
+<tr>
+<td>Incident response</td>
+<td>Written procedure with a 72 hour clock, security contact published, two people, no on call rota</td>
+<td><code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code>. AI incidents: <code>docs/release-2.8.5/ai-quality/INCIDENT-RUNBOOK.md</code></td>
+</tr>
+<tr>
+<td>Vulnerability management</td>
+<td>Weekly automated scans (Mondays), 14 day remediation commitment for high and critical, 15 open Dependabot alerts all fixed in the local tree</td>
+<td>section 1 above</td>
+</tr>
+<tr>
+<td>Penetration testing</td>
+<td><strong>Never commissioned.</strong> ZAP is an automated scan and must not be called a penetration test</td>
+<td>2026-10-22 pack section 5</td>
+</tr>
+<tr>
+<td>Encryption</td>
+<td>HSTS preload, credential vault AES-256-GCM, database encryption at rest is the vendor&#39;s default (not read today, so no claim beyond &quot;vendor managed&quot;)</td>
+<td><code>web/src/shared/lib/proxy/security-headers.ts:533</code>, 2026-10-22 pack section 8</td>
+</tr>
+<tr>
+<td>Sub-processors</td>
+<td>19 rows in the DPA schedule (18 after the hCaptcha removal, D306)</td>
+<td><code>docs/legal/data-processing-agreement.md</code> Schedule 1</td>
+</tr>
+<tr>
+<td>Policy and risk</td>
+<td>Approved policy v1.0, ISO 27001 aligned risk register of 15 risks, one internal audit, one management review, SoA v1.1 not approved by top management</td>
+<td><code>docs/compliance/</code></td>
+</tr>
+</tbody></table></div>
+<h2>3. AI section (new)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Question a buyer asks</th>
+<th>Answer today</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Which AI providers see our text</td>
+<td>Google (Gemini) and Anthropic (Claude), on paid commercial terms. OpenAI is not used</td>
+<td>DPA Schedule 1 items 7 and 8</td>
+</tr>
+<tr>
+<td>Do they train on our text</td>
+<td>No by default. Owner verified both production accounts are paid (2026-10-23, D314)</td>
+<td><code>docs/release-2.8.5/legal/ANTHROPIC-RETENTION-CHECK-2026-10-25.md</code>, Gemini paid terms in <code>AI-RESIDENCY-STATEMENT-2026-10-25.md</code></td>
+</tr>
+<tr>
+<td>How long is it kept</td>
+<td>Anthropic deletes within 30 days, Google logs for a limited period for abuse detection</td>
+<td>same documents</td>
+</tr>
+<tr>
+<td>Where is it processed</td>
+<td>Stored in Ireland, AI processing not pinned to the UK or EU</td>
+<td><code>docs/release-2.8.5/legal/AI-RESIDENCY-STATEMENT-2026-10-25.md</code></td>
+</tr>
+<tr>
+<td>Is the AI tested</td>
+<td>Offline guards and golden cases exist. <strong>Deep tests, the OWASP LLM pass and the published scorecard are not finished</strong></td>
+<td><code>docs/release-2.8.5/ai-quality/TARGETS.md</code>, <code>audit-pack/INDEX.md</code></td>
+</tr>
+<tr>
+<td>Who is accountable</td>
+<td>The owner. Weekly review by the driver</td>
+<td><code>docs/release-2.8.5/ai-quality/OPERATING-MODEL.md</code></td>
+</tr>
+<tr>
+<td>What if a provider fails</td>
+<td>Circuit breaker, fallback chain, exit plans</td>
+<td><code>providers/EXIT-PLANS.md</code></td>
+</tr>
+</tbody></table></div>
+<h2>4. Open owner items, with the reply line and a recommendation</h2>
+<p>Reply lines for the dashboard steps are in <code>docs/release-2.8.5/OWNER-ACTIONS-GUIDE-2026-10-23.md</code> section 7.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Decision</th>
+<th>Recommended</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>One timed restore on staging to a scratch project</td>
+<td>Yes, it is the loudest gap. RULE 0-G yes needed first if the project is billable</td>
+<td>Possibly a small project charge, unknown until the owner sees the Supabase price</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Read the Supabase Backups page for the PITR add-on</td>
+<td>Yes, free</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Approve the SoA after the weekly scan wording (now corrected) and the PITR read</td>
+<td>Yes</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Confirm Sentry alert rules reach a real inbox and add the AI route alert (<code>ON-CALL.md</code>)</td>
+<td>Yes</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Approve the release push so the 15 alerts close</td>
+<td>After the build lanes finish, one push (triage decision 2)</td>
+<td>Per RULE 0-G, state the workflows that fire before asking</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Penetration test</td>
+<td>Record as a known gap, get free quotes later, do not commission yet</td>
+<td>2026-10-22 pack section 5 carries the indicative ranges, not quotes</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Written note for the 2026-10-22 key rotation before it is published</td>
+<td>Yes, then the sentence in section 8 of the 2026-10-22 pack can be used</td>
+<td>0</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Fix <code>security.txt</code> Canonical and Policy to the velstrian.com host</td>
+<td>Yes, build lane, tiny</td>
+<td>0</td>
+</tr>
+</tbody></table></div>
+<h2>5. Safe buyer wording today</h2>
+<p>&quot;Velstrian follows the ISO/IEC 27001:2022 Annex A controls and tracks them in its own Statement of Applicability. No certificate is held. Customer data is separated by row level security that is compared with production on every database change. Production data is stored in Ireland, with the application servers in the Netherlands and London. We run automated security scans every week and keep a written incident response procedure and a published security contact. AI features use Google and Anthropic on paid commercial terms that do not train on your data. We have not yet commissioned an independent penetration test.&quot;</p>
+<p>Do not write &quot;tested backups&quot; until the restore is done. Do not write SOC 2, Cyber Essentials or &quot;certified&quot;.</p>
+<h2>6. Why the row stays WIP</h2>
+<p>All agent work on the document is done. What is left is the owner&#39;s: items 1 to 7 above. Item 5 is a push and a production deploy.</p>
+
+</article>
+</main></body></html>

@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Statement of Applicability: ISO/IEC 27001:2022 Annex A</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Statement of Applicability: ISO/IEC 27001:2022 Annex A</h1>
+<p><span class="rv-row">R285-TRUST-SECURITY-EVIDENCE-PACK-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/compliance/STATEMENT-OF-APPLICABILITY.md</code>, rendered from <code>6d8887755</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-TRUST-SECURITY-EVIDENCE-PACK-01 &middot; WIP</span><span class="rtitle">A security evidence pack a buyer can read before a sales call: access control, tenant isolation, backup restore, incident response, vulnerability management, penetration testing</span><p>refreshed pack written at docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md (Dependabot re-measured 15 open all fixed in the local tree and closing on the release push, 676 commits ahead of origin/main, AI section added, buyer wording updated). Agent work is done. Owner items remain: timed restore, PITR read, SoA approval, Sentry AI alert, the release push, pen test decision, key rotation note.</p></div></section>
+<article class="doc">
+<h1>Statement of Applicability: ISO/IEC 27001:2022 Annex A</h1>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Organisation</td>
+<td>Velstrian Systems Ltd</td>
+</tr>
+<tr>
+<td>Standard</td>
+<td>ISO/IEC 27001:2022, Annex A, 93 controls</td>
+</tr>
+<tr>
+<td>Document owner</td>
+<td>Velstrian, <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></td>
+</tr>
+<tr>
+<td>Version</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>Issued</td>
+<td>2026-08-31 (v1.0), revised 2026-08-31 (v1.1: A.5.1 raised to Implemented, A.5.24 raised to Partial, A.5.5, A.5.25, A.5.26 and A.6.8 re-evidenced, counts re-issued)</td>
+</tr>
+<tr>
+<td>Approved by</td>
+<td><strong>Not yet approved by top management.</strong> Approval is recommendation C-2 at management review MR-2026-01</td>
+</tr>
+<tr>
+<td>Next review</td>
+<td>2027-02-28</td>
+</tr>
+<tr>
+<td>Certification status</td>
+<td><strong>None.</strong> Velstrian Systems Ltd holds no ISO/IEC 27001 certificate. This Statement of Applicability has not been reviewed by a certification body.</td>
+</tr>
+</tbody></table></div>
+<h2>Rules used to fill this table</h2>
+<ol>
+<li><strong>Status <code>Implemented</code> requires evidence that exists today.</strong> A file path, a migration, a
+configuration value, a live setting or a measurement taken on a named date. No control is marked
+implemented on the strength of an intention, a design document or a plan.</li>
+<li><strong><code>Partial</code> means the control operates but does not fully meet the control objective</strong>, and the
+shortfall is named in the justification.</li>
+<li><strong><code>Planned</code> means the control does not operate and there is a stated intent to build it.</strong></li>
+<li><strong><code>Not implemented</code> means the control does not operate.</strong></li>
+<li><strong><code>Not applicable</code> is a positive statement that the risk does not apply to this organisation</strong>,
+and every such row carries the reason. It is not shorthand for &quot;we did not get to it&quot;.</li>
+<li>Where a claim could not be verified, the row says <strong>Unverified</strong> and names what would verify it.</li>
+</ol>
+<p>Live database measurements cited below were taken against Supabase production project
+<code>gujtuecjzfiqsdnzgyvo</code> on 2026-08-31. Paths are relative to <code>C:\Users\bhave\Crowagent Repo\</code>.</p>
+<hr>
+<h2>A.5 Organizational controls (37)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Applicable</th>
+<th>Justification</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A.5.1 Policies for information security</td>
+<td>Yes</td>
+<td>An information security policy approved by top management now exists, is written for a reader outside engineering, states the objectives and the framework for setting them, is version controlled, is communicated and is available to interested parties on request. It is supported by the enforced engineering rule set beneath it. Status raised at v1.1 on new evidence, not on a rewrite.</td>
+<td>Implemented</td>
+<td><code>docs/compliance/INFORMATION-SECURITY-POLICY.md</code> v1.0, issued 2026-08-31 · supporting rules in <code>crowagent-platform/ENGINEERING-STANDARDS.md</code> · <code>docs/architecture/11-security-architecture.md</code> · <code>crowagent-platform/CLAUDE.md</code></td>
+</tr>
+<tr>
+<td>A.5.2 Information security roles and responsibilities</td>
+<td>Yes</td>
+<td>Application roles are defined and code-enforced. Organisational security roles are written down and <strong>all of them resolve to Aparajita</strong>, who holds both the CEO and the CTO roles. A second person exists, Monika, co-founder, whose security role, access and engagement basis are undefined. Still Partial, and for a sharper reason than first recorded: the roles are named, they are all held by one person, and the only route to holding a role separately is a second party the pack does not describe.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/rbac-capability-matrix.md</code> · <code>crowagent-platform/api/app/services/rbac.py</code> · <code>crowagent-platform/web/lib/auth/permissions.ts</code> · <code>docs/compliance/ISMS-SCOPE-AND-CONTEXT.md</code> §5.3</td>
+</tr>
+<tr>
+<td>A.5.3 Segregation of duties</td>
+<td>Yes</td>
+<td>Conflicting duties genuinely need separating: one person authors, approves, merges, deploys and audits. <strong>The justification changed on 2026-08-31 and the status did not.</strong> It previously read &quot;cannot be met at one-person headcount&quot;, which was a structural impossibility. With two people it is possible, so the gap is now PROCEDURAL: every approval rule in <code>CLAUDE.md</code> and <code>ENGINEERING-STANDARDS.md</code> still routes to a single owner, and in operation nothing is separated. A control is not implemented because it became possible. Compensating controls remain automated gates that block a merge or push without human discretion.</td>
+<td>Not implemented</td>
+<td>Compensating only: <code>crowagent-platform/.husky/pre-push</code> · <code>crowagent-platform/.github/pull_request_template.md</code> · 29 workflow files in <code>crowagent-platform/.github/workflows/</code></td>
+</tr>
+<tr>
+<td>A.5.4 Management responsibilities</td>
+<td>Yes</td>
+<td>Management direction is issued as binding written rules that engineering agents must read and that gates enforce. There is no record of personnel acknowledging security requirements, because there are no personnel.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/CLAUDE.md</code> · <code>crowagent-platform/ENGINEERING-STANDARDS.md</code></td>
+</tr>
+<tr>
+<td>A.5.5 Contact with authorities</td>
+<td>Yes</td>
+<td>The organisation is ICO registered, knows its supervisory authority, and now has a documented notification decision with the 72 hour clock defined from the point of awareness. Still Partial because the ICO reporting route is to be read from ico.org.uk at the time of reporting rather than held as a maintained contact record, and no contact with law enforcement is defined.</td>
+<td>Partial</td>
+<td>ICO registration C1901492 in <code>crowagent-platform/docs/legal/data-processing-agreement.md</code> · <code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code> section 6</td>
+</tr>
+<tr>
+<td>A.5.6 Contact with special interest groups</td>
+<td>Yes</td>
+<td>Applicable because vulnerability and threat information matters to a security-relevant product. No memberships, forums or advisory subscriptions are held or recorded.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.5.7 Threat intelligence</td>
+<td>Yes</td>
+<td>Automated vulnerability feeds operate weekly. There is no threat intelligence input beyond dependency advisories, and no analysis step.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/.github/dependabot.yml</code> · <code>.github/workflows/weekly-security-scan.yml</code> (pip-audit, npm audit, pnpm audit, Mondays 09:00 UTC) · <code>.github/workflows/security-scan.yml</code> (OWASP ZAP baseline, Mondays 08:00 UTC)</td>
+</tr>
+<tr>
+<td>A.5.8 Information security in project management</td>
+<td>Yes</td>
+<td>Security constraints are embedded in the release process as blocking rules, including a forbidden-capability register scanned at merge. Security requirements are not defined per feature.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/architecture/11-security-architecture.md</code> §6 · <code>crowagent-platform/scripts/donotbuild-scan.mjs</code> · <code>.github/workflows/donotbuild-scan.yml</code></td>
+</tr>
+<tr>
+<td>A.5.9 Inventory of information and other associated assets</td>
+<td>Yes</td>
+<td>An infrastructure registry and a PII registry table exist. The registry is stale: it states a last-updated date of 21 March 2026 while containing later edits, and records migration ranges four months out of date.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/INFRASTRUCTURE_REGISTRY.md</code> · table <code>gdpr_pii_registry</code> (production) · <code>docs/compliance/ISMS-SCOPE-AND-CONTEXT.md</code> §4.3</td>
+</tr>
+<tr>
+<td>A.5.10 Acceptable use of information and other associated assets</td>
+<td>Yes</td>
+<td>Applies to both people and to any future personnel handling production credentials. No acceptable use policy exists. Credential handling rules exist but are operational notes, not a policy.</td>
+<td>Not implemented</td>
+<td>Nearest existing: <code>crowagent-platform/docs/architecture/11-security-architecture.md</code> §3.1 handling rules</td>
+</tr>
+<tr>
+<td>A.5.11 Return of assets</td>
+<td>Yes</td>
+<td>Applicable on any future leaver, and applicable now to credentials held on a personal workstation. No process is defined.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.5.12 Classification of information</td>
+<td>Yes</td>
+<td>The platform holds customer commercial-in-confidence bid content alongside public marketing content, so classification is meaningful. No classification scheme exists.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.5.13 Labelling of information</td>
+<td>Yes</td>
+<td>Follows A.5.12. Nothing can be labelled against a scheme that does not exist.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.5.14 Information transfer</td>
+<td>Yes</td>
+<td>Transfer is encrypted in transit and server-side outbound requests are constrained. Contractual transfer terms exist only in a draft DPA.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/next.config.mjs:314</code> (HSTS <code>max-age=63072000; includeSubDomains; preload</code>) · <code>crowagent-platform/web/lib/security/ssrf-safe-fetch.ts</code> · <code>crowagent-website/_headers</code> · <code>crowagent-platform/docs/legal/data-processing-agreement.md</code> (DRAFT)</td>
+</tr>
+<tr>
+<td>A.5.15 Access control</td>
+<td>Yes</td>
+<td>Row level security is enabled on every table in the production <code>public</code> schema and org membership drives the policies. This is the strongest control in the estate.</td>
+<td>Implemented</td>
+<td>Measured 2026-08-31: 358 of 358 <code>public</code> tables have RLS enabled, 633 policies across 355 tables. <code>private.user_org_ids()</code> introduced by <code>crowagent-platform/supabase/migrations/20265300000000_r28_secadv_06_move_rls_helpers_out_of_the_exposed_schema.sql</code> · <code>docs/rls/README.md</code></td>
+</tr>
+<tr>
+<td>A.5.16 Identity management</td>
+<td>Yes</td>
+<td>Identities are managed in Supabase Auth with organisation membership records and a server-side revocation list checked on every authenticated request.</td>
+<td>Implemented</td>
+<td><code>crowagent-platform/supabase/migrations/20260506300001_revoked_tokens.sql</code> · <code>crowagent-platform/web/lib/auth/org-membership.ts</code> · <code>crowagent-platform/web/lib/auth/revoked-tokens.ts</code></td>
+</tr>
+<tr>
+<td>A.5.17 Authentication information</td>
+<td>Yes</td>
+<td>A password policy and multi-factor authentication exist and are enforced in code. Leaked-password protection is disabled on the production authentication service, so credentials known to be compromised are accepted.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/src/shared/lib/auth/password-policy.ts</code> (min length 8, 3 of 4 character classes). <strong>Live Supabase security advisor 2026-08-31: <code>auth_leaked_password_protection</code> WARN, &quot;Leaked password protection is currently disabled&quot;</strong></td>
+</tr>
+<tr>
+<td>A.5.18 Access rights</td>
+<td>Yes</td>
+<td>Rights are assigned by role and can be revoked immediately by writing to <code>revoked_tokens</code>. There is no periodic review of who holds what.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/src/features/team/assignable-roles.ts</code> · <code>crowagent-platform/api/app/routers/teams.py</code> · <code>supabase/migrations/20260506300001_revoked_tokens.sql</code></td>
+</tr>
+<tr>
+<td>A.5.19 Information security in supplier relationships</td>
+<td>Yes</td>
+<td>Suppliers are named and their processing role is documented. No supplier security assessment is performed before adoption and none is recorded.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/legal/data-processing-agreement.md</code> Schedule 1 (sub-processor list, aligned 2026-07-19)</td>
+</tr>
+<tr>
+<td>A.5.20 Addressing information security within supplier agreements</td>
+<td>Yes</td>
+<td>A data processing agreement exists but is explicitly a draft: &quot;not legally approved and creates no binding obligation until it has been reviewed and executed&quot;, with numerous <code>[DEFAULT ... owner to confirm]</code> placeholders.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/legal/data-processing-agreement.md</code></td>
+</tr>
+<tr>
+<td>A.5.21 Managing information security in the ICT supply chain</td>
+<td>Yes</td>
+<td>Dependency updates are automated, GitHub Actions are pinned by commit SHA, and vulnerable transitive dependencies are pinned by override. There is no software bill of materials and no provenance verification.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/.github/dependabot.yml</code> · <code>crowagent-platform/package.json</code> <code>pnpm.overrides</code> block · SHA-pinned action <code>trufflesecurity/trufflehog@f446421...</code> in <code>.github/workflows/ci.yml</code></td>
+</tr>
+<tr>
+<td>A.5.22 Monitoring, review and change management of supplier services</td>
+<td>Yes</td>
+<td>Supplier availability is probed at deploy time and continuously. There is no scheduled review of supplier security posture or of changes to their terms.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/railway.toml</code> (<code>healthcheckPath = &quot;/readyz&quot;</code>, gates on Supabase and Stripe) · <code>crowagent-platform/api/app/routers/health.py</code></td>
+</tr>
+<tr>
+<td>A.5.23 Information security for use of cloud services</td>
+<td>Yes</td>
+<td>Cloud providers, regions and their roles are documented, and deploy-time controls exist. There are no defined security requirements for adopting or exiting a cloud service, and no exit plan.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/INFRASTRUCTURE_REGISTRY.md</code> · <code>crowagent-platform/vercel.json</code> · <code>crowagent-platform/railway.toml</code> · <code>docs/compliance/ISMS-SCOPE-AND-CONTEXT.md</code> §4.3</td>
+</tr>
+<tr>
+<td>A.5.24 Information security incident management planning and preparation</td>
+<td>Yes</td>
+<td>A security incident response procedure now exists, defining roles, a SEC-1 to SEC-4 severity scheme, detection sources with their blind spots named, reporting channels, containment mechanisms, the notification clock and the records to keep. It falls short of the control objective on preparation: <strong>the walkthrough it requires has not been performed</strong>, and the separation it names is thinner than it reads. An earlier draft named the CEO as second responder to the CTO, which was void because Aparajita holds both titles. The second responder is Monika, whose security role and access are undefined, and no walkthrough has tested whether that handover works under pressure. Status raised from Not implemented at v1.1.</td>
+<td>Partial</td>
+<td><code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code> v1.0, issued 2026-08-31 · availability incidents remain with <code>docs/OPERATIONS_RUNBOOK.md</code> · walkthrough target 2026-10-31 as objective O-7</td>
+</tr>
+<tr>
+<td>A.5.25 Assessment and decision on information security events</td>
+<td>Yes</td>
+<td>Criteria now exist: a four level severity scheme with definitions and examples, a one hour classification target, a rule to classify on the worst credible outcome, and a requirement that triage decisions be recorded including for reports assessed as non incidents. Still Partial because <strong>no such decision has yet been recorded</strong>, so the criteria are untested.</td>
+<td>Partial</td>
+<td><code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code> section 5 · <code>crowagent-platform/api/app/tasks/job_alerts.py</code> · <code>crowagent-platform/api/app/tasks/job_runs.py</code> · <code>crowagent-platform/web/sentry.client.config.ts</code></td>
+</tr>
+<tr>
+<td>A.5.26 Response to information security incidents</td>
+<td>Yes</td>
+<td>Real incidents have been responded to and written up, which demonstrates capability, and a documented response procedure now exists with containment actions bound to the mechanisms that actually exist. Still Partial because the procedure has never been exercised and there is one responder.</td>
+<td>Partial</td>
+<td><code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code> sections 7 to 9 · <code>crowagent-platform/docs/KEY_ROTATION_RUNBOOK.md</code> (2026-03-24 silent production key-rotation failure) · <code>crowagent-platform/KEYS-ROTATE-AND-FIX.md</code> (Brevo key exposed in plaintext, treated as compromised and rotated)</td>
+</tr>
+<tr>
+<td>A.5.27 Learning from information security incidents</td>
+<td>Yes</td>
+<td>This is done unusually well. Findings are given identifiers, root-caused in the code comment, and pinned by a guard test that is red-proved before acceptance, so the same defect cannot return silently.</td>
+<td>Implemented</td>
+<td><code>crowagent-platform/api/app/tasks/scheduler.py:124-153</code> with <code>api/tests/test_r28_scheduler_misfire_defaults.py</code> · <code>api/app/tasks/job_runs.py:774-791</code> with <code>api/tests/test_r28_gdpr_failures_reach_the_digest.py</code> · <code>docs/rls/README.md</code> (records both false-positive and false-negative drift incidents in its own gate)</td>
+</tr>
+<tr>
+<td>A.5.28 Collection of evidence</td>
+<td>Yes</td>
+<td>Audit records exist, including a tamper-evident append-only hash chain where update and delete are blocked by trigger for every role including <code>service_role</code>. There is no evidence handling or chain-of-custody procedure.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/supabase/migrations/20260614170000_esg_audit_events_hash_chain.sql</code> · tables <code>audit_log</code>, <code>audit_events</code>, <code>deletion_audit_log</code>, <code>billing_audit_log</code>, <code>portal_audit_log</code></td>
+</tr>
+<tr>
+<td>A.5.29 Information security during disruption</td>
+<td>Yes</td>
+<td>A business continuity plan exists with stated targets, but it is stale: it still lists the decommissioned CrowAgent Core as an in-scope product, and its scheduled tests have no execution record.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/BCP.md</code> (v1.0, last reviewed 2026-03-18, next review due 2026-09-18)</td>
+</tr>
+<tr>
+<td>A.5.30 ICT readiness for business continuity</td>
+<td>Yes</td>
+<td>Recovery targets are stated (RTO 2 hours, RPO 1 hour on the Pro tier) and a restore procedure is documented. The plan tier in force is unconfirmed and no restore has ever been tested.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/BACKUP_RESTORE.md</code>. <strong>Unverified:</strong> which Supabase plan is active. Verifying would require reading the project&#39;s billing tier in the Supabase dashboard.</td>
+</tr>
+<tr>
+<td>A.5.31 Identification of legal, statutory, regulatory and contractual requirements</td>
+<td>Yes</td>
+<td>Specific legal constraints are identified and, in the case of FCA regulated activity, enforced as a hard lock with a merge-time scanner. There is no consolidated legal and regulatory register.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/architecture/11-security-architecture.md</code> §6 (FCA regulated-activity LOCK, do-not-build register DNB-1 to DNB-5) · <code>crowagent-platform/scripts/donotbuild-scan.mjs</code> · ICO registration C1901492</td>
+</tr>
+<tr>
+<td>A.5.32 Intellectual property rights</td>
+<td>Yes</td>
+<td>Dependency versions are pinned and managed. There is no licence compliance scan, so a copyleft dependency entering the tree would not be detected.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/package.json</code> <code>pnpm.overrides</code> · <code>crowagent-platform/.github/dependabot.yml</code></td>
+</tr>
+<tr>
+<td>A.5.33 Protection of records</td>
+<td>Yes</td>
+<td>Audit records are protected against modification at the database level for at least one table family. Retention periods are stated but explicitly unratified, marked <code>[DEFAULT ... owner to confirm]</code>.</td>
+<td>Partial</td>
+<td><code>supabase/migrations/20260614170000_esg_audit_events_hash_chain.sql</code> · <code>crowagent-platform/docs/legal/data-return-and-deletion-policy.md</code> · table <code>data_retention_policies</code> (7 rows, measured 2026-08-31)</td>
+</tr>
+<tr>
+<td>A.5.34 Privacy and protection of PII</td>
+<td>Yes</td>
+<td>Subject access and erasure pipelines exist, run on a scheduler, and are covered by guard tests. Two requests are currently unresolved. The public security page claims DPIAs are reviewed for new capabilities and no DPIA process document exists.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/api/app/routers/account_gdpr.py</code> · <code>api/app/services/dsar_service.py</code> · <code>api/app/services/account_deletion.py</code> · <code>web/sentry.client.config.ts</code> (email hashed, IP nulled, <code>sendDefaultPii: false</code>). <strong>Measured 2026-08-31: 1 <code>dsar_requests</code> row and 1 <code>deletion_requests</code> row in status <code>failed</code>.</strong></td>
+</tr>
+<tr>
+<td>A.5.35 Independent review of information security</td>
+<td>Yes</td>
+<td>Applicable and important, because a buyer will ask for it. No penetration test has ever been commissioned and no independent review of any kind has been performed. The one internal audit that exists was performed by the same party that performs the work.</td>
+<td>Not implemented</td>
+<td>Absence confirmed by <code>crowagent-platform/COMPLIANCE-READINESS-2026-07.md</code> · <code>docs/compliance/INTERNAL-AUDIT-2026-08.md</code> §Independence</td>
+</tr>
+<tr>
+<td>A.5.36 Compliance with policies and standards for information security</td>
+<td>Yes</td>
+<td>Compliance with engineering rules is checked automatically and thoroughly at merge and push. Compliance with the ISMS itself is not checked, because the ISMS is new.</td>
+<td>Partial</td>
+<td>29 workflows in <code>crowagent-platform/.github/workflows/</code> · 107 entries in <code>crowagent-platform/scripts/</code> · <code>crowagent-platform/.husky/pre-push</code></td>
+</tr>
+<tr>
+<td>A.5.37 Documented operating procedures</td>
+<td>Yes</td>
+<td>Runbooks exist for operations, key rotation, backup and restore, and status page setup. Several reference decommissioned products and a deleted staging project, so an operator following them today would hit instructions that no longer apply.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/OPERATIONS_RUNBOOK.md</code> · <code>docs/KEY_ROTATION_RUNBOOK.md</code> · <code>docs/BACKUP_RESTORE.md</code> · <code>docs/STATUS_PAGE_SETUP.md</code>. Staleness recorded as NC-07 in <code>docs/compliance/INTERNAL-AUDIT-2026-08.md</code></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>A.6 People controls (8)</h2>
+<p><strong>THIS SECTION GOT WORSE ON 2026-08-31, NOT BETTER, AND THAT IS THE HONEST READING OF THE HEADCOUNT
+ANSWER.</strong> The pack previously recorded that Velstrian Systems Ltd had no employees, and deferred five of
+these eight controls to &quot;on first hire&quot;. The organisation has <strong>two people</strong>, Aparajita and Monika. That
+deferral has therefore EXPIRED, and every control it covered is now due rather than pending.</p>
+<p>Nothing in this section is upgraded by the same fact. Two people make Clause 9.2 independence and
+A.5.3 segregation achievable in principle, which is qualified good news recorded elsewhere in this document, and qualified because both executive roles are held by one person so the only route runs through Monika. A.6 moves the
+other way: screening, terms of employment, a disciplinary process, offboarding and confidentiality
+agreements all now have a live subject and no artefact. <strong>A reader who takes the headcount answer as
+uniformly good news is reading only half of it.</strong></p>
+<p>Every control in A.6 remains <strong>applicable</strong>. None is marked not applicable on headcount grounds.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Applicable</th>
+<th>Justification</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A.6.1 Screening</td>
+<td>Yes</td>
+<td><strong>Due, not pending.</strong> Two people work here, Aparajita and Monika, and neither has been screened by any defined process. No screening procedure exists. Production access is held by Aparajita, which is the case the control is written for, and whether Monika holds any is not recorded anywhere.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.6.2 Terms and conditions of employment</td>
+<td>Yes</td>
+<td><strong>The &quot;applicable on first hire&quot; deferral has expired.</strong> There are two people. No employment or engagement terms carrying security responsibilities are recorded for either, and none has been drafted.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.6.3 Information security awareness, education and training</td>
+<td>Yes</td>
+<td>Applies to every person doing work under the organisation&#39;s control, which is now two people plus the AI agents. No training has been delivered or recorded to either. The nearest artefact is the mandatory rule set every engineering agent must read, which is closer to a technical control than to awareness, and it reaches the agents rather than the people.</td>
+<td>Not implemented</td>
+<td>Nearest existing: <code>crowagent-platform/CLAUDE.md</code> · <code>crowagent-platform/ENGINEERING-STANDARDS.md</code></td>
+</tr>
+<tr>
+<td>A.6.4 Disciplinary process</td>
+<td>Yes</td>
+<td><strong>Deferral expired.</strong> Two people, no defined process. Clause 9.2 and A.5.3 both now rest on Monika being able to hold Aparajita to account, and that rests on nothing written: no defined role, no stated authority, no process.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.6.5 Responsibilities after termination or change of employment</td>
+<td>Yes</td>
+<td><strong>Deferral expired, and this is the sharpest of the five.</strong> With two people there is a real offboarding scenario and a real role change scenario, and a privileged credential register does not exist to revoke against (risk R-03). None defined.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.6.6 Confidentiality or non-disclosure agreements</td>
+<td>Yes</td>
+<td>Confidentiality obligations toward customers are drafted in the DPA, itself unexecuted. There is no NDA or confidentiality clause covering EITHER of the two people, who between them hold every customer record the company processes.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/legal/data-processing-agreement.md</code> (DRAFT)</td>
+</tr>
+<tr>
+<td>A.6.7 Remote working</td>
+<td>Yes</td>
+<td>The organisation is 100 percent remote with no premises, so this control carries risk that would elsewhere sit in A.7. There is no remote working policy and no verified endpoint baseline.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.6.8 Information security event reporting</td>
+<td>Yes</td>
+<td>An external reporting route is published with a triage and patch SLA, and an internal reporting channel with expected acknowledgement times is now defined, including the rule that a report is never closed by the receiver deciding it is nothing. <strong><code>security@crowagent.ai</code> is confirmed by the owner on 2026-08-31 to deliver to a monitored mailbox</strong>, which closes the blocker that mattered most: an RFC 9116 contact published on two production surfaces that reached nobody would be a control that reaches nothing, and the published route is now backed. Still Partial for the two reasons that remain: there is no ticket queue behind it, and no report has yet been received and handled, so the route is confirmed reachable and not yet exercised.</td>
+<td>Partial</td>
+<td><code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code> section 4 · <code>crowagent-platform/web/public/.well-known/security.txt</code> and <code>apps/portal/public/.well-known/security.txt</code> (RFC 9116, expires 2027-05-03) · vulnerability disclosure section of <code>crowagent-website/astro/src/content/legal/security.md</code></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>A.7 Physical controls (14)</h2>
+<p>Velstrian Systems Ltd occupies <strong>no premises, no office, no data centre and no server room</strong>. All production
+compute and storage is operated by AWS (through Supabase), Vercel, Railway and Cloudflare, whose
+physical controls are inherited and are not operated by Velstrian.</p>
+<p>Five controls remain applicable because remote work does not remove them: <strong>A.7.7, A.7.8, A.7.9,
+A.7.10 and A.7.14</strong>. Each of those concerns the founder&#39;s workstation, which holds <code>.env.local</code> files
+containing production credentials including a Supabase service role key.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Applicable</th>
+<th>Justification</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A.7.1 Physical security perimeter</td>
+<td>No</td>
+<td>Velstrian operates no facility for which it could define a perimeter. The perimeter around production compute belongs to the cloud providers and is covered by their own certifications, not by Velstrian Tenderworks&#39; controls.</td>
+<td>Not applicable</td>
+<td><code>docs/compliance/ISMS-SCOPE-AND-CONTEXT.md</code> §4.3 (out of scope, with reason)</td>
+</tr>
+<tr>
+<td>A.7.2 Physical entry controls</td>
+<td>No</td>
+<td>Follows A.7.1. There is no Velstrian-controlled entry point to control.</td>
+<td>Not applicable</td>
+<td>As above</td>
+</tr>
+<tr>
+<td>A.7.3 Securing offices, rooms and facilities</td>
+<td>No</td>
+<td>There are no offices, rooms or facilities.</td>
+<td>Not applicable</td>
+<td>As above</td>
+</tr>
+<tr>
+<td>A.7.4 Physical security monitoring</td>
+<td>No</td>
+<td>There is no Velstrian-controlled physical space to monitor.</td>
+<td>Not applicable</td>
+<td>As above</td>
+</tr>
+<tr>
+<td>A.7.5 Protecting against physical and environmental threats</td>
+<td>No</td>
+<td>Physical and environmental protection of production infrastructure is a provider control. Velstrian has no facility whose environment it manages. Environmental risk to the founder&#39;s working location is treated as an availability risk in the business continuity plan rather than as a physical security control.</td>
+<td>Not applicable</td>
+<td><code>crowagent-platform/docs/BCP.md</code></td>
+</tr>
+<tr>
+<td>A.7.6 Working in secure areas</td>
+<td>No</td>
+<td>No secure areas are designated because no Velstrian-controlled areas exist.</td>
+<td>Not applicable</td>
+<td>As above</td>
+</tr>
+<tr>
+<td>A.7.7 Clear desk and clear screen</td>
+<td><strong>Yes</strong></td>
+<td>Explicitly applicable to remote working. The founder&#39;s workstation displays production data and holds production credentials, and may be used in shared or domestic space. No clear desk or clear screen requirement exists and automatic screen lock is not verified.</td>
+<td>Not implemented</td>
+<td><strong>Unverified:</strong> screen lock timeout on the founder workstation. Verifying would require inspecting the operating system lock policy on that device.</td>
+</tr>
+<tr>
+<td>A.7.8 Equipment siting and protection</td>
+<td><strong>Yes</strong></td>
+<td>Narrow but real: the single workstation that holds production credentials is sited in a domestic environment, and its siting affects both shoulder-surfing exposure and theft risk.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.7.9 Security of assets off-premises</td>
+<td><strong>Yes</strong></td>
+<td>Every asset the organisation controls is off-premises by definition, because there are no premises. This makes the control more relevant here, not less. No policy governs device use in transit, in public places or abroad.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.7.10 Storage media</td>
+<td><strong>Yes</strong></td>
+<td>The founder workstation&#39;s local storage holds <code>.env.local</code> files containing production secrets including a Supabase service role key. Full-disk encryption is not verified and there is no removable media rule.</td>
+<td>Not implemented</td>
+<td>Files confirmed present locally and confirmed untracked in git (<code>.gitignore:205</code> <code>.env*.local</code>). <strong>Unverified:</strong> whether the workstation disk is encrypted. Verifying would require checking BitLocker status on that device.</td>
+</tr>
+<tr>
+<td>A.7.11 Supporting utilities</td>
+<td>No</td>
+<td>Velstrian operates no facility with power, cooling or water supply to protect. Utility resilience for production is a provider control. Loss of domestic power or internet is an availability risk to one person&#39;s working time, addressed in the business continuity plan.</td>
+<td>Not applicable</td>
+<td><code>crowagent-platform/docs/BCP.md</code></td>
+</tr>
+<tr>
+<td>A.7.12 Cabling security</td>
+<td>No</td>
+<td>Velstrian owns no cabling carrying data or power for information systems.</td>
+<td>Not applicable</td>
+<td>As above</td>
+</tr>
+<tr>
+<td>A.7.13 Equipment maintenance</td>
+<td>No</td>
+<td>Velstrian maintains no information processing equipment. Production hardware is maintained by the cloud providers. The single consumer workstation has no organisational maintenance regime and no supporting business case for one at current scale.</td>
+<td>Not applicable</td>
+<td>As above</td>
+</tr>
+<tr>
+<td>A.7.14 Secure disposal or re-use of equipment</td>
+<td><strong>Yes</strong></td>
+<td>The founder workstation holds production credentials and customer data in caches and local files. It will eventually be replaced, sold or disposed of, and there is no requirement covering wiping it.</td>
+<td>Not implemented</td>
+<td>None</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>A.8 Technological controls (34)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Applicable</th>
+<th>Justification</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A.8.1 User endpoint devices</td>
+<td>Yes</td>
+<td>The single endpoint that can reach production carries service role credentials. There is no device management, no configuration baseline, no enforced encryption and no anti-malware requirement.</td>
+<td>Not implemented</td>
+<td><strong>Unverified:</strong> endpoint disk encryption and anti-malware state. Verifying would require inspecting the workstation.</td>
+</tr>
+<tr>
+<td>A.8.2 Privileged access rights</td>
+<td>Yes</td>
+<td>Privileged access exists and is real: the API runs as <code>service_role</code>, which bypasses row level security entirely. There is no register of privileged accounts, no approval record and no periodic review.</td>
+<td>Partial</td>
+<td><code>service_role</code> referenced in 56 files under <code>crowagent-platform/api/app/</code> · <code>api/app/dependencies/service_auth.py</code> documents the bypass and the <code>verified_organisation_id()</code> mitigation</td>
+</tr>
+<tr>
+<td>A.8.3 Information access restriction</td>
+<td>Yes</td>
+<td>Two independent layers restrict access to information by tenant: database row level security, and hand-written organisation filters in the API because <code>service_role</code> bypasses the database layer.</td>
+<td>Implemented</td>
+<td>Measured 2026-08-31: RLS enabled on 358 of 358 <code>public</code> tables, 633 policies. 656 explicit <code>organisation_id</code> or <code>org_id</code> equality filters counted across <code>crowagent-platform/api/app/</code>. <code>private.user_org_ids()</code> per <code>supabase/migrations/20265300000000_...sql</code></td>
+</tr>
+<tr>
+<td>A.8.4 Access to source code</td>
+<td>Yes</td>
+<td>Repositories are private and a pull request template enforces a verification checklist. Branch protection is asserted in prose but cannot be verified from the repository tree, and there is no CODEOWNERS file.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/.github/pull_request_template.md</code>. <strong>Unverified:</strong> branch protection rules. Verifying would require reading the GitHub branch protection settings for <code>main</code>. CODEOWNERS confirmed absent from both repositories.</td>
+</tr>
+<tr>
+<td>A.8.5 Secure authentication</td>
+<td>Yes</td>
+<td>Multi-factor authentication with TOTP and passkeys, step-up re-authentication bound to the user, and server-side session revocation all exist and are enforced. Adoption is incomplete and leaked-password protection is off.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/app/api/account/mfa/enrol/route.ts</code> · <code>.../mfa/verify/route.ts</code> · <code>web/lib/auth/step-up.ts</code> (15 minute window, user-id bound) · <code>web/lib/auth/passkey-ceremony.ts</code> · <code>web/lib/auth/requireAAL2.ts</code>. <strong>Measured 2026-08-31: 4 of 9 authentication users hold a verified MFA factor · 0 of 9 organisations set <code>mfa_enforced</code>.</strong></td>
+</tr>
+<tr>
+<td>A.8.6 Capacity management</td>
+<td>Yes</td>
+<td>Rate limits, AI credit ceilings and a deep readiness probe with restart policy exist. There is no capacity plan, no defined thresholds and no forward projection.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/api/app/middleware/rate_limit.py</code> · <code>crowagent-platform/railway.toml</code> · RPC <code>check_ai_credits</code> on production</td>
+</tr>
+<tr>
+<td>A.8.7 Protection against malware</td>
+<td>Yes</td>
+<td>The platform accepts document uploads (tender documents), which is exactly the vector this control addresses. No malware scanning of uploaded files exists anywhere in the codebase, and no endpoint anti-malware is verified.</td>
+<td>Not implemented</td>
+<td>Searched <code>crowagent-platform/api/app/</code> for <code>clamav</code>, <code>antivirus</code>, <code>malware</code>: no matches.</td>
+</tr>
+<tr>
+<td>A.8.8 Management of technical vulnerabilities</td>
+<td>Yes</td>
+<td>A remediation commitment and automated dependency auditing exist. The scan against the running application and the dependency audit run every Monday (<code>weekly-security-scan.yml</code> 09:00 and <code>security-scan.yml</code> 08:00, schedule restored under owner decision D291 and confirmed in the workflow files on 2026-10-23), and can also be started by hand. About 30 billed minutes a month, recurring. The commitment has been measurably breached, and there is no static analysis.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/security/patching-and-vulnerability-remediation.md</code> (14 day commitment for high and critical) · <code>.github/workflows/weekly-security-scan.yml</code> · <code>.github/workflows/security-scan.yml</code>. Recorded breach: a high severity <code>vite</code> advisory open 41 days against a 14 day commitment, per <code>COMPLIANCE-READINESS-2026-07.md</code>. CodeQL confirmed absent from both repositories.</td>
+</tr>
+<tr>
+<td>A.8.9 Configuration management</td>
+<td>Yes</td>
+<td>Deployment configuration is version controlled and architecture baselines are linted. Supabase authentication and database settings are dashboard-managed with no configuration as code, so a change there leaves no reviewable record.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/vercel.json</code> · <code>crowagent-platform/railway.toml</code> · <code>crowagent-platform/scripts/arch-lint-*.mjs</code> with committed baselines. No <code>supabase/config.toml</code> exists in either repository.</td>
+</tr>
+<tr>
+<td>A.8.10 Information deletion</td>
+<td>Yes</td>
+<td>Atomic cascade deletion, a 14 day grace period, and a deletion audit log all exist and are covered by tests. One deletion request is currently in status <code>failed</code>.</td>
+<td>Partial</td>
+<td><code>supabase/migrations/20260610000003_gdpr_p0_001_atomic_delete_user_full_cascade.sql</code> · <code>api/app/services/account_deletion.py</code> · <code>api/tests/test_gdpr_atomic_delete_user.py</code>. <strong>Measured 2026-08-31: 1 <code>deletion_requests</code> row in status <code>failed</code>.</strong></td>
+</tr>
+<tr>
+<td>A.8.11 Data masking</td>
+<td>Yes</td>
+<td>Personal data is masked before it leaves the platform for observability sinks. There is no masking within the database or in non-production environments.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/sentry.client.config.ts</code> (email hashed to a 12 character prefix, IP nulled, <code>sendDefaultPii: false</code>, deny-key walker over breadcrumbs, headers, cookies and query strings)</td>
+</tr>
+<tr>
+<td>A.8.12 Data leakage prevention</td>
+<td>Yes</td>
+<td>Several egress paths are constrained: content security policy, SSRF-safe outbound fetch with DNS rebind protection, a pre-commit block on <code>.env</code> files and secret scanning in CI. There is no endpoint or email data loss prevention.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/lib/security/ssrf-safe-fetch.ts</code> · <code>web/src/shared/lib/net/private-address.ts</code> · <code>crowagent-platform/.husky/pre-commit</code> · TruffleHog job in <code>.github/workflows/ci.yml</code> · <code>crowagent-website/_headers</code></td>
+</tr>
+<tr>
+<td>A.8.13 Information backup</td>
+<td>Yes</td>
+<td>Point-in-time recovery is documented and is provided by the platform vendor. No restore has ever been tested, and the Supabase plan tier that determines retention is unconfirmed. A backup that has never been restored is an assumption.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/BACKUP_RESTORE.md</code>. <strong>Unverified:</strong> active Supabase plan tier and actual PITR retention window. Verifying would require reading the project billing page.</td>
+</tr>
+<tr>
+<td>A.8.14 Redundancy of information processing facilities</td>
+<td>Yes</td>
+<td>There is one production database, in one project, in one region. There is no replica, no standby, no cross-region failover and no tested recovery path. This is a single point of failure for the entire service.</td>
+<td>Not implemented</td>
+<td>Supabase project <code>gujtuecjzfiqsdnzgyvo</code>, region <code>eu-west-1</code>, verified live 2026-08-31. Recorded in <code>crowagent-platform/docs/release-2.7/COMPETITOR-DB-ISOLATION-STUDY-2026-08-17.md</code></td>
+</tr>
+<tr>
+<td>A.8.15 Logging</td>
+<td>Yes</td>
+<td>Application, audit and job execution logging all exist, with structured output and one tamper-evident chain.</td>
+<td>Implemented</td>
+<td>Measured 2026-08-31: <code>audit_log</code> 778 rows, <code>job_runs</code> 37,511 rows. <code>crowagent-platform/web/src/shared/lib/logger.ts</code> · <code>supabase/migrations/20260614170000_esg_audit_events_hash_chain.sql</code> · <code>web/src/features/audit-log/rbac.ts</code> (108 action to category mappings, fail-closed default)</td>
+</tr>
+<tr>
+<td>A.8.16 Monitoring activities</td>
+<td>Yes</td>
+<td>Errors, job failures, readiness and uptime are monitored. Security-specific monitoring is absent: there is no alerting on authentication anomalies, privilege changes or bulk data access, and Sentry alert rules are created by hand in a dashboard with no alert-as-code artefact, so it cannot be shown that any alert is live.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/sentry.client.config.ts</code> · <code>api/app/tasks/job_alerts.py</code> · <code>docs/STATUS_PAGE_SETUP.md</code>. Absence of alert-as-code recorded in <code>docs/SENTRY_SETUP.md</code> and <code>COMPLIANCE-READINESS-2026-07.md</code></td>
+</tr>
+<tr>
+<td>A.8.17 Clock synchronisation</td>
+<td>Yes</td>
+<td>Timestamps must be trustworthy for the audit log and hash chain to mean anything. All runtimes are managed platforms using provider time sources, the scheduler is pinned to UTC and database timestamps are <code>timestamptz</code>. Provider clock synchronisation itself is inherited and not verified by Velstrian.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/api/app/tasks/scheduler.py:152</code> (<code>timezone=&quot;UTC&quot;</code>)</td>
+</tr>
+<tr>
+<td>A.8.18 Use of privileged utility programs</td>
+<td>Yes</td>
+<td>Privileged utilities exist and are used: the Supabase service role key, and direct SQL execution against production through the management interface. Their use is neither restricted nor logged as privileged activity.</td>
+<td>Not implemented</td>
+<td><code>service_role</code> present in 56 files under <code>api/app/</code> · direct production SQL execution used to gather the measurements in this pack</td>
+</tr>
+<tr>
+<td>A.8.19 Installation of software on operational systems</td>
+<td>Yes</td>
+<td>Production runtimes are rebuilt from a Dockerfile and from git on every deploy, so there is no supported path to install software on a running system. This is a strong structural control that is not written down as a rule.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/railway.toml</code> (<code>dockerfilePath = &quot;api/Dockerfile&quot;</code>) · <code>crowagent-platform/vercel.json</code></td>
+</tr>
+<tr>
+<td>A.8.20 Network security</td>
+<td>Yes</td>
+<td>All traffic is TLS, security headers are strict, and outbound server-side requests are validated and pinned to a checked IP. There is no private networking, so the database is reachable over the public internet behind credentials.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/next.config.mjs:314-323</code> (HSTS, <code>X-Frame-Options: DENY</code>, <code>nosniff</code>, <code>Referrer-Policy</code>, <code>Permissions-Policy</code>, CSP with per-request nonce) · <code>web/lib/security/ssrf-safe-fetch.ts</code> · <code>web/src/shared/lib/proxy/security-headers.ts</code> (nonce-driven CSP builder with a static fallback that emits the same non-script-src directives so the two cannot drift, <code>&#39;unsafe-inline&#39;</code> dropped from the production <code>script-src</code>, <code>connect-src</code> narrowed from a <code>https://*.railway.app</code> wildcard to the single production host, and CSP violations reported to Sentry via <code>/api/csp-report</code> rather than failing silently)</td>
+</tr>
+<tr>
+<td>A.8.21 Security of network services</td>
+<td>Yes</td>
+<td>Network services are managed platforms with documented security characteristics. There is no documented set of security requirements against which those services were selected or are reviewed.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/INFRASTRUCTURE_REGISTRY.md</code> · <code>railway.toml</code> · <code>vercel.json</code></td>
+</tr>
+<tr>
+<td>A.8.22 Segregation of networks</td>
+<td>Yes</td>
+<td>Applicable and not met. There is no virtual private network, no private link between the API and the database, and no network-level restriction on who may reach the database endpoint. Isolation rests entirely on credentials, row level security and application filters.</td>
+<td>Not implemented</td>
+<td>No VPC or private networking configuration found in <code>railway.toml</code>, <code>vercel.json</code> or any Supabase configuration in the repository</td>
+</tr>
+<tr>
+<td>A.8.23 Web filtering</td>
+<td>Yes</td>
+<td>Applicable in two directions. Server-side outbound access is filtered by scheme allowlist, optional host allowlist and a private-address block, which is a genuine implementation of the control&#39;s intent. User-level web filtering on the endpoint does not exist.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/lib/security/ssrf-safe-fetch.ts</code> · <code>web/src/shared/lib/net/private-address.ts</code></td>
+</tr>
+<tr>
+<td>A.8.24 Use of cryptography</td>
+<td>Yes</td>
+<td>Strong algorithm choices are made and documented, with authenticated encryption and per-record initialisation vectors. There is no cryptographic policy, no defined key lifecycle for the vault key and no key rotation schedule for it.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/web/src/shared/lib/security/secret-vault.ts</code> (AES-256-GCM, 32 byte key, fresh 12 byte IV per call, 16 byte tag, versioned <code>v1:</code> format, throws when unconfigured) · <code>api/app/services/webhook_secret_crypto.py</code> (Fernet with SHA-256 key derivation) · bcrypt-hashed MFA recovery codes · TLS in transit</td>
+</tr>
+<tr>
+<td>A.8.25 Secure development life cycle</td>
+<td>Yes</td>
+<td>A real development lifecycle exists with automated verification at commit, push, pull request and merge. Security is embedded as gates rather than as a documented set of lifecycle security requirements.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/.husky/pre-commit</code>, <code>.husky/pre-push</code> · <code>.github/pull_request_template.md</code> · 29 workflows · test counts measured: 1,277 vitest files under <code>web/</code>, 562 pytest files under <code>api/tests/</code>, 81 Playwright spec files</td>
+</tr>
+<tr>
+<td>A.8.26 Application security requirements</td>
+<td>Yes</td>
+<td>A security architecture document states the threat model, the tenancy invariants, secret handling rules, egress rules and the regulated-activity boundary. It is architecture-level · there are no per-feature security requirements.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/docs/architecture/11-security-architecture.md</code></td>
+</tr>
+<tr>
+<td>A.8.27 Secure systems architecture and engineering principles</td>
+<td>Yes</td>
+<td>Principles are stated and are demonstrably applied, including fail-closed defaults and the rule that a security control must not be reachable only through a product module, which was written after a near-miss where archiving a product would have deleted the SSRF defence.</td>
+<td>Implemented</td>
+<td><code>crowagent-platform/docs/architecture/11-security-architecture.md</code> §4.2 and §9 · <code>web/src/shared/lib/net/private-address.ts</code> (classifier relocated out of a product module for this reason)</td>
+</tr>
+<tr>
+<td>A.8.28 Secure coding</td>
+<td>Yes</td>
+<td>Unsafe patterns are blocked mechanically: empty catch blocks, <code>@ts-ignore</code>, architecture boundary violations. There is no secure coding standard document and no static application security testing.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/.husky/pre-push</code> (blocks new empty <code>catch {}</code> blocks, runs build and tests) · <code>scripts/arch-lint-*.mjs</code> · <code>.github/pull_request_template.md</code>. CodeQL confirmed absent.</td>
+</tr>
+<tr>
+<td>A.8.29 Security testing in development and acceptance</td>
+<td>Yes</td>
+<td>A baseline scan runs weekly against live production and the marketing site, and RLS parity is gated on every migration change. There has never been a penetration test, and there is no static analysis.</td>
+<td>Partial</td>
+<td><code>.github/workflows/security-scan.yml</code> (OWASP ZAP baseline against <code>https://app.crowagent.ai</code> and <code>https://crowagent.ai</code>) · <code>.github/workflows/rls-parity.yml</code> · <code>scripts/rls/verify-rls-parity.mjs</code> · <code>scripts/rls/verify-rls-enabled.mjs</code></td>
+</tr>
+<tr>
+<td>A.8.30 Outsourced development</td>
+<td>Yes</td>
+<td>Development is performed by AI agents operating under third-party model providers, which is outsourced development in substance. It is governed by a binding rule set, mechanical gates, and a requirement for explicit human approval before any stage, commit, push or deploy. What is missing is a written agreement and any review of the providers&#39; security.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/CLAUDE.md</code> · <code>crowagent-platform/ENGINEERING-STANDARDS.md</code> · <code>.husky/pre-commit</code>, <code>.husky/pre-push</code></td>
+</tr>
+<tr>
+<td>A.8.31 Separation of development, test and production environments</td>
+<td>Yes</td>
+<td>A separate staging Supabase project exists and environment files are separated. Separation is not enforced: production credentials sit on the same workstation as development, and production is routinely queried directly during audit and diagnosis.</td>
+<td>Partial</td>
+<td>Staging project <code>ipgrnwvfnumgvnxkpxsc</code>, production <code>gujtuecjzfiqsdnzgyvo</code>, both <code>eu-west-1</code> · <code>web/.env.example</code>, <code>api/.env.example</code></td>
+</tr>
+<tr>
+<td>A.8.32 Change management</td>
+<td>Yes</td>
+<td>Change control is the most mature process in the organisation: pull request template with a verification checklist, migration apply checks, architecture and RLS gates, a local build and test gate before push, and explicit per-push and per-deploy human approval with a stated cost.</td>
+<td>Implemented</td>
+<td><code>.github/pull_request_template.md</code> · <code>.github/workflows/migration-apply-check.yml</code> · <code>.github/workflows/rls-parity.yml</code> · <code>.husky/pre-push</code> · deploy approval rules in <code>crowagent-platform/ENGINEERING-STANDARDS.md</code> (RULE 0, RULE 0-B, RULE 0-G)</td>
+</tr>
+<tr>
+<td>A.8.33 Test information</td>
+<td>Yes</td>
+<td>Test data seeding and reaping scripts exist. Test data is nonetheless present on production: two rows flagged <code>is_seed = true</code> sit in the production <code>risk_register</code> table.</td>
+<td>Partial</td>
+<td><code>crowagent-platform/scripts/seed-test-data.sql</code> · <code>scripts/reap-test-data.sql</code>. <strong>Measured 2026-08-31: 2 of 10 <code>risk_register</code> rows on production carry <code>is_seed = true</code>, both titled &quot;today issues&quot;, both with no owner.</strong></td>
+</tr>
+<tr>
+<td>A.8.34 Protection of information systems during audit testing</td>
+<td>Yes</td>
+<td>Audit activity does touch production, including the read-only SQL used to produce the measurements in this pack, and the weekly ZAP scan runs against live production. Scanning is baseline and passive rather than active, which limits impact, but there is no rule constraining audit activity against production.</td>
+<td>Partial</td>
+<td><code>.github/workflows/security-scan.yml</code> uses <code>zaproxy/action-baseline</code> (passive baseline scan, not active attack). No documented audit testing rule exists.</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>Counts</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>A.5</th>
+<th>A.6</th>
+<th>A.7</th>
+<th>A.8</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Implemented</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td><strong>8</strong></td>
+</tr>
+<tr>
+<td>Partial</td>
+<td>26</td>
+<td>2</td>
+<td>0</td>
+<td>25</td>
+<td><strong>53</strong></td>
+</tr>
+<tr>
+<td>Planned</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>Not implemented</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>5</td>
+<td><strong>23</strong></td>
+</tr>
+<tr>
+<td>Not applicable</td>
+<td>0</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td><strong>9</strong></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>37</strong></td>
+<td><strong>8</strong></td>
+<td><strong>14</strong></td>
+<td><strong>34</strong></td>
+<td><strong>93</strong></td>
+</tr>
+</tbody></table></div>
+<p>The eight implemented controls are A.5.1 Policies for information security, A.5.15 Access control,
+A.5.16 Identity management, A.5.27 Learning from information security incidents, A.8.3 Information
+access restriction, A.8.15 Logging, A.8.27 Secure systems architecture and engineering principles,
+and A.8.32 Change management.</p>
+<p><strong>Applicable controls: 84 of 93. Not applicable: 9, all in A.7 Physical, each with a stated reason.</strong></p>
+<p>Of the 84 applicable controls, <strong>8 are implemented (9.5 percent)</strong>, 53 are partial, and 23 are not
+implemented. <strong>No control is marked <code>Planned</code></strong>, because a plan without a date and an owner is not a
+different state from not implemented, and this pack refuses to use <code>Planned</code> to make a count look
+better. Target dates for the highest priority gaps are in <code>ISMS-SCOPE-AND-CONTEXT.md</code> §6.2 and in
+the corrective action plan in <code>INTERNAL-AUDIT-2026-08.md</code>.</p>
+<p><strong>What moved at v1.1, and why it is two rows and not more.</strong> A.5.1 went from Partial to Implemented
+because an approved information security policy now exists, which is new evidence rather than a
+rewrite of an old claim. A.5.24 went from Not implemented to Partial because an incident response
+procedure now exists but has not been exercised. A.5.5, A.5.25, A.5.26 and A.6.8 gained evidence and
+kept their status, because in each case the document closed part of the shortfall and the untested or
+unstaffed part remains. <strong>No control was upgraded on the strength of a document that describes it
+without changing it.</strong></p>
+<h2>Controls carrying an unverified element</h2>
+<p>These rows contain a statement that could not be verified from the repository or from live systems,
+and each says what would verify it. <strong>One left the table on 2026-08-31</strong>: the owner confirmed that
+<code>security@crowagent.ai</code> reaches a monitored mailbox, so A.6.8&#39;s entry is settled and deleted rather
+than left in place with a note. Eight remain. They are counted at their current status above, never
+better. Three were added at v1.1 while writing the incident response procedure, which is the expected
+result of writing a procedure that names the mechanism it depends on rather than describing a generic
+one.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>What is unverified</th>
+<th>What would verify it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A.8.6  API default rate limit mode on production</td>
+<td>RESOLVED BY CONSTRUCTION 2026-09-01 (A-224 sweep, row A-223). <code>RATE_LIMIT_DEFAULT_MODE</code> was still unreadable through the connected app, so it was WRITTEN rather than read: it is now <code>enforce</code> on the production and staging Railway services, and the code default for an unset variable changed from shadow to enforce in the same change. Both were set with <code>skipDeploys</code>, so the RUNNING container still holds the previous value until the next API deploy. Note the mode alone was never the whole control: <code>SlowAPIMiddleware</code> reaches 0 of the 103 concrete undecorated <code>/api/v1</code> (path, method) pairs, measured 2026-09-01, so <code>DefaultLimitReachMiddleware</code> is the only thing applying <code>DEFAULT_RATE_LIMIT</code> there</td>
+<td>Confirm after the next API deploy: call an undecorated <code>/api/v1</code> route past 300/minute and expect 429, not a 200 carrying <code>X-RateLimit-Shadow</code></td>
+</tr>
+<tr>
+<td>A.5.29, A.8.16</td>
+<td>Whether the three UptimeRobot monitors and the public status page at <code>status.crowagent.ai</code> are live</td>
+<td>Log into UptimeRobot and load the status page</td>
+</tr>
+<tr>
+<td>A.5.30, A.8.13</td>
+<td>Active Supabase plan tier, and therefore the real PITR retention window</td>
+<td>Read the billing tier on the Supabase project page</td>
+</tr>
+<tr>
+<td>A.7.7</td>
+<td>Automatic screen lock on the founder workstation</td>
+<td>Inspect the operating system lock policy on that device</td>
+</tr>
+<tr>
+<td>A.7.10, A.8.1</td>
+<td>Full-disk encryption and anti-malware state on the founder workstation</td>
+<td>Check BitLocker and Defender status on that device</td>
+</tr>
+<tr>
+<td>A.8.4</td>
+<td>Whether branch protection is actually enforced on <code>main</code></td>
+<td>Read the GitHub branch protection settings for the repository</td>
+</tr>
+<tr>
+<td>A.8.16</td>
+<td>Whether any Sentry alert rule is actually live</td>
+<td>Read the alert rules in the Sentry dashboard</td>
+</tr>
+<tr>
+<td>A.8.17</td>
+<td>Provider clock synchronisation</td>
+<td>Accept as inherited from the provider, or record it as an inherited control with the provider&#39;s own attestation</td>
+</tr>
+</tbody></table></div>
+
+</article>
+</main></body></html>

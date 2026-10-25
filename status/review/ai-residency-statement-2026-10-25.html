@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>One honest statement of where data is stored and where AI runs</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>One honest statement of where data is stored and where AI runs</h1>
+<p><span class="rv-row">R285-P3-TRUST-AI-RESIDENCY-WORDING-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/legal/AI-RESIDENCY-STATEMENT-2026-10-25.md</code>, rendered from <code>2d2636b4e</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-TRUST-AI-RESIDENCY-WORDING-01 &middot; WIP</span><span class="rtitle">One honest statement of where data is stored and where AI processing happens, for the security page and the DPA</span><p>approved source text written at docs/release-2.8.5/legal/AI-RESIDENCY-STATEMENT-2026-10-25.md, consistent with DPA clause 7.2 and Schedule 1. Waits on the owner approving the text and the website copy waits for the website push approval.</p></div></section>
+<article class="doc">
+<h1>One honest statement of where data is stored and where AI runs</h1>
+<p><strong>Row:</strong> <code>R285-P3-TRUST-AI-RESIDENCY-WORDING-01</code>. <strong>Date:</strong> 2026-10-25. <strong>Spec:</strong> <code>specs/platform-systems/ai-quality/18-PRODUCT-CAPABILITY-GAPS-SPEC.md</code> section 13 criterion 1 (<code>REQ-R285-AIQ-CAP-RESIDENCY-WORDING</code>), approved D396. Wording follows D255 (positive, no defensive disclaimers) and claims nothing we do not hold.
+<strong>Website copy waits for the owner&#39;s approval.</strong> Nothing here has been published. This is the approved source text for the security page and the DPA.</p>
+<h2>The facts behind it</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Customer data is stored in Supabase, AWS <code>eu-west-1</code> (Ireland)</td>
+<td><code>docs/legal/data-processing-agreement.md</code> Schedule 1 item 1 and clause 7.2, measured 2026-10-23 in <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> section 9 (project region <code>eu-west-1</code>)</td>
+</tr>
+<tr>
+<td>Web application functions run in Vercel <code>lhr1</code> (London)</td>
+<td>DPA Schedule 1 item 2, header <code>X-Vercel-Id: lhr1::lhr1</code> measured 2026-10-23 (security pack section 8)</td>
+</tr>
+<tr>
+<td>The API runs on Railway <code>europe-west4</code> (Amsterdam)</td>
+<td>DPA Schedule 1 item 3</td>
+</tr>
+<tr>
+<td>Google Gemini is not region pinned</td>
+<td>DPA clause 7.2 and Schedule 1 item 8. The code sets no region (<code>api/app/services/ai/provider_calls.py</code>). Google&#39;s paid tier does not use prompts or responses to improve its products (&quot;Used to improve our products: No&quot;, <a href="https://ai.google.dev/gemini-api/docs/pricing">https://ai.google.dev/gemini-api/docs/pricing</a>, read 2026-10-25)</td>
+</tr>
+<tr>
+<td>Anthropic offers only <code>global</code> or <code>us</code> inference, and no UK or EU option</td>
+<td><a href="https://platform.claude.com/docs/en/manage-claude/data-residency">https://platform.claude.com/docs/en/manage-claude/data-residency</a>, read 2026-10-25. See <code>ANTHROPIC-RETENTION-CHECK-2026-10-25.md</code></td>
+</tr>
+<tr>
+<td>Anthropic deletes API inputs and outputs within 30 days and does not train on them by default</td>
+<td>same check document</td>
+</tr>
+<tr>
+<td>OpenAI is not in use</td>
+<td><code>api/app/services/ai/surface_policy.py:1252-1558</code> has no OpenAI model, DPA Schedule 1 lists no OpenAI row</td>
+</tr>
+</tbody></table></div>
+<h2>The statement (for the security page and the DPA)</h2>
+<blockquote>
+<p><strong>Where your data lives.</strong> Your account data, documents and drafts are stored in Ireland (Supabase, AWS eu-west-1). Our web application runs in London and our API runs in the Netherlands.</p>
+<p><strong>Where AI processing happens.</strong> When you use an AI feature, the text needed for that task is sent to our AI providers, Google and Anthropic, under their paid commercial terms. Both commit not to use that text to train their models. Anthropic deletes it within 30 days. Their AI processing is not pinned to the UK or the EU, so we treat it as an international transfer and protect it with the UK International Data Transfer Agreement or the EU Standard Contractual Clauses with the UK Addendum. We send only what each task needs.</p>
+</blockquote>
+<p>Notes for whoever uses this text:</p>
+<ul>
+<li>&quot;Both commit not to use that text to train&quot; rests on Google&#39;s paid terms (pricing page above) and Anthropic&#39;s default (training page, 2026-08-18). The owner verified on 2026-10-23 (D314) that both production accounts are paid.</li>
+<li>Do not write &quot;EU only&quot;, &quot;UK only&quot; or &quot;data never leaves the UK&quot; anywhere. They are untrue for AI processing.</li>
+<li>When the model registry or the OpenAI onboarding changes the provider list, this statement and DPA Schedule 1 change in the same commit, and the web data use line (<code>web/src/shared/i18n/messages/common/data-use.ts:24</code>) with them (spec 12 criterion 15).</li>
+</ul>
+<h2>Owner decision</h2>
+<p>Approve this text as the single statement for the security page and the DPA (recommended, it is accurate and positive). The website change itself waits for your approval and the website push approval row <code>R285-OWNER-WEBSITE-PUSH-APPROVAL-01</code>.</p>
+
+</article>
+</main></body></html>

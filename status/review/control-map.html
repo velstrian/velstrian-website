@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>ISO/IEC 42001 readiness: control map</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>ISO/IEC 42001 readiness: control map</h1>
+<p><span class="rv-row">R285-P3-AI-ISO42001-POLICY-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/ai-quality/iso42001/CONTROL-MAP.md</code>, rendered from <code>2d2636b4e</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-ISO42001-POLICY-01 &middot; OPEN</span><span class="rtitle">A one page AI policy signed by the owner plus an intended use statement, the single gap in the ISO/IEC 42001 control map with no row</span><p>found by docs/release-2.8.5/ai-quality/iso42001/CONTROL-MAP.md areas A.2 and A.9. Own work, no spend. Owner signs, the AI page row R285-P3-AI-PUBLIC-AI-PAGE-01 carries the public wording. Size S.</p></div></section>
+<article class="doc">
+<h1>ISO/IEC 42001 readiness: control map</h1>
+<p><strong>Row:</strong> <code>R285-P3-AI-ISO42001-READINESS-01</code>. <strong>Date:</strong> 2026-10-25. <strong>Spec:</strong> <code>specs/platform-systems/ai-quality/10-GOVERNANCE-BACKLOG.md</code> section 3.1 (<code>REQ-R285-AIQ-ISO42001-READINESS</code>). <strong>Decisions:</strong> D409, D408.</p>
+<h2>Status of this pack, stated plainly</h2>
+<ul>
+<li><strong>Velstrian holds no ISO/IEC 42001 certificate.</strong> This pack is our own readiness work. Wording we may use: &quot;We follow the structure of ISO/IEC 42001 for our AI management and track it in our own documents. No certificate is held.&quot; (D255 positive wording, D250 no claimed certificate).</li>
+<li><strong>The standard text is a paid document and was not read.</strong> ISO&#39;s own page returned HTTP 403 to this lane (<a href="https://www.iso.org/standard/42001">https://www.iso.org/standard/42001</a>, 2026-10-25). Price: not seen. Reading a licensed copy is an owner spend decision (spec 10 section 3.1 criterion 4). Until then this map uses only the public structure.</li>
+<li><strong>Public structure used.</strong> Management system clauses 4 to 10 follow the ISO harmonised structure (context, leadership, planning, support, operation, performance evaluation, improvement). Annex A is a reference set under objective areas A.2 to A.10, whose topic names below come from secondary guides (<a href="https://docs.modulos.ai/frameworks/iso-42001/annexes-a-d.html">https://docs.modulos.ai/frameworks/iso-42001/annexes-a-d.html</a> and <a href="https://www.tcsa.in/frameworks/iso-42001/controls">https://www.tcsa.in/frameworks/iso-42001/controls</a>, search summaries read 2026-10-25). Those guides disagree on per objective counts and on whether Annex A is normative, so <strong>no control count is claimed here</strong> and the exact control titles must be taken from the standard before a statement of applicability is signed.</li>
+<li>Status words: in place, partly, missing. They are the driver&#39;s first judgement and have not been challenged.</li>
+</ul>
+<h2>A. Management system clauses</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Clause</th>
+<th>What it asks (topic)</th>
+<th>Velstrian control or document</th>
+<th>Status</th>
+<th>Owner</th>
+<th>Gap action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4 Context</td>
+<td>Understand the organisation, interested parties, scope</td>
+<td><code>docs/compliance/ISMS-SCOPE-AND-CONTEXT.md</code> (information security scope), <code>docs/release-2.8.5/ai-quality/OPERATING-MODEL.md</code></td>
+<td>Partly. AI is not named in the scope document</td>
+<td>Owner</td>
+<td>Add one AI paragraph to the scope document at the next management review</td>
+</tr>
+<tr>
+<td>5 Leadership</td>
+<td>Policy, roles, commitment</td>
+<td>OPERATING-MODEL section 1 (owner accountable, driver runs), D354</td>
+<td>Partly. No signed AI policy</td>
+<td>Owner</td>
+<td>Approve a one page AI policy (A.2 below)</td>
+</tr>
+<tr>
+<td>6 Planning</td>
+<td>Risks, opportunities, objectives</td>
+<td><code>docs/release-2.8.5/ai-quality/AI-RISK-REGISTER.md</code>, <code>TARGETS.md</code></td>
+<td>In place (first version)</td>
+<td>Owner</td>
+<td>Challenge ratings at first weekly review</td>
+</tr>
+<tr>
+<td>7 Support</td>
+<td>Resources, competence, awareness, documented information</td>
+<td><code>docs/AI-ONBOARDING-GUIDE.md</code>, specs under <code>specs/platform-systems/ai-quality/</code></td>
+<td>Partly. Competence not recorded</td>
+<td>Owner</td>
+<td>Record AI literacy line (also EU AI Act Article 4, <code>EU-AI-ACT-CHECKLIST.md</code>)</td>
+</tr>
+<tr>
+<td>8 Operation</td>
+<td>Operational planning and control, impact assessment, treatment</td>
+<td>Change process (spec 17 criterion 8), golden evals (<code>api/tests/ai_golden/</code>), model gate (<code>eval_gate.py</code>)</td>
+<td>In place for change control. Impact assessment partly</td>
+<td>Driver</td>
+<td>Impact assessment is part of A.5</td>
+</tr>
+<tr>
+<td>9 Performance evaluation</td>
+<td>Monitoring, internal audit, management review</td>
+<td>Weekly review (OPERATING-MODEL section 2), <code>INTERNAL-AUDIT-CHECKLIST.md</code>, <code>MANAGEMENT-REVIEW-TEMPLATE.md</code></td>
+<td>Partly. No audit or review has been held</td>
+<td>Driver</td>
+<td>Run the checklist once, by hand, at the release boundary</td>
+</tr>
+<tr>
+<td>10 Improvement</td>
+<td>Nonconformity, corrective action, continual improvement</td>
+<td>Tracker rows, golden case per incident (<code>SUPPORT-PLAYBOOK.md</code>)</td>
+<td>In place</td>
+<td>Driver</td>
+<td>None</td>
+</tr>
+</tbody></table></div>
+<h2>B. Annex A objective areas (topic names from secondary guides)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Topic</th>
+<th>Velstrian control, document or test</th>
+<th>Status</th>
+<th>Owner</th>
+<th>Gap action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A.2</td>
+<td>Policies for AI</td>
+<td>Platform <code>CLAUDE.md</code> AI rule (D328), <code>docs/legal/data-processing-agreement.md</code>, public AI page row <code>R285-P3-AI-PUBLIC-AI-PAGE-01</code></td>
+<td>Partly</td>
+<td>Owner</td>
+<td>One page AI policy signed by the owner</td>
+</tr>
+<tr>
+<td>A.3</td>
+<td>Internal organisation, roles, reporting concerns</td>
+<td>OPERATING-MODEL section 1, <code>ON-CALL.md</code>, <code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code></td>
+<td>In place for roles, partly for a concern route</td>
+<td>Owner</td>
+<td>Publish a concern route on the AI page</td>
+</tr>
+<tr>
+<td>A.4</td>
+<td>Resources for AI systems (data, tooling, compute, people)</td>
+<td><code>api/app/services/ai/model_registry.py</code>, <code>docs/release-2.8.5/ai-quality/PII-FIELDS-PER-SURFACE.md</code>, DPA Schedule 1</td>
+<td>Partly</td>
+<td>Driver</td>
+<td>Registry data (spec 13) replaces the code table</td>
+</tr>
+<tr>
+<td>A.5</td>
+<td>Assessing impacts of AI systems</td>
+<td><code>AI-RISK-REGISTER.md</code>, <code>EU-AI-ACT-CHECKLIST.md</code>, Buy fairness row <code>R285-P3-BUY-AI-FAIRNESS-01</code></td>
+<td>Partly. No impact assessment per product written as such</td>
+<td>Driver</td>
+<td>Write one impact note per product from the register at first review</td>
+</tr>
+<tr>
+<td>A.6</td>
+<td>AI system life cycle (design, verification, deployment, operation, monitoring)</td>
+<td>Specs 1 to 19, golden evals, <code>INCIDENT-RUNBOOK.md</code>, <code>surface_health.py</code></td>
+<td>In place</td>
+<td>Driver</td>
+<td>None</td>
+</tr>
+<tr>
+<td>A.7</td>
+<td>Data for AI systems</td>
+<td><code>docs/release-2.8.5/ai-quality/ogl/SOURCES.md</code>, <code>rag/SOURCES.md</code>, content free rule (spec 8)</td>
+<td>In place for learning data. Partly for customer retrieval data quality</td>
+<td>Driver</td>
+<td>Spec 5 recall baseline</td>
+</tr>
+<tr>
+<td>A.8</td>
+<td>Information for interested parties</td>
+<td>Notices spec 16, AI use statement row <code>R285-P3-AI-PPN017-USE-STATEMENT-01</code>, <code>INCIDENT-RUNBOOK.md</code></td>
+<td>Partly</td>
+<td>Driver</td>
+<td>Build those rows</td>
+</tr>
+<tr>
+<td>A.9</td>
+<td>Use of AI systems</td>
+<td>Human approval step, <code>ai_draft_approved</code> event, Buy decision support rule</td>
+<td>Partly</td>
+<td>Owner</td>
+<td>Intended use statement on the AI page</td>
+</tr>
+<tr>
+<td>A.10</td>
+<td>Third party and customer relationships</td>
+<td>DPA Schedule 1, <code>providers/EXIT-PLANS.md</code>, <code>CHURN-CALENDAR.md</code>, <code>ANTHROPIC-RETENTION-CHECK-2026-10-25.md</code></td>
+<td>In place</td>
+<td>Owner</td>
+<td>Keep dates current at each release boundary</td>
+</tr>
+</tbody></table></div>
+<h2>C. Missing controls and their tracker rows</h2>
+<p>Criterion 3 of the spec asks that each missing control has a row. No area above is rated &quot;missing&quot;. The &quot;partly&quot; items are already covered by existing rows, or by the gap actions in the tables, and the driver should add one tracker row, <code>R285-P3-AI-ISO42001-POLICY-01</code> (one page AI policy plus intended use statement), because that is the single gap with no existing row. That row, <code>R285-P3-AI-ISO42001-POLICY-01</code>, is created in the tracker in the same commit as this map.</p>
+<h2>D. Owner decisions</h2>
+<ol>
+<li><strong>Certification audit</strong> (<code>R285-P3-AI-ISO42001-CERT-SPEND-01</code>). One off audit plus yearly surveillance while certified. A consultancy range of 15,000 to 40,000 USD for a small firm is recorded in <code>docs/release-2.8.5/ai-strategy/EXTERNAL-RESEARCH-2026-10-24.md</code> section 6.1 from vendor blogs with a commercial interest. It is not a quote. <strong>Recommended: do not engage.</strong> No buyer has asked. Re-ask at each release boundary.</li>
+<li><strong>Buy a licensed copy of the standard.</strong> Price unknown, not seen. Recommended: only if decision 1 turns to yes.</li>
+</ol>
+
+</article>
+</main></body></html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>AI operating model</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>AI operating model</h1>
+<p><span class="rv-row">R285-P3-AI-OPERATING-MODEL-DOC-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/ai-quality/OPERATING-MODEL.md</code>, rendered from <code>78fe563ee</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-OPERATING-MODEL-DOC-01 &middot; OPEN</span><span class="rtitle">AI operating model and engine design rules documents written (spec 17 and spec 19 section 3)</span><p>SPECIFIED, NOT BUILT. D409 (nothing deferred) and D408. docs/release-2.8.5/ai-quality/OPERATING-MODEL.md and ENGINE-DESIGN-RULES.md written 2026-10-24 night from specs 17 and 19, no invention. Open: owner read.</p></div></section>
+<article class="doc">
+<h1>AI operating model</h1>
+<p><strong>Date:</strong> 2026-10-24. <strong>Source:</strong> <code>specs/platform-systems/ai-quality/17-AI-OPS-SPEC.md</code> criteria 1 to 13, <code>10-GOVERNANCE-BACKLOG.md</code> section 4.
+<strong>Decisions:</strong> D354 (ownership and weekly review), D355 (targets), D356 (dashboard), D357 (change notes), D359 (no refunds for wrong answers),
+D363 (reading level), D409 (governance readiness now). The spec stays canonical.</p>
+<h2>1. Who owns what</h2>
+<ul>
+<li>The owner is accountable for AI quality.</li>
+<li>The driver (the Velstrian platform operator) runs the weekly review and the release boundary list.</li>
+<li>Response is in UK business hours. There is no out of hours on call. Out of hours, surfaces fail closed through their
+ceilings and the existing honest failure states, and Sentry alerts on AI route error spikes go to the platform mailbox.</li>
+</ul>
+<h2>2. The weekly review</h2>
+<p>Started by hand, never on a timer (RULE 0-G). It produces one dated note under <code>docs/release-2.8.5/ai-quality/weekly/</code> with:
+ledger cost and margin share, per surface and per model counters, the dashboard figures against targets, open eval failures,
+user ratings, support cases, the AI risk register reviewed (spec 10 section 3.4), and the actions taken.</p>
+<p>Note template:</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Entry</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Week and sha</td>
+<td></td>
+</tr>
+<tr>
+<td>Cost and margin share</td>
+<td></td>
+</tr>
+<tr>
+<td>Per surface and model counters</td>
+<td></td>
+</tr>
+<tr>
+<td>Dashboard against targets</td>
+<td></td>
+</tr>
+<tr>
+<td>Open eval failures</td>
+<td></td>
+</tr>
+<tr>
+<td>Ratings and support cases</td>
+<td></td>
+</tr>
+<tr>
+<td>Risk register reviewed (date)</td>
+<td></td>
+</tr>
+<tr>
+<td>Reading level band per surface</td>
+<td></td>
+</tr>
+<tr>
+<td>Actions taken</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2>3. Targets</h2>
+<p>Stored once in <code>docs/release-2.8.5/ai-quality/TARGETS.md</code>, all PROVISIONAL until measured baselines exist: invented figures
+reaching a bid 0, unheld credentials without a person&#39;s choice 0, unsupported claim rate under 5 percent after evidence is
+added, extraction at the D388 bar, Recall@5 90 percent, faithfulness 95 percent, Buy reasons per criterion and a recorded human
+decision 100 percent, chatbot wrong price or product fact 0, thumbs up share 80 percent. Win rate is reported to each customer
+only. No target is published as an accuracy claim.</p>
+<h2>4. Change process and cadence</h2>
+<ul>
+<li>A prompt or model change ships only with a new prompt version, a family eval from a committed sha, a ledger record, a change note
+(spec 16) and a tracker row.</li>
+<li>Prompt changes ship at release phase boundaries. Model changes at most once a quarter unless a retirement, a price step or a P0
+forces one. A retired model is never used (D395).</li>
+</ul>
+<h2>5. Incidents and support</h2>
+<ul>
+<li>Incident runbook (<code>INCIDENT-RUNBOOK.md</code>, to be written by spec 17 criterion 10) covers bad output reaching a customer (switch the
+surface off by its ceiling variable), a provider outage (fallback chain of spec 12) and a data leak (the existing incident
+procedure and the ICO clock).</li>
+<li>Support playbook: find the ledger row and trace, explain in plain words, fix the cause, add a golden case, record it in the
+weekly note. No credit refund (D359).</li>
+</ul>
+<h2>6. Release boundary list</h2>
+<p>Answered at every release boundary with the sha and date. Nothing is scheduled.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer (yes, no, not known)</th>
+<th>If yes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Is there a buyer contract clause on AI assurance?</td>
+<td></td>
+<td>open the ISO/IEC 42001 certification spend decision row</td>
+</tr>
+<tr>
+<td>Is there any EU facing claim or EU customer?</td>
+<td></td>
+<td>open the EU AI Act legal advice spend decision row</td>
+</tr>
+<tr>
+<td>Is any candidate model awaiting canary?</td>
+<td></td>
+<td>an admin sets it to <code>canary</code> (spec 19 T22f)</td>
+</tr>
+<tr>
+<td>Have the prompt and model changes of this release got change notes?</td>
+<td></td>
+<td>write them before release</td>
+</tr>
+<tr>
+<td>Have the weekly notes of this release been written?</td>
+<td></td>
+<td>write them</td>
+</tr>
+</tbody></table></div>
+<h2>7. Reading level</h2>
+<p><code>api/app/services/plain_language.py</code> checks AI text addressed to the user for reading ease of at least 60 and sentences of 20
+words or fewer on average. A surface below target for two weekly reviews gets a prompt change row.</p>
+
+</article>
+</main></body></html>

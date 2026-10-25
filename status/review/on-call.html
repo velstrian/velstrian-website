@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>AI on call for a tiny team</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>AI on call for a tiny team</h1>
+<p><span class="rv-row">R285-P3-AI-OPS-ON-CALL-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/ai-quality/ON-CALL.md</code>, rendered from <code>2d2636b4e</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-OPS-ON-CALL-01 &middot; WIP</span><span class="rtitle">On call for a tiny team: UK business hours, Sentry alerts on AI route error spikes, provider status checks, surfaces fail closed out of hours</span><p>docs/release-2.8.5/ai-quality/ON-CALL.md written. Measured gap: Sentry has 4 issue rules and none targets AI routes (2026-10-23 read). OWNER DECISION: create one Sentry issue alert on the AI routes to the platform mailbox, free (recommended). Not created by this lane.</p></div></section>
+<article class="doc">
+<h1>AI on call for a tiny team</h1>
+<p><strong>Rows:</strong> <code>R285-P3-AI-OPS-ON-CALL-01</code>, <code>R285-P3-AI-OPS-QUALITY-OWNER-01</code>. <strong>Date:</strong> 2026-10-25. <strong>Spec:</strong> <code>specs/platform-systems/ai-quality/17-AI-OPS-SPEC.md</code> criteria 1 to 3 (<code>REQ-R285-AIQ-OPS-OWNER-REVIEW</code>). <strong>Decision:</strong> D354.</p>
+<h2>Who</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Person</th>
+<th>Duty</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accountable for AI quality</td>
+<td>the owner</td>
+<td>spend, model changes, customer messages</td>
+</tr>
+<tr>
+<td>Runs the weekly review and the release boundary list</td>
+<td>the driver (the platform operator)</td>
+<td>one 30 minute review per week, picks one fix</td>
+</tr>
+</tbody></table></div>
+<h2>When</h2>
+<p>UK business hours only. There is no 24/7 on call and no paid pager (D354).</p>
+<h2>What alerts exist today</h2>
+<ul>
+<li><strong>Sentry</strong>, organisation <code>crowagent-ltd</code>, region de: 4 issue alert rules, all enabled, 0 metric monitors, measured on 2026-10-23 and recorded in <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> section 9. Three are &quot;high priority issues&quot; rules, one is a pull request rule. <strong>None of them is an AI route error spike alert.</strong> Who receives the notifications was not measured.</li>
+<li><strong>Provider status pages</strong>, checked by hand when Sentry shows AI errors (<code>INCIDENT-RUNBOOK.md</code> Case B).</li>
+<li><strong>Daily ceilings</strong> bound spend while nobody is watching (<code>surface_policy.py:627</code>).</li>
+<li><strong>Breaker</strong> moves calls off a failing model for 60 seconds at a time (<code>surface_health.py:458-460</code>).</li>
+</ul>
+<h2>What fails closed out of hours</h2>
+<p>A surface that reaches its daily GBP ceiling refuses further paid calls (the ceiling is a daily figure, <code>surface_policy.py:44</code>, and spec 17 criterion 3 names the honest failure states). A failing model is skipped by the breaker. Nothing pages anyone.</p>
+<h2>Gap and the one thing to decide</h2>
+<p>Spec 17 criterion 3 says Sentry alerts on AI route error spikes go to the platform mailbox. That alert does not exist yet (measured above). Creating it is a Sentry dashboard step with no spend.</p>
+<p><strong>Owner decision (one line):</strong> create one Sentry issue alert filtered to the AI routes, notifying the platform mailbox only (recommended, free, no code change). Until then the weekly review is the only watcher out of hours.</p>
+
+</article>
+</main></body></html>

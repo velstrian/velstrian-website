@@ -1412,6 +1412,37 @@ function deployState() {
 }
 const deploy = deployState();
 
+/* [R285-BOARD-OWNER-REVIEW-HTML-01, D451] Every document awaiting the owner's
+   read, approval or signature is rendered to status/review/<slug>.html on each
+   rebuild, from the one line per row mapping in owner-review-docs.json, and
+   linked from its row. A failure is reported as unreadable, never hidden, and
+   never stops the board. Skipped for an explicit past release, which must not
+   rewrite the present. */
+let ownerReview = { entries: [], missing: [], watch: [] };
+if (!argOf('release')) {
+  try {
+    ownerReview = require('./render-owner-review.js').renderOwnerReview({
+      platform: PLATFORM,
+      tracker: TRACKER,
+      outDir: path.join(path.dirname(OUT), 'review'),
+    });
+    const byId = new Map(issues.map((i) => [i.id, i]));
+    for (const e of ownerReview.entries) {
+      const issue = byId.get(e.row);
+      const docs = e.docs.filter((d) => !d.missing).map((d) => ({ title: d.title, href: d.href }));
+      if (issue && docs.length) issue.reviewDocs = docs;
+      if (!issue) {
+        unreadable.push({ src: 'status/owner-review-docs.json', why: `row ${e.row} is mapped to a review document but is not on this board.` });
+      }
+    }
+    for (const m of ownerReview.missing) {
+      unreadable.push({ src: `crowagent-platform/${m.path}`, why: `owner review document for ${m.rows.join(', ')} does not exist on disk.` });
+    }
+  } catch (e) {
+    unreadable.push({ src: 'status/render-owner-review.js', why: `owner review pages not rendered: ${e.message}` });
+  }
+}
+
 const board = {
   updated: new Date().toISOString(),
   /* [R28-BOARD-RELEASE-PROVENANCE-01] The release the board actually read, so
@@ -1537,6 +1568,12 @@ const board = {
      scripts/deploy-phase-boundaries.json. See deployState() above for why this
      carries no figures of its own and why it is not a live read. */
   deploy,
+  /* [R285-BOARD-OWNER-REVIEW-HTML-01] The Owner review section on #platform. */
+  ownerReview: ownerReview.entries.map((e) => ({
+    row: e.row,
+    title: e.title,
+    docs: e.docs.filter((d) => !d.missing).map((d) => ({ title: d.title, href: d.href, sha: d.sha })),
+  })),
   unreadable,
   issues,
 };
@@ -1684,7 +1721,9 @@ if (process.argv.includes('--watch')) {
       }
     }, 400);
   };
-  for (const f of [TRACKER, DEFECTS]) {
+  /* The owner review documents too, so a re-drafted approval document reaches
+     its HTML page without anyone remembering to rebuild. */
+  for (const f of [TRACKER, DEFECTS, ...ownerReview.watch, path.join(__dirname, 'owner-review-docs.json')]) {
     if (fs.existsSync(f)) fs.watch(f, rebuild);
   }
   console.log(`[watch] tracking R${RELEASE.version} documents; board rebuilds on change.`);
