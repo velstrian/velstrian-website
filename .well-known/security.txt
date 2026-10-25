@@ -11,4 +11,4 @@ Contact: mailto:contact@velstrian.com
 Expires: 2027-04-30T23:59:59.000Z
 Preferred-Languages: en
 Canonical: https://velstrian.com/.well-known/security.txt
-Policy: https://velstrian.com/security
+Policy: https://velstrian.com/security/
