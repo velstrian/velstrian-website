@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T15:25:30.363Z",
+  "updated": "2026-10-25T00:46:31.069Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1077,6 +1077,30 @@
       "title": "A plain public page: how Velstrian uses AI, the checks it runs, no training on your content, the providers",
       "status": "FIXED",
       "note": "Platform row R285-P3-AI-PUBLIC-AI-PAGE-01 (strategy page revision 2, section 12, 2026-10-24). Prepared on the local site only, live only after owner approval. Positive wording (D255), no AI accuracy figure and no win rate, providers named as in DPA Schedule 1 (Google, Anthropic, OpenAI only once D329 has run). Not started. || 2026-10-24 built on the LOCAL site only, live only after the owner approved website push. Route /ai/ (astro/src/pages/ai.astro), linked from the footer Legal column (How we use AI) and from /security/ AI data handling. Every claim is read from a new site-facts.json record ai_use (23 lines, each with its evidence: surface_policy.py DEFAULT_MODELS, DPA Schedule 1 items 7 and 8, D314, D350, D344, AI strategy page section 3), 16 live today and 7 marked Coming next in the future tense (D341, D342, D344 opt in, D346, D366, D367, D371 notice). Training wording is 'Your content is not used to train AI models.' (the banned 'never used to train' stays banned). Providers Google Gemini and Anthropic Claude only, OpenAI banned on /ai/, /security/ and /privacy/ until D329. New check-site-facts rule ai_use, red proven three ways (missing line, coming line without will, OpenAI named). npm run build 43 of 43 gates PASS. Screenshots at 1440 and 390, light and dark emulation (the site has one theme)."
+    },
+    {
+      "id": "A-418",
+      "src": "owner 2026-10-25",
+      "sev": "P2",
+      "title": "Feature cards review: glossary and integrations sample cards (StripeCard) reviewed against tokens, motion and accessibility, extra card placements proposed for owner review",
+      "status": "FIXED",
+      "note": "Owner item A. Review in docs/website-reviews/2026-10-25-feature-cards-review.md. Sample defects fixed in astro/src/components/ui/StripeCard.astro: literal white replaced by currentColor from --c-white, hover reduced to the calm card contract (edge colour plus link underline, no lift, no shadow swap, no art zoom), resting shadow removed, gradient ids scoped per card, heading level prop, art reduced to a short band on narrow columns. Extra cards are NOT built, owner reviews the suggestions first. || Review written with before and after screenshots at 1440, 1024 and 390. Seven sample defects fixed in StripeCard (calm hover, no resting shadow, currentColor from --stage-ink, scoped SVG ids, heading level, short art band on narrow columns, sentence case on the glossary titles). Copy proposals and six card placements are proposals awaiting the owner, nothing extra built. Lighthouse /glossary/ mobile perf 93 a11y 100 CLS 0.000."
+    },
+    {
+      "id": "A-419",
+      "src": "owner 2026-10-25",
+      "sev": "P1",
+      "title": "Integrations featured card named MCP but linked to /roadmap/, which never mentions MCP, and claimed certified read scopes and zero context leakage",
+      "status": "FIXED",
+      "note": "Owner item B. Facts from crowagent-platform: api/app/routers/mcp.py read only connector, api/app/mcp/server.py read and write server, both on a Velstrian API key; api/app/mcp/agent_tools.py agent access server behind MCP_SERVER_ENABLED which defaults off (api/app/config.py:462). || Card now says what is live: a read only MCP connector and a read and write MCP server on a Velstrian API key, linked to /integrations/#mcp, where the MCP card describes both above the Integrations package plan line. Roadmap lists the agent access server as In progress, built and not switched on, no date. Lighthouse /integrations/ mobile perf 97 a11y 100 CLS 0.000."
+    },
+    {
+      "id": "A-420",
+      "src": "owner 2026-10-25",
+      "sev": "P1",
+      "title": "Compare pages: portrait product screenshot sat as a narrow column in a wide purple stage, and a floating bar covered the caption",
+      "status": "FIXED",
+      "note": "Owner item C. Measured on :8093: /compare/bid-vs-autogenai/ showed the 341x736 question list at about 350px wide in a 1280px stage, /compare/bid-vs-swiftbid/ left about 230px empty either side. The floating bar is the Astro dev toolbar, injected only by astro dev, never on a built page (no fixed element on the page at the caption, probe 2026-10-25). || ProductScreen gains an opt in moment, used by every /compare/* page: the stage shrinks to fit, and screens with steps (answer-list, answer-library) sit beside a FlashCards steps block on the shared autoplay device (plays once, not on phones, not under reduced motion, pause button, verified run 0 to 1 at 1440 and no autoplay under reduce). Compare prose rules no longer reach into the screen. Astro dev toolbar switched off so the dev review matches the built site. Lighthouse /compare/bid-vs-autogenai/ mobile perf 84 a11y 100 CLS 0.001, desktop perf 99."
     }
   ],
   "directives": [
@@ -1146,5 +1170,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 418
+  "nextId": 421
 }
