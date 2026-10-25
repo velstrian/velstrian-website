@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Data Processing Agreement (draft)</title><link rel="stylesheet" href="legal.css"></head>
-<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/legal/data-processing-agreement.md</code> at <code>9280aada4</code>. A read only copy, edit the source, not this page.</p>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/legal/data-processing-agreement.md</code> at <code>0070f5731</code>. A read only copy, edit the source, not this page.</p>
 <h1>Data Processing Agreement (DPA)</h1>
 <blockquote>
 <p><strong>DRAFT — pending legal review and owner sign-off.</strong> <code>[SECU-014]</code></p>
@@ -87,6 +87,24 @@ for the acts and omissions of its Sub-Processors.</p>
 own business administration — for example account and billing records, its own security and audit
 logs, and the identity of the Customer&#39;s authorised users for authentication. That processing is
 governed by Velstrian Tenderworks&#39; Privacy Notice, not by this DPA.</p>
+<p>1.4 <strong>Shared examples (optional, off by default).</strong> The Customer&#39;s administrator may turn on example
+sharing in the Services settings. While it is on, a user can choose to share a single draft and its
+approved answer with Velstrian (a &quot;Shared Example&quot;). For Shared Examples, and only for them, Velstrian
+decides why and how the data is used, so Velstrian acts as an <strong>independent Controller</strong> and not as the
+Customer&#39;s Processor. A Shared Example is no longer Customer Personal Data for the purposes of this DPA
+from the moment it is shared. Velstrian uses a Shared Example only to test and improve Velstrian&#39;s own AI
+features. It does not share a Shared Example with any other customer, does not use it to train any AI
+model, and deletes every Shared Example of the Customer straight away when the Customer&#39;s administrator
+turns sharing off. Velstrian&#39;s processing of Shared Examples is described in its Privacy Notice. Nothing
+else the Customer submits becomes a Shared Example, and the Customer&#39;s other content stays under clauses
+1.1 to 1.3 and clause 3. <code>[DEFAULT, owner to confirm with counsel]</code></p>
+<p>1.5 <strong>Pooled counts (optional, off by default).</strong> If the Customer&#39;s administrator turns it on, the
+number of bids the Customer won and lost in each sector is added to counts across Velstrian. Only counts
+are used, never text, documents or names. The counts are shown only once at least 10 organisations take
+part. Counts of this kind do not identify an individual, so this clause does not make Velstrian a
+Controller of Customer Personal Data.</p>
+<p>1.6 <strong>No other use.</strong> Except as clauses 1.3 to 1.5 describe, Velstrian does not use Customer Personal
+Data to improve the Services or to train any AI model.</p>
 <hr>
 <h2>2. Subject-matter, duration, nature and purpose (Art. 28(3))</h2>
 <p>2.1 <strong>Subject-matter.</strong> Velstrian Tenderworks&#39; processing of Customer Personal Data in order to provide the
@@ -110,6 +128,9 @@ together constitute the Customer&#39;s documented instructions. Additional or di
 must be agreed in writing and may be subject to a change in the Agreement or fees.</p>
 <p>3.3 If Velstrian believes an instruction infringes UK GDPR, EU GDPR or other applicable data
 protection law, it will inform the Customer without undue delay.</p>
+<p>3.4 The Customer&#39;s choice to turn on example sharing under clause 1.4 is not an instruction to process
+Customer Personal Data. It is the Customer&#39;s agreement that Shared Examples are processed by Velstrian as
+an independent Controller. The Customer can withdraw that agreement at any time by turning sharing off.</p>
 <hr>
 <h2>4. Confidentiality</h2>
 <p>4.1 Velstrian ensures that persons authorised to process Customer Personal Data are bound by an
@@ -243,16 +264,20 @@ subject to confidentiality — or where required by a supervisory authority.</p>
 <h2>11. Liability and term</h2>
 <blockquote>
 <p>Owner decision D314 (2026-10-23): liability option B, insurance backed. Two separate caps, the same
-as section 6 of the Terms of Service. Still subject to counsel review (see the sign off pack).</p>
+as section 6 of the Terms of Service. Owner decision D319 (2026-10-23): the data protection cap has a
+fixed floor, so it never falls to £0 when the insurer pays nothing. Counsel sets the floor figure.
+Still subject to counsel review (see the sign off pack).</p>
 </blockquote>
 <p>11.1 <strong>General cap.</strong> For general commercial breach, including defects in the Services (bugs) and
 service interruptions, Velstrian&#39;s aggregate liability under or in connection with the Agreement and
 this DPA shall not exceed the greater of (a) the total subscription fees paid by the Customer in the
 12 months preceding the claim, or (b) £2,500.</p>
 <p>11.2 <strong>Data protection and security cap.</strong> For data protection and security breaches under this DPA,
-including any personal data breach, a separate cap applies, distinct from the cap in clause 11.1. Velstrian&#39;s aggregate liability for those claims shall not exceed the lesser of
-(a) £250,000, or (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional
-Indemnity insurance policy for that claim.</p>
+including any personal data breach, a separate cap applies, distinct from the cap in clause 11.1. Velstrian&#39;s aggregate liability for those claims shall not exceed the greater of
+(a) a floor equal to the greater of the total subscription fees paid by the Customer in the 12 months
+preceding the claim or £2,500 <strong>[DEFAULT, owner to confirm with counsel]</strong>, and (b) the actual
+proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for
+that claim, and in any event shall not exceed £250,000.</p>
 <p>11.3 <strong>Excluded loss.</strong> Velstrian shall not be liable for any indirect loss, consequential loss, loss
 of profits or loss of business, however arising.</p>
 <p>11.4 <strong>No indemnity for fines.</strong> Velstrian gives no indemnity to the Customer for regulatory fines or
@@ -358,7 +383,7 @@ disagree in future, they are the same facts and one of them is stale — reconci
 <tr>
 <td>7</td>
 <td><strong>Anthropic (Claude)</strong></td>
-<td><strong>AI reasoning on CUSTOMER-FACING surfaces</strong> — the buyer-side tender pre-read (<code>buy_preread</code>), bid evaluation judging (<code>bid_eval_judge</code>) and assistant intent classification (<code>copilot_intent</code>) — <strong>as well as</strong> internal founders-portal reasoning surfaces (the <code>portal_*</code> surfaces). All routing is set in <code>api/app/services/ai/surface_policy.py</code> (<code>DEFAULT_MODELS</code>)</td>
+<td><strong>AI reasoning on CUSTOMER-FACING surfaces</strong> — the buyer-side tender pre-read (<code>buy_preread</code>), the only customer-facing Anthropic surface with a production caller (corrected 2026-10-24 against the code: <code>bid_eval_judge</code> is used only by the offline evaluation harness under <code>api/app/services/eval/</code>, and <code>copilot_intent</code> has no caller since the Copilot router was removed in <code>0bcf3fc02</code>, so neither has a production caller, measured in the AI audit of 2026-10-24) — <strong>as well as</strong> internal founders-portal reasoning surfaces (the <code>portal_*</code> surfaces). All routing is set in <code>api/app/services/ai/surface_policy.py</code> (<code>DEFAULT_MODELS</code>)</td>
 <td>Organisation profile; free-text prompts and documents the Customer submits; <strong>the supplier&#39;s full tender/bid response text</strong>, which routinely contains named personnel, CVs, referees and subcontractors</td>
 <td>Contracting entity <strong>Anthropic Ireland, Limited</strong> for EEA/Swiss/UK customers (Anthropic, PBC elsewhere). SCCs (Modules Two and Three) + UK IDTA, automatically incorporated into Anthropic&#39;s Commercial Terms. <strong>Not</strong> DPF-certified. <strong>The processing region cannot be pinned on the Anthropic API — the available inference regions are <code>global</code> (default) or <code>us</code> only, with no UK or EU option</strong> — so this is treated as a restricted transfer. By default Anthropic does not train on inputs or outputs sent via the API, and it deletes inputs and outputs from its backend within 30 days (up to 2 years for policy violations). A zero retention addendum is not required: Anthropic&#39;s standard API terms delete inputs and outputs within 30 days and do not train on them by default. <strong>Owner verified 2026-10-23 (D314):</strong> the production Anthropic Claude API account is an active, billing enabled paid account, not a free tier, so the statement that Customer data is not used for model training is confirmed accurate. <strong>Restricted international transfer mechanism:</strong> Velstrian relies on the UK International Data Transfer Agreement (IDTA) or the EU Standard Contractual Clauses (SCCs) with the UK Addendum.</td>
 </tr>
@@ -480,6 +505,8 @@ requirements and evaluations, social value commitments, evidence, reports).</li>
 IP-derived approximate location).</li>
 <li>Free-text and documents submitted for AI processing.</li>
 </ul>
+<p><strong>Shared Examples (clause 1.4):</strong> not part of this Schedule. They are processed by Velstrian as an
+independent Controller, and only if the Customer&#39;s administrator has turned example sharing on.</p>
 <p><strong>Special-category / criminal-offence data (owner decision D314, 2026-10-23):</strong> the Services are
 designed for business to business tender and proposal management. The Customer is strictly
 prohibited from uploading Special Category Data (Article 9 UK GDPR) or Criminal Offence Data
@@ -559,7 +586,7 @@ complete and usable; the owner must still ratify each before execution.</p>
 <li>Public-data-lookup characterisation of Companies House. <strong>Resolved D314, 2026-10-23:</strong> removed from Schedule 1 (not a Sub-Processor).</li>
 <li>Special-category / criminal-offence data stance (Schedule 2). <strong>Resolved D314, 2026-10-23:</strong> strictly prohibited, CVs and referee names limited to standard professional or business contact information.</li>
 <li>Data-protection contact address on the velstrian.com domain (clause 0).</li>
-<li>Liability caps (clause 11). <strong>Resolved D314, 2026-10-23:</strong> general cap the greater of 12 months of fees or £2,500, a separate data protection cap the lesser of £250,000 or the insurance proceeds actually recovered, no indemnity for regulatory fines. Counsel review still pending.</li>
+<li>Liability caps (clause 11). <strong>Resolved D314 and D319, 2026-10-23:</strong> general cap the greater of 12 months of fees or £2,500, a separate data protection cap the greater of a floor and the insurance proceeds actually recovered, never more than £250,000, no indemnity for regulatory fines. <strong>Still open:</strong> the floor figure (default: the greater of 12 months of fees or £2,500), for the owner to confirm with counsel. Counsel review still pending.</li>
 <li>Billing record retention (clause 9.2). <strong>Resolved D314, 2026-10-23:</strong> 7 years.</li>
 </ol>
 <hr>
@@ -578,4 +605,13 @@ complete and usable; the owner must still ratify each before execution.</p>
 <li><strong>Azure Document Intelligence (item 11).</strong> Dormant / Optional, activated only if specific document intelligence features are enabled by the customer.</li>
 <li><strong>Schedule 2.</strong> Special Category Data and Criminal Offence Data strictly prohibited, CVs and referee names limited to standard professional or business contact information.</li>
 </ul>
+<h2>Update 2026-10-23 (R285-TRUST-LIABILITY-CAP-01, owner decision D319)</h2>
+<p>The data protection and security cap in clause 11.2 now has a fixed floor. Old: &quot;the lesser of (a) £250,000, or (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim&quot;. New: &quot;the greater of (a) a floor equal to the greater of the total subscription fees paid by the Customer in the 12 months preceding the claim or £2,500, and (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim, and in any event shall not exceed £250,000&quot;. The floor figure is a working default marked <code>[DEFAULT, owner to confirm with counsel]</code>. The cap can no longer fall to £0 when the insurer pays nothing. The Terms of Service section 6 carries the same wording with the default figure. The DRAFT banner stays.</p>
+<h2>Update 2026-10-25 (R285-P3-AI-CUSTOMER-CONTENT-POLICY-01, owner decisions D344, D415, D422)</h2>
+<p>Clauses 1.4 to 1.6 and 3.4 added, and a note in Schedule 2, to match the AI learning choices the owner
+approved in the product (copy version d416-2026-10-25). Shared examples make Velstrian an independent
+Controller for those examples only. Pooled counts carry no text. Customer content is never used to improve
+the service by default. Draft wording, the legal role and the lawful basis are for the owner to confirm
+with counsel. The DRAFT banner stays. The rendered copy at <code>status/docs/legal/dpa.html</code> in the website
+repo is regenerated by <code>status/render-legal-docs.mjs</code>.</p>
 </main></body></html>

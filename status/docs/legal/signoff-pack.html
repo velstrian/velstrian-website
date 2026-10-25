@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>DPA and liability sign off pack</title><link rel="stylesheet" href="legal.css"></head>
-<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md</code> at <code>15c756f92</code> plus uncommitted edits. A read only copy, edit the source, not this page.</p>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md</code> at <code>de5d9aef7</code>. A read only copy, edit the source, not this page.</p>
 <h1>DPA and liability cap sign off pack</h1>
 <p><strong>DRAFT FOR COUNSEL REVIEW AND OWNER SIGN OFF. Not legal advice.</strong></p>
-<p>Rows: R285-TRUST-DPA-FINAL-01 (the DPA) and R285-TRUST-LIABILITY-CAP-01 (the liability cap). Date: 2026-10-23, version 2 (owner decisions D314 applied the same day).
+<p>Rows: R285-TRUST-DPA-FINAL-01 (the DPA) and R285-TRUST-LIABILITY-CAP-01 (the liability cap). Date: 2026-10-23, version 3 (owner decisions D314 and D319 applied the same day).
 Company: Velstrian Systems Ltd (company number 17076461, ICO registration C1901492), trading as Velstrian Tenderworks. Contact: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>.</p>
 <h2>1. What exactly is being signed</h2>
 <p>Two separate things. Both are owner decisions with legal advice.</p>
-<p><strong>A. The Data Processing Agreement.</strong> File: <code>docs/legal/data-processing-agreement.md</code>, last changed in commit <code>{{SHA_PLATFORM_1}}</code>. It is the single DPA that Velstrian offers to business customers who ask for an Article 28 contract (the Terms, section 7, tell customers to request it from <a href="mailto:legal@velstrian.com">legal@velstrian.com</a>). It has 12 clauses and three schedules. Schedule 1 lists <strong>17 sub-processors</strong> (14 in part A, 3 customer connected in part B). It still carries the DRAFT banner, because the owner review is not finished and counsel has not reviewed it.</p>
+<p><strong>A. The Data Processing Agreement.</strong> File: <code>docs/legal/data-processing-agreement.md</code>, last changed in commit <code>ae2709f29</code> (D319, before that <code>9280aada4</code> for D314). It is the single DPA that Velstrian offers to business customers who ask for an Article 28 contract (the Terms, section 7, tell customers to request it from <a href="mailto:legal@velstrian.com">legal@velstrian.com</a>). It has 12 clauses and three schedules. Schedule 1 lists <strong>17 sub-processors</strong> (14 in part A, 3 customer connected in part B). It still carries the DRAFT banner, because the owner review is not finished and counsel has not reviewed it.</p>
 <p>What signing means in practice: the owner ratifies the remaining defaults (section 3 below), removes the DRAFT banner after counsel agrees, and from then on Velstrian can send the DPA to customers who ask for it. Customers then countersign (Schedule 3).</p>
-<p><strong>B. The liability caps in the Terms.</strong> File: <code>crowagent-website/astro/src/content/legal/terms.md</code>, section 6, changed in website commit <code>{{SHA_WEBSITE_1}}</code> (local only, not deployed). Owner decision D314, option B, insurance backed:</p>
+<p><strong>B. The liability caps in the Terms.</strong> File: <code>crowagent-website/astro/src/content/legal/terms.md</code>, section 6, changed in website commit <code>da6b99d7</code> (D314) and <code>f48383fd</code> (D319), local only, not deployed. Owner decision D314, option B, insurance backed, with the data protection floor added by D319:</p>
 <ul>
 <li>General commercial breach, bugs and service interruptions: &quot;the greater of (a) the total subscription fees paid by you in the 12 months preceding the claim, or (b) £2,500&quot; (was £1,000).</li>
-<li>Data protection and security breaches under the DPA, a separate and distinct cap: &quot;the lesser of (a) £250,000, or (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim&quot;.</li>
+<li>Data protection and security breaches under the DPA, a separate and distinct cap (D319): &quot;the greater of (a) a floor equal to the greater of the total subscription fees paid by you in the 12 months preceding the claim or £2,500, and (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim, and in any event not more than £250,000&quot;. The floor figure is a working default for counsel to set. It is marked <code>[DEFAULT, owner to confirm with counsel]</code> in the DPA and written plainly in the Terms, because the public legal pages carry no draft markers.</li>
 <li>Indirect loss, consequential loss, loss of profits and loss of business stay excluded (the Terms also keep loss of revenue, loss of data and business interruption, as before).</li>
 <li>No indemnity to the customer for regulatory fines or penalties imposed by any supervisory authority, for example the ICO.</li>
 <li>Not limited: death or personal injury caused by negligence, fraud or fraudulent misrepresentation, anything that cannot be limited by law.</li>
@@ -29,7 +29,7 @@ Company: Velstrian Systems Ltd (company number 17076461, ICO registration C19014
 </ul>
 <h2>3. The 12 open points and how each was resolved</h2>
 <ol>
-<li><strong>Liability floor of £1,000.</strong> RESOLVED by the owner, D314: option B. General cap the greater of 12 months of fees or £2,500. A separate data protection cap, the lesser of £250,000 or the insurance proceeds actually recovered. <strong>For counsel:</strong> the reasonableness test under the Unfair Contract Terms Act 1977, and the drafting risk in section 4.</li>
+<li><strong>Liability floor of £1,000.</strong> RESOLVED by the owner, D314: option B. General cap the greater of 12 months of fees or £2,500. A separate data protection cap, now (D319) the greater of a floor and the insurance proceeds actually recovered, never more than £250,000. <strong>For counsel:</strong> the reasonableness test under the Unfair Contract Terms Act 1977, and the floor figure in section 4.</li>
 <li><strong>Breach notice of 72 hours (DPA clause 8.2).</strong> RESOLVED, D314: &quot;without undue delay and, in any event, within 48 hours after becoming aware of a personal data breach&quot;. The incident procedure and the security policy now say the same (section 7).</li>
 <li><strong>The cap and data protection claims.</strong> RESOLVED, D314: a separate DPA cap (clause 11.2), and the DPA and the Terms now say plainly there is no indemnity for regulatory fines or penalties. <strong>For counsel:</strong> whether the caps are right for claims a data subject can bring directly, which clause 11.5 leaves unlimited only where the law requires.</li>
 <li><strong>AI providers and transfers (Schedule 1 items 7 and 8).</strong> RESOLVED, D314: the owner verified the production Gemini API and the Anthropic Claude API are on active, billing enabled paid accounts, so the no training statements are accurate. Both rows now state the transfer mechanism: the UK IDTA or the EU SCCs with the UK Addendum. <strong>For counsel:</strong> whether the Data Privacy Framework should be relied on for any entry (clause 7.3 default says IDTA for all).</li>
@@ -44,8 +44,8 @@ Company: Velstrian Systems Ltd (company number 17076461, ICO registration C19014
 </ol>
 <h2>4. Points for counsel</h2>
 <ol>
-<li><strong>The data protection cap can fall to £0. Drafting risk identified by the driver.</strong> The cap is the LESSER of £250,000 or the insurance proceeds actually recovered. If the insurer pays nothing (a declined claim, a policy exclusion, or no policy in force), the effective cap is £0. A customer&#39;s counsel may resist that, and it may not pass the reasonableness test in the Unfair Contract Terms Act 1977. The common alternative is &quot;the greater of a fixed floor and the insurance proceeds&quot;. Counsel to advise whether to keep the owner&#39;s wording or add a floor.</li>
-<li><strong>The insurer check comes first.</strong> R285-OWNER-INSURER-01 must confirm that a Cyber / Technology Professional Indemnity policy is in force, and its limit, before this cap is relied on in any customer contract.</li>
+<li><strong>Confirm the floor figure on the data protection cap.</strong> The £0 risk is RESOLVED by owner decision D319. Under D314 the cap was the LESSER of £250,000 or the insurance proceeds actually recovered, so it fell to £0 if the insurer paid nothing. D319 changes it to the greater of a fixed floor and the insurance proceeds, and in any event not more than £250,000. The working default floor is the general cap formula, the greater of the total subscription fees paid in the 12 months preceding the claim or £2,500. <strong>For counsel:</strong> confirm or change that floor figure, and confirm the clause passes the reasonableness test in the Unfair Contract Terms Act 1977.</li>
+<li><strong>The insurer check comes first.</strong> R285-OWNER-INSURER-01 must confirm that a Cyber / Technology Professional Indemnity policy is in force, and its limit, before the cap above the floor is relied on in any customer contract. Owner decision D320: quotes from two brokers found through BIBA, nothing bought until a RULE 0-G cost statement is approved.</li>
 <li><strong>&quot;Loss of data&quot; in the Terms exclusion list.</strong> The Terms keep the existing exclusion of loss of data alongside the new data protection cap. Counsel to confirm the two read together as intended, so that a data protection claim is governed by the separate cap rather than excluded outright.</li>
 <li><strong>Caps applied once.</strong> The DPA clause 11 and the Terms section 6 state the same caps. Counsel to confirm the wording makes them one set of caps, not two cumulative sets.</li>
 <li><strong>UCTA reasonableness of the general cap</strong> (£2,500 floor) for small and mid size customers, public and private.</li>
@@ -69,7 +69,7 @@ Company: Velstrian Systems Ltd (company number 17076461, ICO registration C19014
 <tr>
 <td>B</td>
 <td>Keep the general cap and add a separate, higher cap for data protection breaches, insurance backed</td>
-<td><strong>Chosen by the owner, D314, 2026-10-23.</strong> General cap floor raised to £2,500. Data protection cap the lesser of £250,000 or insurance proceeds recovered</td>
+<td><strong>Chosen by the owner, D314, 2026-10-23.</strong> General cap floor raised to £2,500. Data protection cap the greater of a floor and the insurance proceeds recovered, never more than £250,000 (floor added by D319)</td>
 </tr>
 <tr>
 <td>C</td>
@@ -80,18 +80,160 @@ Company: Velstrian Systems Ltd (company number 17076461, ICO registration C19014
 <h2>6. What happens after approval (the owner&#39;s remaining steps)</h2>
 <ol>
 <li>Confirm cover with the insurer (R285-OWNER-INSURER-01).</li>
-<li>Send this pack and the two source files to the lawyer. Ask for a written yes or a mark up, in particular on section 4.</li>
+<li>Send this pack and the two source files to the lawyer. Ask for a written yes or a mark up, in particular on section 4 and the floor figure.</li>
 <li>Reply with the approval text in section 7.</li>
 <li>The driver then removes the DRAFT banner (if counsel agrees) and publishes the DPA page update. The Terms change reaches the live website only on a separate owner approval. No push or deploy happens without its own approval and cost statement.</li>
 </ol>
 <h2>7. One line approval text for the owner to reply with</h2>
 <p>Choose one line, then send it.</p>
 <ul>
-<li><strong>After counsel has agreed the DPA and the caps as drafted:</strong> <code>Approved: DPA at {{SHA_PLATFORM_1}} and Terms at {{SHA_WEBSITE_1}} as drafted under D314: 48 hour breach notice, general cap the greater of 12 months of fees or £2,500, data protection cap the lesser of £250,000 or insurance proceeds recovered, no fines indemnity, billing records 7 years, 17 sub-processors, insurer cover confirmed, counsel review attached.</code></li>
-<li><strong>After counsel marks changes:</strong> <code>Approved: DPA at {{SHA_PLATFORM_1}} and Terms at {{SHA_WEBSITE_1}} with counsel&#39;s changes applied (including any floor on the data protection cap), insurer cover confirmed, counsel review attached.</code></li>
+<li><strong>After counsel has agreed the DPA and the caps as drafted:</strong> <code>Approved: DPA at ae2709f29 and Terms at f48383fd as drafted under D314 and D319: 48 hour breach notice, general cap the greater of 12 months of fees or £2,500, data protection cap the greater of the floor (12 months of fees or £2,500) and insurance proceeds recovered, never more than £250,000, no fines indemnity, billing records 7 years, 17 sub-processors, insurer cover confirmed, counsel review attached.</code></li>
+<li><strong>After counsel marks changes:</strong> <code>Approved: DPA at ae2709f29 and Terms at f48383fd with counsel&#39;s changes applied (including the floor figure on the data protection cap), insurer cover confirmed, counsel review attached.</code></li>
 </ul>
 <p>Until one of these arrives, the DPA stays a draft, the Terms change stays local, and both rows stay OPEN, owner review in progress.</p>
 <h2>8. Method</h2>
 <p>Read the full DPA, the return and deletion policy, the superseded return and deletion stub (it states no retention), the app pages <code>/sub-processors</code>, <code>/retention</code> and <code>/dpa</code>, the Terms, privacy and security pages in the website repo, the AI provider data map, the incident response procedure, the information security policy, the ISMS scope and the Package 8 draft. Searched <code>docs/legal</code>, <code>docs/trust</code>, <code>docs/compliance</code>, <code>web/app/(legal)</code> and the website content for every processor breach notice period and every 6 year billing statement. Tests and gates are listed in section 9.</p>
-<p>{{CHANGES}}</p>
+<h2>9. Changes made 2026-10-23</h2>
+<h3>Changes made, D319 (data protection cap floor)</h3>
+<p>Owner decision D319, given in chat on 2026-10-23. Platform commit <code>ae2709f29</code>, website commit <code>f48383fd</code>. Nothing pushed or deployed.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>docs/legal/data-processing-agreement.md</code></td>
+<td>Clause 11.2 and its note, owner action item 13 (floor figure still open), a new D319 update note. The floor carries <code>[DEFAULT, owner to confirm with counsel]</code>. DRAFT banner kept</td>
+</tr>
+<tr>
+<td><code>crowagent-website/astro/src/content/legal/terms.md</code></td>
+<td>Section 6: the cap definition list, the at a glance table row and the full clause text. The summary card (&quot;with a separate data protection cap&quot;) names no formula and is unchanged</td>
+</tr>
+<tr>
+<td><code>docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md</code></td>
+<td>This pack, version 3</td>
+</tr>
+<tr>
+<td><code>docs/release-2.8.5/legal/PACKAGE-8-INTL-DPA-ADDENDA-DRAFT-2026-10-23.md</code></td>
+<td>Summary table liability row</td>
+</tr>
+<tr>
+<td><code>docs/release-2.8.5/OWNER-ACTIONS-GUIDE-2026-10-23.md</code></td>
+<td>Section 2 rewritten for D320: two brokers through BIBA, the request text, no purchase before the RULE 0-G cost statement</td>
+</tr>
+<tr>
+<td><code>RELEASE-2.8.5-TRACKER.md</code></td>
+<td>R285-OWNER-INSURER-01 note for D320, verdict stays OPEN</td>
+</tr>
+<tr>
+<td><code>docs/release-2.8.4/scope/DECISION-GATES.md</code></td>
+<td>D318, D319, D320</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>DPA 11.2.</strong> Old: &quot;shall not exceed the lesser of (a) £250,000, or (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim&quot;. New: &quot;shall not exceed the greater of (a) a floor equal to the greater of the total subscription fees paid by the Customer in the 12 months preceding the claim or £2,500 [DEFAULT, owner to confirm with counsel], and (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim, and in any event shall not exceed £250,000&quot;.</li>
+<li><strong>Terms section 6.</strong> Old: &quot;capped at the lesser of (a) £250,000, or (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim&quot;. New: &quot;capped at the greater of (a) a floor equal to the greater of the total subscription fees paid by you in the 12 months preceding the claim or £2,500, and (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim, and in any event not more than £250,000&quot; (the full clause text ends &quot;shall not exceed £250,000&quot;). Table row: &quot;Separate cap: the greater of a floor (12 months&#39; fees paid, or £2,500, whichever is more) and the insurance proceeds actually recovered for that claim, never more than £250,000&quot;. The website legal pages carry no draft markers, so the default figure is written plainly and counsel may change it.</li>
+</ul>
+<h3>Changes made, D314</h3>
+<p>Owner decision D314. Platform commit <code>9280aada4</code> (parent <code>85d20ce02</code>), then this pack and the tracker rows in a second platform commit. Website commit <code>da6b99d7</code> (parent <code>bcb61e2d</code>). Review pointers, created without switching branch: <code>review/dpa-signoff-2026-10-23</code> in both repos. Nothing pushed or deployed.</p>
+<p><code>git diff --stat 85d20ce02..9280aada4</code> (platform, first commit): 9 files changed, 199 insertions, 47 deletions. <code>git diff --stat bcb61e2d..da6b99d7</code> (website): 3 files changed, 9 insertions, 8 deletions.</p>
+<h3>Platform</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>docs/legal/data-processing-agreement.md</code></td>
+<td>Clauses 8.2, 9.2, 11 and 12.2, Schedule 1 items 7, 8, 11 and 15 to 17, the Companies House note, Schedule 2, the owner action list (items 5 and 8 to 11 resolved, 13 and 14 added), both earlier count notes and a new D314 update note. DRAFT banner kept</td>
+</tr>
+<tr>
+<td><code>docs/legal/data-return-and-deletion-policy.md</code></td>
+<td>Clause 5.1 and owner item 7: billing records 6 years to 7 years</td>
+</tr>
+<tr>
+<td><code>docs/compliance/INCIDENT-RESPONSE-PROCEDURE.md</code></td>
+<td>Customer notice row (where Velstrian is processor): 72 hours to 48 hours</td>
+</tr>
+<tr>
+<td><code>docs/compliance/INFORMATION-SECURITY-POLICY.md</code></td>
+<td>Customer notice sentence: 72 hours to 48 hours</td>
+</tr>
+<tr>
+<td><code>docs/release-2.8.5/legal/PACKAGE-8-INTL-DPA-ADDENDA-DRAFT-2026-10-23.md</code></td>
+<td>Summary table: 18 to 17 entries, breach notice, retention, liability. Decision D-A marked decided. Counsel question 5 resolved</td>
+</tr>
+<tr>
+<td><code>docs/trust/AI-PROVIDER-DATA-MAP-2026-10-22.md</code></td>
+<td>Owner check closed for production (section 6), new section 9 recording the owner verification</td>
+</tr>
+<tr>
+<td><code>docs/release-2.8.4/scope/DECISION-GATES.md</code></td>
+<td>D314 added</td>
+</tr>
+<tr>
+<td><code>web/app/(legal)/sub-processors/page.tsx</code></td>
+<td>Azure Document Intelligence row added as dormant and optional (the page had 16 sub-processor rows against the DPA&#39;s 17). Last updated date 23 October 2026</td>
+</tr>
+<tr>
+<td><code>web/__tests__/legal/sub-processors-match-dpa-schedule-1.test.tsx</code></td>
+<td>New guard: DPA Schedule 1 numbered 1 to N, the page shows the same number of sub-processors, Companies House in neither (but still on the page as a public register), Azure in both as dormant. Red proved 4 of 4, then green</td>
+</tr>
+</tbody></table>
+<h3>Website (local only, not deployed)</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>astro/src/content/legal/terms.md</code></td>
+<td>Section 6: the summary card, the cap definition list, the at a glance table and the full clause text. <code>lastUpdated</code> 2026-03-01 to 2026-10-23</td>
+</tr>
+<tr>
+<td><code>astro/src/content/legal/privacy.md</code></td>
+<td>Processor list: Azure Document Intelligence added as dormant and optional</td>
+</tr>
+<tr>
+<td><code>astro/src/content/legal/security.md</code></td>
+<td>Both processor lists: Azure Document Intelligence added as dormant and optional</td>
+</tr>
+</tbody></table>
+<h3>Key clauses, old to new</h3>
+<ul>
+<li><strong>DPA 8.2 breach notice.</strong> Old: &quot;without undue delay, and in any event within [DEFAULT, owner to confirm] 72 hours of becoming aware of a personal data breach&quot;. New: &quot;without undue delay and, in any event, within 48 hours after becoming aware of a personal data breach&quot;.</li>
+<li><strong>DPA 11 liability.</strong> Old 11.1: &quot;subject to the limitations and exclusions of liability set out in the Agreement&quot;. New: 11.1 general cap &quot;the greater of (a) the total subscription fees paid by the Customer in the 12 months preceding the claim, or (b) £2,500&quot;. 11.2 separate data protection and security cap &quot;the lesser of (a) £250,000, or (b) the actual proceeds recovered under Velstrian&#39;s Cyber / Technology Professional Indemnity insurance policy for that claim&quot;. 11.3 no liability for indirect loss, consequential loss, loss of profits or loss of business. 11.4 no indemnity for regulatory fines or penalties imposed by any supervisory authority (for example the ICO). 11.5 death or personal injury by negligence, fraud and anything that cannot be limited by law are not limited. 11.6 term (was 11.2, the survival list now includes clause 11). The old 11.3 is folded into 11.5.</li>
+<li><strong>Terms section 6.</strong> Old: &quot;the greater of (a) the total subscription fees paid by you in the 12 months preceding the claim, or (b) £1,000&quot;. New: the same with £2,500, for general commercial breach, bugs and service interruptions, plus the separate data protection cap, &quot;loss of business&quot; added to the exclusions, and the no fines indemnity sentence. The carve outs are unchanged.</li>
+<li><strong>DPA 9.2 and policy 5.1 retention.</strong> Old: policy &quot;[DEFAULT, owner to confirm] 6 years&quot;, DPA silent. New: billing, invoicing and tax records 7 years in both.</li>
+<li><strong>Schedule 1 item 7 (Anthropic) and item 8 (Gemini).</strong> Added the owner verified paid account statement and &quot;Restricted international transfer mechanism: Velstrian relies on the UK International Data Transfer Agreement (IDTA) or the EU Standard Contractual Clauses (SCCs) with the UK Addendum&quot;. The Gemini &quot;[OWNER/LEGAL TO CONFIRM]&quot; paid tier marker is removed.</li>
+<li><strong>Schedule 1 item 11 (Azure).</strong> Old: &quot;Not enabled today ... [OWNER TO CONFIRM: list Azure now or add it only when OCR is enabled ...]&quot;. New: &quot;Dormant / Optional, activated only if specific document intelligence features are enabled by the customer&quot;. The region stays to be confirmed when it is enabled.</li>
+<li><strong>Schedule 1 Companies House.</strong> Old item 15 removed, Slack, Microsoft Teams and Google Drive renumbered 15 to 17. Schedule 1 goes from 18 to 17 entries.</li>
+<li><strong>Schedule 2.</strong> Old: &quot;[DEFAULT, owner to confirm] the Services are NOT intended to process Art. 9 special-category or Art. 10 criminal-offence data, and Customers are instructed not to submit it&quot;. New: &quot;the Services are designed for business to business tender and proposal management. The Customer is strictly prohibited from uploading Special Category Data (Article 9 UK GDPR) or Criminal Offence Data (Article 10 UK GDPR) to the Services. CVs and referee names included in bid submissions must be limited to standard professional or business contact information.&quot; Clause 12.2 now says Schedule 2 prohibits this data (was &quot;except as permitted under Schedule 2&quot;).</li>
+</ul>
+<h3>Wording adapted to house style (meaning unchanged)</h3>
+<ul>
+<li>The owner&#39;s Azure phrase was written with an em dash. It reads &quot;Dormant / Optional, activated only if ...&quot; with a comma, as instructed.</li>
+<li>The owner&#39;s &quot;liability capped at the LESSER of&quot; is written as &quot;shall not exceed the lesser of&quot; in the DPA, to match the clause&#39;s existing form, and &quot;capped at the lesser of&quot; in the Terms.</li>
+<li>&quot;General commercial breach, bugs and service interruptions&quot; reads &quot;general commercial breach, including defects in the Services (bugs) and service interruptions&quot; in the DPA.</li>
+</ul>
+<h3>Places checked and deliberately left</h3>
+<ul>
+<li><code>web/app/(legal)/dpa/page.tsx</code> already said 48 hours. <code>web/app/(legal)/retention/page.tsx</code> already said 7 years. The website privacy page already says &quot;Up to 7 years&quot; for financial records.</li>
+<li>The 72 hour statements in <code>INCIDENT-RESPONSE-PROCEDURE.md</code> (ICO notification row and the clock text), <code>ISMS-SCOPE-AND-CONTEXT.md</code> line 75 and both security evidence packs in <code>docs/trust/</code> describe the ICO clock where Velstrian is controller, which stays 72 hours by law. <code>INCIDENT-RESPONSE-PROCEDURE.md</code> line 22 and the ISMS NC-02 row record what the contract said when the non conformity was raised, so they are history.</li>
+<li><code>docs/legal/DPA_TEMPLATE.md</code> is a superseded stub. <code>docs/legal/data-return-and-deletion.md</code> is a superseded stub and states no retention period.</li>
+<li><code>docs/release-2.8.5/OWNER-ACTIONS-GUIDE-2026-10-23.md</code> asks these questions of the owner and is left as the record of the question.</li>
+</ul>
+<h3>Verification</h3>
+<ul>
+<li>Platform vitest, one invocation of 9 files, 80 tests passed: the new guard, <code>residency-regions</code>, and the legal prose, banned punctuation, sentence case, brand names, retired concepts, raw design value and Sentry identity guards that read the page.</li>
+<li><code>tsc --noEmit</code> on <code>tsconfig.json</code> and on <code>tsconfig.tests.json</code>: both exit 0.</li>
+<li><code>arch-lint-web</code> and <code>arch-lint-responsive</code>: PASSED.</li>
+<li>Website <code>npm run build</code>: 43 gates run, 43 passed, 0 failed.</li>
+</ul>
 </main></body></html>

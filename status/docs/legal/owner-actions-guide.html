@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Owner actions guide</title><link rel="stylesheet" href="legal.css"></head>
-<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/release-2.8.5/OWNER-ACTIONS-GUIDE-2026-10-23.md</code> at <code>c05839e8a</code>. A read only copy, edit the source, not this page.</p>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/release-2.8.5/OWNER-ACTIONS-GUIDE-2026-10-23.md</code> at <code>ee2ad1746</code>. A read only copy, edit the source, not this page.</p>
 <h1>Owner actions guide, step by step</h1>
 <p>Date: 2026-10-23. For the owner of Velstrian Systems Ltd, trading as Velstrian Tenderworks. Contact: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>.</p>
 <p>This guide covers every action that only you can do. Each section says why it matters, how long it takes, the steps (each step says where to go and what to click or read), and the exact short message to send back to Claude. Nothing here is legal advice.</p>
@@ -10,6 +10,83 @@
 <li>Nothing here needs a push or a deploy. Where something would cost money, the section says so and waits for your yes.</li>
 <li>If a screen looks different from what is described, stop and reply with a screenshot description. Dashboards change, and Claude will adjust the steps.</li>
 </ul>
+<h2>Tonight: switch the app and portal to velstrian.com</h2>
+<p>Rows R285-REBRAND-06-APP-DOMAIN-MIGRATION and R285-REBRAND-15-APP-AND-PORTAL-HOSTS. Your instruction, 2026-10-23: one staging deployment and one production deployment with all the fixes, app and portal on velstrian.com on both, no full test certification for this release, the website stays where it is until you say so.</p>
+<p>What this does for customers: the app opens at <code>app.velstrian.com</code> and the team portal at <code>portal.velstrian.com</code>. The old <code>app.crowagent.ai</code> and <code>portal.crowagent.ai</code> keep working side by side, so nobody is locked out. Every link to the public website (privacy, terms, pricing, contact, blog) keeps pointing at <code>crowagent.ai</code>, because <code>velstrian.com</code> has no website on it yet (it shows a Cloudflare error page, 522, measured tonight).</p>
+<p>Do the steps in this order. Step 4 (steps 1 to 3 are already done) must be finished BEFORE Claude&#39;s driver runs the production deployment, because the new build already names <code>app.velstrian.com</code> in its emails and portal links. Steps 5b to 9 happen in the same evening, straight after the deployment. Each step says how to check it. Reply with the short message at the end when you are done.</p>
+<h3>Before the production deployment</h3>
+<p><strong>Steps 1 to 3 are DONE (measured by the driver 2026-10-23 about 23:50).</strong> <code>app.velstrian.com</code> is attached to <code>crowagent-platform-web</code> (Production) and <code>portal.velstrian.com</code> to <code>crowagent-portal</code> (Production). The Cloudflare records <code>app</code> and <code>portal</code> in <code>velstrian.com</code> are CNAMEs to <code>cname.vercel-dns.com</code>, proxied, the same as the staging hosts (Vercel shows &quot;Proxy Detected&quot;). <code>https://app.velstrian.com/</code> answers 307 to <code>/login</code> and <code>/login</code> answers 200 (still the old build&#39;s copy until the deployment). <code>https://portal.velstrian.com/</code> answers 302 to the Cloudflare Access login, so the portal Access application already covers the new host. Nothing to do here.</p>
+<p><strong>4. Vercel: three production environment values on <code>velstrian-platform-web</code> (5 minutes).</strong>
+Team <code>velstrian</code>, project <code>velstrian-platform-web</code> (renamed tonight from <code>crowagent-platform-web</code>), Settings, Environment Variables, filter Production. Edit each, set the value, save. Values starting <code>NEXT_PUBLIC_</code> are fixed into the build, so they must be saved before the deployment, not after.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>New value</th>
+<th>Today</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>NEXT_PUBLIC_APP_URL</code></td>
+<td><code>https://app.velstrian.com</code></td>
+<td><code>https://app.crowagent.ai</code></td>
+</tr>
+<tr>
+<td><code>NEXT_PUBLIC_API_URL</code></td>
+<td><code>https://api.velstrian.com</code></td>
+<td>hidden (a Sensitive value, nobody can read it back)</td>
+</tr>
+<tr>
+<td><code>RAILWAY_API_URL</code></td>
+<td><code>https://api.velstrian.com</code></td>
+<td>the Railway generated host</td>
+</tr>
+</tbody></table>
+<ul>
+<li>The portal project needs NO change: its production environment has no app, portal or API address set, so the new build uses the velstrian.com hosts by itself.</li>
+<li>Check: the three rows show the new values (or &quot;Sensitive&quot; for the API one) with &quot;Production&quot; ticked.</li>
+</ul>
+<p>Then reply: <strong>&quot;Web production env set.&quot;</strong> The driver will then ask you for the sha line and run the production deployment.</p>
+<h3>Straight after the production deployment</h3>
+<p><strong>5. Railway: nothing to do (measured tonight, names and fingerprints only, no value printed).</strong> <code>velstrian-api</code> and <code>velstrian-worker</code> have NO <code>APP_BASE_URL</code> set, so the new build uses its own default, which is now <code>https://app.velstrian.com</code>. Their <code>ALLOWED_ORIGINS</code> is ignored in production, where the code allows both domains. <code>velstrian-api-staging</code> already has <code>APP_BASE_URL</code> set to <code>https://staging-app.velstrian.com</code>.</p>
+<p><strong>5b. Portal GitHub organisation (1 minute).</strong> The portal&#39;s saved GitHub organisation is still <code>crowagent</code> (production integration store, last 4 characters <code>gent</code>, saved 8 Oct). The org is now <code>velstrian</code>. <code>https://portal.velstrian.com</code>, Settings, Integrations, GitHub, Organisation: type <code>velstrian</code>, Save, then Test. Staging has no saved value, so it uses <code>velstrian</code> from the code. Check: the portal Code page lists the <code>velstrian-platform</code> repository.</p>
+<p><strong>6. Supabase production Auth (10 minutes).</strong> supabase.com, project <code>gujtuecjzfiqsdnzgyvo</code>.</p>
+<ul>
+<li>Authentication, URL Configuration. Site URL: <code>https://app.velstrian.com</code>. Redirect URLs: ADD <code>https://app.velstrian.com/**</code>. Keep every <code>app.crowagent.ai</code> entry.</li>
+<li>Authentication, Sign In / Providers (or Passkeys / WebAuthn, wherever the Relying Party is shown). Relying Party ID: <code>app.velstrian.com</code>. Origins: <code>https://app.velstrian.com</code>.</li>
+<li>Authentication, Hooks, Send Email hook. URL: <code>https://app.velstrian.com/api/auth/send-email-hook</code>. Keep the same secret.</li>
+<li>Check: from <code>https://app.velstrian.com/login</code> ask for a password reset to your own platform account. The email arrives with the Velstrian look and the link opens on <code>app.velstrian.com</code>.</li>
+<li>Passkeys: the one production passkey and the one portal passkey were made on the old address and stop working on the new one. Sign in with password, then add a new passkey in Settings, Security. The four production users get the new link from you.</li>
+</ul>
+<p>Staging is already done for this part. Measured tonight on staging (<code>ipgrnwvfnumgvnxkpxsc</code>): Site URL is <code>https://staging-app.velstrian.com</code>, and the redirect list accepts <code>staging-app.velstrian.com</code> (it also still accepts <code>staging-app.crowagent.ai</code>, see step 10).</p>
+<p><strong>7. Stripe live webhook: point it at the new host (2 minutes).</strong>
+Production Stripe runs in LIVE mode (measured tonight: account &quot;Velstrian Tenderworks&quot;, live webhook <code>we_1UBjWL...</code> to <code>https://app.crowagent.ai/api/stripe/webhooks</code>). dashboard.stripe.com, live mode, Developers, Webhooks, open that endpoint, Update details, change the URL to <code>https://app.velstrian.com/api/stripe/webhooks</code>. Keep everything else.</p>
+<ul>
+<li>This is simpler than the second endpoint in the runbook: the signing secret stays the same, so no secret has to be copied anywhere. Both hosts serve the same app, so payments keep working either way.</li>
+<li>Check: in the endpoint page, &quot;Send test webhook&quot;, event <code>invoice.paid</code>. It shows a 2xx response.</li>
+<li>Staging needs nothing: its sandbox webhook already points at <code>https://staging-app.velstrian.com/api/stripe/webhooks</code>.</li>
+</ul>
+<p><strong>8. PostHog authorised URLs (2 minutes).</strong>
+Claude tried and could not do this: the PostHog key it uses lacks the <code>project:write</code> permission. eu.posthog.com, project &quot;Velstrian&quot;, Settings, Project, Authorized URLs: add <code>https://app.velstrian.com</code>. Session replay, Authorized domains: add <code>https://app.velstrian.com</code>. Keep the old ones.</p>
+<ul>
+<li>Check: both lists show the new address.</li>
+</ul>
+<p><strong>9. Brevo inbound (1 minute, probably nothing to do).</strong>
+The tender intake mailbox was never switched on (<code>inbound.crowagent.ai</code> and <code>inbound.velstrian.com</code> both have no mail record, measured tonight). Brevo, Transactional, Settings, Webhooks, Inbound: if an inbound webhook exists, change its host to <code>https://api.velstrian.com</code> with the same path. If none exists, nothing to do.</p>
+<p>The pg_cron jobs (the ten timed emails and reports) are switched by the driver with one SQL line after the deployment, not by you.</p>
+<h3>Retire the old crowagent.ai staging hosts (your instruction, 2026-10-23)</h3>
+<p>Staging already runs on <code>staging-app.velstrian.com</code> and <code>staging-portal.velstrian.com</code>. Four old staging hosts are still attached. Claude cannot remove Vercel domains (its write guard refuses it), so this is yours.</p>
+<p><strong>10. Vercel: turn the four old staging hosts into redirects (5 minutes). Recommended over deleting them,</strong> because old walk notes, emails and bookmarks still carry these links and a redirect keeps them working.</p>
+<ul>
+<li>Project <code>velstrian-platform-web</code>, Settings, Domains. For <code>staging-app.crowagent.ai</code> and for <code>staging.app.crowagent.ai</code>: Edit, Redirect to <code>staging-app.velstrian.com</code>, status 308, save.</li>
+<li>Project <code>velstrian-portal</code>, Settings, Domains. For <code>staging-portal.crowagent.ai</code> and for <code>staging.portal.crowagent.ai</code>: Edit, Redirect to <code>staging-portal.velstrian.com</code>, status 308, save.</li>
+<li>If you prefer them gone: Remove on each, then in Cloudflare (<code>crowagent.ai</code> zone, DNS) delete the four records <code>staging-app</code>, <code>staging.app</code>, <code>staging-portal</code>, <code>staging.portal</code>, and in Zero Trust, Access, Applications delete the old staging application (or remove the old staging host from it if it shares one application with the velstrian host). Only delete DNS AFTER removing the Vercel domains.</li>
+<li>Supabase staging (<code>ipgrnwvfnumgvnxkpxsc</code>), Authentication, URL Configuration: remove the <code>staging-app.crowagent.ai</code> redirect entry.</li>
+<li>Staging passkeys: 3 passkeys exist on staging, all made between 2 Sep and 11 Oct on the old host, all on test accounts. Each stops working on the velstrian host. Whoever uses those test accounts signs in with password and adds a new passkey.</li>
+<li>Check: <code>https://staging-app.crowagent.ai/login</code> answers 308 and lands on <code>https://staging-app.velstrian.com/login</code>.</li>
+</ul>
+<p>Reply: <strong>&quot;After deploy steps 5b to 9 done, old staging hosts redirected.&quot;</strong></p>
+<hr>
 <h2>Order of work</h2>
 <table>
 <thead>
@@ -28,9 +105,9 @@
 </tr>
 <tr>
 <td>2</td>
-<td>Ask your insurer what cover you hold</td>
-<td>15 minutes</td>
-<td>Needed for section 1 decision 3</td>
+<td>Get insurance quotes from two brokers (D320)</td>
+<td>20 minutes, then a few days</td>
+<td>Before the cap above the floor is relied on in a customer contract</td>
 </tr>
 <tr>
 <td>3</td>
@@ -112,21 +189,30 @@
 <p>Claude then updates the DPA text, the retention page and the policy to match, keeps both tracker rows OPEN until a lawyer or you remove the DRAFT banner, and asks for a separate yes before touching the Terms.</p>
 <p>If you later want the formal approval line, the exact wording is in section 6 of the pack. Do not send that line unless a lawyer has actually reviewed, because it says &quot;counsel review attached&quot;.</p>
 <hr>
-<h2>2. Ask your insurer what cover you hold</h2>
-<p>Row: R285-OWNER-INSURER-01 (new).</p>
+<h2>2. Get insurance quotes from two brokers (D320)</h2>
+<p>Row: R285-OWNER-INSURER-01 (OPEN, owner action). Owner decision D320, 2026-10-23.</p>
 <h3>Why it matters</h3>
-<p>Option B in section 1 only helps if your insurance would pay for a data protection claim. Claude does not know your policy, and the repo holds no policy document.</p>
+<p>The data protection cap in the Terms and the DPA is the greater of a floor and the insurance proceeds actually recovered, never more than £250,000 (D314 and D319). The floor (default: 12 months of fees or £2,500) holds even with no policy. The amount above the floor only exists if a Cyber or Technology Professional Indemnity policy pays out. Customers and their lawyers will also ask what cover you hold.</p>
 <h3>Time</h3>
-<p>15 minutes by phone or email.</p>
+<p>About 20 minutes to find two brokers and send the request, then a few days for quotes.</p>
 <h3>Steps</h3>
 <ol>
-<li>Find your business insurance policy schedule (the page with the cover limits). It may be in your email or with the broker who arranged it.</li>
-<li>Call or email the insurer or broker. Say: &quot;We are a small software company. Please confirm in writing: (a) do we hold professional indemnity cover and what is the limit, (b) do we hold cyber or data breach cover and what is the limit, (c) are claims from customers in the US, Canada, Australia, New Zealand and Singapore covered or excluded, (d) what name is on the policy, and can it be changed to Velstrian Systems Ltd?&quot;</li>
-<li>If you hold no cyber cover, ask for a quote. Do not buy anything yet. A purchase is a recurring cost and needs the RULE 0-G cost statement first (what it costs per month and year, who can cancel it, and what breaks without it). Claude will write that statement once you have a quote.</li>
-<li>Save the written answer in your own records. Do not put the policy number in chat.</li>
+<li>Open BIBA &quot;Find Insurance&quot; (<a href="https://www.biba.org.uk/find-insurance/">https://www.biba.org.uk/find-insurance/</a>) and pick two brokers who list technology, cyber or professional indemnity for small businesses.</li>
+<li>Send each broker the same request. Copy this and fill the turnover band:<ul>
+<li>Company: Velstrian Systems Ltd, company number 17076461, registered in England and Wales, trading as Velstrian Tenderworks.</li>
+<li>Business: business to business software as a service. Small and mid size organisations use it to find public and private contracts and write bids from their own documents, and buyers use it to compare replies. Customers in the UK, with interest from the EU and other countries.</li>
+<li>Turnover band: [owner to fill, for example under £100,000 in the first year].</li>
+<li>Data handled: customers&#39; bid and tender documents, business contact details (names, work emails, phone numbers), CVs limited to professional details, billing details held by Stripe (no card numbers held by us). No special category or criminal offence data, the Terms prohibit it. Data stored in Ireland (EU), with named AI providers processing under contract.</li>
+<li>Our contract terms: general liability cap the greater of 12 months of fees or £2,500. Separate data protection and security cap the greater of a floor (default 12 months of fees or £2,500, counsel may change it) and the insurance proceeds actually recovered, never more than £250,000. No indemnity for regulatory fines.</li>
+<li>Covers wanted, with a quote for each and for a combined package: Cyber (data breach response, forensics, notification, third party claims), Technology Professional Indemnity (claims that the software or its AI drafted output caused a customer a loss), Public and Products Liability, and Directors and Officers (D&amp;O). Employers&#39; Liability is needed by law once staff are employed, so ask for a price now and buy it when the first employee starts.</li>
+<li>Ask for: a limit of at least £250,000 on Cyber and on Tech PI, and what a higher limit costs. Whether claims from customers outside the UK are covered. How the policy treats regulatory fines. The yearly premium, the excess, and whether it can be paid monthly.</li>
+</ul>
+</li>
+<li>Do not buy anything. A policy is a recurring cost. Send the quotes to Claude, and the driver writes the RULE 0-G cost statement (cost per month and per year, who can cancel it, what breaks without it) for your approval first.</li>
+<li>Keep the quotes in your own records. Do not put a policy or quote reference in chat.</li>
 </ol>
 <h3>What to reply to Claude</h3>
-<p><code>Insurer: PI limit GBP [x], cyber limit GBP [x or none], overseas claims [covered / excluded / unknown], name change [done / needed].</code></p>
+<p><code>Quotes: broker 1 [name], Cyber GBP [x]/yr limit GBP [x], Tech PI GBP [x]/yr limit GBP [x], PL GBP [x]/yr, D&amp;O GBP [x]/yr, EL GBP [x]/yr. Broker 2 [same]. Overseas claims [covered / excluded].</code></p>
 <hr>
 <h2>3. ICO name change call</h2>
 <p>Row: R285-REBRAND-13-REGISTRATIONS-AND-LISTINGS. Full detail: <code>docs/release-2.8.5/legal/ICO-NAME-CHANGE-PACK-2026-10-23.md</code>.</p>
@@ -339,4 +425,28 @@ If git refuses and mentions changes, stop and send Claude the message. Do not ad
 </ol>
 <h3>What to reply to Claude</h3>
 <p><code>C:\c deleted.</code></p>
+<hr>
+<h2>10. Better Stack: name the status monitors by role and add the new app host</h2>
+<p>Rows: R285-FILED-BETTERSTACK-MONITOR-LABELS-01 and R285-REBRAND-15-STATUS-PAGE.</p>
+<h3>Why it matters</h3>
+<p>The public status page at <a href="https://status.velstrian.com">https://status.velstrian.com</a> still shows two monitors named <code>app.crowagent.ai</code> and <code>crowagent.ai</code>. A customer reading it sees the old name. Naming the monitors by what they are (&quot;Velstrian app&quot;, &quot;Website&quot;) means the labels never need changing again when a domain moves.</p>
+<h3>Why Claude cannot do it</h3>
+<p>Checked on 2026-10-23: there is no Better Stack connection in Claude&#39;s tools, no Better Stack command line tool on this machine, and no Better Stack API token in any of the repository&#39;s env files (checked by key name only). The monitors are dashboard settings, not code.</p>
+<h3>Time</h3>
+<p>About 10 minutes.</p>
+<h3>Do not start the second half until</h3>
+<p>The app answers at <code>https://app.velstrian.com</code> after tonight&#39;s switch (section &quot;Tonight&quot; at the top of this guide). The rename in steps 1 to 4 can be done now.</p>
+<h3>Steps</h3>
+<ol>
+<li>Open <a href="https://uptime.betterstack.com">https://uptime.betterstack.com</a> and sign in.</li>
+<li>Open Monitors. Open the monitor named <code>app.crowagent.ai</code>, choose Configure, change the name (Pronounceable name) to <code>Velstrian app</code>, keep the URL as it is, and save.</li>
+<li>Open the monitor named <code>crowagent.ai</code>, change its name to <code>Website</code>, keep the URL as it is (the website still lives at crowagent.ai until you release it), and save.</li>
+<li>Open Status pages, choose the status.velstrian.com page, open its Monitors or Structure section and check both monitors show their new names. Save if it asks.</li>
+<li>After the app switch: create a new monitor for <code>https://app.velstrian.com</code> with the same check settings as the old app monitor, name it <code>Velstrian app</code>, and add it to the status page in the same place. Rename the old one to <code>Velstrian app (old address)</code> and remove it from the status page, but keep it running for a week so nothing is missed.</li>
+<li>Optional, same pattern: add <code>https://portal.velstrian.com</code> as a private monitor (not on the public page), because the portal is internal.</li>
+<li>When you later release the website on velstrian.com, edit the <code>Website</code> monitor URL to <code>https://velstrian.com</code>. The name stays.</li>
+<li>Logo: when the Quantum V artwork is final, upload it in the status page settings under Logo. Use <code>packages/tokens/brand/quantum-v/quantum-v-mark.svg</code> from the repository (or the PNG Claude can generate on request).</li>
+</ol>
+<h3>What to reply to Claude</h3>
+<p><code>Better Stack monitors renamed (Velstrian app, Website), app.velstrian.com monitor added on [date].</code> Claude then measures the public page and closes both rows.</p>
 </main></body></html>
