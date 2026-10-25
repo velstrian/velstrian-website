@@ -209,6 +209,11 @@ export default defineConfig({
   site: 'https://velstrian.com', // R285-REBRAND-VELSTRIAN-01: velstrian.com is the primary origin (owner 2026-10-18)
   markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, rehypeAppOrigin] },
   output: 'static',
+  // R285-WEB-COMPARE-SCREEN-01 (owner report 2026-10-25). The dark floating bar the owner saw over the
+  // product screen captions on :8093 was Astro's own dev toolbar, which only `astro dev` injects. The
+  // owner reviews every change on the dev server before anything ships, so the review must look like
+  // the built site: the toolbar is off. It never reached a built page, so production is unchanged.
+  devToolbar: { enabled: false },
   trailingSlash: 'ignore',
   // HTML whitespace is collapsed under HTML rules, which is what this site has
   // always shipped. Stated rather than inherited, because Astro 7 changed the

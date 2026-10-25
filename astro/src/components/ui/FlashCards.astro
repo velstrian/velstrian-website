@@ -69,8 +69,8 @@ interface Props {
   layout?: 'snap' | 'grid';
   /** Number the cards "Step 1 of 3". Defaults to on in steps mode. */
   numbered?: boolean;
-  /** Columns on a wide screen, grid layout. */
-  columns?: 2 | 3 | 4;
+  /** Columns on a wide screen, grid layout. 1 for a column beside a product screen (ProductScreen moment). */
+  columns?: 1 | 2 | 3 | 4;
 }
 
 const {

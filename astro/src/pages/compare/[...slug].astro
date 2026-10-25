@@ -38,5 +38,5 @@ const d = resolvePriceTokensDeep(page.data, `compare/${page.id}`);
   faq={d.faq}
 >
   <Content />
-  <ProductScreen slot="screen" name={d.screen} />
+  <ProductScreen slot="screen" name={d.screen} moment />
 </Compare>

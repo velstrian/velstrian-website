@@ -632,6 +632,46 @@ main .ea-sec * {
   margin-inline: auto;
 }
 
+/* A screen beside its steps (ProductScreen `moment`, R285-WEB-COMPARE-SCREEN-01).
+   The stage shrinks to the pair instead of drawing a 1280px panel round a
+   350px screen, so there is no empty purple to explain. Side by side from
+   900px, the screen at its own width (the 30rem height cap sets it, as for
+   every capture) and the steps in a reading column. Stacked below that, the
+   screen first. Nothing here moves: the steps advance on the shared device. */
+.ea-stage.ea-screen-one--moment {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.ea-screen-pair {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+  justify-content: center;
+}
+
+.ea-screen-pair > .ea-frame--shot {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.ea-screen-moment {
+  min-width: 0;
+  padding: var(--space-4);
+  border-radius: var(--v3-radius-card);
+  background: var(--ea-well);
+  /* A card inside a panel takes the card-inside-a-card tier. */
+  --blk-pad: var(--blk-pad-sm);
+}
+
+@media (min-width: 900px) {
+  .ea-screen-pair {
+    grid-template-columns: minmax(0, auto) minmax(16rem, 25rem);
+  }
+}
+
 /* ── Product screen ───────────────────────────────────────────────────────── */
 /* The window's edge is lit from the top: a 1px gradient border, light at the
    top fading to a darker hairline at the foot, drawn as a border-box layer

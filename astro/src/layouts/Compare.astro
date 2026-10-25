@@ -271,7 +271,7 @@ if (Astro.slots.has('screen')) {
      (tokens.css), which is what --t-h3 is for; --t-h4 is the card tier and is
      kept for the choose cards and the FAQ rows below. Sizing a body h3 at the
      card tier is the same one-tier slip that styles/prose.css carried. */
-  .cmp-body h3 {
+  .cmp-body h3:not(.cmp-screen *) {
     font-family: var(--font-display);
     font-size: var(--t-h3);
     font-weight: var(--t-w-h3);
@@ -279,23 +279,24 @@ if (Astro.slots.has('screen')) {
     color: var(--c-text);
     margin: 2.25rem 0 1rem;
   }
-  .cmp-body p {
+  .cmp-body p:not(.cmp-screen *) {
     font-size: var(--t-lede);
     line-height: 1.75;
     color: var(--c-text-sub);
     margin: 0 0 1.5rem;
   }
-  /* Not the product screen's own list (ProductScreen, .ea-mini-list), which
-     keeps the shared evidenced styling. */
-  .cmp-body ul:not(.ea-mini-list),
-  .cmp-body ol {
+  /* Not the product screen's own lists (ProductScreen: .ea-mini-list, and the
+     steps beside a screen, R285-WEB-COMPARE-SCREEN-01), which keep the shared
+     evidenced styling. The same exclusion is on the h3 and p rules above. */
+  .cmp-body ul:not(.ea-mini-list, .cmp-screen *),
+  .cmp-body ol:not(.cmp-screen *) {
     font-size: var(--t-lede);
     line-height: 1.7;
     color: var(--c-text-sub);
     margin: 0 0 1.5rem;
     padding-inline-start: 1.4rem;
   }
-  .cmp-body :not(.ea-mini-list) > li {
+  .cmp-body :not(.ea-mini-list) > li:not(.cmp-screen *) {
     margin: 0 0 0.6rem;
   }
   .cmp-body a {

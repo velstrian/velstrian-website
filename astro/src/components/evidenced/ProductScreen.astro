@@ -15,10 +15,23 @@
  * pattern: a Frame whose caption opens "Example data". When the capture lane
  * lands a screen, setting its entry in product-captures.ts swaps the
  * recreation for the image with no change here.
+ *
+ * THE MOMENT (R285-WEB-COMPARE-SCREEN-01, owner report 2026-10-25). On the
+ * comparisons the question list (a portrait capture, 341 by 736) drew as a
+ * 350px column in a 1280px stage, two thirds of the stage empty, and the
+ * drafted answer left about 230px empty either side. With `moment`, a screen
+ * that has steps below sits beside them: the stage shrinks to the pair, and
+ * the steps are the shared FlashCards steps block, so they advance on the
+ * site's one automatic advance (scripts/autoplay.ts): once through, never on
+ * a phone or under reduced motion, with a pause button. Every step says only
+ * what the capture beside it shows. Off by default, because the sector pages
+ * already set their screen beside a list of steps of their own.
  */
 import Stage from './Stage.astro';
 import Frame from './Frame.astro';
 import Plain from './Plain.astro';
+import FlashCards, { type FlashCard } from '../ui/FlashCards.astro';
+import { PRODUCT_NAME_BID } from '../../lib/brand-names';
 
 export type ScreenName =
   | 'find'
@@ -34,13 +47,65 @@ interface Props {
   name: ScreenName;
   /** The frame alone, for a page that sets the screen inside its own card. */
   bare?: boolean;
+  /** Set the screen beside its steps, where it has some (see THE MOMENT). */
+  moment?: boolean;
 }
-const { name, bare = false } = Astro.props;
+const { name, bare = false, moment = false } = Astro.props;
+
+const MOMENTS: Partial<Record<ScreenName, { label: string; cards: FlashCard[] }>> = {
+  'answer-list': {
+    label: 'How each question gets answered',
+    cards: [
+      {
+        id: 'answer-list-drafted',
+        title: 'Every question drafted',
+        summary: `${PRODUCT_NAME_BID} drafts each question from your answer library, your past bids or the tender itself, inside its word limit.`,
+      },
+      {
+        id: 'answer-list-source',
+        title: 'Each draft shows its source',
+        summary: 'A tag says what each draft used. Where nothing backs it up, it says No source found, so you know what still needs proof.',
+      },
+      {
+        id: 'answer-list-approved',
+        title: 'A person approves it',
+        summary: 'Nothing is final until someone on your team edits it and approves it. Then the question shows Approved.',
+      },
+    ],
+  },
+  'answer-library': {
+    label: 'How an answer gets drafted',
+    cards: [
+      {
+        id: 'answer-library-draft',
+        title: 'Draft with AI',
+        summary: 'Press Draft with AI and the answer is written from your own documents.',
+      },
+      {
+        id: 'answer-library-limit',
+        title: 'See it fits the limit',
+        summary: 'The word count sits under the answer, so you can see it fits before you send it.',
+      },
+      {
+        id: 'answer-library-approved',
+        title: 'Approve it',
+        summary: 'Your team edits the draft, and the screen records who approved it and when.',
+      },
+    ],
+  },
+};
+const steps = !bare && moment ? MOMENTS[name] : undefined;
+
 const Wrap = bare ? Plain : Stage;
-const wrapProps = bare ? {} : { layout: 'centre' as const, class: 'ea-screen-one' };
+/* The pair is a grid only when there are steps. Otherwise the frame stays the
+   stage's direct child, which every existing .ea-stage__screen > rule needs. */
+const Pair = steps ? 'div' : Fragment;
+const pairProps = steps ? { class: 'ea-screen-pair' } : {};
+const wrapProps = bare ? {} : { layout: 'centre' as const, class: steps ? 'ea-screen-one ea-screen-one--moment' : 'ea-screen-one' };
 ---
 
 <Wrap {...wrapProps}>
+<Pair {...pairProps}>
   {name === 'find' && <Frame title="New today" capture="screen-find" caption="One contract in the morning feed." />}
   {name === 'answer-list' && <Frame title="Your questions" capture="screen-answer-list" caption="Every question drafted." />}
   {name === 'answer-library' && <Frame title="Your answer" capture="screen-answer-library" caption="An answer drafted from your library." />}
@@ -104,4 +169,10 @@ const wrapProps = bare ? {} : { layout: 'centre' as const, class: 'ea-screen-one
       </Frame>
     )
   }
+{steps && (
+  <div class="ea-screen-moment on-light">
+    <FlashCards label={steps.label} cards={steps.cards} mode="steps" layout="grid" columns={1} interval={6000} />
+  </div>
+)}
+</Pair>
 </Wrap>
