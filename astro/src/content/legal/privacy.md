@@ -48,7 +48,7 @@ Velstrian Systems Ltd is registered as a data controller with the UK Information
 
 We may collect and process the following data about you:
 
-- **Account data:** Information that you provide by filling in forms on our site or via our application (app.crowagent.ai). This includes email address, full name, and password hash (via Supabase Auth).
+- **Account data:** Information that you provide by filling in forms on our site or via our application (app.velstrian.com). This includes email address, full name, and password hash (via Supabase Auth).
 - **Sustainability data:** Activity and energy-consumption figures submitted through legacy reporting features, available to existing customers only. This is essential for the Velstrian platform.
 - **Social Value data:** Procurement descriptions, National TOMs selections, and submissions you enter for social value scoring and Velstrian Bid narrative generation.
 - **Usage data:** Details of your visits to our site including, but not limited to, traffic data, location data, weblogs and other communication data, API call counts, feature usage events, timestamps, and subscription plan.
@@ -73,7 +73,7 @@ Under the UK GDPR, the lawful bases we rely on for processing this information a
 - **Contract performance (Article 6(1)(b) UK GDPR):** processing necessary to provide the Velstrian service and fulfil our obligations arising from any contracts entered into between you and us.
 - **Legitimate interests (Article 6(1)(f) UK GDPR):** processing necessary for our legitimate interests, including error monitoring, fraud prevention, service security, and general improvement of the platform.
 - **Consent (Article 6(1)(a) UK GDPR):** processing where you have given clear consent for us to process your personal data for a specific purpose, such as analytics tracking via PostHog or marketing communications.
-- **Legitimate interests for shared examples (Article 6(1)(f) UK GDPR):** only where your administrator has turned on example sharing and a person has chosen to share a draft. See "Helping us improve Velstrian" above.
+- **Legitimate interests for shared examples (Article 6(1)(f) UK GDPR):** only where your administrator has turned on example sharing and a person has ticked the box to share a draft. See "Helping us improve Velstrian" above.
 - **Legal obligation (Article 6(1)(c) UK GDPR):** processing necessary for compliance with a legal obligation to which we are subject, such as financial records retention for HMRC.
 
 ## Helping us improve Velstrian (optional)
@@ -86,11 +86,9 @@ A person on your team can choose to share one draft and its approved answer with
 
 - **Our role:** for a shared example, Velstrian decides how it is used, so we are a data controller for it, as well as your service provider for everything else you do on the platform. Our Data Processing Agreement says the same.
 - **What we do with it:** we use it to test and improve our AI features. We never share it with other customers, and we never use it to train any AI model.
-- **Why we are allowed to:** our lawful basis is legitimate interests (Article 6(1)(f) UK GDPR), which is improving our product, with your administrator's opt in as the safeguard. Nothing is shared unless a person chooses to share that draft.
+- **Why we are allowed to:** our lawful basis is legitimate interests (Article 6(1)(f) UK GDPR). Our interest is making our AI features better. Two safeguards protect you: an administrator in your organisation must turn sharing on, and a person must tick the box to share each example. Nothing is shared without both.
 - **How long we keep it:** until sharing is turned off. When an administrator turns sharing off, every shared example from your organisation is deleted straight away.
 - **Your control:** an administrator can turn sharing off at any time in settings. If a shared example contains your personal data, you can also ask us to delete it, see "Your rights under UK GDPR" above.
-
-<!-- REVIEW: lawful basis for shared examples is the owner's choice with counsel. Recommended: legitimate interests with the administrator opt in. Confirm before publishing. -->
 
 ### Adding your win and loss counts
 
@@ -137,7 +135,7 @@ Supabase EU (Ireland) Railway EU (Netherlands) Vercel UK (London) Cloudflare Edg
 
 - **Supabase (EU, Ireland):** Database, authentication and file storage, in AWS eu-west-1 (Ireland), with daily backups. This is where your account and bid data is stored.
 - **Railway (EU, Netherlands):** Hosting for the Velstrian API and its background worker, in europe-west4 (the Netherlands).
-- **Vercel (UK, London):** Hosting for the web application at app.crowagent.ai, in London (lhr1).
+- **Vercel (UK, London):** Hosting for the web application at app.velstrian.com, in London (lhr1).
 - **Cloudflare (Edge):** DNS, CDN, DDoS protection, and Turnstile bot challenges.
 - **Stripe (US/EU):** Payment processing and subscription management.
 - **PostHog (EU):** Product analytics and session recording.

@@ -1,0 +1,48 @@
+---
+/**
+ * CaptureCrop: one capture shown through its crop region, shared by Frame and
+ * AppWindow so the two never crop a capture two ways.
+ *
+ * The region is data (data/product-captures.ts `view`), so the CSS here never
+ * names a pixel. With a `wide` region the capture is cropped at every width
+ * (the feed card). Without one it is a PHONE ONLY crop (A-437): at 600px and up
+ * the wrapper is `display: contents` and the image draws exactly as an uncropped
+ * capture does, and below 600px only the phone region shows, at a size whose
+ * words can be read (styles/evidenced.css .ea-frame__crop--phone).
+ */
+import type { Capture } from '../../data/product-captures';
+
+interface Props {
+  shot: Capture;
+  /** The image's own class, so the component's uncropped sizing still applies. */
+  imgClass: string;
+}
+const { shot, imgClass } = Astro.props;
+const view = shot.view!;
+const wide = view.wide ?? { x: 0, y: 0, w: shot.width, h: shot.height };
+const style = [
+  `--fw:${shot.width}`,
+  `--fh:${shot.height}`,
+  `--wcx:${wide.x}`,
+  `--wcy:${wide.y}`,
+  `--wcw:${wide.w}`,
+  `--wch:${wide.h}`,
+  `--pcx:${view.phone.x}`,
+  `--pcy:${view.phone.y}`,
+  `--pcw:${view.phone.w}`,
+  `--pch:${view.phone.h}`,
+].join(';');
+---
+
+<div class={view.wide ? 'ea-frame__crop' : 'ea-frame__crop ea-frame__crop--phone'} style={style}>
+  <img
+    class={imgClass}
+    style={`--w0:${shot.width};--h0:${shot.height}`}
+    src={shot.src}
+    width={shot.width}
+    height={shot.height}
+    alt={shot.alt}
+    loading="lazy"
+    decoding="async"
+  />
+</div>

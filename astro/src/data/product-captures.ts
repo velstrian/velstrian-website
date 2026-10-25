@@ -34,8 +34,12 @@ export interface Capture {
    * and up, `phone` below it. Both crop the ONE file at `src`, so a recapture
    * from staging swaps that file and nothing else, as long as the card keeps
    * its layout. Each region ends where whole words end, never mid line.
+   *
+   * `wide` is absent for a phone only crop (PHONE_CROPS below, A-437): at 600px
+   * and up the capture draws whole, exactly as it did before, and only a phone
+   * shows the region.
    */
-  view?: { wide: CropView; phone: CropView };
+  view?: { wide?: CropView; phone: CropView };
   /**
    * Where the picture comes from. Absent or 'real' is a real capture from the
    * demo account on staging. 'figma' is a product design with example data
@@ -206,7 +210,46 @@ const FIGMA: Record<string, Capture> = Object.fromEntries(
   Object.entries(FIGMA_FOR_SLOT).map(([key, slug]) => [key, figma(slug)]),
 );
 
+/*
+ * A-437 (2026-10-25): THE PHONE CROPS FOR WIDE CAPTURES. Measured on the built
+ * site at 390, every wide capture without a harness `view` drew at a quarter to
+ * two fifths of its size (the insights panels on /sectors/ 323px wide for a
+ * 1136px capture, scale 0.28), so its labels and figures were a few pixels tall.
+ * Each region below is the part of the capture a phone shows, in the capture's
+ * CSS pixels, chosen by eye on the capture so it keeps a heading and the words
+ * that make the screen's point, drawn at 0.77 to 0.92 of app size (the feed
+ * card's harness crop draws at 0.87). Where a region cuts a line, the crop's
+ * right edge fades (evidenced.css .ea-frame__crop), the pattern the feed card
+ * already uses. Keyed by FILE, so every slot that shows the file gets it, and a
+ * harness `view` always wins. A recapture that changes a screen's layout must
+ * re-check its region here. Desktop is untouched: these have no `wide` region.
+ */
+const PHONE_CROPS: Record<string, CropView> = {
+  // Bid outcomes: the heading, its one line description and the chart with its stage names.
+  'bid-insights.webp': { x: 0, y: 0, w: 360, h: 345 },
+  // Delivery tracking: the summary line and the first two promises with their progress.
+  'delivery-after-win.webp': { x: 0, y: 0, w: 360, h: 505 },
+  // The drafted answer, its word count and who drafted and approved it.
+  'answer-from-library.webp': { x: 0, y: 0, w: 400, h: 479 },
+  // The drafted answer and the line that says no source was recorded.
+  'refusal-no-source.webp': { x: 0, y: 0, w: 400, h: 481 },
+  // Due within 14 days: the first three deadlines.
+  'action-centre.webp': { x: 0, y: 0, w: 400, h: 402 },
+  // The question list: each question with its draft state, its tags and its word count.
+  'questions-screen.webp': { x: 250, y: 130, w: 350, h: 440 },
+  // The evaluation: the tender, the tabs and the first bid's quality score.
+  'buy-evaluation.webp': { x: 0, y: 0, w: 400, h: 523 },
+  // All bids: the first three bids with sector, value and status.
+  'bid-list.webp': { x: 0, y: 320, w: 420, h: 385 },
+};
+
+function withPhoneCrop(c: Capture | null): Capture | null {
+  if (!c || c.view || c.source === 'figma') return c;
+  const phone = PHONE_CROPS[c.src.split('/').pop() ?? ''];
+  return phone ? { ...c, view: { phone } } : c;
+}
+
 /** Every slot key: a real capture where one exists, then a Figma design, otherwise null. */
 export const CAPTURES: Record<string, Capture | null> = Object.fromEntries(
-  Object.keys({ ...HAND, ...REAL }).map((key) => [key, REAL[key] ?? FIGMA[key] ?? HAND[key] ?? null]),
+  Object.keys({ ...HAND, ...REAL }).map((key) => [key, withPhoneCrop(REAL[key] ?? FIGMA[key] ?? HAND[key] ?? null)]),
 );

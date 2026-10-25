@@ -644,8 +644,13 @@ main .ea-sec * {
   margin-inline: auto;
 }
 
+/* minmax(0, auto) on a phone too (A-437): a phone crop states its region's
+   width, 400px for the drafted answer, and an implicit auto track sized to
+   that drew the screen past a 390 viewport. The track may now shrink to the
+   column, as it already does on the wide layout below. */
 .ea-screen-pair {
   display: grid;
+  grid-template-columns: minmax(0, auto);
   gap: var(--space-6);
   align-items: center;
   justify-content: center;
@@ -801,7 +806,7 @@ main .ea-sec * {
   background: var(--ea-raised);
 }
 
-/* A cropped capture (Frame with a `view`, R285-WEB-REVIEW-2026-10-22 item 2).
+/* A cropped capture (Frame or AppWindow with a `view`, R285-WEB-REVIEW-2026-10-22 item 2).
    The frame takes the full screen width, the window shows the region at the
    region's own proportions, and the one image is scaled so the region fills
    it. Below 600px the phone region applies (the inline style sets the --w and
@@ -841,7 +846,7 @@ main .ea-sec * {
   mask-composite: intersect;
 }
 
-.ea-frame__crop > .ea-frame__shot {
+.ea-frame__crop:not(.ea-frame__crop--phone) > .ea-frame__shot {
   position: absolute;
   width: calc(var(--fw) / var(--cw) * 100%);
   max-width: none;
@@ -852,12 +857,40 @@ main .ea-sec * {
   top: calc(var(--cy) / var(--ch) * -100%);
 }
 
+/* A PHONE ONLY crop (A-437, CaptureCrop.astro). At 600px and up the wrapper
+   draws no box of its own, so the capture sizes exactly as an uncropped one
+   does and no desktop layout moves. Below 600px it becomes the crop box above.
+   Its width is the region's own width, capped at the column, so a fit-content
+   frame or stage still has a width to fit (the image inside is absolute and
+   gives none), and the region draws at most at app size. */
+.ea-frame__crop--phone {
+  display: contents;
+}
+
 @media (max-width: 599px) {
   .ea-frame__crop {
     --cx: var(--pcx);
     --cy: var(--pcy);
     --cw: var(--pcw);
     --ch: var(--pch);
+  }
+
+  .ea-frame__crop--phone {
+    display: block;
+    width: calc(var(--pcw) * 1px);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .ea-frame__crop--phone > :is(.ea-frame__shot, .ea-app__shot) {
+    position: absolute;
+    width: calc(var(--fw) / var(--cw) * 100%);
+    max-width: none;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    left: calc(var(--cx) / var(--cw) * -100%);
+    top: calc(var(--cy) / var(--ch) * -100%);
   }
 }
 

@@ -11,6 +11,7 @@
  */
 import Icon from './Icon.astro';
 import { CAPTURES } from '../../data/product-captures';
+import CaptureCrop from './CaptureCrop.astro';
 import type { IconName } from '../../data/icons';
 
 interface Props {
@@ -30,7 +31,9 @@ const RAIL: IconName[] = ['search', 'pen', 'chat', 'checklist', 'document'];
 
 <figure class="ea-app on-light" data-capture={capture}>
   {
-    shot ? (
+    shot?.view ? (
+      <CaptureCrop shot={shot} imgClass="ea-app__shot" />
+    ) : shot ? (
       <img class="ea-app__shot" src={shot.src} width={shot.width} height={shot.height} alt={shot.alt} loading="lazy" decoding="async" />
     ) : (
       <div class="ea-app__window">
