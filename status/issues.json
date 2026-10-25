@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T05:33:10.742Z",
+  "updated": "2026-10-25T05:34:03.026Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1455,10 +1455,10 @@
       "src": "lane-X-kiro-premium-audit",
       "sev": "P3",
       "title": "Retire stock photos for bespoke art (Kiro BL-01, G-4)",
-      "status": "DECISION",
-      "note": "HELD: owner direction D305 (2026-10-23) keeps the licensed photographs on the 12 existing posts and faces on Audience and Sector pages, designed covers for new posts only. Replacing them reverses a recorded owner decision. Question for the owner: replace the 12 blog photos and the faces with StripeCard style art, yes or no.",
+      "status": "FIXED",
+      "note": "HELD: owner direction D305 (2026-10-23) keeps the licensed photographs on the 12 existing posts and faces on Audience and Sector pages, designed covers for new posts only. Replacing them reverses a recorded owner decision. Question for the owner: replace the 12 blog photos and the faces with StripeCard style art, yes or no. || Owner D424 2026-10-25 amended D305 to a hybrid: real photos kept (12 blog posts, Audience and Sector people, product captures), the 4 clip art resource covers replaced with token built BrandArt panels, every card family rebuilt to the measured Stripe blog pattern. Lane X2 faac5819 and e1011919, 43 of 43 gates, screenshots in audit-screenshots/stripe-pattern-2026-10-25/.",
       "changed": "2026-10-25",
-      "changedAt": "2026-10-25T03:14:10.878Z"
+      "changedAt": "2026-10-25T05:34:03.026Z"
     },
     {
       "id": "A-430",
@@ -1525,10 +1525,10 @@
       "src": "lane-X3",
       "sev": "P3",
       "title": "Sectors index product screen captured blank: a full page screenshot paints the lazy, async decoded capture before Chromium decodes it, readers see it",
-      "status": "OPEN",
-      "note": "Measured on the built site (status 200, landed /sectors/) 2026-10-25. The screen is the real capture screen-insights (product-captures.real.json, bid-insights.webp 2272x1154, file present since 44ef6293). Scrolled into view at 1440 and 390 it paints fully (after-sectors-screen-*.png): opacity 1, img 945x480, naturalWidth 2272. Reproduced the blank: page.screenshot fullPage at 1440x600 without scrolling shows the light window with only the caption (repro-fullpage-600tall-1440.png) although img.complete is true and naturalWidth 2272. Cause: Frame.astro renders the img with loading=lazy and decoding=async, and Chromium does not decode or raster an offscreen image until it nears the viewport, so a one frame full page capture paints the empty well. Awaiting img.decode() on every img before the same capture paints it (repro-fullpage-after-decode-1440.png). Without scrolling and with motion on, every [data-reveal] block below the fold is also blank in a full page capture (repro-fullpage-noscroll-1440.png), the same capture artefact. No product code changed. RECOMMENDATION, for the driver or owner to decide: close as a capture artefact and have audit captures scroll through the page and await img.decode() before a full page shot. Lazy loading stays, it is what keeps the page inside the check-budgets and check-cwv gates.",
+      "status": "CLEARED",
+      "note": "Measured on the built site (status 200, landed /sectors/) 2026-10-25. The screen is the real capture screen-insights (product-captures.real.json, bid-insights.webp 2272x1154, file present since 44ef6293). Scrolled into view at 1440 and 390 it paints fully (after-sectors-screen-*.png): opacity 1, img 945x480, naturalWidth 2272. Reproduced the blank: page.screenshot fullPage at 1440x600 without scrolling shows the light window with only the caption (repro-fullpage-600tall-1440.png) although img.complete is true and naturalWidth 2272. Cause: Frame.astro renders the img with loading=lazy and decoding=async, and Chromium does not decode or raster an offscreen image until it nears the viewport, so a one frame full page capture paints the empty well. Awaiting img.decode() on every img before the same capture paints it (repro-fullpage-after-decode-1440.png). Without scrolling and with motion on, every [data-reveal] block below the fold is also blank in a full page capture (repro-fullpage-noscroll-1440.png), the same capture artefact. No product code changed. RECOMMENDATION, for the driver or owner to decide: close as a capture artefact and have audit captures scroll through the page and await img.decode() before a full page shot. Lazy loading stays, it is what keeps the page inside the check-budgets and check-cwv gates. || Driver 2026-10-25 under D425: capture artefact, not a product defect. Frame.astro lazy loads and decodes async, so a single frame full page screenshot taken without scrolling paints the window empty while the image is loaded (naturalWidth 2272). On the built site the screen paints in full once scrolled into view at 1440 and 390 (lane X3, d70c41ba). Lazy loading stays for check-budgets and check-cwv. Rule for audit captures: scroll the page and await img.decode() before any full page shot.",
       "changed": "2026-10-25",
-      "changedAt": "2026-10-25T05:33:10.627Z"
+      "changedAt": "2026-10-25T05:34:02.894Z"
     },
     {
       "id": "A-437",
