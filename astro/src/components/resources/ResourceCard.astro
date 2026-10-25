@@ -1,74 +1,58 @@
 ---
 /**
- * ResourceCard: one card on /resources/, a type led cover over a label, a
- * title and one line.
+ * ResourceCard: one card on /resources/, on the site's one card (D424, A-434).
  *
- * The cover was a Gemini 3D render per card until 2026-10-22 (a glass book,
- * stacked translucent cards, a tilted grid, rising bars). Owner decision D283
- * replaced the renders with the same type led cover the blog uses, so the hub
- * and the guides read as one set and the cards cost no image bytes. The cover
- * restates the card, so it is hidden from assistive technology and the title
- * below it stays the card's name.
+ * THE STRIPE BLOG PATTERN, measured 2026-10-25
+ * (docs/design/STRIPE-BLOG-PATTERN-2026-10-25.md): a picture to the card's
+ * edges, the category with its accent rule, the title, one summary, Read more.
+ * It is the shared `.ea-tcard--media` in evidenced.css, so it is the same card
+ * as the blog's related posts, and this file sizes nothing.
+ *
+ * THE PICTURE. Until 2026-10-25 each card carried a type led cover (D283): a
+ * flat Iris panel with a small clip art icon (a checklist, a magnifier, bars,
+ * a row of books). Owner decision D424 asks for weak stock style images to be
+ * replaced with bespoke on brand art at the quality of the glossary
+ * "Statutory spotlight" panel, so each card now draws one of those panels
+ * (ui/BrandArt.astro), every colour a token. Decoration only, hidden from
+ * assistive technology: the title below is the card's name.
  */
-import TypeCover from '../blog/TypeCover.astro';
-import type { Cover } from '../blog/covers';
+import BrandArt from '../ui/BrandArt.astro';
+import type { Art } from '../ui/BrandArt.astro';
 
 interface Props {
   href: string;
-  cover: Cover;
+  art: Art;
   label: string;
   title: string;
   description: string;
+  /** The link's words, Read more by default. */
+  more?: string;
 }
 
-const { href, cover, label, title, description } = Astro.props;
+const { href, art, label, title, description, more = 'Read more' } = Astro.props;
+const uid = `res-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 ---
 
-<a href={href} class="ea-card res-card" data-reveal>
-  <div class="res-card__art">
-    <TypeCover cover={cover} flush />
+<a href={href} class="ea-card ea-tcard ea-tcard--media">
+  <div class="ea-tcard__media res-card__art" aria-hidden="true">
+    <BrandArt art={art} uid={uid} />
   </div>
-  <span class="ea-label res-card__label">{label}</span>
-  <h3 class="ea-h3 res-card__title">{title}</h3>
-  <p class="res-card__desc">{description}</p>
+  <div class="ea-tcard__body">
+    <p class="ea-label">{label}</p>
+    <h3 class="ea-h3">{title}</h3>
+    <p>{description}</p>
+    <span class="ea-tcard__more">{more}</span>
+  </div>
 </a>
 
 <style>
-  .res-card {
-    display: grid;
-    grid-row: span 4;
-    grid-template-rows: subgrid;
-    row-gap: var(--space-2);
-    padding: 0 0 var(--blk-pad) 0;
-    text-decoration: none;
-    color: inherit;
-    overflow: hidden;
-  }
-
+  /* The art panel's box: 16:9 like every card picture on the site, the
+     lines and glints in the ink the art is drawn for. */
   .res-card__art {
+    position: relative;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-  }
-
-  .res-card__label {
-    padding-inline: var(--space-6);
-    padding-top: var(--space-4);
-    color: var(--ea-accent-ink);
-  }
-
-  .res-card__title {
-    padding-inline: var(--space-6);
-    margin: 0;
-    color: var(--ea-ink);
-    font-size: var(--t-ea-h3);
-    font-weight: var(--t-w-ea-strong);
-    line-height: 1.3;
-  }
-
-  .res-card__desc {
-    padding-inline: var(--space-6);
-    margin: 0;
-    color: var(--ea-muted);
-    font-size: var(--t-ea-body);
-    line-height: var(--lh-ea-body);
+    color: var(--stage-ink);
+    background: var(--ea-raised);
   }
 </style>

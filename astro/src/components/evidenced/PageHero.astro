@@ -36,9 +36,16 @@ interface Props {
   size?: 'standard' | 'compact';
   /** Id of the band itself, for a page whose anchors point at the hero. */
   bandId?: string;
+  /**
+   * 'start' sets the head on the reading column's left line, the Stripe post
+   * head (D424, A-434): the blog posts. Same h1 treatment, same band, only
+   * the axis moves. Default centred, every other route.
+   */
+  align?: 'centre' | 'start';
 }
 
-const { title, id, label, lead, size = 'standard', bandId, accent } = Astro.props;
+const { title, id, label, lead, size = 'standard', bandId, accent, align = 'centre' } = Astro.props;
+const start = align === 'start';
 const split = accent && title.endsWith(accent) && title.length > accent.length ? title.length - accent.length : -1;
 const hasActions = Astro.slots.has('default');
 const hasNote = Astro.slots.has('note');
@@ -47,7 +54,7 @@ const hasAfter = Astro.slots.has('after');
 ---
 
 <Band tone="light" class={`ea-hero ea-page-hero ea-page-hero--${size}`} labelledby={id} id={bandId}>
-  <div class="ea-wrap ea-hero__head">
+  <div class:list={['ea-wrap ea-hero__head', start && 'ea-hero__head--start']}>
     {hasBefore && <slot name="before" />}
     {label && <p class="ea-label ea-page-hero__label">{label}</p>}
     <h1 class="ea-hero__title" id={id}>{split > 0 ? <>{title.slice(0, split)}<span class="ea-accent">{accent}</span></> : title}</h1>

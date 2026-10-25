@@ -59,6 +59,7 @@ import Band from '../../components/evidenced/Band.astro';
 import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import PostImage from '../../components/blog/PostImage.astro';
+import Byline from '../../components/blog/Byline.astro';
 import '../../styles/evidenced.css';
 import { breadcrumbs } from '../../lib/schema';
 import { SITE } from '../../data/site';
@@ -146,70 +147,78 @@ const schema = [
 
   <Band tone="light" labelledby="bl-title">
     <div class="ea-wrap">
-      <a class="ea-card ea-card--wash feat" href={`/blog/${featured.id}/`} data-reveal>
-        <div class="feat__text">
-          <p class="ea-label feat__kicker">
-            <span class="feat__kicker-lead">Featured</span>
-            <span aria-hidden="true">&middot;</span>
-            <span class="feat__cat">{featured.data.category}</span>
-          </p>
-          <h2 class="ea-h3 feat__title">{featured.data.title}</h2>
-          <p class="feat__desc">{featured.data.description}</p>
-          <p class="ea-label feat__meta">
-            {featured.data.readingTime && (
-              <>
-                <span>{featured.data.readingTime} min read</span>
-                <span aria-hidden="true">&middot;</span>
-              </>
-            )}
-            <time datetime={featured.data.publishDate.toISOString()}>
-              {longDate.format(featured.data.publishDate)}
-            </time>
-          </p>
-        </div>
-        {/* Wrapped rather than given a class: a class handed to a child
-            component cannot be reached by this page's scoped styles (see
-            PostImage.astro). The post's photograph, or its designed cover
-            when none is registered (D305 hybrid). */}
-        <div class="feat__pic">
-          <PostImage
-            slug={featured.id}
-            title={featured.data.title}
-            category={featured.data.category}
-            priority
-            quiet
-            sizes="(min-width: 1000px) 600px, calc(100vw - 5rem)"
-          />
-        </div>
-      </a>
-
-      {/* The guides' own heading, so the cards do not read as children of the
-          featured post. Not drawn: a grid of cards is plainly a list. */}
+      {/* D424 (owner 2026-10-25, A-434): THE STRIPE BLOG PATTERN, measured on
+          stripe.com/blog and written up in
+          docs/design/STRIPE-BLOG-PATTERN-2026-10-25.md. One raised featured
+          card, then every other post as an open row on a four track grid:
+          category and title across three tracks, date and byline in the
+          fourth, the summary and Read more on the left, the picture lifted on
+          the right. Every post, date, category, reading time and picture is
+          kept, and every post is one list, so the register still reads down
+          one edge. The classes live in evidenced.css. */}
       <h2 class="visually-hidden">All guides</h2>
-      <ol class="ea-cards bl-grid">
+      <ol class="ea-postlist bl-list">
+        <li>
+          <a class="ea-card ea-postfeat" href={`/blog/${featured.id}/`} data-reveal>
+            <div class="ea-postfeat__text">
+              <p class="ea-post-cat">Featured guide: {featured.data.category}</p>
+              <h3 class="ea-postfeat__title">{featured.data.title}</h3>
+              {featured.data.author && (
+                <Byline
+                  author={featured.data.author}
+                  role={featured.data.authorRole}
+                  type={featured.data.authorType}
+                />
+              )}
+              <p class="ea-post-excerpt">{featured.data.description}</p>
+              <p class="ea-post-meta">
+                <time datetime={featured.data.publishDate.toISOString()}>
+                  {longDate.format(featured.data.publishDate)}
+                </time>
+                <span aria-hidden="true">&middot;</span>
+                <span>{readMinutes(featured)} min read</span>
+              </p>
+              <span class="ea-tcard__more">Read more</span>
+            </div>
+            {/* The post's photograph, or its designed cover when none is
+                registered (D305 hybrid). */}
+            <div class="ea-postfeat__pic">
+              <PostImage
+                slug={featured.id}
+                title={featured.data.title}
+                category={featured.data.category}
+                priority
+                quiet
+                sizes="(min-width: 1000px) 600px, calc(100vw - 4rem)"
+              />
+            </div>
+          </a>
+        </li>
         {
           rest.map((post) => (
             <li>
-              <a class="ea-card ea-tcard ea-tcard--media" href={`/blog/${post.id}/`}>
-                <div class="ea-tcard__media">
+              <a class="ea-postrow" href={`/blog/${post.id}/`}>
+                <p class="ea-post-cat">{post.data.category}</p>
+                <h3 class="ea-postrow__title">{post.data.title}</h3>
+                <p class="ea-post-meta">
+                  <time datetime={post.data.publishDate.toISOString()}>
+                    {longDate.format(post.data.publishDate)}
+                  </time>
+                  <span aria-hidden="true">&middot;</span>
+                  <span>{readMinutes(post)} min read</span>
+                </p>
+                {post.data.author && (
+                  <Byline author={post.data.author} role={post.data.authorRole} type={post.data.authorType} />
+                )}
+                <p class="ea-post-excerpt">{post.data.description}</p>
+                <span class="ea-tcard__more">Read more</span>
+                <div class="ea-postrow__pic">
                   <PostImage
                     slug={post.id}
                     title={post.data.title}
                     category={post.data.category}
-                    sizes="(min-width: 960px) 400px, (min-width: 600px) 50vw, calc(100vw - 4rem)"
+                    sizes="(min-width: 1100px) 520px, (min-width: 900px) 45vw, calc(100vw - 2.5rem)"
                   />
-                </div>
-                <div class="ea-tcard__body">
-                  <p class="ea-label bl-card__cat">{post.data.category}</p>
-                  <h3 class="ea-h3 bl-card__title ea-clamp-3">{post.data.title}</h3>
-                  <p class="bl-card__desc ea-clamp-3">{post.data.description}</p>
-                  <p class="ea-label ea-tcard__meta bl-card__meta">
-                    <time datetime={post.data.publishDate.toISOString()}>
-                      {longDate.format(post.data.publishDate)}
-                    </time>
-                    <span aria-hidden="true">&middot;</span>
-                    <span>{readMinutes(post)} min read</span>
-                  </p>
                 </div>
               </a>
             </li>
@@ -223,117 +232,25 @@ const schema = [
 </Base>
 
 <style>
-  .feat {
-    position: relative;
-    z-index: 1;
-    padding: var(--blk-pad-lg);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: var(--blk-pad);
-    margin-bottom: var(--sec-gap);
-    text-decoration: none;
-    color: inherit;
+  /* R285-WEB-BLOG-LCP-01, kept through D424. Each post below the featured
+     card skips its rendering until it nears the screen, and `auto` keeps its
+     real height once drawn, so the scrollbar does not jump. Paint containment
+     clips at the item box, so the clip margin gives the lifted picture's deep
+     shadow room. */
+  .bl-list {
+    row-gap: 0;
   }
 
-  .feat__kicker {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.6rem;
-    margin: 0 0 var(--stack-1);
-    color: var(--c-text-muted);
+  /* The space between posts is each item's own padding rather than the list
+     gap, so the lifted picture's deep shadow paints inside the item's box:
+     measured on the built page at 1440, Chromium clipped it at the item's
+     edge under content-visibility even with a clip margin. */
+  .bl-list > li {
+    padding-block-end: var(--post-row-gap);
   }
 
-  .feat__kicker-lead {
-    color: var(--c-text-sub);
-  }
-
-  .feat__title {
-    font-family: var(--font-display);
-    font-size: var(--t-h3);
-    font-weight: var(--t-w-h3);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    color: var(--c-text);
-    margin: 0 0 var(--stack-1);
-  }
-
-  .feat__desc {
-    font-size: var(--t-body);
-    line-height: 1.6;
-    color: var(--c-text-sub);
-    margin: 0 0 var(--stack-2);
-  }
-
-  .feat__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.6rem;
-    margin: 0;
-    color: var(--c-text-muted);
-  }
-
-  /* ── The guides ──────────────────────────────────────────────────────
-     The shared text card grid (`.ea-cards`, `.ea-tcard--media` in
-     evidenced.css): three across, two on a tablet, one on a phone, every card
-     the same height with its date pinned to the foot. */
-  .bl-card__cat {
-    color: var(--ea-accent-ink);
-  }
-
-  .bl-card__title {
-    margin: 0;
-    color: var(--ea-ink);
-    transition: color var(--dur) var(--ease);
-  }
-
-  .bl-card__desc {
-    margin: 0;
-    font-size: var(--t-ea-body);
-    line-height: var(--lh-ea-body);
-  }
-
-  .bl-card__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--ea-muted);
-  }
-
-  /* R285-WEB-BLOG-LCP-01. The first paint on /blog/ waits on style and
-     layout for the whole page: Lighthouse mobile put style and layout at
-     1.9 s of main thread work once the guides became twelve picture cards
-     (628a5df7), against 0.9 s before, and the featured summary (the LCP
-     element) paints only after it. Each card below the fold now skips its
-     rendering until it nears the screen. `auto` in the intrinsic size keeps
-     the card's real height once it has been drawn, so the scrollbar and the
-     layout do not jump on the way back up. The design is unchanged. */
-  .bl-grid > li {
+  .bl-list > li + li {
     content-visibility: auto;
-    contain-intrinsic-size: auto 30rem;
-    /* Paint containment clips at the item box, which would cut the card's
-       shadow. The clip margin gives the shadow room. */
-    overflow-clip-margin: var(--space-10);
+    contain-intrinsic-size: auto 40rem;
   }
-
-  @media (hover: hover) {
-    a.ea-tcard:hover .bl-card__title {
-      color: var(--ea-accent-ink);
-    }
-  }
-
-  /* ── Narrow ─────────────────────────────────────────────────────────────
-     The featured card stacks, and the register drops to a picture beside a
-     two-line block. The date and reading time join the category on one meta
-     line rather than each taking a column of their own, because four columns
-     inside 350px is four columns of two characters. */
-  @media (max-width: 899px) {
-    .feat {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
 </style>

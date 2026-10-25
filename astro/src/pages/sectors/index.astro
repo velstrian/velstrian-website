@@ -38,50 +38,66 @@ const description =
   'See the statute behind your sector. Velstrian helps UK teams find, win and evidence public sector tenders, cited to the regulation that applies to you.';
 const path = '/sectors';
 
+/* `kind` is the card's category on the Stripe card (D424, A-434): whether the
+   work in that sector is public, private or both, in plain words (RULE 0-U). */
 const sectorCards = [
   {
     name: 'Public-Sector Suppliers',
+    kind: 'Public work',
     say: 'PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and makes social value a scored award criterion on in-scope central-government tenders.',
     href: '/bid/',
   },
   {
     name: 'IT Managed Service Providers',
+    kind: 'Public and private work',
     say: 'Public-sector IT and managed-service tenders are scored on PPN 026 social value alongside technical fit and price.',
     href: '/bid/',
   },
   {
     name: 'Professional Services',
+    kind: 'Public and private work',
     say: 'Framework and consultancy tenders reward a consistent, evidenced bid response.',
     href: '/bid/',
   },
   {
     name: 'Construction',
+    kind: 'Public and private work',
     say: 'Public works bids score PPN 026 social value alongside price and technical quality.',
     href: '/sectors/construction/',
   },
   {
     name: 'Facilities Management',
+    kind: 'Public and private work',
     say: 'FM tenders turn on TUPE, mobilisation and evidenced delivery against the published KPIs.',
     href: '/sectors/facilities/',
   },
   {
     name: 'Highways',
+    kind: 'Public work',
     say: 'Term-maintenance and NEC4 contracts are scored on social value alongside price and capability.',
     href: '/sectors/highways/',
   },
   {
     name: 'NHS Suppliers',
+    kind: 'Public work',
     say: 'Framework bids weigh PPN 026 social value alongside a track record of on-time, evidenced delivery.',
     href: '/bid/',
   },
   {
     name: 'Education',
+    kind: 'Public and private work',
     say: 'Public-sector contracts expect a consistent, well-evidenced bid and a track record of on-time delivery.',
     href: '/sectors/education/',
   },
   {
     name: 'Charities',
-    say: 'Grant and tender bids are judged on PPN 026 social value, with reporting that has to stay lean.',
+    kind: 'Contracts and grants',
+    /* A-433 (D424, 2026-10-25). Was "judged on PPN 026 social value". PPN 026
+       binds central government contracting authorities, so it does not judge a
+       charity's grant bid or most of its contracts. What is true for a charity:
+       many contracts and grant funded services ask how you add social value,
+       and a public body may score the answer. */
+    say: 'Many charity contracts and grant funded services ask how you add social value, and public bodies may score your answer. Your reporting still has to stay lean.',
     href: '/bid/',
   },
 ];
@@ -154,6 +170,7 @@ const UPDATED = new Date('2026-10-22');
           sectorCards.map((c) => (
             <li data-reveal>
               <a class="ea-card ea-tcard" href={c.href}>
+                <p class="ea-label">{c.kind}</p>
                 <h3 class="ea-h3">{c.name}</h3>
                 <p>{c.say}</p>
                 <span class="ea-tcard__more">{more(c)}</span>

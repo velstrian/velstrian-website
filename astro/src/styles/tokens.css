@@ -4245,3 +4245,41 @@
     --card-lift: 0px;
   }
 }
+
+/* ============================================================================
+   STRIPE BLOG PATTERN (D424, owner 2026-10-25, A-434)
+   Measured on stripe.com/blog at 1440 and 390, spec in
+   docs/design/STRIPE-BLOG-PATTERN-2026-10-25.md. The pattern only, in
+   Velstrian values: one card system for the blog, its posts and every card
+   family on the site (.ea-tcard and .ea-postlist in evidenced.css).
+     --elev-post-feature  the deep two layer shadow under the featured post and
+                          under every list picture (Stripe 0 50 100 -20 and
+                          0 30 60 -30), Iris tinted like every other shadow here
+     --post-rule-w        the 1px accent rule beside a category and a date
+     --post-avatar        the byline avatar, 48px
+     --post-row-gap       the space between two posts in the list, 112px wide
+     Type takes the site's four heading tiers, never a fifth: a post title in
+     the list and the featured title are --t-h3 (Stripe 38px, ours 30px), the
+     title at the top of a post is --t-page (Stripe 56px, ours 53px), a card
+     title is --t-ea-h3 (check-design-system.js, TYPE SCALE).
+     --lh-post-title      title leading, 48 over 38
+     --lh-post-excerpt    excerpt leading, 28 over 18
+   ============================================================================ */
+:root {
+  --elev-post-feature:
+    0 50px 100px -20px var(--card-shadow-deep),
+    0 30px 60px -30px color-mix(in srgb, var(--c-floor) 45%, transparent);
+  --post-rule-w: 1px;
+  --post-avatar: 48px;
+  --post-row-gap: clamp(var(--space-16), 7vw, 7rem);
+  --lh-post-title: 1.25;
+  --lh-post-excerpt: 1.55;
+}
+
+.band--light,
+.band--light-alt,
+.on-light {
+  --elev-post-feature:
+    0 50px 100px -20px var(--card-shadow-deep),
+    0 30px 60px -30px color-mix(in srgb, var(--c-ink-0) 22%, transparent);
+}

@@ -363,7 +363,14 @@
          mirrored list in scripts/check-render.js was edited in the same pass,
          which is what the note on that line asks for. */
       .h2pf__p, .h2pf__line,
-      .cards__body, .cat__body, .spec__quote
+      .cards__body, .cat__body, .spec__quote,
+      /* D424, 2026-10-25, A-434. The blog post head on the Stripe pattern:
+         trail, category, title, date line, byline and picture on the reading
+         column's left line. The owner chose that pattern for the post head by
+         name, so it is read down one edge like the body under it. Mirrored in
+         scripts/check-render.js in the same pass, both lists. The head
+         itself is PageHero with align="start", .ea-hero__head--start. */
+      .art-head, .ea-hero__head--start
     ) {
     text-align: left;
   }

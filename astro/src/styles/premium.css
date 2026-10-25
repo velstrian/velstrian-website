@@ -254,9 +254,29 @@
    on the blog, About and partners cards. `.eyebrow` stays for the label that
    introduces a section heading, which is what it is for. */
 .ea-bento__copy > .ea-bento__kicker {
+  position: relative;
   justify-self: start;
   margin: 0;
   color: var(--ea-accent-ink);
+  letter-spacing: 0.01em;
+}
+
+/* D424 (A-434): the feature tiles carry the Stripe card anatomy every other
+   card on the site carries (evidenced.css, THE STRIPE BLOG PATTERN): the
+   category's 1px accent rule on the tile's inner left edge, and the card
+   title size on the standard tiles. */
+.ea-bento__copy > .ea-bento__kicker::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.15em;
+  inset-inline-start: calc(-1 * var(--space-4));
+  width: var(--post-rule-w);
+  background: var(--ea-accent);
+}
+
+.ea-bento__tile:not(.ea-bento__tile--lg) .ea-bento__copy > .ea-h3 {
+  font-size: var(--t-ea-h3);
+  line-height: var(--lh-post-title);
 }
 
 /* The product screen sits in the gradient and runs off the tile's edge, the
@@ -670,31 +690,10 @@
   bottom: calc(var(--aurora-foot-h) + var(--space-2));
 }
 
-/* ── RESOURCE COVERS, ONE HUE EACH (P1-7) ─────────────────────────────────────
-   The four covers on /resources/ were one flat indigo. Each now keeps its
-   deep iris ground under the words and takes a light of its own hue from the
-   top right corner, behind its motif, so the row reads as four things rather
-   than one thing four times. White words sit on the deep side (8.16:1 on
-   --c-iris-deep, measured by check-app-contrast.js on the rendered cover). */
-.res-card .res-card__art > .tc {
-  --res-hue: var(--qv-violet);
-  background:
-    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--res-hue) 92%, transparent), transparent 64%),
-    radial-gradient(55% 80% at 100% 100%, color-mix(in srgb, var(--res-hue) 40%, transparent), transparent 70%),
-    var(--tc-bg);
-}
-
-.res-card .res-card__art > .tc[data-family='matrix'] {
-  --res-hue: var(--qv-cyan);
-}
-
-.res-card .res-card__art > .tc[data-family='finder'] {
-  --res-hue: var(--c-sky);
-}
-
-.res-card .res-card__art > .tc[data-family='library'] {
-  --res-hue: var(--qv-iris);
-}
+/* ── RESOURCE COVERS (P1-7) WENT WITH THE COVERS, D424 2026-10-25 ────────────
+   The four /resources/ cards now draw the bespoke art panels of
+   ui/BrandArt.astro, one panel each, so the per cover hue rules that lived
+   here reach nothing and were removed. */
 
 /* ── THE NAV OVER A DARK BAND (P1-2) ──────────────────────────────────────────
    The bar stays OPAQUE (Nav.astro, "THE FILL WENT 72% -> 100%", owner

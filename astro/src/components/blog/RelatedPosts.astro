@@ -38,6 +38,7 @@
  * article headline in Article.astro and this component must never introduce a
  * second one.
  */
+import PostImage from './PostImage.astro';
 import { getCollection } from 'astro:content';
 import Band from '../evidenced/Band.astro';
 import { RELATED_POSTS } from '../../data/blog-related';
@@ -106,10 +107,25 @@ const related = (configured ?? derive()).map((s) => bySlug.get(s)!).filter(Boole
         <ul class:list={['ea-cards', COLS[related.length], 'related__grid']} role="list">
           {related.map((post) => (
             <li data-reveal>
-              <a class="ea-card ea-tcard" href={`/blog/${post.id}/`}>
-                <p class="ea-label">{post.data.category}</p>
-                <h3 class="ea-h3">{post.data.title}</h3>
-                <span class="ea-tcard__more">Read article</span>
+              {/* D424 (A-434): the Stripe card, the same as /resources/:
+                  the post's picture to the card's edges, the category with
+                  its accent rule, the title, the post's own summary, Read
+                  more. */}
+              <a class="ea-card ea-tcard ea-tcard--media" href={`/blog/${post.id}/`}>
+                <div class="ea-tcard__media">
+                  <PostImage
+                    slug={post.id}
+                    title={post.data.title}
+                    category={post.data.category}
+                    sizes="(min-width: 960px) 400px, calc(100vw - 2.5rem)"
+                  />
+                </div>
+                <div class="ea-tcard__body">
+                  <p class="ea-label">{post.data.category}</p>
+                  <h3 class="ea-h3">{post.data.title}</h3>
+                  <p class="ea-clamp-3">{post.data.description}</p>
+                  <span class="ea-tcard__more">Read more</span>
+                </div>
               </a>
             </li>
           ))}

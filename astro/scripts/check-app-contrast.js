@@ -298,7 +298,9 @@ const WASHED = [
   { route: '/buy/', sel: '.ea-bento__tile' },
   { route: '/pricing/', sel: '.ea-card:not(.ea-card--plain)' },
   { route: '/integrations/', sel: '.ea-card:not(.ea-card--plain)' },
-  { route: '/resources/', sel: '.res-card .tc' },
+  /* D424 (A-434): the resource cards dropped their type covers for art panels
+     with no words on them, so the words to measure are the card's own. */
+  { route: '/resources/', sel: '.ea-card:not(.ea-card--plain)' },
 ];
 const PX_FLOOR = 40;
 /* The words go transparent, and so do the element's own ::before and ::after

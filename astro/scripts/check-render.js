@@ -125,33 +125,19 @@ const DIST = process.env.DS_DIST || path.join(__dirname, '..', 'dist');
  * `{ route, selector, reason }`. `selector` is the block's class signature as
  * this gate prints it. A reason that only says "intentional" is not a reason.
  *
- * ONE ENTRY, and the count is stated here rather than in the header because
+ * NO ENTRIES (2026-10-25), and the count is stated here rather than in the header because
  * that is the only place it cannot drift away from the array it describes. It
  * did: the header claimed this list was empty for a day while the entry below
  * sat in it. Every entry is printed on every run, so the number is also
  * checkable against the output rather than only against this line.
  */
-const ALLOW = [
-  {
-    route: '/blog/',
-    selector: '.feat.surface.surface--pad',
-    reason:
-      'The featured post card is TWO COLUMNS — a text column and a 512px picture ' +
-      'column — so its two children sit 256px either side of the card centre by ' +
-      'construction, which is what a column is. Its TEXT is centred and is still ' +
-      'measured: only the child-offset half of the rule is waived. The rule cannot ' +
-      'tell this apart from the defect it was written for (a chip whose 18px logo ' +
-      'column pushed its label off the axis) because both are multi-column grids, ' +
-      'and the difference is whether the columns are the composition or an accident ' +
-      'of it. That is intent, so it is named here rather than guessed at. It carried ' +
-      'surface--read until 2026-08-03 and was skipped wholesale; this is the same ' +
-      'block, now measured for everything except the thing it is allowed to do.',
-    /* 'children' waives ONLY the child-offset half of the rule. Without this the
-       entry would silently stop measuring the card's text alignment too, which
-       is how an exception quietly becomes a hole. */
-    waive: 'children',
-  },
-];
+/* EMPTY SINCE 2026-10-25 (D424, A-434). Its one entry waived the child
+   offset half of the rule for the /blog/ featured card `.feat.surface.surface--pad`.
+   That card left .surface in the version 3 redesign and the gate had reported
+   the entry STALE since. The featured card is now a list item on the Stripe
+   pattern (`.ea-postfeat` in an <ol>), which sits left because it is a list
+   item, so it needs no waiver. */
+const ALLOW = [];
 
 /* ── SITEWIDE ALIGNMENT: WHAT IS ALLOWED TO SIT LEFT ────────────────────────
  *
@@ -527,7 +513,7 @@ const MEASURE = `(() => {
        '.hir__p', '.in__aside', '.compare', '.plans__trial',
        '.lead', '.faq__a', '.sec-faq-a', '.cmp-intro', '.sec-say', '.sec-prose',
        '.gx-def', '.gl-def', '.pg__p', '.reach__body',
-       '.cards__body', '.cat__body', '.spec__quote',
+       '.cards__body', '.cat__body', '.spec__quote', '.art-head', '.ea-hero__head--start',
       ].some((t) => el.querySelector(':scope > ' + t))
     ) continue;
 
@@ -1053,7 +1039,7 @@ const MEASURE_LEFT = `window.__measureLeft = () => {
     '.conn__note, .role__p, .note, .tl__p, .hir__p, .in__aside, .compare, ' +
     '.plans__trial, .lead, .faq__a, .sec-faq-a, .cmp-intro, .sec-say, ' +
     '.sec-prose, .gx-def, .gl-def, .pg__p, .reach__body, ' +
-    '.cards__body, .cat__body, .spec__quote, .h2pf__p, .h2pf__line';
+    '.cards__body, .cat__body, .spec__quote, .h2pf__p, .h2pf__line, .art-head, .ea-hero__head--start';
 
   /* MIRRORS styles/alignment.css RULE 4, ONE BOX ONE AXIS, BY HAND, and the two
      must be edited together like the two constants above. Owner instruction of

@@ -4,19 +4,11 @@ import Action from '../evidenced/Action.astro';
 import ResourceCard from './ResourceCard.astro';
 import { LIVE_SOURCES } from '../../data/site-facts';
 import { RECENT_DAYS } from '../../data/tender-finder';
-import { buildCover } from '../blog/covers';
 
-/* Type led covers (D283). Every tile draws its own motif (D305 lane B,
-   2026-10-23): the guide tile used to carry the blog post's cover, so the same
-   art appeared twice across the site, and /blog/ now shows that post's
-   photograph anyway. Here it draws the weighting bars instead. */
+/* D424 (A-434): each card draws its own bespoke art panel (ui/BrandArt.astro)
+   in place of the type led cover with a clip art icon. One panel each, so no
+   two cards on the hub repeat. */
 const PPN_GUIDE_TITLE = 'PPN 026 social value: how the model is scored';
-const covers = {
-  matrix: buildCover({ line: 'Requirements line by line', kind: 'Free tool', family: 'matrix' }),
-  finder: buildCover({ line: 'Open tenders in one search', kind: 'Free tool', family: 'finder' }),
-  guide: buildCover({ line: 'How social value is scored', kind: 'Social value', family: 'value', motif: 'weighting' }),
-  guides: buildCover({ line: 'Guides you can act on', kind: 'Guides', family: 'library' }),
-};
 ---
 
 <Band tone="light-alt" id="tools" labelledby="tools-title">
@@ -31,36 +23,48 @@ const covers = {
       </p>
     </div>
 
-    <div class="res-grid">
-      <ResourceCard
-        href="/tools/tender-compliance-matrix/"
-        cover={covers.matrix}
-        label="Free tool"
-        title="Tender Compliance Matrix"
-        description="Paste the text of a tender and read back the requirements its wording states, each one shown with the line it came from. Nothing is uploaded and nothing is generated."
-      />
-      <ResourceCard
-        href="/tools/tender-finder/"
-        cover={covers.finder}
-        label="Free tool"
-        title="Tender Finder"
-        description={`Search open notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. Filter by keyword, region, value and closing date, and follow each result to its official source.`}
-      />
-      <ResourceCard
-        href="/blog/ppn-026-social-value-guide/"
-        cover={covers.guide}
-        label="PPN 026"
-        title={PPN_GUIDE_TITLE}
-        description="A minimum 10% social value weighting applies from 1 million pounds inc VAT, rising to 20% at 5 million or above. How the National TOMs measures and National TOMs proxies turn into a defensible, bid-ready score."
-      />
-      <ResourceCard
-        href="/blog/"
-        cover={covers.guides}
-        label="Guides"
-        title="In-depth guides"
-        description="Long-form analysis written in-house. Each article cites the policy note, Act or section it rests on, not somebody else's summary of it."
-      />
-    </div>
+    <ul class="ea-cards ea-cards--4 res-grid" role="list">
+      <li data-reveal>
+        <ResourceCard
+          href="/tools/tender-compliance-matrix/"
+          art="iris-flow"
+          more="Use the free tool"
+          label="Free tool"
+          title="Tender Compliance Matrix"
+          description="Paste the text of a tender and read back the requirements its wording states, each one shown with the line it came from. Nothing is uploaded and nothing is generated."
+        />
+      </li>
+      <li data-reveal>
+        <ResourceCard
+          href="/tools/tender-finder/"
+          art="cyan-aurora"
+          more="Use the free tool"
+          label="Free tool"
+          title="Tender Finder"
+          description={`Search open notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. Filter by keyword, region, value and closing date, and follow each result to its official source.`}
+        />
+      </li>
+      <li data-reveal>
+        <ResourceCard
+          href="/blog/ppn-026-social-value-guide/"
+          art="statutory-horizon"
+          more="Read the guide"
+          label="PPN 026"
+          title={PPN_GUIDE_TITLE}
+          description="A minimum 10% social value weighting applies from 1 million pounds inc VAT, rising to 20% at 5 million or above. How the National TOMs measures and National TOMs proxies turn into a defensible, bid-ready score."
+        />
+      </li>
+      <li data-reveal>
+        <ResourceCard
+          href="/blog/"
+          art="protocol-stream"
+          more="See all guides"
+          label="Guides"
+          title="In-depth guides"
+          description="Long-form analysis written in-house. Each article cites the policy note, Act or section it rests on, not somebody else's summary of it."
+        />
+      </li>
+    </ul>
 
     <div class="res-more" data-reveal>
       <div class="ea-actions">
@@ -77,29 +81,10 @@ const covers = {
     color: var(--ea-accent-ink);
   }
 
+  /* The shared four across card row (.ea-cards--4, evidenced.css): two
+     across below 1100px, one across below 960px. */
   .res-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-5);
-    align-items: stretch;
     margin-top: clamp(var(--space-8), 2rem + 2vw, var(--space-12));
-  }
-
-  :global(.res-card .tc__line) {
-    top: 35cqi;
-    bottom: auto;
-  }
-
-  @media (max-width: 1023px) {
-    .res-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (max-width: 639px) {
-    .res-grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 
   /* The two buttons sit in the shared .ea-actions row, one width each

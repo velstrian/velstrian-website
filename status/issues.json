@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T03:14:11.298Z",
+  "updated": "2026-10-25T04:58:46.067Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1479,6 +1479,46 @@
       "note": "H-02 grid is .ea-hero__sky::before, intentional. Spot check of the unaudited templates and routes at 1440, 768, 390: only cut text is inside deliberate horizontal scrollers (integrations rail, compare, privacy, terms, sources tables). Screens in audit-screenshots/kiro-premium-2026-10-25/spot.",
       "changed": "2026-10-25",
       "changedAt": "2026-10-25T03:14:11.298Z"
+    },
+    {
+      "id": "A-432",
+      "src": "lane-X2-security-txt",
+      "sev": "P3",
+      "title": "security.txt Canonical and Policy lines must name velstrian.com URLs that exist in the built site",
+      "status": "FIXED",
+      "note": "Measured 2026-10-25: source .well-known/security.txt, HEAD and astro/dist already carry Canonical https://velstrian.com/.well-known/security.txt and Policy https://velstrian.com/security (rebrand eb8d7796). No crowagent.ai URL remains. The built /security/ page declares canonical https://velstrian.com/security/, so Policy without the slash names a URL that answers with a redirect. Policy now names /security/ exactly. || Policy now https://velstrian.com/security/, the exact canonical the built /security/ page declares. Canonical stays https://velstrian.com/.well-known/security.txt. No crowagent.ai URL was left in the source, HEAD or dist (measured). copy-cf-config.js RFC 9116 checks (Contact, Expires, Canonical) pass in the 43 of 43 green build.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T04:58:45.686Z"
+    },
+    {
+      "id": "A-433",
+      "src": "lane-X2-D424",
+      "sev": "P2",
+      "title": "Sectors index Charities card says charity bids are judged on PPN 026 social value",
+      "status": "FIXED",
+      "note": "PPN 026 applies to central government contracting authorities, not to charity grants or every charity contract. Correcting to a plain accurate statement, checked against check-facts.js. || Charities card now reads: Many charity contracts and grant funded services ask how you add social value, and public bodies may score your answer. Your reporting still has to stay lean. check-facts.js 10 rules clean. Built /sectors/ checked at 1440, 768, 390 in audit-screenshots/stripe-pattern-2026-10-25 (before-*, after-*, stripe-reference/).",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T04:58:45.912Z"
+    },
+    {
+      "id": "A-434",
+      "src": "lane-X2-D424",
+      "sev": "P2",
+      "title": "D424: blog index, post header and every card family adopt the Stripe blog pattern in Velstrian tokens, hybrid imagery",
+      "status": "FIXED",
+      "note": "Owner decision D424 2026-10-25. Measured spec in docs/design/STRIPE-BLOG-PATTERN-2026-10-25.md, screenshots in audit-screenshots/stripe-pattern-2026-10-25/. || Stripe pattern measured (docs/design/STRIPE-BLOG-PATTERN-2026-10-25.md). Blog index: raised featured card plus open rows on a 4 track grid. Post head: PageHero align=start, byline in the gutter beside the picture. One card anatomy in evidenced.css for every .ea-tcard family (related posts now picture cards, resources, compare, glossary, sectors with plain public or private labels, tools, contact, integrations), StripeCard and bento kickers aligned. Resource clip art covers replaced with token art (ui/BrandArt.astro). npm run build 43 of 43 gates green, then check-render, check-budgets, check-cwv re-run green after a shadow fix. Screens in audit-screenshots/stripe-pattern-2026-10-25 (before-*, after-*, stripe-reference/).",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T04:58:46.065Z"
+    },
+    {
+      "id": "A-435",
+      "src": "lane-X2-D424",
+      "sev": "P2",
+      "title": "Sectors index: IT, Construction and NHS cards say bids are scored on PPN 026, which binds central government only",
+      "status": "OPEN",
+      "note": "Found while correcting A-433 (Charities). /sectors/ IT Managed Service Providers: 'Public-sector IT and managed-service tenders are scored on PPN 026 social value'. Construction: 'Public works bids score PPN 026 social value'. NHS Suppliers: 'Framework bids weigh PPN 026 social value'. PPN 026 applies to central government contracting authorities (in-scope procurements from 1 January 2027), not to every public body, so a council or NHS trust tender may not score it. Not changed: the brief named Charities only. QUESTION FOR THE OWNER: reword these three the same way (public bodies may score social value, central government must under PPN 026)?",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:51:47.130Z"
     }
   ],
   "directives": [
@@ -1548,5 +1588,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 432
+  "nextId": 436
 }

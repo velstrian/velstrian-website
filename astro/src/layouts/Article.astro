@@ -41,6 +41,7 @@ import '../styles/evidenced.css';
 import ShareRow from '../components/blog/ShareRow.astro';
 import RelatedPosts from '../components/blog/RelatedPosts.astro';
 import PostImage from '../components/blog/PostImage.astro';
+import Byline from '../components/blog/Byline.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import { blogPosting, breadcrumbs, faqPage } from '../lib/schema';
 import type { FaqEntry } from '../lib/schema';
@@ -239,7 +240,16 @@ const canonicalUrl = routeUrl(path);
       and below 720px the trail hides (the pill already goes back). The chevron
       is drawn, because JetBrains Mono has no arrow glyph.
     */}
-    <PageHero id="art-title" size="compact" label={category} title={title}>
+    {/* D424 (owner 2026-10-25, A-434): THE STRIPE POST HEAD, measured on a
+        stripe.com post (docs/design/STRIPE-BLOG-PATTERN-2026-10-25.md). The
+        head sits on the reading column's own line, left aligned: the trail,
+        the category with its accent rule, a large title, the date line, then
+        the byline in the gutter beside the picture, as Stripe sets it. It is
+        the shared PageHero set on the start axis (align="start"), so the h1
+        keeps the one page title treatment check-render.js holds every route
+        to. Every word, the trail, the pill, the byline, the dates, the
+        reading time and the picture are kept. */}
+    <PageHero id="art-title" size="compact" align="start" label={category} title={title}>
       <div slot="before" class="art__nav ea-trail">
         <a class="control chip art__pill" href="/blog/">
           <svg
@@ -261,14 +271,8 @@ const canonicalUrl = routeUrl(path);
           <Breadcrumb trail={trail} current={category} />
         </div>
       </div>
-      <p slot="after" class="meta art__meta">
+      <p slot="after" class="ea-post-meta">
         <time datetime={publishedAt.toISOString()}>{dateFormatter.format(publishedAt)}</time>
-        {author && (
-          <>
-            <span aria-hidden="true">&middot;</span>
-            <span>By {author}{authorRole ? `, ${authorRole}` : ''}</span>
-          </>
-        )}
         {readingTime && (
           <>
             <span aria-hidden="true">&middot;</span>
@@ -285,20 +289,26 @@ const canonicalUrl = routeUrl(path);
     </PageHero>
 
     <Band tone="light" class="art__pane">
-      <div class="art__hero">
-        {/* The post's photograph, or its designed cover when none is
-            registered (D305 hybrid). No credit prop: the Pexels Licence needs
-            none and the owner asked for none, provenance stays in
-            blog/PHOTO-CREDITS.md. The social card is the type led cover either
-            way (D305 decision D5). */}
-        <PostImage
-          slug={slug}
-          title={title}
-          category={category}
-          wide
-          priority
-          sizes="(min-width: 1100px) 1104px, calc(100vw - 2.5rem)"
-        />
+      <div class="art-head">
+        {author && (
+          <div class="art-head__by">
+            <Byline author={author} role={authorRole} type={authorType} />
+          </div>
+        )}
+        <div class="art-head__hero">
+          {/* The post's photograph, or its designed cover when none is
+              registered (D305 hybrid). No credit prop: the Pexels Licence needs
+              none and the owner asked for none, provenance stays in
+              blog/PHOTO-CREDITS.md. */}
+          <PostImage
+            slug={slug}
+            title={title}
+            category={category}
+            wide
+            priority
+            sizes="(min-width: 1280px) 845px, calc(100vw - 2.5rem)"
+          />
+        </div>
       </div>
       <div class="art__col">
         {/* SUMMARY FIRST (D305 lane E3, 2026-10-23). A first time reader from
@@ -365,6 +375,52 @@ const canonicalUrl = routeUrl(path);
 </Base>
 
 <style>
+  /* ── THE BYLINE AND THE PICTURE (D424, A-434) ───────────────────────
+     The head itself is PageHero on the start axis (evidenced.css,
+     .ea-hero__head--start). Under it, the picture on the same column line,
+     and from 80rem the byline in the gutter beside it, right aligned to the
+     column line as Stripe sets it. The three tracks are the reading
+     column's own (the gutter, the measure, the rest). */
+  .art-head {
+    max-width: calc(var(--measure) * 0.47 + 2 * var(--gutter));
+    margin-inline: auto;
+    margin-bottom: var(--sec-gap);
+    padding-inline: var(--gutter);
+  }
+
+  .art-head__by {
+    margin-bottom: var(--space-6);
+  }
+
+  .art-head__hero {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--v3-radius-card);
+    box-shadow: var(--elev-post-feature);
+  }
+
+  @media (min-width: 80rem) {
+    .art-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) min(100%, calc(var(--measure) * 0.47)) minmax(0, 1fr);
+      max-width: none;
+    }
+
+    .art-head > .art-head__hero {
+      grid-row: 1;
+      grid-column: 2 / -1;
+      max-inline-size: calc(var(--measure) * 0.66);
+    }
+
+    .art-head > .art-head__by {
+      grid-row: 1;
+      grid-column: 1;
+      align-self: start;
+      justify-self: end;
+      margin: 0 var(--space-8) 0 0;
+    }
+  }
+
   /* ── IN SHORT (D305 lane E3) ────────────────────────────────────────────
      A calm box on the reading column: the one card's edge and ground, no
      hover, because it is not a control. Tokens only (RULE 0-C). */
@@ -480,11 +536,11 @@ const canonicalUrl = routeUrl(path);
   }
 
   .art__nav {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: var(--stack-1);
-    margin-bottom: var(--sec-gap);
+    gap: var(--space-2) var(--space-6);
+    margin-bottom: var(--space-8);
   }
 
   /* The wash, the hairline and the hover are `.control` in styles/controls.css
@@ -566,43 +622,16 @@ const canonicalUrl = routeUrl(path);
    * tighter tracking. Those differences were the defect, not a decision.
    */
 
-  .art__meta {
-    /* The gap the deleted `h1` rule used to hold as its own bottom margin.
-       h1.section__title is `margin: 0` in headings.css, because a shared head
-       block cannot know what follows it, so the space belongs to whatever
-       this layout puts in the slot, which is this byline. */
-    margin: var(--stack-2) 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    /* The byline sits in the head block, where a standfirst would, so it
-       centres with it. text-align cannot do this on a flex container. */
-    justify-content: center;
-    align-items: center;
-    color: var(--c-text-muted);
-  }
+
 
   /* In the centred hero head the trail row spans the measure, so the pill
      sits at the start and the trail centres on the page. */
-  .art__nav {
-    justify-self: stretch;
-    width: 100%;
-    max-width: var(--measure);
-    margin-inline: auto;
-  }
+
 
   /* The post's picture at the head of the reading band, at the frame width
      it has always had. It no longer rises into a dark band above it: the
      whole page is light now, so there is nothing for it to straddle. */
-  .art__hero {
-    position: relative;
-    z-index: 1;
-    width: var(--art-hero-w);
-    margin-inline: auto;
-    margin-bottom: var(--sec-gap);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-  }
+
 
   /*
    * THE READING MEASURE. 0.47, giving a 601.6px CONTENT column.
@@ -827,7 +856,7 @@ const canonicalUrl = routeUrl(path);
       display: none;
     }
     .art__nav {
-      grid-template-columns: 1fr;
+      margin-bottom: var(--space-6);
     }
   }
 

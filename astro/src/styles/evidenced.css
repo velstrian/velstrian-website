@@ -2993,6 +2993,356 @@ a.ea-tcard:focus-visible {
   }
 }
 
+/* ══ THE STRIPE BLOG PATTERN (D424, owner 2026-10-25, A-434) ═══════════════
+   Measured on stripe.com/blog, docs/design/STRIPE-BLOG-PATTERN-2026-10-25.md.
+   ONE card anatomy for every card family on the site, because every family
+   (posts, related posts, resources, comparisons, glossary terms, sectors,
+   tools, contact routes, integrations) is already this one .ea-tcard:
+
+     category   sentence case, accent ink, with a 1px accent rule 16px
+                before the words, where Stripe draws it
+     title      --t-ea-h3, the card tier of the four heading tiers
+     excerpt    the body size on the Stripe 28 over 18 leading
+     Read more  accent ink, a drawn chevron after the words, underlined on
+                hover. Nothing else moves: the card keeps the calm hover
+                contract (D294, D321) that check-sheen.js measures.
+
+   A page names the classes and never sizes a card. Every value is a token. */
+.ea-tcard > .ea-label:first-child,
+.ea-tcard__body > .ea-label:first-child,
+.ea-hero__head--start > .ea-page-hero__label,
+.ea-post-cat {
+  position: relative;
+  margin: 0;
+  color: var(--ea-accent-ink);
+  font-size: var(--t-ea-small);
+  font-weight: var(--t-w-ea-medium);
+  letter-spacing: 0.01em;
+}
+
+.ea-tcard > .ea-label:first-child::before,
+.ea-tcard__body > .ea-label:first-child::before,
+.ea-hero__head--start > .ea-page-hero__label::before,
+.ea-post-cat::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.15em;
+  /* 16px before the words, as Stripe sets it, whatever the card's padding. */
+  inset-inline-start: calc(-1 * var(--space-4));
+  width: var(--post-rule-w);
+  background: var(--ea-accent);
+}
+
+.ea-tcard .ea-h3 {
+  margin: 0;
+  font-size: var(--t-ea-h3);
+  line-height: var(--lh-post-title);
+  color: var(--ea-ink);
+}
+
+.ea-tcard p:not(.ea-label) {
+  font-size: var(--t-ea-body);
+  line-height: var(--lh-post-excerpt);
+}
+
+.ea-tcard__more {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* The chevron, drawn from the text colour so it needs no icon file and no
+   colour of its own. */
+.ea-tcard__more::after {
+  content: '';
+  flex: none;
+  width: 0.42em;
+  height: 0.42em;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  rotate: 45deg;
+}
+
+/* ── THE POST HEAD, PageHero align="start" ─────────────────────────────────
+   Stripe's post head: the trail, the category, the title and the date line
+   on the reading column's left line, not centred over the page. The same h1
+   and the same band as every PageHero, only the axis moves. Below 80rem the
+   head is the reading column. From 80rem it takes that column's three tracks
+   and starts on the measure's line, running to the right like Stripe's. */
+.ea-hero__head.ea-hero__head--start {
+  justify-items: start;
+  max-width: calc(var(--measure) * 0.47 + 2 * var(--gutter));
+  /* The head rule above centres its text unlayered. Revert to the layered
+     value, which is styles/alignment.css giving this family the left line,
+     so the axis is decided in that one file and nowhere else. */
+  text-align: revert-layer;
+}
+
+.ea-hero__head--start .ea-hero__title {
+  max-width: 18em;
+}
+
+.ea-hero__head--start > .ea-page-hero__label {
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 80rem) {
+  .ea-hero__head.ea-hero__head--start {
+    grid-template-columns: minmax(0, 1fr) min(100%, calc(var(--measure) * 0.47)) minmax(0, 1fr);
+    max-width: var(--measure);
+  }
+
+  .ea-hero__head--start > * {
+    grid-column: 2 / -1;
+  }
+}
+
+/* ── THE FEATURED POST ─────────────────────────────────────────────────────
+   Stripe's one raised card: white, the deep two layer shadow, the words on
+   the left half and the picture inset on the right half. Stacks below 900px
+   with the picture last. */
+.ea-card.ea-postfeat:not(.ea-card--plain) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--blk-pad);
+  /* Stripe insets the picture 16px from the card edge. */
+  padding: var(--blk-pad-2xs);
+  border-color: transparent;
+  box-shadow: var(--elev-post-feature);
+  color: var(--ea-ink);
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ea-card.ea-postfeat:not(.ea-card--plain):hover {
+    box-shadow: var(--elev-post-feature);
+  }
+}
+
+.ea-postfeat__text {
+  --blk-pad: var(--blk-pad-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6) 0 var(--space-6) var(--blk-pad);
+}
+
+.ea-postfeat__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  font-weight: var(--t-w-ea-strong);
+  line-height: var(--lh-post-title);
+  letter-spacing: -0.015em;
+  color: var(--ea-ink);
+  text-wrap: balance;
+}
+
+.ea-post-excerpt {
+  margin: 0;
+  font-size: var(--t-ea-lead);
+  line-height: var(--lh-post-excerpt);
+  color: var(--ea-sub);
+}
+
+.ea-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  font-size: var(--t-ea-small);
+  color: var(--ea-muted);
+}
+
+.ea-postfeat__pic,
+.ea-postrow__pic {
+  border-radius: var(--v3-radius-card);
+  overflow: hidden;
+}
+
+/* ── THE LIST OF POSTS ─────────────────────────────────────────────────────
+   Not cards: open rows on a four track grid, as Stripe sets them. The
+   category and title run over three tracks, the date and byline take the
+   fourth, the summary and Read more sit under the title on the left and the
+   picture lifts on the right with the featured card's shadow. */
+.ea-postlist {
+  display: grid;
+  /* One track that may shrink below a picture's intrinsic width, or a phone
+     scrolls sideways. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--post-row-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ea-postrow {
+  --blk-pad: var(--space-4);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-areas:
+    'cat cat cat date'
+    'title title title by'
+    'ex ex pic pic'
+    'more more pic pic'
+    '. . pic pic';
+  grid-template-rows: auto auto auto auto 1fr;
+  column-gap: var(--space-8);
+  row-gap: var(--space-4);
+  padding-inline-start: var(--blk-pad);
+  color: var(--ea-ink);
+  text-decoration: none;
+}
+
+.ea-postrow .ea-post-cat {
+  grid-area: cat;
+}
+
+.ea-postrow .ea-post-meta {
+  grid-area: date;
+  position: relative;
+  padding-inline-start: var(--blk-pad);
+}
+
+.ea-postrow .ea-byline {
+  grid-area: by;
+  align-self: start;
+  padding-inline-start: var(--blk-pad);
+}
+
+.ea-postrow .ea-post-excerpt {
+  grid-area: ex;
+}
+
+.ea-postrow .ea-tcard__more {
+  grid-area: more;
+}
+
+.ea-postrow__pic {
+  grid-area: pic;
+  box-shadow: var(--elev-post-feature);
+}
+
+/* The date carries the same accent rule on its own column line. */
+.ea-postrow .ea-post-meta::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.15em;
+  inset-inline-start: 0;
+  width: var(--post-rule-w);
+  background: var(--ea-accent);
+}
+
+.ea-postrow__title {
+  grid-area: title;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  font-weight: var(--t-w-ea-strong);
+  line-height: var(--lh-post-title);
+  letter-spacing: -0.015em;
+  color: var(--ea-ink);
+  text-wrap: balance;
+}
+
+.ea-postrow .ea-tcard__more,
+.ea-postfeat .ea-tcard__more {
+  color: var(--ea-accent-ink);
+  font-weight: var(--t-w-ea-medium);
+}
+
+a.ea-postrow:focus-visible,
+a.ea-postfeat:focus-visible {
+  outline: var(--ea-focus);
+  outline-offset: 6px;
+  border-radius: var(--v3-radius-card);
+}
+
+@media (hover: hover) {
+  a.ea-postrow:hover .ea-tcard__more,
+  a.ea-postfeat:hover .ea-tcard__more {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+/* ── THE BYLINE ────────────────────────────────────────────────────────────
+   A 48px round avatar, the name, the role. Only a post that names an author
+   carries one: an unsigned post is never given an invented author. */
+.ea-byline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  font-size: var(--t-ea-small);
+  line-height: 1.5;
+}
+
+.ea-byline__avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--post-avatar);
+  height: var(--post-avatar);
+  border-radius: 50%;
+  background: var(--card-rim);
+  color: var(--stage-ink);
+  font-weight: var(--t-w-ea-strong);
+  letter-spacing: 0.02em;
+}
+
+/* A standing team shows the Velstrian mark: its own dark tile, clipped to
+   the circle and scaled so the tile's edge never shows inside it. */
+.ea-byline__avatar--mark {
+  overflow: hidden;
+  background: none;
+}
+
+.ea-byline__avatar--mark svg {
+  width: 112%;
+  height: 112%;
+}
+
+.ea-byline__name {
+  display: block;
+  color: var(--ea-ink);
+  font-weight: var(--t-w-ea-medium);
+}
+
+.ea-byline__role {
+  display: block;
+  color: var(--ea-muted);
+}
+
+@media (max-width: 899px) {
+  .ea-card.ea-postfeat:not(.ea-card--plain) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ea-postfeat__text {
+    --blk-pad: var(--space-6);
+    padding: var(--space-4) var(--space-3) 0 var(--blk-pad);
+  }
+
+  .ea-postrow {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'cat' 'title' 'date' 'by' 'ex' 'more' 'pic';
+    grid-template-rows: none;
+  }
+
+  .ea-postrow .ea-post-meta,
+  .ea-postrow .ea-byline {
+    padding-inline-start: 0;
+  }
+
+  .ea-postrow .ea-post-meta::before {
+    content: none;
+  }
+}
+
 /* The head of a SectionBand with no lead beside it, or centred over its
    content (evidenced/SectionBand.astro). The gap to the content is the same
    head gap every band uses. */

@@ -1,0 +1,39 @@
+---
+/**
+ * Byline: the author line of the Stripe blog pattern (D424, A-434), a 48px
+ * round avatar beside the name and the role. Used on /blog/ and at the top of
+ * a post. Styles live in evidenced.css (`.ea-byline`), tokens only.
+ *
+ * NO PHOTOGRAPH OF A PERSON IS INVENTED. A named person gets their initials on
+ * the Quantum V gradient, a standing team (authorType Organization) gets the
+ * Velstrian mark. A post with no author gets no byline at all: the caller
+ * renders this only when the post names one.
+ */
+import QuantumVMark from '../brand/QuantumVMark.astro';
+
+interface Props {
+  author: string;
+  role?: string;
+  type?: 'Person' | 'Organization';
+  /** The element: a div inside a link, a p in the article head. */
+  as?: 'div' | 'p';
+}
+
+const { author, role, type = 'Person', as: Tag = 'div' } = Astro.props;
+const initials = author
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((w: string) => w.charAt(0).toUpperCase())
+  .join('');
+---
+
+<Tag class="ea-byline">
+  <span class:list={['ea-byline__avatar', type === 'Organization' && 'ea-byline__avatar--mark']} aria-hidden="true">
+    {type === 'Organization' ? <QuantumVMark /> : initials}
+  </span>
+  <span>
+    <span class="ea-byline__name">{author}</span>
+    {role && <span class="ea-byline__role">{role}</span>}
+  </span>
+</Tag>
