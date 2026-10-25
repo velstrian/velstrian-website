@@ -822,6 +822,25 @@ main .ea-sec * {
   aspect-ratio: var(--cw) / var(--ch);
 }
 
+/* A crop whose region ends inside the capture fades out over --shot-fade
+   on that edge, so it never stops on a cut word (H-01: the find card on
+   /contact/ at 390 stopped on "Scotland ·" and lost its buttons). The fade
+   length is the capture pixels left past the region, capped at --shot-fade,
+   so a region that runs to the capture's own edge keeps a hard edge. A
+   region usually ends between two lines at its foot, so that fade is short. */
+.ea-frame__crop {
+  --crop-fade-r: clamp(0px, (var(--fw) - var(--cx) - var(--cw)) * 1px, var(--shot-fade));
+  --crop-fade-b: clamp(0px, (var(--fh) - var(--cy) - var(--ch)) * 1px, var(--space-4));
+  -webkit-mask-image:
+    linear-gradient(to right, var(--c-black) calc(100% - var(--crop-fade-r)), transparent),
+    linear-gradient(to bottom, var(--c-black) calc(100% - var(--crop-fade-b)), transparent);
+  mask-image:
+    linear-gradient(to right, var(--c-black) calc(100% - var(--crop-fade-r)), transparent),
+    linear-gradient(to bottom, var(--c-black) calc(100% - var(--crop-fade-b)), transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
 .ea-frame__crop > .ea-frame__shot {
   position: absolute;
   width: calc(var(--fw) / var(--cw) * 100%);
@@ -1377,6 +1396,21 @@ main .ea-sec * {
   margin: 0;
 }
 
+/* THE COLOUR BREAK SITS ON A CLAUSE (BY-01, M-02). Every hero headline's
+   gradient phrase starts after a comma or a full stop, and on a phone it
+   also starts a line, so the colour change and the line change land
+   together. Measured 2026-10-25 at 390: the home, /bid/ and /about/ heroes
+   began the colour mid line ("yourself, using what"). On a phone the phrase
+   is its own block, so each half balances on its own lines (a forced line
+   break left one word widows, "yourself." and "up.", measured). Wider than a
+   phone the line falls where the measure puts it, already clean at 768 and
+   1440. */
+@media (max-width: 599px) {
+  .ea-hero__title .ea-accent {
+    display: block;
+  }
+}
+
 .ea-hero__head .ea-actions {
   justify-self: center;
 }
@@ -1401,10 +1435,11 @@ main .ea-sec * {
    (evidenced/PageHero.astro). Same light and the same centred head as the
    product heroes, no stage under it, so the band ends with the head. */
 /* The bottom padding also holds the aurora's pause button (.ea-motion, D293)
-   with --space-4 clear above it, so the button never sits beside a line of
-   the head at any width. */
+   docked just above the ribbon's right end (premium.css, M-01), with
+   --space-4 clear above it, so the button never sits beside a line of the
+   head at any width. */
 .ea-page-hero {
-  padding-bottom: max(clamp(var(--space-10), 1rem + 3vw, var(--space-16)), calc(var(--ea-btn-h) + var(--space-3) + var(--space-4)));
+  padding-bottom: max(clamp(var(--space-10), 1rem + 3vw, var(--space-16)), calc(var(--aurora-foot-h) + var(--space-2) + var(--ea-btn-h) + var(--space-4)));
 }
 
 .ea-page-hero__label {
@@ -1431,7 +1466,7 @@ main .ea-sec * {
 
 .ea-page-hero--compact {
   padding-top: clamp(var(--space-8), 0.5rem + 3vw, var(--space-12));
-  padding-bottom: max(clamp(var(--space-8), 0.5rem + 2vw, var(--space-12)), calc(var(--ea-btn-h) + var(--space-3) + var(--space-4)));
+  padding-bottom: max(clamp(var(--space-8), 0.5rem + 2vw, var(--space-12)), calc(var(--aurora-foot-h) + var(--space-2) + var(--ea-btn-h) + var(--space-4)));
 }
 
 .ea-page-hero--compact .ea-hero__head .ea-hero__title {
@@ -2375,12 +2410,19 @@ main .ea-sec * {
     --sh: var(--phh);
   }
 
-  /* The phone region ends inside a line of text, so the line fades out rather
-     than stopping on a cut word. */
-  .ea-walk__view--fade {
-    -webkit-mask-image: linear-gradient(to right, var(--c-black) 82%, transparent);
-    mask-image: linear-gradient(to right, var(--c-black) 82%, transparent);
-  }
+}
+
+/* A region that ends inside the capture fades out over --shot-fade on its
+   right edge, so a line never stops on a cut word (H-01). It was a hand set
+   flag on three phone regions, and the find card's region, which also ends
+   mid line ("publishe", "Save" cut at 390, measured 2026-10-25), carried
+   none. Now the fade length is the capture pixels left past the region,
+   capped at --shot-fade, so every region at every width gets it when it
+   needs it and a region that runs to the capture's edge keeps a hard one. */
+.ea-walk__view {
+  --walk-fade: clamp(0px, (var(--fw) - var(--rx) - var(--rw)) * 1px, var(--shot-fade));
+  -webkit-mask-image: linear-gradient(to right, var(--c-black) calc(100% - var(--walk-fade)), transparent);
+  mask-image: linear-gradient(to right, var(--c-black) calc(100% - var(--walk-fade)), transparent);
 }
 
 .ea-walk__img {

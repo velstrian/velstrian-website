@@ -7,7 +7,7 @@
  * fact of the previous page is kept, on the v3 bands:
  *
  *   1. PageHero   light      is this for my sector?   trail, plain headline, two actions
- *   2. Sectors    light      which one is mine?       nine cards, each one link, the screen on a stage
+ *   2. Sectors    light      which one is mine?       one card per sector, each one link, the screen on a stage
  *   3. Cited      light alt  can I trust the answer?  the one ledger row, a question link
  *   4. Close      gradient   what now?                into the footer
  *
@@ -91,6 +91,14 @@ const sectorCards = [
 const more = (c: { name: string; href: string }) =>
   c.href.startsWith('/sectors/') ? `Read the ${c.name.toLowerCase()} page` : `See ${PRODUCT_NAME_BID}`;
 
+/** SE-01 (audit 2026-10-25): the count in the lead is read from the cards,
+    so it can never drift from what renders. Nine cards render, four of them
+    with a sector page of their own (measured on the built page). */
+const COUNT_WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
+const ownPages = sectorCards.filter((c) => c.href.startsWith('/sectors/')).length;
+const cardCount = COUNT_WORDS[sectorCards.length] ?? String(sectorCards.length);
+const ownCount = (COUNT_WORDS[ownPages] ?? String(ownPages)).toLowerCase();
+
 const trail = [{ name: 'Home', path: '/' }];
 const schema = [
   breadcrumbs([...trail, { name: 'Sectors', path }]),
@@ -136,8 +144,8 @@ const UPDATED = new Date('2026-10-22');
           <h2 class="ea-h2" id="sectors-list-title">Every sector is under its own clock.</h2>
         </div>
         <p class="ea-lead">
-          Nine UK sectors, each with its own bidding pressure. One line on the pressure, and how {PRODUCT_NAME_BID}
-          answers it.
+          {cardCount} UK sectors, each with its own bidding pressure, and {ownCount} with a page of their own. One line
+          on the pressure, and how {PRODUCT_NAME_BID} answers it.
         </p>
       </div>
 

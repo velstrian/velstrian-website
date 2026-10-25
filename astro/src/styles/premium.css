@@ -311,6 +311,35 @@
   object-position: left top;
 }
 
+/* THE BLEED IS DELIBERATE (H-01, G-3). The window runs off the tile's right
+   edge (and its foot on a foot flood tile), and the screen inside it cut a
+   line mid word there: measured 2026-10-25, 7 to 66 percent of a capture's
+   width cropped on the right in every home, /bid/ and /buy/ tile, up to 33
+   percent off the foot on /buy/. The screen now fades into the window's own
+   light ground over --shot-fade before each edge it runs off, so the window
+   still bleeds, its shadow and top left corner stay, and no word is cut.
+   The mask reads only alpha, so --c-black is the opaque stop. */
+.ea-bento__shot img {
+  -webkit-mask-image:
+    linear-gradient(to right, var(--c-black) calc(100% - var(--shot-fade)), transparent),
+    linear-gradient(to bottom, var(--c-black) calc(100% - var(--shot-fade)), transparent);
+  mask-image:
+    linear-gradient(to right, var(--c-black) calc(100% - var(--shot-fade)), transparent),
+    linear-gradient(to bottom, var(--c-black) calc(100% - var(--shot-fade)), transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* An end flood tile's window is closed at its foot (border and corner), so
+   only its right edge bleeds and only that edge fades. Below 720px every
+   tile floods from its foot and opens its foot, so both edges fade again. */
+@media (min-width: 721px) {
+  .ea-bento__tile[data-flood='end'] .ea-bento__shot img {
+    -webkit-mask-image: linear-gradient(to right, var(--c-black) calc(100% - var(--shot-fade)), transparent);
+    mask-image: linear-gradient(to right, var(--c-black) calc(100% - var(--shot-fade)), transparent);
+  }
+}
+
 .ea-bento__copy > .ea-bento__cap {
   margin: var(--space-2) 0 0;
 }
@@ -620,13 +649,25 @@
   --band-glow: none;
 }
 
-/* ── THE AURORA PAUSE CONTROL SITS INSIDE THE HERO (P1-4) ─────────────────────
-   It sat in the hero's bottom corner, on the aurora ribbon, and read as stuck
-   on the seam. Top right of the hero, clear of the ribbon and of every wedge,
-   still 44 by 44 and still hidden until scripts/evidenced.ts shows it. */
+/* ── THE AURORA PAUSE CONTROL SITS ON WHAT IT PAUSES (M-01, H-03) ─────────────
+   P1-4 moved it to the top right of the hero, and below about 1100px wide
+   that put it over the headline: measured 2026-10-25 on 22 route and width
+   pairs (/, /bid/, /buy/ and /about/ from 1024 down to 360, the /pricing/
+   label at 390). It now docks at the bottom right of the hero, ON the moving
+   colour, so it reads as the control of the thing it stops:
+   - under a hero stage it sits on the aurora slab, inside the hero's bottom
+     padding, which tokens.css --ea-hero-pad-b sizes to hold it clear;
+   - on a page hero it sits just above the right end of the aurora ribbon,
+     clear of the seam that made the old bottom corner read as stuck.
+   Still 44 by 44, still hidden until scripts/evidenced.ts shows it, still
+   gone under reduced motion. */
 .ea-sec.ea-hero > .ea-motion {
-  top: var(--space-4);
-  bottom: auto;
+  top: auto;
+  bottom: var(--space-4);
+}
+
+.ea-sec.ea-page-hero > .ea-motion {
+  bottom: calc(var(--aurora-foot-h) + var(--space-2));
 }
 
 /* ── RESOURCE COVERS, ONE HUE EACH (P1-7) ─────────────────────────────────────

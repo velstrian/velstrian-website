@@ -3735,9 +3735,16 @@
   --hero-grid-line: color-mix(in srgb, var(--c-ink-0) 6%, transparent);
   --hero-grid-cell: 64px;
   /* The hero's bottom padding and the gap above its stage, as tokens because
-     the aurora reaches exactly to both. */
-  --ea-hero-pad-b: clamp(var(--space-12), 2rem + 3vw, 5rem);
+     the aurora reaches exactly to both. The floor holds the aurora's pause
+     button (44px) with --space-4 clear above and below it, because the
+     button is docked in this padding on the moving slab (premium.css, M-01). */
+  --ea-hero-pad-b: max(clamp(var(--space-12), 2rem + 3vw, 5rem), calc(var(--ea-btn-h) + var(--space-8)));
   --ea-hero-stage-gap: clamp(var(--space-12), 2rem + 3vw, 4.5rem);
+  /* THE BLEED FADE (H-01, G-3). Where a product screen runs off the edge of
+     its tile or its crop, the last stretch of it fades out over this length,
+     so a line of the screen dissolves into the ground instead of stopping on
+     a cut word. One length for every bleeding screen on the site. */
+  --shot-fade: clamp(var(--space-10), 16%, var(--space-20));
   --stage-radius: 24px;
   --stage-ink: var(--c-white);
 

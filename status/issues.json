@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T01:57:16.607Z",
+  "updated": "2026-10-25T03:14:11.298Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1389,6 +1389,96 @@
       "note": "R285-P3-AI-CUSTOMER-CONTENT-POLICY-01, D344 D415 D422. Added section, legal basis bullet, retention row to astro/src/content/legal/privacy.md. Lawful basis (legitimate interests with admin opt in) is the owner's choice with counsel, REVIEW comment in the file. Not deployed, owner reviews locally first.",
       "changed": "2026-10-25",
       "changedAt": "2026-10-25T01:57:16.607Z"
+    },
+    {
+      "id": "A-423",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P1",
+      "title": "Hero pause control overlapped the headline (Kiro M-01, H-03)",
+      "status": "FIXED",
+      "note": "Measured 2026-10-25: overlap on 22 of 60 route and width pairs (/, /bid, /buy, /about H1 from 1024 down to 360, /pricing label at 390 and 360). Control now docks on the aurora it pauses, bottom right, hero padding holds it (tokens.css --ea-hero-pad-b, evidenced.css page hero padding, premium.css). Built site 8094: 0 overlaps on 18 routes at 6 widths, on top at centre. Gate chain 43 of 43.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:09.483Z"
+    },
+    {
+      "id": "A-424",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P1",
+      "title": "Product demo screens cut mid word at a bleeding edge (Kiro H-01, G-3)",
+      "status": "FIXED",
+      "note": "Measured: bento captures cropped 7 to 66 percent on the right on /, /bid, /buy, 33 percent off the foot on /buy, the find card crop on /contact and /walkthrough at 390 cut 'publishe', 'Save'. One token --shot-fade, bento shots fade on every bleeding edge, frame crops and walkthrough regions fade only when the region ends inside the capture. Screens in audit-screenshots/kiro-premium-2026-10-25/after. Gate chain 43 of 43.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:09.723Z"
+    },
+    {
+      "id": "A-425",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P2",
+      "title": "Sectors lead count (Kiro SE-01, claim refuted)",
+      "status": "FIXED",
+      "note": "Kiro claim REFUTED: /sectors renders nine cards, so 'Nine UK sectors' was true. Count now derived from the card list and the lead says four have a page of their own, measured on the built page.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:09.955Z"
+    },
+    {
+      "id": "A-426",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P3",
+      "title": "Primary CTA fill drift (Kiro PR-01, G-2), refuted",
+      "status": "CLEARED",
+      "note": "Measured at 1440 on 9 routes: every primary CTA, nav included, computes to the one --btn-p-fill gradient defined once in tokens.css and read by .btn and .ea-btn. The white primary is the deliberate inverse on the closing band. No change.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:10.160Z"
+    },
+    {
+      "id": "A-427",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P3",
+      "title": "Hero headline colour break off a clause (Kiro BY-01, M-02)",
+      "status": "FIXED",
+      "note": "Colour phrase on /bid and /buy now starts after the comma, and below 600px the phrase is its own balanced block so colour and line change together (evidenced.css). Measured on 7 heroes at 1440, 768, 390, 360, no one word widows.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:10.405Z"
+    },
+    {
+      "id": "A-428",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P3",
+      "title": "Blurred demo email in the bid list capture (Kiro H-04)",
+      "status": "FIXED",
+      "note": "Six blurred owner email runs replaced with solid rounded bars in a token tint (--c-ink-2 at 24 percent over --c-light-3) by astro/scripts/redact-capture-emails.mjs. OPEN follow up: the platform capture harness (web/e2e/product-captures/website.spec.ts) still blurs, so rerun the script after a recapture until the harness paints a bar.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:10.653Z"
+    },
+    {
+      "id": "A-429",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P3",
+      "title": "Retire stock photos for bespoke art (Kiro BL-01, G-4)",
+      "status": "DECISION",
+      "note": "HELD: owner direction D305 (2026-10-23) keeps the licensed photographs on the 12 existing posts and faces on Audience and Sector pages, designed covers for new posts only. Replacing them reverses a recorded owner decision. Question for the owner: replace the 12 blog photos and the faces with StripeCard style art, yes or no.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:10.878Z"
+    },
+    {
+      "id": "A-430",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P3",
+      "title": "Scroll reveal on section entry (Kiro G-1), already built",
+      "status": "CLEARED",
+      "note": "Measured: [data-reveal] reveal runs once on scroll, 36 of 36 on /, 29 on /buy, 18 on /pricing, none armed under reduced motion. The proposed 8 to 12px rise was tried and the owner could not see it (R285-WEB-SCROLL-MOTION-01), token stays 24px. No change.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:11.082Z"
+    },
+    {
+      "id": "A-431",
+      "src": "lane-X-kiro-premium-audit",
+      "sev": "P3",
+      "title": "Hero grid backdrop (Kiro H-02) and unaudited routes spot check",
+      "status": "CLEARED",
+      "note": "H-02 grid is .ea-hero__sky::before, intentional. Spot check of the unaudited templates and routes at 1440, 768, 390: only cut text is inside deliberate horizontal scrollers (integrations rail, compare, privacy, terms, sources tables). Screens in audit-screenshots/kiro-premium-2026-10-25/spot.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T03:14:11.298Z"
     }
   ],
   "directives": [
@@ -1458,5 +1548,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 423
+  "nextId": 432
 }
