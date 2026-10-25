@@ -18,7 +18,7 @@ faq:
   - question: >-
       How can SME bidders structure responses for both automated and human evaluators?
     answer: >-
-      Bidders should align headings directly with tender specification questions, use clear evidence metrics rather than generic claims, mirror key regulatory terminology, ensure all mandatory annexes (such as PPN 026 or PPN 06/21) are attached, and run automated pre-submission compliance checks.
+      Bidders should align headings directly with tender specification questions, use clear evidence metrics rather than generic claims, mirror key regulatory terminology, attach every annex the buyer asks for (such as a PPN 06/21 carbon reduction plan, or a social value response where the buyer applies PPN 026), and run automated pre-submission compliance checks.
   - question: >-
       Will using AI to draft bids harm my tender score?
     answer: >-
@@ -31,7 +31,7 @@ faq:
 
 As public procurement transitions under the **Procurement Act 2023** (which went live on **24 February 2025**), contracting authorities across England, Wales and Northern Ireland are handling higher volumes of statutory notices, compliance declarations and bid submissions. Some contracting authorities have introduced automated verification tools to help evaluation teams with that volume. How widely, and how far beyond simple document checks, is not something anyone publishes, so treat the sections below as a description of how automated screening works where it is used rather than as a claim about every buyer you will meet.
 
-For SME bidders, this shift fundamentally changes how your proposal is initially processed. Before a human evaluator reads your method statement, automated systems extract data, check mandatory compliance criteria (such as PPN 026 social value missions and PPN 06/21 carbon plans), and cross-reference evidence against tender requirements. Understanding how automated screening works allows bid teams to structure responses so they pass initial filters with full marks.
+For SME bidders, this shift fundamentally changes how your proposal is initially processed. Before a human evaluator reads your method statement, automated systems extract data, check the pass or fail criteria the buyer has set (such as a PPN 06/21 carbon plan, or social value commitments where the buyer applies PPN 026), and cross-reference evidence against tender requirements. Understanding how automated screening works allows bid teams to structure responses so they pass initial filters with full marks.
 
 ## How public sector buyers use automated screening
 
@@ -76,7 +76,7 @@ Under MAT scoring within the Procurement Act 2023, buyers evaluate quality, deli
 
 ### How can SME bidders structure responses for both automated and human evaluators?
 
-Bidders should align headings directly with tender specification questions, use clear evidence metrics rather than generic claims, mirror key regulatory terminology, ensure all mandatory annexes (such as PPN 026 or PPN 06/21) are attached, and run automated pre-submission compliance checks.
+Bidders should align headings directly with tender specification questions, use clear evidence metrics rather than generic claims, mirror key regulatory terminology, attach every annex the buyer asks for (such as a PPN 06/21 carbon reduction plan, or a social value response where the buyer applies PPN 026), and run automated pre-submission compliance checks.
 
 ### Will using AI to draft bids harm my tender score?
 

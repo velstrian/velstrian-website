@@ -46,8 +46,8 @@ faq:
     answer: "Velstrian Bid reads education tenders published on the official listing sites, including work from councils, multi-academy trusts, colleges and universities, and work let through Department for Education and central government frameworks for catering, cleaning, ICT, school management systems and estates. You filter by CPV code (the buyer's standard label for the type of work), region and value."
   - question: "How does buying differ across schools, trusts and colleges?"
     answer: "A single school may buy on its own below set spending limits, while a multi-academy trust often runs one formal tender across many sites, and colleges follow their own rules. Velstrian Bid drafts each answer from bids you have already written, so your voice stays the same across all of them."
-  - question: "How is PPN 026 social value scored on education contracts?"
-    answer: "PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Education buyers often ask for local jobs, help with the curriculum and community benefit. Velstrian Bid works out the figures in code and drafts the words from your own data."
+  - question: "How is social value scored on education contracts?"
+    answer: "PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Schools, academy trusts, colleges and universities are not bound by it and often score social value under their own policy. Education buyers often ask for local jobs, help with the curriculum and community benefit. Velstrian Bid works out the figures in code and drafts the words from your own data."
   - question: "Does Velstrian Bid help after I win an education contract?"
     answer: "Yes. It gives you one place to record proof of each promise you made to a school, trust or college, and it checks the Procurement Act 2023 duties on published targets so you know what the buyer will report on."
 ---

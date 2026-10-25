@@ -50,7 +50,10 @@ const sectorCards = [
   {
     name: 'IT Managed Service Providers',
     kind: 'Public and private work',
-    say: 'Public-sector IT and managed-service tenders are scored on PPN 026 social value alongside technical fit and price.',
+    /* A-435 (2026-10-25). Was "scored on PPN 026 social value". PPN 026 binds
+       central government contracting authorities only, so most IT buyers do
+       not apply it. Tailored to who actually scores social value in IT. */
+    say: 'Many public and private IT tenders ask how you add social value. Central government buyers score it under PPN 026, and other public bodies often use their own policy.',
     href: '/bid/',
   },
   {
@@ -62,7 +65,10 @@ const sectorCards = [
   {
     name: 'Construction',
     kind: 'Public and private work',
-    say: 'Public works bids score PPN 026 social value alongside price and technical quality.',
+    /* A-435 (2026-10-25). Was "Public works bids score PPN 026 social value".
+       Councils and housing bodies let most public works and are not bound by
+       PPN 026, which covers central government only. */
+    say: 'Many public works tenders ask how you add social value, such as local jobs and apprentices. Central government buyers score it under PPN 026, councils often use their own policy, and private clients increasingly ask too.',
     href: '/sectors/construction/',
   },
   {
@@ -74,13 +80,16 @@ const sectorCards = [
   {
     name: 'Highways',
     kind: 'Public work',
-    say: 'Term-maintenance and NEC4 contracts are scored on social value alongside price and capability.',
+    say: 'Term maintenance and NEC4 contracts often score social value alongside price and capability.',
     href: '/sectors/highways/',
   },
   {
     name: 'NHS Suppliers',
     kind: 'Public work',
-    say: 'Framework bids weigh PPN 026 social value alongside a track record of on-time, evidenced delivery.',
+    /* A-435 (2026-10-25). Was "Framework bids weigh PPN 026 social value".
+       PPN 026 binds central government, so an NHS trust tender may score social
+       value under its own approach or not at all. */
+    say: 'NHS buyers often ask how you add social value, and NHS and central government bodies may apply PPN 026. A track record of on time, evidenced delivery still counts.',
     href: '/bid/',
   },
   {

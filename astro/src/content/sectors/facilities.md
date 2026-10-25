@@ -50,8 +50,8 @@ faq:
     answer: "Most FM re-tenders involve TUPE, the Transfer of Undertakings (Protection of Employment) Regulations 2006, because staff move with the contract. Velstrian Bid drafts your staff transfer answers from bids you have already written, so your approach to consultation, terms and continuity is consistent, and a person reviews every draft before it goes in."
   - question: "Does Velstrian Bid help with mobilisation and KPI commitments?"
     answer: "Yes. Your start up plan and service targets (key performance indicators, or KPIs) are scored in the bid and then followed into the contract. Velstrian Bid checks the Procurement Act 2023 duties on published targets and gives you a place to record proof of delivery after you win."
-  - question: "How is PPN 026 social value scored on FM contracts?"
-    answer: "PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. FM buyers often ask for local jobs, fair pay and community benefit on site. Velstrian Bid works out the figures in code and drafts the words from your own data."
+  - question: "How is social value scored on FM contracts?"
+    answer: "PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Councils, NHS trusts and private clients are not bound by it, and many score social value under their own policy. FM buyers often ask for local jobs, fair pay and community benefit on site. Velstrian Bid works out the figures in code and drafts the words from your own data."
 ---
 
 Public buyers are hospitals, schools, councils, housing associations and government offices. They advertise on official listing sites and often buy through government agreements and frameworks. Private clients, such as office landlords, managing agents, retailers and private hospitals, usually send their tender straight to you.

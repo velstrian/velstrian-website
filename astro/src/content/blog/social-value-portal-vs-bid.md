@@ -83,9 +83,9 @@ It is also worth noting that the two platforms are not mutually exclusive. Some 
 
 ## The bigger picture: social value is not optional
 
-Regardless of which platform you choose, the underlying message is the same: social value is now a scored component of UK public sector procurement. PPN 026 sets a minimum weighting of 10% from 1 million pounds inc VAT to 5 million and 20% at 5 million pounds inc VAT or above, and many contracting authorities apply a higher weighting than the minimum in practice. Suppliers who do not have a credible, evidence-backed social value strategy are leaving points on the table in every bid.
+Regardless of which platform you choose, the underlying message is the same: social value is now a scored part of much UK public sector procurement, and private buyers increasingly ask for it too. For central government buyers, PPN 026 sets a minimum weighting of 10% from 1 million pounds inc VAT to 5 million and 20% at 5 million pounds inc VAT or above, and many contracting authorities apply a higher weighting than the minimum in practice. Suppliers who do not have a credible, evidence-backed social value strategy are leaving points on the table in every bid.
 
-The cost of a weak social value response is not confined to one bid. The same section comes up on every public sector tender you enter, so a habit of leaving it until the last afternoon compounds across a year of bidding. Where two bids are close on quality and price, the social value marks are what separate them.
+The cost of a weak social value response is not confined to one bid. The same section comes up on most public sector tenders you enter, so a habit of leaving it until the last afternoon compounds across a year of bidding. Where two bids are close on quality and price, the social value marks are what separate them.
 
 Whether you use SVP, Velstrian Bid, or another approach entirely, the important thing is to have a systematic, evidence-based process for social value planning and delivery. The regulatory requirement is here to stay, and treating it as a strategic discipline rather than a compliance burden puts a supplier in a stronger position at evaluation.
 

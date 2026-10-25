@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T04:58:46.067Z",
+  "updated": "2026-10-25T05:33:10.742Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1515,10 +1515,30 @@
       "src": "lane-X2-D424",
       "sev": "P2",
       "title": "Sectors index: IT, Construction and NHS cards say bids are scored on PPN 026, which binds central government only",
-      "status": "OPEN",
-      "note": "Found while correcting A-433 (Charities). /sectors/ IT Managed Service Providers: 'Public-sector IT and managed-service tenders are scored on PPN 026 social value'. Construction: 'Public works bids score PPN 026 social value'. NHS Suppliers: 'Framework bids weigh PPN 026 social value'. PPN 026 applies to central government contracting authorities (in-scope procurements from 1 January 2027), not to every public body, so a council or NHS trust tender may not score it. Not changed: the brief named Charities only. QUESTION FOR THE OWNER: reword these three the same way (public bodies may score social value, central government must under PPN 026)?",
+      "status": "FIXED",
+      "note": "Found while correcting A-433 (Charities). /sectors/ IT Managed Service Providers: 'Public-sector IT and managed-service tenders are scored on PPN 026 social value'. Construction: 'Public works bids score PPN 026 social value'. NHS Suppliers: 'Framework bids weigh PPN 026 social value'. PPN 026 applies to central government contracting authorities (in-scope procurements from 1 January 2027), not to every public body, so a council or NHS trust tender may not score it. Not changed: the brief named Charities only. QUESTION FOR THE OWNER: reword these three the same way (public bodies may score social value, central government must under PPN 026)? || Fixed by lane X3, 2026-10-25. Sectors index: IT now reads 'Many public and private IT tenders ask how you add social value. Central government buyers score it under PPN 026, and other public bodies often use their own policy.' Construction: 'Many public works tenders ask how you add social value, such as local jobs and apprentices. Central government buyers score it under PPN 026, councils often use their own policy, and private clients increasingly ask too.' NHS: 'NHS buyers often ask how you add social value, and NHS and central government bodies may apply PPN 026. A track record of on time, evidenced delivery still counts.' Highways softened from 'are scored on social value' to 'often score social value'. Site wide sweep also fixed: blog ai-tender-evaluation (PPN 026 called a mandatory annex and mandatory compliance criterion, now 'where the buyer applies PPN 026'), blog social-value-portal-vs-bid (social value a scored part of much, not all, public procurement, PPN 026 minimum scoped to central government, 'every' tender now 'most'), sector pages education and facilities FAQ (question no longer implies PPN 026 scores these contracts, answer says schools, trusts, colleges, councils, NHS trusts and private clients are not bound by it). check-facts.js 10 rules clean. npm run build 43 of 43 gates green. Built dist: 0 pages carry the old wording. Screenshots audit-screenshots/sector-claims-2026-10-25 at 1440 and 390.",
       "changed": "2026-10-25",
-      "changedAt": "2026-10-25T03:51:47.130Z"
+      "changedAt": "2026-10-25T05:33:10.530Z"
+    },
+    {
+      "id": "A-436",
+      "src": "lane-X3",
+      "sev": "P3",
+      "title": "Sectors index product screen captured blank: a full page screenshot paints the lazy, async decoded capture before Chromium decodes it, readers see it",
+      "status": "OPEN",
+      "note": "Measured on the built site (status 200, landed /sectors/) 2026-10-25. The screen is the real capture screen-insights (product-captures.real.json, bid-insights.webp 2272x1154, file present since 44ef6293). Scrolled into view at 1440 and 390 it paints fully (after-sectors-screen-*.png): opacity 1, img 945x480, naturalWidth 2272. Reproduced the blank: page.screenshot fullPage at 1440x600 without scrolling shows the light window with only the caption (repro-fullpage-600tall-1440.png) although img.complete is true and naturalWidth 2272. Cause: Frame.astro renders the img with loading=lazy and decoding=async, and Chromium does not decode or raster an offscreen image until it nears the viewport, so a one frame full page capture paints the empty well. Awaiting img.decode() on every img before the same capture paints it (repro-fullpage-after-decode-1440.png). Without scrolling and with motion on, every [data-reveal] block below the fold is also blank in a full page capture (repro-fullpage-noscroll-1440.png), the same capture artefact. No product code changed. RECOMMENDATION, for the driver or owner to decide: close as a capture artefact and have audit captures scroll through the page and await img.decode() before a full page shot. Lazy loading stays, it is what keeps the page inside the check-budgets and check-cwv gates.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T05:33:10.627Z"
+    },
+    {
+      "id": "A-437",
+      "src": "lane-X3",
+      "sev": "P2",
+      "title": "Sectors index product screen is unreadable at phone width: the 2272px insights capture draws 323px wide at 390",
+      "status": "OPEN",
+      "note": "Measured on the built /sectors/ at 390, 2026-10-25 (after-sectors-screen-390.png): the screen-insights capture has no narrow source, so the whole two panel insights screen shrinks to 323x164 and every label and figure is a few pixels tall. Other captures carry a narrow crop (Frame.astro shot.narrow). Fix: add a narrow crop of the Bid outcomes panel for screen-insights in product-captures.real.json, or show one panel at phone width. Not changed by lane X3, outside the A-435 brief.",
+      "changed": "2026-10-25",
+      "changedAt": "2026-10-25T05:33:10.742Z"
     }
   ],
   "directives": [
@@ -1588,5 +1608,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 436
+  "nextId": 438
 }
