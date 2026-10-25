@@ -127,6 +127,14 @@ if (id) {
   }
   if (sev) item.sev = sev;
   if (title) item.title = title;
+  /* [R285-BOARD-WEBSITE-MOVEMENT-01] The tab's "changed today" line reads `changed` and
+     `changedAt`. Nothing wrote them, so it said "No items changed state today" on 2026-10-25
+     after A-418 to A-420 had closed. Stamped only when the status actually moves. */
+  if (status && status !== item.status) {
+    const now = new Date().toISOString();
+    item.changed = now.slice(0, 10);
+    item.changedAt = now;
+  }
   if (status) item.status = status;
   /* APPEND, DO NOT REPLACE — the reasoning that opened an item is usually the
      half worth keeping. Same ` || ` separator the board already uses. */
@@ -177,8 +185,9 @@ if (board.issues.some((i) => i.id === newId)) {
   process.exit(1);
 }
 
-board.issues.push({ id: newId, src, sev, title, status, note });
-board.updated = new Date().toISOString();
+const createdAt = new Date().toISOString();
+board.issues.push({ id: newId, src, sev, title, status, note, changed: createdAt.slice(0, 10), changedAt: createdAt });
+board.updated = createdAt;
 
 fs.writeFileSync(P, JSON.stringify(board, null, 2));
 console.log(newId);
