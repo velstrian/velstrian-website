@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Built but not switched on, audit 2026-10-26</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Built but not switched on, audit 2026-10-26</h1>
+<p><span class="rv-row">R285-P3-AI-OFF-SURFACES-DECISION-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/BUILT-BUT-OFF-AUDIT-2026-10-26.md</code>, rendered from not yet committed (working tree at <code>a7113e8f9</code>). A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-OFF-SURFACES-DECISION-01 &middot; OPEN</span><span class="rtitle">7 built AI features (11 surfaces) ship with a GBP 0 production budget and are never offered to customers</span><p>DECIDED D361: deep test each, switch on if it passes, fix if it fails, none deleted. SPECIFIED in specs/platform-systems/ai-quality/18-PRODUCT-CAPABILITY-GAPS-SPEC.md (REQ-R285-AIQ-OFF-SURFACES-ON), build order docs/release-2.8.5/ai-strategy/IMPLEMENTATION-ORDER.md live round 1 then wave 3.</p></div></section>
+<article class="doc">
+<h1>Built but not switched on, audit 2026-10-26</h1>
+<p>Read only. No code, no pushes, no paid AI call, no write to any service. Every line is a recommendation, the decision is the owner&#39;s.</p>
+<h2>How this was measured, and how it could have failed</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Measurement</th>
+<th>Negative result would have looked like</th>
+<th>Blind spot</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>API flags</td>
+<td><code>api/app/config.py</code> bool fields (lines 324 to 507) and their comments</td>
+<td>A flag with a true default</td>
+<td>Flags read through <code>os.environ</code> only (not in <code>config.py</code>) were found through <code>surface_policy.py</code> and the earlier wiring audit</td>
+</tr>
+<tr>
+<td>Railway production (<code>-e production</code>, project 98c70d30)</td>
+<td>Variable NAMES and a 10 char sha256 fingerprint through <code>envfp.py</code>, then compared with the hash of <code>true</code>, <code>false</code>, <code>enforce</code>, <code>1.00</code>. No value printed</td>
+<td>A fingerprint matching none of the candidates</td>
+<td>The linked service id is 66217fc7, assumed to be the API. A name that is absent means the code default applies</td>
+</tr>
+<tr>
+<td>Cron</td>
+<td><code>select jobname, schedule, active from cron.job</code> on production gujtuecjzfiqsdnzgyvo against the 13 folders in <code>web/app/api/cron/</code></td>
+<td>A route with no job</td>
+<td>A job can exist and still no-op inside the route</td>
+</tr>
+<tr>
+<td>Supabase</td>
+<td><code>get_advisors</code> security on production, tracker row <code>R285-SEC-LEAKED-PASSWORD-PROTECTION-01</code></td>
+<td>A warning for leaked password protection</td>
+<td>The advisor does not list captcha or MFA enforcement, those are UNVERIFIED</td>
+</tr>
+<tr>
+<td>Vercel env</td>
+<td>NOT read this pass (no project id to hand, light work only)</td>
+<td>n/a</td>
+<td>Every web flag production value below is UNVERIFIED unless a tracker row states it</td>
+</tr>
+</tbody></table></div>
+<h2>Table</h2>
+<p>Sorted by recommendation. Costs are only stated where a document gives a number, otherwise &quot;needs a RULE 0-G figure&quot;.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feature (plain English)</th>
+<th>Where it lives</th>
+<th>State now (prod / staging)</th>
+<th>Why off</th>
+<th>Ready?</th>
+<th>Cost if switched on</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Monthly evidence report emailed to owners</td>
+<td><code>supabase/migrations/20269000002420_r284_cron_monthly_evidence_reports.sql</code>, route <code>web/app/api/cron/monthly-evidence-reports</code></td>
+<td>Prod: NOT in <code>cron.job</code> (13 jobs listed, this one absent). Staging: runs no cron</td>
+<td>D480 (owner &quot;Yes switch on this&quot;, at cutover, after Vault <code>app_base_url</code> points at app.velstrian.com)</td>
+<td>Ready</td>
+<td>D480: no AI call, 12 runs a year, at most 40 renders per run, inside the Supabase and Vercel plans, 0 extra</td>
+<td>Switch on at cutover (already approved)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Account deleted confirmation emails</td>
+<td><code>web/app/api/cron/account-deleted-emails</code></td>
+<td>Prod: route present, no <code>cron.job</code> row and no migration references it (grep of <code>supabase/migrations</code>)</td>
+<td>None found</td>
+<td>Needs work: confirm whether another path sends these, else schedule</td>
+<td>Needs a RULE 0-G line (runs per week not stated anywhere)</td>
+<td>Owner decision</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Dead letter retry for failed Stripe events</td>
+<td><code>web/app/api/cron/stripe-event-dlq-drain</code></td>
+<td>Prod: no <code>cron.job</code> row, no migration references it</td>
+<td>None found</td>
+<td>Needs work: confirm intended cadence</td>
+<td>Needs a RULE 0-G line</td>
+<td>Owner decision, a billing safety net so lean to schedule</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Win theme and debrief AI drafts</td>
+<td><code>BID_WIN_THEME_AI_ENABLED</code>, <code>BID_DEBRIEF_AI_ENABLED</code>, <code>CROWMARK_*</code> twins</td>
+<td>Prod: all four set <code>true</code> (fingerprint equals <code>true</code>). Ceilings for <code>bid_win_theme_draft</code> are 1.00 in env</td>
+<td>Already on, listed to correct the record</td>
+<td>n/a</td>
+<td>Ceiling GBP 1.00 a day each</td>
+<td>None, already on</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Three AI surfaces carry a GBP 1.00 a day production ceiling although the tracker says GBP 0</td>
+<td>Railway prod <code>AI_COST_CEILING_BID_KPI_PROSE_EXTRACT_GBP</code> and <code>..._BID_TONE_GUIDANCE_DRAFT_GBP</code> (fingerprint equals <code>1.00</code>), <code>..._BID_FIELD_EXTRACT_GBP</code> (value unknown, 4 chars). Code default 0 at <code>api/app/services/ai/surface_policy.py:197,206,237</code>, env wins at <code>:741</code></td>
+<td>Prod: ceiling above 0 so the surface can spend, whether a screen offers it is UNVERIFIED</td>
+<td>D361 deep test then switch on, D419 measure cost per use then ceiling</td>
+<td>Needs work: reconcile the tracker row <code>R285-P3-AI-OFF-SURFACES-DECISION-01</code> with this measurement</td>
+<td>Up to GBP 1.00 a day each, so about GBP 30 a month worst case each. Real use far below, D464 haiku evidence only</td>
+<td>Owner decision, and fix the row text</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Four other off AI surfaces: ask a tender question, buyer priority extract, buyer RFQ scope, quote scope</td>
+<td><code>surface_policy.py:230,271,295,296</code> all <code>Decimal(&quot;0&quot;)</code></td>
+<td>Prod: no env override seen, so GBP 0 and refused</td>
+<td>D361, D419</td>
+<td>Six pass on haiku (D464 file: 20 of 20 each, quote scope 11 of 20). Quote scope needs its silent empty fixed</td>
+<td>Gemini cost per use not yet measured, needs a RULE 0-G line per surface</td>
+<td>Needs work then switch on</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Real time co editing of a bid answer</td>
+<td><code>web/src/features/crowmark/collaboration/crdt/flag.ts:14</code>, <code>NEXT_PUBLIC_CROWMARK_CRDT</code></td>
+<td>Prod: off per tracker <code>R285-TX-COEDITING-STAGING-01</code> (&quot;production stays off until the owner decides&quot;). Staging: on, walked at 1280 only</td>
+<td>Owner chose test on staging first</td>
+<td>Needs work: 390 width and three or more editors not walked</td>
+<td>Not stated, no new service named</td>
+<td>Needs work, then owner decision</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Start a bid by forwarding an email</td>
+<td><code>inbound_email_intake_enabled</code> <code>config.py:456</code>, needs migration 20269000002090</td>
+<td>Prod: variable absent so default false. Staging: UNVERIFIED</td>
+<td>R283 D-3, owner&#39;s switch</td>
+<td>Needs work: migration applied status on prod UNVERIFIED, inbound domain not activated (memory: Brevo inbound is API only)</td>
+<td>Needs a RULE 0-G line</td>
+<td>Owner decision</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Read only agent access MCP server for API key customers</td>
+<td><code>mcp_server_enabled</code> <code>config.py:462</code>, route <code>/api/v1/public/mcp/agent</code></td>
+<td>Prod: variable absent so default false, route answers 404</td>
+<td>R283 D-6, &quot;pricing and exposure are the owner&#39;s decision&quot;</td>
+<td>Ready technically, pricing undecided</td>
+<td>Needs pricing and a RULE 0-G line</td>
+<td>Owner decision</td>
+</tr>
+<tr>
+<td>10</td>
+<td>AI welcome paragraph beside the award history fact</td>
+<td><code>onboarding_award_welcome_ai_enabled</code> <code>config.py:507</code></td>
+<td>Prod: variable absent so false</td>
+<td><code>R285-TX-ONBOARDING-AGENT-DECISION-01</code>, fact stands without model</td>
+<td>Ready</td>
+<td>One small model call per new org, not priced in a document</td>
+<td>Keep off until priced</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Dunning auto cancel after failed payments</td>
+<td><code>DUNNING_AUTO_CANCEL_ENABLED</code>, <code>web/app/api/cron/dunning/route.ts:23</code>, <code>web/lib/billing/dunning.ts:65</code></td>
+<td>Prod: dunning job runs daily 08:46, the cancel step is suppressed unless true. Vercel value UNVERIFIED</td>
+<td>R262-D-288</td>
+<td>Owner decision (cancelling customers)</td>
+<td>none (no AI, no extra job)</td>
+<td>Owner decision</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Hard boundary: API accepts only the BFF service token</td>
+<td><code>bff_service_token_enforced</code> <code>config.py:480</code></td>
+<td>Prod: <code>false</code> (fingerprint equals <code>false</code>), dual accept. Signing: <code>BFF_IDENTITY_SIGNING_ENFORCED=true</code></td>
+<td>Staged security posture</td>
+<td>Needs work: flip only when every BFF caller sends the token</td>
+<td>none</td>
+<td>Needs work</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Search result re ranking</td>
+<td><code>RETRIEVAL_RERANK_ENABLED</code>, <code>api/app/services/retrieval.py:45,54</code></td>
+<td>Prod: <code>false</code>. Silver baseline also false (<code>silver_baseline.py:177</code>)</td>
+<td><code>R285-P3-AI-RAG-RECALL-LABELS-01</code>, Recall@5 never scored</td>
+<td>Needs work: recall labels, then a decision</td>
+<td>Extra model call per search, not priced</td>
+<td>Needs work</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Decision record issue and download, clarification letter, transparency pack download</td>
+<td><code>web/app/api/council/evaluations/[id]/decision-record/route.ts</code>, <code>.../clarification/route.ts</code>, <code>web/app/api/council/pack/route.ts</code></td>
+<td>Built, no screen calls them (feature wiring audit 2026-10-11 items 1 to 3). Not re measured today, UNVERIFIED whether since fixed</td>
+<td>None found</td>
+<td>Needs work: add buttons</td>
+<td>none</td>
+<td>Needs work</td>
+</tr>
+<tr>
+<td>15</td>
+<td>CRM pull sync, conflicts and sync log, content source document preview; VAT number check</td>
+<td><code>api/app/routers/crm.py:1251,1465,1507</code>, <code>content_sources.py</code>, <code>stripe.py:166,369</code></td>
+<td>Built, no BFF or UI (audit items 5, 6, 9). Not re measured today</td>
+<td>None found</td>
+<td>Needs work</td>
+<td>none</td>
+<td>Needs work</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Onboarding agent analyse step</td>
+<td><code>web/app/api/onboarding/agent/route.ts</code>, <code>onboarding_agent.py:168</code></td>
+<td>No entry point in UI (audit item 10)</td>
+<td>Owner decision named in audit</td>
+<td>Owner decision</td>
+<td>AI call, unpriced</td>
+<td>Owner decision</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Platform rag backfill job (embedding of old documents)</td>
+<td><code>rag_backfill_cron_enabled</code> <code>config.py:324</code></td>
+<td>Prod: <code>RAG_BACKFILL_CRON_ENABLED=true</code> already</td>
+<td>Already on</td>
+<td>n/a</td>
+<td>Embedding cost, see OD-12</td>
+<td>None, already on</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Python onboarding email producer</td>
+<td><code>config.py:427</code></td>
+<td>Prod: absent, false</td>
+<td>Duplicate of the web cron, would send two emails per milestone</td>
+<td>Ready as fallback only</td>
+<td>none</td>
+<td>Keep off</td>
+</tr>
+<tr>
+<td>19</td>
+<td>OpenAI as a second model vendor</td>
+<td><code>R285-P3-AI-OPENAI-ACCOUNT-01</code></td>
+<td>No key on prod (no OPENAI name among 64 variables)</td>
+<td>D330, D368, waits on owner account and low limit</td>
+<td>Owner decision</td>
+<td>Owner sets the monthly limit</td>
+<td>Keep off until the owner acts</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Google Vertex route for Gemini</td>
+<td><code>VERTEX-CREDITS-PLAN-2026-10-26.md</code></td>
+<td>Not started</td>
+<td>D475, sequenced after the website go live</td>
+<td>Not started</td>
+<td>Per the plan</td>
+<td>Keep off until after go live</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Partner revenue screen</td>
+<td><code>web/app/(dashboard)/crowmark/partner/page.tsx:64-70</code></td>
+<td>Hidden</td>
+<td>No ledger writer exists (audit)</td>
+<td>Needs work: build the ledger</td>
+<td>none</td>
+<td>Keep off</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Tawk chat rebrand, Stripe live mode, leaked password protection</td>
+<td>rows <code>R285-REBRAND-TAWK-01</code>, <code>R285-STRIPE-PRODUCTION-RUNS-LIVE-01</code>, <code>R285-SEC-LEAKED-PASSWORD-PROTECTION-01</code></td>
+<td>Leaked password: ENABLED (row cleared 2026-10-26). Stripe live: row BUILT 2026-10-23 (data statement)</td>
+<td>Owner rows</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No action here</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Captcha at signup, MFA enforcement for all members</td>
+<td>Supabase Authentication settings</td>
+<td>UNVERIFIED (not readable by advisor or SQL)</td>
+<td>none found</td>
+<td>Owner decision</td>
+<td>Captcha provider tier not priced</td>
+<td>Owner decision</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Website rate limit shadow mode (board A-223)</td>
+<td><code>api/app/middleware/rate_limit.py:1237</code>, <code>api/app/main.py:523</code></td>
+<td>Prod API: <code>RATE_LIMIT_DEFAULT_MODE</code> fingerprint equals <code>enforce</code>, so not shadow</td>
+<td>A-223 fixed with shadow default, prod now enforces</td>
+<td>n/a</td>
+<td>none</td>
+<td>No action, correct the record</td>
+</tr>
+</tbody></table></div>
+<h2>Things confirmed ON that the owner may think are off</h2>
+<p>Scheduled in production now: 13 cron jobs, all active (compliance digest weekly, dunning daily, email dispatch every 2 hours, monitoring digest weekly, onboarding emails daily, three retention prunes daily, scheduled reports every 4 hours, service health every 6 hours, status incident notify daily, stripe incomplete cleanup daily, trial ending daily). The four dormant crons of <code>20262450000000</code> are scheduled, though at different cadences than the migration text (service health is every 6 hours).</p>
+<h2>Decisions for the owner</h2>
+<ol>
+<li>Items 2 and 3: schedule the two unscheduled cron routes or confirm they are redundant (recommended: schedule the Stripe DLQ drain, check the other).</li>
+<li>Item 5: confirm the GBP 1.00 production ceilings on kpi prose extract, tone guidance and field extract are intended (recommended: yes if the screens are offered, else set them back to 0).</li>
+<li>Item 6: switch on the six surfaces that passed after one RULE 0-G line each (recommended: yes, quote scope after its fix).</li>
+<li>Item 7: co editing to production after the 390 width and three editor walks (recommended: yes after those walks).</li>
+<li>Items 8 and 9: inbound email and agent MCP stay off until pricing and the inbound domain are decided (recommended: keep off).</li>
+<li>Items 14, 15: build the missing screens or delete the routes (recommended: build, nothing is deleted under D361 style rules).</li>
+<li>Item 23: read captcha and MFA settings in the Supabase dashboard (recommended: owner or driver checks).</li>
+</ol>
+
+</article>
+</main></body></html>

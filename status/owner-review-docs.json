@@ -1,6 +1,7 @@
 {
   "$note": "D451 owner review documents. One line per tracker row: row id -> document paths relative to crowagent-platform. build-platform-board.js renders each document to status/review/<slug>.html on every rebuild and links it from the row on #platform. To add a new approval document, add one line here. A path that does not resolve is reported on the board, never invented.",
   "rows": {
+    "R285-P3-AI-OFF-SURFACES-DECISION-01": ["docs/release-2.8.5/BUILT-BUT-OFF-AUDIT-2026-10-26.md"],
     "R285-P3-AI-VERTEX-CREDITS-PLAN-01": ["docs/release-2.8.5/ai-quality/VERTEX-CREDITS-PLAN-2026-10-26.md"],
     "R285-TRUST-DPA-FINAL-01": ["docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md", "docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md", "docs/release-2.8.5/legal/LEGAL-DISCLAIMER-BENCHMARK-2026-10-26.md"],
     "R285-TRUST-LIABILITY-CAP-01": ["docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md", "docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md", "docs/release-2.8.5/legal/LIABILITY-AND-DPA-BENCHMARK-TOP10-UK-2026-10-26.md"],
