@@ -400,6 +400,9 @@ export async function derive() {
         `description: ${yaml(meta.description)}`,
         `heading: ${yaml(`${heading || titleText}.`.replace(/\.\.$/, '.'))}`,
         `eyebrow: ${yaml('Legal and data protection')}`,
+        /* [R285-LEGAL-KIRO-B03 2026-10-26] A platform page that exports `draftNotice` shows the
+           same draft banner as the Terms, from the one source, until counsel confirms (A-448). */
+        ...(typeof mod.draftNotice === 'string' ? [`draftNotice: ${yaml(mod.draftNotice)}`] : []),
         /* [A-472 2026-10-26] The note is a YAML comment inside the frontmatter, never an HTML
            comment in the body: Astro passes a body comment through to the served page, which
            then told every reader the platform source path. Frontmatter is never rendered, and

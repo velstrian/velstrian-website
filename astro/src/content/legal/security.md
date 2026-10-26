@@ -56,7 +56,7 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 - The web application runs on Vercel in London (lhr1).
 - Error monitoring runs in the EU (Sentry, Germany) and product analytics in the EU (PostHog EU Cloud).
 - Other processors operate under Standard Contractual Clauses (SCCs).
-- AI is the one part that leaves the EU. We send only the text a task needs to Google Gemini and Anthropic Claude, and neither lets us choose a UK or EU location. [AI data handling](#ai-data-handling) below says where each one processes it and under what contract. The full list is below and matches our [Privacy Policy](/privacy/).
+- AI is the one part that leaves the EU. We send only the text a task needs to Google Gemini and Anthropic Claude, and neither lets us choose a UK or EU location. [AI data handling](#ai-data-handling) below says where each one processes it and under what contract. The full list is below and matches our [Sub-processors page](/sub-processors/).
 
 <dl class="deflist"> <dt id="sub-processors">Sub-processors</dt> <dd> <dl class="deflist deflist--ledger"> <dt>Supabase</dt> <dd>EU (Ireland), database, authentication and file storage</dd> <dt>Railway</dt> <dd>EU (Netherlands), the API and background worker</dd> <dt>Vercel</dt> <dd>UK (London), web application hosting</dd> <dt>Cloudflare</dt> <dd>Global edge, SCC, DNS, CDN and bot protection</dd> <dt>Stripe</dt> <dd>US and EU, SCC, payments</dd> <dt>PostHog</dt> <dd>EU, product analytics</dd> <dt>Sentry</dt> <dd>EU (Germany), error monitoring</dd> <dt>Brevo</dt> <dd>EU, email delivery</dd> <dt>Google Gemini</dt> <dd>Not region pinned, international transfer under contract, AI drafting</dd> <dt>Anthropic Claude</dt> <dd>Global, no UK or EU option, international transfer under contract, the buyer pre-read</dd> <dt>Tawk.to</dt> <dd>US, SCC, live chat support</dd> <dt>Calendly</dt> <dd>SCC, meeting scheduling links</dd> <dt>Microsoft Azure Document Intelligence</dt> <dd>Dormant / Optional, activated only if specific document intelligence features are enabled by the customer, text recognition on scanned documents</dd> </dl> </dd> </dl>
 
@@ -96,7 +96,7 @@ We follow ISO/IEC 27001 and review every Annex A control in our own Statement of
 
 ## AI data handling
 
-AI runs through server-side API calls from our own API only. Drafting, document reading, search and the chat assistants use Google Gemini models (the current generation Gemini text models and Gemini embeddings). The buyer pre-read in Velstrian Buy and our checks on the quality of drafted answers use Anthropic Claude (Claude Sonnet 4.6). Both are data sub-processors. The boundaries below describe exactly what crosses to a model provider.
+AI runs through server-side API calls from our own API only. Drafting, document reading, search and the chat assistants use Google Gemini models (the current generation Gemini text models and Gemini embeddings). The buyer pre-read in Velstrian Buy and our checks on the quality of drafted answers use Anthropic's current Claude models. Both are data sub-processors. The boundaries below describe exactly what crosses to a model provider.
 
 In plain words, [how Velstrian uses AI](/ai/) sets out what the AI does in each product, the checks it runs and how you stay in control.
 

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T18:36:22.992Z",
+  "updated": "2026-10-26T20:14:31.590Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1919,6 +1919,26 @@
       "note": "Owner 2026-10-26 confirmed the URL https://www.linkedin.com/company/-velstrian/ ; both literals already match it and the built page renders it. RULE 0-C: one central constant. Fold into the next website change before the A-450 push. || FIXED 2026-10-26 in 7122aec0 (local, not pushed). footer.ts and the Organization schema sameAs in site.ts read SOCIAL_URLS in astro/src/lib/brand-names.ts (all five profiles, LinkedIn https://www.linkedin.com/company/-velstrian/ as the owner confirmed). Guard in scripts/check-brand-names.js scans src/ with comments blanked and fails on a profile URL typed elsewhere, red proved (planted literal, 1 violation, exit 1). npm run build 44 of 44 gates passed, built index.html renders the LinkedIn URL twice (footer and schema).",
       "changed": "2026-10-26",
       "changedAt": "2026-10-26T18:03:30.035Z"
+    },
+    {
+      "id": "A-476",
+      "src": "Kiro legal review B-01 to B-12, 2026-10-26",
+      "sev": "P1",
+      "title": "Legal pages: DPA clause 7 residency, draft banner, DSAR timing, Annex II controls, Supabase entity, Privacy sub-processor list and pinned Claude model corrected (R285-LEGAL-KIRO-B-FIX-01)",
+      "status": "FIXED",
+      "note": "Each Kiro claim checked against the page source. DPA (generated from crowagent-platform web/src/shared/legal/public-pages/dpa.tsx): clause 7 now primary store in UK and EEA with named sub-processors outside under IDTA or SCCs and a TRA where the law requires one, draft banner like the Terms, DSAR acknowledged in 72 hours and answered within one calendar month, six Annex II lines replaced by measured controls (no mandatory admin MFA, no quarterly review, TLS 1.2 accepted, no hardware keys, PITR 35 days and integrity checks unproven). Sub-processors: Supabase Pte. Ltd and its OCBC Centre address confirmed from supabase.com/legal/dpa. Privacy: partial sub-processor list replaced by a pointer to /sub-processors/, Claude Sonnet 4.6 replaced by Anthropic's current Claude models (also on /security/). Gate check-site-facts processors rule now requires /privacy/ to link /sub-processors/. Owner questions B-02, B-07, B-12 on R285-LEGAL-KIRO-B-OWNER-01.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T20:14:31.265Z"
+    },
+    {
+      "id": "A-477",
+      "src": "Kiro legal review B-06 follow up, 2026-10-26",
+      "sev": "P2",
+      "title": "Retention page says PITR snapshots kept up to 35 days, security page says TLS 1.3 in transit, Privacy says Sentry session replays kept 30 days while replay is not enabled (R285-LEGAL-KIRO-B-FOLLOWUP-01)",
+      "status": "OPEN",
+      "note": "Found while auditing DPA Annex II. Measured: plan pro, PITR add-on unconfirmed, no restore tested. app.velstrian.com and api.velstrian.com accept a TLS 1.2 handshake. Sub-processors page says Sentry session replay is not enabled. Not changed in the B lane, outside its scope.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T20:14:31.590Z"
     }
   ],
   "directives": [
@@ -1988,5 +2008,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 476
+  "nextId": 478
 }

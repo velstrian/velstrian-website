@@ -230,7 +230,7 @@ const RULES = [
   },
   {
     record: 'processors',
-    why: 'One processor list. Sentry is in the EU (Germany), Gemini is the 2.5 family, and every processor is named on both /privacy/ and /security/.',
+    why: 'One processor list. Sentry is in the EU (Germany), Gemini is the 2.5 family, and every processor is named on /security/. The Privacy Policy no longer restates a partial list (R285-LEGAL-KIRO-B09): it must link to /sub-processors/, the single source generated from the platform.',
     check(pages) {
       const out = banned(pages, FACTS.processors.banned);
       for (const route of FACTS.processors.pages_listing_all) {
@@ -238,6 +238,11 @@ const RULES = [
         for (const proc of FACTS.processors.list) {
           if (!p || !p.text.includes(proc.name)) out.push({ route, hit: proc.name, ctx: 'processor missing from this page' });
         }
+      }
+      const listHref = `href="${FACTS.processors.list_page}"`;
+      for (const route of FACTS.processors.pages_pointing_to_list) {
+        const p = pages.find((x) => x.route === route);
+        if (!p || !p.html.includes(listHref)) out.push({ route, hit: FACTS.processors.list_page, ctx: 'page does not link to the single sub-processor list' });
       }
       return out;
     },

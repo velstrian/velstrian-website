@@ -124,9 +124,12 @@
       }
     ],
     "pages_listing_all": [
-      "/privacy/",
       "/security/"
     ],
+    "pages_pointing_to_list": [
+      "/privacy/"
+    ],
+    "list_page": "/sub-processors/",
     "banned": [
       "Gemini 1.5",
       "named enterprise providers",
