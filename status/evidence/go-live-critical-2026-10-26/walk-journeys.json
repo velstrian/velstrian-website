@@ -1,0 +1,275 @@
+{
+ "legal": {
+  "terms": {
+   "h1": "Terms of Service.",
+   "dates": [
+    "26 October 2026"
+   ],
+   "has26Oct": true,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 13343
+  },
+  "privacy": {
+   "h1": "Privacy Policy.",
+   "dates": [
+    "26 October 2026",
+    "25 October 2026"
+   ],
+   "has26Oct": true,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 19326
+  },
+  "security": {
+   "h1": "Encrypted, documented, and auditable.",
+   "dates": [],
+   "has26Oct": false,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 11163
+  },
+  "dpa": {
+   "h1": "Data Processing Agreement.",
+   "dates": [
+    "24 April 2026"
+   ],
+   "has26Oct": false,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 8961
+  },
+  "sub-processors": {
+   "h1": "Sub-processors.",
+   "dates": [
+    "26 October 2026",
+    "19 August 2026"
+   ],
+   "has26Oct": true,
+   "upstash": true,
+   "resend": true,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 21657
+  },
+  "residency": {
+   "h1": "Data Residency.",
+   "dates": [
+    "19 July 2026",
+    "19 August 2026"
+   ],
+   "has26Oct": false,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 5147
+  },
+  "retention": {
+   "h1": "Data Retention Policy.",
+   "dates": [
+    "24 May 2026"
+   ],
+   "has26Oct": false,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 5352
+  },
+  "refund-policy": {
+   "h1": "Refund Policy.",
+   "dates": [],
+   "has26Oct": false,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 4072
+  },
+  "cookies": {
+   "h1": "Cookie Policy.",
+   "dates": [
+    "24 October 2026"
+   ],
+   "has26Oct": false,
+   "upstash": false,
+   "resend": false,
+   "gemini25": false,
+   "gemini3": false,
+   "len": 9416
+  }
+ },
+ "cta": {
+  "home": {
+   "signup": [
+    "https://app.velstrian.com/login",
+    "https://app.velstrian.com/signup",
+    "https://app.velstrian.com/signup?plan=bid_starter",
+    "https://app.velstrian.com/signup?plan=bid_pro",
+    "https://app.velstrian.com/signup?plan=bid_portfolio"
+   ],
+   "login": [
+    "https://app.velstrian.com/login",
+    "https://app.velstrian.com/login"
+   ],
+   "selfserve": false,
+   "startFree": [
+    "Start now -> https://app.velstrian.com/signup",
+    "Start now -> https://app.velstrian.com/signup",
+    "Start now -> https://app.velstrian.com/signup",
+    "Try the walkthrough -> http://localhost:8094/walkthrough/",
+    "Start now -> https://app.velstrian.com/signup",
+    "Start now -> https://app.velstrian.com/signup?plan=bid_starter"
+   ]
+  },
+  "pricing": {
+   "signup": [
+    "https://app.velstrian.com/login",
+    "https://app.velstrian.com/signup",
+    "https://app.velstrian.com/signup?plan=bid_starter",
+    "https://app.velstrian.com/signup?plan=bid_starter_annual",
+    "https://app.velstrian.com/signup?plan=bid_pro",
+    "https://app.velstrian.com/signup?plan=bid_pro_annual",
+    "https://app.velstrian.com/signup?plan=bid_portfolio",
+    "https://app.velstrian.com/signup?plan=bid_portfolio_annual",
+    "https://app.velstrian.com/signup?plan=buyer_pro",
+    "https://app.velstrian.com/signup?plan=buyer_pro_annual",
+    "https://app.velstrian.com/signup?plan=buyer_portfolio",
+    "https://app.velstrian.com/signup?plan=buyer_portfolio_annual"
+   ],
+   "login": [
+    "https://app.velstrian.com/login",
+    "https://app.velstrian.com/login"
+   ],
+   "selfserve": false,
+   "startFree": [
+    "Start now -> https://app.velstrian.com/signup",
+    "Start now -> https://app.velstrian.com/signup",
+    "Start now -> https://app.velstrian.com/signup",
+    "Start now\non the Starter plan, -> https://app.velstrian.com/signup?plan=bid_starter",
+    "Start now on the Starter plan, -> https://app.velstrian.com/signup?plan=bid_starter_annual",
+    "Start now\non the Pro plan, bil -> https://app.velstrian.com/signup?plan=bid_pro"
+   ]
+  }
+ },
+ "search": {
+  "total": 41,
+  "visibleForInvite": 3,
+  "visibleForGibberish": 3,
+  "emptyMsg": "No guide matches that yet. Try a shorter word, or ask the support team."
+ },
+ "videos": [
+  {
+   "page": "/",
+   "i": 0,
+   "src": "http://localhost:8094/Assets/video/velstrian-bid-in-60-seconds.mp4",
+   "preload": "none",
+   "autoplay": false,
+   "tracks": [
+    "captions:http://localhost:8094/Assets/video/velstrian-bid-in-60-seconds.vtt"
+   ],
+   "t": 3.354147,
+   "w": 1280,
+   "h": 720,
+   "paused": false,
+   "cues": [
+    12
+   ],
+   "err": null
+  },
+  {
+   "page": "/help/",
+   "i": 0,
+   "src": "http://localhost:8094/Assets/videos/help/01-supplier-answer-your-first-tender-question.mp4",
+   "preload": "none",
+   "autoplay": false,
+   "tracks": [
+    "captions:http://localhost:8094/Assets/videos/help/01-supplier-answer-your-first-tender-question.vtt"
+   ],
+   "t": 2.92005,
+   "w": 1920,
+   "h": 1080,
+   "paused": false,
+   "cues": [
+    26
+   ],
+   "err": null
+  },
+  {
+   "page": "/help/",
+   "i": 1,
+   "src": "http://localhost:8094/Assets/videos/help/00-supplier-start-here.mp4",
+   "preload": "none",
+   "autoplay": false,
+   "tracks": [
+    "captions:http://localhost:8094/Assets/videos/help/00-supplier-start-here.vtt"
+   ],
+   "t": 2.945389,
+   "w": 1920,
+   "h": 1080,
+   "paused": false,
+   "cues": [
+    13
+   ],
+   "err": null
+  },
+  {
+   "page": "/help/",
+   "i": 2,
+   "src": "http://localhost:8094/Assets/videos/help/00-buyer-start-here.mp4",
+   "preload": "none",
+   "autoplay": false,
+   "tracks": [
+    "captions:http://localhost:8094/Assets/videos/help/00-buyer-start-here.vtt"
+   ],
+   "t": 2.962146,
+   "w": 1920,
+   "h": 1080,
+   "paused": false,
+   "cues": [
+    11
+   ],
+   "err": null
+  }
+ ],
+ "storage": {
+  "ls": 0,
+  "ss": 0,
+  "cookie": ""
+ },
+ "cookies": [],
+ "bannerPresent": false,
+ "p404": {
+  "status": 404,
+  "title": "Page not found | Velstrian",
+  "links": 8
+ },
+ "icons": [
+  "http://localhost:8094/favicon.svg",
+  "http://localhost:8094/favicon.ico",
+  "http://localhost:8094/favicon-32.png?v=20260718c",
+  "http://localhost:8094/favicon-192.png?v=20260718c",
+  "http://localhost:8094/apple-touch-icon.png?v=20260718c",
+  "http://localhost:8094/safari-pinned-tab.svg",
+  "https://velstrian.com/Assets/og-image.png?v=20261023",
+  "https://velstrian.com/Assets/og-image.png?v=20261023"
+ ],
+ "iconStatus": {
+  "http://localhost:8094/favicon.svg": "200 image/svg+xml",
+  "http://localhost:8094/favicon.ico": "200 image/x-icon",
+  "http://localhost:8094/favicon-32.png?v=20260718c": "200 image/png",
+  "http://localhost:8094/favicon-192.png?v=20260718c": "200 image/png",
+  "http://localhost:8094/apple-touch-icon.png?v=20260718c": "200 image/png",
+  "http://localhost:8094/safari-pinned-tab.svg": "200 image/svg+xml",
+  "https://velstrian.com/Assets/og-image.png?v=20261023": "200 image/png"
+ }
+}

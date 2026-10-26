@@ -1,0 +1,1166 @@
+[
+ {
+  "u": "http://localhost:8094/buy/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/bid/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/compare/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/tools/tender-finder/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/tools/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/tools/tender-compliance-matrix/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/glossary/ppn-026/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/glossary/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/pricing/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/faq/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/about/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/walkthrough/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/security/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://status.velstrian.com/",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/login",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=bid_pro",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=bid_portfolio",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://x.com/VelstrianLtd",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.linkedin.com/company/-velstrian/",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://calendly.com/crowagent-platform/30min",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.youtube.com/@VELSTRIAN-UK",
+  "from": "/",
+  "ext": true,
+  "st": "302 -> https://consent.youtube.com/m?continue=https%3A%2F%2Fwww.youtube.com%2F%40VELSTRIAN-UK%3Fcbrd%3D1&gl=GB&m=0&pc=yt&cm=2&hl=en-GB&src=1"
+ },
+ {
+  "u": "https://medium.com/@velstrian-systems-ltd",
+  "from": "/",
+  "ext": true,
+  "st": "403"
+ },
+ {
+  "u": "http://localhost:8094/integrations/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/sectors/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/resources/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/sources/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/changelog/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/roadmap/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/contact/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/partners/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/ai/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/privacy/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/terms/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/dpa/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/sub-processors/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/cookies/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/accessibility/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/cookie-preferences/",
+  "from": "/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/glossary/ppn-026",
+  "from": "/about/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=bid_starter",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://find-and-update.company-information.service.gov.uk/company/17076461",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/accessibility",
+  "from": "/accessibility/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.instagram.com/velstrian/",
+  "from": "/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/life-after-award-kpis-contract-performance/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/frameworks-and-dps-explained/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/method-statement-that-scores/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/private-sector-rfp-pqq-guide/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/find-first-public-sector-contract/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/procurement-act-2023-sme-guide/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/social-value-portal-vs-bid/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/regulatory-updates-2026/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/blog/ppn-026-social-value-guide/",
+  "from": "/blog/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://www.equalityadvisoryservice.com/",
+  "from": "/accessibility/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fai-tender-evaluation-uk-public-sector%2F",
+  "from": "/blog/ai-tender-evaluation-uk-public-sector/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fai-tender-evaluation-uk-public-sector%252F"
+ },
+ {
+  "u": "https://github.com/dequelabs/axe-core",
+  "from": "/accessibility/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.gov.uk/government/collections/transforming-public-procurement",
+  "from": "/blog/ai-tender-evaluation-uk-public-sector/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.legislation.gov.uk/ukpga/2023/54/contents",
+  "from": "/blog/ai-tender-evaluation-uk-public-sector/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.gov.uk/government/publications/ppn-026-the-social-value-model",
+  "from": "/blog/ai-tender-evaluation-uk-public-sector/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.gov.uk/government/publications/procurement-policy-note-0621-taking-account-of-carbon-reduction-plans-in-the-procurement-of-major-government-contracts",
+  "from": "/blog/ai-tender-evaluation-uk-public-sector/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fcarbon-reduction-plan-ppn-0621-sme-guide%2F",
+  "from": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fcarbon-reduction-plan-ppn-0621-sme-guide%252F"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fai-tender-evaluation-uk-public-sector%2F&text=How%20AI%20is%20changing%20UK%20public%20sector%20tender%20evaluation",
+  "from": "/blog/ai-tender-evaluation-uk-public-sector/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fai-tender-evaluation-uk-public-sector%2F&text=How%20AI%20is%20changing%20UK%20public%20sector%20tender%20evaluation"
+ },
+ {
+  "u": "https://www.gov.uk/government/collections/government-conversion-factors-for-company-reporting",
+  "from": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fcarbon-reduction-plan-ppn-0621-sme-guide%2F&text=PPN%2006%2F21%20%26%20Carbon%20Reduction%20Plans%3A%20a%20guide%20for%20SME%20bidders",
+  "from": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fcarbon-reduction-plan-ppn-0621-sme-guide%2F&text=PPN%2006%2F21%20%26%20Carbon%20Reduction%20Plans%3A%20a%20guide%20for%20SME%20bidders"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Ffind-first-public-sector-contract%2F&text=How%20to%20find%20and%20win%20your%20first%20UK%20public%20sector%20contract",
+  "from": "/blog/find-first-public-sector-contract/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Ffind-first-public-sector-contract%2F&text=How%20to%20find%20and%20win%20your%20first%20UK%20public%20sector%20contract"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Ffind-first-public-sector-contract%2F",
+  "from": "/blog/find-first-public-sector-contract/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Ffind-first-public-sector-contract%252F"
+ },
+ {
+  "u": "https://www.gov.uk/contracts-finder",
+  "from": "/blog/find-first-public-sector-contract/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement",
+  "from": "/blog/find-first-public-sector-contract/",
+  "ext": true,
+  "st": "404"
+ },
+ {
+  "u": "https://www.find-tender.service.gov.uk/",
+  "from": "/blog/find-first-public-sector-contract/",
+  "ext": true,
+  "st": "302 -> https://www.find-tender.service.gov.uk/Search"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fframeworks-and-dps-explained%2F",
+  "from": "/blog/frameworks-and-dps-explained/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fframeworks-and-dps-explained%252F"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fframeworks-and-dps-explained%2F&text=Frameworks%20and%20DPS%20explained%3A%20G-Cloud%2C%20lots%20and%20call-offs",
+  "from": "/blog/frameworks-and-dps-explained/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fframeworks-and-dps-explained%2F&text=Frameworks%20and%20DPS%20explained%3A%20G-Cloud%2C%20lots%20and%20call-offs"
+ },
+ {
+  "u": "https://www.legislation.gov.uk/ukpga/2008/27/contents",
+  "from": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.crowncommercial.gov.uk/",
+  "from": "/blog/frameworks-and-dps-explained/",
+  "ext": true,
+  "st": "301 -> https://www.gca.gov.uk:443/"
+ },
+ {
+  "u": "https://www.digitalmarketplace.service.gov.uk/",
+  "from": "/blog/frameworks-and-dps-explained/",
+  "ext": true,
+  "st": "301 -> https://www.applytosupply.digitalmarketplace.service.gov.uk:443/"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Flife-after-award-kpis-contract-performance%2F",
+  "from": "/blog/life-after-award-kpis-contract-performance/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Flife-after-award-kpis-contract-performance%252F"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Flife-after-award-kpis-contract-performance%2F&text=Life%20after%20the%20award%3A%20the%20KPIs%20you%20will%20be%20measured%20on%2C%20in%20public",
+  "from": "/blog/life-after-award-kpis-contract-performance/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Flife-after-award-kpis-contract-performance%2F&text=Life%20after%20the%20award%3A%20the%20KPIs%20you%20will%20be%20measured%20on%2C%20in%20public"
+ },
+ {
+  "u": "https://www.legislation.gov.uk/ukpga/2023/54/section/52",
+  "from": "/blog/life-after-award-kpis-contract-performance/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fmethod-statement-that-scores%2F",
+  "from": "/blog/method-statement-that-scores/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fmethod-statement-that-scores%252F"
+ },
+ {
+  "u": "https://www.legislation.gov.uk/ukpga/2023/54/section/71",
+  "from": "/blog/life-after-award-kpis-contract-performance/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.gov.uk/government/publications/guidance-on-transparent-and-responsible-use-of-ai-in-procurement",
+  "from": "/blog/method-statement-that-scores/",
+  "ext": true,
+  "st": "404"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fmethod-statement-that-scores%2F&text=How%20to%20write%20a%20method%20statement%20that%20actually%20scores",
+  "from": "/blog/method-statement-that-scores/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fmethod-statement-that-scores%2F&text=How%20to%20write%20a%20method%20statement%20that%20actually%20scores"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-social-value-guide%2F",
+  "from": "/blog/ppn-026-social-value-guide/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fppn-026-social-value-guide%252F"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-social-value-guide%2F&text=Social%20value%20scoring%20for%20UK%20bids%3A%20the%20complete%20guide%20to%20PPN%20026",
+  "from": "/blog/ppn-026-social-value-guide/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-social-value-guide%2F&text=Social%20value%20scoring%20for%20UK%20bids%3A%20the%20complete%20guide%20to%20PPN%20026"
+ },
+ {
+  "u": "https://www.gov.uk/government/collections/procurement-policy-notes",
+  "from": "/blog/ppn-026-social-value-guide/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-what-has-published-and-what-has-not%2F&text=PPN%20026%20tracker%3A%20what%20has%20published%2C%20and%20what%20has%20not",
+  "from": "/blog/ppn-026-what-has-published-and-what-has-not/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-what-has-published-and-what-has-not%2F&text=PPN%20026%20tracker%3A%20what%20has%20published%2C%20and%20what%20has%20not"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-what-has-published-and-what-has-not%2F",
+  "from": "/blog/ppn-026-what-has-published-and-what-has-not/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fppn-026-what-has-published-and-what-has-not%252F"
+ },
+ {
+  "u": "https://socialvalueportal.com/solutions/national-toms/",
+  "from": "/blog/ppn-026-social-value-guide/",
+  "ext": true,
+  "st": "301 -> https://www.socialvalueportal.com/solutions/national-toms/"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprivate-sector-rfp-pqq-guide%2F&text=Responding%20to%20corporate%20RFPs%20and%20PQQs%20in%20the%20private%20sector",
+  "from": "/blog/private-sector-rfp-pqq-guide/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprivate-sector-rfp-pqq-guide%2F&text=Responding%20to%20corporate%20RFPs%20and%20PQQs%20in%20the%20private%20sector"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprivate-sector-rfp-pqq-guide%2F",
+  "from": "/blog/private-sector-rfp-pqq-guide/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fprivate-sector-rfp-pqq-guide%252F"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprocurement-act-2023-sme-guide%2F",
+  "from": "/blog/procurement-act-2023-sme-guide/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fprocurement-act-2023-sme-guide%252F"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprocurement-act-2023-sme-guide%2F&text=The%20Procurement%20Act%202023%3A%20what%20SME%20bidders%20actually%20need%20to%20know",
+  "from": "/blog/procurement-act-2023-sme-guide/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprocurement-act-2023-sme-guide%2F&text=The%20Procurement%20Act%202023%3A%20what%20SME%20bidders%20actually%20need%20to%20know"
+ },
+ {
+  "u": "https://www.legislation.gov.uk/ukpga/2023/54/section/12",
+  "from": "/blog/procurement-act-2023-sme-guide/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fregulatory-updates-2026%2F",
+  "from": "/blog/regulatory-updates-2026/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fregulatory-updates-2026%252F"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fregulatory-updates-2026%2F&text=PPN%20026%20in%202026%3A%20what%20changed%20(and%20what%20didn%27t)",
+  "from": "/blog/regulatory-updates-2026/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fregulatory-updates-2026%2F&text=PPN%20026%20in%202026%3A%20what%20changed%20(and%20what%20didn%27t)"
+ },
+ {
+  "u": "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fsocial-value-portal-vs-bid%2F&text=Social%20Value%20Portal%20vs%20Velstrian%20Bid%3A%20which%20is%20right%20for%20your%20business%3F",
+  "from": "/blog/social-value-portal-vs-bid/",
+  "ext": true,
+  "st": "301 -> https://x.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fsocial-value-portal-vs-bid%2F&text=Social%20Value%20Portal%20vs%20Velstrian%20Bid%3A%20which%20is%20right%20for%20your%20business%3F"
+ },
+ {
+  "u": "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fsocial-value-portal-vs-bid%2F",
+  "from": "/blog/social-value-portal-vs-bid/",
+  "ext": true,
+  "st": "302 -> https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3FshareActive%3Dtrue%26shareUrl%3Dhttps%253A%252F%252Fvelstrian.com%252Fblog%252Fsocial-value-portal-vs-bid%252F"
+ },
+ {
+  "u": "http://localhost:8094/contact/?product=buy&tier=portfolio",
+  "from": "/buy/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/compare/bid-vs-autogenai/",
+  "from": "/compare/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/compare/bid-vs-mytender-io/",
+  "from": "/compare/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/compare/bid-vs-cleantender/",
+  "from": "/compare/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/compare/bid-vs-swiftbid/",
+  "from": "/compare/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/pricing/?product=mark",
+  "from": "/compare/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=buyer_pro",
+  "from": "/buy/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.getapp.co.uk/software/2072629/autogenai",
+  "from": "/compare/bid-vs-autogenai/",
+  "ext": true,
+  "st": "403"
+ },
+ {
+  "u": "https://www.finsmes.com/2023/12/autogenai-raises-39-5m-in-series-b-funding.html",
+  "from": "/compare/bid-vs-autogenai/",
+  "ext": true,
+  "st": "403"
+ },
+ {
+  "u": "https://cleantender.co.uk/resources/comparisons/ai-tender-software",
+  "from": "/compare/bid-vs-autogenai/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk",
+  "from": "/compare/bid-vs-cleantender/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=buyer_portfolio",
+  "from": "/buy/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.capterra.com/p/10031061/mytender-io/",
+  "from": "/compare/bid-vs-mytender-io/",
+  "ext": true,
+  "st": "403"
+ },
+ {
+  "u": "http://localhost:8094/retention/",
+  "from": "/dpa/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/residency/",
+  "from": "/dpa/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/glossary/toms-framework/",
+  "from": "/glossary/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/bid-workflow-end-to-end/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/quick-start-velstrian/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/procurement-act-2023-readiness/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/create-bid-contract/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/upload-tender-documents/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/build-compliance-matrix/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/generate-narrative/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/collaborative-bidding-and-review-workflows/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/export-tender-responses/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/social-value-score/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/ppn-06-20-social-value-themes/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/toms-social-value-calculator-deep-dive/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/carbon-reduction-plans-ppn-06-21/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/evidence-vault-basics/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/evidence-vault-audit-citations/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/private-bid-to-a-private-buyer/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/private-quick-quote/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/public-sector-supplier-review/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/public-sector-evaluation-scoring/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-set-up-your-workspace/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-build-a-requirement/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-local-priorities-and-social-value/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-weighting-and-rubric/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-publish-download-and-share-the-pack/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-record-suppliers/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-run-an-evaluation/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-compare-bids-and-whole-life-cost/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-award-standstill-and-letters/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-manage-the-contract/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/buyer-quick-rfq/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/private-buyer-mode/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/support-and-reporting-faq/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/private-market-and-currency/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/sso-saml-scim-enterprise-setup/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/billing-and-plans/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/invite-team-members/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/account-security-and-data/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/audit-logs-and-compliance/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool",
+  "from": "/compare/bid-vs-swiftbid/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/help/contact/",
+  "from": "/help/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/support",
+  "from": "/help/",
+  "ext": true,
+  "st": "307 -> /login?redirect_to=%2Fsupport&returnTo=%2Fsupport"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=bid_starter_annual",
+  "from": "/pricing/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=bid_portfolio_annual",
+  "from": "/pricing/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/contact/?tier=portfolio",
+  "from": "/pricing/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=bid_pro_annual",
+  "from": "/pricing/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=buyer_portfolio_annual",
+  "from": "/pricing/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/contact/?product=buy",
+  "from": "/pricing/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://app.velstrian.com/signup?plan=buyer_pro_annual",
+  "from": "/pricing/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/refund-policy/",
+  "from": "/refund-policy/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/sectors/construction/",
+  "from": "/sectors/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/sectors/facilities/",
+  "from": "/sectors/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/sectors/highways/",
+  "from": "/sectors/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/sectors/education/",
+  "from": "/sectors/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://ico.org.uk/make-a-complaint/",
+  "from": "/privacy/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://eur-lex.europa.eu/eli/dir/2014/24/oj",
+  "from": "/sources/",
+  "ext": true,
+  "st": "202"
+ },
+ {
+  "u": "https://supabase.com/legal/dpa",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "308 -> /legal/customer-resources/data-processing-addendum"
+ },
+ {
+  "u": "https://railway.com/legal/dpa",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://vercel.com/legal/dpa",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.cloudflare.com/cloudflare-customer-dpa/",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://stripe.com/legal/dpa",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "307 -> https://stripe.com/gb/legal/dpa"
+ },
+ {
+  "u": "https://www.anthropic.com/legal/data-processing-addendum",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://business.safety.google/processorterms/",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.brevo.com/legal/termsofuse/",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://sentry.io/legal/dpa/",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://posthog.com/dpa",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.tawk.to/data-protection/dpa-data-processing-addendum/",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://calendly.com/legal/data-processing-addendum",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://business.safety.google/controllerterms/",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/supplier-terms/",
+  "from": "/supplier-terms/",
+  "ext": false,
+  "st": "200"
+ },
+ {
+  "u": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+  "from": "/tools/tender-finder/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://cloud.google.com/terms/data-processing-addendum",
+  "from": "/sub-processors/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "http://localhost:8094/this-page-does-not-exist/",
+  "from": "/this-page-does-not-exist/",
+  "ext": false,
+  "st": "404"
+ },
+ {
+  "u": "https://futureworlds.com/mytender-io-ai-driven-bid-writing-platform/",
+  "from": "/compare/bid-vs-mytender-io/",
+  "ext": true,
+  "st": "200"
+ },
+ {
+  "u": "https://ted.europa.eu/en/legal-notice",
+  "from": "/tools/tender-finder/",
+  "ext": true,
+  "st": "202"
+ },
+ {
+  "u": "https://velstrian.com/",
+  "from": "/accessibility/",
+  "ext": true,
+  "st": "ERR This operation was aborted"
+ }
+]

@@ -1,0 +1,39 @@
+{
+  "forms": {
+    "notify": "same",
+    "contact": "formed, validated, success+error ok, live POST waits phase B",
+    "helpContact": "same"
+  },
+  "thirdPartyBeforeConsent": 0,
+  "videos": "4 of 4 play with captions",
+  "widths": [
+    1440,
+    390
+  ],
+  "date": "2026-10-26",
+  "dashes": 0,
+  "links": {
+    "botBlocked": 6,
+    "internalFail": 0,
+    "unique": 194,
+    "externalDead": 2
+  },
+  "consoleErrors": 0,
+  "boards": [
+    "A-469",
+    "A-470",
+    "A-471",
+    "A-472"
+  ],
+  "deadProducts": 0,
+  "nonOk": 0,
+  "gemini25": 0,
+  "cookies": 0,
+  "build": "astro build re-run 10:25 (dist was older than 2 legal commits), 97 pages",
+  "pages": 96,
+  "crowagentVisible": 0,
+  "walks": 194,
+  "h1Fail": 0,
+  "sideScroll": 0,
+  "brokenImages": 0
+}

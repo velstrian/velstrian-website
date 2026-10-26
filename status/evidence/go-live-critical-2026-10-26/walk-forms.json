@@ -1,0 +1,142 @@
+{
+ "contact": {
+  "action": "https://app.velstrian.com/api/contact/submit",
+  "method": "POST",
+  "fields": [
+   "website:text",
+   "name:text*",
+   "email:email*",
+   "organisation:text",
+   "enquiry_type:select-one",
+   "message:textarea*",
+   "gdpr_consent:checkbox*"
+  ],
+  "turnstileHost": {
+   "box": true,
+   "iframe": false,
+   "sitekey": "present"
+  },
+  "emptyErrors": [
+   "name",
+   "email",
+   "message",
+   "Running a quick security check. This will send by itself as soon as it finishes.",
+   "gdpr_consent"
+  ],
+  "postsAfterEmpty": 0,
+  "postsNoToken": 1,
+  "msgNoToken": null,
+  "posts": [
+   {
+    "m": "POST",
+    "u": "https://app.velstrian.com/api/contact/submit",
+    "body": "{\"name\":\"Walk Test\",\"email\":\"walk-test@example.invalid\",\"organisation\":\"Walk Test Ltd\",\"enquiry_type\":\"\",\"message\":\"Automated go live walk, ignore. No real person.\",\"turnstile_token\":\"XXXX.DUMMY.TOKEN.XXXX\"}",
+    "ct": "application/json"
+   },
+   {
+    "m": "POST",
+    "u": "https://app.velstrian.com/api/contact/submit",
+    "body": "{\"name\":\"Walk Test\",\"email\":\"walk-test@example.invalid\",\"organisation\":\"Walk Test Ltd\",\"enquiry_type\":\"\",\"message\":\"Automated go live walk, ignore. No real person.\",\"turnstile_token\":\"MOCK_TOKEN_NOT_REAL\"}",
+    "ct": "application/json"
+   }
+  ],
+  "successText": "sent",
+  "errorText": "went wrong. Please email contact@velstrian.com directly.",
+  "consoleSample": [
+   "Access to fetch at 'https://app.velstrian.com/api/contact/submit' from origin 'http://localhost:8094' has been blocked by CORS policy: Response to preflight req",
+   "Failed to load resource: net::ERR_FAILED",
+   "{\"level\":\"error\",\"service\":\"contact-form\",\"endpoint\":\"https://app.velstrian.com/api/contact/submit\",\"error\":\"TypeError: Failed to fetch\"}",
+   "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+ },
+ "help-contact": {
+  "action": "https://app.velstrian.com/api/contact/submit",
+  "method": "POST",
+  "fields": [
+   "website:text",
+   "name:text*",
+   "email:email*",
+   "message:textarea*",
+   "gdpr_consent:checkbox*"
+  ],
+  "turnstileHost": {
+   "box": true,
+   "iframe": false,
+   "sitekey": "present"
+  },
+  "emptyErrors": [
+   "name",
+   "email",
+   "message",
+   "Running a quick security check. This will send by itself as soon as it finishes.",
+   "gdpr_consent"
+  ],
+  "postsAfterEmpty": 0,
+  "postsNoToken": 1,
+  "msgNoToken": null,
+  "posts": [
+   {
+    "m": "POST",
+    "u": "https://app.velstrian.com/api/contact/submit",
+    "body": "{\"name\":\"Walk Test\",\"email\":\"walk-test@example.invalid\",\"organisation\":\"\",\"enquiry_type\":\"\",\"message\":\"Automated go live walk, ignore. No real person.\",\"topic\":\"support\",\"turnstile_token\":\"XXXX.DUMMY.TOKEN.XXXX\"}",
+    "ct": "application/json"
+   },
+   {
+    "m": "POST",
+    "u": "https://app.velstrian.com/api/contact/submit",
+    "body": "{\"name\":\"Walk Test\",\"email\":\"walk-test@example.invalid\",\"organisation\":\"\",\"enquiry_type\":\"\",\"message\":\"Automated go live walk, ignore. No real person.\",\"topic\":\"support\",\"turnstile_token\":\"MOCK_TOKEN_NOT_REAL\"}",
+    "ct": "application/json"
+   }
+  ],
+  "successText": "sent",
+  "errorText": "went wrong. Please email contact@velstrian.com directly.",
+  "consoleSample": [
+   "Access to fetch at 'https://app.velstrian.com/api/contact/submit' from origin 'http://localhost:8094' has been blocked by CORS policy: Response to preflight req",
+   "Failed to load resource: net::ERR_FAILED",
+   "{\"level\":\"error\",\"service\":\"contact-form\",\"endpoint\":\"https://app.velstrian.com/api/contact/submit\",\"error\":\"TypeError: Failed to fetch\"}",
+   "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+ },
+ "notify": {
+  "action": "https://app.velstrian.com/api/notify",
+  "method": "POST",
+  "fields": [
+   "website:text",
+   "email:email*"
+  ],
+  "turnstileHost": {
+   "box": true,
+   "iframe": false,
+   "sitekey": "present"
+  },
+  "emptyErrors": [
+   "email",
+   "Running a quick security check. This will send by itself as soon as it finishes."
+  ],
+  "postsAfterEmpty": 0,
+  "postsNoToken": 1,
+  "msgNoToken": null,
+  "posts": [
+   {
+    "m": "POST",
+    "u": "https://app.velstrian.com/api/notify",
+    "body": "{\"email\":\"walk-test@example.invalid\",\"source\":\"contact-newsletter\",\"turnstile_token\":\"XXXX.DUMMY.TOKEN.XXXX\"}",
+    "ct": "application/json"
+   },
+   {
+    "m": "POST",
+    "u": "https://app.velstrian.com/api/notify",
+    "body": "{\"email\":\"walk-test@example.invalid\",\"source\":\"contact-newsletter\",\"turnstile_token\":\"MOCK_TOKEN_NOT_REAL\"}",
+    "ct": "application/json"
+   }
+  ],
+  "successText": "Subscribed",
+  "errorText": "went wrong. Please try again, or email contact@velstrian.com.",
+  "consoleSample": [
+   "Access to fetch at 'https://app.velstrian.com/api/notify' from origin 'http://localhost:8094' has been blocked by CORS policy: Response to preflight request doe",
+   "Failed to load resource: net::ERR_FAILED",
+   "{\"level\":\"error\",\"service\":\"newsletter-form\",\"endpoint\":\"https://app.velstrian.com/api/notify\",\"error\":\"TypeError: Failed to fetch\"}",
+   "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+ }
+}

@@ -1,0 +1,6451 @@
+{
+ "res": [
+  {
+   "route": "/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/",
+   "ogurl": "https://velstrian.com/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": " Get a colleague to check it Invite reviewers at no seat cost: 3 on Starter, 10",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/about/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/about/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/about/",
+   "ogurl": "https://velstrian.com/about/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/accessibility/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/accessibility/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/accessibility/",
+   "ogurl": "https://velstrian.com/accessibility/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/ai/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/ai/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/ai/",
+   "ogurl": "https://velstrian.com/ai/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/bid/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/bid/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/bid/",
+   "ogurl": "https://velstrian.com/bid/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": " Get a colleague to check it Invite people to read and comment without paying f",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/",
+   "ogurl": "https://velstrian.com/blog/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/ai-tender-evaluation-uk-public-sector/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/ai-tender-evaluation-uk-public-sector/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/ai-tender-evaluation-uk-public-sector/",
+   "ogurl": "https://velstrian.com/blog/ai-tender-evaluation-uk-public-sector/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-ai-tender-evaluation-uk-public-sector.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "ogurl": "https://velstrian.com/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-carbon-reduction-plan-ppn-0621-sme-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/find-first-public-sector-contract/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/find-first-public-sector-contract/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/find-first-public-sector-contract/",
+   "ogurl": "https://velstrian.com/blog/find-first-public-sector-contract/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-find-first-public-sector-contract.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/frameworks-and-dps-explained/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/frameworks-and-dps-explained/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/frameworks-and-dps-explained/",
+   "ogurl": "https://velstrian.com/blog/frameworks-and-dps-explained/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-frameworks-and-dps-explained.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/life-after-award-kpis-contract-performance/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/life-after-award-kpis-contract-performance/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/life-after-award-kpis-contract-performance/",
+   "ogurl": "https://velstrian.com/blog/life-after-award-kpis-contract-performance/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-life-after-award-kpis-contract-performance.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/method-statement-that-scores/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/method-statement-that-scores/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/method-statement-that-scores/",
+   "ogurl": "https://velstrian.com/blog/method-statement-that-scores/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-method-statement-that-scores.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/ppn-026-social-value-guide/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/ppn-026-social-value-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/ppn-026-social-value-guide/",
+   "ogurl": "https://velstrian.com/blog/ppn-026-social-value-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-ppn-026-social-value-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/ppn-026-what-has-published-and-what-has-not/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/ppn-026-what-has-published-and-what-has-not/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/ppn-026-what-has-published-and-what-has-not/",
+   "ogurl": "https://velstrian.com/blog/ppn-026-what-has-published-and-what-has-not/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-ppn-026-what-has-published-and-what-has-not.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/private-sector-rfp-pqq-guide/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/private-sector-rfp-pqq-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/private-sector-rfp-pqq-guide/",
+   "ogurl": "https://velstrian.com/blog/private-sector-rfp-pqq-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-private-sector-rfp-pqq-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": ". Before a private buyer will invite you to bid, or add you to an approved suppl",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/procurement-act-2023-sme-guide/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/procurement-act-2023-sme-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/procurement-act-2023-sme-guide/",
+   "ogurl": "https://velstrian.com/blog/procurement-act-2023-sme-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-procurement-act-2023-sme-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/regulatory-updates-2026/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/regulatory-updates-2026/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/regulatory-updates-2026/",
+   "ogurl": "https://velstrian.com/blog/regulatory-updates-2026/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-regulatory-updates-2026.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/social-value-portal-vs-bid/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/blog/social-value-portal-vs-bid/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/social-value-portal-vs-bid/",
+   "ogurl": "https://velstrian.com/blog/social-value-portal-vs-bid/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-social-value-portal-vs-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/buy/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/buy/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/buy/",
+   "ogurl": "https://velstrian.com/buy/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": "plier responds. Step 2 of 3 Invite suppliers Send each supplier a personal li",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/changelog/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/changelog/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/changelog/",
+   "ogurl": "https://velstrian.com/changelog/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/compare/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/",
+   "ogurl": "https://velstrian.com/compare/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-autogenai/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/compare/bid-vs-autogenai/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-autogenai/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-autogenai/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-cleantender/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/compare/bid-vs-cleantender/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-cleantender/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-cleantender/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-mytender-io/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/compare/bid-vs-mytender-io/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-mytender-io/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-mytender-io/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-swiftbid/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/compare/bid-vs-swiftbid/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-swiftbid/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-swiftbid/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": " draft, which Velstrian Bid's self-serve software does not provide. If you write",
+   "tp": []
+  },
+  {
+   "route": "/contact/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/contact/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/contact/",
+   "ogurl": "https://velstrian.com/contact/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/cookie-preferences/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/cookie-preferences/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/cookie-preferences/",
+   "ogurl": "https://velstrian.com/cookie-preferences/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/cookies/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/cookies/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/cookies/",
+   "ogurl": "https://velstrian.com/cookies/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/dpa/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/dpa/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/dpa/",
+   "ogurl": "https://velstrian.com/dpa/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/faq/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/faq/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/faq/",
+   "ogurl": "https://velstrian.com/faq/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/glossary/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/glossary/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/glossary/",
+   "ogurl": "https://velstrian.com/glossary/",
+   "ogimg": "https://velstrian.com/Assets/og/glossary-index.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/glossary/ppn-026/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/glossary/ppn-026/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/glossary/ppn-026/",
+   "ogurl": "https://velstrian.com/glossary/ppn-026/",
+   "ogimg": "https://velstrian.com/Assets/og/glossary-index.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/glossary/toms-framework/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/glossary/toms-framework/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/glossary/toms-framework/",
+   "ogurl": "https://velstrian.com/glossary/toms-framework/",
+   "ogimg": "https://velstrian.com/Assets/og/glossary-toms-framework.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/",
+   "ogurl": "https://velstrian.com/help/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/account-security-and-data/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/account-security-and-data/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/account-security-and-data/",
+   "ogurl": "https://velstrian.com/help/account-security-and-data/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/audit-logs-and-compliance/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/audit-logs-and-compliance/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/audit-logs-and-compliance/",
+   "ogurl": "https://velstrian.com/help/audit-logs-and-compliance/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/bid-workflow-end-to-end/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/bid-workflow-end-to-end/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/bid-workflow-end-to-end/",
+   "ogurl": "https://velstrian.com/help/bid-workflow-end-to-end/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/billing-and-plans/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/billing-and-plans/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/billing-and-plans/",
+   "ogurl": "https://velstrian.com/help/billing-and-plans/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/build-compliance-matrix/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/build-compliance-matrix/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/build-compliance-matrix/",
+   "ogurl": "https://velstrian.com/help/build-compliance-matrix/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-award-standstill-and-letters/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-award-standstill-and-letters/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-award-standstill-and-letters/",
+   "ogurl": "https://velstrian.com/help/buyer-award-standstill-and-letters/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-build-a-requirement/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-build-a-requirement/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-build-a-requirement/",
+   "ogurl": "https://velstrian.com/help/buyer-build-a-requirement/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-compare-bids-and-whole-life-cost/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-compare-bids-and-whole-life-cost/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-compare-bids-and-whole-life-cost/",
+   "ogurl": "https://velstrian.com/help/buyer-compare-bids-and-whole-life-cost/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-local-priorities-and-social-value/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-local-priorities-and-social-value/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-local-priorities-and-social-value/",
+   "ogurl": "https://velstrian.com/help/buyer-local-priorities-and-social-value/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-manage-the-contract/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-manage-the-contract/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-manage-the-contract/",
+   "ogurl": "https://velstrian.com/help/buyer-manage-the-contract/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-publish-download-and-share-the-pack/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-publish-download-and-share-the-pack/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-publish-download-and-share-the-pack/",
+   "ogurl": "https://velstrian.com/help/buyer-publish-download-and-share-the-pack/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-quick-rfq/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-quick-rfq/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-quick-rfq/",
+   "ogurl": "https://velstrian.com/help/buyer-quick-rfq/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-record-suppliers/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-record-suppliers/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-record-suppliers/",
+   "ogurl": "https://velstrian.com/help/buyer-record-suppliers/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-run-an-evaluation/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-run-an-evaluation/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-run-an-evaluation/",
+   "ogurl": "https://velstrian.com/help/buyer-run-an-evaluation/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-set-up-your-workspace/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-set-up-your-workspace/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-set-up-your-workspace/",
+   "ogurl": "https://velstrian.com/help/buyer-set-up-your-workspace/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-weighting-and-rubric/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/buyer-weighting-and-rubric/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-weighting-and-rubric/",
+   "ogurl": "https://velstrian.com/help/buyer-weighting-and-rubric/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/carbon-reduction-plans-ppn-06-21/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/carbon-reduction-plans-ppn-06-21/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/carbon-reduction-plans-ppn-06-21/",
+   "ogurl": "https://velstrian.com/help/carbon-reduction-plans-ppn-06-21/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/collaborative-bidding-and-review-workflows/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/collaborative-bidding-and-review-workflows/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/collaborative-bidding-and-review-workflows/",
+   "ogurl": "https://velstrian.com/help/collaborative-bidding-and-review-workflows/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/contact/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/contact/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/contact/",
+   "ogurl": "https://velstrian.com/help/contact/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/create-bid-contract/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/create-bid-contract/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/create-bid-contract/",
+   "ogurl": "https://velstrian.com/help/create-bid-contract/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/evidence-vault-audit-citations/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/evidence-vault-audit-citations/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/evidence-vault-audit-citations/",
+   "ogurl": "https://velstrian.com/help/evidence-vault-audit-citations/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/evidence-vault-basics/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/evidence-vault-basics/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/evidence-vault-basics/",
+   "ogurl": "https://velstrian.com/help/evidence-vault-basics/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/export-tender-responses/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/export-tender-responses/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/export-tender-responses/",
+   "ogurl": "https://velstrian.com/help/export-tender-responses/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/generate-narrative/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/generate-narrative/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/generate-narrative/",
+   "ogurl": "https://velstrian.com/help/generate-narrative/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/invite-team-members/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/invite-team-members/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/invite-team-members/",
+   "ogurl": "https://velstrian.com/help/invite-team-members/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": "Admin Full access Full access Invite & manage View only Member Create & edit Upl",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/ppn-06-20-social-value-themes/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/ppn-06-20-social-value-themes/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/ppn-06-20-social-value-themes/",
+   "ogurl": "https://velstrian.com/help/ppn-06-20-social-value-themes/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-bid-to-a-private-buyer/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/private-bid-to-a-private-buyer/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-bid-to-a-private-buyer/",
+   "ogurl": "https://velstrian.com/help/private-bid-to-a-private-buyer/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-buyer-mode/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/private-buyer-mode/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-buyer-mode/",
+   "ogurl": "https://velstrian.com/help/private-buyer-mode/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-market-and-currency/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/private-market-and-currency/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-market-and-currency/",
+   "ogurl": "https://velstrian.com/help/private-market-and-currency/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-quick-quote/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/private-quick-quote/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-quick-quote/",
+   "ogurl": "https://velstrian.com/help/private-quick-quote/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/procurement-act-2023-readiness/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/procurement-act-2023-readiness/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/procurement-act-2023-readiness/",
+   "ogurl": "https://velstrian.com/help/procurement-act-2023-readiness/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/public-sector-evaluation-scoring/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/public-sector-evaluation-scoring/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/public-sector-evaluation-scoring/",
+   "ogurl": "https://velstrian.com/help/public-sector-evaluation-scoring/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/public-sector-supplier-review/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/public-sector-supplier-review/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/public-sector-supplier-review/",
+   "ogurl": "https://velstrian.com/help/public-sector-supplier-review/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/quick-start-velstrian/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/quick-start-velstrian/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/quick-start-velstrian/",
+   "ogurl": "https://velstrian.com/help/quick-start-velstrian/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/social-value-score/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/social-value-score/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/social-value-score/",
+   "ogurl": "https://velstrian.com/help/social-value-score/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/sso-saml-scim-enterprise-setup/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/sso-saml-scim-enterprise-setup/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/sso-saml-scim-enterprise-setup/",
+   "ogurl": "https://velstrian.com/help/sso-saml-scim-enterprise-setup/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/support-and-reporting-faq/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/support-and-reporting-faq/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/support-and-reporting-faq/",
+   "ogurl": "https://velstrian.com/help/support-and-reporting-faq/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/toms-social-value-calculator-deep-dive/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/toms-social-value-calculator-deep-dive/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/toms-social-value-calculator-deep-dive/",
+   "ogurl": "https://velstrian.com/help/toms-social-value-calculator-deep-dive/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/upload-tender-documents/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/help/upload-tender-documents/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/upload-tender-documents/",
+   "ogurl": "https://velstrian.com/help/upload-tender-documents/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/integrations/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/integrations/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/integrations/",
+   "ogurl": "https://velstrian.com/integrations/",
+   "ogimg": "https://velstrian.com/Assets/og/integrations.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/partners/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/partners/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/partners/",
+   "ogurl": "https://velstrian.com/partners/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/pricing/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/pricing/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/pricing/",
+   "ogurl": "https://velstrian.com/pricing/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/privacy/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/privacy/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/privacy/",
+   "ogurl": "https://velstrian.com/privacy/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/refund-policy/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/refund-policy/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/refund-policy/",
+   "ogurl": "https://velstrian.com/refund-policy/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/residency/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/residency/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/residency/",
+   "ogurl": "https://velstrian.com/residency/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/resources/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/resources/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/resources/",
+   "ogurl": "https://velstrian.com/resources/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/retention/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/retention/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/retention/",
+   "ogurl": "https://velstrian.com/retention/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": "5. Your other rights You can request access, correction, deletion, portability,",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/roadmap/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/roadmap/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/roadmap/",
+   "ogurl": "https://velstrian.com/roadmap/",
+   "ogimg": "https://velstrian.com/Assets/og/roadmap.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/sectors/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/",
+   "ogurl": "https://velstrian.com/sectors/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/construction/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/sectors/construction/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/construction/",
+   "ogurl": "https://velstrian.com/sectors/construction/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/education/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/sectors/education/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/education/",
+   "ogurl": "https://velstrian.com/sectors/education/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/facilities/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/sectors/facilities/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/facilities/",
+   "ogurl": "https://velstrian.com/sectors/facilities/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/highways/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/sectors/highways/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/highways/",
+   "ogurl": "https://velstrian.com/sectors/highways/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/security/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/security/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/security/",
+   "ogurl": "https://velstrian.com/security/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sources/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/sources/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sources/",
+   "ogurl": "https://velstrian.com/sources/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sub-processors/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/sub-processors/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sub-processors/",
+   "ogurl": "https://velstrian.com/sub-processors/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": " or UK contracting entity for self-serve customers. 101 Townsend Street, San Fra",
+   "tp": []
+  },
+  {
+   "route": "/supplier-terms/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/supplier-terms/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/supplier-terms/",
+   "ogurl": "https://velstrian.com/supplier-terms/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/terms/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/terms/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/terms/",
+   "ogurl": "https://velstrian.com/terms/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": "PROCESSOR Stripe CANCELLATION Self-serve from Settings → Billing, any time EFFEC",
+   "tp": []
+  },
+  {
+   "route": "/tools/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/tools/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/tools/",
+   "ogurl": "https://velstrian.com/tools/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/tools/tender-compliance-matrix/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/tools/tender-compliance-matrix/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/tools/tender-compliance-matrix/",
+   "ogurl": "https://velstrian.com/tools/tender-compliance-matrix/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/tools/tender-finder/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/tools/tender-finder/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/tools/tender-finder/",
+   "ogurl": "https://velstrian.com/tools/tender-finder/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/walkthrough/",
+   "width": "desktop",
+   "status": 200,
+   "landed": "/walkthrough/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/walkthrough/",
+   "ogurl": "https://velstrian.com/walkthrough/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/this-page-does-not-exist/",
+   "width": "desktop",
+   "status": 404,
+   "landed": "/this-page-does-not-exist/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/404",
+   "ogurl": "https://velstrian.com/404",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 http://localhost:8094/this-page-does-not-exist/"
+   ],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/",
+   "ogurl": "https://velstrian.com/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": " Get a colleague to check it Invite reviewers at no seat cost: 3 on Starter, 10",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/about/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/about/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/about/",
+   "ogurl": "https://velstrian.com/about/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/accessibility/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/accessibility/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/accessibility/",
+   "ogurl": "https://velstrian.com/accessibility/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/ai/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/ai/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/ai/",
+   "ogurl": "https://velstrian.com/ai/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/bid/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/bid/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/bid/",
+   "ogurl": "https://velstrian.com/bid/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": " Get a colleague to check it Invite people to read and comment without paying f",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/",
+   "ogurl": "https://velstrian.com/blog/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/ai-tender-evaluation-uk-public-sector/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/ai-tender-evaluation-uk-public-sector/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/ai-tender-evaluation-uk-public-sector/",
+   "ogurl": "https://velstrian.com/blog/ai-tender-evaluation-uk-public-sector/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-ai-tender-evaluation-uk-public-sector.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "ogurl": "https://velstrian.com/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-carbon-reduction-plan-ppn-0621-sme-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/find-first-public-sector-contract/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/find-first-public-sector-contract/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/find-first-public-sector-contract/",
+   "ogurl": "https://velstrian.com/blog/find-first-public-sector-contract/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-find-first-public-sector-contract.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/frameworks-and-dps-explained/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/frameworks-and-dps-explained/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/frameworks-and-dps-explained/",
+   "ogurl": "https://velstrian.com/blog/frameworks-and-dps-explained/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-frameworks-and-dps-explained.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/life-after-award-kpis-contract-performance/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/life-after-award-kpis-contract-performance/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/life-after-award-kpis-contract-performance/",
+   "ogurl": "https://velstrian.com/blog/life-after-award-kpis-contract-performance/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-life-after-award-kpis-contract-performance.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/method-statement-that-scores/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/method-statement-that-scores/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/method-statement-that-scores/",
+   "ogurl": "https://velstrian.com/blog/method-statement-that-scores/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-method-statement-that-scores.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/ppn-026-social-value-guide/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/ppn-026-social-value-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/ppn-026-social-value-guide/",
+   "ogurl": "https://velstrian.com/blog/ppn-026-social-value-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-ppn-026-social-value-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/ppn-026-what-has-published-and-what-has-not/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/ppn-026-what-has-published-and-what-has-not/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/ppn-026-what-has-published-and-what-has-not/",
+   "ogurl": "https://velstrian.com/blog/ppn-026-what-has-published-and-what-has-not/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-ppn-026-what-has-published-and-what-has-not.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/private-sector-rfp-pqq-guide/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/private-sector-rfp-pqq-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/private-sector-rfp-pqq-guide/",
+   "ogurl": "https://velstrian.com/blog/private-sector-rfp-pqq-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-private-sector-rfp-pqq-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": ". Before a private buyer will invite you to bid, or add you to an approved suppl",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/procurement-act-2023-sme-guide/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/procurement-act-2023-sme-guide/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/procurement-act-2023-sme-guide/",
+   "ogurl": "https://velstrian.com/blog/procurement-act-2023-sme-guide/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-procurement-act-2023-sme-guide.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/regulatory-updates-2026/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/regulatory-updates-2026/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/regulatory-updates-2026/",
+   "ogurl": "https://velstrian.com/blog/regulatory-updates-2026/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-regulatory-updates-2026.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/blog/social-value-portal-vs-bid/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/blog/social-value-portal-vs-bid/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/blog/social-value-portal-vs-bid/",
+   "ogurl": "https://velstrian.com/blog/social-value-portal-vs-bid/",
+   "ogimg": "https://velstrian.com/Assets/og/blog-social-value-portal-vs-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/buy/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/buy/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/buy/",
+   "ogurl": "https://velstrian.com/buy/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": "plier responds. Step 2 of 3 Invite suppliers Send each supplier a personal li",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/changelog/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/changelog/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/changelog/",
+   "ogurl": "https://velstrian.com/changelog/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/compare/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/",
+   "ogurl": "https://velstrian.com/compare/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-autogenai/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/compare/bid-vs-autogenai/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-autogenai/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-autogenai/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-cleantender/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/compare/bid-vs-cleantender/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-cleantender/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-cleantender/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-mytender-io/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/compare/bid-vs-mytender-io/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-mytender-io/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-mytender-io/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/compare/bid-vs-swiftbid/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/compare/bid-vs-swiftbid/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/compare/bid-vs-swiftbid/",
+   "ogurl": "https://velstrian.com/compare/bid-vs-swiftbid/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": " draft, which Velstrian Bid's self-serve software does not provide. If you write",
+   "tp": []
+  },
+  {
+   "route": "/contact/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/contact/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/contact/",
+   "ogurl": "https://velstrian.com/contact/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/cookie-preferences/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/cookie-preferences/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/cookie-preferences/",
+   "ogurl": "https://velstrian.com/cookie-preferences/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/cookies/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/cookies/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/cookies/",
+   "ogurl": "https://velstrian.com/cookies/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/dpa/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/dpa/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/dpa/",
+   "ogurl": "https://velstrian.com/dpa/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/faq/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/faq/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/faq/",
+   "ogurl": "https://velstrian.com/faq/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/glossary/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/glossary/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/glossary/",
+   "ogurl": "https://velstrian.com/glossary/",
+   "ogimg": "https://velstrian.com/Assets/og/glossary-index.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/glossary/ppn-026/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/glossary/ppn-026/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/glossary/ppn-026/",
+   "ogurl": "https://velstrian.com/glossary/ppn-026/",
+   "ogimg": "https://velstrian.com/Assets/og/glossary-index.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/glossary/toms-framework/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/glossary/toms-framework/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/glossary/toms-framework/",
+   "ogurl": "https://velstrian.com/glossary/toms-framework/",
+   "ogimg": "https://velstrian.com/Assets/og/glossary-toms-framework.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/",
+   "ogurl": "https://velstrian.com/help/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/account-security-and-data/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/account-security-and-data/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/account-security-and-data/",
+   "ogurl": "https://velstrian.com/help/account-security-and-data/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/audit-logs-and-compliance/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/audit-logs-and-compliance/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/audit-logs-and-compliance/",
+   "ogurl": "https://velstrian.com/help/audit-logs-and-compliance/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/bid-workflow-end-to-end/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/bid-workflow-end-to-end/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/bid-workflow-end-to-end/",
+   "ogurl": "https://velstrian.com/help/bid-workflow-end-to-end/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/billing-and-plans/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/billing-and-plans/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/billing-and-plans/",
+   "ogurl": "https://velstrian.com/help/billing-and-plans/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/build-compliance-matrix/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/build-compliance-matrix/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/build-compliance-matrix/",
+   "ogurl": "https://velstrian.com/help/build-compliance-matrix/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-award-standstill-and-letters/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-award-standstill-and-letters/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-award-standstill-and-letters/",
+   "ogurl": "https://velstrian.com/help/buyer-award-standstill-and-letters/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-build-a-requirement/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-build-a-requirement/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-build-a-requirement/",
+   "ogurl": "https://velstrian.com/help/buyer-build-a-requirement/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-compare-bids-and-whole-life-cost/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-compare-bids-and-whole-life-cost/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-compare-bids-and-whole-life-cost/",
+   "ogurl": "https://velstrian.com/help/buyer-compare-bids-and-whole-life-cost/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-local-priorities-and-social-value/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-local-priorities-and-social-value/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-local-priorities-and-social-value/",
+   "ogurl": "https://velstrian.com/help/buyer-local-priorities-and-social-value/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-manage-the-contract/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-manage-the-contract/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-manage-the-contract/",
+   "ogurl": "https://velstrian.com/help/buyer-manage-the-contract/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-publish-download-and-share-the-pack/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-publish-download-and-share-the-pack/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-publish-download-and-share-the-pack/",
+   "ogurl": "https://velstrian.com/help/buyer-publish-download-and-share-the-pack/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-quick-rfq/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-quick-rfq/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-quick-rfq/",
+   "ogurl": "https://velstrian.com/help/buyer-quick-rfq/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-record-suppliers/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-record-suppliers/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-record-suppliers/",
+   "ogurl": "https://velstrian.com/help/buyer-record-suppliers/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-run-an-evaluation/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-run-an-evaluation/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-run-an-evaluation/",
+   "ogurl": "https://velstrian.com/help/buyer-run-an-evaluation/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-set-up-your-workspace/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-set-up-your-workspace/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-set-up-your-workspace/",
+   "ogurl": "https://velstrian.com/help/buyer-set-up-your-workspace/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/buyer-weighting-and-rubric/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/buyer-weighting-and-rubric/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/buyer-weighting-and-rubric/",
+   "ogurl": "https://velstrian.com/help/buyer-weighting-and-rubric/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/carbon-reduction-plans-ppn-06-21/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/carbon-reduction-plans-ppn-06-21/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/carbon-reduction-plans-ppn-06-21/",
+   "ogurl": "https://velstrian.com/help/carbon-reduction-plans-ppn-06-21/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/collaborative-bidding-and-review-workflows/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/collaborative-bidding-and-review-workflows/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/collaborative-bidding-and-review-workflows/",
+   "ogurl": "https://velstrian.com/help/collaborative-bidding-and-review-workflows/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/contact/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/contact/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/contact/",
+   "ogurl": "https://velstrian.com/help/contact/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/create-bid-contract/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/create-bid-contract/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/create-bid-contract/",
+   "ogurl": "https://velstrian.com/help/create-bid-contract/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/evidence-vault-audit-citations/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/evidence-vault-audit-citations/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/evidence-vault-audit-citations/",
+   "ogurl": "https://velstrian.com/help/evidence-vault-audit-citations/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/evidence-vault-basics/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/evidence-vault-basics/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/evidence-vault-basics/",
+   "ogurl": "https://velstrian.com/help/evidence-vault-basics/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/export-tender-responses/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/export-tender-responses/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/export-tender-responses/",
+   "ogurl": "https://velstrian.com/help/export-tender-responses/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/generate-narrative/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/generate-narrative/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/generate-narrative/",
+   "ogurl": "https://velstrian.com/help/generate-narrative/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/invite-team-members/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/invite-team-members/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/invite-team-members/",
+   "ogurl": "https://velstrian.com/help/invite-team-members/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": "Admin Full access Full access Invite & manage View only Member Create & edit Upl",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/ppn-06-20-social-value-themes/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/ppn-06-20-social-value-themes/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/ppn-06-20-social-value-themes/",
+   "ogurl": "https://velstrian.com/help/ppn-06-20-social-value-themes/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-bid-to-a-private-buyer/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/private-bid-to-a-private-buyer/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-bid-to-a-private-buyer/",
+   "ogurl": "https://velstrian.com/help/private-bid-to-a-private-buyer/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-buyer-mode/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/private-buyer-mode/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-buyer-mode/",
+   "ogurl": "https://velstrian.com/help/private-buyer-mode/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-market-and-currency/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/private-market-and-currency/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-market-and-currency/",
+   "ogurl": "https://velstrian.com/help/private-market-and-currency/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/private-quick-quote/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/private-quick-quote/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/private-quick-quote/",
+   "ogurl": "https://velstrian.com/help/private-quick-quote/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/procurement-act-2023-readiness/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/procurement-act-2023-readiness/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/procurement-act-2023-readiness/",
+   "ogurl": "https://velstrian.com/help/procurement-act-2023-readiness/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/public-sector-evaluation-scoring/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/public-sector-evaluation-scoring/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/public-sector-evaluation-scoring/",
+   "ogurl": "https://velstrian.com/help/public-sector-evaluation-scoring/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/public-sector-supplier-review/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/public-sector-supplier-review/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/public-sector-supplier-review/",
+   "ogurl": "https://velstrian.com/help/public-sector-supplier-review/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/quick-start-velstrian/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/quick-start-velstrian/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/quick-start-velstrian/",
+   "ogurl": "https://velstrian.com/help/quick-start-velstrian/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/social-value-score/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/social-value-score/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/social-value-score/",
+   "ogurl": "https://velstrian.com/help/social-value-score/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/sso-saml-scim-enterprise-setup/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/sso-saml-scim-enterprise-setup/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/sso-saml-scim-enterprise-setup/",
+   "ogurl": "https://velstrian.com/help/sso-saml-scim-enterprise-setup/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/support-and-reporting-faq/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/support-and-reporting-faq/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/support-and-reporting-faq/",
+   "ogurl": "https://velstrian.com/help/support-and-reporting-faq/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/toms-social-value-calculator-deep-dive/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/toms-social-value-calculator-deep-dive/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/toms-social-value-calculator-deep-dive/",
+   "ogurl": "https://velstrian.com/help/toms-social-value-calculator-deep-dive/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/help/upload-tender-documents/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/help/upload-tender-documents/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/help/upload-tender-documents/",
+   "ogurl": "https://velstrian.com/help/upload-tender-documents/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/integrations/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/integrations/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/integrations/",
+   "ogurl": "https://velstrian.com/integrations/",
+   "ogimg": "https://velstrian.com/Assets/og/integrations.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/partners/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/partners/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/partners/",
+   "ogurl": "https://velstrian.com/partners/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/pricing/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/pricing/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/pricing/",
+   "ogurl": "https://velstrian.com/pricing/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/privacy/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/privacy/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/privacy/",
+   "ogurl": "https://velstrian.com/privacy/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/refund-policy/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/refund-policy/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/refund-policy/",
+   "ogurl": "https://velstrian.com/refund-policy/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/residency/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/residency/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/residency/",
+   "ogurl": "https://velstrian.com/residency/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/resources/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/resources/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/resources/",
+   "ogurl": "https://velstrian.com/resources/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/retention/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/retention/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/retention/",
+   "ogurl": "https://velstrian.com/retention/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": "5. Your other rights You can request access, correction, deletion, portability,",
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/roadmap/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/roadmap/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/roadmap/",
+   "ogurl": "https://velstrian.com/roadmap/",
+   "ogimg": "https://velstrian.com/Assets/og/roadmap.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/sectors/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/",
+   "ogurl": "https://velstrian.com/sectors/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/construction/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/sectors/construction/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/construction/",
+   "ogurl": "https://velstrian.com/sectors/construction/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/education/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/sectors/education/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/education/",
+   "ogurl": "https://velstrian.com/sectors/education/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/facilities/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/sectors/facilities/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/facilities/",
+   "ogurl": "https://velstrian.com/sectors/facilities/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sectors/highways/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/sectors/highways/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sectors/highways/",
+   "ogurl": "https://velstrian.com/sectors/highways/",
+   "ogimg": "https://velstrian.com/Assets/og/velstrian-bid.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/security/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/security/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/security/",
+   "ogurl": "https://velstrian.com/security/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sources/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/sources/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sources/",
+   "ogurl": "https://velstrian.com/sources/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/sub-processors/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/sub-processors/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/sub-processors/",
+   "ogurl": "https://velstrian.com/sub-processors/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": " or UK contracting entity for self-serve customers. 101 Townsend Street, San Fra",
+   "tp": []
+  },
+  {
+   "route": "/supplier-terms/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/supplier-terms/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/supplier-terms/",
+   "ogurl": "https://velstrian.com/supplier-terms/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/terms/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/terms/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/terms/",
+   "ogurl": "https://velstrian.com/terms/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": "PROCESSOR Stripe CANCELLATION Self-serve from Settings → Billing, any time EFFEC",
+   "tp": []
+  },
+  {
+   "route": "/tools/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/tools/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/tools/",
+   "ogurl": "https://velstrian.com/tools/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/tools/tender-compliance-matrix/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/tools/tender-compliance-matrix/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/tools/tender-compliance-matrix/",
+   "ogurl": "https://velstrian.com/tools/tender-compliance-matrix/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/tools/tender-finder/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/tools/tender-finder/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/tools/tender-finder/",
+   "ogurl": "https://velstrian.com/tools/tender-finder/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/walkthrough/",
+   "width": "phone",
+   "status": 200,
+   "landed": "/walkthrough/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/walkthrough/",
+   "ogurl": "https://velstrian.com/walkthrough/",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [],
+   "bad": [],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  },
+  {
+   "route": "/this-page-does-not-exist/",
+   "width": "phone",
+   "status": 404,
+   "landed": "/this-page-does-not-exist/",
+   "h1": 1,
+   "brokenImgs": [],
+   "sideScroll": false,
+   "canon": "https://velstrian.com/404",
+   "ogurl": "https://velstrian.com/404",
+   "ogimg": "https://velstrian.com/Assets/og-image.png?v=20261023",
+   "crowagentHtml": [],
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bad": [
+    "404 http://localhost:8094/this-page-does-not-exist/"
+   ],
+   "crowagentText": null,
+   "dash": null,
+   "gemini25": null,
+   "beta": null,
+   "dead": null,
+   "selfserve": null,
+   "tp": []
+  }
+ ],
+ "thirdParty": {},
+ "links": [
+  [
+   "http://localhost:8094/#main-content",
+   "/"
+  ],
+  [
+   "http://localhost:8094/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/bid/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/buy/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/compare/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/tools/tender-compliance-matrix/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/tools/tender-finder/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/tools/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/glossary/ppn-026/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/glossary/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/pricing/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/blog/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/faq/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/about/",
+   "/"
+  ],
+  [
+   "https://app.velstrian.com/login",
+   "/"
+  ],
+  [
+   "https://app.velstrian.com/signup",
+   "/"
+  ],
+  [
+   "http://localhost:8094/walkthrough/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/#ea-hero-src-1",
+   "/"
+  ],
+  [
+   "http://localhost:8094/#ea-hero-src-2",
+   "/"
+  ],
+  [
+   "http://localhost:8094/#ea-hero-src-3",
+   "/"
+  ],
+  [
+   "http://localhost:8094/#who-small",
+   "/"
+  ],
+  [
+   "http://localhost:8094/#who-team",
+   "/"
+  ],
+  [
+   "http://localhost:8094/#who-buyer",
+   "/"
+  ],
+  [
+   "http://localhost:8094/#ea-ref-src-1",
+   "/"
+  ],
+  [
+   "http://localhost:8094/security/",
+   "/"
+  ],
+  [
+   "https://status.velstrian.com/",
+   "/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=bid_starter",
+   "/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=bid_pro",
+   "/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=bid_portfolio",
+   "/"
+  ],
+  [
+   "https://calendly.com/crowagent-platform/30min",
+   "/"
+  ],
+  [
+   "https://www.linkedin.com/company/-velstrian/",
+   "/"
+  ],
+  [
+   "https://x.com/VelstrianLtd",
+   "/"
+  ],
+  [
+   "https://www.youtube.com/@VELSTRIAN-UK",
+   "/"
+  ],
+  [
+   "https://medium.com/@velstrian-systems-ltd",
+   "/"
+  ],
+  [
+   "https://www.instagram.com/velstrian/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/integrations/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/sectors/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/help/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/resources/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/sources/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/changelog/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/roadmap/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/contact/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/partners/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/ai/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/privacy/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/terms/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/dpa/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/cookies/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/accessibility/",
+   "/"
+  ],
+  [
+   "https://find-and-update.company-information.service.gov.uk/company/17076461",
+   "/"
+  ],
+  [
+   "http://localhost:8094/cookie-preferences/",
+   "/"
+  ],
+  [
+   "http://localhost:8094/about/#main-content",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/contact/#contact-form",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/about/#role-run",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/about/#role-sign",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/about/#role-score",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/about/#role-deliver",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/sources/#s52",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/glossary/ppn-026",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/sources/#ppn-026",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/sources/#s71",
+   "/about/"
+  ],
+  [
+   "mailto:contact@velstrian.com",
+   "/about/"
+  ],
+  [
+   "http://localhost:8094/accessibility/#main-content",
+   "/accessibility/"
+  ],
+  [
+   "http://localhost:8094/accessibility/#conformance-status",
+   "/accessibility/"
+  ],
+  [
+   "http://localhost:8094/accessibility/#what-we-tested-and-what-we-found",
+   "/accessibility/"
+  ],
+  [
+   "http://localhost:8094/accessibility/#what-we-have-not-tested",
+   "/accessibility/"
+  ],
+  [
+   "http://localhost:8094/accessibility/#reporting-a-barrier",
+   "/accessibility/"
+  ],
+  [
+   "http://localhost:8094/accessibility/#enforcement",
+   "/accessibility/"
+  ],
+  [
+   "http://localhost:8094/accessibility/#preparation-of-this-statement",
+   "/accessibility/"
+  ],
+  [
+   "https://velstrian.com/",
+   "/accessibility/"
+  ],
+  [
+   "https://app.velstrian.com/accessibility",
+   "/accessibility/"
+  ],
+  [
+   "https://github.com/dequelabs/axe-core",
+   "/accessibility/"
+  ],
+  [
+   "https://www.equalityadvisoryservice.com/",
+   "/accessibility/"
+  ],
+  [
+   "http://localhost:8094/ai/#main-content",
+   "/ai/"
+  ],
+  [
+   "http://localhost:8094/security/#sub-processors",
+   "/ai/"
+  ],
+  [
+   "http://localhost:8094/bid/#main-content",
+   "/bid/"
+  ],
+  [
+   "http://localhost:8094/bid/#ea-ref-src-1",
+   "/bid/"
+  ],
+  [
+   "http://localhost:8094/blog/#main-content",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/regulatory-updates-2026/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/",
+   "/blog/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#main-content",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#the-short-answer",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#how-public-sector-buyers-use-automated-screening",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#mat-scoring-and-automated-evaluation",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#how-to-structure-responses-for-hybrid-evaluation",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#pitfalls-of-unevidenced-ai-content-in-tender-drafting",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#frequently-asked-questions",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/ai-tender-evaluation-uk-public-sector/#sources",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fai-tender-evaluation-uk-public-sector%2F",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fai-tender-evaluation-uk-public-sector%2F&text=How%20AI%20is%20changing%20UK%20public%20sector%20tender%20evaluation",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "mailto:?subject=How%20AI%20is%20changing%20UK%20public%20sector%20tender%20evaluation&body=How%20AI%20is%20changing%20UK%20public%20sector%20tender%20evaluation%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fai-tender-evaluation-uk-public-sector%2F",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "https://www.legislation.gov.uk/ukpga/2023/54/contents",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "https://www.gov.uk/government/collections/transforming-public-procurement",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "https://www.gov.uk/government/publications/ppn-026-the-social-value-model",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "https://www.gov.uk/government/publications/procurement-policy-note-0621-taking-account-of-carbon-reduction-plans-in-the-procurement-of-major-government-contracts",
+   "/blog/ai-tender-evaluation-uk-public-sector/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#main-content",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#the-short-answer",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#what-a-compliant-carbon-reduction-plan-requires",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#the-five-mandatory-scope-3-categories",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#how-to-prepare-your-crp-without-heavy-consultancy-costs",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#common-reasons-tender-evaluators-fail-carbon-reduction-plans",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#frequently-asked-questions",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/carbon-reduction-plan-ppn-0621-sme-guide/#sources",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fcarbon-reduction-plan-ppn-0621-sme-guide%2F",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fcarbon-reduction-plan-ppn-0621-sme-guide%2F&text=PPN%2006%2F21%20%26%20Carbon%20Reduction%20Plans%3A%20a%20guide%20for%20SME%20bidders",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "mailto:?subject=PPN%2006%2F21%20%26%20Carbon%20Reduction%20Plans%3A%20a%20guide%20for%20SME%20bidders&body=PPN%2006%2F21%20%26%20Carbon%20Reduction%20Plans%3A%20a%20guide%20for%20SME%20bidders%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fcarbon-reduction-plan-ppn-0621-sme-guide%2F",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "https://www.gov.uk/government/collections/government-conversion-factors-for-company-reporting",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "https://www.legislation.gov.uk/ukpga/2008/27/contents",
+   "/blog/carbon-reduction-plan-ppn-0621-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#main-content",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#the-short-answer",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#where-to-look",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#how-to-read-a-tender",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#sq-versus-itt",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#the-bid-or-no-bid-decision",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#social-value-and-ppn-026",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#common-first-timer-mistakes",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#frequently-asked-questions",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/find-first-public-sector-contract/#sources",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Ffind-first-public-sector-contract%2F",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Ffind-first-public-sector-contract%2F&text=How%20to%20find%20and%20win%20your%20first%20UK%20public%20sector%20contract",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "mailto:?subject=How%20to%20find%20and%20win%20your%20first%20UK%20public%20sector%20contract&body=How%20to%20find%20and%20win%20your%20first%20UK%20public%20sector%20contract%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Ffind-first-public-sector-contract%2F",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "https://www.find-tender.service.gov.uk/",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "https://www.gov.uk/contracts-finder",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "https://www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement",
+   "/blog/find-first-public-sector-contract/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#main-content",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#the-short-answer",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#what-a-framework-agreement-is",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#what-a-dps-is-and-how-it-differs",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#the-cabinet-offices-central-commercial-organisation",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#g-cloud-and-the-digital-marketplace",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#how-call-off-competitions-work",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#getting-onto-a-framework-or-dps",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#common-mistakes-bidding-through-frameworks",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#frequently-asked-questions",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/frameworks-and-dps-explained/#sources",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fframeworks-and-dps-explained%2F",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fframeworks-and-dps-explained%2F&text=Frameworks%20and%20DPS%20explained%3A%20G-Cloud%2C%20lots%20and%20call-offs",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "mailto:?subject=Frameworks%20and%20DPS%20explained%3A%20G-Cloud%2C%20lots%20and%20call-offs&body=Frameworks%20and%20DPS%20explained%3A%20G-Cloud%2C%20lots%20and%20call-offs%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fframeworks-and-dps-explained%2F",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "https://www.crowncommercial.gov.uk/",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "https://www.digitalmarketplace.service.gov.uk/",
+   "/blog/frameworks-and-dps-explained/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#main-content",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#two-duties-not-one",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#what-this-actually-changes-for-a-supplier",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#the-gap-where-it-goes-wrong",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#what-velstrian-bid-does-about-it",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#where-the-ai-helps-and-where-we-stop-it",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#what-to-do-this-quarter",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#frequently-asked-questions",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/life-after-award-kpis-contract-performance/#sources",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Flife-after-award-kpis-contract-performance%2F",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Flife-after-award-kpis-contract-performance%2F&text=Life%20after%20the%20award%3A%20the%20KPIs%20you%20will%20be%20measured%20on%2C%20in%20public",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "mailto:?subject=Life%20after%20the%20award%3A%20the%20KPIs%20you%20will%20be%20measured%20on%2C%20in%20public&body=Life%20after%20the%20award%3A%20the%20KPIs%20you%20will%20be%20measured%20on%2C%20in%20public%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Flife-after-award-kpis-contract-performance%2F",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "https://www.legislation.gov.uk/ukpga/2023/54/section/52",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "https://www.legislation.gov.uk/ukpga/2023/54/section/71",
+   "/blog/life-after-award-kpis-contract-performance/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#main-content",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#the-short-answer",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#what-a-method-statement-actually-is",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#what-evaluators-are-marking-against",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#a-structure-that-scores",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#answer-the-question-asked",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#evidence-beats-adjectives",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#risk-mitigation-and-contingency",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#word-limits-and-formatting-discipline",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#common-mistakes-that-cost-marks",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#frequently-asked-questions",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/method-statement-that-scores/#sources",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fmethod-statement-that-scores%2F",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fmethod-statement-that-scores%2F&text=How%20to%20write%20a%20method%20statement%20that%20actually%20scores",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "mailto:?subject=How%20to%20write%20a%20method%20statement%20that%20actually%20scores&body=How%20to%20write%20a%20method%20statement%20that%20actually%20scores%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fmethod-statement-that-scores%2F",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "https://www.gov.uk/government/publications/guidance-on-transparent-and-responsible-use-of-ai-in-procurement",
+   "/blog/method-statement-that-scores/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#main-content",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#1-which-edition-applies-to-your-bid",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#2-the-minimum-weighting-and-what-a-weighting-is",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#3-what-this-guide-states-and-what-it-does-not",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#4-the-toms-framework-and-national-toms-proxy-values",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#5-which-sectors-are-affected",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#6-evidence-requirements-and-post-award-reporting",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#7-common-pitfalls-that-cost-suppliers-marks",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#8-how-velstrian-bid-builds-a-social-value-response",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-social-value-guide/#sources",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-social-value-guide%2F",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-social-value-guide%2F&text=Social%20value%20scoring%20for%20UK%20bids%3A%20the%20complete%20guide%20to%20PPN%20026",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "mailto:?subject=Social%20value%20scoring%20for%20UK%20bids%3A%20the%20complete%20guide%20to%20PPN%20026&body=Social%20value%20scoring%20for%20UK%20bids%3A%20the%20complete%20guide%20to%20PPN%20026%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-social-value-guide%2F",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "https://www.gov.uk/government/collections/procurement-policy-notes",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "https://socialvalueportal.com/solutions/national-toms/",
+   "/blog/ppn-026-social-value-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#main-content",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#what-has-published",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#what-has-not-published",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#the-date-collision-worth-checking",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#what-this-edition-stops-asking-about",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#who-is-actually-in-scope",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#where-ppn-002-stands",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#what-to-do-before-january",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#frequently-asked-questions",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/ppn-026-what-has-published-and-what-has-not/#sources",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-what-has-published-and-what-has-not%2F",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-what-has-published-and-what-has-not%2F&text=PPN%20026%20tracker%3A%20what%20has%20published%2C%20and%20what%20has%20not",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "mailto:?subject=PPN%20026%20tracker%3A%20what%20has%20published%2C%20and%20what%20has%20not&body=PPN%20026%20tracker%3A%20what%20has%20published%2C%20and%20what%20has%20not%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fppn-026-what-has-published-and-what-has-not%2F",
+   "/blog/ppn-026-what-has-published-and-what-has-not/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#main-content",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#the-short-answer",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#how-private-sector-procurement-differs",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#the-pqq-in-the-private-sector",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#the-rfp-stage-what-is-actually-scored",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#building-relationships-before-the-rfp-lands",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#common-corporate-evaluation-criteria",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#common-mistakes-bidding-private-sector-work",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#frequently-asked-questions",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/private-sector-rfp-pqq-guide/#sources",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprivate-sector-rfp-pqq-guide%2F",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprivate-sector-rfp-pqq-guide%2F&text=Responding%20to%20corporate%20RFPs%20and%20PQQs%20in%20the%20private%20sector",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "mailto:?subject=Responding%20to%20corporate%20RFPs%20and%20PQQs%20in%20the%20private%20sector&body=Responding%20to%20corporate%20RFPs%20and%20PQQs%20in%20the%20private%20sector%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fprivate-sector-rfp-pqq-guide%2F",
+   "/blog/private-sector-rfp-pqq-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#main-content",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#the-short-answer",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#what-actually-changed",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#mat-replaces-meat",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#the-central-digital-platform-and-find-a-tender",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#transparency-notices",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#kpis-on-contracts-over-5-million-pounds",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#exclusion-and-debarment",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#what-changes-day-to-day-for-an-sme",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#frequently-asked-questions",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/procurement-act-2023-sme-guide/#sources",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprocurement-act-2023-sme-guide%2F",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fprocurement-act-2023-sme-guide%2F&text=The%20Procurement%20Act%202023%3A%20what%20SME%20bidders%20actually%20need%20to%20know",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "mailto:?subject=The%20Procurement%20Act%202023%3A%20what%20SME%20bidders%20actually%20need%20to%20know&body=The%20Procurement%20Act%202023%3A%20what%20SME%20bidders%20actually%20need%20to%20know%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fprocurement-act-2023-sme-guide%2F",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "https://www.legislation.gov.uk/ukpga/2023/54/section/12",
+   "/blog/procurement-act-2023-sme-guide/"
+  ],
+  [
+   "http://localhost:8094/blog/regulatory-updates-2026/#main-content",
+   "/blog/regulatory-updates-2026/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fregulatory-updates-2026%2F",
+   "/blog/regulatory-updates-2026/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fregulatory-updates-2026%2F&text=PPN%20026%20in%202026%3A%20what%20changed%20(and%20what%20didn%27t)",
+   "/blog/regulatory-updates-2026/"
+  ],
+  [
+   "mailto:?subject=PPN%20026%20in%202026%3A%20what%20changed%20(and%20what%20didn%27t)&body=PPN%20026%20in%202026%3A%20what%20changed%20(and%20what%20didn%27t)%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fregulatory-updates-2026%2F",
+   "/blog/regulatory-updates-2026/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/#main-content",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/#the-regulatory-context-ppn-026",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/#social-value-portal-the-enterprise-standard",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/#velstrian-bid-built-for-smes",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/#head-to-head-comparison",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/#which-should-you-choose",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "http://localhost:8094/blog/social-value-portal-vs-bid/#the-bigger-picture-social-value-is-not-optional",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "https://www.linkedin.com/feed/?shareActive=true&shareUrl=https%3A%2F%2Fvelstrian.com%2Fblog%2Fsocial-value-portal-vs-bid%2F",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "https://twitter.com/intent/tweet?url=https%3A%2F%2Fvelstrian.com%2Fblog%2Fsocial-value-portal-vs-bid%2F&text=Social%20Value%20Portal%20vs%20Velstrian%20Bid%3A%20which%20is%20right%20for%20your%20business%3F",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "mailto:?subject=Social%20Value%20Portal%20vs%20Velstrian%20Bid%3A%20which%20is%20right%20for%20your%20business%3F&body=Social%20Value%20Portal%20vs%20Velstrian%20Bid%3A%20which%20is%20right%20for%20your%20business%3F%0A%0Ahttps%3A%2F%2Fvelstrian.com%2Fblog%2Fsocial-value-portal-vs-bid%2F",
+   "/blog/social-value-portal-vs-bid/"
+  ],
+  [
+   "http://localhost:8094/buy/#main-content",
+   "/buy/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=buyer_pro",
+   "/buy/"
+  ],
+  [
+   "http://localhost:8094/buy/#what-it-does",
+   "/buy/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=buyer_portfolio",
+   "/buy/"
+  ],
+  [
+   "http://localhost:8094/contact/?product=buy&tier=portfolio#contact-form",
+   "/buy/"
+  ],
+  [
+   "http://localhost:8094/changelog/#main-content",
+   "/changelog/"
+  ],
+  [
+   "http://localhost:8094/compare/#main-content",
+   "/compare/"
+  ],
+  [
+   "http://localhost:8094/compare/#comparisons",
+   "/compare/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-autogenai/",
+   "/compare/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-mytender-io/",
+   "/compare/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-cleantender/",
+   "/compare/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-swiftbid/",
+   "/compare/"
+  ],
+  [
+   "http://localhost:8094/pricing/?product=mark",
+   "/compare/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-autogenai/#main-content",
+   "/compare/bid-vs-autogenai/"
+  ],
+  [
+   "https://cleantender.co.uk/resources/comparisons/ai-tender-software",
+   "/compare/bid-vs-autogenai/"
+  ],
+  [
+   "https://www.getapp.co.uk/software/2072629/autogenai",
+   "/compare/bid-vs-autogenai/"
+  ],
+  [
+   "https://www.finsmes.com/2023/12/autogenai-raises-39-5m-in-series-b-funding.html",
+   "/compare/bid-vs-autogenai/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-cleantender/#main-content",
+   "/compare/bid-vs-cleantender/"
+  ],
+  [
+   "https://cleantender.co.uk/resources/comparisons/ai-bid-management-software-uk",
+   "/compare/bid-vs-cleantender/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-mytender-io/#main-content",
+   "/compare/bid-vs-mytender-io/"
+  ],
+  [
+   "https://futureworlds.com/mytender-io-ai-driven-bid-writing-platform/",
+   "/compare/bid-vs-mytender-io/"
+  ],
+  [
+   "https://www.capterra.com/p/10031061/mytender-io/",
+   "/compare/bid-vs-mytender-io/"
+  ],
+  [
+   "http://localhost:8094/compare/bid-vs-swiftbid/#main-content",
+   "/compare/bid-vs-swiftbid/"
+  ],
+  [
+   "https://cleantender.co.uk/resources/comparisons/bid-writer-vs-ai-bid-tool",
+   "/compare/bid-vs-swiftbid/"
+  ],
+  [
+   "http://localhost:8094/contact/#main-content",
+   "/contact/"
+  ],
+  [
+   "mailto:contact@velstrian.com?subject=Portfolio%20enquiry",
+   "/contact/"
+  ],
+  [
+   "http://localhost:8094/cookie-preferences/#main-content",
+   "/cookie-preferences/"
+  ],
+  [
+   "http://localhost:8094/cookies/#main-content",
+   "/cookies/"
+  ],
+  [
+   "http://localhost:8094/cookies/#1-what-cookies-are-in-plain-english",
+   "/cookies/"
+  ],
+  [
+   "http://localhost:8094/cookies/#2-every-cookie-we-use",
+   "/cookies/"
+  ],
+  [
+   "http://localhost:8094/cookies/#3-the-three-categories-we-use",
+   "/cookies/"
+  ],
+  [
+   "http://localhost:8094/cookies/#4-third-party-providers",
+   "/cookies/"
+  ],
+  [
+   "http://localhost:8094/cookies/#5-frequently-asked-questions",
+   "/cookies/"
+  ],
+  [
+   "http://localhost:8094/cookies/#6-how-to-change-your-choices",
+   "/cookies/"
+  ],
+  [
+   "http://localhost:8094/dpa/#main-content",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#1-subject-matter-duration-nature-and-purpose",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#2-categories-of-data-and-data-subjects",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#3-processor-obligations",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#4-sub-processors",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#5-data-subject-rights",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#6-personal-data-breaches",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#7-international-transfers",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#8-security-measures-annex-ii",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#9-audits",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#10-liability-and-governing-law",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/dpa/#11-how-to-execute-this-dpa",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/retention/",
+   "/dpa/"
+  ],
+  [
+   "mailto:hello@velstrian.com",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/residency/",
+   "/dpa/"
+  ],
+  [
+   "http://localhost:8094/faq/#main-content",
+   "/faq/"
+  ],
+  [
+   "http://localhost:8094/faq/#faq-general",
+   "/faq/"
+  ],
+  [
+   "http://localhost:8094/pricing/#ai-credits",
+   "/faq/"
+  ],
+  [
+   "http://localhost:8094/glossary/#main-content",
+   "/glossary/"
+  ],
+  [
+   "http://localhost:8094/glossary/toms-framework/",
+   "/glossary/"
+  ],
+  [
+   "http://localhost:8094/glossary/ppn-026/#main-content",
+   "/glossary/ppn-026/"
+  ],
+  [
+   "http://localhost:8094/glossary/toms-framework/#main-content",
+   "/glossary/toms-framework/"
+  ],
+  [
+   "http://localhost:8094/help/#main-content",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/bid-workflow-end-to-end/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/#help-getting-started",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/#help-velstrian-bid",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/#help-velstrian-buy",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/#help-knowledge-base",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/#help-account",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/quick-start-velstrian/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/procurement-act-2023-readiness/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/create-bid-contract/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/upload-tender-documents/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/build-compliance-matrix/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/generate-narrative/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/collaborative-bidding-and-review-workflows/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/export-tender-responses/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/social-value-score/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/ppn-06-20-social-value-themes/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/toms-social-value-calculator-deep-dive/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/carbon-reduction-plans-ppn-06-21/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/evidence-vault-basics/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/evidence-vault-audit-citations/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/private-bid-to-a-private-buyer/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/private-quick-quote/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/public-sector-supplier-review/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/public-sector-evaluation-scoring/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-set-up-your-workspace/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-build-a-requirement/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-local-priorities-and-social-value/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-weighting-and-rubric/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-publish-download-and-share-the-pack/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-record-suppliers/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-run-an-evaluation/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-compare-bids-and-whole-life-cost/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-award-standstill-and-letters/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-manage-the-contract/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-quick-rfq/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/private-buyer-mode/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/support-and-reporting-faq/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/private-market-and-currency/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/sso-saml-scim-enterprise-setup/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/billing-and-plans/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/invite-team-members/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/account-security-and-data/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/audit-logs-and-compliance/",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/contact/",
+   "/help/"
+  ],
+  [
+   "https://app.velstrian.com/support",
+   "/help/"
+  ],
+  [
+   "http://localhost:8094/help/account-security-and-data/#main-content",
+   "/help/account-security-and-data/"
+  ],
+  [
+   "http://localhost:8094/help/audit-logs-and-compliance/#main-content",
+   "/help/audit-logs-and-compliance/"
+  ],
+  [
+   "http://localhost:8094/help/bid-workflow-end-to-end/#main-content",
+   "/help/bid-workflow-end-to-end/"
+  ],
+  [
+   "http://localhost:8094/help/billing-and-plans/#main-content",
+   "/help/billing-and-plans/"
+  ],
+  [
+   "http://localhost:8094/help/build-compliance-matrix/#main-content",
+   "/help/build-compliance-matrix/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-award-standstill-and-letters/#main-content",
+   "/help/buyer-award-standstill-and-letters/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-build-a-requirement/#main-content",
+   "/help/buyer-build-a-requirement/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-compare-bids-and-whole-life-cost/#main-content",
+   "/help/buyer-compare-bids-and-whole-life-cost/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-local-priorities-and-social-value/#main-content",
+   "/help/buyer-local-priorities-and-social-value/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-manage-the-contract/#main-content",
+   "/help/buyer-manage-the-contract/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-publish-download-and-share-the-pack/#main-content",
+   "/help/buyer-publish-download-and-share-the-pack/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-quick-rfq/#main-content",
+   "/help/buyer-quick-rfq/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-record-suppliers/#main-content",
+   "/help/buyer-record-suppliers/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-run-an-evaluation/#main-content",
+   "/help/buyer-run-an-evaluation/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-set-up-your-workspace/#main-content",
+   "/help/buyer-set-up-your-workspace/"
+  ],
+  [
+   "http://localhost:8094/help/buyer-weighting-and-rubric/#main-content",
+   "/help/buyer-weighting-and-rubric/"
+  ],
+  [
+   "http://localhost:8094/help/carbon-reduction-plans-ppn-06-21/#main-content",
+   "/help/carbon-reduction-plans-ppn-06-21/"
+  ],
+  [
+   "http://localhost:8094/help/collaborative-bidding-and-review-workflows/#main-content",
+   "/help/collaborative-bidding-and-review-workflows/"
+  ],
+  [
+   "http://localhost:8094/help/contact/#main-content",
+   "/help/contact/"
+  ],
+  [
+   "mailto:support@velstrian.com",
+   "/help/contact/"
+  ],
+  [
+   "http://localhost:8094/help/create-bid-contract/#main-content",
+   "/help/create-bid-contract/"
+  ],
+  [
+   "http://localhost:8094/help/evidence-vault-audit-citations/#main-content",
+   "/help/evidence-vault-audit-citations/"
+  ],
+  [
+   "http://localhost:8094/help/evidence-vault-basics/#main-content",
+   "/help/evidence-vault-basics/"
+  ],
+  [
+   "http://localhost:8094/help/export-tender-responses/#main-content",
+   "/help/export-tender-responses/"
+  ],
+  [
+   "http://localhost:8094/help/generate-narrative/#main-content",
+   "/help/generate-narrative/"
+  ],
+  [
+   "http://localhost:8094/help/invite-team-members/#main-content",
+   "/help/invite-team-members/"
+  ],
+  [
+   "http://localhost:8094/help/ppn-06-20-social-value-themes/#main-content",
+   "/help/ppn-06-20-social-value-themes/"
+  ],
+  [
+   "http://localhost:8094/help/private-bid-to-a-private-buyer/#main-content",
+   "/help/private-bid-to-a-private-buyer/"
+  ],
+  [
+   "http://localhost:8094/help/private-buyer-mode/#main-content",
+   "/help/private-buyer-mode/"
+  ],
+  [
+   "http://localhost:8094/help/private-market-and-currency/#main-content",
+   "/help/private-market-and-currency/"
+  ],
+  [
+   "http://localhost:8094/help/private-quick-quote/#main-content",
+   "/help/private-quick-quote/"
+  ],
+  [
+   "http://localhost:8094/help/procurement-act-2023-readiness/#main-content",
+   "/help/procurement-act-2023-readiness/"
+  ],
+  [
+   "http://localhost:8094/help/public-sector-evaluation-scoring/#main-content",
+   "/help/public-sector-evaluation-scoring/"
+  ],
+  [
+   "http://localhost:8094/help/public-sector-supplier-review/#main-content",
+   "/help/public-sector-supplier-review/"
+  ],
+  [
+   "http://localhost:8094/help/quick-start-velstrian/#main-content",
+   "/help/quick-start-velstrian/"
+  ],
+  [
+   "http://localhost:8094/help/social-value-score/#main-content",
+   "/help/social-value-score/"
+  ],
+  [
+   "http://localhost:8094/help/sso-saml-scim-enterprise-setup/#main-content",
+   "/help/sso-saml-scim-enterprise-setup/"
+  ],
+  [
+   "http://localhost:8094/help/support-and-reporting-faq/#main-content",
+   "/help/support-and-reporting-faq/"
+  ],
+  [
+   "http://localhost:8094/help/toms-social-value-calculator-deep-dive/#main-content",
+   "/help/toms-social-value-calculator-deep-dive/"
+  ],
+  [
+   "http://localhost:8094/help/upload-tender-documents/#main-content",
+   "/help/upload-tender-documents/"
+  ],
+  [
+   "http://localhost:8094/integrations/#main-content",
+   "/integrations/"
+  ],
+  [
+   "http://localhost:8094/integrations/#mcp",
+   "/integrations/"
+  ],
+  [
+   "http://localhost:8094/partners/#main-content",
+   "/partners/"
+  ],
+  [
+   "http://localhost:8094/partners/#partner-enquiry",
+   "/partners/"
+  ],
+  [
+   "http://localhost:8094/pricing/#main-content",
+   "/pricing/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=bid_starter_annual",
+   "/pricing/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=bid_pro_annual",
+   "/pricing/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=bid_portfolio_annual",
+   "/pricing/"
+  ],
+  [
+   "http://localhost:8094/contact/?tier=portfolio#contact-form",
+   "/pricing/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=buyer_pro_annual",
+   "/pricing/"
+  ],
+  [
+   "https://app.velstrian.com/signup?plan=buyer_portfolio_annual",
+   "/pricing/"
+  ],
+  [
+   "http://localhost:8094/contact/?product=buy#contact-form",
+   "/pricing/"
+  ],
+  [
+   "http://localhost:8094/privacy/#main-content",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#what-this-policy-covers",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#the-detail-in-full",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#data-controller",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#data-we-collect",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#how-we-use-your-data",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#legal-basis-for-processing",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#helping-us-improve-velstrian-optional",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#data-retention",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#your-rights-under-uk-gdpr",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#data-protection-officer",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#cookies",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#sub-processors",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#international-data-transfers",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#automated-decisions--ai",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#subject-access-request-dsar-procedure",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#google-gemini-ai-processing",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#anthropic-claude-ai-processing",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#sentry-retention--error-scrubbing",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/privacy/#contact--ico-complaint",
+   "/privacy/"
+  ],
+  [
+   "mailto:dpo@velstrian.com",
+   "/privacy/"
+  ],
+  [
+   "mailto:privacy@velstrian.com",
+   "/privacy/"
+  ],
+  [
+   "https://ico.org.uk/make-a-complaint/",
+   "/privacy/"
+  ],
+  [
+   "http://localhost:8094/refund-policy/#main-content",
+   "/refund-policy/"
+  ],
+  [
+   "http://localhost:8094/refund-policy/#1-satisfaction-guarantee-window",
+   "/refund-policy/"
+  ],
+  [
+   "http://localhost:8094/refund-policy/#2-after-the-14-day-window",
+   "/refund-policy/"
+  ],
+  [
+   "http://localhost:8094/refund-policy/#3-exceptions",
+   "/refund-policy/"
+  ],
+  [
+   "http://localhost:8094/refund-policy/#4-chargebacks",
+   "/refund-policy/"
+  ],
+  [
+   "http://localhost:8094/refund-policy/#5-how-to-request-a-refund",
+   "/refund-policy/"
+  ],
+  [
+   "http://localhost:8094/refund-policy/#6-governing-law",
+   "/refund-policy/"
+  ],
+  [
+   "http://localhost:8094/residency/#main-content",
+   "/residency/"
+  ],
+  [
+   "http://localhost:8094/residency/#1-primary-storage-and-processing",
+   "/residency/"
+  ],
+  [
+   "http://localhost:8094/residency/#2-third-party-sub-processor-regions",
+   "/residency/"
+  ],
+  [
+   "http://localhost:8094/residency/#3-international-transfers",
+   "/residency/"
+  ],
+  [
+   "http://localhost:8094/residency/#4-region-pinning-for-enterprise-customers",
+   "/residency/"
+  ],
+  [
+   "http://localhost:8094/residency/#5-changes-to-residency",
+   "/residency/"
+  ],
+  [
+   "http://localhost:8094/resources/#main-content",
+   "/resources/"
+  ],
+  [
+   "http://localhost:8094/sources/#national-toms",
+   "/resources/"
+  ],
+  [
+   "http://localhost:8094/retention/#main-content",
+   "/retention/"
+  ],
+  [
+   "http://localhost:8094/retention/#1-retention-schedule",
+   "/retention/"
+  ],
+  [
+   "http://localhost:8094/retention/#2-account-closure-uk-gdpr-article-17",
+   "/retention/"
+  ],
+  [
+   "http://localhost:8094/retention/#3-subject-access-requests-uk-gdpr-articles-15--20",
+   "/retention/"
+  ],
+  [
+   "http://localhost:8094/retention/#4-backups",
+   "/retention/"
+  ],
+  [
+   "http://localhost:8094/retention/#5-your-other-rights",
+   "/retention/"
+  ],
+  [
+   "http://localhost:8094/retention/#6-changes-to-this-policy",
+   "/retention/"
+  ],
+  [
+   "http://localhost:8094/roadmap/#main-content",
+   "/roadmap/"
+  ],
+  [
+   "http://localhost:8094/bid/#features",
+   "/roadmap/"
+  ],
+  [
+   "http://localhost:8094/sectors/#main-content",
+   "/sectors/"
+  ],
+  [
+   "http://localhost:8094/sectors/#sectors-list",
+   "/sectors/"
+  ],
+  [
+   "http://localhost:8094/sectors/construction/",
+   "/sectors/"
+  ],
+  [
+   "http://localhost:8094/sectors/facilities/",
+   "/sectors/"
+  ],
+  [
+   "http://localhost:8094/sectors/highways/",
+   "/sectors/"
+  ],
+  [
+   "http://localhost:8094/sectors/education/",
+   "/sectors/"
+  ],
+  [
+   "http://localhost:8094/sectors/construction/#main-content",
+   "/sectors/construction/"
+  ],
+  [
+   "http://localhost:8094/sectors/education/#main-content",
+   "/sectors/education/"
+  ],
+  [
+   "http://localhost:8094/sectors/facilities/#main-content",
+   "/sectors/facilities/"
+  ],
+  [
+   "http://localhost:8094/sectors/highways/#main-content",
+   "/sectors/highways/"
+  ],
+  [
+   "http://localhost:8094/security/#main-content",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#operational-standards",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#security-documentation",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#aes-256-encryption",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#eu-data-residency-1",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#gdpr-compliance",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#access-controls",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#iso-27001-controls",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#ai-data-handling",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#vulnerability-disclosure",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#uptime-target",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#deep-dives",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#company--regulatory-details",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/security/#finished-your-review",
+   "/security/"
+  ],
+  [
+   "mailto:contact@velstrian.com?subject=Security%20Disclosure",
+   "/security/"
+  ],
+  [
+   "http://localhost:8094/sources/#main-content",
+   "/sources/"
+  ],
+  [
+   "http://localhost:8094/sources/#homepage",
+   "/sources/"
+  ],
+  [
+   "https://eur-lex.europa.eu/eli/dir/2014/24/oj",
+   "/sources/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#main-content",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#contracting-entity-agreement-and-transfers",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#what-each-sub-processor-does",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#artificial-intelligence-processing",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#customer-authorised-connectors",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#google-sign-in-is-not-a-sub-processor",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#public-registers-and-reference-data",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#integrations-you-control",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#change-notification",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/sub-processors/#removed-sub-processors",
+   "/sub-processors/"
+  ],
+  [
+   "mailto:hello@velstrian.com?subject=Subscribe%20sub-processor%20updates",
+   "/sub-processors/"
+  ],
+  [
+   "https://supabase.com/legal/dpa",
+   "/sub-processors/"
+  ],
+  [
+   "https://railway.com/legal/dpa",
+   "/sub-processors/"
+  ],
+  [
+   "https://vercel.com/legal/dpa",
+   "/sub-processors/"
+  ],
+  [
+   "https://www.cloudflare.com/cloudflare-customer-dpa/",
+   "/sub-processors/"
+  ],
+  [
+   "https://www.brevo.com/legal/termsofuse/",
+   "/sub-processors/"
+  ],
+  [
+   "https://stripe.com/legal/dpa",
+   "/sub-processors/"
+  ],
+  [
+   "https://www.anthropic.com/legal/data-processing-addendum",
+   "/sub-processors/"
+  ],
+  [
+   "https://business.safety.google/processorterms/",
+   "/sub-processors/"
+  ],
+  [
+   "https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA",
+   "/sub-processors/"
+  ],
+  [
+   "https://sentry.io/legal/dpa/",
+   "/sub-processors/"
+  ],
+  [
+   "https://posthog.com/dpa",
+   "/sub-processors/"
+  ],
+  [
+   "https://www.tawk.to/data-protection/dpa-data-processing-addendum/",
+   "/sub-processors/"
+  ],
+  [
+   "https://calendly.com/legal/data-processing-addendum",
+   "/sub-processors/"
+  ],
+  [
+   "https://cloud.google.com/terms/data-processing-addendum",
+   "/sub-processors/"
+  ],
+  [
+   "https://business.safety.google/controllerterms/",
+   "/sub-processors/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#main-content",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#who-these-terms-are-for",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#what-you-agree-to",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#who-sees-what-you-send",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#your-personal-data",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#what-we-record-when-you-submit",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#changes-and-the-law-that-applies",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/#questions",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#acceptable-use",
+   "/supplier-terms/"
+  ],
+  [
+   "mailto:legal@velstrian.com",
+   "/supplier-terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#main-content",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#the-six-clauses-customers-ask-about",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#full-terms-of-service",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#1-parties-and-agreement",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#2-subscription-and-access",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#3-acceptable-use",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#4-ai-output-disclaimer",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#5-intellectual-property",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#6-limitation-of-liability",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#7-data-processing",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#8-service-availability-and-warranties",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#9-governing-law-and-disputes",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#10-changes-to-these-terms",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#11-contact",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/terms/#data-processing-agreement",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/supplier-terms/",
+   "/terms/"
+  ],
+  [
+   "mailto:legal@velstrian.com?subject=DPA%20Request",
+   "/terms/"
+  ],
+  [
+   "http://localhost:8094/tools/#main-content",
+   "/tools/"
+  ],
+  [
+   "http://localhost:8094/tools/tender-compliance-matrix/#main-content",
+   "/tools/tender-compliance-matrix/"
+  ],
+  [
+   "http://localhost:8094/tools/tender-compliance-matrix/#tenderText",
+   "/tools/tender-compliance-matrix/"
+  ],
+  [
+   "http://localhost:8094/tools/tender-finder/#main-content",
+   "/tools/tender-finder/"
+  ],
+  [
+   "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+   "/tools/tender-finder/"
+  ],
+  [
+   "https://ted.europa.eu/en/legal-notice",
+   "/tools/tender-finder/"
+  ],
+  [
+   "http://localhost:8094/walkthrough/#main-content",
+   "/walkthrough/"
+  ],
+  [
+   "http://localhost:8094/this-page-does-not-exist/#main-content",
+   "/this-page-does-not-exist/"
+  ]
+ ]
+}
