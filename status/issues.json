@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T12:54:09.361Z",
+  "updated": "2026-10-26T13:00:07.309Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1909,6 +1909,16 @@
       "note": "Owner 2026-10-26: not urgent, will decide later. Candidates in use today: home headline 'Write strong bids yourself, using what you already have.' and the site summary. The retired hero line 'Qualify. Draft. Prove it.' is unused. When approved it goes into BRANDING-SPEC.md and one central constant.",
       "changed": "2026-10-26",
       "changedAt": "2026-10-26T12:54:09.361Z"
+    },
+    {
+      "id": "A-475",
+      "src": "owner chat 2026-10-26",
+      "sev": "P3",
+      "title": "LinkedIn company URL is written twice (footer.ts:206 and site.ts:104), make the footer read one constant",
+      "status": "OPEN",
+      "note": "Owner 2026-10-26 confirmed the URL https://www.linkedin.com/company/-velstrian/ ; both literals already match it and the built page renders it. RULE 0-C: one central constant. Fold into the next website change before the A-450 push.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T13:00:07.309Z"
     }
   ],
   "directives": [
@@ -1978,5 +1988,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 475
+  "nextId": 476
 }
