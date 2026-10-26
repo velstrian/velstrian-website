@@ -1,4 +1,4 @@
-name: Smoke test — crowagent.ai must never redirect to login
+name: Smoke test — velstrian.com must never redirect to login
 
 # [RULE 0-G · owner instruction 2026-08-18: "you must fix all such billing leakages"]
 # CADENCE CUT: every 15 minutes -> once daily. 672 runs/week -> 7.
@@ -78,20 +78,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Check crowagent.ai returns 200 (not redirect)
+      - name: Check velstrian.com returns 200 (not redirect)
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 0 https://crowagent.ai)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-redirs 0 https://velstrian.com)
           echo "HTTP status: $STATUS"
           if [ "$STATUS" != "200" ]; then
-            echo "CRITICAL: crowagent.ai returned $STATUS — expected 200"
+            echo "CRITICAL: velstrian.com returned $STATUS — expected 200"
             echo "This means the marketing site is broken or redirecting"
             exit 1
           fi
-          echo "PASS: crowagent.ai returns 200"
+          echo "PASS: velstrian.com returns 200"
 
-      - name: Check crowagent.ai serves marketing content (not platform app)
+      - name: Check velstrian.com serves marketing content (not platform app)
         run: |
-          BODY=$(curl -s --max-redirs 0 https://crowagent.ai)
+          BODY=$(curl -s --max-redirs 0 https://velstrian.com)
 
           # Must contain marketing content. Marker = the marketing-only nav-inject
           # script (the platform app never ships it), NOT brand copy — copy/taglines
@@ -100,23 +100,23 @@ jobs:
           if echo "$BODY" | grep -q "nav-inject.js"; then
             echo "PASS: marketing shell present (nav-inject.js)"
           else
-            echo "CRITICAL: marketing shell marker (nav-inject.js) missing from crowagent.ai"
+            echo "CRITICAL: marketing shell marker (nav-inject.js) missing from velstrian.com"
             echo "Marketing site may have been replaced with platform app content"
             exit 1
           fi
 
           # Must NOT contain login redirect
           if echo "$BODY" | grep -qi "window.location.*login\|meta.*refresh.*login\|redirect.*login"; then
-            echo "CRITICAL: crowagent.ai contains login redirect code"
+            echo "CRITICAL: velstrian.com contains login redirect code"
             exit 1
           fi
           echo "PASS: no login redirect detected"
 
-      - name: Check crowagent.ai does NOT load Supabase client
+      - name: Check velstrian.com does NOT load Supabase client
         run: |
-          BODY=$(curl -s --max-redirs 0 https://crowagent.ai)
+          BODY=$(curl -s --max-redirs 0 https://velstrian.com)
           if echo "$BODY" | grep -qi "supabase\|createClient\|NEXT_PUBLIC_SUPABASE"; then
-            echo "CRITICAL: crowagent.ai is loading Supabase — platform app deployed to marketing domain"
+            echo "CRITICAL: velstrian.com is loading Supabase — platform app deployed to marketing domain"
             exit 1
           fi
           echo "PASS: no Supabase references on marketing site"
@@ -134,8 +134,8 @@ jobs:
       - name: Notify on failure
         if: failure()
         run: |
-          echo "SMOKE TEST FAILED — crowagent.ai is broken"
+          echo "SMOKE TEST FAILED — velstrian.com is broken"
           echo "Immediate actions (per CLAUDE.md §17 + §18):"
-          echo "1. Check Cloudflare Pages dashboard — crowagent-website project must own crowagent.ai (Cloudflare, not Vercel)"
+          echo "1. Check Cloudflare Pages dashboard — crowagent-website project must own velstrian.com (Cloudflare, not Vercel)"
           echo "2. If recent merge: purge cache (Caching → Purge Everything) — bare URL may be serving stale edge cache (max-age=14400)"
-          echo "3. Re-test with cache-buster: curl -fsSL \"https://crowagent.ai/?_=\$(date +%s)\""
+          echo "3. Re-test with cache-buster: curl -fsSL \"https://velstrian.com/?_=\$(date +%s)\""
