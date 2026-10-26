@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Google Vertex credits plan, research 2026-10-26</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Google Vertex credits plan, research 2026-10-26</h1>
+<p><span class="rv-row">R285-P3-AI-VERTEX-CREDITS-PLAN-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/ai-quality/VERTEX-CREDITS-PLAN-2026-10-26.md</code>, rendered from not yet committed (working tree at <code>e59f3cf69</code>). A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-VERTEX-CREDITS-PLAN-01 &middot; OPEN</span><span class="rtitle">D465 Google Vertex credits: what credits we hold, what Vertex would lift (Gemini in eu or London, Document AI, caching, grounding), cost, DPA impact, ranked top 5</span><p>research done, WAITS ON OWNER. Credits found: Free Trial USD 300 (90 days, ends about 24 Jan 2027, Part D result still unread), Startups AI tier up to USD 350,000 needs an application and eligibility we have not confirmed. Credits do NOT pay for Claude. See docs/release-2.8.5/ai-quality/VERTEX-CREDITS-PLAN-2026-10-26.md. Recommended: apply to the AI tier, build a staging only Vertex client behind a flag, classify the missed D388 rows before any Document AI spend.</p></div></section>
+<article class="doc">
+<h1>Google Vertex credits plan, research 2026-10-26</h1>
+<p>Row: R285-P3-AI-VERTEX-CREDITS-PLAN-01. Owner decision D465. Research only. Nothing was spent, built, enabled or changed. Writing style RULE 0-S.</p>
+<p>Owner question: &quot;check how you can leverage google vertex credits to make crowagent as top 1% ultra premium best SaaS enterprise&quot;. RULE 0-U sets the test: every option below is judged by whether it makes bid work simpler or more trustworthy for a small business that bids for itself, not by how impressive the Google product list is.</p>
+<h2>Answer in six lines</h2>
+<ol>
+<li><strong>The only credit we hold today is the Google Cloud Free Trial: USD 300, 90 days, ending about 24 Jan 2027</strong> (the date in <code>docs/release-2.8.5/ai-strategy/VERTEX-VS-GEMINI-API-2026-10-25.md</code> line 16). USD 300 is about GBP 237 at the platform rate of 0.79 (<code>api/app/services/ai/pricing.py</code> line 88). The Part D check of whether it actually paid for a Vertex call has no recorded result yet, so that is still UNVERIFIED.</li>
+<li><strong>The big prize is the Google for Startups Cloud Program AI tier: up to USD 350,000 over two years.</strong> It is a separate application, it needs venture funding and a company age we have not confirmed, and Google decides.</li>
+<li><strong>Credits will not pay for Claude.</strong> Google&#39;s own pages say third party models are billed directly and are not covered by programme credits, and the Free Trial excludes partner models offered as a managed API. So &quot;Claude on Vertex paid from credits&quot; is not available. This is the most important correction to the idea.</li>
+<li><strong>Credits can plausibly pay for Gemini on Vertex.</strong> That is a real saving, but at our volume the saving is small (the whole D411 Claude test session and the D450 Gemini test session together cost about GBP 9). The credits are worth far less than the residency answer.</li>
+<li><strong>The strongest product reason to move Gemini to Vertex is data location, not money.</strong> Gemini 3.8 Flash, 3.1 Pro, 3.5 Flash-Lite and both embedding models are listed for <code>europe-west2</code> (London) and the <code>eu</code> multi-region. Our DPA says Gemini is not region pinned (<code>docs/legal/data-processing-agreement.md</code> line 378).</li>
+<li><strong>The tender reading gap (D388 recall 80.7 percent, critical recall 78.4 percent) is not proven to be a PDF parsing problem.</strong> D450 moved ryde_gdpr recall from 24.7 to 91.8 percent by prompt alone. Document AI is therefore a measured test first, not a purchase.</li>
+</ol>
+<h2>1. Credits available to us</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Programme</th>
+<th>Amount</th>
+<th>Eligibility</th>
+<th>Expiry</th>
+<th>Pays for</th>
+<th>Does not pay for</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Google Cloud Free Trial</td>
+<td>USD 300 welcome credit</td>
+<td>Never a paying Google Cloud, Maps Platform or Firebase customer, never used the trial, valid payment method held (hold, not charge)</td>
+<td>90 days from sign up</td>
+<td>Products in the trial, usage past Free Tier limits. The page does not exclude Vertex AI</td>
+<td>Gemini API in AI Studio, partner models as a managed API, Marketplace, quota increases</td>
+<td><a href="https://docs.cloud.google.com/free/docs/free-cloud-features">https://docs.cloud.google.com/free/docs/free-cloud-features</a> (read 2026-10-26)</td>
+</tr>
+<tr>
+<td>Google for Startups Cloud Program, Start</td>
+<td>USD 2,000 reported by third party guides</td>
+<td>Founded within about 2 years, no prior credits beyond the trial, reported by aggregators only</td>
+<td>One year, reported by aggregators only</td>
+<td>Google Cloud and Firebase</td>
+<td>Not confirmed</td>
+<td><a href="https://cloud.google.com/startup">https://cloud.google.com/startup</a> (page did not render text, UNVERIFIED), <a href="https://creditforstartups.com/companies/google">https://creditforstartups.com/companies/google</a></td>
+</tr>
+<tr>
+<td>Google for Startups Cloud Program, Scale</td>
+<td>Up to USD 200,000 reported</td>
+<td>Pre-seed to Series A funding, founded within about 5 years, no more than USD 5,000 prior credits reported</td>
+<td>Reported as year 1 up to 100 percent of eligible spend then year 2 at 20 percent up to USD 100,000</td>
+<td>Google Cloud services</td>
+<td>Third party models and Marketplace per Google&#39;s FAQ text</td>
+<td><a href="https://cloud.google.com/startup/faq">https://cloud.google.com/startup/faq</a> (Google FAQ text seen through search summary 2026-10-26)</td>
+</tr>
+<tr>
+<td>Google for Startups Cloud Program, AI tier</td>
+<td>Up to USD 350,000 over two years: year 1 up to USD 250,000 including a USD 150,000 AI bonus, year 2 up to USD 100,000</td>
+<td>Early stage AI first startups with venture funding, Vertex AI or Gemini core to the product, founded within 10 years on the AI page, no more than USD 5,000 prior credits, Google&#39;s discretion. The main programme page says 3 to 5 years, so the two pages disagree</td>
+<td>Two years</td>
+<td>Google&#39;s own models such as Gemini and Gemma</td>
+<td>Third party models are billed directly and are not covered (Google AI programme page text, seen through search summary)</td>
+<td><a href="https://cloud.google.com/startup/ai">https://cloud.google.com/startup/ai</a></td>
+</tr>
+</tbody></table></div>
+<p>Honest limits on this table:</p>
+<ul>
+<li>The Google programme pages are script rendered and my page fetch returned only the page titles. Amounts and criteria above come from a web search summary of Google&#39;s own pages, which disagrees with itself on founding date and funding stage. <strong>Treat every programme figure as UNVERIFIED until the owner reads the live page while signed in.</strong> Third party guides (vestbee, fin.ai, guptadeepak, creditforstartups) agree on the headline USD 350,000 and disagree on the rest, so they are hints, not evidence.</li>
+<li>One search result (a promotional site) claimed Google credits cover Claude on Vertex. Google&#39;s own wording, as returned, says the opposite. I rely on Google&#39;s wording and flag the conflict.</li>
+<li>Whether the Free Trial USD 300 paid for a Vertex Gemini call is the Part D test the owner approved in <code>project_r285_resume_2026_10_25_checkpoint_17</code>. No result is in the repo. Until it is read from the billing report this stays UNVERIFIED.</li>
+<li>We have no evidence in the repo of our funding stage or incorporation date. Eligibility for the AI tier is therefore unknown, not assumed.</li>
+</ul>
+<h2>2. What moving to Vertex would give, mapped to how the product calls AI</h2>
+<p><strong>Today.</strong> Every call goes through <code>AIClient</code>. <code>DEFAULT_MODELS</code> in <code>api/app/services/ai/surface_policy.py</code> line 1408 onward assigns gemini-3.8-flash to 22 entries, gemini-3.1-pro-preview to 9, the embedding models to the rest, and Claude Sonnet 4.6 and Haiku 5.5 to the remaining entries (counted from the block, lines 1408 to 1680). Gemini is built with <code>genai.Client(api_key=...)</code> at <code>provider_calls.py</code> lines 566, 779, 932, 1013 and <code>gemini_batch.py</code> line 113. The switch to Vertex is client setup (<code>vertexai=True</code>, project, location, a service account) per Google&#39;s migration note quoted in the earlier research doc (item 3). The earlier doc estimates about 6 files plus config and medium risk because batch and embeddings paths need a live check.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Vertex capability</th>
+<th>What it is</th>
+<th>What it would give Velstrian</th>
+<th>Honest note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Gemini 3 on <code>eu</code> or <code>europe-west2</code></td>
+<td>Same models, fixed processing location</td>
+<td>A real answer to &quot;where is my data processed&quot;, and DPA Schedule 1 item 8 can change from &quot;not region pinned&quot;</td>
+<td>Locations page lists all five models for London and <code>eu</code> (<a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations">https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations</a>). The same page warns endpoints do not guarantee residency and says use the <code>eu</code> multi-region, not global. London pay as you go for these models is UNVERIFIED because the earlier research saw a conflicting search snippet</td>
+</tr>
+<tr>
+<td>Context caching</td>
+<td>Reuse a long prompt prefix at a discount</td>
+<td>Cheaper tender chunk reads and evidence heavy drafts</td>
+<td>Google&#39;s docs (search summary of <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview">https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview</a>): implicit caching is on by default with a 90 percent discount on cached tokens, explicit caching also 90 percent on Gemini 2.5 and later with storage charges, minimum 2,048 tokens. Our small surfaces average 573 to 1,519 input tokens (D411 ledger, D419 table), under the minimum, so only the large ones benefit</td>
+</tr>
+<tr>
+<td>Batch prediction</td>
+<td>Offline bulk calls at a lower price</td>
+<td>Portfolio re-reads, nightly scheduler insight</td>
+<td>Discount for Gemini 3 not read, UNVERIFIED. We already have <code>gemini_batch.py</code> on the Developer API, so Vertex adds no new capability here, only a different quota</td>
+</tr>
+<tr>
+<td>Provisioned throughput</td>
+<td>Reserved capacity</td>
+<td>Guaranteed latency under load</td>
+<td>Needs a regional endpoint. No price read. At pre launch volume there is nothing to reserve. Not recommended</td>
+</tr>
+<tr>
+<td>Grounding with Google Search</td>
+<td>Model answers cite live web results</td>
+<td>Regulatory change watching, &quot;has this PPN changed&quot;</td>
+<td>Developer API price in the search summary: 5,000 free requests a month then USD 14 per 1,000. Vertex enterprise web grounding was quoted at USD 45 per 1,000 grounded prompts by a third party. Neither read from Google&#39;s pricing page, UNVERIFIED. Risk: open web sources can contradict our curated PPN 026 knowledge base</td>
+</tr>
+<tr>
+<td>Document AI Layout Parser</td>
+<td>Splits a PDF into structured blocks with tables and headings, with chunking</td>
+<td>Cleaner tender input for extraction</td>
+<td>USD 10 per 1,000 pages including initial chunking, plus USD 0.02 per 1,000 pages to re-chunk (<a href="https://cloud.google.com/products/document-ai/pricing">https://cloud.google.com/products/document-ai/pricing</a>, search summary). A 100 page tender is USD 1.00, about GBP 0.79</td>
+</tr>
+<tr>
+<td>Vertex AI RAG Engine</td>
+<td>Managed ingest, embed, retrieve</td>
+<td>Would replace our own retrieval</td>
+<td>Our retrieval and grounding already exist and are model independent. RAG Engine&#39;s managed vector store is a Spanner instance, a standing monthly cost (<a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/rag-engine/rag-engine-billing">https://docs.cloud.google.com/vertex-ai/generative-ai/docs/rag-engine/rag-engine-billing</a>). Not recommended</td>
+</tr>
+<tr>
+<td>Vertex AI Search</td>
+<td>Managed search over our documents</td>
+<td>Duplicate of our library search</td>
+<td>No pricing read. Not recommended</td>
+</tr>
+<tr>
+<td>Text embeddings</td>
+<td><code>gemini-embedding-2</code> and <code>-001</code> in London and <code>eu</code></td>
+<td>Embeddings processed in region</td>
+<td>Part of the Gemini move. Matters most because library documents are the most sensitive text we send</td>
+</tr>
+<tr>
+<td>Gen AI evaluation service</td>
+<td>Google hosted model graded evaluation</td>
+<td>Another grader</td>
+<td>We have our own golden harness, ledger and human reviewed sets. No pricing read. Not recommended</td>
+</tr>
+<tr>
+<td>Claude on Vertex</td>
+<td>Claude through Google as a managed API</td>
+<td>One invoice, residency in the <code>eu</code> multi-region</td>
+<td>Not payable from Google credits, 10 percent premium for multi-region and regional endpoints, Claude Opus 5.5 and Sonnet 5.5 are global or multi-region only (regional serves Sonnet 4.6 and earlier), Message Batches API and Files API are not supported (<a href="https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed">https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed</a>). Lower value than keeping Anthropic&#39;s own API</td>
+</tr>
+</tbody></table></div>
+<h2>3. Per option: surface lifted, cost, credit cover, DPA, lock in, switch off</h2>
+<p>Cost basis, all measured. D450 run 8 read 10 tenders for GBP 2.4208 (33 calls), so about <strong>GBP 0.24 per tender extraction</strong> (<code>docs/release-2.8.5/ai-quality/D450-GEMINI-LEDGER.md</code>). The D411 ledger (<code>D411-SPEND-LEDGER.md</code>) puts the cheap surfaces at GBP 0.000071 to 0.000311 a call on Claude Haiku, and the full Claude test session at GBP 4.65 of GBP 50. There are no paying customers, so real monthly volume is test traffic. Monthly figures below use an <strong>illustrative 100 tender reads a month</strong>, which is an assumption and not a measurement.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Surface it lifts</th>
+<th>Cost at 100 tenders a month</th>
+<th>Credit cover</th>
+<th>DPA and residency</th>
+<th>Lock in</th>
+<th>Switch off</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A. Apply to Google for Startups, AI tier, and use the Free Trial now</td>
+<td>None directly, it pays for B to E</td>
+<td>Nil to apply</td>
+<td>Up to USD 350,000 if accepted. Trial USD 300 is about 980 tender reads at GBP 0.24</td>
+<td>None</td>
+<td>Credits tie future spend to Google Cloud for two years</td>
+<td>Do not enable billing past the credit</td>
+</tr>
+<tr>
+<td>B. Gemini on Vertex, <code>eu</code> or London, behind a flag</td>
+<td>All Gemini surfaces and library embeddings</td>
+<td>About GBP 24 for tender reads if Vertex per token prices equal the Developer API (UNVERIFIED, Vertex rates not read). Plus the other Gemini surfaces</td>
+<td>Fully covered while credit lasts, on trial credit ends about 24 Jan 2027</td>
+<td>Moves Schedule 1 item 8 from &quot;not region pinned&quot; to a stated location. Google Cloud DPA would apply. Needs counsel view on clause 6.4 (30 days notice, <code>data-processing-agreement.md</code> line 198) and on <code>AI-RESIDENCY-STATEMENT-2026-10-25.md</code></td>
+<td>Low. Same <code>google-genai</code> SDK, the model ids do not change</td>
+<td>One environment variable back to the key path, kept for the flag</td>
+</tr>
+<tr>
+<td>C. Document AI Layout Parser in front of tender extraction</td>
+<td>bid_rfp_extract, conflict detection (needs tables and clause structure)</td>
+<td>GBP 79 for 100 pages each, about three times the current model cost per tender</td>
+<td>Covered by trial credit (30,000 pages)</td>
+<td>A second Google Cloud service in the data flow, same processor family. Region must be chosen when the processor is created</td>
+<td>Medium. Output is only text and blocks, our own schema stays</td>
+<td>Skip the parser call, extraction runs as today</td>
+</tr>
+<tr>
+<td>D. Context caching and batch</td>
+<td>Drafting with evidence, tender chunk reads, nightly jobs</td>
+<td>Saves part of the model cost, no new spend</td>
+<td>Not needed</td>
+<td>None</td>
+<td>Low</td>
+<td>Disable explicit caching, implicit caching is automatic</td>
+</tr>
+<tr>
+<td>E. Grounding with Google Search, pilot on regulatory_monitor only</td>
+<td>Regulatory watch, buyer guidance freshness</td>
+<td>Under the 5,000 free requests a month on the Developer API price (UNVERIFIED on Vertex)</td>
+<td>Possibly covered</td>
+<td>Sends search queries, not customer documents</td>
+<td>Low</td>
+<td>Flag off</td>
+</tr>
+<tr>
+<td>Not recommended: Claude on Vertex, RAG Engine, Vertex AI Search, provisioned throughput, Gen AI evaluation service</td>
+<td>Nothing we lack</td>
+<td>RAG Engine adds a standing Spanner bill</td>
+<td>Claude not coverable</td>
+<td>Claude <code>eu</code> adds a 10 percent premium</td>
+<td>Higher</td>
+<td>n/a</td>
+</tr>
+</tbody></table></div>
+<h3>Why Document AI is a test, not a purchase</h3>
+<p>D450 shows the extraction gap moves with the prompt. Run 4 to run 5: ryde_gdpr recall went from 37.0 to 91.8 percent and critical recall to 100 percent by adding one sentence to the v7 prompt. The remaining D388 failures are walkwheel_survey (critical recall 57.9 to 63.2 percent) and rdash_town_planning (critical recall 66.0 percent, 27 critical errors), and run to run variance on 3.1 Pro is large (walkwheel 87 rows in one run, 49 in the next). Better input structure could fix part of that, but nobody has measured whether the missed rows sat in tables or in plain text. A free first step is to classify the missed critical rows of rdash and walkwheel by where they sit in the source PDF. Only if most sit in tables or headers does the paid A/B make sense.</p>
+<h2>4. Ranked recommendation (questions for the owner)</h2>
+<p><strong>1. Apply to the Google for Startups Cloud Program, AI tier, and finish the Free Trial Part D check.</strong> Gives: a funded runway of up to USD 350,000 if accepted, and the fact on whether trial credit pays for Vertex. Effort: one application (owner account action) and reading one billing report. Credits burn: none. Question: <strong>Is Velstrian Tenderworks eligible (funding stage, company age, prior Google Cloud credits) and do you want to apply?</strong> Recommended: yes, answer every question truthfully, and do not describe the company as venture funded if it is not.</p>
+<p><strong>2. Run Gemini and embeddings on Vertex in the <code>eu</code> multi-region behind an environment flag, staging first.</strong> Gives: a stated processing location for the DPA and sales answers, plus the credit. Effort: about 6 files plus service account handling, medium risk until batch and embeddings are tried live (earlier doc, item 3). Credits burn: small, test traffic plus staging runs. Question: <strong>After Part D shows whether credit paid, do you approve a staging only build of the Vertex client with the existing key path kept as the default?</strong> Recommended: yes, and keep production on the Gemini API until the staging walk and a golden subset pass.</p>
+<p><strong>3. Classify the missed D388 rows by location in the PDF, then run a Document AI Layout Parser A/B on the failing tenders only.</strong> Gives: evidence on whether structure fixes critical recall, the one number the tender reading bar still lacks. Effort: classification is a read only job, the A/B needs a pre pass and a reader change. Credits burn: classification nil, the A/B is the page count times USD 0.01. For two tenders of about 100 pages it is about USD 2 (assumed page counts). Question: <strong>Do you approve a one off Document AI test capped at GBP 12 once the classification says tables are the cause?</strong> Recommended: yes, conditional on the classification.</p>
+<p><strong>4. Switch on Vertex context caching for the large surfaces and set Vertex batch for the nightly jobs.</strong> Gives: lower repeat cost on tender chunk prompts and evidence heavy drafts. Effort: small once option 2 exists. Credits burn: reduces spend. Question: <strong>Do you want caching measured on bid_rfp_extract and bid_response_draft before it is made default?</strong> Recommended: yes, measured on the golden harness first (RULE 0-T applies).</p>
+<p><strong>5. Pilot Google Search grounding on regulatory_monitor only.</strong> Gives: fresher legal and policy change watching for buyers and bidders, which is a clear customer story. Effort: one surface and a source display rule. Credits burn: low. Question: <strong>Do you accept live web sources on a single background surface if every claim shows its source and never replaces the curated PPN 026 knowledge base?</strong> Recommended: yes for the pilot, no for customer facing answers.</p>
+<h2>Decisions for the owner</h2>
+<ol>
+<li>Apply for the Startups AI tier, and who signs in to answer the eligibility questions (yes recommended).</li>
+<li>Approve a staging only Vertex client behind a flag (yes recommended, after Part D).</li>
+<li>Approve the free classification of the missed tender rows now, and a Document AI test capped at GBP 12 only if tables are the cause.</li>
+<li>Confirm Claude stays on Anthropic&#39;s own API, since credits cannot pay for it (yes recommended).</li>
+<li>Counsel question: if Gemini moves to a fixed location under the Google Cloud DPA, does that change Schedule 1 item 8 and trigger the clause 6.4 notice, and can the residency statement be upgraded.</li>
+<li>Do you want the credit expiry date (about 24 Jan 2027) and the Gemini 3.8 Flash price rise on 1 Jan 2027 tracked as dated risks on the board.</li>
+</ol>
+<h2>Unverified list</h2>
+<p>Programme amounts and eligibility (Google pages did not render, figures come from search summaries and conflict). Whether the Free Trial credit pays Vertex Gemini. Vertex per token prices. London single region pay as you go for Gemini 3. Batch discount for Gemini 3. Vertex grounding and Vertex AI Search price. Gen AI evaluation price. Page counts of the D388 tenders. Whether our funding stage qualifies. Cloud DPA terms for residency.</p>
+<h2>Sources, all read or seen 2026-10-26</h2>
+<ul>
+<li><a href="https://docs.cloud.google.com/free/docs/free-cloud-features">https://docs.cloud.google.com/free/docs/free-cloud-features</a> (fetched)</li>
+<li><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations">https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations</a> (fetched)</li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed">https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed</a> (fetched)</li>
+<li><a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/rag-engine/rag-engine-billing">https://docs.cloud.google.com/vertex-ai/generative-ai/docs/rag-engine/rag-engine-billing</a> (fetched)</li>
+<li><a href="https://cloud.google.com/startup">https://cloud.google.com/startup</a> , <a href="https://cloud.google.com/startup/ai">https://cloud.google.com/startup/ai</a> , <a href="https://cloud.google.com/startup/faq">https://cloud.google.com/startup/faq</a> , <a href="https://cloud.google.com/startup/benefits">https://cloud.google.com/startup/benefits</a> (titles only, content via search summary)</li>
+<li><a href="https://cloud.google.com/products/document-ai/pricing">https://cloud.google.com/products/document-ai/pricing</a> (search summary, page text did not render)</li>
+<li><a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview">https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview</a> (search summary)</li>
+<li><a href="https://creditforstartups.com/companies/google">https://creditforstartups.com/companies/google</a> , <a href="https://www.getaiperks.com/en/ai/google-cloud-startup-credits-guide">https://www.getaiperks.com/en/ai/google-cloud-startup-credits-guide</a> (third party, hints only)</li>
+<li>Repo: <code>docs/release-2.8.5/ai-strategy/VERTEX-VS-GEMINI-API-2026-10-25.md</code>, <code>docs/release-2.8.5/ai-quality/D411-SPEND-LEDGER.md</code>, <code>docs/release-2.8.5/ai-quality/D450-GEMINI-LEDGER.md</code>, <code>docs/legal/data-processing-agreement.md</code> lines 198, 225 to 232, 378, <code>api/app/services/ai/surface_policy.py</code> line 1408, <code>api/app/services/ai/provider_calls.py</code> lines 566, 779, 932, 1013, <code>api/app/services/ai/gemini_batch.py</code> line 113, <code>api/app/services/ai/pricing.py</code> line 88</li>
+</ul>
+
+</article>
+</main></body></html>
