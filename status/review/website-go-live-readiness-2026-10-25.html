@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Website go live readiness, D455, 2026-10-25</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Website go live readiness, D455, 2026-10-25</h1>
+<p><span class="rv-row">R285-REBRAND-08-WEBSITE</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/website/WEBSITE-GO-LIVE-READINESS-2026-10-25.md</code>, rendered from not yet committed (working tree at <code>5d70379f2</code>). A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-REBRAND-08-WEBSITE &middot; BUILT</span><span class="rtitle">Website rebrand in crowagent-website (astro/): content, metadata, llms.txt, legal pages, and crowagent.ai 301 to velstrian.com (plan C5 to C7)</span><p>WAITS ON OWNER ACTION (the explicit website deploy ask, owner rule 2026-10-20). Measured 2026-10-24: crowagent.ai answers 200 with 0 mentions of Velstrian and 59 of crowagent, velstrian.com times out, the website repo is 280 commits ahead of origin/main. Small agent item left: astro/src/data/site-facts.json still holds 2 status.crowagent.ai links (the old count of 7 is stale), mechanic lane. Re-verdicted from WIP.</p></div></section>
+<article class="doc">
+<h1>Website go live readiness, D455, 2026-10-25</h1>
+<p>Verdict: NO-GO for now. Several checks could not run (build, page walk, Lighthouse) and four real blockers were found by reading code and live DNS. Nothing was deployed, pushed or changed.</p>
+<h2>What ran and what did not</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. Production build with full gate chain</td>
+<td>BLOCKED. The shared heavy lock <code>crowagent-platform/.git/heavy.lock</code> was held by another lane from 23:34 to past 00:01 (no owner file, a platform <code>tsc --noEmit</code> was running) and free RAM sat at 0.6 to 0.9 GB. Polled 30 minutes, never built. The known <code>check-budgets</code> failure (14,362.9 KB vs 14,336 KB, A-439) is therefore unconfirmed on this tree.</td>
+</tr>
+<tr>
+<td>2. Domain and links</td>
+<td>Source level only. Built output not scanned (no fresh build, <code>astro/dist</code> is from 21:11 and older than the last commit).</td>
+</tr>
+<tr>
+<td>3. Invite only</td>
+<td>Done from code. Result below.</td>
+</tr>
+<tr>
+<td>4. Page walk 1440 and 390, screenshots</td>
+<td>BLOCKED (no fresh build, RAM under 1 GB). Walker is ready at <code>scratchpad/walk.cjs</code>.</td>
+</tr>
+<tr>
+<td>5. Lighthouse</td>
+<td>BLOCKED, same reason.</td>
+</tr>
+<tr>
+<td>6. SEO move</td>
+<td>Partly done from source and live headers.</td>
+</tr>
+<tr>
+<td>7. Cloudflare</td>
+<td>Done, read only.</td>
+</tr>
+</tbody></table></div>
+<h2>Blocking findings</h2>
+<ol>
+<li><strong>App sign up is OPEN, not invite only.</strong> <code>crowagent-platform/web/src/shared/lib/access-mode.ts:22</code> has <code>ACCESS_MODE = &quot;open&quot;</code> (D236). <code>web/src/shared/lib/auth/staging-open-signup.ts:54</code> returns true for every environment while it is open, so anyone passing Turnstile and the rate limit gets an admission row. D455 needs <code>invite_only</code>. Flipping the constant restores the older gate (staging-only open signup, production needs a <code>beta_invites</code> row) and switches the copy. It is a product change that ships with the platform cutover.</li>
+<li><strong>velstrian.com does not serve the website.</strong> Live: <code>https://velstrian.com/</code> answers 522, apex A record is <code>192.64.119.64</code> (Namecheap parking) and <code>www</code> is a CNAME to <code>parkingpage.namecheap.com</code>. The Pages project <code>crowagent-website</code> (production branch <code>main</code>) serves only <code>crowagent.ai</code>, <code>www.crowagent.ai</code> and <code>crowagent-website.pages.dev</code>.</li>
+<li><strong>Production build gate chain not proven green</strong> (see above). Treat A-439 <code>check-budgets</code> as red until a build runs.</li>
+<li><strong>Legal pages state Gemini 2.5.</strong> <code>crowagent-website/astro/src/content/legal/privacy.md:173</code> and <code>security.md:99</code> name Gemini 2.5 Pro and Flash. D447 retired 2.5 (it returns 404). The privacy notice must match the processing before go live.</li>
+<li><strong>The site mentions private beta and invite only wording</strong>, which the owner wants only on app login and sign up. Hits in source: <code>astro/src/data/site-facts.json:148-154</code> (a fact gate REQUIRES the phrase &quot;Private beta with selected users&quot;), <code>astro/src/components/about/AboutHistory.astro:66</code>, <code>astro/src/pages/roadmap.astro:205</code>, <code>astro/src/content/legal/security.md:79</code> (&quot;Invite-only org joins&quot;, which means team joins, rewrite), <code>llms-full.txt:13</code>. Removing them means changing the <code>check-facts</code> rule in the same commit.</li>
+</ol>
+<h2>Invite only mechanism (platform)</h2>
+<ul>
+<li>(a) Exists: <code>access-mode.ts</code> (code constant, one switch) plus a DB lock <code>public.platform_access_locks</code> read by <code>web/src/shared/lib/auth/access-lock.ts:1-60</code> and applied at <code>web/src/shared/lib/proxy/access-lock-gate.ts</code>. The DB lock default is open, so it is NOT a production guard until a founder sets <code>scope=&#39;global&#39;</code>. Signup also relies on <code>beta_invites</code> (the DB trigger provisions an org only for an invited address). Production config today is open (finding 1). There is no env flag by design.</li>
+<li>(b) Login and sign up screens: login only shows the notice after <code>error=beta_invite_required</code> (<code>shared/i18n/messages/auth/login.ts:50</code>, &quot;is currently invitation-only. Please request access&quot;) and a &quot;Request access&quot; footer link (<code>login.ts:76-82</code>). Sign up has a subtitle <code>createSubtitleInviteOnly</code> (<code>signup.ts:39</code>) used only when invite only. Both are plain and short once the constant flips.</li>
+<li>(c) Other places that mention it: <code>shared/i18n/messages/common/ui-chrome.ts:53</code> &quot;Invitation only&quot; and <code>shared/ui/BetaNotice.tsx</code> (hidden in production by <code>isProductionEnv()</code> at line 65, fine), <code>onboarding/support.ts:311</code> &quot;Request access&quot;, <code>settings/my-products.ts:84-85</code> &quot;Waitlist / Join waitlist&quot; inside the app. The waitlist strings are in-app and should be reviewed. No email template match found in <code>api/app</code> templates by grep (not exhaustive).</li>
+</ul>
+<h2>Website to app flows</h2>
+<ul>
+<li>Forms post to <code>APP_ORIGIN</code> = <code>https://app.velstrian.com</code> (<code>astro/src/data/app.ts:24</code>): <code>/api/contact/submit</code> and <code>/api/notify</code>. Both routes use <code>web/app/api/_shared/cors.ts:26-29</code>, which allows <code>velstrian.com</code> and <code>www.velstrian.com</code> via <code>MARKETING_APEX_HOSTS</code> and <code>MARKETING_WWW_HOSTS</code>. The API CORS list (<code>api/app/public_hosts.py:76</code>) also allows them. Origin allow works in code. The platform cutover is not deployed, so this is unproven on production.</li>
+<li>Sign up CTAs point to app.velstrian.com (<code>/signup</code>). While sign up is open that matches self serve, not invite only. After finding 1 is fixed the visitor lands on a sign up screen that asks for an invitation, which is the intended single place for that message.</li>
+<li><code>public_hosts.py:36</code> and <code>:93</code> still set <code>MARKETING_DOMAIN</code>/<code>PRIMARY_MARKETING_HOST</code> to <code>crowagent.ai</code>, so document footers print crowagent.ai. Flip with go live (its JavaScript twin too).</li>
+</ul>
+<h2>crowagent strings in the website</h2>
+<p>Source level (comments excluded by reading): <code>_headers</code> CSP still allows <code>https://crowagent-platform-production.up.railway.app</code>, the retired Railway host (non blocking, drop at go live). Other <code>crowagent</code> hits in <code>astro/src</code> are in code comments. <code>_redirects:164-165</code> already 301s <code>crowagent.ai/*</code> and <code>www.crowagent.ai/*</code> to <code>https://velstrian.com/:splat</code>. <code>.well-known/security.txt</code> is on velstrian.com. The built output scan (canonical, sitemap, OG, JSON-LD, llms.txt) is NOT done.</p>
+<h2>SEO move</h2>
+<p>Google&#39;s change of address needs a 301 from every old URL to its new one, so crowagent.ai should 301 to velstrian.com for a long period (months) and NOT be removed outright. D455 says take crowagent.ai down, so recommend: keep the crowagent.ai zone on the free plan with one Redirect Rule (free plan allows it) sending all paths to velstrian.com, and take down only the content. The crowagent.ai Search Console property was removed today, so the change of address tool is no longer available. Live today: <code>https://www.crowagent.ai/</code> answers 301, <code>https://crowagent.ai/</code> answers 200.</p>
+<h2>Cloudflare (read only, free plan)</h2>
+<ul>
+<li>Zones, all Free Website: crowagent.ai, crowagent.co, crowagent.co.uk, crowagentplatform.co.uk, velstrian.com, velstrian.co.uk, velstrian.uk.</li>
+<li>velstrian.com DNS: parking A and parking <code>www</code> (proxied) as above, <code>app</code>, <code>portal</code>, <code>staging-app</code>, <code>staging-portal</code> CNAME to Vercel, <code>api</code>, <code>api-staging</code> CNAME to Railway, Brevo DKIM, DMARC <code>p=none</code>, Email Routing MX, SPF, Google site verification, <code>status</code> Better Stack.</li>
+<li>Pages project <code>crowagent-website</code>, production branch <code>main</code>, no velstrian.com custom domain.</li>
+</ul>
+<h2>Go live steps (after the owner approves)</h2>
+<ol>
+<li>Free the heavy lock, run <code>cd astro &amp;&amp; npm run build</code> once, fix every red gate (A-439 budget), re-run.</li>
+<li>Fix findings 4 and 5 in the website (and the <code>check-facts</code> rule), decide the roadmap wording.</li>
+<li>Flip <code>ACCESS_MODE</code> to <code>invite_only</code> in the platform and deploy it with the cutover. Set the <code>MARKETING_DOMAIN</code> twins to velstrian.com.</li>
+<li>Run the page walk at 1440 and 390 and Lighthouse on the built output.</li>
+<li>In Cloudflare Pages add custom domains <code>velstrian.com</code> and <code>www.velstrian.com</code>, replace the parking A and <code>www</code> records with the Pages CNAME, then push <code>main</code> (owner approval, a push is a production deploy).</li>
+<li>Add the crowagent.ai Redirect Rule (301 to velstrian.com), then drop crowagent.ai as a Pages custom domain.</li>
+<li>Submit the new sitemap in the velstrian.com Search Console property.</li>
+</ol>
+<h2>Not covered</h2>
+<p>Console errors, broken images, phone layout, lorem text, dead product names, certificate claims and Core Web Vitals on the built pages. These stay unproven until the build runs.</p>
+
+</article>
+</main></body></html>
