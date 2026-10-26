@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T12:23:47.000Z",
+  "updated": "2026-10-26T12:25:24.849Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1685,10 +1685,10 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, D455 SEO move",
       "sev": "P1",
       "title": "SEO: crowagent.ai needs a long running 301 to velstrian.com, owner to confirm 301 versus immediate removal",
-      "status": "OPEN",
-      "note": "Readiness doc SEO move: a Google change of address needs a 301 from every old URL for months. Recommendation: keep the crowagent.ai zone on the free plan with one Redirect Rule (path preserved) and take down only the content. D455 says take crowagent.ai down, so this is an OWNER DECISION, not settled. _redirects:164-165 already 301s but only works while Pages serves crowagent.ai. Overlaps the last sentence of A-446.",
+      "status": "CLEARED",
+      "note": "Readiness doc SEO move: a Google change of address needs a 301 from every old URL for months. Recommendation: keep the crowagent.ai zone on the free plan with one Redirect Rule (path preserved) and take down only the content. D455 says take crowagent.ai down, so this is an OWNER DECISION, not settled. _redirects:164-165 already 301s but only works while Pages serves crowagent.ai. Overlaps the last sentence of A-446. || Owner decision D473: crowagent.ai goes fully off with no redirect once velstrian.com is live. The go live step is A-453.",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:40:48.324Z"
+      "changedAt": "2026-10-26T12:25:24.586Z"
     },
     {
       "id": "A-453",
@@ -1755,10 +1755,10 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, R285-WEB-SELF-SERVE-COPY-01, D456",
       "sev": "P3",
       "title": "R285-WEB-SELF-SERVE-COPY-01 is superseded by D456 invite only, reconcile it so the site never says sign up is self serve",
-      "status": "OPEN",
-      "note": "Platform row R285-WEB-SELF-SERVE-COPY-01 is still OPEN (says sign up is self serve once production really is, D253). D456 (2026-10-26) keeps app sign up invite only until the owner asks for general availability and D455 puts invite only wording on the login and sign up screens only. Owner or driver to mark the platform row SUPERSEDED. Website side is covered by A-444 and must not gain self serve copy.",
+      "status": "CLEARED",
+      "note": "Platform row R285-WEB-SELF-SERVE-COPY-01 is still OPEN (says sign up is self serve once production really is, D253). D456 (2026-10-26) keeps app sign up invite only until the owner asks for general availability and D455 puts invite only wording on the login and sign up screens only. Owner or driver to mark the platform row SUPERSEDED. Website side is covered by A-444 and must not gain self serve copy. || Owner decision D468: self serve wording ships, open sign up claims stay held. Website side is covered by A-444 (f6c0a0c6).",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:40:49.280Z"
+      "changedAt": "2026-10-26T12:25:24.847Z"
     },
     {
       "id": "A-460",
