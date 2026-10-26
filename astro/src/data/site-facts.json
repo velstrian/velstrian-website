@@ -145,7 +145,7 @@
     ]
   },
   "product_status": {
-    "measured": "2026-10-26, owner decision D455 and D456 superseding the D252 item 8 wording: the app stays invite only until the owner asks for general availability, and that is said ONLY on the app login and sign up screens. The website carries no beta, invite only, waitlist or request access wording. Velstrian Bid has had customers bidding on real work since May 2026 and launches fully in October 2026 depending on readiness, or by November 2026 at the latest. The company was founded in March 2026 and never traded under another name, so no page calls out a rename",
+    "measured": "2026-10-26, owner decision D455 and D456 superseding the D252 item 8 wording: the app stays invite only until the owner asks for general availability, and that is said ONLY on the app login and sign up screens. The website carries no beta, invite only, waitlist or request access wording. Velstrian Bid has had customers bidding on real work since May 2026 and launches fully in October 2026 depending on readiness, or by November 2026 at the latest. The company was founded in March 2026 and never traded under another name, so no page calls out a rename. D468 (2026-10-26): the site may say the product is self serve once an account is open (a small business sets it up and writes bids itself, no consultant needed), and still never claims that anyone can sign up openly or instantly",
     "bid": "invite_only_app_no_site_mention",
     "customers_since": "May 2026",
     "full_launch": "October to November 2026",
@@ -171,7 +171,12 @@
       "Platform live",
       "renamed Velstrian",
       "formerly CrowAgent",
-      "formerly known as CrowAgent"
+      "formerly known as CrowAgent",
+      "anyone can sign up",
+      "sign up in seconds",
+      "sign up instantly",
+      "instant sign up",
+      "instant access"
     ]
   },
   "ai_advisor": {

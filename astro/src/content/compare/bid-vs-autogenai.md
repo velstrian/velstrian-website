@@ -16,7 +16,7 @@ ctaSubLine2: "Start today. No sales call needed."
 screen: answer-list
 faq:
   - question: "Is Velstrian Bid or AutogenAI cheaper?"
-    answer: "Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and anyone can sign up and start by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information."
+    answer: "Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and once your account is open you set it up and write your bids yourself, paying by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information."
   - question: "Does AutogenAI publish its pricing?"
     answer: "No. AutogenAI lists no public price and quotes enterprise customers on request. Figures that circulate online are third-party estimates, not vendor-published rates."
   - question: "Which is better for a small supplier or SME?"
@@ -147,7 +147,7 @@ faq:
 <p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft also carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
 
 <p>After award, Velstrian Bid keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. It is built for small and mid size firms answering public and private tenders, not for enterprise-wide proposal automation.</p>
-<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Anyone can sign up and start by card, held securely by Stripe and never stored by us.</p>
+<p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Once your account is open you set it up and run it yourself, with no consultant needed, and you pay by card, held securely by Stripe and never stored by us.</p>
     </div>
   </details>
   <details>
@@ -162,7 +162,7 @@ faq:
 <div class="cfaq">
   <details>
     <summary><h3>Is Velstrian Bid or AutogenAI cheaper?</h3></summary>
-    <div class="cfaq-a"><p>Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and anyone can sign up and start by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information.</p></div>
+    <div class="cfaq-a"><p>Velstrian Bid publishes its prices: Starter is {{bid.starter.monthly}} per month and Pro is {{bid.pro.monthly}} per month, and once your account is open you set it up and write your bids yourself, paying by card. AutogenAI does not publish a price. It is sold as an enterprise subscription on request, so a direct number-to-number comparison is not possible from public information.</p></div>
   </details>
   <details>
     <summary><h3>Does AutogenAI publish its pricing?</h3></summary>
