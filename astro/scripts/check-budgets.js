@@ -428,7 +428,13 @@ const BUDGETS = {
      * put there to improve on. Retiring that tier removes 1.94 MB and makes
      * every non-AVIF browser faster; it needs an owner decision because it
      * deletes published assets, and it is the first place to look when this
-     * budget next binds. */
+     * budget next binds.
+     *
+     * D455, A-439 (2026-10-26): it bound at 14,362.9 KB. Kept at 14 MB, not
+     * raised. The blog heroes carried three formats (AVIF, WebP and the JPEG
+     * fallback), and the WebP tier was retired from PostImage.astro because
+     * AVIF plus the JPEG covers every browser. That removed 48 files,
+     * 1,513.9 KB, measured on dist. */
   wholeBuild: 14 * MB,
 };
 

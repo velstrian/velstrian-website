@@ -78,13 +78,21 @@ const cover = hero ? null : coverForPost(slug, title, category);
 const base = hero ? `/Assets/blog-photos/${hero.file}` : '';
 
 /*
- * The ladder on disk for every hero, in BOTH formats, written by
- * scripts/build-blog-photos.mjs and nothing else. Listed rather than derived so
- * adding a width means adding the file first. AVIF is offered first: measured
- * across the set it is roughly half the WebP bytes for the same picture.
+ * The AVIF ladder on disk for every hero, written by scripts/build-blog-photos.mjs
+ * and nothing else. Listed rather than derived so adding a width means adding the
+ * file first.
+ *
+ * D455, A-439 (2026-10-26): the WebP tier was retired from this picture. The
+ * fallback chain is AVIF, then the JPEG in <img src>, and that covers every
+ * browser: AVIF ships in Chrome 85+, Firefox 93+, Edge 121+ and Safari 16.4+,
+ * and every other browser takes the JPEG. A third format here bought nothing a
+ * reader could see except for the small cohort on Safari 14 to 16.3, who now get
+ * the JPEG (at most 245 KB, lazy loaded) instead of a WebP. It removed 48 files
+ * and 1,513.9 KB from the build, measured on dist. The WebP files stay on disk
+ * under Assets/ and copy-assets.js only copies what a page references.
  */
 const WIDTHS = [400, 600, 800, 1200] as const;
-const srcset = (ext: 'avif' | 'webp') => WIDTHS.map((w) => `${base}-${w}w.${ext} ${w}w`).join(', ');
+const srcset = (ext: 'avif') => WIDTHS.map((w) => `${base}-${w}w.${ext} ${w}w`).join(', ');
 ---
 
 {
@@ -92,7 +100,6 @@ const srcset = (ext: 'avif' | 'webp') => WIDTHS.map((w) => `${base}-${w}w.${ext}
     <div class="pi">
       <picture>
         <source type="image/avif" srcset={srcset('avif')} sizes={sizes} />
-        <source type="image/webp" srcset={srcset('webp')} sizes={sizes} />
         <img
           class="pi__img"
           src={`${base}.jpg`}
