@@ -2,7 +2,7 @@
   "$note": "D451 owner review documents. One line per tracker row: row id -> document paths relative to crowagent-platform. build-platform-board.js renders each document to status/review/<slug>.html on every rebuild and links it from the row on #platform. To add a new approval document, add one line here. A path that does not resolve is reported on the board, never invented.",
   "rows": {
     "R285-TRUST-DPA-FINAL-01": ["docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md", "docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md", "docs/release-2.8.5/legal/LEGAL-DISCLAIMER-BENCHMARK-2026-10-26.md"],
-    "R285-TRUST-LIABILITY-CAP-01": ["docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md", "docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md"],
+    "R285-TRUST-LIABILITY-CAP-01": ["docs/release-2.8.5/legal/DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md", "docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md", "docs/release-2.8.5/legal/LIABILITY-AND-DPA-BENCHMARK-TOP10-UK-2026-10-26.md"],
     "R285-P3-TRUST-AI-RESIDENCY-WORDING-01": ["docs/release-2.8.5/legal/AI-RESIDENCY-STATEMENT-2026-10-25.md"],
     "R285-P3-AI-OPERATING-MODEL-DOC-01": ["docs/release-2.8.5/ai-quality/OPERATING-MODEL.md", "docs/release-2.8.5/ai-quality/ENGINE-DESIGN-RULES.md"],
     "R285-P3-AI-ISO42001-POLICY-01": ["docs/release-2.8.5/ai-quality/iso42001/AI-POLICY-AND-INTENDED-USE.md", "docs/release-2.8.5/ai-quality/iso42001/CONTROL-MAP.md"],
