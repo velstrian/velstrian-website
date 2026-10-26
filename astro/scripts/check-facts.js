@@ -80,8 +80,18 @@ const RULES = [
      *
      * [2026-10-21, D255] THE DENIAL NO LONGER CLEARS IT. This rule used to carry
      * an `unless` that let "we are not certified" style wording through. The
-     * owner ruled that defensive wording goes, so there is no hedge left to
-     * protect, and a standard we neither hold nor follow is simply not named.
+     * owner ruled that defensive wording goes.
+     *
+     * [2026-10-26, D455 website pass] THE APPROVED WORDING PASSES. The owner
+     * approved "we follow the structure of ISO/IEC 42001, no certificate is
+     * held". The earlier message said we do not follow the standard, which
+     * contradicted that. So the rule is now two rules:
+     *   - iso42001-certified-claim fires on any certification, accreditation,
+     *     audit or compliance claim, wherever it sits, with no exception;
+     *   - iso42001-unearned fires on any other mention, unless the words
+     *     directly before the standard say we follow its structure (the check
+     *     reads only the 80 characters before the match, never a wide window,
+     *     so an approved sentence cannot clear a different mention nearby).
      *
      * IF CERTIFICATION IS EVER ACHIEVED, this rule is the change: quote the
      * certificate number and the UKAS-accredited body on the page and add a named
@@ -90,14 +100,30 @@ const RULES = [
      * unaccredited certificate is a live risk and a reviewer will ask which body
      * issued it.
      */
-    id: 'iso42001-unearned',
-    pattern: /ISO(?:\/IEC)?[\s ]*42001/gi,
-    message: 'ISO 42001 named on a published page',
+    id: 'iso42001-certified-claim',
+    pattern: /\bISO(?:\/IEC)?[\s\u00a0]*42001[\s\u00a0-]*(?:certified|certification|certificate\s+(?:holder|number|no\b)|accredited|accreditation|audited|compliant|compliance)|\b(?:certified|accredited|audited|compliant)\s+(?:to|under|against|with|for)\s+(?:the\s+)?ISO(?:\/IEC)?[\s\u00a0]*42001/gi,
+    message: 'an ISO/IEC 42001 certification, accreditation, audit or compliance claim',
     why:
-      'D255 (2026-10-21): say what we do, positively, and never claim a certificate we do\n' +
-      '      not hold. CrowAgent neither holds nor follows ISO/IEC 42001, so there is nothing\n' +
-      '      positive to say about it and a mention reads as a status. A denial beside it no\n' +
-      '      longer clears the rule: defensive wording is what D255 removed.',
+      'D255: never claim a certificate we do not hold. No ISO/IEC 42001 certificate is held.\n' +
+      '      The approved wording is "we follow the structure of ISO/IEC 42001, no certificate\n' +
+      '      is held". Any certified, accredited, audited or compliant claim fails.',
+  },
+  {
+    /* See iso42001-certified-claim above: any other mention of the standard
+       must use the approved framing directly before it. */
+    id: 'iso42001-unearned',
+    pattern: /ISO(?:\/IEC)?[\s\u00a0]*42001/gi,
+    check: (m) => {
+      const before = m.input.slice(Math.max(0, m.index - 80), m.index);
+      return !/(?:follow(?:s|ing)?|built\s+on|organised\s+around|structured\s+around|structured\s+on|modelled\s+on|aligned\s+to)\s+(?:the\s+)?(?:structure|framework|clauses|management\s+system\s+structure)\s+(?:of|in|set\s+out\s+in)\s+(?:the\s+)?$/i.test(before);
+    },
+    message: 'ISO/IEC 42001 named without the approved framing',
+    why:
+      'D255 and the approved wording (2026-10-26): we follow the structure of ISO/IEC 42001\n' +
+      '      and hold no certificate. Name the standard only as "we follow the structure of\n' +
+      '      ISO/IEC 42001, no certificate is held" or a close variant (follows, following, the\n' +
+      '      framework of, the clauses of). A bare mention, a badge or "42001 aligned" reads as\n' +
+      '      a status and fails.',
   },
   {
     /* D255 (2026-10-21). The one boundary the owner kept: never claim a
