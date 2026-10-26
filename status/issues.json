@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T04:29:55.902Z",
+  "updated": "2026-10-26T04:51:33.829Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1835,10 +1835,20 @@
       "src": "HELP-WEB lane 2026-10-26",
       "sev": "P2",
       "title": "Retention page says Brevo send logs are kept 12 months rolling, Brevo keeps them with no time limit unless a retention rule is set",
-      "status": "OPEN",
-      "note": "Measured 2026-10-26: help.brevo.com article 4415743225746 says transactional logs are stored indefinitely by default until a retention rule is set under Settings, Transactional emails, Retention rules. /retention/ (generated from the platform page) states 12 months rolling. Owner action: set the Brevo retention rule to 12 months, or change the stated period in the platform page. Also open from the same lane: privacy.md wording changed (Upstash removed) but its version stays 2026-10-25, owner to say whether a sub-processor removal needs a new accepted version (D448). Platform docs/release-2.8.5/legal/PACKAGE-8-INTL-DPA-ADDENDA-DRAFT-2026-10-23.md line 33 still names Upstash (Ireland), status/docs/legal/package-8-intl-addenda.html is rendered from it.",
+      "status": "FIXED",
+      "note": "Measured 2026-10-26: help.brevo.com article 4415743225746 says transactional logs are stored indefinitely by default until a retention rule is set under Settings, Transactional emails, Retention rules. /retention/ (generated from the platform page) states 12 months rolling. Owner action: set the Brevo retention rule to 12 months, or change the stated period in the platform page. Also open from the same lane: privacy.md wording changed (Upstash removed) but its version stays 2026-10-25, owner to say whether a sub-processor removal needs a new accepted version (D448). Platform docs/release-2.8.5/legal/PACKAGE-8-INTL-DPA-ADDENDA-DRAFT-2026-10-23.md line 33 still names Upstash (Ireland), status/docs/legal/package-8-intl-addenda.html is rendered from it. || LEFTOVERS lane 2026-10-26: page now states the current truth, Brevo send logs have no fixed limit yet (platform 8b6b2c716, website retention.md regenerated, check-help-centre PASS). The 12 month rule is the owner action filed beside this item. DPA addenda line 33 and its rendered copy no longer name Upstash. privacy.md version: kept 2026-10-25 on purpose, see R285-WEB-HELP-CENTRE-01 row (the version is the agreement version every acceptance record and the Agree gate compare, a processor removal adds no processing so it needs no re-acceptance, lastUpdated already reads 2026-10-26).",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T04:29:55.902Z"
+      "changedAt": "2026-10-26T04:51:33.829Z"
+    },
+    {
+      "id": "A-468",
+      "src": "LEFTOVERS lane 2026-10-26",
+      "sev": "P2",
+      "title": "OWNER ACTION: set the Brevo transactional log retention rule to 12 months",
+      "status": "OPEN",
+      "note": "Account read only via the Brevo MCP (accounts_get_account): Velstrain Systems Ltd, free plan, nothing changed. The MCP has no tool that reads or sets retention rules, so the current rule is unmeasured, and Brevo's default for an account under 10 million events is no time limit (help.brevo.com 4415743225746 and 360021533839). Steps: log in to app.brevo.com, account menu top right, Settings, Transactional emails, Retention rules, choose 12 months (options run 1 month to 5 years), Save. Brevo deletes older logs and previews within 24 to 72 hours. Then tell the lane: the platform retention page cell (web/app/(legal)/retention/page.tsx) changes from 'No fixed limit yet' to '12 months rolling' and the website /retention is regenerated (node scripts/generate-help-centre.mjs from astro/). Also noted, not changed: the account name reads 'Velstrain' (typo for Velstrian) and the 'Deleted on unsubscribe' cell is not how Brevo logs behave, an unsubscribe stops sending but does not delete send logs.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T04:51:33.724Z"
     }
   ],
   "directives": [
@@ -1908,5 +1918,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 468
+  "nextId": 469
 }
