@@ -53,7 +53,6 @@ const OLD_SOCIALS = [
 // app.crowagent.ai left this list and a built page naming it is now a violation.
 const KEPT_HOSTS = [
   'calendly.com/crowagent-platform',
-  'crowagent-platform-production.up.railway.app', // the API host the partner form posts to, moves with the app
 ];
 
 const TEXT_EXT = new Set(['.html', '.xml', '.txt', '.json', '.js', '.webmanifest', '.svg']);

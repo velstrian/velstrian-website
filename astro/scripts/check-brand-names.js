@@ -72,9 +72,7 @@ function getHtmlFiles(dir) {
 }
 
 const KEPT_HOSTS = [
-  'portal.crowagent.ai',
   'calendly.com/crowagent-platform',
-  'crowagent-platform-production.up.railway.app',
 ];
 
 const ROOT_TEXT_FILES = [
