@@ -10,6 +10,7 @@
     "R285-P3-AI-ISO42001-POLICY-01": ["docs/release-2.8.5/ai-quality/iso42001/AI-POLICY-AND-INTENDED-USE.md", "docs/release-2.8.5/ai-quality/iso42001/CONTROL-MAP.md"],
     "R285-TRUST-SECURITY-EVIDENCE-PACK-01": ["docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md", "docs/compliance/STATEMENT-OF-APPLICABILITY.md"],
     "R285-P3-AI-OPS-ON-CALL-01": ["docs/release-2.8.5/ai-quality/ON-CALL.md"],
+    "R285-LEGAL-KIRO-B-OWNER-01": ["docs/release-2.8.5/legal/KIRO-B-REVIEW-OWNER-QUESTIONS-2026-10-26.md"],
     "R285-LEGAL-KIRO-A09-01": ["docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md", "docs/release-2.8.5/legal/LEGAL-DISCLAIMER-BENCHMARK-2026-10-26.md"],
     "R285-REBRAND-08-WEBSITE": ["docs/release-2.8.5/website/WEBSITE-GO-LIVE-READINESS-2026-10-25.md"],
     "R285-WEB-HELP-CENTRE-01": ["docs/release-2.8.5/website/HELP-CENTRE-PLACEMENT-2026-10-26.md"]
