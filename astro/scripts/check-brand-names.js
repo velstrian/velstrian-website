@@ -7,7 +7,9 @@
  * 1. astro/src/lib/brand-names.ts matches crowagent-platform/packages/tokens/src/brand-names.ts
  * 2. No old brand names (CrowMark, CrowAgent, Crow Agent, old company name) appear in built HTML.
  *    (External infrastructure hosts during transition are allowed:
- *    calendly.com/crowagent-platform, crowagent-platform-production.up.railway.app.
+ *    crowagent-platform-production.up.railway.app. The old Calendly slug left this
+ *    list on 2026-10-26, A-472, when the owner gave the velstrian-systems-ltd account,
+ *    and a page that still names it now fails the build.
  *    app.crowagent.ai left this list on 2026-10-25, A-294, when APP_ORIGIN moved to
  *    app.velstrian.com, so a page that names the old app host fails the build).
  */
@@ -71,9 +73,7 @@ function getHtmlFiles(dir) {
   return res;
 }
 
-const KEPT_HOSTS = [
-  'calendly.com/crowagent-platform',
-];
+const KEPT_HOSTS = [];
 
 const ROOT_TEXT_FILES = [
   'robots.txt',
@@ -88,6 +88,11 @@ function checkContent(rel, rawContent) {
   // Mask allowed transitional external app/infrastructure hosts
   for (const h of KEPT_HOSTS) {
     content = content.split(h).join('__KEPT_HOST__');
+  }
+
+  // A-472: the old Calendly account. CALENDLY_URL in src/data/app.ts is the one source.
+  if (/calendly\.com\/crowagent-platform/i.test(rawContent)) {
+    errors.push(`[old-calendly] ${rel}: links to calendly.com/crowagent-platform, read CALENDLY_URL from src/data/app.ts`);
   }
 
   // Check for CrowMark

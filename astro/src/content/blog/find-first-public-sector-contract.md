@@ -131,7 +131,7 @@ No. Use a bid or no-bid decision to weigh fit, capacity, the strength of any inc
 - [Find a Tender service](https://www.find-tender.service.gov.uk/), gov.uk.
 - [Contracts Finder](https://www.gov.uk/contracts-finder), gov.uk.
 - [Transforming Public Procurement](https://www.gov.uk/government/collections/transforming-public-procurement), Cabinet Office guidance collection, gov.uk.
-- [Procurement Policy Note 002 on social value](https://www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement), Cabinet Office, gov.uk.
+- [PPN 026: The social value model](https://www.gov.uk/government/publications/ppn-026-the-social-value-model), Cabinet Office, gov.uk.
 
 ---
 

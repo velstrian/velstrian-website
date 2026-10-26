@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T10:35:35.552Z",
+  "updated": "2026-10-26T12:19:47.197Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1855,40 +1855,50 @@
       "src": "go-live critical walk 2026-10-26",
       "sev": "P2",
       "title": "_redirects 301s crowagent.ai and www.crowagent.ai to velstrian.com, contradicting D473 (crowagent.ai fully off, no redirect)",
-      "status": "OPEN",
-      "note": "Product defect. File crowagent-website/_redirects lines 164-165 (copied into astro/dist/_redirects): 'https://crowagent.ai/* https://velstrian.com/:splat 301' and the www twin. Observed: the shipped rules redirect the retired domain. Expected: per D473 no redirect, so both lines go before the push. Also remove the comment block near line 192 that explains them. Check scripts that assert these lines (check-redirects or smoke test) change in the same commit.",
+      "status": "FIXED",
+      "note": "Product defect. File crowagent-website/_redirects lines 164-165 (copied into astro/dist/_redirects): 'https://crowagent.ai/* https://velstrian.com/:splat 301' and the www twin. Observed: the shipped rules redirect the retired domain. Expected: per D473 no redirect, so both lines go before the push. Also remove the comment block near line 192 that explains them. Check scripts that assert these lines (check-redirects or smoke test) change in the same commit. || 2026-10-26: the crowagent.ai and www.crowagent.ai host rules removed from root _redirects (D473, no redirect). Same site path rules kept. No gate asserted them. New guard in astro/scripts/check-rebrand-velstrian.mjs fails on any served crowagent host rule, red proven against the old dist (2 hits). Full build 44 of 44.",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T10:35:34.677Z"
+      "changedAt": "2026-10-26T12:19:46.185Z"
     },
     {
       "id": "A-470",
       "src": "go-live critical walk 2026-10-26",
       "sev": "P2",
       "title": "Legal pages show old 'last updated' dates though their text changed on 2026-10-26 (DPA, retention, residency, refund)",
-      "status": "OPEN",
-      "note": "Product defect, platform source. Generated pages astro/src/content/legal/dpa.md:9 'Version 1.0, in force from 24 April 2026', retention.md:9 'Last updated: 24 May 2026', residency.md:9 'Last updated: 19 July 2026', refund-policy.md:9 'Version 2026-04-24'. Their wording was edited on 2026-10-26 (Brevo retention, Upstash and Resend removal) but the date lines come from crowagent-platform/web/src/shared/legal/public-pages and were not bumped. Terms, privacy and sub-processors do show 26 October 2026. security.md carries no date. Expected: date or version of each page matches its last content change. Fix in the platform module then rerun scripts/generate-help-centre.mjs.",
+      "status": "FIXED",
+      "note": "Product defect, platform source. Generated pages astro/src/content/legal/dpa.md:9 'Version 1.0, in force from 24 April 2026', retention.md:9 'Last updated: 24 May 2026', residency.md:9 'Last updated: 19 July 2026', refund-policy.md:9 'Version 2026-04-24'. Their wording was edited on 2026-10-26 (Brevo retention, Upstash and Resend removal) but the date lines come from crowagent-platform/web/src/shared/legal/public-pages and were not bumped. Terms, privacy and sub-processors do show 26 October 2026. security.md carries no date. Expected: date or version of each page matches its last content change. Fix in the platform module then rerun scripts/generate-help-centre.mjs. || 2026-10-26: dates fixed in the platform sources and regenerated, drift check PASS. DPA now prints the version the D448 record already holds (2026-10-26, from LEGAL_DOCUMENT_VERSIONS.dpa) and its date, no version bump. Retention and residency: Last updated 26 October 2026 (not agreements, no version). Refund: version 2026-04-24 kept (wording change was the support address on 21 October, not material), Last updated 21 October 2026 added. Walked at 1440 and 390.",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T10:35:35.035Z"
+      "changedAt": "2026-10-26T12:19:46.527Z"
     },
     {
       "id": "A-471",
       "src": "go-live critical walk 2026-10-26",
       "sev": "P3",
       "title": "Two blog posts link to gov.uk pages that now answer 404",
-      "status": "OPEN",
-      "note": "Product defect (content). Measured by GET 2026-10-26: https://www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement (on /blog/find-first-public-sector-contract/) and https://www.gov.uk/government/publications/guidance-on-transparent-and-responsible-use-of-ai-in-procurement (on /blog/method-statement-that-scores/) both 404. Expected: a live official URL or the link removed. Several other external links (LinkedIn, Capterra, GetApp, Medium, finsmes) answered 302 or 403 to a script, which is bot handling and not counted as broken.",
+      "status": "FIXED",
+      "note": "Product defect (content). Measured by GET 2026-10-26: https://www.gov.uk/government/publications/procurement-policy-note-0223-social-value-in-procurement (on /blog/find-first-public-sector-contract/) and https://www.gov.uk/government/publications/guidance-on-transparent-and-responsible-use-of-ai-in-procurement (on /blog/method-statement-that-scores/) both 404. Expected: a live official URL or the link removed. Several other external links (LinkedIn, Capterra, GetApp, Medium, finsmes) answered 302 or 403 to a script, which is bot handling and not counted as broken. || 2026-10-26: replaced with the official pages, both 200: gov.uk PPN 026 The social value model (link text also drops the PPN 002 name) and gov.uk PPN 017 Improving transparency of AI use in procurement. All 16 external blog links re-checked: none 404, find-tender answers a slow 302 to a script (bot handling).",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T10:35:35.302Z"
+      "changedAt": "2026-10-26T12:19:46.798Z"
     },
     {
       "id": "A-472",
       "src": "go-live critical walk 2026-10-26",
       "sev": "P3",
       "title": "Book a demo link uses the old brand Calendly slug, and generated legal pages leak platform source paths in HTML comments",
-      "status": "OPEN",
-      "note": "Product defect, low. astro/src/data/app.ts:67 WALKTHROUGH_URL and astro/src/content/legal/security.md:139 point to calendly.com/crowagent-platform/30min, which appears in 45 built pages and reveals the old brand in the URL a visitor sees on hover. Needs an owner action in Calendly (rename the slug) then one constant change. Separately 5 generated legal pages carry a GENERATED comment naming crowagent-platform/web/src/shared/legal/... in view source (generate-help-centre.mjs). Expected: no old brand string or internal path in served HTML.",
+      "status": "FIXED",
+      "note": "Product defect, low. astro/src/data/app.ts:67 WALKTHROUGH_URL and astro/src/content/legal/security.md:139 point to calendly.com/crowagent-platform/30min, which appears in 45 built pages and reveals the old brand in the URL a visitor sees on hover. Needs an owner action in Calendly (rename the slug) then one constant change. Separately 5 generated legal pages carry a GENERATED comment naming crowagent-platform/web/src/shared/legal/... in view source (generate-help-centre.mjs). Expected: no old brand string or internal path in served HTML. || 2026-10-26: the generator writes its note as a YAML comment in the frontmatter, so no platform path reaches the served HTML (walk confirmed on all 5 generated pages), drift check still PASS. Calendly: one constant CALENDLY_URL plus WALKTHROUGH_URL in astro/src/data/app.ts, now the owner's event https://calendly.com/velstrian-systems-ltd/velstrian-meet. security.md uses a walkthrough: link resolved at build, a hand typed calendly.com link in content fails the build, and check-brand-names fails on the old slug (red proven, 30 hits on the old dist). 42 built pages carry the new link, 0 the old. Platform support page embed read calendly.com/velstrian-platform/30min, which answers 404: now CALENDLY_BOOKING_URL in @velstrian/tokens.",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T10:35:35.552Z"
+      "changedAt": "2026-10-26T12:19:46.998Z"
+    },
+    {
+      "id": "A-473",
+      "src": "A-472 follow up 2026-10-26",
+      "sev": "P3",
+      "title": "Owner action: Calendly booking account moves off the crowagent-platform slug",
+      "status": "FIXED",
+      "note": "Owner gave https://calendly.com/velstrian-systems-ltd/velstrian-meet on 2026-10-26 (answers 200). Website and app now read it from one constant each (astro/src/data/app.ts, packages/tokens/src/contact.ts). Nothing left for the owner beyond confirming the event length matches the button copy 'Book a 30-minute call'.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T12:19:47.197Z"
     }
   ],
   "directives": [
@@ -1958,5 +1968,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 473
+  "nextId": 474
 }

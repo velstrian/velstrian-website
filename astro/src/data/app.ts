@@ -60,8 +60,17 @@ export const START_LABEL = 'Start now';
 export const API_ORIGIN = 'https://api.velstrian.com';
 
 /**
- * The 30 minute walkthrough booking page. Typed into three page files before
- * (HomeConversion.astro, about.astro, bid.astro). The evidenced answer pages
- * read it from here, and the older pages move to it as they adopt the system.
+ * THE ONE CALENDLY ACCOUNT (A-472, owner 2026-10-26). The booking account the
+ * owner gave on 2026-10-26, replacing the old crowagent-platform slug. Every
+ * booking link on the site, and the `walkthrough:` link in Markdown content
+ * (astro.config.mjs rehypeAppOrigin), reads it from here, so a change of
+ * account is this one line.
  */
-export const WALKTHROUGH_URL = 'https://calendly.com/crowagent-platform/30min';
+export const CALENDLY_URL = 'https://calendly.com/velstrian-systems-ltd';
+
+/**
+ * The walkthrough booking page on that account, the exact event URL the owner
+ * gave on 2026-10-26. Measured 2026-10-26: it answers 200, and an unknown event
+ * slug on the account answers 404.
+ */
+export const WALKTHROUGH_URL = `${CALENDLY_URL}/velstrian-meet`;

@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { APP_ORIGIN } from './src/data/app.ts';
+import { APP_ORIGIN, WALKTHROUGH_URL } from './src/data/app.ts';
 
 /**
  * Serve `/Assets/...` from the repository root DURING DEV ONLY.
@@ -195,12 +195,23 @@ const APP_HOST_LINK = /^https?:\/\/app\.[a-z0-9.-]+/i;
  * check-brand-names. As an option the origin is part of the config digest, so a
  * host change clears the cache by itself.
  */
-function rehypeAppOrigin({ origin }) {
+/*
+ * THE BOOKING LINK IN CONTENT IS ONE LINE TOO (A-472). A Markdown link to the
+ * walkthrough is written `walkthrough:`, and this writes WALKTHROUGH_URL from
+ * src/data/app.ts in its place. A hand typed calendly.com link in content fails
+ * the build, so a change of Calendly account can never miss a page.
+ */
+const CALENDLY_LINK = /^https?:\/\/(?:www\.)?calendly\.com\/(?!legal\/)/i;
+function rehypeAppOrigin({ origin, walkthrough }) {
   return (tree, file) => {
     const walk = (node) => {
       if (node.type === 'element' && node.tagName === 'a' && node.properties && typeof node.properties.href === 'string') {
         const href = node.properties.href;
-        if (href.startsWith('app:/')) node.properties.href = origin + href.slice(4);
+        if (href === 'walkthrough:') node.properties.href = walkthrough;
+        else if (CALENDLY_LINK.test(href)) {
+          throw new Error(`A-472: ${file?.path ?? 'content'} links to ${href}. Write it as walkthrough: so the booking link stays one line in src/data/app.ts.`);
+        }
+        else if (href.startsWith('app:/')) node.properties.href = origin + href.slice(4);
         else if (APP_HOST_LINK.test(href)) {
           throw new Error(`A-391: ${file?.path ?? 'content'} links to ${href}. Write it as app:${href.replace(APP_HOST_LINK, '')} so the app host stays one line in src/data/app.ts.`);
         }
@@ -216,7 +227,7 @@ function rehypeAppOrigin({ origin }) {
 
 export default defineConfig({
   site: 'https://velstrian.com', // R285-REBRAND-VELSTRIAN-01: velstrian.com is the primary origin (owner 2026-10-18)
-  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, [rehypeAppOrigin, { origin: APP_ORIGIN }]] },
+  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, [rehypeAppOrigin, { origin: APP_ORIGIN, walkthrough: WALKTHROUGH_URL }]] },
   output: 'static',
   // R285-WEB-COMPARE-SCREEN-01 (owner report 2026-10-25). The dark floating bar the owner saw over the
   // product screen captions on :8093 was Astro's own dev toolbar, which only `astro dev` injects. The

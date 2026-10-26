@@ -51,9 +51,9 @@ const OLD_SOCIALS = [
 // email move now, the app moves later in its own migration). A reader can see these and
 // that is correct until the app migration lands. A-294 (2026-10-25): the app moved, so
 // app.crowagent.ai left this list and a built page naming it is now a violation.
-const KEPT_HOSTS = [
-  'calendly.com/crowagent-platform',
-];
+// A-472 (2026-10-26): the Calendly account moved to velstrian-systems-ltd, so the old
+// calendly.com/crowagent-platform slug left this list too.
+const KEPT_HOSTS = [];
 
 const TEXT_EXT = new Set(['.html', '.xml', '.txt', '.json', '.js', '.webmanifest', '.svg']);
 
@@ -119,6 +119,14 @@ if (!existsSync(join(DIST, 'index.html'))) {
     }
     if (isHeaders && /https:\/\/(?:www\.)?crowagent\.ai(?![a-z.-])/.test(raw.replace(/https:\/\/status\.crowagent\.ai/g, ''))) {
       add('headers-origin', file, 'bare crowagent.ai origin left in _headers, use velstrian.com (status. may stay)');
+    }
+    // D473 and D474 (owner 2026-10-26): crowagent.ai goes fully off with no redirect and every
+    // crowagent domain is freed for sale, so no served rule may match a crowagent host. Comment
+    // lines are history, same site paths such as /get-crowagent-core are not hosts.
+    if (isRedirects) {
+      for (const line of raw.split('\n')) {
+        if (/^\s*https?:\/\/[^/\s]*crowagent/i.test(line)) add('redirects-old-host', file, `${line.trim()} (D473: no crowagent host rule)`);
+      }
     }
   }
 

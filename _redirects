@@ -161,8 +161,11 @@
 # (this line, defence in depth). Single direction only; there is no apex→www
 # counterpart anywhere, so a loop is not possible.
 https://www.velstrian.com/*  https://velstrian.com/:splat  301
-https://crowagent.ai/*  https://velstrian.com/:splat  301
-https://www.crowagent.ai/*  https://velstrian.com/:splat  301
+# D473 (owner 2026-10-26): crowagent.ai goes fully off with NO redirect once
+# velstrian.com is live. The two crowagent.ai host rules that sat here were removed
+# on 2026-10-26 (A-469). Never add a crowagent host rule back: every crowagent
+# domain is being freed for sale (D474). check-rebrand-velstrian.mjs fails the build
+# if one reappears.
 
 # ── 3. DIRECTORY 200-REWRITES ────────────────────────────────────────────────
 # RESTORED 2026-05-06 (DEF-LOOP-001) after PR #148 removed them and production
@@ -189,8 +192,8 @@ https://www.crowagent.ai/*  https://velstrian.com/:splat  301
 # ⚠️ PLAIN `301`, NEVER `301!`. These two rules shipped once as `301!` and both
 # returned 404 in production: Cloudflare Pages silently DROPS a rule whose status
 # token it does not recognise, and the `!` force flag is Netlify syntax, not
-# Cloudflare. It looks supported here only because the `https://www.crowagent.ai/*`
-# rule above carries a `!` and the www redirect demonstrably works — but that one
+# Cloudflare. It once looked supported only because a since removed (D473) www host
+# rule carried a `!` and that www redirect demonstrably worked — but that one
 # is served by a zone-level Redirect Rule, not by this file, so it proves nothing.
 # Verified by contrast against /get-cyber-essentials, a plain `301` in this same
 # file, which fires correctly.

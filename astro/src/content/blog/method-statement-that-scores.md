@@ -132,7 +132,7 @@ Only as a starting point, never as a final answer. Every buyer asks the question
 
 - [Procurement Act 2023, full text](https://www.legislation.gov.uk/ukpga/2023/54/contents), legislation.gov.uk.
 - [Transforming Public Procurement](https://www.gov.uk/government/collections/transforming-public-procurement), Cabinet Office guidance collection, gov.uk.
-- [Guidance on the transparent and responsible use of AI in procurement (PPN 017)](https://www.gov.uk/government/publications/guidance-on-transparent-and-responsible-use-of-ai-in-procurement), Cabinet Office, gov.uk.
+- [PPN 017: Improving transparency of AI use in procurement](https://www.gov.uk/government/publications/ppn-017-improving-transparency-of-ai-use-in-procurement), Cabinet Office, gov.uk.
 
 ---
 

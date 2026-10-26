@@ -400,8 +400,12 @@ export async function derive() {
         `description: ${yaml(meta.description)}`,
         `heading: ${yaml(`${heading || titleText}.`.replace(/\.\.$/, '.'))}`,
         `eyebrow: ${yaml('Legal and data protection')}`,
+        /* [A-472 2026-10-26] The note is a YAML comment inside the frontmatter, never an HTML
+           comment in the body: Astro passes a body comment through to the served page, which
+           then told every reader the platform source path. Frontmatter is never rendered, and
+           the drift check still compares the whole file, note included. */
+        `# ${GENERATED_NOTE} Source: crowagent-platform/web/src/shared/legal/public-pages/${route}.tsx`,
         '---',
-        `<!-- ${GENERATED_NOTE} Source: crowagent-platform/web/src/shared/legal/public-pages/${route}.tsx -->`,
         '',
         body,
         '',
