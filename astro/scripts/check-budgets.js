@@ -436,6 +436,28 @@ const BUDGETS = {
      * AVIF plus the JPEG covers every browser. That removed 48 files,
      * 1,513.9 KB, measured on dist. */
   wholeBuild: 14 * MB,
+
+  /* VIDEO HAS ITS OWN CEILING AND IS NOT IN wholeBuild (owner instruction
+     2026-10-26, relayed with the help centre videos: "keep video bytes in their
+     own stated ceiling rather than raising the 14 MB page budget").
+     *
+     * Every video on this site is fetched only when a reader presses play: the
+     * tour dialog and the /help players all carry preload="none" and a poster,
+     * and check-autoplay.mjs fails a page that starts one by itself. So a video
+     * byte is never part of what a page downloads on load, and counting the
+     * three approved help cuts (47.8 MB, byte for byte the platform's files) in
+     * the page budget would have meant either raising 14 MB or refusing the
+     * videos. The poster images stay in wholeBuild and in singleImage, because a
+     * poster IS fetched on load.
+     *
+     *   videoFile   25 MiB, Cloudflare Pages' hard per file limit, so a file
+     *               over it would fail the deploy rather than this gate.
+     *   videoTotal  52 MB against 49.7 MB measured 2026-10-26 (the 1.9 MB tour
+     *               plus the three help cuts), small headroom on purpose: the
+     *               help cuts are encoded at about 1 MB a second, and the next
+     *               cut that binds this is the prompt to re-encode, not to raise. */
+  videoFile: 25 * 1024 * 1024,
+  videoTotal: 52 * MB,
 };
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -661,6 +683,10 @@ let buildTotal = 0;
 const jsChunks = [];
 
 const IMAGE_EXT = new Set(['.png', '.webp', '.avif', '.jpg', '.jpeg', '.gif', '.svg']);
+/** Played on demand only, budgeted apart from the page build (see BUDGETS.videoTotal). */
+const VIDEO_EXT = new Set(['.mp4', '.webm', '.vtt']);
+const videos = [];
+let videoTotal = 0;
 
 (function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -672,6 +698,11 @@ const IMAGE_EXT = new Set(['.png', '.webp', '.avif', '.jpg', '.jpeg', '.gif', '.
     const size = fs.statSync(full).size;
     const rel = path.relative(DIST, full).split(path.sep).join('/');
     const ext = path.extname(entry.name).toLowerCase();
+    if (VIDEO_EXT.has(ext)) {
+      videoTotal += size;
+      videos.push({ rel, size });
+      continue;
+    }
     buildTotal += size;
     if (ext === '.html') {
       /* THE WIRE SIZE IS THE ONE A READER PAYS. Cloudflare Pages serves brotli,
@@ -945,6 +976,10 @@ if (heaviestRoute) {
   judge('jsRouteMax:all', `JS on the heaviest single route (${heaviestRoute.rel})`, heaviestRoute.size, BUDGETS.jsRouteMax);
 }
 judge('wholeBuild:all', 'whole build', buildTotal, BUDGETS.wholeBuild);
+judge('videoTotal:all', `video, played on demand only (${videos.length} file${videos.length === 1 ? '' : 's'})`, videoTotal, BUDGETS.videoTotal);
+for (const v of videos) {
+  judge(`videoFile:${v.rel}`, `video file ${v.rel}`, v.size, BUDGETS.videoFile);
+}
 judge(
   'duplicatedBundledScript:all',
   `duplicated inline bundled script (${dupBundledSubjects.length} subject${dupBundledSubjects.length === 1 ? '' : 's'})`,
@@ -1011,7 +1046,8 @@ if (heaviestRoute) {
   }
 }
 console.log(`  Any single image ${kb(BUDGETS.singleImage).padStart(9)}   largest ${kb(images[0].size)} (${images[0].rel})`);
-console.log(`  Whole build      ${mb(BUDGETS.wholeBuild).padStart(9)}   ${mb(buildTotal)}`);
+console.log(`  Whole build      ${mb(BUDGETS.wholeBuild).padStart(9)}   ${mb(buildTotal)}   video excluded, budgeted on the next line`);
+console.log(`  Video, on demand ${mb(BUDGETS.videoTotal).padStart(9)}   ${mb(videoTotal)} across ${videos.length} file(s), largest ${videos.length ? mb(Math.max(...videos.map((v) => v.size))) : '0 MB'} against ${mb(BUDGETS.videoFile)} per file`);
 
 console.log('\n  the three assertions that replaced the jsTotal:0 ratchet (A-73, ADR 0010):');
 console.log(`    1  nothing render-blocking          ${renderBlocking.length} blocking <script src>, and ${kb(headInline.length ? headInline[0].bytes : 0)} of inline <head> script on the worst route against ${kb(ASSERTIONS.headInlineScriptPerDoc)}`);

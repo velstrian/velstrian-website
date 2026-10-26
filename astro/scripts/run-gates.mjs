@@ -91,6 +91,12 @@ const GATES = [
      artefact. This site is CANONICAL for brand colour (owner, 2026-08-11) and
      the platform is generated from the record this gate measures against. */
   { name: 'check-brand-drift', cmd: node, args: ['scripts/check-brand-drift.js'] },
+  /* D462 point 4 (2026-10-26): the help centre and the five moved legal pages
+     are GENERATED from crowagent-platform. This fails when a committed file no
+     longer matches what the platform source would generate now, and passes
+     with a note where the platform is not beside this repository. Source only,
+     no browser, so it sits with the guards before the build. */
+  { name: 'check-help-centre', cmd: node, args: ['scripts/generate-help-centre.mjs', '--check'] },
   { name: 'astro check', cmd: node, args: [astroBin, 'check'] },
   { name: 'astro build', cmd: node, args: [astroBin, 'build'] },
   { name: 'copy-assets', cmd: node, args: ['scripts/copy-assets.js'] },

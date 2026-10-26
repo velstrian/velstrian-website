@@ -352,7 +352,33 @@ const RULES = [
 /* The one exception (the Figma Discover drawing's alt text on
    /sectors/construction/ and /compare/) was removed 2026-10-22 with the
    drawing itself: ProductScreen shows the real feed capture there now. */
-const EXCEPTIONS = [];
+const EXCEPTIONS = [
+  /* D462 point 3 (2026-10-26): the moved legal pages are generated word for
+     word from the platform, so a hit here is fixed in the platform, never by
+     editing the copy on this site. Each exception is matched on its context
+     so the same word anywhere else still fails. */
+  {
+    record: 'regions',
+    route: /^\/sub-processors\/$/,
+    hit: /^Dublin$/,
+    ctxMatch: /Sir John Rogerson's Quay, Dublin 2, Ireland/,
+    why: "A sub-processor's registered company address (Google Ireland Limited and Google Cloud EMEA Limited), which the list must publish under Article 28. It says where a company is registered, not where customer data is stored.",
+  },
+  {
+    record: 'regions',
+    route: /^\/residency\/$/,
+    hit: /^Dublin$/,
+    ctxMatch: /Stripe Payments Europe, Ltd Billing, VAT handling, card vaulting EU \(Dublin\)/,
+    why: "Where Stripe processes billing data, disclosed on the residency page as the law requires. It is a statement about the payment processor, not a claim that customer documents stay in a region.",
+  },
+  {
+    record: 'product_status',
+    route: /^\/retention\/$/,
+    hit: /^request access$/i,
+    ctxMatch: /You can request access, correction, deletion, portability, or restriction of your personal d/,
+    why: 'The UK GDPR right of access (Article 15), named in a list of data subject rights. It is not the access request wording D455 and D456 keep off the site.',
+  },
+];
 
 function excused(record, f) {
   return EXCEPTIONS.find(

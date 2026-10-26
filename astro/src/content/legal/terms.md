@@ -118,7 +118,7 @@ You confirm that you and your users are not on a UK, US or EU sanctions list and
 
 ## 7. Data Processing
 
-Personal data is processed in accordance with our [Privacy Policy](/privacy/). If we process personal data on your behalf, our [Data Processing Agreement](app:/dpa) forms part of these Terms. It sets out how we handle that data for you under Article 28 UK GDPR. The liability limits in section 6 also cover the Data Processing Agreement, and are stated only there. If you would like a copy for your records, request one using the buttons below.
+Personal data is processed in accordance with our [Privacy Policy](/privacy/). If we process personal data on your behalf, our [Data Processing Agreement](/dpa/) forms part of these Terms. It sets out how we handle that data for you under Article 28 UK GDPR. The liability limits in section 6 also cover the Data Processing Agreement, and are stated only there. If you would like a copy for your records, request one using the buttons below.
 
 [Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:contact@velstrian.com)
 

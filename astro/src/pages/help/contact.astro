@@ -1,0 +1,87 @@
+---
+/**
+ * /help/contact/: support that works without signing in (D461, D462 point 5).
+ *
+ * Moved from the app host with the rest of the help centre. The form is the
+ * site's one ContactForm in its support variant: it posts to the SAME app route
+ * it always used (`${APP_ORIGIN}/api/contact/submit`, with `topic: "support"`),
+ * so no new backend exists and a support request still reaches the support
+ * mailbox rather than sales. A customer who can sign in is pointed to the app,
+ * where their own tickets live.
+ */
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import ContactForm from '../../components/forms/ContactForm.astro';
+import '../../styles/evidenced.css';
+import { breadcrumbs } from '../../lib/schema';
+import { SUPPORT_EMAIL } from '../../data/help-centre';
+import { APP_ORIGIN } from '../../data/app';
+import { SITE } from '../../data/site';
+
+const title = 'Contact support | Velstrian';
+const description = 'Get help with Velstrian without signing in. Send the support team a message or email them directly.';
+const trail = [
+  { name: 'Home', path: '/' },
+  { name: 'Help centre', path: '/help/' },
+];
+const schema = [breadcrumbs([...trail, { name: 'Contact support', path: '/help/contact/' }])];
+---
+
+<Base title={title} description={description} path="/help/contact" schema={schema} typeface="evidenced" headerTone="light">
+  <PageHero
+    id="help-contact-title"
+    size="compact"
+    label="Help centre"
+    title="Contact support"
+    lead="Tell us what went wrong and we will help. You do not need to sign in."
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Contact support" /></div>
+  </PageHero>
+
+  <Band tone="light" class="help-contact" flush>
+    <div class="ea-wrap help-contact__wrap">
+      <p class="help-contact__lead">
+        Prefer email? Write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
+      </p>
+      <div id="contact-form">
+        <ContactForm topic="support" />
+      </div>
+      <ul class="help-contact__more" role="list">
+        <li>Is something down? Check the <a href={SITE.statusUrl}>service status</a>.</li>
+        <li>Already a customer? Your tickets are in the <a href={`${APP_ORIGIN}/support`}>app</a>.</li>
+        <li>Want to try it first? <a href="/help/">Browse the guides</a>.</li>
+      </ul>
+    </div>
+  </Band>
+</Base>
+
+<style>
+  .help-contact__wrap {
+    display: grid;
+    gap: var(--stack-2);
+    max-width: var(--measure-prose);
+  }
+
+  .help-contact__lead {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--c-text-muted);
+  }
+
+  .help-contact__more {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: var(--stack-2) 0 0;
+    border-top: 1px solid var(--c-border);
+    list-style: none;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--c-text-muted);
+  }
+</style>

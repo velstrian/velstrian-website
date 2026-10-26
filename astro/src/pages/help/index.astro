@@ -1,0 +1,367 @@
+---
+/**
+ * /help/: the public help centre (D461, D462, row R285-WEB-HELP-CENTRE-01).
+ *
+ * Moved from the app host because a guide that anyone can read belongs on the
+ * public site, as every vendor in the research did it (Xero, HubSpot,
+ * Atlassian, Loopio, crowagent-platform docs/release-2.8.5/website/
+ * HELP-CENTRE-PLACEMENT-2026-10-26.md). The app keeps a thin link layer that
+ * deep links here. Anything that needs a customer's own data stays in the app.
+ *
+ * ONE SOURCE. Every title, summary and category comes from
+ * data/help-centre.generated.json, written from the platform's
+ * web/lib/help-articles.ts by scripts/generate-help-centre.mjs. Nothing on this
+ * page restates an article.
+ *
+ * SIMPLE FIRST (RULE 0-U): one search box, then the guides grouped under five
+ * plain headings, each a single link. The search filters the list in the page
+ * and needs no server. Without JavaScript every guide is still listed.
+ */
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import '../../styles/evidenced.css';
+import '../../styles/forms.css';
+import { breadcrumbs } from '../../lib/schema';
+import { HELP_ARTICLES, HELP_CATEGORIES, HELP_VIDEOS, articlesIn, categoryId, videoDuration } from '../../data/help-centre';
+import { APP_ORIGIN } from '../../data/app';
+
+const title = 'Help centre | Velstrian';
+const description =
+  'Plain step by step guides to finding contracts, writing bids with your own documents, running a buy and managing your account.';
+
+const trail = [{ name: 'Home', path: '/' }];
+const schema = [breadcrumbs([...trail, { name: 'Help centre', path: '/help/' }])];
+---
+
+<Base title={title} description={description} path="/help" schema={schema} typeface="evidenced" headerTone="light">
+  <PageHero
+    id="help-title"
+    size="compact"
+    label="Help centre"
+    title="How can we help?"
+    lead={`${HELP_ARTICLES.length} short guides, written for people doing this for the first time. Search, or pick a topic below.`}
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Help centre" /></div>
+  </PageHero>
+
+  <Band tone="light" class="help" flush>
+    <div class="ea-wrap help__wrap">
+      <div class="help__search" role="search">
+        <label class="ea-label help__search-label" for="help-filter">Search the guides</label>
+        <input
+          class="field__input help__search-input"
+          id="help-filter"
+          type="search"
+          placeholder="For example: upload a tender"
+          autocomplete="off"
+          aria-describedby="help-filter-count"
+        />
+        <p class="help__count" id="help-filter-count" aria-live="polite">{HELP_ARTICLES.length} guides</p>
+      </div>
+
+      {/* VIDEO GUIDES (owner 2026-10-26). The approved list only, from the
+          platform's help-videos.ts. Native controls, because they are keyboard
+          operable and announced already. preload="none" with a poster, so the
+          poster is the only byte fetched until the reader presses play, and
+          never autoplay (check-autoplay.mjs). Captions are on by default. The
+          16:9 box is reserved by CSS, so nothing shifts as a poster arrives. */}
+      {
+        HELP_VIDEOS.length > 0 && (
+          <section class="help__group" aria-labelledby="help-videos-title">
+            <h2 class="help__group-title" id="help-videos-title">Video guides</h2>
+            <p class="help__group-lead">Short walkthroughs of the main tasks, with captions.</p>
+            <ul class="help__videos" role="list">
+              {HELP_VIDEOS.map((v) => (
+                <li>
+                  <figure class="help__video" aria-labelledby={`help-video-${v.id}`}>
+                    <video
+                      class="help__video-player"
+                      controls
+                      preload="none"
+                      playsinline
+                      poster={v.poster}
+                      aria-labelledby={`help-video-${v.id}`}
+                      data-help-video={v.id}
+                    >
+                      <source src={v.src} type="video/mp4" />
+                      <track kind="captions" src={v.captions} srclang="en" label="English" default />
+                      Your browser cannot play this video. Use the written guide instead.
+                    </video>
+                    <figcaption class="help__video-caption">
+                      <h3 class="help__video-title" id={`help-video-${v.id}`}>{v.title}</h3>
+                      <p class="help__video-meta">
+                        <span>{videoDuration(v.durationSeconds)}</span>
+                        {v.helpSlug && <a href={`/help/${v.helpSlug}/`}>Read the steps</a>}
+                      </p>
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <nav class="help__topics" aria-label="Topics">
+        <ul role="list">
+          {HELP_CATEGORIES.map((c) => (
+            <li><a href={`#${categoryId(c.name)}`}>{c.name}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      {
+        HELP_CATEGORIES.map((c) => (
+          <section class="help__group" aria-labelledby={categoryId(c.name)} data-help-group>
+            <h2 class="help__group-title" id={categoryId(c.name)}>{c.name}</h2>
+            <p class="help__group-lead">{c.description}.</p>
+            <ul class="help__list" role="list">
+              {articlesIn(c.name).map((a) => (
+                <li class="help__item" data-help-text={`${a.title} ${a.summary} ${a.category}`.toLowerCase()}>
+                  <a class="help__link" href={`/help/${a.slug}/`}>
+                    <span class="help__link-title">{a.title}</span>
+                    <span class="help__link-summary">{a.summary}</span>
+                    <span class="help__link-meta">{a.readingTime} read</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+
+      <p class="help__empty" id="help-empty" hidden>
+        No guide matches that yet. Try a shorter word, or <a href="/help/contact/">ask the support team</a>.
+      </p>
+
+      <aside class="help__more" aria-labelledby="help-more-title">
+        <h2 class="help__group-title" id="help-more-title">Still stuck?</h2>
+        <p>
+          <a href="/help/contact/">Contact support</a>, no sign in needed. Already a customer? Your tickets and
+          account help are in the <a href={`${APP_ORIGIN}/support`}>app</a>.
+        </p>
+      </aside>
+    </div>
+  </Band>
+</Base>
+
+<script>
+  /* Filters the guide list in place. Every guide is in the HTML, so with no
+     script the page still lists all of them and only the box does nothing. */
+  const input = document.getElementById('help-filter') as HTMLInputElement | null;
+  const count = document.getElementById('help-filter-count');
+  const empty = document.getElementById('help-empty');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-help-text]')];
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-help-group]')];
+  if (input && count && empty) {
+    input.addEventListener('input', () => {
+      const words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+      let shown = 0;
+      for (const item of items) {
+        const text = item.dataset.helpText ?? '';
+        const match = words.every((w) => text.includes(w));
+        item.hidden = !match;
+        if (match) shown += 1;
+      }
+      for (const group of groups) {
+        group.hidden = !group.querySelector('[data-help-text]:not([hidden])');
+      }
+      count.textContent = `${shown} ${shown === 1 ? 'guide' : 'guides'}`;
+      empty.hidden = shown !== 0;
+    });
+  }
+</script>
+
+<style>
+  .help__wrap {
+    display: grid;
+    gap: var(--stack-3);
+    max-width: var(--measure-mid);
+  }
+
+  .help__search {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .help__search-label {
+    color: var(--c-text-muted);
+  }
+
+  .help__count {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    color: var(--c-text-muted);
+  }
+
+  .help__topics ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--stack-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .help__topics a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    color: var(--c-interactive);
+  }
+
+  .help__videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .help__video {
+    display: grid;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+  }
+
+  .help__video-player {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    background: var(--c-border);
+  }
+
+  .help__video-player:focus-visible {
+    outline: 3px solid var(--c-interactive);
+    outline-offset: 2px;
+  }
+
+  .help__video-caption {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .help__video-title {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-h4);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--c-text);
+  }
+
+  .help__video-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    color: var(--c-text-muted);
+  }
+
+  .help__video-meta a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--c-interactive);
+  }
+
+  .help__group,
+  .help__more {
+    display: grid;
+    gap: var(--space-3);
+    scroll-margin-top: calc(var(--v3-header-h) + var(--space-4));
+  }
+
+  .help__group[hidden] {
+    display: none;
+  }
+
+  .help__group-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--t-ea-h3);
+    line-height: 1.25;
+    color: var(--c-text);
+  }
+
+  .help__group-lead,
+  .help__more p,
+  .help__empty {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--c-text-muted);
+  }
+
+  .help__list {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .help__item[hidden] {
+    display: none;
+  }
+
+  .help__link {
+    display: grid;
+    gap: var(--space-1);
+    min-height: 44px;
+    padding: var(--space-4) var(--space-6);
+    border: 1px solid var(--c-border);
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+    text-decoration: none;
+  }
+
+  /* A whole card is one link. Its pointer response is the title underlining,
+     the site's text link response, not the small control hairline that
+     src/styles/controls.css owns. */
+  .help__link:hover .help__link-title {
+    text-decoration: underline;
+  }
+
+  .help__link:focus-visible {
+    outline: 3px solid var(--c-interactive);
+    outline-offset: 2px;
+  }
+
+  .help__link-title {
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--c-text);
+  }
+
+  .help__link-summary {
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    line-height: 1.5;
+    color: var(--c-text-muted);
+  }
+
+  .help__link-meta {
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    color: var(--c-text-muted);
+  }
+</style>

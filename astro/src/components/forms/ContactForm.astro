@@ -113,6 +113,23 @@ import { APP_ORIGIN } from '../../data/app';
 const CONTACT_ENDPOINT = `${APP_ORIGIN}/api/contact/submit`;
 
 /**
+ * THE SUPPORT VARIANT (D461, D462 point 5, 2026-10-26). /help/contact/ moved
+ * here from the app host and keeps posting to the SAME app route, with
+ * `topic: "support"`, which the route's schema already accepts
+ * (crowagent-platform web/app/api/contact/submit/route.ts, `topic` enum) and
+ * which sends the request to the support mailbox, not to sales. A support
+ * request has no organisation or sales topic to choose, so those two fields
+ * are left out and the form is name, email and message: the shortest route to
+ * help for somebody who cannot sign in (RULE 0-U).
+ */
+interface Props {
+  topic?: 'general' | 'support';
+}
+const { topic = 'general' } = Astro.props;
+const isSupport = topic === 'support';
+const shownFields = isSupport ? FIELDS.filter((f) => f.name !== 'organisation') : FIELDS;
+
+/**
  * [A-269 2026-09-08] TRUST ROW AT THE CONVERSION POINT.
  *
  * NOTHING HERE IS WRITTEN FRESH. Two of the three lines are read out of
@@ -189,6 +206,7 @@ const TRUST_BADGES: string[] = [
   action={CONTACT_ENDPOINT}
   novalidate
   data-contact-email={SITE.email}
+  data-topic={topic}
 >
   {/* Honeypot. aria-hidden and tabindex=-1 so it is unreachable by keyboard or
       assistive tech, and invisible to a human, but attractive to a bot that
@@ -199,7 +217,7 @@ const TRUST_BADGES: string[] = [
   </div>
 
   {
-    FIELDS.map((f) => (
+    shownFields.map((f) => (
       <div class="field">
         <label class="field__label" for={f.id}>
           {f.label}
@@ -225,12 +243,16 @@ const TRUST_BADGES: string[] = [
     ))
   }
 
-  <div class="field">
-    <label class="field__label" for="cp-type">What are you working on?</label>
-    <select class="field__input" id="cp-type" name="enquiry_type">
-      {ENQUIRY_OPTIONS.map((o) => <option value={o.value}>{o.label}</option>)}
-    </select>
-  </div>
+  {
+    !isSupport && (
+      <div class="field">
+        <label class="field__label" for="cp-type">What are you working on?</label>
+        <select class="field__input" id="cp-type" name="enquiry_type">
+          {ENQUIRY_OPTIONS.map((o) => <option value={o.value}>{o.label}</option>)}
+        </select>
+      </div>
+    )
+  }
 
   <div class="field">
     <label class="field__label" for="cp-msg">
@@ -245,7 +267,7 @@ const TRUST_BADGES: string[] = [
       rows="5"
       required
       minlength="20"
-      placeholder="Tell us more about your requirements..."
+      placeholder={isSupport ? 'Tell us what you were trying to do and what happened...' : 'Tell us more about your requirements...'}
       aria-describedby="cp-msg-help cp-msg-err"></textarea>
     <p class="field__help" id="cp-msg-help">Minimum 20 characters.</p>
     <p class="field__err" id="cp-msg-err" data-msg="Please tell us a little about your enquiry, in at least 20 characters." hidden>
@@ -263,7 +285,7 @@ const TRUST_BADGES: string[] = [
     <label class="consent">
       <input type="checkbox" name="gdpr_consent" id="cp-consent" required aria-describedby="cp-consent-err" />
       <span>
-        I agree that {SITE.legalName} may process my data to respond to this enquiry, in
+        I agree that {SITE.legalName} may process my data to respond to this {isSupport ? 'request' : 'enquiry'}, in
         line with the <a href="/privacy/">Privacy Policy</a>.
       </span>
     </label>

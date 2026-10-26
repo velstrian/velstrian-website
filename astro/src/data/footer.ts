@@ -249,6 +249,8 @@ export const FOOTER = {
     {
       title: 'Resources',
       links: [
+        /* D461 (2026-10-26): the public help centre moved here from the app. */
+        { label: 'Help centre', href: '/help/' },
         { label: 'Resources hub', href: '/resources/' },
         { label: 'Blog', href: '/blog/' },
         { label: `Compare ${PRODUCT_NAME_BID}`, href: '/compare/' },
@@ -280,6 +282,10 @@ export const FOOTER = {
         { label: 'How we use AI', href: '/ai/' },
         { label: 'Privacy', href: '/privacy/' },
         { label: 'Terms', href: '/terms/' },
+        /* D462 point 3 (2026-10-26): the DPA and the sub-processor list moved
+           here from the app host, generated from the platform pages. */
+        { label: 'Data Processing Agreement', href: '/dpa/' },
+        { label: 'Sub-processors', href: '/sub-processors/' },
         { label: 'Cookies', href: '/cookies/' },
         /*
          * Accessibility statement. It lives in the `legal` collection and is

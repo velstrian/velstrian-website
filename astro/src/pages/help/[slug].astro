@@ -1,0 +1,130 @@
+---
+/**
+ * /help/<slug>/: one help guide (D461, D462, row R285-WEB-HELP-CENTRE-01).
+ *
+ * The slug, title, summary and body are the platform's own, from
+ * data/help-centre.generated.json (scripts/generate-help-centre.mjs). The app
+ * redirects its old /help/<slug> to the same slug here, so a slug is a URL
+ * contract: rename it only in the platform, and the app redirect follows.
+ */
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import '../../styles/evidenced.css';
+import { breadcrumbs } from '../../lib/schema';
+import { HELP_ARTICLES, articleHtml, articlesIn, type HelpArticle } from '../../data/help-centre';
+
+export function getStaticPaths() {
+  return HELP_ARTICLES.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+interface Props {
+  article: HelpArticle;
+}
+
+const { article } = Astro.props;
+const path = `/help/${article.slug}`;
+const trail = [
+  { name: 'Home', path: '/' },
+  { name: 'Help centre', path: '/help/' },
+];
+const schema = [breadcrumbs([...trail, { name: article.title, path: `${path}/` }])];
+const related = articlesIn(article.category)
+  .filter((a) => a.slug !== article.slug)
+  .slice(0, 4);
+---
+
+<Base
+  title={`${article.title} | Velstrian help`}
+  description={article.summary}
+  path={path}
+  type="article"
+  schema={schema}
+  typeface="evidenced"
+  headerTone="light"
+>
+  <PageHero id="help-article-title" size="compact" label={article.category} title={article.title} lead={article.summary}>
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current={article.title} /></div>
+    <p slot="after" class="ea-label">{article.readingTime} read</p>
+  </PageHero>
+
+  <Band tone="light" class="help-article" flush>
+    <div class="ea-wrap help-article__grid">
+      <article class="prose help-article__body" set:html={articleHtml(article)} />
+      <aside class="help-article__rail" aria-labelledby="help-related-title">
+        <p class="ea-label help-article__rail-title" id="help-related-title">More in {article.category}</p>
+        <ul role="list">
+          {related.map((a) => (
+            <li><a href={`/help/${a.slug}/`}>{a.title}</a></li>
+          ))}
+          <li><a href="/help/">All guides</a></li>
+        </ul>
+        <p class="help-article__ask">
+          Still stuck? <a href="/help/contact/">Contact support</a>, no sign in needed.
+        </p>
+      </aside>
+    </div>
+  </Band>
+</Base>
+
+<style>
+  .help-article__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: clamp(32px, 5vw, 72px);
+  }
+
+  .help-article__body {
+    min-width: 0;
+  }
+
+  .help-article__rail {
+    align-self: start;
+    position: sticky;
+    top: calc(var(--v3-header-h) + var(--space-6));
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .help-article__rail-title {
+    margin: 0;
+    color: var(--c-text-muted);
+  }
+
+  .help-article__rail ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .help-article__rail a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: var(--space-1) 0;
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    line-height: 1.4;
+    color: var(--c-interactive);
+  }
+
+  .help-article__ask {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    line-height: 1.5;
+    color: var(--c-text-muted);
+  }
+
+  @media (max-width: 899px) {
+    .help-article__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .help-article__rail {
+      position: static;
+      padding-top: var(--stack-2);
+      border-top: 1px solid var(--c-border);
+    }
+  }
+</style>

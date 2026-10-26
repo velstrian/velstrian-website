@@ -159,6 +159,10 @@ function initContact(): void {
     organisation: val('cp-org'),
     enquiry_type: sel?.value ?? '',
     message: val('cp-msg'),
+    /* D462: /help/contact/ is the same form with data-topic="support", which the
+       app route sends to the support mailbox. The general form sends no topic,
+       as it always has. */
+    ...(form.dataset.topic === 'support' ? { topic: 'support' } : {}),
   }));
 }
 
