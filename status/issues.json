@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T00:04:04.746Z",
+  "updated": "2026-10-26T01:40:49.945Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1629,6 +1629,176 @@
       "note": "CSP allows https://crowagent-platform-production.up.railway.app. Remove at go live. Also decide the crowagent.ai 301 (keep a free Redirect Rule, do not remove outright).",
       "changed": "2026-10-26",
       "changedAt": "2026-10-26T00:04:04.746Z"
+    },
+    {
+      "id": "A-447",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D459 D460",
+      "sev": "P1",
+      "title": "Terms carry D459 and D460 wording at version 2026-10-26 as DRAFT, local only until the website push and counsel",
+      "status": "OPEN",
+      "note": "Website commits 2e353e5a (D459: business only, no refund for an inaccurate AI output, as is, no win guarantee, sanctions, AI providers named) and f6790df8 (D460: Annual Fees cap with no floor, data cap twice fees max GBP 250,000, exclusions, indemnities, sole remedy, 12 month claims window, 30 days notice). Decisions D459 and D460 in DECISION-GATES.md, platform rows R285-TRUST-DPA-FINAL-01 and R285-LEGAL-KIRO-A01-01. Not live: needs the owner website push approval. Stays DRAFT per D442.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:47.275Z"
+    },
+    {
+      "id": "A-448",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D442 D459 D460",
+      "sev": "P1",
+      "title": "Counsel review gate: remove the DRAFT labels from Terms, supplier terms and DPA only after counsel confirms",
+      "status": "OPEN",
+      "note": "D442 keeps the DRAFT banner until a lawyer has read the text or a customer asks for a final copy. D459 and D460 both say counsel confirms UCTA reasonableness (claims window, data cap once insurance is bound) before the label comes off. Questions in docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md (platform rows R285-LEGAL-KIRO-A02-01, A09-01 consumer terms check, A10-01 48 hour notice on call cover). Owner action, the website cannot do it alone. Insurer cover R285-OWNER-INSURER-01 also pending.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:47.547Z"
+    },
+    {
+      "id": "A-449",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D255",
+      "sev": "P2",
+      "title": "check-facts ISO 42001 gate rejected the approved wording we follow the structure of ISO/IEC 42001",
+      "status": "FIXED",
+      "note": "Fixed in website commit 3a78dc55 (astro/scripts/check-facts.js, rules iso42001-certified-claim and iso42001-unearned accept the approved framing and still fail any certified, accredited, audited or compliant claim). Verified with git show --stat 3a78dc55. Filed late by the reconciliation, it was only named inside the A-444 commit.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:47.831Z"
+    },
+    {
+      "id": "A-450",
+      "src": "WEB-BOARD reconciliation 2026-10-26, R285-OWNER-WEBSITE-PUSH-APPROVAL-01",
+      "sev": "P1",
+      "title": "Website production push needs the owner explicit approval (website is about 300 commits ahead of live)",
+      "status": "OPEN",
+      "note": "A push to website main is a production Cloudflare deploy (RULE 0-G, owner rule 2026-10-20, D455 says explicit approval for website live). Platform row R285-OWNER-WEBSITE-PUSH-APPROVAL-01 OPEN. One approval, one push, cost statement first. Gated on A-441, A-442, A-443, A-444 and a clean build gate chain.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.039Z"
+    },
+    {
+      "id": "A-451",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D455 go live step 5, R285-OWNER-VELSTRIAN-COM-HOSTING-01",
+      "sev": "P1",
+      "title": "Cloudflare Pages custom domains for velstrian.com and www, replace the Namecheap parking records (owner dashboard steps)",
+      "status": "OPEN",
+      "note": "A-441 records the live 522. This is the action list from WEBSITE-GO-LIVE-READINESS-2026-10-25.md: add the two custom domains to Pages project crowagent-website, wait for Active, replace parking A and www CNAME, confirm 200. Only after the website push approval. Platform row R285-OWNER-VELSTRIAN-COM-HOSTING-01 OPEN.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.192Z"
+    },
+    {
+      "id": "A-452",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D455 SEO move",
+      "sev": "P1",
+      "title": "SEO: crowagent.ai needs a long running 301 to velstrian.com, owner to confirm 301 versus immediate removal",
+      "status": "OPEN",
+      "note": "Readiness doc SEO move: a Google change of address needs a 301 from every old URL for months. Recommendation: keep the crowagent.ai zone on the free plan with one Redirect Rule (path preserved) and take down only the content. D455 says take crowagent.ai down, so this is an OWNER DECISION, not settled. _redirects:164-165 already 301s but only works while Pages serves crowagent.ai. Overlaps the last sentence of A-446.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.324Z"
+    },
+    {
+      "id": "A-453",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D454 D455",
+      "sev": "P2",
+      "title": "Take crowagent.ai down after velstrian.com is live (drop the Pages custom domains, apex and www)",
+      "status": "OPEN",
+      "note": "D454 extended to apex and www by D455 item 3. Order: velstrian.com live and verified, Redirect Rule added (see the SEO 301 item), then detach crowagent.ai and www.crowagent.ai from Pages. Also retire Brevo sender id 4 support@crowagent.ai once the website no longer sends from it (cutover doc G5).",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.454Z"
+    },
+    {
+      "id": "A-454",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D455 Search Console",
+      "sev": "P2",
+      "title": "After go live: submit the velstrian.com sitemap in Search Console",
+      "status": "OPEN",
+      "note": "velstrian.com was added and auto verified under contact@velstrian.com and the crowagent.ai property removed on 2026-10-25 (D455). Remaining go live step 7: submit the sitemap index from https://velstrian.com (confirm the built filename) once the site answers 200, then request indexing of the home page.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.589Z"
+    },
+    {
+      "id": "A-455",
+      "src": "WEB-BOARD reconciliation 2026-10-26, Google OAuth",
+      "sev": "P2",
+      "title": "Google OAuth Verify branding needs the velstrian.com privacy and terms pages live",
+      "status": "OPEN",
+      "note": "The Google consent screen branding verification checks the home, privacy and terms URLs on the authorised domain. They answer only after the website is live on velstrian.com (A-441). Owner or driver step in the Google Cloud console after go live. Cutover doc 5.0 section 2.5 row G1 lists the Google console items as not yet read.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.716Z"
+    },
+    {
+      "id": "A-456",
+      "src": "WEB-BOARD reconciliation 2026-10-26, D453, cutover doc 5.0 finding 2",
+      "sev": "P1",
+      "title": "Website forms (contact, newsletter, partner) fail until the platform cutover and production API deploy",
+      "status": "OPEN",
+      "note": "Forms post to APP_ORIGIN https://app.velstrian.com (astro/src/data/app.ts:24). CORS allows velstrian.com in web/app/api/_shared/cors.ts:26-29 and api/app/public_hosts.py:76 but the production API still answers preflight 400 for the new origin (cutover doc finding 1) and form destinations move to platform@velstrian.com (D453 Q4). The website must not go live before the platform promote and production API deploy. Related A-389 and A-445.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.845Z"
+    },
+    {
+      "id": "A-457",
+      "src": "WEB-BOARD reconciliation 2026-10-26, WEB-BOARD",
+      "sev": "P1",
+      "title": "Website smoke-test.yml and robots-guard.yml still target crowagent.ai and will fail when it becomes a 301",
+      "status": "OPEN",
+      "note": "crowagent-website/.github/workflows/smoke-test.yml:83,94,117 curl https://crowagent.ai with --max-redirs 0 and expect 200, robots-guard.yml is titled and keyed on crowagent.ai. Both fire on a push to main (the schedule is gone), so the go live push could turn them red if crowagent.ai already 301s. Platform api/app/tasks/guard_jobs.py lines 27 to 28 and 107 run the same hourly marketing_smoke_check against crowagent.ai. Retarget to velstrian.com in the SAME commit as the go live change (RULE 0-G, a guard attached to a product change).",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:48.982Z"
+    },
+    {
+      "id": "A-458",
+      "src": "WEB-BOARD reconciliation 2026-10-26, R285-P2-PERF-PUBLIC-PAGES-LCP-TBT-01",
+      "sev": "P2",
+      "title": "Lighthouse and Core Web Vitals on the production velstrian.com pages after go live",
+      "status": "OPEN",
+      "note": "Go live step 4 and the readiness doc Not covered list: console errors, broken images, phone layout, lorem text, dead product names, certificate claims and Core Web Vitals on the built pages were never measured because the build was blocked. Run the page walk at 1440 and 390 plus Lighthouse on the built output before the push and on production after it. The platform row R285-P2-PERF-PUBLIC-PAGES-LCP-TBT-01 covers the app public pages, this is the website half.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:49.110Z"
+    },
+    {
+      "id": "A-459",
+      "src": "WEB-BOARD reconciliation 2026-10-26, R285-WEB-SELF-SERVE-COPY-01, D456",
+      "sev": "P3",
+      "title": "R285-WEB-SELF-SERVE-COPY-01 is superseded by D456 invite only, reconcile it so the site never says sign up is self serve",
+      "status": "OPEN",
+      "note": "Platform row R285-WEB-SELF-SERVE-COPY-01 is still OPEN (says sign up is self serve once production really is, D253). D456 (2026-10-26) keeps app sign up invite only until the owner asks for general availability and D455 puts invite only wording on the login and sign up screens only. Owner or driver to mark the platform row SUPERSEDED. Website side is covered by A-444 and must not gain self serve copy.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:49.280Z"
+    },
+    {
+      "id": "A-460",
+      "src": "WEB-BOARD reconciliation 2026-10-26, R285-REBRAND-TAWK-01",
+      "sev": "P3",
+      "title": "Tawk chat on the website: renamed Velstrian, property URL app.velstrian.com, logo and colours pending",
+      "status": "OPEN",
+      "note": "privacy.md and security.md describe the Tawk chat widget. Platform row R285-REBRAND-TAWK-01 is OPEN BLOCKED (dashboard session conflict, D451): property name, chat title, welcome and offline messages, avatar, widget colours, transcript sender and allowed site list still carry crowagent. Owner action in the Tawk dashboard, widget must show the Quantum V mark and brand tokens.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:49.444Z"
+    },
+    {
+      "id": "A-461",
+      "src": "WEB-BOARD reconciliation 2026-10-26, R285-FILED-BETTERSTACK-MONITOR-LABELS-01",
+      "sev": "P3",
+      "title": "Better Stack: Website monitor must watch velstrian.com after go live, SVG logo still PNG only",
+      "status": "OPEN",
+      "note": "Platform row R285-FILED-BETTERSTACK-MONITOR-LABELS-01 is OPEN PARTLY DONE (D451): monitor names and public names changed on status.velstrian.com, PNG logo uploaded, SVG not attempted. Website monitor 4241709 is renamed but still points at crowagent.ai. Filed here so the website cutover cannot forget the monitor URL.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:49.586Z"
+    },
+    {
+      "id": "A-462",
+      "src": "WEB-BOARD reconciliation 2026-10-26, owner request via lane brief",
+      "sev": "P3",
+      "title": "Owner wants the local website dev server (port 8093) reachable from a phone on the same network",
+      "status": "OPEN",
+      "note": "Raised in the 2026-10-26 lane brief. No source document found in the platform tracker, platform docs or website repo (searched 8093 and phone). Needs astro dev --host and a firewall rule on this machine, so a local setup task. Owner to confirm it is wanted. Nothing measured.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:49.784Z"
+    },
+    {
+      "id": "A-463",
+      "src": "WEB-BOARD reconciliation 2026-10-26, R285-REBRAND-08-WEBSITE",
+      "sev": "P2",
+      "title": "Cloudflare Worker and Pages project names still crowagent, listed by R285-REBRAND-08 as not applied (later)",
+      "status": "OPEN",
+      "note": "R285-REBRAND-08-WEBSITE says Worker renames listed, not applied (Cloudflare, later). Later without an owner decision is a silent deferral, so it is filed. Covers the Pages project name crowagent-website (its pages.dev URL changes if renamed, owner confirms), any Worker names and the A-446 CSP host. Do with the go live Cloudflare work.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:40:49.945Z"
     }
   ],
   "directives": [
@@ -1698,5 +1868,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 447
+  "nextId": 464
 }
