@@ -3,7 +3,7 @@ title: "Privacy Policy | Velstrian"
 description: "How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info."
 heading: "Privacy Policy."
 eyebrow: "Legal & Data Protection"
-lastUpdated: "2026-10-25"
+lastUpdated: "2026-10-26"
 version: "2026-10-25"
 effectiveDate: "2026-10-25"
 ---How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
@@ -133,7 +133,7 @@ Velstrian sets a minimal set of cookies. Analytics and non-essential cookies are
 
 We engage the following third-party sub-processors to operate the service. A Data Processing Agreement (DPA) is available on request. We ensure that all sub-processors provide sufficient guarantees to implement appropriate technical and organisational measures.
 
-Supabase EU (Ireland) Railway EU (Netherlands) Vercel UK (London) Cloudflare Edge Stripe US/EU PostHog EU Sentry EU Brevo EU Upstash EU Tawk.to US Calendly US Google Gemini Outside the EU Anthropic Claude Outside the EU Azure Document Intelligence Dormant, optional
+Supabase EU (Ireland) Railway EU (Netherlands) Vercel UK (London) Cloudflare Edge Stripe US/EU PostHog EU Sentry EU Brevo EU Tawk.to US Calendly US Google Gemini Outside the EU Anthropic Claude Outside the EU Azure Document Intelligence Dormant, optional
 
 - **Supabase (EU, Ireland):** Database, authentication and file storage, in AWS eu-west-1 (Ireland), with daily backups. This is where your account and bid data is stored.
 - **Railway (EU, Netherlands):** Hosting for the Velstrian API and its background worker, in europe-west4 (the Netherlands).
@@ -143,7 +143,6 @@ Supabase EU (Ireland) Railway EU (Netherlands) Vercel UK (London) Cloudflare Edg
 - **PostHog (EU):** Product analytics and session recording.
 - **Sentry (EU, Germany):** Error monitoring and performance tracking.
 - **Brevo (EU):** Transactional and marketing email delivery.
-- **Upstash (EU, Ireland):** Rate limit counters and the background job queue.
 - **Tawk.to (US):** Live chat support.
 - **Calendly (US):** Meeting booking.
 - **Google Gemini (outside the EU):** Drafting bid answers and social value narratives, reading tender and company documents, search over your library, and the chat assistants. Not region pinned, see "Google Gemini AI processing" below.

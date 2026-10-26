@@ -65,7 +65,13 @@ const VIDEO_SOURCE_DIR = path.join(WEB, 'public');
 const VIDEO_OUT_DIR = path.join(ASTRO, '..', 'Assets', 'videos', 'help');
 const VIDEO_URL_DIR = '/Assets/videos/help/';
 
-const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+/* Text files (the .vtt captions) are hashed with line endings normalised, because
+   git may check them out as CRLF or LF depending on the machine. Bytes otherwise. */
+const sha256 = (file) => {
+  let buf = fs.readFileSync(file);
+  if (/\.(vtt|txt)$/i.test(file)) buf = Buffer.from(buf.toString('utf8').replace(/\r\n/g, '\n'), 'utf8');
+  return crypto.createHash('sha256').update(buf).digest('hex');
+};
 
 /** The app legal pages that move here (D462 point 3), by route. Accessibility
     is not in the list: this site already publishes its own statement, and the
