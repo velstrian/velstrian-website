@@ -8,12 +8,47 @@
 <p class="rv-kicker">Owner review</p>
 <h1>Website go live readiness, D455, 2026-10-25</h1>
 <p><span class="rv-row">R285-REBRAND-08-WEBSITE</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/website/WEBSITE-GO-LIVE-READINESS-2026-10-25.md</code>, rendered from not yet committed (working tree at <code>5d70379f2</code>). A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/website/WEBSITE-GO-LIVE-READINESS-2026-10-25.md</code>, rendered from <code>1905a7e3e</code>. A read only copy, the source file is what counts.</p>
 </header>
 <section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-REBRAND-08-WEBSITE &middot; BUILT</span><span class="rtitle">Website rebrand in crowagent-website (astro/): content, metadata, llms.txt, legal pages, and crowagent.ai 301 to velstrian.com (plan C5 to C7)</span><p>WAITS ON OWNER ACTION (the explicit website deploy ask, owner rule 2026-10-20). Measured 2026-10-24: crowagent.ai answers 200 with 0 mentions of Velstrian and 59 of crowagent, velstrian.com times out, the website repo is 280 commits ahead of origin/main. Small agent item left: astro/src/data/site-facts.json still holds 2 status.crowagent.ai links (the old count of 7 is stale), mechanic lane. Re-verdicted from WIP.</p></div></section>
 <article class="doc">
 <h1>Website go live readiness, D455, 2026-10-25</h1>
-<p>Verdict: NO-GO for now. Several checks could not run (build, page walk, Lighthouse) and four real blockers were found by reading code and live DNS. Nothing was deployed, pushed or changed.</p>
+<p>Verdict, updated 2026-10-26: the WEBSITE BUILD IS READY ON THE LOCAL TREE, go live is still NO-GO until the owner actions below. The full gate chain, the walk and Lighthouse have now run on the current tree (section 0). What still blocks go live is outside the website build: velstrian.com does not point at the Pages project, the platform cutover (invite only, MARKETING_DOMAIN) is not deployed, and the push needs the owner&#39;s explicit approval. Nothing was deployed or pushed.</p>
+<h2>0. Final local build, 2026-10-26 (website branch review/r2.8.5-2026-10-24, tip c495cbd7)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result, measured</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Full gate chain (<code>npm run build</code>, 44 gates)</td>
+<td>43 of 44 PASS on one run. check-cwv and check-autoplay both PASS (they had never launched before, exit 0xC0000142). The one FAIL, check-design-system (a new help card heading off the type tiers), was fixed and rerun PASS, then astro build, every fast dist gate, check-render, check-treatments and check-heading-ink were rerun PASS.</td>
+</tr>
+<tr>
+<td>check-budgets</td>
+<td>PASS. Whole build 12.73 MB of 14 MB. Video now has its own on demand ceiling, 47.43 of 52 MB across 8 files, largest 17.85 MB against Cloudflare&#39;s 25 MiB per file limit, because every video is preload none and plays only when pressed.</td>
+</tr>
+<tr>
+<td>Walk, built dist, 1440 and 390</td>
+<td>51 routes (home, pricing, bid, terms, privacy, security, DPA, sub-processors, residency, retention, refund, /help, /help/contact and all 38 guides), 0 failing: status 200, landed URL, one h1, no sideways scroll, no en or em dash, no missing alt, no console error, no 4xx.</td>
+</tr>
+<tr>
+<td>Help videos</td>
+<td>The 3 approved cuts play in Chrome: currentTime advanced about 2.5 s, 1920 by 1080 decoded, captions showing (26, 13 and 11 cues), preload none, no autoplay.</td>
+</tr>
+<tr>
+<td>Lighthouse mobile, built dist</td>
+<td>Home: performance 87, accessibility 97 (the list audit, pre-existing), best practices 100, SEO 100, LCP 3.4 s. /help: 86, 100, 100, 100, LCP 3.6 s. /help/quick-start-velstrian/: 96, 100, 100, 100, LCP 2.3 s.</td>
+</tr>
+<tr>
+<td>Screenshots</td>
+<td><code>crowagent-website/status/evidence/help-centre-2026-10-26/</code> (help index, contact, two guides, DPA, terms, at 1440 and 390).</td>
+</tr>
+</tbody></table></div>
+<p>New on the site in this build (D461, D462, D468): the public help centre at /help generated from <code>web/lib/help-articles.ts</code> with a drift guard, the five app legal pages on the site, the approved videos, the support form posting to the app API, Upstash and Resend gone from every current sub-processor list, and the compare pages saying self serve without an open sign up claim. Findings 3, 4 and 5 below are closed on the website (board A-442, A-443, A-444, A-446). Finding 1 and the MARKETING_DOMAIN item (A-445) are platform work.</p>
+<p>Original verdict, 2026-10-25: NO-GO for now. Several checks could not run (build, page walk, Lighthouse) and four real blockers were found by reading code and live DNS. Nothing was deployed, pushed or changed.</p>
 <h2>What ran and what did not</h2>
 <div class="tbl"><table>
 <thead>
