@@ -30,7 +30,7 @@ eyebrow: "Legal and data protection"
 
 <p>You can request a portable copy of every record we hold on your account at any time from <strong>Account → Data export</strong>. We process the request asynchronously and email you a private download link to a ZIP archive (one JSON file per data category) usually within a few minutes. The link is single-tenant-signed and expires after<strong> 7 days</strong>; you can request a new export at most<strong> once every 30 days</strong>.</p>
 
-<p>If you prefer a written request, email <a href="mailto:hello@velstrian.com">hello@velstrian.com</a> and we will respond within one calendar month (UK GDPR Article 12(3)).</p>
+<p>If you prefer a written request, email <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> and we will respond within one calendar month (UK GDPR Article 12(3)).</p>
 
 ## 4. Backups
 
@@ -38,7 +38,7 @@ eyebrow: "Legal and data protection"
 
 ## 5. Your other rights
 
-<p>You can request access, correction, deletion, portability, or restriction of your personal data at any time by emailing <a href="mailto:hello@velstrian.com">hello@velstrian.com</a>. We respond within one calendar month (UK GDPR Article 12(3)).</p>
+<p>You can request access, correction, deletion, portability, or restriction of your personal data at any time by emailing <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>. We respond within one calendar month (UK GDPR Article 12(3)).</p>
 
 ## 6. Changes to this policy
 

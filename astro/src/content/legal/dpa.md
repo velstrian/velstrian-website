@@ -40,7 +40,7 @@ eyebrow: "Legal and data protection"
 
 ## 5. Data subject rights
 
-<p>Velstrian Tenderworks shall, taking into account the nature of the processing, assist the Customer by appropriate technical and organisational measures, insofar as this is possible, in fulfilling the Customer&#x27;s obligation to respond to requests to exercise data subject rights. Platform self-service tooling covers access (via account export), rectification (via profile editing), and erasure (via account deletion). For other requests, Customer should email <a href="mailto:hello@velstrian.com">hello@velstrian.com</a> and we respond within 72 hours.</p>
+<p>Velstrian Tenderworks shall, taking into account the nature of the processing, assist the Customer by appropriate technical and organisational measures, insofar as this is possible, in fulfilling the Customer&#x27;s obligation to respond to requests to exercise data subject rights. Platform self-service tooling covers access (via account export), rectification (via profile editing), and erasure (via account deletion). For other requests, Customer should email <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> and we respond within 72 hours.</p>
 
 <p>Help through the product&#x27;s own export, delete and settings tools is included. For other help with requests from individuals, data protection impact assessments or regulator contact, we may charge our reasonable costs and will give you an estimate first.</p>
 
@@ -80,4 +80,4 @@ eyebrow: "Legal and data protection"
 
 ## 11. How to execute this DPA
 
-<p>For customers on Starter, Pro, or Portfolio plans this DPA is self-serving: clicking through at checkout accepts this DPA and the referenced sub-processor list. Enterprise customers requiring a counter-signed copy may request one at <a href="mailto:hello@velstrian.com">hello@velstrian.com</a>.</p>
+<p>For customers on Starter, Pro, or Portfolio plans this DPA is self-serving: clicking through at checkout accepts this DPA and the referenced sub-processor list. Enterprise customers requiring a counter-signed copy may request one at <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>.</p>

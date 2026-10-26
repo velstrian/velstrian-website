@@ -12,7 +12,7 @@ eyebrow: "Legal and data protection"
 
 ## 1. Satisfaction-guarantee window
 
-<p>New paying customers may request a full refund of the first paid invoice within<strong> 14 calendar days</strong> of the invoice date, for any reason. Email <a href="mailto:support@velstrian.com">support@velstrian.com</a> from the account holder address within the window; the refund is processed to the original payment method within 5 working days.</p>
+<p>New paying customers may request a full refund of the first paid invoice within<strong> 14 calendar days</strong> of the invoice date, for any reason. Email <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> from the account holder address within the window; the refund is processed to the original payment method within 5 working days.</p>
 
 ## 2. After the 14-day window
 
@@ -30,7 +30,7 @@ eyebrow: "Legal and data protection"
 
 ## 5. How to request a refund
 
-<p>Email <a href="mailto:support@velstrian.com">support@velstrian.com</a> from your registered account-holder address. Include the invoice number and the reason. We respond within 2 working days and, when the refund is approved, issue it to the original payment method within 5 working days.</p>
+<p>Email <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> from your registered account-holder address. Include the invoice number and the reason. We respond within 2 working days and, when the refund is approved, issue it to the original payment method within 5 working days.</p>
 
 ## 6. Governing law
 

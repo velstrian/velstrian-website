@@ -28,7 +28,7 @@ eyebrow: "Legal and data protection"
 
 <p><strong>All customer data today is stored in AWS eu-west-1 (Ireland), as set out in section 1. No customer data is stored in a UK region.</strong> We do not currently offer region-pinning, and no UK-resident storage option is available on any plan at present.</p>
 
-<p>Customers with a regulatory requirement to store data exclusively in the UK rather than the EEA should contact <a href="mailto:hello@velstrian.com">hello@velstrian.com</a> before contracting. A UK storage region would be a future change requiring engineering work and a separate written agreement; it is not something we can enable on an existing account, and nothing on this page should be read as a commitment that it is available today.</p>
+<p>Customers with a regulatory requirement to store data exclusively in the UK rather than the EEA should contact <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> before contracting. A UK storage region would be a future change requiring engineering work and a separate written agreement; it is not something we can enable on an existing account, and nothing on this page should be read as a commitment that it is available today.</p>
 
 ## 5. Changes to residency
 

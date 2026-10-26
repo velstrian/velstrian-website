@@ -8,7 +8,7 @@ eyebrow: "Legal and data protection"
 
 <p>Last updated: 26 October 2026</p>
 
-<p>This page lists the sub-processors Velstrian Tenderworks currently engages to deliver the platform, in accordance with Article 28 of the UK GDPR and the EU GDPR. The list is part of our <a href="/dpa/">Data Processing Agreement</a> and is updated here at least 30 days before any change takes effect. Customers may subscribe to updates at <a href="mailto:hello@velstrian.com?subject=Subscribe%20sub-processor%20updates">hello@velstrian.com</a>.</p>
+<p>This page lists the sub-processors Velstrian Tenderworks currently engages to deliver the platform, in accordance with Article 28 of the UK GDPR and the EU GDPR. The list is part of our <a href="/dpa/">Data Processing Agreement</a> and is updated here at least 30 days before any change takes effect. Customers may subscribe to updates at <a href="mailto:contact@velstrian.com?subject=Subscribe%20sub-processor%20updates">contact@velstrian.com</a>.</p>
 
 <p>Each entry names the legal entity that contracts with us for UK and EU services, that entity’s registered address, a link to the provider’s own published Data Processing Agreement, and the mechanism relied on for any transfer outside the UK and EEA. Where a provider is described as certified under the EU-US Data Privacy Framework, that has been checked against the official register rather than taken from the provider’s own marketing.</p>
 
