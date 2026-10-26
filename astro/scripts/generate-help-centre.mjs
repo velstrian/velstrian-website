@@ -78,6 +78,11 @@ const sha256 = (file) => {
     app keeps a statement for the app, which is a different product. */
 export const LEGAL_PAGES = ['dpa', 'sub-processors', 'residency', 'retention', 'refund-policy'];
 
+/** Where the platform keeps those page modules. They sit outside its app/ tree because the app
+    paths are permanent 308s to this site (crowagent-platform/web/config/redirects.mjs
+    LEGAL_REDIRECTS), so the app serves no page a redirect claims. */
+const LEGAL_SOURCE_DIR = path.join(WEB, 'src', 'shared', 'legal', 'public-pages');
+
 /** Paths that now live on THIS site. A link to anything else from a moved page
     is a page that stays in the app, so it becomes app:/<path>. */
 const SITE_PATHS = new Set([
@@ -256,7 +261,7 @@ function applyCorrections(route, markup) {
   for (const c of PENDING_PLATFORM_CORRECTIONS.filter((x) => x.route === route)) {
     if (!c.find.test(html)) {
       throw new Error(
-        `generate-help-centre: the platform page app/(legal)/${route} no longer holds the text a pending correction fixes (${c.why}). The platform is corrected: delete this entry from PENDING_PLATFORM_CORRECTIONS.`,
+        `generate-help-centre: the platform page src/shared/legal/public-pages/${route}.tsx no longer holds the text a pending correction fixes (${c.why}). The platform is corrected: delete this entry from PENDING_PLATFORM_CORRECTIONS.`,
       );
     }
     html = html.replace(c.find, c.replace);
@@ -380,12 +385,12 @@ export async function derive() {
     ) + '\n';
 
   for (const route of LEGAL_PAGES) {
-    const mod = await jiti.import(path.join(WEB, 'app', '(legal)', route, 'page.tsx'));
+    const mod = await jiti.import(path.join(LEGAL_SOURCE_DIR, `${route}.tsx`));
     const Page = mod.default;
     const meta = mod.metadata ?? {};
     const titleText = typeof meta.title === 'string' ? meta.title : meta.title?.default;
     if (!titleText || !meta.description) {
-      throw new Error(`generate-help-centre: app/(legal)/${route} has no metadata title or description`);
+      throw new Error(`generate-help-centre: src/shared/legal/public-pages/${route}.tsx has no metadata title or description`);
     }
     const { heading, body } = legalMarkdown(renderToStaticMarkup(createElement(Page)), route);
     out[path.join(LEGAL_DIR, `${route}.md`)] =
@@ -396,7 +401,7 @@ export async function derive() {
         `heading: ${yaml(`${heading || titleText}.`.replace(/\.\.$/, '.'))}`,
         `eyebrow: ${yaml('Legal and data protection')}`,
         '---',
-        `<!-- ${GENERATED_NOTE} Source: crowagent-platform/web/app/(legal)/${route}/page.tsx -->`,
+        `<!-- ${GENERATED_NOTE} Source: crowagent-platform/web/src/shared/legal/public-pages/${route}.tsx -->`,
         '',
         body,
         '',
