@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Built but switched off: owner decision pack, 2026-10-26</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Built but switched off: owner decision pack, 2026-10-26</h1>
+<p><span class="rv-row">R285-P3-AI-OFF-SURFACES-DECISION-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/BUILT-BUT-OFF-DECISION-PACK-2026-10-26.md</code>, rendered from not yet committed (working tree at <code>90e1ec01a</code>). A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-OFF-SURFACES-DECISION-01 &middot; OPEN</span><span class="rtitle">7 built AI features (11 surfaces) ship with a GBP 0 production budget and are never offered to customers</span><p>DECIDED D361: deep test each, switch on if it passes, fix if it fails, none deleted. SPECIFIED in specs/platform-systems/ai-quality/18-PRODUCT-CAPABILITY-GAPS-SPEC.md (REQ-R285-AIQ-OFF-SURFACES-ON), build order docs/release-2.8.5/ai-strategy/IMPLEMENTATION-ORDER.md live round 1 then wave 3.</p></div></section>
+<article class="doc">
+<h1>Built but switched off: owner decision pack, 2026-10-26</h1>
+<p>Read only research. No code, no push, no paid AI call, no write to any service. This replaces the table in <code>BUILT-BUT-OFF-AUDIT-2026-10-26.md</code> (commit c81302c1c) with one page per decision: what it does, whether it works, what it costs in numbers, the options, and one recommendation. Every recommendation is a question for the owner. The decision is yours.</p>
+<h2>Read this first: the audit was wrong on seven rows</h2>
+<p>Re-measuring each row against the tree, production and staging today changed the picture. Several &quot;needs a decision&quot; rows are already on, already wired or already decided.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Audit row</th>
+<th>Audit said</th>
+<th>Measured today</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3 Stripe dead letter retry</td>
+<td>Not scheduled</td>
+<td><strong>Already runs daily at 04:04</strong> on the Railway scheduler. 14 of 14 runs succeeded in 14 days, 1.5 s average, 0 unresolved events</td>
+<td><code>api/app/tasks/scheduler.py:1965-1976</code>, production <code>job_runs</code></td>
+</tr>
+<tr>
+<td>2 Account deleted emails</td>
+<td>Unscheduled</td>
+<td><strong>Redundant.</strong> The deletion service already sends the completion email, the web route is a break glass backup</td>
+<td><code>api/app/services/deletion_service.py:380</code>, route comment</td>
+</tr>
+<tr>
+<td>5 Three surfaces at GBP 1 a day</td>
+<td>Tracker says GBP 0</td>
+<td><strong>Already effectively on</strong> in production (see item 1B). Field extract is GBP 2 a day, not 1</td>
+<td>production Railway fingerprints, <code>bid_ai_field_extract.py:111-127</code></td>
+</tr>
+<tr>
+<td>7 Co editing &quot;390 width and 3 editors not walked&quot;</td>
+<td>Not walked</td>
+<td><strong>Walked and passed on 2026-10-13</strong>: 3 editors at 1280 and 2 editors at 390, 10 of 10 checks PASS</td>
+<td><code>docs/release-2.8.5/transformation/e2e-results/walk-d-results.ndjson</code></td>
+</tr>
+<tr>
+<td>6 Quote scope &quot;needs its silent empty fixed&quot;</td>
+<td>Needs a fix</td>
+<td><strong>Fixed 2026-10-26</strong>, 20 of 20 after the fix (tracker row <code>R285-P3-AI-D464-QUOTE-SCOPE-EMPTY-01</code>)</td>
+<td><code>D411-SPEND-LEDGER.md:105</code></td>
+</tr>
+<tr>
+<td>14 and 15 Decision record, clarification letter, CRM pull, content preview</td>
+<td>Built, no screen</td>
+<td><strong>Wired and on production since 2026-10-18</strong> (row <code>R285-TX-FEATURE-WIRING-AUDIT-01</code>)</td>
+<td><code>DecisionRecordActions.tsx</code>, <code>SensitivityRiskPanel.tsx</code>, <code>CrmIntegrationPanel.tsx</code>, <code>ContentSourcesPanel.tsx</code></td>
+</tr>
+<tr>
+<td>21 Partner revenue screen</td>
+<td>Hidden, ledger missing</td>
+<td><strong>Decided D208</strong>: revenue share removed, page is a permanent redirect</td>
+<td><code>web/app/(dashboard)/bid/partner/revenue/page.tsx:1-12</code></td>
+</tr>
+</tbody></table></div>
+<h2>How cost was measured</h2>
+<ul>
+<li><strong>Tokens per call</strong> come from the staging <code>ai_calls</code> ledger (project ipgrnwvfnumgvnxkpxsc), successful calls of claude-haiku-5-5 from the D464 run, plus the older gemini-2.5-flash rows where they exist. Mean input and output tokens are in each item.</li>
+<li><strong>Price card</strong>: production serves gemini-3.8-flash by default (<code>surface_policy.py:1554-1738</code>). <code>api/app/services/ai/pricing.py:262-268</code> prices it at USD 0.75 input and USD 3.75 output per million tokens until 31 December 2026, and USD 1.50 and USD 7.50 from 1 January 2027 (the file cites Google&#39;s page). Exchange rate 0.79 (<code>pricing.py:83</code>).</li>
+<li><strong>Arithmetic</strong>: cost = (input tokens x 0.75 + output tokens x 3.75) / 1,000,000 x 0.79.</li>
+<li><strong>Low case</strong> uses the Claude token counts. <strong>High case</strong> multiplies output tokens by 4, because the older Gemini rows ran 1.0 to 3.6 times the Claude output on the same surfaces (field extract 453 against 127, quote scope 597 against 202, RFQ scope 334 against 352, onboarding 177 against 114). There are no gemini-3.8 rows for these surfaces yet, which is the one thing that cannot be measured without a paid Gemini run (the Gemini prepay is depleted, owner top up pending).</li>
+<li><strong>Usage assumption per active organisation per month</strong> (a 10 person firm writing about 5 bids): 40 tender questions, 20 field reads, 5 KPI reads, 2 tone drafts, 4 RFQ scopes, 4 quote scopes, 2 buyer priority reads, 60 retrievals. These are stated assumptions, not measurements. Production has 1 organisation and 4 profiles today, and its whole AI history in 60 days is 25 calls for GBP 0.07 (production <code>ai_calls</code>), so there is no real usage to measure.</li>
+<li><strong>Hard bound</strong>: each surface has a daily ceiling in <code>surface_policy.py</code> (and a per organisation half ceiling), so the worst month is ceiling x 30 whatever the usage.</li>
+<li><strong>Tests</strong>: I ran none (shared machine, rule 0-T). The newest full shard logs in <code>.certification/</code> date from 2026-09-21, so <strong>no full suite is certified against the current tree</strong>. Test evidence below is the file name plus the pass count a tracker row recorded, never a claim of my own.</li>
+<li><strong>Plan limits</strong> used: Brevo free plan 300 sends a day (<a href="https://help.brevo.com/hc/en-us/articles/208580669">https://help.brevo.com/hc/en-us/articles/208580669</a>, via search result and <code>docs/AI-ONBOARDING-GUIDE.md:492</code>). Supabase Pro Realtime 5 million messages a month then USD 2.50 per million, 500 peak connections then USD 10 per 1000 (<a href="https://supabase.com/pricing">https://supabase.com/pricing</a>). Realtime limits 500 connections and 500 messages a second on Pro (<a href="https://supabase.com/docs/guides/realtime/limits">https://supabase.com/docs/guides/realtime/limits</a>). Vercel cron jobs are billed as ordinary function invocations (<a href="https://vercel.com/docs/cron-jobs/usage-and-pricing">https://vercel.com/docs/cron-jobs/usage-and-pricing</a>).</li>
+</ul>
+<h2>Items in priority order</h2>
+<ol>
+<li>Ask the tender (row 6a)</li>
+<li>Field reader, KPI reader and tone guidance (row 5), already on in production</li>
+<li>Quick RFQ and quick quote scope (row 6b)</li>
+<li>Buyer priority reader (row 6c)</li>
+<li>Real time co editing (row 7)</li>
+<li>API hard boundary to the web app only (row 12)</li>
+<li>Dunning auto cancel (row 11)</li>
+<li>Start a bid by forwarding an email (row 8)</li>
+<li>Agent access server (row 9)</li>
+<li>AI welcome paragraph (row 10)</li>
+<li>Search re ranking (row 13)</li>
+<li>Onboarding agent analyse step (row 16)</li>
+<li>No decision left: Stripe retry, deleted emails (rows 2 and 3)</li>
+<li>No decision left: decision record, clarification letter, transparency pack (14a to 14c)</li>
+<li>No decision left: CRM pull, content preview, VAT check (15a to 15c)</li>
+<li>Keep off: Python onboarding email producer (row 18)</li>
+<li>Closed by D208: partner revenue (row 21)</li>
+</ol>
+<hr>
+<h2>1. Ask the tender (row 6a, surface <code>bid_tender_ask</code>)</h2>
+<p><strong>What it does.</strong> You open a tender pack and type a question such as &quot;what insurance do they ask for?&quot; The answer comes back in plain words with the page it came from. Benefit: a 10 person firm stops reading 80 pages to find one clause, which is hours saved on every bid and fewer missed requirements.</p>
+<p><strong>Readiness: Ready with a small step.</strong> Code: <code>api/app/routers/bid_tender_ask.py:51</code> (POST <code>/contracts/{id}/tender-ask</code>), switch <code>api/app/services/bid_tender_ask.py:98</code>, screen <code>web/src/features/bid/tender-ask/AskTheTenderPanel.tsx</code> used at <code>web/app/(dashboard)/bid/contracts/[id]/tender/page.tsx:25</code>. Quality: 20 of 20 on claude-haiku-5-5 (D464 file, &quot;Tender reading&quot; row), Gemini quality not certified. Tests: <code>api/tests/test_r282_d137_tender_ask.py</code> (no run by me). Staging walk of the screen: none found. Small step: one Gemini cost run (about GBP 0.05) and one UI walk, about half a day. Production has no ceiling variable for it, so it is off.</p>
+<p><strong>Cost.</strong> Mean 854 tokens in and 74 out (staging, 40 calls, p95 in 1,523). Per question: low GBP 0.00073, high GBP 0.00138. Each question also charges the customer 1 credit (<code>credits.py:109</code>).</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Active orgs</th>
+<th>Low a month</th>
+<th>High a month</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>GBP 0.29</td>
+<td>GBP 0.55</td>
+</tr>
+<tr>
+<td>50</td>
+<td>GBP 1.45</td>
+<td>GBP 2.77</td>
+</tr>
+<tr>
+<td>200</td>
+<td>GBP 5.80</td>
+<td>GBP 11.06</td>
+</tr>
+</tbody></table></div>
+<p>From 1 January 2027 the rates double, so the 200 org high case is GBP 22.13. Hard bound if you set a GBP 1 a day ceiling: GBP 30 a month.</p>
+<p><strong>Risk on.</strong> A wrong answer read as fact. Mitigation in code: every answer needs a verbatim quote that passes the shared quote gate. <strong>Risk off.</strong> The most useful feature for a small bidder stays hidden while the website sells reading a tender fast.</p>
+<p><strong>Options.</strong></p>
+<ul>
+<li>A. Switch on at cutover with a GBP 1 a day ceiling. Consequence: customers get it on day one, cost is under GBP 12 a month at 200 orgs.</li>
+<li>B. Switch on staging now, walk it, then production after the cutover walk. Consequence: one more day, lower risk.</li>
+<li>C. Keep off.</li>
+</ul>
+<p><strong>Recommendation: B</strong>, consistent with D361 (deep test, then switch on, none deleted) and D419 (show the cost per use before it goes live: it is GBP 0.0007 to 0.0014 a question). Customer value is high and cost is negligible.</p>
+<p><strong>Switching on.</strong> Railway variable <code>AI_COST_CEILING_BID_TENDER_ASK_GBP=1</code> on staging first (staging already has it set, fingerprint present), then on production at cutover. Rollback: unset the variable, no deploy. No migration.</p>
+<hr>
+<h2>2. Field reader, KPI reader and tone guidance (row 5), already on in production</h2>
+<p><strong>What it does.</strong> Field reader fills contract value, dates and length from the tender for you. KPI reader pulls the performance measures out of the contract text. Tone guidance learns how your firm writes from answers that won, so new drafts sound like you. Benefit: less retyping and a consistent voice.</p>
+<p><strong>Finding.</strong> Production Railway holds <code>AI_COST_CEILING_BID_FIELD_EXTRACT_GBP</code> at 2.00 (fingerprint equals the hash of <code>2.00</code>), <code>..._BID_KPI_PROSE_EXTRACT_GBP</code> at 1.00 and <code>..._BID_TONE_GUIDANCE_DRAFT_GBP</code> at 1.00, plus the CROWMARK_ twins the deployed code reads (<code>crowmark_ai_field_extract.py:51</code> exists at the production commit b6eb7dadc). The switch only needs a ceiling above zero (<code>bid_ai_field_extract.py:111-127</code>) and the eval gate is in observe mode, so it is open (<code>eval_gate.py:216-246</code>). <strong>They are already on in production.</strong> The tracker row still says GBP 0 and is wrong. No production call has happened (production <code>ai_calls</code>: none for these surfaces in 60 days), because there are no customers.</p>
+<p><strong>Readiness: Ready.</strong> Tests D464: field extract 21 of 21, KPI 20 of 20, tone 20 of 20 on haiku. Offline cases in <code>tests/ai_golden/deep_test.py</code>. The tone screen hides its button while off (<code>bid_response.py:1851-1860</code>).</p>
+<p><strong>Cost.</strong> Field read 584 in and 127 out, GBP 0.00072 to 0.00185 a call. KPI 564 and 90, GBP 0.0006 to 0.0014. Tone 1,377 and 263, GBP 0.0016 to 0.0039.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Active orgs</th>
+<th>Low a month</th>
+<th>High a month</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>GBP 0.21</td>
+<td>GBP 0.52</td>
+</tr>
+<tr>
+<td>50</td>
+<td>GBP 1.03</td>
+<td>GBP 2.59</td>
+</tr>
+<tr>
+<td>200</td>
+<td>GBP 4.13</td>
+<td>GBP 10.38</td>
+</tr>
+</tbody></table></div>
+<p>Hard bound: GBP 2 + 1 + 1 a day = GBP 120 a month, a ceiling you set, not a forecast.</p>
+<p><strong>Risk on.</strong> Gemini quality is uncertified on these three (Claude baseline only). <strong>Risk off.</strong> Customers retype contract details.</p>
+<p><strong>Options.</strong> A. Leave the three ceilings as they are and fix the tracker text. B. Lower field extract to GBP 1 to match the others. C. Set all three back to 0.</p>
+<p><strong>Recommendation: A</strong> with the tracker corrected. Cost at 200 orgs is under GBP 11 a month and the ceilings already cap the worst case. D361 and D419 point the same way.</p>
+<p><strong>Switching on.</strong> Already done. Action for the driver: correct row <code>R285-P3-AI-OFF-SURFACES-DECISION-01</code>.</p>
+<hr>
+<h2>3. Quick RFQ scope and quick quote scope (row 6b, surfaces <code>buy_rfq_scope</code>, <code>bid_quote_scope</code>)</h2>
+<p><strong>What it does.</strong> A buyer describes what they need in a sentence and the product drafts the scope items for a request for quotes. A supplier does the same when pricing a quote. Benefit: a private buyer or small supplier gets a clean scope in a minute instead of an hour, which opens the private market (RULE 0-U).</p>
+<p><strong>Readiness: Ready with a small step.</strong> Code: <code>api/app/routers/quick_rfq.py:486</code>, <code>quick_quote.py:638</code>, switch <code>quick_scope.py:271</code>, screens <code>QuickQuoteScreen.tsx</code> and the buyer requirements page. Tests: <code>test_r283_quick_scope.py</code>, <code>test_r283_quick_rfq_routes.py</code>, <code>test_r283_quick_quote_routes.py</code>. Staging walk: <code>web/e2e/quick-quote-journey.spec.ts</code> and <code>quick-rfq-journey.spec.ts</code> exist. D464 results: RFQ scope 20 of 20, quote scope 11 of 20 then <strong>fixed to 20 of 20</strong> (tracker row <code>R285-P3-AI-D464-QUOTE-SCOPE-EMPTY-01</code>, commits 8c17e443a and 0a5fb8174, local not on staging). Small step: promote that fix to staging and rerun once, a few hours.</p>
+<p><strong>Cost.</strong> RFQ scope 1,674 in and 352 out, GBP 0.00203 to 0.00516 a call. Quote scope 1,582 and 202, GBP 0.00154 to 0.00333. At 4 of each a month:</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Active orgs</th>
+<th>Low</th>
+<th>High</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>GBP 0.14</td>
+<td>GBP 0.34</td>
+</tr>
+<tr>
+<td>50</td>
+<td>GBP 0.71</td>
+<td>GBP 1.70</td>
+</tr>
+<tr>
+<td>200</td>
+<td>GBP 2.86</td>
+<td>GBP 6.80</td>
+</tr>
+</tbody></table></div>
+<p>1 credit per use. Bound at GBP 1 a day each: GBP 60 a month.</p>
+<p><strong>Risk on.</strong> A drafted scope the buyer does not check. The product marks them as drafts the person confirms. <strong>Risk off.</strong> Quick RFQ and quote are in the navigation but cannot draft.</p>
+<p><strong>Options.</strong> A. On at cutover. B. On staging first, rerun, then production. C. Off.</p>
+<p><strong>Recommendation: B</strong>, D361 and D419. Both staging variables are already set to 1.</p>
+<p><strong>Switching on.</strong> Production Railway <code>AI_COST_CEILING_BUY_RFQ_SCOPE_GBP=1</code> and <code>AI_COST_CEILING_BID_QUOTE_SCOPE_GBP=1</code> (code reads them at <code>quick_scope.py</code> ENABLE_ENV). Never set without your written approval (surface_policy comment). Rollback: unset.</p>
+<hr>
+<h2>4. Buyer priority reader (row 6c, surface <code>buy_priority_extract</code>)</h2>
+<p><strong>What it does.</strong> A buyer uploads their buying policy and the product lists the priorities to score suppliers on (price, local jobs, carbon). Benefit: a first time buyer sets up fair scoring in minutes.</p>
+<p><strong>Readiness: Ready.</strong> Route <code>api/app/routers/buy_priority_extract.py:43</code>, screen <code>PolicyPriorityExtract.tsx</code> with its test, tests <code>test_r284_buyer_priority_extract.py</code>. D464: 20 of 20 haiku, the injected instruction was not obeyed. Staging UI walk: none found.</p>
+<p><strong>Cost.</strong> 573 in and 65 out, GBP 0.00053 to 0.00111 a read. 2 reads an org a month:</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Active orgs</th>
+<th>Low</th>
+<th>High</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>GBP 0.01</td>
+<td>GBP 0.02</td>
+</tr>
+<tr>
+<td>50</td>
+<td>GBP 0.05</td>
+<td>GBP 0.11</td>
+</tr>
+<tr>
+<td>200</td>
+<td>GBP 0.21</td>
+<td>GBP 0.44</td>
+</tr>
+</tbody></table></div>
+<p><strong>Risk on.</strong> Negligible. <strong>Risk off.</strong> Buyers type priorities by hand.</p>
+<p><strong>Options.</strong> A. On at cutover. B. Off.</p>
+<p><strong>Recommendation: A.</strong> Cheapest AI surface in the product, passes. D361, D419.</p>
+<p><strong>Switching on.</strong> Production Railway <code>AI_COST_CEILING_BUY_PRIORITY_EXTRACT_GBP=1</code>. Rollback: unset.</p>
+<hr>
+<h2>5. Real time co editing (row 7)</h2>
+<p><strong>What it does.</strong> Two or three colleagues type in the same bid answer at once and see each other&#39;s words and who is in it, like a shared document. Benefit: no more &quot;who has the latest version&quot; and no overwritten answers on a deadline day.</p>
+<p><strong>Readiness: Ready with a small fix.</strong> Code: <code>web/src/features/bid/collaboration/crdt/flag.ts:14</code> (env <code>NEXT_PUBLIC_BID_CRDT</code>, the old <code>NEXT_PUBLIC_CROWMARK_CRDT</code> still read), transport Supabase Realtime (<code>useCollaborativeAnswer.ts</code>). Tests: <code>crdt/__tests__/dnb3-crdt-killswitch.test.ts</code>, <code>useCollaborativeAnswer.test.ts</code>, <code>PresenceBar.test.tsx</code>. <strong>Staging walks: 3 editors at 1280 and 2 editors at 390, 10 of 10 PASS on 2026-10-13</strong> (<code>walk-d-results.ndjson</code>, spec <code>walk-d-coedit3.spec.ts</code>), plus the 2 editor walk at <code>e278f3a67</code>. The tracker row text is stale. Small fix: the flag is a build time <code>NEXT_PUBLIC_</code> value, so it takes a web deploy, and production has neither name set (Vercel production env names listed, 28 variables, none of them this one). Effort: 15 minutes plus the cutover deploy.</p>
+<p><strong>Cost.</strong> No AI. Uses the existing Supabase Realtime. Pro includes 5 million messages a month and 500 peak connections (<a href="https://supabase.com/pricing">https://supabase.com/pricing</a>). One editor typing sends roughly 2 messages a second while typing. Assume 3 editors for 20 minutes a bid, 5 bids a month: about 3 x 2 x 1,200 x 5 = 36,000 messages an org a month. 200 orgs = 7.2 million, which is 2.2 million over, about USD 5.50 (2.2 x 2.50). 50 orgs = 1.8 million, inside the allowance. 10 orgs = 0.36 million, inside. The 2 messages a second figure is my estimate, not measured. Peak connections: 200 orgs with 1 in 20 editing at once = 30, far under 500.</p>
+<p><strong>Risk on.</strong> A synchronisation fault could confuse an answer. Kill switch tested (<code>dnb3-crdt-killswitch.test.ts</code>) and off returns today&#39;s plain editor. <strong>Risk off.</strong> Teams keep overwriting each other, the main reason a small team would pay for a shared tool.</p>
+<p><strong>Options.</strong> A. On at the cutover deploy. B. On after one more walk against production data shape. C. Keep off.</p>
+<p><strong>Recommendation: A.</strong> Walked at both widths and with three editors, cost is nil to USD 5.50 a month at 200 orgs, and the kill switch is a one variable rebuild.</p>
+<p><strong>Switching on.</strong> Vercel production env <code>NEXT_PUBLIC_BID_CRDT=1</code> set before the cutover build, so it ships in that one deploy. Staging already carries the old name. Rollback: remove the variable and redeploy (a deploy from your budget).</p>
+<hr>
+<h2>6. API hard boundary to the web app only (row 12, <code>BFF_SERVICE_TOKEN_ENFORCED</code>)</h2>
+<p><strong>What it does.</strong> Today the back end accepts requests from the web app and also straight from a signed in user&#39;s token. Switching on means only the web app can call it, so a stolen user token cannot be used against the API directly. Benefit: one door instead of two, a security improvement a customer questionnaire asks about.</p>
+<p><strong>Readiness: Ready.</strong> Code <code>api/app/middleware/auth.py:682</code>. Staging runs it <strong>on</strong> (Railway staging variable fingerprint equals <code>true</code>), so every staging walk since went through the enforced door. A past sweep found and fixed the one <code>lib/</code> caller that sent a bare token (<code>web/lib/billing/railway-proxy.ts:10-24</code>). Test: <code>api/tests/test_rb09_bff_forwards_the_scoped_jwt.py</code>. Not enumerated: any caller outside the web app and the scheduler. Production is <code>false</code> (fingerprint) with <code>BFF_IDENTITY_SIGNING_ENFORCED=true</code>.</p>
+<p><strong>Cost.</strong> None.</p>
+<p><strong>Risk on.</strong> A caller that sends only a user token gets a 401. Comment at <code>auth.py:676-679</code> says flipping back re-accepts user tokens with no redeploy. <strong>Risk off.</strong> A leaked user token works against the API directly.</p>
+<p><strong>Options.</strong> A. Switch on in the cutover set after the smoke walk passes. B. Switch on one week after cutover with real traffic watched. C. Leave dual accept.</p>
+<p><strong>Recommendation: A.</strong> Staging has proven it and rollback is instant. Risk lower than the benefit.</p>
+<p><strong>Switching on.</strong> Railway production <code>BFF_SERVICE_TOKEN_ENFORCED=true</code>, then run the cutover smoke walk, flip back to <code>false</code> on any 401 spike.</p>
+<hr>
+<h2>7. Dunning auto cancel (row 11, <code>DUNNING_AUTO_CANCEL_ENABLED</code>)</h2>
+<p><strong>What it does.</strong> When a payment fails the product emails on day 3, 7 and 14. On day 30 it can cancel the subscription. Today the three emails run and the cancel is suppressed. Benefit of cancelling: unpaid accounts stop on their own. Risk: it ends a paying customer&#39;s plan.</p>
+<p><strong>Readiness: Ready.</strong> Code <code>web/lib/billing/dunning.ts:65</code>, cron <code>web/app/api/cron/dunning/route.ts</code>, production cron <code>dunning</code> daily 08:46 (production <code>cron.job</code>), test <code>web/__tests__/billing/r262-d288-dunning-ladder-wired.test.ts</code>. Production today: 4 profiles, 0 in dunning, 0 past due, 0 dunning events. The variable is absent from the Vercel production env list, so the code default (off) applies.</p>
+<p><strong>Cost.</strong> None. The job already runs once a day.</p>
+<p><strong>Risk on.</strong> A card that failed for a bank reason gets cancelled at day 30 after three warning emails. <strong>Risk off.</strong> Non paying accounts linger and the owner cancels them by hand. At 0 past due today that is nothing.</p>
+<p><strong>Options.</strong> A. Leave off, review the suppressed count weekly once customers exist (the job already counts them). B. Switch on at cutover. C. Switch on after the first 10 paying customers.</p>
+<p><strong>Recommendation: A, revisit at the first 10 paying customers.</strong> Customer value first: an unwanted cancellation does more damage than a lingering unpaid account while the base is tiny. This also needs a look at Stripe&#39;s own retry and cancel settings, which I could not read (dashboard only).</p>
+<p><strong>Switching on.</strong> Vercel production <code>DUNNING_AUTO_CANCEL_ENABLED=true</code>, redeploy. Rollback: remove and redeploy.</p>
+<hr>
+<h2>8. Start a bid by forwarding an email (row 8, <code>inbound_email_intake_enabled</code>)</h2>
+<p><strong>What it does.</strong> You forward a tender invitation email to your firm&#39;s private address and a draft bid appears with the attachments. Benefit: bids arriving by email start without anyone downloading and uploading files.</p>
+<p><strong>Readiness: Not ready.</strong> Code <code>api/app/config.py:456</code>, routers <code>bid_org_intake_address.py</code> and <code>bid_tender_intake_webhook.py</code>. Tests <code>test_r283_ux_org_email_intake.py</code>, <code>test_r283_p2_d3_email_intake_free_plan.py</code>, <code>test_bid_tender_email_intake.py</code>. Missing, measured:</p>
+<ul>
+<li><strong>Production</strong>: migration 20269000002090 objects are present (index <code>crowmark_tender_intake_addresses_one_live_org_address</code> and column <code>created_contract</code> exist). Flag absent, so off.</li>
+<li><strong>Staging</strong>: the flag is <strong>true</strong> but those same objects are <strong>absent</strong>, so staging intake cannot be working.</li>
+<li><strong>No receiving domain</strong>: <code>inbound.velstrian.com</code> and <code>inbound.crowagent.ai</code> both answer non existent domain in DNS today. Brevo&#39;s documentation requires two MX records (<code>inbound1.sendinblue.com</code> priority 10 and <code>inbound2.sendinblue.com</code> priority 20) on a receiving domain that differs from the sending domain, and a verified domain (<a href="https://developers.brevo.com/docs/inbound-parse-webhooks">https://developers.brevo.com/docs/inbound-parse-webhooks</a>). The page does not state a plan restriction, which needs confirming on staging.</li>
+<li>No staging walk.
+Effort: 1 to 2 days (apply migration to staging, MX records at Cloudflare, register the Brevo webhook, walk it).</li>
+</ul>
+<p><strong>Cost.</strong> No AI. Brevo inbound is on the free plan per <code>docs/decisions/D205-...md:21</code>, unconfirmed against Brevo&#39;s terms. Extra Brevo sends: the product sends an acknowledgement, assume 5 a month an org, 1,000 a month at 200 orgs, which with the platform&#39;s other mail needs checking against 300 sends a day (about 9,000 a month). Cloudflare DNS on the free plan costs nothing.</p>
+<p><strong>Risk on.</strong> Anyone who learns an organisation&#39;s address can inject documents, which is why the webhook needs <code>INBOUND_EMAIL_SECRET</code> (present in both environments). <strong>Risk off.</strong> Nothing is lost: D288 removed every email forwarding claim from the website.</p>
+<p><strong>Options.</strong> A. Build it ready now and switch on after the cutover. B. Keep off until a customer asks. C. Retire it.</p>
+<p><strong>Recommendation: B.</strong> It is not ready, the website no longer promises it (D288) and customers have not asked. Reopen when a real customer asks.</p>
+<p><strong>Switching on later.</strong> Railway <code>INBOUND_EMAIL_INTAKE_ENABLED=true</code>, DNS MX records, Brevo inbound webhook to the intake URL, <code>TENDER_INTAKE_DOMAIN</code> set, migration applied to staging first.</p>
+<hr>
+<h2>9. Agent access server (row 9, <code>mcp_server_enabled</code>)</h2>
+<p><strong>What it does.</strong> Lets a customer&#39;s own AI assistant, such as Claude, read their bids through a paid API key. Benefit: a small firm can ask its own assistant &quot;which of my bids are due this week&quot; using their own data, a premium feature.</p>
+<p><strong>Readiness: Ready technically, pricing undecided.</strong> Route <code>api/app/mcp/router.py:~290</code> (<code>/api/v1/public/mcp/agent</code>), flag read at <code>router.py:282</code>, answers 404 when off. Tests <code>test_r283_ux_agent_access_mcp.py</code> and the matrix <code>test_r283_p2_d6_mcp_paid_key_matrix.py</code> (no key 401, free key refused, paid key works, call 61 in a minute is 429). Limits 60 a minute and 600 an hour a key. The test docstring records an owner decision D206 that MCP sits behind Integrations (Portfolio holds it, Pro only with the add on, Starter refused). Note <code>DECISION-GATES.md</code> line 445 uses D206 for a different item, so the packaging decision number needs confirming. The older <code>/mcp</code> and <code>/mcp/v2</code> are already live and separate.</p>
+<p><strong>Cost.</strong> No AI call by us. The customer&#39;s assistant pays its own model. Our cost is database reads, at most 600 calls an hour a key. Bound: one busy key 600 x 24 x 30 = 432,000 reads a month, small for Supabase Pro. Not measured.</p>
+<p><strong>Risk on.</strong> More exposed surface. Mitigated by paid key, view permission of the key owner, read only tools. <strong>Risk off.</strong> Competitors with an assistant connector look ahead.</p>
+<p><strong>Options.</strong> A. On at cutover as part of Integrations. B. Keep off until a customer asks. C. On, but only after a security review.</p>
+<p><strong>Recommendation: B.</strong> No customer has asked, pricing sits in the packaging decision, and RULE 0-U says our buyers are small firms, not assistant builders. D206 packaging already protects it when you do switch on.</p>
+<p><strong>Switching on.</strong> Railway <code>MCP_SERVER_ENABLED=true</code>. Rollback: unset.</p>
+<hr>
+<h2>10. AI welcome paragraph (row 10, <code>onboarding_award_welcome_ai_enabled</code>)</h2>
+<p><strong>What it does.</strong> On first login a new firm sees &quot;You have won N public contracts&quot; (already live) and optionally a two sentence personal welcome written from that fact. Benefit: a warmer first run, small activation lift. The fact stands without it.</p>
+<p><strong>Readiness: Ready.</strong> Code <code>api/app/routers/onboarding_agent.py:447</code> and <code>_compose_welcome</code>, surface <code>onboarding_agent</code> (ceiling GBP 5 a day, table). Tests <code>test_r285_onboarding_award_history.py</code>, <code>test_r285_onboarding_welcome_has_no_semicolon.py</code> (tracker: pytest 159 passed). D464: <code>onboarding_agent</code> 20 of 20 on haiku. Staging has the flag <strong>true</strong>. A number gate drops any figure the engine did not produce.</p>
+<p><strong>Cost.</strong> 1,601 in and 114 out, GBP 0.00129 to 0.0023 once per new organisation. 200 new orgs = GBP 0.26 to 0.46 one off.</p>
+<p><strong>Risk on.</strong> A bland or odd sentence. <strong>Risk off.</strong> None.</p>
+<p><strong>Options.</strong> A. On at cutover. B. Keep off. C. Replace with fixed text.</p>
+<p><strong>Recommendation: B.</strong> Value is small and the line &quot;fact stands without model&quot; is the owner&#39;s earlier decision (<code>R285-TX-ONBOARDING-AGENT-DECISION-01</code>). Revisit after you see activation numbers.</p>
+<p><strong>Switching on.</strong> Railway <code>ONBOARDING_AWARD_WELCOME_AI_ENABLED=true</code>.</p>
+<hr>
+<h2>11. Search re ranking (row 13, <code>RETRIEVAL_RERANK_ENABLED</code>)</h2>
+<p><strong>What it does.</strong> After the product finds passages in your library for an answer it asks a model to reorder them by relevance. Benefit claimed: better evidence in drafts. Not shown.</p>
+<p><strong>Readiness: Not ready.</strong> Code <code>api/app/services/retrieval.py:45-54</code>, switch <code>RERANK_ENABLED_DEFAULT=False</code> at <code>:384</code>, override <code>RETRIEVAL_RERANK_DEFAULT</code>. Production holds <code>RETRIEVAL_RERANK_ENABLED=false</code>, which is a kill switch that wins. Missing: recall labels, so no evidence it helps (row <code>R285-P3-AI-RAG-RECALL-LABELS-01</code>, WIP, 189 synthetic queries built, not labelled). <code>docs/release-2.8/RAG-RERANK-COST-2026-08-29.md</code> section 6 recommends OFF because on the only production evidence it changed the chunks that reached the drafter in 2 of 4 runs of the same query and in both it evicted a chunk the model had rated third best. D464 shows <code>bid_rag_rerank</code> 20 of 20 on haiku, a format test, not a quality test.</p>
+<p><strong>Cost.</strong> Measured GBP 0.003273 a query on gemini-2.5-flash, worst GBP 0.0134 (that document). At gemini-3.8-flash with the same tokens (1,060 in, 1,500 out): GBP 0.00507. At 60 retrievals an org a month: 10 orgs GBP 3.04, 50 orgs GBP 15.22, 200 orgs GBP 60.86. From 2027 double: GBP 121.72 at 200. Adds a measured 6.4 s median per query (22 to 24 percent of retrieval to draft time). Ceiling GBP 10 a day (<code>surface_policy.py:381</code>) is GBP 300 a month.</p>
+<p><strong>Risk on.</strong> Slower drafts and possibly worse evidence. <strong>Risk off.</strong> None known.</p>
+<p><strong>Options.</strong> A. Keep off until recall labels are scored. B. Switch on now. C. Delete the stage.</p>
+<p><strong>Recommendation: A.</strong> It costs money, adds seconds, and may hurt. D348 already sets how recall will be measured.</p>
+<p><strong>Switching on later.</strong> Remove <code>RETRIEVAL_RERANK_ENABLED=false</code> and set <code>RETRIEVAL_RERANK_DEFAULT=true</code>, no deploy.</p>
+<hr>
+<h2>12. Onboarding agent analyse step (row 16)</h2>
+<p><strong>What it does.</strong> From a company number it works out which products suit you and writes a short explanation. Benefit: a guided first run. Today the useful half (award history) is already live. The analyse half was a cross sell across products that no longer exist.</p>
+<p><strong>Readiness: Not ready.</strong> Backend <code>api/app/routers/onboarding_agent.py:202</code> (<code>/analyse</code>) and BFF <code>web/app/api/onboarding/agent/route.ts</code> exist. The screen file named in the i18n comment (<code>src/features/onboarding-agent/OnboardingAgentClient.tsx</code>) is absent. Fit rules sit in <code>api/app/services/onboarding_fit.py</code>. Tracker says owner questioned deleting it and it is &quot;being evaluated&quot;. With two live products the fit tiles show little.</p>
+<p><strong>Cost.</strong> Uses surface <code>onboarding_agent</code>: 1,601 in and 114 out, GBP 0.0013 to 0.0023 a run, once per new org, GBP 0.26 to 0.46 at 200 orgs.</p>
+<p><strong>Risk on.</strong> Needs a new screen and a check that fit tiles only name live products. <strong>Risk off.</strong> None.</p>
+<p><strong>Options.</strong> A. Leave as is, no screen. B. Build a small &quot;what to do first&quot; screen from the live products. C. Remove the unused route.</p>
+<p><strong>Recommendation: A</strong>, until activation numbers show a gap, because D361 style rules say nothing is deleted and building a cross sell for two products adds little. This is your call, the tracker flagged it.</p>
+<hr>
+<h2>13. No decision left: Stripe retry and deleted emails (rows 3 and 2)</h2>
+<ul>
+<li><strong>Stripe dead letter retry.</strong> Already scheduled daily at 04:04 on the Railway scheduler (<code>scheduler.py:1965-1976</code>). Production <code>job_runs</code>: 14 runs, 14 succeeded, 1.5 s average, last 2026-10-26 04:04. Production <code>stripe_event_dlq</code>: 120 rows, 0 unresolved. Cost: one Railway scheduler job a day calling a Vercel function for 1.5 s. <strong>Recommendation: no action, correct the audit.</strong></li>
+<li><strong>Account deleted emails.</strong> The deletion service already sends the completion email (<code>deletion_service.py:380</code> and <code>:1156</code>), the hourly deletion job <code>gdpr_deletion_process</code> ran 333 of 333 in 14 days. The web route is a break glass sender that dedups against the same email log. Production <code>deletion_requests</code>: 0 rows, so no live proof yet. <strong>Recommendation: leave unscheduled.</strong> A second sender would risk two emails.</li>
+</ul>
+<h2>14. No decision left: decision record, clarification letter, transparency pack (14a to 14c)</h2>
+<ul>
+<li><strong>14a Decision record issue and download.</strong> Wired: <code>DecisionRecordActions.tsx</code> is rendered at <code>buyer/evaluations/[id]/page.tsx:1428</code>, route <code>web/app/api/buy/evaluations/[id]/decision-record/route.ts</code>, test <code>DecisionRecordActions.test.tsx</code>.</li>
+<li><strong>14b Clarification letter.</strong> Wired: <code>SensitivityRiskPanel.tsx</code> at <code>page.tsx:1542</code>, test <code>SensitivityRiskPanel.test.tsx</code>.</li>
+<li><strong>14c Transparency pack download.</strong> Kept on its one home, the Reporting transparency page (<code>buyer/transparency/page.tsx:532</code>), per the owner decision recorded in <code>R285-TX-FEATURE-WIRING-AUDIT-01</code>.</li>
+</ul>
+<p>Row <code>R285-TX-FEATURE-WIRING-AUDIT-01</code> says all three are on production since 2026-10-18 (commits are ancestors of b6eb7dadc). Cost: none. <strong>Recommendation: no action.</strong></p>
+<h2>15. No decision left: CRM pull, content preview, VAT check (15a to 15c)</h2>
+<ul>
+<li><strong>15a CRM pull sync, conflicts and sync log.</strong> Wired: BFF routes under <code>web/app/api/integrations/crm/</code> (<code>pull-conflicts</code>, <code>sync-log</code>, <code>[provider]/pull</code>), <code>CrmActivity.tsx</code> rendered inside <code>CrmIntegrationPanel.tsx:209</code>, test <code>pull-routes.test.ts</code>.</li>
+<li><strong>15b Content source document preview.</strong> Wired: BFF <code>.../documents/[documentId]/preview/route.ts</code> (commit 93d939355) and <code>ContentSourcesPanel.tsx</code>.</li>
+<li><strong>15c VAT number check.</strong> The owner chose to remove it with the dead code (tracker row text: &quot;the duplicate VAT endpoints join the dead code removal&quot;). Decided, not pending.</li>
+</ul>
+<p><strong>Recommendation: no action.</strong> Cost: none, no AI.</p>
+<h2>16. Keep off: Python onboarding email producer (row 18)</h2>
+<p><strong>What it does.</strong> A second sender of the welcome emails. <strong>Why off.</strong> The web cron <code>onboarding-emails</code> already sends them daily at 09:24 UTC with a per recipient log. This Python path has no dedup, so switching on sends two emails per milestone (<code>config.py:420-427</code>). Production cron list confirms the web job is active. <strong>Cost</strong> if on: double sends against the 300 a day Brevo limit. <strong>Recommendation: keep off</strong>, no decision needed. Flag <code>PYTHON_ONBOARDING_EMAIL_PRODUCER_ENABLED</code>.</p>
+<h2>17. Closed by D208: partner revenue (row 21)</h2>
+<p>The owner decided the practice pays and revenue share is removed (<code>web/app/(dashboard)/bid/partner/revenue/page.tsx:1-12</code>). The page is a permanent redirect and the <code>agency_revenue_share</code> ledger routes were deleted (row <code>R285-TX-PARTNER-CONSOLE-SIMPLIFY-01</code>). Cost: none. <strong>Recommendation: nothing to build, correct the audit.</strong> The table <code>agency_revenue_share</code> remains in migration history, harmless.</p>
+<hr>
+<h2>Summary of decisions for you</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Item</th>
+<th>Recommended</th>
+<th>Cost at 200 orgs</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Ask the tender</td>
+<td>B, staging walk then production</td>
+<td>GBP 5.80 to 11.06 a month</td>
+<td>after cutover walk</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Field, KPI, tone readers</td>
+<td>A, already on, fix the row</td>
+<td>GBP 4.13 to 10.38 a month</td>
+<td>already</td>
+</tr>
+<tr>
+<td>3</td>
+<td>RFQ and quote scope</td>
+<td>B</td>
+<td>GBP 2.86 to 6.80 a month</td>
+<td>after one staging rerun</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Buyer priority reader</td>
+<td>A</td>
+<td>GBP 0.21 to 0.44 a month</td>
+<td>at cutover</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Co editing</td>
+<td>A</td>
+<td>nil to about USD 5.50 a month</td>
+<td>cutover deploy</td>
+</tr>
+<tr>
+<td>6</td>
+<td>API hard boundary</td>
+<td>A</td>
+<td>nil</td>
+<td>cutover set</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Dunning auto cancel</td>
+<td>A, keep off, revisit at 10 customers</td>
+<td>nil</td>
+<td>later</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Email forwarding</td>
+<td>B, keep off</td>
+<td>nil</td>
+<td>when asked</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Agent access server</td>
+<td>B, keep off</td>
+<td>nil</td>
+<td>when asked</td>
+</tr>
+<tr>
+<td>10</td>
+<td>AI welcome paragraph</td>
+<td>B, keep off</td>
+<td>GBP 0.26 to 0.46 one off</td>
+<td>later</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Search re ranking</td>
+<td>A, keep off</td>
+<td>GBP 60.86 a month</td>
+<td>after recall labels</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Onboarding agent analyse</td>
+<td>A, leave</td>
+<td>GBP 0.26 to 0.46 one off</td>
+<td>later</td>
+</tr>
+</tbody></table></div>
+<p>Two dependencies: the Gemini prepay is depleted (owner top up pending), so no Gemini number above has been confirmed against a real gemini-3.8 call. And no full test suite is certified against the current tree.</p>
+
+</article>
+</main></body></html>
