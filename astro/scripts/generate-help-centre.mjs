@@ -58,7 +58,7 @@ const LEGAL_DIR = path.join(ASTRO, 'src', 'content', 'legal');
  * and its poster). The short cuts in `variants` are for emails and social, the
  * page never plays them, and the 9x16 cut is not approved at all, so neither is
  * copied. The mp4 and vtt are byte for byte the platform's files. The poster is
- * re-encoded from the platform PNG to WebP at the same 1920 by 1080, because the
+ * re-encoded from the platform PNG to a 960 by 540 WebP (twice the widest card it fills), because the
  * PNGs are 360 to 690 KB and the site's single image budget is 250 KB.
  */
 const VIDEO_SOURCE_DIR = path.join(WEB, 'public');
@@ -450,7 +450,7 @@ async function main() {
       if (!fs.existsSync(b.to) || !known || known.sourceSha256.poster !== sha256(b.from)) {
         const sharp = createRequire(path.join(ASTRO, 'package.json'))('sharp');
         fs.mkdirSync(path.dirname(b.to), { recursive: true });
-        await sharp(b.from).webp({ quality: 80 }).toFile(b.to);
+        await sharp(b.from).resize(960).webp({ quality: 80 }).toFile(b.to);
         console.log(`encoded ${rel}`);
       }
     }
