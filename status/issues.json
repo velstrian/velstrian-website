@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T01:40:49.945Z",
+  "updated": "2026-10-26T01:42:53.446Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1799,6 +1799,26 @@
       "note": "R285-REBRAND-08-WEBSITE says Worker renames listed, not applied (Cloudflare, later). Later without an owner decision is a silent deferral, so it is filed. Covers the Pages project name crowagent-website (its pages.dev URL changes if renamed, owner confirms), any Worker names and the A-446 CSP host. Do with the go live Cloudflare work.",
       "changed": "2026-10-26",
       "changedAt": "2026-10-26T01:40:49.945Z"
+    },
+    {
+      "id": "A-464",
+      "src": "crowagent-platform RELEASE-2.8.5-TRACKER.md R285-WEB-PROMO-VIDEOS-01",
+      "sev": "P1",
+      "title": "Promotional videos V1, V2, V4 from real staging recordings, local only, go live with the website push (R285-WEB-PROMO-VIDEOS-01)",
+      "status": "BUILT",
+      "note": "Platform row R285-WEB-PROMO-VIDEOS-01 BUILT 2026-10-23: pipeline scripts/media (videos.json, build_videos.py, render-cards.mjs) and web/e2e/product-captures/record-videos.spec.ts. Not live until the website push (A-450). Walk on production after go-live.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:42:53.068Z"
+    },
+    {
+      "id": "A-465",
+      "src": "crowagent-platform RELEASE-2.8.5-TRACKER.md R285-WEB-IMAGERY-01",
+      "sev": "P2",
+      "title": "Human and sector photography on the website, local only, goes live with the website push (R285-WEB-IMAGERY-01)",
+      "status": "BUILT",
+      "note": "Platform row R285-WEB-IMAGERY-01 BUILT 2026-10-23 at website 9b97a229: two Pexels photographs after a look test (home audience band, /sectors/construction/), licence log Assets/people/PHOTO-CREDITS.md, blog photos restored a2dca954 (D305). Not live until the website push (A-450). Check on production after go-live.",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T01:42:53.446Z"
     }
   ],
   "directives": [
@@ -1868,5 +1888,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 464
+  "nextId": 466
 }
