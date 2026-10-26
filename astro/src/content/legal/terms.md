@@ -2,9 +2,9 @@
 title: "Terms of Service | Velstrian"
 description: "Velstrian Systems Ltd terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes."
 heading: "Terms of Service."
-lastUpdated: "2026-10-25"
-version: "2026-10-25"
-effectiveDate: "2026-10-25"
+lastUpdated: "2026-10-26"
+version: "2026-10-26"
+effectiveDate: "2026-10-26"
 draftNotice: "These Terms and the Data Processing Agreement that forms part of them are a draft. The wording may still change before it is final. If you have a question, email legal@velstrian.com."
 ---
 ## The six clauses customers ask about
@@ -29,7 +29,7 @@ Tap any card to jump straight to the full clause. The complete agreement follows
 
   IF YOU RENUMBER A HEADING IN THIS FILE, THESE MOVE WITH IT.
 -->
-<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>Velstrian Systems Ltd (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are not legal or professional advice.</p> </a> <a href="#6-limitation-of-liability" class="prose-card"> <span aria-hidden="true"></span> <h3>Liability</h3> <p>Greater of 12 months' fees or £2,500, with a separate data protection cap.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
+<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>Velstrian Systems Ltd (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are drafts you check before use. They are not legal or professional advice.</p> </a> <a href="#6-limitation-of-liability" class="prose-card"> <span aria-hidden="true"></span> <h3>Liability</h3> <p>Greater of 12 months' fees or £2,500, with a separate data protection cap.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
 
 ## Full terms of service
 
@@ -40,6 +40,8 @@ The complete agreement, written in plain language. Jump to any clause, or contac
 ## 1. Parties and Agreement
 
 These Terms of Service (“Terms”) form a legally binding agreement between **Velstrian Systems Ltd** (a private company limited by shares incorporated in England and Wales, “Velstrian”, “we”, “us”) and the individual or organisation accessing or using the Velstrian platform (“Customer”, “you”). By creating an account or using the platform, you agree to these Terms.
+
+Velstrian is sold to businesses and other organisations for use in their trade, business or profession. A sole trader buying for their business is a business customer. By signing up you confirm you are buying for that purpose.
 
 These Terms include the [Acceptable Use rules](#acceptable-use) in section 3 and the [Data Processing Agreement](#data-processing-agreement) described in section 7. People who only answer, sign or review through a link someone sent them have their own short [Terms for suppliers and guests](/supplier-terms/).
 
@@ -53,11 +55,11 @@ These Terms include the [Acceptable Use rules](#acceptable-use) in section 3 and
 - Paid plans are subject to the limits specified on the Pricing page.
 - Velstrian may modify plans or pricing with 30 days' written notice to subscribers.
 
-<dl class="deflist"> <dt>Cancellation &amp; refunds</dt> <dd> <p>You may cancel your subscription at any time from <strong>Settings → Billing</strong>. Access continues until the end of the current billing period.</p> <p><strong>No refunds are issued for partial periods.</strong> Pro-rated refunds are not available for unused days within a billing cycle.</p> </dd> </dl>
+<dl class="deflist"> <dt>Cancellation &amp; refunds</dt> <dd> <p>You may cancel your subscription at any time from <strong>Settings → Billing</strong>. Access continues until the end of the current billing period.</p> <p><strong>No refunds are issued for partial periods.</strong> Pro-rated refunds are not available for unused days within a billing cycle.</p> </dd> <dt>AI outputs and refunds</dt> <dd> <p>Because you review every AI output before you use it, <strong>we do not refund or credit fees because an output is inaccurate or incomplete</strong>. This applies to every customer. We will still look into any answer you think is wrong and help put it right. This does not limit our support, your right to cancel, or any right the law does not allow us to limit.</p> </dd> </dl>
 
 ### Subscription rules at a glance
 
-<div class="prose-scroll" role="region" aria-label="Subscription mechanics (table)" tabindex="0"><table class="lc-table"> <caption>Subscription mechanics</caption> <thead> <tr><th scope="col">Item</th><th scope="col">Detail</th></tr> </thead> <tbody> <tr><th scope="row">Billing cycle</th><td>Monthly or annual, in advance</td></tr> <tr><th scope="row">Currency</th><td>GBP</td></tr> <tr><th scope="row">Payment processor</th><td>Stripe</td></tr> <tr><th scope="row">Cancellation</th><td>Self-serve from Settings → Billing, any time</td></tr> <tr><th scope="row">Effective date of cancellation</th><td>End of current billing period</td></tr> <tr><th scope="row">Refunds</th><td>Not issued for partial periods</td></tr> <tr><th scope="row">Pricing changes</th><td>30 days' written notice to subscribers</td></tr> </tbody> </table></div>
+<div class="prose-scroll" role="region" aria-label="Subscription mechanics (table)" tabindex="0"><table class="lc-table"> <caption>Subscription mechanics</caption> <thead> <tr><th scope="col">Item</th><th scope="col">Detail</th></tr> </thead> <tbody> <tr><th scope="row">Billing cycle</th><td>Monthly or annual, in advance</td></tr> <tr><th scope="row">Currency</th><td>GBP</td></tr> <tr><th scope="row">Payment processor</th><td>Stripe</td></tr> <tr><th scope="row">Cancellation</th><td>Self-serve from Settings → Billing, any time</td></tr> <tr><th scope="row">Effective date of cancellation</th><td>End of current billing period</td></tr> <tr><th scope="row">Refunds</th><td>Not issued for partial periods, or because an AI output is inaccurate or incomplete</td></tr> <tr><th scope="row">Pricing changes</th><td>30 days' written notice to subscribers</td></tr> </tbody> </table></div>
 
 <div id="acceptable-use" class="legal-anchor"></div>
 
@@ -67,7 +69,7 @@ Use of the Velstrian platform is conditional on staying within the boundaries be
 
 ### Permitted
 
-- Using outputs internally to support your own compliance, procurement, or sustainability workflows.
+- Using outputs to prepare your own bids, tenders and proposals for public and private work, and to support your procurement and social value work.
 - Inviting colleagues to your workspace under your subscription's seat limit.
 - Sharing reports with clients with proper attribution to Velstrian where AI outputs are reproduced.
 - Exporting your own data at any time from Settings → Data.
@@ -78,13 +80,19 @@ Use of the Velstrian platform is conditional on staying within the boundaries be
 - Reverse-engineering, scraping, or systematically extracting data from the platform beyond your authorised quota.
 - Sharing account credentials or reselling access without a separate reseller agreement.
 - Submitting content that is defamatory, fraudulent, or infringes third-party intellectual property rights.
-- Using AI outputs to misrepresent compliance status in regulatory filings without independent professional review.
+- Using AI outputs to misrepresent your experience, capability or compliance in a bid, tender or regulatory filing.
+- Uploading malware or anything designed to harm the platform or other users.
+- Misusing the AI, for example by trying to extract its instructions or using outputs to build a competing product or model.
+
+### Export and sanctions
+
+You confirm that you and your users are not on a UK, US or EU sanctions list and are not in a country under a trade embargo, and you will not use Velstrian in breach of export or sanctions law.
 
 <details class="lc-details" id="use-detail"> <summary>Acceptable Use, full enforcement detail</summary> <div class="lc-details__body"> <p>Velstrian reserves the right to suspend or terminate access for material breach of these terms, with or without prior notice depending on severity.</p> <p>For first-time, low-severity breaches we typically issue a written warning and a 7-day remediation window. For severe breaches (data scraping, credential resale, regulatory fraud) access may be suspended immediately and accounts terminated without refund.</p> <ul> <li>Warnings are sent to the account's billing email address.</li> <li>Appeals can be raised by replying to the warning email within 14 days.</li> <li>Final termination decisions rest with Velstrian's legal officer.</li> </ul> </div> </details>
 
 ## 4. AI Output Disclaimer
 
-<dl class="deflist"> <dt>Important, AI outputs are not advice</dt> <dd> <p>The Velstrian platform uses artificial intelligence models (including Google Gemini) to generate PPN 026 social value scores and bid content, and, for existing customers, legacy sustainability and security-evidence guidance.</p> <p><strong>These outputs do not constitute legal, surveying, financial, or professional advice.</strong> They are provided for informational and decision-support purposes only.</p> </dd> </dl>
+<dl class="deflist"> <dt>Important, AI outputs are not advice</dt> <dd> <p>The Velstrian platform uses artificial intelligence models from Google (Gemini) and Anthropic (Claude), the AI providers listed in our Data Processing Agreement, to generate PPN 026 social value scores and bid content, and, for existing customers, legacy sustainability and security-evidence guidance. We add another AI provider only after giving the notice our Data Processing Agreement sets out. We use trusted AI providers, and a change at one of them can affect the service.</p> <p><strong>AI outputs are drafts to help you. Please check them before you rely on them or submit them.</strong> These outputs do not constitute legal, surveying, financial, or professional advice. They are provided for informational and decision-support purposes only.</p> </dd> <dt>No guarantee of winning</dt> <dd> <p>Velstrian helps you write better bids, faster. Whether a bid or tender wins is decided by the buyer, so we cannot promise any result.</p> </dd> </dl>
 
 <details class="lc-details" id="ai-detail"> <summary>AI Disclaimer, model behaviour, accuracy, professional review</summary> <div class="lc-details__body"> <p>You should not rely solely on AI outputs to make compliance decisions, submit regulatory returns, or advise clients. Velstrian strongly recommends that all significant compliance or procurement decisions are reviewed by a qualified professional before action is taken.</p> <p>AI model outputs may contain errors, omissions, or outdated information. Velstrian does not warrant the accuracy, completeness, or fitness for purpose of any AI-generated content.</p> <ul> <li>Outputs reflect the model's training data and may not capture the latest regulatory changes.</li> <li>Confidence scores indicate model certainty, not factual accuracy.</li> <li>Always cross-check material thresholds and dates against the source legislation.</li> <li>For regulated submissions, obtain a sign-off from a qualified surveyor, lawyer, or compliance officer.</li> </ul> </div> </details>
 
@@ -112,9 +120,11 @@ Personal data is processed in accordance with our [Privacy Policy](/privacy/). I
 
 [Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:contact@velstrian.com)
 
-## 8. Service Availability
+## 8. Service Availability and Warranties
 
 Velstrian targets **99.5% monthly uptime** but does not guarantee uninterrupted access. We may perform maintenance with reasonable prior notice. Planned downtime is excluded from uptime calculations.
+
+We work hard to keep Velstrian running well and we fix problems quickly. The service is provided as it is and as available. We do not promise it will always be uninterrupted or error free, and we give no warranty beyond what these Terms state, to the extent the law allows.
 
 99.5<sup>%</sup>
 
