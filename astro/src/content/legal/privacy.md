@@ -170,7 +170,7 @@ You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [
 
 ## Google Gemini AI processing
 
-Velstrian Bid and Velstrian Buy use Google Gemini (Gemini 2.5 Pro, Gemini 2.5 Flash and Gemini embeddings) to draft answers, read tender and company documents, search your library and run the chat assistants. We call it through Google's Gemini API from our own servers, under Google's Gemini API terms.
+Velstrian Bid and Velstrian Buy use Google Gemini models (the current generation Gemini text models and Gemini embeddings) to draft answers, read tender and company documents, search your library and run the chat assistants. We call it through Google's Gemini API from our own servers, under Google's Gemini API terms.
 
 What is sent: the text the task needs, which can include tender documents, your answers, your library and documents you upload, and what you type into a chat. This can contain personal data, such as a name in a CV, and we do not remove it before sending.
 

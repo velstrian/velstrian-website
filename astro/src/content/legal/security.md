@@ -76,7 +76,7 @@ Platform access is enforced in depth: organisation-scoped roles at the applicati
 
 - Org-scoped roles: Owner, Admin, Member.
 - Privileged actions audit-logged.
-- Invite-only org joins.
+- People join an organisation only when one of its admins adds them.
 
 ### RLS
 
@@ -96,7 +96,7 @@ We follow ISO/IEC 27001 and review every Annex A control in our own Statement of
 
 ## AI data handling
 
-AI runs through server-side API calls from our own API only. Drafting, document reading, search and the chat assistants use Google Gemini (Gemini 2.5 Pro, Gemini 2.5 Flash and Gemini embeddings). The buyer pre-read in Velstrian Buy and our checks on the quality of drafted answers use Anthropic Claude (Claude Sonnet 4.6). Both are data sub-processors. The boundaries below describe exactly what crosses to a model provider.
+AI runs through server-side API calls from our own API only. Drafting, document reading, search and the chat assistants use Google Gemini models (the current generation Gemini text models and Gemini embeddings). The buyer pre-read in Velstrian Buy and our checks on the quality of drafted answers use Anthropic Claude (Claude Sonnet 4.6). Both are data sub-processors. The boundaries below describe exactly what crosses to a model provider.
 
 In plain words, [how Velstrian uses AI](/ai/) sets out what the AI does in each product, the checks it runs and how you stay in control.
 

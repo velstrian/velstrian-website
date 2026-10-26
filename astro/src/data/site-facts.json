@@ -145,13 +145,24 @@
     ]
   },
   "product_status": {
-    "measured": "2026-10-23, owner answers to D252 item 8, superseding D252 (6): Velstrian Bid has been in private beta with selected users since May 2026 and opens to every customer in October 2026 depending on readiness, or by November 2026 at the latest. The company was founded in March 2026 and never traded under another name, so no page calls out a rename",
-    "bid": "private_beta",
-    "beta_since": "May 2026",
-    "opens_to_everyone": "October to November 2026",
-    "page": "/about/",
-    "must_contain": "Private beta with selected users",
-    "beta_allowed_as": "private beta",
+    "measured": "2026-10-26, owner decision D455 and D456 superseding the D252 item 8 wording: the app stays invite only until the owner asks for general availability, and that is said ONLY on the app login and sign up screens. The website carries no beta, invite only, waitlist or request access wording. Velstrian Bid has had customers bidding on real work since May 2026 and launches fully in October 2026 depending on readiness, or by November 2026 at the latest. The company was founded in March 2026 and never traded under another name, so no page calls out a rename",
+    "bid": "invite_only_app_no_site_mention",
+    "customers_since": "May 2026",
+    "full_launch": "October to November 2026",
+    "banned_access_wording": [
+      "beta",
+      "invite only",
+      "invite-only",
+      "invitation only",
+      "invitation-only",
+      "by invitation",
+      "waitlist",
+      "wait list",
+      "waiting list",
+      "selected users",
+      "request access",
+      "early access"
+    ],
     "banned": [
       "live production",
       "live in production",

@@ -82,12 +82,12 @@ export interface PaletteAction {
 export const PALETTE_ACTIONS: PaletteAction[] = [
   {
     /* D236 (2026-10-19): sign up is self serve, so the action goes to the
-       app's sign up page. "request access" stays in the hint so a reader who
-       types the old words still finds it. */
+       app's sign up page. D455: no access request wording on the site, so the
+       hint carries only neutral words. */
     title: START_LABEL,
     href: SIGNUP_URL,
     section: 'Action',
-    hint: 'request access trial sign up get started demo account onboarding',
+    hint: 'trial sign up get started demo account onboarding',
     kind: 'action',
   },
   {

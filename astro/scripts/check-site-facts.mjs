@@ -252,13 +252,12 @@ const RULES = [
   },
   {
     record: 'product_status',
-    why: 'Velstrian Bid has been in private beta with selected users since May 2026 and opens to every customer in October to November 2026 (owner, D252 item 8, 2026-10-23, superseding D252 (6)). No page and no llms file claims live production, and no page calls out a rename. "beta" appears only as "private beta", and /about/ states it.',
+    why: 'The app stays invite only until the owner asks for general availability, and that is said ONLY on the app login and sign up screens (owner, D455 and D456, 2026-10-25, superseding the D252 item 8 private beta milestone). No page and no llms file uses beta, invite only, waitlist or request access wording, claims live production, or calls out a rename.',
     check(pages) {
       const s = FACTS.product_status;
       const out = banned(pages, s.banned, 'gi');
-      out.push(...scan(pages, /\bbeta\b/gi, (t, m) => !t.slice(Math.max(0, m.index - 8), m.index + 4).toLowerCase().includes(s.beta_allowed_as)));
-      const p = pages.find((x) => x.route === s.page);
-      if (!p || !p.text.includes(s.must_contain)) out.push({ route: s.page, hit: s.must_contain, ctx: 'the private beta milestone is missing' });
+      const words = s.banned_access_wording.map((w) => esc(w).replace(/[ -]/g, '[\\s-]'));
+      out.push(...scan(pages, new RegExp('\\b(?:' + words.join('|') + ')\\b', 'gi')));
       return out;
     },
   },
