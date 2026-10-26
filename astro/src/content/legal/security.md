@@ -15,15 +15,15 @@ The controls every Velstrian organisation inherits by default, from encryption t
 
 ### AES-256 encryption at rest
 
-Disk-level AES-256-GCM with automatic key rotation across databases, file storage, and backups.
+AES-256 encryption at rest across the database, file storage and backups, with keys managed by our hosting provider. Stored integration credentials get our own AES-256-GCM encryption on top.
 
 ### TLS 1.3 in transit
 
-Forward-secret HTTPS on every request with HSTS preload and modern cipher suites only.
+Forward-secret HTTPS on every request with HSTS preload. TLS 1.3 is used wherever the browser supports it, and TLS 1.2 otherwise.
 
 ### GDPR compliant
 
-Subject rights supported end to end, with lawful basis, retention and deletion documented. A Data Processing Agreement is available for customers on request, currently in draft pending legal review.
+Subject rights supported end to end, with lawful basis, retention and deletion documented. Our [Data Processing Agreement](/dpa/) is published, and is still a draft pending legal review.
 
 ### EU data residency
 
@@ -45,9 +45,9 @@ The detail behind each control, written for security and procurement teams. Jump
 
 ## AES-256 encryption
 
-All customer data is encrypted at rest using AES-256, and in transit using TLS 1.3. Disk encryption keys are managed and rotated by our infrastructure providers. Application credentials and API keys are rotated by us, on a documented procedure with a verification step before the old key is revoked. Database snapshots, file storage, and backups inherit the same protection.
+All customer data is encrypted at rest using AES-256, and in transit using TLS 1.2 or higher, with TLS 1.3 wherever the browser supports it. Disk encryption keys are managed by our infrastructure providers. Application credentials and API keys are rotated by us, on a documented procedure with a verification step before the old key is revoked. Database snapshots, file storage, and backups inherit the same protection.
 
-<dl class="deflist deflist--ledger"> <dt>At rest</dt> <dd>AES-256-GCM</dd> <dt>In transit</dt> <dd>TLS 1.3, HSTS</dd> <dt>Disk key rotation</dt> <dd>Provider managed</dd> <dt>Application key rotation</dt> <dd>Documented procedure</dd> <dt>Backups</dt> <dd>Encrypted</dd> </dl>
+<dl class="deflist deflist--ledger"> <dt>At rest</dt> <dd>AES-256</dd> <dt>In transit</dt> <dd>TLS 1.3 where supported, TLS 1.2 minimum, HSTS</dd> <dt>Disk key rotation</dt> <dd>Provider managed</dd> <dt>Application key rotation</dt> <dd>Documented procedure</dd> <dt>Backups</dt> <dd>Encrypted</dd> </dl>
 
 ## EU data residency
 
@@ -63,14 +63,14 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 ## GDPR compliance
 
 - Velstrian Systems Ltd is registered as a data controller with the Information Commissioner’s Office (ICO) under the Data Protection (Charges and Information) Regulations 2018.
-- A Data Processing Agreement (DPA) is available on request for customers. It is in draft pending legal review, so terms may change before signature.
+- Our [Data Processing Agreement](/dpa/) (DPA) is published for customers. It is in draft pending legal review, so its terms may still change.
 - Data subject rights supported: right to erasure, data portability, restriction of processing, and access.
 
 <dl class="deflist"> <dt>ICO contact &amp; registration</dt> <dd> <p>Registered with the Information Commissioner's Office as a data controller.</p> <p>Data requests: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></p> </dd> </dl>
 
 ## Access controls
 
-Platform access is enforced in depth: organisation-scoped roles at the application layer, Row-Level Security at the database, and multi-factor authentication at the identity layer.
+Platform access is enforced in depth: organisation-scoped roles at the application layer, Row-Level Security at the database, and multi-factor authentication available to every user at the identity layer.
 
 ### RBAC
 
@@ -102,7 +102,7 @@ In plain words, [how Velstrian uses AI](/ai/) sets out what the AI does in each 
 
 <dl class="deflist"> <dt>What is sent</dt> <dd> <ul> <li>The text the active task needs: tender documents, your answers, your library, documents you upload, or what you type into a chat.</li> <li>This can contain personal data, such as a name in a CV. We do not remove it before sending.</li> <li>Server-side API calls only.</li> </ul> </dd> <dt>What is NOT sent</dt> <dd> <ul> <li>Bulk exports or full organisation datasets.</li> <li>Passwords, authentication tokens or payment details.</li> </ul> </dd> <dt>Where it is processed</dt> <dd> <ul> <li>Google Gemini: the Gemini API offers no region setting, and Google may store or cache the text in any country where it or its agents have facilities.</li> <li>Anthropic Claude: Anthropic's global service, with no UK or EU option.</li> </ul> </dd> <dt>Under what contract</dt> <dd> <ul> <li>Google Gemini: Google's Gemini API terms.</li> <li>Anthropic Claude: Anthropic's Commercial Terms with Anthropic Ireland, Limited, which include the EU Standard Contractual Clauses and the UK International Data Transfer Agreement. By default Anthropic does not train on what we send, and deletes it within 30 days, or up to 2 years if it is flagged for a usage policy breach.</li> <li>We treat both as international transfers, protected as our <a href="/privacy/">Privacy Policy</a> sets out.</li> </ul> </dd> </dl>
 
-<dl class="deflist"> <dt>Model Usage &amp; Data Isolation</dt> <dd>Inference traffic is brokered through Velstrian-controlled service identities. Prompts include the minimum context required to satisfy the active task. Model responses are post-processed before storage to strip provider metadata.</dd> </dl>
+<dl class="deflist"> <dt>Model Usage &amp; Data Isolation</dt> <dd>AI calls are made only from our own API, under Velstrian's own provider accounts. Prompts include only the text the active task needs. Every call is recorded in our cost and audit ledger with the model and provider used.</dd> </dl>
 
 ## Vulnerability disclosure
 

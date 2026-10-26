@@ -239,10 +239,15 @@ const RULES = [
           if (!p || !p.text.includes(proc.name)) out.push({ route, hit: proc.name, ctx: 'processor missing from this page' });
         }
       }
+      /* [R285-LEGAL-KIRO-B-FOLLOWUP-01 2026-10-26] Read the legal article body only. The
+         site footer links /sub-processors/ on every page, so a whole page search passed with
+         the Privacy link deleted (red proof run 2026-10-26 stayed PASS). */
       const listHref = `href="${FACTS.processors.list_page}"`;
       for (const route of FACTS.processors.pages_pointing_to_list) {
         const p = pages.find((x) => x.route === route);
-        if (!p || !p.html.includes(listHref)) out.push({ route, hit: FACTS.processors.list_page, ctx: 'page does not link to the single sub-processor list' });
+        const article = p ? /<article\b[^>]*\blegal__body\b[^>]*>([\s\S]*?)<\/article>/i.exec(p.html) : null;
+        if (!article) out.push({ route, hit: FACTS.processors.list_page, ctx: 'no legal article body found on this page' });
+        else if (!article[1].includes(listHref)) out.push({ route, hit: FACTS.processors.list_page, ctx: 'page body does not link to the single sub-processor list' });
       }
       return out;
     },

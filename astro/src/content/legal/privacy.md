@@ -141,7 +141,7 @@ We use other companies (sub-processors) to run the service, such as our database
 
 ## International data transfers
 
-Where personal data is transferred outside the UK, we rely on UK IDTA or EU SCCs + UK Addendum, adequacy decisions, or documented Transfer Risk Assessments (TRAs). This ensures that your data receives an equivalent level of protection to that provided under UK law.
+Where personal data is transferred outside the UK, we rely on UK IDTA or EU SCCs + UK Addendum, or adequacy decisions, together with a transfer risk assessment where the law requires one. This ensures that your data receives an equivalent level of protection to that provided under UK law.
 
 ## Automated decisions & AI
 
@@ -177,7 +177,7 @@ Anthropic runs Claude on its global service, which offers no UK or EU location. 
 
 ## Sentry retention & error scrubbing
 
-We use Sentry for error monitoring to ensure the stability of the Velstrian platform and its modules. Error events are retained for 90 days, and session replays are retained for 30 days. The Sentry SDK is configured to scrub sensitive keys such as passwords and tokens before they are transmitted from your browser.
+We use Sentry for error monitoring to ensure the stability of the Velstrian platform and its modules. Error events are retained for 90 days. Session replay is not turned on, so Sentry keeps no recording of your screen. The Sentry SDK is configured to scrub sensitive keys such as passwords and tokens before they are transmitted from your browser.
 
 ## Contact & ICO complaint
 
