@@ -143,6 +143,59 @@ if (fs.existsSync(DIST)) {
   }
 }
 
+// 3. A-475 (owner 2026-10-26): every company social profile URL is written once, in
+//    SOCIAL_URLS in src/lib/brand-names.ts. A profile URL typed anywhere else under src/
+//    is a second copy that can drift. Comments are blanked first, so a note that names a
+//    URL is not a hit. Share intents (linkedin.com/feed, twitter.com/intent) are not
+//    profiles and are not matched.
+export const SOCIAL_PROFILE = /(?:linkedin\.com\/company\/|x\.com\/Velstrian|youtube\.com\/@VELSTRIAN|instagram\.com\/velstrian|medium\.com\/@velstrian)/i;
+const SOCIAL_SOURCE_EXT = new Set(['.ts', '.tsx', '.js', '.mjs', '.astro', '.md', '.mdx', '.json']);
+const SOCIAL_HOME = path.join('src', 'lib', 'brand-names.ts');
+
+export function blankComments(text, ext) {
+  const blank = (m) => m.replace(/[^\n]/g, ' ');
+  if (ext === '.json') return text;
+  if (ext === '.md' || ext === '.mdx') return text.replace(/<!--[\s\S]*?-->/g, blank);
+  return text
+    .replace(/\/\*[\s\S]*?\*\//g, blank)
+    .replace(/(^|[^:\w])\/\/[^\n]*/g, (m, p1) => p1 + blank(m.slice(p1.length)))
+    .replace(/<!--[\s\S]*?-->/g, blank);
+}
+
+/** Lines of one source file's code that type a social profile URL. */
+export function socialProfileLiterals(rel, text) {
+  if (rel === SOCIAL_HOME) return [];
+  return blankComments(text, path.extname(rel))
+    .split('\n')
+    .map((line, i) => ({ line: line.trim(), n: i + 1 }))
+    .filter(({ line }) => SOCIAL_PROFILE.test(line))
+    .map(({ line, n }) => `${rel}:${n}: ${line.slice(0, 120)}`);
+}
+
+function walkSource(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) walkSource(full, out);
+    else if (SOCIAL_SOURCE_EXT.has(path.extname(ent.name))) out.push(full);
+  }
+  return out;
+}
+
+const sourceFiles = walkSource(path.join(ROOT, 'src'));
+if (sourceFiles.length < 100) {
+  errors.push(`[social-scan-empty] the social URL scan read only ${sourceFiles.length} files under src/, so a pass would mean nothing`);
+}
+const homeText = fs.readFileSync(path.join(ROOT, SOCIAL_HOME), 'utf8');
+if (!/export const SOCIAL_URLS = \{[\s\S]*?linkedin: "https:\/\/www\.linkedin\.com\/company\/-velstrian\/"/.test(homeText)) {
+  errors.push('[social-home] SOCIAL_URLS.linkedin is missing from src/lib/brand-names.ts (the owner confirmed https://www.linkedin.com/company/-velstrian/)');
+}
+for (const file of sourceFiles) {
+  const rel = path.relative(ROOT, file);
+  for (const hit of socialProfileLiterals(rel, fs.readFileSync(file, 'utf8'))) {
+    errors.push(`[social-url-copy] ${hit} (read SOCIAL_URLS from src/lib/brand-names.ts)`);
+  }
+}
+
 if (errors.length > 0) {
   console.error(`FAIL — check-brand-names: ${errors.length} violation(s) found:\n`);
   for (const err of errors.slice(0, 30)) {

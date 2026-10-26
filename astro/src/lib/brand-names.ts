@@ -69,6 +69,23 @@ export const LEGAL_ENTITY_LINE = `${LEGAL_ENTITY_NAME}, trading as ${PLATFORM_NA
 export const PUBLIC_EMAIL = "contact@velstrian.com";
 
 /**
+ * THE COMPANY SOCIAL PROFILES (A-475, owner 2026-10-26 confirmed the LinkedIn URL).
+ * The footer icons and the Organization schema `sameAs` both read this object, so a
+ * profile URL is written once. scripts/check-brand-names.js fails the build when a
+ * profile URL is typed anywhere else under src/.
+ */
+export const SOCIAL_URLS = {
+  linkedin: "https://www.linkedin.com/company/-velstrian/",
+  x: "https://x.com/VelstrianLtd",
+  youtube: "https://www.youtube.com/@VELSTRIAN-UK",
+  instagram: "https://www.instagram.com/velstrian/",
+  medium: "https://medium.com/@velstrian-systems-ltd",
+} as const;
+
+/** The LinkedIn company page, the one the owner confirmed (A-475). */
+export const LINKEDIN_URL = SOCIAL_URLS.linkedin;
+
+/**
  * THE ONE PUBLIC REPLY TIME. Its value is the text the pages say today. D286
  * ("within one business day") is ON HOLD while the owner reconfirms it
  * (2026-10-22), so no page reads this yet and no reader sees a change. When it

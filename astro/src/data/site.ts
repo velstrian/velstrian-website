@@ -27,6 +27,7 @@ import {
   STATUS_URL,
   PRODUCT_NAME_BID,
   PRODUCT_NAME_BUY,
+  SOCIAL_URLS,
 } from '../lib/brand-names';
 
 /*
@@ -98,12 +99,13 @@ export const SITE = {
     email: PUBLIC_EMAIL,
     identifier: { '@type': 'PropertyValue', name: 'Companies House', value: COMPANY_NUMBER },
     address: { '@type': 'PostalAddress', addressCountry: 'GB' },
+    // A-475: the profiles are written once, in SOCIAL_URLS. Order kept as before.
     sameAs: [
-      'https://www.youtube.com/@VELSTRIAN-UK',
-      'https://x.com/VelstrianLtd',
-      'https://www.linkedin.com/company/-velstrian/',
-      'https://www.instagram.com/velstrian/',
-      'https://medium.com/@velstrian-systems-ltd',
+      SOCIAL_URLS.youtube,
+      SOCIAL_URLS.x,
+      SOCIAL_URLS.linkedin,
+      SOCIAL_URLS.instagram,
+      SOCIAL_URLS.medium,
     ],
   },
 } as const;
