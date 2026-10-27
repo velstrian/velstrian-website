@@ -100,7 +100,7 @@ If an administrator turns this on, the number of bids you won and lost in each s
 
 We retain personal data only for as long as necessary for the purposes set out in this policy, in line with UK GDPR Article 5(1)(e) (storage limitation). When we no longer need your personal data, we will securely delete or anonymise it.
 
-<div class="prose-scroll" role="region" aria-label="Table" tabindex="0"><table class="pv-table"> <thead> <tr> <th>Data category</th> <th>Retention period</th> <th>Basis</th> </tr> </thead> <tbody> <tr><td>Account data</td><td>Purged within 30 days of account deletion</td><td>UK GDPR Art 17</td></tr> <tr><td>Financial / invoice records</td><td>Up to 7 years (anonymised audit trail)</td><td>UK HMRC requirement</td></tr> <tr><td>Shared examples (optional)</td><td>Until sharing is turned off, then deleted straight away</td><td>Your administrator's opt in</td></tr> <tr><td>Usage events</td><td>13 months</td><td>Product analytics</td></tr> <tr><td>Error logs (Sentry)</td><td>90 days</td><td>Diagnostics</td></tr> <tr><td>Session replay (Sentry)</td><td>30 days</td><td>Diagnostics</td></tr> <tr><td>Analytics (PostHog)</td><td>12 months</td><td>Aggregate insights</td></tr> </tbody> </table></div>
+<div class="prose-scroll" role="region" aria-label="Table" tabindex="0"><table class="pv-table"> <thead> <tr> <th>Data category</th> <th>Retention period</th> <th>Basis</th> </tr> </thead> <tbody> <tr><td>Account data</td><td>Purged within 30 days of account deletion</td><td>UK GDPR Art 17</td></tr> <tr><td>Financial / invoice records</td><td>Up to 7 years (anonymised audit trail)</td><td>UK HMRC requirement</td></tr> <tr><td>Shared examples (optional)</td><td>Until sharing is turned off, then deleted straight away</td><td>Your administrator's opt in</td></tr> <tr><td>Usage events</td><td>13 months</td><td>Product analytics</td></tr> <tr><td>Error events (Sentry)</td><td>30 days</td><td>Diagnostics</td></tr> <tr><td>Analytics (PostHog)</td><td>12 months</td><td>Aggregate insights</td></tr> </tbody> </table></div>
 
 ## Your rights under UK GDPR
 
@@ -177,7 +177,7 @@ Anthropic runs Claude on its global service, which offers no UK or EU location. 
 
 ## Sentry retention & error scrubbing
 
-We use Sentry for error monitoring to ensure the stability of the Velstrian platform and its modules. Error events are retained for 90 days. Session replay is not turned on, so Sentry keeps no recording of your screen. The Sentry SDK is configured to scrub sensitive keys such as passwords and tokens before they are transmitted from your browser.
+We use Sentry for error monitoring to ensure the stability of the Velstrian platform and its modules. Error events are retained for 30 days. Session replay is not turned on, so Sentry keeps no recording of your screen. The Sentry SDK is configured to scrub sensitive keys such as passwords and tokens before they are transmitted from your browser.
 
 ## Contact & ICO complaint
 
