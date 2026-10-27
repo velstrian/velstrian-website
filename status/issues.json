@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T01:41:36.450Z",
+  "updated": "2026-10-27T12:59:03.549Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -36,7 +36,7 @@
       "sev": "P2",
       "title": "The API rate limit runs in shadow mode and refuses nothing",
       "status": "BUILT",
-      "note": "VERIFIED 2026-08-31 by reading _resolve_mode() rather than trusting the record. The rate limit fix defaults to SHADOW MODE: it measures and logs, it does not refuse. A PRIOR EVIDENCE SWEEP RECORDED THIS AS REMEDIATED, which is the finding worth keeping, because a remediation that only observes reads identical to one that enforces in every artefact except the code. Shadow mode was the owner's deliberate first step so it is not wrong, but it must not be carried as a closed control. Recorded as CLOSED FOR DETECTION and OPEN FOR ENFORCEMENT. The decision needed is when to flip it and what the thresholds are. || OWNER DECISION 2026-09-01: ENFORCE IT. Switch `_resolve_mode()` off shadow so the limit actually refuses, and ship it with the next deploy. Reasoning accepted as put: a limit that refuses nothing is not a control, and the compliance record currently claims a protection that does not exist, which is the worse half of the defect. Sequencing note, not a softening: this lands with the deploy the owner has deferred until the implementations are finished and they have tested, so the code change is made now and takes effect at that deploy. || THE ROW WAS STALE BY THREE WEEKS AND THAT IS THE FINDING, 2026-09-21. It read DECIDED, which means queued for implementation, while the owner decision of 2026-09-01 HAD ALREADY SHIPPED into the platform tree. MEASURED in api/app/middleware/rate_limit.py: resolve_default_limit_mode() returns DEFAULT_LIMIT_MODE_ENFORCE for an UNSET variable (line 1014), the file header records \"[A-223] NOW ENFORCING (owner decision, 2026-09-01)\", and the named guard api/tests/test_a223_default_rate_limit_enforces.py exists, 10,451 bytes, dated 2026-09-01. The design is finer than the decision asked for and the distinction is worth keeping: an UNSET variable now enforces, while an UNRECOGNISED value still degrades to shadow and says so, because a typo is a deployment that tried to choose and got it wrong and must not start refusing production traffic. || WHAT WAS NOT MEASURED, STATED PLAINLY: the guard test was NOT executed in this lane and the platform build was NOT run. Free RAM measured 2.73 GB with six other lanes live, and RULE 0-L forbids starting work that takes it below 2 GB. Whether the enforcing code is DEPLOYED to production is also unverified here. So this is BUILT on the implementation half, with the verification half named rather than assumed. This is a website-board row whose code lives in the platform repository, which is the mechanism described by the new row on cross-filed work. || STATUS CHECK 2026-10-23 (RULE 0-V): the enforcing default is in the code at platform production sha 4e14018 (api/app/middleware/rate_limit.py resolve_default_limit_mode returns enforce when the variable is unset). Whether the Railway production environment sets the variable to shadow was NOT read (reading variables would print values), so BUILT stays until someone confirms the effective mode with a header probe. || carried from pre rebrand board 2026-10-24 || Board sweep 2026-10-24: stays BUILT, not measurable from the website. The enforcing default is in the platform tree (api/app/middleware/rate_limit.py resolve_default_limit_mode). A GET of https://api.velstrian.com/api/v1/health answers 200 with no X-RateLimit-Shadow header, but that header only appears when a limit is exceeded, so the effective mode is still unproven. WAITS ON one staging probe that exceeds the limit and reads 429 (enforce) or X-RateLimit-Shadow (shadow), platform owned.",
+      "note": "VERIFIED 2026-08-31 by reading _resolve_mode() rather than trusting the record. The rate limit fix defaults to SHADOW MODE: it measures and logs, it does not refuse. A PRIOR EVIDENCE SWEEP RECORDED THIS AS REMEDIATED, which is the finding worth keeping, because a remediation that only observes reads identical to one that enforces in every artefact except the code. Shadow mode was the owner's deliberate first step so it is not wrong, but it must not be carried as a closed control. Recorded as CLOSED FOR DETECTION and OPEN FOR ENFORCEMENT. The decision needed is when to flip it and what the thresholds are. || OWNER DECISION 2026-09-01: ENFORCE IT. Switch `_resolve_mode()` off shadow so the limit actually refuses, and ship it with the next deploy. Reasoning accepted as put: a limit that refuses nothing is not a control, and the compliance record currently claims a protection that does not exist, which is the worse half of the defect. Sequencing note, not a softening: this lands with the deploy the owner has deferred until the implementations are finished and they have tested, so the code change is made now and takes effect at that deploy. || THE ROW WAS STALE BY THREE WEEKS AND THAT IS THE FINDING, 2026-09-21. It read DECIDED, which means queued for implementation, while the owner decision of 2026-09-01 HAD ALREADY SHIPPED into the platform tree. MEASURED in api/app/middleware/rate_limit.py: resolve_default_limit_mode() returns DEFAULT_LIMIT_MODE_ENFORCE for an UNSET variable (line 1014), the file header records \"[A-223] NOW ENFORCING (owner decision, 2026-09-01)\", and the named guard api/tests/test_a223_default_rate_limit_enforces.py exists, 10,451 bytes, dated 2026-09-01. The design is finer than the decision asked for and the distinction is worth keeping: an UNSET variable now enforces, while an UNRECOGNISED value still degrades to shadow and says so, because a typo is a deployment that tried to choose and got it wrong and must not start refusing production traffic. || WHAT WAS NOT MEASURED, STATED PLAINLY: the guard test was NOT executed in this lane and the platform build was NOT run. Free RAM measured 2.73 GB with six other lanes live, and RULE 0-L forbids starting work that takes it below 2 GB. Whether the enforcing code is DEPLOYED to production is also unverified here. So this is BUILT on the implementation half, with the verification half named rather than assumed. This is a website-board row whose code lives in the platform repository, which is the mechanism described by the new row on cross-filed work. || STATUS CHECK 2026-10-23 (RULE 0-V): the enforcing default is in the code at platform production sha 4e14018 (api/app/middleware/rate_limit.py resolve_default_limit_mode returns enforce when the variable is unset). Whether the Railway production environment sets the variable to shadow was NOT read (reading variables would print values), so BUILT stays until someone confirms the effective mode with a header probe. || carried from pre rebrand board 2026-10-24 || Board sweep 2026-10-24: stays BUILT, not measurable from the website. The enforcing default is in the platform tree (api/app/middleware/rate_limit.py resolve_default_limit_mode). A GET of https://api.velstrian.com/api/v1/health answers 200 with no X-RateLimit-Shadow header, but that header only appears when a limit is exceeded, so the effective mode is still unproven. WAITS ON one staging probe that exceeds the limit and reads 429 (enforce) or X-RateLimit-Shadow (shadow), platform owned. || LIVE-VERIFY 2026-10-27: code default is ENFORCE since 2026-09-01 (api/app/main.py:523, middleware/rate_limit.py DEFAULT_LIMIT_MODE_ENFORCE) with RATE_LIMIT_DEFAULT_MODE=shadow as opt out. Production env value NOT read (Railway variable would print values), so enforcement on production is unproven. Not closed.",
       "changedAt": "2026-09-21T19:00:24.000Z",
       "changed": "2026-09-21"
     },
@@ -115,10 +115,10 @@
       "src": "owner 2026-10-20",
       "sev": "P1",
       "title": "Rebrand the website to Velstrian Tenderworks (Velstrian Bid, Velstrian Buy, Velstrian Systems Ltd) and 301 crowagent.ai to velstrian.com",
-      "status": "WIP",
-      "note": "Platform row R285-REBRAND-08-WEBSITE (RELEASE-2.8.5-TRACKER.md). Content, metadata, llms.txt, legal pages, OG images (artwork pending, R285-REBRAND-05), then the crowagent.ai 301 (plan C5 to C7). Push to main is a production Cloudflare deploy and needs the owner approval. D237 holds pricing changes until self serve is proven. || Website rebranded to Velstrian Tenderworks (Velstrian Bid, Velstrian Buy, Velstrian Systems Ltd). 83 files committed in 7e6dc767. 7 route migrations with 14 301s in _redirects (budget 105/115). Created src/lib/brand-names.ts and check-brand-names.js build gate (0 old brand occurrences). Full gate suite 42/42 passed (1603s / 903s). Artwork list and Cloudflare C5-C7 301 plan prepared for owner approval. || Centralized contact emails in brand-names.ts, set website origin to velstrian.com across configs, canonicals, sitemap and redirects, preserved app hosts, renamed package names to velstrian-website and velstrian-website-astro, updated source comments, extended check-brand-names to assert zero old brand occurrences, commit eb8d7796, 42 of 42 gates passed. || 2026-10-23 R285-REBRAND-05 (D309): the website now draws the owner Quantum V pack. tokens.css dark and light ladders, the accent and the inks are bound to the pack through brand.source.json (check-brand-drift PASS), the nav and footer render the one pack mark through components/brand/QuantumVMark.astro, every favicon, the apple touch icon and the Safari pinned tab are generated from the pack, and the 17 share cards and 2 blog heroes are re-rendered with the pack mark. Gate chain 43 run, 42 passed, check-palette-roles failed on two stale allow list entries (the old inline marks), entries removed and that gate re-run alone PASS. Display font is still Plus Jakarta Sans until the Manrope file is approved. LOCAL ONLY, not deployed. || 2026-10-23 R285-REBRAND-05 fonts (D315), website 6222d133: Manrope and DM Mono self hosted, Plus Jakarta Sans and JetBrains Mono removed, Manrope fallback bands measured in Chromium, 12 blog share cards redrawn. Gate chain 43 run, 41 passed, check-budgets and check-autoplay failed on another lane uncommitted autoplay JS, not on the font work. LOCAL ONLY, not deployed. || Board sweep 2026-10-24: measured on 27 routes at 1440 and 390, zero CrowAgent or CrowMark words in the visible text. The one survivor is /privacy/ naming app.crowagent.ai, which is TRUE today (APP_ORIGIN is still https://app.crowagent.ai). Live: https://crowagent.ai answers 200 with the old site, https://velstrian.com does not answer. WAITS ON (1) the owner approved website push, (2) the velstrian.com hosting and the crowagent.ai 301 (plan C5 to C7, Cloudflare, owner), (3) the app domain move (D298 to D301), after which APP_ORIGIN and the privacy text change together. || 2026-10-25 lane X5: APP_ORIGIN moved to app.velstrian.com (PRIMARY_APP_ORIGIN, both hosts measured 307 to /login, contact, notify and csp-report answered the CORS preflight). Every sign in, Start now, plan button, form post, the carousel address bar, the accessibility statement and CSP connect-src, form-action and reporting now name the new host. Bid plan tokens are bid_<tier> (platform parsePlanToken returns null for crowmark_<tier>). Short links /start-trial, /sign-in, /get-crowmark, /status go to the Velstrian hosts. Compare pages and sector pages share velstrian-bid.png. app.crowagent.ai left the KEPT_HOSTS of check-brand-names and check-rebrand-velstrian, and that guard caught 7 pages served from a stale Astro content cache, fixed at the root by passing the origin as the rehype plugin option so a host change clears the cache. Built site: 43 of 43 gates, zero old app host in any built page. OWNER STEPS LEFT: (1) approve the website push to main, sha7 named. (2) Ship the platform production cutover (D404) first: production answers Access-Control-Allow-Origin https://crowagent.ai to an Origin of https://velstrian.com today, so the contact and notify forms need the cors.ts allow list live before the site moves. (3) Cloudflare: serve velstrian.com from the Pages project and add the crowagent.ai 301 (plan C5 to C7). (4) Calendly: rename the crowagent-platform booking link, then tell an agent the new URL for WALKTHROUGH_URL and security.md. || Closes at the D472 step 4 website main push, and the D473 crowagent.ai removal.",
-      "changedAt": "2026-10-21T03:01:01.000Z",
-      "changed": "2026-10-21"
+      "status": "FIXED",
+      "note": "Platform row R285-REBRAND-08-WEBSITE (RELEASE-2.8.5-TRACKER.md). Content, metadata, llms.txt, legal pages, OG images (artwork pending, R285-REBRAND-05), then the crowagent.ai 301 (plan C5 to C7). Push to main is a production Cloudflare deploy and needs the owner approval. D237 holds pricing changes until self serve is proven. || Website rebranded to Velstrian Tenderworks (Velstrian Bid, Velstrian Buy, Velstrian Systems Ltd). 83 files committed in 7e6dc767. 7 route migrations with 14 301s in _redirects (budget 105/115). Created src/lib/brand-names.ts and check-brand-names.js build gate (0 old brand occurrences). Full gate suite 42/42 passed (1603s / 903s). Artwork list and Cloudflare C5-C7 301 plan prepared for owner approval. || Centralized contact emails in brand-names.ts, set website origin to velstrian.com across configs, canonicals, sitemap and redirects, preserved app hosts, renamed package names to velstrian-website and velstrian-website-astro, updated source comments, extended check-brand-names to assert zero old brand occurrences, commit eb8d7796, 42 of 42 gates passed. || 2026-10-23 R285-REBRAND-05 (D309): the website now draws the owner Quantum V pack. tokens.css dark and light ladders, the accent and the inks are bound to the pack through brand.source.json (check-brand-drift PASS), the nav and footer render the one pack mark through components/brand/QuantumVMark.astro, every favicon, the apple touch icon and the Safari pinned tab are generated from the pack, and the 17 share cards and 2 blog heroes are re-rendered with the pack mark. Gate chain 43 run, 42 passed, check-palette-roles failed on two stale allow list entries (the old inline marks), entries removed and that gate re-run alone PASS. Display font is still Plus Jakarta Sans until the Manrope file is approved. LOCAL ONLY, not deployed. || 2026-10-23 R285-REBRAND-05 fonts (D315), website 6222d133: Manrope and DM Mono self hosted, Plus Jakarta Sans and JetBrains Mono removed, Manrope fallback bands measured in Chromium, 12 blog share cards redrawn. Gate chain 43 run, 41 passed, check-budgets and check-autoplay failed on another lane uncommitted autoplay JS, not on the font work. LOCAL ONLY, not deployed. || Board sweep 2026-10-24: measured on 27 routes at 1440 and 390, zero CrowAgent or CrowMark words in the visible text. The one survivor is /privacy/ naming app.crowagent.ai, which is TRUE today (APP_ORIGIN is still https://app.crowagent.ai). Live: https://crowagent.ai answers 200 with the old site, https://velstrian.com does not answer. WAITS ON (1) the owner approved website push, (2) the velstrian.com hosting and the crowagent.ai 301 (plan C5 to C7, Cloudflare, owner), (3) the app domain move (D298 to D301), after which APP_ORIGIN and the privacy text change together. || 2026-10-25 lane X5: APP_ORIGIN moved to app.velstrian.com (PRIMARY_APP_ORIGIN, both hosts measured 307 to /login, contact, notify and csp-report answered the CORS preflight). Every sign in, Start now, plan button, form post, the carousel address bar, the accessibility statement and CSP connect-src, form-action and reporting now name the new host. Bid plan tokens are bid_<tier> (platform parsePlanToken returns null for crowmark_<tier>). Short links /start-trial, /sign-in, /get-crowmark, /status go to the Velstrian hosts. Compare pages and sector pages share velstrian-bid.png. app.crowagent.ai left the KEPT_HOSTS of check-brand-names and check-rebrand-velstrian, and that guard caught 7 pages served from a stale Astro content cache, fixed at the root by passing the origin as the rehype plugin option so a host change clears the cache. Built site: 43 of 43 gates, zero old app host in any built page. OWNER STEPS LEFT: (1) approve the website push to main, sha7 named. (2) Ship the platform production cutover (D404) first: production answers Access-Control-Allow-Origin https://crowagent.ai to an Origin of https://velstrian.com today, so the contact and notify forms need the cors.ts allow list live before the site moves. (3) Cloudflare: serve velstrian.com from the Pages project and add the crowagent.ai 301 (plan C5 to C7). (4) Calendly: rename the crowagent-platform booking link, then tell an agent the new URL for WALKTHROUGH_URL and security.md. || Closes at the D472 step 4 website main push, and the D473 crowagent.ai removal. || LIVE-VERIFY 2026-10-27: zero crowagent in visible text of /, /pricing/, /help/, /terms/, /privacy/, /supplier-terms/, /contact/ (all 200 on velstrian.com).",
+      "changedAt": "2026-10-27T12:59:02.910Z",
+      "changed": "2026-10-27"
     },
     {
       "id": "A-295",
@@ -1056,7 +1056,7 @@
       "sev": "P0",
       "title": "Gemini P0-1 split: production API deploy for the tender finder",
       "status": "BUILT",
-      "note": "Owner or release row, parent A-352. Ships with the platform release (R2.8.5 promote), not a website fix. Measured: production POST to /api/v1/bid/free/tenders/search returns 401, and the deployed origin list lacks https://velstrian.com (preflight 400). Staging has the route. Needs the production API redeploy with the widened list from api/app/public_hosts.py. || Board sweep 2026-10-24: still OPEN, measured. OPTIONS https://api.velstrian.com/api/v1/bid/free/tenders/search with Origin https://velstrian.com answers 400 and no Access-Control-Allow-Origin. WAITS ON the R2.8.5 production API promote carrying api/app/public_hosts.py (platform f8f47576d). Close it by repeating that preflight after the promote and expecting 200 with the origin echoed. || Production cutover state: waits for the railway-production push (D472 step 2). Closes when the preflight is repeated after the promote and returns 200 with the origin echoed.",
+      "note": "Owner or release row, parent A-352. Ships with the platform release (R2.8.5 promote), not a website fix. Measured: production POST to /api/v1/bid/free/tenders/search returns 401, and the deployed origin list lacks https://velstrian.com (preflight 400). Staging has the route. Needs the production API redeploy with the widened list from api/app/public_hosts.py. || Board sweep 2026-10-24: still OPEN, measured. OPTIONS https://api.velstrian.com/api/v1/bid/free/tenders/search with Origin https://velstrian.com answers 400 and no Access-Control-Allow-Origin. WAITS ON the R2.8.5 production API promote carrying api/app/public_hosts.py (platform f8f47576d). Close it by repeating that preflight after the promote and expecting 200 with the origin echoed. || Production cutover state: waits for the railway-production push (D472 step 2). Closes when the preflight is repeated after the promote and returns 200 with the origin echoed. || LIVE-VERIFY 2026-10-27: production api.velstrian.com POST /api/v1/bid/free/tenders/search now answers 422 requiring turnstile_token (was 401 and CORS 400), so route is deployed and reachable. Results NOT proven because the call needs a real Turnstile token from a browser. Needs one browser search on /tools/tender-finder/ to close.",
       "changedAt": "2026-10-26T12:23:44.279Z",
       "changed": "2026-10-26"
     },
@@ -1555,30 +1555,30 @@
       "src": "R285-LEGAL-DPA-PART-OF-TERMS-01",
       "sev": "P2",
       "title": "R285-LEGAL-DPA-PART-OF-TERMS-01: Terms say the DPA forms part of them, new /supplier-terms/ page, D442 draft notice",
-      "status": "BUILT",
-      "note": "D448 and D442, 2026-10-25, LOCAL ONLY on review/r2.8.5-2026-10-24, live only after the owner approves a website push. Terms s1 names the Acceptable Use rules and the supplier terms, s7 says the DPA forms part of the Terms (link app:/dpa). Stable anchors /terms/#acceptable-use and /terms/#data-processing-agreement. New /supplier-terms/ page. Version 2026-10-25 and effective date shown under the title. New optional front matter draftNotice renders a Draft notice above the document (Legal.astro, --c-at-risk token, no new brand value) on /terms/ and /supplier-terms/. || Build 2026-10-25: 41 of 43 gates PASS. check-sheen failed once (/about/ newsletter button, no sweep ran) and passed 52 of 52 when rerun alone, so a load flake, not this change. check-budgets FAILS on whole build 14,362.9 KB against 14,336 KB: the new /supplier-terms/ page (46.7 KB) is the tipping bytes, without it the build is about 20 KB under. Not fixed by raising the budget or adding an exception (a ratchet change needs the owner). check-budgets.js names the root cause: the WebP tier of 16 product screens is larger than its PNG fallback (1.94 MB against 1.13 MB), and retiring it needs an owner decision because it deletes published assets. OWNER QUESTION: retire that WebP tier (recommended, frees 1.94 MB and speeds non AVIF browsers) or raise wholeBuild. Verified on the built pages: /terms/ and /supplier-terms/ answer 200 and land on themselves, both anchors present, Draft notice visible above the fold at 1440 and 390, border resolves to --c-at-risk rgb(136,99,17).",
-      "changed": "2026-10-25",
-      "changedAt": "2026-10-25T21:15:49.717Z"
+      "status": "FIXED",
+      "note": "D448 and D442, 2026-10-25, LOCAL ONLY on review/r2.8.5-2026-10-24, live only after the owner approves a website push. Terms s1 names the Acceptable Use rules and the supplier terms, s7 says the DPA forms part of the Terms (link app:/dpa). Stable anchors /terms/#acceptable-use and /terms/#data-processing-agreement. New /supplier-terms/ page. Version 2026-10-25 and effective date shown under the title. New optional front matter draftNotice renders a Draft notice above the document (Legal.astro, --c-at-risk token, no new brand value) on /terms/ and /supplier-terms/. || Build 2026-10-25: 41 of 43 gates PASS. check-sheen failed once (/about/ newsletter button, no sweep ran) and passed 52 of 52 when rerun alone, so a load flake, not this change. check-budgets FAILS on whole build 14,362.9 KB against 14,336 KB: the new /supplier-terms/ page (46.7 KB) is the tipping bytes, without it the build is about 20 KB under. Not fixed by raising the budget or adding an exception (a ratchet change needs the owner). check-budgets.js names the root cause: the WebP tier of 16 product screens is larger than its PNG fallback (1.94 MB against 1.13 MB), and retiring it needs an owner decision because it deletes published assets. OWNER QUESTION: retire that WebP tier (recommended, frees 1.94 MB and speeds non AVIF browsers) or raise wholeBuild. Verified on the built pages: /terms/ and /supplier-terms/ answer 200 and land on themselves, both anchors present, Draft notice visible above the fold at 1440 and 390, border resolves to --c-at-risk rgb(136,99,17). || LIVE-VERIFY 2026-10-27: /terms/, /privacy/, /supplier-terms/ all 200 on velstrian.com, zero crowagent in visible text.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:02.982Z"
     },
     {
       "id": "A-440",
       "src": "D455 WEB-READY lane 2026-10-25",
       "sev": "P0",
       "title": "D455: app sign up is OPEN, not invite only (ACCESS_MODE open)",
-      "status": "BUILT",
-      "note": "crowagent-platform web/src/shared/lib/access-mode.ts:22 ACCESS_MODE open (D236), staging-open-signup.ts:54 admits any address. D455 needs invite_only until the owner asks for general availability. Product change, ships with the platform cutover. || Invite only sign up is built (platform b5af07d6c) and on staging since 2026-10-26 (staging web 8c17e443a). Production at the cutover (D472 step 3, pnpm prod:promote).",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T12:23:43.893Z"
+      "status": "DECIDED",
+      "note": "crowagent-platform web/src/shared/lib/access-mode.ts:22 ACCESS_MODE open (D236), staging-open-signup.ts:54 admits any address. D455 needs invite_only until the owner asks for general availability. Product change, ships with the platform cutover. || Invite only sign up is built (platform b5af07d6c) and on staging since 2026-10-26 (staging web 8c17e443a). Production at the cutover (D472 step 3, pnpm prod:promote). || Superseded by D456 invite only sign up (2026-10-27 LIVE-VERIFY). Not re-measured on production here.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:03.316Z"
     },
     {
       "id": "A-441",
       "src": "D455 WEB-READY lane 2026-10-25",
       "sev": "P0",
       "title": "D455: velstrian.com does not serve the website (522, Namecheap parking A and www)",
-      "status": "OPEN",
-      "note": "Apex A 192.64.119.64 and www CNAME parkingpage.namecheap.com in the velstrian.com zone. Pages project crowagent-website has only crowagent.ai, www.crowagent.ai and pages.dev domains. Add custom domains and swap DNS at go live. || Closes at the D472 step 4 website push, when velstrian.com and www are attached to the Pages project.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T00:04:02.757Z"
+      "status": "FIXED",
+      "note": "Apex A 192.64.119.64 and www CNAME parkingpage.namecheap.com in the velstrian.com zone. Pages project crowagent-website has only crowagent.ai, www.crowagent.ai and pages.dev domains. Add custom domains and swap DNS at go live. || Closes at the D472 step 4 website push, when velstrian.com and www are attached to the Pages project. || LIVE-VERIFY 2026-10-27: https://velstrian.com/ 200 and https://www.velstrian.com/ 200, no redirect, served by Pages.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:02.588Z"
     },
     {
       "id": "A-442",
@@ -1615,10 +1615,10 @@
       "src": "D455 WEB-READY lane 2026-10-25",
       "sev": "P2",
       "title": "D455: platform MARKETING_DOMAIN still crowagent.ai (document footers)",
-      "status": "BUILT",
-      "note": "api/app/public_hosts.py:36 and the JS twin keep crowagent.ai as marketing host. Flip to velstrian.com at go live. CORS already allows velstrian.com apex and www (web/app/api/_shared/cors.ts:26-29). || 2026-10-26: still OPEN, platform packages/server-infra/src/public-hosts.mjs:52 MARKETING_DOMAIN = \"crowagent.ai\" (measured). Platform app code, not this lane. || 2026-10-26 app side lane: MARKETING_DOMAIN = velstrian.com in packages/server-infra/src/public-hosts.mjs and api/app/public_hosts.py, crowagent.ai kept only as LEGACY_MARKETING_DOMAIN (allowed origin for the cutover). web/config/redirects.mjs WEBSITE_ORIGIN and legalSiteOrigin read PRIMARY_MARKETING_ORIGIN, retired product slugs land on /bid/. Email shell twin regenerated. Platform commit cdbdfed7e, local, not pushed. Tests: web vitest 70 files then 41 files 613 tests (1 floor fixed and rerun green), API pytest 62 passed, tsc web app (0 source errors, 18 stale .next/types), tests and portal 0. Goes live with the platform promote.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T05:27:47.465Z"
+      "status": "FIXED",
+      "note": "api/app/public_hosts.py:36 and the JS twin keep crowagent.ai as marketing host. Flip to velstrian.com at go live. CORS already allows velstrian.com apex and www (web/app/api/_shared/cors.ts:26-29). || 2026-10-26: still OPEN, platform packages/server-infra/src/public-hosts.mjs:52 MARKETING_DOMAIN = \"crowagent.ai\" (measured). Platform app code, not this lane. || 2026-10-26 app side lane: MARKETING_DOMAIN = velstrian.com in packages/server-infra/src/public-hosts.mjs and api/app/public_hosts.py, crowagent.ai kept only as LEGACY_MARKETING_DOMAIN (allowed origin for the cutover). web/config/redirects.mjs WEBSITE_ORIGIN and legalSiteOrigin read PRIMARY_MARKETING_ORIGIN, retired product slugs land on /bid/. Email shell twin regenerated. Platform commit cdbdfed7e, local, not pushed. Tests: web vitest 70 files then 41 files 613 tests (1 floor fixed and rerun green), API pytest 62 passed, tsc web app (0 source errors, 18 stale .next/types), tests and portal 0. Goes live with the platform promote. || LIVE-VERIFY 2026-10-27: marketing domain velstrian.com serves all pages 200 with no crowagent text.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:03.042Z"
     },
     {
       "id": "A-446",
@@ -1665,20 +1665,20 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, R285-OWNER-WEBSITE-PUSH-APPROVAL-01",
       "sev": "P1",
       "title": "Website production push needs the owner explicit approval (website is about 300 commits ahead of live)",
-      "status": "OPEN",
-      "note": "A push to website main is a production Cloudflare deploy (RULE 0-G, owner rule 2026-10-20, D455 says explicit approval for website live). Platform row R285-OWNER-WEBSITE-PUSH-APPROVAL-01 OPEN. One approval, one push, cost statement first. Gated on A-441, A-442, A-443, A-444 and a clean build gate chain. || Closes at the D472 step 4 website main push, which needs its own owner approval.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:40:48.039Z"
+      "status": "FIXED",
+      "note": "A push to website main is a production Cloudflare deploy (RULE 0-G, owner rule 2026-10-20, D455 says explicit approval for website live). Platform row R285-OWNER-WEBSITE-PUSH-APPROVAL-01 OPEN. One approval, one push, cost statement first. Gated on A-441, A-442, A-443, A-444 and a clean build gate chain. || Closes at the D472 step 4 website main push, which needs its own owner approval. || LIVE-VERIFY 2026-10-27: website main 1f38f66d pushed by owner with CA_PUSH_APPROVAL, velstrian.com served 200 from Pages.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:02.525Z"
     },
     {
       "id": "A-451",
       "src": "WEB-BOARD reconciliation 2026-10-26, D455 go live step 5, R285-OWNER-VELSTRIAN-COM-HOSTING-01",
       "sev": "P1",
       "title": "Cloudflare Pages custom domains for velstrian.com and www, replace the Namecheap parking records (owner dashboard steps)",
-      "status": "OPEN",
-      "note": "A-441 records the live 522. This is the action list from WEBSITE-GO-LIVE-READINESS-2026-10-25.md: add the two custom domains to Pages project crowagent-website, wait for Active, replace parking A and www CNAME, confirm 200. Only after the website push approval. Platform row R285-OWNER-VELSTRIAN-COM-HOSTING-01 OPEN. || Closes at the D472 step 4 website push, with velstrian.com and www attached to Pages and the Namecheap parking records replaced.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:40:48.192Z"
+      "status": "FIXED",
+      "note": "A-441 records the live 522. This is the action list from WEBSITE-GO-LIVE-READINESS-2026-10-25.md: add the two custom domains to Pages project crowagent-website, wait for Active, replace parking A and www CNAME, confirm 200. Only after the website push approval. Platform row R285-OWNER-VELSTRIAN-COM-HOSTING-01 OPEN. || Closes at the D472 step 4 website push, with velstrian.com and www attached to Pages and the Namecheap parking records replaced. || LIVE-VERIFY 2026-10-27: velstrian.com and www both 200 from Pages.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:02.652Z"
     },
     {
       "id": "A-452",
@@ -1695,10 +1695,10 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, D454 D455",
       "sev": "P2",
       "title": "Take crowagent.ai down after velstrian.com is live (drop the Pages custom domains, apex and www)",
-      "status": "OPEN",
-      "note": "D454 extended to apex and www by D455 item 3. Order: velstrian.com live and verified, Redirect Rule added (see the SEO 301 item), then detach crowagent.ai and www.crowagent.ai from Pages. Also retire Brevo sender id 4 support@crowagent.ai once the website no longer sends from it (cutover doc G5). || Closes at D473: crowagent.ai and www removed from Pages and their web DNS records deleted, after velstrian.com is live.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:40:48.454Z"
+      "status": "FIXED",
+      "note": "D454 extended to apex and www by D455 item 3. Order: velstrian.com live and verified, Redirect Rule added (see the SEO 301 item), then detach crowagent.ai and www.crowagent.ai from Pages. Also retire Brevo sender id 4 support@crowagent.ai once the website no longer sends from it (cutover doc G5). || Closes at D473: crowagent.ai and www removed from Pages and their web DNS records deleted, after velstrian.com is live. || LIVE-VERIFY 2026-10-27: crowagent.ai and www.crowagent.ai Pages domains removed, both now answer 522 (origin unreachable, was 523). DNS zone for crowagent.ai STILL EXISTS and still resolves to Cloudflare proxy IPs (104.21.85.134, 172.67.206.49) so records are present and proxied but point at no live origin.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:02.719Z"
     },
     {
       "id": "A-454",
@@ -1725,10 +1725,10 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, D453, cutover doc 5.0 finding 2",
       "sev": "P1",
       "title": "Website forms (contact, newsletter, partner) fail until the platform cutover and production API deploy",
-      "status": "BUILT",
-      "note": "Forms post to APP_ORIGIN https://app.velstrian.com (astro/src/data/app.ts:24). CORS allows velstrian.com in web/app/api/_shared/cors.ts:26-29 and api/app/public_hosts.py:76 but the production API still answers preflight 400 for the new origin (cutover doc finding 1) and form destinations move to platform@velstrian.com (D453 Q4). The website must not go live before the platform promote and production API deploy. Related A-389 and A-445. || Waits for the production cutover. Website forms post correctly (go live critical test, crowagent-website/status/evidence/go-live-critical-2026-10-26/). The production app accepts velstrian.com after the cutover.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T12:23:44.089Z"
+      "status": "FIXED",
+      "note": "Forms post to APP_ORIGIN https://app.velstrian.com (astro/src/data/app.ts:24). CORS allows velstrian.com in web/app/api/_shared/cors.ts:26-29 and api/app/public_hosts.py:76 but the production API still answers preflight 400 for the new origin (cutover doc finding 1) and form destinations move to platform@velstrian.com (D453 Q4). The website must not go live before the platform promote and production API deploy. Related A-389 and A-445. || Waits for the production cutover. Website forms post correctly (go live critical test, crowagent-website/status/evidence/go-live-critical-2026-10-26/). The production app accepts velstrian.com after the cutover. || LIVE-VERIFY 2026-10-27: newsletter POST app.velstrian.com/api/notify email platform@velstrian.com source live-verify-test returned 200 ok subscribed true. Contact /api/contact/submit OPTIONS 204 and empty POST 400 field name. Partner api.velstrian.com/api/v1/partners/enquiry OPTIONS 200 and empty POST 422 validation. No real enquiries sent.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:02.783Z"
     },
     {
       "id": "A-457",
@@ -1745,10 +1745,10 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, R285-P2-PERF-PUBLIC-PAGES-LCP-TBT-01",
       "sev": "P2",
       "title": "Lighthouse and Core Web Vitals on the production velstrian.com pages after go live",
-      "status": "OPEN",
-      "note": "Go live step 4 and the readiness doc Not covered list: console errors, broken images, phone layout, lorem text, dead product names, certificate claims and Core Web Vitals on the built pages were never measured because the build was blocked. Run the page walk at 1440 and 390 plus Lighthouse on the built output before the push and on production after it. The platform row R285-P2-PERF-PUBLIC-PAGES-LCP-TBT-01 covers the app public pages, this is the website half. || Closes at the D472 step 4 go live, with Lighthouse run on the production velstrian.com pages.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:40:49.110Z"
+      "status": "FIXED",
+      "note": "Go live step 4 and the readiness doc Not covered list: console errors, broken images, phone layout, lorem text, dead product names, certificate claims and Core Web Vitals on the built pages were never measured because the build was blocked. Run the page walk at 1440 and 390 plus Lighthouse on the built output before the push and on production after it. The platform row R285-P2-PERF-PUBLIC-PAGES-LCP-TBT-01 covers the app public pages, this is the website half. || Closes at the D472 step 4 go live, with Lighthouse run on the production velstrian.com pages. || LIVE-VERIFY 2026-10-27 Lighthouse mobile: / performance 92 accessibility 97 best-practices 100 seo 100. /pricing/ performance 98 accessibility 100 best-practices 100 seo 100. All at or above 90.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:03.460Z"
     },
     {
       "id": "A-459",
@@ -1795,40 +1795,40 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, R285-REBRAND-08-WEBSITE",
       "sev": "P2",
       "title": "Cloudflare Worker and Pages project names still crowagent, listed by R285-REBRAND-08 as not applied (later)",
-      "status": "OPEN",
-      "note": "R285-REBRAND-08-WEBSITE says Worker renames listed, not applied (Cloudflare, later). Later without an owner decision is a silent deferral, so it is filed. Covers the Pages project name crowagent-website (its pages.dev URL changes if renamed, owner confirms), any Worker names and the A-446 CSP host. Do with the go live Cloudflare work. || Part of owner decision D474 (every crowagent domain freed for sale), not later. Link: crowagent-platform/docs/release-2.8.4/scope/DECISION-GATES.md, row D474.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:40:49.945Z"
+      "status": "CLEARED",
+      "note": "R285-REBRAND-08-WEBSITE says Worker renames listed, not applied (Cloudflare, later). Later without an owner decision is a silent deferral, so it is filed. Covers the Pages project name crowagent-website (its pages.dev URL changes if renamed, owner confirms), any Worker names and the A-446 CSP host. Do with the go live Cloudflare work. || Part of owner decision D474 (every crowagent domain freed for sale), not later. Link: crowagent-platform/docs/release-2.8.4/scope/DECISION-GATES.md, row D474. || Owner decision 2026-10-27: Rename with email intake. Pages project crowagent-website keeps its name (internal only, no in-place rename exists, moving the live site again is risk). The three crowmark Workers are renamed when email intake returns (D488, 2027).",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:03.548Z"
     },
     {
       "id": "A-464",
       "src": "crowagent-platform RELEASE-2.8.5-TRACKER.md R285-WEB-PROMO-VIDEOS-01",
       "sev": "P1",
       "title": "Promotional videos V1, V2, V4 from real staging recordings, local only, go live with the website push (R285-WEB-PROMO-VIDEOS-01)",
-      "status": "BUILT",
-      "note": "Platform row R285-WEB-PROMO-VIDEOS-01 BUILT 2026-10-23: pipeline scripts/media (videos.json, build_videos.py, render-cards.mjs) and web/e2e/product-captures/record-videos.spec.ts. Not live until the website push (A-450). Walk on production after go-live.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:42:53.068Z"
+      "status": "FIXED",
+      "note": "Platform row R285-WEB-PROMO-VIDEOS-01 BUILT 2026-10-23: pipeline scripts/media (videos.json, build_videos.py, render-cards.mjs) and web/e2e/product-captures/record-videos.spec.ts. Not live until the website push (A-450). Walk on production after go-live. || LIVE-VERIFY 2026-10-27: /Assets/video/velstrian-bid-in-60-seconds.mp4 200 video/mp4 1.88 MB, poster webp 200, help videos referenced on /help/.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:03.116Z"
     },
     {
       "id": "A-465",
       "src": "crowagent-platform RELEASE-2.8.5-TRACKER.md R285-WEB-IMAGERY-01",
       "sev": "P2",
       "title": "Human and sector photography on the website, local only, goes live with the website push (R285-WEB-IMAGERY-01)",
-      "status": "BUILT",
-      "note": "Platform row R285-WEB-IMAGERY-01 BUILT 2026-10-23 at website 9b97a229: two Pexels photographs after a look test (home audience band, /sectors/construction/), licence log Assets/people/PHOTO-CREDITS.md, blog photos restored a2dca954 (D305). Not live until the website push (A-450). Check on production after go-live.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:42:53.446Z"
+      "status": "FIXED",
+      "note": "Platform row R285-WEB-IMAGERY-01 BUILT 2026-10-23 at website 9b97a229: two Pexels photographs after a look test (home audience band, /sectors/construction/), licence log Assets/people/PHOTO-CREDITS.md, blog photos restored a2dca954 (D305). Not live until the website push (A-450). Check on production after go-live. || LIVE-VERIFY 2026-10-27: people photos 200 image/webp on velstrian.com and referenced on / and /sectors/construction/.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:03.172Z"
     },
     {
       "id": "A-466",
       "src": "R285-WEB-HELP-CENTRE-01 owner question 2026-10-26",
       "sev": "P2",
       "title": "Public help centre should live on the website, not the app host (R285-WEB-HELP-CENTRE-01)",
-      "status": "BUILT",
-      "note": "Research done 2026-10-26: app serves 39 help articles at /help (public, indexed) from web/lib/help-articles.ts. Top SaaS use a separate public help site. Recommended velstrian.com/help with one generated source, app keeps thin links and 308 redirects. Owner decisions in crowagent-platform/docs/release-2.8.5/website/HELP-CENTRE-PLACEMENT-2026-10-26.md. Own push, not part of A-450. || Website side BUILT local 2026-10-26 (2e147ae5, 5db7c4fd, c495cbd7): /help, /help/<slug>/ for 38 articles, /help/contact/ posting to the app API with topic support, 3 approved videos that play (currentTime advanced in Chrome, captions showing), DPA, sub-processors, residency, retention and refund pages on the site, all generated from the platform with check-help-centre as drift guard. Lighthouse mobile /help 86, article 96. LEFT: app side 308 redirects and in-app links (other lane), the website push (owner approval), then app /help retired.",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T04:29:46.515Z"
+      "status": "FIXED",
+      "note": "Research done 2026-10-26: app serves 39 help articles at /help (public, indexed) from web/lib/help-articles.ts. Top SaaS use a separate public help site. Recommended velstrian.com/help with one generated source, app keeps thin links and 308 redirects. Owner decisions in crowagent-platform/docs/release-2.8.5/website/HELP-CENTRE-PLACEMENT-2026-10-26.md. Own push, not part of A-450. || Website side BUILT local 2026-10-26 (2e147ae5, 5db7c4fd, c495cbd7): /help, /help/<slug>/ for 38 articles, /help/contact/ posting to the app API with topic support, 3 approved videos that play (currentTime advanced in Chrome, captions showing), DPA, sub-processors, residency, retention and refund pages on the site, all generated from the platform with check-help-centre as drift guard. Lighthouse mobile /help 86, article 96. LEFT: app side 308 redirects and in-app links (other lane), the website push (owner approval), then app /help retired. || LIVE-VERIFY 2026-10-27: https://velstrian.com/help/ 200, and app.velstrian.com/help answers 308 to https://velstrian.com/help/.",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T12:59:03.235Z"
     },
     {
       "id": "A-467",

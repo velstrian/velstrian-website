@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T18:38:04.843Z",
+  "updated": "2026-10-27T12:59:34.194Z",
   "release": "2.8.5",
   "note": "DERIVED, not authored. Generated from RELEASE-2.8.5-TRACKER.md and RELEASE-2.8.5-DEFECT-REGISTER.md by status/build-platform-board.js. Those documents are what a release is certified against and they win every disagreement, and this view is stale by at most one run. Re-run the generator after editing either document.",
   "sources": [
@@ -9,12 +9,12 @@
     "crowagent-platform/docs/release-2.8.5/PHASE-ASSIGNMENT-*.md"
   ],
   "phaseBreakdown": {
-    "generatedAt": "2026-10-26T18:37:36.964Z",
-    "sourceFingerprint": "835:218039135",
+    "generatedAt": "2026-10-27T12:59:22.492Z",
+    "sourceFingerprint": "855:-680958621",
     "note": "Phase counts cover items NOT YET DONE (OPEN + WIP + BUILT + DECISION). FIXED and CLEARED items are assigned to NO phase, which is why the phase totals do not approach the release total. BUILT means implemented and awaiting certification - it is NOT outstanding work.",
-    "totalRaised": 835,
-    "done": 438,
-    "remaining": 376,
+    "totalRaised": 855,
+    "done": 443,
+    "remaining": 391,
     "phases": {
       "1": {
         "items": 0,
@@ -33,10 +33,10 @@
         "onHold": 0
       },
       "3": {
-        "items": 376,
-        "open": 33,
-        "built": 305,
-        "wip": 38,
+        "items": 391,
+        "open": 30,
+        "built": 322,
+        "wip": 39,
         "decision": 0,
         "onHold": 0
       }
@@ -46,8 +46,8 @@
       "2": [],
       "3": [
         "R285-ACCESS-INVITE-ONLY-D456-01",
+        "R285-AUTH-OAUTH-UNINVITED-LANDS-IN-ONBOARDING-01",
         "R285-NEXT-CVE-01",
-        "R285-ENV-GEMINI-PREPAY-DEPLETED-01",
         "R285-P3-AI-ENGINE-T01-BID-PLAN-01",
         "R285-AI-TOKEN-CHARGING-DEFAULT-D457-01",
         "R285-APP-DISCLOSURE-01",
@@ -75,17 +75,23 @@
         "R285-P2-UPGRADE-DIALOG-NOTHING-TODAY-FALSE-01",
         "R285-P3-AI-CHARGE-SYSTEM-WORK-01",
         "R285-P3-AI-CHARGING-TOKENS-01",
+        "R285-P3-AI-D482-READERS-METERED-01",
+        "R285-P3-AI-D487-AI-OFF-ON-FAILED-PAYMENT-01",
+        "R285-P3-AI-D494-SURFACES-METERED-01",
         "R285-P3-AI-DEEP-TEST-BID-DRAFTING-01",
         "R285-P3-AI-OFFERING-TIERS-01",
+        "R285-P3-COLLAB-D485-CO-EDITING-PAID-ONLY-01",
         "R285-PROD-STRIPE-STALE-CUSTOMER-01",
         "R285-STRIPE-PRODUCTION-RUNS-LIVE-01",
         "R285-TX-DATA-BUYER-RUNG-MIGRATION-01",
         "R285-WEB-BID-PAGE-UNSTYLED-01",
         "R285-P3-AI-LEGACY-MODEL-MIGRATION-01",
+        "R285-MIGRATIONS-GO-LIVE-01",
         "R285-P3-AI-OWASP-LLM-PASS-01",
         "R285-REBRAND-06-APP-DOMAIN-MIGRATION",
         "R285-TRUST-SECURITY-EVIDENCE-PACK-01",
         "R285-AUTH-MFA-ONBOARDING-LOOP-01",
+        "R285-AUTH-PORTAL-CAPTCHA-01",
         "R285-AUTH-SUPABASE-CAPTCHA-01",
         "R285-NODE-CVE-2026-111497-01",
         "R285-P2-AUTH-EMAIL-UNBRANDED-01",
@@ -94,14 +100,13 @@
         "R285-SEC-DEPENDABOT-VITE-01",
         "R285-PROD-CRON-EMAIL-DISPATCH-500-01",
         "R285-REBRAND-15-APP-AND-PORTAL-HOSTS",
-        "R285-LEGAL-KIRO-A01-01",
         "R285-LEGAL-KIRO-A10-01",
+        "R285-LEGAL-KIRO-B-OWNER-01",
         "R285-OWNER-API-STAGING-PUSH-APPROVAL-01",
         "R285-OWNER-POST-PROMOTE-STEPS-01",
         "R285-OWNER-PROD-ENV-VALUES-01",
         "R285-OWNER-VELSTRIAN-COM-HOSTING-01",
         "R285-OWNER-WEBSITE-PUSH-APPROVAL-01",
-        "R285-TRUST-DPA-FINAL-01",
         "R285-GOV-BRANCH-RULES-01",
         "R285-P2-DROP-02",
         "R285-P3-AI-D388-BENCHMARK-RESULT-01",
@@ -129,8 +134,8 @@
         "R285-KIRO-PLAT-06-01",
         "R285-LEGAL-ACCEPT-EVERY-ENTRY-01",
         "R285-LEGAL-ACCEPTANCE-RECORD-01",
-        "R285-LEGAL-DPA-PART-OF-TERMS-01",
         "R285-LEGAL-KIRO-A02-01",
+        "R285-LEGAL-KIRO-B-FIX-01",
         "R285-MEDIA-REGENERABLE-01",
         "R285-P2-BATCH-2-RED-01",
         "R285-P2-DROP-01",
@@ -217,6 +222,7 @@
         "R285-P2-UPGRADE-TAX-LOCATION-500-01",
         "R285-P3-AI-BID-DECISION-SHEET-01",
         "R285-P3-AI-COMMERCIAL-MARGIN-MODEL-01",
+        "R285-P3-AI-D490-WELCOME-PAID-ONLY-01",
         "R285-P3-AI-LIBRARY-REUSE-SUGGEST-01",
         "R285-P3-AI-NOTICES-01",
         "R285-P3-AI-PLAIN-ENGLISH-OUTPUT-01",
@@ -240,6 +246,7 @@
         "R285-WALK3-QUESTIONS-EMPTY-PANELS-01",
         "R285-P2-DROP-10",
         "R285-AUTH-EXEMPT-PREFIX-01",
+        "R285-DEPS-SECURITY-BUMPS-01",
         "R285-FILED-AUTH-CHROME-TEAL-PROOF-STALE-01",
         "R285-FREE-TOOL-CAPTCHA-TURNSTILE-01",
         "R285-FREE-TOOL-TABLES-DROP-01",
@@ -262,7 +269,6 @@
         "R285-P3-AI-GOLDEN-SET-HUMAN-REVIEW-01",
         "R285-P3-AI-OPENAI-ACCOUNT-01",
         "R285-P3-AI-OPENAI-EVAL-01",
-        "R285-P3-AI-P4-V8-GEMINI-SHORT-DRAFT-01",
         "R285-P3-AI-VERTEX-CREDITS-PLAN-01",
         "R285-QUICK-AI-STAGING-COST-01",
         "R285-REBRAND-13-REGISTRATIONS-AND-LISTINGS",
@@ -313,6 +319,8 @@
         "R285-LEGAL-AUTHORITY-TO-BIND-01",
         "R285-LEGAL-EXTERNAL-LINK-NOTICE-01",
         "R285-LEGAL-KIRO-A04-01",
+        "R285-LEGAL-KIRO-B-FOLLOWUP-01",
+        "R285-LEGAL-KIRO-E-01",
         "R285-P2-ADVISOR-TRANSLATION-SCOPE-01",
         "R285-P2-DROP-07",
         "R285-P2-DROP-08",
@@ -336,6 +344,8 @@
         "R285-P3-AI-D464-ADVISOR-TRUNCATED-01",
         "R285-P3-AI-D464-DRAFT-FAITHFULNESS-01",
         "R285-P3-AI-D464-READING-LEVEL-STILL-FAILS-01",
+        "R285-P3-AI-D478-CHATBOT-REGISTRY-DRIFT-01",
+        "R285-P3-AI-D493-READING-SCORER-01",
         "R285-P3-AI-DEAD-SURFACES-01",
         "R285-P3-AI-DEEP-TEST-ADVISOR-01",
         "R285-P3-AI-DEEP-TEST-DOCUMENT-USE-01",
@@ -362,6 +372,7 @@
         "R285-P3-AI-OPS-RELEASE-CADENCE-01",
         "R285-P3-AI-OPS-SUPPORT-PLAYBOOK-01",
         "R285-P3-AI-OUTPUT-A11Y-01",
+        "R285-P3-AI-P4-V8-GEMINI-SHORT-DRAFT-01",
         "R285-P3-AI-POOLED-PATTERNS-AUTO-01",
         "R285-P3-AI-PPN017-KEPT-CLAIMS-WORDING-01",
         "R285-P3-AI-PROMPT-REGISTRY-GAPS-01",
@@ -404,6 +415,8 @@
         "R285-P3-AI-CANARY-SHADOW-BUILD-01",
         "R285-P3-AI-D464-ACCURACY-WORDLIMIT-01",
         "R285-P3-AI-D464-NARRATIVE-INVALID-JSON-01",
+        "R285-P3-AI-D478-RUBRIC-PIN-DRIFT-01",
+        "R285-P3-AI-D492-ONBOARDING-ANALYSE-REMOVED-01",
         "R285-P3-AI-DEEP-TEST-BACKGROUND-01",
         "R285-P3-AI-EMBEDDING-2-PLAN-01",
         "R285-P3-AI-EU-AI-ACT-CHECKLIST-01",
@@ -420,6 +433,8 @@
         "R285-P3-AI-USEFULNESS-RATING-01",
         "R285-P3-AI-WELSH-OUTPUT-01",
         "R285-P3-TRUST-ANTHROPIC-RETENTION-01",
+        "R285-REBRAND-DOC-DOMAIN-CONTROLS-01",
+        "R285-STYLE-EM-DASH-HEAD-01",
         "R285-WALK3-ERRORSTATE-NO-H1-01"
       ]
     }
@@ -537,7 +552,7 @@
       {
         "phase": 3,
         "name": "PHASE 3 - THE VELSTRIAN REBRAND, QUANTUM V AND EVERY ITEM BUILT AFTER 18 OCTOBER",
-        "items": 376,
+        "items": 391,
         "sha": null,
         "shipped": null,
         "state": "NOT MERGED",
@@ -552,9 +567,25 @@
         "why": "Owner run redeploy of the same production code (web dpl_9U9bSjMF, portal dpl_4f9c1edX) to recover the 22:36 to 22:47 UTC outage after the old Supabase key was deleted in the Railway incident rotation. No new code. Recorded for completeness."
       }
     ],
-    "assignment": "docs/release-2.8.5/PHASE-ASSIGNMENT-2026-10-26.md"
+    "assignment": "docs/release-2.8.5/PHASE-ASSIGNMENT-2026-10-27.md"
   },
   "ownerReview": [
+    {
+      "row": "R285-P3-AI-OFF-SURFACES-DECISION-01",
+      "title": "7 built AI features (11 surfaces) ship with a GBP 0 production budget and are never offered to customers",
+      "docs": [
+        {
+          "title": "Built but switched off: owner decision pack, 2026-10-26",
+          "href": "review/built-but-off-decision-pack-2026-10-26.html",
+          "sha": "cd4f385ab"
+        },
+        {
+          "title": "Built but not switched on, audit 2026-10-26",
+          "href": "review/built-but-off-audit-2026-10-26.html",
+          "sha": "c81302c1c"
+        }
+      ]
+    },
     {
       "row": "R285-P3-AI-VERTEX-CREDITS-PLAN-01",
       "title": "D465 Google Vertex credits: what credits we hold, what Vertex would lift (Gemini in eu or London, Document AI, caching, grounding), cost, DPA impact, ranked top 5",
@@ -674,7 +705,18 @@
         {
           "title": "AI on call for a tiny team",
           "href": "review/on-call.html",
-          "sha": "52711d77a"
+          "sha": "f7078eb69"
+        }
+      ]
+    },
+    {
+      "row": "R285-LEGAL-KIRO-B-OWNER-01",
+      "title": "Kiro legal review owner questions: B-02 three Terms caps that do not reconcile, B-07 RTO and RPO with no timed restore, B-12 Data Protection Officer title, B-04 Sentry alert recipients",
+      "docs": [
+        {
+          "title": "Legal page review B-01 to B-12, owner questions, 2026-10-26",
+          "href": "review/kiro-b-review-owner-questions-2026-10-26.html",
+          "sha": "39d06411a"
         }
       ]
     },
@@ -886,6 +928,19 @@
       "changedAtSource": "commit 6c73fe51",
       "status": "FIXED",
       "title": "[SEV:P2][LANE:COST] Configured environment variables that nothing reads",
+      "note": ""
+    },
+    {
+      "id": "R285-AUTH-OAUTH-UNINVITED-LANDS-IN-ONBOARDING-01",
+      "src": "R2.8.5 tracker",
+      "sev": "P0",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T01:01:37.000Z",
+      "changedAtSource": "commit 645f6c53",
+      "status": "BUILT",
+      "title": "[SEV:P0][LANE:AUTH][PHASE:2] Production (app.velstrian.com, build b6eb7dadc): a new Google and a new Microsoft account with no invite signed in, landed on /onboarding/organisation-type, filled 3 steps, then got \"Unable to save onboarding state. Please retry.\"",
       "note": ""
     },
     {
@@ -4366,8 +4421,8 @@
       "sevExplicit": true,
       "lane": "PRODUCT",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T01:19:43.000Z",
-      "changedAtSource": "commit 2cc083ba",
+      "changedAt": "2026-10-26T18:38:53.000Z",
+      "changedAtSource": "commit aef88b63",
       "status": "FIXED",
       "title": "[SEV:P1][LANE:BRAND][PHASE:3] Microsoft sign in moves from the old crowagent Entra (crowagent.platform Microsoft account) to a new Entra under contact@velstrian.com, old one disabled (owner 2026-10-26)",
       "note": ""
@@ -4644,10 +4699,10 @@
       "sev": "P1",
       "sevExplicit": true,
       "lane": "PRODUCT",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T03:43:28.000Z",
-      "changedAtSource": "commit 4be04df3",
-      "status": "OPEN",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T01:42:05.000Z",
+      "changedAtSource": "commit d33e9d8a",
+      "status": "FIXED",
       "title": "[SEV:P1][LANE:OWNER][PHASE:2] The Data Processing Agreement is published as a draft pending legal review",
       "note": "",
       "reviewDocs": [
@@ -4787,10 +4842,23 @@
       "sevExplicit": true,
       "lane": "PRODUCT",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T18:37:36.435Z",
-      "changedAtSource": "uncommitted edit",
+      "changedAt": "2026-10-26T18:38:27.000Z",
+      "changedAtSource": "commit c6b7bf9b",
       "status": "BUILT",
       "title": "[SEV:P1][LANE:SECURITY][PHASE:2] Every Supabase auth call sends the Turnstile captcha token, so Supabase Auth captcha (free, provider Turnstile) can be switched on (owner 2026-10-26)",
+      "note": ""
+    },
+    {
+      "id": "R285-AUTH-PORTAL-CAPTCHA-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-27T04:09:14.000Z",
+      "changedAtSource": "commit 51f278d3",
+      "status": "BUILT",
+      "title": "[SEV:P1][LANE:SECURITY][PHASE:2] The portal password sign in sends the Turnstile token Supabase captcha demands, so turning captcha on does not lock the founders out of the portal (driver 2026-10-26)",
       "note": ""
     },
     {
@@ -8348,10 +8416,10 @@
       "sev": "P1",
       "sevExplicit": true,
       "lane": "PRODUCT",
-      "changed": "2026-10-25",
-      "changedAt": "2026-10-25T23:10:14.000Z",
-      "changedAtSource": "commit 4117a841",
-      "status": "BUILT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T01:42:05.000Z",
+      "changedAtSource": "commit d33e9d8a",
+      "status": "FIXED",
       "title": "[SEV:P1][LANE:TRUST][PHASE:2] The Terms do not state that the data processing agreement forms part of them, so the DPA may not bind customers",
       "note": ""
     },
@@ -8509,7 +8577,17 @@
       "changedAtSource": "commit 7dbd472e",
       "status": "OPEN",
       "title": "[SEV:P2][LANE:PRODUCT][PHASE:3] 7 built AI features (11 surfaces) ship with a GBP 0 production budget and are never offered to customers",
-      "note": ""
+      "note": "",
+      "reviewDocs": [
+        {
+          "title": "Built but switched off: owner decision pack, 2026-10-26",
+          "href": "review/built-but-off-decision-pack-2026-10-26.html"
+        },
+        {
+          "title": "Built but not switched on, audit 2026-10-26",
+          "href": "review/built-but-off-audit-2026-10-26.html"
+        }
+      ]
     },
     {
       "id": "R285-P3-AI-LIBRARY-REUSE-SUGGEST-01",
@@ -11305,10 +11383,10 @@
       "sev": "P1",
       "sevExplicit": true,
       "lane": "PRODUCT",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T00:30:34.000Z",
-      "changedAtSource": "commit 52711d77",
-      "status": "OPEN",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T01:42:05.000Z",
+      "changedAtSource": "commit d33e9d8a",
+      "status": "FIXED",
       "title": "[SEV:P1][LANE:OWNER][PHASE:2] Terms section 6 data protection cap floor is a default, so the Terms change stays local until counsel sets it and cover is bound",
       "note": ""
     },
@@ -11453,6 +11531,64 @@
       "note": ""
     },
     {
+      "id": "R285-LEGAL-KIRO-B-FIX-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T21:03:41.000Z",
+      "changedAtSource": "commit 90e1ec01",
+      "status": "BUILT",
+      "title": "[SEV:P1][LANE:TRUST][PHASE:2] Kiro legal review B-01, B-03, B-05, B-06, B-08, B-09, B-10, B-11: DPA residency wording, missing DPA draft banner, 72 hour DSAR reply, untrue Annex II controls, Supabase entity, partial Privacy sub-processor list, pinned Claude model, transfer risk assessment reference",
+      "note": ""
+    },
+    {
+      "id": "R285-LEGAL-KIRO-B-OWNER-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T22:41:05.000Z",
+      "changedAtSource": "commit 3a64ab64",
+      "status": "OPEN",
+      "title": "[SEV:P1][LANE:OWNER][PHASE:2] Kiro legal review owner questions: B-02 three Terms caps that do not reconcile, B-07 RTO and RPO with no timed restore, B-12 Data Protection Officer title, B-04 Sentry alert recipients",
+      "note": "",
+      "reviewDocs": [
+        {
+          "title": "Legal page review B-01 to B-12, owner questions, 2026-10-26",
+          "href": "review/kiro-b-review-owner-questions-2026-10-26.html"
+        }
+      ]
+    },
+    {
+      "id": "R285-LEGAL-KIRO-B-FOLLOWUP-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T22:41:05.000Z",
+      "changedAtSource": "commit 3a64ab64",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:TRUST][PHASE:2] C-01 sweep of every control claim on Terms, Privacy, DPA, Sub-processors, Retention, Security and the security evidence pack against DPA Annex II, C-03 verification, C-04 Anthropic Ireland address",
+      "note": ""
+    },
+    {
+      "id": "R285-LEGAL-KIRO-E-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T00:19:43.000Z",
+      "changedAtSource": "commit 1caa89a0",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:TRUST][PHASE:2] Kiro legal review E-01, E-02, E-03: sub-processor 30 day notice sentence, stray capitals after abbreviation full stops, Sentry retention wording, PITR record",
+      "note": ""
+    },
+    {
       "id": "R285-WEB-HELP-CENTRE-01",
       "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
       "sev": "P2",
@@ -11496,9 +11632,9 @@
       "sev": "P2",
       "sevExplicit": true,
       "lane": "PRODUCT",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T13:06:58.000Z",
-      "changedAtSource": "commit dd8306e7",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-26T22:02:12.000Z",
+      "changedAtSource": "commit 5304b2b9",
       "status": "BUILT",
       "title": "[SEV:P2][LANE:AI][PHASE:3] The plain English reading level check still fails most tender briefing and advisor answers on both Claude models after the D434 fix",
       "note": ""
@@ -11522,10 +11658,10 @@
       "sev": "P2",
       "sevExplicit": true,
       "lane": "PRODUCT",
-      "changed": "2026-10-26",
-      "changedAt": "2026-10-26T13:06:58.000Z",
-      "changedAtSource": "commit dd8306e7",
-      "status": "OPEN",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-26T21:03:41.000Z",
+      "changedAtSource": "commit 90e1ec01",
+      "status": "BUILT",
       "title": "[SEV:P2][LANE:AI][PHASE:3] bid_response_draft@v8 on Gemini 3.1 Pro fails its golden: 55 of 70 PASS, short drafts",
       "note": ""
     },
@@ -11621,6 +11757,32 @@
       "note": ""
     },
     {
+      "id": "R285-P3-AI-D478-CHATBOT-REGISTRY-DRIFT-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-26T21:03:41.000Z",
+      "changedAtSource": "commit 90e1ec01",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:AI][PHASE:3] chatbot_public versions 1 to 3 changed text under their own numbers, three registry tests red on HEAD",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D478-RUBRIC-PIN-DRIFT-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-26T21:03:41.000Z",
+      "changedAtSource": "commit 90e1ec01",
+      "status": "BUILT",
+      "title": "[SEV:P3][LANE:AI-EVAL][PHASE:3] Three rubric tests red on the committed baseline after the D308 rows landed",
+      "note": ""
+    },
+    {
       "id": "R285-P3-AI-BASELINE-EXCLUDES-MODEL-OVERRIDE-01",
       "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
       "sev": "P3",
@@ -11640,9 +11802,9 @@
       "sevExplicit": true,
       "lane": "PRODUCT",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T12:56:08.000Z",
-      "changedAtSource": "commit 783d4a51",
-      "status": "OPEN",
+      "changedAt": "2026-10-26T19:28:45.000Z",
+      "changedAtSource": "commit 6ab53310",
+      "status": "FIXED",
       "title": "[SEV:P0][LANE:AI][PHASE:2] Staging AND production Gemini calls answer 402 RESOURCE_EXHAUSTED because the Google AI Studio prepayment credits are depleted, so tender reading, drafting and token charging cannot be proven and production AI is down",
       "note": ""
     },
@@ -11666,10 +11828,166 @@
       "sevExplicit": true,
       "lane": "PRODUCT",
       "changed": "2026-10-26",
-      "changedAt": "2026-10-26T18:37:36.435Z",
-      "changedAtSource": "uncommitted edit",
+      "changedAt": "2026-10-26T18:38:27.000Z",
+      "changedAtSource": "commit c6b7bf9b",
       "status": "FIXED",
       "title": "[SEV:P3][LANE:COST] Dependabot cost on velstrian/velstrian-platform, measured",
+      "note": ""
+    },
+    {
+      "id": "R285-DEPS-SECURITY-BUMPS-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T19:05:48.000Z",
+      "changedAtSource": "commit afc107e8",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:SECURITY][PHASE:2] Dependabot security PRs 795 to 798 ask for pypdf 6.19.0 to 6.21.2, sanitize-html 2.17.7 to 2.18.0 and vite 8.1.3 to 8.1.6",
+      "note": ""
+    },
+    {
+      "id": "R285-STYLE-EM-DASH-HEAD-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T19:05:48.000Z",
+      "changedAtSource": "commit afc107e8",
+      "status": "BUILT",
+      "title": "[SEV:P3][LANE:STYLE][PHASE:2] api/tests/test_r283_user_copy_dash_is_not_punctuation.py red on HEAD with 9 offences",
+      "note": ""
+    },
+    {
+      "id": "R285-REBRAND-DOC-DOMAIN-CONTROLS-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T19:09:06.000Z",
+      "changedAtSource": "commit 525f4bd6",
+      "status": "BUILT",
+      "title": "[SEV:P3][LANE:BRAND][PHASE:2] Two branding controls still expected crowagent.ai in document footers after the D462 marketing domain flip",
+      "note": ""
+    },
+    {
+      "id": "R285-MIGRATIONS-GO-LIVE-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-26",
+      "changedAt": "2026-10-26T20:04:01.000Z",
+      "changedAtSource": "commit 0086bd0a",
+      "status": "WIP",
+      "title": "[SEV:P1][LANE:DATA][PHASE:2] Every migration after 20269000000422 applied on staging and an exact ordered list ready for the production promote (D479, D469)",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D482-READERS-METERED-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T02:25:44.000Z",
+      "changedAtSource": "commit 8c4fbf62",
+      "status": "BUILT",
+      "title": "[SEV:P1][LANE:BILLING][PHASE:3] D482, D484: the field, KPI prose and Buyer priority readers ran with no credit charge, Velstrian paid every reading",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D483-QUICK-SCOPE-METERED-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T04:09:14.000Z",
+      "changedAtSource": "commit 51f278d3",
+      "status": "FIXED",
+      "title": "[SEV:P1][LANE:BILLING][PHASE:3] D483: the Quick RFQ (buy_rfq_scope) and Quick Quote (bid_quote_scope) scope drafts ran with no credit charge, Velstrian paid every draft",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D494-SURFACES-METERED-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T02:25:44.000Z",
+      "changedAtSource": "commit 8c4fbf62",
+      "status": "BUILT",
+      "title": "[SEV:P1][LANE:BILLING][PHASE:3] D494 (new, applies D481 and D485): eight customer AI surfaces charged nothing",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D487-AI-OFF-ON-FAILED-PAYMENT-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T02:25:44.000Z",
+      "changedAtSource": "commit 8c4fbf62",
+      "status": "BUILT",
+      "title": "[SEV:P1][LANE:BILLING][PHASE:3] D487: a past_due organisation kept spending AI, and no dunning cancel existed",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-COLLAB-D485-CO-EDITING-PAID-ONLY-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T02:25:44.000Z",
+      "changedAtSource": "commit 8c4fbf62",
+      "status": "BUILT",
+      "title": "[SEV:P1][LANE:BILLING][PHASE:3] D485: real time co-editing was open to free and trial organisations",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D490-WELCOME-PAID-ONLY-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T02:25:44.000Z",
+      "changedAtSource": "commit 8c4fbf62",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:BILLING][PHASE:3] D490: the AI welcome paragraph ran for any organisation at Velstrian's cost",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D492-ONBOARDING-ANALYSE-REMOVED-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T02:25:44.000Z",
+      "changedAtSource": "commit 8c4fbf62",
+      "status": "BUILT",
+      "title": "[SEV:P3][LANE:CLEANUP][PHASE:3] D492: the onboarding agent analyse step removed",
+      "note": ""
+    },
+    {
+      "id": "R285-P3-AI-D493-READING-SCORER-01",
+      "src": "Phase 3: everything still pending after phase 2 shipped (opened as the phase 2 list, owner instruction 2026-10-13)",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-10-27",
+      "changedAt": "2026-10-27T02:25:44.000Z",
+      "changedAtSource": "commit 8c4fbf62",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:AI-QUALITY][PHASE:3] D493: the reading level scorer joined sentences at a full stop after a number",
       "note": ""
     }
   ]
