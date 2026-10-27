@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T20:27:07.706Z",
+  "updated": "2026-10-27T20:41:37.809Z",
   "release": "2.8.5",
   "note": "DERIVED, not authored. Generated from RELEASE-2.8.5-TRACKER.md and RELEASE-2.8.5-DEFECT-REGISTER.md by status/build-platform-board.js. Those documents are what a release is certified against and they win every disagreement, and this view is stale by at most one run. Re-run the generator after editing either document.",
   "sources": [
