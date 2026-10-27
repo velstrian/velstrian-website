@@ -20,7 +20,7 @@
  * scripts/carousel.ts initCarousels turns it into the paged control and only
  * then shows the arrows and counter.
  *
- * Slides are the default slot, each a <li class="ea-car__slide">, usually an
+ * Slides are the default slot, each a <div class="ea-car__slide">, usually an
  * AppWindow. `count` is the number of slides, for the server rendered counter.
  */
 import Icon from './Icon.astro';
@@ -38,9 +38,9 @@ const { label, count, autoplay = false } = Astro.props;
   <div class="ea-car__stage">
     <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
     <div class="ea-car__viewport" data-car-viewport tabindex="0" aria-label={`${label}, use the arrow keys to move between screens`}>
-      <ul class="ea-car__track" data-car-track>
+      <div class="ea-car__track" data-car-track>
         <slot />
-      </ul>
+      </div>
     </div>
   </div>
   <div class="ea-car__controls" data-car-controls hidden>

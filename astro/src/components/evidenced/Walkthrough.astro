@@ -172,10 +172,10 @@ const Heading = level;
   <div class="ea-car__stage">
     <div class="ea-stage__ground band--stage" aria-hidden="true"></div>
     <div class="ea-car__viewport" data-car-viewport tabindex="0" aria-label="Walkthrough steps, use the arrow keys to move between them">
-      <ul class="ea-car__track" data-car-track>
+      <div class="ea-car__track" data-car-track>
         {
           slides.map((s, k) => (
-            <li class="ea-car__slide">
+            <div class="ea-car__slide">
               <div class="ea-walk__slide">
                 <div class="ea-walk__say">
                   <p class="ea-label">Step {k + 1} of {slides.length}</p>
@@ -201,10 +201,10 @@ const Heading = level;
                   <figcaption class="ea-walk__caption">{s.c.caption}</figcaption>
                 </figure>
               </div>
-            </li>
+            </div>
           ))
         }
-        <li class="ea-car__slide">
+        <div class="ea-car__slide">
           <div class="ea-walk__slide ea-walk__end">
             <p class="ea-label">You have seen the whole journey</p>
             <Heading class="ea-walk__end-title">From finding a contract to keeping your promises, in one place.</Heading>
@@ -214,8 +214,8 @@ const Heading = level;
               <Action as="button" variant="secondary" data-car-to="0">See it again</Action>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

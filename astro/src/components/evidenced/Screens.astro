@@ -30,7 +30,7 @@ const BIDS = [
     </div>
     <div data-reveal>
       <ProductCarousel label="Velstrian Bid screens" count={4} autoplay>
-        <li class="ea-car__slide">
+        <div class="ea-car__slide">
           <AppWindow crumb="Bids" title="Your bids" current="pen" capture="home-car-board" caption="Your bids, how far each one has got and when it closes.">
             <table class="ea-app-table">
               <caption class="visually-hidden">Your bids, example</caption>
@@ -49,8 +49,8 @@ const BIDS = [
               </tbody>
             </table>
           </AppWindow>
-        </li>
-        <li class="ea-car__slide">
+        </div>
+        <div class="ea-car__slide">
           <AppWindow crumb="Bids / Grounds care, a housing association" title="Question 4 of 6" current="pen" capture="home-car-answer" caption="An answer drafted from your library.">
             <div class="ea-app-split">
               <ol class="ea-app-qs">
@@ -69,8 +69,8 @@ const BIDS = [
               </div>
             </div>
           </AppWindow>
-        </li>
-        <li class="ea-car__slide">
+        </div>
+        <div class="ea-car__slide">
           <AppWindow crumb="Bids / Building care, a housing estate" title="Question 6 of 12" current="pen" capture="home-car-refusal" caption="Asked for a figure there was no proof of, it said so instead of inventing one.">
             <div class="ea-app-answer">
               <p class="ea-label">Question 6: by how much will you cut carbon in the first year?</p>
@@ -78,8 +78,8 @@ const BIDS = [
               <p class="ea-app-answer__held"><span class="ea-chip ea-chip--held">No source found</span> Drafted with AI, no source recorded.</p>
             </div>
           </AppWindow>
-        </li>
-        <li class="ea-car__slide">
+        </div>
+        <div class="ea-car__slide">
           <AppWindow crumb="Delivery" title="After you win: grounds care" current="checklist" capture="home-car-deliver" caption="The promises from a winning bid, as a checklist with dates.">
             <ul class="ea-app-list ea-app-list--check">
               <li><span class="ea-tick" aria-hidden="true"></span><span class="ea-app-list__text"><span class="ea-app-list__name">Cover staff on call for every site</span><span class="ea-app-list__meta">From your answer to question 4</span></span><span class="ea-chip ea-chip--ok">On track</span></li>
@@ -88,7 +88,7 @@ const BIDS = [
               <li><span class="ea-tick ea-tick--open" aria-hidden="true"></span><span class="ea-app-list__text"><span class="ea-app-list__name">Reply to urgent calls within two hours</span><span class="ea-app-list__meta">Checked every month</span></span><span class="ea-chip">Monthly</span></li>
             </ul>
           </AppWindow>
-        </li>
+        </div>
       </ProductCarousel>
     </div>
   </div>
