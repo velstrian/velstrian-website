@@ -5,7 +5,6 @@ heading: "Terms of Service."
 lastUpdated: "2026-10-26"
 version: "2026-10-26"
 effectiveDate: "2026-10-26"
-draftNotice: "These Terms and the Data Processing Agreement that forms part of them are a draft. The wording may still change before it is final. If you have a question, email legal@velstrian.com."
 ---
 ## The six clauses customers ask about
 

@@ -6,7 +6,6 @@ eyebrow: "Legal"
 lastUpdated: "2026-10-25"
 version: "2026-10-25"
 effectiveDate: "2026-10-25"
-draftNotice: "These terms are a draft. The wording may still change before it is final. If you have a question, email legal@velstrian.com."
 ---
 ## Who these terms are for
 
