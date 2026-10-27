@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Security evidence pack</title><link rel="stylesheet" href="legal.css"></head>
-<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> at <code>223696dcb</code>. A read only copy, edit the source, not this page.</p>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> at <code>bd029e44e</code>. A read only copy, edit the source, not this page.</p>
 <h1>Security evidence pack, 2026-10-22</h1>
 <p>Row R285-TRUST-SECURITY-EVIDENCE-PACK-01. Velstrian Systems Ltd, platform Velstrian Tenderworks, products Velstrian Bid and Velstrian Buy. Status: DRAFT for owner review, nothing has been sent to anyone. It re-checks <code>docs/trust/R285-SECURITY-EVIDENCE-PACK-2026-10-21.md</code> and records what changed in one day.</p>
 <h2>1. How this was measured and what it cannot see</h2>
@@ -10,7 +10,7 @@
 <li>Measured live: GitHub Dependabot alerts through <code>gh api</code> (11 open, counted and classified). Nothing in Supabase, Railway, Vercel or Sentry was queried.</li>
 <li>Carried forward unchanged from the 21 October pack and not re-opened today: access control files, the RLS workflow step list, incident procedure contents, the patching document, the penetration test price sources. Those lines are tagged <strong>[21 Oct]</strong>.</li>
 <li>Documents changed on 21 and 22 October by the DPA lane (commits <code>5525b467f</code>, <code>1840481ce</code>, <code>42e45d70f</code>, <code>7ec79c25a</code>, <code>7937c1e7b</code>, <code>994ce6244</code>). So some 21 October statements are now out of date, noted below.</li>
-<li><strong>What it cannot see:</strong> whether any control runs in production beyond what the repo shows, the Supabase plan tier and actual PITR window, whether a Sentry alert rule is live, whether the UptimeRobot monitors and status page are live (the SoA lists all three as unverified, lines 219 to 224), and what a hostile tester would find. No tests, builds or gates were run.</li>
+<li><strong>What it cannot see:</strong> whether any control runs in production beyond what the repo shows, the Supabase plan tier and actual PITR window, whether a Sentry alert rule is live, whether the Better Stack (Uptime) monitors and status page are live (the SoA lists all three as unverified, lines 219 to 224), and what a hostile tester would find. No tests, builds or gates were run.</li>
 </ul>
 <h2>2. What we claim and what we do not</h2>
 <ul>
@@ -203,7 +203,7 @@
 <li><strong>Penetration test.</strong> Recommend: record as a known gap with a review date, say so to buyers, and obtain two or three free quotes later. Do not commission yet.</li>
 <li><strong>Plan tier and PITR window unconfirmed.</strong> Recommend: owner reads the Supabase billing tier and records it in the SoA and <code>BACKUP_RESTORE.md</code>.</li>
 <li><strong>Approve the SoA.</strong> Recommend: approve after items 3 and 6 so the approved text is accurate.</li>
-<li><strong>Sentry alert rules, UptimeRobot monitors, status page.</strong> Recommend: owner confirms each is live. Cost nothing.</li>
+<li><strong>Sentry alert rules, Better Stack (Uptime) monitors, status page.</strong> Recommend: owner confirms each is live. Cost nothing.</li>
 <li><strong>AI data flows.</strong> Blocks any claim about where customer text goes. See <code>AI-PROVIDER-DATA-MAP-2026-10-22.md</code>, notably the Gemini billing tier.</li>
 <li><strong>Privileged credential register, workstation disk encryption, key rotation schedule.</strong> Owner actions, no spend.</li>
 <li><strong>Static analysis.</strong> Recommend: disclose for now. Adding a scanner workflow is a RULE 0-G decision.</li>
@@ -219,7 +219,7 @@
 <li><strong>Next.js</strong> is on 16.4.2 (<code>web/package.json</code> line 78), the security upgrade.</li>
 <li><strong>Keys:</strong> the credential vault key is <code>PLATFORM_SECRET_KEY</code> (AES-256-GCM, <code>secret-vault.ts</code>) and webhook secrets use <code>WEBHOOK_SIGNING_ENC_KEY</code> (<code>webhook_secret_crypto.py</code>). After the Railway incident the owner rotated the platform keys on 2026-10-22. That is the owner&#39;s statement, no rotation record is in the repository. Wording that is true: &quot;after a hosting incident on 2026-10-22 we rotated all keys and found no sign of misuse in the logs we reviewed&quot;. Do not publish it until the owner has a written incident note to point to.</li>
 <li><strong>Dependabot:</strong> 9 of 11 alerts are fixed in the local tree and wait on an owner approved push. Unchanged otherwise.</li>
-<li>Still the owner&#39;s: (1) one timed restore on staging, with the RULE 0-G yes if it creates a billable project, (2) dismiss alerts 405 and 406 as mitigated or leave them open, (3) confirm the Supabase PITR add-on, (4) approve the SoA after those, (5) confirm Sentry alert rules, UptimeRobot and the status page are live, (6) approve a push for the nine fixed alerts, (7) decide on a penetration test quote request.</li>
+<li>Still the owner&#39;s: (1) one timed restore on staging, with the RULE 0-G yes if it creates a billable project, (2) dismiss alerts 405 and 406 as mitigated or leave them open, (3) confirm the Supabase PITR add-on, (4) approve the SoA after those, (5) confirm Sentry alert rules, Better Stack (Uptime) and the status page are live, (6) approve a push for the nine fixed alerts, (7) decide on a penetration test quote request.</li>
 </ul>
 <h2>9. Measured 2026-10-23 by the evidence lane (read only tools)</h2>
 <p>Each line names the measurement and how it could have failed.</p>
