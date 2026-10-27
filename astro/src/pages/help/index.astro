@@ -24,7 +24,16 @@ import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import '../../styles/evidenced.css';
 import '../../styles/forms.css';
 import { breadcrumbs } from '../../lib/schema';
-import { HELP_ARTICLES, HELP_CATEGORIES, HELP_VIDEOS, articlesIn, categoryId, videoDuration } from '../../data/help-centre';
+import {
+  HELP_ARTICLES,
+  HELP_CATEGORIES,
+  HELP_VIDEOS,
+  HELP_KB_URL,
+  SUPPORT_EMAIL,
+  articlesIn,
+  categoryId,
+  videoDuration,
+} from '../../data/help-centre';
 import { APP_ORIGIN } from '../../data/app';
 
 const title = 'Help centre | Velstrian';
@@ -59,6 +68,9 @@ const schema = [breadcrumbs([...trail, { name: 'Help centre', path: '/help/' }])
           aria-describedby="help-filter-count"
         />
         <p class="help__count" id="help-filter-count" aria-live="polite">{HELP_ARTICLES.length} guides</p>
+        <p class="help__kb">
+          Not here? <a href={HELP_KB_URL}>Search all guides</a> in our knowledge base.
+        </p>
       </div>
 
       {/* VIDEO GUIDES (owner 2026-10-26). The approved list only, from the
@@ -142,6 +154,9 @@ const schema = [breadcrumbs([...trail, { name: 'Help centre', path: '/help/' }])
           <a href="/help/contact/">Contact support</a>, no sign in needed. Already a customer? Your tickets and
           account help are in the <a href={`${APP_ORIGIN}/support`}>app</a>.
         </p>
+        <p>
+          Prefer email? Write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
+        </p>
       </aside>
     </div>
   </Band>
@@ -190,7 +205,8 @@ const schema = [breadcrumbs([...trail, { name: 'Help centre', path: '/help/' }])
     color: var(--c-text-muted);
   }
 
-  .help__count {
+  .help__count,
+  .help__kb {
     margin: 0;
     font-family: var(--font-body);
     font-size: var(--t-ea-small);

@@ -42,6 +42,10 @@ export interface HelpCategory {
 /** support@ mailbox, from SUPPORT_EMAIL in the platform's @velstrian/tokens. */
 export const SUPPORT_EMAIL: string = data.supportEmail;
 
+/** The full knowledge base, hosted by Tawk.to on our own subdomain. Written once
+ *  here so /help and any later page link the same address. */
+export const HELP_KB_URL = 'https://velstrian.tawk.help';
+
 export const HELP_CATEGORIES: HelpCategory[] = data.categories;
 export const HELP_ARTICLES: HelpArticle[] = data.articles as HelpArticle[];
 export const HELP_VIDEOS: HelpVideo[] = data.videos as HelpVideo[];
