@@ -46,6 +46,11 @@ export const SUPPORT_EMAIL: string = data.supportEmail;
  *  here so /help and any later page link the same address. */
 export const HELP_KB_URL = 'https://velstrian.tawk.help';
 
+/** Live chat, on Tawk.to's hosted chat page (property 6a2dc03cfb383c1d45b80c76,
+ *  widget 1jr43vp8q, the same one the app links). Owner decision 2026-10-27:
+ *  a plain link, no widget script, so no CSP origin is needed. */
+export const LIVE_CHAT_URL = 'https://tawk.to/chat/6a2dc03cfb383c1d45b80c76/1jr43vp8q';
+
 export const HELP_CATEGORIES: HelpCategory[] = data.categories;
 export const HELP_ARTICLES: HelpArticle[] = data.articles as HelpArticle[];
 export const HELP_VIDEOS: HelpVideo[] = data.videos as HelpVideo[];

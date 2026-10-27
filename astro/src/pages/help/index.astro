@@ -29,6 +29,7 @@ import {
   HELP_CATEGORIES,
   HELP_VIDEOS,
   HELP_KB_URL,
+  LIVE_CHAT_URL,
   SUPPORT_EMAIL,
   articlesIn,
   categoryId,
@@ -155,7 +156,8 @@ const schema = [breadcrumbs([...trail, { name: 'Help centre', path: '/help/' }])
           account help are in the <a href={`${APP_ORIGIN}/support`}>app</a>.
         </p>
         <p>
-          Prefer email? Write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
+          Prefer email? Write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>, or
+          <a href={LIVE_CHAT_URL}>chat with us</a>.
         </p>
       </aside>
     </div>

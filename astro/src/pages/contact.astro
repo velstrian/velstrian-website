@@ -48,6 +48,7 @@ import {
   PRODUCT_NAME_BID,
 } from '../lib/brand-names';
 import { WALKTHROUGH_URL } from '../data/app';
+import { LIVE_CHAT_URL } from '../data/help-centre';
 
 const title = 'Contact Velstrian | Book a demo or ask a question';
 const description =
@@ -211,6 +212,9 @@ const UPDATED = new Date('2026-10-22');
           <ul class="ct-mailbox__for">
             {MAILBOX_FOR.map((m) => <li>{m}</li>)}
           </ul>
+          <p class="ct-mailbox__intro">
+            Prefer to talk now? <a class="ct-list__link" href={LIVE_CHAT_URL}>Chat with us</a>.
+          </p>
 
           <h3 class="ea-h3 ct-pane__next" id="company-title">{LEGAL_ENTITY_NAME}</h3>
           <dl class="ct-list" aria-labelledby="company-title">
