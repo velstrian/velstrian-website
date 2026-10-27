@@ -53,7 +53,7 @@ Most public sector evaluators, and an increasing number of private sector ones, 
 
 This matters because it means a method statement is not marked on how confident or persuasive it sounds. It is marked on whether it contains the specific things the evaluator has been told to look for. A response that reads well but is vague about resourcing, timescales, or named individuals will often score lower than a plainer response that answers every element the evaluator has been briefed to check.
 
-Where you can see the evaluation criteria or weighted sub-questions in the tender pack, and buyers under the Procurement Act 2023 are required to be transparent about how they will assess bids, work through them line by line before you draft. Treat each one as a checklist item your answer must visibly satisfy.
+Where you can see the evaluation criteria or weighted sub-questions in the tender pack, and buyers under the Procurement Act 2023 are required to be transparent about how they will assess bids, work through them line by line before you draft. Treat each one as a checklist item your answer must visibly satisfy. You can extract these requirements automatically with our [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).
 
 ## A structure that scores
 
@@ -138,7 +138,7 @@ Only as a starting point, never as a final answer. Every buyer asks the question
 
 ### Draft method statements grounded in your own evidence
 
-Velstrian Bid drafts answers from your organisation's own submitted bids, refuses to print a figure your data does not contain, and carries a PPN 017 AI-transparency disclosure on every draft, so the evidence in your method statement is real.
+Velstrian Bid drafts answers from your organisation's own submitted bids, refuses to print a figure your data does not contain, and carries a PPN 017 AI-transparency disclosure on every draft, so the evidence in your method statement is real. If you are looking for new contracts to bid on, search open notices with our [free Tender Finder](/tools/tender-finder/).
 
 [Start now](app:/signup)
 [See Velstrian Bid →](/bid/)

@@ -57,3 +57,5 @@ Public buyers are councils buying for their schools, academy trusts, colleges an
 Three things make education bids demanding. The same supplier has to pitch to a single school and to a trust with dozens of sites. Buyers check carefully how you protect pupil and staff data before they award. And public buyers now score the good you do locally.
 
 For a supplier with a small bid team, keeping every answer accurate, consistent and on time across all of these buyers is the hard part.
+
+Search open education tenders with the [free Tender Finder](/tools/tender-finder/?sector=education), or check tender requirements and word counts with the [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AI provider data map</title><link rel="stylesheet" href="legal.css"></head>
-<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/trust/AI-PROVIDER-DATA-MAP-2026-10-22.md</code> at <code>9280aada4</code>. A read only copy, edit the source, not this page.</p>
+<body><main><p class="src"><a href="../../rebrand-velstran.html#steps">Back to the rebrand plan</a> | Rendered from <code>crowagent-platform/docs/trust/AI-PROVIDER-DATA-MAP-2026-10-22.md</code> at <code>685820fae</code>. A read only copy, edit the source, not this page.</p>
 <h1>AI provider data map, 2026-10-22</h1>
 <p>Row R285-TRUST-AI-PROVIDER-DATA-MAP-01. Velstrian Systems Ltd, platform Velstrian Tenderworks, products Velstrian Bid and Velstrian Buy. Status: DRAFT for owner review. Not legal advice. It supersedes nothing silently: it re-measures <code>docs/trust/R285-AI-PROVIDER-DATA-MAP-2026-10-21.md</code> and adds the call site table, the bypass check and the two billing tier readings.</p>
 <h2>1. How this was measured and what it cannot see</h2>
@@ -36,6 +36,13 @@
 <td>No by default</td>
 <td>Deleted within 30 days. Policy violations up to 2 years, classifier scores up to 7 years</td>
 <td><code>global</code> default. <code>us</code> optional. Nothing for UK or EU</td>
+</tr>
+<tr>
+<td>OpenAI API (being added, not in use: R285-P3-TRUST-OPENAI-DPA-NOTICE-01)</td>
+<td>None registered. <code>AIClient</code> refuses every OpenAI id (no registry row, no price) and the DPA clause 6.4 gate (<code>subprocessor_notice.py</code>) refuses OpenAI until the notice has run</td>
+<td>No by default <strong>[UNVERIFIED, OpenAI pages answered 403 on 2026-10-24]</strong></td>
+<td>Abuse monitoring logs up to 30 days. Zero data retention by approval <strong>[UNVERIFIED, same reason]</strong></td>
+<td>United States (D336). No UK or EU region assumed</td>
 </tr>
 <tr>
 <td>Azure Document Intelligence (OCR, not a language model)</td>
@@ -219,4 +226,12 @@
 <li><strong>Azure (gap 5): decided.</strong> DPA item 11 lists Azure as dormant and optional, activated only if specific document intelligence features are enabled by the customer. The app page <code>/sub-processors</code> carries the same row.</li>
 <li>Not part of the owner statement, so still open: the staging Gemini key tier (staging carries test data only under RULE 0-P), and the Anthropic zero retention default (section 7 item 3).</li>
 </ul>
+<h2>10. Update 2026-10-25 (R285-P3-TRUST-OPENAI-DPA-NOTICE-01)</h2>
+<p>OpenAI gains a row in section 2, as the third provider the owner onboarded under D368. It receives no
+data today: no OpenAI model is registered or priced, and <code>api/app/services/subprocessor_notice.py</code>
+refuses every OpenAI call until the DPA clause 6.4 notice date is set and the notice of at least 30 days
+(D460) has run for that organisation. The terms in its row come from the strategy page
+(crowagent-website/status/architecture-ai-strategy.html, sections 5 and 16) and are unverified,
+because the OpenAI DPA and sub-processor pages answered 403. They are read again before the legal
+review in R285-TRUST-DPA-FINAL-01 closes. DPA Schedule 1 carries OpenAI as item 18, pending legal review.</p>
 </main></body></html>

@@ -59,3 +59,5 @@ Public buyers are hospitals, schools, councils, housing associations and governm
 Two things make FM bids demanding. The staff on a contract usually move to the new provider, so buyers want a clear, believable plan for looking after them and keeping the service running. And buyers score how quickly and safely you will start the service, then hold you to it.
 
 For a team running live contracts at the same time, that is a lot to write well and keep consistent.
+
+Search open facilities tenders with the [free Tender Finder](/tools/tender-finder/?sector=facilities), or check tender requirements and word counts with the [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).

@@ -45,7 +45,7 @@ The **Find a Tender** service publishes higher-value public sector opportunities
 
 **Contracts Finder** has traditionally carried lower-value opportunities, including central government contracts from 12,000 pounds, along with details of some awarded contracts. For a first-time bidder this is often the more useful of the two, because smaller contracts tend to have less incumbent competition and give you a chance to build a public sector track record before you chase larger work.
 
-Under the Procurement Act 2023, which went live on 24 February 2025, opportunities and notices are drawn together through the **Central Digital Platform**. Register your organisation there early so your core details are ready to reuse, and if you want the wider context on how the new regime works, read our [Procurement Act 2023 guide for SME bidders](/blog/procurement-act-2023-sme-guide/).
+Under the Procurement Act 2023, which went live on 24 February 2025, opportunities and notices are drawn together through the **Central Digital Platform**. Register your organisation there early so your core details are ready to reuse, and if you want the wider context on how the new regime works, read our [Procurement Act 2023 guide for SME bidders](/blog/procurement-act-2023-sme-guide/). You can search current notices across both sources with our [free Tender Finder](/tools/tender-finder/).
 
 ## How to read a tender
 
@@ -58,7 +58,7 @@ A tender pack can run to dozens of documents, but a first read should extract si
 - **The response format.** Word or character limits, required attachments, and the exact question set. Answer in the structure the buyer gives you.
 - **The clarification process.** How and by when you can ask questions. Good bidders use it. The answers are usually shared with all bidders.
 
-Map the award criteria to a simple response plan before you draft. If quality is 60 percent of the score, price 30 and social value 10, your time should broadly follow those proportions. Bidders lose winnable contracts by writing at length about the things they enjoy and skimming the things that carry the marks.
+Map the award criteria to a simple response plan before you draft. If quality is 60 percent of the score, price 30 and social value 10, your time should broadly follow those proportions. Bidders lose winnable contracts by writing at length about the things they enjoy and skimming the things that carry the marks. You can check a document's stated requirements and word limits with our [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).
 
 ## SQ versus ITT
 

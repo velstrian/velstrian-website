@@ -53,6 +53,8 @@ import SecurityBuiltIn from '../components/evidenced/SecurityBuiltIn.astro';
 import Close from '../components/evidenced/Close.astro';
 import '../styles/evidenced.css';
 import { SITE, HOME_DESCRIPTION } from '../data/site';
+import { HOME_FAQS } from '../data/home-faq';
+import { faqPage } from '../lib/schema';
 
 /* 56 characters, under the 60-character ceiling A-89 set. WAS a keyword list
    ("Bid software: supplier, buyer, public, private") until 2026-10-22, when the
@@ -94,7 +96,7 @@ const UPDATED = new Date('2026-10-21');
   title={title}
   description={description}
   path="/"
-  schema={[webSite]}
+  schema={[webSite, ...faqPage(HOME_FAQS)]}
   updatedAt={UPDATED}
   typeface="evidenced"
   preloadSerif

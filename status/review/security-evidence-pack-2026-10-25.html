@@ -8,7 +8,7 @@
 <p class="rv-kicker">Owner review</p>
 <h1>Security evidence pack, 2026-10-25 refresh</h1>
 <p><span class="rv-row">R285-TRUST-SECURITY-EVIDENCE-PACK-01</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md</code>, rendered from <code>2d2636b4e</code>. A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md</code>, rendered from <code>4be04df3a</code>. A read only copy, the source file is what counts.</p>
 </header>
 <section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-TRUST-SECURITY-EVIDENCE-PACK-01 &middot; WIP</span><span class="rtitle">A security evidence pack a buyer can read before a sales call: access control, tenant isolation, backup restore, incident response, vulnerability management, penetration testing</span><p>refreshed pack written at docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md (Dependabot re-measured 15 open all fixed in the local tree and closing on the release push, 676 commits ahead of origin/main, AI section added, buyer wording updated). Agent work is done. Owner items remain: timed restore, PITR read, SoA approval, Sentry AI alert, the release push, pen test decision, key rotation note.</p></div></section>
 <article class="doc">
@@ -41,7 +41,7 @@ This refreshes <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> (sec
 </tr>
 <tr>
 <td>So why are the alerts still open</td>
-<td>GitHub reads the remote default branch, which does not carry these lockfiles. They close when the release push lands. <strong>That push waits on the owner&#39;s approval</strong> (<code>R285-OWNER-API-STAGING-PUSH-APPROVAL-01</code> and the website row) and a production deploy</td>
+<td>GitHub reads the remote default branch, which does not carry these lockfiles. They close when the fixed lockfile reaches <code>main</code>, not at the <code>railway-production</code> push. <strong>That merge to <code>main</code> waits on the owner&#39;s approval</strong> (<code>R285-OWNER-API-STAGING-PUSH-APPROVAL-01</code> and the website row) and a production deploy</td>
 <td>Not applicable</td>
 </tr>
 <tr>
@@ -107,7 +107,7 @@ This refreshes <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> (sec
 </tr>
 <tr>
 <td>Sub-processors</td>
-<td>19 rows in the DPA schedule (18 after the hCaptcha removal, D306)</td>
+<td><strong>17 in force</strong> (Schedule 1 part A 14, part B 3), the same 17 as the DPA sign off pack and the residency statement. The earlier &quot;19 (18 after hCaptcha)&quot; was out of date: hCaptcha (D306) and Companies House (D314) are in no table row. OpenAI is item 18 in part C, pending legal review and not in force. Verified 2026-10-26 by reading Schedule 1 and the guard <code>web/__tests__/legal/sub-processors-match-dpa-schedule-1.test.tsx</code> (read, not run)</td>
 <td><code>docs/legal/data-processing-agreement.md</code> Schedule 1</td>
 </tr>
 <tr>
@@ -198,7 +198,7 @@ This refreshes <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> (sec
 </tr>
 <tr>
 <td>5</td>
-<td>Approve the release push so the 15 alerts close</td>
+<td>Approve the merge to <code>main</code> so the 15 alerts close</td>
 <td>After the build lanes finish, one push (triage decision 2)</td>
 <td>Per RULE 0-G, state the workflows that fire before asking</td>
 </tr>
@@ -223,7 +223,7 @@ This refreshes <code>docs/trust/SECURITY-EVIDENCE-PACK-2026-10-22.md</code> (sec
 </tbody></table></div>
 <h2>5. Safe buyer wording today</h2>
 <p>&quot;Velstrian follows the ISO/IEC 27001:2022 Annex A controls and tracks them in its own Statement of Applicability. No certificate is held. Customer data is separated by row level security that is compared with production on every database change. Production data is stored in Ireland, with the application servers in the Netherlands and London. We run automated security scans every week and keep a written incident response procedure and a published security contact. AI features use Google and Anthropic on paid commercial terms that do not train on your data. We have not yet commissioned an independent penetration test.&quot;</p>
-<p>Do not write &quot;tested backups&quot; until the restore is done. Do not write SOC 2, Cyber Essentials or &quot;certified&quot;.</p>
+<p>Do not write &quot;tested backups&quot; until the restore is done. Known gaps buyer wording must not hide: the production database is a single region and single project (SoA A.8.14, Not implemented) and no restore has ever been tested (SoA A.8.13, Partial), so nothing here may read as a tested recovery claim. Do not write SOC 2, Cyber Essentials or &quot;certified&quot;.</p>
 <h2>6. Why the row stays WIP</h2>
 <p>All agent work on the document is done. What is left is the owner&#39;s: items 1 to 7 above. Item 5 is a push and a production deploy.</p>
 

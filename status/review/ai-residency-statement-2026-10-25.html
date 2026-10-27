@@ -8,7 +8,7 @@
 <p class="rv-kicker">Owner review</p>
 <h1>One honest statement of where data is stored and where AI runs</h1>
 <p><span class="rv-row">R285-P3-TRUST-AI-RESIDENCY-WORDING-01</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/legal/AI-RESIDENCY-STATEMENT-2026-10-25.md</code>, rendered from <code>2d2636b4e</code>. A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/legal/AI-RESIDENCY-STATEMENT-2026-10-25.md</code>, rendered from <code>52711d77a</code>. A read only copy, the source file is what counts.</p>
 </header>
 <section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-TRUST-AI-RESIDENCY-WORDING-01 &middot; WIP</span><span class="rtitle">One honest statement of where data is stored and where AI processing happens, for the security page and the DPA</span><p>approved source text written at docs/release-2.8.5/legal/AI-RESIDENCY-STATEMENT-2026-10-25.md, consistent with DPA clause 7.2 and Schedule 1. Waits on the owner approving the text and the website copy waits for the website push approval.</p></div></section>
 <article class="doc">
@@ -59,10 +59,13 @@
 </blockquote>
 <p>Notes for whoever uses this text:</p>
 <ul>
+<li><strong>Transfer risk assessment (TRA).</strong> The IDTA or EU SCCs statement for Anthropic (global or us inference) and Google Gemini (not region pinned) needs a transfer risk assessment on file. None is recorded in the repo yet (R285-LEGAL-KIRO-A04-01). Reference it beside the statement once written.</li>
 <li>&quot;Both commit not to use that text to train&quot; rests on Google&#39;s paid terms (pricing page above) and Anthropic&#39;s default (training page, 2026-08-18). The owner verified on 2026-10-23 (D314) that both production accounts are paid.</li>
 <li>Do not write &quot;EU only&quot;, &quot;UK only&quot; or &quot;data never leaves the UK&quot; anywhere. They are untrue for AI processing.</li>
 <li>When the model registry or the OpenAI onboarding changes the provider list, this statement and DPA Schedule 1 change in the same commit, and the web data use line (<code>web/src/shared/i18n/messages/common/data-use.ts:24</code>) with them (spec 12 criterion 15).</li>
 </ul>
+<h2>Advisory note for the owner (Kiro, 2026-10-26)</h2>
+<p>&quot;Do not train&quot; rests on a pricing page (Google paid tier) and a provider default (Anthropic), not on a contract term we negotiated. Recommended: record the contractual basis where it exists. Documents to name, as already cited in the repo: Google Gemini API Additional Terms, <a href="https://ai.google.dev/gemini-api/terms">https://ai.google.dev/gemini-api/terms</a> (paid services clause for UK, EEA and Switzerland, read 2026-10-22 in <code>docs/trust/AI-PROVIDER-DATA-MAP-2026-10-22.md</code> section 4), and Anthropic&#39;s commercial terms and privacy centre articles cited in <code>ANTHROPIC-RETENTION-CHECK-2026-10-25.md</code>. Whether Anthropic&#39;s commercial terms or DPA hold a training commitment as a clause was not read here, counsel or the owner should read it. Nothing was browsed for this note.</p>
 <h2>Owner decision</h2>
 <p>Approve this text as the single statement for the security page and the DPA (recommended, it is accurate and positive). The website change itself waits for your approval and the website push approval row <code>R285-OWNER-WEBSITE-PUSH-APPROVAL-01</code>.</p>
 

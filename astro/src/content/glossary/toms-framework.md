@@ -56,3 +56,4 @@ ctaSub: "Velstrian Bid maps your contract to the TOMs measures you are eligible 
 
 <h2 id="how-we-help">How Velstrian uses this term</h2>
 <p><a href="/bid/">Velstrian Bid</a> stores its social value measures in the database, never hardcoded. The library is curated, with measures aligned to National TOMs conventions and mapped to the edition of the Social Value Model the buyer names, which every draft records. It is not a full National TOMs implementation. When a contract profile is submitted, deterministic rules surface the eligible measures, and the arithmetic runs in code with every number traceable to its source.</p>
+<p>To check stated social value requirements in a tender pack, use our <a href="/tools/tender-compliance-matrix/">free Tender Compliance Matrix</a>. You can also search open public opportunities on our <a href="/tools/tender-finder/">free Tender Finder</a>.</p>

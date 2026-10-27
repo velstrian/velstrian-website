@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-27T12:59:22.492Z",
-  "sourceFingerprint": "855:-680958621",
+  "generatedAt": "2026-10-27T18:31:57.522Z",
+  "sourceFingerprint": "858:-1542716762",
   "note": "Phase counts cover items NOT YET DONE (OPEN + WIP + BUILT + DECISION). FIXED and CLEARED items are assigned to NO phase, which is why the phase totals do not approach the release total. BUILT means implemented and awaiting certification - it is NOT outstanding work.",
-  "totalRaised": 855,
-  "done": 443,
-  "remaining": 391,
+  "totalRaised": 858,
+  "done": 445,
+  "remaining": 392,
   "phases": {
     "1": {
       "items": 0,
@@ -23,10 +23,10 @@
       "onHold": 0
     },
     "3": {
-      "items": 391,
+      "items": 392,
       "open": 30,
       "built": 322,
-      "wip": 39,
+      "wip": 40,
       "decision": 0,
       "onHold": 0
     }
@@ -277,6 +277,7 @@
       "R285-P3-AI-WELSH-DRAFTING-BUILD-01",
       "R285-P3-BUY-AI-FAIRNESS-01",
       "R285-P3-TRUST-AI-RESIDENCY-WORDING-01",
+      "R285-P3-WEB-SEARCH-CONSOLE-SETUP-01",
       "R285-WEB-HELP-CENTRE-01",
       "R285-AI-ADVISOR-INJECTION-OBEYED-01",
       "R285-AI-ADVISOR-LIST-INCOMPLETE-01",

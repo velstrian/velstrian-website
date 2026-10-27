@@ -25,11 +25,11 @@ interface Props {
   label: string;
   title: string;
   description: string;
-  /** The link's words, Read more by default. */
+  /** The link's words, Read resource by default. */
   more?: string;
 }
 
-const { href, art, label, title, description, more = 'Read more' } = Astro.props;
+const { href, art, label, title, description, more = 'Read resource' } = Astro.props;
 const uid = `res-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 ---
 

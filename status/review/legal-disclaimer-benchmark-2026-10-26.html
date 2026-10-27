@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Legal disclaimer benchmark, 2026-10-26</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Legal disclaimer benchmark, 2026-10-26</h1>
+<p><span class="rv-row">R285-TRUST-DPA-FINAL-01</span><span class="rv-row">R285-LEGAL-KIRO-A09-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/legal/LEGAL-DISCLAIMER-BENCHMARK-2026-10-26.md</code>, rendered from <code>cbc89c700</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-TRUST-DPA-FINAL-01 &middot; FIXED</span><span class="rtitle">The Data Processing Agreement is published as a draft pending legal review</span><p>Owner approval 2026-10-27: DRAFT label removed from DPA, Terms and supplier terms, no wording changed (website astro/src/content/legal, platform web/src/shared/legal/public-pages/dpa.tsx).</p></div><div class="item"><span class="rid">R285-LEGAL-KIRO-A09-01 &middot; OPEN</span><span class="rtitle">Does any customer buy on consumer terms, so D359 no refund for a wrong AI answer needs a consumer law check</span><p>WAITS ON OWNER. Question in COUNSEL-QUESTIONS-2026-10-26.md. Recommended: confirm business only sales, then ask counsel about a buying for business confirmation at sign up.</p></div></section>
+<article class="doc">
+<h1>Legal disclaimer benchmark, 2026-10-26</h1>
+<p><strong>Status:</strong> advisory desk research, not a solicitor&#39;s opinion. Counsel confirms. No Terms, DPA or legal page was changed. Recommended wording is for the owner to approve first. Companion to <code>COUNSEL-QUESTIONS-2026-10-26.md</code> (sources S1 to S18 are listed there).</p>
+<p><strong>Corpus read:</strong> our Terms (<code>crowagent-website/astro/src/content/legal/terms.md</code>), Privacy, Security, Supplier terms (same folder), the app AI notices (<code>crowagent-platform/web/src/shared/i18n/messages/common/ai-notices.ts</code>) and the support playbook (<code>docs/release-2.8.5/ai-quality/SUPPORT-PLAYBOOK.md</code>, D359). Acceptable Use is section 3 of the Terms, there is no separate page. The DPA notice clause is covered in the counsel questions. Comparators: Anthropic, Atlassian, Jasper, Grammarly (Superhuman), Responsive, plus Microsoft and Google help pages. Where a comparator was not read, the cell says so.</p>
+<h2>Result</h2>
+<p>12 topics. 3 covered, 2 stronger than market, 2 weaker, 5 missing.</p>
+<h2>The table</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>What we say</th>
+<th>What the market says</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>AI output accuracy and human review</td>
+<td>terms.md:89 &quot;You should not rely solely on AI outputs&quot; and &quot;may contain errors, omissions, or outdated information&quot;. App notices ai-notices.ts:19 &quot;AI drafted from your documents. Check before you submit.&quot; on 12 output types</td>
+<td>Anthropic D.3 &quot;should not be relied upon without independently checking their accuracy&quot;. Responsive 9.4 &quot;CUSTOMER&#39;S RESPONSIBILITY TO EVALUATE THE ACCURACY&quot;. Microsoft &quot;doesn&#39;t replace your responsibility to review it&quot;. Google &quot;may suggest inaccurate or inappropriate information&quot;</td>
+<td>Covered. The in-product notice is better than most</td>
+</tr>
+<tr>
+<td>2</td>
+<td>No warranty, fitness for purpose (whole service)</td>
+<td>Only for AI content: terms.md:89 &quot;does not warrant the accuracy, completeness, or fitness for purpose of any AI-generated content&quot;. No clause for the platform itself</td>
+<td>Anthropic L.2 &quot;PROVIDED &#39;AS IS&#39; AND &#39;AS AVAILABLE&#39; WITHOUT WARRANTY OF ANY KIND&quot;. Atlassian 11.4 &quot;does not warrant that Customer&#39;s use of the Products will be uninterrupted or error-free&quot;. Jasper s8 &quot;AS IS&quot;</td>
+<td>Missing</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Limitation of liability and exclusions</td>
+<td>terms.md:97-105: greater of 12 months fees or GBP 2,500, separate data protection cap up to GBP 250,000, standard exclusions, no limit for death, injury, fraud</td>
+<td>Anthropic L.3 &quot;limited to Fees paid ... in the previous 12 months&quot;. Atlassian 14.2 and 14.4 a general cap plus a separate data security cap. Jasper s10 12 months</td>
+<td>Stronger than market (a floor and a data cap). Reasonableness is counsel question A-02</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Service availability and SLA</td>
+<td>terms.md:117 &quot;targets 99.5% monthly uptime but does not guarantee uninterrupted access&quot;, planned downtime excluded</td>
+<td>Atlassian 4.3 separate Service Level Agreement. Responsive 2.9 provides the service under its SLA</td>
+<td>Covered. No credit scheme, which is normal for small plans</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Third party and AI provider reliance</td>
+<td>terms.md:87 names Google Gemini only. Anthropic Claude is used (privacy.md:29, security.md:59) but not named in the Terms. No sentence that provider outages or changes are outside our control</td>
+<td>Not found in the pages read, so market comparison is [Unverified]</td>
+<td>Weaker. The Terms name one provider of two</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Data and training use</td>
+<td>privacy.md:90 &quot;we never use it to train any AI model&quot;. privacy.md:165 no solely automated decisions. security.md:99 AI processing section</td>
+<td>Anthropic Commercial Terms B &quot;Anthropic may not train models on Customer Content&quot;</td>
+<td>Stronger than market (a plain promise on the public page). Terms are silent but Privacy covers it</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Bid outcome not guaranteed</td>
+<td>Nothing. No sentence says we do not promise a bid will win</td>
+<td>Responsive 9.4 makes no warranty &quot;as to the results that may be obtained from use of the software&quot;. No sampled vendor quotes &quot;winning&quot; directly</td>
+<td>Missing. The most product specific gap</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Regulatory and legal advice not provided</td>
+<td>terms.md:87 &quot;do not constitute legal, surveying, financial, or professional advice&quot;. terms.md:81 bans misrepresenting compliance</td>
+<td>Google &quot;Don&#39;t rely on Gemini features as medical, legal, financial, or other professional advice&quot;</td>
+<td>Covered</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Export and sanctions</td>
+<td>Nothing</td>
+<td>Anthropic M.8 &quot;Customer may not export or provide access to the Services to persons or entities or into countries&quot;. Atlassian 20.13 export restrictions. Responsive s14 no use in embargoed regions</td>
+<td>Missing</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Acceptable use</td>
+<td>terms.md:66-83. Lists unlawful use, scraping, credential sharing, infringing content. Wording points to &quot;compliance, procurement, or sustainability&quot; and &quot;regulatory filings&quot;, not to bids</td>
+<td>Not read in full at the comparators, [Unverified]</td>
+<td>Weaker. Wording is stale for a bid product and has no line against malware, abuse of the AI, or building a rival model</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Business only sale</td>
+<td>terms.md:42 &quot;the individual or organisation accessing or using the Velstrian platform&quot;. Nothing says business use only</td>
+<td>Anthropic &quot;not for consumer use&quot;. Jasper 2(b) &quot;solely for your internal business operations&quot;</td>
+<td>Missing. This also decides the consumer law question</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Refund for a wrong AI answer (D359)</td>
+<td>terms.md:56 &quot;No refunds are issued for partial periods&quot;. The D359 position lives only in the support playbook and not in the Terms</td>
+<td>Jasper 5(b) &quot;there are no refunds for cancellation&quot;. Grammarly 8.10 &quot;non-refundable&quot;. Responsive 7.3 refund only for vendor material breach</td>
+<td>Missing from the Terms. The position itself is market standard</td>
+</tr>
+</tbody></table></div>
+<h2>Top 5 gaps, with recommended wording</h2>
+<p>All drafts are British English, positive and short, for owner approval then counsel.</p>
+<p><strong>1. Business only sale (topic 11), clause for section 1 or 2.</strong>
+&quot;Velstrian is sold to businesses and other organisations for use in their trade, business or profession. By signing up you confirm you are buying for that purpose.&quot;</p>
+<p><strong>2. No warranty for the service (topic 2), clause for section 8.</strong>
+&quot;We work hard to keep Velstrian running well and we fix problems quickly. The service is provided as it is and as available. We do not promise it will always be uninterrupted or error free, and we do not give any warranty the law lets us leave out.&quot;</p>
+<p><strong>3. Bid outcome not guaranteed (topic 7), clause for section 4.</strong>
+&quot;Velstrian helps you write better bids, faster. Whether a bid wins is decided by the buyer, so we cannot promise any result.&quot;</p>
+<p><strong>4. Refund and AI accuracy (topic 12), clause for section 2.</strong>
+&quot;Because you review every AI output before you use it, we do not refund or credit fees because an output is inaccurate or incomplete. We will still look into any answer you think is wrong and help put it right.&quot;</p>
+<p><strong>5. Export and sanctions (topic 9), clause for section 3.</strong>
+&quot;You confirm that you and your users are not on a UK, US or EU sanctions list and are not in a country under a trade embargo, and you will not use Velstrian in breach of export or sanctions law.&quot;</p>
+<p>Also worth one line each at the same pass: topic 5 (name both AI providers in terms.md:87 and add &quot;We use trusted AI providers, and a change at one of them can affect the service&quot;) and topic 10 (refresh section 3 to mention bids and add &quot;do not misuse the AI, for example by trying to extract its instructions or build a competing product&quot;).</p>
+<h2>Owner decisions</h2>
+<ol>
+<li>Approve which of the 5 gap clauses go to counsel. Recommended: all 5 in one review, then edit the Terms in one change.</li>
+<li>Topics 5 and 10: include in the same pass. Recommended: yes.</li>
+<li>Topics 1, 3, 4, 6 and 8 need no change.</li>
+</ol>
+<h2>Not verified</h2>
+<p>OpenAI, Notion, AutogenAI, Slack and Microsoft contract pages did not load. Comparator quotes are from the pages that did. Nothing here is a legal conclusion.</p>
+
+</article>
+</main></body></html>

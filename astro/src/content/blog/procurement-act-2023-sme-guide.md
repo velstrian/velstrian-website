@@ -49,7 +49,7 @@ For an SME, MAT is an opportunity rather than a technicality. If you cannot alwa
 
 ## The Central Digital Platform and Find a Tender
 
-The Act introduces a **Central Digital Platform**. Suppliers register their core organisation details once, such as company information, financial data, connected persons and exclusion-related declarations, and reuse that information across multiple bids instead of re-keying it into every tender. The platform underpins the **Find a Tender** service, which is the official place where in-scope opportunities and the growing set of statutory notices are published.
+The Act introduces a **Central Digital Platform**. Suppliers register their core organisation details once, such as company information, financial data, connected persons and exclusion-related declarations, and reuse that information across multiple bids instead of re-keying it into every tender. The platform underpins the **Find a Tender** service, which is the official place where in-scope opportunities and the growing set of statutory notices are published. You can search current notices across UK and EU sources with our [free Tender Finder](/tools/tender-finder/).
 
 The practical step for a new SME bidder is to register your organisation on the Central Digital Platform early, before you need it for a live deadline. Getting your supplier information verified and complete takes time you do not want to be spending in the last 48 hours of a submission. Once your core data is in, later bids reuse it, which is one of the concrete ways the Act tries to reduce the paperwork burden that historically fell hardest on smaller suppliers.
 
@@ -119,7 +119,7 @@ Yes. Section 12 requires contracting authorities to have regard to the particula
 
 ### Put your effort where the marks are
 
-Under MAT, social value sits inside the award test. Velstrian Bid helps you plan and draft a TOMs-aligned PPN 026 social value response so a scored section becomes a strength, not an afterthought.
+Under MAT, social value sits inside the award test. Velstrian Bid helps you plan and draft a TOMs-aligned PPN 026 social value response so a scored section becomes a strength, not an afterthought. You can also check requirements in any tender pack with our [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).
 
 [See Velstrian Bid →](/bid/)
 [Read the PPN 026 guide →](/blog/ppn-026-social-value-guide/)

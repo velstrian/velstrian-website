@@ -109,7 +109,7 @@ const schema = [
     id="tf-title"
     label="Free, no account"
     title="Find UK and EU tenders"
-    lead={`Search open public sector notices from ${LIVE_SOURCES}, published in the last ${RECENT_DAYS} days. No account and no email needed.`}
+    lead={`Tender Finder is a free search tool for suppliers bidding for public work, searching open notices from ${LIVE_SOURCES} published in the last ${RECENT_DAYS} days. Filter by keyword, region, value and closing date with no account and no email needed.`}
   >
     <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Tender Finder" /></div>
   </PageHero>
@@ -559,6 +559,45 @@ const schema = [
       resetCheck();
     }
   });
+
+  const params = new URLSearchParams(window.location.search);
+  const qParam = params.get('q');
+  const sectorParam = params.get('sector');
+  const initialKeyword = qParam || sectorParam || '';
+  if (initialKeyword) {
+    const kwInput = byId<HTMLInputElement>('tf-keyword');
+    if (kwInput) kwInput.value = initialKeyword;
+  }
+  const regionParam = params.get('region');
+  if (regionParam) {
+    const regEl = byId<HTMLSelectElement>('tf-region');
+    if (regEl) regEl.value = regionParam;
+  }
+  const countryParam = params.get('country');
+  if (countryParam) {
+    const cEl = byId<HTMLSelectElement>('tf-country');
+    if (cEl) cEl.value = countryParam;
+  }
+  const valParam = params.get('value_band') || params.get('value');
+  if (valParam) {
+    const vEl = byId<HTMLSelectElement>('tf-value');
+    if (vEl) vEl.value = valParam;
+  }
+  const closingParam = params.get('closes_within_days') || params.get('closes');
+  if (closingParam) {
+    const clEl = byId<HTMLSelectElement>('tf-closing');
+    if (clEl) clEl.value = closingParam;
+  }
+  const srcParam = params.get('source');
+  if (srcParam) {
+    const sEl = byId<HTMLSelectElement>('tf-source');
+    if (sEl) sEl.value = srcParam;
+  }
+  if (initialKeyword) {
+    window.setTimeout(() => {
+      form.requestSubmit();
+    }, 0);
+  }
 </script>
 
 <style>

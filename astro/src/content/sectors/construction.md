@@ -54,3 +54,5 @@ Public clients are councils, schools, the NHS, housing associations and central 
 Two things make these bids harder than they used to be. Public buyers now score the good you do locally, such as local jobs, apprentices and lower carbon on site, and they expect proof of it after you win. Every promise in a bid follows you into the contract.
 
 Most small firms have one or two people writing bids between live jobs. Missing a tender, or reusing a weak answer, costs real work.
+
+Search open construction tenders with the [free Tender Finder](/tools/tender-finder/?sector=construction), or check tender requirements and word counts with the [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).

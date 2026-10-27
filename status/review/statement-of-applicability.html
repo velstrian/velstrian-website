@@ -8,7 +8,7 @@
 <p class="rv-kicker">Owner review</p>
 <h1>Statement of Applicability: ISO/IEC 27001:2022 Annex A</h1>
 <p><span class="rv-row">R285-TRUST-SECURITY-EVIDENCE-PACK-01</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/compliance/STATEMENT-OF-APPLICABILITY.md</code>, rendered from <code>6d8887755</code>. A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/compliance/STATEMENT-OF-APPLICABILITY.md</code>, rendered from <code>bd029e44e</code>. A read only copy, the source file is what counts.</p>
 </header>
 <section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-TRUST-SECURITY-EVIDENCE-PACK-01 &middot; WIP</span><span class="rtitle">A security evidence pack a buyer can read before a sales call: access control, tenant isolation, backup restore, incident response, vulnerability management, penetration testing</span><p>refreshed pack written at docs/release-2.8.5/security/SECURITY-EVIDENCE-PACK-2026-10-25.md (Dependabot re-measured 15 open all fixed in the local tree and closing on the release push, 676 commits ahead of origin/main, AI section added, buyer wording updated). Agent work is done. Owner items remain: timed restore, PITR read, SoA approval, Sentry AI alert, the release push, pen test decision, key rotation note.</p></div></section>
 <article class="doc">
@@ -195,7 +195,7 @@ and every such row carries the reason. It is not shorthand for &quot;we did not 
 <tr>
 <td>A.5.17 Authentication information</td>
 <td>Yes</td>
-<td>A password policy and multi-factor authentication exist and are enforced in code. Leaked-password protection is disabled on the production authentication service, so credentials known to be compromised are accepted.</td>
+<td>A password policy and multi-factor authentication exist and are enforced in code. Leaked-password protection is ENABLED on the production authentication service (Supabase gujtuecjzfiqsdnzgyvo, Authentication, Attack Protection, &quot;Prevent use of leaked passwords: ENABLED&quot;, read by the driver 2026-10-26 about 00:40 UTC). The 2026-08-31 advisor finding below is stale and is kept as history. Status word left for the owner to re-confirm at SoA approval.</td>
 <td>Partial</td>
 <td><code>crowagent-platform/web/src/shared/lib/auth/password-policy.ts</code> (min length 8, 3 of 4 character classes). <strong>Live Supabase security advisor 2026-08-31: <code>auth_leaked_password_protection</code> WARN, &quot;Leaked password protection is currently disabled&quot;</strong></td>
 </tr>
@@ -775,14 +775,14 @@ containing production credentials including a Supabase service role key.</p>
 <tr>
 <td>A.8.33 Test information</td>
 <td>Yes</td>
-<td>Test data seeding and reaping scripts exist. Test data is nonetheless present on production: two rows flagged <code>is_seed = true</code> sit in the production <code>risk_register</code> table.</td>
+<td>Test data seeding and reaping scripts exist. Two rows flagged <code>is_seed = true</code> were present in the production <code>risk_register</code> table on 2026-08-31. The owner approved deleting them and the driver did so on 2026-10-26 (ids fa29886d-fa24-4698-a4df-b25dd2808c61 and 20d09aa0-e7e8-453e-a4b7-a60cd964a505, both titled &quot;today issues&quot;, created 2026-03-23). The <code>is_seed</code> count is now 0. The rest of the control (seed and reap scripts) is unchanged.</td>
 <td>Partial</td>
 <td><code>crowagent-platform/scripts/seed-test-data.sql</code> · <code>scripts/reap-test-data.sql</code>. <strong>Measured 2026-08-31: 2 of 10 <code>risk_register</code> rows on production carry <code>is_seed = true</code>, both titled &quot;today issues&quot;, both with no owner.</strong></td>
 </tr>
 <tr>
 <td>A.8.34 Protection of information systems during audit testing</td>
 <td>Yes</td>
-<td>Audit activity does touch production, including the read-only SQL used to produce the measurements in this pack, and the weekly ZAP scan runs against live production. Scanning is baseline and passive rather than active, which limits impact, but there is no rule constraining audit activity against production.</td>
+<td>Audit activity does touch production, including the read-only SQL used to produce the measurements in this pack, and the weekly ZAP scan runs against live production. Scanning is baseline and passive rather than active, which limits impact, but there is no rule constraining audit activity against production. Proposed fix (R285-SEC-PROD-AUDIT-SQL-PRACTICE-01): a written audit testing rule that production SQL is read only, run through a read only role, logged, and that anything else runs on staging.</td>
 <td>Partial</td>
 <td><code>.github/workflows/security-scan.yml</code> uses <code>zaproxy/action-baseline</code> (passive baseline scan, not active attack). No documented audit testing rule exists.</td>
 </tr>
@@ -889,8 +889,8 @@ one.</p>
 </tr>
 <tr>
 <td>A.5.29, A.8.16</td>
-<td>Whether the three UptimeRobot monitors and the public status page at <code>status.crowagent.ai</code> are live</td>
-<td>Log into UptimeRobot and load the status page</td>
+<td>Whether the three Better Stack (Uptime) monitors and the public status page at <code>status.velstrian.com</code> are live</td>
+<td>Log into Better Stack and load the status page</td>
 </tr>
 <tr>
 <td>A.5.30, A.8.13</td>

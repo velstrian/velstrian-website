@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Questions for counsel and the owner, 2026-10-26</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Questions for counsel and the owner, 2026-10-26</h1>
+<p><span class="rv-row">R285-TRUST-DPA-FINAL-01</span><span class="rv-row">R285-TRUST-LIABILITY-CAP-01</span><span class="rv-row">R285-LEGAL-KIRO-A09-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/legal/COUNSEL-QUESTIONS-2026-10-26.md</code>, rendered from <code>cbc89c700</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-TRUST-DPA-FINAL-01 &middot; FIXED</span><span class="rtitle">The Data Processing Agreement is published as a draft pending legal review</span><p>Owner approval 2026-10-27: DRAFT label removed from DPA, Terms and supplier terms, no wording changed (website astro/src/content/legal, platform web/src/shared/legal/public-pages/dpa.tsx).</p></div><div class="item"><span class="rid">R285-TRUST-LIABILITY-CAP-01 &middot; OPEN</span><span class="rtitle">The standard terms cap aggregate liability at the greater of 12 months of fees or GBP 1,000</span><p>Owner 2026-10-26: counsel pack v4 (Drive, Google Doc 19kkFVjOTCCeHaXbRdnInOtE61sAIlVo11V5ctY3HVVs) shared with the founders. OWNER DECISION D460 APPLIED TO THE DRAFT, WAITS ON COUNSEL (D442) AND R285-OWNER-INSURER-01. Terms section 6 (website f6790df8, version 2026-10-26): general cap the Annual Fees, the fees paid or payable for the 12 months before the event, no fixed floor (reverses D314 and D319). Data protection and security cap twice the Annual Fees, never more than GBP 250,000, replacing the general cap for those claims, higher limit by agreement for an extra charge. Exclusions widened (savings, goodwill, contracts, loss of a bid or tender, a buyer decision), data loss limited to restore from the latest backup, never limited items kept, 12 month claims window, customer content and misuse indemnity, no indemnity for AI output, limited warranty with a fix or refund as the only remedy (an inaccurate AI output is not a failure, in step with D459), 99.5 percent uptime a target with no credits, 30 days notice of Terms changes. Caps stated once, the DPA clause 11.1 and app /dpa page cross refer (platform 1491ceda0). Source docs/release-2.8.5/legal/LIABILITY-AND-DPA-BENCHMARK-TOP10-UK-2026-10-26.md. Counsel: UCTA reasonableness of the no floor cap, the data cap once insurance is bound, and the claims window.</p></div><div class="item"><span class="rid">R285-LEGAL-KIRO-A09-01 &middot; OPEN</span><span class="rtitle">Does any customer buy on consumer terms, so D359 no refund for a wrong AI answer needs a consumer law check</span><p>WAITS ON OWNER. Question in COUNSEL-QUESTIONS-2026-10-26.md. Recommended: confirm business only sales, then ask counsel about a buying for business confirmation at sign up.</p></div></section>
+<article class="doc">
+<h1>Questions for counsel and the owner, 2026-10-26</h1>
+<p><strong>Source:</strong> advisory review by Kiro (not a solicitor&#39;s opinion), items A-02, A-09 and A-10. <strong>Status:</strong> questions only. Nothing here answers them and no legal term, figure or cap was changed. Every scope or wording verdict is the owner&#39;s, after counsel.
+Related pack: <code>DPA-AND-LIABILITY-SIGNOFF-PACK-2026-10-23.md</code>. Rows: R285-LEGAL-KIRO-A02-01, R285-LEGAL-KIRO-A09-01, R285-LEGAL-KIRO-A10-01.</p>
+<h2>Figures as they stand (read from the Terms, <code>crowagent-website/astro/src/content/legal/terms.md</code> section 6)</h2>
+<ul>
+<li>General cap: the greater of (a) the subscription fees paid in the 12 months before the claim, or (b) GBP 2,500.</li>
+<li>Data protection and security cap: the greater of (a) a floor equal to the greater of 12 months of fees or GBP 2,500, and (b) the insurance proceeds actually recovered for that claim, never more than GBP 250,000. The floor is a working default awaiting counsel.</li>
+<li>Exclusions include &quot;loss of data&quot; and &quot;loss of business&quot;. No indemnity for regulatory fines. Death, personal injury, fraud and anything the law does not allow us to limit are not limited.</li>
+</ul>
+<h2>A-02. Liability caps (for counsel)</h2>
+<ol>
+<li><strong>UCTA 1977 reasonableness.</strong> Is the general cap (greater of 12 months of fees or GBP 2,500) reasonable under the Unfair Contract Terms Act 1977 for small and mid size business customers, public and private, who accept the Terms online on standard terms? Is a GBP 2,500 floor defensible for a customer paying little in 12 months, for example in its first month?</li>
+<li><strong>One set of caps, not two.</strong> The DPA clause 11 and Terms section 6 state the same two caps. Does the wording make them ONE set of caps for one claim, so a single data protection event cannot be read as GBP 250,000 under the DPA plus the general cap under the Terms?</li>
+<li><strong>&quot;Loss of data&quot; beside the data protection cap.</strong> The exclusions list &quot;loss of data&quot; while a separate data protection cap exists. Does a data protection claim read as governed by the cap rather than excluded outright, or should the exclusion carve it out?</li>
+<li><strong>If a cap is struck down.</strong> Please confirm our understanding that a cap found unreasonable under UCTA falls away entirely (the clause does not get rewritten to a lower figure), so liability for that head of loss would be uncapped. Is a severability or fallback wording advisable, and is it permitted?</li>
+<li><strong>Floor figure.</strong> Confirm or change the data protection floor, and confirm the whole clause passes once the insurer check (R285-OWNER-INSURER-01) is complete.</li>
+</ol>
+<h2>A-09. Consumer or business terms (for the owner, then counsel)</h2>
+<p><strong>Owner question.</strong> Does any customer buy on consumer rather than business terms, for example a sole trader or micro business buying outside their trade? If yes, D359 (no refund for a wrong AI answer) needs a consumer law check, because the Consumer Rights Act 2015 may limit exclusions for digital content and services in consumer contracts. Recommended answer: confirm in writing that the product is sold to businesses only (the DPA already says it is designed for business to business use), then ask counsel whether the sign up flow needs a &quot;buying for business purposes&quot; confirmation.</p>
+<h2>A-10. The 48 hour breach clock (for the owner, then counsel)</h2>
+<p>DPA clause 8.2 promises notice of a personal data breach &quot;without undue delay and, in any event, within 48 hours after becoming aware&quot;. <code>docs/release-2.8.5/ai-quality/ON-CALL.md</code> says UK business hours only, with an out of hours email alert (Sentry alert id 1417258) that nobody is paid to read overnight.</p>
+<ol>
+<li><strong>Owner.</strong> Can 48 hours be met when a breach starts on a Friday evening, given the alert is read next UK business day? Options: (A) keep 48 hours and accept the risk, (B) widen to a longer period (the earlier 72 hours default), (C) add a named out of hours reader. Recommended: ask counsel first, then choose B unless the owner wants to commit to C. Not decided here.</li>
+<li><strong>Counsel.</strong> When does Velstrian &quot;become aware&quot; for this clause: at the alert, or when a person confirms the breach? Which reading do customers expect?</li>
+<li>This question should be answered before the DPA DRAFT banner is removed.</li>
+</ol>
+<h2>Research and recommendation 2026-10-26</h2>
+<p><strong>Status:</strong> advisory desk research, not a solicitor&#39;s opinion. Counsel confirms. The DPA and the Terms were not changed. The wider comparison of every disclaimer is in <code>LEGAL-DISCLAIMER-BENCHMARK-2026-10-26.md</code>.</p>
+<h3>Q1. Breach notice (A-10), checked against market practice</h3>
+<p><strong>The law.</strong> UK GDPR Article 33(1) gives the customer (the controller) &quot;without undue delay and, where feasible, not later than 72 hours after having become aware of it&quot; to tell the ICO. Article 33(2) says &quot;The processor shall notify the controller without undue delay after becoming aware of a personal data breach.&quot; The law sets no hour limit for a processor like us, so any number in the DPA is a commercial choice (S1). A Law Society note says the customer&#39;s 72 hours runs from when the customer is aware (S2, secondary source, the ICO page itself returned 404 so [Unverified] against the ICO).</p>
+<p><strong>What well known SaaS DPAs say</strong> (7 read. Microsoft, Slack and Notion could not be read, their pages gave no clause or returned 404):</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Company</th>
+<th>Time commitment</th>
+<th>From awareness?</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Atlassian</td>
+<td>&quot;without undue delay and, where feasible, no later than seventy-two (72) hours&quot;</td>
+<td>Yes, &quot;after becoming aware of a Security Incident&quot;</td>
+<td>S3</td>
+</tr>
+<tr>
+<td>HubSpot</td>
+<td>&quot;without undue delay, but no later than seventy-two (72) hours&quot;</td>
+<td>Yes, &quot;after we become aware&quot;</td>
+<td>S4</td>
+</tr>
+<tr>
+<td>Zendesk</td>
+<td>&quot;without undue delay and within 48 hours&quot; for a confirmed breach</td>
+<td>Confirmed breach</td>
+<td>S5</td>
+</tr>
+<tr>
+<td>Salesforce</td>
+<td>&quot;without undue delay after becoming aware&quot;</td>
+<td>Yes, no hour limit</td>
+<td>S6</td>
+</tr>
+<tr>
+<td>Xero</td>
+<td>&quot;inform the Customer without undue delay&quot;</td>
+<td>Yes, &quot;If Xero becomes aware&quot;</td>
+<td>S7</td>
+</tr>
+<tr>
+<td>monday.com</td>
+<td>&quot;without undue delay after becoming aware&quot;</td>
+<td>Yes, no hour limit</td>
+<td>S8</td>
+</tr>
+<tr>
+<td>Intercom</td>
+<td>&quot;without undue delay&quot;</td>
+<td>Yes, &quot;Upon becoming aware&quot;</td>
+<td>S9</td>
+</tr>
+</tbody></table></div>
+<p><strong>Count:</strong> 7 of 7 run the clock from awareness. 3 of 7 add a number (72, 72 and 48 hours). 4 of 7 say only &quot;without undue delay&quot;. Our 48 hours is the strictest number read, matched only by Zendesk, and Zendesk limits it to a &quot;confirmed&quot; breach.</p>
+<p><strong>Can we meet it?</strong> Measured against ON-CALL.md (UK business hours only, Sentry alert 1417258 read next business day): a breach found at 18:00 on Friday reaches 09:00 on Monday after 63 hours. 48 hours fails that case and 72 hours passes it. A Friday before a bank holiday Monday reaches Tuesday 09:00 after 87 hours, which fails both, so that case needs a named reader, and &quot;without undue delay&quot; is the duty that bites.</p>
+<p><strong>Recommended clause 8.2 (one option, the owner decides):</strong></p>
+<blockquote>
+<p>&quot;We will tell you without undue delay after we become aware of a personal data breach affecting your personal data, and in any event within 72 hours of becoming aware. We become aware when we have reasonable certainty that a breach has happened. We will then give you the information you need to meet your own duties and keep you updated as we learn more.&quot;</p>
+</blockquote>
+<p>Market standard: yes, it matches Atlassian and HubSpot and is looser than Zendesk. Meetable with business hours on-call: yes for a normal weekend, not for a long bank holiday weekend. Owner options unchanged: (A) keep 48 hours, (B) 72 hours as above, (C) add a named out of hours reader. Recommended: B. Counsel still answers the &quot;become aware&quot; question in A-10 and whether 72 hours leaves the customer enough of its own 72.</p>
+<h3>Q2. No refund for a wrong AI answer (A-09, D359)</h3>
+<p><strong>What AI and AI-feature vendors say</strong> (7 read, all business facing):</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Output accuracy and review</th>
+<th>Refunds and credits</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Anthropic Commercial Terms</td>
+<td>D.3 &quot;factual assertions in Outputs should not be relied upon without independently checking their accuracy&quot;. L.2 &quot;AS IS&quot; and &quot;AS AVAILABLE&quot;. Opening notice &quot;not for consumer use&quot;</td>
+<td>No refund clause, prepaid credits only</td>
+<td>S10</td>
+</tr>
+<tr>
+<td>OpenAI Business Terms (May 2025)</td>
+<td>Customer &quot;solely responsible for all use of the Outputs and for evaluating the accuracy and appropriateness&quot; (as shown by search, the page itself returned 403 so [Unverified])</td>
+<td>Not confirmed</td>
+<td>S11</td>
+</tr>
+<tr>
+<td>Microsoft 365 Copilot</td>
+<td>Copilot &quot;doesn&#39;t replace your responsibility to review it for accuracy, clarity, and appropriateness before sharing&quot;</td>
+<td>Not found</td>
+<td>S12</td>
+</tr>
+<tr>
+<td>Google Workspace Gemini</td>
+<td>&quot;Gemini features may suggest inaccurate or inappropriate information&quot; and &quot;Don&#39;t rely on Gemini features as medical, legal, financial, or other professional advice&quot;</td>
+<td>Not found</td>
+<td>S13</td>
+</tr>
+<tr>
+<td>Jasper</td>
+<td>s8 &quot;DO NOT WARRANT THAT THE CONTENT IS ACCURATE, RELIABLE OR CORRECT&quot;. s2(b) access &quot;solely for your internal business operations&quot;</td>
+<td>s5(b) &quot;there are no refunds for cancellation&quot;</td>
+<td>S14</td>
+</tr>
+<tr>
+<td>Grammarly (Superhuman)</td>
+<td>s10.2 &quot;YOU SHOULD NOT RELY ON SUPERHUMAN&#39;S GENERATIVE AI AS A SINGLE SOURCE OF FACTUAL INFORMATION&quot;</td>
+<td>s8.10 &quot;all payments made by you under these Terms are non-refundable&quot;</td>
+<td>S15</td>
+</tr>
+<tr>
+<td>Responsive (bid software)</td>
+<td>s9.4 &quot;IT IS CUSTOMER&#39;S RESPONSIBILITY TO EVALUATE THE ACCURACY, RELIABILITY AND APPROPRIATENESS OF THE OUTPUTS FOR USE&quot;</td>
+<td>s7.3 pro rata refund only if the customer ends the contract for the vendor&#39;s material breach</td>
+<td>S16</td>
+</tr>
+</tbody></table></div>
+<p>Not found: Notion AI terms (404) and AutogenAI terms (404).</p>
+<p><strong>Pattern:</strong> 7 of 7 put the duty to check on the customer. Of the 3 that state a refund rule (Jasper, Grammarly, Responsive), none refunds because an output was wrong. The only refund trigger is the vendor&#39;s material breach (Responsive). Our position of no refund for an inaccurate output is market standard. The gap is that our Terms never say it: section 2 only says no refunds for partial periods.</p>
+<p><strong>The UK point.</strong> Our customers are businesses. The Consumer Rights Act 2015 protects a &quot;consumer&quot;, defined in section 2(3) as &quot;an individual acting for purposes that are wholly or mainly outside that individual&#39;s trade, business, craft or profession&quot; (S17). A sole trader buying bid software for their trade is acting for their business, so is not a consumer and the Act does not apply. For business customers on our standard terms the control is the reasonableness test in the Unfair Contract Terms Act 1977 (already question A-02, for counsel). The remaining risk is a person who buys mainly for personal reasons, so the Terms should say plainly that the service is for business use. Terms line 42 currently says &quot;the individual or organisation accessing or using&quot; the platform and has no business only statement.</p>
+<p><strong>Simplest position:</strong> business only terms, outputs are drafts that need human review, no refund for output accuracy, support still helps put things right.</p>
+<p><strong>Recommended clause (new, for the Terms, owner decides after counsel):</strong></p>
+<blockquote>
+<p>&quot;Velstrian is sold to businesses and other organisations for use in their trade, business or profession. By signing up you confirm you are buying for that purpose. AI outputs are drafts to help you. Please check them before you rely on them or submit them. Because you review every output, we do not refund or credit fees because an output is inaccurate or incomplete. This does not limit our support, your right to cancel, or any right the law does not allow us to limit.&quot;</p>
+</blockquote>
+<p>Questions for counsel: (a) is a sign up confirmation of &quot;buying for business&quot; advisable, (b) does the last sentence keep the clause reasonable under UCTA.</p>
+<h3>Q3 pointer</h3>
+<p>The full table of every disclaimer topic against market is in <code>LEGAL-DISCLAIMER-BENCHMARK-2026-10-26.md</code>. Result: 12 topics, 3 covered, 2 stronger than market, 2 weaker, 5 missing.</p>
+<h3>Sources</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Source</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S1</td>
+<td>UK GDPR Article 33</td>
+<td><a href="https://www.legislation.gov.uk/eur/2016/679/article/33">https://www.legislation.gov.uk/eur/2016/679/article/33</a></td>
+</tr>
+<tr>
+<td>S2</td>
+<td>Law Society, when to report a data breach (secondary)</td>
+<td><a href="https://www.lawsociety.org.uk/Contact-or-visit-us/Helplines/Practice-advice-service/Q-and-As/When-do-I-have-to-report-a-data-breach">https://www.lawsociety.org.uk/Contact-or-visit-us/Helplines/Practice-advice-service/Q-and-As/When-do-I-have-to-report-a-data-breach</a></td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Atlassian DPA section 3.2</td>
+<td><a href="https://www.atlassian.com/legal/data-processing-addendum">https://www.atlassian.com/legal/data-processing-addendum</a></td>
+</tr>
+<tr>
+<td>S4</td>
+<td>HubSpot DPA section 3.5</td>
+<td><a href="https://legal.hubspot.com/dpa">https://legal.hubspot.com/dpa</a></td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Zendesk data processing form section 1.4</td>
+<td><a href="https://www.zendesk.co.uk/company/data-processing-form/">https://www.zendesk.co.uk/company/data-processing-form/</a></td>
+</tr>
+<tr>
+<td>S6</td>
+<td>Salesforce DPA section 7</td>
+<td><a href="https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/Agreements/data-processing-addendum.pdf">https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/Agreements/data-processing-addendum.pdf</a></td>
+</tr>
+<tr>
+<td>S7</td>
+<td>Xero DPA clause 1.9</td>
+<td><a href="https://www.xero.com/legal/terms/data-processing">https://www.xero.com/legal/terms/data-processing</a></td>
+</tr>
+<tr>
+<td>S8</td>
+<td>monday.com DPA section 7.1</td>
+<td><a href="https://monday.com/l/privacy/dpa/">https://monday.com/l/privacy/dpa/</a></td>
+</tr>
+<tr>
+<td>S9</td>
+<td>Intercom DPA section 9(iv)</td>
+<td><a href="https://www.intercom.com/legal/data-processing-agreement">https://www.intercom.com/legal/data-processing-agreement</a></td>
+</tr>
+<tr>
+<td>S10</td>
+<td>Anthropic Commercial Terms</td>
+<td><a href="https://www.anthropic.com/legal/commercial-terms">https://www.anthropic.com/legal/commercial-terms</a></td>
+</tr>
+<tr>
+<td>S11</td>
+<td>OpenAI business terms May 2025</td>
+<td><a href="https://openai.com/policies/may-2025-business-terms/">https://openai.com/policies/may-2025-business-terms/</a></td>
+</tr>
+<tr>
+<td>S12</td>
+<td>Microsoft, evaluate Copilot output</td>
+<td><a href="https://support.microsoft.com/en-us/topic/36dcc853-61be-4913-b012-2d0a7717e2fd">https://support.microsoft.com/en-us/topic/36dcc853-61be-4913-b012-2d0a7717e2fd</a></td>
+</tr>
+<tr>
+<td>S13</td>
+<td>Google Workspace, before you use Gemini</td>
+<td><a href="https://support.google.com/a/users/answer/14506784?hl=en">https://support.google.com/a/users/answer/14506784?hl=en</a></td>
+</tr>
+<tr>
+<td>S14</td>
+<td>Jasper Terms of Service</td>
+<td><a href="https://www.jasper.ai/legal/terms-of-service">https://www.jasper.ai/legal/terms-of-service</a></td>
+</tr>
+<tr>
+<td>S15</td>
+<td>Grammarly (Superhuman) Terms</td>
+<td><a href="https://www.grammarly.com/terms">https://www.grammarly.com/terms</a></td>
+</tr>
+<tr>
+<td>S16</td>
+<td>Responsive Terms of Service</td>
+<td><a href="https://www.responsive.io/terms-of-service">https://www.responsive.io/terms-of-service</a></td>
+</tr>
+<tr>
+<td>S17</td>
+<td>Consumer Rights Act 2015 section 2</td>
+<td><a href="https://www.legislation.gov.uk/ukpga/2015/15/section/2">https://www.legislation.gov.uk/ukpga/2015/15/section/2</a></td>
+</tr>
+<tr>
+<td>S18</td>
+<td>Atlassian Customer Agreement</td>
+<td><a href="https://www.atlassian.com/legal/customer-agreement">https://www.atlassian.com/legal/customer-agreement</a></td>
+</tr>
+</tbody></table></div>
+
+</article>
+</main></body></html>

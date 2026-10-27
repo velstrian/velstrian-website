@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Liability and DPA benchmark, top 10 UK serving SaaS, 2026-10-26</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Liability and DPA benchmark, top 10 UK serving SaaS, 2026-10-26</h1>
+<p><span class="rv-row">R285-TRUST-LIABILITY-CAP-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/legal/LIABILITY-AND-DPA-BENCHMARK-TOP10-UK-2026-10-26.md</code>, rendered from <code>98d33d26e</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-TRUST-LIABILITY-CAP-01 &middot; OPEN</span><span class="rtitle">The standard terms cap aggregate liability at the greater of 12 months of fees or GBP 1,000</span><p>Owner 2026-10-26: counsel pack v4 (Drive, Google Doc 19kkFVjOTCCeHaXbRdnInOtE61sAIlVo11V5ctY3HVVs) shared with the founders. OWNER DECISION D460 APPLIED TO THE DRAFT, WAITS ON COUNSEL (D442) AND R285-OWNER-INSURER-01. Terms section 6 (website f6790df8, version 2026-10-26): general cap the Annual Fees, the fees paid or payable for the 12 months before the event, no fixed floor (reverses D314 and D319). Data protection and security cap twice the Annual Fees, never more than GBP 250,000, replacing the general cap for those claims, higher limit by agreement for an extra charge. Exclusions widened (savings, goodwill, contracts, loss of a bid or tender, a buyer decision), data loss limited to restore from the latest backup, never limited items kept, 12 month claims window, customer content and misuse indemnity, no indemnity for AI output, limited warranty with a fix or refund as the only remedy (an inaccurate AI output is not a failure, in step with D459), 99.5 percent uptime a target with no credits, 30 days notice of Terms changes. Caps stated once, the DPA clause 11.1 and app /dpa page cross refer (platform 1491ceda0). Source docs/release-2.8.5/legal/LIABILITY-AND-DPA-BENCHMARK-TOP10-UK-2026-10-26.md. Counsel: UCTA reasonableness of the no floor cap, the data cap once insurance is bound, and the claims window.</p></div></section>
+<article class="doc">
+<h1>Liability and DPA benchmark, top 10 UK serving SaaS, 2026-10-26</h1>
+<p><strong>Status:</strong> advisory desk research by a Sonnet research lane, not a solicitor&#39;s opinion. Counsel confirms. Read only: no Terms, DPA or legal page was edited here. The wording below is for a follow-up edit after the owner approves. It extends <code>COUNSEL-QUESTIONS-2026-10-26.md</code> and <code>LEGAL-DISCLAIMER-BENCHMARK-2026-10-26.md</code> and does not repeat their sources (their S1 to S18 stay valid). Row: R285-TRUST-LIABILITY-CAP-01.</p>
+<p><strong>Owner brief (2026-10-26):</strong> own as little liability as possible and be as risk free as possible. <strong>The limit on that:</strong> a clause a court strikes down is worse than a modest clause that stands, so every recommendation below is the most protective position that is still market standard and likely reasonable for SME customers.</p>
+<p><strong>Corpus read.</strong> Ours: <code>crowagent-website/astro/src/content/legal/terms.md</code> (working tree, which the LEGAL-D459 lane is editing, so line numbers may move), <code>crowagent-platform/docs/legal/data-processing-agreement.md</code>, the app page <code>crowagent-platform/web/app/(legal)/dpa/page.tsx</code>, <code>supplier-terms.md</code> (no liability or indemnity clause found by grep), and the three earlier papers. Market: <strong>7 customer terms read</strong> (Xero UK, FreeAgent, Atlassian, Zendesk, Intercom, HubSpot, Responsive) and <strong>5 DPAs read</strong> (Xero, HubSpot, Atlassian, Zendesk, monday.com). Anthropic, Jasper and Grammarly come from the earlier papers. <strong>Not read, [Unverified]:</strong> Sage (PDF would not decode), Salesforce MSA (404), monday.com customer terms (403), Notion (404), Loopio (404), Intercom DPA clauses beyond the earlier paper, Thought Machine and Bud (no public customer terms found). So &quot;top 10&quot; is 7 terms plus 5 DPAs actually read, not 10 terms. UK headquartered among the read: Xero (NZ parent, UK edition terms), FreeAgent. The rest are US or Irish group terms, and several of those pick US law, which does not transfer to us.</p>
+<h2>Headline</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th>Our text now</th>
+<th>Market read</th>
+<th>Recommended (owner decides)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>General cap basis</td>
+<td>Greater of 12 months fees paid or GBP 2,500 (terms.md:107, DPA 11.1)</td>
+<td>6 of 7 use fees for the prior 12 months (Atlassian 14.2, Zendesk 10.2, Intercom 12.2, HubSpot 10.4, Responsive 9.5, Xero s65). 1 of 7 uses one month (FreeAgent). <strong>0 of 7 have a fixed pound floor on a paid plan.</strong> HubSpot has USD 100 for free users only</td>
+<td><strong>1x the fees paid or payable for the 12 months</strong> (no fixed pound floor, first year customers use the fees due for 12 months at their plan). Aggregate, all claims together</td>
+</tr>
+<tr>
+<td>Data protection and security cap</td>
+<td>Greater of floor and insurance proceeds, never above GBP 250,000 (terms.md:107, DPA 11.2)</td>
+<td>5 of 7 keep it <strong>inside</strong> the general cap (Xero, FreeAgent, HubSpot, Zendesk, Intercom). 1 of 7 has a higher separate cap (Atlassian 14.4, twice 12 months fees, at most USD 5,000,000). 1 of 7 leaves security breach <strong>uncapped</strong> (Responsive 9.5)</td>
+<td><strong>2x the fees for the 12 months, never more than GBP 250,000, replacing and not adding to the general cap.</strong> Lowest exposure alternative is to fold it into the general cap (the 5 of 7 position)</td>
+</tr>
+</tbody></table></div>
+<p><strong>Evidence count:</strong> 12 comparators in all (7 terms, 5 DPAs). <strong>Why change.</strong> Our current data cap is up to GBP 250,000 for a customer paying perhaps GBP 600 a year, which is about 400 times fees, and no vendor read goes near that ratio (Atlassian is 2x). The GBP 2,500 floor raises our exposure above the market for the smallest customers and is the owner&#39;s own choice (D314, D319), so changing it needs the owner. Counsel question A-02 item 1 asked if the floor is defensible. This paper&#39;s answer: a floor is not needed for reasonableness if the cap is &quot;fees payable for 12 months&quot;, and it costs us money.</p>
+<h2>UK law guardrails (what keeps a clause standing)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>One line</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UCTA 1977 s11(1)</td>
+<td>The term must be &quot;a fair and reasonable one to be included&quot; having regard to what the parties knew or should have known at the time</td>
+<td><a href="https://www.legislation.gov.uk/ukpga/1977/50/section/11">https://www.legislation.gov.uk/ukpga/1977/50/section/11</a></td>
+</tr>
+<tr>
+<td>UCTA s11(4)</td>
+<td>Where liability is limited to a sum, courts look at &quot;the resources which he could expect to be available&quot; and &quot;how far it was open to him to cover himself by insurance&quot;. <strong>Binding for us: once we hold Cyber/Tech PI cover, a very low cap is easier to challenge, so state the cover is in place before relying on the cap</strong></td>
+<td>same page</td>
+</tr>
+<tr>
+<td>UCTA s11(5)</td>
+<td>The burden is on us to show the term is reasonable</td>
+<td>same page</td>
+</tr>
+<tr>
+<td>UCTA s2(1), s3, Schedule 2</td>
+<td>s2(1) death or personal injury by negligence can never be excluded. s2(2) other negligence loss and s3 (standard terms, exclusion of liability for our own breach or substantially different performance) need reasonableness. Schedule 2 factors (bargaining strength, inducement, customer knowledge, insurance, choice of other suppliers) are the checklist courts use. [Unverified: the s2, s3 and Schedule 2 text was not re-read here, taken from the Act as known]</td>
+<td><a href="https://www.legislation.gov.uk/ukpga/1977/50">https://www.legislation.gov.uk/ukpga/1977/50</a></td>
+</tr>
+<tr>
+<td>Goodlife Foods v Hall Fire Protection [2018] EWCA Civ 1371</td>
+<td>Cap upheld between businesses. Commentary stresses the customer was offered the option of wider cover or insurance, [Unverified: secondary commentary, judgment not read]</td>
+<td><a href="https://www.ashfords.co.uk/insights/articles/wide-exclusion-of-liability-considered-as-reasonable-under-ucta">https://www.ashfords.co.uk/insights/articles/wide-exclusion-of-liability-considered-as-reasonable-under-ucta</a></td>
+</tr>
+<tr>
+<td>Last Bus v Dawsongroup [2023]</td>
+<td>Parties of equal overall strength can be unequal on one clause, and a clause is at risk where the customer could not buy elsewhere without it. [Unverified: secondary commentary, citation not confirmed]</td>
+<td><a href="https://lancashirebusinessview.co.uk/latest-news-and-features/the-enforceability-of-terms-and-conditions">https://lancashirebusinessview.co.uk/latest-news-and-features/the-enforceability-of-terms-and-conditions</a></td>
+</tr>
+<tr>
+<td>Kingsway Hall Hotel v Red Sky IT [2010]</td>
+<td>Software supplier could not rely on its standard exclusions where only price was negotiated. [Unverified: secondary commentary]</td>
+<td>same commentary results</td>
+</tr>
+<tr>
+<td>Watford Electronics v Sanderson [2001]</td>
+<td>Court of Appeal upheld a cap between commercial parties of broadly equal strength. [Unverified: from memory, not re-read, treat as a pointer only]</td>
+<td>not fetched</td>
+</tr>
+<tr>
+<td>UK GDPR Art 82</td>
+<td>A person who suffers damage &quot;shall have the right to receive compensation&quot;. Each controller or processor involved can be &quot;liable for the entire damage&quot; (82(4)) and &quot;shall be entitled to claim back&quot; the others&#39; share (82(5)). <strong>A cap in our contract with the customer cannot cut a data subject&#39;s own claim.</strong> It only limits what the customer can claim from us</td>
+<td><a href="https://www.legislation.gov.uk/eur/2016/679/article/82">https://www.legislation.gov.uk/eur/2016/679/article/82</a></td>
+</tr>
+<tr>
+<td>UK GDPR Art 28</td>
+<td>Mandatory processor terms (instructions, confidentiality, security, sub-processors, assistance, deletion or return, audits) cannot be removed. Frequency, notice and cost of audits can be set, which is the market method</td>
+<td>Art 28(3)(h) quoted in the earlier counsel paper area, text not re-fetched here</td>
+</tr>
+<tr>
+<td>Consumer Rights Act 2015</td>
+<td>Not applicable if sales are business only, as D459 decided. A sole trader buying for the trade is a business buyer (s2(3), earlier paper S17)</td>
+<td><a href="https://www.legislation.gov.uk/ukpga/2015/15/section/2">https://www.legislation.gov.uk/ukpga/2015/15/section/2</a></td>
+</tr>
+</tbody></table></div>
+<p><strong>Three structural points that keep clauses standing.</strong> (1) Do not use &quot;gross negligence&quot; (Xero s65, Intercom 12.5, Responsive 9.5 use it). It is a US idea and English law has no settled meaning for it [Unverified]. Use &quot;anything the law does not let us limit&quot;. (2) Keep one cap for the whole contract, stated once. (3) Add the customer&#39;s option to ask for a higher cap, which is the Goodlife style factor that helps show reasonableness.</p>
+<h2>The table (ours / market / recommendation)</h2>
+<p>Rows 1 to 7 follow the owner&#39;s seven topics. Section 3 gives the exact wording.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>Ours</th>
+<th>Market range read</th>
+<th>Recommendation</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>General cap</td>
+<td>terms.md:107, 113 and DPA 11.1: greater of 12 months fees paid or GBP 2,500</td>
+<td>Zendesk 10.2 &quot;THE AMOUNTS PAID OR PAYABLE&quot; for 12 months. Xero s65 &quot;the total amount you paid us for your subscription&quot; in the 12 months before the claim. Atlassian 14.2 amounts paid in the prior twelve months. FreeAgent one month&#39;s subscription fee</td>
+<td>1x fees paid or payable in 12 months, aggregate, drop the fixed floor</td>
+<td>Low. Dropping the floor lowers cost. A first month customer is covered by the &quot;payable for 12 months&quot; wording</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Data protection cap</td>
+<td>terms.md:107 and DPA 11.2 as above, up to GBP 250,000</td>
+<td>Atlassian 14.4 &quot;two times the amounts paid&quot; capped USD 5,000,000. HubSpot DPA 12.3 puts DPA liability under the main cap. Responsive 9.5 security uncapped. Xero s65 data loss limited to &quot;reasonable steps&quot; to restore from backup</td>
+<td>2x fees for 12 months, ceiling GBP 250,000, one cap not two</td>
+<td>Medium. UCTA s11(4) turns on insurance, so bind the cover (R285-OWNER-INSURER-01) first</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Exclusions</td>
+<td>terms.md:113: indirect, consequential, special, punitive, profit, revenue, business, data, business interruption. No goodwill. No bid outcome</td>
+<td>FreeAgent: profit, savings, sales, business, goodwill, data. Xero s65: &quot;loss of revenue or profit, loss of goodwill, loss of customers&quot;. Intercom 12.1: lost profits, lost data</td>
+<td>Add goodwill, savings, and loss of a bid, tender or contract. Replace flat &quot;loss of data&quot; with the Xero style restore from backup duty</td>
+<td>Medium for data (core service, UCTA s3). Low for the rest</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Indemnities</td>
+<td>None either way (grep of terms.md and supplier-terms.md found no indemnity)</td>
+<td>Supplier IP indemnity: 5 of 7 (Atlassian 15.1, Zendesk 9.1, HubSpot 9.2, Intercom s13, Responsive 10.1). <strong>None found in Xero or FreeAgent, the two UK SME products.</strong> Customer indemnity: 6 of 7 (all except Atlassian)</td>
+<td>No supplier IP indemnity at launch. Add a narrow customer indemnity for customer content and misuse</td>
+<td>Low legally. Commercial: enterprise questionnaires ask for an IP indemnity</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Warranties and SLA</td>
+<td>terms.md:125: 99.5% target, no guarantee, no warranty clause for the platform</td>
+<td>HubSpot 10.1 and Intercom 9.1 and Zendesk 8.2 give a limited warranty with sole remedy fix or refund, claims within 30 days (Zendesk, Intercom, Atlassian 11.2). Xero s64 &quot;as is&quot;. FreeAgent &quot;no guarantee&quot;</td>
+<td>As is, plus one limited warranty with a sole remedy and a 30 day notice</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>6</td>
+<td>DPA terms</td>
+<td>see section 4</td>
+<td>see section 4</td>
+<td>see section 4</td>
+<td>Mixed</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Claims time limit, law, suspension, changes</td>
+<td>No time limit. England and Wales exclusive courts (terms.md:135-137). 7 day warning window and immediate suspension for severe breach (terms.md:91). 14 days notice of changes (terms.md:141)</td>
+<td>Time limit: HubSpot 12.3 one year (1 of 7). English law in Xero s79 and FreeAgent. Suspension for non payment: Xero 7 days, HubSpot 4.4.2 and Atlassian 10.4 on 10 days notice. Changes: Atlassian 20.9 30 days, Zendesk 11.4 30 days, Xero s76 60 days (endeavour)</td>
+<td>12 month claims window, keep law, add non payment suspension on 10 days notice, 30 days notice of changes</td>
+<td>Medium for the time limit (UCTA s13 treats shortened remedies like exclusions)</td>
+</tr>
+</tbody></table></div>
+<h2>Section 3. Exact clause wording (British English, plain words)</h2>
+<p>Each is a replacement or addition to Terms section 6 unless stated. &quot;Annual Fees&quot; is defined once in section 6.</p>
+<p><strong>C1. General cap (replaces terms.md:107 first definition and :113 first paragraph and DPA 11.1).</strong>
+&quot;In these Terms, Annual Fees means the fees you paid or must pay for the 12 months before the event that led to the claim. If you have subscribed for less than 12 months, it means the fees for the first 12 months of your current plan. Our total liability to you for all claims arising under or in connection with these Terms, whether in contract, negligence or otherwise, will not be more than the Annual Fees.&quot;
+Risk: low. Removes the GBP 2,500 floor, which is an owner decision (D314) so it needs the owner. If the owner keeps a floor, the market evidence is that none exists, so keep it small.</p>
+<p><strong>C2. Data protection and security cap (replaces the second definition, DPA 11.2).</strong>
+&quot;For claims arising from a personal data breach, a breach of our Data Processing Agreement or of our security obligations, our total liability will not be more than twice the Annual Fees, and never more than GBP 250,000. This replaces the cap in the paragraph above for those claims and does not add to it. In any 12 month period our total liability for all claims together will not be more than twice the Annual Fees. If you need a higher limit, ask us and we may agree one for an extra charge.&quot;
+Risk: medium. Needs the insurance fact stated truthfully before it is relied on. The &quot;ask for a higher limit&quot; sentence is the Goodlife style factor.</p>
+<p><strong>C3. Exclusions (replaces the paragraph at terms.md:113 that begins &quot;Velstrian shall not be liable&quot;).</strong>
+&quot;We are not liable for loss of profit, revenue, savings, goodwill, customers, business or contracts, for the loss of a bid, tender or opportunity, or for any decision a buyer makes about your bid, whether the loss is direct or indirect. We are not liable for indirect or consequential loss. We are not liable for loss or corruption of data except that we will take reasonable steps to restore your data from our most recent backup.&quot;
+Risk: medium for the data sentence. A flat exclusion of data loss in a service that stores customer data is a UCTA s3 target. The backup duty copies the Xero approach (s65) and is easier to defend.</p>
+<p><strong>C4. What is never limited (keep, add one phrase).</strong>
+&quot;Nothing in these Terms limits our liability for death or personal injury caused by negligence, for fraud or fraudulent misrepresentation, or for anything else the law does not allow us to limit or exclude.&quot;
+Risk: none. Required by UCTA s2(1). Do not add &quot;gross negligence&quot; or &quot;wilful misconduct&quot; (see guardrails).</p>
+<p><strong>C5. Customer content and misuse indemnity (new, section 3 or 5).</strong>
+&quot;You are responsible for your content and for how you use Velstrian. You will cover us for losses, including reasonable legal costs, that we suffer from a claim by someone else that your content, or your use of Velstrian in breach of these Terms, infringes their rights or breaks the law.&quot;
+Market: 6 of 7. UCTA s4 [Unverified, from the Act as known] is aimed at consumer indemnities, so a business to business customer indemnity is not caught by it.
+Risk: low.</p>
+<p><strong>C6. No supplier IP indemnity. Add this sentence to section 5.</strong>
+&quot;We do not give an indemnity for claims about your use of AI output. You are responsible for checking AI output before you use it. If someone claims that part of the Velstrian software itself infringes their rights, tell us and we will, at our choice, fix it, replace it or end your subscription and refund the fees for the period you cannot use it.&quot;
+Risk: low legally, commercial risk with larger buyers. If an IP indemnity is ever agreed, make it software only and inside the general cap.</p>
+<p><strong>C7. Warranty and sole remedy (replaces terms.md:125 plus adds the remedy).</strong>
+&quot;We provide Velstrian with reasonable skill and care and so that it works materially as described in our documentation. If it does not, tell us within 30 days of noticing. We will fix it. If we cannot fix it within 30 days, either of us can end your subscription and we will refund the fees you paid for the period after that date. This is your only remedy for that failure. The 99.5% monthly uptime figure is a target, not a promise, and no credits are due if we miss it. Apart from this, Velstrian is provided as it is and as available, and we give no other warranty the law lets us leave out.&quot;
+Risk: low. Follows HubSpot 10.1, Intercom 9.1 and Zendesk 8.2. Carve out AI output accuracy (D359, no refund for an inaccurate output) so the two refund rules do not clash.</p>
+<p><strong>C8. Time limit for claims (new, section 6).</strong>
+&quot;Any claim against us must be brought within 12 months of the date you first knew, or should reasonably have known, of the event behind it.&quot;
+Market: 1 of 7 (HubSpot 12.3). Default English contract limitation is six years [Unverified: Limitation Act 1980 s5, from memory]. Risk: medium. UCTA s13 [Unverified, from the Act as known] treats a clause that shortens remedies like an exclusion, so it must itself be reasonable. Optional, the owner may skip it.</p>
+<p><strong>C9. DPA liability link (DPA 11 and the app /dpa page).</strong>
+&quot;Our liability under this DPA counts towards the limits in the Terms and does not add to them. This does not affect any right a person has under Article 82 UK GDPR. Where we pay compensation for damage that you were responsible for, we may claim back that share from you.&quot;
+Market: HubSpot 12.3 and Atlassian 9.3 link DPA liability to the main agreement, Xero, Zendesk and monday.com say the DPA prevails and do not restate a cap. <strong>Measured inconsistency:</strong> the repository DPA (clause 11.1 and 11.2) restates both caps, the Terms state them again, and the app page <code>web/app/(legal)/dpa/page.tsx:205</code> says only &quot;Liability under this DPA is subject to the limitations in the Terms of Service&quot;. State the figures once, in the Terms, and let the DPA and the app page cross refer. That answers counsel question A-02 item 2 (one set of caps).
+Risk: low.</p>
+<p><strong>C10. Audit (DPA 10.2).</strong>
+&quot;First, we will give you our latest security documentation and answer reasonable written questions. If that does not meet what the law requires, you may audit us once in any 12 months, on 30 days&#39; written notice, in working hours, subject to confidentiality and without access to other customers&#39; data. You pay the cost, including our reasonable time. A regulator&#39;s request, or a personal data breach affecting your data, allows an extra audit.&quot;
+Market: report first in 5 of 5 DPAs read. Once a year in HubSpot 7, Atlassian 7.1, Zendesk 3.4, monday.com 6.2 (4 of 5). Notice: Atlassian 60 days, Zendesk 30, monday.com 14. Cost to customer in Atlassian 7.2 and Zendesk 3.4. Note Xero and HubSpot rely on a SOC 2 report and ISO certificate. <strong>We must not say certified</strong> (D255, we follow ISO 27001 without a certificate), so the clause says &quot;security documentation&quot;.
+Risk: low. Art 28(3)(h) forbids removing the right, not limiting how it is used.</p>
+<p><strong>C11. Sub-processors (DPA 6.4).</strong>
+&quot;We will tell you at least 30 days before a new sub-processor starts, by email to the billing contact and on the public sub-processor page. If we must replace a sub-processor sooner for security or continuity, we will tell you as soon as we can. You may object on reasonable data protection grounds within 14 days of the notice. If we cannot resolve it, you may end the affected service and we will refund prepaid fees for it. This is your only remedy for the objection.&quot;
+Market notice: 30 days at Xero 1.6, HubSpot 5, Atlassian 4.2, Zendesk 2.2. monday.com publishes and gives 7 days to object. Our current 7 to 30 days (DPA 6.4, D358) is shorter than 4 of 5. Objection window: Xero 14 days, HubSpot 30, Zendesk 30, monday.com 7. Sole remedy: Atlassian 4.3, monday.com 5.3. Pro rata refund: Zendesk 2.3.
+Risk: low to medium. Art 28(2) needs the customer to have a chance to object, so a short notice is a counsel point (D358 was an owner decision, so this is a question).</p>
+<p><strong>C12. Assistance costs (DPA 8.1, new 8.3).</strong>
+&quot;Help through the product&#39;s own export, delete and settings tools is included. For other help with requests from individuals, data protection impact assessments or regulator contact, we may charge our reasonable costs and will give you an estimate first.&quot;
+Market: HubSpot Sec 4 customer reimburses commercially reasonable costs. monday.com 6.1 and 11.1 &quot;at Customer&#39;s cost&quot;. Xero 1.7 requests at the customer&#39;s expense. Atlassian and Zendesk silent. Ours silent.
+Risk: low.</p>
+<p><strong>C13. Transfers (DPA 7, wording only).</strong>
+&quot;Where we or a sub-processor sends personal data outside the UK, we rely on UK adequacy regulations (including the UK extension to the Data Privacy Framework for a certified US recipient), or otherwise the UK International Data Transfer Agreement or the UK Addendum to the EU Standard Contractual Clauses.&quot;
+Market: Atlassian Sched 2 1.5, HubSpot 8.5, Zendesk Annex III and monday.com 9.1 name the Data Privacy Framework. Ours names IDTA and SCCs (DPA 7 and Schedule 1 rows 7 and 8). <strong>We must confirm each US sub-processor is certified before naming the framework</strong> [Unverified].
+Risk: low.</p>
+<p><strong>C14. Suspension and changes (Terms section 3 detail, section 10).</strong>
+&quot;If you do not pay by the due date, we may suspend your access after 10 days&#39; written notice and end your subscription if it is still unpaid 30 days after the due date. We may suspend access at once where your use threatens the security of the service or breaks the law.&quot; and &quot;We will give you at least 30 days&#39; notice of a material change to these Terms by email. If you do not accept it, you can cancel before it takes effect. Using Velstrian after the date means you accept the change.&quot;
+Market: non payment suspension on 10 days notice at HubSpot 4.4.2 and Atlassian 10.4, Xero 7 days. Changes notice 30 days in Atlassian 20.9 and Zendesk 11.4, Xero 60 days (reasonable endeavours). Intercom and Atlassian let the customer object. Our 14 days is shorter than every comparator that states a figure.
+Risk: low. A refund on cancellation after a change is optional, the owner&#39;s call under D359 style.</p>
+<p><strong>C15. Governing law (terms.md:135-137, small add).</strong>
+&quot;These Terms are governed by the laws of England and Wales and the courts of England and Wales have exclusive jurisdiction. Before starting court proceedings, each of us will first try to settle the dispute by talking, for at least 30 days. Either of us may ask a court for urgent relief at any time.&quot;
+Market: Xero s79 and FreeAgent English law. Intercom 16.3(a) 30 day pre dispute step. Risk: low.</p>
+<h2>Section 4. DPA table (ours / market)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Ours</th>
+<th>Market (5 DPAs)</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Processor liability link</td>
+<td>DPA 11 restates both caps (doc), app page links to Terms (page:205)</td>
+<td>HubSpot 12.3 and Atlassian 9.3 link to main cap. Others silent</td>
+<td>Fix inconsistency, C9</td>
+</tr>
+<tr>
+<td>Audit</td>
+<td>Once per 12 months, 30 days, customer&#39;s cost, documents first (DPA 10.2)</td>
+<td>Report first 5 of 5. Once a year 4 of 5. Notice 14 to 60 days. Cost on customer in 2 of 5</td>
+<td>In line, add the breach and regulator exceptions and name the reliance order, C10</td>
+</tr>
+<tr>
+<td>Sub-processor notice</td>
+<td>7 to 30 days (DPA 6.4)</td>
+<td>30 days in 4 of 5</td>
+<td>Weaker than market for the customer, stronger for us. Counsel question, C11</td>
+</tr>
+<tr>
+<td>Objection and remedy</td>
+<td>14 days, terminate affected service, pro rata refund</td>
+<td>Atlassian and monday.com sole remedy terminate. Zendesk pro rata refund</td>
+<td>In line. Add &quot;only remedy&quot;</td>
+</tr>
+<tr>
+<td>Assistance costs</td>
+<td>Silent</td>
+<td>HubSpot, monday.com, Xero charge. Atlassian, Zendesk silent</td>
+<td>Gap, C12</td>
+</tr>
+<tr>
+<td>Deletion and return</td>
+<td>Return window 30 days then 30 days deletion then backup purge 30 to 90 days (deletion policy)</td>
+<td>Atlassian 6.2 per documentation. HubSpot per product terms. Xero cl 1.10 keeps a copy 7 years</td>
+<td>In line, no change</td>
+</tr>
+<tr>
+<td>Transfers</td>
+<td>IDTA or SCCs with UK Addendum (DPA Schedule 1 rows 7, 8)</td>
+<td>SCCs with UK Addendum in all, Data Privacy Framework named in 4</td>
+<td>Add framework wording after certification is checked, C13</td>
+</tr>
+<tr>
+<td>Breach notice</td>
+<td>72 hours from awareness (D459)</td>
+<td>72 hours Atlassian and HubSpot, 48 hours Zendesk, none in 3</td>
+<td>Done, no change</td>
+</tr>
+</tbody></table></div>
+<h2>Section 5. Ranked list of clause changes (for the follow-up edit)</h2>
+<ol>
+<li>C1 general cap becomes 1x fees paid or payable, drop the fixed floor (owner D314 reversal).</li>
+<li>C2 data protection cap becomes 2x fees, ceiling GBP 250,000, replaces not adds, higher limit by request.</li>
+<li>C3 exclusions add goodwill, savings and bid outcome, and swap flat data loss exclusion for the backup restore duty.</li>
+<li>C9 state the figures once, DPA and app page cross refer, Article 82 sentence.</li>
+<li>C7 limited warranty with a sole remedy, 99.5% is a target, no credits.</li>
+<li>C5 customer content and misuse indemnity.</li>
+<li>C6 no supplier IP indemnity, with the software only fix and refund sentence.</li>
+<li>C14 suspension on non payment and 30 days notice of changes.</li>
+<li>C10 audit order, exceptions and cost.</li>
+<li>C11 sub-processor 30 days, sole remedy (counsel question first).</li>
+<li>C12 assistance costs.</li>
+<li>C8 and C15 12 month claims window (optional) and a 30 day talk step.</li>
+</ol>
+<h2>Owner decisions</h2>
+<ol>
+<li><strong>General cap.</strong> Option A: 1x fees paid or payable, no pound floor (recommended, 0 of 7 comparators have a floor). Option B: keep GBP 2,500 (current). Option C: add a smaller floor such as GBP 500.</li>
+<li><strong>Data protection cap.</strong> Option A: 2x fees ceiling GBP 250,000, replacing the general cap for those claims (recommended). Option B: fold into the general cap (lowest exposure, the 5 of 7 position, higher UCTA s11(4) challenge risk once insurance is bound). Option C: keep today&#39;s insurance linked cap to GBP 250,000.</li>
+<li><strong>IP indemnity.</strong> Option A: none at launch (recommended, Xero and FreeAgent give none). Option B: software only, inside the cap.</li>
+<li><strong>Time limit for claims (C8).</strong> Option A: include 12 months. Option B: skip it (recommended if the owner wants zero UCTA s13 risk).</li>
+<li><strong>Sub-processor notice (C11).</strong> Option A: 30 days with an emergency exception (recommended, counsel to confirm). Option B: keep 7 to 30 days (D358).</li>
+<li><strong>Change of Terms (C14).</strong> Option A: 30 days and a right to cancel before it takes effect, no refund wording added (recommended). Option B: add a refund of prepaid fees for the period after the change (Intercom).</li>
+</ol>
+<h2>Risk flags (UCTA)</h2>
+<ol>
+<li>Removing or keeping a floor does not itself risk UCTA, but a cap far below the likely loss in a data breach is the s11(4) target once cover exists. The cap can pass only if the cover and the &quot;ask for a higher limit&quot; route are real.</li>
+<li>A flat &quot;loss of data&quot; exclusion for a product that holds customer documents is the weakest existing clause (s3). C3 mends it.</li>
+<li>Standard terms accepted online by small firms is the Kingsway Hall and Last Bus fact pattern. The cure is a modest, market shaped cap, not a lower one.</li>
+<li>The 12 month claims window shortens remedies and itself needs to be reasonable.</li>
+<li>Nothing here can change what a data subject can claim under Art 82. The cap limits only the customer&#39;s claim against us.</li>
+<li>All wording stays DRAFT (D442) until counsel confirms.</li>
+</ol>
+<h2>Sources</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Source</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>Xero UK terms of use s59 to s79</td>
+<td><a href="https://www.xero.com/uk/legal/terms/">https://www.xero.com/uk/legal/terms/</a></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>FreeAgent terms</td>
+<td><a href="https://www.freeagent.com/terms/">https://www.freeagent.com/terms/</a></td>
+</tr>
+<tr>
+<td>T3</td>
+<td>Atlassian Customer Agreement 11, 14, 15, 20.9</td>
+<td><a href="https://www.atlassian.com/legal/customer-agreement">https://www.atlassian.com/legal/customer-agreement</a></td>
+</tr>
+<tr>
+<td>T4</td>
+<td>Zendesk Main Services Agreement 7 to 11</td>
+<td><a href="https://www.zendesk.co.uk/company/agreements-and-terms/main-services-agreement/">https://www.zendesk.co.uk/company/agreements-and-terms/main-services-agreement/</a></td>
+</tr>
+<tr>
+<td>T5</td>
+<td>Intercom Terms of Service s3.6, 9, 12, 13, 16</td>
+<td><a href="https://www.intercom.com/legal/terms-and-policies">https://www.intercom.com/legal/terms-and-policies</a></td>
+</tr>
+<tr>
+<td>T6</td>
+<td>HubSpot customer terms s9, 10, 12</td>
+<td><a href="https://legal.hubspot.com/terms-of-service">https://legal.hubspot.com/terms-of-service</a></td>
+</tr>
+<tr>
+<td>T7</td>
+<td>Responsive Terms of Service s9, 10, 17</td>
+<td><a href="https://www.responsive.io/terms-of-service">https://www.responsive.io/terms-of-service</a></td>
+</tr>
+<tr>
+<td>D1</td>
+<td>Xero DPA Part A and B</td>
+<td><a href="https://www.xero.com/uk/legal/terms/data-processing/">https://www.xero.com/uk/legal/terms/data-processing/</a></td>
+</tr>
+<tr>
+<td>D2</td>
+<td>HubSpot DPA s3 to 12</td>
+<td><a href="https://legal.hubspot.com/dpa">https://legal.hubspot.com/dpa</a></td>
+</tr>
+<tr>
+<td>D3</td>
+<td>Atlassian DPA s4 to 9</td>
+<td><a href="https://www.atlassian.com/legal/data-processing-addendum">https://www.atlassian.com/legal/data-processing-addendum</a></td>
+</tr>
+<tr>
+<td>D4</td>
+<td>Zendesk data processing form s2, 3, 4, 5</td>
+<td><a href="https://www.zendesk.co.uk/company/data-processing-form/">https://www.zendesk.co.uk/company/data-processing-form/</a></td>
+</tr>
+<tr>
+<td>D5</td>
+<td>monday.com DPA s5, 6, 8, 9</td>
+<td><a href="https://monday.com/l/privacy/dpa/">https://monday.com/l/privacy/dpa/</a></td>
+</tr>
+<tr>
+<td>L1</td>
+<td>UCTA 1977 s11</td>
+<td><a href="https://www.legislation.gov.uk/ukpga/1977/50/section/11">https://www.legislation.gov.uk/ukpga/1977/50/section/11</a></td>
+</tr>
+<tr>
+<td>L2</td>
+<td>UK GDPR Article 82</td>
+<td><a href="https://www.legislation.gov.uk/eur/2016/679/article/82">https://www.legislation.gov.uk/eur/2016/679/article/82</a></td>
+</tr>
+<tr>
+<td>L3</td>
+<td>Commentary on Goodlife, Last Bus, Kingsway Hall (secondary)</td>
+<td><a href="https://www.ashfords.co.uk/insights/articles/wide-exclusion-of-liability-considered-as-reasonable-under-ucta">https://www.ashfords.co.uk/insights/articles/wide-exclusion-of-liability-considered-as-reasonable-under-ucta</a> and <a href="https://lancashirebusinessview.co.uk/latest-news-and-features/the-enforceability-of-terms-and-conditions">https://lancashirebusinessview.co.uk/latest-news-and-features/the-enforceability-of-terms-and-conditions</a></td>
+</tr>
+</tbody></table></div>
+<p>Quote basis: the fetch tool returns a model summary of each page, so the quoted fragments above are as that summary reported them. Clause numbers should be re-checked against the live page before any wording is published.</p>
+
+</article>
+</main></body></html>

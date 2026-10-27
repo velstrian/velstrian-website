@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Legal page review B-01 to B-12, owner questions, 2026-10-26</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Legal page review B-01 to B-12, owner questions, 2026-10-26</h1>
+<p><span class="rv-row">R285-LEGAL-KIRO-B-OWNER-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/legal/KIRO-B-REVIEW-OWNER-QUESTIONS-2026-10-26.md</code>, rendered from <code>39d06411a</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-LEGAL-KIRO-B-OWNER-01 &middot; OPEN</span><span class="rtitle">Kiro legal review owner questions: B-02 three Terms caps that do not reconcile, B-07 RTO and RPO with no timed restore, B-12 Data Protection Officer title, B-04 Sentry alert recipients</span><p>WAITS ON OWNER. Options and recommendations in docs/release-2.8.5/legal/KIRO-B-REVIEW-OWNER-QUESTIONS-2026-10-26.md: B-02 A (one overall annual ceiling with the general cap inside it, then counsel), B-07 A (target wording plus one timed restore on staging, RULE 0-G yes first), B-12 A (data protection contact unless a formal Article 37 DPO is appointed), B-04 invite platform@velstrian.com to Sentry, mobile push, a non working day reader. ON-CALL.md now records the 72 hour clock and the bank holiday risk. Added 2026-10-26 (R285-LEGAL-KIRO-B-FOLLOWUP-01): C-02 two free dashboard steps, enforce a second factor for every admin login and turn on GitHub organisation velstrian 2FA (two_factor_requirement_enabled false), not changed by an agent. Q4 TLS badge (D289) and S1 line (D290), recommend A &quot;TLS 1.3 where supported&quot;. Q5 the 72 hour breach clock is not operationally backed until the out of hours Sentry alert exists, recommend the DPA draft banner stays until the alert is created and one test reaches a phone, not on a documented alert.</p></div></section>
+<article class="doc">
+<h1>Legal page review B-01 to B-12, owner questions, 2026-10-26</h1>
+<p><strong>Source:</strong> advisory review by Kiro (not a solicitor&#39;s opinion), items B-01 to B-12. Each item was treated as a claim and checked against the page source before anything changed. <strong>Status:</strong> five owner questions (B-02, B-07, B-12, Q4 TLS badge, Q5 breach clock) and three dashboard steps (B-04 Sentry, admin second factor, GitHub organisation 2FA). Nothing below changes a legal figure. The draft labels stay until counsel confirms (A-448).</p>
+<h2>What was fixed without a question (factual accuracy only)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Verdict</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B-01</td>
+<td>Genuine. DPA clause 7 said &quot;Customer personal data is hosted in the UK/EEA&quot; while the sub-processor page names providers outside it</td>
+<td>Clause 7 now says the primary store is in the UK and EEA, and named sub-processors on the sub-processor page process it outside, under the IDTA or the SCCs with the UK Addendum</td>
+</tr>
+<tr>
+<td>B-03</td>
+<td>Genuine. The Terms carried a draft banner, the DPA carried none</td>
+<td>The DPA now shows the same draft banner, from the platform source</td>
+</tr>
+<tr>
+<td>B-04</td>
+<td>Genuine as a gap in the written path, not in the clause</td>
+<td><code>ON-CALL.md</code> now records the 72 hour clock (D459), the Friday evening worst case and the bank holiday risk. The dashboard step is below</td>
+</tr>
+<tr>
+<td>B-05</td>
+<td>Genuine. DPA clause 5 said &quot;we respond within 72 hours&quot;, the Privacy Policy says one calendar month</td>
+<td>Acknowledge within 72 hours, give the customer what it needs within one calendar month</td>
+</tr>
+<tr>
+<td>B-06</td>
+<td>Genuine for six lines of Annex II</td>
+<td>Each line was measured. Untrue lines were replaced by the real control (table below)</td>
+</tr>
+<tr>
+<td>B-08</td>
+<td>Partly genuine</td>
+<td>Supabase entity and address confirmed from Supabase&#39;s own DPA. Google already confirmed. Anthropic entity confirmed, address still not published</td>
+</tr>
+<tr>
+<td>B-09</td>
+<td>Genuine. The Privacy Policy restated a partial list</td>
+<td>It now points to the sub-processor page as the single list</td>
+</tr>
+<tr>
+<td>B-10</td>
+<td>Genuine. &quot;Claude Sonnet 4.6&quot; was pinned on the Privacy Policy and the security page</td>
+<td>Both now say &quot;Anthropic&#39;s current Claude models&quot;</td>
+</tr>
+<tr>
+<td>B-11</td>
+<td>Genuine</td>
+<td>DPA clause 7 now names a transfer risk assessment where the law requires one. <strong>The assessment itself is not yet written</strong> (R285-LEGAL-KIRO-A04-01), so the page states the obligation and does not claim a document on file</td>
+</tr>
+</tbody></table></div>
+<h3>Annex II, line by line (B-06)</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Line as it stood</th>
+<th>Measured</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Role-based access control with least-privilege defaults</td>
+<td>Roles and capability matrix exist</td>
+<td>True, kept</td>
+</tr>
+<tr>
+<td>Mandatory MFA for all administrative access</td>
+<td><code>require_aal2_for_sensitive_action</code> lets a user with no MFA factor through. GitHub organisation <code>velstrian</code> returns <code>two_factor_requirement_enabled: false</code></td>
+<td>Not true. Reworded to MFA for every user with a server side step up for sensitive actions once a factor is enrolled</td>
+</tr>
+<tr>
+<td>Quarterly access reviews</td>
+<td>SoA A.5.18: no periodic review</td>
+<td>Not true. Replaced by role based grants that can be withdrawn at once, including ending sessions and revoking tokens</td>
+</tr>
+<tr>
+<td>TLS 1.3 for all data in transit</td>
+<td><code>app.velstrian.com</code> and <code>api.velstrian.com</code> complete a TLS 1.2 handshake</td>
+<td>Not true. Reworded to TLS 1.2 or higher, TLS 1.3 where the client supports it, HSTS preload</td>
+</tr>
+<tr>
+<td>AES-256 at rest for database and object storage</td>
+<td>Vendor default, not read by us</td>
+<td>Reworded to encryption at rest managed by the hosting provider, plus our own AES-256-GCM for stored integration credentials</td>
+</tr>
+<tr>
+<td>Hardware-backed key storage via Supabase and Cloudflare</td>
+<td>No evidence</td>
+<td>Removed</td>
+</tr>
+<tr>
+<td>Continuous PITR retained for 35 days</td>
+<td>Plan <code>pro</code>, PITR add-on unreadable, no restore tested (SoA A.8.13)</td>
+<td>Not true as stated. Replaced by automated daily backups managed by the provider</td>
+</tr>
+<tr>
+<td>Automated daily backup integrity checks</td>
+<td>No evidence</td>
+<td>Removed. Replaced by the documented backup and restore procedure and continuity plan</td>
+</tr>
+<tr>
+<td>24 hour RTO, 1 hour RPO targets</td>
+<td>No timed restore. BCP says 2 hours RTO</td>
+<td>Kept unchanged, owner question B-07</td>
+</tr>
+<tr>
+<td>Centralised audit logging</td>
+<td>Append-only <code>audit_log</code></td>
+<td>True, kept</td>
+</tr>
+<tr>
+<td>Sentry with PII scrubbing</td>
+<td><code>log_scrubbing.py</code>, Sentry PII off</td>
+<td>True, internal jargon removed</td>
+</tr>
+<tr>
+<td>SAST, secret scanning and dependency audits on every pull request</td>
+<td><code>ci.yml</code> on pull requests: Bandit and ESLint, TruffleHog, npm audit (doc only and Dependabot PRs skip)</td>
+<td>True, now &quot;every code pull request&quot;, plus the pre-commit secret hook and the key rotation runbook. GitHub secret scanning is not enabled and is not proposed</td>
+</tr>
+<tr>
+<td>(new) Weekly scans</td>
+<td><code>weekly-security-scan.yml</code> and the ZAP scan, Mondays (D291)</td>
+<td>Added, true</td>
+</tr>
+</tbody></table></div>
+<p>Supabase security advisors on production and staging list no leaked password protection warning, which reads as that protection being on for both. A missing lint could also mean the advisor did not check, so the owner may confirm it in Authentication, Settings.</p>
+<h2>Question 1 (B-02). Three liability caps that do not reconcile</h2>
+<p>Terms section 6 says (1) general cap: the Annual Fees, (2) data protection and security cap: twice the Annual Fees, never more than GBP 250,000, replacing the general cap for those claims, and (3) in the full clause text only: &quot;In any 12 month period our total liability for all claims together will not be more than twice the Annual Fees&quot;. The summary card and the table do not mention (3).</p>
+<p>The conflict: (3) can let general claims reach twice the Annual Fees once a data claim exists, and it can cut a data claim below GBP 250,000 when two claims fall in one year. A reader cannot tell which wins.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>One reconciling sentence</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A (recommended)</td>
+<td>&quot;In any 12 month period our total liability for all claims together, of every kind, will not be more than twice the Annual Fees and never more than GBP 250,000, and within that total, claims other than data protection and security claims will not be more than the Annual Fees.&quot;</td>
+<td>Keeps all three numbers, makes one overall ceiling and puts the general cap inside it</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Delete sentence (3)</td>
+<td>Two caps only, each per claim set. Simplest, but no overall annual ceiling</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Keep (3) and add it to the card and table as a third row</td>
+<td>Shows the reader all three, leaves the overlap for counsel</td>
+</tr>
+</tbody></table></div>
+<p>Recommended: A, then counsel confirms it (A-02). The figures stay the owner&#39;s. Card, table and clause are made consistent only after your answer.</p>
+<h2>Question 2 (B-07). RTO and RPO read as a promise with no timed restore</h2>
+<p>Annex II says &quot;Documented incident-response runbook with 24-hour RTO, 1-hour RPO targets&quot;. No restore has ever been timed (SoA A.8.13, evidence pack 2026-10-25), the PITR add-on is unconfirmed, and <code>BCP.md</code> says a 2 hour RTO. A 1 hour RPO needs PITR, daily backups give up to 24 hours.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Wording</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A (recommended)</td>
+<td>&quot;We aim to restore service within 24 hours and to lose no more than 24 hours of data. These are targets, not commitments.&quot; and run one timed restore on staging</td>
+<td>Restore drill on staging: a scratch project may carry a small Supabase charge, so it needs your RULE 0-G yes first</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Keep the current line and run the drill before the draft label comes off</td>
+<td>Same drill cost</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Remove the RTO and RPO line until a drill has run</td>
+<td>None</td>
+</tr>
+</tbody></table></div>
+<p>Recommended: A. Answer with &quot;B-07 A&quot; and whether the staging drill may run.</p>
+<h2>Question 3 (B-12). &quot;Data Protection Officer&quot;</h2>
+<p>The Privacy Policy names a &quot;Data Protection Officer&quot; in three places (aside card, section heading, footer ledger) with <code>dpo@velstrian.com</code>. Under UK GDPR Article 37 a formal DPO is only required for large scale monitoring or special category data, and naming one brings Article 38 and 39 duties (independence, reporting to the highest level, no conflict).</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A (recommended, unless a DPO is formally appointed)</td>
+<td>Rename to &quot;data protection contact&quot;, keep <code>dpo@velstrian.com</code> working</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Keep &quot;Data Protection Officer&quot; because one is formally appointed, and name the role holder internally</td>
+</tr>
+</tbody></table></div>
+<p>Question: is a formal Article 37 DPO appointed? Answer &quot;B-12 A&quot; or &quot;B-12 B&quot;.</p>
+<h2>Dashboard step (B-04)</h2>
+<p>The breach clock stays at 72 hours from awareness. Sentry has 5 issue alert rules (4 enabled notification rules and the AI routes spike rule 1417258), and email actions reach organisation members only, today <code>contact@velstrian.com</code>. No tool here can read who receives each rule, so this is yours:</p>
+<ol>
+<li>Sentry, Settings, Members, invite <code>platform@velstrian.com</code> so alerts also reach the platform mailbox.</li>
+<li>Turn on Sentry mobile push for the high priority and AI route rules.</li>
+<li>Agree who reads the alert inbox once on each non working day, because a bank holiday weekend can pass 72 hours before the first read.</li>
+</ol>
+<p>Nothing here costs money.</p>
+<h2>Follow up sweep, 2026-10-26 (R285-LEGAL-KIRO-B-FOLLOWUP-01)</h2>
+<p>Every control claim on Terms, Privacy, DPA, Sub-processors, Retention, Security and the security evidence pack was held against DPA Annex II. Fixed as factual accuracy:</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Sentence as it stood</th>
+<th>Now</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Retention</td>
+<td>&quot;Backup snapshots (encrypted), 35 days rolling&quot; and &quot;Supabase Point-In-Time Recovery snapshots are taken continuously and retained for up to 35 days&quot;</td>
+<td>Daily encrypted backups kept 7 days on our current plan (Supabase Pro). No PITR window is stated</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>&quot;Disk-level AES-256-GCM with automatic key rotation&quot;</td>
+<td>AES-256 at rest with provider managed keys (supabase.com/security, read 2026-10-26), plus our own AES-256-GCM for stored integration credentials</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>&quot;Forward-secret HTTPS ... and modern cipher suites only&quot;</td>
+<td>Forward secret, TLS 1.3 where the browser supports it, TLS 1.2 otherwise. Measured 2026-10-26: static RSA suites refused, CBC SHA1 suites with ECDHE accepted</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>&quot;in transit using TLS 1.3&quot; and ledger &quot;TLS 1.3, HSTS&quot;</td>
+<td>TLS 1.2 or higher, TLS 1.3 where supported</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>&quot;multi-factor authentication at the identity layer&quot; under &quot;enforced in depth&quot;</td>
+<td>multi-factor authentication available to every user</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>&quot;Model responses are post-processed before storage to strip provider metadata&quot;</td>
+<td>No such step exists. Now says every call is recorded in the cost and audit ledger with model and provider</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>&quot;A Data Processing Agreement is available ... on request&quot;</td>
+<td>It is published at /dpa/, still a draft</td>
+</tr>
+<tr>
+<td>Privacy</td>
+<td>&quot;session replays are retained for 30 days&quot;</td>
+<td>Session replay is not turned on (no replay integration in <code>web/instrumentation-client.ts</code>)</td>
+</tr>
+<tr>
+<td>Privacy</td>
+<td>&quot;documented Transfer Risk Assessments (TRAs)&quot;</td>
+<td>A transfer risk assessment where the law requires one. The TRA is not yet written (R285-LEGAL-KIRO-A04-01)</td>
+</tr>
+</tbody></table></div>
+<p>Checked and true, kept: role based access, row level security, sessions ended by admins, audit log, Sentry scrubbing, static analysis and secret checks on every code pull request (TruffleHog in <code>ci.yml</code>, not GitHub secret scanning, which stays off), weekly scans, daily backups, 99.5% uptime target.</p>
+<p>Anthropic Ireland, Limited registered address stays in italics as being confirmed. One search found only a secondary site quoting company 760497 at South Bank House, Barrow Street, Dublin 4, and core.cro.ie returned 403, so it is not citable and is not used.</p>
+<h2>Question 4. The &quot;TLS 1.3 in transit&quot; badge and the S1 security line</h2>
+<p>D289 kept the badge &quot;TLS 1.3 in transit&quot;, and D290 approved the line &quot;Encrypted in transit with TLS 1.3 and at rest with AES-256.&quot; on the home page and /security/. Both read as if every connection uses TLS 1.3, while the hosts also accept TLS 1.2 and the DPA now says &quot;TLS 1.2 or higher ... with TLS 1.3 where the client supports it&quot;.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A (recommended)</td>
+<td>Badge &quot;TLS 1.3 where supported&quot;, line &quot;Encrypted in transit with TLS 1.3 where your browser supports it, and at rest with AES-256.&quot; One edit in <code>site-facts.json</code> reaches every page</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Keep both as D289 and D290 decided</td>
+</tr>
+</tbody></table></div>
+<p>Answer &quot;Q4 A&quot; or &quot;Q4 B&quot;.</p>
+<h2>Owner dashboard steps, both free</h2>
+<p>These are yours because they change production sign in and GitHub settings. Nothing here was changed by an agent.</p>
+<ol>
+<li><strong>Second factor for every admin account at login.</strong> Today <code>require_aal2_for_sensitive_action</code> lets an admin with no factor through, so Annex II says &quot;once a factor is enrolled&quot;. Enrol a TOTP factor or passkey on each of the four platform accounts and each Supabase dashboard login (Supabase, Account, Security, enable MFA). Cost: none.</li>
+<li><strong>GitHub organisation 2FA.</strong> GitHub, organisation <code>velstrian</code>, Settings, Authentication security, tick &quot;Require two-factor authentication for everyone&quot;. Measured: <code>two_factor_requirement_enabled: false</code>. Members without 2FA are removed until they enable it, so check every member has it first. Cost: none.</li>
+</ol>
+<p>When both are done, Annex II 8.1 can say &quot;Multi-factor authentication is required for all administrative access&quot;.</p>
+<h2>Question 5. The 72 hour breach clock and the DPA draft banner</h2>
+<p>The DPA promises notice within 72 hours of awareness. That is not operationally backed until the out of hours Sentry alert exists (B-04 steps above: platform mailbox as a member, mobile push, a named reader on non working days). <code>ON-CALL.md</code> documents the alert, but documenting it does not create it.</p>
+<p>Recommendation: keep the DPA draft banner until the alert is created and one test alert has reached a phone out of hours, as well as counsel&#39;s wording check (A-448). Do not remove the banner on the strength of a documented but not created alert.</p>
+<p>Answer &quot;Q5 yes&quot; to keep that condition, or name a different one.</p>
+<h2>Left open, not changed here</h2>
+<ul>
+<li>The sub-processor page lists 13 sub-processors and 3 customer authorised connectors, 16 in all. The 2026-10-25 evidence pack counts 17 in DPA Schedule 1 (14 in part A). The difference is not resolved here.</li>
+<li>The PITR add-on state is still unread. If it is on, the Retention page window changes to the PITR retention shown on the Supabase Backups page.</li>
+</ul>
+
+</article>
+</main></body></html>

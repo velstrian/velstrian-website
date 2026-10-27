@@ -61,6 +61,28 @@ const description =
   'For public and private buyers. Say what you need, collect every supplier reply in one place, see the proof in each, word for word, and track delivery after award. Your panel scores, not the AI.';
 
 const schema = [
+  /*
+   * SoftwareApplication. No aggregateRating and no review: this site does not
+   * publish ratings it cannot evidence. The offers are derived from BUYER_PLANS,
+   * exactly as /pricing does it, so the two pages cannot publish different
+   * prices for the same product.
+   */
+  {
+    '@type': 'SoftwareApplication',
+    name: PRODUCT_NAME_BUY,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: `${SITE.origin}/buy`,
+    description,
+    publisher: { '@type': 'Organization', name: PLATFORM_SHORT_NAME, url: `${SITE.origin}/` },
+    offers: BUYER_PLANS.filter((p) => p.monthly !== null).map((p) => ({
+      '@type': 'Offer',
+      name: p.name,
+      price: String(p.monthly),
+      priceCurrency: 'GBP',
+      url: `${SITE.origin}/pricing`,
+    })),
+  },
   {
     '@type': 'WebPage',
     name: title,

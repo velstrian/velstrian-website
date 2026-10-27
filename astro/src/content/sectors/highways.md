@@ -57,3 +57,5 @@ Public clients are National Highways and the councils that look after local road
 Highways bids are demanding for three reasons. Many schemes use contracts written for working together, so buyers expect a bid that shows how you will deliver, not only a price. Maintenance contracts run for years against published targets, and your promises follow you into delivery. And public buyers now score the good you do locally.
 
 For a team that is also running live works, keeping all of that accurate and consistent across many schemes is the real workload.
+
+Search open highways tenders with the [free Tender Finder](/tools/tender-finder/?sector=highways), or check tender requirements and word counts with the [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).

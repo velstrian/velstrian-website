@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Help centre placement: app host or website (R285-WEB-HELP-CENTRE-01)</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Help centre placement: app host or website (R285-WEB-HELP-CENTRE-01)</h1>
+<p><span class="rv-row">R285-WEB-HELP-CENTRE-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.8.5/website/HELP-CENTRE-PLACEMENT-2026-10-26.md</code>, rendered from <code>55096a637</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-WEB-HELP-CENTRE-01 &middot; WIP</span><span class="rtitle">Public help centre placement: move the 39 help articles from the app host to velstrian.com/help with one generated source, thin in-app links and 308 redirects</span><p>LEGAL PART BUILT 2026-10-26 (app side follow on lane, local, NOT pushed): D462 point 3 done. The five page modules moved byte identical to web/src/shared/legal/public-pages/&lt;route&gt;.tsx, loading files deleted, web/config/redirects.mjs LEGAL_REDIRECTS answers /dpa, /sub-processors, /residency, /retention and /refund-policy with permanent 308s to PRIMARY_MARKETING_ORIGIN/&lt;route&gt;/. In app links (legal footer, consent retention link, DPA acceptance URL, data use note, sub-processor notice, compliance and appearance data commitments) use the WEBSITE_* URLs and open a new tab. The app /accessibility statement, whose only way in was the legal footer, is linked from Settings &gt; Appearance &gt; Accessibility. Website generator reads the new path (crowagent-website 8d944ad2), check-help-centre --check PASS, every legal body unchanged (only the Source comment line). Guard help-centre-url.guard.test.ts now asserts the legal table and that no app page shadows it. A-445 flipped in the same commit (cdbdfed7e). Tests: web vitest 70 files 874 tests then 41 files 613 tests, all green after triage, tsc web 0 source errors (18 stale .next/types), tests 0, portal 0, arch-lint web, bff, responsive PASS. Earlier OPEN points (1) and (2) below are closed by this. APP SIDE BUILT, local commits 863fc11a3 (legal facts) and c5f0ad5c7 (help), leftovers 8b6b2c716 and website 8d152863 (A-467 /retention states Brevo send logs have no fixed limit yet until the owner sets the Brevo rule, A-468 owner action; PACKAGE-8 addenda and its rendered copy stop naming Upstash; privacy.md version kept 2026-10-25 on purpose: LEGAL_DOCUMENT_VERSIONS.privacy in web/src/shared/lib/legal/legal-documents.ts is what every D448 acceptance record stores and the Agree gate compares, so bumping it re-asks every user, and a processor removal adds no new processing so it needs no re-acceptance, lastUpdated already reads 2026-10-26), NOT pushed, ships with the website go live. ONE help base: WEBSITE_HELP_URL in web/src/shared/lib/website-urls.ts (PRIMARY_MARKETING_ORIGIN + /help/), helpers in web/src/shared/help/help-centre-url.ts. Every in app help link uses it and opens a new tab (sidebar need help, contextual guide, /support hub, assistant help and home tabs, first run, welcome video replay, both 404s, trial ended, rate limited, Zapier, sign in support link). web/config/redirects.mjs HELP_REDIRECTS: /help and /help/:slug (covers /help/contact) are permanent 308s to the website. app/help, HelpIndexClient, HelpArticleLayout, HelpVideoSection, split-help-article and help-articles-db DELETED, not shadowed (tests/a11y-route-manifest and routes-have-inbound-nav forbid a page under a redirect). /help left the sitemap and known-top-segments. KEPT in the app because they need the session: /support (tickets, signed in hub), the assistant, /knowledge-base (forwards to /support). CONTACT FORM: /api/contact/submit CORS already admits https://velstrian.com and www (MARKETING_DOMAINS), the preflight now sends Vary: Origin, support label names the website page, 3 tests added (velstrian apex, www, evil origin refused). Website CSP connect-src already names app.velstrian.com. DRIFT GUARD web/src/shared/help/help-centre-url.guard.test.ts: no app help link anywhere (no exemption list), the redirect table and no help page left, one article corpus, and the website help-centre.generated.json equals web/lib/help-articles.ts field by field (same range dash rule as the generator), RED PROVEN against the website file before the dash rule (2 articles). LEGAL FACTS (863fc11a3): Upstash moved to no longer engaged (September 2026) on /sub-processors, residency row removed, DPA Schedule 1 item 12 removed and 13 to 18 renumbered (OpenAI part C now 17 in the change record and tests), /retention names Brevo send logs instead of Resend. OWNER STEP: set the Brevo transactional log retention rule to 12 months (Brevo keeps logs with no limit until a rule is set, help.brevo.com 4415743225746), so the stated 12 months is true. OPEN (decision needed, not silently dropped): (1) D462 point 3, the five legal pages are NOT redirected yet. The website generator renders them from web/app/(legal)/&lt;route&gt;/page.tsx, so a redirect leaves them shadowed (the same two guards fail) and moving them breaks the generator path. Recommended: move the five page modules to web/src/features/legal/documents/&lt;route&gt;.tsx, the website lane changes one import path, then add the five 308s. (2) A-445 MARKETING_DOMAIN flip to velstrian.com not done here: measured 39 test files assert https://crowagent.ai plus the API mirror api/app/public_hosts.py and its parse guard, so it is its own lane. Until it flips, help links resolve on crowagent.ai. (3) The D305 steps first article split left with HelpArticleLayout, the website renders the full article. (4) Tests: web vitest batch 1 123 files collected (21 red, triaged), batch 2 40 files 743 tests, 739 pass, the 4 red are /agree in known-top-segments and inbound nav (another lane's new route), a pre existing /beta-request e2e literal, and one floor fixed after the run. Rerun of the fixed files 3 collected, 38 of 39 pass (the /beta-request literal). tsc web app and tests 0 errors outside stale .next/types from the build before the deletions, apps/portal 0. pytest test_r285_trust_openai_dpa_notice 15 passed. arch-lint-web (2 stale help allowances removed), bff, responsive PASS.</p></div></section>
+<article class="doc">
+<h1>Help centre placement: app host or website (R285-WEB-HELP-CENTRE-01)</h1>
+<p>Date 2026-10-26. Research only, no code changed. Every choice below is a question for the owner.</p>
+<h2>1. Owner question</h2>
+<p><code>staging-app.velstrian.com/help</code> works signed out and signed in. Why is it not on the website, like other enterprise SaaS? Answer: there is no good reason it lives on the app host. It was moved out of the login-gated dashboard in 2026-05 (BUG-005) so crawlers and anonymous visitors could read it, and it stayed on the app because that was the nearest public route.</p>
+<h2>2. What we have today (measured, comments ignored)</h2>
+<p>Corpus scanned: <code>crowagent-platform/web/app</code>, <code>web/lib</code>, <code>web/src/features/support</code>, <code>web/src/shared/{help,ui,lib/proxy}</code>, <code>crowagent-website/astro/src/{pages,content}</code>. A grep is a hint, each item below was confirmed by opening the file.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Routes: <code>/help</code>, <code>/help/[slug]</code>, <code>/help/contact</code> (3 route files plus layout)</td>
+<td><code>web/app/help/page.tsx</code>, <code>web/app/help/[slug]/page.tsx</code>, <code>web/app/help/contact/page.tsx</code>, <code>web/app/help/layout.tsx</code></td>
+</tr>
+<tr>
+<td>39 articles, all in one TypeScript file (1,502 lines)</td>
+<td><code>web/lib/help-articles.ts</code> (39 <code>slug:</code> entries)</td>
+</tr>
+<tr>
+<td>Content is not MDX and not DB. The <code>help_articles</code> table was empty on prod and staging, the DB read was removed</td>
+<td><code>web/lib/help-articles-db.ts</code> lines 4-40</td>
+</tr>
+<tr>
+<td>Prices, seats, credits and statutory figures in the articles resolve from governed constants at build time</td>
+<td><code>web/lib/help-articles-db.ts</code> lines 25-33, guard <code>web/lib/help-articles.billing-copy.test.ts</code></td>
+</tr>
+<tr>
+<td>Public, no login. Signed-in users get the dashboard shell, signed-out get <code>PublicShell</code></td>
+<td><code>web/app/help/layout.tsx</code>, <code>web/proxy.ts</code> lines 92-97, <code>web/src/shared/lib/proxy/route-classification.ts</code> (<code>/help</code> in public lists)</td>
+</tr>
+<tr>
+<td>Indexed: <code>robots: { index: true, follow: true }</code> and listed in the sitemap at priority 0.5</td>
+<td><code>web/app/help/layout.tsx</code>, <code>web/app/sitemap.ts</code> line 116</td>
+</tr>
+<tr>
+<td>Trial wall exempts <code>/help</code> so an expired trial can still read it</td>
+<td><code>web/proxy.ts</code> line 1279 onward</td>
+</tr>
+<tr>
+<td>Approved how-to video (1 entry) plays on <code>/help</code></td>
+<td><code>web/src/shared/help/help-videos.ts</code>, <code>HelpVideoSection.tsx</code></td>
+</tr>
+<tr>
+<td>Support form that works signed out</td>
+<td><code>web/app/help/contact/page.tsx</code></td>
+</tr>
+</tbody></table></div>
+<p>In-app surfaces that link to it (all hard-coded <code>/help</code> or <code>/help/&lt;slug&gt;</code>, same origin):</p>
+<ul>
+<li>Sidebar &quot;Help Centre&quot; item: <code>web/src/widgets/layout/sidebar.tsx</code></li>
+<li>&quot;Guide for this page&quot; link in every core screen header (opens a new tab): <code>web/src/shared/ui/ContextualHelpLink.tsx</code>, map in <code>web/src/shared/help/contextual-help.ts</code></li>
+<li><code>NeedHelpLink.tsx</code>, <code>HelpEntryButton.tsx</code>, settings page, login panels, trial-ended, not-found pages, rate-limited page, support page, knowledge-base page, first-run panel</li>
+<li>Floating CrowChat Help tab lists articles and links to <code>/help/&lt;slug&gt;</code> (<code>web/src/features/support/crowchat/components/HelpMode.tsx</code>, <code>articles.ts</code>)</li>
+<li>Help search box asks the AI via <code>POST /api/chat/public</code> (<code>web/src/features/support/HelpSearch.tsx</code> line 27). The signed-in chat reads article text through <code>articles.ts</code>, so the article file is also the AI help source.</li>
+</ul>
+<p>Other public pages on the app host (<code>route-classification.ts</code> public lists, <code>app/</code> tree): <code>/status</code> (live incidents from the DB, genuinely app data), <code>/changelog.xml</code> (feed), <code>/docs/test-mode</code>, <code>/pricing</code> (listed public), legal pages in <code>app/(legal)</code> (accessibility, dpa, refund-policy, residency, retention, sub-processors), <code>/respond/[token]</code> and <code>/sign/[token]</code> (token links, must stay in the app), <code>/supplier/</code>. Sitemap comments say <code>/pricing</code>, <code>/contact</code>, <code>/blog</code>, <code>/about</code>, <code>/security</code> were already removed or 308-redirected to the website under R283 and R262.</p>
+<p>Website today (<code>crowagent-website/astro/src</code>): no help or docs section. It has <code>faq.astro</code> (257 lines), <code>resources.astro</code>, <code>blog/</code> (12 posts), <code>glossary/</code> (2), <code>compare/</code> (4), <code>tools/</code> (tender finder and compliance matrix), <code>legal/</code> (accessibility, cookies, privacy, security, supplier-terms), <code>changelog.astro</code>, <code>search-index.json.ts</code>. Plan-level site search already exists.</p>
+<p>Overlap and duplication, measured:</p>
+<ul>
+<li>Legal: <code>accessibility</code> exists on both hosts (app <code>(legal)/accessibility</code>, website <code>content/legal/accessibility.md</code>). Security is a 308 from app to site already.</li>
+<li>Changelog: app <code>/changelog.xml</code> and website <code>changelog.astro</code>.</li>
+<li>Pricing: listed public on app, owned by website <code>pricing.astro</code>.</li>
+<li>FAQ and help: <code>faq.astro</code> answers overlap with help articles on pricing, plans and getting started. Not diffed line by line, this is a lane task.</li>
+<li>Glossary and PPN 026 guides on the website overlap with help topics on requirements.</li>
+</ul>
+<h2>3. How top SaaS do it</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Host and access</th>
+<th>App linking</th>
+<th>SEO</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Xero</td>
+<td>Own help subdomain <code>central.xero.com</code>, public</td>
+<td>In-product help icon shows articles matched to the current page, &quot;Get in touch&quot; at the foot of each article opens a case (<a href="https://blog.xero.com/product-updates/better-way-to-get-support/">Xero blog</a>)</td>
+<td>Public articles indexed by search engines</td>
+</tr>
+<tr>
+<td>HubSpot</td>
+<td><code>knowledge.hubspot.com</code>, public, with a separate &quot;Go to my account&quot; link (<a href="https://knowledge.hubspot.com/">knowledge.hubspot.com</a>)</td>
+<td>Deep links from the product to articles</td>
+<td>Public, searchable, &quot;Highest rated articles&quot;</td>
+</tr>
+<tr>
+<td>Atlassian</td>
+<td><code>support.atlassian.com</code>, public, &quot;Sign in&quot; is only a header option, support contact needs login (<a href="https://support.atlassian.com/">support.atlassian.com</a>)</td>
+<td>Product links to per-app support pages</td>
+<td>Public, indexed</td>
+</tr>
+<tr>
+<td>Loopio (bid tool)</td>
+<td><code>support.loopio.com</code>, public help centre organised by role, some resources need a login (<a href="https://support.loopio.com/hc/p/library_role_resources">search result</a>). Direct fetch returned 403 to our tool, so only the search summary was read</td>
+<td>Help Centre answers surface inside Microsoft Teams through an AI agent</td>
+<td>Public pages exist</td>
+</tr>
+</tbody></table></div>
+<p>Pattern: all four put knowledge on a separate public help subdomain, not on the app host. None sits behind login. The app only holds a thin link or a contextual widget, and anything that needs the customer&#39;s data (cases, account) stays behind login. I did not verify each vendor&#39;s robots or sitemap, so the SEO column is limited to what the pages showed.</p>
+<h2>4. Recommended model (one option, owner decides)</h2>
+<p><strong>Public help centre on the website at <code>velstrian.com/help</code>, one source of content, a thin in-app link layer.</strong></p>
+<p>Why path not subdomain: the website is one Cloudflare Pages project, a path costs no new DNS, no new project and no new certificate, and the Astro build, search index and sitemap already exist there. A <code>help.</code> subdomain adds a second Pages project for no gain at our size. This matches the vendor pattern in spirit (separate public knowledge surface) while staying on Cloudflare Free.</p>
+<p>What moves to the website:</p>
+<ul>
+<li>The 39 articles, <code>/help</code> index, article pages, and <code>/help/contact</code> (public form, posts to the existing <code>/api/contact/submit</code> on the app API, so the form stays working, only its page moves). Needs a cross-origin allow-list check, a lane task.</li>
+<li>Videos (<code>/videos/onboarding/*</code>) served from the website.</li>
+<li>Legal pages <code>(legal)/accessibility</code> is a duplicate and can redirect, DPA, sub-processors, residency, retention, refund policy are public legal text and belong on the website with the existing <code>legal/</code> collection. Owner question, not done here.</li>
+<li><code>/pricing</code> public entry on the app host should redirect to the website.</li>
+</ul>
+<p>What stays in the app:</p>
+<ul>
+<li>The contextual &quot;Guide for this page&quot; link (kept, now points to <code>https://velstrian.com/help/&lt;slug&gt;</code>), sidebar item (opens website), CrowChat Help tab (keeps its in-app search, links out to articles).</li>
+<li><code>/status</code> (reads live incident data), <code>/respond/[token]</code>, <code>/sign/[token]</code>, <code>/supplier/</code>, <code>/docs/test-mode</code>, <code>/changelog.xml</code> feed.</li>
+<li><code>/support</code> and <code>/knowledge-base</code> dashboard pages (need the customer&#39;s data and tickets).</li>
+</ul>
+<p>Single source of content: keep one file of articles and generate both outputs from it. Recommended: move the article source into the shared <code>@velstrian/tokens</code>-style workspace package or a JSON export produced by the platform build and committed into the website (Astro content collection). The governed figures (prices, seats, credits, PPN thresholds) currently resolve inside the TypeScript file at build, so the export must be built from that file, not hand-copied, or the RULE 0-C price guard is lost. The AI help (<code>/api/chat/public</code> and CrowChat <code>articles.ts</code>) keeps reading the same file. The website copy is a generated artefact with a guard test that fails if it drifts.</p>
+<p>Redirects: app <code>/help</code> and <code>/help/:slug</code> return 308 to <code>https://velstrian.com/help/:slug</code> (one rule in <code>web/proxy.ts</code> or <code>next.config.mjs</code>). Remove <code>/help</code> from the app sitemap and PUBLIC lists after the redirect lands. <code>/help/contact</code> redirects too. Trial wall exemption becomes moot.</p>
+<p>Effect on go-live (A-450): the website go-live does not need this. It can ship first without <code>/help</code>, because the app <code>/help</code> keeps working. Order if the owner agrees: (1) website ships, (2) help centre section built on the website and walked locally, (3) platform cutover adds the redirects and rewrites in-app links. Folding it into A-450 widens that push (a new section on a site about 300 commits ahead of live), so the recommendation is a follow-up push with its own approval and cost statement, not part of A-450. Effect on platform cutover: one proxy redirect rule plus link constants, and <code>help-links.ts</code> plus <code>contextual-help.ts</code> need a base URL constant (RULE 0-C, no hard-coded host).</p>
+<p>Cost: GBP 0 recurring. Website is Cloudflare Pages on the Free plan, no help desk product, no new project, no cron, no CI workflow. One push to the website (explicit owner approval, RULE 0-G) and one platform promote.</p>
+<p>Size estimate (lanes and files):</p>
+<ul>
+<li>Lane A (builder): export script plus Astro <code>help</code> route (index, article, search via existing search-index), 3 pages or components, 1 generated data file, 1 drift guard test. About 8 files.</li>
+<li>Lane B (builder): app side. Redirect rule, base URL constant, 6 to 8 in-app link files, sitemap, route-classification, trial-wall, tests updated. About 14 files.</li>
+<li>Lane C (researcher or mechanic): diff <code>faq.astro</code> against help articles and remove duplicates, move legal pages decided by the owner. About 6 files.
+Total 3 lanes, about 28 files.</li>
+</ul>
+<h2>5. Public app pages: move or noindex</h2>
+<ul>
+<li>Move to website: help (above), <code>/pricing</code> public entry, duplicate accessibility page, DPA, sub-processors, residency, retention, refund-policy (owner choice).</li>
+<li>Keep but set <code>noindex</code>: <code>/status</code> is a live app page, <code>/docs/test-mode</code>, any <code>/supplier/</code> and token routes (confirm they already carry noindex, not checked here).</li>
+<li>Not measured: whether <code>/docs/test-mode</code> and <code>/supplier/</code> currently emit a robots tag.</li>
+</ul>
+<h2>6. Decision list for the owner</h2>
+<ol>
+<li>Where does public help live? Options: (a) <code>velstrian.com/help</code> on the website, recommended, (b) <code>help.velstrian.com</code> second Pages project, (c) leave on the app host and only add noindex or links.</li>
+<li>Include it in the A-450 push or ship it as its own later push? Recommended: later, own approval.</li>
+<li>Move the public legal pages (DPA, sub-processors, residency, retention, refund) to the website too? Recommended: yes, same lane, separate sub-decision per document if counsel prefers to review.</li>
+<li>Single source mechanism: generated export from the platform article file. Recommended over hand-copying.</li>
+<li><code>/help/contact</code> form: keep posting to the app API from the website page. Recommended, avoids a new backend.</li>
+</ol>
+<h2>7. Sources</h2>
+<ul>
+<li><a href="https://central.xero.com/">https://central.xero.com/</a> (blocked to the fetch tool, described via <a href="https://blog.xero.com/product-updates/better-way-to-get-support/">https://blog.xero.com/product-updates/better-way-to-get-support/</a>)</li>
+<li><a href="https://knowledge.hubspot.com/">https://knowledge.hubspot.com/</a></li>
+<li><a href="https://support.atlassian.com/">https://support.atlassian.com/</a></li>
+<li><a href="https://support.loopio.com/hc/p/library_role_resources">https://support.loopio.com/hc/p/library_role_resources</a></li>
+</ul>
+
+</article>
+</main></body></html>
