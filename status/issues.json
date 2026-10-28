@@ -1765,8 +1765,8 @@
       "src": "WEB-BOARD reconciliation 2026-10-26, R285-REBRAND-TAWK-01",
       "sev": "P3",
       "title": "Tawk chat on the website: renamed Velstrian, property URL app.velstrian.com, logo and colours pending",
-      "status": "OPEN",
-      "note": "privacy.md and security.md describe the Tawk chat widget. Platform row R285-REBRAND-TAWK-01 is OPEN BLOCKED (dashboard session conflict, D451): property name, chat title, welcome and offline messages, avatar, widget colours, transcript sender and allowed site list still carry crowagent. Owner action in the Tawk dashboard, widget must show the Quantum V mark and brand tokens. || Owner action in the Tawk dashboard. Closes at the D472 step 4 go live. || OPEN, PROGRESS 2026-10-27 - Tawk property renamed Velstrian, URL https://velstrian.com, widget 1jr43vp8q colour #6C63FF (brand iris), property image already the Velstrian logo. Evidence: Claude in Chrome run reported by the owner 2026-10-27, all as contact@velstrian.com. Remaining: the Knowledge Base (velstrian.tawk.help) support email has no field in the admin page, and Ticketing shows only a read-only Tawk forwarding address.",
+      "status": "FIXED",
+      "note": "privacy.md and security.md describe the Tawk chat widget. Platform row R285-REBRAND-TAWK-01 is OPEN BLOCKED (dashboard session conflict, D451): property name, chat title, welcome and offline messages, avatar, widget colours, transcript sender and allowed site list still carry crowagent. Owner action in the Tawk dashboard, widget must show the Quantum V mark and brand tokens. || Owner action in the Tawk dashboard. Closes at the D472 step 4 go live. || OPEN, PROGRESS 2026-10-27 - Tawk property renamed Velstrian, URL https://velstrian.com, widget 1jr43vp8q colour #6C63FF (brand iris), property image already the Velstrian logo. Evidence: Claude in Chrome run reported by the owner 2026-10-27, all as contact@velstrian.com. Remaining: the Knowledge Base (velstrian.tawk.help) support email has no field in the admin page, and Ticketing shows only a read-only Tawk forwarding address. || FIXED 2026-10-28 - measured by Claude in the Tawk dashboard: property name Velstrian, property URL https://velstrian.com, property image the Velstrian logo, widget Velstrian Support active, Domain Restriction off so no crowagent site list exists. The Knowledge Base support email and the Ticketing forwarding address have no editable field in Tawk, so nothing is left to change.",
       "changed": "2026-10-26",
       "changedAt": "2026-10-26T01:40:49.444Z"
     },
@@ -1955,8 +1955,8 @@
       "src": "session",
       "sev": "P2",
       "title": "Google and Microsoft sign-in screens show the old CrowAgent logo, and browsers show the cached old app favicon",
-      "status": "WIP",
-      "note": "WIP 2026-10-27 - Favicon fix committed in crowagent-platform 0b92d552a (version query on icon links, ships with the next platform deploy). Still to do: replace the Google Cloud Branding logo and the Microsoft Entra app registration logo with C:\\Users\\bhave\\Downloads\\velstrian-logo-120.png and velstrian-logo-240.png.",
+      "status": "BUILT",
+      "note": "WIP 2026-10-27 - Favicon fix committed in crowagent-platform 0b92d552a (version query on icon links, ships with the next platform deploy). Still to do: replace the Google Cloud Branding logo and the Microsoft Entra app registration logo with C:\\Users\\bhave\\Downloads\\velstrian-logo-120.png and velstrian-logo-240.png. || BUILT 2026-10-28 - Google and Microsoft sign in screens rebranded (owner confirmed, done by Claude in Chrome on contact@velstrian.com). Live https://app.velstrian.com/favicon.svg is the Velstrian mark. The cache busting fix 0b92d552a (version query on the icon links) is not live yet: the production login page still links /favicon.svg with no ?v= query. Closes FIXED when that commit reaches production.",
       "changed": "2026-10-27",
       "changedAt": "2026-10-27T13:31:26.183Z"
     },
@@ -1985,8 +1985,8 @@
       "src": "seo",
       "sev": "P2",
       "title": "Search Console and Bing Webmaster setup for velstrian.com",
-      "status": "WIP",
-      "note": "Gemini in the owner's Chrome. GSC on contact@velstrian.com: sitemap submitted, 96 pages, Success. Bing: sitemap submitted, Processing, 25 key URLs being submitted. Next: GSC URL indexing requests. Per Gemini report, not yet measured by Claude. Platform row R285-P3-WEB-SEARCH-CONSOLE-SETUP-01.",
+      "status": "FIXED",
+      "note": "Gemini in the owner's Chrome. GSC on contact@velstrian.com: sitemap submitted, 96 pages, Success. Bing: sitemap submitted, Processing, 25 key URLs being submitted. Next: GSC URL indexing requests. Per Gemini report, not yet measured by Claude. Platform row R285-P3-WEB-SEARCH-CONSOLE-SETUP-01. || FIXED 2026-10-28 - owner confirmed done. Google Search Console on contact@velstrian.com: sitemap submitted, 96 pages, Success. Bing Webmaster: sitemap submitted. Claude cannot sign in to either console, so this closes on the owner confirmation.",
       "changed": "2026-10-27",
       "changedAt": "2026-10-27T18:17:30.625Z"
     },
