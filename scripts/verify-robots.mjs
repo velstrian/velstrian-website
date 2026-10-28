@@ -12,7 +12,7 @@
 //
 // Exit code 0 = all assertions pass. Non-zero = at least one failure (message printed).
 
-const ORIGIN = process.env.ROBOTS_ORIGIN || "https://crowagent.ai";
+const ORIGIN = process.env.ROBOTS_ORIGIN || "https://velstrian.com";
 const ROBOTS_URL = `${ORIGIN}/robots.txt`;
 const LLMS_URL = `${ORIGIN}/llms.txt`;
 

@@ -406,7 +406,7 @@ async function main() {
 
   let server = null;
   let base = null;
-  if (OPT.live) base = 'https://crowagent.ai';
+  if (OPT.live) base = 'https://velstrian.com';
   else if (OPT.base) base = OPT.base.replace(/\/+$/, '');
 
   const urlFor = base ? (route) => `${base}${route}` : null;

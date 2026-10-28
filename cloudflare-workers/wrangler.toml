@@ -29,13 +29,11 @@ workers_dev = false
 
 [env.production]
 name = "crowagent-marketing-edge-cache"
-routes = [
-  { pattern = "crowagent.ai/", zone_name = "crowagent.ai" },
-  { pattern = "crowagent.ai/pricing", zone_name = "crowagent.ai" },
-  { pattern = "crowagent.ai/pricing/", zone_name = "crowagent.ai" },
-  { pattern = "crowagent.ai/products", zone_name = "crowagent.ai" },
-  { pattern = "crowagent.ai/products/*", zone_name = "crowagent.ai" },
-]
+# [DOMAIN-RELEASE row 36, D474] The crowagent.ai zone is removed
+# (docs/release-2.8.5/CROWAGENT-ZONES-DNS-BACKUP-2026-10-27.md) and had no worker routes
+# bound, so the route patterns are deleted. Re-add velstrian.com patterns here only if an
+# edge-cache worker is ever bound to the velstrian zone.
+routes = []
 
 [env.production.vars]
 ORIGIN = "https://crowagent-website.pages.dev"
@@ -43,9 +41,7 @@ EDGE_TTL_SECONDS = "3600"
 
 [env.staging]
 name = "crowagent-marketing-edge-cache-staging"
-routes = [
-  { pattern = "staging.crowagent.ai/*", zone_name = "crowagent.ai" },
-]
+routes = []
 
 [env.staging.vars]
 ORIGIN = "https://staging.crowagent-website.pages.dev"
@@ -64,11 +60,7 @@ name = "crowagent-tools-bot-conditional"
 main = "tools-bot-conditional.ts"
 compatibility_date = "2026-05-06"
 compatibility_flags = ["nodejs_compat"]
-routes = [
-  { pattern = "crowagent.ai/tools", zone_name = "crowagent.ai" },
-  { pattern = "crowagent.ai/tools/", zone_name = "crowagent.ai" },
-  { pattern = "crowagent.ai/tools/*", zone_name = "crowagent.ai" },
-]
+routes = []
 
 [env.tools_production.vars]
 ORIGIN = "https://crowagent-website.pages.dev"
@@ -80,11 +72,7 @@ name = "crowagent-tools-bot-conditional-staging"
 main = "tools-bot-conditional.ts"
 compatibility_date = "2026-05-06"
 compatibility_flags = ["nodejs_compat"]
-routes = [
-  { pattern = "staging.crowagent.ai/tools", zone_name = "crowagent.ai" },
-  { pattern = "staging.crowagent.ai/tools/", zone_name = "crowagent.ai" },
-  { pattern = "staging.crowagent.ai/tools/*", zone_name = "crowagent.ai" },
-]
+routes = []
 
 [env.tools_staging.vars]
 ORIGIN = "https://staging.crowagent-website.pages.dev"
