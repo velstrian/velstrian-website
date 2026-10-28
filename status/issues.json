@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T01:55:36.439Z",
+  "updated": "2026-10-28T23:31:52.177Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2065,10 +2065,20 @@
       "src": "R285-CROWAGENT-TOOLS-REMOVAL-01",
       "sev": "P2",
       "title": "crowagent.ai 301 redirect intentionally gone after the zone was deleted, website repo crowagent leftovers remain",
-      "status": "WIP",
-      "note": "crowagent.ai zone deleted on owner order, so the 301 to velstrian.com is gone by design. Leftovers still in this repo: CNAME, wrangler.toml routes, site-facts.json, audit-release.mjs, verify-robots.mjs. In Kiro Wave B. Evidence: crowagent-platform docs/release-2.8.5/CROWAGENT-ZONES-DNS-BACKUP-2026-10-27.md (Removal log).",
+      "status": "FIXED",
+      "note": "crowagent.ai zone deleted on owner order, so the 301 to velstrian.com is gone by design. Leftovers still in this repo: CNAME, wrangler.toml routes, site-facts.json, audit-release.mjs, verify-robots.mjs. In Kiro Wave B. Evidence: crowagent-platform docs/release-2.8.5/CROWAGENT-ZONES-DNS-BACKUP-2026-10-27.md (Removal log). || 2026-10-28 measured by Claude: CNAME and wrangler.toml crowagent routes already gone; last two crowagent.ai comments in scripts/audit-release.mjs and scripts/verify-robots.mjs repointed to velstrian.com. Remaining site-facts.json hits are the banned-host guard (status.crowagent.ai) and dated historical evidence, kept on purpose. crowagent.ai 301 gone by owner design.",
       "changed": "2026-10-28",
-      "changedAt": "2026-10-28T01:55:36.439Z"
+      "changedAt": "2026-10-28T23:31:51.449Z"
+    },
+    {
+      "id": "A-491",
+      "src": "owner 2026-10-28",
+      "sev": "P2",
+      "title": "SEO and AI discovery: www and velstrian.co.uk redirect to velstrian.com, AI crawlers allowed, Bing Webmaster set up",
+      "status": "FIXED",
+      "note": "Measured by Claude 2026-10-28: http://www.velstrian.com and velstrian.co.uk (apex and www) 301 to https://velstrian.com/ keeping path and query; Cloudflare AI bot block, Bot Fight Mode and WAF rules off; robots.txt allows GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended and more; bingbot, GPTBot, ClaudeBot, PerplexityBot, Googlebot all get 200; llms.txt and sitemap.xml (96 URLs) 200. Copilot gap was Bing not indexing the new domain: owner set up Bing Webmaster Tools 2026-10-28. Crawler Hints handed to Gemini.",
+      "changed": "2026-10-28",
+      "changedAt": "2026-10-28T23:31:52.177Z"
     }
   ],
   "directives": [
@@ -2138,5 +2148,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 491
+  "nextId": 492
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// verify-robots.mjs — AI-crawler regression guard for crowagent.ai.
+// verify-robots.mjs — AI-crawler regression guard for velstrian.com.
 //
-// Purpose: crowagent.ai deliberately ALLOWS AI-discovery crawlers (ClaudeBot,
+// Purpose: velstrian.com deliberately ALLOWS AI-discovery crawlers (ClaudeBot,
 // GPTBot, CCBot, Google-Extended, PerplexityBot, OAI-SearchBot) because the
 // marketing content is exactly the corpus we want surfaced in AI-search answers.
 // This script fails loudly if that policy silently regresses, most commonly when

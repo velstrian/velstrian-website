@@ -74,7 +74,7 @@
  * ── USAGE ───────────────────────────────────────────────────────────────────
  *
  *   npm run audit:release                 built artefact at astro/dist
- *   npm run audit:release -- --live       https://crowagent.ai
+ *   npm run audit:release -- --live       https://velstrian.com
  *   npm run audit:release -- --base=http://localhost:8095
  *   npm run audit:release -- --lh-all     Lighthouse on all 45 routes, slow
  *   npm run audit:release -- --mobile     mobile preset instead of desktop
