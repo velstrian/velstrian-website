@@ -9,7 +9,7 @@
   every gap as a tracker row and shows every recorded and open decision.
 
   SOURCES, AND NOTHING ELSE. Every claim on this page comes from committed
-  files in crowagent-platform:
+  files in velstrian-platform:
     docs/release-2.8.5/ai-strategy/EXTERNAL-RESEARCH-2026-10-24.md (1bb2d1d5f)
     docs/release-2.8.5/ai-strategy/INTERNAL-AI-AUDIT-2026-10-24.md (2d18cfc2a)
     docs/release-2.8.5/design/MODEL-CHOICE-MULTI-PROVIDER-DESIGN-2026-10-24.md
@@ -38,12 +38,20 @@
   24 October 2026), the model choice design paper, the DPA and the pricing catalogue, and decisions D322
   and D328 to D349. <b>All new model work is on hold under D339</b> (owner, 24 October 2026, "let me
   think first"). Fixes to the AI already running are not new model work and go ahead. Section 21 lists
-  every decision: 23 recorded, 18 still open.</p>
+  every decision: 23 recorded, 18 still open on 24 October.</p>
+  <p class="dated"><b>Re-measured 29 October 2026.</b> The model state moved after this page was written.
+  Under D447 (owner, 25 October 2026) every Gemini surface moved to the Gemini 3 family (<code>gemini-3.8-flash</code>
+  and <code>gemini-3.1-pro-preview</code> in <code>api/app/services/ai/model_registry.py</code>) and the Gemini 2.5 ids
+  were retired, because Google answers 404 for them on the Velstrian project key. The 2.5 model names in the tables
+  below describe the audit of 24 October and are history. Also decided since: token mode charging (D457), AI off
+  at once on a failed payment (D487), and the off surfaces (D482 to D484), which answers open decision 8.
+  Production Railway holds both a Gemini and an Anthropic key, measured by variable name on 29 October 2026.
+  The 18 open decisions were not re-counted, treat that figure as the 24 October count.</p>
 </div>
 
 <div class="kpi">
   <div><b>3.1 of 5</b><span>audit score across 10 dimensions. Careful and honest, thinly measured</span></div>
-  <div><b>1 provider</b><span>Google Gemini 2.5 runs almost every customer AI feature, with no second provider behind it</span></div>
+  <div><b>1 provider</b><span>Google Gemini (the 3 family since D447, 25 October 2026) runs almost every customer AI feature, with Claude as a tested fallback</span></div>
   <div><b>3 vendors</b><span>Google and Anthropic in use. OpenAI agreed as a sub-processor (D329), not connected, on hold</span></div>
   <div><b>23 decided</b><span>D322, D328 to D349 recorded. 18 decisions still open, in the order to ask</span></div>
   <div><b>0 P0</b><span>no live customer harm found. 24 audit gaps, now joined by 39 new rows from this review</span></div>
@@ -93,8 +101,8 @@
 
 <div class="cards">
   <div class="card"><span class="no">1. Biggest risk</span><h4>One provider, legacy models</h4>
-  <p>Gemini 2.5 runs nearly every customer feature. Google limits 2.5 to past users and gives no notice
-  period in days. Claude is already in the DPA and could stand behind it, once D339 lifts.</p></div>
+  <p>On 24 October Gemini 2.5 ran nearly every customer feature and Google had limited 2.5 to past users. That legacy risk was
+  closed by D447 on 25 October, the single provider risk remains. Claude is already in the DPA and could stand behind it, once D339 lifts.</p></div>
   <div class="card ok"><span class="no">2. Decided, to build</span><h4>Credential cards, never a block</h4>
   <p>D341: a credential your record does not show gets a card beside the sentence: we hold it,
   underway, remove, or keep with a comment. Recorded for the PPN 017 statement.</p></div>
@@ -203,7 +211,8 @@ customer at once, and none of them needs customer content (D344).</p>
 
 <p>The platform names <b>56 AI surfaces</b> (a surface is one AI feature with its own model, budget
 and checks). About <b>37 are live</b> for customers or background jobs, 10 serve the internal
-founders portal, 6 are dead with no caller, and 1 is used only by tests. The models are
+founders portal, 6 are dead with no caller, and 1 is used only by tests. As measured on 24 October the models were
+(on 29 October 2026 the two Gemini 2.5 ids are replaced by <code>gemini-3.8-flash</code> and <code>gemini-3.1-pro-preview</code>, D447)
 <code>gemini-2.5-pro</code>, <code>gemini-2.5-flash</code>, <code>claude-sonnet-4-6</code>,
 <code>claude-haiku-4-5</code> and <code>claude-opus-4-8</code>, plus <code>gemini-embedding-001</code>
 for search. No OpenAI model runs anywhere: the client raises an error on any id that is not Claude or
@@ -1261,7 +1270,7 @@ recommendation. Every surface name, price and source sits behind a plus sign or 
 expert reader. Nothing was dropped to make it short.</div>
 
 <p class="sm">Prepared by Velstrian Tenderworks, 24 October 2026, revision 2. Sources:
-<code>crowagent-platform/docs/release-2.8.5/ai-strategy/INTERNAL-AI-AUDIT-2026-10-24.md</code>,
+<code>velstrian-platform/docs/release-2.8.5/ai-strategy/INTERNAL-AI-AUDIT-2026-10-24.md</code>,
 <code>EXTERNAL-RESEARCH-2026-10-24.md</code> in the same folder, the model choice design paper,
 <code>docs/legal/data-processing-agreement.md</code>, <code>packages/pricing/catalogue.ts</code> and
 <code>docs/release-2.8.4/scope/DECISION-GATES.md</code>. Where this page and those files disagree, the

@@ -1,18 +1,10 @@
-<!-- [R27-ARCH-01] architecture-review.html is a COPY of crowagent-platform/tools/arch-visualizer/index.html.
-     It lives here because the status server serves crowagent-website/status only.
-     A copy that can drift is a defect, so status/check-architecture-copy.mjs compares
-     the two and fails if they diverge. Edit the SOURCE, then re-copy.
-     [R285-REBRAND refresh 2026-10-24] Re-synced after the Velstrian rebrand: title, product
-     framing, headings and visible labels moved to Velstrian Tenderworks, Velstrian Bid and
-     Velstrian Buy, and the live app and portal host labels to velstrian.com. The review body
-     remains the Release 2.7 revalidation of 2026-08-16 and its measured figures carry that date. -->
 <!-- Contents re-measured against production 2026-08-19; prod commit 37173e87. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velstrian Tenderworks Platform Architecture Review (body revalidated for Release 2.7, 2026-08-16, hosts and names refreshed 2026-10-24)</title>
+    <title>Velstrian Tenderworks Platform Architecture Review (body revalidated for Release 2.7, 2026-08-16, re-measured 2026-10-29)</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -672,7 +664,7 @@
   means it was wrong when written. Unmarked prose is narrative, not a measurement.
   <br>
   <strong>What this page still is not.</strong> It is hand-authored and has no gate on its CONTENT.
-  The only gate is <code>crowagent-website/status/check-architecture-copy.mjs</code>, which proves the
+  The only gate is <code>velstrian-website/status/check-architecture-copy.mjs</code>, which proves the
   served copy matches this source; it cannot tell whether either is true. It drifts the moment the
   code moves.
   <br>
@@ -759,9 +751,51 @@
                     internal key <span class="code-path">council</span>). The internal keys, table names and routes keep
                     the old spelling on purpose (D298). The body of this review below was revalidated for Release 2.7 on
                     2026-08-16 and its measured figures carry that date, so it names the old product words in places that
-                    were not re-measured today. Production tip today is <span class="code-path">b6eb7dadc</span> (Release
-                    2.8.5 phase 2).
+                    were not re-measured today. Production tip today is <span class="code-path">f89e959</span> (Release
+                    2.8.5 live, see the 29 October 2026 block below).
                 </p>
+                <div class="fact-box">
+                <div class="fact-title"><span>&#128204;</span> Re-measured 2026-10-29: what has overtaken the August body</div>
+                <p style="color:var(--text-muted)">
+                    Every figure in the body below was measured on 2026-08-16 to 2026-08-19 and is kept as that
+                    record. Every <span class="code-path">crowagent.ai</span> host and every <span class="code-path">crowmark</span>
+                    or <span class="code-path">council</span> name in it is the name in use when it was measured. These
+                    facts were re-measured on 2026-10-29 and supersede it:
+                </p>
+                <ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+                    <li><strong>Hosts.</strong> App <span class="code-path">app.velstrian.com</span>, portal
+                    <span class="code-path">portal.velstrian.com</span>, API <span class="code-path">api.velstrian.com</span>,
+                    website <span class="code-path">velstrian.com</span> (Cloudflare Pages), and
+                    <span class="code-path">velstrian.co.uk</span> and <span class="code-path">velstrian.uk</span> answer 301 to it. The
+                    crowagent.ai zones are no longer in the Cloudflare account, and <span class="code-path">app.crowagent.ai</span>
+                    answers 404. The portal and the staging hosts answer 302 to Cloudflare Access without a token.</li>
+                    <li><strong>Repositories.</strong> <span class="code-path">velstrian/velstrian-platform</span>,
+                    <span class="code-path">velstrian/velstrian-website</span>, <span class="code-path">velstrian/velstrian-branding</span> and
+                    <span class="code-path">velstrian/velstrian-local-archive</span>. Every other repository is now
+                    <span class="code-path">velstrian-legacy-*</span>. The local folders take the same names when the rename kit runs at
+                    the end of the 2026-10-29 session.</li>
+                    <li><strong>Production.</strong> Vercel web <span class="code-path">dpl_BRSrSEnTv6TkrJ5TgngcST1mXS67</span> and portal
+                    <span class="code-path">dpl_5TAT5WLw7kRUaWzAFV7j66CPgAv3</span>, both READY on the production target. The API runs on Railway
+                    <span class="code-path">velstrian-api</span> (branch <span class="code-path">railway-production</span>, region
+                    <span class="code-path">europe-west4</span>) beside <span class="code-path">velstrian-worker</span>. Supabase production
+                    <span class="code-path">gujtuecjzfiqsdnzgyvo</span> (Postgres 17, eu-west-1) holds 442 public tables, 1,166 RLS policies,
+                    4 users and 1 organisation. <span class="code-path">api.velstrian.com/readyz</span> reports Supabase, Brevo, Stripe and rate limit storage all ok.</li>
+                    <li><strong>Edge.</strong> Cloudflare Free plan, DNSSEC active on all three zones, SSL Full (strict) on velstrian.com,
+                    minimum TLS 1.2, DMARC <span class="code-path">p=quarantine</span>.</li>
+                    <li><strong>Code names.</strong> The code folders were renamed from crowmark and council to bid and buy
+                    (<span class="code-path">web/app/api/bid</span>, <span class="code-path">web/app/api/buy</span>,
+                    <span class="code-path">api/app/routers/bid</span>, <span class="code-path">api/app/services/bid_tier.py</span>), and the
+                    <span class="code-path">crowmark_*</span> tables are now <span class="code-path">bid_*</span> (107 tables) with 24
+                    <span class="code-path">buy_*</span> tables and 2 <span class="code-path">council_*</span> tables left. Several paths named in the August body no
+                    longer exist for that reason.</li>
+                    <li><strong>Prices, public endpoint 2026-10-29.</strong> Bid Starter &pound;49, Pro &pound;149, Portfolio &pound;549 a month.
+                    Buy Pro &pound;299 and Buy Portfolio &pound;699 a month, each 10 percent cheaper billed annually. The August Buy
+                    prices (&pound;3,600, &pound;9,600, &pound;19,200 a year) are gone. Credits per month are 200, 750 and 3,000 on the three
+                    Bid plans, the free state carries 0 credits and the trial is 7 days with 30 credits.</li>
+                    <li><strong>AI.</strong> Every Gemini surface moved to the Gemini 3 family (D447) and the 2.5 ids are retired.</li>
+                    <li><strong>Release.</strong> Release 2.8.5 is live on production. The release after it is R2.9.</li>
+                </ul>
+                </div>
                 <p class="section-desc">
                     Velstrian has moved from a multi-product SME compliance monorepo to a platform built around
                     <strong>Velstrian Bid</strong>, the UK public and private sector bid management suite, and its buy-side sibling
@@ -1530,7 +1564,7 @@
                 </p>
                 <p style="color:var(--text-muted);margin-top:.75rem">
                     <strong>This page does not correct the trackers</strong> &mdash; they are edited in
-                    <span class="code-path">crowagent-platform</span>, not here. The disagreement is recorded so that the header
+                    <span class="code-path">velstrian-platform</span>, not here. The disagreement is recorded so that the header
                     note above (&ldquo;where this page disagrees with the trackers, this page is wrong&rdquo;) is not applied
                     blindly: <strong>on these six rows the trackers are the stale surface and the database is the truth.</strong>
                 </p>

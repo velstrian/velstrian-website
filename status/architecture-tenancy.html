@@ -67,12 +67,14 @@
   <p class="title">Tenancy and data isolation</p>
   <p class="lede">Can a public body or a large enterprise be given its own database, and should it
   be? The decision is recorded now, and only one value is reachable.</p>
-  <p class="dated">Updated 24 October 2026. The product names were refreshed to Velstrian Bid and
-  Velstrian Buy (the internal keys <code>crowmark</code> and <code>council</code> are kept, D298),
-  the app host now reads velstrian.com from <code>packages/server-infra/src/public-hosts.mjs</code>,
-  and the migration count was re-counted at 1,067 files. The tenancy and row level security
-  analysis itself was written against the code on 16 August 2026 with catalogue figures re-counted
-  18 August, and that code level analysis was not re-measured today, so its figures carry their
+  <p class="dated">Updated 29 October 2026. Re-measured on 29 October 2026 from production Supabase (1 organisation, 1
+  catalogue row, 1,166 RLS policies across 442 public tables, every table with row level security on)
+  and the git tree (1,118 migration files, file paths and route names checked to exist, the
+  code folders were renamed from crowmark and council to bid and buy). The product names are Velstrian Bid and
+  Velstrian Buy (the internal keys <code>crowmark</code> and <code>council</code> are kept in some table and
+  Stripe key names, D298) and the app host reads velstrian.com from <code>packages/server-infra/src/public-hosts.mjs</code>.
+  The line level code analysis (the 17 seam consumers, the 418 bypass call sites, the line numbers) was written
+  on 16 August 2026 and re-counted 18 August, and was not re-counted today, so those figures carry their
   August dates and the evidence stays folded under each claim. Prepared by Velstrian Tenderworks.</p>
 </div>
 
@@ -90,10 +92,10 @@
 
 
 <div class="bar" style="margin:18px 0 6px">
-  <div class="stat"><b>13</b><span>organisations</span></div>
+  <div class="stat"><b>1</b><span>organisation (13 on 18 August, 29 October 2026 count)</span></div>
   <div class="stat"><b>1</b><span>database</span></div>
-  <div class="stat"><b style="color:var(--fixed)">13</b><span>catalog rows, all pooled</span></div>
-  <div class="stat"><b style="color:var(--fixed)">515</b><span>RLS policies</span></div>
+  <div class="stat"><b style="color:var(--fixed)">1</b><span>catalog row, pooled (29 October 2026)</span></div>
+  <div class="stat"><b style="color:var(--fixed)">1,166</b><span>RLS policies (515 on 16 August, 29 October 2026 count)</span></div>
   <div class="stat"><b style="color:var(--wip)">17</b><span>seam consumers</span></div>
   <div class="stat"><b style="color:var(--open)">0</b><span>on the supplier side</span></div>
   <div class="stat"><b style="color:var(--open)">418</b><span>RLS-bypass call sites</span></div>
@@ -132,15 +134,15 @@
   The seam that chooses a tenant's database is read on every buyer request by seventeen non-test
   consumers, sixteen buyer API routes and one page (re-counted 18 August 2026, up from twelve).
   It reads one table. Until 17 August 2026 that table held <strong>zero rows against thirteen
-  production organisations</strong>, so every tenant resolved to pooled by fallback rather than by
+  production organisations</strong> (the production database now holds one organisation, 29 October 2026), so every tenant resolved to pooled by fallback rather than by
   a decision anyone had recorded. The catalogue is now backfilled, ten organisations on staging and
-  thirteen on production, with a trigger so it cannot empty again on the next signup. Every row
+  thirteen on production at that time (one row for the one organisation today), with a trigger so it cannot empty again on the next signup. Every row
   records <strong>pooled</strong>, because pooled is the only value the code can honour.
 </p>
 
 <figure>
 <svg class="fig" viewBox="0 0 900 210" role="img" aria-labelledby="tntitle0">
-  <title id="tntitle0">Thirteen production organisations now resolve through a populated catalog table, and every recorded decision is pooled</title>
+  <title id="tntitle0">The production organisations resolve through a populated catalog table, and every recorded decision is pooled</title>
   <defs>
     <marker id="tnm0a" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh" d="M0,0 L8,4 L0,8 z"/></marker>
     <marker id="tnm0b" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-warn" d="M0,0 L8,4 L0,8 z"/></marker>
@@ -162,7 +164,7 @@
   <rect class="chip" x="138" y="82" width="30" height="22" rx="4"/>
   <rect class="chip" x="174" y="82" width="30" height="22" rx="4"/>
   <rect class="chip" x="210" y="82" width="30" height="22" rx="4"/>
-  <text class="big2" x="30" y="140">13</text>
+  <text class="big2" x="30" y="140">1</text>
   <text class="sm" x="66" y="140">organisations, every one of them pooled</text>
 
   <path class="e" d="M292,90 L328,90" marker-end="url(#tnm0a)"/>
@@ -214,8 +216,8 @@
     </p>
     <p>
       <b>It is not a control that reaches nothing.</b> Twelve non-test files consume the seam, plus
-      the module itself: ten route files under <code>web/app/api/council/</code> and two pages
-      under <code>web/app/(dashboard)/public-sector/</code>. A static guard test globs the buyer
+      the module itself: ten route files under <code>web/app/api/buy/</code> and two pages
+      under <code>web/app/(dashboard)/buyer/</code>. A static guard test globs the buyer
       API route tree and fails CI if a route touches the database without importing the resolver,
       or mints its own client.
     </p>
@@ -232,7 +234,7 @@
     </p>
     <p class="src">
       <code>web/src/shared/lib/tenant/datasource.ts:24,108</code> &middot;
-      <code>apps/portal/src/app/api/customers/[id]/provision-council/route.ts:133,147-148</code>
+      <code>apps/portal/src/app/api/customers/[id]/provision-buy/route.ts:133,147-148</code>
     </p>
     <p>
       <b>Half the buyer routes do not go through the seam, by design.</b> Of 22 route files under
@@ -242,7 +244,7 @@
     </p>
     <p>
       <b>A gap in the guard, found in this review.</b>
-      <code>app/api/council/buyer-profile/route.ts</code> performs a real database read by calling
+      <code>app/api/buy/buyer-profile/route.ts</code> performs a real database read by calling
       <code>loadBuyerProfile(guard.supabase, orgId)</code>, passing the raw session client rather
       than the resolved <code>ds.client</code>. The guard does not catch it: it detects database
       access by matching a quoted <code>council_</code> table name or the token
@@ -254,7 +256,7 @@
       silence.
     </p>
     <p class="src">
-      <code>web/app/api/council/buyer-profile/route.ts:31</code> &middot;
+      <code>web/app/api/buy/buyer-profile/route.ts:31</code> &middot;
       <code>web/src/features/public-sector/buyer-profile.server.ts:42-50</code> &middot;
       guard regex at <code>web/tests/public-sector/ws2-resolver-seam.test.ts:48</code>
     </p>
@@ -352,8 +354,8 @@
 
         <rect class="r" x="170" y="336" width="560" height="112" rx="10"/>
         <text class="hd" x="190" y="362">One Supabase project &middot; gujtuecjzfiqsdnzgyvo</text>
-        <text class="sm" x="190" y="384">515 row-level security policies across 309 tables (16 Aug) &middot; 1,067 migrations (24 Oct)</text>
-        <text class="sm" x="190" y="404">13 organisations, isolation_tier pooled for every one of them</text>
+        <text class="sm" x="190" y="384">1,166 row-level security policies across 442 tables &middot; 1,118 migrations (29 Oct)</text>
+        <text class="sm" x="190" y="404">1 organisation, isolation_tier pooled for every one of them (29 Oct)</text>
         <text class="lbl-bad" x="190" y="430">AWS eu-west-1 (IRELAND). NO CUSTOMER DATA IS IN A UK REGION.</text>
       </svg>
       <figcaption>
@@ -381,12 +383,12 @@
           <table>
             <thead><tr><th>Product</th><th>Internal key</th><th>Route</th><th>Sold to</th><th>Price</th></tr></thead>
             <tbody>
-              <tr><td><b>Velstrian Bid</b></td><td><code>crowmark</code></td><td><code>/crowmark</code></td>
+              <tr><td><b>Velstrian Bid</b></td><td><code>crowmark</code></td><td><code>/bid</code></td>
                   <td>Suppliers writing bids, public and private</td>
                   <td>&pound;49 / &pound;149 / &pound;549 per month</td></tr>
               <tr><td><b>Velstrian Buy</b></td><td><code>council</code> (legacy, never user-visible)</td>
-                  <td><code>/public-sector</code></td><td>Buyers evaluating incoming bids</td>
-                  <td>&pound;3,600 / &pound;9,600 / &pound;19,200 per year</td></tr>
+                  <td><code>/buyer</code></td><td>Buyers evaluating incoming bids</td>
+                  <td>&pound;299 / &pound;699 per month (&pound;3,229 / &pound;7,549 a year billed annually), read from the public pricing endpoint on 29 October 2026</td></tr>
             </tbody>
           </table>
           </div>
@@ -413,16 +415,16 @@
           </p>
           <p class="src">
             <code>web/src/shared/lib/auth/requireEntitlement.ts</code> &middot;
-            <code>api/app/services/crowmark_tier.py:5-7</code> &middot;
+            <code>api/app/services/bid_tier.py:5-7</code> &middot;
             <code>web/src/shared/product/registry.ts:242-244</code>
           </p>
           <p>
             The two products do not share tables. I checked in both directions and in both tiers:
-            no buyer-side route reads a <code>crowmark_</code> table, and no supplier-side route
-            reads a <code>council_</code> table. The buyer's own supplier directory is
-            <code>council_suppliers</code>, a record the buying organisation keeps about its
+            no buyer-side route reads a <code>bid_</code> table (named <code>crowmark_</code> until the rename, 107 <code>bid_</code> tables on 29 October 2026), and no supplier-side route
+            reads a <code>buy_</code> table (24 <code>buy_</code> tables, 2 <code>council_</code> tables remain). The buyer's own supplier directory is
+            <code>buy_suppliers</code>, a record the buying organisation keeps about its
             market, not a window into a supplier tenant's account. Verified across
-            <code>web/app/api/council/**</code>, <code>web/app/api/crowmark/**</code> and
+            <code>web/app/api/buy/**</code>, <code>web/app/api/bid/**</code> and
             <code>api/app/routers/**</code>, with one deliberate exception disclosed further down
             this page.
           </p>
@@ -475,17 +477,17 @@
           <table>
             <thead><tr><th>Measure</th><th>Value</th><th>Source</th></tr></thead>
             <tbody>
-              <tr><td>RLS policies in the production <code>public</code> schema</td><td><b>515</b></td>
+              <tr><td>RLS policies in the production <code>public</code> schema</td><td><b>1,166</b> (re-counted 29 Oct 2026, 515 on 16 Aug)</td>
                   <td>Snapshot captured from prod 2026-08-16, md5-verified in Postgres and re-derived locally</td></tr>
               <tr><td>Distinct tables carrying at least one policy</td><td><b>309</b></td><td>Same snapshot</td></tr>
               <tr><td>Public-schema tables in prod, RLS enabled</td><td><b>314</b>, RLS on <b>100%</b></td>
                   <td>Re-read from prod 18 August 2026. The earlier "approx. 280" was never reconciled against the 309 above; this count is exact and the 100% holds</td></tr>
-              <tr><td>Committed migrations</td><td><b>1,067</b> (re-counted 24 Oct 2026)</td><td><code>supabase/migrations/*.sql</code></td></tr>
+              <tr><td>Committed migrations</td><td><b>1,118</b> (re-counted 29 Oct 2026)</td><td><code>supabase/migrations/*.sql</code></td></tr>
               <tr><td>Primary storage region</td><td><code>eu-west-1</code> (AWS Ireland)</td>
                   <td>Published residency page and the tenant-model migration default</td></tr>
-              <tr><td>Organisations sharing the production project</td><td><b>13</b></td>
+              <tr><td>Organisations sharing the production project</td><td><b>1</b> (29 Oct 2026, 13 on 18 Aug)</td>
                   <td>Established 2026-08-16. An earlier pass could not read it and said so</td></tr>
-              <tr><td>Rows in <code>tenant_datasource_catalog</code></td><td><b>13</b>, every one <code>pooled</code></td>
+              <tr><td>Rows in <code>tenant_datasource_catalog</code></td><td><b>1</b> (29 Oct 2026, 13 on 18 Aug), every one <code>pooled</code></td>
                   <td>Re-read from prod 18 August 2026. Was 0 on 16 August; the R27-TENANCY-01 backfill and its insert trigger closed it, so pooled is now a recorded decision rather than a fallback</td></tr>
             </tbody>
           </table>
@@ -494,7 +496,7 @@
             <code>docs/rls/prod-policies-snapshot.json</code> (<code>_meta.policy_count</code>) &middot;
             <code>docs/release-2.7/AUDIT-SECURITY-2026-08-16.md:334</code> &middot;
             <code>supabase/migrations/20260719000000_council06_ws1_tenant_model.sql</code> &middot;
-            <code>web/app/(legal)/residency/page.tsx:47</code>
+            <code>velstrian.com/residency</code> (the page moved to the website, app.velstrian.com/residency answers 308 to it)
           </p>
           <p>
             <b>Caveat one.</b> The 309 figure counts tables with a policy row in a production
@@ -533,7 +535,7 @@
         <text class="sm" x="36" y="64">1 of 6</text>
         <text class="hd" x="36" y="86">A catalog row</text>
         <text class="sm" x="36" y="104">recording the isolation decision</text>
-        <text class="lbl-ok" x="36" y="128">EXISTS &middot; 13 OF 13 &middot; TRIGGER</text>
+        <text class="lbl-ok" x="36" y="128">EXISTS &middot; 1 OF 1 &middot; TRIGGER</text>
 
         <path class="e" d="M290,90 L311,90" marker-end="url(#tnm2a)"/>
 
@@ -633,7 +635,7 @@
                 Area</b>, not <b>United Kingdom</b>.
               </p>
               <p class="src">
-                <code>web/app/(legal)/residency/page.tsx:188-206</code> &middot;
+                <code>velstrian.com/residency</code> &middot;
                 G-Cloud residency option values:
                 <a href="https://raw.githubusercontent.com/alphagov/digitalmarketplace-frameworks/main/frameworks/g-cloud-13/questions/services/dataStorageAndProcessingLocations.yml">alphagov/digitalmarketplace-frameworks</a>
               </p>
@@ -753,7 +755,7 @@
                   for a sample, aggregates them, and returns only aggregates. It is feature-gated on
                   <code>crowmark.benchmarks</code>, capped, and the code comments are candid that
                   RLS could not have bounded it. No bid narrative text is read.
-                  <span class="src">(<code>api/app/routers/crowmark/analytics.py:135,181</code>)</span></li>
+                  <span class="src">(<code>api/app/routers/bid/analytics.py:135,181</code>)</span></li>
               </ul>
               <p>
                 A supplier asking "can my competitors see my data?" deserves the whole answer.
@@ -772,7 +774,7 @@
                       <td>Body-supplied organisation ids rejected on mismatch</td></tr>
                   <tr><td>RLS on the shared database</td>
                       <td><span class="pill" style="background:var(--wip);color:var(--bg)">PARTIAL</span></td>
-                      <td>515 policies, but the supplier product's request path never evaluates them</td></tr>
+                      <td>1,166 policies (515 in August), but the supplier product's request path never evaluates them</td></tr>
                   <tr><td>SSO and SCIM</td>
                       <td><span class="pill" style="background:var(--fixed);color:var(--bg)">HAVE</span></td>
                       <td>SCIM v2 Users and Groups endpoints exist</td></tr>
@@ -1090,8 +1092,8 @@
     All customers share one PostgreSQL database. Every request resolves the caller's organisation
     from server-held membership records, never from the request body, and a mismatched organisation
     identifier is rejected. On the buyer product, reads run under a per-session database role and
-    row-level security restricts every row to the caller's organisation; 515 policies cover 309
-    tables. On the supplier product, separation is enforced in application code rather than by the
+    row-level security restricts every row to the caller's organisation; 1,166 policies cover 442
+    tables (29 October 2026). On the supplier product, separation is enforced in application code rather than by the
     database, because that tier connects with a privileged key. One reporting endpoint returns
     cross-customer aggregates and no customer content. Data is stored in AWS eu-west-1 (Ireland).
     No dedicated instance is offered.
@@ -1183,7 +1185,7 @@
     This page cannot yet say how the platforms we sell against isolate their tenants, and it will
     not guess. A separate research pass is under way covering ten procurement platforms with a
     focus on database and tenant isolation, and its findings land in
-    <code>crowagent-platform/docs/research/COMPETITOR-TENANCY-ISOLATION-2026-08-16.md</code>. The
+    <code>velstrian-platform/docs/research/COMPETITOR-TENANCY-ISOLATION-2026-08-16.md</code>. The
     table below is the shape this section will take when that report is in.
   </p>
   <p>
@@ -1266,7 +1268,7 @@
         sites, and the guard's blind spot for delegated queries.</td>
       <td>Small work. It keeps the seam honest before anything depends on it.</td></tr>
     <tr><td>D7</td>
-      <td><b>Do we write catalog rows for all 13 organisations, even at pooled?</b></td>
+      <td><b>Do we write catalog rows for every organisation (13 on 18 August, 1 on 29 October), even at pooled?</b></td>
       <td>A recorded decision and a fallback look identical from the code and are not the same
         thing. Backfilling turns the seam from a claim into a record.</td></tr>
     <tr><td>D8</td>

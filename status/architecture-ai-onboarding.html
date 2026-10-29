@@ -9,7 +9,7 @@
 
   Fragment injected by index.html. No style block, no script element, no colour
   literal (check-board-contract.js). This page SUMMARISES
-  crowagent-platform/docs/AI-ONBOARDING-GUIDE.md. The guide is canonical, and a
+  velstrian-platform/docs/AI-ONBOARDING-GUIDE.md. The guide is canonical, and a
   rule changed there is changed here in the same commit.
   ════════════════════════════════════════════════════════
 -->
@@ -19,15 +19,15 @@
   <p class="title">One guide, every AI tool, the same rules</p>
   <p class="lede">Claude, Gemini, Kiro, Codex, Cursor and Copilot all work in this estate. Each opens
   its own entry file first, and every entry file sends it to one guide:
-  <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>. This page is the map of that guide:
+  <code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code>. This page is the map of that guide:
   which file each tool reads, what each role may do, and the deployment, testing, pipeline,
   secret and working rules that bind all of them.</p>
-  <p class="dated">Updated 24 October 2026, measured from <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>,
+  <p class="dated">Updated 29 October 2026, measured from <code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code>,
   the entry files (<code>CLAUDE.md</code>, <code>AGENTS.md</code>, <code>GEMINI.md</code>,
   <code>.kiro/steering/</code>), <code>ENGINEERING-STANDARDS.md</code> and
-  <code>crowagent-platform/package.json</code>. First written 9 October 2026. Production tip today is
-  <code>b6eb7dadc</code> (Release 2.8.5 phase 2, shipped 18 October 2026, phase 3 in progress).
-  Canonical rule text: <code>crowagent-platform/ENGINEERING-STANDARDS.md</code>, with detailed wording in
+  <code>velstrian-platform/package.json</code>. First written 9 October 2026. Production tip today is
+  <code>f89e959</code> (Release 2.8.5 live on production, web deployment <code>dpl_BRSrSEnTv6TkrJ5TgngcST1mXS67</code> and portal deployment <code>dpl_5TAT5WLw7kRUaWzAFV7j66CPgAv3</code>, both READY on Vercel, 29 October 2026).
+  Canonical rule text: <code>velstrian-platform/ENGINEERING-STANDARDS.md</code>, with detailed wording in
   the workspace <code>CLAUDE.md</code>. Where this page and the guide disagree, the guide wins.</p>
 </div>
 
@@ -59,11 +59,11 @@
 <table class="doc-tbl">
   <thead><tr><th>Tool</th><th>Opens first</th><th>Then</th></tr></thead>
   <tbody>
-    <tr><td><b>Claude Code</b></td><td>workspace <code>CLAUDE.md</code>, then <code>crowagent-platform/CLAUDE.md</code> (loaded automatically)</td><td>the onboarding guide, the live release tracker</td></tr>
-    <tr><td><b>Codex, Cursor, Copilot</b> and any tool that reads <code>AGENTS.md</code></td><td><code>AGENTS.md</code> at the workspace root, in <code>crowagent-platform/</code> and in <code>crowagent-website/</code></td><td>the onboarding guide</td></tr>
-    <tr><td><b>Google Gemini</b></td><td><code>GEMINI.md</code> at the workspace root, in <code>crowagent-platform/</code> and in <code>crowagent-website/</code></td><td>the onboarding guide, then its written brief</td></tr>
-    <tr><td><b>Kiro</b></td><td><code>.kiro/steering/engineering-standards.md</code> (workspace) and <code>crowagent-platform/.kiro/steering/crowagent-guide.md</code>, both always included</td><td>the onboarding guide, then its <code>KIRO-BRIEF-*.md</code></td></tr>
-    <tr><td><b>Any other tool</b></td><td><code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code> directly</td><td><code>ENGINEERING-STANDARDS.md</code> RULE 0 to RULE 0-P</td></tr>
+    <tr><td><b>Claude Code</b></td><td>workspace <code>CLAUDE.md</code>, then <code>velstrian-platform/CLAUDE.md</code> (loaded automatically)</td><td>the onboarding guide, the live release tracker</td></tr>
+    <tr><td><b>Codex, Cursor, Copilot</b> and any tool that reads <code>AGENTS.md</code></td><td><code>AGENTS.md</code> at the workspace root, in <code>velstrian-platform/</code> and in <code>velstrian-website/</code></td><td>the onboarding guide</td></tr>
+    <tr><td><b>Google Gemini</b></td><td><code>GEMINI.md</code> at the workspace root, in <code>velstrian-platform/</code> and in <code>velstrian-website/</code></td><td>the onboarding guide, then its written brief</td></tr>
+    <tr><td><b>Kiro</b></td><td><code>.kiro/steering/engineering-standards.md</code> (workspace) and <code>velstrian-platform/.kiro/steering/crowagent-guide.md</code>, both always included</td><td>the onboarding guide, then its <code>KIRO-BRIEF-*.md</code></td></tr>
+    <tr><td><b>Any other tool</b></td><td><code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code> directly</td><td><code>ENGINEERING-STANDARDS.md</code> RULE 0 to RULE 0-P</td></tr>
   </tbody>
 </table>
 </div>
@@ -71,9 +71,9 @@
 <div class="callout">Refreshed 9 October 2026. The workspace root <code>AGENTS.md</code>, <code>GEMINI.md</code>
 and Kiro steering were stale: they pointed at a moved rules file, an old approval phrase, a full
 build before every push (which RULE 0-T forbids) and a decommissioned folder. All three were
-rewritten, every entry file now carries the secrets rule, and <code>crowagent-website</code> gained
-its own <code>AGENTS.md</code> and <code>GEMINI.md</code>. <code>crowagent-website/CLAUDE.md</code>
-still describes an older transformation spec, and the guide overrides it.</div>
+rewritten, every entry file now carries the secrets rule, and <code>velstrian-website</code> gained
+its own <code>AGENTS.md</code> and <code>GEMINI.md</code>. <code>velstrian-website/CLAUDE.md</code>
+was rewritten the same day (9 October 2026) and now describes the status board and the live site, re-read 29 October 2026.</div>
 
 <h2 id="ai-roles"><span class="n">Section 2</span>Roles: who may do what</h2>
 
@@ -83,7 +83,7 @@ still describes an older transformation spec, and the guide overrides it.</div>
   <tbody>
     <tr><td><b>Driver</b></td><td>the desktop Claude Code session</td><td>write briefs, decide HOW, commit by pathspec, run <code>staging:promote</code>, walk journeys in a real browser, apply migrations with approval, push and promote with the owner's per push approval, fix a P0 on live production at once and tell the owner</td><td>spend without a cost statement, push without approval, decide scope</td></tr>
     <tr><td><b>Build or verification slice</b></td><td>Kiro, a Claude subagent or cloud session</td><td>work the slice its brief names, edit only the paths named, run targeted tests, write its report</td><td>git of any kind, push, deploy, migrations, <code>vercel.json</code>, the tracker, any key or variable</td></tr>
-    <tr><td><b>Staging walker</b></td><td>Google Gemini</td><td>walk the staging app (<code>staging-app.velstrian.com</code>, with <code>staging-app.crowagent.ai</code> still answering during the domain overlap) with DevTools at 1280x800 and 390x844, record console, network, accessibility and layout findings</td><td>change code, data or settings outside the test accounts, touch production, send real email, buy anything</td></tr>
+    <tr><td><b>Staging walker</b></td><td>Google Gemini</td><td>walk the staging app (<code>staging-app.velstrian.com</code>, behind Cloudflare Access, measured 29 October 2026) with DevTools at 1280x800 and 390x844, record console, network, accessibility and layout findings</td><td>change code, data or settings outside the test accounts, touch production, send real email, buy anything</td></tr>
   </tbody>
 </table>
 </div>
@@ -106,7 +106,7 @@ Vercel and Railway deploys follow.</p></div></div>
 <div class="step"><div class="num">3</div><div class="body">
 <p><b>RULE 0.</b> No Vercel preview, ever. Every non <code>main</code> git deployment must settle
 <code>CANCELED</code>. Never edit a <code>vercel.json</code> off <code>main</code>. A push to
-<code>crowagent-website</code> <code>main</code> is a production deploy of the live site.</p></div></div>
+<code>velstrian-website</code> <code>main</code> is a production deploy of the live site.</p></div></div>
 
 <div class="step"><div class="num">4</div><div class="body">
 <p><b>A variable change needs a rebuild.</b> Vercel applies a changed variable only on the next
@@ -206,7 +206,7 @@ Env file backups were all deleted on 8 October because several held live keys. N
 
 <div class="step"><div class="num">1</div><div class="body">
 <p><b>No brief, no work.</b> Any AI other than the driver works only from a written brief under
-<code>crowagent-platform/docs/release-&lt;version&gt;/</code>, for example
+<code>velstrian-platform/docs/release-&lt;version&gt;/</code>, for example
 <code>KIRO-BRIEF-&lt;WAVE&gt;.md</code> or <code>GEMINI-BRIEF-&lt;TOPIC&gt;.md</code>. If the brief
 and the guide disagree, stop and say so.</p></div></div>
 
@@ -233,8 +233,8 @@ October 2026. Full detail: onboarding guide section 3.8.</p>
     <tr><td><b>Git pre-commit</b>, <code>scripts/guardrails/guardrails.mjs</code> from <code>.husky/</code> (platform, website) and <code>.githooks/</code> (workspace root)</td><td>every tool, because every tool commits through git</td><td>an author that is not the current Velstrian Tenderworks identity or that carries the owner's personal name or Gmail, any added secret value, deleting or renaming a rule file, removing any RULE identifier, gutting a rule file, any change to a hook or the checker</td><td>7 unit tests, 7 end to end cases in a throwaway repository, and a planted key refused by all three live hooks</td></tr>
     <tr><td><b>Git pre-push</b></td><td>every tool</td><td>a push to platform <code>main</code>, <code>railway-production</code> or <code>staging</code>, or to website <code>main</code> (a production deploy), without the owner's approval text naming the sha7</td><td>website guard: refused without approval, passed with it, other branches unaffected</td></tr>
     <tr><td><b>Claude Code PreToolUse hooks</b></td><td>every Claude session, which cannot skip them</td><td>secrets on a command line or printed, credential files printed, <code>--no-verify</code> and hook rewiring, force push, <code>git add .</code>, approval variables set by the agent, direct Vercel, Railway, Supabase CLI, <code>gh</code> and <code>wrangler</code> deploys or changes, deleting rule files, MCP deploy and variable tools, and any edit to the guards themselves</td><td>43 cases, plus live refusals of <code>git add -A</code> and an edit to a guard file</td></tr>
-    <tr><td><b>GitHub, server side</b> (push ruleset, owner approved 9 October 2026, $0)</td><td>every push from every tool, which no client flag can skip</td><td>A push to <code>crowagent-platform</code> that changes a rule file, a hook, the guardrail checker or a workflow (push ruleset 24758190, no bypass). The owner disables the ruleset for an approved rule change and re-enables it straight after</td><td>settings read back from the API, billing products identical before and after</td></tr>
-    <tr><td><b>Gemini CLI settings</b>, <code>~/.gemini/settings.json</code></td><td>Gemini</td><td>53 shell command prefixes (mutating git, deploy CLIs, promote scripts, deletes, environment dumps, process kills) and 36 Vercel and Railway MCP write and variable tools</td><td>setting key verified in the installed CLI 0.62.0 code. Not run live, because that is a paid call</td></tr>
+    <tr><td><b>GitHub, server side</b> (push ruleset, owner approved 9 October 2026, $0)</td><td>every push from every tool, which no client flag can skip</td><td>A push to <code>velstrian-platform</code> that changes a rule file, a hook, the guardrail checker or a workflow (push ruleset 24758190, no bypass). The owner disables the ruleset for an approved rule change and re-enables it straight after</td><td>settings read back from the API, billing products identical before and after</td></tr>
+    <tr><td><b>Gemini CLI settings</b>, <code>~/.gemini/settings.json</code></td><td>Gemini</td><td>53 shell command prefixes (mutating git, deploy CLIs, promote scripts, deletes, environment dumps, process kills) and 36 Vercel and Railway MCP write and variable tools</td><td>setting key verified in the installed CLI 0.62.0 code, counts re-read from the settings file on 29 October 2026 (53 prefixes, 20 Vercel plus 16 Railway tools). Not run live, because that is a paid call</td></tr>
   </tbody>
 </table>
 </div>
@@ -249,6 +249,6 @@ added on a guess. Only the owner may set <code>CA_RULES_CHANGE_APPROVAL</code>,
 <code>CA_GUARDRAILS_CHANGE_APPROVAL</code> or <code>CA_PUSH_APPROVAL</code>, in the owner's own
 shell.</div>
 
-<p class="sm">Prepared by Velstrian Tenderworks, 24 October 2026. Source of every rule:
-<code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>, <code>ENGINEERING-STANDARDS.md</code>
+<p class="sm">Prepared by Velstrian Tenderworks, re-measured 29 October 2026. Source of every rule:
+<code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code>, <code>ENGINEERING-STANDARDS.md</code>
 and the workspace <code>CLAUDE.md</code>. This page is the map, those files are the territory.</p>

@@ -20,13 +20,12 @@
   portal are Next.js on Vercel, the API is FastAPI on Railway, the site is Astro on Cloudflare
   Pages. Everything is verified on this machine first, promoted to staging, then to production by
   one script. CI is a backstop that fires on the push, never a test runner.</p>
-  <p class="dated">Updated 24 October 2026. Commands re-read that day from <code>package.json</code>
+  <p class="dated">Updated 29 October 2026. Commands re-read that day from <code>package.json</code>
   (root, web, portal, astro), the API <code>Procfile</code>, <code>.github/workflows</code> and
   <code>web/playwright.config.ts</code>. The app, portal and API hosts now read velstrian.com from
-  <code>packages/server-infra/src/public-hosts.mjs</code> (the old crowagent.ai hosts still answer
-  during the overlap), Node is pinned to <code>^24.22.1</code> in the root <code>engines</code>, and
+  <code>packages/server-infra/src/public-hosts.mjs</code> (the crowagent.ai zones are gone from the Cloudflare account, and app.crowagent.ai answers 404, measured 29 October 2026), Node is pinned to <code>^24.22.1</code> in the root <code>engines</code>, and
   two weekly security scans carry a schedule again (D291). First written 4 September 2026. The single
-  onboarding source for every AI tool is <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>,
+  onboarding source for every AI tool is <code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code>,
   and where this page and that guide disagree, the guide is the newer measurement.</p>
 </div>
 
@@ -58,11 +57,11 @@
 <table class="doc-tbl">
   <thead><tr><th>Deployable</th><th>Code</th><th>Local</th><th>Staging</th><th>Production</th></tr></thead>
   <tbody>
-    <tr><td><b>Platform web</b> (app.velstrian.com)</td><td><code>crowagent-platform/web</code>, Next.js 16, npm</td><td><code>next dev</code> on 3000, <code>next start</code> on 3001</td><td><code>staging-app.velstrian.com</code>, Vercel custom environment</td><td>Vercel <code>crowagent-platform-web</code></td></tr>
-    <tr><td><b>Founders portal</b> (portal.velstrian.com)</td><td><code>crowagent-platform/apps/portal</code>, Next.js, pnpm workspace</td><td><code>pnpm dev</code> on 3100 (the script says 3000, run it with <code>-p 3100</code> beside the web app)</td><td><code>staging-portal.velstrian.com</code>, custom environment <code>staging</code> on <code>crowagent-portal</code>, promoted with <code>--project portal</code></td><td>Vercel <code>crowagent-portal</code></td></tr>
-    <tr><td><b>API</b> (api.velstrian.com)</td><td><code>crowagent-platform/api</code>, FastAPI, Python</td><td><code>uvicorn app.main:app --reload --port 8000</code></td><td>Railway service <code>crowagent-platform-staging</code> at <code>api-staging.velstrian.com</code>, branch <code>api-staging</code></td><td>Railway <code>crowagent-platform</code> plus <code>crowagent-worker</code> at <code>api.velstrian.com</code>, both from branch <code>railway-production</code></td></tr>
-    <tr><td><b>Marketing site</b> (crowagent.ai)</td><td><code>crowagent-website/astro</code>, Astro 7</td><td><code>npm run dev</code> (8093 for the Home 2.0 preview)</td><td>none</td><td>Cloudflare Pages, a push to <code>main</code> IS the deploy. Stays on crowagent.ai until the owner releases it to velstrian.com</td></tr>
-    <tr><td><b>Status board</b></td><td><code>crowagent-website/status</code></td><td><code>start-tracker.cmd</code> on 8099</td><td colspan="2">local only, reads the highest <code>RELEASE-*-TRACKER.md</code></td></tr>
+    <tr><td><b>Platform web</b> (app.velstrian.com)</td><td><code>velstrian-platform/web</code>, Next.js 16, npm</td><td><code>next dev</code> on 3000, <code>next start</code> on 3001</td><td><code>staging-app.velstrian.com</code>, Vercel custom environment</td><td>Vercel <code>velstrian-platform-web</code></td></tr>
+    <tr><td><b>Founders portal</b> (portal.velstrian.com)</td><td><code>velstrian-platform/apps/portal</code>, Next.js, pnpm workspace</td><td><code>pnpm dev</code> on 3100 (the script says 3000, run it with <code>-p 3100</code> beside the web app)</td><td><code>staging-portal.velstrian.com</code>, custom environment <code>staging</code> on <code>velstrian-portal</code>, promoted with <code>--project portal</code></td><td>Vercel <code>velstrian-portal</code></td></tr>
+    <tr><td><b>API</b> (api.velstrian.com)</td><td><code>velstrian-platform/api</code>, FastAPI, Python</td><td><code>uvicorn app.main:app --reload --port 8000</code></td><td>Railway service <code>velstrian-api-staging</code> at <code>api-staging.velstrian.com</code>, branch <code>api-staging</code></td><td>Railway <code>velstrian-platform</code> plus <code>velstrian-worker</code> at <code>api.velstrian.com</code>, both from branch <code>railway-production</code></td></tr>
+    <tr><td><b>Marketing site</b> (velstrian.com)</td><td><code>velstrian-website/astro</code>, Astro 7</td><td><code>npm run dev</code> (8093 for the Home 2.0 preview)</td><td>none</td><td>Cloudflare Pages, a push to <code>main</code> IS the deploy. Live on velstrian.com since the owner released it (Pages project <code>crowagent-website</code>, deployment commit <code>be30e057</code> on 29 October 2026, with velstrian.co.uk and velstrian.uk redirecting to it). velstrian.com answered 200 on 29 October 2026</td></tr>
+    <tr><td><b>Status board</b></td><td><code>velstrian-website/status</code></td><td><code>start-tracker.cmd</code> on 8099</td><td colspan="2">local only, reads the highest <code>RELEASE-*-TRACKER.md</code></td></tr>
   </tbody>
 </table>
 </div>
@@ -70,7 +69,7 @@
 <p class="sm">Databases: Supabase production <code>gujtuecjzfiqsdnzgyvo</code>, Supabase staging
 <code>ipgrnwvfnumgvnxkpxsc</code>, both in <code>eu-west-1</code>. Local development points at
 STAGING for both Supabase and Railway, through <code>web/.env.local</code>. A local process never
-talks to production.</p>
+talks to production. Measured 29 October 2026: both projects are named <code>velstrian-platform</code> and <code>velstrian-platform-staging</code>, Postgres 17, status ACTIVE_HEALTHY. Repositories on GitHub, renamed 29 October 2026: <code>velstrian/velstrian-platform</code>, <code>velstrian/velstrian-website</code>, <code>velstrian/velstrian-branding</code> and <code>velstrian/velstrian-local-archive</code>, every other repository is now <code>velstrian-legacy-*</code> and archived. The local folders are named <code>velstrian-platform</code>, <code>velstrian-website</code> and <code>velstrian-branding</code> once the rename kit runs at the end of the 29 October 2026 session, until then they still carry the <code>crowagent-</code> names.</p>
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <h2 id="dev-setup"><span class="n">Section 2</span>Set up and run locally</h2>
@@ -104,7 +103,7 @@ talks to production.</p>
   <code>cd web &amp;&amp; CA_BUILD_LOW_CPUS=4 npm run build &amp;&amp; npm run start</code> (3001).
   Portal: <code>cd apps/portal &amp;&amp; pnpm dev -- -p 3100</code>. API:
   <code>cd api &amp;&amp; uvicorn app.main:app --reload --port 8000</code>. Board:
-  <code>crowagent-website/status/start-tracker.cmd</code>. On this machine a server started
+  <code>velstrian-website/status/start-tracker.cmd</code>. On this machine a server started
   inside a tool call dies with the tool's timeout, so use <code>Start-Process</code> in PowerShell
   and stop by verified pid, never by process name.</span>
 </div></div>
@@ -136,12 +135,12 @@ talks to production.</p>
   <tbody>
     <tr><td>Web types</td><td><code>web/</code> <code>npx tsc --noEmit -p tsconfig.json</code> and <code>npm run type-check:tests</code></td><td>both tsconfigs before a promotion. Never pipe the command, the pipe's exit code is what you would read</td></tr>
     <tr><td>Web unit tests</td><td><code>web/</code> <code>./node_modules/.bin/vitest run &lt;one file&gt;</code></td><td>use the project binary, never <code>npx vitest</code>, which resolves a pnpm store copy whose workers never start. On <code>web/</code> run one file per invocation. No flag combination is reliable here: if the collected count is zero or short, switch between <code>--pool=threads</code> and <code>--pool=forks</code> and run again. Vitest can exit 0 with zero tests collected, read the count</td></tr>
-    <tr><td>Web e2e, one gate</td><td><code>web/</code> <code>BASE_URL=http://127.0.0.1:3001 npx playwright test e2e/&lt;spec&gt; --project=chromium --no-deps</code></td><td>projects: <code>security-headers-unauth</code>, <code>critical-journeys</code>, <code>a11y-public</code>, <code>axe-authed</code>, <code>responsive-authed</code>, <code>mobile-overflow</code>, <code>crowmark-scenarios</code> and more in <code>playwright.config.ts</code>. Authenticated projects need the <code>setup</code> project and a staging account, and the saved auth state expires silently</td></tr>
+    <tr><td>Web e2e, one gate</td><td><code>web/</code> <code>BASE_URL=http://127.0.0.1:3001 npx playwright test e2e/&lt;spec&gt; --project=chromium --no-deps</code></td><td>projects: <code>security-headers-unauth</code>, <code>critical-journeys</code>, <code>a11y-public</code>, <code>axe-authed</code>, <code>responsive-authed</code>, <code>mobile-overflow</code>, <code>bid-scenarios</code> and more in <code>playwright.config.ts</code>. Authenticated projects need the <code>setup</code> project and a staging account, and the saved auth state expires silently</td></tr>
     <tr><td>Against staging</td><td><code>BASE_URL=https://staging-app.velstrian.com</code> with the same command. For headless discovery that must clear all three staging gates, use <code>--config=playwright.discovery.config.ts</code>, which injects the Cloudflare Access service token and the Vercel bypass and signs in with the E2E Supabase account</td><td>this is the run that verifies a promotion. The discovery config's service token is valid to Sep 2027, so it does not expire daily like the saved browser auth state. Never run concurrent Playwright logins against production Supabase</td></tr>
     <tr><td>Portal</td><td><code>apps/portal/</code> <code>pnpm vitest run &lt;files&gt;</code>, <code>pnpm tsc --noEmit</code>, <code>pnpm build</code></td><td>portal build validation also runs in CI on every push to main</td></tr>
     <tr><td>API</td><td><code>api/</code> <code>./.venv/Scripts/python.exe -m pytest &lt;files&gt; -p no:cacheprovider -n 0</code></td><td>targeted, the venv always. <code>pytest.ini</code> already sets <code>-q</code>. <code>scripts/run_affected_tests.py</code> maps a changed file to its tests</td></tr>
     <tr><td>Local quality gates</td><td>root <code>pnpm gates:local</code>, list with <code>pnpm gates:local:list</code></td><td>33 gates, about 774 seconds (measured D143, 22 September 2026, run <code>pnpm gates:local:list</code> for the live figure), zero Actions minutes. Both promote scripts run them at the sha in a clean checkout. Waive one promotion with <code>CA_SKIP_QUALITY_GATES=1</code>, which the record announces</td></tr>
-    <tr><td>Website</td><td><code>crowagent-website/astro/</code> <code>npm run build</code> is the local certification gate chain, <code>npm run build:deploy</code> is what Cloudflare runs</td><td>an em dash in user facing copy fails the deploy</td></tr>
+    <tr><td>Website</td><td><code>velstrian-website/astro/</code> <code>npm run build</code> is the local certification gate chain, <code>npm run build:deploy</code> is what Cloudflare runs</td><td>an em dash in user facing copy fails the deploy</td></tr>
     <tr><td>Brand and design tokens</td><td>root <code>pnpm brand:tokens:check</code>, <code>pnpm brand:superseded</code>, <code>bash scripts/brand-lint.sh</code></td><td>RULE 0-C: a hardcoded colour, radius or font is a defect. Tokens live in <code>packages/tokens</code></td></tr>
     <tr><td>Billing leaks</td><td>root <code>pnpm billing:audit</code> (live) or <code>pnpm billing:audit:quick</code></td><td>any FAIL is a P0, a DIVERGE row is an unpromoted cost cut rather than a leak. Runs inside the production promotion, and the quick form runs in the pre-push hook</td></tr>
   </tbody>
@@ -165,7 +164,7 @@ talks to production.</p>
     <tr><td><code>scripts/donotbuild-scan.mjs</code></td><td>fails if a decommissioned product or a forbidden capability reappears</td><td>CI on push, and locally</td></tr>
     <tr><td><code>scripts/verify-api-shard-coverage.mjs</code>, <code>verify-ci-wired-markers.mjs</code>, <code>verify-chassis-ratchet.mjs</code>, <code>verify-client-chunk-budget.mjs</code></td><td>certification helpers: shard coverage, wired gate markers, chassis ratchet, chunk budget</td><td>release certification</td></tr>
     <tr><td><code>scripts/run_affected_tests.py</code></td><td>maps changed files to the API tests that cover them</td><td>API changes</td></tr>
-    <tr><td><code>scripts/assign-phases.mjs</code>, <code>status/build-platform-board.js</code></td><td>rebuild the board from the tracker</td><td>after tracker edits: board, then <code>node scripts/assign-phases.mjs ../crowagent-website/status/platform.json</code>, then board again</td></tr>
+    <tr><td><code>scripts/assign-phases.mjs</code>, <code>status/build-platform-board.js</code></td><td>rebuild the board from the tracker</td><td>after tracker edits: board, then <code>node scripts/assign-phases.mjs ../velstrian-website/status/platform.json</code>, then board again</td></tr>
     <tr><td><code>scripts/no_compromise_gate.py</code></td><td>Stop hook: the session cannot end with unverified claims</td><td>automatic</td></tr>
   </tbody>
 </table>
@@ -176,7 +175,7 @@ talks to production.</p>
 
 <div class="step"><div class="num">1</div><div class="body">
   <b>Apply through the Supabase MCP, never the CLI and never <code>db push</code>.</b>
-  <span>Either re-runs about a thousand already applied migrations (1,067 files on 24 October 2026),
+  <span>Either re-runs about a thousand already applied migrations (1,118 files on 29 October 2026),
   several with <code>DROP TABLE</code>. Write migrations in ASCII only, and ship any migration that
   changes what deployed code reads or writes in the same promotion as that code.
   Prefer <code>execute_sql</code> for DDL. After ANY apply, write the migration file into
@@ -240,7 +239,7 @@ talks to production.</p>
 <div class="step"><div class="num">6</div><div class="body">
   <b>Post push audit and product proof.</b>
   <span>The script itself verifies web and portal READY from the deployments it uploaded, and
-  Railway <code>crowagent-platform</code> and <code>crowagent-worker</code> on the sha when
+  Railway <code>velstrian-api</code> and <code>velstrian-worker</code> on the sha when
   <code>api/</code> changed. A partial deploy exits 1 and is never reported as done. Then the
   change is proven on <code>app.velstrian.com</code> and written on the tracker row. Website: a push
   to <code>main</code> is a Cloudflare deploy and needs its own approval.</span>
@@ -259,7 +258,7 @@ talks to production.</p>
     <tr><td><code>regime-threshold-scan.yml</code></td><td>push to main or <code>release/**</code> touching the regulated constant and market spec files</td><td>procurement regime thresholds match the source of record</td></tr>
     <tr><td><code>ci.yml</code>, <code>crowagent-platform-ci.yml</code></td><td>pull request only</td><td>the promotion path opens no pull request, so neither fires on a promotion. <code>pnpm gates:local</code> runs their cheap half on this machine instead</td></tr>
     <tr><td>Vercel builds</td><td>none from git on web</td><td>the web ignore script skips every git ref. The portal's ignore command now skips them too (<code>0745f7464</code>, 4 of 4 CANCELED on 8 October). A changed variable reaches production only on the next build. Production web and portal are source uploads made by <code>promote-production.mjs</code>, built on the fixed Standard machine, unbilled. Every other branch lands CANCELED</td></tr>
-    <tr><td>Railway</td><td>push to <code>railway-production</code>, made only by the promote script when <code>api/</code> changed</td><td><code>crowagent-platform</code> and <code>crowagent-worker</code> redeploy. Staging is <code>crowagent-platform-staging</code> on <code>api-staging</code>, and a push there has been measured not to redeploy, so read the Railway deployment list</td></tr>
+    <tr><td>Railway</td><td>push to <code>railway-production</code>, made only by the promote script when <code>api/</code> changed</td><td><code>velstrian-api</code> and <code>velstrian-worker</code> redeploy. Staging is <code>velstrian-api-staging</code> on <code>api-staging</code>, and a push there has been measured not to redeploy, so read the Railway deployment list</td></tr>
     <tr><td>Scheduled workflows</td><td>two, both weekly</td><td><code>security-scan.yml</code> (OWASP ZAP) runs Mondays 08:00 UTC and <code>weekly-security-scan.yml</code> (dependency audit) Mondays 09:00 UTC, restored under D291 (22 October 2026), together about 30 billed minutes a month and both allowlisted. Every other schedule stays off and the audit fails if one outside the allowlist returns</td></tr>
   </tbody>
 </table>
@@ -297,9 +296,9 @@ genuinely cannot run locally.</p>
 <p class="sm">For how a headless test clears the three staging gates and which credential satisfies each,
 see the Release and environments page, section 7 (testing on staging). The staging URL is
 <code>https://staging-app.velstrian.com</code> with a hyphen, and the old
-<code>https://staging-app.crowagent.ai</code> still answers during the domain overlap.</p>
+<code>crowagent.ai</code> staging host is gone (the zone is no longer in the Cloudflare account, 29 October 2026).</p>
 
-<p class="sm">Every AI tool starts at <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>, which
+<p class="sm">Every AI tool starts at <code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code>, which
 also holds the test accounts by variable name, the AI roles and the glossary.
 Canonical texts: <code>ENGINEERING-STANDARDS.md</code>, the root <code>CLAUDE.md</code>,
 <code>docs/ENVIRONMENT-PROMOTION-MANDATE.md</code>, <code>docs/architecture/15-release-and-deployment-process.md</code>.

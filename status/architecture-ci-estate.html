@@ -32,16 +32,17 @@
   <p class="lede">GitHub costs about ten times Railway. The bill is not the crons and never was, it
   is the two workflows that gate a merge, billed per job with round up. The cap is now $15 a month
   with stop usage on, which is the backstop rather than the fix.</p>
-  <p class="dated">Updated 24 October 2026. Triggers, workflow counts and the schedule state re-read
-  that day from every workflow file in both repositories (29 in <code>crowagent-platform</code>, 4 in
-  <code>crowagent-website</code>) and from <code>scripts/staging/billing-allowlist.json</code>. The
+  <p class="dated">Updated 29 October 2026. Triggers, workflow counts, the schedule state, branch protection, the
+  Supabase <code>cron.job</code> table and the Actions billing usage were re-read
+  that day from every workflow file in both repositories (30 in <code>velstrian-platform</code>, 4 in
+  <code>velstrian-website</code>) and from <code>scripts/staging/billing-allowlist.json</code>. The
   one change since 9 October: under D291 (owner, 22 October 2026) two weekly security scans had their
   Monday <code>schedule:</code> trigger restored, so the count is no longer zero. The money figures
-  below are the August snapshot with the September and October billing reads named beside them, and
-  were not re-read today. First measured 29 August 2026 from the live GitHub API, the GitHub
+  below are the August snapshot with the September and October billing reads named beside them. The
+  September and October reads were repeated on 29 October 2026 from the organisation billing API. First measured 29 August 2026 from the live GitHub API, the GitHub
   organisation billing console, the Railway console and the production Supabase <code>cron.job</code>
   table. The single onboarding source for every AI tool is
-  <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
+  <code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
 </div>
 
 <div class="callout good">
@@ -50,24 +51,26 @@
   (<code>pnpm prod:promote</code>) pushes <code>main</code> with no pull request, so neither runs on a
   promotion and neither gates a deploy. Their cheap half runs on this machine as
   <code>pnpm gates:local</code>, 33 gates, zero Actions minutes. A push to <code>main</code> fires at
-  most four workflow files, three of them path filtered. <b>Scheduled work (24 October 2026):</b>
+  most four workflow files, three of them path filtered. <b>Scheduled work (29 October 2026):</b>
   after a spell at zero, two weekly security scans were switched back on under D291 (owner, 22
   October). <code>security-scan.yml</code> (OWASP ZAP) runs Mondays at 08:00 UTC and
   <code>weekly-security-scan.yml</code> (dependency audit) Mondays at 09:00 UTC, together about 30
   billed minutes a month, near USD 0.25, both allowlisted in
   <code>scripts/staging/billing-allowlist.json</code>. Every other schedule stays off.
-  <b>Billing, 9 October 2026:</b> Actions used 1,270 minutes in September, $8.53 gross and
-  <b>$0.37 billed</b>, and 105 minutes in October to that date, $0 billed, against 10,658 minutes and
-  $39.80 billed in August. The required checks on <code>main</code> are <code>Run Tests</code> and
-  <code>All CI Gates Pass</code>. The two gating workflows carried 17 jobs (7 and 10) on 9 October,
+  <b>Billing, 29 October 2026:</b> Actions Linux used 1,270 minutes in September ($7.62 gross, $0 billed on
+  that line, $0.91 storage billed) and 475 minutes in October to date ($2.85 gross, $0 billed), against 10,658 minutes and
+  $39.80 billed in August. <b>Branch protection, 29 October 2026:</b> <code>main</code> now requires a pull request
+  (ruleset D393, plus classic protection with 0 approvals) and lists no required status checks, where on 9 October it
+  listed <code>Run Tests</code> and <code>All CI Gates Pass</code>. The organisation is now named <code>velstrian</code>
+  (the repository is <code>velstrian/velstrian-platform</code>). The two gating workflows carried 17 jobs (7 and 10) on 9 October,
   down from 21.
 </div>
 
 <div class="kpi">
   <div><b style="color:var(--open)">$52</b><span>GitHub per month in August, all in. Railway was $5</span></div>
   <div><b>76%</b><span>of August Actions minutes were the TWO workflows that gate merges</span></div>
-  <div><b>$0.37</b><span>GitHub Actions billed in September 2026 (1,270 min), $0 so far in October</span></div>
-  <div><b>2 / 29 + 4</b><span>scheduled workflows (both weekly security scans, D291) / workflow files in the platform and the website on 24 October</span></div>
+  <div><b>$0.37</b><span>GitHub Actions Linux billed in September 2026 (1,270 min) and October to 29th (475 min), both $0 after the included minutes</span></div>
+  <div><b>2 / 30 + 4</b><span>scheduled workflows (both weekly security scans, D291) / workflow files in the platform and the website on 29 October</span></div>
 </div>
 
 <div class="callout bad">
@@ -153,11 +156,11 @@ is only visible on the billing page, never from run duration.</figcaption>
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <h2 id="ci-inventory"><span class="n">Section 2</span>The full inventory, and what gates what</h2>
 
-<p>On 4 October: 29 workflow files in <code>crowagent-platform</code>, 4 in
-<code>crowagent-website</code> (<code>astro-gates</code>, <code>og-image-rebuild</code>,
+<p>On 29 October 2026: 30 workflow files in <code>velstrian-platform</code>, 4 in
+<code>velstrian-website</code> (<code>astro-gates</code>, <code>og-image-rebuild</code>,
 <code>robots-guard</code>, <code>smoke-test</code>). On 29 August branch protection on
 <code>main</code> required exactly two checks, read live from the API: <code>Run Tests</code> and
-<code>All CI Gates Pass</code>. Re-read from the API on 9 October 2026: still exactly those two.
+<code>All CI Gates Pass</code>. Re-read from the API on 29 October 2026: no required status check is listed any more, only a pull request with 0 approvals.
 The Trigger column below was corrected on 4 October. The minutes and the proposals are
 the August snapshot.</p>
 
@@ -229,7 +232,7 @@ free or already paid for. This is the part of the estate that is working.</p>
   <tbody>
     <tr>
       <td><b>Supabase pg_cron</b><br><span class="muted">drives the <code>/api/cron/*</code> routes</span></td>
-      <td class="num">13 active, re-listed 9 October (14 on 29 August)</td><td class="num">212 on 9 October (~240 in August)</td>
+      <td class="num">14 active, re-listed 29 October (13 on 9 October, 14 on 29 August)</td><td class="num">212 plus one monthly run on 29 October (~240 in August)</td>
       <td>Nothing extra. Scheduling runs inside Postgres and the work at the far end is a Vercel
           invocation well inside the included quota.</td>
     </tr>
@@ -259,7 +262,7 @@ free or already paid for. This is the part of the estate that is working.</p>
 </div>
 
 <details>
-  <summary>The 13 active Supabase pg_cron jobs, re-listed from production on 9 October 2026</summary>
+  <summary>The 14 active Supabase pg_cron jobs, re-listed from production on 29 October 2026</summary>
   <div class="dbody">
     <div class="tblwrap">
     <table class="doc-tbl">
@@ -292,7 +295,7 @@ free or already paid for. This is the part of the estate that is working.</p>
 <table class="doc-tbl">
   <thead><tr><th>Layer</th><th>Keeps</th><th>Why it is the right home</th></tr></thead>
   <tbody>
-    <tr><td><b>GitHub Actions</b></td><td>The 2 required checks, plus Dependabot</td><td>Only surface that can gate a merge. Dependabot has no equivalent elsewhere.</td></tr>
+    <tr><td><b>GitHub Actions</b></td><td>Pull requests into main, plus Dependabot (the two named required checks were removed from branch protection by 29 October 2026)</td><td>Only surface that can gate a merge. Dependabot has no equivalent elsewhere.</td></tr>
     <tr><td><b>Railway</b></td><td>Scheduled audits. Price drift, smoke test and robots guard are already there</td><td>The container is always on and billed anyway, so each added job costs only its CPU seconds. Proven with ~29 live jobs.</td></tr>
     <tr><td><b>Supabase pg_cron</b></td><td>Product cron that drives app endpoints</td><td>Already correct. Scheduling happens inside Postgres at no extra cost and stays next to the data.</td></tr>
     <tr><td><b>This machine</b></td><td>Every build, typecheck and test before a push</td><td>RULE 0-G already mandates local first. CI is the gate, never the test runner.</td></tr>
@@ -379,7 +382,7 @@ gross, $0 billed. Seats and Railway were not re-read.</p>
 
 <div class="tblwrap">
 <table class="doc-tbl">
-  <thead><tr><th>GitHub, crowagent.ai organisation, August 2026</th><th class="num">Units</th><th class="num">Gross</th><th class="num">Billed</th></tr></thead>
+  <thead><tr><th>GitHub, organisation then named crowagent, August 2026</th><th class="num">Units</th><th class="num">Gross</th><th class="num">Billed</th></tr></thead>
   <tbody>
     <tr><td><b>Actions Linux</b></td><td class="num"><b>10,658 min</b></td><td class="num">$63.95</td><td class="num"><b>$39.80</b></td></tr>
     <tr><td>Actions storage</td><td class="num">3,000.44 GB-hr</td><td class="num">$1.01</td><td class="num">$0.43</td></tr>
@@ -394,7 +397,7 @@ gross, $0 billed. Seats and Railway were not re-read.</p>
   <b>100 percent of the metered GitHub spend is Actions</b>, and an earlier version of this page said
   it probably was not. The timing API returned zero billable milliseconds and the PERSONAL account
   showed no usage. Both were true and both were the wrong place to look: the repositories belong to
-  the <code>crowagent</code> ORGANISATION, which bills separately.
+  the ORGANISATION (named <code>crowagent</code> then, <code>velstrian</code> now), which bills separately.
 </div>
 
 <div class="callout good">

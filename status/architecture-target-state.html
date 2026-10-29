@@ -44,19 +44,18 @@
   <p class="lede">Three questions, three different answers. The internal portal <b>separates</b>.
   Buyer and Supplier <b>stay together</b>. Customer tenancy stays <b>pooled</b>, with the seam for a
   dedicated database built before anyone asks for one.</p>
-  <p class="dated">Updated 24 October 2026. The app and portal hosts now read velstrian.com from
-  <code>packages/server-infra/src/public-hosts.mjs</code> (owner 2026-10-23), with the old
-  crowagent.ai hosts still answering during the overlap, so the diagrams name the velstrian hosts.
-  The foreign key counts, file counts and the two crossing <code>platform_connector_*</code> keys
-  were last measured on production on 9 October 2026 and were not re-counted today, so they carry
-  that date. First counted on production 29 August 2026, nothing estimated. The single onboarding
-  source for every AI tool is <code>crowagent-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
+  <p class="dated">Updated 29 October 2026. The app and portal hosts read velstrian.com from
+  <code>packages/server-infra/src/public-hosts.mjs</code> (owner 2026-10-23) and the old
+  crowagent.ai hosts are removed from every allow list, so the diagrams name the velstrian hosts.
+  The foreign key counts, the portal file counts and the two crossing <code>platform_connector_*</code> keys
+  were re-counted on 29 October 2026 (production Supabase and the git tree). The Buyer and Supplier file and key counts were not re-counted and keep their date. First counted on production 29 August 2026, nothing estimated. The single onboarding
+  source for every AI tool is <code>velstrian-platform/docs/AI-ONBOARDING-GUIDE.md</code>.</p>
 </div>
 
 <div class="callout">
-  <b>Status on 9 October 2026.</b> Step 0 is done and complete: the <code>crowagent-internal</code>
+  <b>Status on 29 October 2026.</b> Step 0 is done and complete: the <code>crowagent-internal</code>
   Vercel project was deleted on 29 August, and its GitHub repository and local folder were deleted
-  on 8 October. Steps 1 to 6 have not started: re-measured on production on 9 October, both
+  on 8 October. Steps 1 to 6 have not started: re-measured on production on 29 October, both
   <code>platform_connector_*</code> foreign keys to <code>organisations</code> still exist, and the
   Supabase API lists exactly two projects, both in <code>eu-west-1</code>. One new fact sharpens step
   3: since the 8 October rotation, ONE production <code>sb_secret</code> key is shared by the Railway
@@ -338,22 +337,22 @@ boundary. Counted over every foreign key in <code>public</code> on production.</
 <figcaption>Bars are to scale, which is the whole argument. The portal is held to customer data by
 two keys against the 474 that hold customer data to itself, and both crossings are
 <code>platform_connector_*</code> rows referencing <code>organisations</code>. Neither carries owner
-confidential data. <b>Recounted on production on 9 October 2026</b>, with the same table rule (portal
+confidential data. <b>Recounted on production on 29 October 2026</b>, with the same table rule (portal
 side means the <code>portal_</code>, <code>founder_</code> and <code>platform_</code> tables plus
 <code>health_history</code>, <code>sales_pipeline</code>, <code>headcount_plan</code>,
 <code>rd_log</code>, <code>risk_register</code>, <code>mrr_snapshots</code> and
-<code>infra_cost_history</code>, references to <code>auth</code> excluded): 583 foreign keys in
-<code>public</code>, 567 inside customer data, 14 inside the portal across 35 portal side tables, and
+<code>infra_cost_history</code>, references to <code>auth</code> excluded): 670 foreign keys in
+<code>public</code> (583 on 9 October), 654 inside customer data (567), 14 inside the portal (14) across 35 portal side tables (35) out of 442 public tables, all with row level security on, and
 still exactly 2 crossing, the same two connector keys. The bars keep the 29 August figures. The
 argument is unchanged because the crossing count is unchanged. The 9 Buyer to Supplier keys were not
-recounted.</figcaption>
+recounted, and the tables they join have been renamed since: <code>crowmark_comparisons</code> is now <code>bid_comparisons</code>, <code>council_requirements</code> is <code>buy_requirements</code>, <code>crowmark_contracts</code> is <code>bid_contracts</code> (measured 29 October 2026).</figcaption>
 </figure>
 
 <div class="kpi">
-  <div><b>732</b><span>portal source files, 131,894 lines</span></div>
-  <div><b>220</b><span>portal imports from shared packages, the intended seam</span></div>
-  <div><b>7</b><span>portal imports of platform code. All test only, all the same file</span></div>
-  <div><b>0</b><span>platform imports from the portal. 21 mentions, all comments</span></div>
+  <div><b>559</b><span>portal source files, 109,711 lines, test files excluded (counted 29 October 2026 with git ls-files on apps/portal, .ts and .tsx only. The 29 August method is not recorded, so do not compare the two)</span></div>
+  <div><b>325</b><span>portal import statements from shared packages outside tests, the intended seam (29 October 2026)</span></div>
+  <div><b>0</b><span>portal imports of platform code outside tests. 48 portal test files import the same helper web/__tests__/_lib/strip-comments.mjs or other web test code (29 October 2026)</span></div>
+  <div><b>0</b><span>platform imports from the portal outside tests (29 October 2026). One platform test, web/__tests__/cross-app/portal-grants-only-what-the-app-understands.test.ts, imports a portal file on purpose</span></div>
 </div>
 
 <div class="callout good">
@@ -369,12 +368,11 @@ recounted.</figcaption>
     application folders, and the boundary held even where it was inconvenient.
     <code>web/lib/stripe-prices.ts:52</code> is the evidence: somebody hit the boundary and, instead
     of crossing it, wrote down that they could not import from <code>apps/portal</code>.</p>
-    <p>The 220 shared package imports break down as <code>@crowagent/ui</code> 102,
-    <code>@crowagent/server-infra</code> 93, <code>@crowagent/tokens</code> 15,
-    <code>@crowagent/pricing</code> 7, <code>@crowagent/formatters</code> 3. None of these blocks
+    <p>The 325 shared package imports outside tests break down as <code>@velstrian/ui</code> 107,
+    <code>@velstrian/server-infra</code> 147, <code>@velstrian/tokens</code> 55,
+    <code>@velstrian/pricing</code> 13, <code>@velstrian/formatters</code> 3 (29 October 2026). None of these blocks
     extraction, because a package can be published and consumed by version.</p>
-    <p>The seven escaping imports are all <code>web/__tests__/_lib/strip-comments.mjs</code>, and all
-    seven are in test files.</p>
+    <p>On 29 October 2026 the escaping imports are in 48 portal test files, mostly <code>web/__tests__/_lib/strip-comments.mjs</code> (39 import lines), and none is outside a test. The count was seven on 29 August.</p>
   </div>
 </details>
 
@@ -460,9 +458,9 @@ joined, and those nine keys are the product rather than debt.</p>
   <summary>The 9 keys, and the full 6 to 3 split</summary>
   <div class="dbody">
     <ul>
-      <li><code>crowmark_comparisons.requirement_id</code> to <code>council_requirements</code></li>
-      <li><code>contract_kpis.contract_id</code> to <code>crowmark_contracts</code></li>
-      <li><code>sv_commitments.contract_id</code> to <code>crowmark_contracts</code></li>
+      <li><code>bid_comparisons.requirement_id</code> to <code>buy_requirements</code></li>
+      <li><code>contract_kpis.contract_id</code> to <code>bid_contracts</code></li>
+      <li><code>sv_commitments.contract_id</code> to <code>bid_contracts</code></li>
     </ul>
     <p>Buyer to Supplier is 6 keys, Supplier to Buyer is 3.</p>
     <p>The three crossing imports are <code>sector-taxonomy-is-not-copied.test.ts</code>,
@@ -529,7 +527,7 @@ joined, and those nine keys are the product rather than debt.</p>
   <b>Delete the dead portal. DONE on 29 August.</b>
   <span>The owner deleted the <code>crowagent-internal</code> Vercel project on 29 August, and its
   GitHub repository and local folder on 8 October. It served nothing: no custom domain, <code>"live": false</code>, and
-  <code>portal.crowagent.ai</code> stayed up when it was paused.</span>
+  <code>portal.crowagent.ai</code> (the host name then) stayed up when it was paused.</span>
 </div></div>
 
 <div class="step"><div class="num">1</div><div class="body">
@@ -586,7 +584,7 @@ joined, and those nine keys are the product rather than debt.</p>
   package publishing are one-time costs that rise the moment a real customer arrives.
 </div>
 
-<p class="src">First prepared 29 August 2026, refreshed by Velstrian Tenderworks 24 October 2026. Foreign key counts, import counts and file
-counts were measured against production and the working tree on that date. No dates are attached to
+<p class="src">First prepared 29 August 2026, refreshed by Velstrian Tenderworks 29 October 2026. Foreign key counts, portal import counts and portal file
+counts were measured against production and the working tree on that date, the Buyer and Supplier file counts were not. No dates are attached to
 the steps: sizing is done by reading the code, and steps 4 to 6 should be measured when they are
 started rather than estimated now.</p>
