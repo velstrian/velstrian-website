@@ -1,6 +1,6 @@
 ---
-title: "Cookie Policy | Velstrian"
-description: "How Velstrian uses cookies. This website sets no tracking cookies. The signed-in Velstrian platform sets the items listed here, with the reason and lifetime for each."
+title: "Cookie Policy and Tracking Notice | Velstrian"
+description: "How Velstrian uses cookies. This website sets no tracking cookies. Signed-in platform cookies are listed here with the reason and lifetime for each."
 heading: "Cookie Policy."
 lastUpdated: "2026-10-24"
 ---Full statutory disclosure for Velstrian Systems Ltd. UK GDPR and PECR aligned transparency.

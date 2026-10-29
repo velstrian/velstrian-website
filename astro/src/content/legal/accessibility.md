@@ -1,5 +1,5 @@
 ---
-title: "Accessibility | Velstrian"
+title: "Accessibility Statement | Velstrian"
 description: "Velstrian's accessibility statement: what we have tested against WCAG 2.2 AA, the results, what we have not yet tested, and how to report a barrier."
 heading: "What we have tested, and what we have not."
 eyebrow: "Accessibility"

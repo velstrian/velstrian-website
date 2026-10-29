@@ -1,5 +1,5 @@
 ---
-title: "Construction Bid Software | Public and Private Works | Velstrian"
+title: "Construction Bid Software | Works Tenders | Velstrian"
 description: "Velstrian Bid helps small and mid size UK construction firms find public works tenders, answer private clients' tenders from their own documents, and show social value under PPN 026."
 ogDescription: "Find construction work, public and private, and answer every tender from your own documents with Velstrian Bid."
 ogImageAlt: "Velstrian Bid bid software for UK construction firms"

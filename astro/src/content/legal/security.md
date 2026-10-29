@@ -1,6 +1,6 @@
 ---
-title: "Security | Velstrian"
-description: "How Velstrian stores and protects your bid data: AES-256 at rest, TLS 1.3 in transit, where each layer is stored and processed, and what we send to AI providers."
+title: "Security Architecture and Controls | Velstrian"
+description: "How Velstrian protects your bid data: AES-256 at rest, TLS 1.3 in transit, UK data residency, and controls over what is sent to AI providers."
 heading: "Encrypted, documented, and auditable."
 eyebrow: "Security & Trust"
 ---[System status: status.velstrian.com](https://status.velstrian.com)

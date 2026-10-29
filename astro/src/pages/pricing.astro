@@ -45,7 +45,7 @@ const [P_BUYER_PRO, P_BUYER_PORTFOLIO] = BUYER_PLANS;
 const SAVE_PCT = annualDiscountPct(P_STARTER);
 const title = `Velstrian Bid pricing | Plans from £${P_STARTER.monthly} a month | Velstrian`;
 const description =
-  `Velstrian pricing: Velstrian Bid from £${P_STARTER.monthly} a month, Pro £${P_PRO.monthly}, Portfolio £${P_PORTFOLIO.monthly}, Velstrian Buy from £${P_BUYER_PRO.monthly} and Buyer Portfolio £${P_BUYER_PORTFOLIO.monthly}. Annual billing saves ${SAVE_PCT}%. Start today by card.`;
+  `Velstrian pricing: Velstrian Bid from £${P_STARTER.monthly} a month, Pro £${P_PRO.monthly}, Velstrian Buy from £${P_BUYER_PRO.monthly}. Annual billing saves ${SAVE_PCT}%. Start today by card.`;
 
 const offers = PLANS.filter((p) => p.monthly !== null).map((p) => ({
   '@type': 'Offer',

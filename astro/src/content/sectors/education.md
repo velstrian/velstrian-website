@@ -1,6 +1,6 @@
 ---
-title: "Education Bid Software | School, Trust and College Tenders | Velstrian"
-description: "Velstrian Bid helps small and mid size suppliers win work from schools, academy trusts, colleges, universities and independent schools, and show social value under PPN 026."
+title: "Education Bid Software | School and College | Velstrian"
+description: "Velstrian Bid helps suppliers win work from schools, academy trusts, colleges and universities, and evidence social value under PPN 026."
 ogDescription: "Find education work, public and private, and answer every tender from your own documents with Velstrian Bid."
 ogImageAlt: "Velstrian Bid bid software for suppliers to UK schools, trusts and colleges"
 sectorLabel: "Education"

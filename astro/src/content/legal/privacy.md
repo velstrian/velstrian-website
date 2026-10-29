@@ -1,5 +1,5 @@
 ---
-title: "Privacy Policy | Velstrian"
+title: "Privacy Policy and Data Protection | Velstrian"
 description: "How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info."
 heading: "Privacy Policy."
 eyebrow: "Legal & Data Protection"

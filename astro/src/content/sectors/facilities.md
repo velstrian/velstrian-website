@@ -1,6 +1,6 @@
 ---
 title: "Facilities Management Bid Software | FM Tenders | Velstrian"
-description: "Velstrian Bid helps small and mid size facilities management providers find FM tenders, answer staff transfer and start up questions, and win private contracts as well as public ones."
+description: "Velstrian Bid helps FM providers find tenders, answer TUPE and mobilisation questions, and win public and private sector facilities contracts."
 ogDescription: "Find facilities work, public and private, and answer every tender from your own documents with Velstrian Bid."
 ogImageAlt: "Velstrian Bid bid software for UK facilities management providers"
 sectorLabel: "Facilities management"

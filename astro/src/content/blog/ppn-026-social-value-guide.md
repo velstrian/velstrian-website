@@ -1,7 +1,7 @@
 ---
 title: "Social value scoring for UK bids: the complete guide to PPN 026"
 seoTitle: "PPN 026 social value scoring for UK bidders"
-description: "Social value scoring for UK bids under PPN 026, the edition of the Social Value Model that applies to central government procurements commencing from 1 January 2027, with the weightings, the evidence requirements and the pitfalls."
+description: "Social value scoring under PPN 026 for central government procurements commencing from 1 January 2027, covering award weightings and evidence rules."
 keyPoints:
   - "PPN 026 applies to central government procurements commenced on or after 1 January 2027, at 1 million pounds inc VAT or above."
   - "The date the procurement was commenced decides the edition, not the date you submit your bid."

@@ -33,11 +33,58 @@ const schema = [breadcrumbs([...trail, { name: article.title, path: `${path}/` }
 const related = articlesIn(article.category)
   .filter((a) => a.slug !== article.slug)
   .slice(0, 4);
+
+const HELP_TITLES: Record<string, string> = {
+  'quick-start-velstrian': 'Quick Start Guide | Velstrian Tenderworks',
+  'bid-workflow-end-to-end': 'End-to-End Bid Management Workflow | Velstrian',
+  'procurement-act-2023-readiness': 'Procurement Act 2023 Compliance Guide | Velstrian',
+  'create-bid-contract': 'Create a Tender Workspace | Velstrian Bid Guide',
+  'upload-tender-documents': 'Upload and Parse Tender Documents | Velstrian Bid',
+  'build-compliance-matrix': 'Build an Audit-Proof Compliance Matrix | Velstrian',
+  'generate-narrative': 'Draft and Cite Bid Narratives | Velstrian Bid',
+  'collaborative-bidding-and-review-workflows': 'Collaborative Bidding and Review Gates | Velstrian',
+  'export-tender-responses': 'Export Submission Packs and Matrices | Velstrian',
+  'social-value-score': 'Social Value Scoring and TOMs Proxies | Velstrian',
+  'ppn-06-20-social-value-themes': 'PPN 06/20 Social Value Themes Reference | Velstrian',
+  'toms-social-value-calculator-deep-dive': 'Social Value Bank Proxy Methodology | Velstrian',
+  'carbon-reduction-plans-ppn-06-21': 'Carbon Reduction Plans and PPN 006 | Velstrian',
+  'evidence-vault-basics': 'Evidence Vault Setup and Policies | Velstrian',
+  'evidence-vault-audit-citations': 'Automated Citation Mapping in Answers | Velstrian',
+  'public-sector-supplier-review': 'Supplier Review and Compliance Checks | Velstrian',
+  'public-sector-evaluation-scoring': 'Evaluation Rubrics and Scoring Audits | Velstrian',
+  'buyer-set-up-your-workspace': 'Set Up Your Buyer Profile | Velstrian Buy Guide',
+  'buyer-build-a-requirement': 'Build a Buyer Requirement Pack | Velstrian Buy',
+  'buyer-local-priorities-and-social-value': 'Local Priorities and Social Value | Velstrian Buy',
+  'buyer-weighting-and-rubric': 'Award Weightings and Scoring Bands | Velstrian Buy',
+  'buyer-publish-download-and-share-the-pack': 'Publish and Share Requirement Packs | Velstrian Buy',
+  'buyer-record-suppliers': 'Record Suppliers in Your Directory | Velstrian Buy',
+  'buyer-run-an-evaluation': 'Run an Evaluation and AI Pre-read | Velstrian Buy',
+  'buyer-compare-bids-and-whole-life-cost': 'Compare Bids and Whole Life Cost | Velstrian Buy',
+  'buyer-award-standstill-and-letters': 'Contract Award Standstill and Letters | Velstrian Buy',
+  'buyer-manage-the-contract': 'Manage Contract Commitments | Velstrian Buy Guide',
+  'buyer-quick-rfq': 'Quick RFQ for Private Sector Buyers | Velstrian Buy',
+  'private-bid-to-a-private-buyer': 'Bid to a Private Sector Buyer | Velstrian Bid',
+  'private-market-and-currency': 'Set Market and Default Currency | Velstrian Help',
+  'private-quick-quote': 'Price Quotes with Quick Quote | Velstrian Help',
+  'private-buyer-mode': 'Private Sector Purchasing Mode | Velstrian Buy',
+  'sso-saml-scim-enterprise-setup': 'Enterprise Single Sign-On and SCIM | Velstrian',
+  'billing-and-plans': 'Billing, Subscriptions and AI Credits | Velstrian',
+  'invite-team-members': 'Role-Based Access and Team Invites | Velstrian',
+  'account-security-and-data': 'Account Security, MFA and Data Controls | Velstrian',
+  'audit-logs-and-compliance': 'Compliance Audit Trails and Session Logs | Velstrian',
+  'support-and-reporting-faq': 'Support SLA and Diagnostic Reporting | Velstrian',
+};
+
+const metaTitle = HELP_TITLES[article.slug] ?? `${article.title} | Velstrian`;
+const metaDescription =
+  article.slug === 'ppn-06-20-social-value-themes'
+    ? 'The five social value themes and Model Award Criteria introduced by PPN 06/20. Reference guide for contracts recorded under the superseded framework.'
+    : article.summary;
 ---
 
 <Base
-  title={`${article.title} | Velstrian help`}
-  description={article.summary}
+  title={metaTitle}
+  description={metaDescription}
   path={path}
   type="article"
   schema={schema}

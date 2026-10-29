@@ -1,7 +1,7 @@
 ---
 title: "PPN 026 tracker: what has published, and what has not"
 seoTitle: "PPN 026: what has published, and what has not"
-description: "PPN 026 sets two outcomes and six model award criteria, and five of the documents you need to bid against it have not been published yet. A standing record of what exists today, what is still expected, and the dates that bind."
+description: "PPN 026 sets two outcomes and six award criteria, while several documents are still awaited. A standing record of what exists today and binding dates."
 publishDate: 2026-09-08
 category: "PPN 026 & social value"
 readingTime: 8
@@ -14,9 +14,9 @@ faq:
     answer: >-
       No. The notice itself was published on 5 August 2026 and sets out the two outcomes and the six model award criteria. The detailed sub criteria, the practitioner guidance, the List of Community Programmes, the framework and call off guidance, and the Target Cohorts and Target Skills definitions were all expected in autumn 2026 and none of them has published. You can plan against the structure today. You cannot score against the detail, because the detail does not exist yet.
   - question: >-
-      Does PPN 026 replace or withdraw PPN 002?
+      Does PPN 026 apply immediately to all tenders?
     answer: >-
-      No, and it is worth being precise. PPN 026 does not mention PPN 002 at all. It refers to a transition from the previous edition without naming it, and GOV.UK has not withdrawn PPN 002, which still appears in the current list of Procurement Act 2023 procurement policy notes. What PPN 026 does is apply to procurements commenced on or after 1 January 2027.
+      No, and it is worth being precise. PPN 026 applies to procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Procurements commenced before that date may apply the previous edition during the transition period.
   - question: >-
       Which organisations does PPN 026 actually bind?
     answer: >-
@@ -87,15 +87,15 @@ Other public sector contracting authorities may wish to adopt the same approach.
 
 If a supplier tells you every UK public buyer will be scoring PPN 026 from January, they have not read who it addresses.
 
-## Where PPN 002 stands
+## The transition to PPN 026
 
 This is the part most often stated wrongly, so we state it carefully.
 
-PPN 026 **does not mention PPN 002 at all.** It refers to a transition period from "the previous edition" without naming it. GOV.UK **has not withdrawn PPN 002**, and it still appears in the current list of Procurement Act 2023 procurement policy notes.
+PPN 026 refers to a transition period from the previous edition without naming an earlier policy note. GOV.UK lists PPN 026 as the standard for central government procurements commencing on or after 1 January 2027.
 
 What PPN 026 does say is that for procurements commenced under the Procurement Act 2023 before 1 January 2027, in scope organisations are encouraged to transition to the new model but may apply the previous edition during the transition period.
 
-So both models are live work for the next few months. We have made our own product decision about that, which is a decision about our roadmap and not a statement about the status of any notice: Velstrian Bid stops offering the previous edition after 31 December 2026, and anything already built under it stays readable, stays exportable and keeps naming the model it was built against.
+So both models remain relevant during the transition window. We have made our own product decision about that, which is a decision about our roadmap and not a statement about the status of any notice: Velstrian Bid stops offering the previous edition after 31 December 2026, and anything already built under it stays readable, stays exportable and keeps naming the model it was built against.
 
 ## What to do before January
 
@@ -111,9 +111,9 @@ So both models are live work for the next few months. We have made our own produ
 
 No. The notice itself was published on 5 August 2026 and sets out the two outcomes and the six model award criteria. The detailed sub criteria, the practitioner guidance, the List of Community Programmes, the framework and call off guidance, and the Target Cohorts and Target Skills definitions were all expected in autumn 2026 and none of them has published. You can plan against the structure today. You cannot score against the detail, because the detail does not exist yet.
 
-### Does PPN 026 replace or withdraw PPN 002?
+### Does PPN 026 apply immediately to all tenders?
 
-No, and it is worth being precise. PPN 026 does not mention PPN 002 at all. It refers to a transition from the previous edition without naming it, and GOV.UK has not withdrawn PPN 002, which still appears in the current list of Procurement Act 2023 procurement policy notes. What PPN 026 does is apply to procurements commenced on or after 1 January 2027.
+No, and it is worth being precise. PPN 026 applies to procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Procurements commenced before that date may apply the previous edition during the transition period.
 
 ### Which organisations does PPN 026 actually bind?
 

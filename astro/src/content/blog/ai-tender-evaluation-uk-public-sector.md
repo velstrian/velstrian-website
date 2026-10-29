@@ -1,7 +1,7 @@
 ---
 title: "How AI is changing UK public sector tender evaluation"
 seoTitle: "AI tender evaluation in UK public procurement"
-description: "How UK contracting authorities use AI and automated compliance tools to screen tenders under the Procurement Act 2023, and how SME bidders can structure responses."
+description: "How UK contracting authorities use AI tools to screen tenders under the Procurement Act 2023, and how SME bidders can structure compliant responses."
 publishDate: 2026-08-05
 category: "Tender strategy & AI"
 readingTime: 6

@@ -26,10 +26,17 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
+
+const TITLE_OVERRIDES: Record<string, string> = {
+  'refund-policy': 'Refund Policy and Cancellation Terms | Velstrian',
+  'residency': 'Data Residency and UK Hosting | Velstrian',
+  'sub-processors': 'Approved Third-Party Sub-processors | Velstrian',
+};
+const pageTitle = TITLE_OVERRIDES[entry.id] ?? entry.data.title;
 ---
 
 <Legal
-  title={entry.data.title}
+  title={pageTitle}
   description={entry.data.description}
   path={`/${entry.id}`}
   heading={entry.data.heading}

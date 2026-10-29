@@ -158,6 +158,14 @@ const UPDATE = process.argv.includes('--update');
  * when a loss must be tolerated across several builds.
  */
 const ALLOWED_LOSSES = new Map([
+  /* 2026-10-28, R285-WEB-GEMINI-SEO (owner instruction): reworded section and FAQ
+     heading in ppn-026-what-has-published-and-what-has-not. Editorial policy:
+     PPN 026 only, never name PPN 002. */
+  ['/blog/ppn-026-what-has-published-and-what-has-not/  heading: where ppn 002 stands',
+   'Owner instruction 2026-10-28: reworded to "The transition to PPN 026". Editorial policy: PPN 026 only, never name PPN 002.'],
+  ['/blog/ppn-026-what-has-published-and-what-has-not/  heading: does ppn 026 replace or withdraw ppn 002?',
+   'Owner instruction 2026-10-28: reworded FAQ heading. Editorial policy: PPN 026 only, never name PPN 002.'],
+
   /* 2026-10-24, R285-WEB-GEMINI-UIUX P2-13 (driver decision): /cookie-preferences/
      reframed in plain words. REWORDED heads, the answer under each confirmed on
      the dev page. */

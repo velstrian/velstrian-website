@@ -1,6 +1,6 @@
 ---
-title: "Terms of Service | Velstrian"
-description: "Velstrian Systems Ltd terms of service for customers and website visitors: account use, subscriptions, acceptable use, data handling, liability, service changes."
+title: "Terms of Service and Agreement | Velstrian"
+description: "Velstrian Systems Ltd terms of service: customer account use, subscriptions, acceptable use, data handling, liability and service changes."
 heading: "Terms of Service."
 lastUpdated: "2026-10-26"
 version: "2026-10-26"

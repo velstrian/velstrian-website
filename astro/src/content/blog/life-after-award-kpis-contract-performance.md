@@ -1,7 +1,7 @@
 ---
 title: "Life after the award: the KPIs you will be measured on, in public"
 seoTitle: "After the award: KPIs and published assessments"
-description: "Winning is not the end of the bid. Under the Procurement Act 2023 the indicators are published before the contract is signed, and the assessment against them is published at least every 12 months. Here is what that means for the promises you made."
+description: "Under the Procurement Act 2023, contract performance KPIs are published before signing and assessed annually. What this means for bid commitments."
 publishDate: 2026-09-08
 category: "Procurement Act 2023"
 readingTime: 9
