@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T23:31:52.177Z",
+  "updated": "2026-10-29T02:41:30.078Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -1955,10 +1955,10 @@
       "src": "session",
       "sev": "P2",
       "title": "Google and Microsoft sign-in screens show the old CrowAgent logo, and browsers show the cached old app favicon",
-      "status": "BUILT",
-      "note": "WIP 2026-10-27 - Favicon fix committed in crowagent-platform 0b92d552a (version query on icon links, ships with the next platform deploy). Still to do: replace the Google Cloud Branding logo and the Microsoft Entra app registration logo with C:\\Users\\bhave\\Downloads\\velstrian-logo-120.png and velstrian-logo-240.png. || BUILT 2026-10-28 - Google and Microsoft sign in screens rebranded (owner confirmed, done by Claude in Chrome on contact@velstrian.com). Live https://app.velstrian.com/favicon.svg is the Velstrian mark. The cache busting fix 0b92d552a (version query on the icon links) is not live yet: the production login page still links /favicon.svg with no ?v= query. Closes FIXED when that commit reaches production.",
-      "changed": "2026-10-27",
-      "changedAt": "2026-10-27T13:31:26.183Z"
+      "status": "FIXED",
+      "note": "WIP 2026-10-27 - Favicon fix committed in crowagent-platform 0b92d552a (version query on icon links, ships with the next platform deploy). Still to do: replace the Google Cloud Branding logo and the Microsoft Entra app registration logo with C:\\Users\\bhave\\Downloads\\velstrian-logo-120.png and velstrian-logo-240.png. || BUILT 2026-10-28 - Google and Microsoft sign in screens rebranded (owner confirmed, done by Claude in Chrome on contact@velstrian.com). Live https://app.velstrian.com/favicon.svg is the Velstrian mark. The cache busting fix 0b92d552a (version query on the icon links) is not live yet: the production login page still links /favicon.svg with no ?v= query. Closes FIXED when that commit reaches production. || 2026-10-29 measured by Claude: production app.velstrian.com/login now links /favicon.svg?v=20261023 (and .ico, -32.png), the cache busting fix reached production in prod promote 3baf459.",
+      "changed": "2026-10-29",
+      "changedAt": "2026-10-29T02:41:30.078Z"
     },
     {
       "id": "A-480",
@@ -2079,6 +2079,16 @@
       "note": "Measured by Claude 2026-10-28: http://www.velstrian.com and velstrian.co.uk (apex and www) 301 to https://velstrian.com/ keeping path and query; Cloudflare AI bot block, Bot Fight Mode and WAF rules off; robots.txt allows GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended and more; bingbot, GPTBot, ClaudeBot, PerplexityBot, Googlebot all get 200; llms.txt and sitemap.xml (96 URLs) 200. Copilot gap was Bing not indexing the new domain: owner set up Bing Webmaster Tools 2026-10-28. Crawler Hints handed to Gemini.",
       "changed": "2026-10-28",
       "changedAt": "2026-10-28T23:31:52.177Z"
+    },
+    {
+      "id": "A-492",
+      "src": "owner 2026-10-28",
+      "sev": "P2",
+      "title": "Bing Webmaster Tools and SEO audit remediation: titles, descriptions, sitemap index, and content parity",
+      "status": "FIXED",
+      "note": "Fixed top Bing Webmaster Tools and SEO audit issues. Mapped and adjusted all titles to 30-60 characters across help articles, pages, sectors, and legal routes (0 short, 0 long). Shortened meta descriptions exceeding 160 characters (0 long, 0 missing). Added public sitemap-index.xml returning 200 and pointing to canonical sitemap. Reworded PPN 026 transition section and FAQ headings without naming obsolete references, adding allowed losses in check-content-parity.js. All 44 local gates passed cleanly. Commit 400e7b3d merged to main and pushed. Cloudflare Pages production deployment verified live on velstrian.com (home, pricing, blog, help, sitemap-index all 200, www 301 redirect).",
+      "changed": "2026-10-29",
+      "changedAt": "2026-10-29T00:30:55.878Z"
     }
   ],
   "directives": [
@@ -2148,5 +2158,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 492
+  "nextId": 493
 }
