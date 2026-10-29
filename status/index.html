@@ -1810,7 +1810,7 @@ function render(){
      made those rows disappear from the page altogether, which is deletion
      wearing the costume of segregation. */
   const shown=allItems.filter(i=>filter==='ALL'||i.status===filter)
-                   .sort((a,b)=>order[a.sev]-order[b.sev]||a.id.localeCompare(b.id));
+                   .sort((a,b)=>(a.phase||9)-(b.phase||9)||(a.order||99)-(b.order||99)||order[a.sev]-order[b.sev]||a.id.localeCompare(b.id));
 
   /* [R27-BOARD-LANE-01, owner instruction 2026-08-17] THE CI LANE GETS ITS OWN
      HEADING. Mixing "a ratchet baseline is stale" into the same list as "a buyer
@@ -1849,7 +1849,7 @@ function render(){
 
   const rowHtml = (i) => `
     <tr>
-      <td class="id">${esc(i.id)}${changedLabel(i)}</td>
+      <td class="id">${esc(i.id)}${i.phase?'<div class="note"><b>Phase '+i.phase+(i.order?', #'+i.order:'')+'</b></div>':''}${changedLabel(i)}</td>
       <td><span class="sev" style="color:var(${SEVC[i.sev]})">${i.sev}</span></td>
       <td><span class="pill" style="background:var(${COLOUR[i.status]||'--unknown'});color:var(--bg)">${esc(i.status)}</span></td>
       <td><strong>${esc(i.title)}</strong><div class="note">${esc(i.note||'')}</div></td>

@@ -79,7 +79,7 @@ const arg = (name, fallback) => {
 
 /* Every flag this script understands. Anything else is a typo and is fatal —
    see the note on unknown flags at the top. */
-const KNOWN = ['id', 'sev', 'status', 'title', 'note', 'src'];
+const KNOWN = ['id', 'sev', 'status', 'title', 'note', 'src', 'phase', 'order'];
 const unknown = process.argv
   .slice(2)
   .filter((a) => a.startsWith('--'))
@@ -97,6 +97,10 @@ const status = arg('status');
 const title = arg('title');
 const note = arg('note');
 const src = arg('src', 'session');
+/* [R29-BOARD-REVIEW, owner 2026-10-29] Phase 1 = fixes and enhancements needed for general availability. Phase 2 = new functionality. No other phase. Open items carry phase and order. */
+const phase = arg('phase');
+const order = arg('order');
+if (phase && !/^[12]$/.test(phase)) { console.error('add-issue: --phase must be 1 or 2.'); process.exit(2); }
 
 const VALID_SEV = ['P0', 'P1', 'P2', 'P3'];
 /* Taken from the file's own `legend`, so this cannot drift from it. */
@@ -142,6 +146,8 @@ if (id) {
     item.changedAt = now;
   }
   if (status) item.status = status;
+  if (phase) item.phase = Number(phase);
+  if (order) item.order = Number(order);
   /* [R29-SCOPE] An item with no release is filed in the current one. An item
      REOPENED from a past release moves to the current one, because open work
      belongs to the release that will do it and a past release is an archive.
@@ -201,7 +207,7 @@ if (board.issues.some((i) => i.id === newId)) {
 const createdAt = new Date().toISOString();
 /* [R29-SCOPE] Every new item is filed in the platform's current release, which
    is what the Website tab shows by default. */
-board.issues.push({ id: newId, src, sev, title, status, note, changed: createdAt.slice(0, 10), changedAt: createdAt, release: CURRENT_RELEASE });
+board.issues.push(Object.assign({ id: newId, src, sev, title, status, note, changed: createdAt.slice(0, 10), changedAt: createdAt, release: CURRENT_RELEASE }, phase ? { phase: Number(phase) } : {}, order ? { order: Number(order) } : {}));
 board.updated = createdAt;
 
 fs.writeFileSync(P, JSON.stringify(board, null, 2));
