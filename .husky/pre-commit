@@ -18,7 +18,7 @@ esac
 # [IDENTITY HARD RULE] Also block the personal identity appearing in STAGED CONTENT,
 # not just in the commit author. The author check above cannot catch a personal
 # address pasted into a doc, a ledger table, an email template or app copy, which
-# is exactly the mistake this caught in crowagent-platform on 2026-07-21.
+# is exactly the mistake this caught in velstrian-platform on 2026-07-21.
 # CLAUDE.md and the hooks themselves are excluded: they must NAME the pattern in
 # order to forbid it.
 __pn="Bhavesh Parihar"; __pm="bhavesh.parihar@gmail.com"
@@ -31,8 +31,8 @@ fi
 
 # [R284-AGENT-GUARDRAILS-01 2026-10-09] The shared guardrail checker lives in crowagent-platform.
 # It FAILS CLOSED: if the checker cannot be found, the commit is refused rather than passed.
-__g="../crowagent-platform/scripts/guardrails/guardrails.mjs"
+__g="../velstrian-platform/scripts/guardrails/guardrails.mjs"
 if [ ! -f "$__g" ]; then
-  echo "BLOCKED: guardrail checker not found at $__g. Restore crowagent-platform beside this repository." >&2; exit 1
+  echo "BLOCKED: guardrail checker not found at $__g. Restore velstrian-platform beside this repository." >&2; exit 1
 fi
 node "$__g" pre-commit || exit 1

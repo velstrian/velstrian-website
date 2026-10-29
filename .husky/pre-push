@@ -45,7 +45,7 @@
 # until today this hook let it through with no approval at all. Now it needs the owner's per push
 # approval text naming the pushed sha7 in CA_PUSH_APPROVAL, the same shape as guard 0b in
 # crowagent-platform. Any other branch is unaffected. Fails closed if the checker is missing.
-__g="../crowagent-platform/scripts/guardrails/guardrails.mjs"
+__g="../velstrian-platform/scripts/guardrails/guardrails.mjs"
 if [ ! -f "$__g" ]; then
   echo "BLOCKED: guardrail checker not found at $__g." >&2; exit 1
 fi
