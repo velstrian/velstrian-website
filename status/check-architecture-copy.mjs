@@ -25,10 +25,11 @@ import { readFileSync, existsSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { siblingRepo } from '../scripts/lib/sibling-repo.cjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const COPY = join(HERE, 'architecture-review.html')
-const SOURCE = join(HERE, '..', '..', 'crowagent-platform', 'tools', 'arch-visualizer', 'index.html')
+const SOURCE = join(siblingRepo('platform'), 'tools', 'arch-visualizer', 'index.html')
 
 if (!existsSync(COPY)) {
   console.error(`FAILED: ${COPY} is missing. The Architecture tab will 404.`)

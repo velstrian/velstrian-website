@@ -46,6 +46,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { siblingRepo } = require('../scripts/lib/sibling-repo.cjs');
 
 const argOf = (name) => {
   const hit = process.argv.find((a) => a.startsWith(`--${name}=`));
@@ -63,7 +64,7 @@ const argOf = (name) => {
  * append the fake line, `--sources=<scratch> --out=<scratch>/after.json`, and
  * compare. Nothing under crowagent-platform is written, and the live board is
  * untouched because `--out` redirects it. */
-const PLATFORM = path.resolve(argOf('sources') || path.join(__dirname, '..', '..', 'crowagent-platform'));
+const PLATFORM = path.resolve(argOf('sources') || siblingRepo('platform'));
 const OUT = path.resolve(argOf('out') || path.join(__dirname, 'platform.json'));
 
 /* [R27-BOARD-03] THE STATUS VOCABULARY IS NOW ONE FILE, READ BY BOTH READERS.
@@ -83,7 +84,7 @@ const OUT = path.resolve(argOf('out') || path.join(__dirname, 'platform.json'));
  * `unreadable` on purpose, but this one must not: defaulting to a built-in list
  * would silently restore the second writer this change exists to remove, and
  * the failure would look exactly like a working board. */
-const VOCAB_FILE = path.join(__dirname, '..', '..', 'crowagent-platform', 'scripts', 'status-vocabulary.json');
+const VOCAB_FILE = path.join(siblingRepo('platform'), 'scripts', 'status-vocabulary.json');
 const STATUS_VOCAB = (() => {
   const raw = JSON.parse(fs.readFileSync(VOCAB_FILE, 'utf8'));
   const terms = Object.entries(raw.terms || {});

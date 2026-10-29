@@ -40,10 +40,11 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import crypto from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { siblingRepo } from '../../scripts/lib/sibling-repo.cjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ASTRO = path.join(__dirname, '..');
-export const PLATFORM = path.resolve(ASTRO, '..', '..', 'crowagent-platform');
+export const PLATFORM = siblingRepo('platform');
 const WEB = path.join(PLATFORM, 'web');
 
 export const HELP_JSON = path.join(ASTRO, 'src', 'data', 'help-centre.generated.json');

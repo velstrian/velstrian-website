@@ -16,12 +16,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { siblingRepo } from '../../scripts/lib/sibling-repo.cjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
 const WEBSITE_LIB = path.join(ROOT, 'src', 'lib', 'brand-names.ts');
-const PLATFORM_TOKENS = path.resolve(ROOT, '..', '..', 'crowagent-platform', 'packages', 'tokens', 'src', 'brand-names.ts');
+const PLATFORM_TOKENS = path.join(siblingRepo('platform'), 'packages', 'tokens', 'src', 'brand-names.ts');
 
 let errors = [];
 

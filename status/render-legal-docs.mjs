@@ -6,11 +6,12 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { siblingRepo } from '../scripts/lib/sibling-repo.cjs';
 
-const require = createRequire(path.resolve('../crowagent-platform/web/package.json'));
+const require = createRequire(path.join(siblingRepo('platform'), 'web', 'package.json'));
 const { marked } = require('marked');
 const here = path.dirname(fileURLToPath(import.meta.url));
-const platform = path.resolve(here, '../../crowagent-platform');
+const platform = siblingRepo('platform');
 const out = path.join(here, 'docs', 'legal');
 mkdirSync(out, { recursive: true });
 

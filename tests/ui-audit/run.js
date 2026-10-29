@@ -16,22 +16,23 @@ const path = require('node:path');
 const H = require('./harness');
 const R = require('./routes');
 
+const { WEBSITE_ROOT, siblingRepo } = require('../../scripts/lib/sibling-repo.cjs');
 const REPO = path.resolve(__dirname, '..', '..', '..');
 
 const TARGETS = {
   website: {
     baseUrl: process.env.AUDIT_WEBSITE_BASE || 'http://localhost:8093',
-    discover: () => R.discoverStaticRoutes(path.join(REPO, 'crowagent-website', 'astro', 'dist')),
+    discover: () => R.discoverStaticRoutes(path.join(WEBSITE_ROOT, 'astro', 'dist')),
     profiles: ['mobile', 'tablet', 'desktop'],
   },
   platform: {
     baseUrl: process.env.AUDIT_PLATFORM_BASE || 'http://localhost:3000',
-    discover: () => R.discoverNextRoutes(path.join(REPO, 'crowagent-platform', 'web', 'app')),
+    discover: () => R.discoverNextRoutes(path.join(siblingRepo('platform'), 'web', 'app')),
     profiles: ['desktop', 'mobile'],
   },
   portal: {
     baseUrl: process.env.AUDIT_PORTAL_BASE || 'http://localhost:3100',
-    discover: () => R.discoverNextRoutes(path.join(REPO, 'crowagent-platform', 'apps', 'portal', 'src', 'app')),
+    discover: () => R.discoverNextRoutes(path.join(siblingRepo('platform'), 'apps', 'portal', 'src', 'app')),
     profiles: ['desktop', 'mobile'],
   },
 };

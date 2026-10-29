@@ -27,10 +27,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { siblingRepo } from '../../scripts/lib/sibling-repo.cjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const FACTS_PATH = path.join(__dirname, '..', 'src', 'data', 'site-facts.json');
-export const PLATFORM = path.resolve(__dirname, '..', '..', '..', 'crowagent-platform');
+export const PLATFORM = siblingRepo('platform');
 
 const P = {
   markets: 'api/app/services/bid_markets.json',

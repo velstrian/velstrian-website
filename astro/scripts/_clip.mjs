@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
+import { fileURLToPath } from 'node:url';
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path';
-const DIST='C:/Users/bhave/Crowagent Repo/crowagent-website/astro/dist';
+const DIST=fileURLToPath(new URL('../dist', import.meta.url));
 const T={'.html':'text/html','.css':'text/css','.js':'text/javascript','.woff2':'font/woff2','.webp':'image/webp','.avif':'image/avif','.png':'image/png','.svg':'image/svg+xml','.json':'application/json'};
 const s=http.createServer((q,r)=>{let f=path.join(DIST,decodeURIComponent(q.url.split('?')[0]));
  if(fs.existsSync(f)&&fs.statSync(f).isDirectory())f=path.join(f,'index.html');

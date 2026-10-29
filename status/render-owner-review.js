@@ -25,6 +25,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const { siblingRepo } = require('../scripts/lib/sibling-repo.cjs');
 const { execFileSync } = require('child_process');
 
 const HERE = __dirname;
@@ -215,7 +216,7 @@ ${body}
 module.exports = { renderOwnerReview };
 
 if (require.main === module) {
-  const platform = path.resolve(HERE, '..', '..', 'crowagent-platform');
+  const platform = siblingRepo('platform');
   const tracker = fs.readdirSync(platform)
     .filter((n) => /^RELEASE-[\d.]+-TRACKER\.md$/.test(n))
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
