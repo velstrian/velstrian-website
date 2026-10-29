@@ -1,10 +1,11 @@
-<!-- Contents re-measured against production 2026-08-19; prod commit 37173e87. -->
+<!-- Copy of crowagent-platform/tools/arch-visualizer/index.html, re-copied 2026-10-29. Edit the source, then re-copy. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Contents re-measured 2026-10-29 against production: platform f89e959, API and worker on Railway, web dpl_BRSrSEnTv6TkrJ5TgngcST1mXS67. Each section carries a dated status box. The August 2026 body is kept as history. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velstrian Tenderworks Platform Architecture Review (body revalidated for Release 2.7, 2026-08-16, re-measured 2026-10-29)</title>
+    <title>Velstrian Tenderworks Platform Architecture Review (re-measured 2026-10-29, Release 2.9)</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -741,7 +742,7 @@
             <!-- Section 1: Executive Overview -->
             <div class="section-header">
                 <div class="section-tag">Executive Architectural Briefing</div>
-                <h2 class="section-title">Platform Evolution: Release 2.6 to Release 2.7</h2>
+                <h2 class="section-title">Platform Evolution: Release 2.6 to Release 2.9 (re-measured 29 October 2026)</h2>
                 <p class="section-desc">
                     <span class="pill pill-amber">REFRESHED 2026-10-24</span> The company is now
                     <strong>Velstrian Systems Ltd</strong> and the platform identity is
@@ -793,6 +794,19 @@
                     prices (&pound;3,600, &pound;9,600, &pound;19,200 a year) are gone. Credits per month are 200, 750 and 3,000 on the three
                     Bid plans, the free state carries 0 credits and the trial is 7 days with 30 credits.</li>
                     <li><strong>AI.</strong> Every Gemini surface moved to the Gemini 3 family (D447) and the 2.5 ids are retired.</li>
+                    <li><strong>Counts, 29 October 2026.</strong> Production Postgres holds 442 public tables (442 with RLS on, 22 with RLS forced),
+                    1,166 policies (1,128 permissive and 38 restrictive), 1,039 migration ledger rows (latest 20269000000550) and 14 pg_cron jobs.
+                    Staging holds the same 442 tables and 1,166 policies with 914 ledger rows (latest 20269000000422), 90 organisations and 92 users, so staging is
+                    behind production by 125 ledger rows. The background queue is the <span class="code-path">async_jobs</span> table (62 rows) read by
+                    <span class="code-path">python -m app.worker</span> on <span class="code-path">velstrian-worker</span>, with no Redis and no QStash.
+                    Vercel holds two projects, <span class="code-path">velstrian-platform-web</span> and <span class="code-path">velstrian-portal</span>.
+                    Railway holds one project, <span class="code-path">velstrian-platform</span>, with three services:
+                    <span class="code-path">velstrian-api</span>, <span class="code-path">velstrian-worker</span> and <span class="code-path">velstrian-api-staging</span>.</li>
+                    <li><strong>Live hosts, curl 29 October 2026.</strong> <span class="code-path">velstrian.com</span> 200, <span class="code-path">app.velstrian.com</span> 307 on the root and 200 on /login,
+                    <span class="code-path">api.velstrian.com/readyz</span> 200, <span class="code-path">api-staging.velstrian.com</span> 200, and <span class="code-path">portal</span>, <span class="code-path">staging-app</span> and
+                    <span class="code-path">staging-portal</span> answer 302 without an Access token (not walked with a token by this pass). <span class="code-path">app.crowagent.ai</span> answers 404.
+                    The readyz body still names the service <span class="code-path">crowagent-platform-api</span>, and the Railway private network endpoint is still <span class="code-path">crowagent-platform</span>.
+                    Website production is <span class="code-path">be30e057</span> per the release record, not re-queried here.</li>
                     <li><strong>Release.</strong> Release 2.8.5 shipped to production and closed on 29 October 2026. R2.9 is the active release, tracked in <code>RELEASE-2.9-TRACKER.md</code>.</li>
                 </ul>
                 </div>
@@ -806,7 +820,7 @@
                     &ldquo;100% dedicated to one product&rdquo;. <strong>There are two products, not one.</strong>
                     <span class="code-path">web/src/shared/product/registry.ts</span> is the single source of truth for what
                     exists and it holds exactly <span class="code-path">crowmark</span> and
-                    <span class="code-path">council</span>, the latter displaying as <strong>Velstrian Buy</strong>. Every
+                    <span class="code-path">council</span> in August (they are the keys <span class="code-path">bid</span> and <span class="code-path">buy</span> on 29 October), the latter displaying as <strong>Velstrian Buy</strong>. Every
                     decommissioned product is <em>removed</em> from the type unions rather than disabled, so the compiler rather
                     than a runtime check refuses a call site that names one.
                 </p>
@@ -868,12 +882,23 @@
                 </div>
             </div>
 
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the Release 2.7 state card above</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Each line below is a claim from the August card with its current status.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Two products, one codebase: the registry now keys the products <span class="code-path">bid</span> and <span class="code-path">buy</span> (web/src/shared/product/registry.ts:76-80, <span class="code-path">CatalogueKey = "bid"</span>, <span class="code-path">PaidKey = "bid" | "buy"</span>), labels come from PRODUCT_NAME_BID and PRODUCT_NAME_BUY (registry.ts:240 and :281). The August keys crowmark and council are renamed. The Postgres enum billing_product_key reads <span class="code-path">bid,buy</span> on production.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Northern Ireland and buyer_sector: the Northern Ireland ruleset now declares <span class="code-path">governing_regime: procurement_act_2023</span> with MAT (specs/regulated/regulated-constants.yaml:1752-1766). The table is <span class="code-path">bid_contracts</span>: 19 rows on production, all buyer_sector public (was 24 of 24).</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> Hybrid RAG: retrieval.py:4 still documents expansion, vector, lexical, RRF fusion, rerank, similarity floor, trace, and content_chunks carries an HNSW index (content_chunks_hnsw, m 16, ef_construction 64) and a GIN index on content_tsv, with 477 rows on production. No labelled retrieval accuracy set was found, so the 99 percent claim stays REFUTED. Not re-searched in depth this pass.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Compute geography: FIXED and extended. Three routes (/login, /api/health, /api/public/pricing) returned <span class="code-path">x-vercel-id: lhr1::lhr1::</span> with x-vercel-cache MISS on 29 October, and vercel.json:7-9 holds <span class="code-path">regions: ["lhr1"]</span>. The Railway API runs one replica in <span class="code-path">europe-west4-drams3a</span>. The /residency page was published on velstrian.com and now reads London (see the Revalidation section).</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Retained engines: the PPN 006 carbon plan is now <span class="code-path">api/app/services/bid_carbon_plan.py</span> (esg_carbon_engine.py survives because bid_carbon_plan.py imports it). The Cyber Essentials consistency check was not re-read in this pass.</li>
+</ul></div>
+
             <!-- Section 2: End-to-End System Architecture Diagram -->
             <div class="section-header" style="margin-top: 3rem;">
                 <div class="section-tag">System & Technology Design</div>
                 <h2 class="section-title">High-Level System Architecture (HLD)</h2>
                 <p class="section-desc">
-                    Comprehensive mapping of client interfaces, API gateway services, background worker queues, AI orchestration pipeline, vector store, and Postgres database with Row-Level Security (RLS).
+                    Full mapping of client interfaces, API gateway services, background worker queues, AI orchestration pipeline, vector store, and Postgres database with Row-Level Security (RLS).
                 </p>
             </div>
 
@@ -881,35 +906,35 @@
                 <div class="mermaid">
                     graph TD
                     subgraph Client Layer
-                        WEB["Next.js 16 Web App<br/>(app.velstrian.com)"]
+                        WEB["Next.js 16.4 Web App<br/>(app.velstrian.com, Vercel lhr1)"]
                         ADDIN["Word Office Add-in<br/>(word-addin/)"]
                         PORTAL["Internal Admin Portal<br/>(portal.velstrian.com)"]
                     end
 
                     subgraph API & Gateway Layer
-                        FASTAPI["FastAPI Backend Service<br/>(Railway Container)"]
-                        SUPA_AUTH["Supabase Auth / WorkOS SSO"]
-                        RLS_GATE["Postgres RLS Policy Guard<br/>(count unverified, see note)"]
+                        FASTAPI["FastAPI Backend Service<br/>(Railway velstrian-api, europe-west4)"]
+                        SUPA_AUTH["Supabase Auth and SAML SSO<br/>(web/app/api/auth/sso)"]
+                        RLS_GATE["Postgres RLS Policy Guard<br/>(442 of 442 public tables, measured 2026-10-29)"]
                     end
 
                     subgraph Application Services
-                        INGEST_SVC["Tender & Document Ingestion<br/>(crowmark_document_extract.py)"]
+                        INGEST_SVC["Tender & Document Ingestion<br/>(bid_document_extract.py)"]
                         RAG_SVC["Hybrid RAG & Vector Retrieval<br/>(retrieval.py / rag_service.py)"]
-                        BID_SCR["Bid Scorer & Fit Engine<br/>(crowmark_bid_fit.py)"]
-                        BUYER_PREREAD["Buyer Advisory Engine<br/>(council_preread.py)"]
+                        BID_SCR["Bid Scorer & Fit Engine<br/>(bid_fit.py)"]
+                        BUYER_PREREAD["Buyer Advisory Engine<br/>(buy_preread.py)"]
                         CARBON_ENGINE["PPN 006 Carbon Engine<br/>(esg_carbon_engine.py)"]
                     end
 
                     subgraph AI Orchestration Layer
                         AI_CLIENT["Unified AIClient Wrapper<br/>(Cost Ledger: ai_calls)"]
-                        GEMINI["Gemini 2.5 Pro / Flash<br/>(Customer Bid Drafting)"]
+                        GEMINI["Gemini 3.8 Flash and 3.1 Pro (D447)<br/>(Customer Bid Drafting)"]
                         CLAUDE["Claude Sonnet 4.6<br/>(Internal Reasoning & Parsing)"]
                         VERIFIER["7-Source Grounding Validator<br/>(citation_validator.py)"]
                     end
 
                     subgraph Infrastructure & Storage
                         PG_DB[("Supabase Postgres DB<br/>pgvector + Full Text Search")]
-                        QSTASH["Upstash QStash Worker Queue<br/>(crowagent:jobs)"]
+                        QSTASH["async_jobs queue in Postgres<br/>(velstrian-worker, no Redis)"]
                         BREVO["Brevo Email Dispatcher"]
                         STRIPE["Stripe Billing & Metering"]
                     end
@@ -980,6 +1005,18 @@
                 </p>
             </div>
 
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the diagram corrections</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> The diagram above was edited in place to current names. The August corrections below it are kept as history.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Next.js: web/package.json:78 pins <span class="code-path">"next": "16.4.2"</span> and :83 <span class="code-path">"react": "^19.2.5"</span>.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Models: api/app/services/ai/model_registry.py:30-56 declares claude-sonnet-4-6, claude-haiku-4-5 (kept so it can be refused), claude-haiku-5-5, claude-sonnet-5-5 and claude-opus-5-5 (candidates), claude-opus-4-8, gemini-2.5-pro and gemini-2.5-flash (kept so they can be refused), gemini-3.8-flash, gemini-3.1-pro-preview and gemini-3.5-flash-lite. Production ai_calls, last 60 days: gemini-2.5-flash last seen 2026-10-26 08:00 UTC (18 rows), gemini-3.8-flash 2026-10-29 02:50 UTC (1 row), so the Gemini 3 cutover is days old and its volume is one call. claude-sonnet-4-6 holds 2,405 of the 4,411 ledger rows over the ledger life (2026-05-24 to 2026-10-29).</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> The withdrawn "381 of 381 tables protected" is replaced by a dated measurement: <strong>442 of 442</strong> public tables have RLS on in production and in staging, with 1,166 policies each. The two RLS gates (scripts/rls/verify-rls-enabled.mjs and verify-rls-parity.mjs) still exist. Whether either now counts tables was not re-read, so the number is a measurement and not yet a gate.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> Upstash QStash queue named <span class="code-path">crowagent:jobs</span>: no mention of qstash exists in api/app, web/src, web/app, web/lib or packages (grep, 29 October). The queue is the <span class="code-path">async_jobs</span> table, worked by <span class="code-path">python -m app.worker</span> (api/railway.worker.json, decision D151, no Redis). The diagram label was wrong in August too.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> WorkOS SSO: WorkOS appears in 3 files (BulkInviteModal.tsx, database.types.ts, a login action types file) and none is the SSO path. SSO is SAML through @node-saml/node-saml in web/app/api/auth/sso/_lib/saml-config.ts. The diagram label was changed.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> The twelve service files all exist under their new names: bid_document_extract.py, retrieval.py, rag_service.py, bid_fit.py, buy_preread.py, esg_carbon_engine.py, bid_response_agent.py, bid_tender_ingest.py, citation_validator.py, docx_generator.py, buy_data.py, bid_carbon_plan.py. The migration file supabase/migrations/20260530120001_council_foundations.sql keeps its name because a migration filename is a record.</li>
+</ul></div>
+
             <!-- Section 3: Low-Level Design (LLD) & Codebase Mapping -->
             <div class="section-header" style="margin-top: 3rem;">
                 <div class="section-tag">Low-Level Architecture (LLD)</div>
@@ -1001,11 +1038,11 @@
                     <ul class="feature-list">
                         <li class="feature-item">
                             <span>🔹</span>
-                            <div><span class="code-path">api/app/routers/crowmark/</span> Router endpoints for answers, bids, lot management, and export.</div>
+                            <div><span class="code-path">api/app/routers/bid/</span> Router endpoints for answers, bids, lot management, and export.</div>
                         </li>
                         <li class="feature-item">
                             <span>🔹</span>
-                            <div><span class="code-path">api/app/services/crowmark_response_agent.py</span> Dual LLM answer synthesis engine.</div>
+                            <div><span class="code-path">api/app/services/bid_response_agent.py</span> Dual LLM answer synthesis engine.</div>
                         </li>
                         <li class="feature-item">
                             <span>🔹</span>
@@ -1029,7 +1066,7 @@
                     <ul class="feature-list">
                         <li class="feature-item">
                             <span>🔹</span>
-                            <div><span class="code-path">public.crowmark_answer_library</span> Ground truth answer database with embedding vectors.</div>
+                            <div><span class="code-path">public.bid_answer_library</span> Ground truth answer database with embedding vectors.</div>
                         </li>
                         <li class="feature-item">
                             <span>🔹</span>
@@ -1037,11 +1074,11 @@
                         </li>
                         <li class="feature-item">
                             <span>🔹</span>
-                            <div><span class="code-path">public.crowmark_contracts</span> Contracts, carrying <span class="code-path">buyer_sector</span> (public or private) and <span class="code-path">threshold_category</span>. Measured on production 2026-08-16: <strong>24 rows, all <span class="code-path">public</span>, zero NULL</strong>.</div>
+                            <div><span class="code-path">public.bid_contracts</span> Contracts, carrying <span class="code-path">buyer_sector</span> (public or private) and <span class="code-path">threshold_category</span>. Measured on production 2026-08-16: <strong>24 rows, all <span class="code-path">public</span>, zero NULL</strong>.</div>
                         </li>
                         <li class="feature-item">
                             <span>🔹</span>
-                            <div><span class="code-path">public.crowmark_opportunities</span> Tender metadata, CPV codes and deadlines. Its own <span class="code-path">buyer_sector</span> is <span class="code-path">NOT NULL DEFAULT 'public'</span> with <span class="code-path">CHECK (buyer_sector = 'public')</span>, so &ldquo;there is no private-sector discovery feed&rdquo; is enforced in the schema rather than merely stated in copy.</div>
+                            <div><span class="code-path">public.bid_opportunities</span> Tender metadata, CPV codes and deadlines. Its own <span class="code-path">buyer_sector</span> is <span class="code-path">NOT NULL DEFAULT 'public'</span> with <span class="code-path">CHECK (buyer_sector = 'public')</span>, so &ldquo;there is no private-sector discovery feed&rdquo; is enforced in the schema rather than merely stated in copy.</div>
                         </li>
                         <li class="feature-item">
                             <span>🔹</span>
@@ -1064,7 +1101,7 @@
                     <ul class="feature-list">
                         <li class="feature-item">
                             <span>🔹</span>
-                            <div><span class="code-path">web/src/features/crowmark/</span> Ingestion, evaluation matrix, and response editor.</div>
+                            <div><span class="code-path">web/src/features/bid/</span> Ingestion, evaluation matrix, and response editor.</div>
                         </li>
                         <li class="feature-item">
                             <span>🔹</span>
@@ -1081,6 +1118,18 @@
                     </ul>
                 </div>
             </div>
+
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the component layout</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Paths in the cards above were updated to the names that exist today.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Router package is api/app/routers/bid/ and the buyer router is api/app/routers/buy.py. The folders crowmark and council were renamed (D298).</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Tables: production holds 107 <span class="code-path">bid_*</span> tables, 24 <span class="code-path">buy_*</span> tables, 2 <span class="code-path">council_*</span> tables and 0 <span class="code-path">crowmark_*</span> tables (pg_tables, 29 October). Staging reports the same four counts.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> bid_contracts: 19 rows on production, buyer_sector public on all 19, threshold_category NULL on 11, central_government 1, sub_central 2, below_threshold 5. bid_opportunities still carries <span class="code-path">CHECK (buyer_sector = 'public')</span>, so the no private discovery feed rule is still enforced in the schema.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> The buyer feature home is still web/src/features/public-sector/ and the bid feature home is web/src/features/bid/. The web/src/shared/lib/tenant/datasource.ts seam now has 55 non-test importing files (August: 12). Its dedicated branch still throws by design (datasource.ts:30-33 and :109).</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> No per-tenant silo runtime. The dedicated tier is a reserved capability that fails loudly. No R2.9 row covers it.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> word-addin/ still sits at the repository root (manifest.xml, package.json, assets).</li>
+</ul></div>
 
             <!-- Section 4: End-to-End User Journeys -->
             <div class="section-header" style="margin-top: 3rem;">
@@ -1103,7 +1152,7 @@
                                 <h4>Opportunity Intake & Discovery</h4>
                                 <p>Auto-discovered from UK Contracts Finder / Find a Tender OR ingested from uploaded PDF/Word invitation packs.</p>
                                 <div class="step-tech">
-                                    <span class="tech-tag">crowmark_tender_ingest.py</span>
+                                    <span class="tech-tag">bid_tender_ingest.py</span>
                                     <span class="tech-tag">Playwright Worker</span>
                                 </div>
                             </div>
@@ -1115,8 +1164,8 @@
                                 <h4>Multi-Modal Requirements Extraction</h4>
                                 <p>Document parser extracts questions, word counts, evaluation criteria, deadlines, and mandatory PPN obligations.</p>
                                 <div class="step-tech">
-                                    <span class="tech-tag">crowmark_document_extract.py</span>
-                                    <span class="tech-tag">Claude 3.7 OCR</span>
+                                    <span class="tech-tag">bid_document_extract.py</span>
+                                    <span class="tech-tag">Claude Sonnet 4.6</span>
                                 </div>
                             </div>
                         </div>
@@ -1137,10 +1186,10 @@
                             <div class="step-num">4</div>
                             <div class="step-content">
                                 <h4>Grounded AI Answer Generation</h4>
-                                <p>Gemini 2.5 Pro drafts responses using 7-source verbatim citations, PPN 002 social value figures, and PPN 017 AI disclosures.</p>
+                                <p>The drafting model chosen by the model registry (Claude Sonnet 4.6 or the Gemini 3 family) drafts responses using 7-source verbatim citations, PPN 002 social value figures, and PPN 017 AI disclosures.</p>
                                 <div class="step-tech">
-                                    <span class="tech-tag">crowmark_response_agent.py</span>
-                                    <span class="tech-tag">Gemini 2.5 Pro</span>
+                                    <span class="tech-tag">bid_response_agent.py</span>
+                                    <span class="tech-tag">Gemini 3 family</span>
                                 </div>
                             </div>
                         </div>
@@ -1170,7 +1219,7 @@
                                 <h4>Tender Specification & Requirements Publish</h4>
                                 <p>Public or private buyer uploads tender documents and sets evaluation criteria and lot structure.</p>
                                 <div class="step-tech">
-                                    <span class="tech-tag">council_data.py</span>
+                                    <span class="tech-tag">buy_data.py</span>
                                 </div>
                             </div>
                         </div>
@@ -1192,7 +1241,7 @@
                                 <h4>Automated Advisory Pre-Read</h4>
                                 <p>AI scans responses, locates requirement evidence, checks Cyber Essentials & PPN 006 compliance, and generates panel observations.</p>
                                 <div class="step-tech">
-                                    <span class="tech-tag">council_preread.py</span>
+                                    <span class="tech-tag">buy_preread.py</span>
                                 </div>
                             </div>
                         </div>
@@ -1216,7 +1265,7 @@
                 <div class="section-tag">Core AI Intelligence</div>
                 <h2 class="section-title">Platform AI Capabilities Engine for Velstrian Bid</h2>
                 <p class="section-desc">
-                    Comprehensive overview of the specialized AI systems powering precision bid drafting, compliance verification, and advisory evaluation.
+                    Overview of the specialized AI systems powering precision bid drafting, compliance verification, and advisory evaluation.
                 </p>
             </div>
 
@@ -1232,7 +1281,7 @@
                         Separates customer-facing generation from internal reasoning to maximize output quality and cost efficiency.
                     </p>
                     <ul class="feature-list" style="margin-top: 0.75rem;">
-                        <li class="feature-item"><span>•</span> <strong>Gemini 2.5 Pro / Flash:</strong> Powers high-speed, long-context customer-facing response drafting.</li>
+                        <li class="feature-item"><span>•</span> <strong>Gemini 3 family (D447):</strong> Powers high-speed, long-context customer-facing response drafting.</li>
                         <li class="feature-item"><span>•</span> <strong>Claude Sonnet 4.6:</strong> Handles complex document parsing, table OCR and evaluation pre-reads. <span class="pill pill-amber">CORRECTED</span> this said &ldquo;Claude 3.7 Sonnet&rdquo;, a model name that appears nowhere in the codebase. <span class="code-path">claude-haiku-4-5</span> is permitted only on cheap surfaces that pass a golden eval.</li>
                         <li class="feature-item"><span>•</span> <strong>Centralized Audit Ledger:</strong> Every LLM call logs tokens, cost, and execution duration to <code>public.ai_calls</code>.</li>
                     </ul>
@@ -1310,6 +1359,19 @@
                 </p>
             </div>
 
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the journeys and the AI engine</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> The module names in the journeys above were updated. The claims below were re-read.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Bid drafting model: the comment at api/app/services/ai/surface_policy.py:691 records the staging ledger for the bid_narrative surface on 2026-10-26 as claude-sonnet-4-6 (18 calls) and claude-haiku-5-5 (about 50 attempts). So the August claim that Gemini 2.5 Pro drafts the response is no longer how that surface runs. The Gemini 3 family carries the Gemini surfaces (D447). The model route is a registry decision and not a page fact, so the journey badge now says Gemini 3 family where Gemini is used.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Step 2 parser badge now reads Claude Sonnet 4.6 (the August text said Claude 3.7, a name absent from the codebase).</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Social value framework: the product works to PPN 026 (owner decision, PPN 026 only). api/app/services/citation_sources.py:50 still carries a ppn_002 entry and a ppn_026 entry (the edition the product works to). The workflow and engine cards below keep their August wording about PPN 002 as the record. Treat every PPN 002 mention in the August cards as PPN 026.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> The free PPN 002 social value calculator: web/app has no tools directory and api/app/routers has no free_tools directory. web/src/shared/i18n/messages/bid/analytics.ts:235 calls it the withdrawn free PPN 002 calculator. Its 15x finding is closed by removal of the route.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Grounding: citation_validator.py:53-54 holds <span class="code-path">NGRAM_N = 5</span> and <span class="code-path">MATCH_THRESHOLD = 0.92</span>, and :186-193 keeps the n = min(5, len) rule.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Procurement Act guard: <span class="code-path">assert_no_human_score_fields</span> now lives at api/app/services/buy_preread.py:759 (it was council_preread.py:448).</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> The count of 7 authorised citation sources was not re-derived (the citation source table holds 10 entries, which counts regulation sources, not company sources). Marked not re-measured 29 Oct.</li>
+</ul></div>
+
             <!-- Section 6: Assessment & Recommendations -->
             <div class="section-header" style="margin-top: 3.5rem;">
                 <div class="section-tag">Honest Engineering Review</div>
@@ -1378,7 +1440,26 @@
 
             <!-- ══════════════════ REVALIDATION 2026-08-19 ══════════════════ -->
 
-            <div class="section-header" style="margin-top: 3.5rem;">
+            <div class="fact-box" style="margin-top:1.5rem;border-left-color:#fbbf24">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of every gap and recommendation in this card</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Nothing is deleted. Each August finding has a verdict. A finding marked NOT RE-MEASURED is neither open nor closed.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Two writers of one policy (11 of 17 entitlement pairs disagree, 42 of 142 shared tokens disagree). The entitlement and token comparisons need a purpose-built diff and were not run. No R2.9 tracker row names them (grep of RELEASE-2.9-TRACKER.md).</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> 21 of 32 guard scripts invoked by no workflow, six red. Counts today: scripts/ holds 150 entries, web/scripts 37 and web/__tests__/infra 304, but wiring was not traced. No R2.9 row names the unwired scripts.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> 6 of 16 bare-hex lint exemptions and 7 of 39 brand-lint carve-outs. Not re-run. No R2.9 row.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> The two named fail-open reads: web/src/shared/lib/auth/mfa-attempt.ts:81 holds <span class="code-path">MfaSoftLockState = "clear" | "locked" | "unknown"</span>, and web/app/api/auth/sso/_lib/connection.ts exists beside provision.ts and saml-config.ts. Only the file and type were re-read.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> The population of 51 TypeScript and 52 Python catch arms that discard errors. Not re-run, so the class is neither open nor closed.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> 46 of 60 text scanners use a broken comment stripper. Not re-run.</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> The lint gate has no warning ceiling: web/package.json:12 is <span class="code-path">eslint . --ext .ts,.tsx,.js,.jsx</span>, and a grep for max-warnings in web/package.json, package.json and .github/workflows/ci.yml returned no match. The count of 58 warnings was not re-run. No R2.9 row covers it, and RULE 0-G forbids a new ratchet without owner approval.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Recommendation 1, the public pricing endpoint: see the Revalidation section. The FastAPI route was removed (api/app/routers/public.py:9).</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Recommendation 2, resolve entitlement once per request. Not re-read. Production has one subscription row (bid, portfolio, active) and one organisation, so the multi-writer drift has not met a second customer yet.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Recommendation 3, fail-open auth reads: see the type above.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Recommendations 4 and 6 (wire or delete 21 guards, codemod 46 strippers) share the unmeasured denominators above.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Recommendation 5, Schedule 1 capture: partly closed. See the Correctness section.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Strengths still hold: registry enforced by the compiler (registry.ts:76-80), assert_no_human_score_fields (buy_preread.py:759), one generated regulatory registry (specs/regulated/regulated-constants.yaml). The one pricing catalogue is packages/pricing/catalogue.ts.</li>
+</ul></div>
+
+<div class="section-header" style="margin-top: 3.5rem;">
                 <div class="section-tag">Revalidation &middot; measured 2026-08-19, 20:31&ndash;20:35 UTC</div>
                 <h2 class="section-title">What Production Says Today, And Where This Page Was Overtaken</h2>
                 <p class="section-desc">
@@ -1391,6 +1472,20 @@
                     trust the next wrong thing.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the five August revalidation findings</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Production moved from 37173e87 (19 August) to f89e959 (29 October). The deployed range contains commit 7221588b.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> 1. Pricing endpoint: <span class="code-path">GET api.velstrian.com/api/v1/pricing/public</span> now answers 401 (JWT middleware, curl 29 October) because the route was removed (api/app/routers/public.py:9 and api/app/middleware/auth.py:112). Public prices come from the web endpoint <span class="code-path">app.velstrian.com/api/public/pricing</span> (200, 539 bytes): Bid Starter 49 (44 a month annual, 529 a year), Pro 149 (134, 1,609), Portfolio 549 (494, 5,929). Buy Pro 299 (269, 3,229) and Buy Portfolio 699 (629, 7,549). Annual discount 10 percent. The text _FALLBACK_PRICING has 0 matches in api/app source, so the fallback branch is deleted, not merely bypassed.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Portfolio is no longer contact-sales only. The public payload now publishes 549 a month. The August records (Decision A hold, the compile-time quoteOnly box) describe a state that has moved. Who changed it and when was not traced by this pass.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> 2. Fail-open reads: type and file confirmed (see the Assessment status box).</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> 3. Residency: the /residency page now lives at <span class="code-path">velstrian.com/residency/</span> (app.velstrian.com/residency answers 308 to it). It names Vercel London, says "Until 19 August 2026 this ran in iad1 (Washington DC, USA), that transfer no longer occurs", names Supabase AWS eu-west-1 Ireland and Railway europe-west4 Amsterdam, and PostHog eu.posthog.com Frankfurt. This is the correction the August panel asked for. Only the live page was fetched, not the other six locations.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> 4. Six PROD PENDING rows: all six are in production and the tracker that carried them is now historical. Evidence by effect on 29 October: gdpr_erasure_exclusions holds 106 rows (was 33), atomic_delete_user references both content_chunks and answer_marks, restrictive policies number 38 across 26 tables (was 32), and bid_rate_cards and bid_effort_entries exist.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> 5. The Sentry 422 on the AI assistant: web/app/api/ai-assistant now holds only a feedback route and tests (no route.ts), and commit 7221588b is an ancestor of production f89e959 (git merge-base --is-ancestor). The original BFF path no longer exists. Sentry itself was not re-queried here.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Deployment state today: Vercel project velstrian-platform-web, deployment <span class="code-path">dpl_BRSrSEnTv6TkrJ5TgngcST1mXS67</span> READY with target production, created 2026-10-29 12:08 UTC. The earlier production deployments were on the project now named velstrian-platform-web (the oldest listed still carries the crowagent-platform-web name). Staging deployments carry target null, which is the custom staging environment. Railway: velstrian-api tracks branch railway-production (rootDirectory /api, health check /readyz), custom domain api.velstrian.com.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> 69 of 69 QA findings closed, and all UI/UX audit closure. No denominator was recounted.</li>
+</ul></div>
+
 
             <div class="fact-box" style="border-left-color:#34d399">
                 <div class="fact-title"><span>&#9989;</span> 1. The endpoint that was this page&rsquo;s #1 recommendation now serves the locked ladder</div>
@@ -1637,6 +1732,16 @@
                     the correct value existed and nothing read it.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#fbbf24">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the four statute defects</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Measured against the generated registry, the code and production.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Northern Ireland instrument and basis: the ruleset points at <span class="code-path">procurement_act_2023</span> with MAT (regulated-constants.yaml:1752 and :1758-1759). The internal key residue R27-SEGMENT-13 is closed: the key is now the true regime, and the registry refuses a regime-only question whose answer differs between jurisdictions (yaml comment at :1726-1746). Scotland keeps PCSR 2015 and MEAT with supports_user_defined_stages false.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> NI competitive flexible procedure: the NI ruleset carries <span class="code-path">supports_user_defined_stages: true</span> (yaml:1764). The test assertion at api/tests was not re-run.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Schedule 1 central versus sub-central: regulation-logic.ts:292 holds goodsServicesThresholdFor, and :335 authorityClassForOrganisationType derives the class from the organisation type, with resolveAuthorityClass at :424 returning determined, assumed or not_a_contracting_authority (it no longer assumes sub-central for an unrecorded NHS body). Still absent: <strong>no authority_class column exists on any production public table</strong> (information_schema, 29 October), and 11 of 19 production contracts have a NULL threshold_category. Verdict: PARTLY FIXED. No R2.9 row names authority_class (grep returned none).</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> The 10 percent social value floor and its generated rule table. Not re-read.</li>
+</ul></div>
+
 
             <div class="grid-2">
                 <div class="card">
@@ -1764,6 +1869,17 @@
                     positioning statement and became a set of columns, gates and types.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the tenancy table</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Production now holds 1 organisation, 4 users and a maximum of 4 org_users rows in one organisation. Staging holds 90 organisations and 92 users.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> bid_contracts.buyer_sector: 19 of 19 production rows carry public, zero NULL (August: 24 of 24).</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Onboarding organisation type: the production CHECK on organisations.type now permits 12 values: individual, company, agency, enterprise, council, education, nhs_trust, nhs_icb, nhs, housing_association, central_government, other_public. The August card said 10. What onboarding offers today was not re-counted.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Entitlement source split (profiles.plan versus product_context): not re-read.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Tenant seam: 55 non-test importers (see the LLD status box).</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> The 422 on the bid/no-bid decision read endpoint: not re-read in this pass.</li>
+</ul></div>
+
 
             <div class="benchmark-table-container">
                 <table class="benchmark-table">
@@ -1857,6 +1973,15 @@
                     the four findings are the same shape: a central declaration that reached nothing.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the design system and accessibility findings</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> No browser sweep was run in this pass, so these are carried, not re-measured.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Page title token, route identity binding, sidebar breakpoint token and chat drawer: each is a guarded fix in August. The guard files were not re-run (RULE 0-T). Not re-measured 29 Oct.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> The axe sweep (46 runs, 0 critical and 15 serious in the first run, later 2 serious on 14 routes) was not repeated, and its results directory is still gitignored. No R2.9 row asks for an axe re-run (grep for axe and accessibility matched unrelated rows).</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Design tokens and brand: the brand is now Velstrian Tenderworks (R285 rebrand rows REBRAND-02 and REBRAND-05 carry the artwork and design system work in the R2.9 tracker).</li>
+</ul></div>
+
 
             <div class="grid-2">
                 <div class="card">
@@ -1983,6 +2108,14 @@
                     these were built before this document was written and appear nowhere in it.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the two understated capabilities</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Both are still present. Paths moved with the rename.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Defensible Decision Record: web/src/features/public-sector/decision-record.ts is now also imported by decision-record-document.ts, evaluation-field.server.ts, evidence/api.ts, evidence/criterion-state.ts and clarification-letter.ts, and there are decision-record-docx.ts and decision-record-pdf.ts export files. A test named decision-record-dormant-half.test.ts still pins the part that stays dormant. Whether the provenance ladder now reaches a screen was not traced.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Renewal and Commitment Watchtower: the route is now web/app/(dashboard)/bid/awards/page.tsx (it was /crowmark/awards), with a loading.tsx beside it.</li>
+</ul></div>
+
 
             <div class="grid-2">
                 <div class="card">
@@ -2053,6 +2186,14 @@
                     global AI bid, tender and RFP management solutions&rdquo;.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#ef4444">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the benchmark tab</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> The tab stays REFUTED in full. Nothing on it was re-scored, and no benchmark methodology has been added since August.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> Every score, radar value and competitor price band on this tab is unmeasured. Do not publish, quote or repeat any of them. No R2.9 row builds a sourced benchmark (grep for benchmark matched only unrelated rows).</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Names on the tab: CrowMark is now Velstrian Bid, the free PPN 002 calculator it cites was withdrawn, and the product price band it cited is now Starter 49, Pro 149, Portfolio 549 (live endpoint 29 October). The competitor figures are third-party prices never verified by this platform and were not re-checked.</li>
+</ul></div>
+
 
             <div class="fact-box" style="border-left-color:#ef4444;background:rgba(127,29,29,.25)">
                 <div class="fact-title"><span>&#128721;</span> REFUTED IN FULL. This tab was wrong when it was written, not overtaken by events</div>
@@ -2379,6 +2520,18 @@
                     advisory is marked <span class="band-label band-rec" style="margin:0">Recommendation</span>.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of what we sell and charge</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Live endpoint read on 29 October: https://app.velstrian.com/api/public/pricing, HTTP 200. Stripe itself was not re-read by this pass (the Stripe account was outside the allowed sources), so every Stripe figure below keeps its earlier date.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Products sellable: the endpoint carries two product keys, <span class="code-path">bid</span> and <span class="code-path">buy</span>. In August only crowmark was sellable.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Bid ladder: Starter 49 / 44 / 529, Pro 149 / 134 / 1,609, Portfolio 549 / 494 / 5,929 (monthly, monthly if annual, annual total). Buy ladder: Pro 299 / 269 / 3,229 and Portfolio 699 / 629 / 7,549. The August Buy ladder (Essentials 249, Pro 749, Enterprise 1,999 and the 3,600, 9,600 and 19,200 council tiers) is absent from the payload.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Annual discount rule: the payload states annual_discount_pct 10 and 529 = floor(49 x 12 x 0.9). All five annual totals agree with that rule.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Credits and seats from packages/pricing/catalogue.ts: Free state 1 seat and 0 credits (:692), trial 1 seat and 30 credits (:712 and :803), Starter 1 seat, 200 credits, 3 guests (:724), Pro 5, 750, 10 (:739), Portfolio 10, 3,000, 25 (:755), Buy tiers 5 / 750 / 10 and 10 / 3,000 / 25 (:796 and :827). The trial is now 7 days with 30 credits (velstrian.com/terms/ fetched 29 October: "runs for 7 days at the Starter feature set for 1 user, with 30 AI credits, and needs a card to start"). The August figures of 14 days and 50 credits are gone.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Published copy: velstrian.com/pricing/ (fetched 29 October) states 1 user, 5 users and 10 users included, 200 / 750 / 3,000 credits, and the sentence "These are the numbers the platform enforces."</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Live Stripe: 19 active prices archived to 10, the Agency nicknames, the Velstrian Bid Council product name and the subscription list. The one subscription row now in production is bid / portfolio / active with a Stripe style id, so the August premise of zero live subscription revenue was not re-read and may no longer hold. Whether that row is live mode money was not checked.</li>
+</ul></div>
+
 
             <div class="fact-box" style="border-left-color:#10b981">
                 <div class="fact-title"><span>&#9989;</span> Revalidation 2026-08-16 &middot; six of the seven decisions on this tab have been taken</div>
@@ -2491,6 +2644,15 @@
                     been rewritten; the original verdicts are quoted inside each cell so the change is legible.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#fbbf24">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the product ladders</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Counts read from the endpoint, the catalogue and production Postgres.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Ladder table: Velstrian Bid is the supplier ladder, Velstrian Buy is the buyer ladder with two sold tiers (Pro and Portfolio). The older Buyer Essentials / Pro / Enterprise and council small / standard / county Stripe prices are not served.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> Public Sector is half-built with a live grant: production product_subscriptions holds exactly one row, <span class="code-path">bid / portfolio / active</span>. The council_county manual grant is gone, billing_product_key now reads bid, buy, and organisations.product_context holds buy as buyer_portfolio with seats_limit 50. The August counts of organisations carrying a council key (6, then 9 of 13) no longer apply because production has 1 organisation.</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> Ten product_context keys name no product: advisor, agency, analytics, carbon, contracts, marketplace, monitoring, regulatory_monitor, reports and workflows, each tier enterprise and seats_limit 1000, on the single production organisation (organisations.product_context, 29 October). Whether any can grant access has still not been traced. No R2.9 row names them.</li>
+</ul></div>
+
 
             <div class="benchmark-table-container">
                 <table class="benchmark-table">
@@ -2597,6 +2759,16 @@
                     Section 5 is rewritten accordingly.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the four-surface parity matrix</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Platform API, website and catalogue were read. Stripe and the portal matrix were not.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Surfaces: Platform API app.velstrian.com/api/public/pricing, website velstrian.com/pricing/, catalogue packages/pricing/catalogue.ts. The portal matrix path apps/portal/src/lib/pricing/matrix.ts was not re-read.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Starter and Pro price parity: API 49 / 529 and 149 / 1,609 matches the website text (fetched 29 October, the pricing page prints "549 a month, 5,929 a year (10% off)" for Portfolio and "699 a month, 7,549 a year (10% off)" for Buy Portfolio). The API and website agree with each other on every figure shown.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> The Portfolio contact_sales breach and the 549 publish: never rule: Portfolio 549 is now a published price, so the finding applies to a state that no longer exists. Whether the Stripe metadata still reads publish never was not re-read.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> The council_standard and council_county prices with unset tax_behavior: not in the payload. Stripe not re-read.</li>
+</ul></div>
+
 
             <div class="benchmark-table-container">
                 <table class="benchmark-table">
@@ -2758,6 +2930,18 @@
                     &pound;549 subscription can host a 200-person bid consultancy.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the seat decision</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> The catalogue is still the one declaration (packages/pricing/catalogue.ts). Starter 1, Pro 5, Portfolio 10 are unchanged.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Eight declarations are one: catalogue.ts holds seats and the files that read it call getSeatLimit (not recounted today, 20 files in August).</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> Seat enforcement: <span class="code-path">SEAT_ENFORCED_PRODUCTS</span> is still the empty array, web/src/shared/lib/billing/seat-limits.ts:211. Owner decision OD-12 still gates it. No R2.9 row covers it.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Safety argument: production org_users maximum is now 4 in one organisation (was 1 per organisation), and the production organisation is Portfolio with a 10 seat cap, so the cap is still not exceeded. Starter and Pro caps remain unexercised (no organisation on those tiers).</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Guest review cap (REQ-PRICE-018): api/app/routers/bid_review_guests.py:240 defines _enforce_guest_invite_cap, which counts live invites per contract, uses guests.guest_invite_limit(tier), fails closed with a 502 and refuses with 422. The TypeScript getGuestLimit still has two files (the catalogue and a billing test), so enforcement lives in Python. production bid_review_guest_invites holds 0 rows.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Terms trial seat clause: now 7 days, Starter feature set, 1 user, 30 AI credits (velstrian.com/terms/).</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> Ten product_context keys with seats_limit 1000 (see the ladders box).</li>
+</ul></div>
+
 
             <div class="benchmark-table-container">
                 <table class="benchmark-table">
@@ -3069,6 +3253,16 @@
                     for review after the first real billing cycle. Lock §2.5 closes the open question this section raised.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the credit ladder</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Credits per month are 0 (free state), 200, 750 and 3,000 on the three Bid tiers, and 30 for the trial.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Trial allowance is now 30 credits for 7 days (catalogue.ts:712 and :803), replacing 50 credits for 14 days.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Published copy and catalogue agree (see the pricing box above).</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Credit top ups and the metered overage: the pricing page offers packs from 10 pounds and auto reload (live text, 29 October). The 0.10 pound per credit overage was not re-read in Stripe.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Modelled COGS and gross margins (92, 90, 89 percent). They are the packaging document figures and were not re-derived.</li>
+</ul></div>
+
 
             <div class="grid-2">
                 <div class="card">
@@ -3162,7 +3356,19 @@
                     <strong>displays as &ldquo;Large&rdquo;</strong> and the small tier&rsquo;s blurb reads &ldquo;Single
                     directorate or <strong>faculty</strong>&rdquo;.
                 </p>
-                <div class="fact-box" style="margin-top:1rem;border-left-color:#f87171">
+                
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the naming residue</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Names read from code and production.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Product names: Velstrian Buy and Velstrian Bid come from PRODUCT_NAME_BUY and PRODUCT_NAME_BID (registry.ts:240 and :281). The guard web/__tests__/infra/product-label-is-centralised.test.ts is present.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> The checkout URL ?plan=council_council_small: 0 matches for council_council in web/src and web/app.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> The five UK local-authority AI prompts: the phrase now appears in api/app only in comments (buy.py:1452, bid/delivery.py:702, bid_buyer_priorities.py:236), none in a prompt string.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Requirement pack route: web/app/api/buy/requirements/[id]/pack/route.ts (was web/app/api/council/...). The download filename token was not re-read.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> The Stripe product Velstrian Bid Council and its description: Stripe was outside the allowed sources.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Internal keys: the August policy (keys stay council) has been replaced by the rename (D298). Production tables are bid_ and buy_ (see the LLD box). Residual crowmark and crowagent identifiers (env vars such as CROWMARK_FREE_FIRST_BRIEFING and CROWAGENT_DATA_PATH on Railway, the readyz service name) remain, covered by row R285-REBRAND-11-INTERNAL-IDENTIFIERS (BUILT) in RELEASE-2.9-TRACKER.md.</li>
+</ul></div>
+<div class="fact-box" style="margin-top:1rem;border-left-color:#f87171">
                     <div class="fact-title"><span>&#128721;</span> REFUTED: the naming policy this section states is no longer the policy</div>
                     <p style="color:var(--text-main)">
                         This page told you the policy was <strong>&ldquo;keys stay <span class="code-path">council</span>, labels
@@ -3381,6 +3587,18 @@
                     recording a recommendation as a recommendation.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the seven decisions</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> The decisions are historical. Their outcomes were compared with what is live.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> A, Portfolio publish or withdraw: August outcome was HOLD (contact sales). Today the payload publishes 549. The decision was reversed in practice and the reason was not traced.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> B, Buyer ladder: August outcome was ARCHIVE. Today the payload sells Buy Pro 299 and Buy Portfolio 699. The archived Stripe prices are not what is served.</li>
+<li><span class="pill pill-purple" style="font-size:.7rem">NO LONGER APPLIES</span> C, tax_behavior unset on two prices: those prices are not in the payload.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> D, seat copy and Terms at 1 / 5 / 10: confirmed on the live pricing page and Terms.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> E, tier ladder for non council buyers: the sold Buy ladder is two tiers named Pro and Portfolio, a neutral ordinal.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> G, Free is a state: catalogue.ts:692 holds free creditsPerMonth 0.</li>
+</ul></div>
+
 
             <div class="grid-2">
                 <div class="rec-box">
@@ -3735,6 +3953,18 @@
                     them has become the live P0 of Release 2.7.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of Decision E and the register rows</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> See the previous boxes for the evidence.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Decision E: the buy side now has one product and a two step ladder, so options 1 to 4 resolved to a neutral ordinal.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> Register rows R262-D-34, R262-D-159, R262-D-160, seats copy, free tier, deactivated seat blocker, system prompts and the unlimited claim: closed, status unchanged since August.</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> R27P0 second pricing endpoint: closed and the route removed.</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> R27P2 product_context ten dead keys: open (see above).</li>
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> REQ-PRICE-018 guest cap: enforced in Python (see the seats box).</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> R262-D-161 Stripe nicknames and the crowmark_agency tier string in the portal: Stripe and the portal were not re-read.</li>
+</ul></div>
+
 
             <div class="benchmark-table-container">
                 <table class="benchmark-table">
@@ -3834,6 +4064,15 @@
                 <div class="section-tag">Section 8</div>
                 <h2 class="section-title">How This Was Measured, And What Is Deliberately Not Claimed</h2>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#6366f1">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the method notes</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> This pass used a different corpus. The method lines below remain as the August record.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> Corpus read on 29 October: the code in crowagent-platform with comments stripped for model, route and constant claims, Supabase production gujtuecjzfiqsdnzgyvo and staging ipgrnwvfnumgvnxkpxsc (SELECT only), the Vercel and Railway tools, and curl on the public hosts. Stripe, Sentry, Cloudflare and the portal behind Access were not queried.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> Portal and staging hosts behind Cloudflare Access: not walked with a token (the credential file is blocked from this lane by a guardrail), so only the 302 answers without a token are stated.</li>
+<li><span class="pill pill-rose" style="font-size:.7rem">NOT RE-MEASURED</span> No test suite was run (RULE 0-T) and no checkout was exercised.</li>
+</ul></div>
+
 
             <div class="grid-2">
                 <div class="fact-box" style="margin-top:0">
@@ -3952,6 +4191,15 @@
                     the part that stops it recurring, is <strong>UNVERIFIED</strong>.
                 </p>
             </div>
+<div class="fact-box" style="margin-top:1.5rem;border-left-color:#10b981">
+<div class="fact-title"><span>&#128260;</span> Status 29 October 2026 of the two pricing endpoints</div>
+<p style="color:var(--text-muted)"><span class="pill pill-emerald">RE-MEASURED 29 October 2026</span> Only one pricing endpoint exists today.</p>
+<ul style="color:var(--text-muted);margin:.5rem 0 .5rem 1.25rem">
+<li><span class="pill pill-emerald" style="font-size:.7rem">FIXED</span> The FastAPI endpoint GET /api/v1/pricing/public no longer exists: it answers 401 from the JWT middleware and its route and auth exemption were deleted (api/app/routers/public.py:9, api/app/middleware/auth.py:112). The three fixes asked for are met in the strongest way, by deletion. _FALLBACK_PRICING has 0 matches in api/app source.</li>
+<li><span class="pill pill-amber" style="font-size:.7rem">STILL OPEN</span> The wider lesson: a parity guard that scans one language of a two language platform. Whether any check spans the TypeScript and Python contract boundary was not re-measured, and no R2.9 row names it.</li>
+<li><span class="pill pill-indigo" style="font-size:.7rem">CHANGED</span> The Next.js endpoint remains the single public price source, now keyed bid and buy (live payload quoted above).</li>
+</ul></div>
+
 
             <div class="fact-box" style="border-left-color:#f87171">
                 <div class="fact-title"><span>&#128721;</span> Both fetched on 2026-08-16, unauthenticated, within a second of each other <span class="pill pill-amber" style="font-size:.75rem">HISTORICAL &mdash; superseded 2026-08-19, retained</span></div>
