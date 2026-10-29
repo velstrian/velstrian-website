@@ -61,9 +61,8 @@
     --card2:rgba(255,255,255,.075);
     --paper:#fff;
 
-    /* Standard spacing for the body gutter. The full-bleed document frame has to
-       cancel exactly this value, and a second copy of it written as a magic -20px
-       is how a full-bleed row drifts out of alignment with the page. */
+    /* Standard spacing for the body gutter. Anything that has to line up with
+       the page edge reads this value rather than a magic -20px copy of it. */
     --gutter:20px;
     --measure:1180px;
 
@@ -126,36 +125,6 @@
   body.pbmode .brandmark rect[stroke],body.mastermode .brandmark rect[stroke],
   body.archmode .brandmark rect[stroke],body.webmode .brandmark rect[stroke]{stroke:none}
 
-  /* [R27-ARCH-03] The architecture review is a 164KB document with its own layout.
-     Inside the 1180px wrapper it rendered in a column narrower than it was
-     designed for, which made a full review look like a preview, so it breaks out
-     to the full width of the page.
-
-     [R28-BOARD-NAV-01] IT USED TO BREAK OUT WITH `width:100vw`, AND THAT MADE THE
-     WHOLE PAGE SCROLL SIDEWAYS. `100vw` counts the vertical scrollbar; the body's
-     content box does not. Measured on the live board: scrollWidth 1273 against
-     clientWidth 1265, so every reader of the review got eight pixels of horizontal
-     scroll on a page that has nothing to the right. Viewport units cannot see the
-     scrollbar, so the breakout no longer uses them: the wrapper's own cap is
-     lifted for a framed view and the three chrome rows above stay centred at the
-     normal measure. The frame then fills the body content box exactly. */
-  .docframe{
-    width:100%;
-    height:calc(100vh - 150px);
-    min-height:520px;
-    border:0;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    background:var(--paper);
-    display:block;
-  }
-  /* Full-bleed also means the body's own side padding must not reappear as a
-     white gutter, so the frame row cancels exactly one gutter each side. */
-  .docframe-row{margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter))}
-  body.fullbleed .wrap{max-width:none}
-  body.fullbleed .wrap > h1,
-  body.fullbleed .wrap > .sub,
-  body.fullbleed .wrap > .boardnav{max-width:var(--measure);margin-left:auto;margin-right:auto}
   h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 6px;letter-spacing:-.02em}
   .sub{color:var(--sub);margin:0 0 28px}
   .bar{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px}
@@ -301,9 +270,6 @@
   .subnav .views button[aria-pressed="true"] span{color:var(--bg);opacity:.78}
   .subnav .views button:hover{border-color:var(--sub)}
   .subnav .views button[aria-pressed="true"]:hover{border-color:var(--teal)}
-  .subnav .aside{display:flex;flex-wrap:wrap;gap:12px;align-items:center;
-                 margin:10px 0 0;font-size:13px;color:var(--sub)}
-  .subnav .aside a{color:var(--built)}
   .subnav[hidden]{display:none}
 
   /* ════════════════════════════════════════════════════════════════════════
@@ -741,9 +707,6 @@
     border-color:var(--pb-accent);box-shadow:0 0 0 1px var(--pb-accent)}
   body.archmode .subnav .views button[aria-pressed="true"] strong{color:var(--pb-accent);font-weight:700}
   body.archmode .subnav .views button[aria-pressed="true"] span{color:var(--pb-ink);opacity:.85}
-  body.archmode .subnav .aside{margin:2px 0 0;font-size:12.5px;color:var(--pb-muted)}
-  body.archmode .subnav .aside a{color:var(--pb-accent);text-decoration:none}
-  body.archmode .subnav .aside a:hover{text-decoration:underline}
 
   /* Document Body Layout & Components under Architecture */
   body.archmode #docbody{max-width:100%;margin:0;display:flex;flex-direction:column;gap:18px}
@@ -2417,28 +2380,35 @@ const BOARDS = {
   architecture: {
     label: 'Architecture & Tenancy',
     heading: 'Architecture and tenancy: how the two products are supplied',
-    blurb: 'Eight documents about how this is built and where it should go: the review, target architecture, tenancy, the CI estate, release and environments, the developer guide, AI onboarding and AI strategy. Pick one below, each is described so you can choose without opening them all.',
-    /* Two views behind one tab. The architecture review is the 164KB document
-       from tools/arch-visualizer, which carries its OWN stylesheet plus Chart.js
-       and Mermaid; injecting it inline would collide with this page's CSS, so it
-       is framed and keeps working exactly as authored. The tenancy analysis is a
-       fragment written against this page's own styles, so it is injected. */
+    blurb: 'Ten documents about how this is built and where it should go: the three parts of the architecture review (deep-dive, capability rating, pricing parity), target architecture, tenancy, the CI estate, release and environments, the developer guide, AI onboarding and AI strategy. Pick one below, each is described so you can choose without opening them all.',
+    /* Every view behind this tab is a FRAGMENT written against this page's own
+       #docbody styles and injected into it. There is no framed view any more:
+       the architecture review used to be framed and read as a different website
+       inside a box, so it was rebuilt as three fragments (R29-ARCH-REVIEW). */
     views: [
       /* [R28-BOARD-NAV-01] Each view carries a `blurb`, and it is not decoration.
          The switcher was four bare words, so the only way to learn what any of
          them held was to open it, which is the owner's "no way to see the four
          without first landing on one". `stale` puts a dated notice above a
          document this board cannot itself keep current. */
-      /* [R29-ARCH-REVIEW-RESTORED, owner 2026-10-29] The architecture review is
-         a view again. It was retired on 2026-08-29 (R28-ARCH-REVIEW-RETIRED-01)
-         as an R2.7 record, and is being re-measured for R2.9. FRAMED, not
-         injected: it carries its own stylesheet and scripts, so it keeps working
-         as authored and none of its CSS reaches this page.
-         check-board-contract.js checks every frame: on disk, a whole document
-         with its own doctype and title. */
-      { id: 'review',  label: 'Architecture review',
-        blurb: 'The full platform architecture review, its own page shown in a frame. Open it full page for the best read',
-        frame: 'architecture-review.html' },
+      /* [R29-ARCH-REVIEW, owner 2026-10-29] The architecture review, re-measured
+         on 29 October 2026, is THREE views, one per top-level tab of the old
+         standalone review page, with the names taken from it. Each is a doc
+         fragment like target and tenancy, styled only by this page, so it looks
+         and behaves exactly like them. No frame, no full page link, and the old
+         architecture-review.html copy is gone from this board. The historic
+         standalone tool stays in the platform repo
+         (tools/arch-visualizer/index.html) and is not linked from here.
+         check-board-contract.js checks these like every other doc fragment. */
+      { id: 'deepdive', label: 'Architecture and AI deep-dive',
+        blurb: 'How the platform is built today, re-measured 29 October 2026: design, AI engine, statute, tenancy',
+        doc:   'architecture-review-deep-dive.html' },
+      { id: 'rating',  label: 'Velstrian Bid capability and top 5 rating',
+        blurb: 'What Velstrian Bid can do, and why the August competitor rating is refuted in full',
+        doc:   'architecture-review-capability-rating.html' },
+      { id: 'pricing', label: 'Pricing decision and four-surface parity',
+        blurb: 'What we sell and charge, and whether the API, website, catalogue and Stripe agree',
+        doc:   'architecture-review-pricing.html' },
       { id: 'target',  label: 'Target architecture',
         blurb: 'Diagrams: what runs today, what to build, and the coupling numbers behind it',
         doc:   'architecture-target-state.html' },
@@ -2591,9 +2561,8 @@ function applyDocState(){
 
 /* [R28-BOARD-NAV-01] THE SWITCHER IS RENDERED INTO PERMANENT CHROME, and it is
    the whole second level of navigation: a breadcrumb saying where you are, four
-   described choices so you can see what the others hold without opening them,
-   and, for a framed document, the link out and the notice that it is not
-   maintained. */
+   described choices so you can see what the others hold without opening them.
+   Every view is a fragment on this page, so there is no link out. */
 function renderDocSwitch(spec, active){
   const el = document.getElementById('docswitch');
   if (!el) return;
@@ -2608,16 +2577,9 @@ function renderDocSwitch(spec, active){
     '<strong>' + esc(v.label) + '</strong>' +
     (v.blurb ? '<span>' + esc(v.blurb) + '</span>' : '') +
     '</button>').join('') + '</div>';
-  /* An embedded frame can never give a 164KB document the whole window, so the
-     link out is not decoration. It was previously an unstyled anchor and rendered
-     in the browser's default link blue, measured as rgb(0,0,238) against a page
-     that has no other blue: a colour nothing declared, on the one control that
-     leaves the page. */
-  const aside = view.frame
-    ? '<p class="aside"><a href="' + esc(view.frame) + '" target="_blank" rel="noopener">' +
-      'Open this document full page &rarr;</a></p>'
-    : '';
-  el.innerHTML = crumb + views + aside;
+  /* [R29-ARCH-REVIEW] No "open full page" link: every view is a fragment on
+     this page, so there is nowhere else to open it. One entry point per view. */
+  el.innerHTML = crumb + views;
   el.hidden = false;
 }
 
@@ -2626,43 +2588,25 @@ async function renderDocView(spec, host){
   docView = active;
   renderDocSwitch(spec, active);
   const view = spec.views.find(v => v.id === active);
-  /* [R28-BOARD-NAV-01] Full bleed is a property of THIS VIEW, not of the board,
-     so it is set and cleared on every view change rather than once on load. */
-  document.body.classList.toggle('fullbleed', !!view.frame);
-
   /* A document this board cannot keep current says so, in the board's own chrome,
      rather than being quietly served as though it were the answer. The notice is
-     written here and not in the document because the document is framed: editing
-     a 164KB generated file to add a banner is how a generated file stops being
-     regenerable. */
+     written here so it travels with the view entry rather than the document. */
   const staleNotice = view.stale
     ? '<div class="callout bad" style="margin:0 0 14px"><b>This document is a record, not the current answer.</b> ' +
       esc(view.stale) + '</div>'
     : '';
 
-  if (view.frame) {
-    /* Framed, not injected: it brings its own stylesheet and two CDN libraries.
-       Height is generous because the document is long and a scrollbar inside a
-       scrollbar is worse than a tall frame. */
-    /* The switch keeps the wrapper's width; only the frame breaks out. A
-       full-bleed row of buttons would put the controls miles from the text. */
-    host.innerHTML = staleNotice +
-      '<div class="docframe-row">' +
-      '<iframe class="docframe" src="' + esc(view.frame) + '" title="' + esc(view.label) + '"></iframe>' +
-      '</div>';
-  } else {
-    let body;
-    try{
-      const r = await fetch(view.doc + '?t=' + Date.now());
-      if(!r.ok) throw new Error('HTTP ' + r.status);
-      body = await r.text();
-    }catch(err){
-      /* Name the document AND the reason. "Could not load" alone sends the reader
-         to the wrong file. */
-      body = '<p>Could not load ' + esc(view.doc) + ': ' + esc(err.message) + '</p>';
-    }
-    host.innerHTML = staleNotice + body;
+  let body;
+  try{
+    const r = await fetch(view.doc + '?t=' + Date.now());
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    body = await r.text();
+  }catch(err){
+    /* Name the document AND the reason. "Could not load" alone sends the reader
+       to the wrong file. */
+    body = '<p>Could not load ' + esc(view.doc) + ': ' + esc(err.message) + '</p>';
   }
+  host.innerHTML = staleNotice + body;
   /* The state a document publishes must be re-applied after every injection, not
      only on the first one. Switching view replaces #docbody wholesale, so a
      document's declared default would otherwise never be set on a switch and its
@@ -2716,7 +2660,6 @@ async function load(){
     document.getElementById('docbody').hidden = true;
     const swEl = document.getElementById('docswitch');
     if (swEl) { swEl.innerHTML = ''; swEl.hidden = true; }
-    document.body.classList.remove('fullbleed');
     return;
   }
 
@@ -2744,11 +2687,10 @@ async function load(){
     await renderDocView(spec, host);
     return;
   }
-  /* Leaving a document board: the switcher, the full-bleed breakout and any
+  /* Leaving a document board: the switcher and any
      document state all belong to it and none of them may survive the exit. */
   const swEl = document.getElementById('docswitch');
   if (swEl) { swEl.innerHTML = ''; swEl.hidden = true; }
-  document.body.classList.remove('fullbleed');
   document.getElementById('docbody').removeAttribute('data-state');
   /* An issue board: restore what the document branch hid. `deploy` is NOT in this
      list on purpose. render() owns its visibility and re-decides every load, so
@@ -3055,17 +2997,45 @@ function renderMasterHub() {
           </div>
         </a>
 
-        <a href="/architecture-review.html" class="hub-card" data-kw="architecture review visualizer 3d chart.js mermaid crowmark rating visualizer">
+        <a href="#architecture/deepdive" class="hub-card" data-kw="architecture review deep dive hld lld ai engine statute tenancy accessibility rls hosts">
           <div>
             <div class="hub-card-top">
-              <h4 class="hub-card-title">Architecture Review Visualizer</h4>
-              <span class="hub-badge teal">Standalone App</span>
+              <h4 class="hub-card-title">Architecture and AI Deep-Dive</h4>
+              <span class="hub-badge teal">Re-measured 29 Oct</span>
             </div>
-            <p class="hub-card-desc">Interactive 3D/Mermaid deep-dive into platform components, Velstrian Bid capabilities, and benchmark metrics with Chart.js analytics.</p>
+            <p class="hub-card-desc">How the platform is built today: hosts, high and low level design, the AI engine, statute correctness, tenancy and accessibility, with the August record kept underneath.</p>
           </div>
           <div class="hub-card-footer">
-            <span>Launch Visualizer &rarr;</span>
-            <span class="meta">/architecture-review.html</span>
+            <span>View Deep-Dive &rarr;</span>
+            <span class="meta">#architecture/deepdive</span>
+          </div>
+        </a>
+
+        <a href="#architecture/rating" class="hub-card" data-kw="architecture review velstrian bid capability top 5 rating benchmark competitor radar refuted">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Velstrian Bid Capability and Top 5 Rating</h4>
+              <span class="hub-badge teal">Re-measured 29 Oct</span>
+            </div>
+            <p class="hub-card-desc">What Velstrian Bid can do, and why the August competitor rating is refuted in full and must not be quoted.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View Capability Rating &rarr;</span>
+            <span class="meta">#architecture/rating</span>
+          </div>
+        </a>
+
+        <a href="#architecture/pricing" class="hub-card" data-kw="architecture review pricing decision four surface parity seats credits catalogue stripe ladders">
+          <div>
+            <div class="hub-card-top">
+              <h4 class="hub-card-title">Pricing Decision and Four-Surface Parity</h4>
+              <span class="hub-badge teal">Re-measured 29 Oct</span>
+            </div>
+            <p class="hub-card-desc">What we sell and charge, the seat and credit ladders, and whether the API, website, catalogue and Stripe agree.</p>
+          </div>
+          <div class="hub-card-footer">
+            <span>View Pricing Parity &rarr;</span>
+            <span class="meta">#architecture/pricing</span>
           </div>
         </a>
       </div>

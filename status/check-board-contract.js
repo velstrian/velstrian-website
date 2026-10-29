@@ -299,6 +299,39 @@ for (const file of ['index.html', ...DOCS]) {
     );
   }
 
+  /* [R29-ARCH-REVIEW 2026-10-29] A FRAGMENT IS NOT A PAGE. The architecture
+     review used to be a whole page with its own stylesheet and two CDN
+     libraries, shown in an iframe, and read as a different website inside a
+     box. An unscoped <style> rule injected into #docbody would restyle the
+     whole board, and an html, head or body element or a doctype means a page was
+     pasted where a fragment belongs. A CDN reference is a library this board
+     never loads. Checked on the comment-stripped text, because these files
+     explain the rule in their header comments. Negative case: put a <style>
+     element in any doc fragment and this prints a red line for it. */
+  if (file !== 'index.html') {
+    const body = raw.replace(/<!--[\s\S]*?-->/g, ' ');
+    for (const [re, what] of [
+      [/<!doctype/i, 'a doctype'],
+      [/<html[\s>]/i, 'an <html> element'],
+      [/<head[\s>]/i, 'a <head> element'],
+      [/<body[\s>]/i, 'a <body> element'],
+      [/<iframe[\s>]/i, 'an <iframe>'],
+      [/\b(?:src|href)\s*=\s*["']https?:\/\/(?:cdn\.|unpkg\.|cdnjs\.)/i, 'a CDN reference'],
+    ]) {
+      if (re.test(body)) problems.push(`is not a fragment: it contains ${what}`);
+    }
+    /* A <style> element is allowed only when every rule in it is scoped under
+       #docbody, as architecture-tenancy.html does for the few classes that are
+       unique to it. An unscoped rule reaches the board's own chrome. */
+    for (const m of body.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
+      const css = m[1].replace(/\/\*[\s\S]*?\*\//g, ' ');
+      for (const sel of css.split('}').map((r) => r.split('{')[0].trim()).filter(Boolean)) {
+        const bad = sel.split(',').map((x) => x.trim()).filter((x) => !x.startsWith('#docbody'));
+        if (bad.length) problems.push(`has a <style> rule not scoped under #docbody: ${bad.join(', ')}`);
+      }
+    }
+  }
+
   /* Comments are stripped first, because a text scanner cannot tell code from
      prose and the explanations in these files name the very patterns they forbid.
      Numeric HTML entities look exactly like hex literals, so they go too. */
@@ -341,36 +374,28 @@ for (const file of ['index.html', ...DOCS]) {
 
 /* The board offers four views. A view whose file is not on disk is a button that
    renders "Could not load", so the registry and the directory must agree. */
-const declaredViews = [...rawPage.matchAll(/(?:doc|frame):\s*'([^']+\.html)'/g)].map((m) => m[1]);
+const declaredViews = [...rawPage.matchAll(/doc:\s*'([^']+\.html)'/g)].map((m) => m[1]);
 for (const v of new Set(declaredViews)) {
   if (!fs.existsSync(path.join(HERE, v))) {
     console.error(`❌ index.html offers a view for ${v}, which is not on disk.`);
     failed = true;
   }
 }
-/* [R29-ARCH-REVIEW-RESTORED 2026-10-29] A FRAMED view is a whole page in an
-   iframe, so the fragment rules above (no script, no colour literal) do not
-   apply to it: its scripts run in their own document and its colours cannot
-   reach this page. What it must be is a complete document, because a frame
-   without a doctype renders in quirks mode and one without a title is announced
-   as nothing to a screen reader. Negative case: drop the doctype from a framed
-   file and this prints a red line for it. */
-const framed = [...strip(rawPage).matchAll(/frame:\s*'([^']+\.html)'/g)].map((m) => m[1]);
-for (const f of new Set(framed)) {
-  const full = path.join(HERE, f);
-  if (!fs.existsSync(full)) continue; // reported above as not on disk
-  const raw = fs.readFileSync(full, 'utf8');
-  const problems = [];
-  if (!/<!doctype html>/i.test(raw)) problems.push('no <!DOCTYPE html>, so the frame renders in quirks mode');
-  if (!/<title>[^<]+<\/title>/i.test(raw)) problems.push('no <title>');
-  if (problems.length) {
-    console.error(`❌ ${f} (framed view): ${problems.join(', ')}`);
-    failed = true;
-  } else {
-    console.log(`✅ ${f} — framed view, a whole document with a doctype and a title`);
-  }
+/* [R29-ARCH-REVIEW 2026-10-29] NO FRAMED VIEWS. Every view is a doc fragment
+   checked above. The frame rule was deleted with the last framed view, and a
+   `frame:` entry is now refused outright, so a whole page cannot be framed back
+   in without this line going red. Negative case: add `frame: 'x.html'` to a
+   view in index.html and this exits 1. */
+const framed = [...strip(rawPage).matchAll(/\bframe:\s*'([^']+)'/g)].map((m) => m[1]);
+if (framed.length) {
+  console.error(`❌ index.html offers framed view(s): ${framed.join(', ')}. Every view must be a doc fragment.`);
+  failed = true;
 }
-if (!framed.length) console.log('framed views: none offered');
+/* No element may link to the retired standalone review copy. */
+if (/href=["'][^"']*architecture-review\.html["']/i.test(strip(rawPage))) {
+  console.error('❌ index.html links to architecture-review.html, the retired standalone review. Use the #architecture views.');
+  failed = true;
+}
 console.log(`\nviews offered: ${[...new Set(declaredViews)].join(', ')}`);
 console.log(`tokens declared on :root: ${declaredTokens.size}`);
 

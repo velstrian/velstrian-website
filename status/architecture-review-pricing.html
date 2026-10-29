@@ -1,0 +1,1862 @@
+<!--
+  [R29-ARCH-REVIEW 2026-10-29] PRICING DECISION AND FOUR-SURFACE PARITY. A board FRAGMENT, injected
+  into #docbody by index.html like architecture-target-state.html and
+  architecture-tenancy.html, and styled only by the #docbody rules there.
+
+  It replaces the "Pricing decision and four-surface parity" tab of the old standalone review page, which the
+  board used to show in an iframe. Owner, 2026-10-29: the review must look and
+  behave exactly like the other architecture views, one entry point each, no
+  frame. The old page lives on only as the historic tool in the platform repo,
+  crowagent-platform/tools/arch-visualizer/index.html, which the board no longer
+  copies or links.
+
+  Current first: each section opens with its 29 October 2026 status box. The
+  August 2026 detail follows in a closed details block, unchanged in substance,
+  so nothing was dropped. No style element, no script element, no colour
+  literal: check-board-contract.js asserts all three.
+-->
+
+<div class="dochead">
+  <p class="kicker">Architecture review</p>
+  <p class="title">Pricing decision and four-surface parity</p>
+  <p class="lede">What we sell, what we charge, and whether the API, the website, the catalogue and Stripe agree. Each section opens with what was re-measured on 29 October 2026. The August 2026 decisions and their evidence sit closed underneath.</p>
+  <p class="dated">Re-measured 29 October 2026 against the code, production and the live public surfaces. 10 status boxes on this page, one per section that was re-read. Where this page and <code>RELEASE-2.9-TRACKER.md</code> disagree, the tracker wins.</p>
+</div>
+
+<div class="kpi"><div><b>16</b><span>Fixed</span></div><div><b>16</b><span>Changed</span></div><div><b>5</b><span>Still open</span></div><div><b>4</b><span>No longer applies</span></div><div><b>6</b><span>Not re-measured</span></div></div>
+<div class="callout bad"><p><b>Still open on 29 October 2026</b></p><ul><li>Ten product_context keys name no product, each with seats_limit 1000. R2.9 row <code>R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01</code></li><li>Seat limits are not enforced: SEAT_ENFORCED_PRODUCTS is still empty. R2.9 row <code>R29-ARCH-SEAT-ENFORCEMENT-01</code></li><li>No check spans the TypeScript and Python contract boundary. R2.9 row <code>R29-ARCH-CROSS-LANGUAGE-CONTRACT-CHECK-01</code></li></ul></div>
+
+<details>
+  <summary>How to read the marks on this page</summary>
+  <div class="dbody">
+<p><span class="pill p-good">Fixed</span> re-measured on 29 October 2026 and now true. <span class="pill p-info">Changed</span> the claim moved, and the new fact is stated with its source. <span class="pill p-warn">Still open</span> the defect is still there, with its R2.9 row. <span class="pill p-none">No longer applies</span> the thing it was about is gone. <span class="pill p-bad">Not re-measured</span> carried forward from August without a new reading, so treat it as a claim.</p>
+<p>In the August 2026 records the older marks still appear: verified, corrected, refuted and unverified, each as dated on 16 or 19 August 2026. A refuted figure was wrong when written and must not be quoted.</p>
+  </div>
+</details>
+
+<details class="toc">
+  <summary>On this page</summary>
+  <ol>
+    <li><a href="#rvpr-1">What We Sell, What We Charge For, and Where Those Two Disagree</a></li>
+    <li><a href="#rvpr-2">What Product Ladders Exist</a></li>
+    <li><a href="#rvpr-3">Four-Surface Parity Matrix</a></li>
+    <li><a href="#rvpr-4">Seats: One Decision, Eight Declarations, Three Answers Each For Starter And Pro</a></li>
+    <li><a href="#rvpr-5">Credits: Where 15 / 200 / 750 / 3,000 Came From</a></li>
+    <li><a href="#rvpr-6">“Council” Named the Product After One Customer Type</a></li>
+    <li><a href="#rvpr-7">Seven Decisions, With Their Trade-offs</a></li>
+    <li><a href="#rvpr-8">Decision E: A Tier Ladder That A School, A University, A Trust and A County Can All Read</a></li>
+    <li><a href="#rvpr-9">The Open Register Rows These Decisions Close</a></li>
+    <li><a href="#rvpr-10">How This Was Measured, And What Is Deliberately Not Claimed</a></li>
+    <li><a href="#rvpr-11">There Are Two Public Pricing Endpoints. One Was Fixed. The Other Published £399</a></li>
+  </ol>
+</details>
+
+<h2 id="rvpr-1"><span class="n">Section 1</span>What We Sell, What We Charge For, and Where Those Two Disagree</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of what we sell and charge</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Live endpoint read on 29 October: https://app.velstrian.com/api/public/pricing, HTTP 200. Stripe itself was not re-read by this pass (the Stripe account was outside the allowed sources), so every Stripe figure below keeps its earlier date.</p><ul><li><span class="pill p-info">CHANGED</span> Products sellable: the endpoint carries two product keys, <code>bid</code> and <code>buy</code>. In August only crowmark was sellable.</li><li><span class="pill p-info">CHANGED</span> Bid ladder: Starter 49 / 44 / 529, Pro 149 / 134 / 1,609, Portfolio 549 / 494 / 5,929 (monthly, monthly if annual, annual total). Buy ladder: Pro 299 / 269 / 3,229 and Portfolio 699 / 629 / 7,549. The August Buy ladder (Essentials 249, Pro 749, Enterprise 1,999 and the 3,600, 9,600 and 19,200 council tiers) is absent from the payload.</li><li><span class="pill p-good">FIXED</span> Annual discount rule: the payload states annual_discount_pct 10 and 529 = floor(49 x 12 x 0.9). All five annual totals agree with that rule.</li><li><span class="pill p-info">CHANGED</span> Credits and seats from packages/pricing/catalogue.ts: Free state 1 seat and 0 credits (:692), trial 1 seat and 30 credits (:712 and :803), Starter 1 seat, 200 credits, 3 guests (:724), Pro 5, 750, 10 (:739), Portfolio 10, 3,000, 25 (:755), Buy tiers 5 / 750 / 10 and 10 / 3,000 / 25 (:796 and :827). The trial is now 7 days with 30 credits (velstrian.com/terms/ fetched 29 October: "runs for 7 days at the Starter feature set for 1 user, with 30 AI credits, and needs a card to start"). The August figures of 14 days and 50 credits are gone.</li><li><span class="pill p-good">FIXED</span> Published copy: velstrian.com/pricing/ (fetched 29 October) states 1 user, 5 users and 10 users included, 200 / 750 / 3,000 credits, and the sentence "These are the numbers the platform enforces."</li><li><span class="pill p-bad">NOT RE-MEASURED</span> Live Stripe: 19 active prices archived to 10, the Agency nicknames, the Velstrian Bid Council product name and the subscription list. The one subscription row now in production is bid / portfolio / active with a Stripe style id, so the August premise of zero live subscription revenue was not re-read and may no longer hold. Whether that row is live mode money was not checked.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                
+                
+                <p>
+                    Nothing on this page is quoted from a document. Every number was read from a <strong>live</strong> surface:
+                    the Stripe API in live mode, the production pricing endpoint, the published marketing page, the production
+                    Postgres database, and the code at HEAD. Where a figure could not be established, it is named as unestablished
+                    rather than filled in.
+                </p>
+                <p>
+                    The original headline was that <strong>the platform held more pricing opinions than it held products</strong>.
+                    <strong>That is no longer the state of the system.</strong> The owner took the decisions on 2026-08-09, they
+                    were recorded in <code>docs/decisions/PRICING-LOCK-2026-08.md</code>, and most of this tab
+                    now describes a problem that has been closed. It is retained rather than deleted because the shape of the
+                    failure, a number in a table that no decision stood behind, is the reusable part.
+                </p>
+                <p>
+                    Everything measured is marked <span class="pill p-info">Fact</span> and everything
+                    advisory is marked <span class="pill p-none">Recommendation</span>.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of what we sell and charge</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Live endpoint read on 29 October: https://app.velstrian.com/api/public/pricing, HTTP 200. Stripe itself was not re-read by this pass (the Stripe account was outside the allowed sources), so every Stripe figure below keeps its earlier date.</p>
+<ul>
+<li><span class="pill p-info">CHANGED</span> Products sellable: the endpoint carries two product keys, <code>bid</code> and <code>buy</code>. In August only crowmark was sellable.</li>
+<li><span class="pill p-info">CHANGED</span> Bid ladder: Starter 49 / 44 / 529, Pro 149 / 134 / 1,609, Portfolio 549 / 494 / 5,929 (monthly, monthly if annual, annual total). Buy ladder: Pro 299 / 269 / 3,229 and Portfolio 699 / 629 / 7,549. The August Buy ladder (Essentials 249, Pro 749, Enterprise 1,999 and the 3,600, 9,600 and 19,200 council tiers) is absent from the payload.</li>
+<li><span class="pill p-good">FIXED</span> Annual discount rule: the payload states annual_discount_pct 10 and 529 = floor(49 x 12 x 0.9). All five annual totals agree with that rule.</li>
+<li><span class="pill p-info">CHANGED</span> Credits and seats from packages/pricing/catalogue.ts: Free state 1 seat and 0 credits (:692), trial 1 seat and 30 credits (:712 and :803), Starter 1 seat, 200 credits, 3 guests (:724), Pro 5, 750, 10 (:739), Portfolio 10, 3,000, 25 (:755), Buy tiers 5 / 750 / 10 and 10 / 3,000 / 25 (:796 and :827). The trial is now 7 days with 30 credits (velstrian.com/terms/ fetched 29 October: "runs for 7 days at the Starter feature set for 1 user, with 30 AI credits, and needs a card to start"). The August figures of 14 days and 50 credits are gone.</li>
+<li><span class="pill p-good">FIXED</span> Published copy: velstrian.com/pricing/ (fetched 29 October) states 1 user, 5 users and 10 users included, 200 / 750 / 3,000 credits, and the sentence "These are the numbers the platform enforces."</li>
+<li><span class="pill p-bad">NOT RE-MEASURED</span> Live Stripe: 19 active prices archived to 10, the Agency nicknames, the Velstrian Bid Council product name and the subscription list. The one subscription row now in production is bid / portfolio / active with a Stripe style id, so the August premise of zero live subscription revenue was not re-read and may no longer hold. Whether that row is live mode money was not checked.</li>
+</ul></div>
+<div class="callout good">
+                <p><b>Revalidation 2026-08-16 · six of the seven decisions on this tab have been taken</b></p>
+                <p>
+                    <code>docs/decisions/PRICING-LOCK-2026-08.md</code> is the owner decision this tab was
+                    written to prompt. It was taken the same day, and amended later that day in a dated §5 rather than edited in
+                    place. The locked catalogue is <strong>Starter £49 / 1 seat / 200 credits</strong>,
+                    <strong>Pro £149 / 5 seats / 750 credits</strong>,
+                    <strong>Portfolio quote-only / 10 seats / 3,000 credits</strong>, with
+                    <strong>Free reduced to 0 credits and declared a STATE, not a plan</strong>.
+                </p>
+                <p>
+                    Every locked number is now declared exactly once, in
+                    <code>packages/pricing/catalogue.ts</code> (lines 231 to 283). The eight competing seat
+                    declarations catalogued in Section 3 are gone as DECLARATIONS: the surviving files derive from the catalogue
+                    instead of restating it. <code>web/src/shared/lib/billing/seat-limits.ts:144 to 166</code>
+                    builds Velstrian Bid's row by calling <code>catalogueSeatLimit()</code> and holds no literal.
+                </p>
+                <p>
+                    <strong>What was NOT re-measured today, named rather than glossed.</strong> The live Stripe account was not
+                    re-read on 2026-08-16: the Stripe integration returned an expired-token error, so every Stripe figure below
+                    carries its 2026-08-09 measurement date and the claim that nine Buyer and Public Sector prices were archived
+                    is a <em>recorded</em> claim (<code>PRICING-LOCK-2026-08.md</code> §2.4, restated at
+                    <code>web/app/api/public/pricing/route.ts:248 to 253</code>), not one this revalidation
+                    confirmed. Re-reading <code>GET /v1/prices?active=true</code> would settle it.
+                </p>
+            </div>
+<div class="qgrid"><div class="q">
+                    <h4>Products sellable</h4>
+                    <div>1</div>
+                    <p>
+                        Velstrian Bid. <span class="pill p-good">VERIFIED 2026-08-16</span> Confirmed by fetching
+                        <code>app.crowagent.ai/api/public/pricing</code>: the response carries exactly one
+                        product key, <code>crowmark</code>.
+                        <strong>Correction:</strong> the platform holds <em>two</em> products in
+                        <code>web/src/shared/product/registry.ts</code>, Velstrian Bid and the Public Sector
+                        edition (internal key <code>council</code>). One is sellable; two exist.
+                    </p>
+                </div><div class="q">
+                    <h4>Live prices vs reachable</h4>
+                    <div>19 → 10</div>
+                    <p>
+                        <span class="pill p-warn">CORRECTED</span> 19 active prices on 2026-08-09. The nine Buyer and Public
+                        Sector prices were archived that day under lock §2.4, leaving ten: six Velstrian Bid subscription prices,
+                        three credit top-ups and one metered overage. The top-ups and the overage are now <strong>published</strong>
+                        on <code>crowagent.ai/pricing/</code>, which they were not.
+                        <strong>Not re-read on 2026-08-16</strong>, see the note above.
+                    </p>
+                </div><div class="q">
+                    <h4>Seat declarations</h4>
+                    <div>8 → 1</div>
+                    <p>
+                        <span class="pill p-good">CORRECTED, and this one is closed</span> Eight independent declarations
+                        became one: <code>packages/pricing/catalogue.ts:231 to 283</code>. Starter 1, Pro 5,
+                        Portfolio 10. Every other file derives.
+                    </p>
+                </div><div class="q">
+                    <h4>Live subscription revenue</h4>
+                    <div>£0</div>
+                    <p>
+                        Measured 2026-08-09: live Stripe held <strong>one subscription, ever</strong>, and it was
+                        <span class="pill p-bad">canceled</span>. <strong>Not re-measured on 2026-08-16.</strong>
+                        This figure is the premise the whole lock was executed against, so it is the one worth re-reading first.
+                    </p>
+                </div></div>
+<div class="callout fix">
+                <p><b>The single most useful fact for this decision</b></p>
+                <p>
+                    <code>GET /v1/subscriptions?status=all</code> against the live account
+                    <code>acct_1TB3MxILkzuI7dCV</code> returns exactly <strong>one</strong> subscription,
+                    <code>has_more: false</code>. Its status is <strong>canceled</strong>
+                    (<code>cancellation_details.reason: payment_failed</code>) and it sits on the archived legacy
+                    <em>“Agency Monthly”</em> £399 price.
+                </p>
+                <p>
+                    <strong>There is no live subscription revenue to protect.</strong> No grandfathering rule is needed for any
+                    change below, not a seat cap, not a price archive, not a tier rename. That window closes the moment the
+                    first customer subscribes, which is the strongest argument for deciding these now rather than later.
+                </p>
+                <p>
+                    <span class="pill p-good">OUTCOME 2026-08-16</span> The argument was taken. The lock records the same
+                    read as its own precondition (§4) and states that had it returned anything else the instruction was to STOP.
+                    The seat caps, the price archive and the Free reduction were all applied inside that window, with no
+                    grandfathering rule and no customer communication step. <strong>The window is still open</strong>, so the
+                    remaining rows on this tab are still cheap.
+                </p>
+            </div>
+  </div>
+</details>
+
+<h2 id="rvpr-2"><span class="n">Section 2</span>What Product Ladders Exist</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the product ladders</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Counts read from the endpoint, the catalogue and production Postgres.</p><ul><li><span class="pill p-info">CHANGED</span> Ladder table: Velstrian Bid is the supplier ladder, Velstrian Buy is the buyer ladder with two sold tiers (Pro and Portfolio). The older Buyer Essentials / Pro / Enterprise and council small / standard / county Stripe prices are not served.</li><li><span class="pill p-none">NO LONGER APPLIES</span> Public Sector is half-built with a live grant: production product_subscriptions holds exactly one row, <code>bid / portfolio / active</code>. The council_county manual grant is gone, billing_product_key now reads bid, buy, and organisations.product_context holds buy as buyer_portfolio with seats_limit 50. The August counts of organisations carrying a council key (6, then 9 of 13) no longer apply because production has 1 organisation.</li><li><span class="pill p-warn">STILL OPEN</span> Ten product_context keys name no product: advisor, agency, analytics, carbon, contracts, marketplace, monitoring, regulatory_monitor, reports and workflows, each tier enterprise and seats_limit 1000, on the single production organisation (organisations.product_context, 29 October). Whether any can grant access has still not been traced. No R2.9 row names them. R2.9 row <code>R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01</code>.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact · measured, not inferred</span>
+                
+                
+                <p>
+                    Post-R2.6.2 the portfolio is Velstrian Bid and its Public Sector edition. Core, CrowCyber, CrowCash, CrowESG and
+                    the CSRD Checker are decommissioned. But “decommissioned” has meant different things on different
+                    surfaces, and two ladders existed in the money system that existed nowhere else.
+                </p>
+                <p>
+                    <span class="pill p-good">CORRECTED 2026-08-16</span> Both of those ladders were archived on live Stripe
+                    on 2026-08-09 under lock §2.4, and the two in-app-only rows are now published. The verdict column below has
+                    been rewritten; the original verdicts are quoted inside each cell so the change is legible.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of the product ladders</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Counts read from the endpoint, the catalogue and production Postgres.</p>
+<ul>
+<li><span class="pill p-info">CHANGED</span> Ladder table: Velstrian Bid is the supplier ladder, Velstrian Buy is the buyer ladder with two sold tiers (Pro and Portfolio). The older Buyer Essentials / Pro / Enterprise and council small / standard / county Stripe prices are not served.</li>
+<li><span class="pill p-none">NO LONGER APPLIES</span> Public Sector is half-built with a live grant: production product_subscriptions holds exactly one row, <code>bid / portfolio / active</code>. The council_county manual grant is gone, billing_product_key now reads bid, buy, and organisations.product_context holds buy as buyer_portfolio with seats_limit 50. The August counts of organisations carrying a council key (6, then 9 of 13) no longer apply because production has 1 organisation.</li>
+<li><span class="pill p-warn">STILL OPEN</span> Ten product_context keys name no product: advisor, agency, analytics, carbon, contracts, marketplace, monitoring, regulatory_monitor, reports and workflows, each tier enterprise and seats_limit 1000, on the single production organisation (organisations.product_context, 29 October). Whether any can grant access has still not been traced. No R2.9 row names them.</li>
+</ul></div>
+<div class="tblwrap">
+                <table class="doc-tbl">
+                    <thead>
+                        <tr>
+                            <th>Ladder</th>
+                            <th>Live Stripe prices</th>
+                            <th>In <code>PRODUCTS_CATALOGUE</code></th>
+                            <th>In public API</th>
+                            <th>On website</th>
+                            <th>Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Velstrian Bid supplier</strong><br>Free · Starter · Pro · Portfolio</td>
+                            <td>6 (3 tiers × 2 cadences)</td>
+                            <td>✅</td><td>✅</td><td>✅</td>
+                            <td><span class="pill p-good">REAL PRODUCT</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Velstrian Buy</strong><br>Essentials · Pro · Enterprise, private sector</td>
+                            <td>0 active (was 6, archived 2026-08-09)</td>
+                            <td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">ARCHIVED</span><br>was “STRIPE ONLY”</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Public Sector</strong><br>internal key <code>council</code>; three size tiers</td>
+                            <td>0 active (was 3 annual, archived 2026-08-09)</td>
+                            <td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">HALF-BUILT, UNPRICED</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI credit top-ups</strong><br>100 / 500 / 1,000 credits</td>
+                            <td>3 one-time</td>
+                            <td>❌</td><td>❌</td><td>✅</td>
+                            <td><span class="pill p-good">NOW PUBLISHED</span><br>was “IN-APP ONLY”</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metered credit overage</strong><br>£0.10 per credit</td>
+                            <td>1 metered</td>
+                            <td>❌</td><td>❌</td><td>✅</td>
+                            <td><span class="pill p-good">NOW PUBLISHED</span><br>was “IN-APP ONLY”</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Core / CrowCyber / CrowCash / CrowESG</strong></td>
+                            <td>0 active</td>
+                            <td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-good">CLEANLY GONE</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<div class="callout">
+                <p><b>Public Sector is not residue; it is half-built, and it has a live grant</b></p>
+                <p>
+                    It is easy to read the Public Sector ladder as leftovers. It is not. Measured on production
+                    (<code>gujtuecjzfiqsdnzgyvo</code>):
+                </p>
+                <p>
+                    • <code>product_subscriptions</code> holds a live row
+                    <code>council / council_county / active</code>, created 2026-07-31.<br>
+                    • <code>billing_product_key</code> is a Postgres enum whose only two values are
+                    <code>crowmark</code> and <code>council</code>; it is a first-class product in the schema.<br>
+                    • Six of thirteen organisations carry a <code>council</code> key in
+                    <code>product_context</code>, which is what decides product visibility.<br>
+                    • It has its own seat ladder, its own credit row, its own checkout button and its own i18n catalogue.
+                </p>
+                <p>
+                    <strong>But the live row is not revenue.</strong> Its
+                    <code>stripe_subscription_id</code> is the literal string
+                    <code>manual_grant_council_c44a172e</code>, a manual grant, not a Stripe subscription.
+                    Half a product exists, with an operator-granted user on it, and no way for anyone to buy it.
+                </p>
+            </div>
+  </div>
+</details>
+
+<h2 id="rvpr-3"><span class="n">Section 3</span>Four-Surface Parity Matrix</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the four-surface parity matrix</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Platform API, website and catalogue were read. Stripe and the portal matrix were not.</p><ul><li><span class="pill p-info">CHANGED</span> Surfaces: Platform API app.velstrian.com/api/public/pricing, website velstrian.com/pricing/, catalogue packages/pricing/catalogue.ts. The portal matrix path apps/portal/src/lib/pricing/matrix.ts was not re-read.</li><li><span class="pill p-good">FIXED</span> Starter and Pro price parity: API 49 / 529 and 149 / 1,609 matches the website text (fetched 29 October, the pricing page prints "549 a month, 5,929 a year (10% off)" for Portfolio and "699 a month, 7,549 a year (10% off)" for Buy Portfolio). The API and website agree with each other on every figure shown.</li><li><span class="pill p-none">NO LONGER APPLIES</span> The Portfolio contact_sales breach and the 549 publish: never rule: Portfolio 549 is now a published price, so the finding applies to a state that no longer exists. Whether the Stripe metadata still reads publish never was not re-read.</li><li><span class="pill p-none">NO LONGER APPLIES</span> The council_standard and council_county prices with unset tax_behavior: not in the payload. Stripe not re-read.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact</span>
+                
+                
+                <p>
+                    The four surfaces are <strong>Stripe</strong> (what can be charged),
+                    <strong>Platform API</strong> (<code>app.crowagent.ai/api/public/pricing</code>, what the app publishes),
+                    <strong>Website</strong> (<code>crowagent.ai/pricing/</code>, what a prospect is told), and
+                    <strong>Portal Matrix</strong> (<code>apps/portal/src/lib/pricing/matrix.ts</code>, what an operator can reprice).
+                </p>
+                <p>
+                    <strong>Naming corrected, twice.</strong> An earlier version of this page listed “Council Small /
+                    Standard / County” as if those were product names. They are not.
+                    <code>council</code> is an internal database key.
+                </p>
+                <p>
+                    <span class="pill p-bad">SECOND CORRECTION 2026-08-16</span> The version of this page you are reading
+                    said the key “displays as <strong>Public Sector</strong>”. <strong>That is now wrong too.</strong>
+                    The buyer-side product is named <strong>Velstrian Buy</strong>, declared once at
+                    <code>web/src/shared/product/registry.ts:145</code> and read through
+                    <code>productLabel()</code>. The registry states the reason directly at
+                    <code>:48 to 53</code>: it is named for the side of the table the user sits on, they
+                    evaluate incoming bids rather than write them, and <em>“Council” names a single prospect while
+                    “Public Sector” is a sector label that excludes private-sector buyers doing the identical job;
+                    both narrow the addressable market, and NEITHER may be used as this product’s name again.</em>
+                    Guarded by <code>web/__tests__/infra/product-label-is-centralised.test.ts</code>.
+                    Section 5 is rewritten accordingly.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of the four-surface parity matrix</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Platform API, website and catalogue were read. Stripe and the portal matrix were not.</p>
+<ul>
+<li><span class="pill p-info">CHANGED</span> Surfaces: Platform API app.velstrian.com/api/public/pricing, website velstrian.com/pricing/, catalogue packages/pricing/catalogue.ts. The portal matrix path apps/portal/src/lib/pricing/matrix.ts was not re-read.</li>
+<li><span class="pill p-good">FIXED</span> Starter and Pro price parity: API 49 / 529 and 149 / 1,609 matches the website text (fetched 29 October, the pricing page prints "549 a month, 5,929 a year (10% off)" for Portfolio and "699 a month, 7,549 a year (10% off)" for Buy Portfolio). The API and website agree with each other on every figure shown.</li>
+<li><span class="pill p-none">NO LONGER APPLIES</span> The Portfolio contact_sales breach and the 549 publish: never rule: Portfolio 549 is now a published price, so the finding applies to a state that no longer exists. Whether the Stripe metadata still reads publish never was not re-read.</li>
+<li><span class="pill p-none">NO LONGER APPLIES</span> The council_standard and council_county prices with unset tax_behavior: not in the payload. Stripe not re-read.</li>
+</ul></div>
+<div class="tblwrap">
+                <table class="doc-tbl">
+                    <thead>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Monthly</th>
+                            <th>Annual</th>
+                            <th>Stripe (live)</th>
+                            <th>Platform API</th>
+                            <th>Website</th>
+                            <th>Portal Matrix</th>
+                            <th>Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Velstrian Bid Starter</strong></td><td>£49</td><td>£529</td>
+                            <td>✅</td><td>✅</td><td>✅</td><td>✅</td>
+                            <td><span class="pill p-good">PRICE PARITY</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Velstrian Bid Pro</strong></td><td>£149</td><td>£1,609</td>
+                            <td>✅</td><td>✅</td><td>✅</td><td>✅</td>
+                            <td><span class="pill p-good">PRICE PARITY</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Velstrian Bid Portfolio</strong></td><td>quote</td><td>quote</td>
+                            <td>✅ active, for sales to quote against</td>
+                            <td><span class="pill p-good">contact_sales</span></td>
+                            <td><span class="pill p-good">Contact sales</span></td><td>✅</td>
+                            <td><span class="pill p-good">CLOSED</span><br>was “BREACHES A DECISION”</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buyer Essentials</strong><br>meta: 3 seats · 6 projects/yr</td>
+                            <td>£249</td><td>£2,689</td>
+                            <td>❌</td><td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">ARCHIVED 2026-08-09</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buyer Pro</strong><br>meta: 10 seats · 24 projects/yr</td>
+                            <td>£749</td><td>£8,089</td>
+                            <td>❌</td><td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">ARCHIVED 2026-08-09</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buyer Enterprise</strong><br>meta: custom seats &amp; projects, SSO, audit</td>
+                            <td>£1,999</td><td>£21,589</td>
+                            <td>❌</td><td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">ARCHIVED 2026-08-09</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Velstrian Buy, small</strong><br>key <code>council_small</code></td>
+                            <td>n/a</td><td>£3,600</td>
+                            <td>❌</td><td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">ARCHIVED 2026-08-09</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Velstrian Buy, standard</strong><br>key <code>council_standard</code></td>
+                            <td>n/a</td><td>£9,600</td>
+                            <td>❌ had <code>tax_behavior</code> unset</td><td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">ARCHIVED</span><br>defect resolved by archiving</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Velstrian Buy, county</strong><br>key <code>council_county</code></td>
+                            <td>n/a</td><td>£19,200</td>
+                            <td>❌ had <code>tax_behavior</code> unset</td><td>❌</td><td>❌</td><td>❌</td>
+                            <td><span class="pill p-warn">ARCHIVED</span><br>defect resolved by archiving</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI credit top-ups</strong><br>100 / 500 / 1,000 credits</td>
+                            <td>£10 / £50 / £100</td><td>one-time</td>
+                            <td>✅</td><td>❌</td><td>✅</td><td>❌</td>
+                            <td><span class="pill p-good">NOW PUBLISHED</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metered overage</strong></td><td>£0.10 / credit</td><td>metered</td>
+                            <td>✅</td><td>❌</td><td>✅</td><td>❌</td>
+                            <td><span class="pill p-good">NOW PUBLISHED</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<div class="qgrid"><div class="q">
+                    <h4>The annual discount is coherent <span class="pill p-good">VERIFIED</span></h4>
+                    <p>
+                        Every annual price in live Stripe was <strong>exactly 10% off twelve monthly payments</strong>, rounded down.
+                        It held across all six monthly and annual pairs, including the Buyer ladder nobody had published,
+                        so the discount was applied by a rule, not set by hand.
+                    </p>
+                    <p>
+                        £588→£529 · £1,788→£1,609 · £6,588→£5,929 ·
+                        £2,988→£2,689 · £8,988→£8,089 · £23,988→£21,589.
+                        Six for six.
+                    </p>
+                    <p>
+                        <strong>The rule is now code, not an observation.</strong>
+                        <code>packages/pricing/catalogue.ts:321</code> exposes
+                        <code>annualPence(monthlyPence)</code> computing
+                        <code>floor(monthly × 12 × 0.9)</code>, and the lock states
+                        <em>“computed, never written as a literal”</em>. Confirmed live on 2026-08-16:
+                        <code>/api/public/pricing</code> serves Starter £529 and Pro £1,609.
+                    </p>
+                </div><div class="q">
+                    <h4>Portfolio was a breach. It is now closed, and a different endpoint took its place</h4>
+                    <p>
+                        The original finding: <code>R241-PRICING-STRATEGY change 3</code> records that Portfolio
+                        is contact-sales and <em>“never publish £549”</em>, the website honoured it, and the
+                        public pricing API returned <code>portfolio.monthly: 549</code> to any anonymous caller.
+                    </p>
+                    <p>
+                        <span class="pill p-good">CLOSED, verified live 2026-08-16</span>
+                        <code>GET https://app.crowagent.ai/api/public/pricing</code> now returns
+                        <code>portfolio: { pricing: "contact_sales", sales_only: true }</code> with
+                        <strong>no numeric field at all</strong>.
+                        <code>web/app/api/public/pricing/route.ts:198 to 210</code> short-circuits a sales-led
+                        tier <em>before</em> any figure is computed, and its comment states why: deriving the number then omitting
+                        it leaves the amount one careless spread away from publication, which is how £549 reached anonymous
+                        callers under the previous <code>sales_only</code> flag design.
+                    </p>
+                    <p>
+                        <strong>But the class is not closed, and this is the live P0 of Release 2.7.</strong> A SECOND
+                        unauthenticated pricing endpoint exists on the FastAPI backend. Fetched 2026-08-16:
+                        <code>GET .../api/v1/pricing/public</code> returns
+                        <code>"Agency", price_monthly: 399, users: "Unlimited users"</code>, with
+                        <code>source: "fallback"</code>. That is a retired price, retired vocabulary
+                        (Solo / Team / Agency) and the exact seat claim the 1/5/10 lock removed. See Section 9.
+                    </p>
+                </div></div>
+  </div>
+</details>
+
+<h2 id="rvpr-4"><span class="n">Section 4</span>Seats: One Decision, Eight Declarations, Three Answers Each For Starter And Pro</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the seat decision</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> The catalogue is still the one declaration (packages/pricing/catalogue.ts). Starter 1, Pro 5, Portfolio 10 are unchanged.</p><ul><li><span class="pill p-good">FIXED</span> Eight declarations are one: catalogue.ts holds seats and the files that read it call getSeatLimit (not recounted today, 20 files in August).</li><li><span class="pill p-warn">STILL OPEN</span> Seat enforcement: <code>SEAT_ENFORCED_PRODUCTS</code> is still the empty array, web/src/shared/lib/billing/seat-limits.ts:211. Owner decision OD-12 still gates it. Filed as R2.9 row <code>R29-ARCH-SEAT-ENFORCEMENT-01</code>.</li><li><span class="pill p-info">CHANGED</span> Safety argument: production org_users maximum is now 4 in one organisation (was 1 per organisation), and the production organisation is Portfolio with a 10 seat cap, so the cap is still not exceeded. Starter and Pro caps remain unexercised (no organisation on those tiers).</li><li><span class="pill p-good">FIXED</span> Guest review cap (REQ-PRICE-018): api/app/routers/bid_review_guests.py:240 defines _enforce_guest_invite_cap, which counts live invites per contract, uses guests.guest_invite_limit(tier), fails closed with a 502 and refuses with 422. The TypeScript getGuestLimit still has two files (the catalogue and a billing test), so enforcement lives in Python. production bid_review_guest_invites holds 0 rows.</li><li><span class="pill p-info">CHANGED</span> Terms trial seat clause: now 7 days, Starter feature set, 1 user, 30 AI credits (velstrian.com/terms/).</li><li><span class="pill p-warn">STILL OPEN</span> Ten product_context keys with seats_limit 1000 (see the ladders box). R2.9 row <code>R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01</code>.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact</span>
+                
+                
+                <p>
+                    The owner’s decision is <strong>Starter = 1 user, Pro = 5 users, Portfolio = 10 users</strong>. A prior
+                    consolidation recorded 1 and 5 as “understated”, raised them to 3 and 10, and the marketing site
+                    was changed to advertise 3 and 10. This section catalogued every place a Velstrian Bid seat number was declared.
+                </p>
+                <p>
+                    <span class="pill p-good">CLOSED 2026-08-09, revalidated 2026-08-16</span>
+                    <strong>The eight declarations are one.</strong> <code>packages/pricing/catalogue.ts</code>
+                    is the sole declaration site; the files below that survive do so as LOGIC, deriving their numbers by calling
+                    it. The table is kept because the failure it records is the reusable part: a source that DISAGREES with an
+                    owner instruction is not automatically the correct one, and “this consolidation invents no new figure”
+                    is still a new figure when it overrides the person who set the old one
+                    (<code>seat-limits.ts:126 to 130</code>).
+                </p>
+                <p>
+                    <strong>Portfolio changed too, and it is the one behavioural change nobody asked about.</strong> It was
+                    <code>null</code>, meaning unlimited. It is now <strong>10</strong>. The reason is recorded
+                    at <code>seat-limits.ts:155 to 161</code>: an unlimited Portfolio means a single
+                    £549 subscription can host a 200-person bid consultancy.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of the seat decision</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> The catalogue is still the one declaration (packages/pricing/catalogue.ts). Starter 1, Pro 5, Portfolio 10 are unchanged.</p>
+<ul>
+<li><span class="pill p-good">FIXED</span> Eight declarations are one: catalogue.ts holds seats and the files that read it call getSeatLimit (not recounted today, 20 files in August).</li>
+<li><span class="pill p-warn">STILL OPEN</span> Seat enforcement: <code>SEAT_ENFORCED_PRODUCTS</code> is still the empty array, web/src/shared/lib/billing/seat-limits.ts:211. Owner decision OD-12 still gates it. No R2.9 row covers it.</li>
+<li><span class="pill p-info">CHANGED</span> Safety argument: production org_users maximum is now 4 in one organisation (was 1 per organisation), and the production organisation is Portfolio with a 10 seat cap, so the cap is still not exceeded. Starter and Pro caps remain unexercised (no organisation on those tiers).</li>
+<li><span class="pill p-good">FIXED</span> Guest review cap (REQ-PRICE-018): api/app/routers/bid_review_guests.py:240 defines _enforce_guest_invite_cap, which counts live invites per contract, uses guests.guest_invite_limit(tier), fails closed with a 502 and refuses with 422. The TypeScript getGuestLimit still has two files (the catalogue and a billing test), so enforcement lives in Python. production bid_review_guest_invites holds 0 rows.</li>
+<li><span class="pill p-info">CHANGED</span> Terms trial seat clause: now 7 days, Starter feature set, 1 user, 30 AI credits (velstrian.com/terms/).</li>
+<li><span class="pill p-warn">STILL OPEN</span> Ten product_context keys with seats_limit 1000 (see the ladders box).</li>
+</ul></div>
+<div class="tblwrap">
+                <table class="doc-tbl">
+                    <thead>
+                        <tr>
+                            <th>Where</th>
+                            <th>Starter</th>
+                            <th>Pro</th>
+                            <th>Portfolio</th>
+                            <th>Kind</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong><code>packages/pricing/catalogue.ts</code></strong><br>lines 231 to 283, added by the lock · <strong>THE ONLY DECLARATION</strong></td>
+                            <td>1</td><td>5</td><td>10</td>
+                            <td><strong>declared</strong></td>
+                            <td><span class="pill p-good">CANONICAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><code>web/src/shared/lib/billing/seat-limits.ts</code><br>once declared itself “THE ONE SEAT TABLE”; now builds its row at <code>:144 to 166</code></td>
+                            <td>1</td><td>5</td><td>10</td>
+                            <td>enforced (web), derived</td>
+                            <td><span class="pill p-good">DERIVED</span></td>
+                        </tr>
+                        <tr>
+                            <td><code>api/app/routers/teams.py</code> <code>SEAT_LIMITS</code><br>was a hand-kept second copy in another language; now reads the generated JSON artifact (<code>:88 to 92</code>)</td>
+                            <td>1</td><td>5</td><td>10</td>
+                            <td>enforced (API), derived</td>
+                            <td><span class="pill p-good">DERIVED</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong><code>apps/portal/src/lib/invites/products.ts</code></strong> <code>SEATS_BY_TIER</code><br>was <code>{starter:2, pro:5, portfolio:20}</code>; now <code>getSeatLimit()</code> at <code>:63 to 67</code>, and <code>FULL_ACCESS_SEATS_LIMIT</code> at <code>:156</code></td>
+                            <td>1</td><td>5</td><td>10</td>
+                            <td>written to prod DB, derived</td>
+                            <td><span class="pill p-good">DERIVED</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong><code>organisations.product_context[].seats_limit</code></strong><br>re-queried on PRODUCTION 2026-08-16</td>
+                            <td>null</td><td>, </td><td>null</td>
+                            <td>stored data</td>
+                            <td><span class="pill p-warn">NO LONGER DISAGREES</span><br>the 2 and the 1000 are gone from Velstrian Bid rows; see the note below on where 1000 still lives</td>
+                        </tr>
+                        <tr>
+                            <td><strong><code>crowagent.ai/pricing/</code></strong><br>live rendered text, re-fetched 2026-08-16 (HTTP 200, 80,278 bytes)</td>
+                            <td>1 user</td><td>5 users</td><td>10 users included, more by arrangement</td>
+                            <td>public promise</td>
+                            <td><span class="pill p-good">AGREES</span><br>was “OVER-PROMISES” at 3 and 10</td>
+                        </tr>
+                        <tr>
+                            <td><strong><code>crowagent.ai/terms/</code></strong>, Terms of Service<br>re-fetched 2026-08-16: “runs for 14 days at the Starter feature set for <strong>1 user</strong>”</td>
+                            <td>1 user (trial)</td><td>, </td><td>, </td>
+                            <td><strong>contractual</strong></td>
+                            <td><span class="pill p-good">AGREES</span><br>was the “MOST SERIOUS” row, at “up to 3 users”</td>
+                        </tr>
+                        <tr>
+                            <td><code>PRICING-AND-PACKAGING-2026-07.md</code> §3.6 / §7<br>the spec the consolidation read</td>
+                            <td>3</td><td>10</td><td>unlimited</td>
+                            <td>stale spec</td>
+                            <td><span class="pill p-warn">SUPERSEDED</span></td>
+                        </tr>
+                        <tr>
+                            <td><code>specs/platform-systems/pricing-model/README.md</code> §6.2<br>was described here as CANONICAL</td>
+                            <td>1</td><td>3</td><td>10</td>
+                            <td>spec recommendation</td>
+                            <td><span class="pill p-warn">SUPERSEDED</span><br>lock §2.1 explicitly supersedes its 1/3/10</td>
+                        </tr>
+                        <tr>
+                            <td>Platform pricing UI, upgrade gate, help articles, Stripe catalogue copy<br>all call <code>getSeatLimit()</code></td>
+                            <td>1</td><td>5</td><td>10</td>
+                            <td>derived</td>
+                            <td><span class="pill p-good">AUTOMATIC</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<div class="qgrid"><div class="q">
+                    <h4>What the correction got right, and what the lock then finished</h4>
+                    <p>
+                        The two <em>enforcing</em> tables agreed on 1 and 5, and every rendered surface inside the platform derives
+                        from <code>getSeatLimit()</code> rather than restating a number. The pricing page, the
+                        upgrade gate, the help articles and the Stripe catalogue feature lines all moved with it, for free.
+                    </p>
+                    <p>
+                        <span class="pill p-good">VERIFIED 2026-08-16</span> The safety argument still holds. Re-queried on
+                        production: <code>max(count(*)) from org_users group by organisation_id</code> is
+                        <strong>1</strong>, and <code>count(*) where active is false</code> is <strong>0</strong>.
+                        No organisation loses access under any cap on this page.
+                    </p>
+                </div><div class="q">
+                    <h4>What it did not reach, and what has since reached it</h4>
+                    <p>
+                        <strong>The portal wrote a different number.</strong> <code>SEATS_BY_TIER</code> was
+                        <code>{starter: 2, pro: 5, portfolio: 20}</code>, with
+                        <code>FULL_ACCESS_SEATS_LIMIT = 20</code> beside it, and a beta invite baked those into
+                        <code>product_context.seats_limit</code>.
+                        <span class="pill p-good">CLOSED</span> Both now call
+                        <code>getSeatLimit()</code>. The file’s own note at
+                        <code>:58 to 62</code> records that it was wrong on every row.
+                    </p>
+                    <p>
+                        <strong>The specs said 3 and 10, and 1 and 3 and 10.</strong>
+                        <span class="pill p-good">CLOSED</span> The lock supersedes both by name, and §5.2 records that
+                        <code>REQ-PRICE-011</code> was corrected to match the lock rather than the reverse,
+                        after the owner was asked directly rather than guessed at.
+                    </p>
+                    <p>
+                        <strong>One residue found on 2026-08-16 that this page did not have.</strong> The
+                        <code>1000</code> sentinel is not gone from production. It sits on
+                        <strong>ten <code>product_context</code> keys that name no product</strong>: see the
+                        note below.
+                    </p>
+                </div><div class="q">
+                    <h4>The uncomfortable one, re-measured</h4>
+                    <p>
+                        The seat cap was <strong>inert in production</strong>. It is now <strong>partly live</strong>, and the
+                        change came from the tier that nobody was arguing about.
+                    </p>
+                    <p>
+                        Re-measured 2026-08-16: <code>organisations.tier</code> holds
+                        <code>{free: 9, portfolio: 4}</code> and
+                        <code>subscriptions.tier</code> holds
+                        <code>{free: 1, portfolio: 4}</code>. Neither
+                        <code>starter</code> nor <code>pro</code> appears on any row, so those
+                        two caps are still unexercised. <strong>But Portfolio moved from unlimited to 10</strong>, so the four
+                        Portfolio organisations now carry a real ceiling where they carried none.
+                    </p>
+                    <p>
+                        <strong>Nobody can hit it today</strong> at one seat in use. The point stands in a narrower form: a cap
+                        being correct is not the same as a cap being exercised, and
+                        <code>SEAT_ENFORCED_PRODUCTS</code> is still the empty array at
+                        <code>seat-limits.ts:190</code>, deliberately, because switching a never-enforced cap on
+                        is reserved as an owner decision (OD-12).
+                    </p>
+                </div></div>
+<div class="callout good">
+                <p><b>The P0 blocker on this page is FIXED. It was the only blocker, and it is gone</b></p>
+                <p>
+                    The finding was that <code>checkSeatCapacity</code> counted <strong>every</strong>
+                    <code>org_users</code> row and did <strong>not</strong> filter on
+                    <code>active</code>, so a deprovisioned user went on holding a paid seat. At 3 seats that was
+                    a billing inaccuracy. At Starter = 1 it is a trap: removing someone does not free their seat, so the customer
+                    cannot replace them and cannot self-serve out of it.
+                </p>
+                <p>
+                    <span class="pill p-good">FIXED, verified 2026-08-16</span>
+                    <code>web/src/shared/lib/billing/seat-limits.ts:419</code> now applies
+                    <code>.not("active", "is", false)</code>, and
+                    <code>checkAllProductSeatLimits</code> carries the same filter at
+                    <code>:466</code>. Test:
+                    <code>web/__tests__/req-price-017-deactivated-seat.test.ts:114</code>. The SQL counterpart
+                    is <code>20261890000000_r262_req_price_017_deactivated_member_seats.sql</code>, and the two
+                    are required to agree.
+                </p>
+                <p>
+                    <strong>The filter is <code>IS NOT FALSE</code>, not <code>= true</code>,
+                    and the reasoning is worth keeping</strong> (<code>:366 to 378</code>):
+                    <code>= true</code> would drop a NULL, and the two mistakes are not symmetric. An under-count
+                    hands out a seat nobody paid for; an over-count merely denies an invite the customer can appeal.
+                </p>
+                <p>
+                    <strong>Two residues, named rather than glossed.</strong> The acceptance criterion at
+                    <code>specs/platform-systems/pricing-model/requirements.md:109</code> still asks for a test
+                    asserting <code>.eq("active", true)</code>, which the code deliberately does not do; and
+                    <code>README.md:278</code> still describes the unfixed behaviour. The spec now trails the
+                    code, which is the same drift in the opposite direction.
+                </p>
+            </div>
+<div class="callout">
+                <p><b>Correction, kept: I was reading a superseded spec, and the one I called canonical said Pro = 3</b></p>
+                <p>
+                    <code>PRICING-AND-PACKAGING-2026-07.md</code> was <strong>not canonical</strong>.
+                    <code>specs/platform-systems/pricing-model/README.md</code> superseded it, was written later
+                    with the live surfaces in hand, and independently recorded the same zero-revenue fact measured at the top of
+                    this page. Its §6.2 ladder was <strong>Free 1 · Starter 1 · Pro 3 · Portfolio 10</strong>.
+                </p>
+                <p>
+                    <span class="pill p-good">SETTLED 2026-08-09</span> The owner’s 5 is the operative number and the
+                    spec was corrected, not the decision. Lock §2.1 supersedes the 1/3/10 recommendation by name. The spec’s
+                    other recommendation, capping Portfolio at 10 rather than leaving it unlimited, <strong>was accepted</strong>
+                    and is now the shipped figure.
+                </p>
+                <p>
+                    <strong>The lesson survives its own resolution.</strong> An owner decision outranks a spec recommendation. A
+                    fresh, canonical, post-dated source is exactly what a future consolidation would read, which is why the lock
+                    requires that a change to any of its numbers arrive as a <strong>new dated entry</strong> in the lock itself,
+                    never as an edit somewhere else.
+                </p>
+            </div>
+<div class="callout">
+                <p><b>The seat figure was in the Terms of Service. It has been corrected there too</b></p>
+                <p>
+                    The finding was that <code>crowagent.ai/terms/</code> promised a trial
+                    <em>“at the Starter feature set for <strong>up to 3 users</strong>”</em>, a published contractual
+                    term rather than a card on a pricing page, with the 3 and 10 figures on at least eight deployed pages.
+                </p>
+                <p>
+                    <span class="pill p-good">CLOSED, re-fetched 2026-08-16</span> The Terms now read
+                    <em>“The standard trial runs for 14 days at the Starter feature set for <strong>1 user</strong>; any
+                    trial granted on different terms has those terms stated to you when access is given.”</em>
+                    <code>crowagent.ai/crowmark/</code> now reads 1 user, 5 users, and
+                    “10 users included, more by arrangement”. The retired
+                    <em>“Bid volume effectively unlimited”</em> and “white-label” claims are gone from that
+                    page as well.
+                </p>
+                <p>
+                    The trailing clause is the interesting part: it makes room for a negotiated trial without re-opening the
+                    contract every time sales agrees one, which the earlier flat number did not.
+                </p>
+            </div>
+<div class="callout good">
+                <p><b>The free tier question was the fifth open question. It has been answered</b></p>
+                <p>
+                    The finding was that the platform shipped a Free Velstrian Bid tier with a real seat count and
+                    <code>CREDIT_ALLOWANCES.crowmark.free = 15</code>, while the marketing site stated
+                    <em>“Velstrian Bid is a paid product and there is no free plan.”</em> The 15-credit allowance appeared on
+                    no public surface, a negative that was controlled against a
+                    <code>200 credits</code> search returning three hits.
+                </p>
+                <p>
+                    <span class="pill p-good">DECIDED 2026-08-09, lock §2.2</span>
+                    <strong>Free is a STATE, not a plan.</strong> Zero credits, unpublished, occupied by an organisation before it
+                    subscribes. <code>packages/pricing/catalogue.ts:236</code> now declares
+                    <code>creditsPerMonth: 0</code> with <code>publishable: false</code>, and
+                    the catalogue notes at <code>:217 to 219</code> that this is one of only two entries that
+                    CHANGED live behaviour rather than transcribing an existing figure.
+                </p>
+                <p>
+                    Re-fetched 2026-08-16, the site still says <em>“Velstrian Bid is a paid product and there is no free
+                    plan”</em>. The difference is that the sentence is now literally true rather than merely asserted.
+                </p>
+            </div>
+<div class="callout">
+                <p><b>A hypothesis about where 3 and 10 came from, offered as a hypothesis and never upgraded</b></p>
+                <p>
+                    Live Stripe metadata on the unpublished Buyer ladder read
+                    <code>buyer_essentials → seats: "3"</code> and
+                    <code>buyer_pro → seats: "10"</code>. The same pair is what the consolidation raised
+                    Velstrian Bid Starter and Pro to, and <code>SEAT_LIMITS.council</code> carried 3 and 10 as well.
+                </p>
+                <p>
+                    <strong>Still not established, and deliberately left that way.</strong> Nothing measured since has connected
+                    the three ladders, and the Buyer ladder has been archived, so the evidence that would settle it is now harder
+                    to reach rather than easier. It stays on the page as an unproven coincidence because that is what it was.
+                </p>
+                <p>
+                    <code>SEAT_LIMITS.council</code> is <strong>still</strong> 3 / 10 / unlimited at
+                    <code>seat-limits.ts:168</code>, and it is deliberately NOT a catalogue row: the buyer-side
+                    product is not in the pricing lock at all. So one ladder on the platform still holds an uncapped top tier, and
+                    it is the one nobody can currently buy.
+                </p>
+            </div>
+<div class="callout">
+                <p><b>NEW 2026-08-16: production entitlement carries ten keys that name no product</b></p>
+                <p>
+                    <code>organisations.product_context</code> is what decides product visibility. Queried on
+                    production, it holds <strong>fifteen distinct keys</strong>. Two of them,
+                    <code>crowmark</code> and <code>council</code>, are the products in
+                    <code>web/src/shared/product/registry.ts</code>. The other thirteen include
+                    <code>advisor</code>, <code>agency</code>,
+                    <code>analytics</code>, <code>carbon</code>,
+                    <code>contracts</code>, <code>marketplace</code>,
+                    <code>monitoring</code>, <code>regulatory_monitor</code>,
+                    <code>reports</code> and <code>workflows</code>, each on <strong>8 of 13
+                    organisations</strong> at <code>tier: enterprise</code> and
+                    <code>seats_limit: 1000</code>.
+                </p>
+                <p>
+                    <strong>This is where the 1000 sentinel went.</strong> The Velstrian Bid rows now carry
+                    <code>seats_limit: null</code>, so the figure this page reported as a Velstrian Bid disagreement
+                    is gone from Velstrian Bid. It survives on slots the registry does not know about.
+                </p>
+                <p>
+                    The registry anticipates exactly this (<code>registry.ts:33 to 38</code>): the database
+                    still holds <code>product_context</code> JSONB slots with dead
+                    <code>product_key</code> values, and the only code permitted to know about them is a
+                    narrowly-scoped read tolerance. <strong>What is not established</strong> is whether any of these ten keys can
+                    still grant something. That is a read of every entitlement call site against this key list, and it has not been
+                    done. It is stated as unestablished rather than assumed harmless.
+                </p>
+            </div>
+  </div>
+</details>
+
+<h2 id="rvpr-5"><span class="n">Section 5</span>Credits: Where 15 / 200 / 750 / 3,000 Came From</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the credit ladder</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Credits per month are 0 (free state), 200, 750 and 3,000 on the three Bid tiers, and 30 for the trial.</p><ul><li><span class="pill p-info">CHANGED</span> Trial allowance is now 30 credits for 7 days (catalogue.ts:712 and :803), replacing 50 credits for 14 days.</li><li><span class="pill p-good">FIXED</span> Published copy and catalogue agree (see the status box in section 1).</li><li><span class="pill p-info">CHANGED</span> Credit top ups and the metered overage: the pricing page offers packs from 10 pounds and auto reload (live text, 29 October). The 0.10 pound per credit overage was not re-read in Stripe.</li><li><span class="pill p-bad">NOT RE-MEASURED</span> Modelled COGS and gross margins (92, 90, 89 percent). They are the packaging document figures and were not re-derived.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact</span>
+                
+                
+                <p>
+                    The brief asked whether these are owner-decided or consolidation-derived. The answer is documented in the
+                    source itself, and it is neither flattering nor alarming.
+                </p>
+                <p>
+                    <span class="pill p-good">RESOLVED 2026-08-09</span> The ladder is now
+                    <strong>0 / 200 / 750 / 3,000</strong>. Free fell from 15 to 0 when it was reclassified as a state rather than
+                    a plan, and the three paid figures were <strong>accepted by the owner as cost-modelled estimates</strong>,
+                    for review after the first real billing cycle. Lock §2.5 closes the open question this section raised.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of the credit ladder</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Credits per month are 0 (free state), 200, 750 and 3,000 on the three Bid tiers, and 30 for the trial.</p>
+<ul>
+<li><span class="pill p-info">CHANGED</span> Trial allowance is now 30 credits for 7 days (catalogue.ts:712 and :803), replacing 50 credits for 14 days.</li>
+<li><span class="pill p-good">FIXED</span> Published copy and catalogue agree (see the pricing box above).</li>
+<li><span class="pill p-info">CHANGED</span> Credit top ups and the metered overage: the pricing page offers packs from 10 pounds and auto reload (live text, 29 October). The 0.10 pound per credit overage was not re-read in Stripe.</li>
+<li><span class="pill p-bad">NOT RE-MEASURED</span> Modelled COGS and gross margins (92, 90, 89 percent). They are the packaging document figures and were not re-derived.</li>
+</ul></div>
+<div class="qgrid"><div class="q">
+                    <h4>Provenance: cost-modelled, owner-unconfirmed</h4>
+                    <p>
+                        <code>credit-allowances.ts</code> states it plainly:
+                        <em>“These numbers are COST-derived, not demand-derived: there has never been an external customer
+                        to measure. Every paid tier holds ≥85% gross margin at 100% burn. They are estimates and are to be
+                        revisited after one real billing cycle.”</em>
+                    </p>
+                    <p>
+                        §10 of the packaging doc asks the owner directly:
+                        <em>“Are the allowance numbers acceptable at the observe-only stage? … Confirm you are comfortable
+                        shipping them as estimates.”</em>
+                        <strong>No record of an answer could be found</strong> at the time of writing, and the numbers had shipped
+                        anyway.
+                    </p>
+                    <p>
+                        <span class="pill p-good">ANSWERED 2026-08-09</span> Lock §2.5:
+                        <em>“Credit allowances 200 / 750 / 3,000 are ACCEPTED as cost-modelled estimates, for review after the
+                        first real billing cycle. This closes the §10 open question, it is an accepted estimate, not a measured
+                        figure, and is recorded as such.”</em> The acceptance is now the record that was missing.
+                    </p>
+                </div><div class="q">
+                    <h4>The important difference from seats</h4>
+                    <p>
+                        Seats had an owner decision that a consolidation overrode. Credits had <strong>no prior owner decision at
+                        all</strong>. The packaging exercise originated the figures from unit-cost arithmetic, and they had been
+                        the only figures since.
+                    </p>
+                    <p>
+                        So they were not a reversal of an instruction. They were a <strong>proposal implemented before it was
+                        accepted</strong>. <span class="pill p-good">The acceptance has since been given.</span>
+                        Unlike the seat numbers, all four surfaces already agreed with each other, because they all read the same
+                        table. Re-fetched 2026-08-16, <code>crowagent.ai/pricing/</code> publishes 200 / 750 /
+                        3,000 and the top-up and overage prices beside them.
+                    </p>
+                </div></div>
+<div class="tblwrap">
+                <table class="doc-tbl">
+                    <thead><tr><th>Tier</th><th>Credits/month</th><th>Monthly price</th><th>Modelled COGS at 100% burn</th><th>Gross margin</th><th>Provenance</th></tr></thead>
+                    <tbody>
+                        <tr><td>Free (a state, not a plan)</td><td><strong>0</strong> was 15</td><td>£0</td><td>n/a</td><td>n/a</td><td><span class="pill p-good">owner decision 2026-08-09</span></td></tr>
+                        <tr><td>Starter</td><td>200</td><td>£49</td><td>£4.00</td><td>92%</td><td><span class="pill p-good">accepted estimate 2026-08-09</span></td></tr>
+                        <tr><td>Pro</td><td>750</td><td>£149</td><td>£15.00</td><td>90%</td><td><span class="pill p-good">accepted estimate 2026-08-09</span></td></tr>
+                        <tr><td>Portfolio</td><td>3,000</td><td>contact sales</td><td>£60.00</td><td>≥89% at the quoted price</td><td><span class="pill p-good">accepted estimate 2026-08-09</span></td></tr>
+                        <tr><td>Trial (14 days)</td><td>50</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="pill p-good">owner decision 2026-08-05</span></td></tr>
+                        <tr><td>Velstrian Buy, all tiers</td><td>no published number</td><td>ladder archived</td><td>n/a</td><td>n/a</td><td><span class="pill p-warn">unpriced pending a single quoted ladder</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+<div class="callout good">
+                <p><b>The sentence that was about to become untrue is true again</b></p>
+                <p>
+                    <code>crowagent.ai/pricing/</code> prints, verbatim, next to the credit table:
+                    <em>“These are the numbers the platform enforces.”</em>
+                </p>
+                <p>
+                    The finding was that this held for credits but was about to break for seats, because the page advertised 3 and
+                    10 while the platform was being set to 1 and 5. A sentence like that converts a copy drift into an explicit
+                    claim about enforcement, which is materially worse than a stale number.
+                </p>
+                <p>
+                    <span class="pill p-good">RE-FETCHED 2026-08-16</span> The sentence is still on the page and the seat
+                    figures beside it now read <strong>1 user / 5 users / 10 users included</strong>. The claim is accurate on both
+                    axes. Worth noting for the record: the resolution was to move the copy to the enforced numbers, which is the
+                    direction the lock requires.
+                </p>
+            </div>
+  </div>
+</details>
+
+<h2 id="rvpr-6"><span class="n">Section 6</span>“Council” Named the Product After One Customer Type</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the naming residue</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Names read from code and production.</p><ul><li><span class="pill p-good">FIXED</span> Product names: Velstrian Buy and Velstrian Bid come from PRODUCT_NAME_BUY and PRODUCT_NAME_BID (registry.ts:240 and :281). The guard web/__tests__/infra/product-label-is-centralised.test.ts is present.</li><li><span class="pill p-good">FIXED</span> The checkout URL ?plan=council_council_small: 0 matches for council_council in web/src and web/app.</li><li><span class="pill p-good">FIXED</span> The five UK local-authority AI prompts: the phrase now appears in api/app only in comments (buy.py:1452, bid/delivery.py:702, bid_buyer_priorities.py:236), none in a prompt string.</li><li><span class="pill p-good">FIXED</span> Requirement pack route: web/app/api/buy/requirements/[id]/pack/route.ts (was web/app/api/council/...). The download filename token was not re-read.</li><li><span class="pill p-bad">NOT RE-MEASURED</span> The Stripe product Velstrian Bid Council and its description: Stripe was outside the allowed sources.</li><li><span class="pill p-info">CHANGED</span> Internal keys: the August policy (keys stay council) has been replaced by the rename (D298). Production tables are bid_ and buy_ (see the LLD box). Residual crowmark and crowagent identifiers (env vars such as CROWMARK_FREE_FIRST_BRIEFING and CROWAGENT_DATA_PATH on Railway, the readyz service name) remain, covered by row R285-REBRAND-11-INTERNAL-IDENTIFIERS (BUILT) in RELEASE-2.9-TRACKER.md.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact</span>
+                
+                
+                <p>
+                    The owner’s ruling: councils are <strong>one prospect segment</strong> among many buyers. The others are
+                    schools, universities, NHS trusts, housing associations, and government departments and institutes.
+                </p>
+                <p>
+                    <strong>Correction to the first reading of this page.</strong> It began by assuming the customer-facing ladder
+                    still said <em>Small / Standard / County</em> and that “County” was unnameable for a university.
+                    <strong>That was wrong, and it was only found by looking at the display layer rather than at the keys.</strong>
+                    A rename had already been executed in two passes tagged
+                    <code>PUBSEC-RENAME-01/02</code>, 66 markers across 50 files. The top tier
+                    <strong>displays as “Large”</strong> and the small tier’s blurb reads “Single
+                    directorate or <strong>faculty</strong>”.
+                </p>
+                
+
+<div class="callout bad">
+                    <p><b>REFUTED: the naming policy this section states is no longer the policy</b></p>
+                    <p>
+                        This page told you the policy was <strong>“keys stay <code>council</code>, labels
+                        say Public Sector”</strong>. It was accurate on the day. It has been superseded twice since, and the
+                        second supersession reverses part of the first.
+                    </p>
+                    <p>
+                        <strong>1. Same day, 2026-08-09.</strong> Lock §5.1 records the owner asked directly and chose
+                        <em>“rename keys too, full wave”</em>, withdrawing the keys-stay half. Two classes were
+                        exempted and the reasoning is worth keeping: <strong>79 historical-record files</strong>, because a record
+                        edited after the fact stops being a record, and <strong>28 real-world data files</strong>, because the eval
+                        corpus is real tender documents written by real authorities and rewriting an input corpus corrupts every
+                        evaluation run against it.
+                    </p>
+                    <p>
+                        <strong>2. Current, verified 2026-08-16.</strong>
+                        <code>web/src/shared/product/registry.ts:56 to 57</code> states
+                        <em>“The internal key stays <code>council</code> on purpose… Key is not
+                        display name, deliberately.”</em> And the product’s name is neither “Council” nor
+                        “Public Sector”.
+                    </p>
+                    <p>
+                        <strong>The buyer-side product is Velstrian Buy.</strong> Declared once, at
+                        <code>registry.ts:145</code>, read through <code>productLabel()</code>,
+                        guarded by <code>web/__tests__/infra/product-label-is-centralised.test.ts</code>. The
+                        registry gives the reason at <code>:47 to 53</code>: it is named for the side of the
+                        table the user sits on, and <em>“Council” names a single prospect while “Public
+                        Sector” is a sector label that excludes private-sector buyers doing the identical job; both narrow
+                        the addressable market, and NEITHER may be used as this product’s name again.</em>
+                    </p>
+                    <p>
+                        The registry also records <em>why</em> a single declaration site was needed: the buyer-side product had its
+                        name re-declared in <strong>twelve</strong> separate hand-maintained maps, which is how
+                        “Public Sector” survived several corrections.
+                    </p>
+                </div>
+                <p>
+                    The segment axis exists too. Re-measured on production 2026-08-16,
+                    <code>organisations.type</code> is a <strong>ten-value CHECK constraint on a text column,
+                    not a Postgres enum</strong>: <code>individual, company, agency, enterprise, council,
+                    education, nhs, housing_association, central_government, other_public</code>. Correcting the earlier
+                    description: the only relevant Postgres enum is
+                    <code>billing_product_key</code>, which still has exactly two values,
+                    <code>crowmark</code> and <code>council</code>.
+                </p>
+                <p>
+                    <strong>The ruling is largely implemented</strong>, but it remains tenancy metadata, deliberately decoupled
+                    from entitlement, and <strong>no per-segment pricing, packaging, seat or credit differentiation exists
+                    anywhere.</strong> Most of the residue this section listed has since been cleared; the table below records which.
+                </p>
+            </div>
+<div class="tblwrap">
+                <table class="doc-tbl">
+                    <thead><tr><th>Occurrence</th><th>Class</th><th>Seen by a customer?</th><th>Cost to change</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Stripe product name</strong> <code>prod_Up9CZpAwYboTXk</code> = “Velstrian Bid Council”<br>
+                            description: “Velstrian Bid Council Edition, … for UK local authorities. Annual, per-authority tiers (Small / Standard / County).”</td>
+                            <td><span class="pill p-bad">(b) customer-facing</span></td>
+                            <td><strong>Yes</strong>, product name renders on Stripe invoices, receipts and Checkout</td>
+                            <td><span class="pill p-good">FREE</span>, <code>name</code> is mutable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stripe nicknames</strong>, “Council County (annual)”, “Council Standard (annual)”, “Velstrian Bid Council Small authority”</td>
+                            <td><span class="pill p-warn">(a) internal</span></td>
+                            <td>No, dashboard label only</td>
+                            <td><span class="pill p-good">FREE</span>, mutable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stripe lookup_keys</strong> <code>crowagent_council_{small,standard,county}_annual</code></td>
+                            <td><span class="pill p-none">(c) lookup_key</span></td>
+                            <td>No</td>
+                            <td><span class="pill p-warn">MODERATE</span>, requires a new price + key transfer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Postgres enums</strong> <code>billing_product_key</code> = <code>council</code>;
+                            <code>billing_tier_key</code> ∋ <code>council_small|standard|county</code></td>
+                            <td><span class="pill p-warn">(a) internal</span></td>
+                            <td>No</td>
+                            <td><span class="pill p-warn">MODERATE</span>, enum values add cheaply, retire expensively</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Type unions and tables</strong>, <code>SeatProduct</code>, <code>SeatTier</code>,
+                            <code>CreditProductKey</code>, <code>PRODUCT_KEYS</code>, <code>TIER_KEYS</code>,
+                            <code>PLAN_LIMITS.council_council_*</code></td>
+                            <td><span class="pill p-warn">(a) internal</span></td>
+                            <td>No</td>
+                            <td><span class="pill p-good">LOW</span>, compiler-checked rename</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Production data</strong>, <code>product_context.council</code> on
+                            <strong>9 of 13</strong> orgs (re-queried 2026-08-16; was 6);
+                            one <code>product_subscriptions</code> row at <code>council_county</code>,
+                            still present, still a manual grant</td>
+                            <td><span class="pill p-warn">(a) internal</span></td>
+                            <td>No, but it gates visibility</td>
+                            <td><span class="pill p-warn">MODERATE</span>, and the row count has grown from 7 to 10</td>
+                        </tr>
+                        <tr>
+                            <td><strong>i18n VALUES, UI routes, tier display names, email and PDF labels</strong><br>
+                            tiers already display Small / Standard / <strong>Large</strong>; UI route is <code>/public-sector</code>; emails and PDFs say “Velstrian Bid Public Sector”</td>
+                            <td><span class="pill p-good">already fixed</span></td>
+                            <td>Yes, and correct</td>
+                            <td><span class="pill p-good">NONE</span>, done, and test-pinned</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI system prompts</strong>, <code>api/app/routers/council.py</code><br>
+                            were “You are a UK local-authority …”, including the award and regret letter drafter</td>
+                            <td><span class="pill p-good">FIXED</span></td>
+                            <td><strong>Was yes.</strong> Re-read 2026-08-16: all five now read <em>“You are a UK
+                            public-sector …”</em> at <code>:393</code>, <code>:408</code>,
+                            <code>:422</code>, <code>:443</code>. The comment at
+                            <code>:438 to 442</code> records that the letter is sent under the CUSTOMER's name.</td>
+                            <td><span class="pill p-good">NONE</span>, done</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Download filename</strong>,
+                            <code>council-requirement-pack.pdf</code></td>
+                            <td><span class="pill p-good">FIXED</span></td>
+                            <td><strong>Was yes.</strong> Now <code>public-sector-requirement-pack</code> at
+                            <code>web/app/api/council/requirements/[id]/pack/route.ts:194</code>, pinned by a
+                            test at <code>route.test.ts:191,203</code>. The pack’s
+                            “Ward” column header is also gone.</td>
+                            <td><span class="pill p-good">NONE</span>, done</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Checkout URL</strong>,
+                            <code>?plan=council_council_small</code>, doubled prefix and all</td>
+                            <td><span class="pill p-bad">(b) customer-facing</span></td>
+                            <td><strong>Yes</strong>, shown in the address bar. Still present at
+                            <code>web/src/features/public-sector/PublicSectorCheckoutButton.test.ts:97</code>.
+                            Recorded as found and deliberately not changed
+                            (<code>RESUME-STATE-2026-08-09.md:476</code>).</td>
+                            <td><span class="pill p-good">LOW</span>, and the ladder it leads to is archived</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<div class="qgrid"><div class="q">
+                    <h4>The good news, measured, and then measured again</h4>
+                    <p>
+                        The <em>customer-facing</em> half had largely been done already. The i18n catalogues render a neutral
+                        label to users, the settings route is <code>/public-sector/settings</code>, and the
+                        message <em>keys</em> are still <code>council.*</code>, which is class (a) and costs
+                        nothing to leave.
+                    </p>
+                    <p>
+                        <strong>The marketing site is clean</strong>, and this was measured rather than assumed. The word
+                        “council” never renders as a tier or product name on any deployed page. Where it appears in
+                        rendered copy it is the ordinary common noun (“contracting authorities, councils, NHS bodies and
+                        universities”) or a real authority named in screenshot alt text.
+                        That negative is trustworthy because the sweep was controlled: <code>council</code>
+                        matched 58 files repo-wide, so the search demonstrably works, and the built pricing page returned
+                        <strong>zero</strong> hits.
+                    </p>
+                    <p>
+                        <span class="pill p-warn">SHARPENED 2026-08-16</span> The label this card called correct,
+                        “Velstrian Bid Public Sector”, is now itself a banned string. The guard
+                        <code>product-label-is-centralised.test.ts:70</code> matches
+                        <code>/Velstrian Bid\s+Public\s+Sector/i</code> as a <em>former</em> brand string and
+                        carries an EMPTY <code>KNOWN_DEBT</code> array at <code>:99</code>.
+                    </p>
+                    <p>
+                        The string still appears in about thirty files. Four were opened and <strong>every hit in those four was a
+                        code comment</strong>, which the guard strips at <code>:208 to 211</code> before
+                        scanning. So the guard is not lying and no user sees it. <strong>Stated narrowly rather than
+                        generalised:</strong> four files were checked, not thirty, so “all of it is comments” is not a
+                        claim this page makes.
+                    </p>
+                </div><div class="q">
+                    <h4>The residue that leaked, and what is left of it</h4>
+                    <p>
+                        Seventeen genuine class-(b) leaks survived. The five that mattered were not labels at all. They were
+                        <strong>system prompts</strong> in <code>api/app/routers/council.py</code> beginning
+                        <em>“You are a UK local-authority…”</em>, one of which drafts <strong>award and regret
+                        letters sent to suppliers</strong> and another of which shapes the published social-value section of a
+                        tender. A university or NHS trust generated council-flavoured prose and sent it to third parties under
+                        their own name.
+                    </p>
+                    <p>
+                        <span class="pill p-good">FIXED, re-read 2026-08-16</span> All five now read
+                        <em>“You are a UK public-sector…”</em>. The file records the reasoning at
+                        <code>:438 to 442</code>, which is the part worth keeping: the letter goes out under
+                        the CUSTOMER's name, so the framing is theirs and not ours to get wrong.
+                    </p>
+                    <p>
+                        <strong>Also fixed:</strong> the requirement pack now downloads as
+                        <code>public-sector-requirement-pack</code>, test-pinned, and the
+                        <strong>“Ward”</strong> column header is gone.
+                        <strong>Still open:</strong> the checkout redirect still produces
+                        <code>?plan=council_council_small</code>, doubled prefix and all, and the Stripe product
+                        name could not be re-read on 2026-08-16 because the Stripe integration was unavailable.
+                    </p>
+                </div></div>
+  </div>
+</details>
+
+<h2 id="rvpr-7"><span class="n">Section 7</span>Seven Decisions, With Their Trade-offs</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the seven decisions</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> The decisions are historical. Their outcomes were compared with what is live.</p><ul><li><span class="pill p-info">CHANGED</span> A, Portfolio publish or withdraw: August outcome was HOLD (contact sales). Today the payload publishes 549. The decision was reversed in practice and the reason was not traced.</li><li><span class="pill p-info">CHANGED</span> B, Buyer ladder: August outcome was ARCHIVE. Today the payload sells Buy Pro 299 and Buy Portfolio 699. The archived Stripe prices are not what is served.</li><li><span class="pill p-none">NO LONGER APPLIES</span> C, tax_behavior unset on two prices: those prices are not in the payload.</li><li><span class="pill p-good">FIXED</span> D, seat copy and Terms at 1 / 5 / 10: confirmed on the live pricing page and Terms.</li><li><span class="pill p-info">CHANGED</span> E, tier ladder for non council buyers: the sold Buy ladder is two tiers named Pro and Portfolio, a neutral ordinal.</li><li><span class="pill p-good">FIXED</span> G, Free is a state: catalogue.ts:692 holds free creditsPerMonth 0.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-none"> Recommendation · advisory only, you decide</span>
+                
+                
+                <p>
+                    Nothing below had been implemented when this section was written. Where a real commercial choice existed, both
+                    options were given with what each costs. Where one option was dominated, that was said plainly, and where the
+                    author held a view it was labelled as a view.
+                </p>
+                <p>
+                    <span class="pill p-good">OUTCOME 2026-08-16</span> <strong>All seven were taken on 2026-08-09</strong>
+                    and recorded in <code>docs/decisions/PRICING-LOCK-2026-08.md</code>. Each box below now
+                    carries what was decided. Two of them were decided differently from the recommendation, which is the point of
+                    recording a recommendation as a recommendation.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of the seven decisions</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> The decisions are historical. Their outcomes were compared with what is live.</p>
+<ul>
+<li><span class="pill p-info">CHANGED</span> A, Portfolio publish or withdraw: August outcome was HOLD (contact sales). Today the payload publishes 549. The decision was reversed in practice and the reason was not traced.</li>
+<li><span class="pill p-info">CHANGED</span> B, Buyer ladder: August outcome was ARCHIVE. Today the payload sells Buy Pro 299 and Buy Portfolio 699. The archived Stripe prices are not what is served.</li>
+<li><span class="pill p-none">NO LONGER APPLIES</span> C, tax_behavior unset on two prices: those prices are not in the payload.</li>
+<li><span class="pill p-good">FIXED</span> D, seat copy and Terms at 1 / 5 / 10: confirmed on the live pricing page and Terms.</li>
+<li><span class="pill p-info">CHANGED</span> E, tier ladder for non council buyers: the sold Buy ladder is two tiers named Pro and Portfolio, a neutral ordinal.</li>
+<li><span class="pill p-good">FIXED</span> G, Free is a state: catalogue.ts:692 holds free creditsPerMonth 0.</li>
+</ul></div>
+<div class="qgrid"><div>
+                    <p><b><span class="pill p-info">Decision A</span>  Portfolio: publish or withdraw the price</b></p>
+                    <p>
+                        This one has an answer already recorded, <code>R241-PRICING-STRATEGY 3</code> says
+                        contact-sales, never publish £549, so the real question is whether you still hold that view.
+                    </p>
+                    <p>
+                        <strong>Hold the decision (cheapest):</strong> filter Portfolio out of the public pricing API response, as
+                        the platform’s own pricing page already does. One code change, one surface, no commercial change.<br><br>
+                        <strong>Reverse the decision:</strong> publish £549 / £5,929 on the website, drop the quote-only FAQ,
+                        remove the test pin. Gains a self-serve path to the top tier; loses the ability to price an org-scoped
+                        rollout to the org.
+                    </p>
+                    <p><strong>Doing neither leaves an anonymous endpoint contradicting your recorded decision.</strong></p>
+                    <p>
+                        <span class="pill p-good">DECIDED: HOLD</span> Lock §2.3: Portfolio is contact-sales, its Stripe
+                        prices stay ACTIVE so sales can quote against them, and <strong>publication is blocked in code, not by
+                        archiving</strong>. Implemented at
+                        <code>web/app/api/public/pricing/route.ts:187,198 to 210</code> and verified live on
+                        2026-08-16. The implementation goes further than the recommendation: the catalogue puts £549 in a
+                        type-level box (<code>quoteOnly()</code>) so that reading
+                        <code>PORTFOLIO.billing.monthlyPence</code> is a <strong>compile error, not a lint
+                        warning</strong>.
+                    </p>
+                </div><div>
+                    <p><b><span class="pill p-info">Decision B</span>  Buyer and Public Sector: sell them or archive them</b></p>
+                    <p>
+                        Nine live prices, up to £21,589/yr, reachable by nobody. The Buyer set carries deliberate metadata
+                        (<code>R262-BUYER-001</code>, seat and project counts), so it was built, not spilled.
+                    </p>
+                    <p>
+                        <strong>Sell:</strong> they must reach the public API, the pricing page and the portal matrix, and the
+                        entitlement work must finish. That is real product work, not a config change.<br><br>
+                        <strong>Archive:</strong> costs nothing today; no live Stripe subscription depends on any of them.
+                        The one Public Sector grant on production is a manual grant, not a Stripe subscription, so archiving the
+                        price does not disturb it.
+                    </p>
+                    <p>
+                        <strong>The view offered, as a view:</strong> archiving is reversible and free; leaving them live is the
+                        only option that carries risk with no revenue.
+                    </p>
+                    <p>
+                        <span class="pill p-good">DECIDED: ARCHIVE</span> Lock §2.4:
+                        <em>“Buyer and Public Sector ladders are archived, pending a single quoted Buyer S/M/L
+                        ladder.”</em> Nine live chargeable prices removed from the reachable catalogue on 2026-08-09. The
+                        manual grant on production is undisturbed, exactly as this box predicted, because it was never a Stripe
+                        subscription.
+                    </p>
+                    <p>
+                        <strong>The “pending” half is still pending, and it now has a plan.</strong>
+                        <code>docs/release-2.7/PLAN-SERVE-ALL-SEGMENTS-2026-08-16.md</code> §7 records the owner
+                        agreeing on 2026-08-16 that <strong>the private sector is a FIRST-CLASS RULESET, not a mode flag</strong>,
+                        so statutory content is absent by construction rather than suppressed by a flag every surface must
+                        remember to check. The buyer ladder is unpriced until that lands.
+                    </p>
+                </div></div>
+<div class="qgrid"><div>
+                    <p><b><span class="pill p-info">Decision C</span>  The two prices that cannot do automatic tax</b></p>
+                    <p>
+                        <code>crowagent_council_standard_annual</code> (£9,600) and
+                        <code>crowagent_council_county_annual</code> (£19,200) carry
+                        <code>tax_behavior: "unspecified"</code>, which
+                        <code>automatic_tax</code> rejects. <strong>The field is immutable</strong>; they can
+                        only be superseded, never patched.
+                    </p>
+                    <p>
+                        <code>council_small_annual</code> is correctly <code>exclusive</code>.
+                        That control is what makes this drift rather than a house convention.
+                    </p>
+                    <p>
+                        <strong>C is downstream of B and of E.</strong> If the ladder is archived or re-cut, new prices get created
+                        correctly and this disappears without a remediation.
+                    </p>
+                    <p>
+                        <span class="pill p-good">RESOLVED BY B</span> Both prices were archived on 2026-08-09, so the
+                        immutable field is no longer attached to anything sellable. This is the cleanest kind of resolution: the
+                        defect was not patched, it was made unreachable, and the guard that would have had to police it was never
+                        written. The rule survives for the next ladder:
+                        <strong>a price created without <code>tax_behavior</code> can only be superseded, never
+                        corrected.</strong>
+                    </p>
+                </div><div>
+                    <p><b><span class="pill p-info">Decision D</span>  Finish the seat correction, or accept the gaps</b></p>
+                    <p>
+                        Four things still say something other than 1 and 5. Only two of them need <em>your</em> decision:
+                    </p>
+                    <p>
+                        <strong>Yours:</strong> the marketing site advertises 3 and 10, next to the sentence
+                        <em>“These are the numbers the platform enforces.”</em>, and the <strong>Terms of Service</strong>
+                        promise a trial for “up to 3 users”. Either the copy and the terms come down to 1 and 5, or the caps
+                        go back up. There is no third state that is honest.<br><br>
+                        <strong>Yours:</strong> the portal grants Starter beta invites <strong>2</strong> seats. Is a beta partner
+                        deliberately given more than a paying Starter customer, or is that a leftover?
+                    </p>
+                    <p>
+                        <strong>The pressure valve that makes 1 seat workable is not the reviewer pool.</strong> The canonical spec
+                        is explicit that a <code>viewer</code> <em>does</em> consume a seat, because that role
+                        holds <code>approve_work</code>, recording an approve/reject decision on a bid is
+                        doing the job the product exists for, so it is not a free seat.
+                    </p>
+                    <p>
+                        The actual valve is the <strong>guest review invite</strong>
+                        (<code>crowmark_review_guest_invites</code>): token-hashed, contract-scoped, expiring, and
+                        with <strong>no <code>org_users</code> row</strong>, so it sits outside the tenant.
+                        That is how a solo bidder gets a colleague’s eyes on a draft without a second seat.
+                        <strong>There is no cap on it in code today</strong>, and an uncapped guest mechanism is an uncapped
+                        seat mechanism. The spec proposes 3 / 10 / 25 per contract, expiring at 30 days
+                        (<code>REQ-PRICE-018</code>).
+                    </p>
+                    <p>
+                        <strong>Related, and yours:</strong> the spec argues seat add-ons must <em>not</em> be sold on Starter,
+                        because Starter + 2 seats at £45 = £139 undercuts Pro at £149 while carrying 550 fewer
+                        credits. Worth confirming, since it constrains how 1-seat Starter can be softened.
+                    </p>
+                    <p>
+                        <strong>Engineering, not an owner call:</strong> the stale comments and the §3.6 spec text.
+                    </p>
+                    <p>
+                        <span class="pill p-good">DECIDED: FINISH IT</span> The copy and the Terms came down to 1 and 5, not
+                        the caps back up. Both re-fetched 2026-08-16 and both now agree. The portal’s Starter beta invite
+                        grants <strong>1</strong> seat, not 2, because it now calls the catalogue. Seat add-ons were confirmed
+                        <strong>Pro only</strong> when the owner was asked directly, and the spec was corrected to match rather
+                        than the code being relaxed (lock §5.2).
+                    </p>
+                    <p>
+                        <strong>The guest cap is still not enforced, and the measurement is worse than “not built”.</strong>
+                        The numbers now exist: <code>packages/pricing/catalogue.ts</code> declares
+                        <code>guestReviewers</code> 0 / 3 / 3 / 10 / 25, and
+                        <code>getGuestLimit()</code> reads them at <code>:486</code>.
+                        <strong>It has no production consumer.</strong> A repo sweep of
+                        <code>web</code>, <code>packages</code> and
+                        <code>apps</code> returns <strong>2 files</strong> for
+                        <code>getGuestLimit</code>, and they are the declaration and its parity test.
+                        Controlled against the same sweep for <code>getSeatLimit</code>
+                        (<strong>20 files</strong>) and <code>getCreditAllowance</code>
+                        (<strong>16 files</strong>), so the search demonstrably finds consumers where they exist.
+                        <strong>The guest allowance is a number in a table that reaches nothing</strong>, which is this
+                        repository’s signature defect wearing a pricing label.
+                        <code>REQ-PRICE-018</code> is not closed by declaring the figure.
+                    </p>
+                </div></div>
+  </div>
+</details>
+
+<h2 id="rvpr-8"><span class="n">Section 8</span>Decision E: A Tier Ladder That A School, A University, A Trust and A County Can All Read</h2>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-none"> Recommendation</span>
+                
+                <p>
+                    The tier <em>labels</em> were already neutral (Small / Standard / Large). What was <strong>not</strong> settled
+                    was the <strong>sizing axis behind them</strong>: the blurbs sized on authority shape
+                    (“single directorate or faculty”, “large or multi-body authority”), which is what a
+                    prospect uses to locate themselves. Four options, with what each costs. <strong>None was picked here.</strong>
+                </p>
+                <p>
+                    <strong>Note before you read them:</strong> the pricing spec already proposed an answer,
+                    <strong>Buyer S / M / L</strong>, quoted, annual, invoice or purchase order, sized on <em>authority type</em>
+                    in the public sector and on <em>procurement spend</em> in the private sector, with the supplier ladder
+                    identical across both. That is option 3 crossed with option 4.
+                </p>
+                <div class="callout">
+                    <p><b>OUTCOME: deferred by design, and the axis moved out from under the question</b></p>
+                    <p>
+                        The ladder was <strong>archived rather than re-cut</strong> (Decision B), so no tier names had to be chosen
+                        on 2026-08-09 and none were. Lock §2.4 states the deferral in the same sentence as the archive:
+                        <em>“pending a single quoted Buyer S/M/L ladder”</em>, which is the spec’s proposal
+                        accepted in principle without committing the sizing axis.
+                    </p>
+                    <p>
+                        <strong>Two things have changed the question since, and both make option 4 stronger.</strong>
+                    </p>
+                    <p>
+                        <strong>1. The product is no longer a public-sector product.</strong> It is
+                        <strong>Velstrian Buy</strong>, and the registry now states that a sector label
+                        “excludes private-sector buyers doing the identical job”. A sizing axis built on
+                        <em>authority type</em> inherits exactly that exclusion, so option 3’s public-sector half is now in
+                        tension with the product’s own name.
+                    </p>
+                    <p>
+                        <strong>2. The owner has since agreed the private sector is a first-class ruleset.</strong>
+                        <code>PLAN-SERVE-ALL-SEGMENTS-2026-08-16.md</code> §7, decision 2. If a private buyer is
+                        a first-class case rather than a mode, then a ladder that sizes on
+                        <code>central_government / sub_central</code> shape cannot be the only ladder, and the
+                        neutral ordinal is the one that spans both without a second ladder to drift.
+                    </p>
+                    <p>
+                        <strong>Still not picked here, deliberately.</strong> This is an observation that two options narrowed, not
+                        a recommendation that one won.
+                    </p>
+                </div>
+            </div>
+<div class="tblwrap">
+                <table class="doc-tbl">
+                    <thead><tr><th>Option</th><th>Tier names</th><th>What it sizes on</th><th>Strengths</th><th>Weaknesses</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Seats</strong></td>
+                            <td>Team / Department / Organisation</td>
+                            <td>Named users</td>
+                            <td>Universally legible; we already enforce seats; a buyer can self-select in one question; scales identically for a school and an ICB.</td>
+                            <td>Decouples price from value: a five-seat county team doing 400 evaluations pays less than a twenty-seat school doing four. Invites seat-sharing.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Procurement volume</strong></td>
+                            <td>e.g. up to 25 / 100 / unlimited evaluations a year</td>
+                            <td>Tenders or evaluations per year</td>
+                            <td>Tracks the value delivered; buyer-type-blind; matches how the Buyer ladder is already metadata’d (<code>sourcing_projects_per_year</code>).</td>
+                            <td>A prospect may not know their own annual volume at the point of buying. Needs a countable, agreed unit and an in-product meter we would have to build.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Organisation spend band</strong></td>
+                            <td>e.g. under £10m / £10 to 100m / over £100m annual third-party spend</td>
+                            <td>Addressable procurement spend</td>
+                            <td>The nearest thing to a fair value proxy; public bodies publish this; neutral across schools, trusts and authorities; anchors price to their budget not our cost.</td>
+                            <td>Feels intrusive; needs verification; a large trust with centralised buying may object to a band it cannot influence.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Neutral ordinal</strong></td>
+                            <td>Essentials / Standard / Enterprise</td>
+                            <td>Nothing, a feature ladder</td>
+                            <td>Zero market signal; matches the supplier and Buyer ladders so the whole catalogue reads as one system; cheapest to implement.</td>
+                            <td>Gives a prospect no way to self-select, so every deal needs a conversation. Honest only if the price really is negotiated, which, being invoice/PO, it already is.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<div class="qgrid"><div>
+                    <p><b>A structural observation, separate from the choice</b></p>
+                    <p>
+                        There is a strong argument that <strong>“Public Sector” should not be a product ladder at all.</strong>
+                        Measured, it is not really a different product from Velstrian Buy; both are the buy-side of a
+                        procurement, both are advisory, and both size on seats plus assessment volume. The only genuine differences
+                        are the <strong>billing mechanics</strong> (annual, invoice/PO, no self-serve checkout) and the
+                        <strong>regulatory content</strong> (PPN 002, social value).
+                    </p>
+                    <p>
+                        Those are a <em>payment method</em> and a <em>content pack</em>, not a product line. Collapsing Public Sector
+                        into the Buyer ladder with an invoice-billing flag would delete an entire duplicated axis, its enum
+                        values, its seat row, its credit row, its <code>PLAN_LIMITS</code> keys and three Stripe
+                        prices, rather than renaming it.
+                    </p>
+                    <p>
+                        <strong>The canonical spec has already reached this conclusion independently.</strong> Its §6.1 matrix
+                        collapses both into one <strong>Buyer S / M / L</strong> row spanning public and private sector, and states
+                        the reason directly: the supplier ladder must not vary by sector, because that
+                        <em>“removes an entire class of pricing bug; there is no second supplier ladder to drift.”</em>
+                        Two independent passes arriving at the same structure is weak evidence, but it is evidence.
+                    </p>
+                    <p>
+                        <strong>It was not recommended here.</strong> It is a bigger call than E, and it only pays off if the
+                        answer to B is “sell the Buyer ladder”.
+                    </p>
+                    <p>
+                        <span class="pill p-good">THE STRUCTURE WON, and by a third route</span> The observation was that
+                        the two buy-side ladders differ only by <em>payment method</em> and <em>content pack</em>, which are not a
+                        product line. The product registry has since collapsed them without being asked to: there is exactly one
+                        buy-side product, <strong>Velstrian Buy</strong>, at
+                        <code>registry.ts:136 to 152</code>, and both Stripe ladders were archived on the same
+                        day. <strong>Three independent passes reaching the same structure is stronger evidence than two</strong>,
+                        though it is still evidence about the shape and not about whether to sell it.
+                    </p>
+                </div><div>
+                    <p><b>Decision F: sequencing, so nothing is paid for twice</b></p>
+                    <p>
+                        These decisions are not independent, and taking them in the wrong order means creating Stripe prices you
+                        then have to supersede.
+                    </p>
+                    <p>
+                        <strong>1.</strong> Answer <strong>B</strong> (sell or archive Buyer / Public Sector). Everything else hangs off it.<br>
+                        <strong>2.</strong> If “sell”, answer <strong>E</strong> before any Stripe write; the ladder shape decides
+                        how many prices exist.<br>
+                        <strong>3.</strong> <strong>C</strong> resolves itself under either answer: archive, or create new prices with
+                        <code>tax_behavior</code> set correctly the first time.<br>
+                        <strong>4.</strong> <strong>A</strong> and <strong>D</strong> are independent of all of the above and can be done today.
+                    </p>
+                    <p>
+                        The one free action available immediately, under every branch: <strong>rename the Stripe product
+                        “Velstrian Bid Council”</strong> and its local-authority-only description. That string reaches invoices,
+                        <code>name</code> is mutable, and no branch of any decision keeps it.
+                    </p>
+                    <p>
+                        <span class="pill p-good">SEQUENCE FOLLOWED</span> B was answered first, C fell out of it, and A and
+                        D were done the same day. No Stripe price was created and then superseded, which is what the sequencing
+                        existed to prevent. Lock §2.7 adds a rung the sequence did not have:
+                        <strong>the lookup keys <code>crowagent_council_{small,standard,county}_annual</code>
+                        are left alone</strong>, recorded as a decision rather than an oversight, because transferring one costs a
+                        new price object and buys nothing on a dead ladder.
+                    </p>
+                    <p>
+                        <strong>The one free action could not be re-verified on 2026-08-16.</strong> Whether the Stripe product
+                        name still reads “Velstrian Bid Council” is unknown to this revalidation, because the Stripe
+                        integration returned an expired token. It is stated as unknown rather than assumed done. One
+                        <code>GET /v1/products</code> settles it.
+                    </p>
+                </div></div>
+<div class="callout fix">
+                <p><b><span class="pill p-info">Decision G</span>  Is Free a plan, or a state?</b></p>
+                <p>
+                    The platform ships a Free tier with a real seat count and a real credit allowance. The website says there is no
+                    free plan. Both are internally consistent; together they are not.
+                </p>
+                <p>
+                    <strong>Free is a plan:</strong> publish it at 1 user and 15 AI credits, and it becomes a top-of-funnel
+                    entry point that costs roughly <strong>£0.30</strong> a month per org, 15 credits at Starter’s own
+                    modelled unit cost of £4.00 ÷ 200; my arithmetic, not a measured figure. Risks diluting the 14-day trial, which
+                    currently does that job with 50 credits and a card on file.<br><br>
+                    <strong>Free is a state:</strong> it is what an org looks like before it subscribes. Keep it unpublished,
+                    and the website copy is already correct. Then the 15-credit allowance needs a stated purpose, or it is a
+                    quantity nobody chose.
+                </p>
+                <p>
+                    <strong>Either answer is cheap.</strong> This is on the list only because leaving it unanswered is how the
+                    seat figures drifted in the first place: a number in a table that no decision stands behind.
+                </p>
+                <p>
+                    <span class="pill p-good">DECIDED: FREE IS A STATE</span> Lock §2.2. Zero credits, unpublished, occupied
+                    by an organisation before it subscribes. The 15 was the pre-lock estimate and is gone from
+                    <code>packages/pricing/catalogue.ts:236</code>. The marketing claim
+                    <em>“Velstrian Bid is a paid product and there is no free plan”</em> is now literally true rather than
+                    merely asserted, which was the whole complaint.
+                </p>
+                <p>
+                    Note what the decision cost: <strong>this is one of only two entries in the catalogue that CHANGED live
+                    behaviour</strong> rather than transcribing an existing figure, and the catalogue flags it as such at
+                    <code>:214 to 223</code> so no reader mistakes it for a transcription. An organisation on
+                    the free state that could previously spend 15 credits now spends none.
+                </p>
+            </div>
+  </div>
+</details>
+
+<h2 id="rvpr-9"><span class="n">Section 9</span>The Open Register Rows These Decisions Close</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of Decision E and the register rows</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> See the previous boxes for the evidence.</p><ul><li><span class="pill p-info">CHANGED</span> Decision E: the buy side now has one product and a two step ladder, so options 1 to 4 resolved to a neutral ordinal.</li><li><span class="pill p-good">FIXED</span> Register rows R262-D-34, R262-D-159, R262-D-160, seats copy, free tier, deactivated seat blocker, system prompts and the unlimited claim: closed, status unchanged since August.</li><li><span class="pill p-good">FIXED</span> R27P0 second pricing endpoint: closed and the route removed.</li><li><span class="pill p-warn">STILL OPEN</span> R27P2 product_context ten dead keys: open (see section 2). R2.9 row <code>R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01</code>.</li><li><span class="pill p-good">FIXED</span> REQ-PRICE-018 guest cap: enforced in Python (see the seats box).</li><li><span class="pill p-bad">NOT RE-MEASURED</span> R262-D-161 Stripe nicknames and the crowmark_agency tier string in the portal: Stripe and the portal were not re-read.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact</span>
+                
+                
+                <p>
+                    <span class="pill p-good">REVALIDATED 2026-08-16</span> The right-hand column now carries the outcome
+                    rather than the intention. Eight of the eleven rows are closed. The three that are not are named, and one of
+                    them has become the live P0 of Release 2.7.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of Decision E and the register rows</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> See the previous boxes for the evidence.</p>
+<ul>
+<li><span class="pill p-info">CHANGED</span> Decision E: the buy side now has one product and a two step ladder, so options 1 to 4 resolved to a neutral ordinal.</li>
+<li><span class="pill p-good">FIXED</span> Register rows R262-D-34, R262-D-159, R262-D-160, seats copy, free tier, deactivated seat blocker, system prompts and the unlimited claim: closed, status unchanged since August.</li>
+<li><span class="pill p-good">FIXED</span> R27P0 second pricing endpoint: closed and the route removed.</li>
+<li><span class="pill p-warn">STILL OPEN</span> R27P2 product_context ten dead keys: open (see above).</li>
+<li><span class="pill p-good">FIXED</span> REQ-PRICE-018 guest cap: enforced in Python (see the seats box).</li>
+<li><span class="pill p-bad">NOT RE-MEASURED</span> R262-D-161 Stripe nicknames and the crowmark_agency tier string in the portal: Stripe and the portal were not re-read.</li>
+</ul></div>
+<div class="tblwrap">
+                <table class="doc-tbl">
+                    <thead><tr><th>Row</th><th>Severity</th><th>What it is</th><th>Status, 2026-08-16</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>R262-D-159</strong></td><td><span class="pill p-warn">P1</span></td>
+                            <td>Nine live, chargeable prices, up to £21,589/yr, on no other surface.</td>
+                            <td><span class="pill p-good">CLOSED</span> by Decision <strong>B</strong>, archived 2026-08-09 (recorded, not re-read today)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R262-D-160</strong></td><td><span class="pill p-warn">P2</span></td>
+                            <td>Two buyer-side prices with immutable <code>tax_behavior: unspecified</code>.</td>
+                            <td><span class="pill p-good">CLOSED</span> by <strong>C</strong>, made unreachable rather than patched</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R262-D-161</strong></td><td><span class="pill p-good">P3</span></td>
+                            <td>Portfolio’s Stripe nicknames still say “Agency”, a vocabulary the matrix retired.</td>
+                            <td><span class="pill p-warn">UNVERIFIED</span> Stripe was not re-read on 2026-08-16</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R262-D-34</strong></td><td><span class="pill p-warn">P2</span></td>
+                            <td>Portfolio published by the API against quote-only on the site. <strong>Sharpened at the time:</strong> a recorded owner decision already existed and the API was the surface breaching it.</td>
+                            <td><span class="pill p-good">CLOSED</span> by <strong>A</strong>. Verified live: the endpoint returns <code>contact_sales</code> with no numeric field</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Was: new, not yet filed</strong></td><td><span class="pill p-bad">P1</span></td>
+                            <td>“Agency” is not only in Stripe. <code>apps/portal</code> writes tier
+                            <code>crowmark_agency</code> into production entitlement rows for full-access invites, and
+                            <code>help-articles.ts</code> tells customers about “Agency plan users”.</td>
+                            <td><span class="pill p-warn">PARTIAL</span> the portal’s seat numbers now derive from the catalogue; the <code>crowmark_agency</code> tier string is a read-compat value that normalises to <code>portfolio</code>, so entitlement resolution is safe. The customer-facing help text was not re-checked</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Was: new, not yet filed</strong></td><td><span class="pill p-bad">P1</span></td>
+                            <td>The website will advertise 3 and 10 seats against an enforced 1 and 5, under the sentence
+                            “These are the numbers the platform enforces”, and the <strong>Terms of Service</strong>
+                            promise a trial for “up to 3 users”.</td>
+                            <td><span class="pill p-good">CLOSED</span> by <strong>D</strong>. Both pages re-fetched 2026-08-16 and both read 1 / 5 / 10</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Was: new, not yet filed</strong></td><td><span class="pill p-warn">P2</span></td>
+                            <td>The platform ships a Free Velstrian Bid tier (1 seat, 15 credits) that the marketing site explicitly denies:
+                            <em>“Velstrian Bid is a paid product and there is no free plan.”</em></td>
+                            <td><span class="pill p-good">CLOSED</span> by <strong>G</strong>. Free is a state at 0 credits, unpublished</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Was: new, not yet filed</strong></td><td><span class="pill p-bad">P0 BLOCKER</span></td>
+                            <td><code>checkSeatCapacity</code> does not filter <code>org_users</code>
+                            on <code>active</code>, so a deactivated user still holds a seat. At Starter = 1 the
+                            customer cannot replace a departed colleague. <code>REQ-PRICE-017</code>.</td>
+                            <td><span class="pill p-good">FIXED</span> <code>seat-limits.ts:419</code> and <code>:466</code> apply <code>active IS NOT FALSE</code>; test at <code>req-price-017-deactivated-seat.test.ts:114</code>. Spec text now trails the code</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Was: new, not yet filed</strong></td><td><span class="pill p-bad">P1</span></td>
+                            <td>Five AI system prompts in <code>api/app/routers/council.py</code> hardcode
+                            <em>“You are a UK local-authority…”</em>, including the one that drafts award and regret
+                            letters sent to suppliers.</td>
+                            <td><span class="pill p-good">FIXED</span> all five re-read 2026-08-16 as “UK public-sector”</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Still open</strong></td><td><span class="pill p-warn">P2</span></td>
+                            <td>Guest review invites are <strong>uncapped in code</strong>. An uncapped guest mechanism is an
+                            uncapped seat mechanism, and guests are the pressure valve that makes 1-seat Starter workable.
+                            <code>REQ-PRICE-018</code>.</td>
+                            <td><span class="pill p-bad">OPEN, and now measurable</span> the limits are declared (0/3/3/10/25) and <code>getGuestLimit</code> has <strong>2</strong> files repo-wide against 20 for <code>getSeatLimit</code>. Declared, not enforced</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Was: new, not yet filed</strong></td><td><span class="pill p-warn">P2</span></td>
+                            <td>The retired claim <em>“Bid volume effectively unlimited”</em> was corrected on <code>/pricing</code>
+                            (defect OA-05) but survives on the deployed <code>/crowmark</code> page, which also states
+                            no credit allowance at all. Same tier, two different published feature claims.</td>
+                            <td><span class="pill p-good">CLOSED</span> <code>crowagent.ai/crowmark/</code> re-fetched 2026-08-16: no “unlimited”, no “white-label”, and the credit allowance is stated on every tier</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NEW · R27</strong></td><td><span class="pill p-bad">P0 LIVE</span></td>
+                            <td>A <strong>second</strong> unauthenticated pricing endpoint publishes a retired price.
+                            <code>GET .../api/v1/pricing/public</code> on the FastAPI backend returns
+                            “Agency” at <strong>£399</strong> with <strong>“Unlimited users”</strong>,
+                            from <code>_FALLBACK_PRICING</code>, with <code>source: "fallback"</code>.</td>
+                            <td><span class="pill p-bad">OPEN</span> fetched live 2026-08-16. Section 9</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NEW · R27</strong></td><td><span class="pill p-warn">P2</span></td>
+                            <td><code>organisations.product_context</code> holds <strong>15 keys</strong> on
+                            production; 13 name no product in the registry, ten of them on 8 of 13 organisations at
+                            <code>tier: enterprise</code>, <code>seats_limit: 1000</code>.</td>
+                            <td><span class="pill p-bad">OPEN</span> whether any can still grant something is unestablished</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+  </div>
+</details>
+
+<h2 id="rvpr-10"><span class="n">Section 10</span>How This Was Measured, And What Is Deliberately Not Claimed</h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the method notes</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> This pass used a different corpus. The method lines below remain as the August record.</p><ul><li><span class="pill p-info">CHANGED</span> Corpus read on 29 October: the code in crowagent-platform with comments stripped for model, route and constant claims, Supabase production gujtuecjzfiqsdnzgyvo and staging ipgrnwvfnumgvnxkpxsc (SELECT only), the Vercel and Railway tools, and curl on the public hosts. Stripe, Sentry, Cloudflare and the portal behind Access were not queried.</li><li><span class="pill p-bad">NOT RE-MEASURED</span> Portal and staging hosts behind Cloudflare Access: not walked with a token (the credential file is blocked from this lane by a guardrail), so only the 302 answers without a token are stated.</li><li><span class="pill p-bad">NOT RE-MEASURED</span> No test suite was run (RULE 0-T) and no checkout was exercised.</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact</span>
+                
+                
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of the method notes</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> This pass used a different corpus. The method lines below remain as the August record.</p>
+<ul>
+<li><span class="pill p-info">CHANGED</span> Corpus read on 29 October: the code in crowagent-platform with comments stripped for model, route and constant claims, Supabase production gujtuecjzfiqsdnzgyvo and staging ipgrnwvfnumgvnxkpxsc (SELECT only), the Vercel and Railway tools, and curl on the public hosts. Stripe, Sentry, Cloudflare and the portal behind Access were not queried.</li>
+<li><span class="pill p-bad">NOT RE-MEASURED</span> Portal and staging hosts behind Cloudflare Access: not walked with a token (the credential file is blocked from this lane by a guardrail), so only the 302 answers without a token are stated.</li>
+<li><span class="pill p-bad">NOT RE-MEASURED</span> No test suite was run (RULE 0-T) and no checkout was exercised.</li>
+</ul></div>
+<div class="qgrid"><div>
+                    <p><b>Controls run, because an empty result proves nothing on its own</b></p>
+                    <p>
+                        <strong>Stripe completeness.</strong> <code>GET /v1/prices?active=true&amp;limit=100</code>
+                        returned 19 with <code>has_more: false</code>, so the catalogue is not a page-1 sample.<br><br>
+                        <strong>Stripe read path works.</strong> A single subscription id read <em>failed</em> with
+                        <code>No such subscription</code>. That alone proves nothing, so
+                        <code>GET /v1/subscriptions?status=all</code> was run as the control; it returned data,
+                        <code>has_more: false</code>. The read path works; the id is not in the live account.<br><br>
+                        <strong>Grep controls.</strong> Every “this appears nowhere” claim was paired with a search proven to
+                        return non-zero hits with the same tool. The <code>seats_limit</code> single-reader result was
+                        controlled with <code>seats_used</code>; the “Public Sector” sweep was controlled against
+                        the <code>council</code> sweep.<br><br>
+                        <strong>Seat-safety cross-check.</strong> The claim “no org exceeds one seat” was re-run independently
+                        against production rather than taken from the code comment asserting it. It holds:
+                        <code>max = 1</code>.<br><br>
+                        <strong>Website extraction.</strong> The live page was fetched with a cache-buster (HTTP 200, 75,400 bytes),
+                        scripts and styles stripped, and text extracted, then cross-checked against an independent sweep of the
+                        website repository. The two agree on every figure.<br><br>
+                        <strong>A trap that would have produced a false clean result.</strong> The website repo’s
+                        <code>.gitignore</code> ignores <code>astro/dist/</code>, and the search tool
+                        honours <code>.gitignore</code>, so <strong>the deployed build is invisible to a default
+                        search</strong>. Every claim about what is served was re-run against an explicit
+                        <code>astro/dist</code> path. Searching only the source would have been searching the wrong artefact.
+                    </p>
+                </div><div>
+                    <p><b>Not claimed, named rather than quietly omitted</b></p>
+                    <p>
+                        <strong>No checkout was ever exercised.</strong> Not for Portfolio, not for Buyer, not for Public Sector.
+                        Every statement is that a price <em>exists and is active</em>, never that a purchase completes.<br><br>
+                        <strong>Stripe was READ ONLY.</strong> Nothing was created, updated or archived.<br><br>
+                        <strong>The five non-live subscription ids were not traced to an account.</strong> They are provably not in
+                        <code>acct_1TB3MxILkzuI7dCV</code>; which account they belong to was not established, and no
+                        claim is made that they are test-mode rows.<br><br>
+                        <strong>Credit weights were not audited.</strong> The margin percentages are the packaging document’s own
+                        arithmetic, reproduced, not independently re-derived from live AI spend.<br><br>
+                        <strong>No customer count is asserted</strong> for any tier beyond the row counts stated.<br><br>
+                        <strong>The website extraction reads rendered text only.</strong> A figure that appears solely inside an image
+                        or a script payload would not have been seen.<br><br>
+                        <strong>Whether the §10 credit question was ever answered could not be determined</strong>, only that no
+                        record of an answer was found. Absence of a record is not proof of absence of a decision.<br><br>
+                        <strong>Two of my own findings were wrong, and are corrected in place rather than deleted.</strong>
+                        I first treated <code>PRICING-AND-PACKAGING-2026-07.md</code> as canonical when it has been
+                        superseded; and I asserted that the Public Sector tier ladder still showed “County” to customers
+                        when the display layer already says “Large”. Both errors came from reading keys and specs instead of
+                        the rendered artefact. They are marked as corrections on this page because the failure mode is more useful
+                        to you than a clean-looking result.<br><br>
+                        <strong>I did not audit the AI prompt outputs</strong>, only the prompt text. No claim is made about how
+                        strongly “UK local-authority” framing shapes a generated award letter.<br><br>
+                        <strong>The page was not visually rendered in a browser.</strong> It was verified structurally: HTTP 200 from
+                        the server, exact tag balance globally and within the tab, and every CSS class used proven to exist.
+                    </p>
+                </div></div>
+<div class="callout">
+                <p><b>How the 2026-08-16 revalidation was done, and what it did not reach</b></p>
+                <p>
+                    <strong>Live surfaces, re-read rather than quoted.</strong>
+                    <code>GET https://app.crowagent.ai/api/public/pricing</code> and
+                    <code>GET https://api.velstrian.com/api/v1/pricing/public</code>,
+                    both with a cache-buster.
+                    <code>crowagent.ai/pricing/</code> (HTTP 200, 80,278 bytes),
+                    <code>/terms/</code> (51,562 bytes) and
+                    <code>/crowmark/</code> (97,575 bytes), scripts and styles stripped and text extracted.
+                </p>
+                <p>
+                    <strong>Production, queried directly</strong> on <code>gujtuecjzfiqsdnzgyvo</code>, read
+                    only: organisation and contract counts, <code>buyer_sector</code> distribution,
+                    <code>product_context</code> key and tier distribution,
+                    <code>product_subscriptions</code> by product and tier,
+                    <code>organisations.tier</code> and <code>subscriptions.tier</code>,
+                    <code>max(count(*))</code> over <code>org_users</code>, and the
+                    <code>organisations</code> CHECK constraints read from
+                    <code>pg_constraint</code>.
+                </p>
+                <p>
+                    <strong>A controlled negative, because an empty result proves nothing alone.</strong> The claim that
+                    <code>getGuestLimit</code> has no production consumer was paired with the same sweep for
+                    <code>getSeatLimit</code> and <code>getCreditAllowance</code>, which
+                    returned 20 and 16 files. The instrument finds consumers where they exist.
+                </p>
+                <p>
+                    <strong>NOT reached, named rather than omitted.</strong> <strong>Live Stripe was not re-read</strong>: the
+                    integration returned an expired token, so every Stripe figure on this tab keeps its 2026-08-09 date and the
+                    archive of nine prices is a recorded claim rather than a re-measurement. <strong>No test suite was executed</strong>
+                    as part of this revalidation, so where a guard is cited it is cited as present in the tree, not as observed
+                    passing. <strong>No checkout was exercised.</strong> Nothing was written to any database or to Stripe.
+                </p>
+            </div>
+  </div>
+</details>
+
+<h2 id="rvpr-11"><span class="n">Section 11</span>There Are Two Public Pricing Endpoints. One Was Fixed. The Other Published £399 <span class="pill p-good">CLOSED 2026-08-19</span></h2>
+<div class="callout good"><p><b>Status 29 October 2026 of the two pricing endpoints</b></p><p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Only one pricing endpoint exists today.</p><ul><li><span class="pill p-good">FIXED</span> The FastAPI endpoint GET /api/v1/pricing/public no longer exists: it answers 401 from the JWT middleware and its route and auth exemption were deleted (api/app/routers/public.py:9, api/app/middleware/auth.py:112). The three fixes asked for are met in the strongest way, by deletion. _FALLBACK_PRICING has 0 matches in api/app source.</li><li><span class="pill p-warn">STILL OPEN</span> The wider lesson: a parity guard that scans one language of a two language platform. Whether any check spans the TypeScript and Python contract boundary was not re-measured, and Filed as R2.9 row <code>R29-ARCH-CROSS-LANGUAGE-CONTRACT-CHECK-01</code>.</li><li><span class="pill p-info">CHANGED</span> The Next.js endpoint remains the single public price source, now keyed bid and buy (live payload quoted above).</li></ul></div>
+<details>
+  <summary>The August 2026 record of this section</summary>
+  <div class="dbody">
+<div>
+                <span class="pill p-info"> Fact · new in Release 2.7</span>
+                
+                
+                <p>
+                    This is the finding that most changes the picture, and it is the reason a revalidation is worth more than an
+                    appended update. The whole of Section 2 was written about ONE public pricing endpoint. Fixing it was treated
+                    as closing the class. It was not.
+                </p>
+                <p>
+                    <strong>Status as at 2026-08-19, 20:31 UTC.</strong> The Railway endpoint now returns
+                    <code>source: "stripe"</code> with Starter 49, Pro 149 and Portfolio
+                    <code>contact_sales</code> / <code>sales_only: true</code>. No
+                    <strong>£399</strong>, no <strong>£549</strong>, no Solo / Team / Agency, no “Unlimited
+                    users”. <strong>The heading’s tense is the only thing changed below; every word of the finding is
+                    retained.</strong> It was true when written, it is the reason the endpoint was fixed, and deleting it would
+                    leave a document that looks as though it never made the claim, and, worse, never explained why no
+                    guard caught it. <strong>The diagnosis outlives the defect.</strong> What is closed is the served value.
+                    Whether the guard was widened to <code>api/**</code> with a positive assertion, which is
+                    the part that stops it recurring, is <strong>UNVERIFIED</strong>.
+                </p>
+            </div>
+<div class="callout">
+<p><b>Status 29 October 2026 of the two pricing endpoints</b></p>
+<p><span class="pill p-good">RE-MEASURED 29 October 2026</span> Only one pricing endpoint exists today.</p>
+<ul>
+<li><span class="pill p-good">FIXED</span> The FastAPI endpoint GET /api/v1/pricing/public no longer exists: it answers 401 from the JWT middleware and its route and auth exemption were deleted (api/app/routers/public.py:9, api/app/middleware/auth.py:112). The three fixes asked for are met in the strongest way, by deletion. _FALLBACK_PRICING has 0 matches in api/app source.</li>
+<li><span class="pill p-warn">STILL OPEN</span> The wider lesson: a parity guard that scans one language of a two language platform. Whether any check spans the TypeScript and Python contract boundary was not re-measured, and no R2.9 row names it.</li>
+<li><span class="pill p-info">CHANGED</span> The Next.js endpoint remains the single public price source, now keyed bid and buy (live payload quoted above).</li>
+</ul></div>
+<div class="callout bad">
+                <p><b>Both fetched on 2026-08-16, unauthenticated, within a second of each other <span class="pill p-warn">HISTORICAL, superseded 2026-08-19, retained</span></b></p>
+                <p>
+                    <code>https://app.crowagent.ai/api/public/pricing</code>
+                </p>
+                <p>
+                    <code>starter 49 / 529 · pro 149 / 1609 · portfolio { pricing: "contact_sales", sales_only: true }</code>
+                </p>
+                <p>
+                    <code>https://api.velstrian.com/api/v1/pricing/public</code>
+                </p>
+                <p>
+                    <code>Solo 49 · Team 149 · Agency 399 / 359, "Unlimited users" · source: "fallback"</code>
+                </p>
+                <p>
+                    Three things are wrong at once, and each would be a defect alone. <strong>£399 is the retired top-tier
+                    price</strong>, the one whose conflict with £549 was closed in R2.6.2.
+                    <strong>Solo / Team / Agency is retired vocabulary.</strong> And <strong>“Unlimited users” is the
+                    precise claim the 1 / 5 / 10 seat lock removed</strong>, restated on a public surface after the Terms and the
+                    marketing site were both corrected away from it.
+                </p>
+                <p>
+                    <code>source: "fallback"</code> means the Stripe path is failing in production, so
+                    <code>_FALLBACK_PRICING</code> is what ships. The empty
+                    <code>stripe_price_id_*</code> fields in the response confirm it.
+                    <strong>Repairing Stripe would not fix it.</strong> The audit of 2026-08-16 records that all six live prices
+                    hang off one product and the selector takes the first monthly price on it, which is
+                    <code>portfolio_monthly</code> at 54900. A recovered Stripe path publishes <strong>£549</strong>,
+                    the exact figure marked <code>publish: never</code>. Neither branch is correct.
+                </p>
+            </div>
+<div class="qgrid"><div class="q">
+                    <h4>Why no guard caught it, which is the transferable part</h4>
+                    <p>
+                        A price-lock parity test exists and is good. It scans
+                        <code>CUSTOMER_FACING_ROOTS = ["web/app", "web/src", "web/lib", "apps/portal/src"]</code>
+                        and accepts only <code>.ts</code> and <code>.tsx</code>.
+                        <strong><code>api/</code> is invisible to it.</strong>
+                    </p>
+                    <p>
+                        This is the same ungoverned-backend gap already recorded for the naming and brand guards. Every one of them
+                        scans <code>web/**</code>. The Python half of a two-language platform is policed by
+                        nothing, and the endpoint a stranger can call without a login lives there.
+                    </p>
+                    <p>
+                        <strong>The guard is also one-directional.</strong> Its forbidden-literal pattern bans the RIGHT number
+                        from leaking out. Nothing asserts the SERVED number is right, so <code>399</code> passes
+                        every gate in the repository. <strong>Assert the absence AND the presence, or a wrong value that is not on
+                        the ban list is indistinguishable from a clean tree.</strong>
+                    </p>
+                </div><div class="q">
+                    <h4>What closing it requires</h4>
+                    <p>
+                        <strong>1.</strong> Delete <code>_FALLBACK_PRICING</code> and the
+                        <code>source: "fallback"</code> branch. On a Stripe failure return
+                        <strong>503, never a price</strong>. A pricing endpoint that degrades to a wrong number is worse than one
+                        that degrades to an error, because only one of the two is visible.
+                    </p>
+                    <p>
+                        <strong>2.</strong> Select by <code>lookup_key</code> rather than by
+                        “first monthly price on the product”, and filter on
+                        <code>metadata.publish != "never"</code>.
+                    </p>
+                    <p>
+                        <strong>3.</strong> Add <code>api</code> to the parity guard’s roots and
+                        <code>.py</code> to its extension filter, and add a positive assertion on the served
+                        payload.
+                    </p>
+                    <p>
+                        <strong>Calibration, stated honestly.</strong> No customer is harmed today: there is no live subscription
+                        and the marketing site does not read this endpoint. What is live is a public URL that contradicts a
+                        recorded owner decision, which is a reputational and consumer-protection exposure rather than a billing
+                        one.
+                    </p>
+                    <p>
+                        <strong>Which of these three landed, checked 2026-08-19.</strong> The <strong>outcome</strong> of steps 1
+                        and 2 is confirmed from the served payload: <code>source</code> reads
+                        <code>"stripe"</code> rather than <code>"fallback"</code>, and the
+                        published top tier is <code>contact_sales</code> rather than the
+                        <code>publish: never</code> £549 that a naive Stripe recovery would have selected, so selection is no longer “first monthly price on the product”. Whether that was
+                        achieved by <code>lookup_key</code> specifically, and whether
+                        <code>_FALLBACK_PRICING</code> was deleted or merely bypassed, is
+                        <strong>UNVERIFIED</strong>: a payload cannot distinguish a deleted branch from an untaken one.
+                        <strong>Step 3 is UNVERIFIED entirely.</strong> It is also the only one of the three that protects the
+                        future, so it is the one worth confirming.
+                    </p>
+                </div></div>
+<div class="callout fix">
+                <p><b>The conclusion, rewritten 2026-08-16</b></p>
+                <p>
+                    <strong>What this said on 2026-08-09:</strong> the supplier ladder was in four-way parity and needed no
+                    decision, while everything beside it was unresolved. A top tier whose price one surface published against a
+                    recorded decision, two ladders that existed only where money is taken, a seat number the public site
+                    over-promised, credit allowances implemented before they were accepted, and a buy-side product named after a
+                    single customer type. None of it expensive to fix, all of it expensive the day a customer exists.
+                </p>
+                <p>
+                    <strong>What is true a week later.</strong> The decisions were taken the same day and executed. Eight of eleven
+                    register rows are closed, the eight seat declarations are one, the Terms and the marketing site agree with the
+                    code, Free is a state, the credit figures are accepted rather than assumed, and the buy-side product is named
+                    <strong>Velstrian Buy</strong> for the side of the table its user sits on.
+                </p>
+                <p>
+                    <strong>And the lesson arrived by a different door.</strong> A second unauthenticated pricing endpoint, in the
+                    half of the platform no guard scans, publishes a retired price and the exact seat claim the lock removed. The
+                    original conclusion was that a number nobody had decided is how drift starts. The revalidation adds the
+                    sharper half: <strong>a decision is not implemented until every surface that can answer the question has been
+                    counted</strong>, and a guard that scans one language of a two-language platform has not counted them.
+                </p>
+                <p>
+                    <strong>Addendum, 2026-08-19.</strong> The endpoint is fixed and both public surfaces now agree with the lock.
+                    But the class the paragraph above names, two writers of one contract across the TypeScript / Python
+                    boundary, with no guard spanning it, <strong>produced a second live production defect three days
+                    later</strong>, in a different subsystem: the AI assistant BFF forwarded a payload violating four FastAPI
+                    bounds it had never been told about, and users met a 422. Same seam, same absence of a cross-language check,
+                    a fortnight apart.
+                </p>
+                <p>
+                    That is the strongest available evidence that <strong>fixing the instance did not fix the class</strong>. The
+                    recommendation to widen the parity guard to <code>api/**</code> was written about prices;
+                    the recurrence says the missing thing is more general than a price guard, and that until a contract between
+                    the two languages is checked by something, this seam will keep producing live defects that no gate sees
+                    first. <strong>Counting the surfaces was the right lesson and it was scoped too narrowly:</strong> it is not
+                    only every surface that can answer a pricing question, it is every contract with a writer on each side.
+                </p>
+            </div>
+  </div>
+</details>
+
