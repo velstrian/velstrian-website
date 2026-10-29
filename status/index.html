@@ -1041,12 +1041,14 @@
   body.webmode .deploy code{font-family:"IBM Plex Mono",monospace;font-size:12px;
     background:var(--pb-panel2);border:1px solid var(--pb-line);padding:1px 5px;border-radius:4px;color:var(--pb-ink)}
 
-  body.webmode #filters{margin:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  body.webmode #filters button{border:1px solid var(--pb-line);background:var(--pb-panel);color:var(--pb-ink);
+  body.webmode #filters, body.webmode #relsel{margin:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  body.webmode #relsel[hidden]{display:none}
+  body.webmode .relsel-label{color:var(--pb-muted);font-size:13px;font-weight:600}
+  body.webmode #filters button, body.webmode #relsel button{border:1px solid var(--pb-line);background:var(--pb-panel);color:var(--pb-ink);
     border-radius:999px;padding:5px 13px;font:inherit;font-size:13px;cursor:pointer;
     min-height:30px;font-weight:400;transition:all .15s ease}
-  body.webmode #filters button:hover{border-color:var(--pb-muted)}
-  body.webmode #filters button[aria-pressed="true"]{background:var(--pb-accent-soft);border-color:var(--pb-accent);
+  body.webmode #filters button:hover, body.webmode #relsel button:hover{border-color:var(--pb-muted)}
+  body.webmode #filters button[aria-pressed="true"], body.webmode #relsel button[aria-pressed="true"]{background:var(--pb-accent-soft);border-color:var(--pb-accent);
     color:var(--pb-ink);font-weight:600}
 
   body.webmode #issuetable{width:100%;border-collapse:separate;border-spacing:0;
@@ -1342,6 +1344,9 @@
        drops" was in fact dropping silently as far as any reader was concerned.
        A record of a thing is not the thing. -->
   <div class="warn notice" id="unreadable" hidden></div>
+  <!-- [R29-SCOPE] The Website tab's release selector. Current release first,
+       every past release reachable as an archive. Rendered by webReleaseScope(). -->
+  <div class="controls" id="relsel" role="group" aria-label="Release" hidden></div>
   <div class="bar" id="stats"></div>
   <!-- [R262-D-76] Movement line: what CHANGED, beside what merely IS. -->
   <p class="movement" id="movement"></p>
@@ -1443,6 +1448,69 @@ function statusKeys(counts){
 }
 let DATA=null, filter='ALL';
 
+/* [R29-SCOPE, owner 2026-10-29: "website also follow same release version as
+   platform"] The website has no release of its own. The current release is the
+   PLATFORM's, which build-platform-board.js discovers from the highest
+   RELEASE-<version>-TRACKER.md and writes into platform.json, together with
+   that release's deploy budget. Read from there on every load, never typed in
+   here, because a release number compiled into this page is how the Website
+   tab came to say R2.6.2 in R2.9. */
+let CUR = { release: null, deploy: null, error: null };
+let webRel = null; // the release the Website tab is showing, null means current
+async function loadCurrentRelease() {
+  try {
+    const r = await fetch('platform.json?t=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const p = await r.json();
+    CUR = {
+      release: typeof p.release === 'string' ? p.release : null,
+      deploy: p.deploy && typeof p.deploy === 'object' ? p.deploy : null,
+      error: null,
+    };
+  } catch (err) {
+    CUR = { release: null, deploy: null, error: err instanceof Error ? err.message : String(err) };
+  }
+  document.querySelectorAll('[data-currel]').forEach(el => {
+    el.textContent = CUR.release ? 'Release ' + CUR.release : 'Release unknown';
+  });
+}
+
+const relCmp = (a, b) => {
+  const A = String(a).replace(/^R/, '').split('.').map(Number);
+  const B = String(b).replace(/^R/, '').split('.').map(Number);
+  for (let k = 0; k < Math.max(A.length, B.length); k++) {
+    const d = (A[k] || 0) - (B[k] || 0);
+    if (d) return d;
+  }
+  return 0;
+};
+
+/* The Website tab's items for the selected release, and the selector that
+   reaches every other release. An item with no release is shown under the
+   current one and counted in a warning, never hidden. */
+function webReleaseScope() {
+  const all = DATA.issues;
+  const stamped = [...new Set(all.map(i => i.release).filter(Boolean))];
+  const current = CUR.release ? 'R' + CUR.release
+    : (stamped.slice().sort((a, b) => relCmp(b, a))[0] || 'unknown');
+  const releases = [...new Set([current, ...stamped])].sort((a, b) => relCmp(b, a));
+  if (!webRel || !releases.includes(webRel)) webRel = current;
+  const items = all.filter(i => (i.release || current) === webRel);
+  const sel = document.getElementById('relsel');
+  if (sel) {
+    sel.innerHTML = '<span class="relsel-label">Release</span>' + releases.map(rel => {
+      const n = all.filter(i => (i.release || current) === rel).length;
+      return '<button type="button" data-rel="' + esc(rel) + '" aria-pressed="' + (rel === webRel) + '">' +
+        esc(rel) + (rel === current ? ' current' : ' archive') + ' (' + n + ')</button>';
+    }).join('');
+    sel.hidden = false;
+  }
+  return {
+    items, current, selected: webRel, isCurrent: webRel === current,
+    unstamped: all.filter(i => !i.release).length,
+  };
+}
+
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 function render(){
@@ -1454,7 +1522,13 @@ function render(){
      stated as cost, so the exclusion is VISIBLE rather than silent.
      A row with NO lane counts as PRODUCT — a missing marker must never quietly
      shrink the release. */
-  const allItems=DATA.issues;
+  /* [R29-SCOPE, owner 2026-10-29] THE WEBSITE TAB SHOWS ONE RELEASE AT A TIME,
+     the platform's current one by default. It listed 217 items, 208 of them
+     delivered, so "what is left" was buried under everything ever closed. Past
+     releases stay one click away in the release selector, nothing is deleted. */
+  const scope = board === 'website' ? webReleaseScope() : null;
+  if (!scope) { const rs = document.getElementById('relsel'); if (rs) { rs.innerHTML = ''; rs.hidden = true; } }
+  const allItems = scope ? scope.items : DATA.issues;
   const items=allItems.filter(i=>i.lane!=='CI');
   const ciItems=allItems.filter(i=>i.lane==='CI');
   const counts={};
@@ -1531,6 +1605,8 @@ function render(){
   if(extra.length) warn.push(`status(es) not declared in the legend: ${extra.join(', ')}.`);
   const missingColour=present.filter(k=>!COLOUR[k]);
   if(missingColour.length) warn.push(`no colour defined for: ${missingColour.join(', ')}.`);
+  if(scope && scope.unstamped) warn.push(`${scope.unstamped} item(s) carry no release and are shown under the current release, ${scope.current}. Stamp them with add-issue.js.`);
+  if(scope && !CUR.release) warn.push(`The platform release could not be read from platform.json (${CUR.error || 'no release field'}), so the current release is taken from the newest release in issues.json, ${scope.current}.`);
   document.getElementById('warn').innerHTML =
     warn.length?`<b>This page and issues.json disagree.</b> ${esc(warn.join(' '))}`:'';
   document.getElementById('warn').hidden = warn.length===0;
@@ -1596,7 +1672,30 @@ function render(){
    * The panel states what it is NOT: a declaration read out of the repository, not
    * a live read of Vercel. Owner rule 6 is that deploy state is never reported
    * from a repository document, and this panel is a repository document. */
-  const dep = DATA.deploy && typeof DATA.deploy === 'object' ? DATA.deploy : null;
+  /* [R29-SCOPE, owner 2026-10-29: "why deploy budget still showing R2.6.2"]
+     issues.json carried a hand written headline that named R2.6.2, and nothing
+     ever rewrote it, so the Website tab reported a budget three releases old.
+     The website tab now takes the figures and the release from platform.json,
+     which the generator derives from deploy-phase-boundaries-<release>.json,
+     and issues.json keeps only the sentence about the website being outside
+     that budget. Both tabs name the release in the panel title. */
+  let dep = DATA.deploy && typeof DATA.deploy === 'object' ? DATA.deploy : null;
+  if (scope && dep) {
+    const pd = scope.isCurrent ? CUR.deploy : null;
+    dep = Object.assign({}, dep, pd ? {
+      budget: pd.budget, spent: pd.spent, remaining: pd.remaining, breached: pd.breached,
+      headline: (pd.headline ? pd.headline + ' ' : '') + (dep.headline || ''),
+      release: pd.appliesToRelease || CUR.release,
+    } : {
+      headline: (scope.isCurrent
+        ? 'The platform deploy budget could not be read from platform.json, so no figures are shown. '
+        : 'An archived release. Its deploy budget is in that release\'s deploy-phase-boundaries file, not on this page. ') +
+        (dep.headline || ''),
+      release: scope.selected.replace(/^R/, ''),
+    });
+  } else if (dep) {
+    dep = Object.assign({}, dep, { release: dep.appliesToRelease || DATA.release });
+  }
   const depEl = document.getElementById('deploy');
   if (depEl) {
     if (!dep) {
@@ -1610,7 +1709,8 @@ function render(){
         '<div class="t"><b' + (colour ? ' style="color:var(' + colour + ')"' : '') + '>' +
         esc(val) + '</b><span>' + esc(label) + '</span></div>';
 
-      let html = '<h2>' + esc(dep.title || 'Deploy budget and phases') + '</h2>';
+      let html = '<h2>' + esc(dep.title || 'Deploy budget and phases') +
+        (dep.release ? ', R' + esc(dep.release) : '') + '</h2>';
       if (dep.unavailable) {
         /* Not zero, not fine — UNKNOWN, and loud. "No data, so nothing is wrong"
            is the silent green this release kept finding in its own gates. */
@@ -1844,7 +1944,7 @@ function render(){
    * each entry's own closure marker; items predating it simply carry null and are
    * counted as unchanged rather than breaking the line. */
   const today = new Date().toISOString().slice(0, 10);
-  const movedToday = (DATA.issues || []).filter(i => i.changed === today);
+  const movedToday = allItems.filter(i => i.changed === today);
   const movementEl = document.getElementById('movement');
   if (movementEl) {
     if (movedToday.length) {
@@ -2296,7 +2396,7 @@ document.getElementById('filters').addEventListener('click',e=>{
 const BOARDS = {
   master: {
     label: 'Master Hub',
-    heading: 'Velstrian Tenderworks: Master Hub (Release 2.8.5)',
+    heading: 'Velstrian Tenderworks: Master Hub',
     blurb: 'Unified directory of all status trackers, technical architecture blueprints, rebrand specifications, and environment endpoints.'
   },
   website:  { file: 'issues.json',   label: 'Website',
@@ -2329,6 +2429,16 @@ const BOARDS = {
          them held was to open it, which is the owner's "no way to see the four
          without first landing on one". `stale` puts a dated notice above a
          document this board cannot itself keep current. */
+      /* [R29-ARCH-REVIEW-RESTORED, owner 2026-10-29] The architecture review is
+         a view again. It was retired on 2026-08-29 (R28-ARCH-REVIEW-RETIRED-01)
+         as an R2.7 record, and is being re-measured for R2.9. FRAMED, not
+         injected: it carries its own stylesheet and scripts, so it keeps working
+         as authored and none of its CSS reaches this page.
+         check-board-contract.js checks every frame: on disk, a whole document
+         with its own doctype and title. */
+      { id: 'review',  label: 'Architecture review',
+        blurb: 'The full platform architecture review, its own page shown in a frame. Open it full page for the best read',
+        frame: 'architecture-review.html' },
       { id: 'target',  label: 'Target architecture',
         blurb: 'Diagrams: what runs today, what to build, and the coupling numbers behind it',
         doc:   'architecture-target-state.html' },
@@ -2412,7 +2522,8 @@ function renderTabs(){
   const el = document.getElementById('boardheading');
   if (el) {
     if (board === 'master') {
-      el.innerHTML = 'Velstrian Tenderworks: <span>Master Hub (Release 2.8.5)</span>';
+      el.innerHTML = 'Velstrian Tenderworks: <span>Master Hub (<span data-currel>' +
+        esc(CUR.release ? 'Release ' + CUR.release : 'Release') + '</span>)</span>';
     } else if (board === 'architecture' && h.includes(': ')) {
       const parts = h.split(': ');
       el.innerHTML = esc(parts[0]) + ': <span>' + esc(parts[1]) + '</span>';
@@ -2585,9 +2696,10 @@ async function load(){
     if (hubEl) {
       hubEl.hidden = false;
       renderMasterHub();
+      loadCurrentRelease();
     }
     for (const id of ['filters','deploy','summary','movement','srcnote','legend',
-                      'stats','legendbox','warn','unreadable','updated']) {
+                      'stats','legendbox','warn','unreadable','updated','relsel']) {
       const el = document.getElementById(id); if (el) el.hidden = true;
     }
     /* [2026-10-23] #pbhead, #pbtop and #pbitems are NOT hidden by attribute
@@ -2623,7 +2735,7 @@ async function load(){
        poll. Issue-board chrome under a prose page, on all four views. Verified in
        the browser, where legendbox.hidden read false on the CI view. */
     for (const id of ['filters','deploy','summary','movement','srcnote','legend',
-                      'stats','legendbox','warn','unreadable','updated']) {
+                      'stats','legendbox','warn','unreadable','updated','relsel']) {
       const el = document.getElementById(id); if (el) el.hidden = true;
     }
     document.getElementById('issuetable').hidden = true;
@@ -2665,6 +2777,10 @@ async function load(){
     if(!r.ok) throw new Error('HTTP '+r.status);
     const fresh = await r.json();
     if (mySeq !== loadSeq) return;
+    /* The Website tab and the hub name the PLATFORM's release, so it is read
+       before the first draw rather than patched in after it. */
+    if (board === 'website') await loadCurrentRelease();
+    if (mySeq !== loadSeq) return;
     DATA=fresh; renderTabs(); render();
     /* The derived board says so on its face. A reader must never mistake a
        generated view for the record it was generated from. */
@@ -2687,6 +2803,11 @@ async function load(){
     }
   }
 }
+
+document.getElementById('relsel').addEventListener('click', e => {
+  const b = e.target.closest('button[data-rel]'); if (!b || board !== 'website' || !DATA) return;
+  webRel = b.dataset.rel; filter = 'ALL'; render();
+});
 
 document.getElementById('boardtabs').addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b) return;
@@ -2779,7 +2900,7 @@ function renderMasterHub() {
   if (!hub) return;
   hub.innerHTML = `
     <div class="hub-hero">
-      <div class="kicker">Release 2.8.5 &middot; Master Directory</div>
+      <div class="kicker"><span data-currel>${esc(CUR.release ? 'Release ' + CUR.release : 'Release')}</span> &middot; Master Directory</div>
       <div class="hub-bar" style="margin-top:0">
         <div>
           <h2>Platform, Website &amp; Architecture Directory</h2>
@@ -2792,7 +2913,7 @@ function renderMasterHub() {
         </div>
         <div class="hub-meta">
           <span class="hub-pill live"><b>SERVER ONLINE</b> http://localhost:8099/</span>
-          <span class="hub-pill"><b>RELEASE</b> 2.8.5</span>
+          <span class="hub-pill"><b>RELEASE</b> <span data-currel>${esc(CUR.release ? 'Release ' + CUR.release : 'Release')}</span></span>
           <span class="hub-pill"><b>DESTINATIONS</b> 15 verified</span>
         </div>
       </div>
@@ -2808,7 +2929,7 @@ function renderMasterHub() {
               <h4 class="hub-card-title">Platform &amp; Portal Release Status</h4>
               <span class="hub-badge teal">Auto-Derived</span>
             </div>
-            <p class="hub-card-desc">Derived automatically from RELEASE-2.8.5-TRACKER.md and defect register. Shows progress per owner prompt, severity by status, running jobs, and burning issues.</p>
+            <p class="hub-card-desc">Derived automatically from the highest RELEASE-&lt;version&gt;-TRACKER.md and its defect register. Shows progress per owner prompt, severity by status, running jobs, and burning issues.</p>
           </div>
           <div class="hub-card-footer">
             <span>Open Platform Board &rarr;</span>

@@ -348,6 +348,29 @@ for (const v of new Set(declaredViews)) {
     failed = true;
   }
 }
+/* [R29-ARCH-REVIEW-RESTORED 2026-10-29] A FRAMED view is a whole page in an
+   iframe, so the fragment rules above (no script, no colour literal) do not
+   apply to it: its scripts run in their own document and its colours cannot
+   reach this page. What it must be is a complete document, because a frame
+   without a doctype renders in quirks mode and one without a title is announced
+   as nothing to a screen reader. Negative case: drop the doctype from a framed
+   file and this prints a red line for it. */
+const framed = [...strip(rawPage).matchAll(/frame:\s*'([^']+\.html)'/g)].map((m) => m[1]);
+for (const f of new Set(framed)) {
+  const full = path.join(HERE, f);
+  if (!fs.existsSync(full)) continue; // reported above as not on disk
+  const raw = fs.readFileSync(full, 'utf8');
+  const problems = [];
+  if (!/<!doctype html>/i.test(raw)) problems.push('no <!DOCTYPE html>, so the frame renders in quirks mode');
+  if (!/<title>[^<]+<\/title>/i.test(raw)) problems.push('no <title>');
+  if (problems.length) {
+    console.error(`❌ ${f} (framed view): ${problems.join(', ')}`);
+    failed = true;
+  } else {
+    console.log(`✅ ${f} — framed view, a whole document with a doctype and a title`);
+  }
+}
+if (!framed.length) console.log('framed views: none offered');
 console.log(`\nviews offered: ${[...new Set(declaredViews)].join(', ')}`);
 console.log(`tokens declared on :root: ${declaredTokens.size}`);
 

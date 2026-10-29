@@ -68,6 +68,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { currentRelease } = require('./current-release.cjs');
 
 const P = path.join(__dirname, 'issues.json');
 
@@ -101,6 +102,11 @@ const VALID_SEV = ['P0', 'P1', 'P2', 'P3'];
 /* Taken from the file's own `legend`, so this cannot drift from it. */
 const board = JSON.parse(fs.readFileSync(P, 'utf8'));
 const VALID_STATUS = Object.keys(board.legend);
+/* [R29-SCOPE, owner 2026-10-29] The website follows the platform's release. */
+const CURRENT_RELEASE = currentRelease();
+/* Delivered or settled outcomes. Archived old items with these statuses left the
+   board on 2026-10-24 (archive/README.md), the same set. */
+const CLOSED = ['FIXED', 'CLEARED', 'DECIDED', 'NOREPRO', 'REFUTED', 'CORRECTED'];
 
 if (sev && !VALID_SEV.includes(sev)) {
   console.error(`add-issue: --sev must be one of ${VALID_SEV.join(', ')}, got "${sev}".`);
@@ -136,6 +142,13 @@ if (id) {
     item.changedAt = now;
   }
   if (status) item.status = status;
+  /* [R29-SCOPE] An item with no release is filed in the current one. An item
+     REOPENED from a past release moves to the current one, because open work
+     belongs to the release that will do it and a past release is an archive.
+     Closing an item keeps the release it was delivered in. */
+  if (!item.release || (status && !CLOSED.includes(status) && item.release !== CURRENT_RELEASE)) {
+    item.release = CURRENT_RELEASE;
+  }
   /* APPEND, DO NOT REPLACE — the reasoning that opened an item is usually the
      half worth keeping. Same ` || ` separator the board already uses. */
   if (note) item.note = item.note ? `${item.note} || ${note}` : note;
@@ -186,7 +199,9 @@ if (board.issues.some((i) => i.id === newId)) {
 }
 
 const createdAt = new Date().toISOString();
-board.issues.push({ id: newId, src, sev, title, status, note, changed: createdAt.slice(0, 10), changedAt: createdAt });
+/* [R29-SCOPE] Every new item is filed in the platform's current release, which
+   is what the Website tab shows by default. */
+board.issues.push({ id: newId, src, sev, title, status, note, changed: createdAt.slice(0, 10), changedAt: createdAt, release: CURRENT_RELEASE });
 board.updated = createdAt;
 
 fs.writeFileSync(P, JSON.stringify(board, null, 2));
