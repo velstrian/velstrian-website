@@ -38,7 +38,7 @@ detail:
   - heading: "PPN 026 and social value"
     body: "Social value is the extra good you do locally, such as local jobs, fair pay and community benefit on site. PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above. Velstrian Bid adds up the figures in code from a curated library of measures aligned to National TOMs conventions (Themes, Outcomes and Measures, a UK way of counting social value)."
   - heading: "PPN 017 and AI"
-    body: "PPN 017 is the government guidance on telling a buyer when AI helped write a bid. Every answer drafted with AI carries that note, and a person approves it before it is sent."
+    body: "PPN 017 is the government's guidance on being open about AI in bids. Velstrian adds a short note to every answer drafted with AI saying AI helped, and a person approves it before it is sent."
   - heading: "Procurement Act 2023, KPIs"
     body: "The Procurement Act 2023 sets the rules public buyers follow. Section 52 says a public contract worth more than £5m needs at least three published targets, called key performance indicators (KPIs). Section 71 says performance against them must be assessed and published. Velstrian Bid checks these duties for you and keeps your delivery proof beside each target. The checks guide you and never block you."
 faq:

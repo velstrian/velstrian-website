@@ -22,12 +22,12 @@ import { TRUST_BADGES } from '../../data/site-facts';
 <Band tone="light" class="ea-proof" labelledby="bid-trust-title">
   <div class="ea-wrap">
     <h2 class="ea-h2 ea-h2--centre" id="bid-trust-title" data-reveal>You stay in charge of every answer.</h2>
-    <!-- REVIEW: "PPN 017, the government guidance on telling a buyer that AI helped" is a plain words gloss of the PPN 017 AI transparency disclosure the previous page named. -->
+    <!-- PPN 017 is advisory Cabinet Office guidance, not a legal duty. The label says Velstrian adds the note itself, following that guidance, and must match site-facts.json ai_use K4 word for word. -->
     <FactsBand
       facts={[
         { icon: 'document', value: 'Proof', label: 'Every claim shows which of your documents backs it up, and it refuses to write one with no proof' },
         { icon: 'checklist', value: 'Approved', label: 'Nothing goes to a buyer without human approval, and nothing is ever sent for you' },
-        { icon: 'shield', value: 'Disclosed', label: 'Every AI drafted answer carries a PPN 017 note, the government guidance on telling a buyer that AI helped' },
+        { icon: 'shield', value: 'Disclosed', label: "Every AI drafted answer carries a short note saying AI helped, following the government's PPN 017 guidance on being open about AI" },
       ]}
       strip={[...TRUST_BADGES]}
       stripLabel="How your data is protected"

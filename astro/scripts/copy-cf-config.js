@@ -88,8 +88,13 @@ const REPO_ROOT = path.join(__dirname, '..', '..');
  * Expires lines to drift out of step. Unlike the icons in `astro/public/`, which
  * have no root original, this file already exists at the root and is the
  * original.
+ *
+ * [2026-10-29] `auth.md` ADDED for the Cloudflare agent readiness check
+ * ("Share login instructions for AI bots"). It tells agents that registration
+ * is by invitation, where people sign in, and that there is no public API. Same
+ * reason as llms.txt for living at the root.
  */
-const FILES = ['_headers', '_redirects', 'robots.txt', 'llms.txt', 'llms-full.txt', '.well-known/security.txt'];
+const FILES = ['_headers', '_redirects', 'robots.txt', 'llms.txt', 'llms-full.txt', '.well-known/security.txt', 'auth.md'];
 
 /**
  * Immutable caching for Astro's content-hashed output. Appended rather than

@@ -660,7 +660,7 @@
           { "id": "K1", "status": "now", "line": "You review, edit and approve every answer, and you submit it yourself.", "evidence": "a person approves every answer (SecurityBuiltIn lead), site-facts M7 never lodges" },
           { "id": "K2", "status": "now", "line": "Anything the AI writes is marked AI drafted, so you always know.", "evidence": "web/src/shared/ui/AiChip.tsx, common/ai-output.ts chipDrafted" },
           { "id": "K3", "status": "coming", "line": "Every AI draft will carry a short note: \"AI drafted from your documents. Check before you submit.\"", "evidence": "D371 (3), not built" },
-          { "id": "K4", "status": "now", "line": "Every AI drafted answer carries a PPN 017 note, the government guidance on telling a buyer that AI helped.", "evidence": "the same claim /bid/ prints" },
+          { "id": "K4", "status": "now", "line": "Every AI drafted answer carries a short note saying AI helped, following the government's PPN 017 guidance on being open about AI.", "evidence": "the same claim /bid/ prints" },
           { "id": "K5", "status": "coming", "line": "Velstrian Bid will write a full \"How we used AI in this bid\" statement from what actually happened, ready for any buyer who asks.", "evidence": "D346, built after D341 and D342" }
         ]
       }

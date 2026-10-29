@@ -138,7 +138,7 @@ Only as a starting point, never as a final answer. Every buyer asks the question
 
 ### Draft method statements grounded in your own evidence
 
-Velstrian Bid drafts answers from your organisation's own submitted bids, refuses to print a figure your data does not contain, and carries a PPN 017 AI-transparency disclosure on every draft, so the evidence in your method statement is real. If you are looking for new contracts to bid on, search open notices with our [free Tender Finder](/tools/tender-finder/).
+Velstrian Bid drafts answers from your organisation's own submitted bids, refuses to print a figure your data does not contain, and adds a short note to every draft saying AI helped, following the government's PPN 017 guidance, so the evidence in your method statement is real. If you are looking for new contracts to bid on, search open notices with our [free Tender Finder](/tools/tender-finder/).
 
 [Start now](app:/signup)
 [See Velstrian Bid →](/bid/)

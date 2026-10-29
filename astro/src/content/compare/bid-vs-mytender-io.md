@@ -52,7 +52,7 @@ faq:
 <li>You bid for public and private work: public contracts arrive each morning, and a private client's tender you upload.</li>
 <li>You want published pricing from {{bid.starter.monthly}} per month, stated before any call.</li>
 <li>You need Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED discovery refreshed daily.</li>
-<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped (PPN 017).</li>
+<li>You want the AI blocked from inventing a figure, with a note on every draft saying AI helped, following the government's PPN 017 guidance.</li>
 <li>You need social value added up in code and proof of delivery after you win.</li>
 </ul>
 </div>
@@ -71,7 +71,7 @@ faq:
 <tr><th scope="row">Finds public contracts for you (Find a Tender, Contracts Finder, Public Contracts Scotland, EU TED)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, refreshed daily at 06:00 UTC</td><td>No own feed stated. Partnered with a UK tender portal</td></tr>
 <tr><th scope="row">Drafting grounded in your own past bids</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Yes, retrieval over your content library</td></tr>
 <tr><th scope="row">Figure-grounding (AI blocked from inventing a number)</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, a fixed check in code</td><td>Not stated publicly</td></tr>
-<tr><th scope="row">A note on every draft saying AI helped write it (the PPN 017 disclosure public buyers expect)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
+<tr><th scope="row">A note on every draft saying AI helped write it (following the government's PPN 017 guidance on being open about AI)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated publicly</td></tr>
 <tr><th scope="row">Social value (the local good you do) added up in code</th><td class="cmp-us"><span class="cmp-yes">Yes</span>, worked out in code</td><td>Not a dedicated calculator</td></tr>
 <tr><th scope="row">Proof of delivery after you win (Procurement Act 2023 s.52 / s.71)</th><td class="cmp-us"><span class="cmp-yes">Yes</span></td><td>Not stated</td></tr>
 <tr><th scope="row">Private-cloud (VPC) deployment</th><td>Standard cloud, EU data residency</td><td><span class="cmp-yes">Yes</span>, Virtual Private Cloud</td></tr>
@@ -92,7 +92,7 @@ faq:
 <summary><span>Read in full<span class="visually-hidden">: Traceability</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>Every &pound; and % in a draft is checked against a set of allowed figures computed from your own data, and the draft is rejected if a figure is not in that set. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a named person to approve it before you submit.</dd>
+<dd>Every &pound; and % in a draft is checked against a set of allowed figures computed from your own data, and the draft is rejected if a figure is not in that set. Every AI-assisted draft carries a short note saying AI helped, following the government's PPN 017 guidance, and waits for a named person to approve it before you submit.</dd>
 <dt class="meta">mytender.io</dt>
 <dd>Not stated publicly. The sources at the foot of this page describe retrieval over your own content library and integrations with SharePoint, Salesforce and Google Drive. They document no check of this kind.</dd>
 </dl>
@@ -118,7 +118,7 @@ faq:
 <summary><span>Read in full<span class="visually-hidden">: UK regulatory alignment</span></span></summary>
 <dl class="cmp-sum-dl">
 <dt class="meta cmp-sum-us">Velstrian Bid</dt>
-<dd>A PPN 017 AI-use disclosure on every AI-assisted draft, social value calculated in code against the weighting the buyer published rather than by the AI, and post-award delivery evidence against Procurement Act 2023 sections 52 and 71.</dd>
+<dd>A note on every AI-assisted draft saying AI helped, following the government's PPN 017 guidance, social value calculated in code against the weighting the buyer published rather than by the AI, and post-award delivery evidence against Procurement Act 2023 sections 52 and 71.</dd>
 <dt class="meta">mytender.io</dt>
 <dd>The sources at the foot of this page state no position on PPN 017 disclosure, social value calculation or the Procurement Act 2023 post-award duties.</dd>
 </dl>
@@ -146,7 +146,7 @@ faq:
   <details>
     <summary><h3 id="what-is-bid">What is Velstrian Bid?</h3></summary>
     <div class="cfaq-a cmp-read">
-<p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a PPN 017 AI-use disclosure and waits for a person to approve it.</p>
+<p>Velstrian Bid is Velstrian's UK bid and tender management suite, live and ready to use today. It is built for small and mid size firms that write their own bids, for public and private work. It tracks Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED, drafts answers grounded in the supplier's own submitted bids, and calculates social value in code. Its defining rule is figure-grounding: before a draft is shown, every &pound; and % in the prose is checked against a set of allowed figures computed from your own data, and if a number is not in that set the draft is rejected. Every AI-assisted draft carries a short note saying AI helped, following the government's PPN 017 guidance, and waits for a person to approve it.</p>
 
 <p>After award, Velstrian Bid keeps the commitment you bid attached to the contract: delivery percentages with a RAG status, evidence capture, monthly social-value reports, and checks against the Procurement Act 2023 KPI duties in sections 52 and 71. On security, it uses EU data residency, AES-256 encryption at rest and TLS 1.3 in transit.</p>
 <p>Velstrian Bid publishes its pricing. Starter is <a href="/pricing/?product=mark">{{bid.starter.monthly}} per month</a> for 1 user, Pro is {{bid.pro.monthly}} per month for 5 users with post-award delivery tracking, and Portfolio is {{bid.portfolio.monthly}} per month for 10 users. Once your account is open you set it up and run it yourself, with no consultant needed, and you pay by card, held securely by Stripe and never stored by us.</p>

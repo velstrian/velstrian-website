@@ -156,7 +156,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         question: `What is the ${PPN026.fig} minimum?`,
         answer:
-          'The buyer publishes the social value weighting in its own tender documents, and many local authorities and NHS trusts set a higher one than central government requires. In Velstrian Bid you set the weighting your buyer published and it works out the social value total in code. It then drafts the supporting text, with a note saying AI helped (the disclosure PPN 017 asks for), for you to approve.',
+          'The buyer publishes the social value weighting in its own tender documents, and many local authorities and NHS trusts set a higher one than central government requires. In Velstrian Bid you set the weighting your buyer published and it works out the social value total in code. It then drafts the supporting text, with a note saying AI helped (following the government\'s PPN 017 guidance on being open about AI), for you to approve.',
       },
       {
         question: 'How is social value scored?',

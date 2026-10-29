@@ -464,7 +464,7 @@ export const COMPARE_LEAD: CompareRow[] = [
     cells: [String(GUEST_REVIEWERS.starter), String(GUEST_REVIEWERS.pro), String(GUEST_REVIEWERS.portfolio)],
   },
   { feature: 'Single sign-on (SAML 2.0) with SCIM provisioning, and passkeys', cells: [true, true, true] },
-  { feature: 'Grounded AI drafting with PPN 017 disclosure', cells: [true, true, true] },
+  { feature: 'Grounded AI drafting with an AI-use note (PPN 017 guidance)', cells: [true, true, true] },
   { feature: 'Deterministic social value calculation', cells: [true, true, true] },
 ];
 

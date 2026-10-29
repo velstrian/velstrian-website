@@ -48,7 +48,7 @@ export const BID_FAQS: BidFaq[] = [
   },
   {
     question: 'Is AI use disclosed to the buyer?',
-    answer: `Yes. Every AI drafted answer carries a PPN 017 note, the government guidance on telling a buyer that AI helped, and a person has to approve the answer before it goes to the buyer. ${PRODUCT_NAME_BID} does not send anything to a buyer portal on your behalf.`,
+    answer: `Yes. Every AI drafted answer carries a short note saying AI helped, following the government's PPN 017 guidance on being open about AI, and a person has to approve the answer before it goes to the buyer. ${PRODUCT_NAME_BID} does not send anything to a buyer portal on your behalf.`,
   },
   {
     question: 'What is social value, and what is PPN 026?',

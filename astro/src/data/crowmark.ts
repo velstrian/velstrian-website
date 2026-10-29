@@ -54,7 +54,7 @@ export interface Card {
 export const PROOF = [
   { lead: 'Daily feeds', rest: 'UK and EU public tenders, four official sources' },
   { lead: 'On request', rest: 'Canada, US federal and World Bank notices' },
-  { lead: 'PPN 017', rest: 'Disclosure on every draft' },
+  { lead: 'PPN 017', rest: 'AI-use note on every draft' },
   { lead: 's.52 · s.71', rest: 'Procurement Act 2023' },
 ];
 
@@ -89,7 +89,7 @@ export const KEY_FACTS = [
   {
     term: 'The differentiator',
     detail:
-      'Deterministic figure-grounding, so the model cannot print a number your data does not contain, plus a PPN 017 AI-use disclosure on every draft and a named person approving every answer.',
+      'Deterministic figure-grounding, so the model cannot print a number your data does not contain, plus a note on every draft saying AI helped, following the government\'s PPN 017 guidance, and a named person approving every answer.',
   },
   {
     term: 'The statute',
@@ -127,10 +127,10 @@ export const BENEFITS: Card[] = [
     body: 'Before a draft is shown, every £ and % in the prose is checked against a set of allowed figures computed from your own data. If a number is not in that set, the draft is rejected rather than published. The language model is never the source of a figure. A gate then reports the figures traced, the word count and the citations, and approval stays blocked until it passes.',
   },
   {
-    heading: 'PPN 017 disclosure, human approval',
+    heading: 'Open about AI, human approval',
     /* R285-WEB-CLAIMS-AUDIT-01 B6: "If no AI key is configured ..." removed. It
        described internal configuration, not something a customer meets. */
-    body: 'Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and nothing reaches a buyer without a person approving it. A person approves, never the model.',
+    body: 'Every AI-assisted draft carries a short note saying AI helped, following the government\'s PPN 017 guidance on being open about AI, and nothing reaches a buyer without a person approving it. A person approves, never the model.',
   },
   {
     heading: 'Award to delivery to reporting',
@@ -297,7 +297,7 @@ export const FAQS: Faq[] = [
   {
     question: 'Is AI use disclosed to the buyer?',
     answer:
-      'Yes. Every AI-assisted draft carries a PPN 017 AI-transparency disclosure, and a person has to approve the answer before it goes to the buyer. Velstrian Bid does not send anything to a buyer portal on your behalf.',
+      'Yes. Every AI-assisted draft carries a short note saying AI helped, following the government\'s PPN 017 guidance on being open about AI, and a person has to approve the answer before it goes to the buyer. Velstrian Bid does not send anything to a buyer portal on your behalf.',
   },
   {
     question: 'How is social value calculated?',
