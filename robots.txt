@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 
+# Content Signals (https://contentsignals.org/)
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
 # WS-AUDIT-021: removed `Disallow: /api/` — no /api/ surface exists on
 # velstrian.com (the API lives on app.velstrian.com). The directive was
 # harmless but signalled confused IA.

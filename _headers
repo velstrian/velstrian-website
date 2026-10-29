@@ -470,6 +470,7 @@
   #   than HIT. A HIT can serve an object stored before the deploy, which is the
   #   exact trap that made / look compressed when it was not.
   Cache-Control: public, max-age=0, must-revalidate
+  Link: </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"
 
 # --- [A-258, 2026-09-07] THREE RULES WERE DELETED HERE, AND THE FILES THEY
 # COVERED ARE GONE TOO.

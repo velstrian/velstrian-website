@@ -99,13 +99,11 @@ export const SITE = {
     email: PUBLIC_EMAIL,
     identifier: { '@type': 'PropertyValue', name: 'Companies House', value: COMPANY_NUMBER },
     address: { '@type': 'PostalAddress', addressCountry: 'GB' },
-    // A-475: the profiles are written once, in SOCIAL_URLS. Order kept as before.
+    // Social profiles pointing to confirmed company profiles (LinkedIn, X, Instagram)
     sameAs: [
-      SOCIAL_URLS.youtube,
-      SOCIAL_URLS.x,
       SOCIAL_URLS.linkedin,
+      SOCIAL_URLS.x,
       SOCIAL_URLS.instagram,
-      SOCIAL_URLS.medium,
     ],
   },
 } as const;
