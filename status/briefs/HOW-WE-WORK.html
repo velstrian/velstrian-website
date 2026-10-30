@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How we work: work items, briefs, reporting and releases</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="HOW-WE-WORK.md">HOW-WE-WORK.md</a></p>
+<h1>How we work: work items, briefs, reporting and releases</h1>
+<p>For every AI (Claude, Gemini, Kiro, Claude in Chrome) and every team member. Updated 2026-10-30. Board: <a href="http://192.168.1.63:8099/">http://192.168.1.63:8099/</a> (office network) or <a href="http://localhost:8099/">http://localhost:8099/</a> on the main machine.</p>
+<h2>1. The roles</h2>
+<ul><li>
+<strong>Owner</strong> decides scope, approves every push, every production change and every spend.
+</li><li>
+<strong>Driver (Claude)</strong> plans the work, writes the briefs, reviews every result, fixes what review finds,
+ keeps the board true, runs promotes.
+</li><li>
+<strong>Executors (Gemini, a team member with Kiro, Claude in Chrome)</strong> do the work in a brief, nothing
+ outside it, and report back.
+</li></ul>
+<h2>2. Where everything lives</h2>
+<ul><li>
+<strong>Work items:</strong> the Platform tab of the board (<a href="http://192.168.1.63:8099/#platform">http://192.168.1.63:8099/#platform</a>). Each item has an
+ id like <code>R29-PORTAL-OWN-SUPABASE-01</code>, a severity, a phase and a status.
+</li><li>
+<strong>Briefs (the instructions and prompts):</strong> <a href="http://192.168.1.63:8099/briefs/">http://192.168.1.63:8099/briefs/</a> . Each brief names its
+ work items, its executor and how to report. Open the web page version and give its link to your agent.
+</li><li>
+<strong>Updates from people on other machines:</strong> the GitHub issue the brief names, in the private repo
+ <code>velstrian/velstrian-platform</code>. The driver reads it and moves the board.
+</li><li>
+<strong>Rules:</strong> the AI onboarding guide on the board (<a href="http://192.168.1.63:8099/#architecture/aionboarding">http://192.168.1.63:8099/#architecture/aionboarding</a>)
+ and <code>ENGINEERING-STANDARDS.md</code> in the platform repo. They bind every AI and every person.
+</li></ul>
+<h2>3. Status words (the first word of a work item's status)</h2>
+<ul><li>
+<strong>OPEN</strong>: still to do. <strong>WIP</strong>: being worked. <strong>ON HOLD</strong>: parked by the owner.
+</li><li>
+<strong>BUILT</strong>: done and tested, but not live yet (waiting on a promote or a push).
+</li><li>
+<strong>FIXED</strong>: live, and confirmed on the live system (by the owner or by measurement).
+</li><li>
+A work item is never FIXED while its change sits only on a branch.
+</li></ul>
+<h2>4. The life of a work item</h2>
+<ol><li>
+The driver measures the item (is it still true, what exactly is left) and writes a brief.
+</li><li>
+The brief goes on the briefs page and the work item links to it.
+</li><li>
+The executor works on a branch named <code>review/r29-&lt;topic&gt;</code> from <code>main</code>, commits only the files it
+ changed (<code>git commit -- &lt;paths&gt;</code>), and runs only the tests that cover its change.
+</li><li>
+The executor reports: on the GitHub issue (team members), or in chat to the owner (Gemini, Claude
+ in Chrome), who pastes the result to the driver.
+</li><li>
+The driver reviews. A defect found in review is fixed on the same branch before anything goes live.
+</li><li>
+The item becomes BUILT. When it is live and confirmed, FIXED.
+</li></ol>
+<h2>5. Hard rules every executor follows</h2>
+<ul><li>
+**No push, deploy, migration or dashboard change unless the brief says the owner approved that exact
+ act.** One approval is one push. A <code>review/*</code> branch push costs nothing (no GitHub Actions run,
+ Vercel cancels the build) but still needs approval. A push to website <code>main</code> is a live website deploy.
+</li><li>
+<strong>Never print, paste or commit a secret.</strong> Read keys by name only.
+</li><li>
+<strong>Targeted tests only</strong> while working. Show what was collected and what passed.
+</li><li>
+<strong>Never weaken a test to make it pass</strong>, no empty <code>catch</code>, no <code>@ts-ignore</code>, no hardcoded ids.
+</li><li>
+<strong>Design values come from the central tokens</strong>, never a hardcoded colour, size or font.
+</li><li>
+<strong>Plain words</strong> in anything a customer reads (small businesses, public and private work). No em
+ dash, en dash or semicolon in user facing text.
+</li><li>
+<strong>Identity</strong> on every commit: <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Never a personal name.
+</li><li>
+<strong>Shared machine:</strong> keep free memory above 1 GB, one heavy build or test run at a time, never stop a
+ process you did not start.
+</li><li>
+<strong>Switch the repository back to <code>main</code> when you finish.</strong> The board is served from the checked out
+ files, so a repo left on a branch shows an old board.
+</li></ul>
+<h2>6. Releases (how work goes live)</h2>
+<ol><li>
+The driver merges the BUILT branches into one batch branch and runs the targeted tests on it.
+</li><li>
+<strong>Staging:</strong> <code>pnpm staging:promote</code> builds on the main machine and uploads to
+ <a href="https://staging-app.velstrian.com">https://staging-app.velstrian.com</a> (free). The API reaches staging only by a push the owner approves.
+</li><li>
+The owner and the driver check staging.
+</li><li>
+<strong>Production:</strong> <code>pnpm prod:promote</code>, only with the owner's approval naming the commit (sha), a
+ verified staging record and a clean billing audit.
+</li><li>
+<strong>Website:</strong> the owner checks the site locally first, then approves the push to website <code>main</code>.
+</li><li>
+After live: the driver checks production and moves the items to FIXED.
+</li></ol>
+<h2>7. Where the database work goes</h2>
+<ul><li>
+Platform database: production <code>gujtuecjzfiqsdnzgyvo</code>, staging <code>ipgrnwvfnumgvnxkpxsc</code>.
+</li><li>
+Portal database (owner decision 2026-10-30): its own project <code>upxwdxhqzdsjnpsftsfb</code>, one database for
+ portal staging and production. See brief 08.
+</li><li>
+Database changes are applied with the Supabase tool's <code>execute_sql</code> and recorded as a migration file,
+ never <code>db push</code> and never the Supabase command line tool.
+</li></ul>
+</main></body></html>
