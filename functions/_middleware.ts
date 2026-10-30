@@ -7,8 +7,12 @@
  *   /about/     -> /about.md
  * Returns Content-Type: text/markdown; charset=utf-8 and Vary: Accept.
  *
- * For HTML responses, passes through to static assets and ensures Vary: Accept
- * and Link: </path.md>; rel="alternate"; type="text/markdown" are set.
+ * Any other request passes straight through to the static assets (redirects and
+ * the trailing slash 308 unchanged). An HTML response gains Vary: Accept and a
+ * Link to its Markdown twin.
+ *
+ * Free plan: _routes.json keeps assets off this function, and the Pages project is
+ * set to fail open, so if the 100,000 a day allowance runs out the site still serves.
  */
 
 interface PagesFunctionContext {
@@ -53,24 +57,12 @@ export async function onRequest(context: PagesFunctionContext): Promise<Response
     }
   }
 
-  // Handle requests without Accept: text/markdown (browsers)
-  // If clean route without trailing slash, serve the index HTML directly
-  let response: Response;
-  const isCleanRoute = !pathname.includes('.') && !pathname.endsWith('/');
-  if (isCleanRoute && isGetOrHead) {
-    const slashedUrl = new URL(`${pathname}/`, url.origin);
-    const candidate = await env.ASSETS.fetch(new Request(slashedUrl.toString(), request));
-    if (candidate.ok) {
-      response = candidate;
-    } else {
-      response = await context.next();
-    }
-  } else {
-    response = await context.next();
-  }
+  // Everything else goes to the static assets unchanged, so _redirects and the
+  // trailing slash 308 behave exactly as they did before this middleware existed.
+  const response = await context.next();
 
   const contentType = response.headers.get('Content-Type') || '';
-  if (contentType.includes('text/html')) {
+  if (response.ok && contentType.includes('text/html')) {
     const headers = new Headers(response.headers);
     headers.set('Vary', 'Accept');
     const twinPath = getTwinPath(pathname);

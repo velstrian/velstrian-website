@@ -94,8 +94,9 @@ const REPO_ROOT = path.join(__dirname, '..', '..');
  * is by invitation, where people sign in, and that there is no public API. Same
  * reason as llms.txt for living at the root.
  *
- * [2026-10-30] `_routes.json` ADDED for Cloudflare Pages Functions routing to
- * ensure static assets bypass functions and avoid consuming the 100k free tier.
+ * [2026-10-30] `_routes.json` ADDED. It keeps static assets off the Pages Function
+ * in `functions/` (the Pages root is the repository root, so that is the only
+ * functions folder Pages reads). One root source, copied here like the rest.
  */
 const FILES = ['_headers', '_redirects', 'robots.txt', 'llms.txt', 'llms-full.txt', '.well-known/security.txt', 'auth.md', '_routes.json'];
 
