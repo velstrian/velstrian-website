@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brief 06: Supabase email setup (Gemini, in the browser)</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-06-SUPABASE-EMAIL-SETUP.md">BRIEF-06-SUPABASE-EMAIL-SETUP.md</a></p>
+<h1>Brief 06: Supabase email setup (Gemini, in the browser)</h1>
+<p>Row: R29-EMAIL-BREVO-SUPABASE-E2E-01 and R29-AUTH-STAGING-CAPTCHA-SECRET-01. Start after brief 05. Sign in to dashboards as contact@velstrian.com. Never write a secret into chat, a file or a report.</p>
+<h2>1. Email templates (staging, then production)</h2>
+<p>Files: <code>C:\Users\bhave\Velstrian Repo\gemini-briefs\supabase-auth-templates\</code> (six <code>.html</code> files).</p>
+<p>Supabase, project staging <code>ipgrnwvfnumgvnxkpxsc</code> then production <code>gujtuecjzfiqsdnzgyvo</code>, Authentication, Email Templates. For each file:</p>
+<ul><li>
+open the template named in the file's first comment
+</li><li>
+set the subject from the file's first comment
+</li><li>
+replace the body with the whole file
+</li><li>
+save, reload, check the subject stuck
+</li></ul>
+<h2>2. Captcha key (staging only)</h2>
+<p>Cloudflare, Turnstile, widget <strong>Velstrian Marketing</strong>, copy its secret key. Supabase staging, Authentication, Attack Protection, provider Turnstile, paste the key, save. Do not change production.</p>
+<h2>Report</h2>
+<p>One line per template per project (saved yes or no), and "staging captcha key saved". Nothing else.</p>
+</main></body></html>

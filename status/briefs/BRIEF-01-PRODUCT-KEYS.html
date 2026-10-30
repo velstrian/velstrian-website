@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 01: legacy product keys and dead product_context keys</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-01-PRODUCT-KEYS.md">BRIEF-01-PRODUCT-KEYS.md</a></p>
+<h1>Gemini brief 01: legacy product keys and dead product_context keys</h1>
+<p>Driver: Claude (reviews your work). Executor: Gemini. Date 2026-10-30. Release R2.9.</p>
+<p>Rows: <strong>R29-REG-LEGACY-PRODUCT-KEYS-REMOVE-01</strong> and <strong>R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01</strong> in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>.</p>
+<h2>Read first</h2>
+<ol><li>
+<code>velstrian-platform/ENGINEERING-STANDARDS.md</code> (binding) and <code>velstrian-platform/CLAUDE.md</code> rules
+ 0-G, 0-T, 0-L, 0-V, 0-C, IDENTITY. <code>GEMINI.md</code> is partly stale (old domains, identity). Where it
+ conflicts with this brief, <strong>this brief wins for this task only</strong>.
+</li><li>
+This brief replaces the "walker only, no code" role in <code>GEMINI.md</code>: **for this task the owner
+ authorises code changes and LOCAL commits on a <code>review/*</code> branch.**
+</li></ol>
+<h2>Hard limits</h2>
+<ul><li>
+**No push, no deploy, no migration applied to any database, no Supabase/Stripe/Vercel/Railway
+ write.** Write migration files only. The driver applies nothing until the owner approves.
+</li><li>
+<strong>No paid AI call, no email.</strong> Never open or print <code>.env*</code>, keys or tokens.
+</li><li>
+Git identity is already <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Never use any personal
+ name or Gmail. Commit by pathspec: <code>git commit -- &lt;paths&gt;</code>, never <code>git add .</code>.
+</li><li>
+<strong>Targeted tests only (RULE 0-T).</strong> Never run the full suite. Free RAM must stay above 1 GB. One
+ heavyweight (pytest batch, <code>tsc</code>, <code>next build</code>) at a time. Do not kill any process you did not start.
+</li><li>
+API tests: <code>./.venv/Scripts/python.exe -m pytest &lt;files&gt;</code> from <code>api/</code>. Web: <code>pnpm vitest run &lt;files&gt;</code> from <code>web/</code>.
+</li><li>
+Do not delete strings that guard the dead products (<code>crowcyber</code>, <code>crowcash</code>, <code>crowesg</code>,
+ <code>crowagent_core</code>, <code>core</code> in <code>DISABLED_PRODUCTS</code>, and tests that assert their ABSENCE). Those are guards.
+</li></ul>
+<h2>Measured by the driver on 2026-10-30 (read only)</h2>
+<ul><li>
+Production (<code>gujtuecjzfiqsdnzgyvo</code>) <code>organisations.product_context</code> keys: <code>bid</code>, <code>buy</code> and ten dead
+ keys on ONE org: `advisor, agency, analytics, carbon, contracts, marketplace, monitoring,
+ regulatory_monitor, reports, workflows`.
+</li><li>
+Staging (<code>ipgrnwvfnumgvnxkpxsc</code>): <code>bid</code> 48 orgs, <code>buy</code> 24, plus `crowagent_core, crowcash,
+ crowcyber, crowesg` on one org.
+</li><li>
+Production <code>regulation_monitor.products</code> and <code>product_subscriptions.product_key</code>: <strong>zero</strong> rows
+ holding <code>crowmark</code> or <code>council</code>. No web code sends <code>X-Product: crowmark|council</code>.
+</li></ul>
+<h2>Task A, R29-REG-LEGACY-PRODUCT-KEYS-REMOVE-01</h2>
+<p>The one release window for <code>LEGACY_PRODUCT_KEYS</code> (<code>api/app/products/registry.py:105-116</code>) has passed.</p>
+<ol><li>
+Re-confirm in code (strip comments before trusting a grep) that no web, portal or worker caller
+ sends or stores <code>crowmark</code>/<code>council</code> as a product key. Include <code>apps/portal/src</code>, <code>web/src</code>,
+ <code>worker/</code> if present, and Supabase functions.
+</li><li>
+Remove <code>LEGACY_PRODUCT_KEYS</code> and <code>canonical_product_key</code>. Update every caller:
+ <code>api/app/middleware/auth.py:14,599</code>, <code>api/app/services/regulatory_monitor.py:29,146-264</code>
+ (use the key as stored, still intersect with <code>LIVE_PRODUCTS</code>). Fix the docstrings that describe
+ the mapping.
+</li><li>
+Update <code>api/tests/test_r285_rebrand_legacy_api_paths.py</code> so it asserts the NEW behaviour
+ (<code>crowmark</code> is no longer mapped, it is an unknown key). Do not just delete the test. Note:
+ <code>api/app/middleware/legacy_prefix.py</code> rewrites old URL PATHS, which is a different thing. Leave it
+ unless you prove it reads the removed map.
+</li></ol>
+<h2>Task B, R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01</h2>
+<ol><li>
+Trace whether ANY of the ten dead keys (list above) can grant access or affect billing: read
+ <code>api/app/services/entitlements.py</code>, <code>bid_access.py</code>, <code>bid_tier.py</code>, <code>buyer_tier.py</code>,
+ <code>billing_grace.py</code>, <code>ai/credits.py</code>, <code>tasks/billing_cron.py</code>, <code>regulatory_monitor.py</code>
+ (note <code>regulatory_monitor</code> and <code>monitoring</code> are key names here), <code>web/src</code> entitlement and
+ seat code, and the portal <code>apps/portal/src/app/api/customers/**</code> routes. Report each key: read
+ anywhere (path:line) or not.
+</li><li>
+Write ONE migration file <code>supabase/migrations/&lt;next timestamp&gt;_r29_drop_dead_product_context_keys.sql</code>
+ that removes exactly those ten keys plus <code>crowagent_core, crowcash, crowcyber, crowesg</code> from
+ <code>organisations.product_context</code> (<code>product_context - '&lt;key&gt;'</code>), idempotent, ASCII only, with a
+ header comment naming both rows. Do not touch <code>bid</code> or <code>buy</code>. Do NOT apply it.
+</li><li>
+If any code path writes those keys (seeding, portal onboarding, provisioning), stop it writing
+ them in the same change, so the migration and the code ship together.
+</li><li>
+Add a guard test (API pytest) that fails if the write path can emit a key outside the live set,
+ and red-prove it once (show it failing before your code change, passing after).
+</li></ol>
+<h2>Verify</h2>
+<ul><li>
+Targeted pytest over every API test file that imports <code>registry</code>, <code>regulatory_monitor</code> or
+ <code>middleware.auth</code>, plus your new test, in ONE invocation. Report the collected count.
+</li><li>
+If you touched TypeScript: <code>pnpm tsc --noEmit</code> in that project and the targeted vitest files.
+</li><li>
+<code>ruff</code>/lint on changed Python files if configured in <code>api/</code>.
+</li></ul>
+<h2>Commit and board</h2>
+<ul><li>
+Branch <code>review/r29-product-keys</code> from <code>main</code>. Commits:
+ <code>fix(registry): R29-REG-LEGACY-PRODUCT-KEYS-REMOVE-01 remove the one release legacy product key map</code>
+ <code>fix(data): R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01 stop writing and drop dead product_context keys</code>
+ End each message with <code>Co-Authored-By: Gemini &lt;noreply@google.com&gt;</code> only if your tooling adds a
+ trailer, never a personal identity.
+</li><li>
+Set both rows to `BUILT 2026-10-30 - &lt;sha7&gt; on review/r29-product-keys, migration NOT applied, waits
+ on owner approval for staging then production apply. Tests: &lt;files, collected N, passed N&gt;.` Keep
+ the old text after <code>Was:</code>. Rebuild the board (guide section 7.3).
+</li></ul>
+<h2>Report back (short)</h2>
+<p>Files changed with line numbers, the per-key trace table, the test command with collected and passed counts, the red-proof output, the two sha7s, and anything you could not do and why.</p>
+</main></body></html>

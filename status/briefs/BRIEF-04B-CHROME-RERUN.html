@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brief 04B: Claude in Chrome rerun of brief 04 Part B</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-04B-CHROME-RERUN.md">BRIEF-04B-CHROME-RERUN.md</a></p>
+<h1>Brief 04B: Claude in Chrome rerun of brief 04 Part B</h1>
+<p>Row: <strong>R29-EMAIL-BREVO-SUPABASE-E2E-01</strong> and <strong>R29-AUTH-STAGING-CAPTCHA-SECRET-01</strong>. Date 2026-10-30.</p>
+<p>Use Chrome signed in as contact@velstrian.com. Never read out, copy into chat or screenshot any secret. Record every value before you change it.</p>
+<h2>What the driver found after the first run</h2>
+<ul><li>
+Only three template files reached you because Gemini's six are on a review branch. They are now in
+ <code>C:\Users\bhave\AppData\Local\Temp\claude\C--Users-bhave-Velstrian-Repo\bd02e4fc-4cc5-42b3-97ff-f10f89e3fc94\scratchpad\supabase-auth-templates\</code>.
+ Each <code>.html</code> file starts with a comment giving the exact subject line and the dashboard template name.
+</li><li>
+<strong>The reset email never sent because of a captcha mismatch, not email.</strong> Staging log at 16:48:51 UTC:
+ <code>resetPasswordForEmail</code> failed with <code>captcha protection: request disallowed (invalid-input-response)</code>.
+ There is one Turnstile widget, <strong>Velstrian Marketing</strong>, site key <code>0x4AAAAAADML7D0t7OQT4B4R</code>, which
+ covers app, portal, staging-app and staging-portal. Staging Supabase must hold a secret that is not
+ this widget's. Production Supabase has captcha OFF today (a fake token was accepted), which is why
+ production resets work.
+</li><li>
+<strong>The signup was refused because the form posted country <code>AF</code> (Afghanistan), not GB</strong>, three times
+ (log <code>signup.business_only_refused</code>, market AF). Filed as R29-AUTH-SIGNUP-COUNTRY-POSTS-AF-01. For
+ this rerun, pick the country by typing <code>United Kingdom</code> and clicking the option in the list, then
+ check the field shows it before submitting.
+</li></ul>
+<h2>Steps</h2>
+<ol><li>
+<strong>Turnstile secret.</strong> In Cloudflare (dash.cloudflare.com, account VELSTRIAN SYSTEMS LIMITED),
+ Turnstile, widget Velstrian Marketing: open its settings and copy its secret key to the clipboard
+ only. In Supabase <strong>staging</strong> <code>ipgrnwvfnumgvnxkpxsc</code>, Authentication, Attack Protection (Bot and
+ Abuse Protection): confirm the provider is Turnstile and paste that secret, Save. Do NOT turn captcha
+ on in production. Report only "secret replaced" or "already matched".
+</li><li>
+<strong>Templates, staging then production.</strong> Authentication, Email Templates. For each of the six
+ templates (Confirm sign up, Invite user, Magic link, Change email address, Reset password,
+ Reauthentication): set the subject from the file's comment, paste the whole <code>.html</code> file as the body,
+ Save, reload the page and confirm the subject and the first heading persisted. This replaces the two
+ you pasted earlier, which were the older versions.
+</li><li>
+<strong>Brevo blocked contacts and tracking</strong>, still unchecked: Transactional, Settings, report open and
+ click tracking on or off, and Contacts, Blocked, count and reasons only. Confirm sender
+ support@velstrian.com is gone and contact@velstrian.com is the only sender.
+</li><li>
+<strong>Live test on staging.</strong>
+ a. <code>https://staging-app.velstrian.com/forgot-password</code> for <code>crowagent.platform+r285-team-owner@gmail.com</code>
+ (this staging account exists, the driver checked).
+ b. <code>/signup</code> with <code>crowagent.platform+r29-email-&lt;yyyymmddhhmm&gt;@gmail.com</code>, country United Kingdom
+ chosen from the list, a valid format company number (any 8 digits, staging only), terms ticked,
+ marketing unticked.
+ c. In Gmail (crowagent.platform@gmail.com) both emails arrive within 5 minutes, From
+ <code>Velstrian Tenderworks &lt;contact@velstrian.com&gt;</code>, Velstrian branded, links to
+ staging-app.velstrian.com, not in spam. Screenshot each with the link cropped. Do not click links.
+ d. Brevo, Transactional, Logs: both show delivered.
+</li><li>
+If step 4a still sends nothing, stop and report the time of the attempt so the driver can read the log.
+</li></ol>
+<h2>Report back (short)</h2>
+<p>Per step: before, after, evidence. For 4c the From, the subject and the link host of each email.</p>
+</main></body></html>

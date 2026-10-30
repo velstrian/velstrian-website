@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 07: mono label weight and the dark teal text colour</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-07-MONO-WEIGHT-AND-DARK-TEAL-TEXT.md">BRIEF-07-MONO-WEIGHT-AND-DARK-TEAL-TEXT.md</a></p>
+<h1>Gemini brief 07: mono label weight and the dark teal text colour</h1>
+<p>Driver: Claude (reviews your work). Executor: Gemini. Date 2026-10-30. Release R2.9.</p>
+<p>Rows: <strong>R29-STEP-REBRAND-05-ARTWORK-AND-DESIGN-SYSTEM-01</strong> (Part A) and <strong>R29-STEP-P2-PREMIUM-TYPE-01</strong> (Part B), in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>. Read both rows and the history of <code>R285-REBRAND-05-ARTWORK-AND-DESIGN-SYSTEM</code> and <code>R285-P2-PREMIUM-TYPE-01</code> in <code>RELEASE-2.8.5-TRACKER.md</code>.</p>
+<h2>Hard limits</h2>
+<ul><li>
+RULE 0-C: change the CENTRAL token once and let it flow. Never hardcode a colour, weight or font
+ locally. A change that needs edits in many places means a missing token: add the token, then point
+ the places at it.
+</li><li>
+No push, deploy, promote, migration, SQL or dashboard change. Local commits only.
+</li><li>
+Platform: branch <code>review/r29-type-tokens</code> from platform <code>main</code>. Website: branch from website <code>main</code>
+ named <code>review/r29-type-tokens</code>, NOT the agent readiness branch.
+</li><li>
+Targeted tests only (RULE 0-T). One heavyweight at a time, free RAM above 1 GB. Never kill a
+ process you did not start.
+</li><li>
+No empty catch, no <code>@ts-ignore</code>, no <code>eslint-disable</code>. No em dash, en dash or semicolon in user
+ facing text. Identity <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Commit by pathspec.
+</li><li>
+<strong>When you finish, switch BOTH repositories back to <code>main</code>.</strong> Tracker edits are committed on
+ platform <code>main</code> only.
+</li></ul>
+<h2>Part A, mono labels at weight 500</h2>
+<p>The technical font is DM Mono (<code>packages/tokens/src/constants.ts:155</code>, <code>packages/tokens/src/tokens.css:474</code>). DM Mono has no 700 weight, so every mono label set to bold is a FAKE bold the browser draws. Driver decision (no scope change): mono labels use weight 500.</p>
+<ol><li>
+Find every place mono text is set bold or 700: Tailwind <code>font-mono</code> together with <code>font-bold</code> or
+ <code>font-semibold</code> (about 48 class lists across <code>web/</code>, <code>apps/portal/src</code>, <code>packages/</code>), and CSS rules
+ that use <code>var(--font-mono)</code> or <code>var(--ca-font-mono)</code> with <code>font-weight: 600</code> or <code>700</code>. Strip comments
+ before counting. Report the count per area.
+</li><li>
+Fix it centrally. Add a token for the mono label weight (for example <code>--font-mono-weight: 500</code>
+ in <code>tokens.css</code>, mirrored in <code>constants.ts</code> if constants carry weights) and a utility class or
+ Tailwind theme entry that sets mono and that weight together. Point every place from step 1 at it.
+ Do not leave a raw <code>500</code> in components.
+</li><li>
+Check the font files load 500. If only 400 is loaded, load DM Mono 500 the same way 400 is loaded
+ (self hosted, no external font host). Report which weights are now loaded.
+</li><li>
+Add a guard test that fails if <code>font-mono</code> appears with <code>font-bold</code> or <code>font-semibold</code>, or a mono
+ rule sets weight 600 or 700, comments stripped. Prove it red on the old tree, green after.
+</li><li>
+Emails and PDFs: if the email shell or PDF styles use mono at 700, change them through their own
+ token source (<code>packages/tokens/src/email-shell.ts</code> and the PDF style source), then regenerate the
+ generated files with their own generator scripts (<code>api/app/services/_email_shell_generated.py</code>,
+ <code>scripts/generate-auth-email-templates.mjs</code>). Never hand edit a generated file.
+</li></ol>
+<h2>Part B, dark theme teal text from #FFFFFF to #F8F9FB</h2>
+<p>Driver decision 2026-10-29 (no scope change): in the dark theme, the primary text colour used on teal changes from pure white <code>#FFFFFF</code> to <code>#F8F9FB</code>, in the central tokens, website included.</p>
+<ol><li>
+Find the token that holds that colour in <code>packages/tokens/src/tokens.css</code> (and its source, for
+ example <code>brand.source.json</code>, if tokens are generated). Read the comments around it first. If a
+ comment warns against this change, stop and report it.
+</li><li>
+Change it once at the source and regenerate whatever is generated from it. Report every token
+ name that changed and every generated file that changed.
+</li><li>
+Website: <code>velstrian-website</code> takes its tokens from the same source or a synced copy. Find how it
+ gets them and apply the same change through that path, never by hand editing a colour.
+</li><li>
+Contrast: compute the contrast ratio of the new colour against every dark theme teal background
+ it sits on (read the background tokens). Each must stay at or above 4.5 to 1 for normal text.
+ Report the numbers.
+</li></ol>
+<h2>Verify</h2>
+<ul><li>
+Platform: <code>pnpm tsc --noEmit</code> in <code>web/</code> and <code>apps/portal</code>, the token and brand guard tests (find
+ them by the token file names), your new mono guard, in as few invocations as possible. <code>next build</code>
+ once in <code>web/</code> if any CSS or Tailwind config changed.
+</li><li>
+Website: <code>npm run build</code> in <code>astro/</code> once, all gates.
+</li><li>
+Screenshots of one page with mono labels and one dark teal surface, before and after, on local dev
+ (<code>http://localhost:3000</code> for the app with the test login, the website preview for the site), saved
+ under <code>web/test-results/r29-type-tokens/</code> and <code>velstrian-website/test-results/r29-type-tokens/</code>.
+</li></ul>
+<h2>Commit, board, report</h2>
+<ul><li>
+Commits: <code>fix(design): R29-STEP-REBRAND-05-ARTWORK-AND-DESIGN-SYSTEM-01 mono labels at weight 500 from one token</code>
+ and <code>fix(design): R29-STEP-P2-PREMIUM-TYPE-01 dark teal primary text F8F9FB from the central token</code>
+ (one per repo where both repos change).
+</li><li>
+Switch both repositories to <code>main</code>. Set both rows to BUILT with branches, sha7s, counts, contrast
+ numbers and <code>not pushed</code>. Keep the old text after <code>Was:</code>. Commit the tracker on platform <code>main</code>,
+ rebuild the board (<code>docs/AI-ONBOARDING-GUIDE.md</code> section 7.3).
+</li><li>
+Report back, short: counts found and fixed per area, the new token names, font weights loaded,
+ guard red and green output, contrast table, test and build results, sha7s, anything not done.
+</li></ul>
+</main></body></html>

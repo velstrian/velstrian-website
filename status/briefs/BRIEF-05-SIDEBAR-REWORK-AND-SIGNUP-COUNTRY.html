@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 05: sidebar check rework, and the signup country defect</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-05-SIDEBAR-REWORK-AND-SIGNUP-COUNTRY.md">BRIEF-05-SIDEBAR-REWORK-AND-SIGNUP-COUNTRY.md</a></p>
+<h1>Gemini brief 05: sidebar check rework, and the signup country defect</h1>
+<p>Driver: Claude (reviews your work). Executor: Gemini. Date 2026-10-30. Release R2.9.</p>
+<p>Rows: <strong>R29-STEP-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01</strong> (Part A) and <strong>R29-AUTH-SIGNUP-COUNTRY-POSTS-AF-01</strong> (Part B), in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>. Read both rows first.</p>
+<p>Claude in Chrome is running a test on staging at the same time (password reset and one signup as <code>crowagent.platform+r29-email-*</code>). Do not sign in as that address, do not change any Supabase, Brevo or Cloudflare setting.</p>
+<h2>Hard limits</h2>
+<ul><li>
+No push, deploy, promote, migration, SQL or dashboard change. Staging only for browser tests.
+</li><li>
+Never open, print or paste any <code>.env*</code> value, key or token. Playwright reads them by name.
+</li><li>
+Targeted tests only (RULE 0-T). Free RAM above 1 GB before each run
+ (<code>powershell -c "(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1MB"</code>). One
+ heavyweight at a time. Never kill a process you did not start.
+</li><li>
+**No empty <code>catch</code>, no <code>@ts-ignore</code>, no <code>eslint-disable</code>, no hardcoded ids, no loosened assertion
+ to make a test pass.** If a test fails, either the page is wrong (fix the page) or the test measures
+ the wrong thing (make it measure the right thing). Never widen a tolerance.
+</li><li>
+Identity <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Commit by pathspec, never <code>git add .</code>.
+</li><li>
+<strong>When you finish, switch the repository back to <code>main</code>.</strong> Tracker edits are committed on <code>main</code>
+ only, never on a review branch.
+</li></ul>
+<h2>Part A, rework of b20e4ef08 on <code>review/r29-sidebar-layout</code></h2>
+<p>The driver's review of your brief 03 commit found four problems. Fix all four on the same branch.</p>
+<ol><li>
+<strong>The 8px left margin was removed.</strong> <code>web/e2e/sidebar-layout-and-popovers.spec.ts</code> <code>expectInside</code>
+ changed <code>box.x &gt;= MARGIN - 1</code> to <code>box.x &gt;= 0</code>. That passes a popover touching the screen edge, which
+ is the exact defect this row exists for. Restore <code>MARGIN - 1</code>. Then run the spec, read which
+ element fails and at which viewport, and decide by measurement:
+<ul><li>
+if the failing box is a menu ITEM whose hover target uses <code>-mx-2</code>, measure the panel that holds it
+ (the element with role <code>menu</code>, <code>listbox</code> or <code>dialog</code>, or the positioned container that
+ <code>web/src/shared/ui/side-flyout-position.ts</code> places) and keep the item check for "reachable and
+ clickable" only. Name in the report which locator you changed and why.
+</li><li>
+if the PANEL itself sits within 8px of the edge, that is a product defect. Fix it in
+ <code>side-flyout-position.ts</code> (<code>anchoredPosition</code>), which is the one positioning rule, and run its
+ guard <code>anchored-position</code>.
+</li></ul>
+</li><li>
+<strong>Empty catch</strong> in <code>web/e2e/r285-staging-walk/_walk.ts</code> (the <code>addInitScript</code> block). Remove the
+ try and catch. <code>localStorage</code> exists on every staging page this runs on. If you keep a guard,
+ it must do something visible, never swallow.
+ Also replace the hardcoded <code>velstrian:welcome-video-seen:e2850000-0000-4000-a000-000000000003</code> key:
+ build it from the signed in user's id, or find the product's own way to mark the welcome video
+ seen (read the component that reads that key) and use that.
+</li><li>
+<strong>Hardcoded bid id</strong> in the spec: the <code>R285_C5_BID_ID</code> override to <code>...000013</code> when the env says
+ <code>...000005</code>. Remove it. Find which bid the LAYOUT persona's organisations can open (read the seed
+ data under <code>scripts/staging/seeds/</code> or the walk persona notes), and if <code>R285_C5_BID_ID</code> is wrong for
+ this persona, use a new key <code>R285_LAYOUT_BID_ID</code> read by name, and report the value it needs. The
+ driver will set it in the git ignored env file. Never write the env file yourself.
+</li><li>
+<strong>The click on the first button named close.</strong> Name the overlay you are closing (the welcome or
+ tour dialog) and close it by its own accessible name or role, or mark it seen the way the product
+ does (item 2) so it never opens. A walk that clicks any "close" button can close the menu it is
+ about to measure.
+</li></ol>
+<p>Keep the other changes from b20e4ef08: the <code>mintSession</code> captcha fallback in <code>web/e2e/bid-scenarios/_support/staging.ts</code> and the <code>/agree</code> handler, both staging only.</p>
+<p><strong>Verify:</strong> <code>pnpm tsc --noEmit</code> in <code>web/</code>, the four vitest guards (<code>anchored-position</code>, <code>shell-popovers-route-through-one-primitive</code>, <code>r285-sidebar-layout-and-popovers</code>, <code>page-top-container-width-set</code>) in ONE invocation, then the Playwright spec once against staging as in brief 03. State collected, passed and failed counts. Commit <code>test(web): R29-STEP-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01 restore the 8px margin and measure the panel</code> (and <code>fix(ux): ...</code> separately if a product fix was needed).</p>
+<p>Done when: the spec is green with the 8px margin restored, no empty catch, no hardcoded id. If no product code changed, the row becomes FIXED (the layout code is already live on production). If product code changed, BUILT.</p>
+<h2>Part B, R29-AUTH-SIGNUP-COUNTRY-POSTS-AF-01, new branch <code>review/r29-signup-country</code> from <code>main</code></h2>
+<p>Staging logs at 16:50:16, 16:50:37 and 16:51:02 UTC show the signup form posted <code>market=AF</code> (Afghanistan) while the tester believed United Kingdom was chosen. The field is a <code>SearchableSelect</code> in <code>mode="combobox"</code> (<code>web/app/(auth)/signup/SignupPanels.tsx:583</code>). Find out why, locally, without staging.</p>
+<ol><li>
+Read <code>SearchableSelect</code> (find it by import from <code>SignupPanels.tsx</code>), <code>SIGNUP_INITIAL_STATE</code>
+ (<code>web/app/(auth)/signup/action-types.ts:35</code>) and how <code>countryOptions</code> is ordered.
+</li><li>
+Write a vitest + Testing Library test against the combobox that reproduces each likely path, and
+ report which ones post a value different from what the field shows:
+<ul><li>
+type <code>United Kingdom</code>, press Enter
+</li><li>
+type <code>United</code>, press Enter (several matches)
+</li><li>
+type <code>uk</code>, press Enter
+</li><li>
+open the list and click United Kingdom
+</li><li>
+type a country, then blur without choosing
+</li><li>
+submit without touching the field
+</li></ul>
+</li><li>
+If any path shows one country and posts another, fix the component so the posted value is always
+ the shown value, and an unconfirmed typed text never commits the first option silently. Then decide
+ the empty case by RULE 0-U (UK small businesses first): the field starts empty with a clear
+ "Choose your country" prompt, or starts at United Kingdom. Recommend one in the report, implement
+ the empty prompt version unless the code already documents an owner decision, and say which.
+</li><li>
+The tests from step 2 become the guard (red before the fix, green after, show both). Run them, the
+ existing signup tests that import <code>SignupPanels</code> or <code>SearchableSelect</code> (find by import), and
+ <code>pnpm tsc --noEmit</code>, in as few invocations as possible.
+</li><li>
+Commit <code>fix(auth): R29-AUTH-SIGNUP-COUNTRY-POSTS-AF-01 the country field posts the country it shows</code>.
+ If no path reproduces, commit only the tests and say so plainly: then the cause was the tester's
+ input, and the row stays OPEN for the driver.
+</li></ol>
+<h2>Board and report</h2>
+<ul><li>
+Switch to <code>main</code>. Update both rows (keep the old text after <code>Was:</code>) with branch, sha7, counts and
+ status, commit <code>RELEASE-2.9-TRACKER.md</code> on <code>main</code> by pathspec, rebuild the board
+ (<code>docs/AI-ONBOARDING-GUIDE.md</code> section 7.3).
+</li><li>
+Report back, short: for Part A which element failed the 8px check and what you changed, the four
+ fixes, test counts. For Part B the table of paths and what each posted, the fix, red and green
+ output, sha7s. Anything not done and why.
+</li></ul>
+</main></body></html>

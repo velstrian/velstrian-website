@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 03: sidebar layout staging check, and the real about page header picture</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-03-SIDEBAR-WALK-AND-ABOUT-HERO.md">BRIEF-03-SIDEBAR-WALK-AND-ABOUT-HERO.md</a></p>
+<h1>Gemini brief 03: sidebar layout staging check, and the real about page header picture</h1>
+<p>Driver: Claude (reviews your work). Executor: Gemini. Date 2026-10-30. Release R2.9.</p>
+<p>Rows: <strong>R29-STEP-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01</strong> (Part A) and <strong>R29-STEP-WEB-REAL-SCREENSHOTS-01</strong> (Part B), in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>. Read the full history of each in <code>RELEASE-2.8.5-TRACKER.md</code> under <code>R285-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01</code> and <code>R285-WEB-REAL-SCREENSHOTS-01</code>.</p>
+<p>Start only after brief 02 is finished and reported. Both briefs build and run browsers, and only one heavyweight may run at a time on this machine.</p>
+<h2>Read first</h2>
+<p><code>velstrian-platform/ENGINEERING-STANDARDS.md</code> and <code>velstrian-platform/CLAUDE.md</code> (rules 0-G, 0-T, 0-L, 0-V, 0-C, 0-U, IDENTITY), <code>GEMINI.md</code>. For this brief the owner authorises: running Playwright against <strong>staging only</strong>, web code fixes and LOCAL commits on <code>review/*</code> branches, and the website picture swap. Never production (<code>app.velstrian.com</code>, <code>portal.velstrian.com</code>) for any test.</p>
+<h2>Hard limits</h2>
+<ul><li>
+No push, no deploy, no promote, no migration, no SQL, no dashboard change.
+</li><li>
+Never open, print or paste the contents of any <code>.env*</code> file, password, token or key. Playwright
+ reads them by key name. If a value appears on screen, report only its NAME.
+</li><li>
+No paid AI call. The captures and the walk never press Generate or any AI button.
+</li><li>
+Targeted tests only (RULE 0-T). Free RAM must stay above 1 GB. Check it before each run:
+ <code>powershell -c "(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1MB"</code>. Never kill a
+ process you did not start.
+</li><li>
+Identity <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Commit by pathspec, never <code>git add .</code>.
+</li><li>
+No em dash, en dash or semicolon in user facing text.
+</li></ul>
+<h2>Part A, R29-STEP-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01</h2>
+<h3>What is settled (do not reopen)</h3>
+<ul><li>
+<strong>Owner decision 2026-10-14, "Stretch like work pages":</strong> every app page fills the space beside the
+ sidebar and widens when the sidebar collapses. Spec 9.2's fixed 880px form column is SUPERSEDED for
+ app pages. Long single line inputs stay capped inside their cards. Only <code>reading</code> pages (the
+ changelog, help articles) are centred. The R2.9 row text that says "follow spec 9.2" is wrong and
+ the owner decision wins. Correct the row text when you update it.
+</li><li>
+The popover fix (organisation list opens upwards from the sidebar foot, one positioning rule in
+ <code>web/src/shared/ui/side-flyout-position.ts</code>) is on production <code>f89e959</code>.
+</li></ul>
+<h3>What remains, do all of it</h3>
+<ol><li>
+<strong>Legacy widths.</strong> The old row named nine routes with <code>72rem</code> or <code>64rem</code> fallback widths. Prove,
+ with comments stripped, that no page, <code>loading.tsx</code>, <code>RouteSkeleton</code> or <code>PageLayout</code> call under
+ <code>web/app</code> or <code>web/src</code> still applies a 72rem or 64rem cap. A grep hit in a comment is not a hit.
+ List each of the nine routes with the line that now sets its width (<code>web/src/config/platformNav.ts</code>
+ width set, <code>PageShell</code>, or <code>PageLayout</code>). If any real cap remains, fix it to the width set.
+</li><li>
+<strong>Run the real browser check on staging.</strong> The spec is <code>web/e2e/sidebar-layout-and-popovers.spec.ts</code>
+ (read its header). The driver set up the account on 2026-10-30: the persona keys
+ <code>R285_LAYOUT_EMAIL</code>, <code>R285_LAYOUT_PASSWORD</code>, <code>R285_LAYOUT_TENANT</code> are now in the git-ignored
+ <code>web/.env.r285-walk</code> (the Overdue 1280 walk persona, now a member of 6 staging organisations, home
+ organisation holds both products). Load that file the same way the existing staging walk does
+ (read <code>web/e2e/r285-staging-walk/_walk.ts</code> and how the walk is normally started), never by
+ printing it. Then from <code>web/</code>:
+ <code>BASE_URL=<a href="https://staging-app.velstrian.com">https://staging-app.velstrian.com</a> npx playwright test e2e/sidebar-layout-and-popovers.spec.ts --project=chromium --no-deps --workers=1</code>
+ <code>R285_C5_BID_ID</code> is already in the same file.
+</li><li>
+<strong>Classify every failure</strong> as a SPEC defect (the test is wrong) or a PRODUCT defect (the page is
+ wrong). Assert the landed URL and status before trusting any measurement (a login redirect or a
+ 404 is not a layout). Fix spec defects in the spec. Fix product defects in web code.
+</li><li>
+<strong>Check the owner's two original reports by eye</strong> in the same staging session, with screenshots
+ saved under <code>web/test-results/r29-sidebar/</code>:
+<ul><li>
+dark theme, sidebar expanded, window 1440x980: open the organisation switcher at the foot of the
+ sidebar. All 6 organisations are reachable on screen, the list is not cut off, and the product
+ rows above still scroll normally.
+</li><li>
+sidebar collapsed, window 1920x1080: <code>/support</code> and <code>/bid/new</code> fill the width beside the rail
+ with no large empty band on the right, and expanding the sidebar narrows them.
+</li></ul>
+</li><li>
+If you changed product code: <code>pnpm tsc --noEmit</code> in <code>web/</code>, the vitest guards
+ <code>anchored-position</code>, <code>shell-popovers-route-through-one-primitive</code>, <code>r285-sidebar-layout-and-popovers</code>
+ and <code>page-top-container-width-set</code> (find their files by name), in ONE invocation, then rerun the
+ Playwright spec once. Report collected and passed counts.
+</li></ol>
+<p>Done when: the spec runs green against staging with its collected count stated, both owner reports check out by eye with screenshots, and no legacy cap remains. A product fix only goes live with the next promote, so the row then reads BUILT, not FIXED.</p>
+<h2>Part B, R29-STEP-WEB-REAL-SCREENSHOTS-01</h2>
+<p><strong>Settled by the driver (RULE 0-U, show do not explain):</strong> the about page header takes a REAL product capture, the drafted answer screen, replacing the designed picture.</p>
+<ol><li>
+Read <code>velstrian-website/docs/design/R285-REAL-SCREENSHOTS-PLAN.md</code> (section 8 explains why
+ <code>about-hero</code> was left as a design) and the capture harness <code>web/e2e/product-captures/website.spec.ts</code>
+ (one command, light theme at 2x, refuses production, writes the website WebP and
+ <code>product-captures.real.json</code>).
+</li><li>
+Capture the drafted answer screen from staging for the <code>about-hero</code> slot. If the harness has no
+ <code>about-hero</code> target, add one that reuses the existing drafted answer capture and its crop rules.
+ Emails and personal names blurred, no "council", no retired brand words, no weak fit shown.
+</li><li>
+Put the picture on the website: in <code>velstrian-website</code>, on the branch from brief 02
+ (<code>review/r29-agent-readiness</code>), so one owner approved push carries both. Keep the alt text plain
+ and true (what the screen shows, for a first time small business reader). Mark it as a real capture
+ in <code>product-captures.real.json</code>.
+</li><li>
+Verify: <code>npm run build</code> in <code>velstrian-website/astro</code> once, then the built <code>/about</code> page shows the
+ new picture (screenshot it at 1280 and 390 from the local preview, under
+ <code>velstrian-website/test-results/r29-about-hero/</code>). Check the picture size is no larger than the
+ other hero captures (state both byte sizes).
+</li></ol>
+<h2>Commit, board and report</h2>
+<ul><li>
+Part A: branch <code>review/r29-sidebar-layout</code> from platform <code>main</code>. Commit
+ <code>fix(ux): R29-STEP-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01 &lt;what&gt;</code> (or <code>test(e2e): ...</code> if only the spec
+ changed, which then rides with the walk evidence).
+</li><li>
+Part B: on <code>review/r29-agent-readiness</code>, commit <code>feat(web): R29-STEP-WEB-REAL-SCREENSHOTS-01 about page header is a real drafted answer capture</code>.
+</li><li>
+Update both rows: BUILT with sha7, branch, the spec collected and passed counts, the screenshot
+ folders, and <code>not pushed</code>. If the spec is fully green with no product change needed, Part A is
+ FIXED (the code is already live on production <code>f89e959</code>). Keep old text after <code>Was:</code>. Rebuild the
+ board (platform <code>docs/AI-ONBOARDING-GUIDE.md</code> section 7.3), and update the website board item for
+ the screenshots with <code>node status/add-issue.js</code> (find its A-number first, it was A-322).
+</li><li>
+Report back, short: the nine routes table, the spec result (collected, passed, failed with each
+ failure classified), the two eye checks, files changed with lines, sha7s, and anything not done
+ and why.
+</li></ul>
+</main></body></html>
