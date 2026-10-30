@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brief 04: email, Brevo and Supabase auth templates, end to end</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-04-EMAIL-BREVO-SUPABASE.md">BRIEF-04-EMAIL-BREVO-SUPABASE.md</a></p>
+<h1>Brief 04: email, Brevo and Supabase auth templates, end to end</h1>
+<p>Driver: Claude. Date 2026-10-30. Release R2.9. Row: <strong>R29-EMAIL-BREVO-SUPABASE-E2E-01</strong>, which also carries R29-STEP-REBRAND-03-AUTH-EMAIL-TEMPLATES-01, the template paste tail of R29-STEP-REBRAND-05-ARTWORK-AND-DESIGN-SYSTEM-01, R29-AUTH-STAGING-SEND-EMAIL-HOOK-URL-01 and R29-STEP-BREVO-SENDER-CONTACT-01.</p>
+<p>Part A is code, for Gemini. Part B is dashboards and a live test, for <strong>Claude in Chrome</strong>, and runs after Part A is committed.</p>
+<h2>How email works today (measured by the driver 2026-10-30, do not redesign it)</h2>
+<ul><li>
+<strong>Every email is built in our own code</strong> from the central brand tokens and sent through the Brevo
+ API: 32 templates in <code>web/lib/email/templates/*.tsx</code> and the API shell in
+ <code>api/app/services/email_shell.py</code>. Sender <code>contact@velstrian.com</code> (Brevo sender id 5).
+</li><li>
+<strong>Sign-in emails</strong> (sign up, reset, invite, magic link, email change) go through the Supabase
+ <strong>Send Email hook</strong> to <code>/api/auth/send-email-hook</code>, which renders <code>web/lib/email/templates/auth-email.tsx</code>
+ and sends through Brevo. Supabase's own dashboard templates are only a FALLBACK if the hook is off.
+</li><li>
+<strong>Templates stored in Brevo are retired on purpose</strong> (R285-P2-EMAIL-VENDOR-BRANDING-SETTINGS-01,
+ <code>DASHBOARD_TEMPLATES_RETIRED = true</code> in <code>apps/portal/src/lib/api/brevo-client.ts</code>), because a
+ template that lives in Brevo hardcodes colours no repo guard can see (RULE 0-C). **Never create new
+ email templates in the Brevo dashboard.** A missing email is fixed in code.
+</li><li>
+Brevo log, 29 to 30 October: every email since the 29 October promote came from contact@velstrian.com
+ (password reset, reset code, new device sign-in). Older failure alerts came from support@ and
+ support@crowagent.ai, before that promote.
+</li><li>
+Brevo plan: <strong>Free, 300 emails a day</strong> (owner rule: free tier only). Domain velstrian.com is
+ authenticated. The driver deactivated retired Brevo templates 2, 3, 5, 6 and 7. Templates 1 and 4
+ are still active because the tool's permission check blocked those two.
+</li><li>
+Staging Supabase Auth has captcha ON, so a sign-in email can only be triggered from a real browser.
+</li></ul>
+<h2>Part A, code (Gemini)</h2>
+<p>Hard limits: no push, no deploy, no dashboard, local commits on <code>review/r29-email-templates</code> from platform <code>main</code>, commit by pathspec, targeted tests only, never print a secret. <strong>Switch the repo back to <code>main</code> when you finish.</strong></p>
+<ol><li>
+<strong>Missing fallback templates.</strong> <code>scripts/generate-auth-email-templates.mjs</code> emits only
+ <code>confirmation</code>, <code>reset-password</code> and <code>welcome</code> into <code>web/lib/email-templates/</code>. Supabase has six
+ auth templates: Confirm signup, Invite user, Magic link, Change email address, Reset password,
+ Reauthentication. Extend the generator so it emits all six (HTML and <code>.txt</code>), same tokens, same
+ shell, the correct Supabase variables for each (<code>{{ .ConfirmationURL }}</code>, <code>{{ .Token }}</code>,
+ <code>{{ .NewEmail }}</code> and so on, check the Supabase docs for each type). Plain words for a first time
+ small business user (RULE 0-U), no em dash, en dash or semicolon. Regenerate, then update
+ <code>api/tests/test_email_templates.py</code> and <code>web/lib/email/__tests__/auth-email-templates.test.ts</code>
+ and run them in one invocation.
+</li><li>
+<strong>Rewrite <code>docs/EMAIL_TEMPLATES.md</code>.</strong> It is stale: it says auth mail goes through Supabase SMTP,
+ names "EPC lookup" (a decommissioned product) and an unwired drip. Replace it with the real
+ inventory: one row per email the product sends (trigger, recipient, code file, sender, transactional
+ or marketing, unsubscribe rule), built by reading the code (every <code>send_email</code>, <code>sendTransactional</code>,
+ <code>renderEmailTemplate</code> call site, comments stripped). Then list <strong>gaps</strong>: any journey that should
+ email and does not (for example a buyer invite reply, a bid deadline, a failed payment, a
+ completed export), each as a recommendation for the owner, not a decision.
+</li><li>
+Commit <code>fix(email): R29-EMAIL-BREVO-SUPABASE-E2E-01 six Supabase fallback templates from the tokens</code>
+ and <code>docs(email): R29-EMAIL-BREVO-SUPABASE-E2E-01 real email inventory and gaps</code>. Report files,
+ test counts, sha7s and the gap list.
+</li></ol>
+<h2>Part B, dashboards and live test (Claude in Chrome)</h2>
+<p>Use Chrome signed in as <strong>contact@velstrian.com</strong> for Brevo and the Supabase organisation. Check the signed in account first. Never read out, copy or screenshot an API key, hook secret or SMTP password. Change only what is listed. Record each setting before and after.</p>
+<h3>Supabase, staging <code>ipgrnwvfnumgvnxkpxsc</code> then production <code>gujtuecjzfiqsdnzgyvo</code></h3>
+<ol><li>
+Authentication, Hooks: the Send Email hook is ENABLED and points at
+ <code>https://staging-app.velstrian.com/api/auth/send-email-hook</code> (staging) and
+ <code>https://app.velstrian.com/api/auth/send-email-hook</code> (production). Report what you find. Change it
+ only if it names any other host, and do not touch the secret.
+</li><li>
+Authentication, URL Configuration: Site URL is <code>https://staging-app.velstrian.com</code> (staging) and
+ <code>https://app.velstrian.com</code> (production). The redirect list names only velstrian.com hosts and
+ localhost. Report any crowagent.ai entry, and remove it only on production after reporting.
+</li><li>
+Authentication, Email Templates: paste each of the six generated files from Part A
+ (<code>web/lib/email-templates/*.html</code>, subject from the file header) into the matching template. These
+ are the fallback only.
+</li><li>
+Authentication, Rate Limits: report the email send limits, change nothing.
+</li></ol>
+<h3>Brevo</h3>
+<ol><li>
+Templates: set templates 1 (<code>portal-user-invite</code>) and 4 (<code>trial-expiry-reminder</code>) to inactive,
+ the same as the other five. Delete none.
+</li><li>
+Senders: deactivate or delete sender id 3 <code>support@velstrian.com</code>, so only <code>contact@velstrian.com</code>
+ remains. The code already sends from contact@ (<code>api/app/config.py</code> SENDER_EMAIL).
+</li><li>
+Transactional, Settings and Logs: report the daily send count against the 300 limit, whether open
+ and click tracking is on, and the blocked contacts list (count and reasons only, no addresses).
+</li><li>
+Do not create webhooks, templates, campaigns, automations or lists. Do not send to any address
+ outside the test inboxes below.
+</li></ol>
+<h3>Live end to end test on staging (real browser, Turnstile solves itself)</h3>
+<ol><li>
+On <code>https://staging-app.velstrian.com/forgot-password</code>, request a reset for
+ <code>crowagent.platform+r285-team-owner@gmail.com</code>. Then sign up a new account at <code>/signup</code> with
+ <code>crowagent.platform+r29-email-&lt;yyyymmddhhmm&gt;@gmail.com</code>.
+</li><li>
+In Gmail (crowagent.platform@gmail.com) confirm both emails arrived within 5 minutes, From
+ <code>Velstrian Tenderworks &lt;contact@velstrian.com&gt;</code>, Velstrian branded, links pointing at
+ staging-app.velstrian.com, no crowagent text, not in spam. Screenshot each email (no tokens visible:
+ crop the link). Do not click the links.
+</li><li>
+In Brevo Logs, confirm both sends show <code>delivered</code>.
+</li></ol>
+<h3>Report back (short)</h3>
+<p>Per step: before, after, and evidence. The two received emails with their From, subject and the landing host of the link. Anything blocked and why.</p>
+</main></body></html>

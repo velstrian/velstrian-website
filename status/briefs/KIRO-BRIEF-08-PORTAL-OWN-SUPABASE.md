@@ -1,18 +1,31 @@
 # Kiro brief 08: move the founders portal onto its own Supabase project
 
 Owner of the work: a Velstrian team member, executing with Kiro. Driver and reviewer: Claude.
-Row: **R29-PORTAL-OWN-SUPABASE-01** (Phase 1, P1) in `velstrian-platform/RELEASE-2.9-TRACKER.md`.
+Work item: **R29-PORTAL-OWN-SUPABASE-01** (Phase 1, P1) on the status board.
 Written 2026-10-30. Read it fully before starting. Ask the owner when a step says so.
+
+**Where things are, from any machine:**
+- This brief: http://192.168.1.63:8099/briefs/KIRO-BRIEF-08-PORTAL-OWN-SUPABASE.html (office network)
+- The work item and every update: GitHub issue https://github.com/velstrian/velstrian-platform/issues/803
+- The status board: http://192.168.1.63:8099/#platform
+
+**How to report.** You do not edit the tracker file. Post every update as a comment on issue 803
+(Kiro can do it with `gh issue comment 803 --repo velstrian/velstrian-platform --body "..."`). Start
+each comment with the step and a state word: `INVENTORY DONE`, `DESIGN READY FOR APPROVAL`, `BUILT`,
+`BLOCKED`. Claude reads the issue and updates the board for you. The owner approves in the same issue.
 
 ## 0. Before you start
 
-1. Read `velstrian-platform/docs/AI-ONBOARDING-GUIDE.md` and `velstrian-platform/ENGINEERING-STANDARDS.md`.
+1. In your clone of `velstrian/velstrian-platform`, read `docs/AI-ONBOARDING-GUIDE.md` and `ENGINEERING-STANDARDS.md`
+   (the same guide is on the board: http://192.168.1.63:8099/#architecture/aionboarding).
    Rules that bite here: RULE 0-G (no push without the owner's written approval, state the cost
    first), 0-T (targeted tests only), 0-V (measure before you claim), 0-L (this machine's RAM is
    shared, stay above 1 GB free), IDENTITY (`Velstrian Tenderworks <platform@velstrian.com>`, never a
    personal name or email), secrets guide 3.7 (never print, paste or commit a key).
-2. Work on branch `review/r29-portal-own-supabase` from platform `main`. Commit by pathspec. **Switch
-   back to `main` when you stop for the day** (the :8099 board and other agents read `main`).
+2. Work on branch `review/r29-portal-own-supabase` from `main` in your own clone. Commit by pathspec.
+   **Never push without the owner's written approval in issue 803** (RULE 0-G). A push of a `review/*`
+   branch starts no GitHub Actions run and Vercel cancels the build, so it costs nothing, but it still
+   needs that approval.
 3. Access check. The new project is `upxwdxhqzdsjnpsftsfb` (free plan, owner created 2026-10-30).
    Confirm you can open it in the Supabase dashboard and through your Supabase tool. If you cannot,
    stop and ask the owner to add you to the organisation that holds it.
@@ -99,10 +112,10 @@ Write `docs/release-2.9/portal-own-supabase/DESIGN.md` covering:
 4. Only after a week of the portal working on the new project: drop the `portal_*` tables from the
    platform databases with a migration, owner approved, and remove the old code paths.
 
-## 4. Board and report
+## 4. Reporting
 
-- Update the row R29-PORTAL-OWN-SUPABASE-01 at each step (OPEN, then WIP, BUILT when code is done and
-  not live, FIXED when the owner confirms on production). Keep the old text after `Was:`. Commit the
-  tracker on platform `main` only and rebuild the board (onboarding guide section 7.3).
-- At each stop, report to the owner and the driver, short: what you measured, what changed (files,
-  commits), test results with counts, what you need approved next.
+- Report on issue 803 at every stop (inventory done, design ready, built, blocked). Short: what you
+  measured, what changed (files, commits, branch), test results with counts, what you need approved.
+- Put the INVENTORY and DESIGN documents in the issue as comments (or attach them), so the owner and
+  Claude can read them without your machine.
+- Claude moves the work item on the board (OPEN, WIP, BUILT, FIXED) from your issue comments.

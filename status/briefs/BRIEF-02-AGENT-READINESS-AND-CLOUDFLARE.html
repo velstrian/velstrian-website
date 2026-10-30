@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 02: velstrian.com agent readiness (website code) and Cloudflare dashboard changes</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-02-AGENT-READINESS-AND-CLOUDFLARE.md">BRIEF-02-AGENT-READINESS-AND-CLOUDFLARE.md</a></p>
+<h1>Gemini brief 02: velstrian.com agent readiness (website code) and Cloudflare dashboard changes</h1>
+<p>Driver: Claude (reviews your work). Executor: Gemini. Date 2026-10-30. Release R2.9.</p>
+<p>Rows: <strong>R29-WEB-AGENT-READINESS-AND-CLOUDFLARE-HARDENING-01</strong> (website board A-504) and <strong>R29-STEP-REBRAND-08-WEBSITE-01</strong>. Repo: <code>velstrian-website</code>.</p>
+<p>Part A is website code. Part B is four Cloudflare dashboard changes. Do Part B only the way it is written, change nothing else in Cloudflare.</p>
+<h2>Read first</h2>
+<p><code>velstrian-website/CLAUDE.md</code>, <code>velstrian-website/GEMINI.md</code>, <code>velstrian-platform/ENGINEERING-STANDARDS.md</code> (rules 0-G, 0-T, 0-L, 0-S, 0-U, IDENTITY). Where <code>GEMINI.md</code> says Gemini changes no code, this brief wins for this task only: the owner authorises code changes and LOCAL commits on a <code>review/*</code> branch.</p>
+<h2>Hard limits</h2>
+<ul><li>
+<strong>No push.</strong> A push to website <code>main</code> is a production Cloudflare deploy and needs its own owner
+ approval. No <code>wrangler deploy</code>, no dashboard change.
+</li><li>
+No em dash, en dash or semicolon in any user facing text (the deploy fails on an em dash).
+</li><li>
+Never open or print <code>.env*</code>, keys or tokens. Identity is <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>.
+</li><li>
+Free RAM must stay above 1 GB. One heavyweight (the astro build) at a time.
+</li><li>
+Commit by pathspec, <code>git commit -- &lt;paths&gt;</code>, never <code>git add .</code>.
+</li></ul>
+<h2>Measured by the driver on 2026-10-30</h2>
+<p>isitagentready.com scan of <a href="https://velstrian.com:">https://velstrian.com:</a> <strong>level 2 Bot-Aware</strong>. Passing: robots.txt, sitemap, Link headers (service-doc, describedby), AI bot rules, Content Signals. The only requirement for level 3 Agent-Readable is Markdown content negotiation. Failing but out of scope (no such service exists, publishing them would describe nothing real): API catalog, OAuth discovery, MCP server card, A2A card, agent skills, WebMCP, DNS-AID, ARD, personal agent protocol. Commerce checks are neutral.</p>
+<h1>PART A, website code</h1>
+<h2>Task 1, Markdown twins with content negotiation (free plan)</h2>
+<p>Cloudflare's Markdown for Agents switch is Pro plan only, and the owner rule is free plan only, so build it in the site.</p>
+<ol><li>
+First find how the site is served today: Pages static assets, a Pages Function, or the Worker in
+ <code>cloudflare-workers/</code> (<code>wrangler.toml</code>, <code>marketing-edge-cache.ts</code>, <code>tools-bot-conditional.ts</code>).
+ Report which. If an existing Worker or Function already runs on every HTML request, add the
+ negotiation there so no new invocation is billed. If adding it means a NEW Worker or Function on
+ every request, STOP and report the expected requests per day against the free 100,000 per day
+ limit before building.
+</li><li>
+At build time emit a Markdown twin of every public HTML page (<code>/pricing</code> gets <code>/pricing.md</code>, <code>/</code>
+ gets <code>/index.md</code>). Main content only (no nav, footer, cookie banner), keep headings, links and any
+ JSON-LD as a fenced json block at the end. A small Astro integration or a post build script over
+ <code>dist/</code> is fine. Add it to the existing build script so it runs every build.
+</li><li>
+When a request carries <code>Accept: text/markdown</code>, serve the twin with
+ <code>Content-Type: text/markdown; charset=utf-8</code> and <code>Vary: Accept</code>. Browsers still get HTML. Every
+ HTML response also gets <code>Vary: Accept</code> and a
+ <code>Link: &lt;/path.md&gt;; rel="alternate"; type="text/markdown"</code> alongside the existing Link values in <code>_headers</code>.
+</li><li>
+Read every block you edit, comments included. A file that warns against your change outranks this
+ brief, so report the conflict and stop.
+</li></ol>
+<h2>Task 2, auth.md heading</h2>
+<p><code>auth.md</code> H1 is <code># Signing in to Velstrian</code>. The scanner needs an H1 containing <code>auth.md</code>. Change it to <code># Velstrian auth.md</code> and keep the body. If an existing test or the brand guard asserts the old heading, update it in the same commit.</p>
+<h2>Task 3, Content Signals (owner approved 2026-10-30)</h2>
+<p><code>robots.txt</code> line <code>Content-Signal: ai-train=no, search=yes, ai-input=no</code> becomes <code>Content-Signal: ai-train=no, search=yes, ai-input=yes</code>. Update the comment so it states why: the site wants to be cited in AI answers, and training stays off. Change it wherever the robots source lives (root <code>robots.txt</code>, <code>astro/public</code>, or a generator). Find all copies first.</p>
+<h2>Task 4, R29-STEP-REBRAND-08-WEBSITE-01</h2>
+<p><code>astro/src/data/site-facts.json</code> lines 520 and 572 are evidence strings saying HSTS was measured on <code>app.crowagent.ai</code>. Reword to <code>app.velstrian.com</code> (re-measured 2026-10-30: it sends <code>max-age=31536000; includeSubDomains; preload</code>, the root site sends <code>max-age=63072000</code>). Leave line 69 (<code>status.crowagent.ai</code>), it is the banned host guard. Run <code>astro/scripts/check-site-facts.mjs</code>.</p>
+<h2>Verify (targeted only)</h2>
+<ul><li>
+<code>npm run build</code> in <code>astro/</code> once, green, and the count of <code>.md</code> twins written equal to the count of
+ HTML pages in <code>dist/</code> (state both numbers).
+</li><li>
+Serve <code>dist/</code> locally the way production serves it (<code>wrangler pages dev</code> or <code>wrangler dev</code> for the
+ Worker), then:
+ <code>curl -sI -H "Accept: text/markdown" <a href="http://localhost:&lt;port&gt;/pricing">http://localhost:&lt;port&gt;/pricing</a></code> returns <code>text/markdown</code> and
+ <code>Vary: Accept</code>, and the same without the header returns <code>text/html</code>. Paste both.
+</li><li>
+<code>check-brand-names.js</code>, <code>check-site-facts.mjs</code>, and only the tests that cover the files you touched.
+</li></ul>
+<h2>Commit and board</h2>
+<ul><li>
+Branch <code>review/r29-agent-readiness</code> from website <code>main</code>. One commit per task, messages
+ <code>feat(agents): R29-WEB-AGENT-READINESS-AND-CLOUDFLARE-HARDENING-01 &lt;what&gt;</code> and
+ <code>fix(copy): R29-STEP-REBRAND-08-WEBSITE-01 HSTS evidence names app.velstrian.com</code>.
+</li><li>
+Set both platform rows and A-504 to `BUILT 2026-10-30 - &lt;sha7s&gt; on review/r29-agent-readiness,
+ not pushed, waits on the owner website push approval<code>. Keep the old text after </code>Was:`. Rebuild the
+ board (platform <code>docs/AI-ONBOARDING-GUIDE.md</code> section 7.3).
+</li></ul>
+<h2>Report back (short)</h2>
+<p>How the site is served, files changed with lines, the build numbers, the two curl outputs, the sha7s, anything not done and why.</p>
+<p>---</p>
+<h1>PART B, Cloudflare dashboard</h1>
+<p><strong>Owner approval, 2026-10-30:</strong> Gemini may make exactly the four dashboard changes below in the Cloudflare dashboard, in the browser, on zone <code>velstrian.com</code>. Nothing else. This overrides the "no settings changes" line in <code>GEMINI.md</code> for these four changes only.</p>
+<h2>Before you start</h2>
+<ul><li>
+Sign in to <a href="https://dash.cloudflare.com">https://dash.cloudflare.com</a> as <strong>contact@velstrian.com</strong> (owner rule, every third party
+ dashboard uses that account). Check the signed in account in the top right before any change.
+ Account name: VELSTRIAN SYSTEMS LIMITED.
+</li><li>
+Never print, copy or screenshot an API token, service token secret or key. If one is on screen,
+ report only its NAME.
+</li><li>
+No DNS change, no SSL/TLS change, no change to any other rule, app or setting.
+</li><li>
+Write a note of every value BEFORE you change it, so each change can be undone.
+</li></ul>
+<h2>Already done by the Cloudflare agent, verify only</h2>
+<p>Early Hints is ON (Speed, Optimization). Confirm it reads On. Change nothing.</p>
+<h2>Change 1, WAF custom rule (block scan paths)</h2>
+<p>Security, Security rules, Create rule, Custom rule.</p>
+<ul><li>
+Name: <code>Block common scan paths</code>
+</li><li>
+Expression (Edit expression):
+ <code>(starts_with(http.request.uri.path, "/.env")) or (starts_with(http.request.uri.path, "/.git")) or (starts_with(http.request.uri.path, "/wp-admin")) or (starts_with(http.request.uri.path, "/wp-login.php")) or (starts_with(http.request.uri.path, "/xmlrpc.php"))</code>
+</li><li>
+Action: Block. Deploy.
+</li></ul>
+<p>Test: <code>curl -s -o /dev/null -w "%{http_code}" <a href="https://velstrian.com/.env">https://velstrian.com/.env</a></code> gives 403, and <code>https://velstrian.com/pricing</code>, <code>https://app.velstrian.com/login</code> and <code>https://api.velstrian.com/health</code> give the same status as before the rule (measure all three BEFORE deploying, then after).</p>
+<h2>Change 2, rate limiting rule (auth endpoints on app.velstrian.com)</h2>
+<p>The Cloudflare agent asked for paths on api.velstrian.com. <strong>There are none.</strong> The driver measured the code on 2026-10-30: the API has no sign in or password reset endpoint. Password sign in goes from the browser straight to Supabase (which has its own limits and Turnstile). The account recovery endpoints live on the web app, <strong>app.velstrian.com</strong>, which is proxied by Cloudflare.</p>
+<p>Security, Security rules, Create rule, Rate limiting rule.</p>
+<ul><li>
+Name: <code>Rate limit account recovery endpoints</code>
+</li><li>
+Expression:
+ <code>(http.host eq "app.velstrian.com" and (starts_with(http.request.uri.path, "/api/auth/password-reset/") or http.request.uri.path eq "/api/auth/reset-password" or http.request.uri.path eq "/api/auth/unlock" or http.request.uri.path eq "/api/auth/accept-invite" or starts_with(http.request.uri.path, "/api/auth/email-change")))</code>
+</li><li>
+Characteristic: IP. Period 10 seconds. Requests: 20. Action: Block. Duration: 10 seconds (the
+ free plan fixes these, take what it allows and report it).
+</li><li>
+<strong>Must NOT match</strong> <code>/api/auth/send-email-hook</code> (Supabase calls it from a few shared IPs, blocking it
+ stops every auth email), <code>/auth/callback</code>, any Stripe or webhook path, or anything on
+ api.velstrian.com. The expression above already avoids them, do not widen it.
+</li><li>
+The free plan allows one rate limiting rule. If one already exists, stop and report it.
+</li></ul>
+<p>Test: one <code>curl -s -o /dev/null -w "%{http_code}" -X POST <a href="https://app.velstrian.com/api/auth/password-reset/request">https://app.velstrian.com/api/auth/password-reset/request</a> -H "Content-Type: application/json" -d "{}"</code> returns the same status as before the rule (a 4xx for an empty body is fine). Do NOT send 20 requests to trip it, and never put a real email address in the body.</p>
+<h2>Change 3, binding cookie on the portal Access app</h2>
+<p>Zero Trust, Access, Applications, <strong>Velstrian Portal</strong> (covers portal.velstrian.com and staging-portal.velstrian.com), Edit, Settings or Advanced, <strong>Binding Cookie</strong> On, Save. Only that app.</p>
+<p>Test: open <a href="https://portal.velstrian.com">https://portal.velstrian.com</a> in a fresh window, complete the Access sign in, and confirm the portal home loads. If sign in breaks, turn the cookie Off at once and report.</p>
+<h2>Change 4, remove leftover test emails from the staging Access app</h2>
+<p><strong>Velstrian Staging App</strong>, policy <strong>Named testers</strong>. Remove ONLY these six, which are one-off leftovers written by the portal invite Playwright spec (<code>apps/portal/tests/e2e/forms/customer-invite.spec.ts:125</code> creates a fresh <code>e2e-invite-&lt;timestamp&gt;@example.com</code> each run, so nothing reuses them):</p>
+<ul><li>
+e2e-invite-1790438270661@example.com
+</li><li>
+e2e-invite-1790440894306@example.com
+</li><li>
+e2e-invite-1790505102678@example.com
+</li><li>
+e2e-invite-1790513120253@example.com
+</li><li>
+e2e-invite-1790620625998@example.com
+</li><li>
+e2e-invite-1790621088948@example.com
+</li></ul>
+<p>Leave every gmail.com address and the service token policy exactly as they are. The owner decides those. Do not touch the Velstrian Portal policy list.</p>
+<h2>Part B board and report</h2>
+<ul><li>
+Update R29-WEB-AGENT-READINESS-AND-CLOUDFLARE-HARDENING-01 in
+ <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>: prefix the status with
+ `2026-10-30 dashboard: Early Hints on (verified), WAF scan path rule &lt;id&gt;, rate limit rule &lt;id&gt;,
+ binding cookie on Velstrian Portal, 6 e2e test emails removed from staging.` Keep OPEN while the
+ website code half (brief 02) is not BUILT. Keep the old text after <code>Was:</code>. Rebuild the board
+ (<code>docs/AI-ONBOARDING-GUIDE.md</code> section 7.3). Do the same on website board item A-504 with
+ <code>node status/add-issue.js --id A-504 --note "..."</code>.
+</li><li>
+Report back, short: for each change the before value, the after value read back from the
+ dashboard, the rule ids, and every curl status before and after. Anything you could not do and why.
+</li></ul>
+<h2>Why only these four (driver verdicts on the 15 audit findings, for the record)</h2>
+<p>Driver verdicts on the 15 findings, measured 2026-10-30.</p>
+<p>| # | Finding | Verdict | |---|---|---| | 1 | Enable HSTS | NO CHANGE. Already sent by the site, max-age 63072000, includeSubDomains, preload. Edge HSTS would duplicate it | | 2 | Minimum TLS 1.3 | NO CHANGE. Keep 1.2, older public-sector and corporate proxies still need it. TLS 1.3 is already on | | 3 | DMARC p=reject | ALREADY A ROW, R29-EMAIL-DMARC-REJECT-01, earliest 2026-11-12 after two clean weeks. Add adkim=s and aspf=s then, after confirming Brevo DKIM aligns | | 4 | SPF -all | WITH ROW 3 on 2026-11-12, only after every sender is listed. Today SPF is <code>include:_spf.mx.cloudflare.net ~all</code> | | 5 | Proxy status.velstrian.com | NO CHANGE. It is a CNAME to Better Uptime, whose custom domain certificate needs DNS only | | 6 | Auto Minify | NO CHANGE. Cloudflare retired Auto Minify in 2024, and Astro already minifies | | 7 | Early Hints | APPLY | | 8 | 0-RTT | NO CHANGE. api.velstrian.com is on this zone and 0-RTT allows replay of POST requests | | 9 | www to root redirect | ALREADY DONE. www.velstrian.com/pricing answers 301 to velstrian.com/pricing | | 10 | Rate limit the API | APPLY WITH CARE. Never per IP on all of api.velstrian.com, because the web app calls the API from a few Vercel server IPs and one rule would throttle every customer. Free plan gives one rule. Limit only sign in and password reset paths, about 20 requests per 10 seconds per IP, action Block, and exclude the Stripe webhook path | | 11 | WAF custom rule | APPLY. One rule, all hosts: block paths starting <code>/.env</code>, <code>/.git</code>, <code>/wp-admin</code>, <code>/wp-login.php</code>, <code>/xmlrpc.php</code> | | 12 | Access email lists | REVIEW FIRST. The <code>e2e-invite-*@example.com</code> entries may be used by the staging Playwright walks, so check before removing. The portal list is the owner's call | | 13 | Cache rules | NO CHANGE for app.velstrian.com, Vercel already serves immutable asset headers. Website static assets already cache | | 14 | Rocket Loader | NO CHANGE. It rewrites script tags and would break the site's CSP script hashes | | 15 | Access binding cookie | APPLY on the portal and staging portal apps, then sign in once to confirm |</p>
+<p>The Cloudflare agent applied Early Hints on 2026-10-30. It could not do the WAF rule, the rate limit or the binding cookie (its token has no write permission) and listed the Access emails without changing them.</p>
+</main></body></html>
