@@ -137,6 +137,9 @@
          border-radius:100px;padding:9px 16px;font:inherit;font-size:14px;cursor:pointer;
          min-height:40px}
   button[aria-pressed="true"]{background:var(--teal);color:var(--bg);border-color:var(--teal);font-weight:700}
+  button:disabled{opacity:.6;cursor:progress}
+  #rebuildbar{align-items:center}
+  .rebuildmsg{color:var(--sub);font-size:13px}
   button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--built);outline-offset:2px}
   table{width:100%;border-collapse:collapse;margin-top:8px}
   th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -1259,6 +1262,16 @@
        with no time, which is the only freshness a reader actually met. It now sits
        directly under the navigation, above the tiles. -->
   <p class="updated" id="updated"></p>
+  <!-- [2026-10-30, owner: "board must have button to press auto refresh"] The board
+       watcher and the logon task were removed, so nothing regenerated platform.json
+       and the 10 second poll re-read stale data. Refresh asks serve-board.js to run
+       the full rebuild. Auto refresh repeats it every minute while this tab is open.
+       Under a plain static server the endpoint is absent and the status says so. -->
+  <div class="controls" id="rebuildbar">
+    <button type="button" id="rebuildnow">Refresh now</button>
+    <button type="button" id="rebuildauto" aria-pressed="false">Auto refresh: off</button>
+    <span class="rebuildmsg" id="rebuildmsg" role="status"></span>
+  </div>
   <div class="warn" id="warn" hidden></div>
   <!-- [R283-BOARD-PLATFORM-ARTIFACT-01] Summary and activity panels for the
        Platform tab. Placed after the disagreement banner, which stays an alarm at
@@ -3204,6 +3217,59 @@ if (_initialBoard.misread) {
    board or the MASTER hub there is nothing to refresh, and re-injecting the fragment
    every 10 seconds wiped reader state. */
 setInterval(() => { if (!BOARDS[board].views && board !== 'master') load(); }, 10000);
+
+/* Refresh button: POST /api/rebuild on serve-board.js regenerates platform.json and
+   phase-breakdown.json, then the board reloads. Auto refresh repeats it every 60 s and
+   remembers the choice in this browser. */
+(() => {
+  const nowBtn = document.getElementById('rebuildnow');
+  const autoBtn = document.getElementById('rebuildauto');
+  const msg = document.getElementById('rebuildmsg');
+  const KEY = 'board.autoRefresh';
+  let timer = null;
+
+  async function rebuildBoard() {
+    if (nowBtn.disabled) return;
+    nowBtn.disabled = true;
+    msg.textContent = 'Rebuilding...';
+    try {
+      const r = await fetch('api/rebuild', { method: 'POST' });
+      if (r.status === 404 || r.status === 405) {
+        msg.textContent = 'Refresh needs the board started from Velstrian-Board.ps1 (serve-board.js).';
+        return;
+      }
+      const result = await r.json();
+      if (!result.ok) {
+        msg.textContent = 'Rebuild failed: ' + (result.error || 'unknown error');
+        return;
+      }
+      if (!BOARDS[board].views && board !== 'master') await load();
+      msg.textContent = 'Rebuilt at ' + new Date(result.at).toLocaleTimeString() + ' (' + (result.ms / 1000).toFixed(1) + ' s)';
+    } catch (err) {
+      msg.textContent = 'Rebuild failed: ' + (err instanceof Error ? err.message : String(err));
+    } finally {
+      nowBtn.disabled = false;
+    }
+  }
+
+  function setAuto(on) {
+    autoBtn.setAttribute('aria-pressed', String(on));
+    autoBtn.textContent = 'Auto refresh: ' + (on ? 'on' : 'off');
+    clearInterval(timer);
+    timer = on ? setInterval(rebuildBoard, 60000) : null;
+    try { localStorage.setItem(KEY, on ? '1' : '0'); } catch (err) { msg.textContent = 'Auto refresh is on for this visit only (browser storage unavailable).'; }
+  }
+
+  nowBtn.addEventListener('click', rebuildBoard);
+  autoBtn.addEventListener('click', () => {
+    const on = autoBtn.getAttribute('aria-pressed') !== 'true';
+    setAuto(on);
+    if (on) rebuildBoard();
+  });
+  let saved = false;
+  try { saved = localStorage.getItem(KEY) === '1'; } catch (err) { saved = false; }
+  if (saved) setAuto(true);
+})();
 </script>
 </body>
 </html>
