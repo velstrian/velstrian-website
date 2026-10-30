@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executor Briefs</title>
+<style>
+  :root { --bg: #090B12; --surf: #12151E; --line: #262B38; --text: #F8F9FB; --muted: #A9ADBA; --accent: #8C85FF; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.55 Inter, system-ui, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 16px 48px; }
+  a { color: var(--accent); }
+  h1 { font-size: 24px; margin: 8px 0 4px; }
+  p.sub { color: var(--muted); margin: 0 0 20px; }
+  table { width: 100%; border-collapse: collapse; background: var(--surf); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+  td code { font-size: 12px; color: var(--muted); }
+  .status { white-space: nowrap; font-size: 13px; }
+  .open { color: #F5B454; } .done { color: #5CD6A4; }
+  .wrap { overflow-x: auto; }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="../#master">&larr; Board</a></p>
+  <h1>Executor briefs and prompts</h1>
+  <p class="sub">Open a brief, give its link to your agent (Gemini, Kiro or Claude in Chrome), and report back on its work item. Address from another machine on the office network: <strong>http://192.168.1.63:8099/briefs/</strong>. Status lives on the work item on the board, this list shows the state when the brief was last updated.</p>
+  <div class="wrap">
+  <table>
+    <thead><tr><th>Brief</th><th>Executor</th><th>Work items</th><th>State</th></tr></thead>
+    <tbody>
+      <tr><td><a href="KIRO-BRIEF-08-PORTAL-OWN-SUPABASE.md">08 Portal moves to its own Supabase project</a></td><td>Team member with Kiro</td><td><code>R29-PORTAL-OWN-SUPABASE-01</code></td><td class="status open">Ready to start</td></tr>
+      <tr><td><a href="BRIEF-07-MONO-WEIGHT-AND-DARK-TEAL-TEXT.md">07 Mono label weight and dark teal text</a></td><td>Gemini</td><td><code>R29-STEP-REBRAND-05-ARTWORK-AND-DESIGN-SYSTEM-01</code> <code>R29-STEP-P2-PREMIUM-TYPE-01</code></td><td class="status done">Done, in review</td></tr>
+      <tr><td><a href="BRIEF-06-SUPABASE-EMAIL-SETUP.md">06 Supabase email templates and captcha key</a></td><td>Owner (done by hand)</td><td><code>R29-EMAIL-BREVO-SUPABASE-E2E-01</code></td><td class="status done">Done</td></tr>
+      <tr><td><a href="BRIEF-05-SIDEBAR-REWORK-AND-SIGNUP-COUNTRY.md">05 Sidebar check rework and signup country</a></td><td>Gemini</td><td><code>R29-STEP-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01</code> <code>R29-AUTH-SIGNUP-COUNTRY-POSTS-AF-01</code></td><td class="status done">Done</td></tr>
+      <tr><td><a href="BRIEF-04B-CHROME-RERUN.md">04B Email setup rerun</a></td><td>Claude in Chrome</td><td><code>R29-EMAIL-BREVO-SUPABASE-E2E-01</code></td><td class="status done">Replaced by 06</td></tr>
+      <tr><td><a href="BRIEF-04-EMAIL-BREVO-SUPABASE.md">04 Email, Brevo and Supabase end to end</a></td><td>Gemini, Claude in Chrome</td><td><code>R29-EMAIL-BREVO-SUPABASE-E2E-01</code></td><td class="status done">Done</td></tr>
+      <tr><td><a href="BRIEF-03-SIDEBAR-WALK-AND-ABOUT-HERO.md">03 Sidebar staging check and real About page picture</a></td><td>Gemini</td><td><code>R29-STEP-P2-SIDEBAR-LAYOUT-AND-POPOVERS-01</code> <code>R29-STEP-WEB-REAL-SCREENSHOTS-01</code></td><td class="status done">Done</td></tr>
+      <tr><td><a href="BRIEF-02-AGENT-READINESS-AND-CLOUDFLARE.md">02 Website agent readiness and Cloudflare</a></td><td>Gemini</td><td><code>R29-WEB-AGENT-READINESS-AND-CLOUDFLARE-HARDENING-01</code> <code>R29-STEP-REBRAND-08-WEBSITE-01</code></td><td class="status done">Done, waits on website push</td></tr>
+      <tr><td><a href="BRIEF-01-PRODUCT-KEYS.md">01 Legacy and dead product keys</a></td><td>Gemini</td><td><code>R29-REG-LEGACY-PRODUCT-KEYS-REMOVE-01</code> <code>R29-ARCH-DEAD-PRODUCT-CONTEXT-KEYS-01</code></td><td class="status done">Done, waits on promote</td></tr>
+    </tbody>
+  </table>
+  </div>
+</main>
+</body>
+</html>
