@@ -517,7 +517,7 @@
           {
             "id": "S1",
             "line": "Encrypted in transit with TLS 1.3 and at rest with AES-256.",
-            "evidence": "B1 HSTS preload measured on app.crowagent.ai, app, API and database accept TLS 1.3 (D289). B2 Supabase AES-256 at rest, crm_vault.py AES-256-GCM"
+            "evidence": "B1 HSTS preload measured on app.velstrian.com, app, API and database accept TLS 1.3 (D289). B2 Supabase AES-256 at rest, crm_vault.py AES-256-GCM"
           },
           {
             "id": "S2",
@@ -569,7 +569,7 @@
           {
             "id": "S9",
             "line": "Rate limiting on the API and strict security headers on the app.",
-            "evidence": "B8 api/app/middleware/rate_limit.py, B9 CSP with nonce, frame-ancestors none, X-Frame-Options DENY, HSTS measured on app.crowagent.ai"
+            "evidence": "B8 api/app/middleware/rate_limit.py, B9 CSP with nonce, frame-ancestors none, X-Frame-Options DENY, HSTS measured on app.velstrian.com"
           },
           {
             "id": "S10",
