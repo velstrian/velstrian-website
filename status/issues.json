@@ -2451,7 +2451,7 @@
       "sev": "P1",
       "title": "R29-STEP-LEGAL-KIRO-B-FIX-01 and R29-STEP-P3-AI-CUSTOMER-CONTENT-POLICY-01 legal pages: D521 liability ceiling, D522 recovery targets, D523 data protection contact, DPA shared examples clause",
       "status": "BUILT",
-      "note": "Platform tracker rows of the same ids hold the detail. BUILT 2026-10-31 on website review/r29-legal-b (fab2a058 terms, privacy, fb56ea8d DPA regenerated from the platform, check-help-centre PASS), not pushed. Open: the content parity baseline must be refreshed after an astro build, because the privacy heading Data Protection Officer became Data protection contact.",
+      "note": "Platform tracker rows of the same ids hold the detail. BUILT 2026-10-31 on website review/r29-legal-b (fab2a058 terms, privacy, fb56ea8d DPA regenerated from the platform, check-help-centre PASS), not pushed. || 2026-10-31 astro build on review/r29-legal-b: 44 gates run, 44 passed, 0 failed (content-parity 49 of 49 routes PASS, no baseline refresh needed). Ready for the owner local check on 8093, not pushed.",
       "changed": "2026-10-31",
       "changedAt": "2026-10-31T03:38:43.059Z",
       "release": "R2.9"
