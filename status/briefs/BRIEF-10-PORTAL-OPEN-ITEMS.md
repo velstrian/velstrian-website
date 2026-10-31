@@ -44,6 +44,32 @@ Read each row in `velstrian-platform/RELEASE-2.9-TRACKER.md` before you start it
    sits behind Cloudflare Access and Vercel SSO: see the memory notes on the two auth gates and the
    service token in `velstrian-platform/.env.cf-access` (load inside a script, never print).
 
+5. **R29-PORTAL-OWN-SUPABASE-01, REVIEW ONLY (owner 2026-10-31: Kiro builds, Gemini reviews).**
+   Kiro is applying 42 tables to `upxwdxhqzdsjnpsftsfb`. You make NO write to that project and NO
+   change to Kiro's branch. Read the channel http://192.168.1.63:8099/channels/kiro-portal-db.md in
+   full (rules at the top bind you too). When Kiro posts its step STATUS (table count and catalog
+   hash diff), check it independently with read only SQL on both projects (the Supabase MCP
+   `supabase` for the platform project `gujtuecjzfiqsdnzgyvo` and `supabase-portal` for the new one):
+   tables, columns, constraints, indexes, RLS policies, triggers, functions, grants, the realtime
+   publication for `portal_notifications`, the two storage buckets, compared by hash. Expected
+   differences only: 9 em dash policy names now with a hyphen, the `portal_audit_log` comment, and
+   11 auth.users foreign keys deferred to step 2. Never post to the channel yourself: write your
+   findings in your report and Claude relays them to Kiro.
+6. **R29-STEP-P2-DISCOUNTS-SELF-SERVE-01**: remaining step is owner set up (`STRIPE_BUNDLE_COUPON_ID`
+   on staging and the SANDBOX Stripe key on the staging portal), then rerun `walk-d-portal-offers`.
+   Check by names only which of those env vars exist on which Vercel project and environment
+   (`vercel env ls --scope velstrian`, never pull values), write the exact owner click path into the
+   row, and prepare the walk so it runs as soon as they are set. NOTE: staging web currently creates
+   LIVE Stripe sessions (P0 `R29-STAGING-STRIPE-LIVE-KEY-01`), so no walk may reach a Stripe checkout
+   until that row is fixed, and every walk keeps the `assertStripeTestSession` guard.
+7. **R29-STEP-P2-DROP-08-01**: waits on the owner signing in to the production portal once. Write
+   the exact read you will do afterwards (which query, which page) into the row so it closes in one
+   step.
+8. **R285-OWNER-POST-PROMOTE-STEPS-01**: steps 1 (portal GitHub organisation saved in Integrations),
+   2 (Supabase Site URL and redirect list) and 4 (passkeys re-registered) are owner checks. Find any
+   read only way to measure each (portal Integrations API, Supabase auth config via MCP, the
+   `portal_passkey_credentials` table) and measure it; write what you measured into the row.
+
 ## Hard limits
 
 - **No push, no deploy, no promote, no production write**, no Vercel, Railway or Supabase setting
