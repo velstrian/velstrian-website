@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kiro crew brief 11: knowledge base, product videos and an ultra premium social pack</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="KIRO-CREW-BRIEF-11-CONTENT.md">KIRO-CREW-BRIEF-11-CONTENT.md</a></p>
+<h1>Kiro crew brief 11: knowledge base, product videos and an ultra premium social pack</h1>
+<p>Driver: Claude (reviews every deliverable). Executor: the Kiro crew. Date 2026-10-31. Release R2.9.</p>
+<p>Row: <strong>R29-CONTENT-KIRO-CREW-01</strong> in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>. It absorbs <code>R286-PLATFORM-KNOWLEDGE-BASE-01</code>, <code>R286-PLATFORM-VIDEO-SERIES-01</code>, <code>R286-ONBOARDING-VIDEO-02</code> and website item <code>A-506</code>. Read those rows first.</p>
+<p>This is separate from the Kiro portal database move (<code>R29-PORTAL-OWN-SUPABASE-01</code>). Do not touch it.</p>
+<h2>Who it is for (RULE 0-U, the most important rule)</h2>
+<p>Small and mid size organisations that write bids THEMSELVES, with no bid team, bidding for PUBLIC AND PRIVATE work. Every word must make the complicated work feel simple to a first time user from a 10 person firm. Plain words first, jargon only where needed and explained the first time. Name both public and private buyers. One idea per piece. Show the real product, never stock photography.</p>
+<h2>The three deliverables</h2>
+<h3>1. Knowledge base (help centre)</h3>
+<ul><li>
+Source of truth for help articles: <code>velstrian-platform/web/lib/help-articles.ts</code> (the public help
+ centre on velstrian.com is GENERATED from it, never edit the website copy directly).
+</li><li>
+Cover every journey and feature of Velstrian Bid and Velstrian Buy that has no article yet:
+ find, assess and win a contract; upload tender documents; requirements; drafting answers from
+ your own documents; evidence vault; social value (PPN 026 only); reviews and approvals; exports;
+ billing and plans; team and seats; integrations; and the Buy journeys (requirements, evaluations,
+ supplier feedback). Map existing articles first and list the gaps.
+</li><li>
+Each article: at least 300 words of real substance, what it is for, step by step in the product,
+ what happens next, common problems. EVERY step and screen name must be confirmed in the code
+ (<code>web/app</code>, components, i18n strings). Anything you cannot confirm is left out and listed.
+ Prices, seats, credits and trial facts only through the catalogue helpers already used in
+ <code>help-articles.ts</code> (never typed). A guard test already fails any article under 300 words.
+</li></ul>
+<h3>2. Product video series</h3>
+<ul><li>
+Supplier journey and buyer journey, each as one long walkthrough plus short cuts (30 to 90
+ seconds) per feature, with burned in captions and a plain voice over script.
+</li><li>
+Record REAL screens from STAGING only (<code>https://staging-app.velstrian.com</code>, test accounts from
+ the repo's staging walk set up, <code>web/e2e/r285-staging-walk</code>). Never record production, never show
+ real customer data, never a real email address or phone number on screen.
+</li><li>
+Staging checkout currently creates LIVE Stripe sessions (P0 <code>R29-STAGING-STRIPE-LIVE-KEY-01</code>):
+ do not record or click any checkout or payment step until the driver tells you it is fixed.
+</li><li>
+Deliver: script (text), shot list, the video files (MP4, 1080p and 1080x1920 vertical), caption
+ files (SRT), and a thumbnail per video.
+</li></ul>
+<h3>3. Ultra premium social media pack</h3>
+<p>The bar: a top 1 percent B2B SaaS brand. Calm, confident, precise. Real product screens, generous space, one message per slide, strong typography, motion that explains rather than decorates.</p>
+<ul><li>
+<strong>Carousels:</strong> at least 12 promotional carousels (6 to 10 slides each, 1080x1350 and 1080x1080)
+ for LinkedIn and Instagram: problem, how Velstrian solves it, the real screen, one plain call to
+ action.
+</li><li>
+<strong>Autoplay posts:</strong> at least 12 short looping videos (6 to 15 seconds, silent first with captions
+ burned in, 1080x1350 and 1080x1920) that autoplay well in a feed: a feature in action, a before
+ and after, a 3 step how-to.
+</li><li>
+<strong>Copy:</strong> post text for each (LinkedIn, X, Instagram), hashtags kept short and relevant, alt text
+ for every image.
+</li><li>
+<strong>Calendar:</strong> a 6 week posting plan as a simple table, so the owner can approve and schedule.
+</li></ul>
+<h2>Brand and claims (all binding)</h2>
+<ul><li>
+<strong>Design system (RULE 0-C):</strong> colours, type, logo and spacing ONLY from the central sources:
+ <code>velstrian-platform/packages/tokens/src</code>, <code>velstrian-website/astro/src/styles/tokens.css</code> and
+ <code>brand.source.json</code>, and <code>velstrian-branding/BRANDING-SPEC.md</code>. Never invent or eyeball a colour.
+ Name every token you used in your report.
+</li><li>
+<strong>Names:</strong> the company is Velstrian Tenderworks. Products: Velstrian Bid and Velstrian Buy.
+ Never "council" as a product name. Never CrowMark, CrowAgent or any old name.
+</li><li>
+<strong>Claims:</strong> never a win rate, an AI accuracy figure, a customer count, a testimonial or logo you
+ cannot prove, or a promise that the product makes anyone compliant. Positive wording is welcome
+ ("follows ISO/IEC 27001", "UK GDPR compliant" where true), never a certificate we do not hold.
+ Social value is PPN 026 only, never PPN 002. Data claim: "Primary data stored in the EU", never
+ "EU data residency". Anything unverifiable goes in a REVIEW list in the report, not in the post.
+</li><li>
+<strong>Writing (RULE 0-S):</strong> British English, sentence case, no em or en dashes, no semicolons in
+ prose, no hype words (revolutionise, harness, unleash, cutting edge, game changing).
+</li><li>
+<strong>Accessibility:</strong> captions on every video, alt text on every image, text contrast meeting WCAG AA
+ against the token colours, nothing flashing.
+</li></ul>
+<h2>Hard limits</h2>
+<ul><li>
+<strong>Publish nothing.</strong> No post, upload, schedule, ad spend, or push to any social account, website
+ or app. Everything is a draft for the owner's approval.
+</li><li>
+<strong>No push</strong> to any git remote. Work on a branch named <code>review/r29-content-kiro-crew</code> in each repo
+ you change. Never edit <code>vercel.json</code>. A push to website <code>main</code> is a production deploy and is never
+ yours to do.
+</li><li>
+<strong>Money:</strong> free tools only. Anything that costs money (paid stock, paid music, paid AI, a paid
+ plan) is a question to the owner with the price first. AI generated imagery only if it is clearly
+ better than a real product screen, and never of people presented as customers.
+</li><li>
+<strong>Secrets and data:</strong> never put a key, password, real email or real phone number in any file,
+ frame or caption.
+</li><li>
+<strong>Shared machine (RULE 0-L):</strong> keep free RAM above 1.5 GB on the machine you run on, one browser
+ at a time, and never kill a process you did not start.
+</li><li>
+Identity for commits: <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Commit by pathspec.
+</li></ul>
+<h2>Where to put things</h2>
+<ul><li>
+Knowledge base: edits to <code>velstrian-platform/web/lib/help-articles.ts</code> (and related help sources)
+ on your review branch, with the existing help guard tests passing.
+</li><li>
+Videos, social pack and scripts: a new folder <code>velstrian-website/marketing/content-2026-11/</code> on
+ your review branch, organised as <code>knowledge-base-gaps.md</code>, <code>videos/</code>, <code>social/carousels/</code>,
+ <code>social/autoplay/</code>, <code>social/copy.md</code>, <code>social/calendar.md</code>. Keep large binaries out of git if
+ they are over 25 MB each: list their location and checksum instead.
+</li></ul>
+<h2>Report</h2>
+<p>Write <code>gemini-briefs/KIRO-CREW-BRIEF-11-REPORT.md</code>:</p>
+<ul><li>
+the knowledge base gap list and the articles added, with word counts
+</li><li>
+every video and social asset with its file path, size and one line on its message
+</li><li>
+the tokens used
+</li><li>
+the REVIEW list of claims you could not verify
+</li><li>
+anything you left out and why
+</li></ul>
+<p>Update the row <code>R29-CONTENT-KIRO-CREW-01</code> in the tracker with the branch names and commit shas. The driver then reviews and asks the owner to approve publishing, piece by piece.</p>
+</main></body></html>
