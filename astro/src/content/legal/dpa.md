@@ -64,7 +64,7 @@ eyebrow: "Legal and data protection"
 
 ### 8.3 Resilience
 
-<ul><li>Automated daily database backups managed by our hosting provider.</li><li>A documented backup and restore procedure and business continuity plan.</li><li>Documented incident-response runbook with 24-hour RTO, 1-hour RPO targets.</li></ul>
+<ul><li>Automated daily database backups managed by our hosting provider.</li><li>A documented backup and restore procedure and business continuity plan.</li><li>Documented incident-response runbook. We aim to restore service within 24 hours and to lose no more than 24 hours of data. These are targets, not commitments.</li></ul>
 
 ### 8.4 Monitoring
 

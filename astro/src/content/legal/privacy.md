@@ -30,9 +30,9 @@ We use Google Gemini and Anthropic Claude as AI sub-processors. They process the
 
 ## The detail, in full
 
-Every clause below is written for clarity. Jump to any section, or contact our Data Protection Officer with a question.
+Every clause below is written for clarity. Jump to any section, or send a question to our data protection contact.
 
-<aside aria-label="Data Protection Officer" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Data Protection Officer</p> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
+<aside aria-label="Data protection contact" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Data protection contact</p> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
 
 ## Data controller
 
@@ -115,11 +115,11 @@ You have the following rights in respect of personal data we hold about you. To 
 - **Withdraw consent (Art 7(3)):** For consent-based processing, you can withdraw your consent at any time.
 - **Lodge ICO complaint (Art 77):** You have the right to lodge a complaint with the UK Information Commissioner’s Office (ICO).
 
-## Data Protection Officer
+## Data protection contact
 
-Our Data Protection Officer is the canonical contact for all data-protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact our DPO for any matter related to Velstrian Bid or to any legacy feature retained for existing customers data handling.
+Our data protection contact handles all data protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact them for any matter related to Velstrian Bid or to any legacy feature retained for existing customers data handling.
 
-<dl class="deflist"> <dt>Contact the DPO</dt> <dd>Email: <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a> | <a href="mailto:privacy@velstrian.com">privacy@velstrian.com</a></dd> </dl>
+<dl class="deflist"> <dt>Contact details</dt> <dd>Email: <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a> | <a href="mailto:privacy@velstrian.com">privacy@velstrian.com</a></dd> </dl>
 
 ## Cookies
 
