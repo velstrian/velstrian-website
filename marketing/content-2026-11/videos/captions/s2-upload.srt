@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:08,000
+Got the tender documents? Drop them in.
+
+2
+00:00:08,000 --> 00:00:16,000
+Velstrian Bid reads them into a clear list of questions.
+
+3
+00:00:16,000 --> 00:00:24,000
+Buyer changes during the tender stay in one place.
+
+4
+00:00:24,000 --> 00:00:32,000
+Always work from the latest version.
+
+5
+00:00:32,000 --> 00:00:40,000
+Velstrian Bid.

@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:09,000
+A compliance matrix is just a checklist of every question.
+
+2
+00:00:09,000 --> 00:00:18,000
+Break each question into its parts.
+
+3
+00:00:18,000 --> 00:00:27,000
+Give every part an owner.
+
+4
+00:00:27,000 --> 00:00:36,000
+Nothing slips through.
+
+5
+00:00:36,000 --> 00:00:45,000
+Velstrian Bid.
