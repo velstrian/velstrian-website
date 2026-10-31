@@ -198,7 +198,7 @@ export const CAPABILITIES: Card[] = [
   },
   {
     heading: 'Private sector quotes',
-    body: "Quick Quote takes a buyer's RFQ, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. You write the scope. The AI does not draft it.",
+    body: "Quick Quote takes a buyer's RFQ, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. AI drafts the scope from the request, and you accept, change or remove each item. It never writes a price, a rate or a term.",
   },
   {
     heading: 'Answer library, tone profiles and learnings',
