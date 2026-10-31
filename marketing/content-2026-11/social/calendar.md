@@ -4,6 +4,8 @@ A draft plan for the owner to approve and schedule. Nothing is scheduled or post
 
 Dates are weekdays, left for the owner to set the start week. Times are a suggestion for a UK business audience.
 
+Start week: to be set by the owner.
+
 | Week | Mon (carousel) | Wed (autoplay loop) | Fri (video short) |
 | --- | --- | --- | --- |
 | 1 | c01 Find the right tenders (Bid) | a07 Build a requirement (Buy) | s1-find (Bid) |
