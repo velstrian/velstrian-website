@@ -215,3 +215,4 @@ tests/parity-shots/
 # Local gate and certification run logs. Evidence for the session that made
 # them, not source, and not something a deploy or another machine needs.
 .certification/
+status/media/
