@@ -99,7 +99,7 @@ const { trail, current } = Astro.props;
   <ol class="meta crumb__list">
     {trail.map((c) => (
       <li class="crumb__item">
-        <a href={c.path}>{c.name}</a>
+        <a class="tap-target" href={c.path}>{c.name}</a>
       </li>
     ))}
     <li class="crumb__item"><span aria-current="page">{current}</span></li>
@@ -173,6 +173,11 @@ const { trail, current } = Astro.props;
    * routes), but a one-word crumb can be narrow too, and a rule that guards one
    * axis is a rule that has to be revisited the first time somebody writes a
    * crumb called "UK".
+   *
+   * A-503 (2026-10-31): 24px is the WCAG AA floor, and this site holds every
+   * standalone control to 44 by 44. The link keeps its 24px drawing, so the row
+   * and its separators do not move, and `tap-target` (styles/targets.css) grows
+   * the hit area to --tap-min on both axes.
    */
   .crumb__item a,
   .crumb__item [aria-current='page'] {
