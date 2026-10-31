@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 10: finish the open portal work items</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-10-PORTAL-OPEN-ITEMS.md">BRIEF-10-PORTAL-OPEN-ITEMS.md</a></p>
+<h1>Gemini brief 10: finish the open portal work items</h1>
+<p>Driver: Claude (reviews your work). Executor: Gemini. Date 2026-10-31. Release R2.9.</p>
+<p>Owner instruction 2026-10-31: every portal work item is yours, EXCEPT the portal database move <code>R29-PORTAL-OWN-SUPABASE-01</code>, which stays with Kiro (team member) and is coordinated in <a href="http://192.168.1.63:8099/channels/kiro-portal-db.md.">http://192.168.1.63:8099/channels/kiro-portal-db.md.</a> Do not touch that work or project <code>upxwdxhqzdsjnpsftsfb</code>.</p>
+<p>Read each row in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code> before you start it.</p>
+<h2>Where you work</h2>
+<ul><li>
+Platform worktree <code>C:\w\vp</code>, branch <code>review/r29-batch2</code>. Do not switch branches. Other lanes
+ commit there too, so commit ONLY your own paths with <code>git commit -- &lt;paths&gt;</code>.
+</li><li>
+Production code is <code>git show origin/main:&lt;path&gt;</code>. Batch 2 (today's portal fixes) is on
+ <code>review/r29-batch2</code> only and is NOT deployed yet.
+</li><li>
+Portal code: <code>apps/portal</code>. Portal AI eval harness: <code>api/tests/ai_golden/portal_deep_live.py</code>,
+ <code>api/tests/ai_golden/deep_test_cases/portal_cases.json</code>, <code>api/tests/golden/</code>.
+</li></ul>
+<h2>Your items, in order</h2>
+<ol><li>
+<strong>R29-PORTAL-AI-LIVE-DEFECTS-01, what is left</strong> (fixes already in <code>90d0bda7d</code>):
+<ul><li>
+<code>portal_agents_tests_run_repro</code> passes 2 of 20: the model's NPV and IRR drift between two runs.
+ The product compares figures that should be arithmetic. Compute <code>npv</code>, <code>payback_years</code>, <code>irr</code>
+ and <code>roi</code> in code from the inputs (a small pure function with unit tests against known worked
+ examples), and let the model only explain them. Then the repro compares computed values.
+</li><li>
+Case or scorer defects, fix them fairly and say why in the commit (never tune a case to a
+ result you have seen): HLT-03 pins a score of 48 and reads "30" from the field name
+ <code>loginsLast30d</code>; BRD-01 and AGN-01 flag heading and list numbers as invented figures.
+</li><li>
+Evidence: <code>docs/release-2.9/portal-live-2026-10-31/</code> and <code>docs/release-2.9/d507/portal-agents-tests/</code>.
+</li></ul>
+</li><li>
+<strong>R29-PORTAL-PROD-FEATURES-FAILING-01</strong> (P0 parent): its five children are built in batch 2
+ (<code>78f0e80bc</code>, <code>fcdfff1d2</code>, <code>c484907bd</code>, <code>3a2ed732b</code>) except the env row. Write the close
+ criteria into the row as a checklist that can only be ticked on staging after the batch 2 promote:
+ Integrations page shows the current key fingerprint and every stored credential reads
+ <code>current_key</code> or <code>legacy_readable</code>; the Stripe console opens in the right mode; rollback works
+ with a project key; pricing redeploy targets <code>velstrian-platform-web</code>.
+</li><li>
+<strong>R29-PORTAL-PROD-MISSING-CONFIG-ENV-VARS-01</strong>: only <code>VERCEL_TOKEN</code> on the portal STAGING
+ environment is missing. That is an owner action; write the exact click path into the row.
+</li><li>
+<strong>Batch 2 portal staging walk (prepare now, run after the owner promotes batch 2 to staging)</strong>:
+ write a Playwright walk under <code>web/e2e/r285-staging-walk/</code> (Playwright resolves only from
+ <code>velstrian-platform/web</code>) for <code>staging-portal.velstrian.com</code> covering item 2's checklist plus the
+ passkey sign in Turnstile check (<code>5a36f84d5</code>) and the founders activity feed. The staging portal
+ sits behind Cloudflare Access and Vercel SSO: see the memory notes on the two auth gates and the
+ service token in <code>velstrian-platform/.env.cf-access</code> (load inside a script, never print).
+</li></ol>
+<h2>Hard limits</h2>
+<ul><li>
+<strong>No push, no deploy, no promote, no production write</strong>, no Vercel, Railway or Supabase setting
+ change, no Stripe write. Paid AI calls only on STAGING and only with a cap the owner approved:
+ the portal live run approval is GBP 3 with GBP 1.85 spent, so at most GBP 1.15 more, worst case
+ stated before each run, spend read from the staging <code>ai_calls</code> ledger.
+</li><li>
+<strong>Secrets.</strong> Never print, paste or commit a key, token or env value.
+</li><li>
+<strong>RULE 0-V.</strong> Name what you measured and how it could have failed. A grep is a hint, confirm at
+ the call site.
+</li><li>
+<strong>RULE 0-T.</strong> Targeted tests only, one invocation per package, red prove every fix on HEAD.
+</li><li>
+<strong>RULE 0-L.</strong> Keep free RAM above 1.5 GB before any test or browser run. One browser at a time.
+ Never kill a process you did not start.
+</li><li>
+Identity <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Commit messages
+ <code>fix(portal-ai): &lt;ROW-ID&gt; &lt;what&gt;</code> or <code>test(e2e): &lt;ROW-ID&gt; &lt;what&gt;</code>. No em dash, en dash or
+ semicolon in prose. Never "council" as a product name. PPN 026 only.
+</li></ul>
+<h2>Report</h2>
+<p>Write <code>gemini-briefs/BRIEF-10-REPORT.md</code>: per item, the sha, files with lines, tests with collected and passed counts, red proofs, spend from the ledger, and anything left with the exact next action. Update each row you touched in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code> (main checkout, commit by pathspec) and rebuild the board: <code>node status/build-platform-board.js</code> from <code>velstrian-website</code>, then <code>node scripts/assign-phases.mjs ../velstrian-website/status/platform.json</code> from <code>velstrian-platform</code>, then the board again.</p>
+</main></body></html>
