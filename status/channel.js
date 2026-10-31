@@ -22,7 +22,7 @@ const crypto = require('crypto');
 
 const CHANNEL_DIR = path.join(__dirname, 'channels');
 const TOKEN_FILE = path.join(os.homedir(), '.velstrian', 'channel-token');
-const CHANNELS = new Set(['kiro-portal-db']);
+const CHANNELS = new Set(['kiro-portal-db', 'kiro-crew-content']);
 const AUTHORS = new Set(['kiro', 'claude']);
 const MAX_BODY = 32 * 1024;
 const HEADER_RE = /^### #(\d+) · ([A-Z]+) · (.+)$/gm;

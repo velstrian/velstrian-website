@@ -8,6 +8,29 @@ website item `A-506`. Read those rows first.
 
 This is separate from the Kiro portal database move (`R29-PORTAL-OWN-SUPABASE-01`). Do not touch it.
 
+## You work on your own machine: set up first
+
+The driver works on another machine. Nothing in this brief refers to that machine's folders. Paths
+below are relative to your own clones.
+
+1. Clone or update both repositories and start from the latest `main`:
+   - `https://github.com/velstrian/velstrian-platform` (product code, help articles, tokens)
+   - `https://github.com/velstrian/velstrian-website` (public site, brand tokens)
+   Run `git fetch origin` then `git switch -c review/r29-content-kiro-crew origin/main` in each.
+   Check you are current: `git rev-list --count HEAD..origin/main` must print 0. A stale checkout
+   gives wrong file paths and wrong screen names.
+2. The brand spec `BRANDING-SPEC.md` lives in the owner's workspace and may not be in your clones.
+   Use the tokens in `velstrian-platform/packages/tokens/src` and
+   `velstrian-website/astro/src/styles/tokens.css` plus `brand.source.json`. If you need the spec,
+   ask for it in the channel.
+3. Your coordination channel (rules at the top, they bind you):
+   http://192.168.1.63:8099/channels/kiro-crew-content.md . Post with the token the owner gave you
+   (see the prompt). All questions, decisions, review requests and your final report go there.
+4. Staging access for recording: you need staging test accounts and the Vercel staging access the
+   repo's walks use (`velstrian-platform/web/e2e/r285-staging-walk`). If your machine does not have
+   them, post a `BLOCKER` in the channel naming exactly what is missing. Never ask for a production
+   login.
+
 ## Who it is for (RULE 0-U, the most important rule)
 
 Small and mid size organisations that write bids THEMSELVES, with no bid team, bidding for PUBLIC
@@ -21,6 +44,11 @@ public and private buyers. One idea per piece. Show the real product, never stoc
 
 - Source of truth for help articles: `velstrian-platform/web/lib/help-articles.ts` (the public help
   centre on velstrian.com is GENERATED from it, never edit the website copy directly).
+- IMPORTANT, avoid a merge clash: the driver rewrote all 38 existing articles today on a branch you
+  cannot see yet. So do NOT edit `help-articles.ts`. Put every NEW article in a new file
+  `velstrian-platform/web/lib/help-articles-crew.ts`, in the same object shape as the entries in
+  `help-articles.ts`, and list any change you would make to an EXISTING article in
+  `velstrian-website/marketing/content-2026-11/knowledge-base-gaps.md`. The driver merges both.
 - Cover every journey and feature of Velstrian Bid and Velstrian Buy that has no article yet:
   find, assess and win a contract; upload tender documents; requirements; drafting answers from
   your own documents; evidence vault; social value (PPN 026 only); reviews and approvals; exports;
@@ -30,7 +58,7 @@ public and private buyers. One idea per piece. Show the real product, never stoc
   what happens next, common problems. EVERY step and screen name must be confirmed in the code
   (`web/app`, components, i18n strings). Anything you cannot confirm is left out and listed.
   Prices, seats, credits and trial facts only through the catalogue helpers already used in
-  `help-articles.ts` (never typed). A guard test already fails any article under 300 words.
+  `help-articles.ts` (never typed).
 
 ### 2. Product video series
 
@@ -102,9 +130,13 @@ space, one message per slide, strong typography, motion that explains rather tha
   `social/autoplay/`, `social/copy.md`, `social/calendar.md`. Keep large binaries out of git if
   they are over 25 MB each: list their location and checksum instead.
 
-## Report
+## Report and handover
 
-Write `gemini-briefs/KIRO-CREW-BRIEF-11-REPORT.md`:
+Commit everything on `review/r29-content-kiro-crew` in your clones. Do NOT push: a push needs the
+owner's own approval. When a batch is ready, post a `REVIEW-REQUEST` in the channel. When all is
+done, post your report in the channel as one message (or `part 1 of n` if longer than 30 KB) and add
+it to your branch as `velstrian-website/marketing/content-2026-11/REPORT.md`. The owner then decides
+how the branch reaches the driver (an approved push of the review branch). Your report covers:
 
 - the knowledge base gap list and the articles added, with word counts
 - every video and social asset with its file path, size and one line on its message
@@ -112,5 +144,5 @@ Write `gemini-briefs/KIRO-CREW-BRIEF-11-REPORT.md`:
 - the REVIEW list of claims you could not verify
 - anything you left out and why
 
-Update the row `R29-CONTENT-KIRO-CREW-01` in the tracker with the branch names and commit shas.
-The driver then reviews and asks the owner to approve publishing, piece by piece.
+Do not edit the tracker yourself (the driver owns it and updates `R29-CONTENT-KIRO-CREW-01` from your
+channel messages). The driver reviews and asks the owner to approve publishing, piece by piece.
