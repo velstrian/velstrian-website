@@ -2,9 +2,9 @@
 title: "Terms of Service and Agreement | Velstrian"
 description: "Velstrian Systems Ltd terms of service: customer account use, subscriptions, acceptable use, data handling, liability and service changes."
 heading: "Terms of Service."
-lastUpdated: "2026-10-26"
-version: "2026-10-26"
-effectiveDate: "2026-10-26"
+lastUpdated: "2026-10-31"
+version: "2026-10-31"
+effectiveDate: "2026-10-31"
 ---
 ## The six clauses customers ask about
 
@@ -50,7 +50,7 @@ These Terms include the [Acceptable Use rules](#acceptable-use) in section 3 and
 - Subscriptions are billed monthly or annually in advance via Stripe. All prices are quoted in GBP.
 - There is no free plan. You can sign up and start a plan yourself on our website, paying by card, or for qualifying plans by invoice with a purchase order.
 - A free trial is available when you start a plan. It runs for 7 days at the Starter feature set for 1 user, with 30 AI credits, and needs a card to start. No charge arises during a trial, and you can cancel before it ends.
-- Trials are limited to one per organisation. When a trial period ends, access stops unless a subscription is taken, and your data is retained.
+- Trials are limited to one per organisation. If you do not cancel before the 7 days end, the trial becomes the paid plan you chose and the card you gave at the start is charged then. Cancel within the 7 days and you pay nothing. Your data is retained either way.
 - Paid plans are subject to the limits specified on the Pricing page.
 - Velstrian may modify plans or pricing with 30 days' written notice to subscribers.
 
