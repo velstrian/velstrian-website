@@ -7,7 +7,8 @@
  * the documented sequence: build-platform-board.js, then the platform repo's
  * assign-phases.mjs (writes phase-breakdown.json), then build-platform-board.js again.
  *
- * Binds to 127.0.0.1 only. No dependencies. Usage: node status/serve-board.js --port=8099
+ * Listens on every interface like http-server did: team members open briefs at the office
+ * network address (192.168.1.63:8099). No dependencies. Usage: node status/serve-board.js --port=8099
  */
 'use strict';
 
@@ -94,4 +95,4 @@ const server = http.createServer((req, res) => {
 });
 
 server.on('error', (err) => { log('error', 'listen', { error: err.message, port: PORT }); process.exit(1); });
-server.listen(PORT, '127.0.0.1', () => log('info', 'listen', { url: `http://localhost:${PORT}/` }));
+server.listen(PORT, () => log('info', 'listen', { url: `http://localhost:${PORT}/` }));
