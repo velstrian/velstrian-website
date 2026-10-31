@@ -18,6 +18,8 @@ eyebrow: "Legal and data protection"
 
 <p><strong>Nature and purpose:</strong> hosting, storage, retrieval, modification, processing, and deletion of Customer personal data to deliver the services.</p>
 
+<p><strong>Shared examples (optional, off by default):</strong> the Customer&#x27;s administrator may turn on example sharing in settings. While it is on, a user can choose to share a single draft and its approved answer with Velstrian Tenderworks (a &quot;Shared Example&quot;). For Shared Examples, and only for them, Velstrian Tenderworks decides why and how the data is used, so Velstrian Tenderworks acts as an independent controller and not as the Customer&#x27;s processor, on the lawful basis of legitimate interests (UK GDPR Article 6(1)(f)). Velstrian Tenderworks uses a Shared Example only to test and improve its own AI features, never shares it with another customer, never uses it to train any AI model, and deletes every Shared Example of the Customer straight away when the administrator turns sharing off. Nothing else the Customer submits becomes a Shared Example. Our <a href="/privacy/">Privacy Policy</a> describes this processing.</p>
+
 ## 2. Categories of data and data subjects
 
 <p><strong>Data subjects:</strong> Customer employees, contractors, and representatives who use the Velstrian Tenderworks platform under the Customer&#x27;s account.</p>
