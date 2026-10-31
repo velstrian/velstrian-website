@@ -52,12 +52,12 @@
     ]
   },
   "trust_badges": {
-    "measured": "2026-10-22, owner instruction under D255, badge wording D281 (\"Follows ISO/IEC 27001\" replaces \"Built to ISO 27001 controls\") and D289 (\"TLS 1.3 in transit\" and \"EU data residency\" stay). One list, read by the footer, /about/, /security/, /pricing/ and the contact form",
+    "measured": "2026-10-22, owner instruction under D255, badge wording D281 (\"Follows ISO/IEC 27001\" replaces \"Built to ISO 27001 controls\") and D289 (\"TLS 1.3 in transit\" stays). 2026-10-31, A-500 item 7: \"EU data residency\" became \"Primary data stored in the EU\", because the AI processors (Google Gemini, Anthropic Claude) are not region pinned, so residency overclaimed. Primary storage is Supabase eu-west-1 (Ireland), see regions.data_at_rest. One list, read by the footer, /about/, /security/, /pricing/ and the contact form",
     "list": [
       "AES-256 at rest",
       "TLS 1.3 in transit",
       "GDPR compliant",
-      "EU data residency",
+      "Primary data stored in the EU",
       "Follows ISO/IEC 27001",
       "ICO registered"
     ]

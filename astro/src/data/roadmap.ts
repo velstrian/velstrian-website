@@ -185,7 +185,7 @@ export const AI_LIVE: { heading: string; body: string; link?: { label: string; h
   {
     heading: 'Two models, two jobs',
     body: 'Customer-facing drafting in Velstrian Bid runs on Google Gemini. In-depth reasoning and analysis tasks run on Anthropic Claude. Both are data sub-processors that handle task text under secure contract outside the EU. The full list is on the',
-    link: { label: 'privacy page', href: '/privacy/' },
+    link: { label: 'sub-processors page', href: '/sub-processors/' },
   },
   {
     heading: 'Grounded in the source law',
