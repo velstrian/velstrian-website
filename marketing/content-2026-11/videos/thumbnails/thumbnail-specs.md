@@ -18,21 +18,21 @@ One spec per video. These are text specs, not images. Whoever builds the thumbna
 
 | Video | Title line (display) | Support line (body) | Accent use | Backdrop screen |
 | --- | --- | --- | --- | --- |
-| supplier-long | Win more work | Velstrian Bid, end to end | teal rule under title | Opportunities feed, dimmed |
-| buyer-long | Run a fair process | Velstrian Buy, end to end | teal rule under title | Evaluation screen, dimmed |
-| s1-find | Find the right tenders | One search, three sources | teal chip "Discover" | Opportunities feed |
-| s2-upload | Upload your tender pack | Read into clear questions | teal rule | Tender documents |
-| s3-compliance | Nothing slips through | Build the checklist | teal rule | Compliance matrix |
-| s4-draft | Draft from your evidence | See where it came from | teal chip "Evidence" | Narrative with citation drawer |
-| s5-social-value | Your social value answer | Follows PPN 026 | teal rule | Social value screen |
-| s6-review-export | Review and export | Word and PDF, ready | teal rule | Submission screen |
-| s7-answer-library | Reuse your best answers | One library, every bid | teal chip "Library" | Answer library |
-| b1-requirement | Build a requirement | Step by step | teal rule | Requirement Builder |
-| b2-weighting | Keep it fair | Weighting and rubric | teal rule | Weighting settings |
-| b3-evaluate | Score with confidence | A fixed calculation | teal rule | Evaluation detail |
-| b4-compare | Compare on whole life cost | One figure per currency | teal rule | Compare bids |
-| b5-award | Record the award | Standstill and letters | teal rule | Award step |
-| b6-scorecards | Score your suppliers | Inside the supplier record | teal rule | Supplier scorecard |
+| supplier-long | Win more work | Velstrian Bid, end to end | --c-teal rule under title | Opportunities feed, dimmed |
+| buyer-long | Run a fair process | Velstrian Buy, end to end | --c-teal rule under title | Evaluation screen, dimmed |
+| s1-find | Find the right tenders | One search, three sources | --c-teal chip "Discover" | Opportunities feed |
+| s2-upload | Upload your tender pack | Read into clear questions | --c-teal rule | Tender documents |
+| s3-compliance | Nothing slips through | Build the checklist | --c-teal rule | Compliance matrix |
+| s4-draft | Draft from your evidence | See where it came from | --c-teal chip "Evidence" | Narrative with citation drawer |
+| s5-social-value | Your social value answer | Follows PPN 026 | --c-teal rule | Social value screen |
+| s6-review-export | Review and export | Word and PDF, ready | --c-teal rule | Submission screen |
+| s7-answer-library | Reuse your best answers | One library, every bid | --c-teal chip "Library" | Answer library |
+| b1-requirement | Build a requirement | Step by step | --c-teal rule | Requirement Builder |
+| b2-weighting | Keep it fair | Weighting and rubric | --c-teal rule | Weighting settings |
+| b3-evaluate | Score with confidence | A fixed calculation | --c-teal rule | Evaluation detail |
+| b4-compare | Compare on whole life cost | One figure per currency | --c-teal rule | Compare bids |
+| b5-award | Record the award | Standstill and letters | --c-teal rule | Award step |
+| b6-scorecards | Score your suppliers | Inside the supplier record | --c-teal rule | Supplier scorecard |
 
 ## Tokens used (for the report)
 
