@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 09: why portal features fail on production</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-09-PORTAL-PROD-FEATURES-FAILING.md">BRIEF-09-PORTAL-PROD-FEATURES-FAILING.md</a></p>
+<h1>Gemini brief 09: why portal features fail on production</h1>
+<p>Driver: Claude (reviews your work). Executor: Gemini. Date 2026-10-31. Release R2.9.</p>
+<p>Row: <strong>R29-PORTAL-PROD-FEATURES-FAILING-01</strong> (P0, first in the queue), in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>. Read the row first. The owner reports that portal features fail on production even after the live Stripe key was set, and that most portal features have issues.</p>
+<p>This brief is a MEASUREMENT. You find every failing feature and its real cause, with evidence. You do not fix production.</p>
+<h2>Hard limits</h2>
+<ul><li>
+<strong>Read only on production.</strong> No deploy, promote, push, migration, SQL write, dashboard change,
+ environment variable change or Stripe write. Read only SQL (<code>select</code>) through the Supabase MCP is
+ allowed. Anything that would change production is a finding to report, never an action.
+</li><li>
+<strong>Do not touch the portal Supabase move.</strong> <code>R29-PORTAL-OWN-SUPABASE-01</code> (project
+ <code>upxwdxhqzdsjnpsftsfb</code>) belongs to a team member working in Kiro. Note how it affects your findings,
+ but change nothing there.
+</li><li>
+<strong>Secrets (guide section 3.7).</strong> The Cloudflare Access service token is in
+ <code>velstrian-platform/.env.cf-access</code>. Load it from that file inside a script and send it as the
+ <code>CF-Access-Client-Id</code> and <code>CF-Access-Client-Secret</code> headers. Never print it, never put it on a
+ command line, never paste it into a file, a log or a report.
+</li><li>
+<strong>RULE 0-V.</strong> Do not assume the Stripe key is the cause. Every finding states what you measured,
+ the HTTP status, the landed URL (a 302 to the Access login is NOT a measurement of the feature) and
+ the stored error string from Sentry, Vercel runtime logs, Railway logs or the database.
+</li><li>
+<strong>Shared machine (RULE 0-L).</strong> Keep free RAM above 1 GB. One browser session at a time. Never kill
+ a process you did not start.
+</li><li>
+Identity <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. Commit by pathspec. No em dash, en dash
+ or semicolon in what the owner reads.
+</li></ul>
+<h2>Tools you have</h2>
+<p>Chrome DevTools MCP, Sentry, Vercel, Railway, Supabase (<code>supabase</code> for the platform organisation, <code>supabase-portal</code> for the new portal project), PostHog, Stripe (read only).</p>
+<h2>Steps</h2>
+<ol><li>
+<strong>List the portal features.</strong> Read <code>velstrian-platform/apps/portal/src</code> (routes, pages and the API
+ calls each one makes). Produce the feature list: name, route, and the backend calls it depends on
+ (portal API routes, platform API on Railway, Supabase tables, Stripe).
+</li><li>
+<strong>Find where production portal is served and what it talks to.</strong> From the Vercel MCP: the
+ <code>crowagent-portal</code> project, its latest production deployment, its git sha and the NAMES (never
+ the values) of its production environment variables. Report which Supabase project and which API
+ host those names point at, from the code that reads them.
+</li><li>
+<strong>Collect the errors that already exist.</strong> Sentry: unresolved issues for the portal in the
+ <code>production</code> environment over the last 14 days, with last seen, event count and user count.
+ Vercel: runtime errors and logs for the portal production deployment over the last 7 days.
+ Railway: production API logs filtered to requests from the portal. Group by route.
+</li><li>
+<strong>Walk each feature on production.</strong> Through <code>https://portal.velstrian.com</code> with the Access
+ headers (Chrome DevTools MCP or a script). Assert the status code and the landed URL first. For
+ each feature record: works or fails, the failing network call, its status and response body
+ (secrets redacted), and the console error.
+</li><li>
+<strong>Match each failure to a root cause</strong> with evidence: missing or misnamed environment variable,
+ wrong host after the rebrand (<code>crowagent</code> against <code>velstrian</code> domains), Supabase RLS denial
+ (shows as 200 with <code>[]</code>), missing table or column, Stripe mode or key mismatch, CORS, auth or
+ session cookie domain. Name the file and line in the code where it breaks.
+</li><li>
+<strong>File the rows.</strong> One R2.9 row per DISTINCT root cause in <code>RELEASE-2.9-TRACKER.md</code>, ID
+ <code>R29-PORTAL-PROD-&lt;SHORT-NAME&gt;-01</code>, <code>[SEV:..][LANE:PORTAL][PHASE:1]</code>, status <code>OPEN 2026-10-31</code>,
+ with the features it breaks, the evidence and the fix you recommend. Update
+ <code>R29-PORTAL-PROD-FEATURES-FAILING-01</code> to list the rows you filed. Commit the tracker on platform
+ <code>main</code> by pathspec, then rebuild the board with the Refresh button on
+ <code>http://localhost:8099/#platform</code>.
+</li></ol>
+<h2>What you hand back</h2>
+<p>A short report in <code>gemini-briefs/BRIEF-09-REPORT.md</code>:</p>
+<ul><li>
+a table of every portal feature: works or fails, failing call, status, error string, root cause row
+</li><li>
+the rows you filed, with severity
+</li><li>
+what you could NOT measure and why (for example a feature that needs a real customer account)
+</li><li>
+anything that looked like it needed a production change, as a question for the owner
+</li></ul>
+<h2>When you finish</h2>
+<p>Both repositories back on <code>main</code>. No uncommitted changes left except your report.</p>
+</main></body></html>
