@@ -90,6 +90,16 @@ const base = hero ? `/Assets/blog-photos/${hero.file}` : '';
  * the JPEG (at most 245 KB, lazy loaded) instead of a WebP. It removed 48 files
  * and 1,513.9 KB from the build, measured on dist. The WebP files stay on disk
  * under Assets/ and copy-assets.js only copies what a page references.
+ *
+ * A-502 (2026-10-31): the <img src> fallback is now the full size WebP master,
+ * not the JPEG. It is the same 1600w master scripts/build-blog-photos.mjs has
+ * always written beside the JPEG (WEBP_MASTER, quality 82, effort 6, from the
+ * same source buffer, so the geometry is identical). Measured over the 12 heroes:
+ * 1,897,604 B of JPEG against 1,383,674 B of WebP, 27% less. Safari 14 to 16.3
+ * reads WebP, so the cohort above now gets a WebP instead of a JPEG. The AVIF
+ * ladder is unchanged and stays the first choice. The JPEGs stay on disk because
+ * build-blog-photos.mjs reads them as masters in derive mode, but no page
+ * references them now, so copy-assets.js no longer ships them.
  */
 const WIDTHS = [400, 600, 800, 1200] as const;
 const srcset = (ext: 'avif') => WIDTHS.map((w) => `${base}-${w}w.${ext} ${w}w`).join(', ');
@@ -102,7 +112,7 @@ const srcset = (ext: 'avif') => WIDTHS.map((w) => `${base}-${w}w.${ext} ${w}w`).
         <source type="image/avif" srcset={srcset('avif')} sizes={sizes} />
         <img
           class="pi__img"
-          src={`${base}.jpg`}
+          src={`${base}.webp`}
           alt={hero.alt}
           width={boxWidth}
           height={boxHeight}
