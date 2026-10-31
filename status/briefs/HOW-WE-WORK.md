@@ -75,3 +75,23 @@ Board: http://192.168.1.63:8099/ (office network) or http://localhost:8099/ on t
   portal staging and production. See brief 08.
 - Database changes are applied with the Supabase tool's `execute_sql` and recorded as a migration file,
   never `db push` and never the Supabase command line tool.
+
+## 8. Database access for AI tools (Supabase connections)
+
+Every AI tool reaches Supabase the same way: Supabase's hosted connection at
+`https://mcp.supabase.com/mcp`, signed in through the browser. No key is stored in a file.
+
+| Connection name | Address | Organisation to choose when signing in |
+|---|---|---|
+| `supabase` | `https://mcp.supabase.com/mcp` | Velstrian Systems Ltd (platform production and staging) |
+| `supabase-portal` | `https://mcp.supabase.com/mcp?project_ref=upxwdxhqzdsjnpsftsfb` | the portal organisation (portal project only) |
+
+- **Claude Code:** both are in the workspace `.mcp.json`. Run `/mcp`, pick the connection, choose
+  Authenticate, and in the browser pick the organisation in the table.
+- **Gemini (Gemini CLI settings):** `~/.gemini/settings.json`, key `mcpServers`, each entry
+  `{"httpUrl": "<address>"}`.
+- **Kiro:** `~/.kiro/settings/mcp.json`, key `mcpServers`, each entry `{"url": "<address>"}`.
+- **A team member's own machine:** add the same two entries to your tool's file, then sign in with
+  your own Supabase account. You need to be a member of the organisation.
+- One sign in reaches one organisation, so each organisation needs its own connection name. Add
+  `&read_only=true` to the address when the tool only needs to read.

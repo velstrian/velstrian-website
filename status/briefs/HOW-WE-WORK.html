@@ -117,4 +117,22 @@ Portal database (owner decision 2026-10-30): its own project <code>upxwdxhqzdsjn
 Database changes are applied with the Supabase tool's <code>execute_sql</code> and recorded as a migration file,
  never <code>db push</code> and never the Supabase command line tool.
 </li></ul>
+<h2>8. Database access for AI tools (Supabase connections)</h2>
+<p>Every AI tool reaches Supabase the same way: Supabase's hosted connection at <code>https://mcp.supabase.com/mcp</code>, signed in through the browser. No key is stored in a file.</p>
+<p>| Connection name | Address | Organisation to choose when signing in | |---|---|---| | <code>supabase</code> | <code>https://mcp.supabase.com/mcp</code> | Velstrian Systems Ltd (platform production and staging) | | <code>supabase-portal</code> | <code>https://mcp.supabase.com/mcp?project_ref=upxwdxhqzdsjnpsftsfb</code> | the portal organisation (portal project only) |</p>
+<ul><li>
+<strong>Claude Code:</strong> both are in the workspace <code>.mcp.json</code>. Run <code>/mcp</code>, pick the connection, choose
+ Authenticate, and in the browser pick the organisation in the table.
+</li><li>
+<strong>Gemini (Gemini CLI settings):</strong> <code>~/.gemini/settings.json</code>, key <code>mcpServers</code>, each entry
+ <code>{"httpUrl": "&lt;address&gt;"}</code>.
+</li><li>
+<strong>Kiro:</strong> <code>~/.kiro/settings/mcp.json</code>, key <code>mcpServers</code>, each entry <code>{"url": "&lt;address&gt;"}</code>.
+</li><li>
+<strong>A team member's own machine:</strong> add the same two entries to your tool's file, then sign in with
+ your own Supabase account. You need to be a member of the organisation.
+</li><li>
+One sign in reaches one organisation, so each organisation needs its own connection name. Add
+ <code>&amp;read_only=true</code> to the address when the tool only needs to read.
+</li></ul>
 </main></body></html>
