@@ -8,7 +8,8 @@
  * assign-phases.mjs (writes phase-breakdown.json), then build-platform-board.js again.
  *
  * Listens on every interface like http-server did: team members open briefs at the office
- * network address (192.168.1.63:8099). No dependencies. Usage: node status/serve-board.js --port=8099
+ * network address (192.168.1.63:8099). Also carries /api/channel/<name> (channel.js), the
+ * append only Kiro and Claude message channel. No dependencies. Usage: node status/serve-board.js --port=8099
  */
 'use strict';
 
@@ -16,6 +17,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { execFile } = require('child_process');
+const channel = require('./channel.js');
 
 const STATUS_DIR = __dirname;
 const WEBSITE_DIR = path.resolve(STATUS_DIR, '..');
@@ -67,6 +69,9 @@ function send(res, status, body, type) {
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
+
+  // [R29-PORTAL-OWN-SUPABASE-01] Kiro and Claude message channel, see channel.js.
+  if (channel.handle(req, res, url, send, log)) return;
 
   if (url.pathname === '/api/rebuild') {
     if (req.method !== 'POST') return send(res, 405, JSON.stringify({ ok: false, error: 'POST only' }), TYPES['.json']);
