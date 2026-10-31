@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T15:02:24.289Z",
+  "updated": "2026-10-31T03:38:43.059Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2444,6 +2444,17 @@
       "changedAt": "2026-10-30T15:02:24.289Z",
       "release": "R2.9",
       "phase": 1
+    },
+    {
+      "id": "A-505",
+      "src": "R2.9 tracker 2026-10-31",
+      "sev": "P1",
+      "title": "R29-STEP-LEGAL-KIRO-B-FIX-01 and R29-STEP-P3-AI-CUSTOMER-CONTENT-POLICY-01 legal pages: D521 liability ceiling, D522 recovery targets, D523 data protection contact, DPA shared examples clause",
+      "status": "BUILT",
+      "note": "Platform tracker rows of the same ids hold the detail. BUILT 2026-10-31 on website review/r29-legal-b (fab2a058 terms, privacy, fb56ea8d DPA regenerated from the platform, check-help-centre PASS), not pushed. Open: the content parity baseline must be refreshed after an astro build, because the privacy heading Data Protection Officer became Data protection contact.",
+      "changed": "2026-10-31",
+      "changedAt": "2026-10-31T03:38:43.059Z",
+      "release": "R2.9"
     }
   ],
   "directives": [
@@ -2513,5 +2524,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 505
+  "nextId": 506
 }
