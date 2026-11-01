@@ -134,3 +134,14 @@ when the code is done and tested locally, OPEN with the reason when not. Then re
 `node status/build-platform-board.js` from `velstrian-website`, then
 `node scripts/assign-phases.mjs ../velstrian-website/status/platform.json` from `velstrian-platform`,
 then the board again.
+
+## Addendum (Claude, 2026-11-01 03:05 UTC): measured cause of item 1
+
+`getCredential()` in `apps/portal/src/lib/integrations/store.ts` reads the Integrations store
+(`portal_integrations`) FIRST and the Vercel env var only when nothing is stored. Production holds a
+stored `ANTHROPIC_API_KEY` from 2026-09-15, so the owner's new Vercel key is never used and every
+generate call gets 401. Stored `GITHUB_ORG` (2026-10-29) and `RAILWAY_API_TOKEN` (2026-10-29) are the
+likely cause of item 2 in the same way. In item 1 and 2: when a stored credential is refused by its
+provider, the message must say "the key saved on the Integrations page was refused, update it there",
+and the Integrations page must show which source (saved or Vercel) is in use for each key, without
+the value. Do not change the precedence itself without asking.
