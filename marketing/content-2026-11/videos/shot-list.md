@@ -4,7 +4,7 @@ Every shot below names the exact route to record on staging, what to show, and w
 
 Rule for every shot: sign in as the staging test persona named, never production, never real data. Do not open, hover or click any checkout, upgrade, buy credits or billing payment control. If a flow would reach one, stop at the step before it and cut.
 
-Personas (names from `web/e2e/r285-staging-walk/README.md`): supplier shots use `SUPPLIER_PUBLIC` and `SUPPLIER_PRIVATE`. Buyer shots use `BUYER_PUBLIC`. The driver holds the sign ins.
+Personas (names from `web/e2e/r285-staging-walk/README.md`): supplier shots use `SUPPLIER_PUBLIC` and `SUPPLIER_PRIVATE`. Buyer shots use `BUYER_PUBLIC`. Sign ins come from `web/.env.r285-walk`, never shown.
 
 Corrected on 2026-10-31 against the driver's reference recording (manifest at the media URL in channel #64). Where a route redirects on the real staging persona, the LANDED screen is named and used. Weak or empty screens are either cut or described as an empty state, and no data is created to fill them.
 
