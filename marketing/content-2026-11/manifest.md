@@ -57,3 +57,12 @@ Audio deliverables:
 - Self check per file: confirmed each has an audio stream and non-silent audio (supplier mean -15 dB, max 0 dB).
 
 Status: the horizontal walkthroughs have full audio. The vertical and square walkthrough cuts and the owner's listen on the voice sample are the remaining audio steps.
+
+## Concern log (team member / owner feedback, updated after each change)
+
+1. "the current voice sounds very automated, non-authentic and uncanny... more friendly, positive and influential". Change: dropped the piper TTS; moved to Google Cloud TTS natural voices; reviewer picked Leda (primary) + Puck (secondary) mixed. Status: DONE (voice picked), re-render IN PROGRESS.
+2. "redo only the videos containing audios and save in a separate folder". Change: new voiced videos go under videos/clips/voiced-v2 and the board v2/videos. Status: IN PROGRESS (re-rendering with chosen voice + new scripts).
+3. "social/loops/v2 is useless... no voice, pictures stretched, horrible quality". Change: scrapped the v2 loops (commit d26f011a); will rebuild from the clean full-res stills, no stretching, after the voice pick. Status: IN PROGRESS.
+4. "all videos have the same voices and the same script... different ones for each video" (without wasting credits on brand-new creative). Change: a distinct script per video, 2 long + 8 short, in review-pack-v2.md, each line sourced. Status: NEEDS DECISION (reviewer OK/Change per script).
+5. "make it more professional like a top startup... animation, design, slides" and "ask claude what you can improve". Change: design upgrade plan from driver #193 (device frames, progress bar, Ken Burns, title/end cards, lower-thirds). Status: IN PROGRESS (loops rebuild + carousels + walkthrough cards).
+6. "scripts must be 100% true... without inventing lies... influential and very good marketing style". Change: every script line carries a source on the current build; cut "Primary data stored in the EU" (not on the website); "no AI" uses the exact on-screen wording. Status: NEEDS DECISION (driver truth check + reviewer wording).
