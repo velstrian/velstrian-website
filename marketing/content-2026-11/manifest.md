@@ -39,3 +39,21 @@ One line per deliverable, with status. Masked = test tenant name and TEST MODE /
 - Durable master: the owner's Google Drive content-2026-11 (MKT has no access yet, see the channel).
 - Review board: http://192.168.1.63:8099/media/mkt/ (masked images and videos only).
 - Git: branch review/r29-content-kiro-crew in both clones, plus a git bundle backup at C:\Users\apara\velstrian-backup. Nothing pushed.
+
+## Audio (added for the owner audio rule)
+
+Voice over:
+- Engine: piper-tts (MIT licence, free, offline), run in a local venv.
+- Voice model: en_GB-cori-medium. Card: https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/medium . Dataset: LibriVox, licence PUBLIC DOMAIN. Commercial use allowed, no attribution required.
+- British English, about 150 words a minute. The product name is said as vel-STREE-an via a phonetic spelling in the TTS input only; the on-screen text and captions keep the correct spelling "Velstrian".
+
+Music bed:
+- Self-made ambient pad, synthesised with ffmpeg (layered sine tones, slow tremolo, gentle filter). Created by the crew, so no third-party rights: royalty free, commercial use fine, no attribution. Source: generated, not downloaded.
+- Ducked under the voice (sidechain), whole mix normalised to about -14 LUFS integrated (loops to about -16), peaks below 0 dB, no clipping.
+
+Audio deliverables:
+- videos/supplier-long-1920x1080-audio.mp4 and buyer-long-1920x1080-audio.mp4: voice over + ducked music + matching WebVTT (captions/supplier-long.vtt, buyer-long.vtt).
+- social/loops/*.mp4: all 24 now carry the music bed (they autoplay muted in feeds, sound present when unmuted).
+- Self check per file: confirmed each has an audio stream and non-silent audio (supplier mean -15 dB, max 0 dB).
+
+Status: the horizontal walkthroughs have full audio. The vertical and square walkthrough cuts and the owner's listen on the voice sample are the remaining audio steps.
