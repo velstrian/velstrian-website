@@ -128,4 +128,4 @@ function handle(req, res, url, send, log) {
   return true;
 }
 
-module.exports = { handle, parse, CHANNEL_DIR };
+module.exports = { handle, parse, tokenOk, CHANNEL_DIR };

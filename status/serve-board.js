@@ -9,7 +9,8 @@
  *
  * Listens on every interface like http-server did: team members open briefs at the office
  * network address (192.168.1.63:8099). Also carries /api/channel/<name> (channel.js), the
- * append only Kiro and Claude message channel. No dependencies. Usage: node status/serve-board.js --port=8099
+ * append only Kiro and Claude message channel, and PUT /api/upload/mkt/<path> (upload.js), the
+ * token gated marketing upload reviewed at /media/mkt/. No dependencies. Usage: node status/serve-board.js --port=8099
  */
 'use strict';
 
@@ -18,10 +19,13 @@ const fs = require('fs');
 const path = require('path');
 const { execFile } = require('child_process');
 const channel = require('./channel.js');
+const upload = require('./upload.js');
 
 const STATUS_DIR = __dirname;
 const WEBSITE_DIR = path.resolve(STATUS_DIR, '..');
 const PLATFORM_DIR = path.resolve(WEBSITE_DIR, '..', 'velstrian-platform');
+// [R29-BOARD-MKT-UPLOAD-01] Kiro crew marketing uploads, see upload.js. Same token as the channels.
+const handleUpload = upload.create({ mktDir: path.join(STATUS_DIR, 'media', 'mkt'), statusDir: STATUS_DIR, tokenOk: channel.tokenOk });
 const portArg = process.argv.find((a) => a.startsWith('--port='));
 const PORT = Number(portArg ? portArg.split('=')[1] : 8099);
 
@@ -72,6 +76,9 @@ const server = http.createServer((req, res) => {
 
   // [R29-PORTAL-OWN-SUPABASE-01] Kiro and Claude message channel, see channel.js.
   if (channel.handle(req, res, url, send, log)) return;
+
+  // Checked on the RAW path before the static server, see upload.js.
+  if (handleUpload(req, res, send, log)) return;
 
   if (url.pathname === '/api/rebuild') {
     if (req.method !== 'POST') return send(res, 405, JSON.stringify({ ok: false, error: 'POST only' }), TYPES['.json']);
