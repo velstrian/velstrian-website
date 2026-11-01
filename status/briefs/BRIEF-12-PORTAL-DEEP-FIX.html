@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini brief 12: founders portal, deep check and fix of every page</title>
+<style>
+:root { --bg:#090B12; --surf:#12151E; --line:#262B38; --text:#F8F9FB; --muted:#A9ADBA; --accent:#8C85FF; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 Inter, system-ui, sans-serif; }
+main { max-width:900px; margin:0 auto; padding:24px 16px 56px; }
+a { color:var(--accent); word-break:break-word; }
+h1 { font-size:24px; } h2 { font-size:19px; margin-top:28px; border-top:1px solid var(--line); padding-top:18px; } h3 { font-size:16px; }
+code { background:var(--surf); padding:1px 5px; border-radius:4px; font-size:13px; }
+pre { background:var(--surf); border:1px solid var(--line); padding:12px; border-radius:8px; overflow-x:auto; }
+pre code { padding:0; background:none; }
+li { margin:4px 0; }
+.top { color:var(--muted); font-size:13px; }
+</style></head>
+<body><main><p class="top"><a href="./">&larr; All briefs</a> &middot; <a href="../#platform">Board</a> &middot; source: <a href="BRIEF-12-PORTAL-DEEP-FIX.md">BRIEF-12-PORTAL-DEEP-FIX.md</a></p>
+<h1>Gemini brief 12: founders portal, deep check and fix of every page</h1>
+<p>Driver: Claude (reviews every result). Executor: Gemini. Date 2026-11-01. Release R2.9.</p>
+<p>The founders portal (<a href="https://portal.velstrian.com">https://portal.velstrian.com</a>) is used by the founders only. The owner found broken features and a lot of old content from products that no longer exist. Work through every item below in order, systematically, with full checks. Do not stop between items. Do not ask whether to continue.</p>
+<p>Rows (in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code>, read each one in full first): R29-PORTAL-BIZ-DOCS-AI-KEY-01, R29-PORTAL-INTEGRATION-HEALTH-01, R29-PORTAL-STALE-PRODUCT-CONTENT-01, R29-PORTAL-KB-CONNECT-SOURCES-01, R29-PORTAL-REGULATION-UPDATES-DECISION-01, R29-PORTAL-SIDEBAR-COLLAPSE-01, R29-PORTAL-FULL-PAGE-AUDIT-01. Already fixed by Claude, do not redo: R29-PORTAL-RECEIPTS-MONTH-END-01 (d62fb5c33) and R29-PORTAL-SECRET-IN-ERROR-LOG-01 (da4bcb3d8).</p>
+<h2>Where you work</h2>
+<ul><li>
+Platform worktree <code>C:\w\vp</code>, branch <code>review/r29-batch2</code>. Do not switch branches. Other lanes commit
+ here too, so commit ONLY your own paths with <code>git commit -- &lt;paths&gt;</code>.
+</li><li>
+Portal code: <code>apps/portal</code>. Tests: <code>npx vitest run &lt;files&gt;</code> from <code>apps/portal</code>, and
+ <code>npx tsc --noEmit -p .</code> there. TARGETED tests only, one batched run per item (RULE 0-T).
+</li><li>
+Do not touch <code>review/kiro-portal-step4</code> in <code>C:\w\kp</code> (Kiro's database move code). If your fix
+ touches a file that branch also changes (<code>apps/portal/src/lib/supabase/*</code> or the 16 customer data
+ routes it moves to <code>getPlatformAdmin()</code>), write it so it works on both and say so in the report.
+</li></ul>
+<h2>The items</h2>
+<h3>1. Business Hub document generation (P0, R29-PORTAL-BIZ-DOCS-AI-KEY-01)</h3>
+<p>Production logs show <code>POST /api/agents/generate</code> failing with <code>401 invalid x-api-key</code> from Anthropic, so the portal's AI key is wrong. The owner will set a valid key. Your part:</p>
+<ul><li>
+Find every portal route that calls an AI provider and the setting each one reads.
+</li><li>
+When a key is missing or refused, the screen must say plainly which setting to fix ("The AI key for
+ the portal is missing or not accepted. Set ANTHROPIC_API_KEY on the portal project."), never
+ "An unexpected error occurred". The real cause is logged without the value.
+</li><li>
+Tests with a mocked provider: a refused key, a missing key and a good key.
+</li><li>
+NO real AI call. The portal's live AI budget is almost used. If you need one, ask in the report.
+</li></ul>
+<h3>2. Integration panels (P1, R29-PORTAL-INTEGRATION-HEALTH-01)</h3>
+<p>Production logs, 2026-11-01:</p>
+<ul><li>
+GitHub: <code>list organization repositories</code> and <code>Dependabot alerts</code> return Not Found, and the workflow
+ list reads files from the OLD <code>crowagent/crowagent-platform</code> repository. The organisation is now
+ <code>velstrian</code> and the repository <code>velstrian-platform</code>. Find where the organisation and repository come
+ from (the integrations store <code>GITHUB_ORG</code>, <code>getCredentialOr</code>, <code>GITHUB_ORG_LOGIN</code>, the shared deploy
+ targets) and make ONE source decide it. Remove the dead workflow paths (for example
+ <code>stripe-bootstrap-cyber-cash.yml</code>, <code>sprint1-ci.yml</code>) from anything that lists them. If the stored
+ integration value is wrong, say exactly what the owner sets on the Integrations page.
+</li><li>
+Railway: <code>/api/railway/metrics</code> and the env var list get HTTP 400. Find out why (token, project id,
+ environment id, or a changed GraphQL query) by reading the code and Railway's API docs, then fix it.
+ Never print a token.
+</li><li>
+Supabase management: the owner is replacing a malformed token. Check the staging DB and health panels
+ read it correctly after the change.
+</li><li>
+Each panel that cannot reach its service shows a plain message naming the service and the setting,
+ not a blank card or a generic error.
+</li></ul>
+<h3>3. Old product content (P1, R29-PORTAL-STALE-PRODUCT-CONTENT-01)</h3>
+<p>The Outreach Generator offers Sustainability Manager, Energy Consultant and Property Manager personas. The Campaign Content Agent has the same problem. These come from decommissioned products (CrowAgent Core, CrowCash, CrowCyber, CrowESG, CSRD Checker). Never build or restore those products.</p>
+<ul><li>
+Sweep EVERY portal agent, prompt, persona list, dropdown, template, sample text and seed for old
+ product content: energy, sustainability manager, property, MEES, EPC, CSRD, ESG, cyber, cash flow,
+ CrowMark, CrowAgent, crowagent.ai. Strip comments before you judge a match (a comment that explains
+ why something was removed is a guard, leave it).
+</li><li>
+Replace the audiences with the real ones for Velstrian Bid and Velstrian Buy: owner or managing
+ director of a small firm, bid writer or bid manager, operations manager, public sector procurement
+ officer, private sector buyer, framework manager. Name public AND private buyers.
+</li><li>
+Pain point examples: PPN 026 only, never PPN 002.
+</li><li>
+Business Hub shows pipeline rows tagged "Retired product". List them for the owner with a
+ recommendation (archive or relabel). Do not delete data.
+</li><li>
+A guard test that fails if a dead product persona or name returns in a portal agent or prompt file.
+</li></ul>
+<h3>4. Knowledge base connected to the real sources (P2, R29-PORTAL-KB-CONNECT-SOURCES-01)</h3>
+<p><code>/portal/kb</code> and <code>/portal/kb/ask</code> must cover what the founders actually maintain:</p>
+<ul><li>
+the platform help articles (<code>web/lib/help-articles.ts</code> and <code>web/lib/help-articles-crew.ts</code>, the single
+ source the public help centre is generated from),
+</li><li>
+the website help centre (<code>velstrian-website/astro/src/data/help-centre.generated.json</code>),
+</li><li>
+the Tawk knowledge base, if Tawk offers a free read API (check the docs, never a paid plan),
+</li><li>
+the Google Drive documents (the legal and compliance PDFs folder in the platform Google Drive), shown
+ as a list with title, last modified date and a link. Read only.
+ One list with a source label on each item, a search box, and the ask box answering from those sources
+ with a link to each source it used. Read only. Free APIs only. Any new credential is a question for the
+ owner, never invented. If an item needs an owner setting, say which.
+</li></ul>
+<h3>5. Regulation updates page: keep or not (P2, R29-PORTAL-REGULATION-UPDATES-DECISION-01)</h3>
+<p>The owner asks whether <code>/portal/regulation-updates</code> is needed. Measure: what it shows, where its data comes from, when it last updated, and whether anything else reads it. Then write a recommendation with evidence: keep, repurpose (for example Procurement Act 2023, PPNs and threshold changes that matter to small bidders) or remove. Do NOT remove or rebuild it. The owner decides.</p>
+<h3>6. Sidebar collapse (P2, R29-PORTAL-SIDEBAR-COLLAPSE-01)</h3>
+<p>The group that holds the current page cannot be collapsed. Find why (it is probably forced open while a child is active), fix it so every group opens and closes, remember the choice, and keep the current page visible some other way (highlight). Check it with the keyboard and on a phone width.</p>
+<h3>7. Every portal page, deep check (P1, R29-PORTAL-FULL-PAGE-AUDIT-01)</h3>
+<p>The owner says many more pages need work. Do a full audit:</p>
+<ul><li>
+List every portal route under <code>apps/portal/src/app</code> (pages and API).
+</li><li>
+For each page, with Playwright against a local portal (<code>next dev</code> from <code>apps/portal</code>, mocked
+ services where a real one is needed, never production): it loads without errors, the browser console
+ is clean, every button and form does what it says, no old product or brand content, plain English
+ for a busy founder (RULE 0-U), colours and type from the design tokens only (RULE 0-C), works at 390
+ and 1440 width, and has a clear empty state and error state.
+</li><li>
+Write the register to <code>docs/release-2.9/PORTAL-PAGE-AUDIT-2026-11-01.md</code>: page, what works, what is
+ broken, evidence (file:line, screenshot path), severity, fix sha.
+</li><li>
+Fix in batches grouped by root cause. File every defect you cannot fix in the same pass as its own
+ row in the tracker (next free R29-PORTAL-... id), never silently.
+</li></ul>
+<h2>Rules (all binding)</h2>
+<ul><li>
+<strong>Production is read only.</strong> Read logs and data, never write. No deploy, no push, no env change, no
+ Vercel or Railway or Supabase setting change. Those are the owner's.
+</li><li>
+<strong>No paid AI calls.</strong> Mock every provider in tests.
+</li><li>
+<strong>Secrets.</strong> Never print, paste, log or commit a key, token or env value. Test with fake shapes only.
+</li><li>
+<strong>A grep is a hint, not a finding.</strong> Confirm at the call site and in the running page.
+</li><li>
+<strong>Writing (RULE 0-S).</strong> British English, sentence case, no em or en dashes, no semicolons in prose,
+ no hype words. Product names: Velstrian Bid and Velstrian Buy. Never "council".
+</li><li>
+<strong>Machine (RULE 0-L).</strong> Free RAM above 1.5 GB before any build, browser or test run. One heavy job
+ at a time. Never kill a process you did not start.
+</li><li>
+Identity <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. End each commit with
+ <code>Co-Authored-By: Gemini &lt;noreply@google.com&gt;</code>.
+</li></ul>
+<h2>Report</h2>
+<p>Write <code>gemini-briefs/BRIEF-12-REPORT.md</code>: per item, the sha, files with lines, tests with collected and passed counts, screenshots, what is left and why, and every owner step in plain words. Update each row you touched in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code> (main checkout, commit by pathspec): BUILT when the code is done and tested locally, OPEN with the reason when not. Then rebuild the board: <code>node status/build-platform-board.js</code> from <code>velstrian-website</code>, then <code>node scripts/assign-phases.mjs ../velstrian-website/status/platform.json</code> from <code>velstrian-platform</code>, then the board again.</p>
+</main></body></html>
