@@ -32,7 +32,7 @@ Upload the tender pack. Buyer changes stay in one place, so you work from the la
 
 9
 00:01:16,000 --> 00:01:28,000
-The pack becomes a list of questions. Build a compliance matrix, a checklist of every part.
+The pack becomes a list of questions, with the work broken into parts, each with an owner.
 
 10
 00:01:28,000 --> 00:01:38,000
@@ -40,7 +40,7 @@ Your proof lives in the Evidence Vault. Link it to an answer.
 
 11
 00:01:38,000 --> 00:01:50,000
-Velstrian Bid drafts a first answer from your evidence, showing where every point came from.
+Velstrian Bid drafts a first answer from your evidence, showing where a point came from.
 
 12
 00:01:50,000 --> 00:02:02,000

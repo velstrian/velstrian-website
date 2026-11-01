@@ -21,9 +21,9 @@ ON SCREEN (shot 2): the Requirement Builder stepper, starting from a template.
 
 ---
 
-VO: Set the weighting and the rubric. Weighting is how much each part counts, for example price against quality. The rubric is the scale you score against. Agreeing this up front is what keeps the evaluation fair.
+VO: Choose how the work goes to market and send it to suppliers. The requirement carries the procurement route and the send step.
 
-ON SCREEN (shot 3): the weighting and rubric settings.
+ON SCREEN (shot 3): the requirement's procurement route and the send step. Note: this persona has no weighting editor on the requirement, so show the route and send, not a weighting editor that is not there. (Weighting and the rubric are covered as their own topic in the help centre and the b2 short where a persona has them.)
 
 ---
 
@@ -45,27 +45,27 @@ ON SCREEN (shot 6): the whole life figures side by side.
 
 ---
 
-VO: Record the award. Velstrian Buy helps with the standstill period, the pause before a contract is signed so unsuccessful bidders can respond, and with the award letters.
+VO: Record the award. The evaluation shows the awarded outcome in one place.
 
-ON SCREEN (shot 7): recording the award, the standstill, draft letters. Do not send a real letter to a real address.
-
----
-
-VO: The work does not end at award. Open the supplier's record and keep it current. Score how they are performing with a scorecard, held right inside the supplier record.
-
-ON SCREEN (shots 8 and 9): the supplier record, then a scorecard panel over it.
+ON SCREEN (shot 7): the Awarded state on the evaluation. Note: this persona shows Awarded with no standstill or letters step, so show the award state and do not imply a standstill flow that is not there. (The standstill and award letters are described in the help centre where a persona reaches them.)
 
 ---
 
-VO: Hold regular reviews, structured check ins kept with the same supplier, so the full story of the contract stays in one place.
+VO: The work does not end at award. Open the supplier's record and keep it current.
 
-ON SCREEN (shot 10): a supplier review session.
+ON SCREEN (shot 8): the supplier record after award.
 
 ---
 
-VO: And track what the contract actually delivers with the Value tracker, built with finance in mind. It keeps its totals separate, so a delivered figure is never confused with a forecast. Your primary data is stored in the EU.
+VO: From there you can score a supplier with a scorecard, and hold regular reviews, both kept inside the supplier record.
 
-ON SCREEN (shot 11): the value tracker and its finance queue.
+ON SCREEN (shots 9 and 10): the scorecards and reviews areas. Note: on this persona both are empty states. Either cut these shots, or show the empty state and say in the voice over what a buyer sees before any scorecard or review exists. Do not create data to fill them.
+
+---
+
+VO: And track what the contract delivers with the Value tracker, built with finance in mind. It keeps its totals separate, so a delivered figure is never confused with a forecast. Your primary data is stored in the EU.
+
+ON SCREEN (shot 11): the value tracker and its finance queue. If it is an empty state on this persona, describe what a buyer sees before any value is recorded.
 
 ---
 

@@ -16,7 +16,7 @@ Step by step, and you can start from a template.
 
 5
 00:00:40,000 --> 00:00:52,000
-Set the weighting, how much each part counts, and the rubric, the scale you score against.
+Choose how the work goes to market, and send it to suppliers.
 
 6
 00:00:52,000 --> 00:01:04,000
@@ -40,7 +40,7 @@ Compare bids brings each supplier to one whole life figure per currency. It does
 
 11
 00:01:49,000 --> 00:02:00,000
-Record the award, with help for the standstill period and the letters.
+Record the award, shown in one place on the evaluation.
 
 12
 00:02:00,000 --> 00:02:11,000

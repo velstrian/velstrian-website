@@ -104,3 +104,16 @@ Format: ID, title, length, caption lines in order. A matching SRT is in `caption
 ---
 
 Claims note: no banned claim appears. Social value is PPN 026 only (s5). The deterministic headline line (b3) is confirmed in the code. No short records a payment step.
+
+---
+
+## Corrections from the driver reference recording (2026-10-31)
+
+Recorded against the real staging personas, so the shorts match what is actually on screen:
+
+- s3-compliance: the compliance matrix route lands on the Requirements screen. Film Requirements and keep the captions about seeing every part has an owner (no "nothing slips through" promise).
+- s4-draft: drafting is on the Response page (the narrative route lands there). Caption says "shows which document a point came from" (not "exactly" or "each").
+- b2-weighting: the BUYER_PUBLIC persona has no weighting editor. Record this short only on a persona that has one, or cut it. Do not create data to stage it.
+- b5-award: the BUYER_PUBLIC persona shows Awarded with no standstill or letters step. Record this short only on a persona that reaches the standstill, or cut it and keep the award state. Do not invent a standstill.
+- b6-scorecards: scorecards are an empty state on BUYER_PUBLIC. Either record on a persona with a scorecard, or show the empty state and say what a buyer sees before one exists.
+- Never film buyer requirement 01 (it shows a supplier email). Pick a requirement without clarification questions. Scrub any email on screen to "[supplier email]" before every still and in the video.

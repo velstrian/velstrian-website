@@ -33,9 +33,9 @@ ON SCREEN (shot 4): uploading the pack, the Changes from the buyer section.
 
 ---
 
-VO: The pack is read into a clear list of questions. From there you build a compliance matrix, which is simply a checklist that breaks each question into its parts, so nothing is missed and everyone knows who owns what.
+VO: The pack is read into a clear list of questions. Alongside it, the Requirements screen breaks the work into parts so you can see each one has an owner.
 
-ON SCREEN (shots 5 and 6): the questions list, then the compliance matrix with owners.
+ON SCREEN (shots 5 and 6): the questions list, then the Requirements screen with owners. Note: on staging the compliance matrix route lands on Requirements, so this shot shows Requirements.
 
 ---
 
@@ -45,9 +45,9 @@ ON SCREEN (shot 7): linking a policy from the Evidence Vault.
 
 ---
 
-VO: Now draft. Velstrian Bid writes a first answer grounded in your own evidence, with a side drawer showing exactly which document each point came from. You stay in control, you edit, and you keep your own voice.
+VO: Now draft. On the Response page, Velstrian Bid writes a first answer grounded in your own evidence, and shows which document a point came from. You stay in control, you edit, and you keep your own voice.
 
-ON SCREEN (shot 8): a drafted answer, the citation side drawer open.
+ON SCREEN (shot 8): the Response page with a drafted answer and its source shown. Note: on staging the narrative route lands on the Response page, so this shot shows the Response page.
 
 ---
 
@@ -57,15 +57,15 @@ ON SCREEN (shot 9): the social value screen with PPN 026 measures.
 
 ---
 
-VO: Before you send, review. Bring in a colleague, check each answer against the evidence, and sign it off.
+VO: Before you send, review. Check each answer against the evidence, and bring in a colleague.
 
-ON SCREEN (shot 10): the review and sign off step.
+ON SCREEN (shot 10): the review screen. This persona has no sign off stages, so show the review step itself, do not imply a sign off that is not there.
 
 ---
 
-VO: Finally, export. A submission ready pack in Word and PDF, with your compliance matrix, ready to upload to the buyer's portal. Your work is yours, and your primary data is stored in the EU.
+VO: Finally, the submission. A pack you can export to Word and PDF, with your cover letter, ready for the buyer's portal. Your work is yours, and your primary data is stored in the EU.
 
-ON SCREEN (shot 11): exporting to Word and PDF. STOP before any payment or portal checkout.
+ON SCREEN (shot 11): the submission cover letter section. Do NOT click export. STOP before any payment or portal checkout.
 
 ---
 
