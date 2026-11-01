@@ -145,3 +145,18 @@ likely cause of item 2 in the same way. In item 1 and 2: when a stored credentia
 provider, the message must say "the key saved on the Integrations page was refused, update it there",
 and the Integrations page must show which source (saved or Vercel) is in use for each key, without
 the value. Do not change the precedence itself without asking.
+
+## Addendum 2 (owner, 2026-11-01 03:15 UTC): item 1 is NOT solved by the saved key, investigate
+
+The owner says the key saved on the Integrations page and the Vercel `ANTHROPIC_API_KEY` are the SAME
+key, and the same key works for Claude's testing, yet production `POST /api/agents/generate` still gets
+`401 invalid x-api-key` (03:00 UTC, deployment dpl_CAXi1bhT). Find the real cause by measurement, never
+by printing the key. Check at least:
+- what `getCredential('ANTHROPIC_API_KEY')` actually returns at runtime: its length, first 7
+  characters (`sk-ant-`) and whether it has a space, line break or quote, logged as a SHAPE only;
+- whether the saved ciphertext decrypts with the current encryption key or an older one (the store
+  has key id logic), which would turn a correct key into a wrong string;
+- whether the generate path builds its own Anthropic client with a different variable, header, base
+  URL or proxy than the one that works;
+- whether staging behaves the same (staging is safe to test, production stays read only).
+Fix the cause, add a test for it, and make the error say what is wrong in plain words.

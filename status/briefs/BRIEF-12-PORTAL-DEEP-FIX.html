@@ -145,4 +145,19 @@ Identity <code>Velstrian Tenderworks &lt;platform@velstrian.com&gt;</code>. End 
 <p>Write <code>gemini-briefs/BRIEF-12-REPORT.md</code>: per item, the sha, files with lines, tests with collected and passed counts, screenshots, what is left and why, and every owner step in plain words. Update each row you touched in <code>velstrian-platform/RELEASE-2.9-TRACKER.md</code> (main checkout, commit by pathspec): BUILT when the code is done and tested locally, OPEN with the reason when not. Then rebuild the board: <code>node status/build-platform-board.js</code> from <code>velstrian-website</code>, then <code>node scripts/assign-phases.mjs ../velstrian-website/status/platform.json</code> from <code>velstrian-platform</code>, then the board again.</p>
 <h2>Addendum (Claude, 2026-11-01 03:05 UTC): measured cause of item 1</h2>
 <p><code>getCredential()</code> in <code>apps/portal/src/lib/integrations/store.ts</code> reads the Integrations store (<code>portal_integrations</code>) FIRST and the Vercel env var only when nothing is stored. Production holds a stored <code>ANTHROPIC_API_KEY</code> from 2026-09-15, so the owner's new Vercel key is never used and every generate call gets 401. Stored <code>GITHUB_ORG</code> (2026-10-29) and <code>RAILWAY_API_TOKEN</code> (2026-10-29) are the likely cause of item 2 in the same way. In item 1 and 2: when a stored credential is refused by its provider, the message must say "the key saved on the Integrations page was refused, update it there", and the Integrations page must show which source (saved or Vercel) is in use for each key, without the value. Do not change the precedence itself without asking.</p>
+<h2>Addendum 2 (owner, 2026-11-01 03:15 UTC): item 1 is NOT solved by the saved key, investigate</h2>
+<p>The owner says the key saved on the Integrations page and the Vercel <code>ANTHROPIC_API_KEY</code> are the SAME key, and the same key works for Claude's testing, yet production <code>POST /api/agents/generate</code> still gets <code>401 invalid x-api-key</code> (03:00 UTC, deployment dpl_CAXi1bhT). Find the real cause by measurement, never by printing the key. Check at least:</p>
+<ul><li>
+what <code>getCredential('ANTHROPIC_API_KEY')</code> actually returns at runtime: its length, first 7
+ characters (<code>sk-ant-</code>) and whether it has a space, line break or quote, logged as a SHAPE only;
+</li><li>
+whether the saved ciphertext decrypts with the current encryption key or an older one (the store
+ has key id logic), which would turn a correct key into a wrong string;
+</li><li>
+whether the generate path builds its own Anthropic client with a different variable, header, base
+ URL or proxy than the one that works;
+</li><li>
+whether staging behaves the same (staging is safe to test, production stays read only).
+ Fix the cause, add a test for it, and make the error say what is wrong in plain words.
+</li></ul>
 </main></body></html>
