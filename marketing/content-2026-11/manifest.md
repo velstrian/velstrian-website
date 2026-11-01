@@ -16,6 +16,23 @@ One line per deliverable, with status. Masked = test tenant name and TEST MODE /
 ## Walkthrough videos (videos/clips)
 - supplier-long and buyer-long, MP4 at 1920x1080, 1080x1920, 1080x1080, plus captioned versions. Status: draft (recorded before masking). To be re-cut from masked captures before the board and Drive copies, so only masked video ships.
 
+## Voiced walkthroughs v2 (videos/clips/voiced-v2) [FINAL SET]
+- 10 distinct videos, one per approved script in review/final-scripts.md. Voice: Google Cloud TTS, Leda (en-GB-Chirp3-HD-Leda) narrates the overviews and the Bid shorts, Puck (en-GB-Chirp3-HD-Puck) narrates the Buy shorts, per the reviewer's pick.
+- Files: the 2 overviews at 1920x1080 and 1080x1920; the 8 shorts at 1080x1920. 12 MP4 in total.
+- Design (Claude #193): title card and end card, the product still un-stretched inside a browser device frame on a branded backdrop, an animated lower-third caption per spoken line, a soft Ken Burns zoom, crossfades, a bottom progress bar. Brand colours and fonts read from tokens.css (RULE 0-C).
+- Audio: voice over plus the self-made music bed ducked under the voice (sidechain), whole mix at -14 LUFS integrated, peaks below -1.5 dBTP. Stereo AAC 160k.
+- Captions: videos/captions/<name>-v2.vtt, 10 files, built from the real per-line VO timings and offset by the title card, correct "Velstrian" spelling.
+- Truth: every line matches review/final-scripts.md, which carries the 22 truth rewordings from review/driver-truth-check.md (37 TRUE, 22 REWORD, 0 CUT). No win claims, PPN 026 limited to good jobs and skills, Buy evaluation says people set the scores and AI never sets or changes a mark, no EU storage line.
+- Status: final (masked), drafts for the owner to review. Board copy at v2/videos and v2/captions. The old Kore-voice voiced-v2 1080x1080 cuts were deleted (superseded).
+
+## Autoplay loops v2 (social/loops/v2) [REBUILT]
+- a01 to a12, 12 loops, at 1080x1350 and 1080x1920, 24 MP4 in total. Rebuilt from the clean full-res masked stills, un-stretched inside the same device frame, with a slow Ken Burns push, a crossfade between two related screens, a bottom progress bar, the music bed (looped, about -16 LUFS, fades top and tail), seamless.
+- Captions are truth-corrected: no "official", no "best matches", no win implication. Aligned with final-scripts.md.
+- Status: final (masked). Board copy at v2/loops. This replaces the scrapped earlier v2 loops the owner rejected as stretched.
+
+## Final scripts (review/final-scripts.md)
+- The 10 corrected scripts (text only, voiced verbatim), voice assignment, and the 22-change log. Status: final, GO from the driver (#226) after the reviewer OK'd all 10 (#225).
+
 ## Stills (videos/clips/stills)
 - Supplier stills (s-*.png): final (masked). Includes the 7 per-bid contract screens (tender, questions, requirements, response, social-value, review, submission).
 - Buyer stills (b-*.png): draft (to be re-masked from a fresh buyer capture before upload).
@@ -60,9 +77,9 @@ Status: the horizontal walkthroughs have full audio. The vertical and square wal
 
 ## Concern log (team member / owner feedback, updated after each change)
 
-1. "the current voice sounds very automated, non-authentic and uncanny... more friendly, positive and influential". Change: dropped the piper TTS; moved to Google Cloud TTS natural voices; reviewer picked Leda (primary) + Puck (secondary) mixed. Status: DONE (voice picked), re-render IN PROGRESS.
-2. "redo only the videos containing audios and save in a separate folder". Change: new voiced videos go under videos/clips/voiced-v2 and the board v2/videos. Status: IN PROGRESS (re-rendering with chosen voice + new scripts).
-3. "social/loops/v2 is useless... no voice, pictures stretched, horrible quality". Change: scrapped the v2 loops (commit d26f011a); will rebuild from the clean full-res stills, no stretching, after the voice pick. Status: IN PROGRESS.
-4. "all videos have the same voices and the same script... different ones for each video" (without wasting credits on brand-new creative). Change: a distinct script per video, 2 long + 8 short, in review-pack-v2.md, each line sourced. Status: NEEDS DECISION (reviewer OK/Change per script).
-5. "make it more professional like a top startup... animation, design, slides" and "ask claude what you can improve". Change: design upgrade plan from driver #193 (device frames, progress bar, Ken Burns, title/end cards, lower-thirds). Status: IN PROGRESS (loops rebuild + carousels + walkthrough cards).
-6. "scripts must be 100% true... without inventing lies... influential and very good marketing style". Change: every script line carries a source on the current build; cut "Primary data stored in the EU" (not on the website); "no AI" uses the exact on-screen wording. Status: NEEDS DECISION (driver truth check + reviewer wording).
+1. "the current voice sounds very automated, non-authentic and uncanny... more friendly, positive and influential". Change: dropped the piper TTS; moved to Google Cloud TTS natural voices; reviewer picked Leda (primary) + Puck (secondary) mixed. Status: DONE. All 10 re-rendered with Leda/Puck in voiced-v2, board v2/videos.
+2. "redo only the videos containing audios and save in a separate folder". Change: new voiced videos live in videos/clips/voiced-v2 and board v2/videos, the originals untouched. Status: DONE.
+3. "social/loops/v2 is useless... no voice, pictures stretched, horrible quality". Change: scrapped the old v2 loops (commit d26f011a); rebuilt from the clean full-res stills, un-stretched in a device frame, with music and a progress bar, into social/loops/v2 and board v2/loops. Status: DONE.
+4. "all videos have the same voices and the same script... different ones for each video" (without wasting credits on brand-new creative). Change: a distinct script per video, 2 long + 8 short, in review/final-scripts.md, each line sourced. Reviewer OK'd all 10 (#225). Status: DONE.
+5. "make it more professional like a top startup... animation, design, slides" and "ask claude what you can improve". Change: design upgrade from driver #193 (device frames, progress bar, Ken Burns, title/end cards, lower-thirds) applied to the voiced walkthroughs and the loops. Status: DONE for videos and loops; the carousel device-frame pass is still pending.
+6. "scripts must be 100% true... without inventing lies... influential and very good marketing style". Change: every line sourced on the current build; the 22 truth rewordings from the driver truth check (#224) applied in review/final-scripts.md and voiced verbatim (no win claims, PPN 026 = good jobs and skills, Buy evaluation = people set the scores and AI never sets or changes a mark, no EU storage line). Status: DONE (driver GO #226).
