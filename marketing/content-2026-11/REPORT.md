@@ -41,12 +41,18 @@ Every article is at least 300 words, every step and screen name is confirmed in 
 
 ## 2. Product video series
 
-Scripts, shot lists, caption files and thumbnail specs are in `velstrian-website/marketing/content-2026-11/videos/` (21 files). The clips are recorded by the driver on the owner machine from these shot lists (owner decision, Option A, recorded in the channel), then the crew burns in the captions and builds the thumbnails. Recording is on staging only, and every shot that would reach a checkout or payment step is marked STOP, because the staging Stripe P0 (R29-STAGING-STRIPE-LIVE-KEY-01) is still open.
+Scripts, shot lists, caption files, thumbnail specs AND recorded clips are in `velstrian-website/marketing/content-2026-11/videos/`. After the owner decided the crew records itself, the crew built a headless recorder (`velstrian-platform/web/scripts/crew-record.mjs`) and recorded the real staging screens.
 
-- `README.md`, `shot-list.md` (every shot cites a route in the platform code, file:line).
+- `README.md`, `shot-list.md` (every shot cites a route in the platform code, and the shot list was corrected against the driver's reference recording so it matches the live staging routes, including the redirects on supplier shots 6 and 8 and the buyer empty states).
+- `RECORDING-GUIDE.md` for a human recorder, kept as a fallback.
 - `script-supplier-long.md`, `script-buyer-long.md`, `script-shorts.md` (2 long walkthroughs plus 13 shorts).
 - `captions/` 16 SRT files (2 long, 14 short).
-- `thumbnails/thumbnail-specs.md` one spec per video plus the tokens used.
+- `thumbnails/thumbnail-specs.md` one spec per video plus the tokens used, and `thumbnails/frames/` dimmed background frames at 1280x720 (the brand title overlay is the design step, using the Manrope font and the tokens).
+- `clips/` the recorded MP4 cuts: supplier and buyer walkthroughs at 1920x1080, 1080x1920 and 1080x1080, plus captioned versions with the SRTs burned in, and `clips/stills/` one PNG per shot. All clips are under 25 MB and committed.
+
+Recording method: the recorder signs in as the staging test personas with a Supabase password grant, sends the Cloudflare Access and Vercel gate headers, and uses the Cloudflare published staging test captcha token (the sanctioned staging walk path, refused in production). It never records production, never real customer data, scrubs any email to "[supplier email]", and a Stripe route guard aborts any request to a payment host so no checkout or payment screen can be captured (the staging Stripe P0 R29-STAGING-STRIPE-LIVE-KEY-01 stays untouched).
+
+Coverage note: the recorded first pass covers the org level screens that exist for every persona. The per bid contract screens in the corrected shot list need a seeded contract id for the persona and are a second pass (open question in the channel). No data was staged to fake an empty screen.
 
 ## 3. Social media pack
 
