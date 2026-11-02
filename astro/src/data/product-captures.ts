@@ -174,7 +174,6 @@ const HAND: Record<string, Capture | null> = {
  * masters listed in product-screens.json.
  */
 const FIGMA_FOR_SLOT: Record<string, string> = {
-  'about-hero': 'screen-response-answer',
   'home-who-small': 'panel-feed',
   'screen-buyer-delivery': 'screen-supplier-promises',
   'buy-cap-collect': 'panel-submissions',

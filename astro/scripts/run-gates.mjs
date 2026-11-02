@@ -102,6 +102,7 @@ const GATES = [
   { name: 'copy-assets', cmd: node, args: ['scripts/copy-assets.js'] },
   { name: 'copy-cf-config', cmd: node, args: ['scripts/copy-cf-config.js'] },
   { name: 'build-sitemap', cmd: node, args: ['scripts/build-sitemap.js'] },
+  { name: 'build-markdown-twins', cmd: node, args: ['scripts/build-markdown-twins.mjs'] },
   /* Immediately after build-sitemap, because it resolves what that step just
      wrote. It reads dist/sitemap.xml, the built route tree and dist/_redirects
      as copy-cf-config left them, so all three of its inputs have to exist and
