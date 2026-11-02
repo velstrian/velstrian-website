@@ -33,6 +33,7 @@ import BuyTrust from '../components/buy/BuyTrust.astro';
 import BuyDetail from '../components/buy/BuyDetail.astro';
 import BuyFaq from '../components/buy/BuyFaq.astro';
 import Close from '../components/evidenced/Close.astro';
+import JourneyVideoBand from '../components/evidenced/JourneyVideoBand.astro';
 import { BUY_FAQS } from '../components/buy/faqs';
 import '../styles/evidenced.css';
 import { faqPage, breadcrumbs } from '../lib/schema';
@@ -113,6 +114,7 @@ const UPDATED = new Date('2026-10-22');
   <BuyWhatItDoes />
   <BuyBoundary />
   <Steps steps={BUYER_STEPS} action={buyerStart} flash />
+  <JourneyVideoBand product="buy" tone="light-alt" />
   <BuyTrust />
   <BuyDetail />
   <BuyFaq />

@@ -235,6 +235,8 @@ export const FOOTER = {
         { label: PRODUCT_NAME_BID, href: '/bid/' },
         { label: PRODUCT_NAME_BUY, href: '/buy/' },
         { label: 'Product walkthrough', href: '/walkthrough/' },
+        /* A-506 / R29-CONTENT-KIRO-CREW-01: the voiced product videos. */
+        { label: 'See it in action', href: '/see-it-in-action/' },
         { label: 'Pricing', href: '/pricing/' },
         { label: 'Integrations', href: '/integrations/' },
         { label: 'Sectors', href: '/sectors/' },

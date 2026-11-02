@@ -1,0 +1,255 @@
+---
+/**
+ * /see-it-in-action/: the public video walkthroughs (A-506, R29-CONTENT-KIRO-CREW-01).
+ *
+ * Two voiced walkthroughs, supplier and buyer, and eight short feature cuts,
+ * recorded from the real staging product. Every player opens on a poster and
+ * only plays when the reader presses it: no autoplay and no sound without a
+ * press (check-autoplay.mjs). Captions are on by default on every video.
+ *
+ * ONE SOURCE (RULE 0-C): every video, poster and caption path comes from
+ * data/media.ts (JOURNEY_VIDEOS). Nothing is typed here. The 16:9 and 9:16
+ * boxes are reserved by CSS so a poster arriving shifts nothing.
+ *
+ * SIMPLE FIRST (RULE 0-U): plain words, one idea per video, the long journey
+ * first and the short feature cuts under it, for public and private work.
+ */
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/evidenced/PageHero.astro';
+import Band from '../../components/evidenced/Band.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import '../../styles/evidenced.css';
+import { breadcrumbs } from '../../lib/schema';
+import { walkthroughFor, shortsFor } from '../../data/media';
+
+const title = 'See Velstrian in action | Velstrian Tenderworks';
+const description =
+  'Short voiced walkthroughs of Velstrian Bid and Velstrian Buy, recorded from the real product, with captions. See how a small team finds work, writes a bid and runs a fair buy.';
+
+const trail = [{ name: 'Home', path: '/' }];
+const schema = [breadcrumbs([...trail, { name: 'See it in action', path: '/see-it-in-action/' }])];
+
+const journeys = [
+  {
+    product: 'bid' as const,
+    kicker: 'For suppliers',
+    heading: 'Write a bid, start to finish',
+    lead: 'How a small team finds the right work and writes a strong bid from its own documents, for public and private buyers.',
+    pageHref: '/bid/',
+    pageLabel: 'More about Velstrian Bid',
+  },
+  {
+    product: 'buy' as const,
+    kicker: 'For buyers',
+    heading: 'Run a fair, simple buy',
+    lead: 'How a buyer sets out what they need in plain words, then compares the replies and records the award.',
+    pageHref: '/buy/',
+    pageLabel: 'More about Velstrian Buy',
+  },
+];
+---
+
+<Base title={title} description={description} path="/see-it-in-action" schema={schema} typeface="evidenced" headerTone="light">
+  <PageHero
+    id="sia-title"
+    size="compact"
+    label="Watch"
+    title="See Velstrian in action"
+    lead="Short walkthroughs recorded from the real product, with a voice over and captions. Nothing plays until you press it."
+  >
+    <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="See it in action" /></div>
+  </PageHero>
+
+  <Band tone="light" class="sia" flush>
+    <div class="ea-wrap sia__wrap">
+      {
+        journeys.map((j) => {
+          const long = walkthroughFor(j.product);
+          const shorts = shortsFor(j.product);
+          return (
+            <section class="sia__journey" aria-labelledby={`sia-${j.product}`}>
+              <header class="sia__head">
+                <p class="sia__kicker">{j.kicker}</p>
+                <h2 class="sia__heading" id={`sia-${j.product}`}>{j.heading}</h2>
+                <p class="sia__lead">{j.lead}</p>
+                <a class="sia__more" href={j.pageHref}>{j.pageLabel}</a>
+              </header>
+
+              {long && (
+                <figure class="sia__feature" aria-labelledby={`sia-v-${long.id}`}>
+                  <video
+                    class="sia__player sia__player--wide"
+                    controls
+                    preload="none"
+                    playsinline
+                    poster={long.poster}
+                    aria-labelledby={`sia-v-${long.id}`}
+                  >
+                    <source src={long.src} type="video/mp4" />
+                    <track kind="captions" src={long.captions} srclang="en" label="English" default />
+                    Your browser cannot play this video.
+                  </video>
+                  <figcaption class="sia__cap">
+                    <h3 class="sia__v-title" id={`sia-v-${long.id}`}>{long.title}</h3>
+                    <p class="sia__v-sum">{long.summary}</p>
+                  </figcaption>
+                </figure>
+              )}
+
+              {shorts.length > 0 && (
+                <ul class="sia__shorts" role="list">
+                  {shorts.map((v) => (
+                    <li>
+                      <figure class="sia__short" aria-labelledby={`sia-v-${v.id}`}>
+                        <video
+                          class="sia__player sia__player--tall"
+                          controls
+                          preload="none"
+                          playsinline
+                          poster={v.poster}
+                          aria-labelledby={`sia-v-${v.id}`}
+                        >
+                          <source src={v.src} type="video/mp4" />
+                          <track kind="captions" src={v.captions} srclang="en" label="English" default />
+                          Your browser cannot play this video.
+                        </video>
+                        <figcaption class="sia__cap">
+                          <h3 class="sia__v-title" id={`sia-v-${v.id}`}>{v.title}</h3>
+                          <p class="sia__v-sum">{v.summary}</p>
+                        </figcaption>
+                      </figure>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          );
+        })
+      }
+    </div>
+  </Band>
+</Base>
+
+<style>
+  .sia__wrap {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .sia__journey {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .sia__journey + .sia__journey {
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--c-border);
+  }
+
+  .sia__head {
+    display: grid;
+    gap: var(--space-2);
+    max-width: 60ch;
+  }
+
+  .sia__kicker {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
+  }
+
+  .sia__heading {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--t-h2);
+    line-height: 1.2;
+    color: var(--c-text);
+  }
+
+  .sia__lead {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.6;
+    color: var(--c-text-sub);
+  }
+
+  .sia__more {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--c-interactive);
+  }
+
+  .sia__feature,
+  .sia__short {
+    display: grid;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+  }
+
+  .sia__feature {
+    max-width: 880px;
+  }
+
+  .sia__player {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--c-border);
+  }
+
+  .sia__player--wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .sia__player--tall {
+    aspect-ratio: 9 / 16;
+  }
+
+  .sia__player:focus-visible {
+    outline: 3px solid var(--c-interactive);
+    outline-offset: 2px;
+  }
+
+  .sia__cap {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .sia__v-title {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-h4);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--c-text);
+  }
+
+  .sia__v-sum {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    line-height: 1.5;
+    color: var(--c-text-muted);
+  }
+
+  .sia__shorts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>
