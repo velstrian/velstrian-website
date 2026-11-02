@@ -2581,7 +2581,7 @@
      and the platform's Slate and Iris palettes already use a soft white. Interactive
      glyphs keep --c-white. #F8F9FB on --c-bg #05070E is 18.9:1. The platform reads this
      through brand/brand.source.json ink-0. */
-  --c-text:       #F7F8FB;
+  --c-text:       #F8F9FB;
   --c-text-sub:   #D8DAE1;
   --c-text-muted: #A9ADBA;
 

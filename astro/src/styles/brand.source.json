@@ -105,7 +105,7 @@
     "ink-0": {
       "role": "primary text. Platform --cloud. --qv-text.",
       "dark": {
-        "value": "#F7F8FB",
+        "value": "#F8F9FB",
         "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
@@ -252,7 +252,7 @@
     "iris-ink-0": {
       "role": "The website binding of ink-0 (the website names its accent set iris). Same value by construction (D309).",
       "dark": {
-        "value": "#F7F8FB",
+        "value": "#F8F9FB",
         "from": "packages/tokens/brand/quantum-v (D309)"
       },
       "light": {
