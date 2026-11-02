@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T22:58:04.239Z",
+  "updated": "2026-11-02T23:35:50.672Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2501,6 +2501,18 @@
       "changedAt": "2026-11-02T22:58:04.235Z",
       "release": "R2.9",
       "phase": 1
+    },
+    {
+      "id": "A-510",
+      "src": "owner 2026-11-02 23:30",
+      "sev": "P2",
+      "title": "Header navigation: See it in action, Help centre and Sectors missing; Blog, FAQ and About loose. Target 5 groups: Products, Who it's for, Pricing, Resources, Company",
+      "status": "OPEN",
+      "note": "Kiro brief 21 addendum 3: research 5 reference headers, build from astro/src/data/nav.ts only, keyboard and screen reader menus, mobile sections, footer and command palette aligned, gates and screenshots.",
+      "changed": "2026-11-02",
+      "changedAt": "2026-11-02T23:35:50.672Z",
+      "release": "R2.9",
+      "phase": 1
     }
   ],
   "directives": [
@@ -2570,5 +2582,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 510
+  "nextId": 511
 }
