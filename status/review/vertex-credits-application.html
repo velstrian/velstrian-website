@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Google for Startups Cloud Program, AI tier: application draft</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Google for Startups Cloud Program, AI tier: application draft</h1>
+<p><span class="rv-row">R285-P3-AI-VERTEX-CREDITS-PLAN-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/VERTEX-CREDITS-APPLICATION.md</code>, rendered from <code>67600b5ebd</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-P3-AI-VERTEX-CREDITS-PLAN-01 &middot; OPEN</span><span class="rtitle">D465 Google Vertex credits: what credits we hold, what Vertex would lift (Gemini in eu or London, Document AI, caching, grounding), cost, DPA impact, ranked top 5</span><p>application drafted at docs/release-2.9/VERTEX-CREDITS-APPLICATION.md (review/r29-batch2 2016dcd53). Owner step: confirm the fields marked OWNER TO CONFIRM and submit from contact@velstrian.com.</p></div></section>
+<article class="doc">
+<h1>Google for Startups Cloud Program, AI tier: application draft</h1>
+<p>Row: R285-P3-AI-VERTEX-CREDITS-PLAN-01 (owner decision D513: apply). Drafted 2026-11-01. Account: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>. The owner submits it. Nothing here has been sent.</p>
+<p>How to read this: every answer below uses only facts found in the repo. Anything the repo cannot prove is marked <strong>OWNER TO CONFIRM</strong>. Do not guess on the live form. The research says the programme pages disagree with each other on company age and funding stage, so read the live form while signed in first (<a href="https://cloud.google.com/startup">https://cloud.google.com/startup</a> and <a href="https://cloud.google.com/startup/ai">https://cloud.google.com/startup/ai</a>, see <code>docs/release-2.8.5/ai-quality/VERTEX-CREDITS-PLAN-2026-10-26.md</code> section 1). Answer every question truthfully. Do not describe the company as venture funded unless it is.</p>
+<h2>Before you start (three checks only you can do)</h2>
+<ol>
+<li>Eligibility. The research found the AI tier asks for venture funding, a company age limit and no more than USD 5,000 of earlier Google Cloud credits. The repo holds no evidence of our funding stage or incorporation date. <strong>OWNER TO CONFIRM</strong> all three against the live page.</li>
+<li>Billing. The Free Trial (USD 300, about 90 days, ending about 24 Jan 2027) may count as earlier credit. <strong>OWNER TO CONFIRM</strong> how the form treats it.</li>
+<li>Credits will not pay for Claude. Google&#39;s wording says third party models are billed directly. Claude stays on Anthropic&#39;s own API. Do not claim otherwise on the form.</li>
+</ol>
+<h2>Company</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Company name</td>
+<td>Velstrian Tenderworks</td>
+</tr>
+<tr>
+<td>Contact email</td>
+<td><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></td>
+</tr>
+<tr>
+<td>Website</td>
+<td><a href="https://velstrian.com">https://velstrian.com</a> (<strong>OWNER TO CONFIRM</strong> the live address)</td>
+</tr>
+<tr>
+<td>Legal entity type, registration number, country, incorporation date</td>
+<td><strong>OWNER TO CONFIRM</strong> (not in the repo)</td>
+</tr>
+<tr>
+<td>Headquarters</td>
+<td>United Kingdom (<strong>OWNER TO CONFIRM</strong> the registered address)</td>
+</tr>
+<tr>
+<td>Number of employees</td>
+<td><strong>OWNER TO CONFIRM</strong></td>
+</tr>
+<tr>
+<td>Funding stage and amount raised</td>
+<td><strong>OWNER TO CONFIRM</strong>. Write &quot;no external funding&quot; if that is the truth</td>
+</tr>
+<tr>
+<td>Prior Google Cloud credits received</td>
+<td><strong>OWNER TO CONFIRM</strong> (the Free Trial may be the only one)</td>
+</tr>
+</tbody></table></div>
+<h2>What the company does</h2>
+<p>Velstrian Tenderworks builds software that helps small and mid size organisations write bids and tenders themselves, for public and private work, without a bid team or procurement training. The bid product reads a tender, finds the questions and scoring rules, and drafts answers from the firm&#39;s own documents and past work. The buyer product helps busy buyers run a fair, well documented tender. Plain words, one clear next step on every screen.</p>
+<p>Stage: pre revenue. An invite only beta is running. There is no paying customer today (<code>docs/release-2.8.5/ai-quality/OPERATING-MODEL.md</code> section 6, measured 2026-10-29). Revenue, customer and user numbers: <strong>OWNER TO CONFIRM</strong>, and write none if there are none.</p>
+<h2>Why AI is core to the product</h2>
+<p>AI is the main way the product works. It reads long tender packs and pulls out requirements with their weights. It drafts answers that stay backed by the firm&#39;s own evidence. It checks each draft against the buyer&#39;s scoring and flags weak spots. Every AI call goes through one internal client (<code>AIClient</code>) with a per call ledger, a cost ceiling per feature and quality checks before output reaches the user. The platform already runs Gemini models for most surfaces and Gemini embedding models for retrieval, so Google models are central today, not a plan.</p>
+<h2>Intended use of Google Cloud and Vertex AI</h2>
+<p>Taken from <code>docs/release-2.8.5/ai-quality/VERTEX-CREDITS-PLAN-2026-10-26.md</code> sections 2 to 4. In order of priority:</p>
+<ol>
+<li><strong>Gemini and Gemini embeddings on Vertex AI in the EU multi-region or London (<code>europe-west2</code>)</strong>, behind a flag, staging first. Reason: a stated processing location for customer documents, which small firms and their buyers ask about.</li>
+<li><strong>Context caching and batch</strong> for the large tender reading and drafting surfaces, measured on our own test set before it becomes default.</li>
+<li><strong>Document AI Layout Parser</strong> as a measured test on the tenders our extraction still misses, capped spend, only if tables prove to be the cause.</li>
+<li><strong>Search grounding</strong> as a pilot on one background surface (regulatory change watching), showing the source for every claim.</li>
+</ol>
+<p>Not planned: Claude on Vertex, Vertex RAG Engine, Vertex AI Search, provisioned throughput.</p>
+<h2>Data location</h2>
+<ul>
+<li>Database and file storage: Supabase on AWS <code>eu-west-1</code> (Ireland).</li>
+<li>API: Railway <code>europe-west4</code> (Amsterdam).</li>
+<li>Web app: Vercel functions in <code>lhr1</code> (London).</li>
+<li>Product analytics: PostHog, EU.
+Source: <code>docs/legal/data-processing-agreement.md</code> Schedule 1 (lines 371 to 373 and line 222). Google models today are called through the Gemini Developer API, which is not region pinned (same file, line 378). Moving to Vertex in an EU region is the reason for this application.</li>
+</ul>
+<h2>Estimated spend and use of credits</h2>
+<p>Measured, not projected: one tender extraction costs about GBP 0.24 on current Gemini models (10 tenders, 33 calls, GBP 2.4208, <code>docs/release-2.8.5/ai-quality/D450-GEMINI-LEDGER.md</code>). Planned monthly volume once customers arrive: <strong>OWNER TO CONFIRM</strong>. The research used 100 tender reads a month only as an illustration and it is not a forecast, so do not enter it as one.</p>
+<h2>Responsible AI and governance (if the form asks)</h2>
+<ul>
+<li>A written AI operating model with a weekly quality review and a release boundary list (<code>docs/release-2.8.5/ai-quality/OPERATING-MODEL.md</code>).</li>
+<li>Every draft claim is checked against the firm&#39;s own evidence and unsupported claims are flagged.</li>
+<li>AI notices and plain language targets are specified (specs 16 and 17 under <code>specs/platform-systems/ai-quality/</code>).</li>
+<li>Readiness pack only for ISO/IEC 42001. No certificate is held and none should be claimed.</li>
+</ul>
+<h2>Decisions for the owner</h2>
+<ol>
+<li>Submit now, or wait until the eligibility checks above are confirmed (recommended: confirm first, then submit, one application only).</li>
+<li>Which entity details and funding statement to enter (only you can state them).</li>
+<li>Whether to start the Free Trial Part D check first, so the form can state whether trial credit already paid for a Vertex call (recommended: yes, it is read only).</li>
+</ol>
+<p>Decision D513 is recorded in <code>RELEASE-2.9-TRACKER.md</code>. This row closes when the application is submitted and the outcome is recorded.</p>
+
+</article>
+</main></body></html>
