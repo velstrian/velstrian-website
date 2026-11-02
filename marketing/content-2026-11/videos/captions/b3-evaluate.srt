@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:10,000
+Bids are in. Time to score.
+
+2
+00:00:10,000 --> 00:00:20,000
+Each evaluator sets their own scores.
+
+3
+00:00:20,000 --> 00:00:30,000
+The headline is a fixed calculation.
+
+4
+00:00:30,000 --> 00:00:40,000
+The same every time. Never by AI.
+
+5
+00:00:40,000 --> 00:00:50,000
+An outcome you can stand behind.
+
+6
+00:00:50,000 --> 00:01:00,000
+Velstrian Buy.

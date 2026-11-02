@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:09,000
+The work does not end at award.
+
+2
+00:00:09,000 --> 00:00:18,000
+Score how the supplier performs.
+
+3
+00:00:18,000 --> 00:00:27,000
+A scorecard, kept inside the supplier record.
+
+4
+00:00:27,000 --> 00:00:36,000
+Build a clear history over time.
+
+5
+00:00:36,000 --> 00:00:45,000
+Velstrian Buy.
