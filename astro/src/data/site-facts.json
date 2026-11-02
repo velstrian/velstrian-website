@@ -427,12 +427,12 @@
         "csv",
         "txt"
       ],
-      "max_mb": 100
+      "max_mb": 50
     },
     "email_intake": false,
     "allowed_mb": [
       25,
-      100
+      50
     ],
     "images_accepted": false
   },

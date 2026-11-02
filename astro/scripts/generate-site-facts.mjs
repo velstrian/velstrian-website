@@ -40,6 +40,11 @@ const P = {
   uploadPanel: 'web/src/features/bid/rfp/TenderUploadPanel.tsx',
   fit: 'api/app/services/bid_fit.py',
   catalogue: 'packages/pricing/catalogue.ts',
+  // [R29-STORAGE-PROJECT-UPLOAD-LIMIT-01] The one place the tender upload ceiling lives now.
+  // TenderUploadPanel.tsx stopped typing a literal (it was `100 * 1024 * 1024`) and imports
+  // TENDER_UPLOAD_MAX_BYTES from here, because the Supabase 50 MB storage cap made 100 MB a file
+  // the app would accept and then fail to store. mb() follows that one hop so site-facts stays true.
+  uploadLimits: 'web/src/shared/lib/upload-limits.ts',
 };
 
 /** Reader facing names. A source with no name here fails generation, so a new
@@ -107,9 +112,22 @@ function exts(src, constName) {
 }
 
 function mb(src, constName) {
-  const m = src.match(new RegExp(`${constName}\\s*=\\s*(\\d+)\\s*\\*\\s*1024\\s*\\*\\s*1024`));
-  if (!m) fail(`${constName} not found`);
-  return Number(m[1]);
+  // Direct numeric form, e.g. `MAX_TENDER_FILE_SIZE = 25 * 1024 * 1024`.
+  const direct = src.match(new RegExp(`${constName}\\s*=\\s*(\\d+)\\s*\\*\\s*1024\\s*\\*\\s*1024`));
+  if (direct) return Number(direct[1]);
+  // One hop of indirection: `MAX_FILE_SIZE = TENDER_UPLOAD_MAX_BYTES`, where the named value
+  // is defined in upload-limits.ts (R29-STORAGE-PROJECT-UPLOAD-LIMIT-01). Follow exactly one hop,
+  // and only to that one source file, so the fact still traces to platform code and a deeper or
+  // computed form fails loudly rather than guessing.
+  const ref = src.match(new RegExp(`${constName}\\s*=\\s*([A-Z][A-Z0-9_]+)\\b`));
+  if (ref) {
+    const target = ref[1];
+    const limits = read(P.uploadLimits);
+    const resolved = limits.match(new RegExp(`${target}\\s*=\\s*(\\d+)\\s*\\*\\s*1024\\s*\\*\\s*1024`));
+    if (resolved) return Number(resolved[1]);
+    fail(`${constName} = ${target}, but ${target} is not a plain MB literal in ${P.uploadLimits}`);
+  }
+  fail(`${constName} not found`);
 }
 
 /* D288 (owner, 2026-10-22). Email intake is a production switch,

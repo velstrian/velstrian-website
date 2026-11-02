@@ -313,10 +313,21 @@ export async function derive() {
   const tokens = await jiti.import('@velstrian/tokens');
 
   const out = {};
+  /* Resolve any ${BRAND_TOKEN} left literal in a plain-string field (title, summary)
+     against the central brand names. help-articles.ts interpolates brand tokens inside
+     backtick template literals at eval time, but a field written with double quotes keeps
+     the ${...} as text (seen on carbon-reduction-plans-ppn-06-21 summary on review/r29-batch2).
+     The website must never render a raw ${...}, and the one source for the value is
+     src/lib/brand-names.ts (RULE 0-C), already imported here as `brand`. An unknown token is
+     left untouched so it shows up rather than resolving to the wrong thing silently. */
+  const resolveBrand = (s) =>
+    typeof s === 'string'
+      ? s.replace(/\$\{([A-Z][A-Z0-9_]+)\}/g, (m, name) => (typeof brand[name] === 'string' ? brand[name] : m))
+      : s;
   const articles = help.HELP_ARTICLES.map((a) => ({
     slug: a.slug,
-    title: a.title,
-    summary: a.summary,
+    title: resolveBrand(a.title),
+    summary: resolveBrand(a.summary),
     category: a.category,
     product: a.product,
     readingTime: a.readingTime,
