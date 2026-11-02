@@ -24,6 +24,14 @@
  *     and it is the current (now) row, so the history rail keeps its one live
  *     mark (scripts/check-status-pulse.mjs). "Full launch" is the
  *     planned row for October to November 2026;
+ *
+ * 2026-10-31, A-500 item 4: the "Full launch, Planned, October to November
+ * 2026" and "Q4 2026 Regulatory monitor, Planned" rows contradicted /roadmap/,
+ * which reads Velstrian Bid and Velstrian Buy as live now and the regulatory
+ * feed as researching, not committed, with no date. The roadmap is the source,
+ * so the last two rows now read its status words, its label map and its Phase 3
+ * lead from src/data/roadmap.ts, and carry no date the roadmap does not.
+ * "Planned" is retired here because nothing on this rail is committed.
  *   - NO registered office is shown here (owner). The address is still
  *     disclosed once on /privacy/, which is where the trading disclosure duty
  *     is met, see the note above the copyright line in footer/Footer.astro.
@@ -34,11 +42,24 @@ import {
   COMPANY_NUMBER,
   LEGAL_ENTITY_NAME,
   PLATFORM_NAME,
+  PRODUCT_NAME_BID,
+  PRODUCT_NAME_BUY,
 } from '../../lib/brand-names';
+import { PHASES, STATUS_LABEL as ROADMAP_STATUS_LABEL } from '../../data/roadmap';
 
 const COMPANIES_HOUSE = `https://find-and-update.company-information.service.gov.uk/company/${COMPANY_NUMBER}`;
 
-type Status = 'done' | 'now' | 'planned';
+type Status = 'done' | 'now' | 'research';
+
+/* The roadmap phases this rail mirrors (A-500 item 4). Looked up by name so a
+   renamed phase fails the build here rather than printing a stale status. */
+function phase(name: string) {
+  const found = PHASES.find((p) => p.name === name);
+  if (!found) throw new Error(`AboutHistory: no roadmap phase named ${name}`);
+  return found;
+}
+const LIVE_PHASE = phase('Phase 1');
+const RESEARCH_PHASE = phase('Phase 3');
 
 interface Milestone {
   when: string;
@@ -66,26 +87,27 @@ const TIMELINE: Milestone[] = [
     when: 'May 2026',
     heading: 'First customers bidding on real work',
     body: 'Our first customers bid with Velstrian Bid on real work, and what they tell us shapes every release.',
+    status: 'done',
+  },
+  {
+    when: 'Now',
+    heading: `${PRODUCT_NAME_BID} and ${PRODUCT_NAME_BUY} are live`,
+    body: 'Both products are live now. The roadmap shows what is live, what is in progress and what we are still researching.',
     status: 'now',
+    link: { label: 'See the roadmap', href: '/roadmap/' },
   },
   {
-    when: 'October to November 2026',
-    heading: 'Full launch',
-    body: 'Velstrian Bid launches fully in October 2026 once it is ready, and by November 2026 at the latest.',
-    status: 'planned',
-  },
-  {
-    when: 'Q4 2026',
+    when: RESEARCH_PHASE.date ?? 'No committed date',
     heading: 'Regulatory monitor',
-    body: 'A regulatory change feed for UK public procurement, surfacing material updates straight into your dashboard once it ships.',
-    status: 'planned',
+    body: RESEARCH_PHASE.lead,
+    status: 'research',
   },
 ];
 
 const STATUS_LABEL: Record<Status, string> = {
   done: 'Delivered',
-  now: 'Happening now',
-  planned: 'Planned',
+  now: ROADMAP_STATUS_LABEL[LIVE_PHASE.status],
+  research: ROADMAP_STATUS_LABEL[RESEARCH_PHASE.status],
 };
 
 const COMPANY = [
@@ -121,7 +143,7 @@ const COMPANY = [
                   <p class="tl__p">{t.body}</p>
                   {t.link && (
                     <p class="tl__p">
-                      <a class="ea-link" href={t.link.href} target="_blank" rel="noopener noreferrer">
+                      <a class="ea-link" href={t.link.href} {...(t.link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
                         {t.link.label}
                       </a>
                     </p>
@@ -204,7 +226,7 @@ const COMPANY = [
     box-shadow: 0 0 14px color-mix(in srgb, var(--c-verified) 55%, transparent);
   }
 
-  .tl__item--planned .tl__dot {
+  .tl__item--research .tl__dot {
     background: var(--c-border);
   }
 
@@ -236,7 +258,7 @@ const COMPANY = [
     color: var(--c-verified);
   }
 
-  .tl__status--planned {
+  .tl__status--research {
     border-color: var(--c-refused);
     color: var(--c-refused);
   }

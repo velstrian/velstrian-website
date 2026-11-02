@@ -126,6 +126,6 @@ Social value under this edition narrows to jobs and skills. Carbon reduction, co
 ## Sources
 
 - Cabinet Office, PPN 026: The Social Value Model. The publication date of 5 August 2026, the application date of 1 January 2027, the 1 million pounds inclusive of VAT threshold, the two outcomes, the six model award criteria and the two minimum weightings: [gov.uk](https://www.gov.uk/government/publications/ppn-026-the-social-value-model)
-- The full list of Procurement Act 2023 procurement policy notes, which is where PPN 002's current status can be checked rather than assumed: [gov.uk](https://www.gov.uk/government/collections/procurement-policy-notes)
+- The full list of Procurement Act 2023 procurement policy notes, which is where the current status of PPN 026 and any later notice can be checked rather than assumed: [gov.uk](https://www.gov.uk/government/collections/procurement-policy-notes)
 
 Every statutory claim we make about UK procurement is recorded with its instrument, its date and its primary source on our [sources page](/sources/).

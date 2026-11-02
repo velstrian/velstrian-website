@@ -144,7 +144,7 @@ export const FOOTER = {
    * 2026-10-22, D281 (R285-WEB-TRANSFORMATION-AUDIT-01 WT-A, M1): the ISO badge
    * reads "Follows ISO/IEC 27001". "Built to ISO 27001 controls" is retired and
    * listed in site-facts.json certifications.banned, so it cannot come back.
-   * D289: "TLS 1.3 in transit" and "EU data residency" stay as they are.
+   * D289: "TLS 1.3 in transit" stays. A-500 (2026-10-31): "EU data residency" is now "Primary data stored in the EU".
    */
   trustBadges: TRUST_BADGES,
   /*

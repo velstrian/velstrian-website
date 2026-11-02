@@ -289,6 +289,8 @@ const ALLOWED_LOSSES = new Map([
    'D255: customer facing copy says what we do, positively. The section is now "Your data, kept safe." and its six cards are the footer trust badges, word for word.'],
   ['/about/  heading: regulatory monitor planned, not yet built',
    'D255: the timeline status chip reads "Planned" in place of "Planned, not yet built". The item, its description and its planned state are all still on the page.'],
+  ['/about/  heading: full launch planned',
+   'A-500 item 4 (2026-10-31): the row contradicted /roadmap/, which reads Velstrian Bid and Velstrian Buy as live now. It is now "Velstrian Bid and Velstrian Buy are live, Live now", with a link to the roadmap.'],
   ['/security/  link: ico.org.uk/esdwebpages/search',
    'D252 (4): until the ICO register shows the new company name, no page tells a reader to search it for Velstrian Systems Ltd. The registration statement stays.'],
   ['/privacy/  link: ico.org.uk/esdwebpages/search',

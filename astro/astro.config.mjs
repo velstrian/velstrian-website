@@ -225,9 +225,37 @@ function rehypeAppOrigin({ origin, walkthrough }) {
   };
 }
 
+/**
+ * A STANDALONE MARKDOWN LINK GETS THE 44 BY 44 HIT AREA (A-503). A paragraph
+ * that holds nothing but one or more links ("[Start now](app:/signup)" under a
+ * blog post, the link rows on /security/) is a row of controls, not a sentence,
+ * so the WCAG 2.5.8 inline exemption does not reach it. Each such link gets the
+ * `tap-target` class from styles/targets.css. A link inside a sentence is left
+ * alone, because the exemption is right for it. Whitespace between links does
+ * not count as text.
+ */
+function rehypeStandaloneLinks() {
+  return (tree) => {
+    const walk = (node) => {
+      if (node.type === 'element' && node.tagName === 'p' && Array.isArray(node.children)) {
+        const kids = node.children.filter((c) => !(c.type === 'text' && !c.value.trim()));
+        if (kids.length && kids.every((c) => c.type === 'element' && c.tagName === 'a')) {
+          for (const a of kids) {
+            a.properties = a.properties || {};
+            const cls = a.properties.className;
+            a.properties.className = [...(Array.isArray(cls) ? cls : cls ? [String(cls)] : []), 'tap-target'];
+          }
+        }
+      }
+      (node.children || []).forEach(walk);
+    };
+    walk(tree);
+  };
+}
+
 export default defineConfig({
   site: 'https://velstrian.com', // R285-REBRAND-VELSTRIAN-01: velstrian.com is the primary origin (owner 2026-10-18)
-  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, [rehypeAppOrigin, { origin: APP_ORIGIN, walkthrough: WALKTHROUGH_URL }]] },
+  markdown: { rehypePlugins: [rehypeFocusablePre, rehypeContentCards, rehypeStandaloneLinks, [rehypeAppOrigin, { origin: APP_ORIGIN, walkthrough: WALKTHROUGH_URL }]] },
   output: 'static',
   // R285-WEB-COMPARE-SCREEN-01 (owner report 2026-10-25). The dark floating bar the owner saw over the
   // product screen captions on :8093 was Astro's own dev toolbar, which only `astro dev` injects. The
