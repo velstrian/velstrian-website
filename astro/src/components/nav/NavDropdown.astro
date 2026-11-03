@@ -318,13 +318,17 @@ const columnCount = menu.columns.length;
      * genuinely bad outcome here: page text showing straight through a menu. */
   }
 
-  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .ca-mega {
-      background: color-mix(in srgb, var(--c-panel) 82%, transparent);
-      -webkit-backdrop-filter: var(--blur-glass);
-      backdrop-filter: var(--blur-glass);
-    }
-  }
+  /* ── OPAQUE, A-515, 2026-11-03 ────────────────────────────────────────────
+   *
+   * The translucent fill above was withdrawn. Measured on the built home page
+   * at 1440: the panel computed an 88 percent white fill under blur(20px), and
+   * the hero h1 and the Start now button still read sharp through the
+   * Products menu. Nav.astro already recorded why a translucent fill cannot be
+   * rescued by the blur: blur changes the edges, only the fill changes the
+   * level, and large type stays legible below a 100 percent fill. So the menu
+   * is the solid --c-panel on every header and in every engine, and no
+   * backdrop-filter is declared, because over an opaque fill it cannot change
+   * a pixel. */
 
   /* ── THE LIGHT HEADER'S MENU, R285-WEB-GEMINI-AUDIT-5 ─────────────────────
    *
@@ -353,25 +357,10 @@ const columnCount = menu.columns.length;
     box-shadow: var(--shadow-glass-menu);
   }
 
-  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    :global(.on-light) .ca-mega {
-      background: var(--glass-menu-fill);
-      -webkit-backdrop-filter: var(--blur-glass-menu);
-      backdrop-filter: var(--blur-glass-menu);
-    }
-  }
-
-  /* R285-WEB-GEMINI-AUDIT-5. A reader who asked the system for less
-     transparency gets the solid panel, the same one an engine without
-     backdrop-filter draws. Placed after the glass rule so it wins on order. */
-  @media (prefers-reduced-transparency: reduce) {
-    .ca-mega,
-    :global(.on-light) .ca-mega {
-      background: var(--c-panel);
-      -webkit-backdrop-filter: none;
-      backdrop-filter: none;
-    }
-  }
+  /* A-515: the light header's 88 percent sheet and its blur were withdrawn
+     with the dark one above. The light role's own --c-panel is solid white,
+     so every reader now gets the panel that prefers-reduced-transparency
+     used to opt into, and that media rule had nothing left to undo. */
 
   /*
    * OPEN STATE HAS EXACTLY ONE OWNER, AND IT IS JAVASCRIPT.

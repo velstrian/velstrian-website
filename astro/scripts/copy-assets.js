@@ -58,6 +58,53 @@ for (const file of textFiles(DIST)) {
   }
 }
 
+/*
+ * A-516 (P0, 2026-11-03): EVERY PRODUCT VIDEO 404'd ON velstrian.com. media.ts
+ * served them at /assets/videos/ (lowercase, from astro/public/assets/). The
+ * repo-root _redirects carries `/assets/*  /Assets/:splat  200` (CODE-AUDIT-023),
+ * Cloudflare Pages applies _redirects BEFORE static files and is case-sensitive,
+ * so /assets/videos/x.mp4 was rewritten to /Assets/videos/x.mp4, which did not
+ * exist. Windows merges dist/assets and dist/Assets into one folder and its
+ * existsSync ignores case, so every local gate, Lighthouse run and screenshot
+ * passed. A lowercase /assets/ reference in a built page is therefore served
+ * ONLY when its /Assets/ twin is also referenced (so it is copied into dist
+ * below) and exists at the repository root with the EXACT case, checked one
+ * directory entry at a time because this machine cannot be trusted to say.
+ */
+const LOWER_REF = /(?<=["'(\s,=])\/assets\/[A-Za-z0-9._\-/%]+/g;
+
+/** True when `rel` exists under `root` with every path segment in the exact case given. */
+function existsExactCase(root, rel) {
+  let dir = root;
+  for (const segment of rel.split('/').filter(Boolean)) {
+    if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) return false;
+    if (!fs.readdirSync(dir).includes(segment)) return false;
+    dir = path.join(dir, segment);
+  }
+  return true;
+}
+
+const shadowed = new Map();
+for (const file of textFiles(DIST)) {
+  const text = fs.readFileSync(file, 'utf8');
+  for (const match of text.match(LOWER_REF) ?? []) {
+    const ref = decodeURIComponent(match.split('?')[0]);
+    const rewritten = `/Assets/${ref.slice('/assets/'.length)}`;
+    const served = referenced.has(rewritten) && existsExactCase(REPO_ROOT, rewritten);
+    if (!served) shadowed.set(ref, path.relative(DIST, file).split(path.sep).join('/'));
+  }
+}
+
+if (shadowed.size) {
+  console.error(`assets: ${shadowed.size} lowercase /assets/ reference(s) 404 on Cloudflare Pages:`);
+  for (const [ref, page] of shadowed) console.error(`  ${ref}  (in ${page})`);
+  console.error(
+    '_redirects rewrites /assets/* to /Assets/:splat before static files, case-sensitively.'
+  );
+  console.error('Put the file under the repository root Assets/ and reference it as /Assets/.');
+  process.exit(1);
+}
+
 const missing = [];
 let copied = 0;
 let bytes = 0;

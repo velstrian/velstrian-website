@@ -49,6 +49,7 @@ import Screens from '../components/evidenced/Screens.astro';
 import Steps from '../components/evidenced/Steps.astro';
 import Plans from '../components/evidenced/Plans.astro';
 import Close from '../components/evidenced/Close.astro';
+import JourneyVideoBand from '../components/evidenced/JourneyVideoBand.astro';
 import '../styles/evidenced.css';
 import { PLANS } from '../data/pricing';
 import { faqPage, breadcrumbs } from '../lib/schema';
@@ -112,6 +113,7 @@ const UPDATED = new Date('2026-10-22');
   <Refusal />
   <Screens />
   <Steps flash />
+  <JourneyVideoBand product="bid" tone="light-alt" />
   <BidTrust />
   <Plans />
   <BidDetail />

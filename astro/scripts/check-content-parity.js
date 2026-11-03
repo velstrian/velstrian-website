@@ -182,6 +182,28 @@ const ALLOWED_LOSSES = new Map([
   ['/sectors/  heading: the statute behind your sector.',
    'RULE 0-U: "statute" is a word a first time bidder has to look up. Now "What wins work in your sector." in the /sectors/ hero, over the same lead ("Different rules, one product") and the same nine sector cards.'],
 
+  /* 2026-11-03, A-513: the /sectors/ hub cards were repointed so every card links
+     to a real sector page. Three generic cards that linked to /bid/ were renamed
+     to the sectors they describe, each now with its own page:
+     "Public-Sector Suppliers" is covered by the public and private framing across
+     the sector pages, "IT Managed Service Providers" became "Technology and IT"
+     (/sectors/technology-it/), and "NHS Suppliers" became "Healthcare"
+     (/sectors/healthcare/). The hub now has eight cards, every one with a page. */
+  ['/sectors/  heading: public-sector suppliers',
+   'A-513 (2026-11-03): the generic public-sector card linking to /bid/ was removed. Public and private work is now stated on every sector page, each of which has its own page.'],
+  ['/sectors/  heading: it managed service providers',
+   'A-513 (2026-11-03): renamed to "Technology and IT" with its own page at /sectors/technology-it/, replacing the generic card that linked to /bid/.'],
+  ['/sectors/  heading: nhs suppliers',
+   'A-513 (2026-11-03): renamed to "Healthcare" with its own page at /sectors/healthcare/, replacing the generic card that linked to /bid/.'],
+
+  /* 2026-11-03, A-514 (D537): on / the full SecurityBuiltIn block was replaced
+     by TrustStrip, four badges from site-facts with one link on to /security/.
+     The full block, these two headings included, still renders on /security/. */
+  ['/  heading: signing in',
+   'A-514 (2026-11-03, D537): the home page security block became a strip of four trust badges from site-facts linking to /security/, where the full block with this heading still lives.'],
+  ['/  heading: checked automatically',
+   'A-514 (2026-11-03, D537): the home page security block became a strip of four trust badges from site-facts linking to /security/, where the full block with this heading still lives.'],
+
   /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: /about/ on design system v3
      (Gemini build, driver reviewed). Two heads deliberately REWORDED. */
   ['/about/  heading: written for bid teams. readable by the people scoring them.',
@@ -289,6 +311,8 @@ const ALLOWED_LOSSES = new Map([
    'D255: customer facing copy says what we do, positively. The section is now "Your data, kept safe." and its six cards are the footer trust badges, word for word.'],
   ['/about/  heading: regulatory monitor planned, not yet built',
    'D255: the timeline status chip reads "Planned" in place of "Planned, not yet built". The item, its description and its planned state are all still on the page.'],
+  ['/about/  heading: full launch planned',
+   'A-500 item 4 (2026-10-31): the row contradicted /roadmap/, which reads Velstrian Bid and Velstrian Buy as live now. It is now "Velstrian Bid and Velstrian Buy are live, Live now", with a link to the roadmap.'],
   ['/security/  link: ico.org.uk/esdwebpages/search',
    'D252 (4): until the ICO register shows the new company name, no page tells a reader to search it for Velstrian Systems Ltd. The registration statement stays.'],
   ['/privacy/  link: ico.org.uk/esdwebpages/search',

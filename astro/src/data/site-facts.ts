@@ -13,6 +13,7 @@
 /* The import attribute lets plain Node load this module too: check-pricing-parity.js
    imports data/pricing.ts, which imports this file, outside Vite. */
 import FACTS from './site-facts.json' with { type: 'json' };
+import type { IconName } from './icons';
 
 export { FACTS };
 
@@ -96,6 +97,16 @@ export const DATA_HANDLING_SENTENCE =
 export interface SecurityControl { id: string; line: string; evidence: string }
 export interface SecurityGroup { id: string; title: string; controls: SecurityControl[] }
 export const SECURITY_GROUPS: SecurityGroup[] = FACTS.security_controls.groups;
+
+/* A-514, D537. The home page trust strip: four one line badges, each backed
+   by a record above, and one link on to /security/. check-site-facts.mjs fails
+   the build when the home page drops a line or the residency line stops
+   naming the place in regions.data_at_rest. */
+export interface TrustStripItem { id: string; icon: IconName; line: string; backed_by: string }
+export const TRUST_STRIP = {
+  items: FACTS.trust_strip.items as TrustStripItem[],
+  link: FACTS.trust_strip.link,
+};
 
 /**
  * Which plans carry the Integrations package (D206), from the catalogue flags.

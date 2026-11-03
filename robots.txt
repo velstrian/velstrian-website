@@ -2,7 +2,8 @@ User-agent: *
 Allow: /
 
 # Content Signals (https://contentsignals.org/)
-Content-Signal: ai-train=no, search=yes, ai-input=no
+# ai-input is yes so the site can be cited in AI answers, while ai-train stays no so training stays off.
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 # WS-AUDIT-021: removed `Disallow: /api/` — no /api/ surface exists on
 # velstrian.com (the API lives on app.velstrian.com). The directive was

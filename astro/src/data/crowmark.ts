@@ -166,7 +166,11 @@ export const CAPABILITIES: Card[] = [
     heading: 'Tender document ingestion',
     /* R285-WEB-CLAIMS-AUDIT-01 B2 and B5. Was "PDF, DOCX, XLSX, PNG and JPEG up
        to 10MB": images are not accepted and the limits are 25 MB at the door and
-       100 MB in the pack (TenderDropzone.tsx, TenderUploadPanel.tsx). "OCR,
+       50 MB in the pack (TenderDropzone.tsx MAX_TENDER_FILE_SIZE, and
+       TenderUploadPanel.tsx MAX_FILE_SIZE, now TENDER_UPLOAD_MAX_BYTES, the
+       50 MB Supabase storage cap, R29-STORAGE-PROJECT-UPLOAD-LIMIT-01). The
+       sentence itself is UPLOAD_SENTENCE, read from site-facts, so the number
+       here tracks the platform and is never typed into copy. "OCR,
        which Velstrian Bid does not do" was dropped because an OCR path exists
        behind a key whose production state is not measured here. */
     body: `${UPLOAD_SENTENCE} Requirements and clauses are extracted from the text layer and become a citation source in their own right, so an answer can point at the wording it is answering. A scanned PDF with no text layer is flagged as needing OCR rather than guessed at.`,
@@ -198,7 +202,7 @@ export const CAPABILITIES: Card[] = [
   },
   {
     heading: 'Private sector quotes',
-    body: "Quick Quote takes a buyer's RFQ, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. You write the scope. The AI does not draft it.",
+    body: "Quick Quote takes a buyer's RFQ, pasted or uploaded, lets you price each line from your own rate card, and produces a quotation to download with your terms attached. AI drafts the scope from the request, and you accept, change or remove each item. It never writes a price, a rate or a term.",
   },
   {
     heading: 'Answer library, tone profiles and learnings',

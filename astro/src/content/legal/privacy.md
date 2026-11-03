@@ -6,6 +6,14 @@ eyebrow: "Legal & Data Protection"
 lastUpdated: "2026-10-26"
 version: "2026-10-25"
 effectiveDate: "2026-10-25"
+summary:
+  - "We are the data controller for personal data in the platform, and we are registered with the ICO."
+  - "We collect what we need to run your account, your bids and your billing, and use it for that."
+  - "Each use has a lawful basis under UK GDPR: contract, legitimate interests, consent or legal obligation."
+  - "We keep personal data only as long as we need it, then delete or anonymise it."
+  - "AI drafting sends only the text a task needs to Google Gemini and Anthropic Claude, outside the EU, under contract."
+  - "You can ask to see, correct, delete, move or limit your data, or object to how we use it."
+  - "If you are unhappy with how we handle your data, you can complain to the ICO."
 ---How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
 
 ## What this policy covers
@@ -30,9 +38,9 @@ We use Google Gemini and Anthropic Claude as AI sub-processors. They process the
 
 ## The detail, in full
 
-Every clause below is written for clarity. Jump to any section, or contact our Data Protection Officer with a question.
+Every clause below is written for clarity. Jump to any section, or send a question to our data protection contact.
 
-<aside aria-label="Data Protection Officer" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Data Protection Officer</p> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
+<aside aria-label="Data protection contact" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Data protection contact</p> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
 
 ## Data controller
 
@@ -115,11 +123,11 @@ You have the following rights in respect of personal data we hold about you. To 
 - **Withdraw consent (Art 7(3)):** For consent-based processing, you can withdraw your consent at any time.
 - **Lodge ICO complaint (Art 77):** You have the right to lodge a complaint with the UK Information Commissioner’s Office (ICO).
 
-## Data Protection Officer
+## Data protection contact
 
-Our Data Protection Officer is the canonical contact for all data-protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact our DPO for any matter related to Velstrian Bid or to any legacy feature retained for existing customers data handling.
+Our data protection contact handles all data protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact them for any matter related to Velstrian Bid or to any legacy feature retained for existing customers data handling.
 
-<dl class="deflist"> <dt>Contact the DPO</dt> <dd>Email: <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a> | <a href="mailto:privacy@velstrian.com">privacy@velstrian.com</a></dd> </dl>
+<dl class="deflist"> <dt>Contact details</dt> <dd>Email: <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a> | <a href="mailto:privacy@velstrian.com">privacy@velstrian.com</a></dd> </dl>
 
 ## Cookies
 

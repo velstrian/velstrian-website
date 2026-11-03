@@ -3,6 +3,14 @@ title: "Security Architecture and Controls | Velstrian"
 description: "How Velstrian protects your bid data: AES-256 at rest, TLS 1.3 in transit, UK data residency, and controls over what is sent to AI providers."
 heading: "Encrypted, documented, and auditable."
 eyebrow: "Security & Trust"
+summary:
+  - "Your data is encrypted in transit and at rest."
+  - "It is stored in the EU, in Ireland, with daily backups."
+  - "AI is the one part that leaves the EU, and only the text a task needs is sent, under contract."
+  - "Passkeys, multi factor sign in and an audit log help protect your account."
+  - "We follow ISO/IEC 27001 and are UK GDPR compliant."
+  - "Our live status page shows how the service is running."
+  - "You can report a security issue to us by email."
 ---[System status: status.velstrian.com](https://status.velstrian.com)
 
 How Velstrian protects your bid documents, company data, and user accounts: enterprise encryption, data stored in the EU (Ireland), and transparent AI processing boundaries.
@@ -25,7 +33,7 @@ Forward-secret HTTPS on every request with HSTS preload. TLS 1.3 is used whereve
 
 Subject rights supported end to end, with lawful basis, retention and deletion documented. Our [Data Processing Agreement](/dpa/) is published, and is still a draft pending legal review.
 
-### EU data residency
+### Primary data stored in the EU
 
 Primary customer data is stored in the EU, in AWS eu-west-1 (Ireland). Our API runs in the EU and the web application runs in the UK. Full processing locations are listed under sub-processors below.
 
@@ -49,7 +57,7 @@ All customer data is encrypted at rest using AES-256, and in transit using TLS 1
 
 <dl class="deflist deflist--ledger"> <dt>At rest</dt> <dd>AES-256</dd> <dt>In transit</dt> <dd>TLS 1.3 where supported, TLS 1.2 minimum, HSTS</dd> <dt>Disk key rotation</dt> <dd>Provider managed</dd> <dt>Application key rotation</dt> <dd>Documented procedure</dd> <dt>Backups</dt> <dd>Encrypted</dd> </dl>
 
-## EU data residency
+## Where your data is stored
 
 - Your account and bid data, sign in records and uploaded files are stored by Supabase in AWS eu-west-1 (Ireland), with daily backups.
 - The Velstrian API and its background worker run on Railway in europe-west4 (the Netherlands).
@@ -116,7 +124,7 @@ On a narrow screen, this table scrolls sideways.
 
 99.5<sup>%</sup>
 
-Velstrian targets 99.5% monthly uptime, with independent public status monitoring you can check yourself.
+Velstrian aims for 99.5% monthly uptime, with independent public status monitoring you can check yourself. This is an aim, not a promise, and no credit or other remedy is due if we miss it.
 
 [View status page](https://status.velstrian.com)
 
@@ -138,6 +146,6 @@ Everything above is what we can show you today. If it meets your needs, the next
 
 [Start now](app:/signup) [Book a 30-minute demo](walkthrough:)
 
-ICO-registered data controller. EU data residency. AES-256 at rest, TLS 1.3 in transit. Follows ISO/IEC 27001. GDPR compliant.
+ICO-registered data controller. Primary data stored in the EU. AES-256 at rest, TLS 1.3 in transit. Follows ISO/IEC 27001. GDPR compliant.
 
 [Privacy Policy](/privacy/) [Sub-processors](#sub-processors) [Status Page](https://status.velstrian.com)

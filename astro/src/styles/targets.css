@@ -1,0 +1,33 @@
+/*
+ * targets.css: the ONE way a standalone control reaches the 44 by 44 target.
+ *
+ * A-503 (2026-10-31), measured at 390 by 844 on the built site: the header logo
+ * drew a 32px tall link, every breadcrumb link was 24px tall (the WCAG 2.5.8
+ * AA floor, below this site's 44px rule), and a Markdown call to action standing
+ * in its own paragraph ("Start now" under a blog post) was 28px tall.
+ *
+ * GROW THE HIT AREA, NOT THE DRAWING. Growing each box to 44px would push the
+ * breadcrumb row and the header off their measured rhythm. The pseudo-element is
+ * the target and the visible link is the picture of it, the same recipe
+ * .art__pill in layouts/Article.astro has used since 2026-08 and now reads the
+ * same token. The size is --tap-min from tokens.css, never a number here.
+ *
+ * INLINE LINKS INSIDE A SENTENCE ARE NOT GIVEN THIS. WCAG 2.5.8 exempts a link
+ * whose size is set by the line of text around it, and growing one would lay its
+ * hit area over the words above and below. A Markdown link is given the class
+ * only when it stands alone in its paragraph (rehypeStandaloneLinks in
+ * astro.config.mjs).
+ */
+.tap-target {
+  position: relative;
+}
+
+.tap-target::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: max(100%, var(--tap-min));
+  block-size: max(100%, var(--tap-min));
+  transform: translate(-50%, -50%);
+}

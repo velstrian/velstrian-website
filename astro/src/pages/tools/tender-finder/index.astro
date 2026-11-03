@@ -270,10 +270,10 @@ const schema = [
         </p>
       </div>
 
-      <p class="tf-upsell">
-        Want new matches by email and a fit score for each tender?
-        <a href={SIGNUP_URL}>{START_LABEL}</a>.
-      </p>
+      <div class="tf-upsell">
+        <p>Want new matches by email and a fit score for each tender?</p>
+        <Action href={SIGNUP_URL}>{START_LABEL}</Action>
+      </div>
     </div>
 
     <template id="tf-row">
@@ -682,17 +682,32 @@ const schema = [
     margin-block-start: var(--stack-2);
   }
 
-  .tf-attr p,
-  .tf-upsell {
+  .tf-attr p {
     margin: var(--stack-2) 0 0;
     font-family: var(--font-body);
     font-size: var(--t-micro);
     color: var(--c-text-muted);
   }
 
-  .tf-attr a,
-  .tf-upsell a {
+  .tf-attr a {
     color: var(--c-interactive);
+  }
+
+  /* The one next step after a search, so it is a real button (RULE 0-U: one primary
+     action), not a link buried in the licence small print. */
+  .tf-upsell {
+    margin: var(--stack-3) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--stack-2);
+  }
+
+  .tf-upsell p {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    color: var(--c-text);
   }
 
   .tf-form {

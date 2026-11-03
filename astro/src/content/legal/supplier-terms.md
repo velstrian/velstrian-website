@@ -6,6 +6,13 @@ eyebrow: "Legal"
 lastUpdated: "2026-10-25"
 version: "2026-10-25"
 effectiveDate: "2026-10-25"
+summary:
+  - "These terms apply when a Velstrian customer sends you a link to answer, quote, sign or review."
+  - "You do not need an account."
+  - "Only send what you are allowed to share, and use the link only for the reason it was sent."
+  - "What you send goes to the customer who sent the link, and we store it so the service works for them."
+  - "Your personal data is handled under our Privacy Policy."
+  - "We record when you submit and which version of these terms you saw."
 ---
 ## Who these terms are for
 

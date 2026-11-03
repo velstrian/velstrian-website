@@ -93,8 +93,12 @@ const REPO_ROOT = path.join(__dirname, '..', '..');
  * ("Share login instructions for AI bots"). It tells agents that registration
  * is by invitation, where people sign in, and that there is no public API. Same
  * reason as llms.txt for living at the root.
+ *
+ * [2026-10-30] `_routes.json` ADDED. It keeps static assets off the Pages Function
+ * in `functions/` (the Pages root is the repository root, so that is the only
+ * functions folder Pages reads). One root source, copied here like the rest.
  */
-const FILES = ['_headers', '_redirects', 'robots.txt', 'llms.txt', 'llms-full.txt', '.well-known/security.txt', 'auth.md'];
+const FILES = ['_headers', '_redirects', 'robots.txt', 'llms.txt', 'llms-full.txt', '.well-known/security.txt', 'auth.md', '_routes.json'];
 
 /**
  * Immutable caching for Astro's content-hashed output. Appended rather than

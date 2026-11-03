@@ -1,4 +1,4 @@
-# Signing in to Velstrian
+# Velstrian auth.md
 
 This file tells automated agents how accounts work on Velstrian. It is written for software acting on behalf of a person.
 

@@ -24,14 +24,16 @@ import TourDialog from './TourDialog.astro';
 import Icon from './Icon.astro';
 import { SIGNUP_URL, START_LABEL } from '../../data/app';
 import { TRIAL_DAYS } from '../../data/pricing';
+import { BRAND_LINE, BRAND_LINE_SUB } from '../../data/site';
 ---
 
 <Band tone="light" class="ea-hero" labelledby="ea-hero-title">
   <div class="ea-wrap ea-hero__head">
+    {/* A-474 / D530: the brand line, always with its plain line under it on the
+        home and Bid pages. Both strings come from data/site.ts (RULE 0-C). */}
+    <p class="ea-hero__brandline">{BRAND_LINE}</p>
     <h1 class="ea-hero__title" id="ea-hero-title">Write strong bids yourself, <span class="ea-accent">using what you already have.</span></h1>
-    <p class="ea-lead ea-hero__lead">
-      Find public and private contracts that suit you, then answer every question from your own documents.
-    </p>
+    <p class="ea-lead ea-hero__lead">{BRAND_LINE_SUB}</p>
     <div class="ea-actions">
       <Action href={SIGNUP_URL}>{START_LABEL}</Action>
       {/* R285-WEB-INTERACTIVE-WALKTHROUGH-01: the secondary action is now the

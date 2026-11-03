@@ -53,6 +53,7 @@ import '../styles/evidenced.css';
 import { breadcrumbs } from '../lib/schema';
 import '../styles/prose.css';
 import type { MarkdownHeading } from 'astro';
+import { CONTACT_EMAIL } from '../lib/brand-names';
 
 interface Props {
   title: string;
@@ -64,10 +65,12 @@ interface Props {
   version?: string;
   effectiveDate?: string;
   draftNotice?: string;
+  /** A-512, D532: the short plain summary shown before the full document. */
+  summary?: string[];
   headings: MarkdownHeading[];
 }
 
-const { title, description, path, heading, eyebrow, lastUpdated, version, effectiveDate, draftNotice, headings } = Astro.props;
+const { title, description, path, heading, eyebrow, lastUpdated, version, effectiveDate, draftNotice, summary, headings } = Astro.props;
 
 /** h2 only. h3 in these documents are sub-clauses and would swamp the rail. */
 const toc = headings.filter((h) => h.depth === 2);
@@ -162,6 +165,28 @@ const isValidEffective = effectiveFormatted && effectiveFormatted !== 'Invalid D
         </div>
       )
     }
+    {/* A-512, D532: the short plain summary first, then one line saying how
+        to ask for the full document or more detail. The full text below is
+        unchanged. The points come from the page's front matter, the layout
+        adds only the label and the contact line. The label is a <p>, like
+        the Draft and Contents labels beside it: it names the section through
+        aria-labelledby, and an h2 carrying .ea-label made the label size read
+        as a heading size off the four tiers (check-design-system TYPE SCALE). */}
+    {
+      summary && summary.length > 0 && (
+        <div class="ea-wrap">
+          <section class="legal__summary" aria-labelledby="legal-summary-label" data-legal-summary>
+            <p class="ea-label legal__summary-label" id="legal-summary-label">In short</p>
+            <ul class="legal__summary-list">
+              {summary.map((line) => <li>{line}</li>)}
+            </ul>
+            <p class="legal__summary-contact">
+              For the full document or more detail, contact us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+            </p>
+          </section>
+        </div>
+      )
+    }
     <div class="ea-wrap legal__grid">
       {
         toc.length > 0 && (
@@ -205,6 +230,41 @@ const isValidEffective = effectiveFormatted && effectiveFormatted !== 'Invalid D
   }
 
   .legal__draft-text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--c-text);
+  }
+
+  /* The summary. Same card shape as the draft notice, on the accent rule
+     instead of the at risk one, from the central tokens only. */
+  .legal__summary {
+    margin: 0 0 var(--stack-2);
+    padding: var(--space-4) var(--space-6);
+    border: 1px solid var(--ea-rule);
+    border-left: 4px solid var(--ea-accent-ink);
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+  }
+
+  .legal__summary-label {
+    margin: 0 0 var(--space-2);
+    color: var(--ea-accent-ink);
+  }
+
+  .legal__summary-list {
+    margin: 0 0 var(--space-3);
+    padding-left: var(--space-6);
+    display: grid;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--c-text);
+  }
+
+  .legal__summary-contact {
     margin: 0;
     font-family: var(--font-body);
     font-size: var(--t-body);

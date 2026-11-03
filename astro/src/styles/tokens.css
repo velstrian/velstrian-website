@@ -688,6 +688,10 @@
      shape: --v3-btn-h. */
   --btn-h:    var(--v3-btn-h);
   --btn-h-sm: 44px;
+  /* The smallest HIT AREA any standalone control may have, on both axes (A-503,
+     WCAG 2.2 SC 2.5.5 at 44px, the floor this site holds itself to). Read by
+     styles/targets.css, which grows the target without growing the drawing. */
+  --tap-min: var(--btn-h-sm);
   --btn-fs:   15px;
   --btn-fw:   600;
 
@@ -2572,11 +2576,13 @@
      interactive value are the same pigment under V6, and one literal is what
      makes that a decision somebody took rather than two hexes that happen to
      agree. */
-  /* [R285-P2-PREMIUM-TYPE-01] Owner decision 2026-10-13: the ink softens to #F8F9FB
-     and stops sharing the --c-white pigment. Pure white on a near black canvas glares,
-     and the platform's Slate and Iris palettes already use a soft white. Interactive
-     glyphs keep --c-white. #F8F9FB on --c-bg #05070E is 18.9:1. The platform reads this
-     through brand/brand.source.json ink-0. */
+  /* [R285-P2-PREMIUM-TYPE-01, superseded by A-509 / D309 2026-11-02] The primary
+     ink is #F7F8FB, the central token textPrimary
+     (velstrian-platform/packages/tokens/src/constants.ts:258). It softens off pure
+     --c-white so a near black canvas does not glare, and interactive glyphs keep
+     --c-white. The earlier #F8F9FB value (R29-STEP-P2-PREMIUM-TYPE-01) was retired
+     under D309: the one source of truth is the platform token, read here through
+     brand/brand.source.json ink-0. #F7F8FB on --c-bg #05070E stays above 18:1. */
   --c-text:       #F7F8FB;
   --c-text-sub:   #D8DAE1;
   --c-text-muted: #A9ADBA;
@@ -2748,12 +2754,13 @@
      glass above: 88 percent white, a 20px blur at 180 percent saturation, a
      white rim, and a three part shadow (a 5 percent black hairline ring, then
      two soft slate lifts). Every value is Gemini's, written against tokens:
-     --c-slate-900 is Gemini's rgba(15, 23, 42) ink. */
+     --c-slate-900 is Gemini's rgba(15, 23, 42) ink.
+     A-515 (2026-11-03): the 88 percent fill and the 20px blur were withdrawn,
+     the hero read through the menu. The sheet is now the opaque --c-panel,
+     and the rim and shadow below still apply. */
   --c-black: #000000;
   --c-slate-900: #0F172A;
-  --glass-menu-fill: color-mix(in srgb, var(--c-white) 88%, transparent);
   --glass-menu-edge: color-mix(in srgb, var(--c-white) 70%, transparent);
-  --blur-glass-menu: blur(20px) saturate(180%);
   --shadow-glass-menu:
     0 0 0 1px color-mix(in srgb, var(--c-black) 5%, transparent),
     0 12px 32px -4px color-mix(in srgb, var(--c-slate-900) 10%, transparent),

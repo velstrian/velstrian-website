@@ -45,6 +45,7 @@ const pageTitle = TITLE_OVERRIDES[entry.id] ?? entry.data.title;
   version={entry.data.version}
   effectiveDate={entry.data.effectiveDate}
   draftNotice={entry.data.draftNotice}
+  summary={entry.data.summary}
   headings={headings}
 >
   {entry.id === 'security' && <SecurityBuiltIn slot="before" tone="light-alt" />}

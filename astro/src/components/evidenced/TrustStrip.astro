@@ -1,0 +1,83 @@
+---
+/**
+ * TrustStrip: the home page's short answer to "is my data safe?" (A-514,
+ * owner decision D537, KIRO-BRIEF-21 addendum 8, 2026-11-03).
+ *
+ * It replaces the full SecurityBuiltIn block on the home page, in the same
+ * place between the steps and the plans. The full block now lives on
+ * /security/ only, and SecurityBuiltIn.astro is kept unchanged for it.
+ *
+ * FOUR LINES, ONE SOURCE. Every line and the link are read from
+ * site-facts.json trust_strip, and each item there names the record that
+ * backs it. check-site-facts.mjs fails the build when the home page drops a
+ * line. No numbers and no promises beyond the four lines (D532).
+ *
+ * Written for a first time reader at a small firm (RULE 0-U): one short
+ * sentence each, an icon each, and one link for anyone who wants the detail.
+ */
+import Band from './Band.astro';
+import IconTile from './IconTile.astro';
+import { TRUST_STRIP } from '../../data/site-facts';
+---
+
+<Band tone="light" class="ea-trust" labelledby="ea-trust-title">
+  <div class="ea-wrap ea-trust__inner">
+    <h2 class="visually-hidden" id="ea-trust-title">Your data is safe with us</h2>
+    <ul class="ea-trust__list" role="list">
+      {
+        TRUST_STRIP.items.map((t) => (
+          <li class="ea-trust__item" data-reveal>
+            <IconTile name={t.icon} />
+            <span>{t.line}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="ea-trust__more">
+      <a class="ea-link" href={TRUST_STRIP.link.href}>{TRUST_STRIP.link.label}</a>
+    </p>
+  </div>
+</Band>
+
+<style>
+  .ea-trust__inner {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .ea-trust__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .ea-trust__item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: center;
+    color: var(--ea-ink);
+    line-height: 1.4;
+  }
+
+  .ea-trust__more {
+    margin: 0;
+    text-align: center;
+  }
+
+  @media (max-width: 959px) {
+    .ea-trust__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 599px) {
+    .ea-trust__list {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+    }
+  }
+</style>

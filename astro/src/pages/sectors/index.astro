@@ -42,32 +42,8 @@ const path = '/sectors';
    work in that sector is public, private or both, in plain words (RULE 0-U). */
 const sectorCards = [
   {
-    name: 'Public-Sector Suppliers',
-    kind: 'Public work',
-    say: 'PPN 026, the next edition of the Social Value Model, applies to central government procurements commenced on or after 1 January 2027 at 1 million pounds inc VAT or above, and makes social value a scored award criterion on in-scope central-government tenders.',
-    href: '/bid/',
-  },
-  {
-    name: 'IT Managed Service Providers',
-    kind: 'Public and private work',
-    /* A-435 (2026-10-25). Was "scored on PPN 026 social value". PPN 026 binds
-       central government contracting authorities only, so most IT buyers do
-       not apply it. Tailored to who actually scores social value in IT. */
-    say: 'Many public and private IT tenders ask how you add social value. Central government buyers score it under PPN 026, and other public bodies often use their own policy.',
-    href: '/bid/',
-  },
-  {
-    name: 'Professional Services',
-    kind: 'Public and private work',
-    say: 'Framework and consultancy tenders reward a consistent, evidenced bid response.',
-    href: '/bid/',
-  },
-  {
     name: 'Construction',
     kind: 'Public and private work',
-    /* A-435 (2026-10-25). Was "Public works bids score PPN 026 social value".
-       Councils and housing bodies let most public works and are not bound by
-       PPN 026, which covers central government only. */
     say: 'Many public works tenders ask how you add social value, such as local jobs and apprentices. Central government buyers score it under PPN 026, councils often use their own policy, and private clients increasingly ask too.',
     href: '/sectors/construction/',
   },
@@ -78,19 +54,22 @@ const sectorCards = [
     href: '/sectors/facilities/',
   },
   {
-    name: 'Highways',
-    kind: 'Public work',
-    say: 'Term maintenance and NEC4 contracts often score social value alongside price and capability.',
-    href: '/sectors/highways/',
+    name: 'Technology and IT',
+    kind: 'Public and private work',
+    say: 'IT tenders turn on security and data-protection answers, such as Cyber Essentials and ISO/IEC 27001, that have to read the same every time.',
+    href: '/sectors/technology-it/',
   },
   {
-    name: 'NHS Suppliers',
-    kind: 'Public work',
-    /* A-435 (2026-10-25). Was "Framework bids weigh PPN 026 social value".
-       PPN 026 binds central government, so an NHS trust tender may score social
-       value under its own approach or not at all. */
-    say: 'NHS buyers often ask how you add social value, and NHS and central government bodies may apply PPN 026. A track record of on time, evidenced delivery still counts.',
-    href: '/bid/',
+    name: 'Professional Services',
+    kind: 'Public and private work',
+    say: 'Consultancy tenders reward a consistent, evidenced bid built from your method, your people and your track record.',
+    href: '/sectors/professional-services/',
+  },
+  {
+    name: 'Healthcare',
+    kind: 'Public and private work',
+    say: 'Healthcare and care tenders turn on quality and safety, such as CQC evidence and safeguarding, and the same questions recur on every bid.',
+    href: '/sectors/healthcare/',
   },
   {
     name: 'Education',
@@ -99,15 +78,16 @@ const sectorCards = [
     href: '/sectors/education/',
   },
   {
+    name: 'Transport and highways',
+    kind: 'Public and private work',
+    say: 'Road, rail and infrastructure contracts often use collaborative NEC forms and score social value alongside price and capability.',
+    href: '/sectors/highways/',
+  },
+  {
     name: 'Charities',
     kind: 'Contracts and grants',
-    /* A-433 (D424, 2026-10-25). Was "judged on PPN 026 social value". PPN 026
-       binds central government contracting authorities, so it does not judge a
-       charity's grant bid or most of its contracts. What is true for a charity:
-       many contracts and grant funded services ask how you add social value,
-       and a public body may score the answer. */
     say: 'Many charity contracts and grant funded services ask how you add social value, and public bodies may score your answer. Your reporting still has to stay lean.',
-    href: '/bid/',
+    href: '/sectors/charities/',
   },
 ];
 
@@ -117,8 +97,8 @@ const more = (c: { name: string; href: string }) =>
   c.href.startsWith('/sectors/') ? `Read the ${c.name.toLowerCase()} page` : `See ${PRODUCT_NAME_BID}`;
 
 /** SE-01 (audit 2026-10-25): the count in the lead is read from the cards,
-    so it can never drift from what renders. Nine cards render, four of them
-    with a sector page of their own (measured on the built page). */
+    so it can never drift from what renders. A-513 (2026-11-03): eight cards
+    render, every one with a sector page of its own. */
 const COUNT_WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
 const ownPages = sectorCards.filter((c) => c.href.startsWith('/sectors/')).length;
 const cardCount = COUNT_WORDS[sectorCards.length] ?? String(sectorCards.length);

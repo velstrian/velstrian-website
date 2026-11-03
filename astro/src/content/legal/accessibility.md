@@ -4,6 +4,12 @@ description: "Velstrian's accessibility statement: what we have tested against W
 heading: "What we have tested, and what we have not."
 eyebrow: "Accessibility"
 lastUpdated: "9 August 2026"
+summary:
+  - "This statement covers the velstrian.com website. The app has its own statement."
+  - "Automated checks run on every build and find no problems on the site today."
+  - "We have not yet finished hands on and screen reader testing, so we say the site partly meets WCAG 2.2 AA."
+  - "If anything on the site gets in your way, tell us through the contact form or by email."
+  - "If you need something in a different format, ask and we will tell you honestly whether we can provide it."
 ---
 
 This statement covers the Velstrian marketing website at [velstrian.com](https://velstrian.com/). The application at `app.velstrian.com` is a separate product and is **not** covered here. It has its own statement, published at [app.velstrian.com/accessibility](app:/accessibility), and neither statement should be read as evidence for the other: the two are different codebases, tested in different ways, on different dates.

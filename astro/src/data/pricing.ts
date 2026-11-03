@@ -352,6 +352,13 @@ export const TRIAL_DAYS = 7;
  *  label never hides either (R285-WEB-REVIEW-2026-10-22 item 3). */
 export const TRIAL_NOTE = `Your first ${TRIAL_DAYS} days are free. A card is needed to start.`;
 
+/** What happens when the free days end (A-500 item 2, owner 2026-10-31 "Fix the
+ *  wording"). The platform's create-checkout route collects the card up front
+ *  (payment_method_collection "always") and sets trial_period_days, so Stripe
+ *  turns the trial into the paid plan when it ends unless it was cancelled. Said
+ *  once here so /bid/, the home page and /pricing/ cannot drift from the Terms. */
+export const TRIAL_END_NOTE = `Cancel within ${TRIAL_DAYS} days and pay nothing. If you do not cancel, your trial becomes the paid plan you chose after ${TRIAL_DAYS} days and your card is charged then.`;
+
 /** The AI credits a first plan's free trial carries (D236, the platform's
  *  create-checkout trial grant). Already published in the trial answers on
  *  /pricing/ and /faq/, now written once here so those answers read it. */

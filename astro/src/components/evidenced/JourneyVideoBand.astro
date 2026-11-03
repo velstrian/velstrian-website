@@ -1,0 +1,130 @@
+---
+/**
+ * JourneyVideoBand.astro: one voiced walkthrough on a product page (A-506).
+ *
+ * Shows the long walkthrough for a journey ('bid' or 'buy') with a plain
+ * heading and a link to the full video page. Poster first, native controls,
+ * preload="none", never autoplay and never sound without a press
+ * (check-autoplay.mjs). The 16:9 box is reserved by CSS so nothing shifts.
+ *
+ * ONE SOURCE (RULE 0-C): the video, poster and captions come from
+ * data/media.ts. If there is no walkthrough for the journey, nothing renders.
+ */
+import Band from './Band.astro';
+import { walkthroughFor } from '../../data/media';
+
+interface Props {
+  product: 'bid' | 'buy';
+  /** Band tone, so the page can keep its light/dark rhythm. */
+  tone?: 'light' | 'light-alt' | 'dark';
+  heading?: string;
+}
+
+const { product, tone = 'light-alt', heading = 'See it in action' } = Astro.props;
+const video = walkthroughFor(product);
+---
+
+{
+  video && (
+    <Band tone={tone} class="jvb">
+      <div class="ea-wrap jvb__wrap">
+        <div class="jvb__intro">
+          <h2 class="jvb__heading">{heading}</h2>
+          <p class="jvb__lead">{video.summary}</p>
+          <a class="jvb__more" href="/see-it-in-action/">Watch every walkthrough</a>
+        </div>
+        <figure class="jvb__figure" aria-labelledby={`jvb-${video.id}`}>
+          <video
+            class="jvb__player"
+            controls
+            preload="none"
+            playsinline
+            poster={video.poster}
+            aria-labelledby={`jvb-${video.id}`}
+          >
+            <source src={video.src} type="video/mp4" />
+            <track kind="captions" src={video.captions} srclang="en" label="English" default />
+            Your browser cannot play this video.
+          </video>
+          <figcaption class="jvb__cap" id={`jvb-${video.id}`}>{video.title}</figcaption>
+        </figure>
+      </div>
+    </Band>
+  )
+}
+
+<style>
+  .jvb__wrap {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .jvb__wrap {
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-6);
+    }
+  }
+
+  .jvb__intro {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 48ch;
+  }
+
+  .jvb__heading {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--t-h2);
+    line-height: 1.2;
+    color: var(--c-text);
+  }
+
+  .jvb__lead {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    line-height: 1.6;
+    color: var(--c-text-sub);
+  }
+
+  .jvb__more {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--c-interactive);
+  }
+
+  .jvb__figure {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    border-radius: var(--v3-radius-card);
+    background: var(--ea-raised);
+  }
+
+  .jvb__player {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    background: var(--c-border);
+  }
+
+  .jvb__player:focus-visible {
+    outline: 3px solid var(--c-interactive);
+    outline-offset: 2px;
+  }
+
+  .jvb__cap {
+    padding: 0 var(--space-4) var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--t-ea-small);
+    color: var(--c-text-muted);
+  }
+</style>

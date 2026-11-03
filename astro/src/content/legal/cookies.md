@@ -3,6 +3,13 @@ title: "Cookie Policy and Tracking Notice | Velstrian"
 description: "How Velstrian uses cookies. This website sets no tracking cookies. Signed-in platform cookies are listed here with the reason and lifetime for each."
 heading: "Cookie Policy."
 lastUpdated: "2026-10-24"
+summary:
+  - "This website sets no tracking cookies and runs no analytics."
+  - "If you pause the moving background, your browser remembers that for the visit only."
+  - "The platform you sign in to uses cookies to keep you signed in and secure."
+  - "Analytics and the meeting scheduler in the platform only run if you agree."
+  - "We do not sell your data or use cookies for advertising."
+  - "You can change your choice in the platform at any time."
 ---Full statutory disclosure for Velstrian Systems Ltd. UK GDPR and PECR aligned transparency.
 
 Cookies are small files that websites place on your device. This website places no tracking cookies. The Velstrian platform you sign in to does, and every one of them is named below.
