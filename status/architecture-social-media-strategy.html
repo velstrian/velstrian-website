@@ -1,0 +1,390 @@
+<!--
+  ══════════════════════════════════════════════════════════════════
+  SOCIAL MEDIA STRATEGY AND AUTOMATION. Written 3 November 2026 as a research and
+  plan page. Nothing here is built, posted, bought or created.
+
+  This page is a fragment injected by index.html. It carries NO style block, NO
+  script element and NO colour literal, per the injected document contract in
+  check-board-contract.js. Class names are reused from architecture-release-and-environments.html.
+
+  EVIDENCE RULES. Every external fact carries its URL and the date it was read
+  (3 November 2026). Where a fact could not be read it says "not verified". Nothing
+  is a measured result of ours unless it names the file or the command. Prices are
+  in the currency the vendor page showed. No follower count, price or API limit is
+  invented.
+  ══════════════════════════════════════════════════════════════════
+-->
+
+<div class="dochead">
+  <p class="kicker">Social media strategy and automation</p>
+  <p class="title">Qualify. Draft. Prove it. On every channel, with a human approving every post</p>
+  <p class="lede">A plan for a factual, premium social presence for Velstrian Tenderworks that grows
+  followers and brings small firms into Velstrian Bid and Velstrian Buy. It covers which channels,
+  what to say, how the machinery would work, what it would cost, and what the owner must do. It is
+  a plan only. No account was created, nothing was posted and nothing was bought.</p>
+  <p class="dated">Written 3 November 2026. External facts were read on 3 November 2026 and each
+  carries its link. The company identity used throughout is Velstrian Tenderworks,
+  contact@velstrian.com.</p>
+</div>
+
+<div class="callout good">
+  <b>Short answer.</b> Start with <b>LinkedIn (company page plus founder profile)</b>, then
+  <b>YouTube</b> and <b>X</b>, and add the rest later. Run it as a <b>draft, check, approve, post</b>
+  line. Our own AI client drafts, a second model plus a source fetch checks every claim, and
+  <b>every post is emailed through Brevo to aparajita.parihar@gmail.com with approve and reject
+  links. Nothing posts without that click.</b> The recommended stack costs about
+  <b>0 pounds a month in tool fees</b> and an estimated <b>under 5 US dollars a month</b> in AI and X
+  API usage (an estimate from assumed token counts, shown in section 3). Building the scheduler needs
+  the owner to approve the RULE 0-G cost statement in section 3 first. Until then, phase 0 is manual
+  and free.
+</div>
+
+<div class="kpi">
+  <div><b>10</b><span>platforms assessed, 3 recommended to start</span></div>
+  <div><b>1</b><span>approver, every post, no exception, no auto posting</span></div>
+  <div><b>1</b><span>timer a week if built (generation). Publishing is driven by the approve click</span></div>
+  <div><b>0</b><span>accounts created, posts made or pounds spent by this research</span></div>
+</div>
+
+<details class="toc">
+  <summary>On this page</summary>
+  <ol>
+    <li><a href="#soc-platforms">Platforms, ranked, and whether our handles exist</a></li>
+    <li><a href="#soc-content">Content strategy, calendar and ten sample posts</a></li>
+    <li><a href="#soc-automation">Automation architecture, stack and the RULE 0-G cost statement</a></li>
+    <li><a href="#soc-growth">Growth plan and targets</a></li>
+    <li><a href="#soc-risks">Risks and controls</a></li>
+    <li><a href="#soc-plan">Implementation plan, owner actions and decisions</a></li>
+    <li><a href="#soc-sources">Sources and what was not verified</a></li>
+  </ol>
+</details>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-platforms"><span class="n">Section 1</span>Platforms, ranked, and whether our handles exist</h2>
+
+<p>The ranking is a judgement for our audience (UK small and mid size firms that write bids
+themselves, and public sector buyers). It is not a measured audience study. No platform audience
+statistic was read for this page, so none is quoted.</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Rank</th><th>Platform</th><th>Why for us</th><th>Post types</th><th>Frequency</th><th>Handle check, 3 Nov 2026</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>LinkedIn</b>, company page plus founder</td><td>Where business owners, bid writers and procurement staff already talk about work. Best fit for plain English craft posts and proof.</td><td>Text with one idea, document carousels, short product clips, polls</td><td>3 a week page, 3 a week founder</td><td>Not checkable. LinkedIn returned a robot check page to our request, so existence is <b>unverified</b>. Owner to look while logged in.</td></tr>
+    <tr><td>2</td><td><b>YouTube</b></td><td>Our voiced product videos already exist. Search lives here, so how to videos keep working for months.</td><td>Shorts from the existing videos, 2 to 5 minute how tos</td><td>1 short a week, 1 long a fortnight</td><td><code>youtube.com/@velstrian</code> answered 404 Not Found. <b>Not found.</b></td></tr>
+    <tr><td>3</td><td><b>X</b></td><td>Procurement and policy people post news here. Useful for fast, sourced news notes. Posting has a per post API fee, see section 3.</td><td>Short notes, threads, links to sources</td><td>3 a week</td><td><code>x.com/velstriantenderworks</code> answered User Profile Not Found. <code>x.com/velstrian</code> answered 404. <b>Both not found.</b></td></tr>
+    <tr><td>4</td><td><b>Instagram</b></td><td>Lower fit for B2B bid writers. Useful for brand polish and short clips reused from YouTube.</td><td>Reels, carousels</td><td>1 to 2 a week</td><td><code>instagram.com/velstrian</code> returned a profile titled "Velstrian systems Ltd (@velstrian)". <b>Found, owner to confirm it is ours.</b></td></tr>
+    <tr><td>5</td><td><b>Bluesky</b></td><td>Small but active policy and tech audience. Cheap to run, text only.</td><td>Short notes, threads</td><td>Mirror of X, 3 a week</td><td>Page loaded with a generic title for <code>velstrian.bsky.social</code>. It is a script rendered page, so existence is <b>unverified</b>.</td></tr>
+    <tr><td>6</td><td><b>Threads</b></td><td>Low priority. Reuses short text posts.</td><td>Short notes</td><td>Mirror, optional</td><td>Login wall page returned. <b>Unverified.</b></td></tr>
+    <tr><td>7</td><td><b>Facebook page</b></td><td>Low fit for the audience. Worth holding the name and linking from the website.</td><td>Shares of the best posts</td><td>1 a week or less</td><td>Generic page title returned. <b>Unverified.</b></td></tr>
+    <tr><td>8</td><td><b>TikTok</b></td><td>Low fit for B2B bidding. Reuse shorts only if time allows.</td><td>Short video</td><td>Optional</td><td>Generic title returned. <b>Unverified.</b></td></tr>
+    <tr><td>9</td><td><b>Medium or Substack</b></td><td>Long form guides. Our own website blog is better for search, so this is a distribution copy only.</td><td>Guides, newsletters</td><td>1 a month</td><td>Not checked. <b>Unverified.</b></td></tr>
+    <tr><td>10</td><td><b>Reddit</b></td><td>Useful for listening and for answering real questions. Promotion is easily banned, so we take part and do not advertise.</td><td>Helpful answers only</td><td>Weekly, by hand</td><td>Request refused with 403. <b>Unverified.</b> Subreddit self promotion rules were not read, so read each subreddit's rules before any post.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="sm"><b>How the handle check was done and how it can fail.</b> The check was an HTTP request to the
+likely profile address and a read of the page title. A 404 plus a "not found" title on X and YouTube
+is a real negative. A 200 on Facebook, TikTok, Threads and Bluesky proves nothing because those sites
+return a normal page for any name. LinkedIn blocked the request. The GitHub organisation
+<code>github.com/velstrian</code> exists and is titled "VELSTRIAN SYSTEMS LIMITED", which suggests the
+Instagram "Velstrian systems Ltd" account may be ours, but that is an inference, not a fact.</p>
+
+<div class="callout">
+  <b>Recommended order.</b> Phase 1: LinkedIn page, founder profile, YouTube, X. Phase 2 after 90
+  days: Bluesky, Instagram, Medium or Substack. Facebook, Threads and TikTok only claim the name now.
+  Reddit is by hand and for listening.
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-content"><span class="n">Section 2</span>Content strategy, calendar and ten sample posts</h2>
+
+<h3>Pillars</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Pillar</th><th>Share</th><th>What it is</th><th>Where facts come from</th></tr></thead>
+  <tbody>
+    <tr><td>1. Product education and onboarding how tos</td><td>25%</td><td>Short clips and carousels showing one task, for example answering a question from your own documents</td><td>Our own product and our own pages on velstrian.com. A claim about a feature is checked against the live page before approval</td></tr>
+    <tr><td>2. Bid and tender craft</td><td>25%</td><td>Plain English writing advice for people with no bid team</td><td>Opinion labelled as craft advice, or a gov.uk guidance page</td></tr>
+    <tr><td>3. UK procurement news</td><td>20%</td><td>Procurement Act 2023, PPNs, Find a Tender, Contracts Finder, in one plain paragraph</td><td>gov.uk and the official notices only. No post without the source link</td></tr>
+    <tr><td>4. UK economy, business and finance, AI news for SMEs</td><td>10%</td><td>Only items that change what a small bidder should do</td><td>Official releases (for example ONS or Bank of England) with the link and date at generation time</td></tr>
+    <tr><td>5. Customer proof</td><td>0% until real</td><td>Quotes and results from real customers, with written permission</td><td>Written customer consent on file. None exists yet, so this pillar stays empty</td></tr>
+    <tr><td>6. Founder's view</td><td>20%</td><td>Why we built it, what we learned, labelled as opinion</td><td>The founder, in the company voice. Never the owner's personal name</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Weekly calendar</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Day</th><th>LinkedIn page</th><th>Founder</th><th>X and Bluesky</th><th>YouTube</th></tr></thead>
+  <tbody>
+    <tr><td>Monday</td><td>Procurement news in plain English</td><td></td><td>News note with source</td><td></td></tr>
+    <tr><td>Tuesday</td><td></td><td>Founder's view</td><td></td><td>Short from an existing video</td></tr>
+    <tr><td>Wednesday</td><td>Bid craft carousel</td><td></td><td>Craft tip</td><td></td></tr>
+    <tr><td>Thursday</td><td></td><td>Question or poll</td><td>Poll</td><td></td></tr>
+    <tr><td>Friday</td><td>Product how to clip</td><td></td><td>Clip link</td><td>Long how to every second Friday</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><b>Tone.</b> Plain English first, as RULE 0-U requires. One idea per post, one action. No jargon unless
+explained once. Name public and private work together. Positive wording, no defensive disclaimers
+(D255). <b>Formats.</b> Carousels for craft, short voiced video for product, polls for engagement, threads
+only for sourced news. <b>Hashtags.</b> Two or three per post, from a short fixed list such as
+#bidwriting #tenders #UKprocurement, reviewed monthly. More than three reads as spam. Hashtag reach
+effects were not measured.</p>
+
+<h3>Ten sample posts, each with its facts and sources</h3>
+<p>Drafts for illustration. Each would still go through the check and approval line in section 3.
+The wording of product claims is a placeholder until checked against the live page at publish time.</p>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>#</th><th>Channel and pillar</th><th>Draft</th><th>Facts and source for each</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>LinkedIn, news</td><td>"The Procurement Act 2023 has been live since 24 February 2025. If you sell to the public sector, the rules for how buyers find, score and award work have changed. Here are the three things a small firm should check this week. (Carousel)"</td><td>Go live date 24 February 2025: <a href="https://www.thelawyer.com/briefing/new-regulations-confirm-the-procurement-act-2023-will-go-live-on-24-february-2025/">The Lawyer</a> and <a href="https://www.eastsuffolk.gov.uk/your-council/supplying-council/procurement-act-2023">East Suffolk Council</a>. A gov.uk page stating the date was not found in this research, so the approver must add one before posting.</td></tr>
+    <tr><td>2</td><td>X, news</td><td>"Selling to the public sector? Register your organisation on Find a Tender first. The government has a three step guide for suppliers. Link below."</td><td>Guide exists, titled "Suppliers: How to register your organisation and first administrator on Find a Tender in three easy steps": <a href="https://www.gov.uk/government/publications/procurement-act-2023-short-guides">gov.uk short guides</a>, read 3 Nov 2026.</td></tr>
+    <tr><td>3</td><td>LinkedIn, news</td><td>"There is now official guidance on the competitive flexible procedure and negotiation. In plain English: some buyers may talk to bidders before they choose. Here is what that could mean for your bid."</td><td>Guide titled "The Procurement Act 2023: The Competitive Flexible Procedure and Negotiation": <a href="https://www.gov.uk/government/publications/procurement-act-2023-short-guides">gov.uk short guides</a>. The plain English reading is our interpretation and is labelled so.</td></tr>
+    <tr><td>4</td><td>LinkedIn, news</td><td>"Buyers have official guidance on abnormally low tenders. If you price very low to win, know how a buyer may question it."</td><td>Guide titled "The Procurement Act 2023: Abnormally Low Tenders": <a href="https://www.gov.uk/government/publications/procurement-act-2023-short-guides">gov.uk short guides</a>.</td></tr>
+    <tr><td>5</td><td>Bluesky, news</td><td>"Assessment summaries are now part of the official guidance for buyers. Ask for yours after a loss. It tells you where you scored."</td><td>"Assessment Summaries" is listed in the Procure guidance: <a href="https://www.gov.uk/government/collections/procurement-act-2023-guidance-documents">gov.uk guidance collection</a>. The advice to ask is our craft view and is labelled as such.</td></tr>
+    <tr><td>6</td><td>LinkedIn founder, craft</td><td>"Answer the question that was asked, in the order it was asked. Evaluators mark against a list. Make their job easy."</td><td>Craft opinion, no external fact. Labelled "founder's view".</td></tr>
+    <tr><td>7</td><td>YouTube short and LinkedIn clip, product</td><td>"Answer a tender question from your own documents in under a minute." (existing voiced video)</td><td>Product claim checked against the live demo and the video file in <code>status/media/mkt/final/</code> before approval.</td></tr>
+    <tr><td>8</td><td>X poll, engagement</td><td>"What slows your bids most? Finding the right tender, writing the answers, or proving your claims?"</td><td>No fact claimed. The result is quoted only as "our poll, N votes" with the real N.</td></tr>
+    <tr><td>9</td><td>LinkedIn founder, view</td><td>"We built Velstrian Bid for firms with no bid team. Qualify. Draft. Prove it. Every claim in a draft should point back to evidence you hold."</td><td>Slogan D530 (internal decision). Positioning from the brand guide in <code>velstrian-platform/docs/brand/velstrian-brand-guide/</code>.</td></tr>
+    <tr><td>10</td><td>LinkedIn page, trust</td><td>"How we keep our own posts honest: every number has a link, a second check reads the source, and a person approves before it goes out."</td><td>Describes this plan. Only posted once the line is built and true.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Rules for 100% factual accuracy</h3>
+<div class="step"><div class="num">1</div><div class="body"><b>Every claim carries a source URL.</b>
+<span>The generator must output a claims list, each claim with a URL. A post with an unsourced factual claim is rejected by code before it reaches the approver.</span></div></div>
+<div class="step"><div class="num">2</div><div class="body"><b>No news without its source.</b>
+<span>News posts are only created from a fetched page. No source fetched, no post. Nothing is written from the model's memory.</span></div></div>
+<div class="step"><div class="num">3</div><div class="body"><b>No invented customer results.</b>
+<span>Customer proof needs a consent record. We have no customers' results yet, so nothing claims any.</span></div></div>
+<div class="step"><div class="num">4</div><div class="body"><b>Dates and numbers are copied from the source.</b>
+<span>A check compares every number and date in the post to the fetched text. Any mismatch blocks the post.</span></div></div>
+<div class="step"><div class="num">5</div><div class="body"><b>A person approves every post.</b>
+<span>No auto posting, no exceptions, including replies and reposts.</span></div></div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-automation"><span class="n">Section 3</span>Automation architecture, stack and the RULE 0-G cost statement</h2>
+
+<h3>The line, end to end</h3>
+<div class="step"><div class="num">1</div><div class="body"><b>Plan.</b>
+<span>A weekly job reads the calendar and the source list (gov.uk pages, our site) and picks the topics.</span></div></div>
+<div class="step"><div class="num">2</div><div class="body"><b>Draft.</b>
+<span>Our own <code>AIClient</code> (class at <code>api/app/services/ai/client.py</code> line 516) drafts each post with its claims list. It already carries a spend ceiling and reservation mixins, so a monthly cap for this job fits the existing pattern. Not re-measured beyond the class definition.</span></div></div>
+<div class="step"><div class="num">3</div><div class="body"><b>Fact check.</b>
+<span>Code fetches every source URL and confirms the page loads. A second, cheaper model checks each claim against the fetched text and must answer supported, not supported, or cannot tell. Anything but supported blocks the post. This is a control, not a guarantee, so the human approval stays.</span></div></div>
+<div class="step"><div class="num">4</div><div class="body"><b>Approval email through Brevo.</b>
+<span>Each post goes as one email to aparajita.parihar@gmail.com with the text, the sources, the check result and two links, Approve and Reject. The links open a confirmation page and the click that posts is a button press on that page, not the link itself, because email scanners open links automatically. Links are signed, single use and expire after a set time. Reject needs no reason.</span></div></div>
+<div class="step"><div class="num">5</div><div class="body"><b>Schedule and post.</b>
+<span>Only an approved post is sent to the posting layer. The post time is fixed by the calendar. The system never posts a draft, a rejected post or an expired one.</span></div></div>
+<div class="step"><div class="num">6</div><div class="body"><b>Measure.</b>
+<span>Every link back to velstrian.com carries UTM tags. PostHog records visits and signups. Brevo records newsletter growth.</span></div></div>
+
+<h3>Scheduling and posting tools compared</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Option</th><th>Free tier or price (as read)</th><th>API for our own code</th><th>Source</th></tr></thead>
+  <tbody>
+    <tr><td><b>Buffer</b></td><td>Free: up to 3 channels, 10 scheduled posts per channel. Paid: Essentials $5 a month and Team $10 a month, per channel</td><td>One API key on the pricing page, with 1,000 requests per channel per month, up to 3,000. Whether new developers can still get a key was not verified</td><td><a href="https://buffer.com/pricing">buffer.com/pricing</a></td></tr>
+    <tr><td><b>Metricool</b></td><td>Free: 1 brand, 20 scheduled posts a month, networks except LinkedIn and Twitter. Starter from $20 a month annual or $25 monthly. Advanced from $53 annual or $67 monthly, excluding VAT</td><td>API listed only under Advanced</td><td><a href="https://metricool.com/pricing/">metricool.com/pricing</a>. The last 36,017 characters of the page were not read</td></tr>
+    <tr><td><b>Later</b></td><td>No free plan, 14 day trial. Starter $18.75 a month billed yearly</td><td>Not stated on the page</td><td><a href="https://later.com/pricing/">later.com/pricing</a></td></tr>
+    <tr><td><b>Hootsuite</b></td><td>No free plan, 14 day trial. Paid plans start at $99 (Standard, billed annually)</td><td>Not stated on the page</td><td><a href="https://www.hootsuite.com/plans">hootsuite.com/plans</a></td></tr>
+    <tr><td><b>LinkedIn Community Management API</b></td><td>No price stated on the page. It is a "vetted product" with a Development Tier then a Standard Tier. Standard needs a screencast demonstrating each use case. Development tier limits: 500 requests per app and 100 per member (page wording, period not stated)</td><td>Yes. Create and manage company posts and read analytics. <b>Application and review are required.</b> Member profile posting (<code>r_member_social</code>) is closed to new requests</td><td><a href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/community-management-overview">Microsoft Learn, LinkedIn docs</a>, page dated 2026-03-31 with update 2026-05-15</td></tr>
+    <tr><td><b>X API</b></td><td>Pay per use, no subscription, credits bought upfront. Post create $0.015. <b>Post create with a URL $0.200</b>. No free tier mentioned. The page shows no effective date and says prices can change</td><td>Yes</td><td><a href="https://docs.x.com/x-api/getting-started/pricing">docs.x.com pricing</a></td></tr>
+    <tr><td><b>Instagram (Meta)</b></td><td>No fee stated on the page read</td><td>Publishing needs a professional account. 100 API published posts per 24 hours (50 in the carousel section of the same page). Page Publishing Authorization may be required</td><td><a href="https://developers.facebook.com/docs/instagram-platform/content-publishing/">Meta developer docs</a>. Facebook Page posting terms were not read</td></tr>
+    <tr><td><b>YouTube Data API</b></td><td>No fee stated on the page read</td><td>Default quota is 10,000 units a day for other endpoints. The page also states 100 <code>videos.insert</code> calls a day by default. Audit and upload rules for new projects were not read</td><td><a href="https://developers.google.com/youtube/v3/determine_quota_cost">Google quota page</a></td></tr>
+    <tr><td><b>Make.com</b></td><td>Free plan: 1,000 credits a month. Scenario limits and minimum interval not stated on the page read</td><td>Hosted automation</td><td><a href="https://www.make.com/en/pricing">make.com/en/pricing</a></td></tr>
+    <tr><td><b>n8n self hosted</b></td><td>The Community licence is free for internal business use, self hosted only. Selling a service whose value comes from n8n is restricted</td><td>Self run automation. It would add a server to maintain</td><td><a href="https://docs.n8n.io/n8n-community-license/community-license/license-faq">n8n licence FAQ</a>, from a search summary. The page itself was not read in full</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout bad">
+  <b>The X fee changes the maths.</b> A post with a link costs $0.200 through the API against $0.015
+  without one, a thirteen fold difference (both from the X pricing page above). Our posts exist to
+  bring people to velstrian.com. Option: post the text on X without a link and put the link in the
+  profile and in a reply, but whether a reply with a link is also charged at the URL rate is
+  <b>not verified</b>. Until it is, the safest plan is X posted by hand from the approved text.
+</div>
+
+<h3>Recommended stack</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Layer</th><th>Choice</th><th>Why</th><th>Monthly cost</th></tr></thead>
+  <tbody>
+    <tr><td>Generation and checks</td><td>Our <code>AIClient</code>, drafting on Claude Sonnet 5.5, checking on Claude Haiku 5.5</td><td>Already built, has a spend ceiling, no new vendor</td><td>See the estimate below</td></tr>
+    <tr><td>Approval</td><td>Brevo transactional email, one email per post</td><td>Already our single email provider. The free plan sends up to 300 emails a day per Brevo's help centre (<a href="https://help.brevo.com/hc/en-us/articles/208580669">Brevo help</a>, quoted via a search summary because the page itself returned 403). We would send about 15 a week</td><td>0</td></tr>
+    <tr><td>Posting, phase 1</td><td>Buffer free (3 channels: LinkedIn page, LinkedIn founder or YouTube, plus one more), fed by hand from the approved text</td><td>Free, nothing to review or apply for</td><td>0</td></tr>
+    <tr><td>Posting, phase 2</td><td>Direct APIs, LinkedIn after Community Management approval, X pay per use, YouTube Data API</td><td>Removes the manual step, but each needs an application or a key</td><td>X: about $0.015 a post without a link. Others unpriced on the pages read</td></tr>
+    <tr><td>Analytics</td><td>PostHog free tier plus UTM links, Brevo for newsletter growth</td><td>PostHog pricing pages state 1 million events free each month (<a href="https://posthog.com/pricing">posthog.com/pricing</a>, figure read through a search summary because the page text was truncated). Retention on the free tier is shorter, not verified here</td><td>0</td></tr>
+    <tr><td>Not chosen</td><td>Metricool, Later, Hootsuite, Make, n8n</td><td>Paid, or no free API, or a new server to run. n8n is free to self host but adds a service we would need to patch</td><td>Hootsuite $99 and Later $18.75 would be the cheapest paid choices on the pages read</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><b>Cost per post, an estimate.</b> Prices read on <a href="https://platform.claude.com/docs/en/docs/about-claude/pricing">the Anthropic pricing page</a>:
+Sonnet 5.5 at $2 per million input tokens and $10 per million output, Haiku 5.5 (prompts up to
+100,000 tokens) at $0.10 input and $0.50 output. The token counts below are <b>our assumptions</b>, not
+measurements. Draft: 3,000 in and 1,000 out on Sonnet = $0.006 + $0.010 = $0.016. Check: 4,000 in and
+500 out on Haiku = $0.0004 + $0.00025 = about $0.0007. About <b>$0.017 a post</b>. At 15 posts a week
+(about 65 a month) that is about <b>$1.1 a month</b>. If the monthly total for X is added at $0.015 for
+about 13 posts a month it is about $0.20. Total estimate <b>about $1.3 a month</b>, and the headline
+ceiling of under $5 leaves room for retries. A hard monthly cap should be set in the existing spend
+ceiling.</p>
+
+<h3>RULE 0-G cost statement for building the scheduler (needs owner approval before any work)</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+  <tbody>
+    <tr><td>1. What triggers it</td><td>One weekly timer for planning and drafting (Sunday). Every other step is event driven: an approve click calls the API and schedules that one post. No polling timer. <b>1 timer run a week.</b></td></tr>
+    <tr><td>2. One off cost</td><td>Build effort only, no cloud spend. Developer time is not priced here. Account creation is free on the pages read, with the exception of any paid tool the owner later chooses.</td></tr>
+    <tr><td>3. Recurring cost</td><td>AI usage about $0.26 a week and about $1.1 a month (estimate above). Brevo $0 on the free plan. Buffer $0. PostHog $0. X about $0.05 a week without links. Railway: the job runs inside the existing worker or as a short cron on the existing project. <b>The extra Railway charge was not measured.</b> The Railway docs say the Hobby plan includes $5 of usage a month and usage billed per running second (<a href="https://docs.railway.com/pricing/plans">Railway plans</a>, via a search summary). Our own plan tier and current usage were not read for this page, so this line is unverified. A once a week job of a few minutes is small, but treat the figure as unknown until measured.</td></tr>
+    <tr><td>4. What breaks without it</td><td>Nothing in the product. The social line is optional. Without the scheduler the same plan runs by hand: a person drafts with the AI, checks the sources and posts from Buffer. If the owner prefers zero recurring spend, phase 0 stays manual.</td></tr>
+    <tr><td>5. How it is switched off without a code change</td><td>A feature flag row <code>SOCIAL_AUTOMATION_ENABLED</code> read at the start of each run (set false to stop everything), plus pausing the cron in the Railway dashboard. Either can be done by the owner. No GitHub Actions schedule is used, so nothing depends on RULE 0-G workflow allowlists.</td></tr>
+    <tr><td>6. Where it does not run</td><td>Not a GitHub Actions schedule, not a Vercel cron. Both options carry billing and allowlist work the Railway worker avoids. Neither was priced for this page.</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="sm"><b>Nothing in this plan is built.</b> Building the scheduler needs the owner's explicit
+approval of the statement above. Report recurring cost as a liability, not as coverage.</p>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-growth"><span class="n">Section 4</span>Growth plan and targets</h2>
+
+<div class="callout">
+  <b>The targets below are planning goals, not forecasts.</b> No benchmark for B2B SaaS follower
+  growth or engagement rate was read for this page. The basis is a stated cadence and a small seed
+  audience. We have no follower counts today, so every number is a goal for the owner to accept or
+  change. Review monthly against the real counts.
+</div>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Measure</th><th>30 days</th><th>90 days</th><th>365 days</th><th>Basis</th></tr></thead>
+  <tbody>
+    <tr><td>LinkedIn page followers</td><td>100</td><td>400</td><td>2,000</td><td>Goal. Seed from founders, early users and invites to personal networks</td></tr>
+    <tr><td>Founder profile followers</td><td>200</td><td>800</td><td>3,000</td><td>Goal. The founder's network and daily commenting</td></tr>
+    <tr><td>YouTube subscribers</td><td>25</td><td>100</td><td>600</td><td>Goal. Reuse of existing videos, 1 short a week</td></tr>
+    <tr><td>X followers</td><td>50</td><td>200</td><td>1,000</td><td>Goal. Procurement news accounts</td></tr>
+    <tr><td>Newsletter subscribers (Brevo)</td><td>20</td><td>100</td><td>600</td><td>Goal. One signup link on every post</td></tr>
+    <tr><td>Visits to velstrian.com from social</td><td>count, no target</td><td>set from the 30 day count</td><td>set from the 90 day count</td><td>Measured with UTM tags in PostHog</td></tr>
+    <tr><td>Signups attributed to social</td><td>count, no target</td><td>set from the 30 day count</td><td>set from the 90 day count</td><td>Same</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><b>What "top 1%" means here.</b> It cannot be measured, because there is no published ranking of
+brands in this niche that was read. The working definition: the most trusted, most accurate account for
+UK small business bid writers, judged by a 0 error record on facts, replies to every comment within one
+working day, and a growing share of signups that name social as the source.</p>
+
+<h3>Routines</h3>
+<ul>
+  <li><b>Commenting.</b> 10 thoughtful comments a day by a person on posts from buyers, procurement bodies and small firms. Comments are never automated.</li>
+  <li><b>Community.</b> Answer real bidding questions on Reddit and LinkedIn groups with no link unless asked, after reading each community's rules.</li>
+  <li><b>Collaboration.</b> Invite procurement trainers and supplier support groups to short joint videos or guest posts. Ask first, never tag people without consent.</li>
+  <li><b>Employee and founder advocacy.</b> The founder and any team post their own view. The company page shares it. LinkedIn's employee advocacy features exist in the Community Management API (same Microsoft Learn page), but a person-level posting permission is closed, so employees post by hand.</li>
+  <li><b>Paid boosts, optional.</b> No ad price was read for this page, so no figure is given. Recommend zero paid spend for the first 90 days. Revisit with a quote from each ad manager and a cap approved by the owner.</li>
+</ul>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-risks"><span class="n">Section 5</span>Risks and controls</h2>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Risk</th><th>Control</th></tr></thead>
+  <tbody>
+    <tr><td><b>AI generated misinformation</b></td><td>Claims list with a URL per claim, fetch of every source, second model check, number and date match, and a human approval. A rejected post is logged with its reason, and a rate of rejections above a set level pauses the line.</td></tr>
+    <tr><td><b>Brand safety</b></td><td>A banned topics list (politics, named competitors, named individuals), no replies or reposts generated by AI, tone guide in the prompt, and the approver reads the whole post. Keep a record of every approved version.</td></tr>
+    <tr><td><b>Platform bans for automation</b></td><td>Posting only through official APIs or an approved scheduler, no scraping, no automated likes, follows or comments, and limits kept well under the figures stated on the platform pages above. Platform terms for X, Meta and YouTube must be read in full at build time. Only extracts were read for this page.</td></tr>
+    <tr><td><b>GDPR in analytics</b></td><td>UTM tags carry no personal data. PostHog configured for consent and for the UK or EU region. Brevo newsletter signups use an explicit opt in and the privacy page. Poll and comment data is not copied into our systems. A data protection check by the owner before launch. This is a plan, not legal advice.</td></tr>
+    <tr><td><b>Impersonation and fraud accounts</b></td><td>Claim our names early on every platform in section 1. Publish the official list of our handles on velstrian.com. Contact only comes from contact@velstrian.com and we never ask for payment or passwords in a message. Report fake accounts through each platform. Watch for lookalike names weekly by hand. The Instagram "Velstrian systems Ltd" account needs ownership confirmed.</td></tr>
+    <tr><td><b>Approval link abuse</b></td><td>Signed, single use, expiring tokens, confirmation page with a button, approver address fixed in config, and every approval logged with time.</td></tr>
+    <tr><td><b>Runaway spend</b></td><td>A monthly cap in the existing AI spend ceiling, the kill flag in section 3, and a cap on X credits bought.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-plan"><span class="n">Section 6</span>Implementation plan, owner actions and decisions</h2>
+
+<div class="callout bad">
+  <b>Building the scheduler needs explicit owner approval of the cost statement in section 3
+  first.</b> Phases 0 and 1 spend nothing and need no build.
+</div>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Phase</th><th>What</th><th>Effort (our estimate)</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td><b>0. Claim and prepare</b></td><td>Owner creates or confirms accounts and handles, verifies velstrian.com on each, adds profile images and bios from the brand guide, adds social links to the website</td><td>Half a day</td><td>0</td></tr>
+    <tr><td><b>1. Manual with AI help</b></td><td>Weekly: AI drafts and cites sources, a person checks and approves by email, posts from Buffer free. Run for 4 weeks to learn what works</td><td>2 to 3 hours a week</td><td>0 tool fees</td></tr>
+    <tr><td><b>2. Build the line</b></td><td>Draft job, fact check, Brevo approval email with signed links, Buffer or direct posting, UTM links, kill flag. Needs approval of section 3</td><td>About 3 to 5 days of build</td><td>See cost statement</td></tr>
+    <tr><td><b>3. Direct APIs</b></td><td>Apply for LinkedIn Community Management API access, connect YouTube, decide on X</td><td>Calendar time is set by LinkedIn's review, not by us</td><td>X per post fees</td></tr>
+    <tr><td><b>4. Review at 90 days</b></td><td>Compare real counts with section 4, decide on Phase 2 channels and any paid boosts</td><td>Half a day</td><td>0</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>What the owner must do</h3>
+<ul>
+  <li>Create or confirm accounts for LinkedIn (company page and founder), YouTube, X, and claim the names on the other platforms. Use contact@velstrian.com and the Velstrian Tenderworks name, never a personal identity.</li>
+  <li>Verify velstrian.com where a platform asks (domain verification).</li>
+  <li>Confirm whether the Instagram account "Velstrian systems Ltd (@velstrian)" is ours.</li>
+  <li>Connect the APIs (LinkedIn application, X credits, YouTube project) after approving the cost statement.</li>
+  <li>Be, or name, the approver. The plan names aparajita.parihar@gmail.com.</li>
+</ul>
+
+<h3>What can be automated</h3>
+<p>Planning, drafting, source fetching, claim checking, approval emails, scheduling approved posts,
+UTM tagging and weekly reports. <b>Not automated:</b> approval, comments, replies, follows, anything
+that talks to a person.</p>
+
+<h3>Decisions for the owner, each with a recommended answer</h3>
+<ol>
+  <li><b>Start order.</b> Option A: LinkedIn, YouTube, X first. Option B: all platforms at once. <b>Recommend A.</b></li>
+  <li><b>Posting layer in phase 1.</b> Option A: Buffer free by hand. Option B: pay for a tool. <b>Recommend A.</b></li>
+  <li><b>X.</b> Option A: post by hand with a link. Option B: post by API without a link. Option C: skip X for now. <b>Recommend A</b> until the reply fee is verified.</li>
+  <li><b>Build the scheduler.</b> Option A: approve the section 3 cost statement after 4 manual weeks. Option B: approve now. Option C: stay manual. <b>Recommend A.</b></li>
+  <li><b>Fixed approver.</b> Option A: aparajita.parihar@gmail.com only. Option B: add a backup. <b>Recommend B</b>, so an absence does not stop the line (a backup can approve, and unapproved posts expire).</li>
+  <li><b>Paid boosts.</b> Option A: none for 90 days. Option B: set a cap now. <b>Recommend A.</b></li>
+  <li><b>Targets.</b> Accept, change or drop the planning goals in section 4.</li>
+</ol>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-sources"><span class="n">Section 7</span>Sources and what was not verified</h2>
+
+<p class="sm">All read 3 November 2026. Where a page was read through a search summary rather than directly, it
+is said in the text above.</p>
+<ul class="sm">
+  <li><a href="https://buffer.com/pricing">Buffer pricing</a></li>
+  <li><a href="https://metricool.com/pricing/">Metricool pricing</a></li>
+  <li><a href="https://later.com/pricing/">Later pricing</a></li>
+  <li><a href="https://www.hootsuite.com/plans">Hootsuite plans</a></li>
+  <li><a href="https://docs.x.com/x-api/getting-started/pricing">X API pricing</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/community-management-overview">LinkedIn Community Management API overview</a></li>
+  <li><a href="https://developers.facebook.com/docs/instagram-platform/content-publishing/">Instagram content publishing</a></li>
+  <li><a href="https://developers.google.com/youtube/v3/determine_quota_cost">YouTube Data API quota</a></li>
+  <li><a href="https://www.make.com/en/pricing">Make pricing</a> and <a href="https://docs.n8n.io/n8n-community-license/community-license/license-faq">n8n licence FAQ</a></li>
+  <li><a href="https://help.brevo.com/hc/en-us/articles/208580669">Brevo free plan limits</a> and <a href="https://posthog.com/pricing">PostHog pricing</a></li>
+  <li><a href="https://platform.claude.com/docs/en/docs/about-claude/pricing">Anthropic pricing</a></li>
+  <li><a href="https://www.gov.uk/government/publications/procurement-act-2023-short-guides">gov.uk Procurement Act 2023 short guides</a> and <a href="https://www.gov.uk/government/collections/procurement-act-2023-guidance-documents">guidance collection</a></li>
+  <li><a href="https://www.thelawyer.com/briefing/new-regulations-confirm-the-procurement-act-2023-will-go-live-on-24-february-2025/">The Lawyer, go live date</a> and <a href="https://www.eastsuffolk.gov.uk/your-council/supplying-council/procurement-act-2023">East Suffolk Council</a></li>
+</ul>
+
+<div class="callout">
+  <b>Not verified.</b> Whether our handles exist on LinkedIn, Facebook, TikTok, Threads, Bluesky, Medium or
+  Reddit. Whether Buffer still issues API keys to new developers. Whether an X reply with a link is
+  charged the URL rate. Meta Facebook Page posting terms. YouTube API audit rules for new projects.
+  Subreddit rules. The extra Railway charge. A gov.uk page stating the Procurement Act go live date.
+  Any audience size, engagement benchmark, or paid advertising price. The Brevo and PostHog free tier
+  figures come from search summaries, because the vendor pages returned an error or truncated text.
+</div>
