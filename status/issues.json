@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T17:19:37.774Z",
+  "updated": "2026-11-03T22:42:25.307Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2362,10 +2362,10 @@
       "src": "agent readiness 2026-10-29",
       "sev": "P3",
       "title": "Agent readiness: Level 3 and Commerce checks do not fit an invite only beta",
-      "status": "ON HOLD",
-      "note": "2026-10-29: D516, owner chose not to build the Level 3 and Commerce agent checks during the invite only beta. Tracked in Phase 2, revisit when invitations open to agents. DECISION, Phase 2 (new capability), R2.9, 2026-10-29. Level 3 (OAuth protected resource metadata, A2A agent card, DNS _agents) and Commerce checks assume agents can register and buy. Live /auth.md states Velstrian is open by invitation and agents cannot create accounts, and the D456 invite only gate is delivered. Question for the owner: leave them unbuilt until invitations open to agents. Recommended: yes. || HISTORY (kept, oldest last): The Level 3 checks (OAuth protected resource metadata RFC 9728, A2A agent card at /.well-known/agent-card.json, DNS _agents records) and the Commerce checks (agent purchase flows) assume agents can register and buy. Velstrian is invite only during the beta and agents cannot create accounts (/auth.md). Not built. Source: status/review/GEMINI-BING-FIXES-2026-10-28.md section 5 items 4 and 5. QUESTION FOR THE OWNER: leave Level 3 and Commerce unbuilt until invitations open to agents, yes or no? Recommended: yes, revisit when self service sign up opens. Carried to R2.9 as a decision.",
-      "changed": "2026-10-29",
-      "changedAt": "2026-10-29",
+      "status": "HOLD",
+      "note": "2026-10-29: D516, owner chose not to build the Level 3 and Commerce agent checks during the invite only beta. Tracked in Phase 2, revisit when invitations open to agents. DECISION, Phase 2 (new capability), R2.9, 2026-10-29. Level 3 (OAuth protected resource metadata, A2A agent card, DNS _agents) and Commerce checks assume agents can register and buy. Live /auth.md states Velstrian is open by invitation and agents cannot create accounts, and the D456 invite only gate is delivered. Question for the owner: leave them unbuilt until invitations open to agents. Recommended: yes. || HISTORY (kept, oldest last): The Level 3 checks (OAuth protected resource metadata RFC 9728, A2A agent card at /.well-known/agent-card.json, DNS _agents records) and the Commerce checks (agent purchase flows) assume agents can register and buy. Velstrian is invite only during the beta and agents cannot create accounts (/auth.md). Not built. Source: status/review/GEMINI-BING-FIXES-2026-10-28.md section 5 items 4 and 5. QUESTION FOR THE OWNER: leave Level 3 and Commerce unbuilt until invitations open to agents, yes or no? Recommended: yes, revisit when self service sign up opens. Carried to R2.9 as a decision. || 2026-11-03 status value corrected to the legend key HOLD, owner hold D516 phase 2 unchanged.",
+      "changed": "2026-11-03",
+      "changedAt": "2026-11-03T22:42:25.304Z",
       "release": "R2.9",
       "phase": 2,
       "order": 2
@@ -2472,10 +2472,10 @@
       "src": "owner 2026-11-01",
       "sev": "P3",
       "title": "Tender finder: Start now after the results was a text link in the licence small print, now a real button",
-      "status": "BUILT",
-      "note": "BUILT 2026-11-01 - owner report with screenshot of velstrian.com/tools/tender-finder. Fixed on review/r29-legal-b f500677d: the sign up step is the shared Action button at body size (48 px), beside the question on desktop and below it on a phone, screenshots checked at 1440 and 390 on a local dev server. Not live: waits for the owner's local check and an approved website push. || Measured 2026-11-02: fix f500677d is on local main, not on origin/main (live). Waits on the approved website push.",
-      "changed": "2026-11-01",
-      "changedAt": "2026-11-01T01:43:45.824Z",
+      "status": "FIXED",
+      "note": "BUILT 2026-11-01 - owner report with screenshot of velstrian.com/tools/tender-finder. Fixed on review/r29-legal-b f500677d: the sign up step is the shared Action button at body size (48 px), beside the question on desktop and below it on a phone, screenshots checked at 1440 and 390 on a local dev server. Not live: waits for the owner's local check and an approved website push. || Measured 2026-11-02: fix f500677d is on local main, not on origin/main (live). Waits on the approved website push. || 2026-11-03 board audit: f500677d is on origin/main (ancestor of live 75735af3), live /tools/tender-finder/ answers 200 with Start now.",
+      "changed": "2026-11-03",
+      "changedAt": "2026-11-03T22:42:24.898Z",
       "release": "R2.9"
     },
     {
