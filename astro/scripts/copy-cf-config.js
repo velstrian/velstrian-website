@@ -296,6 +296,23 @@ for (const [file, pattern, label] of checks) {
   if (!pattern.test(written)) failures.push(`${file} is missing ${label}`);
 }
 
+/*
+ * [A-519, 2026-11-03] NO EDGE CACHE DIRECTIVE MAY BE SET BY A PATH RULE.
+ * `_headers` matches a path, never a status, so a `CDN-Cache-Control` or
+ * `Surrogate-Control` value on /Assets/* was also attached to every 404 there,
+ * and the edge kept a missing asset as if it were immutable (measured live on
+ * /Assets/videos, cf HIT on a 404 after the file had shipped). Cache-Control
+ * alone carries the 200 lifetime. Only a VALUE line is refused: comment lines
+ * and the `!` unsets that clear an inherited value are allowed.
+ */
+fs.readFileSync(headersPath, 'utf8')
+  .split('\n')
+  .forEach((line, index) => {
+    if (/^\s*(CDN-Cache-Control|Surrogate-Control)\s*:/i.test(line)) {
+      failures.push(`_headers line ${index + 1} sets an edge cache value that a 404 would inherit (A-519): ${line.trim()}`);
+    }
+  });
+
 if (failures.length) {
   failures.forEach((f) => console.error(`cf-config: ${f}`));
   process.exit(1);
