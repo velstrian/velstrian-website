@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T22:50:03.596Z",
+  "updated": "2026-11-03T23:29:30.560Z",
   "overall": 72,
   "verdict": "Ready for an invite only launch once round 4 is in production and the owner checks it, not yet for open paying signup. Production runs rounds 1 (2cf45f3) and 2 (90d3075) only. Round 3 failed its promote gates and deployed nothing, so every round 3 and batch4 gain is staging only and earns staging credit only",
   "earliestDate": "Invite only: the day round 4 reaches production and the owner checks it. Open signup: about 4 days after that, if the silent extraction refusal message is fixed in round 4",
@@ -53,7 +53,7 @@
       "weight": 10,
       "score": 78,
       "status": "amber",
-      "why": "Up 4: AI policy signed (ISO 42001 policy row FIXED) and legal B-OWNER answers recorded. Breach notice 72 hours already in the live DPA (D542). Liability cap still waits on counsel, brief sent 2026-11-03, no reply. Generated legal summaries are staging only"
+      "why": "Up 4: AI policy signed (ISO 42001 policy row FIXED) and legal B-OWNER answers recorded. Breach notice 72 hours already in the live DPA (D542). Generated legal summaries are staging only. Liability caps are on hold by owner decision until customers are onboarded, not a GA gap."
     },
     {
       "name": "Website",
