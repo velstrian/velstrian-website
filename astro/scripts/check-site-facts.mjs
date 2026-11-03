@@ -307,7 +307,7 @@ const RULES = [
   },
   {
     record: 'security_controls',
-    why: 'D290 and D295: the "Security built in" block prints only what is true today, from one list, on the home page and /security/. No scheduled scan of the live site, no tested restore, no training promise until a measurement backs it.',
+    why: 'D290 and D295: the "Security built in" block prints only what is true today, from one list, on /security/ (the home page carries the trust_strip since A-514). No scheduled scan of the live site, no tested restore, no training promise until a measurement backs it.',
     check(pages) {
       const r = FACTS.security_controls;
       const out = banned(pages, r.banned, 'gi');
@@ -318,6 +318,24 @@ const RULES = [
             if (!p || !p.text.includes(c.line)) out.push({ route, hit: `${c.id} "${c.line}"`, ctx: 'security control missing from this page' });
           }
         }
+      }
+      return out;
+    },
+  },
+  {
+    record: 'trust_strip',
+    why: 'A-514, D537: the home page trust strip prints its four lines word for word from one list, links on to /security/, and the residency line names the place the data is actually stored (regions.data_at_rest).',
+    check(pages) {
+      const r = FACTS.trust_strip;
+      const out = [];
+      const p = pages.find((x) => x.route === r.page);
+      for (const t of r.items) {
+        if (!p || !p.text.includes(t.line)) out.push({ route: r.page, hit: `${t.id} "${t.line}"`, ctx: 'trust strip line missing from this page' });
+      }
+      if (!p || !p.html.includes(`href="${r.link.href}"`)) out.push({ route: r.page, hit: r.link.href, ctx: 'trust strip link to the security page missing' });
+      const where = r.items.find((t) => t.id === 'T1');
+      if (!where || !where.line.includes(FACTS.regions.data_at_rest.place)) {
+        out.push({ route: r.page, hit: 'T1', ctx: `residency line must name ${FACTS.regions.data_at_rest.place} (regions.data_at_rest)` });
       }
       return out;
     },

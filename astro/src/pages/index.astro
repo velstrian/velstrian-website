@@ -49,7 +49,7 @@ import Facts from '../components/evidenced/Facts.astro';
 import Faq from '../components/evidenced/Faq.astro';
 import Screens from '../components/evidenced/Screens.astro';
 import Plans from '../components/evidenced/Plans.astro';
-import SecurityBuiltIn from '../components/evidenced/SecurityBuiltIn.astro';
+import TrustStrip from '../components/evidenced/TrustStrip.astro';
 import Close from '../components/evidenced/Close.astro';
 import '../styles/evidenced.css';
 import { SITE, HOME_DESCRIPTION } from '../data/site';
@@ -111,8 +111,10 @@ const UPDATED = new Date('2026-10-21');
   <Steps />
   {/* D290: the question a small business asks before it pays is whether its
       documents are safe, so the security block sits between how to start and
-      the prices. Light, between the dark steps and the light-alt plans. */}
-  <SecurityBuiltIn more />
+      the prices. Light, between the dark steps and the light-alt plans.
+      A-514, D537: a compact strip of four badges from site-facts, with one
+      link on to /security/, where the full SecurityBuiltIn block lives. */}
+  <TrustStrip />
   <Plans />
   <Faq />
   <Close />
