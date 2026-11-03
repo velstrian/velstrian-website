@@ -2,8 +2,8 @@
 title: "Terms of Service and Agreement | Velstrian"
 description: "Velstrian Systems Ltd terms of service: customer account use, subscriptions, acceptable use, data handling, liability and service changes."
 heading: "Terms of Service."
-lastUpdated: "2026-10-31"
-version: "2026-10-31"
+lastUpdated: "2026-11-03"
+version: "2026-11-03"
 effectiveDate: "2026-10-31"
 summary:
   - "These terms are the agreement between Velstrian and your organisation for using the platform."
