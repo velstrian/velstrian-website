@@ -1278,6 +1278,16 @@
        the top, and before the generator notices and the deploy panel, which keep
        their place above the item filters. -->
   <div class="pb" id="pbtop">
+    <!-- [R29-GA-READINESS-AUDIT-01, owner 2026-11-03] General availability readiness,
+         first on the tab. Reads status/ga-readiness.json (overall score, verdict, earliest
+         date, blocker count, one line per area) written by the GA review. Hidden until the
+         file exists, so a missing score never shows as zero. -->
+    <section class="pb-panel" aria-labelledby="pbh-ga" id="pbga" hidden>
+      <h2 class="pb-h2" id="pbh-ga">General availability readiness</h2>
+      <div id="pbgahead"></div>
+      <table class="pb-matrix" id="pbgaareas"></table>
+      <p id="pbgalink"></p>
+    </section>
     <!-- [R285-BOARD-OWNER-REVIEW-HTML-01, D451] Documents waiting on the owner,
          each opened as a readable HTML page from status/review/. First on the
          tab because it is the owner's own queue. Hidden when nothing is mapped. -->
@@ -2122,6 +2132,59 @@ function pbReviewLinks(docs, cls) {
   });
   return wrap;
 }
+/* [R29-GA-READINESS-AUDIT-01] GA readiness panel. Built with DOM nodes and
+   textContent only, never innerHTML, so text in the json cannot inject markup. */
+async function pbRenderGa() {
+  const box = document.getElementById('pbga');
+  if (!box) return;
+  let ga;
+  try {
+    const r = await fetch('ga-readiness.json?t=' + Date.now());
+    if (!r.ok) { box.hidden = true; return; }
+    ga = await r.json();
+  } catch (err) {
+    console.warn(JSON.stringify({ level: 'warn', operation: 'pbRenderGa', error: String(err) }));
+    box.hidden = true;
+    return;
+  }
+  const col = (s) => s === 'green' ? 'var(--pb-fixed)' : s === 'amber' ? 'var(--pb-wip)' : 'var(--pb-open)';
+  const band = (n) => n >= 80 ? 'green' : n >= 60 ? 'amber' : 'red';
+  const head = document.getElementById('pbgahead');
+  head.textContent = '';
+  const big = pbEl('p');
+  const score = pbEl('strong', '', String(ga.overall) + ' / 100');
+  score.style.fontSize = '2rem';
+  score.style.color = col(band(Number(ga.overall)));
+  big.append(score, pbEl('span', '', '  ' + (ga.verdict || '')));
+  const meta = pbEl('p', '', 'Blockers before taking payments: ' + ga.blockers +
+    ' · Earliest credible go live: ' + ga.earliestDate +
+    ' · Scored ' + String(ga.updated || '').slice(0, 16).replace('T', ' ') + ' UTC');
+  head.append(big, meta);
+  const t = document.getElementById('pbgaareas');
+  t.textContent = '';
+  const hr = pbEl('tr');
+  ['Area', 'Weight', 'Score', 'Why'].forEach((h) => { const th = pbEl('th', '', h); th.scope = 'col'; hr.append(th); });
+  t.append(hr);
+  (ga.areas || []).forEach((a) => {
+    const tr = pbEl('tr');
+    const sc = pbEl('td', '', String(a.score));
+    sc.style.color = col(a.status || band(Number(a.score)));
+    sc.style.fontWeight = '700';
+    tr.append(pbEl('td', '', a.name), pbEl('td', '', String(a.weight) + '%'), sc, pbEl('td', '', a.why || ''));
+    t.append(tr);
+  });
+  const link = document.getElementById('pbgalink');
+  link.textContent = '';
+  if (ga.detail) {
+    const a = pbEl('a', '', 'Open the full GA readiness review: blockers, evidence and the path to go live');
+    a.href = ga.detail;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    link.append(a);
+  }
+  box.hidden = false;
+}
+
 function pbRenderReview(rows) {
   const host = document.getElementById('pbreview');
   const ul = document.getElementById('pbreviewlist');
@@ -2240,6 +2303,7 @@ function renderPb(ageMs, mins) {
     '', 'No changes yet.');
 
   pbRenderReview(rows);
+  pbRenderGa();
 
   const mx = document.getElementById('pbmatrix');
   mx.textContent = '';
