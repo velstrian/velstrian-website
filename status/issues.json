@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T01:25:15.551Z",
+  "updated": "2026-11-03T02:41:30.771Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2549,6 +2549,18 @@
       "changedAt": "2026-11-03T01:25:15.551Z",
       "release": "R2.9",
       "phase": 1
+    },
+    {
+      "id": "A-514",
+      "src": "owner D537 2026-11-03",
+      "sev": "P2",
+      "title": "Homepage security section to a compact trust strip of 4 badges linking to /security, full content on /security",
+      "status": "OPEN",
+      "note": "Kiro brief 21 addendum 8.",
+      "changed": "2026-11-03",
+      "changedAt": "2026-11-03T02:41:30.771Z",
+      "release": "R2.9",
+      "phase": 1
     }
   ],
   "directives": [
@@ -2618,5 +2630,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 514
+  "nextId": 515
 }
