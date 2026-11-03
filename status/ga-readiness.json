@@ -1,0 +1,80 @@
+{
+  "updated": "2026-11-03T01:55:35.137Z",
+  "overall": 44,
+  "verdict": "Not ready for paying customers yet",
+  "earliestDate": "2026-11-06 invite only, 2026-11-09 open signup",
+  "blockers": 9,
+  "detail": "review/ga-readiness-2026-11-03.html",
+  "areas": [
+    {
+      "name": "Sign up and onboarding",
+      "weight": 10,
+      "score": 40,
+      "status": "amber",
+      "why": "Fixes built and walked on staging only, production lacks them"
+    },
+    {
+      "name": "Core bid journey",
+      "weight": 12,
+      "score": 42,
+      "status": "amber",
+      "why": "Works on staging, requirement extraction fails its bars"
+    },
+    {
+      "name": "Core buy journey",
+      "weight": 10,
+      "score": 40,
+      "status": "amber",
+      "why": "Buy preview charge fix is staging only"
+    },
+    {
+      "name": "Billing and payments",
+      "weight": 15,
+      "score": 27,
+      "status": "red",
+      "why": "Four money bug fixes not in production, price check red, fraud controls missing"
+    },
+    {
+      "name": "AI quality",
+      "weight": 12,
+      "score": 42,
+      "status": "amber",
+      "why": "Extraction misses exclusion gates, 22 critical errors"
+    },
+    {
+      "name": "Security and auth",
+      "weight": 10,
+      "score": 60,
+      "status": "amber",
+      "why": "Audit fixes built, not yet in production"
+    },
+    {
+      "name": "Legal and trust",
+      "weight": 10,
+      "score": 60,
+      "status": "amber",
+      "why": "Safe play wording decided, pages and counsel review not finished"
+    },
+    {
+      "name": "Website",
+      "weight": 6,
+      "score": 67,
+      "status": "amber",
+      "why": "Live and healthy, final push waits on owner check"
+    },
+    {
+      "name": "Operations and monitoring",
+      "weight": 10,
+      "score": 40,
+      "status": "amber",
+      "why": "Error triage in progress, no timed restore test"
+    },
+    {
+      "name": "Support",
+      "weight": 5,
+      "score": 40,
+      "status": "amber",
+      "why": "Help articles not live, no support process yet"
+    }
+  ]
+}
