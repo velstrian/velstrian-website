@@ -2754,12 +2754,13 @@
      glass above: 88 percent white, a 20px blur at 180 percent saturation, a
      white rim, and a three part shadow (a 5 percent black hairline ring, then
      two soft slate lifts). Every value is Gemini's, written against tokens:
-     --c-slate-900 is Gemini's rgba(15, 23, 42) ink. */
+     --c-slate-900 is Gemini's rgba(15, 23, 42) ink.
+     A-515 (2026-11-03): the 88 percent fill and the 20px blur were withdrawn,
+     the hero read through the menu. The sheet is now the opaque --c-panel,
+     and the rim and shadow below still apply. */
   --c-black: #000000;
   --c-slate-900: #0F172A;
-  --glass-menu-fill: color-mix(in srgb, var(--c-white) 88%, transparent);
   --glass-menu-edge: color-mix(in srgb, var(--c-white) 70%, transparent);
-  --blur-glass-menu: blur(20px) saturate(180%);
   --shadow-glass-menu:
     0 0 0 1px color-mix(in srgb, var(--c-black) 5%, transparent),
     0 12px 32px -4px color-mix(in srgb, var(--c-slate-900) 10%, transparent),
