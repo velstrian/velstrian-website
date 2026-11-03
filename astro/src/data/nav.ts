@@ -24,7 +24,26 @@
  * desktop mega-menu and the mobile accordions from it, and a menu item added
  * here appears in both or in neither. There is no mobile block any more.
  *
- * ── STRUCTURE, OWNER DECISION 2026-08-04 ────────────────────────────────────
+ * ── A-510, OWNER HEADER REWORK 2026-11-02 ───────────────────────────────────
+ *
+ * The owner said the header was wrong: See it in action, the Help centre and
+ * Sectors were missing, and Blog, FAQ and About sat loose as top links. The
+ * header is now FIVE groups and nothing sits loose:
+ *
+ *   Products ▾     Velstrian Bid · Velstrian Buy · See it in action · Compare · Integrations
+ *   Who it's for ▾ All sectors · Construction · Facilities · Education · Highways
+ *   Pricing        (the one flat top link, kept exactly as it was)
+ *   Resources ▾    Learn (Help centre, Blog, Glossary, PPN 026) · Free tools
+ *                  (Tender Finder, Compliance Matrix, all tools) · Support (FAQ, Contact)
+ *   Company ▾      About us · Trust and security (/security/) · Partners · Roadmap · Contact
+ *
+ * Products and Pricing were kept exactly as the owner asked. Every href is
+ * checked against src/pages: there is no /trust/ page, so Trust and security
+ * points at /security/, the legal page that states the controls. The footer
+ * (data/footer.ts) and the command palette (lib/search-index.ts reads NAV and
+ * FOOTER) follow the same groups.
+ *
+ * ── SUPERSEDED STRUCTURE (2026-08-04), kept for the history ──────────────────
  *
  * "Products" was doing three jobs at once: actual products, free tools, and
  * explanatory content. The free tools are lead-generation assets and they were
@@ -101,7 +120,7 @@ export interface NavMenu {
 const PRODUCTS: NavMenu = {
   id: 'products',
   label: 'Products',
-  activeRoutes: ['/bid', '/buy', '/compare'],
+  activeRoutes: ['/bid', '/buy', '/compare', '/see-it-in-action', '/integrations'],
   columns: [
     {
       label: 'Bid and tender software',
@@ -121,11 +140,82 @@ const PRODUCTS: NavMenu = {
           icon: 'checklist',
         },
         {
+          label: 'See it in action',
+          href: '/see-it-in-action/',
+          description: 'Short voiced walkthroughs of both products',
+          accent: 'mark',
+          icon: 'play',
+        },
+        {
           label: `Compare ${PRODUCT_NAME_BID}`,
           href: '/compare/',
           description: 'How it stacks up against other bid tools',
           accent: 'teal',
           icon: 'compare',
+        },
+        {
+          label: 'Integrations',
+          href: '/integrations/',
+          description: 'Connect the tools you already use',
+          accent: 'teal',
+          icon: 'sliders',
+        },
+      ],
+    },
+  ],
+};
+
+/**
+ * Who it's for (A-510, owner header rework 2026-11-02). Sectors were footer only
+ * before, and the owner asked for them in the header. Every row resolves to a
+ * real page: the hub and the four sector pages that ship under /sectors/
+ * (construction, education, facilities, highways). Public and private work are
+ * named here in plain words rather than as a sixth link, because the site has no
+ * one page for each and the sector pages and /bid/ already cover both. If a
+ * dedicated public or private landing page is built later it joins this column.
+ */
+const WHO_ITS_FOR: NavMenu = {
+  id: 'who-its-for',
+  label: "Who it's for",
+  activeRoutes: ['/sectors'],
+  columns: [
+    {
+      label: 'By sector, public and private',
+      items: [
+        {
+          label: 'All sectors',
+          href: '/sectors/',
+          description: 'Who Velstrian is for, public and private buyers',
+          accent: 'mark',
+          icon: 'globe',
+        },
+        {
+          label: 'Construction',
+          href: '/sectors/construction/',
+          description: 'Works tenders, frameworks and social value',
+          accent: 'teal',
+          icon: 'held',
+        },
+        {
+          label: 'Facilities management',
+          href: '/sectors/facilities/',
+          description: 'Cleaning, catering and maintenance contracts',
+          accent: 'teal',
+          icon: 'checklist',
+        },
+        {
+          label: 'Education',
+          href: '/sectors/education/',
+          description: 'Schools, colleges and university bids',
+          accent: 'teal',
+          icon: 'book',
+        },
+        {
+          label: 'Highways',
+          href: '/sectors/highways/',
+          description: 'Road and infrastructure maintenance work',
+          accent: 'teal',
+          icon: 'right',
         },
       ],
     },
@@ -158,18 +248,44 @@ const PRODUCTS: NavMenu = {
 const RESOURCES: NavMenu = {
   id: 'resources',
   label: 'Resources',
-  activeRoutes: ['/tools', '/glossary', '/resources'],
+  activeRoutes: ['/tools', '/glossary', '/resources', '/help', '/blog', '/faq'],
   columns: [
     {
-      label: 'Free tools and reference',
+      label: 'Learn',
       items: [
         {
-          label: 'Tender Compliance Matrix',
-          href: '/tools/tender-compliance-matrix/',
-          description: 'Paste tender text, read back the requirements it states',
+          label: 'Help centre',
+          href: '/help/',
+          description: 'Step by step guides for every task',
           accent: 'mark',
-          icon: 'table',
+          icon: 'book',
         },
+        {
+          label: 'Blog',
+          href: '/blog/',
+          description: 'Plain guides to bidding and procurement',
+          accent: 'teal',
+          icon: 'document',
+        },
+        {
+          label: 'Procurement glossary',
+          href: '/glossary/',
+          description: 'UK bidding terms in plain English',
+          accent: 'teal',
+          icon: 'book',
+        },
+        {
+          label: 'PPN 026 explained',
+          href: '/glossary/ppn-026/',
+          description: 'The Social Value Model, and the dates',
+          accent: 'teal',
+          icon: 'document',
+        },
+      ],
+    },
+    {
+      label: 'Free tools',
+      items: [
         {
           label: 'Tender Finder',
           href: '/tools/tender-finder/',
@@ -178,25 +294,91 @@ const RESOURCES: NavMenu = {
           icon: 'search',
         },
         {
-          label: 'Free tools hub',
+          label: 'Tender Compliance Matrix',
+          href: '/tools/tender-compliance-matrix/',
+          description: 'Read back the requirements a tender states',
+          accent: 'teal',
+          icon: 'table',
+        },
+        {
+          label: 'All free tools',
           href: '/tools/',
           description: 'No account, no email gate',
           accent: 'teal',
           icon: 'right',
         },
+      ],
+    },
+    {
+      label: 'Support',
+      items: [
         {
-          label: 'PPN 026 explained',
-          href: '/glossary/ppn-026/',
-          description: 'The next edition of the Social Value Model, and the dates',
-          accent: 'teal',
-          icon: 'document',
+          label: 'FAQ',
+          href: '/faq/',
+          description: 'Quick answers to common questions',
+          accent: 'mark',
+          icon: 'chat',
         },
         {
-          label: 'Procurement glossary',
-          href: '/glossary/',
-          description: 'UK bidding and tendering terms in plain English',
+          label: 'Contact us',
+          href: '/contact/',
+          description: 'Talk to a person, no bots',
           accent: 'teal',
-          icon: 'book',
+          icon: 'chat',
+        },
+      ],
+    },
+  ],
+};
+
+/**
+ * Company (A-510). About, the trust and security statement (the /security/
+ * legal page), partners, the roadmap and contact. Every href resolves: there is
+ * no /trust/ page, so "Trust and security" points at /security/, the legal page
+ * that states the controls in plain words.
+ */
+const COMPANY: NavMenu = {
+  id: 'company',
+  label: 'Company',
+  activeRoutes: ['/about', '/security', '/partners', '/roadmap', '/contact'],
+  columns: [
+    {
+      label: 'About Velstrian',
+      items: [
+        {
+          label: 'About us',
+          href: '/about/',
+          description: 'Who we are and why we built this',
+          accent: 'mark',
+          icon: 'done',
+        },
+        {
+          label: 'Trust and security',
+          href: '/security/',
+          description: 'How we keep your data safe, in plain words',
+          accent: 'teal',
+          icon: 'shield',
+        },
+        {
+          label: 'Partners',
+          href: '/partners/',
+          description: 'Work with us as a partner or reseller',
+          accent: 'teal',
+          icon: 'globe',
+        },
+        {
+          label: 'Roadmap',
+          href: '/roadmap/',
+          description: 'What is live now and what is coming next',
+          accent: 'teal',
+          icon: 'right',
+        },
+        {
+          label: 'Contact us',
+          href: '/contact/',
+          description: 'Talk to a person, no bots',
+          accent: 'teal',
+          icon: 'chat',
         },
       ],
     },
@@ -210,14 +392,15 @@ export const NAV = {
   },
 
   /** Every dropdown, desktop and mobile, in nav order. */
-  menus: [PRODUCTS, RESOURCES] as NavMenu[],
+  menus: [PRODUCTS, WHO_ITS_FOR, RESOURCES, COMPANY] as NavMenu[],
 
-  /** Flat top-level links, rendered after the dropdowns. */
+  /** Flat top-level links, rendered after the dropdowns. Pricing stays exactly
+   *  as it was (A-510): a single top-level link, not a dropdown. Blog, FAQ and
+   *  About moved into the Resources and Company menus, so the header is five
+   *  groups (Products, Who it's for, Pricing, Resources, Company) and nothing
+   *  sits loose. */
   topLinks: [
     { label: 'Pricing', href: '/pricing/' },
-    { label: 'Blog', href: '/blog/' },
-    { label: 'FAQ', href: '/faq/' },
-    { label: 'About', href: '/about/' },
   ] as NavLink[],
 
   actions: {

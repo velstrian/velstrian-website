@@ -45,6 +45,18 @@ export const HOME_DESCRIPTION = `${PRODUCT_NAME_BID} helps small firms find publ
 /** The longer version: the footer line on every route and the Organization node. */
 export const SITE_SUMMARY = `${PLATFORM_SHORT_NAME} makes bidding simple for small and mid size firms, for public and private work. ${PRODUCT_NAME_BID} finds contracts that suit you and drafts your answers from your own documents. ${PRODUCT_NAME_BUY} helps buyers set out what they need and compare the replies.`;
 
+/*
+ * THE BRAND LINE (A-474, owner decision D530, 2026-11-02). The one approved
+ * brand line, and the plain sentence that ALWAYS sits under it on the home page
+ * and the Velstrian Bid pages. Written once here (RULE 0-C) so the home hero and
+ * the Bid hero read the identical strings and cannot drift. The Buy pages keep
+ * their own buyer line, so this pair is not used there. The brand line is three
+ * one-word sentences on purpose, so the three dots stay as sentence stops.
+ */
+export const BRAND_LINE = 'Qualify. Draft. Prove it.';
+export const BRAND_LINE_SUB =
+  'Pick the contracts worth bidding for, write your answers from your own documents, and back every claim with evidence. Public and private work.';
+
 /** The line under the product names on the default social card
  *  (scripts/generate-og-images.js reads it from this file), at most 140 characters. */
 export const OG_CARD_LINE = `Find public and private contracts and write bids from your own documents. Buyers compare the replies in one place.`;

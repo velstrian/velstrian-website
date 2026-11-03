@@ -230,22 +230,28 @@ export const FOOTER = {
 
   columns: [
     {
-      title: 'Product',
+      title: 'Products',
       links: [
         { label: PRODUCT_NAME_BID, href: '/bid/' },
         { label: PRODUCT_NAME_BUY, href: '/buy/' },
-        { label: 'Product walkthrough', href: '/walkthrough/' },
         /* A-506 / R29-CONTENT-KIRO-CREW-01: the voiced product videos. */
         { label: 'See it in action', href: '/see-it-in-action/' },
-        { label: 'Pricing', href: '/pricing/' },
+        { label: 'Product walkthrough', href: '/walkthrough/' },
+        { label: `Compare ${PRODUCT_NAME_BID}`, href: '/compare/' },
         { label: 'Integrations', href: '/integrations/' },
-        { label: 'Sectors', href: '/sectors/' },
-        /* WAS the PPN 002 calculator until 2026-08-04, when the owner removed
-           that tool. This row is the free-tool row rather than that one tool's
-           row, so it names the free tool the site actually has now. */
-        { label: 'Tender Compliance Matrix', href: '/tools/tender-compliance-matrix/', chip: 'Free' },
-        /* R285-WEB-FREE-TENDER-FINDER-01: the second free tool. */
-        { label: 'Tender Finder', href: '/tools/tender-finder/', chip: 'Free' },
+        { label: 'Pricing', href: '/pricing/' },
+      ],
+    },
+    {
+      /* A-510: the header "Who it's for" group, mirrored in the footer. The four
+         sector pages that ship plus the hub. */
+      title: "Who it's for",
+      links: [
+        { label: 'All sectors', href: '/sectors/' },
+        { label: 'Construction', href: '/sectors/construction/' },
+        { label: 'Facilities management', href: '/sectors/facilities/' },
+        { label: 'Education', href: '/sectors/education/' },
+        { label: 'Highways', href: '/sectors/highways/' },
       ],
     },
     {
@@ -253,17 +259,15 @@ export const FOOTER = {
       links: [
         /* D461 (2026-10-26): the public help centre moved here from the app. */
         { label: 'Help centre', href: '/help/' },
-        { label: 'Resources hub', href: '/resources/' },
         { label: 'Blog', href: '/blog/' },
-        { label: `Compare ${PRODUCT_NAME_BID}`, href: '/compare/' },
+        { label: 'Procurement glossary', href: '/glossary/' },
+        { label: 'PPN 026 explained', href: '/glossary/ppn-026/' },
+        { label: 'Tender Finder', href: '/tools/tender-finder/', chip: 'Free' },
+        { label: 'Tender Compliance Matrix', href: '/tools/tender-compliance-matrix/', chip: 'Free' },
+        { label: 'All free tools', href: '/tools/' },
         { label: 'FAQ', href: '/faq/' },
-        { label: 'Procurement Glossary', href: '/glossary/' },
-        /*
-         * Added 2026-08-02, and NOT a legacy row: /sources did not exist on the
-         * live site. It is the page every figure on the homepage now points at,
-         * so it has to be reachable from somewhere other than the two homepage
-         * links, or the site's provenance lives on one page's scroll depth.
-         */
+        /* Resources hub and the provenance pages stay reachable from the footer. */
+        { label: 'Resources hub', href: '/resources/' },
         { label: 'Sources', href: '/sources/' },
         { label: 'Changelog', href: '/changelog/' },
       ],
@@ -271,16 +275,16 @@ export const FOOTER = {
     {
       title: 'Company',
       links: [
-        { label: 'About', href: '/about/' },
+        { label: 'About us', href: '/about/' },
+        { label: 'Trust and security', href: '/security/' },
+        { label: 'Partners', href: '/partners/' },
         { label: 'Roadmap', href: '/roadmap/' },
         { label: 'Contact', href: '/contact/' },
-        { label: 'Partners', href: '/partners/' },
       ],
     },
     {
       title: 'Legal',
       links: [
-        { label: 'Security', href: '/security/' },
         { label: 'How we use AI', href: '/ai/' },
         { label: 'Privacy', href: '/privacy/' },
         { label: 'Terms', href: '/terms/' },

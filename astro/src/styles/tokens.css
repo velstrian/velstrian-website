@@ -2576,11 +2576,13 @@
      interactive value are the same pigment under V6, and one literal is what
      makes that a decision somebody took rather than two hexes that happen to
      agree. */
-  /* [R285-P2-PREMIUM-TYPE-01] Owner decision 2026-10-13: the ink softens to #F8F9FB
-     and stops sharing the --c-white pigment. Pure white on a near black canvas glares,
-     and the platform's Slate and Iris palettes already use a soft white. Interactive
-     glyphs keep --c-white. #F8F9FB on --c-bg #05070E is 18.9:1. The platform reads this
-     through brand/brand.source.json ink-0. */
+  /* [R285-P2-PREMIUM-TYPE-01, superseded by A-509 / D309 2026-11-02] The primary
+     ink is #F7F8FB, the central token textPrimary
+     (velstrian-platform/packages/tokens/src/constants.ts:258). It softens off pure
+     --c-white so a near black canvas does not glare, and interactive glyphs keep
+     --c-white. The earlier #F8F9FB value (R29-STEP-P2-PREMIUM-TYPE-01) was retired
+     under D309: the one source of truth is the platform token, read here through
+     brand/brand.source.json ink-0. #F7F8FB on --c-bg #05070E stays above 18:1. */
   --c-text:       #F7F8FB;
   --c-text-sub:   #D8DAE1;
   --c-text-muted: #A9ADBA;
