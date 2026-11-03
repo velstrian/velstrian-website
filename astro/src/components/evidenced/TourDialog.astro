@@ -36,7 +36,7 @@ const v = TOUR_VIDEO;
             data-poster={v.poster ?? undefined}
           >
             <source src={v.src} />
-            {v.captions && <track kind="captions" src={v.captions} srclang="en" label="English" default />}
+            {v.captions && <track kind="captions" data-src={v.captions} srclang="en" label="English" default />}
           </video>
         </div>
         <form method="dialog" class="ea-tour__bar">

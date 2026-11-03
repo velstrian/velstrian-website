@@ -288,6 +288,12 @@ function setUp(group: HTMLElement): void {
 
   /** Show one panel and mark its tab. The only place either state is written. */
   const select = (id: string, moveFocus: boolean): void => {
+    const selected = pairs.find(({ panel }) => panel.id === id);
+    if (selected) {
+      if (moveFocus) keepTabInView(selected.tab);
+      place(selected.tab);
+      if (moveFocus) selected.tab.focus();
+    }
     for (const { tab, panel } of pairs) {
       const on = panel.id === id;
       tab.setAttribute('aria-selected', String(on));
@@ -295,11 +301,6 @@ function setUp(group: HTMLElement): void {
          ARIA tabs pattern. Arrow keys move within it. */
       tab.tabIndex = on ? 0 : -1;
       panel.hidden = !on;
-      if (on) {
-        keepTabInView(tab);
-        place(tab);
-      }
-      if (on && moveFocus) tab.focus();
     }
     /* `hidden` and nothing else. It is the one attribute that removes an element
        from the tab order and from the accessibility tree at the same time, so
