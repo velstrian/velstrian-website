@@ -1,80 +1,80 @@
 {
-  "updated": "2026-11-03T01:55:35.137Z",
-  "overall": 44,
-  "verdict": "Not ready for paying customers yet",
-  "earliestDate": "2026-11-06 invite only, 2026-11-09 open signup",
-  "blockers": 9,
-  "detail": "review/ga-readiness-2026-11-03.html",
+  "updated": "2026-11-03T11:23:13.322Z",
+  "overall": 60,
+  "verdict": "Close to an invite only launch, not ready for open paying signup",
+  "earliestDate": "2026-11-05 invite only once the 5 blockers are checked, 2026-11-09 open signup",
+  "blockers": 5,
+  "detail": "review/ga-readiness-2026-11-03-pm.html",
   "areas": [
     {
       "name": "Sign up and onboarding",
       "weight": 10,
-      "score": 40,
+      "score": 68,
       "status": "amber",
-      "why": "Fixes built and walked on staging only, production lacks them"
+      "why": "Org name and signup fixes are in production (375f1525d). Staging walk 25/25 on the same code. Android fingerprint and passkey name still owner checks"
     },
     {
       "name": "Core bid journey",
       "weight": 12,
-      "score": 42,
+      "score": 55,
       "status": "amber",
-      "why": "Works on staging, requirement extraction fails its bars"
+      "why": "Production now runs the staging journey. Extraction safety nets (c18b58197) are not in production"
     },
     {
       "name": "Core buy journey",
       "weight": 10,
-      "score": 40,
+      "score": 70,
       "status": "amber",
-      "why": "Buy preview charge fix is staging only"
+      "why": "Buy preview charge fix is in production (d2faf5350), staging walk passed on the same code"
     },
     {
       "name": "Billing and payments",
       "weight": 15,
-      "score": 27,
-      "status": "red",
-      "why": "Four money bug fixes not in production, price check red, fraud controls missing"
+      "score": 58,
+      "status": "amber",
+      "why": "Four money fixes, price check fix and Stripe return fix are live. Radar rules, live webhook dispute events and live Stripe mode are not confirmed"
     },
     {
       "name": "AI quality",
       "weight": 12,
-      "score": 42,
+      "score": 45,
       "status": "amber",
-      "why": "Extraction misses exclusion gates, 22 critical errors"
+      "why": "Extraction, briefing deadline and review assist fixes sit on review/kiro-ai and are not in production, paid re-check not run"
     },
     {
       "name": "Security and auth",
       "weight": 10,
-      "score": 60,
+      "score": 74,
       "status": "amber",
-      "why": "Audit fixes built, not yet in production"
+      "why": "Audit fixes, dependency fixes and captcha are live. BFF token flip waits for go live, Supabase Auth settings check is an owner step"
     },
     {
       "name": "Legal and trust",
       "weight": 10,
-      "score": 60,
+      "score": 66,
       "status": "amber",
-      "why": "Safe play wording decided, pages and counsel review not finished"
+      "why": "Safe play platform wording is live. Counsel review not back, breach notice wording still open"
     },
     {
       "name": "Website",
       "weight": 6,
-      "score": 67,
-      "status": "amber",
-      "why": "Live and healthy, final push waits on owner check"
+      "score": 78,
+      "status": "green",
+      "why": "Pushed and live (1493de74), health 200"
     },
     {
       "name": "Operations and monitoring",
       "weight": 10,
-      "score": 40,
+      "score": 52,
       "status": "amber",
-      "why": "Error triage in progress, no timed restore test"
+      "why": "Production health 200, migrations applied, Sentry triage fixes live. No timed restore test, no phone alert tested"
     },
     {
       "name": "Support",
       "weight": 5,
-      "score": 40,
+      "score": 42,
       "status": "amber",
-      "why": "Help articles not live, no support process yet"
+      "why": "No support process yet, help centre not confirmed live"
     }
   ]
 }
