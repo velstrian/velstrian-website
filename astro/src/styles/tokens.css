@@ -3641,6 +3641,22 @@
     url(/Assets/images/r285-gemini/close-band-texture-1600.webp) type('image/webp') 1x,
     url(/Assets/images/r285-gemini/close-band-texture-2400.webp) type('image/webp') 2x
   );
+}
+
+@media (max-width: 699px) {
+  :root {
+    --stage-texture: image-set(
+      url(/Assets/images/r285-gemini/stage-texture-1600.avif) type('image/avif') 1x,
+      url(/Assets/images/r285-gemini/stage-texture-1600.webp) type('image/webp') 1x
+    );
+    --close-texture: image-set(
+      url(/Assets/images/r285-gemini/close-band-texture-1600.avif) type('image/avif') 1x,
+      url(/Assets/images/r285-gemini/close-band-texture-1600.webp) type('image/webp') 1x
+    );
+  }
+}
+
+:root {
   --stage-texture-strength: 0.35;
   --stage-texture-blend: soft-light;
   /* The close band's own bloom. The stage bloom lights the TOP LEFT, which is
