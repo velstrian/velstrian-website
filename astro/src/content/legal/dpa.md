@@ -37,7 +37,7 @@ draftNotice: "This Data Processing Agreement is a draft pending legal review. Th
 
 ## 4. Sub-processors
 
-<p>The Customer provides a general authorisation for Velstrian Tenderworks to engage sub-processors listed on our <a href="/sub-processors/">Sub-processors</a> page. We will tell you at least 30 days before a new sub-processor starts, by email to the billing contact and on the public sub-processor page. If we must replace a sub-processor sooner for security or continuity, we will tell you as soon as we can. You may object on reasonable data protection grounds within 14 days of the notice. If we cannot resolve it, you may end the affected service and we will refund prepaid fees for it. This is your only remedy for the objection.</p>
+<p>The Customer provides a general authorisation for Velstrian Tenderworks to engage sub-processors listed on our <a href="/sub-processors/">Sub-processors</a> page. We will tell you at least 30 days before a new sub-processor starts, by email to the billing contact and on the public sub-processor page. If we must replace a sub-processor sooner for security or continuity, we will tell you as soon as we can. You may object on reasonable data protection grounds within 14 days of the notice. If we cannot resolve it, you may end the affected service and nothing more is charged for it. This is your only remedy for the objection.</p>
 
 <p>Velstrian Tenderworks imposes the same data protection obligations on each sub-processor by written contract (SCC-based DPA or equivalent), and remains fully liable to the Customer for the performance of its sub-processors.</p>
 
@@ -49,7 +49,7 @@ draftNotice: "This Data Processing Agreement is a draft pending legal review. Th
 
 ## 6. Personal data breaches
 
-<p>Velstrian Tenderworks will tell the Customer without undue delay after we become aware of a personal data breach affecting Customer data, and in any event within 72 hours of becoming aware. We become aware when we have reasonable certainty that a breach has happened. We will keep the Customer updated as we learn more. The notification will describe the nature of the breach, categories and approximate number of data subjects and records concerned, the likely consequences, and the measures taken or proposed to address it.</p>
+<p>Velstrian Tenderworks will tell the Customer without undue delay after we become aware of a personal data breach affecting Customer data, as UK GDPR Article 33(2) requires. We become aware when we have reasonable certainty that a breach has happened. We will keep the Customer updated as we learn more. The notification will describe the nature of the breach, categories and approximate number of data subjects and records concerned, the likely consequences, and the measures taken or proposed to address it.</p>
 
 ## 7. International transfers
 
@@ -67,7 +67,7 @@ draftNotice: "This Data Processing Agreement is a draft pending legal review. Th
 
 ### 8.3 Resilience
 
-<ul><li>Automated daily database backups managed by our hosting provider.</li><li>A documented backup and restore procedure and business continuity plan.</li><li>Documented incident-response runbook. We aim to restore service within 24 hours and to lose no more than 24 hours of data. These are targets, not commitments.</li></ul>
+<ul><li>Automated daily database backups managed by our hosting provider.</li><li>A documented backup and restore procedure and business continuity plan.</li><li>Documented incident-response runbook.</li></ul>
 
 ### 8.4 Monitoring
 
@@ -79,7 +79,7 @@ draftNotice: "This Data Processing Agreement is a draft pending legal review. Th
 
 ## 10. Liability and governing law
 
-<p>Our liability under this DPA counts towards the limits in the Terms of Service and does not add to them. This does not affect any right a person has under Article 82 UK GDPR. Where we pay compensation for damage that you were responsible for, we may claim back that share from you. The DPA is governed by the laws of England and Wales, with jurisdiction in the courts of England.</p>
+<p>Our liability under this DPA counts towards the limits in the Terms of Service and does not add to them. There is one limit for all claims, including data protection and security claims: the fees you paid in the 12 months before the claim. This does not affect any right a person has under Article 82 UK GDPR. Where we pay compensation for damage that you were responsible for, we may claim back that share from you. The DPA is governed by the laws of England and Wales, with jurisdiction in the courts of England.</p>
 
 ## 11. How to execute this DPA
 
