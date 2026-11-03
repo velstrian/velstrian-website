@@ -158,6 +158,14 @@ const UPDATE = process.argv.includes('--update');
  * when a loss must be tolerated across several builds.
  */
 const ALLOWED_LOSSES = new Map([
+  /* 2026-11-03, R29-LEGAL-REVIEW-AGAIN-01: every data protection contact on
+     /privacy/ now routes to contact@velstrian.com, the one public contact across
+     the estate. The two separate addresses are no longer offered. */
+  ['/privacy/  link: mailto:dpo@velstrian.com',
+   'R29-LEGAL-REVIEW-AGAIN-01 (2026-11-03): one data protection contact, contact@velstrian.com, already linked on /privacy/.'],
+  ['/privacy/  link: mailto:privacy@velstrian.com',
+   'R29-LEGAL-REVIEW-AGAIN-01 (2026-11-03): one data protection contact, contact@velstrian.com, already linked on /privacy/.'],
+
   /* 2026-10-28, R285-WEB-GEMINI-SEO (owner instruction): reworded section and FAQ
      heading in ppn-026-what-has-published-and-what-has-not. Editorial policy:
      PPN 026 only, never name PPN 002. */

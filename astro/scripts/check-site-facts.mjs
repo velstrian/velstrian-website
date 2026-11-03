@@ -392,13 +392,9 @@ const EXCEPTIONS = [
     ctxMatch: /Sir John Rogerson's Quay, Dublin 2, Ireland/,
     why: "A sub-processor's registered company address (Google Ireland Limited and Google Cloud EMEA Limited), which the list must publish under Article 28. It says where a company is registered, not where customer data is stored.",
   },
-  {
-    record: 'regions',
-    route: /^\/residency\/$/,
-    hit: /^Dublin$/,
-    ctxMatch: /Stripe Payments Europe, Ltd Billing, VAT handling, card vaulting EU \(Dublin\)/,
-    why: "Where Stripe processes billing data, disclosed on the residency page as the law requires. It is a statement about the payment processor, not a claim that customer documents stay in a region.",
-  },
+  /* The /residency/ Stripe "EU (Dublin)" exception was deleted 2026-11-03
+     (R29-LEGAL-REVIEW-AGAIN-01): the platform source now says "EU and US (no
+     EU-only residency commitment)", matching /sub-processors/, so it went stale. */
   {
     record: 'product_status',
     route: /^\/retention\/$/,
