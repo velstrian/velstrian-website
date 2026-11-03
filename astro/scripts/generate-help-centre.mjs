@@ -44,7 +44,11 @@ import { siblingRepo } from '../../scripts/lib/sibling-repo.cjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ASTRO = path.join(__dirname, '..');
-export const PLATFORM = siblingRepo('platform');
+/* [A-512 2026-11-03] VELSTRIAN_PLATFORM_DIR points the generator at a platform checkout that is
+   not the sibling folder, such as a review worktree. Unset, the sibling rule is unchanged. */
+export const PLATFORM = process.env.VELSTRIAN_PLATFORM_DIR
+  ? path.resolve(process.env.VELSTRIAN_PLATFORM_DIR)
+  : siblingRepo('platform');
 const WEB = path.join(PLATFORM, 'web');
 
 export const HELP_JSON = path.join(ASTRO, 'src', 'data', 'help-centre.generated.json');
@@ -303,6 +307,15 @@ function retiredNameFindings(files) {
 
 const yaml = (s) => JSON.stringify(String(s));
 
+/** The frontmatter lines for a legal page's optional `summary` export. */
+function legalSummaryLines(summary, route) {
+  if (summary === undefined) return [];
+  if (!Array.isArray(summary) || summary.length === 0 || !summary.every((x) => typeof x === 'string' && x.trim() !== '')) {
+    throw new Error(`generate-help-centre: src/shared/legal/public-pages/${route}.tsx exports a summary that is not a list of plain strings`);
+  }
+  return ['summary:', ...summary.map((x) => `  - ${yaml(x.trim())}`)];
+}
+
 /** Everything this script would write, as { absolutePath: contents }. */
 export async function derive() {
   const jiti = loadJiti();
@@ -415,6 +428,10 @@ export async function derive() {
         /* [R285-LEGAL-KIRO-B03 2026-10-26] A platform page that exports `draftNotice` shows the
            same draft banner as the Terms, from the one source, until counsel confirms (A-448). */
         ...(typeof mod.draftNotice === 'string' ? [`draftNotice: ${yaml(mod.draftNotice)}`] : []),
+        /* [A-512 2026-11-03] A platform page that exports `summary` (a list of plain points) gets
+           the Legal layout's "In short" box, from the one source. Anything but a list of strings
+           fails the run rather than shipping a half summary. */
+        ...legalSummaryLines(mod.summary, route),
         /* [A-472 2026-10-26] The note is a YAML comment inside the frontmatter, never an HTML
            comment in the body: Astro passes a body comment through to the served page, which
            then told every reader the platform source path. Frontmatter is never rendered, and
