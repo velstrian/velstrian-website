@@ -6,6 +6,14 @@ eyebrow: "Legal & Data Protection"
 lastUpdated: "2026-10-26"
 version: "2026-10-25"
 effectiveDate: "2026-10-25"
+summary:
+  - "We are the data controller for personal data in the platform, and we are registered with the ICO."
+  - "We collect what we need to run your account, your bids and your billing, and use it for that."
+  - "Each use has a lawful basis under UK GDPR: contract, legitimate interests, consent or legal obligation."
+  - "We keep personal data only as long as we need it, then delete or anonymise it."
+  - "AI drafting sends only the text a task needs to Google Gemini and Anthropic Claude, outside the EU, under contract."
+  - "You can ask to see, correct, delete, move or limit your data, or object to how we use it."
+  - "If you are unhappy with how we handle your data, you can complain to the ICO."
 ---How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
 
 ## What this policy covers

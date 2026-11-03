@@ -5,6 +5,14 @@ heading: "Terms of Service."
 lastUpdated: "2026-10-31"
 version: "2026-10-31"
 effectiveDate: "2026-10-31"
+summary:
+  - "These terms are the agreement between Velstrian and your organisation for using the platform."
+  - "You pay monthly or yearly in advance, in pounds, and you can cancel at any time."
+  - "When you cancel, your plan keeps working to the end of the period you paid for. Fees already paid are not refunded."
+  - "You keep ownership of your content. We use it only to provide the service."
+  - "AI drafts can be wrong, so check every answer before you use it."
+  - "Our liability is limited to the fees for the 12 months before the event that led to a claim."
+  - "These terms are governed by the laws of England and Wales."
 ---
 ## The six clauses customers ask about
 

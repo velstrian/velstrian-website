@@ -3,6 +3,14 @@ title: "Security Architecture and Controls | Velstrian"
 description: "How Velstrian protects your bid data: AES-256 at rest, TLS 1.3 in transit, UK data residency, and controls over what is sent to AI providers."
 heading: "Encrypted, documented, and auditable."
 eyebrow: "Security & Trust"
+summary:
+  - "Your data is encrypted in transit and at rest."
+  - "It is stored in the EU, in Ireland, with daily backups."
+  - "AI is the one part that leaves the EU, and only the text a task needs is sent, under contract."
+  - "Passkeys, multi factor sign in and an audit log help protect your account."
+  - "We follow ISO/IEC 27001 and are UK GDPR compliant."
+  - "Our live status page shows how the service is running."
+  - "You can report a security issue to us by email."
 ---[System status: status.velstrian.com](https://status.velstrian.com)
 
 How Velstrian protects your bid documents, company data, and user accounts: enterprise encryption, data stored in the EU (Ireland), and transparent AI processing boundaries.

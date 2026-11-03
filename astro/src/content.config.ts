@@ -240,6 +240,15 @@ const legal = defineCollection({
      * document carrying this sentence. Remove it when the wording is final.
      */
     draftNotice: z.string().optional(),
+    /*
+     * A-512, owner decision D532 (2026-11-03): every legal page opens with a
+     * short plain summary, a handful of one line points, and the layout adds
+     * the one "contact us for the full document" line under it. The full text
+     * below is kept word for word. Optional only because the five pages
+     * generated from the platform cannot carry it until the platform
+     * generator writes it.
+     */
+    summary: z.array(z.string()).min(3).max(10).optional(),
   }),
 });
 
