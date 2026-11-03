@@ -180,7 +180,7 @@ const WHO_ITS_FOR: NavMenu = {
   activeRoutes: ['/sectors'],
   columns: [
     {
-      label: 'By sector, public and private',
+      label: 'Public and private work',
       items: [
         {
           label: 'All sectors',
@@ -204,6 +204,32 @@ const WHO_ITS_FOR: NavMenu = {
           icon: 'checklist',
         },
         {
+          label: 'Technology and IT',
+          href: '/sectors/technology-it/',
+          description: 'Security and data-protection answers that hold up',
+          accent: 'teal',
+          icon: 'sliders',
+        },
+        {
+          label: 'Professional services',
+          href: '/sectors/professional-services/',
+          description: 'Consultancy bids built from your method and team',
+          accent: 'teal',
+          icon: 'pen',
+        },
+      ],
+    },
+    {
+      label: 'More sectors',
+      items: [
+        {
+          label: 'Healthcare',
+          href: '/sectors/healthcare/',
+          description: 'NHS and care tenders, quality and safeguarding',
+          accent: 'teal',
+          icon: 'shield',
+        },
+        {
           label: 'Education',
           href: '/sectors/education/',
           description: 'Schools, colleges and university bids',
@@ -211,11 +237,18 @@ const WHO_ITS_FOR: NavMenu = {
           icon: 'book',
         },
         {
-          label: 'Highways',
+          label: 'Transport and highways',
           href: '/sectors/highways/',
-          description: 'Road and infrastructure maintenance work',
+          description: 'Road, rail and infrastructure work',
           accent: 'teal',
           icon: 'right',
+        },
+        {
+          label: 'Charities',
+          href: '/sectors/charities/',
+          description: 'Contracts and grant funded work for the VCSE',
+          accent: 'teal',
+          icon: 'done',
         },
       ],
     },

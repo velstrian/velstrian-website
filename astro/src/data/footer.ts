@@ -243,15 +243,19 @@ export const FOOTER = {
       ],
     },
     {
-      /* A-510: the header "Who it's for" group, mirrored in the footer. The four
-         sector pages that ship plus the hub. */
+      /* A-510 / A-513: the header "Who it's for" group, mirrored in the footer.
+         All eight sector pages plus the hub. */
       title: "Who it's for",
       links: [
         { label: 'All sectors', href: '/sectors/' },
         { label: 'Construction', href: '/sectors/construction/' },
         { label: 'Facilities management', href: '/sectors/facilities/' },
+        { label: 'Technology and IT', href: '/sectors/technology-it/' },
+        { label: 'Professional services', href: '/sectors/professional-services/' },
+        { label: 'Healthcare', href: '/sectors/healthcare/' },
         { label: 'Education', href: '/sectors/education/' },
-        { label: 'Highways', href: '/sectors/highways/' },
+        { label: 'Transport and highways', href: '/sectors/highways/' },
+        { label: 'Charities', href: '/sectors/charities/' },
       ],
     },
     {
