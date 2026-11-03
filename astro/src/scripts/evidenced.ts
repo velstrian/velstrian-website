@@ -65,6 +65,17 @@ function drawRoot(root: HTMLElement, lines: Map<string, Line>): void {
 
   const pane = root.querySelector('[data-cite-pane]');
   const paneBox = pane ? pane.getBoundingClientRect() : box;
+
+  interface CiteItem {
+    id: string;
+    x1: number;
+    y1: number;
+    y2: number;
+    rail: number;
+    x2: number;
+  }
+  const items: CiteItem[] = [];
+
   root.querySelectorAll<HTMLElement>('[data-cite-from]').forEach((from, i) => {
     const id = from.dataset.citeFrom ?? '';
     const to = root.querySelector<HTMLElement>(`[data-cite-to="${id}"]`);
@@ -91,7 +102,11 @@ function drawRoot(root: HTMLElement, lines: Map<string, Line>): void {
       x2 = s.right - box.left;
     }
 
-    let line = lines.get(id);
+    items.push({ id, x1, y1, y2, rail, x2 });
+  });
+
+  for (const it of items) {
+    let line = lines.get(it.id);
     if (!line) {
       const path = document.createElementNS(SVG_NS, 'path');
       attrs(path, { class: 'ea-cite-line', pathLength: 1 });
@@ -99,11 +114,11 @@ function drawRoot(root: HTMLElement, lines: Map<string, Line>): void {
       attrs(dot, { class: 'ea-cite-dot', r: 3.5 });
       svg.append(path, dot);
       line = { path, dot };
-      lines.set(id, line);
+      lines.set(it.id, line);
     }
-    line.path.setAttribute('d', route(x1, y1, rail, y2, x2));
-    attrs(line.dot, { cx: x2, cy: y2 });
-  });
+    line.path.setAttribute('d', route(it.x1, it.y1, it.rail, it.y2, it.x2));
+    attrs(line.dot, { cx: it.x2, cy: it.y2 });
+  }
   root.dataset.citeDrawn = 'on';
 }
 
@@ -287,7 +302,12 @@ export function initTour(): void {
       video.playbackRate = TOUR_RATE;
     }, { once: true });
   }
-  open.addEventListener('click', () => dialog.showModal());
+  open.addEventListener('click', () => {
+    if (video && video.dataset.poster && !video.poster) {
+      video.poster = video.dataset.poster;
+    }
+    dialog.showModal();
+  });
   dialog.addEventListener('close', () => {
     if (video) video.pause();
     open.focus();
