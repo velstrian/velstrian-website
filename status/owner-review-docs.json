@@ -42,7 +42,8 @@
   ],
   "R29-GA-READINESS-AUDIT-01": [
    "docs/release-2.9/GA-READINESS-2026-11-03.md",
-   "docs/release-2.9/GA-READINESS-2026-11-03-PM.md"
+   "docs/release-2.9/GA-READINESS-2026-11-03-PM.md",
+   "docs/release-2.9/GA-READINESS-2026-11-03-EVE.md"
   ],
   "R285-OWNER-POST-PROMOTE-STEPS-01": [
    "docs/release-2.9/OWNER-ACTIONS-2026-11-03.md"

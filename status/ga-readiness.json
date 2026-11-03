@@ -1,80 +1,80 @@
 {
-  "updated": "2026-11-03T11:23:13.322Z",
-  "overall": 61,
-  "verdict": "Close to an invite only launch, not ready for open paying signup",
-  "earliestDate": "2026-11-05 invite only once the 5 blockers are checked, 2026-11-09 open signup",
-  "blockers": 5,
-  "detail": "review/ga-readiness-2026-11-03-pm.html",
+  "updated": "2026-11-03T17:14:06.047Z",
+  "overall": 72,
+  "verdict": "Ready for an invite only launch once the 4 blockers are checked, not yet for open paying signup",
+  "earliestDate": "2026-11-05 invite only after round 3 reaches production and the owner checks, 2026-11-09 open signup",
+  "blockers": 4,
+  "detail": "review/ga-readiness-2026-11-03-eve.html",
   "areas": [
     {
       "name": "Sign up and onboarding",
       "weight": 10,
-      "score": 68,
+      "score": 71,
       "status": "amber",
-      "why": "Org name and signup fixes are in production (375f1525d). Staging walk 25/25 on the same code. Android fingerprint and passkey name still owner checks"
+      "why": "Sign in cookie chunks and invite fixes are in production (90d3075). The send email hook timeout fix and the invitee auto sign in captcha fix are staging only (round 3, 6f361fcf43). Full journey signup to payment to top up PASS on staging. Android fingerprint stays an owner check. Round 3 would add about 11"
     },
     {
       "name": "Core bid journey",
       "weight": 12,
-      "score": 60,
+      "score": 63,
       "status": "amber",
-      "why": "Production now runs the staging journey, including the extraction safety nets (afc9c7ef6). Left: the paid extraction re-check under D507."
+      "why": "Production runs the extraction safety nets (afc9c7ef6) and the credit estimate fix (ac191f197). Extraction critical recall 1.0 but 5 unflagged conflicts left, clean re-measure due tomorrow. Self service journey PASS is staging only"
     },
     {
       "name": "Core buy journey",
       "weight": 10,
-      "score": 70,
+      "score": 72,
       "status": "amber",
-      "why": "Buy preview charge fix is in production (d2faf5350), staging walk passed on the same code"
+      "why": "Preview charge fix and UI polish live. Buy walk 10 of 12 on staging, 0 product defects, 2 checks blocked by the staging AI prepay and a missing route. Role personas seeded on staging only"
     },
     {
       "name": "Billing and payments",
       "weight": 15,
-      "score": 58,
+      "score": 80,
       "status": "amber",
-      "why": "Four money fixes, price check fix and Stripe return fix are live. Radar rules, live webhook dispute events and live Stripe mode are not confirmed"
+      "why": "Live mode confirmed, 3 dispute events on the live webhook, Radar CVC and postcode rules on, CSP billing fix live. A dispute has never been seen end to end (walk built, not run) and Radar for Fraud Teams is not bought. Staging live key guard is round 3 only"
     },
     {
       "name": "AI quality",
       "weight": 12,
-      "score": 45,
+      "score": 52,
       "status": "amber",
-      "why": "Extraction, briefing deadline and review assist fixes sit on review/kiro-ai and are not in production, paid re-check not run"
+      "why": "Honest wording and the extraction, briefing and review assist fixes are live. Review assist 19 of 20 and briefing 3 of 3 were measured on staging with round 3 AI fixes, so partial credit only. Extraction 5 unflagged conflicts left. Round 3 would add about 10"
     },
     {
       "name": "Security and auth",
       "weight": 10,
-      "score": 74,
-      "status": "amber",
-      "why": "Audit fixes, dependency fixes and captcha are live. BFF token flip waits for go live, Supabase Auth settings check is an owner step"
+      "score": 88,
+      "status": "green",
+      "why": "Audit and dependency fixes live. BFF token enforcement confirmed on production by probe, Supabase Auth settings audited, passkey name fixed. Left: owner confirmation of the BFF row. Live key guard is round 3"
     },
     {
       "name": "Legal and trust",
       "weight": 10,
-      "score": 66,
+      "score": 74,
       "status": "amber",
-      "why": "Safe play platform wording is live. Counsel review not back, breach notice wording still open"
+      "why": "Breach notice 72 hours agreed and already in the live DPA (D542). Legal summaries live. Counsel review of the safe play wording still not back (owner)"
     },
     {
       "name": "Website",
       "weight": 6,
-      "score": 78,
+      "score": 84,
       "status": "green",
-      "why": "Pushed and live (1493de74), health 200"
+      "why": "Website 75735af3 live: 61 help articles, videos fixed (A-516). Tender finder speed fix is built, not live"
     },
     {
       "name": "Operations and monitoring",
       "weight": 10,
-      "score": 52,
+      "score": 76,
       "status": "amber",
-      "why": "Production health 200, migrations applied, Sentry triage fixes live. No timed restore test, no phone alert tested"
+      "why": "Restore test done (RTO about 7 min, RPO up to 24 h, runbook on the board). Sentry production alert test emails received. Left: phone notification in the Gmail app (owner), Railway branch join (R29-GA-RAILWAY-BRANCH-JOIN-01), no point in time recovery (D544)"
     },
     {
       "name": "Support",
       "weight": 5,
-      "score": 42,
+      "score": 52,
       "status": "amber",
-      "why": "No support process yet, help centre not confirmed live"
+      "why": "Production has no support process change. Help centre 61 articles live on the website. In app reports reaching the inbox and support emails are round 3 only. Round 3 would add about 18"
     }
   ]
 }
