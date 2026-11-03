@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>R2.9 owner decision log</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>R2.9 owner decision log</h1>
+<p><span class="rv-row">R29-OWNER-DECISIONS-LOG-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>2f2561d84d</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-OWNER-DECISIONS-LOG-01 &middot; WIP</span><span class="rtitle">Owner decision log for R2.9, readable on the board (D525 to D532 and the same day owner answers)</span><p>docs/release-2.9/DECISIONS-R29-LOG.md, linked under Owner review; appended the same turn each new decision is made</p></div></section>
+<article class="doc">
+<h1>R2.9 owner decision log</h1>
+<p>Velstrian Tenderworks. Newest first. Each decision names the board row it moved. &quot;Waiting on&quot; means the next action after the decision.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>D</th>
+<th>Date</th>
+<th>Decision</th>
+<th>Board row(s)</th>
+<th>Status now</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D537</td>
+<td>2026-11-03</td>
+<td>Homepage security section becomes a compact trust strip of 4 badges linking to /security, full content moved to /security, nothing deleted.</td>
+<td>website A-514 (Kiro addendum 8)</td>
+<td>In build: Kiro</td>
+</tr>
+<tr>
+<td>D536</td>
+<td>2026-11-03</td>
+<td>Priority is GA only. Every open, in progress, waiting or on hold row that is not GA related moves to PHASE 2 (60 rows). Phase 1 keeps GA blockers, GA first week rows, R29-GA rows, the production post promote steps and work already built or fixed that ships with this deploy. Replaces the 2026-11-02 rule that every R2.9 row is phase 1.</td>
+<td>60 rows to PHASE:2</td>
+<td>Board rebuilt</td>
+</tr>
+<tr>
+<td>D535</td>
+<td>2026-11-03</td>
+<td>Social accounts confirmed as ours: LinkedIn company <a href="https://www.linkedin.com/company/-velstrian/">https://www.linkedin.com/company/-velstrian/</a>, LinkedIn profile <a href="https://www.linkedin.com/in/velstrian-systems-ltd-690114447">https://www.linkedin.com/in/velstrian-systems-ltd-690114447</a>, X <a href="https://x.com/VelstrianLtd">https://x.com/VelstrianLtd</a>, YouTube <a href="https://www.youtube.com/@VELSTRIAN-UK">https://www.youtube.com/@VELSTRIAN-UK</a>, Medium <a href="https://medium.com/@velstrian-systems-ltd">https://medium.com/@velstrian-systems-ltd</a>, Instagram <a href="https://www.instagram.com/velstrian/">https://www.instagram.com/velstrian/</a> (ours, not impersonation), TikTok <a href="https://www.tiktok.com/@velstrian">https://www.tiktok.com/@velstrian</a>. Approver <a href="mailto:aparajita.parihar@gmail.com">aparajita.parihar@gmail.com</a>, backup approvers <a href="mailto:crowagent.platform@gmail.com">crowagent.platform@gmail.com</a> and <a href="mailto:monikaparul.singh@gmail.com">monikaparul.singh@gmail.com</a>. Buffer free channels and the start order follow the plan defaults (LinkedIn page, LinkedIn profile, X).</td>
+<td>R29-GA-SOCIAL-LAUNCH-01</td>
+<td>Build paused until the deploy (D534)</td>
+</tr>
+<tr>
+<td>D534</td>
+<td>2026-11-03</td>
+<td>Pause all new work. Finish the ongoing lanes, quick targeted regression only (no certification run), deploy to staging then production. The owner explicitly lifts the 2 push session ceiling for this release: push 3 = api-staging, push 4 = railway-production after the staging check. Production web and portal through pnpm prod:promote with the owner approval text naming the sha. Owner also approves additional deploy budget (pushes and Vercel production deploys) as the release requires, to ship quickly.</td>
+<td>R29-GA-READINESS-AUDIT-01</td>
+<td>Waiting on the three running lanes</td>
+</tr>
+<tr>
+<td>D533</td>
+<td>2026-11-03</td>
+<td>Social media strategy and automation APPROVED for build, Phase 1 FREE ONLY: free tiers and free posting only, no new paid tool, API or subscription, apart from subscriptions the company already has. Every post is approved by email by <a href="mailto:aparajita.parihar@gmail.com">aparajita.parihar@gmail.com</a> before it posts. Phase 2 (budget, more capable tools) only after real customers and a new owner decision.</td>
+<td>R29-GA-SOCIAL-LAUNCH-01</td>
+<td>Strategy page update, then the build (queued on free memory)</td>
+</tr>
+<tr>
+<td>D532</td>
+<td>2026-11-03</td>
+<td>Play safe, no money promises: no refunds, no service credits, no compensation. One liability cap, the fees paid in the 12 months before the claim, for every claim (the separate data protection cap is removed). Keep &quot;GDPR compliant&quot; and 99.5% uptime, worded as an aim. Every legal page stays as a short summary plus &quot;contact us&quot;, with the full texts kept in the repo. Captions on by default in videos. Insurance and broker emails parked until the first paying customer. Build the fraud controls (Stripe Radar, dispute alerts, fake buyer checks).</td>
+<td>R29-LEGAL-SAFE-PLAY-01, R285-OWNER-INSURER-01, R29-FRAUD-CONTROLS-01, website A-512</td>
+<td>In build: Kiro (website) and a platform lane (legal sources, fraud controls)</td>
+</tr>
+<tr>
+<td>D531</td>
+<td>2026-11-03</td>
+<td>Do not over-commit while there are no customers. Keep all policies ready, with detailed documents &quot;available on request&quot;, and put customers first.</td>
+<td>R29-LEGAL-SAFE-PLAY-01</td>
+<td>Carried out through D532</td>
+</tr>
+<tr>
+<td>D530</td>
+<td>2026-11-02</td>
+<td>Slogan &quot;Qualify. Draft. Prove it.&quot; with a plain line under it on the home and Bid pages, from one central constant.</td>
+<td>website A-474</td>
+<td>In build: Kiro brief 21</td>
+</tr>
+<tr>
+<td>D529</td>
+<td>2026-11-02</td>
+<td>One website push to live, after Kiro reports ready and the owner checks on 8093. Cost: a free-plan Cloudflare deploy plus 3 free GitHub Actions workflows (public repo).</td>
+<td>R285-OWNER-WEBSITE-PUSH-APPROVAL-01</td>
+<td>Waiting on Kiro ready and the owner check</td>
+</tr>
+<tr>
+<td>D528</td>
+<td>2026-11-02</td>
+<td>The AI engine spec meta row is closed as covered. Its work lives on its own rows.</td>
+<td>R285-P3-AI-SPEC-ENGINE-AUTO-01</td>
+<td>Closed</td>
+</tr>
+<tr>
+<td>D527</td>
+<td>2026-11-02</td>
+<td>Google Vertex credits parked until 15 January 2027.</td>
+<td>R285-P3-AI-VERTEX-CREDITS-PLAN-01</td>
+<td>On hold</td>
+</tr>
+<tr>
+<td>D526</td>
+<td>2026-11-02</td>
+<td>Pooled win and loss counts show only with at least 10 organisations, none above 50%, and counts only, no text.</td>
+<td>R29-STEP-P3-AI-CROSS-CUSTOMER-PATTERNS-01</td>
+<td>Waiting on its migrations reaching staging</td>
+</tr>
+<tr>
+<td>D525</td>
+<td>2026-11-02</td>
+<td>Switch on all 11 built AI features and charge their cost to customer credits.</td>
+<td>R29-STEP-P3-AI-OFF-SURFACES-DECISION-01</td>
+<td>Kiro brief 23 checks the metering, then the driver sets the ceilings with a cost statement</td>
+</tr>
+</tbody></table></div>
+<h2>Owner answers and actions the same day (not D numbered)</h2>
+<ul>
+<li>2026-11-03: TODO when the first paying customer lands: insurance quote first in the Tide app (Tide Insurance with Admiral Business: PI, public liability, employers liability), compare with Hiscox and Simply Business, cyber separately. Row R285-OWNER-INSURER-01 (on hold until then).</li>
+<li>2026-11-03: approved, and the driver changed, the production Supabase passkey domain from app.crowagent.ai to app.velstrian.com (fixes fingerprint sign in on the phone). Open: the display name still reads CrowAgent. Row R29-AUTH-PASSKEY-ENROL-ANDROID-01.</li>
+<li>2026-11-03: &quot;remember this browser&quot; survives sign out for the same user. Row R29-AUTH-REMEMBER-BROWSER-01.</li>
+<li>2026-11-03: the legal review brief was emailed to two helpers and <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>, using the free route (University of Law 30 minute call, then the Aston clinic, with a paid quote only on approval). Row R29-STEP-LEGAL-KIRO-A02-01.</li>
+<li>2026-11-02: the staging health check bypass was approved and applied. Row R29-STAGING-HEALTH-ACCESS-BYPASS-01.</li>
+<li>2026-11-02: the GBP 15 staging eval batch was approved (GBP 2.55 spent). Batch 7 results are on the AI rows.</li>
+<li>2026-11-02: two api-staging pushes were approved and done (7a7822c2a, 1c6988b2e).</li>
+<li>2026-11-02: the company is not VAT registered and expects under GBP 50k a year, so registration is optional (the threshold is GBP 90,000). VAT collection stays off. Row R29-GA-VAT-ON-INVOICES-01.</li>
+<li>2026-11-02: AI_OPENAI_SECOND_PROVIDER set on staging Railway by the owner.</li>
+</ul>
+
+</article>
+</main></body></html>

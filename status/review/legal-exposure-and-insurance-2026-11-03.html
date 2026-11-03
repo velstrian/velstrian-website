@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Legal exposure, insurance at minimal cost, and fraud safeguards</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Legal exposure, insurance at minimal cost, and fraud safeguards</h1>
+<p><span class="rv-row">R285-OWNER-INSURER-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/legal/LEGAL-EXPOSURE-AND-INSURANCE-2026-11-03.md</code>, rendered from <code>e445c01976</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-OWNER-INSURER-01 &middot; ON</span><span class="rtitle">Ask the insurer in writing what professional indemnity and cyber cover Velstrian Systems Ltd holds, so the liability cap option can be chosen</span><p>DECIDED D532 by the owner: park insurance and the broker emails until the first real paying customer. Paper docs/release-2.9/legal/LEGAL-EXPOSURE-AND-INSURANCE-2026-11-03.md (cheapest sensible bundle tech PI plus cyber, about GBP 300 to 1,000 a year; employers liability from the first employee). TODO WHEN THE FIRST PAYING CUSTOMER LANDS (owner 2026-11-03): 1) get the PI quote in the Tide app (Tide Insurance with Admiral Business, FCA FRN 1040067, PI, public and employers liability); 2) compare with Hiscox and Simply Business software PI; 3) cyber separately (Tide offers none); 4) employers liability from the first employee (compulsory).</p></div></section>
+<article class="doc">
+<h1>Legal exposure, insurance at minimal cost, and fraud safeguards</h1>
+<p>Row R285-OWNER-INSURER-01. Prepared 2026-11-03 for the owner of Velstrian Tenderworks (Velstrian Systems Ltd). General guidance, not regulated advice. A broker or solicitor confirms the final choice (said once, here).</p>
+<h2>Short answer</h2>
+<ul>
+<li>We publish 11 legal pages, about 16,000 words. The law requires far fewer. Most of the rest is market practice, and each extra promise is something a buyer can hold us to.</li>
+<li>Law requires: a privacy notice, a cookie notice (only because we use non-essential cookies), company details on the site, and consumer terms only if consumers buy. Everything else is optional.</li>
+<li>Eight comparator sites checked (not 50): 2 to 5 footer legal pages, caps almost always 12 months fees, four of five terms read have no SLA.</li>
+<li>Biggest live exposures today: a &quot;99.5% uptime&quot; line and an &quot;8 hours outage credit&quot; in the refund policy (an SLA by the back door), a &quot;within 72 hours&quot; breach promise and &quot;aim to restore within 24 hours&quot; in the DPA, and a leftover &quot;GDPR compliant&quot; line in security.md.</li>
+<li>Recommended (owner direction D531): publish Privacy, Terms, Cookies and a short Security page. Keep DPA, sub-processors, retention and residency written and ready, available on request via one footer line. Soften every number to a target.</li>
+<li>Insurance: nothing is compulsory today. Employers&#39; liability becomes compulsory with the first employee, possibly not for a sole director who owns the company (unverified, ask the broker).</li>
+<li>Cheapest sensible bundle now: tech PI plus cyber, about GBP 300 to 1,000 a year for GBP 250k to 1m cover, based on published &quot;from&quot; prices and benchmarks (sources below). Treat as indicative only.</li>
+<li>Our Terms cap data protection claims at GBP 250,000, but a cheap online policy may only give GBP 25,000 cyber. Fix: keep the cap but make it &quot;the lesser of twice fees and GBP 250,000&quot;, and buy cover to match once revenue exists.</li>
+<li>The broker email drafts need three edits before sending (turnover, and the liability wording, which no longer matches the live Terms).</li>
+<li>Fraud: the product has a bot check on sign-in, rate limiting and a trial rule, but I found no card-testing, dispute handling or Radar evidence in code. Those are the gaps.</li>
+</ul>
+<h2>Part A. What we publish and whether it is too much</h2>
+<h3>A1. What the website publishes today</h3>
+<p>Source: <code>C:/w/vw/astro/src/content/legal/*.md</code>, served by <code>astro/src/pages/[legal].astro</code>, plus <code>astro/src/data/footer.ts</code> (footer Legal column lines 289 to 304). Word counts measured with <code>wc -w</code>.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Words</th>
+<th>In footer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Terms</td>
+<td>2,904</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Sub-processors</td>
+<td>3,035</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Privacy</td>
+<td>2,641</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>1,733</td>
+<td>yes (&quot;Trust and security&quot;)</td>
+</tr>
+<tr>
+<td>Cookies</td>
+<td>1,479</td>
+<td>yes (plus a 2,195 word preferences page)</td>
+</tr>
+<tr>
+<td>DPA (marked draft pending legal review)</td>
+<td>1,476</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Accessibility</td>
+<td>646</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Retention</td>
+<td>631</td>
+<td>no, but live</td>
+</tr>
+<tr>
+<td>Residency</td>
+<td>614</td>
+<td>no, but live</td>
+</tr>
+<tr>
+<td>Refund policy</td>
+<td>469</td>
+<td>no, but live</td>
+</tr>
+<tr>
+<td>Supplier terms</td>
+<td>414</td>
+<td>no, but live</td>
+</tr>
+<tr>
+<td>How we use AI (<code>ai.astro</code>)</td>
+<td>1,287</td>
+<td>yes</td>
+</tr>
+</tbody></table></div>
+<p>Company number and Companies House link sit in the footer (<code>footer.ts</code> legalEntity).</p>
+<h3>A2. Required versus market practice</h3>
+<p>Required by law (sources: <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/the-right-to-be-informed/">ICO right to be informed</a>, <a href="https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/cookies-and-similar-technologies/">ICO cookies guidance</a>, <a href="https://www.legislation.gov.uk/uksi/2002/2013/regulation/6">E-Commerce Regulations 2002 reg 6</a>):</p>
+<ul>
+<li>Privacy notice (UK GDPR transparency).</li>
+<li>Cookie information and consent for non-essential cookies (PECR).</li>
+<li>Name, address, company number and contact email of the company on the site.</li>
+<li>Consumer Contracts Regulations information only if consumers buy. We sell to businesses, so a B2B-only statement in Terms is enough.</li>
+</ul>
+<p>Market practice only: DPA, sub-processor list, acceptable use policy, SLA, security page, AI policy, retention schedule, residency note, accessibility statement (the last is expected by public buyers, not required of a private company).</p>
+<p>Comparators, read from their footers on 2026-11-03: <a href="https://www.autogenai.com">autogenai.com</a> (privacy, usage, cookie, app cookie, customer T&amp;C, app T&amp;C, app privacy, accessibility, trust centre in nav), <a href="https://www.mytender.io">mytender.io</a> (terms, data protection, privacy, trust centre), <a href="https://www.tenderbase.co.uk">tenderbase.co.uk</a> (terms, privacy only). None list a DPA or sub-processor page in the footer.</p>
+<h3>A3. Risks either way</h3>
+<p>Over-publishing: a published number becomes a promise. Examples live now, all in <code>C:/w/vw/astro/src/content/legal</code>: &quot;99.5% monthly uptime&quot; (security.md line 119, worded as a target, good), outage credit after 8 hours (refund-policy.md line 25, reads as a commitment), breach notice &quot;within 72 hours&quot; (dpa.md line 52), restore &quot;within 24&quot; hours (dpa.md line 70), &quot;GDPR compliant&quot; (security.md line 141, removed from the footer on 2026-08-05 for being unbacked, still in the page), 14 day full refund (refund-policy.md line 15) that contradicts the &quot;no refunds&quot; line in Terms (terms.md line 57). Contradictions are the worst kind of exposure.</p>
+<p>Under-publishing: no privacy notice or cookie notice invites ICO action, and missing trust pages cost deals with buyers who send security questionnaires.</p>
+<h3>A3b. How other small UK-linked SaaS handle it (8 sites checked on 2026-11-03, not 50)</h3>
+<p>I read footers of eight sites and the terms of six. I did not verify which are seed funded or self funded, so read this as a pattern, not a statistic.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Site</th>
+<th>Footer legal pages</th>
+<th>Liability cap in terms</th>
+<th>Uptime SLA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://tenderbase.co.uk/terms-and-condition">Tenderbase</a></td>
+<td>Terms, Privacy</td>
+<td>12 months fees, GBP 100 for free accounts</td>
+<td>None, reasonable skill and care only</td>
+</tr>
+<tr>
+<td><a href="https://www.mytender.io/terms_and_conditions">mytender.io</a></td>
+<td>Terms, Data Protection, Privacy, trust centre</td>
+<td>greater of 12 months fees or GBP 250,000</td>
+<td>None, only if an order form agrees one</td>
+</tr>
+<tr>
+<td><a href="https://autogenai.com">AutogenAI</a></td>
+<td>8 policies, trust centre in nav</td>
+<td>not seen (terms page did not load)</td>
+<td>not seen</td>
+</tr>
+<tr>
+<td><a href="https://www.rotacloud.com/terms/">RotaCloud</a></td>
+<td>Terms, Privacy, GDPR, status, cookies</td>
+<td>12 months fees received</td>
+<td>None, says no guarantee of availability</td>
+</tr>
+<tr>
+<td><a href="https://www.float.com/terms">Float</a></td>
+<td>Terms, Privacy, responsible disclosure, trust centre</td>
+<td>no cap formula, broad exclusions</td>
+<td>None, as available</td>
+</tr>
+<tr>
+<td><a href="https://ometria.com/terms-of-use">Ometria</a></td>
+<td>Security, Privacy, Cookie, Terms, Acceptable Use</td>
+<td>12 months fees</td>
+<td>Yes, credits of 10 to 100 percent below 99.9 percent</td>
+</tr>
+<tr>
+<td><a href="https://www.cakeequity.com/terms">Cake Equity</a></td>
+<td>Privacy, Terms, legal hub, trust centre</td>
+<td>not on the page read</td>
+<td>none seen</td>
+</tr>
+<tr>
+<td><a href="https://www.fixflo.com">Fixflo</a></td>
+<td>Privacy, Legal and patents</td>
+<td>not checked</td>
+<td>not checked</td>
+</tr>
+</tbody></table></div>
+<p>Pattern: 2 to 5 pages in the footer, DPA and sub-processor lists are rarely linked (none of the eight footers linked a DPA or sub-processor page), the cap is almost always 12 months fees, and four of the five terms I read for an SLA give none. Only Ometria, the most established, offers service credits.</p>
+<h3>A4. Recommendation (owner direction D531: play safe, promise nothing extra, keep documents ready, simplify, customers first)</h3>
+<p>Minimum public set (four pages, all already built): <strong>Privacy, Terms, Cookies, Sub-processors</strong> is the market maximum, but the minimum the law needs is <strong>Privacy, Cookies, Terms, plus company details in the footer</strong>. Recommended: public Privacy, Terms, Cookies and a short Security page. Everything else stays written and ready, but is <strong>available on request</strong>.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Public or on request</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Privacy, Terms, Cookies and cookie preferences</td>
+<td>Public</td>
+<td>Built. Fix the refund contradiction first (Terms line 57 versus refund-policy.md line 15) and merge the refund policy into Terms</td>
+</tr>
+<tr>
+<td>Security (short form)</td>
+<td>Public</td>
+<td>Built. Remove &quot;GDPR compliant&quot; at security.md line 141, keep all numbers as targets</td>
+</tr>
+<tr>
+<td>Accessibility</td>
+<td>Public, one line in footer</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>DPA</td>
+<td>On request, still a draft</td>
+<td>Built, mark draft</td>
+</tr>
+<tr>
+<td>Sub-processors</td>
+<td>On request (or one short list inside Privacy)</td>
+<td>Built, 3,035 words is too long to publish</td>
+</tr>
+<tr>
+<td>Retention, Residency, Supplier terms, How we use AI detail</td>
+<td>On request, or one section in Privacy</td>
+<td>Built, needs merging</td>
+</tr>
+<tr>
+<td>SLA, AUP detail</td>
+<td>Do not publish. Terms section 3 already covers acceptable use</td>
+<td>Not needed</td>
+</tr>
+</tbody></table></div>
+<p>Exact footer line (replaces the DPA and Sub-processors links): <strong>&quot;Our DPA, security overview and sub-processor details are available on request: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>&quot;</strong></p>
+<p>Wording rules: say &quot;target&quot;, never &quot;commitment&quot;. No bare numbers (the 99.5 percent uptime, 72 hour breach notice, 24 hour restore and 8 hour outage credit lines become &quot;we aim to&quot;, or move to the on-request documents). &quot;Follows ISO/IEC 27001&quot;, never &quot;certified&quot;. Keep the right to change sub-processors on notice in Terms. State once that targets are not service levels.</p>
+<h2>Part B. Insurance at minimal cost</h2>
+<h3>B1. Which covers matter</h3>
+<ul>
+<li>Compulsory now: none. Employers&#39; liability is compulsory from the day you employ anyone, minimum GBP 5m, fine GBP 2,500 per day without it (<a href="https://www.gov.uk/employers-liability-insurance">GOV.UK</a>). GOV.UK lists only family members and staff based outside Great Britain as exempt. Several broker sites say a company whose only employee is a director owning at least half the shares is exempt, but I could not confirm that on an official page, so ask the broker before relying on it.</li>
+<li>Matters for us: professional indemnity including tech errors and omissions (the AI output risk), cyber and data breach, public and products liability (low risk for software but often demanded by buyers), directors and officers (lowest priority until there is outside funding).</li>
+</ul>
+<h3>B2. Indicative prices (no published rate card exists for our exact profile)</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Source and date</th>
+<th>Cover</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.hiscox.co.uk/business-insurance/professional-indemnity-insurance/faq/how-much-does-professional-indemnity-insurance-cost">Hiscox PI cost page</a>, data Aug 2025 to Aug 2026</td>
+<td>PI starting price</td>
+<td>from GBP 8.50 a month. Example: GBP 250k limit could cost GBP 400 a year, GBP 1m could cost GBP 600 a year. Page says no true average exists.</td>
+</tr>
+<tr>
+<td><a href="https://www.simplybusiness.co.uk/business-insurance/software-company-insurance/">Simply Business, software company</a>, period Jan to Jun 2026</td>
+<td>PI up to GBP 1m</td>
+<td>from GBP 6.95 a month, sample quotes GBP 8.05 and GBP 36.76 a month</td>
+</tr>
+<tr>
+<td><a href="https://www.simplybusiness.co.uk/business-insurance/cyber-insurance/">Simply Business cyber</a>, 2026</td>
+<td>Cyber add-on, limit GBP 25,000</td>
+<td>from GBP 14.87 a month (GBP 155.84 a year), only sold with PI or liability</td>
+</tr>
+<tr>
+<td><a href="https://getindemnity.co.uk/business-insurance/cyber/how-much-does-cyber-insurance-cost">Getindemnity cyber benchmarks</a>, updated 1 May 2026</td>
+<td>SaaS provider, GBP 500k turnover, GBP 1m combined tech PI and cyber</td>
+<td>GBP 750 to 2,500 a year. Consultancy, GBP 1m cyber alone: GBP 500 to 750</td>
+</tr>
+<tr>
+<td><a href="https://gosuperscript.com/business-insurance/industries/it-contractor-insurance/">Superscript</a>, IT contractor page, cites 2023 data</td>
+<td>IT and software PI</td>
+<td>about GBP 11.73 a month, cyber advertised from GBP 10.79 a month</td>
+</tr>
+</tbody></table></div>
+<p>No source I found publishes separate prices for GBP 100k, 500k limits for a micro SaaS. Reading across the above: roughly GBP 150 to 600 a year for PI at GBP 250k to 1m, and GBP 150 to 1,500 for cyber, depending on limit. Coalition, CFC, Markel Direct, Embroker UK and AXA were not found with published micro-SaaS prices, so their numbers need a live quote.</p>
+<h3>B3. Exclusions to ask about</h3>
+<p>AI-generated content errors (ask for explicit confirmation that AI-drafted output is covered, not excluded), liability taken on by contract beyond what the law would impose, regulatory fines (often uninsurable), claims known before the start date, and customers in the US (many UK policies exclude or limit US jurisdiction).</p>
+<h3>B4. Matching the liability cap to cover</h3>
+<p>Cover cannot be bought for a promise you have not made, and a promise you cannot insure is paid from your own pocket. Our live Terms (terms.md lines 106 to 114) cap general claims at 12 months fees with no floor and data protection claims at twice that, never above GBP 250,000. At year 1 revenue under GBP 50k, twice fees is at most about GBP 100k, so the real number is far below GBP 250k. Options:</p>
+<ol>
+<li>Keep the cap and buy GBP 250k cyber. Safe but dearer.</li>
+<li>Change to &quot;the lesser of twice fees and GBP 250,000&quot;. This is what the cap already effectively does while revenue is low. Recommended, and no extra cover is needed beyond the first policy.</li>
+<li>Link the cap to the insurance recovered. The broker drafts describe this, but it is not in the live Terms. It makes customers uneasy and invites disputes. Not recommended.</li>
+</ol>
+<h3>B5. Bundle and timing</h3>
+<ul>
+<li>Now (no customers): cheapest sensible is nothing bound yet, quotes only. Buy at the first paying customer: tech PI plus cyber at GBP 250k to 1m, one combined policy, about GBP 300 to 1,000 a year on the evidence above.</li>
+<li>Add public and products liability at the first buyer who asks.</li>
+<li>Add employers&#39; liability on the first employee.</li>
+<li>First public sector contract: expect GBP 1m each for PI and public liability and GBP 5m employers&#39; liability. <a href="https://www.contractsfinder.service.gov.uk/Notice/Attachment/62c87f22-6938-41b7-83ff-184691a8af05">G-Cloud 14 call-off terms</a> set PI at GBP 1,000,000 per claim with six years of tail cover, after Crown Commercial Service dropped an earlier GBP 10m idea (<a href="https://www.computerweekly.com/news/366572617/CCS-U-turns-on-G-Cloud-14-insurance-requirements-after-supplier-backlash">Computer Weekly</a>). Lot 4 and G-Cloud 15 figures were not confirmed, check the live framework. Individual tenders may ask GBP 5m.</li>
+<li>Cyber Essentials may unlock free cover: one broker source says GBP 25,000 free cyber for firms under GBP 20m turnover with the certificate (<a href="https://www.assuredcyberprotection.com/cyber-insurance-cost-uk-small-business-2026/">Assured Cyber Protection</a>). Unverified on the official scheme page, check before planning around it.</li>
+</ul>
+<h3>B6. Steps</h3>
+<p>Two broker routes through <a href="https://www.biba.org.uk/find-insurance/">BIBA find a broker</a> (pick one tech specialist and one generalist) and two direct online options, <a href="https://www.simplybusiness.co.uk/business-insurance/software-company-insurance/">Simply Business</a> and <a href="https://www.hiscox.co.uk/business-insurance/professional-indemnity-insurance">Hiscox</a>. Have ready: turnover forecast, activities, data volumes and types, controls (MFA, backups, encryption, EU hosting), contract terms, no prior claims.</p>
+<p>Broker drafts (<code>owner-drafts/BROKER-EMAIL-DRAFT-1-2026-11-01.md</code> and <code>-2</code>): they are identical apart from placeholders and read well. Changes needed:</p>
+<ol>
+<li>Fill the turnover band (still a placeholder).</li>
+<li>The &quot;Our contract terms&quot; paragraph states a GBP 2,500 floor and &quot;insurance proceeds actually recovered&quot;. The live Terms have neither. Make the email match the live Terms, or change the Terms first.</li>
+<li>Add a question on whether AI-generated output errors are covered or excluded, and on US claims (the draft only asks about non-UK customers generally).</li>
+</ol>
+<h2>Part C. Fraud and over-commitment safeguards</h2>
+<p>Checked in <code>C:/w/vp</code> with scoped searches. A grep hit is only a hint, so &quot;present&quot; means a file mentions it, not that it is proven.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Wording or term that protects us</th>
+<th>Product control found</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Card testing</td>
+<td>Right to block payments and suspend (Terms 3)</td>
+<td>Not found in code. Rely on Stripe Radar defaults, enable in the Stripe dashboard</td>
+</tr>
+<tr>
+<td>Chargebacks</td>
+<td>Refund policy section 4 asks customers to contact us first and passes on fees</td>
+<td>Webhook parity file mentions disputes (<code>web/src/shared/lib/billing/stripe-webhook-parity.ts</code>), handling not confirmed</td>
+</tr>
+<tr>
+<td>Trial abuse</td>
+<td>One trial per organisation in Terms</td>
+<td>One trial rule shared by products and billing (commit d2faf53501). Staging signup refuses disposable email (<code>staging-open-signup.ts</code> 146 to 172). Production check not confirmed</td>
+</tr>
+<tr>
+<td>Credential stuffing</td>
+<td>Account security duties in Terms</td>
+<td>Turnstile token on sign-in and passkey flows (<code>captcha-token.ts</code>), slowapi rate limits (<code>api/app/middleware/rate_limit.py</code>)</td>
+</tr>
+<tr>
+<td>AI credit abuse</td>
+<td>Fair use and right to suspend</td>
+<td>Premium credit cap and spend reservation (<code>token_charging.py</code>)</td>
+</tr>
+<tr>
+<td>Prompt injection</td>
+<td>AI output is a draft the customer checks (Terms 4)</td>
+<td>Central guard in <code>surface_policy.py</code> line 905</td>
+</tr>
+<tr>
+<td>Fake buyers</td>
+<td>Right to verify an organisation, suspend on false details</td>
+<td>Not found, ask owner</td>
+</tr>
+<tr>
+<td>Invoice fraud</td>
+<td>Pay only via Stripe, we never ask for bank change by email</td>
+<td>Stripe issues invoices, no bank transfers</td>
+</tr>
+<tr>
+<td>Brand impersonation</td>
+<td>Say official domains and contact addresses on the site</td>
+<td>Not a code control, monitor domains</td>
+</tr>
+<tr>
+<td>Refund scams</td>
+<td>No refund for AI output (Terms line 57), 14 day first invoice window</td>
+<td>Refund policy text conflicts with Terms, resolve</td>
+</tr>
+</tbody></table></div>
+<h2>Decisions for the owner</h2>
+<ol>
+<li>Approve the minimum public set (Privacy, Terms, Cookies, short Security) and moving DPA, sub-processors, retention and residency to on request with the one footer line (recommended, matches D531).</li>
+<li>Resolve the refund contradiction: one policy, either 14 day first invoice refund or none (recommended: keep 14 day, it is lawful and buyer friendly, and edit Terms).</li>
+<li>Change the data protection cap wording to &quot;the lesser of twice fees and GBP 250,000&quot; (recommended).</li>
+<li>Approve fixing the broker drafts, then send to two brokers and get quotes only.</li>
+<li>Turn on Stripe Radar rules and a dispute alert before launch (recommended, free tier features only to be confirmed).</li>
+<li>Confirm the director exemption for employers&#39; liability with the broker before the first hire.</li>
+</ol>
+
+</article>
+</main></body></html>

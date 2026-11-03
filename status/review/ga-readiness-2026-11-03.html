@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>GA readiness review, 2026-11-03</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>GA readiness review, 2026-11-03</h1>
+<p><span class="rv-row">R29-GA-READINESS-AUDIT-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/GA-READINESS-2026-11-03.md</code>, rendered from <code>aac0c0bcbd</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-GA-READINESS-AUDIT-01</span><p>This row is not in the tracker. The mapping line is stale.</p></div></section>
+<article class="doc">
+<h1>GA readiness review, 2026-11-03</h1>
+<p>Velstrian Tenderworks. Row R29-GA-READINESS-AUDIT-01 (companion row R29-GA-READINESS-AUDIT-01 in the owner review list). Read only review. Every figure below was read on 2026-11-03.</p>
+<h2>Short answer</h2>
+<ul>
+<li><strong>Score: 44 out of 100.</strong> The same product as it stands on staging would score about 62. Production is what customers get, so 44 is the honest number.</li>
+<li><strong>GA blockers: 9</strong> (table in section 2). Three are owner items, two are billing, one is AI, one is operations, one is the production promote itself, one is the portal.</li>
+<li><strong>Tomorrow (Wednesday 4 November) is not credible.</strong> Production holds none of the R2.9 work. A promote chain and a real Stripe round trip cannot be done safely in one day.</li>
+<li><strong>Earliest credible dates:</strong> invite only soft launch Friday 6 November, open self serve Monday 9 November, both only if the blockers close in the order in section 3.</li>
+<li><strong>The biggest single risk is money, not features.</strong> Four billing bug fixes (double charge, failed draft charged, hidden top up, preview charges) sit on staging only, and the price drift job reports all 6 Velstrian Bid prices missing in Stripe.</li>
+</ul>
+<h2>0. What is live, measured</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Production app health</td>
+<td>200, database, email and payments all &quot;operational&quot;</td>
+<td><code>curl https://app.velstrian.com/api/health</code></td>
+</tr>
+<tr>
+<td>Staging app health</td>
+<td>200</td>
+<td><code>curl https://staging-app.velstrian.com/api/health</code></td>
+</tr>
+<tr>
+<td>Marketing site</td>
+<td>200</td>
+<td><code>curl https://velstrian.com</code></td>
+</tr>
+<tr>
+<td><code>api.velstrian.com/health</code> and <code>/api/health</code></td>
+<td>401 (needs auth, so not a usable liveness probe, the web health route above is the real check)</td>
+<td>curl</td>
+</tr>
+<tr>
+<td>Production web (<code>origin/main</code>)</td>
+<td><code>f89e959d84</code>, 2026-10-29</td>
+<td><code>git -C C:/w/vp log origin/main -1</code></td>
+</tr>
+<tr>
+<td>Production API (<code>origin/railway-production</code>)</td>
+<td><code>3a2d446e01</code>, 2026-11-01 (the idempotency hotfix only)</td>
+<td>git log</td>
+</tr>
+<tr>
+<td>Branch tip</td>
+<td><code>64525ffa09</code>, 2026-11-03, <strong>345 commits ahead of production web</strong></td>
+<td><code>git rev-list --count origin/main..HEAD</code></td>
+</tr>
+<tr>
+<td>Staging</td>
+<td>web <code>267fc9617e7e</code> (promoted 2026-11-03 00:30 UTC), portal <code>a543eafd95f0</code>, API <code>1c6988b2ed</code> (api-staging, 2026-11-02 20:58)</td>
+<td><code>C:/w/vp/scripts/staging/promotions.jsonl</code>, <code>git log origin/api-staging</code></td>
+</tr>
+<tr>
+<td>Vercel production deploy budget for R2.9</td>
+<td>4 allowed, 0 spent, phase 1 &quot;NOT MERGED&quot;</td>
+<td><code>platform.json</code> deploy block</td>
+</tr>
+<tr>
+<td>Board</td>
+<td>299 rows: 169 BUILT (built, not certified), 40 FIXED, 35 OPEN, 17 WIP, 8 DECISION, 27 ON HOLD, 3 CLEARED</td>
+<td><code>platform.json</code></td>
+</tr>
+</tbody></table></div>
+<p>Proof that the billing fixes are not in production: for each of R29-GA-BILL-TOPUP-INVISIBLE-01 (<code>fc7e91e243</code>), R29-GA-BILL-FAILED-DRAFT-CHARGED-01 (<code>3f165b5647</code>), R29-BILLING-CREDIT-PACK-DOUBLE-CHARGE-01 (<code>77356c3daf</code>) and R29-GA-BUY-PREVIEW-CHARGES-01 (<code>d2faf53501</code>), <code>git merge-base --is-ancestor</code> against <code>origin/main</code> and <code>origin/railway-production</code> answered no, against <code>origin/api-staging</code> yes. The price drift fix <code>64525ffa09</code> is on neither production nor api-staging.</p>
+<h2>1. Score by area (strict: production state counts)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Weight</th>
+<th>Score</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sign up and onboarding</td>
+<td>10</td>
+<td>4</td>
+<td>Org name ignored at signup (R29-GA-ONBOARD-ORG-NAME-IGNORED-01, P1) and country AF bug (R29-AUTH-SIGNUP-COUNTRY-POSTS-AF-01) are BUILT, staging only. Android fingerprint enrol fails (R29-AUTH-PASSKEY-ENROL-ANDROID-01, BUILT). Kiro walked 25 personas on staging with 0 axe violations (R29-GA-READINESS-AUDIT-01).</td>
+</tr>
+<tr>
+<td>Core bid journey</td>
+<td>12</td>
+<td>5</td>
+<td>Works on staging per Kiro B13 (&quot;8 of 10, NOT YET but close&quot;). Requirement extraction, the first step, fails its bars. Compliance depth (Find a Tender, notice set, NHS PSR) is an acknowledged gap.</td>
+</tr>
+<tr>
+<td>Core buy journey</td>
+<td>10</td>
+<td>4</td>
+<td>Buy preview charged without a trial (R29-GA-BUY-PREVIEW-CHARGES-01, BUILT, staging only). Buyer credits and role guards held the auditor score down.</td>
+</tr>
+<tr>
+<td>Billing and payments</td>
+<td>15</td>
+<td>4</td>
+<td>3 of 7 P0 rows are billing money bugs, all BUILT, none in production. Price drift job: 6 of 6 prices MISSING (R29-STRIPE-PRICE-DRIFT-JOB-01, WIP). Return from Stripe landed on /login twice (R29-GA-STRIPE-RETURN-LOGIN-01, OPEN). Fraud controls missing (R29-FRAUD-CONTROLS-01, WIP). Live Stripe mode on production is not something I could measure, owner to confirm.</td>
+</tr>
+<tr>
+<td>AI quality</td>
+<td>12</td>
+<td>5</td>
+<td>D388 extraction FAIL: recall 0.779, precision 0.890, critical recall 0.945, 22 critical errors, 11 missed exclusion gates (R29-AI-EXTRACT-D388-BARS-FAIL-01). Briefing states old deadline (R29-AI-BRIEFING-CONF01-DEADLINE-01). Review assist fails RA-03 4 of 5 (R29-AI-REVIEW-ASSIST-RA03-01). Advisor 137 of 170 AIC pass (legacy model row). Good: honest AI transparency, buy 0 FAIL of 295.</td>
+</tr>
+<tr>
+<td>Security and auth</td>
+<td>10</td>
+<td>6</td>
+<td>Security audit, dependency fix, captcha, viewer route guard all BUILT (R29-GA-SEC-AUDIT-01, R29-GA-SEC-DEPS-01, R29-STEP-AUTH-SUPABASE-CAPTCHA-01, R29-B13-VIEWER-ROUTE-GUARD-01), not in production. Production API did get the idempotency hotfix. Portal P0 still open.</td>
+</tr>
+<tr>
+<td>Legal and trust (D532)</td>
+<td>10</td>
+<td>6</td>
+<td>D532 chose no refunds or credits, one 12 month fees cap, minimal legal pages with full texts on request. Rewrite is WIP (R29-LEGAL-SAFE-PLAY-01). Counsel review not back (R29-STEP-LEGAL-KIRO-A02-01). The DPA&#39;s 48 hour breach notice conflicts with business hours on call (R285-LEGAL-KIRO-A10-01). D532 lowers exposure, so this scores better than billing.</td>
+</tr>
+<tr>
+<td>Website</td>
+<td>6</td>
+<td>4</td>
+<td>200 live. One push to live waits on Kiro ready and owner check (D529). Help centre regeneration open (R29-HELP-WEBSITE-REGEN-01).</td>
+</tr>
+<tr>
+<td>Operations and monitoring</td>
+<td>10</td>
+<td>4</td>
+<td>Sentry 3 day triage WIP (R29-SENTRY-3DAY-TRIAGE-01). No timed restore, RTO and RPO unproven (R285-LEGAL-KIRO-B-OWNER-01 B-07). On call is UK business hours. Scheduled drift job is alerting, which is a working signal, but it is red. Production health endpoint is green. I found no board row proving Sentry alert rules or backup restore were tested.</td>
+</tr>
+<tr>
+<td>Support</td>
+<td>5</td>
+<td>2</td>
+<td>Help knowledge base is WIP (R286-PLATFORM-KNOWLEDGE-BASE-01, R29-CONTENT-KIRO-CREW-01). 54 articles sit on a branch, not live. No row shows a support inbox process or response promise (D532 removes promises, which is safe but leaves no process).</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+<td><strong>44</strong></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2>2. GA blockers (before taking real money)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Row</th>
+<th>Why it blocks</th>
+<th>Effort</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>R29-P2-SWEEP-04-01 and the production promote (345 commits, 169 BUILT rows)</td>
+<td>Production runs 6 day old web. Nothing built since is live. 55 rows say their staging walk is still to do. One certified batch is needed (RULE 0-CERT).</td>
+<td>L</td>
+<td>driver</td>
+</tr>
+<tr>
+<td>2</td>
+<td>R29-GA-BILL-TOPUP-INVISIBLE-01, R29-GA-BILL-FAILED-DRAFT-CHARGED-01, R29-BILLING-CREDIT-PACK-DOUBLE-CHARGE-01, R29-GA-BUY-PREVIEW-CHARGES-01</td>
+<td>Customers are charged wrongly or lose credits on production today. Fixes exist, staging only. Ship with blocker 1 and walk once on test Stripe.</td>
+<td>M</td>
+<td>driver</td>
+</tr>
+<tr>
+<td>3</td>
+<td>R29-STRIPE-PRICE-DRIFT-JOB-01</td>
+<td>All 6 Velstrian Bid lookup keys read missing. If true in live Stripe, checkout cannot sell. Fix <code>64525ffa09</code> is not on api-staging yet. Needs one api-staging push (owner approval) and a read only Stripe check.</td>
+<td>S</td>
+<td>driver</td>
+</tr>
+<tr>
+<td>4</td>
+<td>R29-GA-STRIPE-RETURN-LOGIN-01</td>
+<td>Paying customer returned from Stripe may land on login. Not reproduced locally. Needs one real Stripe test round trip on staging.</td>
+<td>S</td>
+<td>driver</td>
+</tr>
+<tr>
+<td>5</td>
+<td>R29-FRAUD-CONTROLS-01 (D532)</td>
+<td>Radar rules, dispute webhook, fake buyer limits. Opening card payment without them risks disputes. Rules in Stripe dashboard are an owner click.</td>
+<td>M</td>
+<td>driver and owner</td>
+</tr>
+<tr>
+<td>6</td>
+<td>R29-AI-EXTRACT-D388-BARS-FAIL-01</td>
+<td>Missed exclusion gates mean a user can miss a must-pass rule. Recommended answer in Q3 below (label plus mandatory human check) to avoid a long tuning project.</td>
+<td>M</td>
+<td>driver</td>
+</tr>
+<tr>
+<td>7</td>
+<td>R29-SENTRY-3DAY-TRIAGE-01</td>
+<td>Real errors in the last 3 days are unfixed or unclassified. Do not launch on unknown error rate.</td>
+<td>M</td>
+<td>driver</td>
+</tr>
+<tr>
+<td>8</td>
+<td>R29-LEGAL-SAFE-PLAY-01 with R285-LEGAL-KIRO-A10-01</td>
+<td>Terms, DPA and in-app text must match D532 (one cap, no refunds) and the 48 hour breach notice must match what can be delivered. Taking money under contradicting terms is the risk.</td>
+<td>M</td>
+<td>driver, Kiro, owner</td>
+</tr>
+<tr>
+<td>9</td>
+<td>R29-PORTAL-PROD-FEATURES-FAILING-01 (P0)</td>
+<td>Internal operator portal broken on production, so the team cannot manage accounts, pricing or credits when a customer problem arrives. Not customer facing.</td>
+<td>M</td>
+<td>Gemini</td>
+</tr>
+</tbody></table></div>
+<p>Also owner only, same day as promote: R285-OWNER-POST-PROMOTE-STEPS-01 (three checks), confirm Stripe account is in live mode with live webhook endpoint, confirm any pending database migrations for the batch (check the migrations folder against production before the API push).</p>
+<p><strong>Should fix in week one:</strong> R29-AI-BRIEFING-CONF01-DEADLINE-01, R29-AI-REVIEW-ASSIST-RA03-01, R29-STEP-P3-AI-LEGACY-MODEL-MIGRATION-01, R29-GA-UI-POLISH-01 (8 P2), R29-B13-LIGHTHOUSE-FCP-LCP-01, R29-B13-A11Y-DEEP-PASS-01, R29-HELP-WEBSITE-REGEN-01, R29-STEP-P2-EXTRA-USAGE-SELF-SERVE-01, R29-STEP-P2-DISCOUNTS-SELF-SERVE-01, R29-AUTH-PASSKEY-ENROL-ANDROID-01 live check, R29-EMAIL-DMARC-REJECT-01, the timed restore test (B-07), R29-GA-VAT-ON-INVOICES-01 stays off.</p>
+<p><strong>Can wait (Phase 2 or no customer impact):</strong> R29-B13-FIND-A-TENDER-PUBLISH-01, R29-B13-PA-NOTICE-SET-01, R29-B13-NHS-PSR-WORKFLOW-01, R29-STEP-P3-AI-GRAPHRAG-BUILD-01, the T15, T16, T07, T08 engine rows, R285-P3-AI-ISO42001-POLICY-01, R285-OWNER-INSURER-01 (parked by owner), R285-KIRO-NATIVE-PRETOOLUSE-GUARD-01 and the other tooling guard rows, R29-STEP-P3-AI-CROSS-CUSTOMER-PATTERNS-01.</p>
+<h2>3. Shortest credible path</h2>
+<p>Each push and each production deploy needs its own explicit owner approval, with the cost statement (RULE 0-G).</p>
+<ol>
+<li><strong>Wed 4 Nov, driver.</strong> Finish rows 3, 5, 7 and the legal text lane. Ask for one api-staging push (price drift fix and later fixes). Cost to state: Railway staging deploy, no Vercel.</li>
+<li><strong>Wed 4 Nov, driver.</strong> Promote web and portal tip to staging (<code>pnpm staging:promote</code>, one gate chain, assert collected counts). Run one real Stripe test round trip: signup, subscribe, top up, failed draft refund, return URL (blocker 4).</li>
+<li><strong>Thu 5 Nov, driver.</strong> Decide D388 route (Q3). Run the certification chain against the current tree, close P2-SWEEP-04 staging walks.</li>
+<li><strong>Thu 5 Nov evening, owner approval with sha prefix.</strong> <code>pnpm prod:promote</code> web, then portal, then one <code>railway-production</code> push for the API (the migrations must reach production first or with it). Spend: 2 of 4 Vercel production deploys.</li>
+<li><strong>Fri 6 Nov.</strong> Owner post-promote checks, production smoke on health, signup, one test purchase refunded manually, Sentry watch. <strong>Invite only soft launch.</strong></li>
+<li><strong>Mon 9 Nov.</strong> Website push (D529) and open self serve if Sentry is quiet for 2 days.</li>
+</ol>
+<p>Why tomorrow fails: a staging gate chain took 1,551 to 6,179 seconds per promote in the log, production gets 345 commits at once, and the money fixes have never run against live Stripe. Slipping one day to promote on Thursday keeps each step verifiable.</p>
+<h2>4. Owner decisions</h2>
+<ol>
+<li>Approve the api-staging push for the price drift fix (recommended: yes, today).</li>
+<li>Soft launch Friday 6 Nov (invite only) then open Monday 9 Nov (recommended), or hold everything until the 9th.</li>
+<li>D388 extraction: (a) ship with a visible &quot;check every requirement and exclusion&quot; prompt and mandatory human confirmation (recommended), (b) hold Bid for tuning, (c) ship as is. Recommended answer is (a), tuning continues in week one.</li>
+<li>Confirm live Stripe account, live webhook and Radar rules are set (owner click).</li>
+<li>Accept the 48 hour breach notice as an aim in D532 wording, or change the DPA clause.</li>
+</ol>
+<h2>5. Board filter proposal</h2>
+<p>Findings from <code>velstrian-website/status/index.html</code> and <code>build-platform-board.js</code>: the row <code>title</code> keeps its leading tag group, for example <code>[SEV:P1][LANE:AI][PHASE:1]</code>. <code>build-platform-board.js:698</code> reads <code>[SEV:]</code> and <code>:719</code> reads <code>[LANE:CI]</code>. <code>scripts/assign-phases.mjs:194-205</code> reads <code>[PHASE:n]</code>. The #platform view builds rows in <code>pbRow</code> (<code>index.html:2095</code>), strips the leading <code>[X:...]</code> group, and filters on <code>pbState = {v, s, q}</code> (<code>index.html:2057</code>, filter at <code>2296-2299</code>). Verdict and severity are filterable, lane is displayed but not filterable, and a GA tag does not exist.</p>
+<p>Smallest change, 1 file plus data:</p>
+<ol>
+<li><code>velstrian-website/status/index.html</code> only, about 12 lines:<ul>
+<li><code>pbRow</code> (line ~2095): add <code>ga: ((m &amp;&amp; m[1].match(/\[GA:([^\]]+)\]/)) || [])[1] || &#39;&#39;</code> to the returned object.</li>
+<li><code>pbState</code> (line 2057): add <code>g:&#39;&#39;</code>.</li>
+<li>Add after the severity select (line 1349) a <code>&lt;select id=&quot;pbga&quot;&gt;</code> with All, BLOCKER, WEEK1.</li>
+<li>Filter (line 2298): add <code>&amp;&amp; (!pbState.g || r.ga === pbState.g)</code>.</li>
+<li>Row label (line 2313): append <code>r.ga ? &#39;  ·  GA:&#39; + r.ga : &#39;&#39;</code>.</li>
+<li>Restore value at line 2281 and add the change listener beside line 2334.</li>
+</ul>
+</li>
+<li>Data: add <code>[GA:BLOCKER]</code> or <code>[GA:WEEK1]</code> to the leading tag group of each row title in <code>RELEASE-2.9-TRACKER.md</code> (the 9 blockers and the week one list). <code>build-platform-board.js</code> needs no edit because the title passes through unchanged, and <code>assign-phases.mjs</code> ignores unknown tags. Keep the tag inside the leading group, otherwise <code>pbRow</code> will not strip it.</li>
+<li>Not changed: <code>build-platform-board.js</code>, <code>assign-phases.mjs</code>. Add the tags by editing the tracker only (no backslash paths in any edit script, check row count equals board count after).</li>
+</ol>
+<h2>6. Caveats</h2>
+<p>Sentry and Stripe dashboards were not queried, so error volume and live Stripe state are owner checks. BUILT means awaiting certification, not working in production. Legal sufficiency belongs to counsel.</p>
+
+</article>
+</main></body></html>
