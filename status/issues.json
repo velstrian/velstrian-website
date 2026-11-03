@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T13:24:21.497Z",
+  "updated": "2026-11-03T13:25:45.189Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2590,7 +2590,7 @@
       "sev": "P1",
       "title": "Tender finder search feels slow (owner report 2026-11-03)",
       "status": "OPEN",
-      "note": "Page HTML 0.15 s live; the search is a client POST to api.velstrian.com/api/v1/bid/free/tenders/search with a Turnstile token and a 20 s client timeout (tools/tender-finder/index.astro:525-530). Driver: measure the real search in a browser (Turnstile wait, API time, upstream Find a Tender time), then fix the slow part.",
+      "note": "Page HTML 0.15 s live; the search is a client POST to api.velstrian.com/api/v1/bid/free/tenders/search with a Turnstile token and a 20 s client timeout (tools/tender-finder/index.astro:525-530). Driver: measure the real search in a browser (Turnstile wait, API time, upstream Find a Tender time), then fix the slow part. || Measured 2026-11-03 in Chrome on live: page HTML 0.15 s; Turnstile api.js only loads about 12.7 s after page start (on first interaction), the search cannot run until its token exists (a first click did nothing); the search POST itself took 1.3 s and returned 20 results. Fix: render Turnstile on load (or on focus of the form), show a checking state on the button, then trim the API time.",
       "changed": "2026-11-03",
       "changedAt": "2026-11-03T13:24:21.244Z",
       "release": "R2.9"
