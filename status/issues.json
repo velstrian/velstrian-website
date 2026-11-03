@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T15:24:31.784Z",
+  "updated": "2026-11-03T15:29:48.620Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2605,6 +2605,17 @@
       "changed": "2026-11-03",
       "changedAt": "2026-11-03T13:24:21.497Z",
       "release": "R2.9"
+    },
+    {
+      "id": "A-519",
+      "src": "session",
+      "sev": "P2",
+      "title": "404 responses are cached for 4 hours (Cache-Control max-age=14400), so a short outage of an asset stays broken in browsers and at the edge for 4 hours",
+      "status": "OPEN",
+      "note": "Measured 2026-11-03 during A-516: a 404 for /Assets/videos/v-draft.mp4 carried Cache-Control max-age=14400 and cf-cache-status HIT; the owner's Chrome kept 404 for supplier-long and v-draft (force-cache 404, no-store 206) after the fix went live. Fix in the next website push: no-store or a short max-age on 404 (Cloudflare Pages _headers cannot target status, so check the zone Browser Cache TTL setting and a Cache Rule for 404, free plan).",
+      "changed": "2026-11-03",
+      "changedAt": "2026-11-03T15:29:48.620Z",
+      "release": "R2.9"
     }
   ],
   "directives": [
@@ -2674,5 +2685,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 519
+  "nextId": 520
 }
