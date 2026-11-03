@@ -36,6 +36,9 @@
     ],
     "R285-OWNER-INSURER-01": [
       "docs/release-2.9/legal/LEGAL-EXPOSURE-AND-INSURANCE-2026-11-03.md"
+    ],
+    "R29-OWNER-DECISIONS-LOG-01": [
+      "docs/release-2.9/DECISIONS-R29-LOG.md"
     ]
   }
 }
