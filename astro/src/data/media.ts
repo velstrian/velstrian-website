@@ -53,7 +53,7 @@ export const TOUR_VIDEO: TourVideo = {
  * from here, so a re-cut or a new file is a change in one place.
  */
 export interface JourneyVideo {
-  /** Stable id, also the asset basename under /assets/videos/. */
+  /** Stable id, also the asset basename under /Assets/videos/ (repo root, copied by copy-assets.js; A-516: a /assets/ path is rewritten to /Assets/ by _redirects and 404s on the case-sensitive host). */
   id: string;
   /** Which journey it belongs to. */
   product: 'bid' | 'buy';
@@ -77,9 +77,9 @@ export interface JourneyVideo {
 function jv(v: Omit<JourneyVideo, 'src' | 'poster' | 'captions'>): JourneyVideo {
   return {
     ...v,
-    src: `/assets/videos/${v.id}.mp4`,
-    poster: `/assets/videos/${v.id}-poster.webp`,
-    captions: `/assets/videos/${v.id}.vtt`,
+    src: `/Assets/videos/${v.id}.mp4`,
+    poster: `/Assets/videos/${v.id}-poster.webp`,
+    captions: `/Assets/videos/${v.id}.vtt`,
   };
 }
 
