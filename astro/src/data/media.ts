@@ -73,13 +73,22 @@ export interface JourneyVideo {
   orientation: 'landscape' | 'portrait';
 }
 
+/**
+ * [A-516 follow up, 2026-11-03] Version tag on every video URL. During the A-516 outage browsers
+ * were told to keep the 404 for /Assets/videos/* for 4 hours (zone Browser Cache TTL), so a visitor
+ * from that window kept a broken player after the fix. A new tag makes every browser fetch the
+ * file fresh. Bump it whenever a video file is replaced or a cached failure must be cleared.
+ * copy-assets.js reads only the path before `?`, so the tag does not change what is copied.
+ */
+const MEDIA_VERSION = '2';
+
 /** One video record, with the served paths filled in from the id. */
 function jv(v: Omit<JourneyVideo, 'src' | 'poster' | 'captions'>): JourneyVideo {
   return {
     ...v,
-    src: `/Assets/videos/${v.id}.mp4`,
-    poster: `/Assets/videos/${v.id}-poster.webp`,
-    captions: `/Assets/videos/${v.id}.vtt`,
+    src: `/Assets/videos/${v.id}.mp4?v=${MEDIA_VERSION}`,
+    poster: `/Assets/videos/${v.id}-poster.webp?v=${MEDIA_VERSION}`,
+    captions: `/Assets/videos/${v.id}.vtt?v=${MEDIA_VERSION}`,
   };
 }
 
