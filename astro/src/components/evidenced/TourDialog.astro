@@ -33,7 +33,7 @@ const v = TOUR_VIDEO;
             controls
             preload="none"
             playsinline
-            poster={v.poster ?? undefined}
+            data-poster={v.poster ?? undefined}
           >
             <source src={v.src} />
             {v.captions && <track kind="captions" src={v.captions} srclang="en" label="English" default />}

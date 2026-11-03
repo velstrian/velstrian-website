@@ -111,7 +111,7 @@ function initNavTone(): void {
   };
   window.addEventListener('scroll', queue, { passive: true });
   window.addEventListener('resize', queue, { passive: true });
-  update();
+  if (window.scrollY > 0) queue();
 }
 
 let started = false;
