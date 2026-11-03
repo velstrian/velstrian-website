@@ -168,12 +168,15 @@ const isValidEffective = effectiveFormatted && effectiveFormatted !== 'Invalid D
     {/* A-512, D532: the short plain summary first, then one line saying how
         to ask for the full document or more detail. The full text below is
         unchanged. The points come from the page's front matter, the layout
-        adds only the label and the contact line. */}
+        adds only the label and the contact line. The label is a <p>, like
+        the Draft and Contents labels beside it: it names the section through
+        aria-labelledby, and an h2 carrying .ea-label made the label size read
+        as a heading size off the four tiers (check-design-system TYPE SCALE). */}
     {
       summary && summary.length > 0 && (
         <div class="ea-wrap">
           <section class="legal__summary" aria-labelledby="legal-summary-label" data-legal-summary>
-            <h2 class="ea-label legal__summary-label" id="legal-summary-label">In short</h2>
+            <p class="ea-label legal__summary-label" id="legal-summary-label">In short</p>
             <ul class="legal__summary-list">
               {summary.map((line) => <li>{line}</li>)}
             </ul>

@@ -196,6 +196,14 @@ const ALLOWED_LOSSES = new Map([
   ['/sectors/  heading: nhs suppliers',
    'A-513 (2026-11-03): renamed to "Healthcare" with its own page at /sectors/healthcare/, replacing the generic card that linked to /bid/.'],
 
+  /* 2026-11-03, A-514 (D537): on / the full SecurityBuiltIn block was replaced
+     by TrustStrip, four badges from site-facts with one link on to /security/.
+     The full block, these two headings included, still renders on /security/. */
+  ['/  heading: signing in',
+   'A-514 (2026-11-03, D537): the home page security block became a strip of four trust badges from site-facts linking to /security/, where the full block with this heading still lives.'],
+  ['/  heading: checked automatically',
+   'A-514 (2026-11-03, D537): the home page security block became a strip of four trust badges from site-facts linking to /security/, where the full block with this heading still lives.'],
+
   /* 2026-10-22, R285-WEB-ENTERPRISE-REDESIGN-01: /about/ on design system v3
      (Gemini build, driver reviewed). Two heads deliberately REWORDED. */
   ['/about/  heading: written for bid teams. readable by the people scoring them.',
