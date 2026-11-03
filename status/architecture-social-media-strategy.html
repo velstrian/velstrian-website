@@ -27,34 +27,44 @@
   contact@velstrian.com.</p>
 </div>
 
+<div class="callout good" id="soc-d533">
+  <b>Decision D533, 3 November 2026.</b> The strategy is <b>approved for build</b> with one change:
+  <b>Phase 1 is free only.</b> Free tiers and free posting only. No new paid tool, API, plan or per post fee.
+  The only exception is what the company already pays for: Railway, Vercel, Supabase Pro, the Brevo free plan,
+  the PostHog free plan, Google Workspace or Gmail, and the existing Anthropic and Gemini API keys.
+  <b>Phase 2</b> (a budget and more capable tools) comes only after real customers, by a new owner decision.
+  Result of the check below: Phase 1 needs <b>GBP 0 new spend</b>. Bluesky and Threads post automatically,
+  LinkedIn and X post through Buffer free if its API key works, and Instagram, Facebook and YouTube uploads
+  are posted by hand from the approved text.
+</div>
+
 <div class="callout good">
   <b>Short answer.</b> Start with <b>LinkedIn (company page plus founder profile)</b>, then
   <b>YouTube</b> and <b>X</b>, and add the rest later. Run it as a <b>draft, check, approve, post</b>
-  line. Our own AI client drafts, a second model plus a source fetch checks every claim, and
-  <b>every post is emailed through Brevo to aparajita.parihar@gmail.com with approve and reject
-  links. Nothing posts without that click.</b> The recommended stack costs about
-  <b>0 pounds a month in tool fees</b> and an estimated <b>under 5 US dollars a month</b> in AI and X
-  API usage (an estimate from assumed token counts, shown in section 3). Building the scheduler needs
-  the owner to approve the RULE 0-G cost statement in section 3 first. Until then, phase 0 is manual
-  and free.
+  line. Our own AI client drafts on the Gemini free tier, a second free model plus a source fetch checks every
+  claim, and <b>every post is emailed through Brevo (free plan) to aparajita.parihar@gmail.com with approve and
+  reject links. Nothing posts without that click.</b> Phase 1 costs <b>GBP 0 in new spend</b>. The earlier
+  estimate of under 5 US dollars a month for paid AI and X fees is now Phase 2 only.
 </div>
 
 <div class="kpi">
   <div><b>10</b><span>platforms assessed, 3 recommended to start</span></div>
   <div><b>1</b><span>approver, every post, no exception, no auto posting</span></div>
-  <div><b>1</b><span>timer a week if built (generation). Publishing is driven by the approve click</span></div>
-  <div><b>0</b><span>accounts created, posts made or pounds spent by this research</span></div>
+  <div><b>1</b><span>weekly timer on the existing Railway worker. Publishing is driven by the approve click</span></div>
+  <div><b>GBP 0</b><span>new spend in Phase 1. No account created, post made or purchase by this research</span></div>
 </div>
 
 <details class="toc">
   <summary>On this page</summary>
   <ol>
+    <li><a href="#soc-d533">Decision D533</a></li>
     <li><a href="#soc-platforms">Platforms, ranked, and whether our handles exist</a></li>
     <li><a href="#soc-content">Content strategy, calendar and ten sample posts</a></li>
-    <li><a href="#soc-automation">Automation architecture, stack and the RULE 0-G cost statement</a></li>
+    <li><a href="#soc-automation">Automation architecture, Phase 1 free stack and the RULE 0-G cost statement</a></li>
     <li><a href="#soc-growth">Growth plan and targets</a></li>
     <li><a href="#soc-risks">Risks and controls</a></li>
-    <li><a href="#soc-plan">Implementation plan, owner actions and decisions</a></li>
+    <li><a href="#soc-plan">Implementation plan Phase 1, owner actions and decisions</a></li>
+    <li><a href="#soc-phase2">Phase 2 (later, needs budget)</a></li>
     <li><a href="#soc-sources">Sources and what was not verified</a></li>
   </ol>
 </details>
@@ -92,9 +102,9 @@ return a normal page for any name. LinkedIn blocked the request. The GitHub orga
 Instagram "Velstrian systems Ltd" account may be ours, but that is an inference, not a fact.</p>
 
 <div class="callout">
-  <b>Recommended order.</b> Phase 1: LinkedIn page, founder profile, YouTube, X. Phase 2 after 90
-  days: Bluesky, Instagram, Medium or Substack. Facebook, Threads and TikTok only claim the name now.
-  Reddit is by hand and for listening.
+  <b>Channel rollout order.</b> Stage A: LinkedIn page, founder profile, YouTube, X, plus Bluesky and Threads
+  because they post free and automatically. Stage B after 90 days: Instagram, Medium or Substack. Facebook and
+  TikTok only claim the name now. Reddit is by hand and for listening.
 </div>
 
 <!-- ═════════════════════════════════════════════════════════════════ -->
@@ -192,8 +202,9 @@ The wording of product claims is a placeholder until checked against the live pa
 <table class="doc-tbl">
   <thead><tr><th>Option</th><th>Free tier or price (as read)</th><th>API for our own code</th><th>Source</th></tr></thead>
   <tbody>
-    <tr><td><b>Buffer</b></td><td>Free: up to 3 channels, 10 scheduled posts per channel. Paid: Essentials $5 a month and Team $10 a month, per channel</td><td>One API key on the pricing page, with 1,000 requests per channel per month, up to 3,000. Whether new developers can still get a key was not verified</td><td><a href="https://buffer.com/pricing">buffer.com/pricing</a></td></tr>
+    <tr><td><b>Buffer</b></td><td>Free: up to 3 channels, 10 scheduled posts per channel. Paid: Essentials $5 a month and Team $10 a month, per channel</td><td>Included on the free plan: 1 API key, 150 requests per 15 minutes, 600 a day, 1,000 per channel per 30 days, up to 3,000. The page does not say how a new account creates the key, so it is checked at build step 0</td><td><a href="https://buffer.com/pricing">buffer.com/pricing</a></td></tr>
     <tr><td><b>Metricool</b></td><td>Free: 1 brand, 20 scheduled posts a month, networks except LinkedIn and Twitter. Starter from $20 a month annual or $25 monthly. Advanced from $53 annual or $67 monthly, excluding VAT</td><td>API listed only under Advanced</td><td><a href="https://metricool.com/pricing/">metricool.com/pricing</a>. The last 36,017 characters of the page were not read</td></tr>
+    <tr><td><b>Publer</b></td><td>Free forever: 3 social accounts excluding X, 10 scheduled posts per account</td><td>No API on free. API only for eligible Business and Enterprise customers</td><td><a href="https://publer.com/help/en/article/what-are-publers-plans-and-pricing-15h4yqh/">Publer help</a>, read 3 Nov 2026</td></tr>
     <tr><td><b>Later</b></td><td>No free plan, 14 day trial. Starter $18.75 a month billed yearly</td><td>Not stated on the page</td><td><a href="https://later.com/pricing/">later.com/pricing</a></td></tr>
     <tr><td><b>Hootsuite</b></td><td>No free plan, 14 day trial. Paid plans start at $99 (Standard, billed annually)</td><td>Not stated on the page</td><td><a href="https://www.hootsuite.com/plans">hootsuite.com/plans</a></td></tr>
     <tr><td><b>LinkedIn Community Management API</b></td><td>No price stated on the page. It is a "vetted product" with a Development Tier then a Standard Tier. Standard needs a screencast demonstrating each use case. Development tier limits: 500 requests per app and 100 per member (page wording, period not stated)</td><td>Yes. Create and manage company posts and read analytics. <b>Application and review are required.</b> Member profile posting (<code>r_member_social</code>) is closed to new requests</td><td><a href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/community-management-overview">Microsoft Learn, LinkedIn docs</a>, page dated 2026-03-31 with update 2026-05-15</td></tr>
@@ -201,60 +212,99 @@ The wording of product claims is a placeholder until checked against the live pa
     <tr><td><b>Instagram (Meta)</b></td><td>No fee stated on the page read</td><td>Publishing needs a professional account. 100 API published posts per 24 hours (50 in the carousel section of the same page). Page Publishing Authorization may be required</td><td><a href="https://developers.facebook.com/docs/instagram-platform/content-publishing/">Meta developer docs</a>. Facebook Page posting terms were not read</td></tr>
     <tr><td><b>YouTube Data API</b></td><td>No fee stated on the page read</td><td>Default quota is 10,000 units a day for other endpoints. The page also states 100 <code>videos.insert</code> calls a day by default. Audit and upload rules for new projects were not read</td><td><a href="https://developers.google.com/youtube/v3/determine_quota_cost">Google quota page</a></td></tr>
     <tr><td><b>Make.com</b></td><td>Free plan: 1,000 credits a month. Scenario limits and minimum interval not stated on the page read</td><td>Hosted automation</td><td><a href="https://www.make.com/en/pricing">make.com/en/pricing</a></td></tr>
-    <tr><td><b>n8n self hosted</b></td><td>The Community licence is free for internal business use, self hosted only. Selling a service whose value comes from n8n is restricted</td><td>Self run automation. It would add a server to maintain</td><td><a href="https://docs.n8n.io/n8n-community-license/community-license/license-faq">n8n licence FAQ</a>, from a search summary. The page itself was not read in full</td></tr>
+    <tr><td><b>n8n self hosted</b></td><td>The Community Edition is the free edition and runs without a licence key. Hosting it still costs Railway usage</td><td>Self run automation. It would add an always on server to maintain, which uses Railway RAM and CPU (see the cost statement)</td><td><a href="https://docs.n8n.io/hosting/community-edition-features/">n8n docs</a>, read 3 Nov 2026</td></tr>
   </tbody>
 </table>
 </div>
 
 <div class="callout bad">
-  <b>The X fee changes the maths.</b> A post with a link costs $0.200 through the API against $0.015
-  without one, a thirteen fold difference (both from the X pricing page above). Our posts exist to
-  bring people to velstrian.com. Option: post the text on X without a link and put the link in the
-  profile and in a reply, but whether a reply with a link is also charged at the URL rate is
-  <b>not verified</b>. Until it is, the safest plan is X posted by hand from the approved text.
+  <b>The X fee decides the X route.</b> A post with a link costs $0.200 through the API against $0.015
+  without one, and there is no free write tier (X pricing page above, read 3 November 2026). Our posts exist to
+  bring people to velstrian.com. Under D533 no per post fee is allowed, so X is posted either through the free
+  Buffer plan if that works, or by hand from the approved text.
 </div>
 
-<h3>Recommended stack</h3>
+<h3>Phase 1 free stack, verified 3 November 2026</h3>
+
+<div class="callout good">
+  <b>Can a free scheduler post for us through an API?</b> Only Buffer, and only in part. Buffer's own pricing page
+  lists API access on the free plan (1 key, 3 channels, 10 scheduled posts per channel, 150 requests per 15 minutes,
+  600 per day, 1,000 per channel per 30 days). Our load is about 15 posts a week, far inside those limits. The
+  catch is that the page does not say how a new account creates the key, so step 0 of the build is to check.
+  Metricool free has no LinkedIn or X and lists its API under the paid Advanced plan. Publer free has no X and
+  no API (its help article says API is for eligible Business and Enterprise customers). Later has no free plan.
+  n8n is free software, but see the Railway figures below.
+</div>
+
 <div class="tblwrap">
 <table class="doc-tbl">
-  <thead><tr><th>Layer</th><th>Choice</th><th>Why</th><th>Monthly cost</th></tr></thead>
+  <thead><tr><th>Platform</th><th>Free direct route, as read</th><th>Phase 1 posting</th></tr></thead>
   <tbody>
-    <tr><td>Generation and checks</td><td>Our <code>AIClient</code>, drafting on Claude Sonnet 5.5, checking on Claude Haiku 5.5</td><td>Already built, has a spend ceiling, no new vendor</td><td>See the estimate below</td></tr>
-    <tr><td>Approval</td><td>Brevo transactional email, one email per post</td><td>Already our single email provider. The free plan sends up to 300 emails a day per Brevo's help centre (<a href="https://help.brevo.com/hc/en-us/articles/208580669">Brevo help</a>, quoted via a search summary because the page itself returned 403). We would send about 15 a week</td><td>0</td></tr>
-    <tr><td>Posting, phase 1</td><td>Buffer free (3 channels: LinkedIn page, LinkedIn founder or YouTube, plus one more), fed by hand from the approved text</td><td>Free, nothing to review or apply for</td><td>0</td></tr>
-    <tr><td>Posting, phase 2</td><td>Direct APIs, LinkedIn after Community Management approval, X pay per use, YouTube Data API</td><td>Removes the manual step, but each needs an application or a key</td><td>X: about $0.015 a post without a link. Others unpriced on the pages read</td></tr>
-    <tr><td>Analytics</td><td>PostHog free tier plus UTM links, Brevo for newsletter growth</td><td>PostHog pricing pages state 1 million events free each month (<a href="https://posthog.com/pricing">posthog.com/pricing</a>, figure read through a search summary because the page text was truncated). Retention on the free tier is shorter, not verified here</td><td>0</td></tr>
-    <tr><td>Not chosen</td><td>Metricool, Later, Hootsuite, Make, n8n</td><td>Paid, or no free API, or a new server to run. n8n is free to self host but adds a service we would need to patch</td><td>Hootsuite $99 and Later $18.75 would be the cheapest paid choices on the pages read</td></tr>
+    <tr><td><b>LinkedIn company page</b></td><td>Community Management API is a vetted product: application, a Development tier, then a Standard tier that needs a screencast. No fee stated on the page. Review time is not ours to control</td><td><b>Automated through Buffer free if the key works, otherwise by hand.</b></td></tr>
+    <tr><td><b>LinkedIn founder profile</b></td><td>Member posting permission <code>r_member_social</code> is closed to new requests (same page). No direct route</td><td><b>Through Buffer free if the key works, otherwise by hand.</b></td></tr>
+    <tr><td><b>X</b></td><td>No free write tier. Pay per use: post $0.015, post with a URL $0.200. The $20 credit mentioned on the page only arrives after saving a card and making a first purchase, so it is not free</td><td><b>Not through the X API. Through Buffer free if its key can publish to X at no fee (not verified), otherwise by hand.</b> Our posts carry links, so a per post API fee of $0.200 is out.</td></tr>
+    <tr><td><b>Instagram and Facebook</b></td><td>Meta Graph API, no fee stated, needs a professional account and permissions at Advanced Access. 100 API posts per 24 hours. Facebook Page posting terms not read</td><td><b>By hand</b> until the owner completes the free Meta app review.</td></tr>
+    <tr><td><b>YouTube</b></td><td>Data API default quota 10,000 units a day and 100 <code>videos.insert</code> calls a day. No fee stated on the pages read. Audit is tied to asking for more quota. Whether an unaudited project may publish public videos was not verified</td><td><b>Uploads by hand.</b> The videos are made by hand anyway. API later.</td></tr>
+    <tr><td><b>Bluesky</b></td><td>AT Protocol with an app password. A create costs 3 points of a 5,000 per hour and 35,000 per day budget. Login is capped at 30 per 5 minutes. No fee stated</td><td><b>Automated, direct.</b></td></tr>
+    <tr><td><b>Threads</b></td><td>Publishing needs <code>threads_basic</code> and <code>threads_content_publish</code>. Without advanced access an app can post for its testers only, so our own account added as a tester should work. 250 posts per 24 hours. No fee stated</td><td><b>Automated, direct, once the tester link is set up (to be confirmed at build).</b></td></tr>
+    <tr><td><b>TikTok, Medium, Reddit</b></td><td>Not assessed for a free API</td><td><b>By hand.</b></td></tr>
   </tbody>
 </table>
 </div>
 
-<p><b>Cost per post, an estimate.</b> Prices read on <a href="https://platform.claude.com/docs/en/docs/about-claude/pricing">the Anthropic pricing page</a>:
-Sonnet 5.5 at $2 per million input tokens and $10 per million output, Haiku 5.5 (prompts up to
-100,000 tokens) at $0.10 input and $0.50 output. The token counts below are <b>our assumptions</b>, not
-measurements. Draft: 3,000 in and 1,000 out on Sonnet = $0.006 + $0.010 = $0.016. Check: 4,000 in and
-500 out on Haiku = $0.0004 + $0.00025 = about $0.0007. About <b>$0.017 a post</b>. At 15 posts a week
-(about 65 a month) that is about <b>$1.1 a month</b>. If the monthly total for X is added at $0.015 for
-about 13 posts a month it is about $0.20. Total estimate <b>about $1.3 a month</b>, and the headline
-ceiling of under $5 leaves room for retries. A hard monthly cap should be set in the existing spend
-ceiling.</p>
+<p><b>By hand after approval.</b> Instagram, Facebook, YouTube uploads, TikTok, Medium and Reddit are posted by hand
+in Phase 1. LinkedIn and X are by hand too if Buffer will not give us a key or cannot publish to them. In every by
+hand case the system emails a Ready to post by hand message with the approved text and a Copy button. The owner
+pastes it in. The approval email itself already has the text, so the owner can copy from either.</p>
 
-<h3>RULE 0-G cost statement for building the scheduler (needs owner approval before any work)</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Layer</th><th>Choice</th><th>Phase 1 cost</th></tr></thead>
+  <tbody>
+    <tr><td>Drafting and checks</td><td>Our <code>AIClient</code> on the Gemini free tier</td><td>GBP 0, see below</td></tr>
+    <tr><td>Approval</td><td>Brevo free plan, one email per post, plus one by hand email where needed</td><td>GBP 0</td></tr>
+    <tr><td>Scheduler</td><td>Buffer free plan, 3 channels</td><td>GBP 0</td></tr>
+    <tr><td>Direct posting</td><td>Bluesky, Threads</td><td>GBP 0</td></tr>
+    <tr><td>Analytics</td><td>PostHog free plan with UTM links</td><td>GBP 0</td></tr>
+    <tr><td>Hosting the job</td><td>The existing Railway worker, one weekly timer</td><td>GBP 0 new, see below</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Which AI is needed and what it costs</h3>
+<p>The job needs two small text calls per post: a draft of about 1,000 words in and out, and a claim check. Both are
+cheap models. The Gemini pricing page lists a free tier for Gemini 3.8 Flash and Gemini 3.5 Flash-Lite (pages read
+3 November 2026 at <a href="https://aistudio.google.com/docs/pricing">aistudio.google.com/docs/pricing</a>), and
+our AIClient already imports Gemini 3.8 Flash (<code>api/app/services/ai/client.py</code> line 118). So drafting and
+checking use the existing Gemini route on a free tier key, at GBP 0. About 65 posts a month is a very small volume.
+The per model free request limits were not on the page excerpt, so they are read in Google AI Studio at build.</p>
+<p><b>Privacy, stated plainly.</b> The pricing page marks free tier content as used to improve Google products, and
+the <a href="https://aistudio.google.com/docs/terms">terms page</a> says human reviewers may read and annotate unpaid
+service input and output after it is detached from the account, and tells users not to send sensitive, confidential
+or personal information. The same terms page says the Paid Services data terms apply to Unpaid Services in the EEA,
+Switzerland and the UK. Either way our prompts hold only public source text (gov.uk pages and our own site) and
+public draft posts. <b>No customer data, no private documents and no personal data is ever sent.</b> A rule in the
+generator enforces that the fact list can only come from public URLs.</p>
+<p><b>The Anthropic key</b> stays the fallback and is not used in Phase 1. At the earlier assumptions (our estimate,
+not a measurement) it would cost about 1.3 US dollars a month.</p>
+
+<h3>RULE 0-G cost statement for Phase 1: GBP 0 new spend</h3>
 <div class="tblwrap">
 <table class="doc-tbl">
   <thead><tr><th>Question</th><th>Answer</th></tr></thead>
   <tbody>
-    <tr><td>1. What triggers it</td><td>One weekly timer for planning and drafting (Sunday). Every other step is event driven: an approve click calls the API and schedules that one post. No polling timer. <b>1 timer run a week.</b></td></tr>
-    <tr><td>2. One off cost</td><td>Build effort only, no cloud spend. Developer time is not priced here. Account creation is free on the pages read, with the exception of any paid tool the owner later chooses.</td></tr>
-    <tr><td>3. Recurring cost</td><td>AI usage about $0.26 a week and about $1.1 a month (estimate above). Brevo $0 on the free plan. Buffer $0. PostHog $0. X about $0.05 a week without links. Railway: the job runs inside the existing worker or as a short cron on the existing project. <b>The extra Railway charge was not measured.</b> The Railway docs say the Hobby plan includes $5 of usage a month and usage billed per running second (<a href="https://docs.railway.com/pricing/plans">Railway plans</a>, via a search summary). Our own plan tier and current usage were not read for this page, so this line is unverified. A once a week job of a few minutes is small, but treat the figure as unknown until measured.</td></tr>
-    <tr><td>4. What breaks without it</td><td>Nothing in the product. The social line is optional. Without the scheduler the same plan runs by hand: a person drafts with the AI, checks the sources and posts from Buffer. If the owner prefers zero recurring spend, phase 0 stays manual.</td></tr>
-    <tr><td>5. How it is switched off without a code change</td><td>A feature flag row <code>SOCIAL_AUTOMATION_ENABLED</code> read at the start of each run (set false to stop everything), plus pausing the cron in the Railway dashboard. Either can be done by the owner. No GitHub Actions schedule is used, so nothing depends on RULE 0-G workflow allowlists.</td></tr>
-    <tr><td>6. Where it does not run</td><td>Not a GitHub Actions schedule, not a Vercel cron. Both options carry billing and allowlist work the Railway worker avoids. Neither was priced for this page.</td></tr>
+    <tr><td>1. What triggers it</td><td>One weekly timer on the existing Railway worker (Sunday) for planning and drafting. Everything else is event driven by an approve click on the existing API. No polling. <b>1 timer run a week.</b></td></tr>
+    <tr><td>2. One off cost</td><td>GBP 0. Build effort only, no cloud resource, no new service, no new account fee.</td></tr>
+    <tr><td>3. Recurring cost</td><td><b>GBP 0 new spend.</b> Gemini free tier, Brevo free plan, Buffer free plan, PostHog free plan, Bluesky and Threads free. The job runs on an existing paid Railway service, so it uses plan usage already paid for. Estimate from Railway's unit prices (RAM $0.000231 per GB per minute, CPU $0.000463 per vCPU per minute, <a href="https://docs.railway.com/pricing/plans">Railway plans</a>), assuming 0.5 GB, 0.5 vCPU and 5 minutes a run, which are our assumptions and not measurements: about $0.002 a run and under one US cent a month. Our Railway plan tier and headroom were not read.</td></tr>
+    <tr><td>4. What breaks without it</td><td>Nothing in the product. The social line is optional. Without it the same plan runs by hand.</td></tr>
+    <tr><td>5. What still runs and how to switch it off</td><td>Still runs: the one weekly timer, and the approve and dispatch calls on the existing API. Off without a code change: set <code>SOCIAL_AUTOMATION_ENABLED</code> to false (the default), and pause the cron in the Railway dashboard. The owner can do either.</td></tr>
+    <tr><td>6. Where it does not run</td><td>Not a GitHub Actions schedule, not a Vercel cron, no new Railway service. n8n was considered and not chosen: at the same Railway RAM rate, 0.5 GB kept running all month would be about $5 a month on its own (0.5 times $10), which would use the whole $5 included on the Hobby plan, so it would not be free in practice. The n8n Community Edition is free software (<a href="https://docs.n8n.io/hosting/community-edition-features/">n8n docs</a>), but it also gives no free route to X or LinkedIn.</td></tr>
   </tbody>
 </table>
 </div>
-<p class="sm"><b>Nothing in this plan is built.</b> Building the scheduler needs the owner's explicit
-approval of the statement above. Report recurring cost as a liability, not as coverage.</p>
+<p class="sm"><b>Still true.</b> Building it still needs the usual per push approvals and the production deploy
+path. A push to the platform repository fires its normal workflows, so each push is its own RULE 0-G ask with
+those costs stated. Report recurring cost as a liability, not as coverage.</p>
 
 <!-- ═════════════════════════════════════════════════════════════════ -->
 <h2 id="soc-growth"><span class="n">Section 4</span>Growth plan and targets</h2>
@@ -314,66 +364,114 @@ working day, and a growing share of signups that name social as the source.</p>
 </div>
 
 <!-- ═════════════════════════════════════════════════════════════════ -->
-<h2 id="soc-plan"><span class="n">Section 6</span>Implementation plan, owner actions and decisions</h2>
+<h2 id="soc-plan"><span class="n">Section 6</span>Implementation plan Phase 1, owner actions and decisions</h2>
 
-<div class="callout bad">
-  <b>Building the scheduler needs explicit owner approval of the cost statement in section 3
-  first.</b> Phases 0 and 1 spend nothing and need no build.
+<div class="callout good">
+  <b>Approved for build under D533 (3 November 2026), Phase 1 is free only.</b> The steps below are for the
+  driver to build in this order. Every push, deploy and migration still needs its own explicit owner approval
+  under RULE 0-G and RULE 0-P, and the weekly timer is registered last, off, so nothing runs until the owner
+  turns the flag on.
 </div>
 
-<div class="tblwrap">
-<table class="doc-tbl">
-  <thead><tr><th>Phase</th><th>What</th><th>Effort (our estimate)</th><th>Cost</th></tr></thead>
-  <tbody>
-    <tr><td><b>0. Claim and prepare</b></td><td>Owner creates or confirms accounts and handles, verifies velstrian.com on each, adds profile images and bios from the brand guide, adds social links to the website</td><td>Half a day</td><td>0</td></tr>
-    <tr><td><b>1. Manual with AI help</b></td><td>Weekly: AI drafts and cites sources, a person checks and approves by email, posts from Buffer free. Run for 4 weeks to learn what works</td><td>2 to 3 hours a week</td><td>0 tool fees</td></tr>
-    <tr><td><b>2. Build the line</b></td><td>Draft job, fact check, Brevo approval email with signed links, Buffer or direct posting, UTM links, kill flag. Needs approval of section 3</td><td>About 3 to 5 days of build</td><td>See cost statement</td></tr>
-    <tr><td><b>3. Direct APIs</b></td><td>Apply for LinkedIn Community Management API access, connect YouTube, decide on X</td><td>Calendar time is set by LinkedIn's review, not by us</td><td>X per post fees</td></tr>
-    <tr><td><b>4. Review at 90 days</b></td><td>Compare real counts with section 4, decide on Phase 2 channels and any paid boosts</td><td>Half a day</td><td>0</td></tr>
-  </tbody>
-</table>
-</div>
+<h3>Ordered build steps for the driver</h3>
+
+<div class="step"><div class="num">0</div><div class="body"><b>Two five minute checks before any code.</b>
+<span>(a) The owner opens Buffer free settings and confirms an API key can be created, and which three channels to connect. No key means LinkedIn and X stay by hand and step 6 builds the by hand email for them. (b) The driver reads which Gemini key the platform holds and whether its Google project has billing. A key from a project with billing is not on the free tier, so a separate key from a project without billing is created for this job. Creating a key costs nothing on the pages read.</span></div></div>
+
+<div class="step"><div class="num">1</div><div class="body"><b>social_posts table (migration).</b>
+<span>One table with: id, channel, status (draft, checked, pending approval, approved, rejected, expired, posted, failed), body, claims and source URLs as JSON, check result, token hash, token expiry, approver, approved at, posted at, external post id, UTM values, created at. Row level security on, service role only. It ships in the same release as the code that writes it, through the normal staging path, never ahead on its own.</span></div></div>
+
+<div class="step"><div class="num">2</div><div class="body"><b>Draft generator job using AIClient.</b>
+<span>Reads the calendar, fetches the source pages (gov.uk and our own site), builds a fact list of quoted passages with URLs, then calls AIClient with the fact list only. The model may state only what is in the fact list. Draft model: Gemini 3.8 Flash, which has a free tier on the pricing page and is already imported in <code>api/app/services/ai/client.py</code> line 118. Output is the post text plus a claims list, each claim tied to a URL. A post with an unsourced factual claim is rejected by code.</span></div></div>
+
+<div class="step"><div class="num">3</div><div class="body"><b>Fact check step.</b>
+<span>Code re-fetches each source and checks every number and date appears in the fetched text. A second model call (Gemini 3.5 Flash-Lite, free tier) answers supported, not supported or cannot tell for each claim. Anything except supported blocks the post. If the free tier limit is hit, the job stops and emails a notice. It never falls back to a paid model by itself (decision 3 below).</span></div></div>
+
+<div class="step"><div class="num">4</div><div class="body"><b>Brevo approval email with signed single use tokens.</b>
+<span>Each checked post is sent through the existing Brevo sending code to aparajita.parihar@gmail.com, with the text, sources, check result, and Approve and Reject buttons. Tokens are signed, single use, expire after a set time, and only their hash is stored. About 15 emails a week against the Brevo free allowance of 300 a day.</span></div></div>
+
+<div class="step"><div class="num">5</div><div class="body"><b>Approve confirm page.</b>
+<span>The email link opens a page that shows the post and a Confirm button. Only the button press (a POST) approves, because email scanners open links automatically. Reject needs no reason. The page lives on the existing API or web service, so there is no new service.</span></div></div>
+
+<div class="step"><div class="num">6</div><div class="body"><b>Post dispatcher, per platform.</b>
+<span>Runs when a post becomes approved. Bluesky: AT Protocol call with an app password, automated. Threads: API call, automated once the account is a tester on our app (to be confirmed). LinkedIn page, LinkedIn founder and X: through the Buffer free API if step 0 gave a key, otherwise by hand. Instagram, Facebook, YouTube uploads, TikTok, Medium, Reddit: by hand. For every by hand case the dispatcher emails a second message, Ready to post by hand, with the approved text and a Copy button per channel. A post never goes out before approval.</span></div></div>
+
+<div class="step"><div class="num">7</div><div class="body"><b>PostHog UTM links.</b>
+<span>Every link back to velstrian.com carries utm source, medium and campaign set from the post id and channel, and PostHog reads them on arrival. No personal data in the tags.</span></div></div>
+
+<div class="step"><div class="num">8</div><div class="body"><b>SOCIAL_AUTOMATION_ENABLED flag, off by default, then the weekly timer.</b>
+<span>The flag is read at the start of every run and by the dispatcher. Off means no drafting, no emails and no posting. The weekly timer on the existing Railway worker is registered last. Verification is local first and targeted: the new tests for steps 1 to 7, then one staging walk with the flag on and the approver email set to the owner. Production flag-on is a separate owner decision.</span></div></div>
 
 <h3>What the owner must do</h3>
 <ul>
-  <li>Create or confirm accounts for LinkedIn (company page and founder), YouTube, X, and claim the names on the other platforms. Use contact@velstrian.com and the Velstrian Tenderworks name, never a personal identity.</li>
-  <li>Verify velstrian.com where a platform asks (domain verification).</li>
+  <li>Create or confirm accounts for LinkedIn (company page and founder), YouTube, X, Bluesky, and claim the names on Instagram, Facebook, Threads and TikTok. Use contact@velstrian.com and the Velstrian Tenderworks name, never a personal identity.</li>
+  <li>Connect each one: Buffer free (three channels, and create the API key if offered), a Bluesky app password, and a Threads tester link. Secrets go into Railway variables by the owner, never into chat or files.</li>
   <li>Confirm whether the Instagram account "Velstrian systems Ltd (@velstrian)" is ours.</li>
-  <li>Connect the APIs (LinkedIn application, X credits, YouTube project) after approving the cost statement.</li>
+  <li>Verify velstrian.com where a platform asks (domain verification).</li>
   <li>Be, or name, the approver. The plan names aparajita.parihar@gmail.com.</li>
+  <li>Optional and free: start the Meta developer app review for Instagram and Facebook posting. Until it passes, those two are by hand.</li>
 </ul>
 
 <h3>What can be automated</h3>
-<p>Planning, drafting, source fetching, claim checking, approval emails, scheduling approved posts,
-UTM tagging and weekly reports. <b>Not automated:</b> approval, comments, replies, follows, anything
-that talks to a person.</p>
+<p>Planning, drafting, source fetching, claim checking, approval emails, posting approved posts where the table in
+section 3 says automated, UTM tagging and weekly reports. <b>Not automated:</b> approval, comments, replies,
+follows, anything that talks to a person, and every platform marked by hand.</p>
 
 <h3>Decisions for the owner, each with a recommended answer</h3>
 <ol>
   <li><b>Start order.</b> Option A: LinkedIn, YouTube, X first. Option B: all platforms at once. <b>Recommend A.</b></li>
-  <li><b>Posting layer in phase 1.</b> Option A: Buffer free by hand. Option B: pay for a tool. <b>Recommend A.</b></li>
-  <li><b>X.</b> Option A: post by hand with a link. Option B: post by API without a link. Option C: skip X for now. <b>Recommend A</b> until the reply fee is verified.</li>
-  <li><b>Build the scheduler.</b> Option A: approve the section 3 cost statement after 4 manual weeks. Option B: approve now. Option C: stay manual. <b>Recommend A.</b></li>
-  <li><b>Fixed approver.</b> Option A: aparajita.parihar@gmail.com only. Option B: add a backup. <b>Recommend B</b>, so an absence does not stop the line (a backup can approve, and unapproved posts expire).</li>
-  <li><b>Paid boosts.</b> Option A: none for 90 days. Option B: set a cap now. <b>Recommend A.</b></li>
+  <li><b>Buffer free channels.</b> Option A: LinkedIn page, LinkedIn founder, X. Option B: LinkedIn page, X, YouTube. <b>Recommend A</b>, because Bluesky and Threads are free direct and YouTube uploads are by hand anyway.</li>
+  <li><b>If the Gemini free tier limit is hit.</b> Option A: the job stops and emails a notice (GBP 0). Option B: fall back to the existing Anthropic key, estimated about 1.3 US dollars a month at the earlier token assumptions. <b>Recommend A</b> for Phase 1, since D533 says free only.</li>
+  <li><b>Fixed approver.</b> Option A: aparajita.parihar@gmail.com only. Option B: add a backup. <b>Recommend B</b>, so an absence does not stop the line (unapproved posts expire).</li>
+  <li><b>Paid boosts.</b> None in Phase 1. Revisit only in Phase 2.</li>
   <li><b>Targets.</b> Accept, change or drop the planning goals in section 4.</li>
 </ol>
 
 <!-- ═════════════════════════════════════════════════════════════════ -->
-<h2 id="soc-sources"><span class="n">Section 7</span>Sources and what was not verified</h2>
+<h2 id="soc-phase2"><span class="n">Section 7</span>Phase 2 (later, needs budget)</h2>
+
+<div class="callout">
+  <b>Not part of D533.</b> Phase 2 starts only after real customers exist and only by a new owner decision with a
+  budget. Nothing here is bought or built now. Prices are as read on the pages cited and can change.
+</div>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Paid upgrade</th><th>What it adds</th><th>Price as read</th><th>Source</th></tr></thead>
+  <tbody>
+    <tr><td>X API, pay per use</td><td>Posting to X from our own code, no hand step</td><td>Post $0.015, post with a URL $0.200, credits bought upfront</td><td><a href="https://docs.x.com/x-api/getting-started/pricing">docs.x.com pricing</a>, 3 Nov 2026</td></tr>
+    <tr><td>Buffer Essentials or Team</td><td>More channels and more scheduled posts, more API keys (the free plan has 1)</td><td>Essentials $5 a month and Team $10 a month per channel, as recorded earlier on this page</td><td><a href="https://buffer.com/pricing">buffer.com/pricing</a></td></tr>
+    <tr><td>Metricool Starter or Advanced</td><td>LinkedIn and X scheduling, Advanced adds API access</td><td>Starter from $20 a month annual, Advanced from $53 annual, excluding VAT</td><td><a href="https://metricool.com/pricing/">metricool.com/pricing</a></td></tr>
+    <tr><td>Publer Business</td><td>API access and X support</td><td>Not confirmed. Sources conflict, check publer.com/pricing</td><td><a href="https://publer.com/help/en/article/what-are-publers-plans-and-pricing-15h4yqh/">Publer help</a></td></tr>
+    <tr><td>Later or Hootsuite</td><td>Fuller scheduling and analytics suites</td><td>Later Starter $18.75 a month yearly, Hootsuite from $99 a month annual</td><td><a href="https://later.com/pricing/">Later</a>, <a href="https://www.hootsuite.com/plans">Hootsuite</a></td></tr>
+    <tr><td>Gemini paid tier</td><td>Higher limits, and prompts not used to improve Google products</td><td>Per token, see the page</td><td><a href="https://aistudio.google.com/docs/pricing">Gemini pricing</a></td></tr>
+    <tr><td>Claude Sonnet 5.5 and Haiku 5.5 for drafting and checking</td><td>Stronger drafting and a second vendor for the fact check</td><td>Sonnet $2 input and $10 output per million tokens, Haiku $0.10 and $0.50</td><td><a href="https://platform.claude.com/docs/en/docs/about-claude/pricing">Anthropic pricing</a></td></tr>
+    <tr><td>LinkedIn Community Management API, Standard tier</td><td>Direct posting to the company page, analytics</td><td>No fee stated, needs application and a screencast. Cost is effort, not money</td><td><a href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/community-management-overview">Microsoft Learn</a></td></tr>
+    <tr><td>Paid boosts and ads</td><td>Reach beyond followers</td><td>No price read</td><td>Quote from each ad manager before any decision</td></tr>
+    <tr><td>More Railway capacity (for example self hosted n8n)</td><td>A visual workflow tool</td><td>RAM $10 per GB a month and CPU $20 per vCPU a month, see section 3</td><td><a href="https://docs.railway.com/pricing/plans">Railway plans</a></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="soc-sources"><span class="n">Section 8</span>Sources and what was not verified</h2>
 
 <p class="sm">All read 3 November 2026. Where a page was read through a search summary rather than directly, it
 is said in the text above.</p>
 <ul class="sm">
-  <li><a href="https://buffer.com/pricing">Buffer pricing</a></li>
-  <li><a href="https://metricool.com/pricing/">Metricool pricing</a></li>
-  <li><a href="https://later.com/pricing/">Later pricing</a></li>
-  <li><a href="https://www.hootsuite.com/plans">Hootsuite plans</a></li>
+  <li><a href="https://buffer.com/pricing">Buffer pricing</a> (free plan, API limits)</li>
+  <li><a href="https://pricingsaas.com/companies/buffer/diffs/2026Q2">Buffer pricing change tracker</a> (third party, API on all plans)</li>
+  <li><a href="https://metricool.com/pricing/">Metricool pricing</a>, <a href="https://publer.com/help/en/article/what-are-publers-plans-and-pricing-15h4yqh/">Publer plans help article</a>, <a href="https://later.com/pricing/">Later pricing</a>, <a href="https://www.hootsuite.com/plans">Hootsuite plans</a></li>
   <li><a href="https://docs.x.com/x-api/getting-started/pricing">X API pricing</a></li>
   <li><a href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/community-management-overview">LinkedIn Community Management API overview</a></li>
-  <li><a href="https://developers.facebook.com/docs/instagram-platform/content-publishing/">Instagram content publishing</a></li>
-  <li><a href="https://developers.google.com/youtube/v3/determine_quota_cost">YouTube Data API quota</a></li>
-  <li><a href="https://www.make.com/en/pricing">Make pricing</a> and <a href="https://docs.n8n.io/n8n-community-license/community-license/license-faq">n8n licence FAQ</a></li>
+  <li><a href="https://developers.facebook.com/docs/instagram-platform/content-publishing/">Instagram content publishing</a> and <a href="https://developers.facebook.com/docs/threads/posts">Threads publishing</a></li>
+  <li><a href="https://developers.google.com/youtube/v3/guides/quota_and_compliance_audits">YouTube Data API quota and compliance audits</a> and <a href="https://developers.google.com/youtube/v3/determine_quota_cost">quota cost</a></li>
+  <li><a href="https://docs.bsky.app/docs/advanced-guides/rate-limits">Bluesky rate limits</a> (limits read through a search summary because the page redirected and its body was not returned)</li>
+  <li><a href="https://aistudio.google.com/docs/pricing">Gemini API pricing</a> and <a href="https://aistudio.google.com/docs/terms">Gemini API additional terms</a> (both moved from ai.google.dev)</li>
+  <li><a href="https://docs.railway.com/pricing/plans">Railway plans and unit prices</a></li>
+  <li><a href="https://docs.n8n.io/hosting/community-edition-features/">n8n Community Edition</a>, <a href="https://www.make.com/en/pricing">Make pricing</a></li>
   <li><a href="https://help.brevo.com/hc/en-us/articles/208580669">Brevo free plan limits</a> and <a href="https://posthog.com/pricing">PostHog pricing</a></li>
   <li><a href="https://platform.claude.com/docs/en/docs/about-claude/pricing">Anthropic pricing</a></li>
   <li><a href="https://www.gov.uk/government/publications/procurement-act-2023-short-guides">gov.uk Procurement Act 2023 short guides</a> and <a href="https://www.gov.uk/government/collections/procurement-act-2023-guidance-documents">guidance collection</a></li>
@@ -381,10 +479,14 @@ is said in the text above.</p>
 </ul>
 
 <div class="callout">
-  <b>Not verified.</b> Whether our handles exist on LinkedIn, Facebook, TikTok, Threads, Bluesky, Medium or
-  Reddit. Whether Buffer still issues API keys to new developers. Whether an X reply with a link is
-  charged the URL rate. Meta Facebook Page posting terms. YouTube API audit rules for new projects.
-  Subreddit rules. The extra Railway charge. A gov.uk page stating the Procurement Act go live date.
-  Any audience size, engagement benchmark, or paid advertising price. The Brevo and PostHog free tier
-  figures come from search summaries, because the vendor pages returned an error or truncated text.
+  <b>Not verified.</b> Whether Buffer will issue an API key to our account today (its pricing page says the free
+  plan includes one key but does not say how to create it, and the only other evidence is a third party tracker and
+  a search summary of a Buffer blog post about a rebuilt API). Whether Buffer's API can publish to LinkedIn and X on
+  the free plan at no extra fee. Whether the Gemini key we already hold belongs to a project without billing,
+  because only a project without billing is on the free tier. The free tier per model request limits (the pricing
+  page excerpt gave none). Whether an unaudited YouTube project can publish public videos. Whether a Threads
+  tester account can post without advanced access in practice. Whether our handles exist on LinkedIn, Facebook,
+  TikTok, Threads, Bluesky, Medium or Reddit. Meta Facebook Page posting terms. Subreddit rules. The Railway plan
+  we are on and its current headroom. A gov.uk page stating the Procurement Act go live date. Any audience size,
+  engagement benchmark or advertising price. The Brevo and PostHog free tier figures come from search summaries.
 </div>
