@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T10:11:59.743Z",
+  "updated": "2026-11-03T10:29:22.555Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2561,6 +2561,17 @@
       "changedAt": "2026-11-03T10:11:59.578Z",
       "release": "R2.9",
       "phase": 1
+    },
+    {
+      "id": "A-515",
+      "src": "session",
+      "sev": "P1",
+      "title": "Header dropdown panels are see-through, hero text reads through the menu",
+      "status": "BUILT",
+      "note": "Measured 2026-11-03 on the built site at 1440 (gemini-briefs/kiro-21-shots/nav-1-products-1440-settled-newheadless.png): .ca-mega computes background color(srgb 1 1 1 / 0.88) with backdrop-filter blur(20px) saturate(1.8), yet the h1 and the Start now button read sharp through the Products menu. Cause: NavDropdown.astro paints a translucent fill (82 percent --c-panel, 88 percent --glass-menu-fill on the light header) that depends on a blur, and Nav.astro records that only a 100 percent fill removes large type. Fix: the opaque --c-panel surface. BUILT 1493de74 on review/r29-website-ga: both translucent fills and blurs removed, the panel is --c-panel, measured rgb(255, 255, 255) with backdrop-filter none at 1440 and 390, proof shots a515-dropdown-open-1440.png and a515-dropdown-open-390.png. Waiting on the website push.",
+      "changed": "2026-11-03",
+      "changedAt": "2026-11-03T10:40:03.330Z",
+      "release": "R2.9"
     }
   ],
   "directives": [
@@ -2630,5 +2641,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 515
+  "nextId": 516
 }
