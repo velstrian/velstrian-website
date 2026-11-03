@@ -116,7 +116,7 @@ On a narrow screen, this table scrolls sideways.
 
 99.5<sup>%</sup>
 
-Velstrian targets 99.5% monthly uptime, with independent public status monitoring you can check yourself.
+Velstrian aims for 99.5% monthly uptime, with independent public status monitoring you can check yourself. This is an aim, not a promise, and no credit or other remedy is due if we miss it.
 
 [View status page](https://status.velstrian.com)
 
