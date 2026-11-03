@@ -1,6 +1,6 @@
 {
   "updated": "2026-11-03T11:23:13.322Z",
-  "overall": 60,
+  "overall": 61,
   "verdict": "Close to an invite only launch, not ready for open paying signup",
   "earliestDate": "2026-11-05 invite only once the 5 blockers are checked, 2026-11-09 open signup",
   "blockers": 5,
@@ -16,9 +16,9 @@
     {
       "name": "Core bid journey",
       "weight": 12,
-      "score": 55,
+      "score": 60,
       "status": "amber",
-      "why": "Production now runs the staging journey. Extraction safety nets (c18b58197) are not in production"
+      "why": "Production now runs the staging journey, including the extraction safety nets (afc9c7ef6). Left: the paid extraction re-check under D507."
     },
     {
       "name": "Core buy journey",
