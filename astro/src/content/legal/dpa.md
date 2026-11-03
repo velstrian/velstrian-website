@@ -79,7 +79,7 @@ draftNotice: "This Data Processing Agreement is a draft pending legal review. Th
 
 ## 10. Liability and governing law
 
-<p>Our liability under this DPA counts towards the limits in the Terms of Service and does not add to them. There is one limit for all claims, including data protection and security claims: the fees you paid in the 12 months before the claim. This does not affect any right a person has under Article 82 UK GDPR. Where we pay compensation for damage that you were responsible for, we may claim back that share from you. The DPA is governed by the laws of England and Wales, with jurisdiction in the courts of England.</p>
+<p>Our liability under this DPA counts towards the limits in the Terms of Service and does not add to them. There is one limit for all claims, including data protection and security claims: the fees paid or payable for the 12 months before the event that led to the claim, as section 6 of the Terms of Service defines them. This does not affect any right a person has under Article 82 UK GDPR. Where we pay compensation for damage that you were responsible for, we may claim back that share from you. The DPA is governed by the laws of England and Wales, with jurisdiction in the courts of England.</p>
 
 ## 11. How to execute this DPA
 
