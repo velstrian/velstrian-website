@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Owner actions, 3 Nov 2026</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Owner actions, 3 Nov 2026</h1>
+<p><span class="rv-row">R285-OWNER-POST-PROMOTE-STEPS-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/OWNER-ACTIONS-2026-11-03.md</code>, rendered from <code>ce9b3ebb19</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R285-OWNER-POST-PROMOTE-STEPS-01 &middot; WIP</span><span class="rtitle">After the production promote: confirm portal GitHub organisation, Supabase Site URL and redirect list, and passkeys (the old staging host redirect steps are obsolete)</span><p>not an owner wait: the driver reads steps 1, 2 and 4 itself (GitHub organisation by gh api, Supabase Site URL and redirect list and passkeys by the dashboards in Claude in Chrome) during production round 4. Was OPEN 2026-10-29 - re-measured 2026-10-29: the promote happened (https://app.velstrian.com/login answers 200, https://app.crowagent.ai/login answers 404). Steps 5 to 8 below are OBSOLETE, not failed: staging-app.crowagent.ai, staging.app.crowagent.ai, staging-portal.crowagent.ai and staging.portal.crowagent.ai have no DNS record, which is the chosen state under D473 (old domain off, no redirect) and D474 (domains freed). Step 3 (production Send Email hook URL) was done by the owner on 2026-10-29, see R29-AUTH-PROD-SEND-EMAIL-HOOK-URL-01. Steps 1, 2 and 4 are OWNER CHECKS: no read tool for the GitHub organisation field, the Supabase Site URL and redirect list, or passkeys exists in this session, so they are not measured. Done when the owner confirms steps 1, 2 and 4.</p></div></section>
+<article class="doc">
+<h1>Owner actions, 3 Nov 2026</h1>
+<p>Every release 2.9 row that is not FIXED or CLEARED and whose next step is yours. 50 rows listed below. Sources: C:/w/vp3/RELEASE-2.9-TRACKER.md (newest text), the platform main tracker for rows that file lacks, DECISIONS-R29-LOG.md and the website issues.json.</p>
+<p>  How to read it.  Blocks GA means the row carries a GA blocker or GA week 1 tag. Phase 1 and Phase 2 are the row phase tags. Cost is copied from the row text, and &quot;not stated&quot; means the row gives no figure. Recommendations are the row&#39;s own, never invented.</p>
+<h2>GA blocking and GA week 1 (7)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Blocks GA</th>
+<th>What you do</th>
+<th>Cost (GBP)</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R29-FRAUD-CONTROLS-01</td>
+<td>GA blocker</td>
+<td>In the Stripe dashboard, turn on the built in Radar rules and add the 3 dispute events to the live webhook (steps in docs/release-2.9/STRIPE-RADAR-RULES.md).</td>
+<td>GBP 0. Custom velocity rules need paid Radar for Fraud Teams and were skipped under D533 (price not stated).</td>
+<td>Do the free steps only, as D533 says.</td>
+</tr>
+<tr>
+<td>R29-GA-SEC-AUDIT-01</td>
+<td>Phase 1</td>
+<td>At go live, flip BFF_SERVICE_TOKEN_ENFORCED on production (D486) and check the Supabase Auth dashboard settings (email confirm, captcha, session timeout, MFA).</td>
+<td>not stated</td>
+<td>Flip it at go live as D486 planned. The audit found 0 FAIL and 0 P0.</td>
+</tr>
+<tr>
+<td>R29-DB-PROD-MIGRATIONS-MISSING-01</td>
+<td>GA week 1</td>
+<td>Confirm in the Supabase MCP the dead cyber and esg policy drops in migration 7150, and make the call on 7180 (an irreversible drop of the unused approval_queue table). 7270 goes with the production API.</td>
+<td>not stated</td>
+<td>Row says approval_queue is dead (0 rows, no readers). Approve 7180.</td>
+</tr>
+<tr>
+<td>R29-AUTH-PASSKEY-ENROL-ANDROID-01</td>
+<td>GA week 1</td>
+<td>Retry fingerprint sign in on the Android phone. The passkey display name in Supabase production still reads CrowAgent and needs renaming.</td>
+<td>GBP 0 (dashboard setting).</td>
+<td>Rename it to Velstrian while you are in the Passkeys page.</td>
+</tr>
+<tr>
+<td>R29-AUTH-REMEMBER-BROWSER-01</td>
+<td>GA week 1</td>
+<td>After the web promote, check that ticking remember this browser for 30 days really skips the second factor screen on your next sign in.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-GA-SOCIAL-LAUNCH-01</td>
+<td>GA week 1</td>
+<td>Once production is live with open sign up, reply to the approval email as approver (<a href="mailto:aparajita.parihar@gmail.com">aparajita.parihar@gmail.com</a>) for each of the 10 GA posts. The draft is already saved in the platform mailbox.</td>
+<td>GBP 0. Free channels only (D533), no timer or cloud job.</td>
+<td>Approve post by post. Nothing posts without a reply.</td>
+</tr>
+<tr>
+<td>R29-BILLING-AUDIT-ACK-REDEPLOYS-01</td>
+<td>GA week 1</td>
+<td>Nothing further unless you want to change it. D540 log says you chose Option A and the acknowledgement list was built (b636cdc2ce). The tracker row text still reads DECISION and should be closed after the production promote.</td>
+<td>One off, already built, no recurring cost.</td>
+<td>Option A (taken).</td>
+</tr>
+</tbody></table></div>
+<h2>Decisions and reviews (8)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Blocks GA</th>
+<th>What you do</th>
+<th>Cost (GBP)</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R285-P3-AI-EXTRACT-LABELS-UNREVIEWED-01</td>
+<td>Phase 1</td>
+<td>Spot check extraction cases 1, 2, 3, 6 and 8 from KIRO-GOLDEN-SET-REVIEW-PACK.md (about 40 minutes). An agent never marks them reviewed. The same 40 minutes also unlocks R285-P3-AI-GOLDEN-SET-HUMAN-REVIEW-01 and R29-STEP-P3-AI-EVAL-GATE-ENFORCE-EXTRACT-01.</td>
+<td>GBP 0 for the review. The scoring run afterwards sits under the D499 cap.</td>
+<td>Do it, it unblocks three rows.</td>
+</tr>
+<tr>
+<td>R29-GA-UI-POLISH-01</td>
+<td>Phase 1</td>
+<td>Decide the last audit item D2: a loading page on the 7 token routes is refused by an existing guard because a refused token would become a soft 404.</td>
+<td>GBP 0.</td>
+<td>Keep the real 404 (or add a Suspense boundary inside each page as a separate change).</td>
+</tr>
+<tr>
+<td>R29-B13-PRIVATE-BIDDER-PRESELECT-01</td>
+<td>Phase 1</td>
+<td>Say whether onboarding should record a bidding focus so a brand new private bidder opens on private from the first bid.</td>
+<td>not stated</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-TX-PLATFORM-ACCOUNT-PORTFOLIO-01</td>
+<td>Phase 1</td>
+<td>D511 chose to grant Portfolio on Bid and Buy to org 3a538395 (Stripe test mode). Approve the exact production write the driver will state.</td>
+<td>GBP 0 stated (test mode).</td>
+<td>Approve once the write is stated.</td>
+</tr>
+<tr>
+<td>A-503 (website)</td>
+<td>Phase 1</td>
+<td>Say whether the 2026-10-25 mobile spot check was enough to close the responsive audit row.</td>
+<td>GBP 0.</td>
+<td>Close it if the spot check satisfies you.</td>
+</tr>
+<tr>
+<td>R29-RAG-VARIANT-1-CONTEXT-DECISION-01</td>
+<td>Phase 2</td>
+<td>Decide whether any organisation moves off embedding variant 1 to get the free chunk context line.</td>
+<td>A paid re-embed needs a cost statement first (figure not stated).</td>
+<td>Keep variant 1 until a paid Recall@5 measurement shows the gain.</td>
+</tr>
+<tr>
+<td>R285-P3-AI-ISO42001-POLICY-01</td>
+<td>Phase 2</td>
+<td>Read and sign the one page AI policy and intended use statement (draft complete). An agent must never sign it.</td>
+<td>GBP 0.</td>
+<td>Sign it when you are ready, readiness only.</td>
+</tr>
+<tr>
+<td>R29-STEP-P3-AI-ENGINE-T16-EVAL-UPGRADE-01</td>
+<td>Phase 2</td>
+<td>Give 30 or more of your own judge labels (KIRO-JUDGE-CALIBRATION-PACK.md).</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+</tbody></table></div>
+<h2>Cost approvals (11)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Blocks GA</th>
+<th>What you do</th>
+<th>Cost (GBP)</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R29-STEP-P2-EXTRA-USAGE-SELF-SERVE-01</td>
+<td>Phase 1</td>
+<td>Approve the RULE 0-G cost statement for switching CREDIT_OVERAGE_ENABLED on (Railway first, then Vercel), after which the staging Stripe walks run.</td>
+<td>not stated. Overage is off by default with a cap.</td>
+<td>Approve once the cost statement is shown.</td>
+</tr>
+<tr>
+<td>R29-STEP-P2-ENTERPRISE-SELF-SERVE-01</td>
+<td>Phase 1</td>
+<td>Approve running the live Stripe price script with --live --confirm so Portfolio is self serve at the published price.</td>
+<td>not stated</td>
+<td>Approve after reading the script dry run.</td>
+</tr>
+<tr>
+<td>R285-QUICK-AI-STAGING-COST-01</td>
+<td>Phase 1</td>
+<td>Approve a cost statement to set AI_COST_CEILING_BUY_RFQ_SCOPE_GBP and AI_COST_CEILING_BID_QUOTE_SCOPE_GBP to 1 on the STAGING Railway service, then two walker generations.</td>
+<td>Ceilings GBP 1 each, staging only (spend is below that).</td>
+<td>Approve, it is small and staging only.</td>
+</tr>
+<tr>
+<td>R29-AI-ADVISOR-READING-EASE-NEAR-MISS-01</td>
+<td>Phase 1</td>
+<td>Approve the live re-run of AIC-028 and AIC-010 to prove the plainer wording works.</td>
+<td>Worst case GBP 6.17 (the row does not record an approval).</td>
+<td>Approve inside the existing D507 style cap.</td>
+</tr>
+<tr>
+<td>R285-P3-AI-D464-RUNNERS-MISSING-01</td>
+<td>Phase 1</td>
+<td>Give each live run its own RULE 0-G approval (OWASP corpus, Welsh drafting, auto router calibration).</td>
+<td>not stated</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-B13-ANSWER-LIBRARY-DEPTH-01</td>
+<td>Phase 1</td>
+<td>Approve (or refuse) answer expiry reminders. They need a timer, so RULE 0-G needs a cost statement and your approval.</td>
+<td>not stated. Recurring, so a liability.</td>
+<td>Refuse a timer for now. Nothing breaks without it.</td>
+</tr>
+<tr>
+<td>R29-STEP-P3-AI-EVIDENCE-PACK-NEUTRAL-01</td>
+<td>Phase 2</td>
+<td>Approve the staging paid rerun (bid_drafting and tender_reading) then set AI_EVIDENCE_PACK_WIRED_DRAFTING on the hosted API.</td>
+<td>One off, inside the D499 GBP 37 cap. No recurring cost.</td>
+<td>Approve after the promote.</td>
+</tr>
+<tr>
+<td>R29-STEP-P3-AI-ENGINE-T08-KNOWLEDGE-PACK-01</td>
+<td>Phase 2</td>
+<td>Read the review sheet and record your review, request a fixed price quote for the expert review, and approve the paid drafting golden run.</td>
+<td>Quote not held, so not stated.</td>
+<td>Record the review first, ask for the quote.</td>
+</tr>
+<tr>
+<td>R29-STEP-P3-AI-OFF-SURFACES-DECISION-01</td>
+<td>Phase 2</td>
+<td>Set AI_COST_CEILING_ _GBP=0.17 for the four D497 surfaces on the production Railway API.</td>
+<td>GBP 0.17 ceiling per surface.</td>
+<td>Set after the cost statement.</td>
+</tr>
+<tr>
+<td>R29-STAGING-ENV-HYGIENE-01</td>
+<td>Phase 2</td>
+<td>Give local evals their own Gemini key or project, clear stale Stripe ids on staging org 8e088ab9, and decide on a staging capacity plan.</td>
+<td>Capacity plan has a cost line, not stated.</td>
+<td>Do the first two. Decide the plan only with a number.</td>
+</tr>
+<tr>
+<td>R285-P3-AI-OPENAI-ONBOARDING-01 and R285-OWNER-OPENAI-KEY-01</td>
+<td>Phase 2</td>
+<td>On hold (D505). Register the OpenAI account, set a low limit and put the key on the STAGING API only.</td>
+<td>not stated</td>
+<td>Leave on hold until the next release.</td>
+</tr>
+</tbody></table></div>
+<h2>Dashboard and hosted steps (16)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Blocks GA</th>
+<th>What you do</th>
+<th>Cost (GBP)</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R285-OWNER-POST-PROMOTE-STEPS-01</td>
+<td>Phase 1</td>
+<td>Three checks: portal GitHub organisation field (velstrian), Supabase production Site URL and redirect list, and passkeys.</td>
+<td>GBP 0.</td>
+<td>Do them after the production promote.</td>
+</tr>
+<tr>
+<td>R285-GOV-BRANCH-RULES-01</td>
+<td>Phase 1</td>
+<td>Set CA_GUARDRAILS_CHANGE_APPROVAL so the written .husky pre-push lines can be applied.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R285-LEGAL-KIRO-A10-01</td>
+<td>Phase 1</td>
+<td>Install the free Sentry app and turn on push for the breach alert route 1417258 (about 2 minutes).</td>
+<td>GBP 0.</td>
+<td>Do it, it backs the 72 hour breach clock.</td>
+</tr>
+<tr>
+<td>R285-LEGAL-KIRO-B-OWNER-01 (C-02)</td>
+<td>Phase 1</td>
+<td>Enforce a second factor for every admin login and turn on GitHub organisation velstrian 2FA.</td>
+<td>GBP 0.</td>
+<td>Do both, both are free.</td>
+</tr>
+<tr>
+<td>R29-STEP-P2-ARRANGED-TERM-CHECKOUT-WORDING-01</td>
+<td>Phase 1</td>
+<td>Enable subscription_schedule.canceled on the staging and production Stripe webhook endpoints.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-STEP-REBRAND-11-INTERNAL-IDENTIFIERS-01</td>
+<td>Phase 1</td>
+<td>Rename the 3 live Stripe product names.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-STEP-LEGAL-CHECKOUT-TERMS-01</td>
+<td>Phase 1</td>
+<td>Set the Stripe terms of service setting so checkout consent works.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-STEP-P2-DISCOUNTS-SELF-SERVE-01</td>
+<td>Phase 1</td>
+<td>Set STRIPE_BUNDLE_COUPON_ID on staging and the sandbox key on the staging portal, then rerun walk-d-portal-offers.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-STEP-TENDER-INTAKE-WORKER-VELSTRIAN-01</td>
+<td>Phase 1</td>
+<td>Set INBOUND_EMAIL_INTAKE_ENABLED on production, after a staging email round trip passes (needs the api-staging push for the token fix).</td>
+<td>GBP 0 stated.</td>
+<td>Flip it only after the round trip.</td>
+</tr>
+<tr>
+<td>R29-STEP-WEB-HELP-CENTRE-01</td>
+<td>Phase 1</td>
+<td>Set the Brevo transactional log retention in the Brevo dashboard. Memory notes say you already do this every time, so confirm it is set.</td>
+<td>GBP 0.</td>
+<td>Confirm and close.</td>
+</tr>
+<tr>
+<td>R29-STEP-P2-DROP-08-01</td>
+<td>Phase 1</td>
+<td>Sign in to the portal once on production so the portal half of the production facts can be read.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R285-P2-SWEEP-04-01</td>
+<td>Phase 1</td>
+<td>Staging proofs that need a person: the staging Turnstile test keys and one allowlisted inbox read of the branded Send Email hook.</td>
+<td>GBP 0.</td>
+<td>not stated</td>
+</tr>
+<tr>
+<td>R29-B13-STAGING-GUEST-PATHS-ACCESS-01</td>
+<td>Phase 1</td>
+<td>Add the two API destinations (/api/bid/review/guest/* and /api/respond/*) to the Cloudflare Access bypass app 7d3894ac. The driver can do this through the API with your OK.</td>
+<td>GBP 0 (Cloudflare free plan).</td>
+<td>Allow the driver to do it.</td>
+</tr>
+<tr>
+<td>R29-B13-PA-NOTICE-SET-01 and ANSWER-LIBRARY-DEPTH and ANNEX-BUYER-CHECKLIST</td>
+<td>Phase 1</td>
+<td>Be present to confirm the Supabase apply for migrations 7240, 7250 and 7260 on staging (the agent cannot give the interactive confirmation unattended). Production already carries them per DB-PROD-MIGRATIONS.</td>
+<td>GBP 0.</td>
+<td>Confirm when you are at the machine.</td>
+</tr>
+<tr>
+<td>R29-EMAIL-DMARC-REJECT-01</td>
+<td>Phase 1</td>
+<td>From 2026-11-12, move DMARC from quarantine to reject if two weeks of reports are clean.</td>
+<td>GBP 0.</td>
+<td>Do it on or after 12 Nov.</td>
+</tr>
+<tr>
+<td>R29-B13-FIND-A-TENDER-PUBLISH-01</td>
+<td>Phase 2</td>
+<td>Supply the Find a Tender (CDP) sandbox credential. The feature is not mounted on any page yet.</td>
+<td>not stated</td>
+<td>Wait until the page is built.</td>
+</tr>
+</tbody></table></div>
+<h2>Legal and counsel (8)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Blocks GA</th>
+<th>What you do</th>
+<th>Cost (GBP)</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R285-LEGAL-KIRO-A02 / R29-STEP-LEGAL-KIRO-A02-01</td>
+<td>Phase 1</td>
+<td>Send COUNSEL-QUESTIONS-2026-10-26.md to counsel. The decisions log says the brief was emailed on 2026-11-03 to two helpers and <a href="mailto:contact@velstrian.com">contact@velstrian.com</a>, using the free route (University of Law call, then the Aston clinic).</td>
+<td>GBP 0 on the free route. A paid quote only on your approval (amount not stated).</td>
+<td>Stay on the free route, ask for a quote only if it is declined.</td>
+</tr>
+<tr>
+<td>R285-TRUST-LIABILITY-CAP-01</td>
+<td>Phase 1</td>
+<td>The liability cap draft (D460, then D532 one cap of 12 months of fees) waits on counsel and on the insurer answer.</td>
+<td>not stated</td>
+<td>Counsel review, then close.</td>
+</tr>
+<tr>
+<td>R285-LEGAL-KIRO-B-OWNER-01</td>
+<td>Phase 1</td>
+<td>Answer the remaining Kiro legal questions: B-04 invite <a href="mailto:platform@velstrian.com">platform@velstrian.com</a> to Sentry, the TLS badge wording (recommend A, TLS 1.3 where supported), and keep the DPA draft banner until one test alert reaches a phone.</td>
+<td>GBP 0.</td>
+<td>Take the recommended option on each.</td>
+</tr>
+<tr>
+<td>R285-LEGAL-KIRO-A09-01</td>
+<td>Phase 1</td>
+<td>Confirm whether any customer buys on consumer terms (affects the no refund for a wrong AI answer line).</td>
+<td>GBP 0.</td>
+<td>Confirm business only sales, then ask counsel about a buying for business tick at sign up.</td>
+</tr>
+<tr>
+<td>R285-INTL-EXPORT-RATING-01</td>
+<td>Phase 1</td>
+<td>Submit the Export Control Joint Unit rating enquiry through the gov.uk goods checker then SPIRE (about 45 minutes). Draft text is ready.</td>
+<td>Free (about 45 minutes of your time).</td>
+<td>Do it, the draft is ready.</td>
+</tr>
+<tr>
+<td>R29-LEGAL-REVIEW-AGAIN-01</td>
+<td>Phase 1</td>
+<td>Run the second legal review you asked for, starting from the counsel pack and the open A09, A10 and B rows.</td>
+<td>not stated</td>
+<td>Fold it into the counsel step above.</td>
+</tr>
+<tr>
+<td>R285-OWNER-INSURER-01</td>
+<td>Phase 1</td>
+<td>Ask insurers for professional indemnity and cyber quotes. D532 parked this until the first paying customer (Tide Insurance first, compare Hiscox and Simply Business).</td>
+<td>not stated</td>
+<td>Stay parked until the first paying customer.</td>
+</tr>
+<tr>
+<td>R29-STEP-P3-TRUST-OPENAI-DPA-NOTICE-01</td>
+<td>Phase 2</td>
+<td>After counsel signs the DPA, announce the OpenAI sub-processor notice (7 to 30 day window).</td>
+<td>not stated</td>
+<td>Keep on hold with OpenAI.</td>
+</tr>
+</tbody></table></div>
+<h2>Not on this list</h2>
+<p>Portal lane (on hold): 22 portal rows are not fixed and are excluded from the counts above.</p>
+<p>Agent runs already approved: the D507 batch (hard cap GBP 25 total, staging only) covers about 20 paid eval rows, so they need no owner action. Other approved runs: credential block run 5.2 (cap GBP 2.50) and the Gemini verification (39 calls, worst GBP 1.07, cap GBP 1.50).</p>
+<p>Parked by you: Google Vertex credits until 15 January 2027 (D527) and the other Phase 2 backlog rows (ISO 42001, external AI audit, GraphRAG, fine tuning, paid Welsh drafting).</p>
+<p>Website rows (19 not fixed in issues.json: 18 BUILT, 1 ON HOLD). Almost all wait on one website push. D539 pre-approved that push without your 8093 check once the 45 gate chain is green with Lighthouse and screenshots. Cost: a free plan Cloudflare deploy plus 3 free GitHub Actions workflows (D529). Owner choices left: A-503 (above) and A-498 (leave agent readiness Level 3 checks unbuilt until invitations open to agents, recommended).</p>
+
+</article>
+</main></body></html>

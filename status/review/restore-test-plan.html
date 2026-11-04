@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Production database restore test plan (R29-GA-RESTORE-TEST-01)</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Production database restore test plan (R29-GA-RESTORE-TEST-01)</h1>
+<p><span class="rv-row">R29-GA-RESTORE-TEST-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/RESTORE-TEST-PLAN.md</code>, rendered from <code>c7bc85007a</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-GA-RESTORE-TEST-01 &middot; FIXED</span><span class="rtitle">GA area Operations: no timed restore test of the production database (RTO and RPO unproven)</span><p>owner deleted the temporary project auluqawdeuucoxrhaslm. Test: RTO about 7 minutes, RPO up to 24 h (daily backup, no PITR), 14 cron jobs on the copy disabled, 0 reached production, row counts matched, about USD 0.03. Runbook, evidence and plan on the board (c7bc85007a); script scripts/ops/restore-test.mjs on review/r29-batch4 (95ee1ffc1f).</p></div></section>
+<article class="doc">
+<h1>Production database restore test plan (R29-GA-RESTORE-TEST-01)</h1>
+<p>Status: PLAN ONLY. Nothing below has been run. No project was created and nothing was spent.
+Prepared 2026-11-03 by Velstrian Tenderworks.</p>
+<h2>What we are proving</h2>
+<p>That production (<code>gujtuecjzfiqsdnzgyvo</code>, project <code>velstrian-platform</code>, eu-west-1, Postgres 17)
+can be brought back from its backup, how long that takes (RTO, recovery time) and how much
+recent data a restore would lose (RPO, recovery point).</p>
+<h2>Facts measured on 2026-11-03 (read only)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Value</th>
+<th>How measured</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Supabase plan</td>
+<td>Pro (org <code>abqoyzsqdrbcpklxaiph</code>, VELSTRIAN SYSTEMS LIMITED)</td>
+<td><code>get_organization</code></td>
+</tr>
+<tr>
+<td>Projects in the org</td>
+<td>2: production and <code>velstrian-platform-staging</code></td>
+<td><code>list_projects</code></td>
+</tr>
+<tr>
+<td>Production database size</td>
+<td>419 MB</td>
+<td><code>pg_database_size</code></td>
+</tr>
+<tr>
+<td>auth users / public tables</td>
+<td>4 / 457</td>
+<td><code>select count(*)</code></td>
+</tr>
+<tr>
+<td>Extensions that act outside the database</td>
+<td><code>pg_cron</code>, <code>pg_net</code></td>
+<td><code>pg_extension</code></td>
+</tr>
+<tr>
+<td>Cron jobs</td>
+<td>14 active, 11 of them call out over HTTP (<code>net.http_*</code>)</td>
+<td><code>cron.job</code></td>
+</tr>
+<tr>
+<td>Backup type on Pro</td>
+<td>daily physical backups, 7 days kept. PITR is a paid add-on (assumed OFF, confirm on Database &gt; Backups)</td>
+<td>Supabase docs, Backups guide</td>
+</tr>
+<tr>
+<td>Local <code>pg_dump</code> / <code>psql</code></td>
+<td>not installed on this machine</td>
+<td><code>which pg_dump</code></td>
+</tr>
+</tbody></table></div>
+<p>Consequence for RPO: with daily backups and no PITR the worst case data loss is up to 24 hours.
+PITR would bring it to about 2 minutes but costs about USD 100 a month (about GBP 79) for 7 days
+retention plus a Small compute minimum. That is a recurring liability and is NOT proposed here.</p>
+<h2>The danger in any copy of production: the cron jobs</h2>
+<p>A restored copy is a full copy, including <code>cron.job</code>. Eleven jobs call out over HTTP using
+settings stored in the database, so the copy would call the same production endpoints that
+production calls: <code>dunning</code>, <code>email-dispatch</code>, <code>onboarding-emails</code>, <code>trial-ending-d1</code>,
+<code>status-incident-notify</code>, <code>stripe-cleanup-incomplete</code> and others. That could send duplicate
+customer emails or duplicate billing actions. Supabase&#39;s own docs say to disable <code>pg_cron</code> and
+<code>pg_net</code> work on a cloned project straight after the copy finishes. Every option below handles
+this explicitly.</p>
+<p>Production schedule (UTC), used to pick a safe window:</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Schedule</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>email-dispatch</td>
+<td>:10 on even hours</td>
+</tr>
+<tr>
+<td>scheduled-reports</td>
+<td>:26 at 00, 04, 08, 12, 16, 20</td>
+</tr>
+<tr>
+<td>service-health</td>
+<td>:44 at 00, 06, 12, 18</td>
+</tr>
+<tr>
+<td>retention prunes</td>
+<td>03:30, 03:35, 03:40</td>
+</tr>
+<tr>
+<td>stripe-cleanup-incomplete</td>
+<td>04:39</td>
+</tr>
+<tr>
+<td>monthly-evidence-reports</td>
+<td>06:13 on the 1st</td>
+</tr>
+<tr>
+<td>status-incident-notify</td>
+<td>06:14</td>
+</tr>
+<tr>
+<td>monitoring-digest / compliance-calendar-digest</td>
+<td>Mon 08:05 / Mon 08:21</td>
+</tr>
+<tr>
+<td>dunning</td>
+<td>08:46</td>
+</tr>
+<tr>
+<td>onboarding-emails</td>
+<td>09:24</td>
+</tr>
+<tr>
+<td>trial-ending-d1</td>
+<td>10:29</td>
+</tr>
+</tbody></table></div>
+<p>Safe window: start between 12:50 and 13:00 UTC on a weekday that is not the 1st. The next job is
+email-dispatch at 14:10, which gives about 70 minutes to finish the restore and switch cron off.</p>
+<h2>Options</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th>A. Restore to a new project (recommended)</th>
+<th>B. Logical dump into a throwaway local database</th>
+<th>C. Restore into staging</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>What it uses</td>
+<td>Supabase&#39;s own daily physical backup, Database &gt; Backups &gt; Restore to a New Project</td>
+<td><code>pg_dump</code> of production over the network, <code>pg_restore</code> into a local Postgres 17</td>
+<td>dump of production loaded into <code>ipgrnwvfnumgvnxkpxsc</code></td>
+</tr>
+<tr>
+<td>One-off cost</td>
+<td>New project billed hourly at the same compute size as production. Micro USD 0.01344/h, Small USD 0.0206/h, Medium USD 0.0822/h, plus disk (cents). The org&#39;s USD 10 compute credit is already used by prod and staging, so this is charged. 3 hours at Micro about USD 0.05, even at Medium about USD 0.30. Budget: under GBP 1. Supabase shows the exact figure before you confirm</td>
+<td>GBP 0 (needs Postgres 17 client tools installed locally, free)</td>
+<td>GBP 0</td>
+</tr>
+<tr>
+<td>Recurring cost</td>
+<td>GBP 0 once the project is deleted the same day</td>
+<td>GBP 0</td>
+<td>GBP 0</td>
+</tr>
+<tr>
+<td>Time to run</td>
+<td>about 1.5 hours end to end (restore of 419 MB is expected in well under an hour, the clock measures it)</td>
+<td>about 1 hour after tool install</td>
+<td>about 1 hour</td>
+</tr>
+<tr>
+<td>What it proves</td>
+<td>The real disaster path: Supabase&#39;s backup restores, a measured RTO, RPO = age of the newest backup</td>
+<td>Only that a logical dump restores. It does not test Supabase&#39;s backup at all</td>
+<td>Same as B, plus it breaks staging</td>
+</tr>
+<tr>
+<td>Risk to production</td>
+<td>Zero writes to production. Only risk is the copied cron jobs (handled by the window and step 6)</td>
+<td>One read-only dump, about 419 MB, off-hours. Production personal data lands on a laptop, so it must be encrypted and deleted</td>
+<td>Production personal data copied into an environment full of test users and test logins. Rejected under UK GDPR data minimisation and RULE 0-P</td>
+</tr>
+</tbody></table></div>
+<h2>Recommendation</h2>
+<p>Option A, once, before GA. It is the only option that tests the backup we would actually use in a
+disaster, it costs under GBP 1 one-off and nothing recurring, and it never writes to production.
+Option B is a useful free supplement later, not a substitute. Option C is rejected.</p>
+<p>This spends money, so under RULE 0-G it needs the owner&#39;s explicit approval before step 3, with
+the figure Supabase displays on the confirm screen.</p>
+<h2>Exact steps for option A</h2>
+<p>Run as the platform account (<code>platform@velstrian.com</code>) in the Supabase dashboard. Use a stopwatch
+or write down UTC times at each mark.</p>
+<ol>
+<li>Pick a weekday that is not the 1st of the month. Be ready at 12:45 UTC.</li>
+<li>Open production <code>velstrian-platform</code> &gt; Database &gt; Backups &gt; Scheduled backups. Write down the
+timestamp of the newest backup (B). Confirm the PITR tab shows PITR disabled.</li>
+<li>At 12:50 UTC: Database &gt; Backups &gt; Restore to a New Project. Pick the newest backup. Read the
+cost shown, confirm it is under GBP 1 an hour, and confirm. Write down T0 (UTC).</li>
+<li>Wait for the dashboard to report the new project as healthy. Write down T1.</li>
+<li>Open the new project&#39;s SQL editor (never production&#39;s, check the project ref in the URL is not
+<code>gujtuecjzfiqsdnzgyvo</code>).</li>
+<li>Immediately run:<pre><code class="language-sql">update cron.job set active = false;
+select count(*) filter (where active) as still_active from cron.job;
+</code></pre>
+<code>still_active</code> must be 0. Write down T2. If T2 is after 14:05 UTC, also check production&#39;s email
+log for a duplicate send at 14:10 and report it.</li>
+<li>Prove the data, comparing the clone against production (production queries are read only):<pre><code class="language-sql">select pg_size_pretty(pg_database_size(current_database()));
+select count(*) from auth.users;
+select count(*) from information_schema.tables where table_schema = &#39;public&#39;;
+select max(created_at) from auth.audit_log_entries;
+</code></pre>
+Size within a few MB of 419 MB, same user and table counts, and the newest audit row equal to
+or just before backup time B. Write down T3.</li>
+<li>Optional: sign in to the clone&#39;s Auth users page and confirm the 4 platform accounts are there.
+Do not point any app at the clone.</li>
+<li>Delete the clone: its Settings &gt; General &gt; Delete project. Write down T4. Billing stops on delete.</li>
+<li>Record in the tracker row:<ul>
+<li>RTO = T1 minus T0 (restore), and T3 minus T0 (restore plus verification).</li>
+<li>RPO = T0 minus B (the age of the newest backup when the restore began, worst case 24 hours).</li>
+<li>Cost = the hours shown on the org usage page at the next invoice.</li>
+</ul>
+</li>
+</ol>
+<h2>What a restore does not bring back</h2>
+<p>Per Supabase docs: Storage objects (files) are not in the database backup, and Edge Functions, Auth
+settings, API keys and Realtime settings need setting up again on a new project. For a real
+disaster where production itself is lost, the runbook must also cover re-pointing the app&#39;s
+environment variables at the new project. That is outside this test and should be its own row if
+not already covered by the incident runbook.</p>
+<h2>Exact steps for option B (later, free supplement)</h2>
+<ol>
+<li>Install PostgreSQL 17 client tools and a local Postgres 17 server.</li>
+<li>Off-hours, run <code>pg_dump --format=custom --no-owner</code> against production&#39;s session pooler
+connection string, read from the password manager, never pasted into a file or chat.</li>
+<li><code>pg_restore</code> into a new local database, time it, run the step 7 checks.</li>
+<li>Drop the local database and securely delete the dump file the same day.</li>
+</ol>
+
+</article>
+</main></body></html>

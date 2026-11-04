@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Database restore and failover runbook</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Database restore and failover runbook</h1>
+<p><span class="rv-row">R29-GA-RESTORE-TEST-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/ops/DATABASE-RESTORE-AND-FAILOVER-RUNBOOK.md</code>, rendered from <code>c7bc85007a</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-GA-RESTORE-TEST-01 &middot; FIXED</span><span class="rtitle">GA area Operations: no timed restore test of the production database (RTO and RPO unproven)</span><p>owner deleted the temporary project auluqawdeuucoxrhaslm. Test: RTO about 7 minutes, RPO up to 24 h (daily backup, no PITR), 14 cron jobs on the copy disabled, 0 reached production, row counts matched, about USD 0.03. Runbook, evidence and plan on the board (c7bc85007a); script scripts/ops/restore-test.mjs on review/r29-batch4 (95ee1ffc1f).</p></div></section>
+<article class="doc">
+<h1>Database restore and failover runbook</h1>
+<p>Row: R29-GA-RESTORE-TEST-01. Owner: the founders. Prepared 2026-11-03 by Velstrian Tenderworks.</p>
+<p>This page tells you, in plain steps, how to:</p>
+<ol>
+<li><strong>Test</strong> that our customer database can be brought back from its backup (every quarter, about 30 minutes, a few cents).</li>
+<li><strong>Recover</strong> for real if the production database is lost or damaged.</li>
+</ol>
+<p>You do not need to know databases to follow it. Every click and command is written out.</p>
+<hr>
+<h2>1. The few facts you need</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Production database</td>
+<td>Supabase project <code>velstrian-platform</code>, ref <code>gujtuecjzfiqsdnzgyvo</code>, region eu-west-1 (Ireland), Micro size</td>
+</tr>
+<tr>
+<td>Staging database (test only)</td>
+<td>ref <code>ipgrnwvfnumgvnxkpxsc</code></td>
+</tr>
+<tr>
+<td>Portal database (internal)</td>
+<td>ref <code>upxwdxhqzdsjnpsftsfb</code>, separate, not covered here</td>
+</tr>
+<tr>
+<td>Backups</td>
+<td>one full backup every day, kept 7 days. Point in time recovery (PITR) is OFF</td>
+</tr>
+<tr>
+<td><strong>Recovery time (RTO), measured 2026-11-03</strong></td>
+<td><strong>about 7 minutes</strong> for the database to come back in a new project. Allow <strong>about 1 hour</strong> for a full failover, including pointing the apps at it</td>
+</tr>
+<tr>
+<td><strong>Data loss (RPO)</strong></td>
+<td><strong>up to 24 hours</strong>: anything written after the last daily backup (around 04:26 UTC) is lost. PITR would cut this to about 2 minutes but costs about USD 100 a month, not switched on</td>
+</tr>
+<tr>
+<td>Cost of a test copy</td>
+<td>USD 10.18 a month, billed by the hour: about 1.4 cents an hour. A test costs under 5 cents if you delete the copy the same day</td>
+</tr>
+</tbody></table></div>
+<p>Evidence of the first test: <code>docs/release-2.9/ops/restore-tests/2026-11-03.md</code>.</p>
+<hr>
+<h2>2. What NOT to click</h2>
+<blockquote>
+<p><strong>Database &gt; Backups &gt; &quot;Scheduled backups&quot; tab &gt; Restore</strong> OVERWRITES production with an old copy.
+Everything customers did since that backup is gone. <strong>Never use it for a test.</strong>
+Only use it in a real disaster, and only after reading section 5.</p>
+</blockquote>
+<blockquote>
+<p><strong>Never delete, pause or restore</strong> a project whose ref is <code>gujtuecjzfiqsdnzgyvo</code>,
+<code>ipgrnwvfnumgvnxkpxsc</code> or <code>upxwdxhqzdsjnpsftsfb</code>. Check the ref in the browser
+address bar before every destructive click.</p>
+</blockquote>
+<p>The safe button for a test is the <strong>&quot;Restore to a new project&quot;</strong> tab. It makes a separate copy and never touches production.</p>
+<hr>
+<h2>3. The hidden danger: copied timers (cron jobs)</h2>
+<p>A restored copy is a full copy, including production&#39;s <strong>14 timed jobs</strong> (pg_cron). They
+arrive <strong>switched on</strong>, and 11 of them call the <strong>production</strong> app, so a copy left running
+could send customers duplicate emails or repeat billing actions.</p>
+<p>On 2026-11-03 all 14 arrived switched on. They were switched off 7 minutes after the copy
+was created, before any of them fired.</p>
+<p>So, for every copy:</p>
+<ul>
+<li><strong>Start only in a quiet window</strong>, when no production job is due for at least 60 minutes.</li>
+<li><strong>Switch the copy&#39;s cron off the moment it answers.</strong> The script does this by itself.</li>
+</ul>
+<p>Production timetable (UTC):</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Job</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>email-dispatch</td>
+<td>10 past every even hour (00:10, 02:10, ... 22:10)</td>
+</tr>
+<tr>
+<td>scheduled-reports</td>
+<td>26 past 00, 04, 08, 12, 16, 20</td>
+</tr>
+<tr>
+<td>service-health</td>
+<td>44 past 00, 06, 12, 18</td>
+</tr>
+<tr>
+<td>retention prunes</td>
+<td>03:30, 03:35, 03:40</td>
+</tr>
+<tr>
+<td>stripe-cleanup-incomplete</td>
+<td>04:39</td>
+</tr>
+<tr>
+<td>monthly-evidence-reports</td>
+<td>06:13 on the 1st</td>
+</tr>
+<tr>
+<td>status-incident-notify</td>
+<td>06:14</td>
+</tr>
+<tr>
+<td>monitoring-digest, compliance-calendar-digest</td>
+<td>Monday 08:05, Monday 08:21</td>
+</tr>
+<tr>
+<td>dunning</td>
+<td>08:46</td>
+</tr>
+<tr>
+<td>onboarding-emails</td>
+<td>09:24</td>
+</tr>
+<tr>
+<td>trial-ending-d1</td>
+<td>10:29</td>
+</tr>
+</tbody></table></div>
+<p><strong>Good start times (UTC):</strong> 12:45 to 13:10, 18:45 to 19:10, 00:45 to 01:10. Run
+<code>node scripts/ops/restore-test.mjs</code> (dry run) and it prints the next safe start times for you.</p>
+<hr>
+<h2>4. The quarterly restore test (routine)</h2>
+<p><strong>When:</strong> once a quarter (January, April, July, October), and after any big database change.
+<strong>Who:</strong> one founder. <strong>Time:</strong> about 30 minutes. <strong>Cost:</strong> under 5 cents.</p>
+<h3>4.1 One time setup</h3>
+<ol>
+<li>Sign in to supabase.com as <code>platform@velstrian.com</code>.</li>
+<li>Account &gt; Access Tokens &gt; Generate new token. Name it <code>restore-test</code>. Copy it into the
+password manager. <strong>Never paste it into a file, a chat or a ticket.</strong></li>
+</ol>
+<h3>4.2 Run it</h3>
+<p>From the <code>velstrian-platform</code> folder, in Git Bash:</p>
+<pre><code class="language-bash"># 1. See the plan, the cost and the next safe start time. Calls nothing.
+node scripts/ops/restore-test.mjs
+
+# 2. At a safe time, load the token for this terminal only (paste it when asked, it is not shown)
+read -s SUPABASE_ACCESS_TOKEN &amp;&amp; export SUPABASE_ACCESS_TOKEN
+
+# 3. Run the test
+node scripts/ops/restore-test.mjs --execute
+</code></pre>
+<p>What happens:</p>
+<ol>
+<li>The script reads production&#39;s backup list and counts key tables (read only, it never writes to production).</li>
+<li>It checks the quiet window and refuses if a production job is due within 60 minutes.</li>
+<li><strong>It asks you for one click</strong>, because Supabase does not offer &quot;restore to a new project&quot; through its API:<ul>
+<li>open the link it prints (production &gt; Database &gt; Backups &gt; <strong>Restore to a new project</strong> tab),</li>
+<li>pick the newest backup,</li>
+<li>name the project <code>velstrian-platform-restoretest-&lt;yyyymmdd&gt;</code> (the name must start with <code>velstrian-platform-restoretest</code>),</li>
+<li>read the cost, click Continue, then press Enter in the terminal.</li>
+</ul>
+</li>
+<li>It finds the new project, waits until it answers (that time is the RTO), switches off all its
+cron jobs, clears its outgoing web request queue, and proves 0 jobs are active.</li>
+<li>It compares row counts with production and writes the evidence to
+<code>docs/release-2.9/ops/restore-tests/&lt;date&gt;.md</code> and <code>.json</code>.</li>
+<li>It deletes the copy, but only after checking the ref is not production, staging or portal and
+the name starts with <code>velstrian-platform-restoretest</code>.</li>
+</ol>
+<p>If you want to look around the copy first, add <code>--keep</code>, and delete it later with:</p>
+<pre><code class="language-bash">node scripts/ops/restore-test.mjs --teardown &lt;copy ref&gt;
+</code></pre>
+<p>Or by hand: open the copy (check the ref in the address bar is NOT one of the three protected refs)</p>
+<blockquote>
+<p>Project Settings &gt; General &gt; Delete project.</p>
+</blockquote>
+<p>If the script stops with an error after the copy exists, <strong>switch the copy&#39;s cron off by hand
+straight away</strong>: open the copy&#39;s SQL editor (check the ref again) and run</p>
+<pre><code class="language-sql">select cron.alter_job(jobid, active := false) from cron.job;
+select count(*) from cron.job where active;   -- must be 0
+</code></pre>
+<p>then delete the copy.</p>
+<h3>4.3 After the test</h3>
+<ul>
+<li>Commit the evidence file and note RTO, RPO and cost in the tracker row.</li>
+<li>Confirm on the org billing page next month that the copy appears only for those hours.</li>
+</ul>
+<hr>
+<h2>5. Real failover: production is lost or damaged</h2>
+<h3>5.1 Decide what happened (5 minutes)</h3>
+<pre><code>Is production up at all? (dashboard shows the project, the app loads)
+|
++-- YES, but data is wrong (bad import, deleted rows, a bad migration)
+|     |
+|     +-- Only a few rows or one table?  -&gt; Do NOT restore. Make a test copy (section 4,
+|     |                                     --keep), copy the missing rows back by hand.
+|     |                                     No customer data written today is lost.
+|     |
+|     +-- Widespread damage?             -&gt; 5.2 option A (new project), or B if A is impossible.
+|
++-- NO, the project is gone, broken or unreachable for more than 30 minutes
+      (check status.supabase.com first: if Supabase itself is down in eu-west-1, wait,
+       a restore would land in the same region)
+      -&gt; 5.2 option A.
+</code></pre>
+<p><strong>Point in time or daily backup?</strong> PITR is OFF, so the only choice is a daily backup. Pick the
+newest backup taken <strong>before</strong> the damage started. Anything after that backup is lost (up to 24 hours).</p>
+<h3>5.2 Restore</h3>
+<p><strong>Option A (preferred): restore into a NEW project.</strong> Production stays untouched, so you can
+still pull data from it later and you can roll back.</p>
+<ol>
+<li>Production &gt; Database &gt; Backups &gt; <strong>Restore to a new project</strong> tab &gt; pick the backup &gt; name it
+<code>velstrian-platform-recovered-&lt;yyyymmdd&gt;</code> &gt; Continue. Note the time.</li>
+<li>About 7 minutes later, open the new project&#39;s SQL editor. <strong>Keep the cron jobs ON</strong> this time
+only if production is truly dead (they are the real jobs now). If old production is still running
+its own jobs, switch the new project&#39;s cron off until the switchover in step 5.3 is done, then
+switch it back on with <code>select cron.alter_job(jobid, active := true) from cron.job;</code>.</li>
+<li>Set again on the new project, because a restore does not copy them:<ul>
+<li>Authentication settings: site URL, redirect URLs, email (Brevo SMTP), MFA and passkey settings, providers.</li>
+<li>Storage buckets and files. <strong>Files are not in the database backup.</strong> If old production is
+still reachable, copy the buckets across. If it is gone, uploaded files are lost.</li>
+<li>Edge Functions and their secrets, if any.</li>
+<li>Network restrictions and SSL enforcement (normally copied, check them).</li>
+</ul>
+</li>
+</ol>
+<p><strong>Option B (last resort): restore over production</strong> (&quot;Scheduled backups&quot; tab &gt; Restore). Use only
+if a new project cannot be created. Production is offline while it runs, and everything after the
+backup is lost permanently. No app repointing is needed afterwards.</p>
+<h3>5.3 Point the apps at the new project (Option A only)</h3>
+<p>Get the new project&#39;s URL and keys from its Project Settings &gt; API (and Database for the connection string).</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What to change</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Railway, API service, production environment</td>
+<td><code>SUPABASE_URL</code>, <code>SUPABASE_ANON_KEY</code>, <code>SUPABASE_SERVICE_ROLE_KEY</code>, <code>SUPABASE_JWT_SECRET</code>, <code>SUPABASE_PROJECT_REF_PRODUCTION</code>, and any database connection string</td>
+</tr>
+<tr>
+<td>Vercel, project <code>crowagent-platform-web</code>, Production</td>
+<td><code>NEXT_PUBLIC_SUPABASE_URL</code>, <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>, <code>SUPABASE_SERVICE_ROLE_KEY</code></td>
+</tr>
+<tr>
+<td>Vercel, project <code>crowagent-portal</code></td>
+<td>only if one of its variables names <code>gujtuecjzfiqsdnzgyvo</code> (the portal normally uses its own database)</td>
+</tr>
+</tbody></table></div>
+<p>Vercel only picks up new values on a new deploy. Redeploy through the normal path only:
+<code>pnpm staging:promote</code>, then <code>pnpm prod:promote</code> with the owner&#39;s approval text carrying the sha
+(RULE 0-P). On Railway, changing a variable redeploys the service by itself.</p>
+<p><strong>Not affected, no change needed:</strong></p>
+<ul>
+<li><strong>Stripe webhooks and Brevo webhooks</strong> point at our app URLs, not at Supabase.</li>
+<li><strong>DNS</strong>: nothing changes. The app domains stay the same.</li>
+</ul>
+<p><strong>What customers notice:</strong> everyone is signed out once (the new project has new signing keys) and
+signs in again. Data written after the backup is missing.</p>
+<h3>5.4 Check it worked (15 minutes)</h3>
+<ol>
+<li>Sign in to the app with a platform account.</li>
+<li>Open a bid, upload a small document, check the dashboard loads.</li>
+<li>In the new project&#39;s SQL editor: <code>select count(*) from cron.job where active;</code> should be 14 (the
+real jobs are now running here) and <code>select max(created_at) from public.audit_logs;</code> should move
+as you use the app.</li>
+<li>Check Sentry for new errors.</li>
+</ol>
+<h3>5.5 Rollback</h3>
+<p>If the new project misbehaves and old production is still alive: put the old values back in Railway
+and Vercel (keep a copy of the old values before step 5.3), redeploy, and switch the new project&#39;s
+cron off. Do not delete either project until the incident is closed.</p>
+<h3>5.6 Who does what</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Who</th>
+<th>About how long</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Decide (5.1) and declare the incident</td>
+<td>founder on call</td>
+<td>5 minutes</td>
+</tr>
+<tr>
+<td>Restore click (5.2)</td>
+<td>founder with Supabase access</td>
+<td>2 minutes, then about 7 minutes waiting</td>
+</tr>
+<tr>
+<td>Auth, storage, functions (5.2 step 3)</td>
+<td>same founder</td>
+<td>15 minutes</td>
+</tr>
+<tr>
+<td>Railway and Vercel variables, redeploy (5.3)</td>
+<td>founder with Railway and Vercel access</td>
+<td>15 to 20 minutes</td>
+</tr>
+<tr>
+<td>Checks (5.4)</td>
+<td>the other founder</td>
+<td>15 minutes</td>
+</tr>
+<tr>
+<td>Tell customers (status page and email if data was lost)</td>
+<td>founder on call</td>
+<td>15 minutes</td>
+</tr>
+</tbody></table></div>
+<p><strong>Total: about 1 hour</strong> from decision to working app, of which the database itself is about 7 minutes.</p>
+<h3>5.7 Evidence to keep</h3>
+<ul>
+<li>Times: damage noticed, decision, restore clicked, copy answered, apps switched, checks passed.</li>
+<li>Which backup was used and its timestamp (that is the data lost).</li>
+<li>The old and new project refs.</li>
+<li>Screenshots of the backup chosen and of the checks.</li>
+<li>File it under <code>docs/release-2.9/ops/restore-tests/</code> as <code>&lt;date&gt;-incident.md</code> and link it from the
+incident row. If personal data was lost, the 72 hour breach notice process applies.</li>
+</ul>
+<hr>
+<h2>6. Reference: what the script calls</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Supabase Management API</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List production backups</td>
+<td><code>GET /v1/projects/{ref}/database/backups</code></td>
+</tr>
+<tr>
+<td>Find the new copy</td>
+<td><code>GET /v1/projects</code></td>
+</tr>
+<tr>
+<td>Wait until the copy is up</td>
+<td><code>GET /v1/projects/{ref}</code> (status <code>ACTIVE_HEALTHY</code>)</td>
+</tr>
+<tr>
+<td>Read production counts (read only)</td>
+<td><code>POST /v1/projects/{ref}/database/query/read-only</code></td>
+</tr>
+<tr>
+<td>Switch off cron, check the copy</td>
+<td><code>POST /v1/projects/{ref}/database/query</code> (copy only, guarded)</td>
+</tr>
+<tr>
+<td>Delete the copy</td>
+<td><code>DELETE /v1/projects/{ref}</code> (copy only, guarded)</td>
+</tr>
+<tr>
+<td>Restore to a new project</td>
+<td><strong>not in the public API</strong>, one dashboard click</td>
+</tr>
+<tr>
+<td>Restore in place (PITR only)</td>
+<td><code>POST /v1/projects/{ref}/database/backups/restore-pitr</code>, never used by the script</td>
+</tr>
+</tbody></table></div>
+<p>Guards are unit tested: <code>node --test scripts/ops/restore-test.test.mjs</code>.</p>
+
+</article>
+</main></body></html>

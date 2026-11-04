@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Database restore test, 2026-11-03</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>Database restore test, 2026-11-03</h1>
+<p><span class="rv-row">R29-GA-RESTORE-TEST-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/ops/restore-tests/2026-11-03.md</code>, rendered from <code>c7bc85007a</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-GA-RESTORE-TEST-01 &middot; FIXED</span><span class="rtitle">GA area Operations: no timed restore test of the production database (RTO and RPO unproven)</span><p>owner deleted the temporary project auluqawdeuucoxrhaslm. Test: RTO about 7 minutes, RPO up to 24 h (daily backup, no PITR), 14 cron jobs on the copy disabled, 0 reached production, row counts matched, about USD 0.03. Runbook, evidence and plan on the board (c7bc85007a); script scripts/ops/restore-test.mjs on review/r29-batch4 (95ee1ffc1f).</p></div></section>
+<article class="doc">
+<h1>Database restore test, 2026-11-03</h1>
+<p>Row: R29-GA-RESTORE-TEST-01. Runbook: docs/release-2.9/ops/DATABASE-RESTORE-AND-FAILOVER-RUNBOOK.md</p>
+<p>This first run was done by hand (owner click, driver measurements), before
+<code>scripts/ops/restore-test.mjs</code> existed. Later runs write this file automatically.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Production ref</td>
+<td>gujtuecjzfiqsdnzgyvo (eu-west-1, Micro, Pro plan, PITR off)</td>
+</tr>
+<tr>
+<td>Copy ref and name</td>
+<td>auluqawdeuucoxrhaslm (velstrian-platform-restoretest)</td>
+</tr>
+<tr>
+<td>How</td>
+<td>Dashboard &gt; Database &gt; Backups &gt; tab &quot;Restore to a new project&quot;, owner clicked Continue</td>
+</tr>
+<tr>
+<td>Backup used (B)</td>
+<td>daily backup 2026-11-03 04:26:39 UTC</td>
+</tr>
+<tr>
+<td>Copy created (T0)</td>
+<td>2026-11-03 15:14:14 UTC (status COMING_UP, then RESTORING)</td>
+</tr>
+<tr>
+<td>API gateway first answered</td>
+<td>15:15:26 UTC</td>
+</tr>
+<tr>
+<td>First successful SQL query (T1)</td>
+<td>15:21:19 UTC</td>
+</tr>
+<tr>
+<td>Cron switched off on the copy (T2)</td>
+<td>15:21:25 UTC, 0 jobs still active</td>
+</tr>
+<tr>
+<td><strong>RTO</strong> (T1 minus T0)</td>
+<td><strong>about 7 minutes 5 seconds</strong> (Micro, 419 MB database)</td>
+</tr>
+<tr>
+<td><strong>RPO</strong> (daily backups, no PITR)</td>
+<td><strong>up to 24 hours</strong> worst case. For this run the copy held everything up to the 04:26:39 backup</td>
+</tr>
+<tr>
+<td>Newest audit_logs row in the copy</td>
+<td>2026-11-02 23:05:55 UTC (no activity between that and the backup, so nothing was missing)</td>
+</tr>
+<tr>
+<td>Cron jobs on the copy</td>
+<td>14 present, all 14 ACTIVE on arrival. Switched off with <code>select cron.alter_job(jobid, active := false) from cron.job</code></td>
+</tr>
+<tr>
+<td>Did the copy call production?</td>
+<td>No. <code>cron.job_run_details</code> showed 0 runs on the copy since 15:14</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>USD 10.18 a month billed hourly, so about USD 0.014 an hour, under USD 0.05 for the run</td>
+</tr>
+<tr>
+<td>Copy deleted (T4)</td>
+<td>PENDING: a founder deletes it in the dashboard (Project Settings &gt; General &gt; Delete project) or runs <code>node scripts/ops/restore-test.mjs --teardown auluqawdeuucoxrhaslm</code> with their token. Supabase MCP <code>pause_project</code> refuses a paid tier project</td>
+</tr>
+</tbody></table></div>
+<h2>Row counts (copy against production)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Production</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public.organisations</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>public.profiles</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>auth.users</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>public.billing_disputes</td>
+<td>present</td>
+<td>present</td>
+</tr>
+</tbody></table></div>
+<h2>Verdict</h2>
+<p>The daily backup restores into a new project in about 7 minutes, the data matches
+production, and the cron hazard is real (all 14 jobs arrived switched on) but was
+contained because the copy was found and its cron switched off within 7 minutes and
+11 seconds of creation, inside a quiet window.</p>
+<p>Recorded by Velstrian Tenderworks.</p>
+
+</article>
+</main></body></html>

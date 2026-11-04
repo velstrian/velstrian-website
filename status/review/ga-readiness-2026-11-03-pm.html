@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>GA readiness re-score, 2026-11-03 evening</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>GA readiness re-score, 2026-11-03 evening</h1>
+<p><span class="rv-row">R29-GA-READINESS-AUDIT-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/GA-READINESS-2026-11-03-PM.md</code>, rendered from <code>e3d8ee229f</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-GA-READINESS-AUDIT-01</span><p>This row is not in the tracker. The mapping line is stale.</p></div></section>
+<article class="doc">
+<h1>GA readiness re-score, 2026-11-03 evening</h1>
+<p>Velstrian Tenderworks. Row R29-GA-READINESS-AUDIT-01. Read only re-score after the production deploy in D541.</p>
+<h2>Short answer</h2>
+<ul>
+<li><strong>Score: 60 out of 100, up from 44.</strong> Production now runs platform 2cf45f3 (app.velstrian.com, portal, Railway API and worker) and the website 1493de74. The production deploy added 607 commits over the old production web tip f89e959d84.</li>
+<li><strong>Verdict:</strong> close to an invite only launch, not ready for open paying signup.</li>
+<li><strong>GA blockers left: 5</strong> (was 9). Details in section 2.</li>
+<li><strong>Earliest dates:</strong> invite only from Thursday 5 November if the owner checks in section 2 are done, open signup Monday 9 November.</li>
+</ul>
+<h2>How each fix was checked</h2>
+<p>A fix counts only if <code>git merge-base --is-ancestor &lt;sha&gt; 2cf45f3</code> answers yes. Confirmed in 2cf45f3: fc7e91e243 (top up visible), 3f165b5647 (failed draft charged), 77356c3daf (credit pack double charge), d2faf53501 (Buy preview charges), 64525ffa09 (price check), 375f1525d (org name), 6420a2f82 (safe play wording), 7bec1338d and a66019fd4 (Radar data and dispute webhooks), 3a20cd017 and 57b2d369d (Sentry fixes), b636cdc2ce (billing acknowledgement), 67bcda2 (staging tip). <strong>Not in 2cf45f3:</strong> c18b58197 (extraction safety nets, on review/kiro-ai), and by the same branch note ca701937b and 4b0e2d633 (briefing deadline, review assist).</p>
+<p>Evidence for &quot;verified&quot;: staging walk 25/25 and the Stripe return check PASS were run on 67bcda2, which is in 2cf45f3, so the same product code. Production health: API /healthz 200 and app /api/health 200 (D541). The production database carries migrations 7130, 7140, 7200, 7230, 7240, 7250, 7260, 7270, 7320 (D541). Nothing was re-run for this document, and no Stripe or Sentry dashboard was queried.</p>
+<h2>1. Score by area</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Weight</th>
+<th>Before</th>
+<th>After</th>
+<th>Why</th>
+<th>What is left, owner</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sign up and onboarding</td>
+<td>10</td>
+<td>40</td>
+<td>68</td>
+<td>Org name fix is live. Staging walk 25/25 on the same code.</td>
+<td>Android fingerprint retry and rename the passkey display name, owner. Remember browser check after promote, owner.</td>
+</tr>
+<tr>
+<td>Core bid journey</td>
+<td>12</td>
+<td>42</td>
+<td>55</td>
+<td>Production now matches the staging journey.</td>
+<td>Extraction safety nets ARE live (afc9c7ef6). Left: the paid extraction re-check under D507, owner cost step.</td>
+</tr>
+<tr>
+<td>Core buy journey</td>
+<td>10</td>
+<td>40</td>
+<td>70</td>
+<td>Preview charge fix is live and walked on staging.</td>
+<td>Buyer credits and role guards from the earlier audit were not re-measured. Driver.</td>
+</tr>
+<tr>
+<td>Billing and payments</td>
+<td>15</td>
+<td>27</td>
+<td>58</td>
+<td>All four money bug fixes, the price check fix and the Stripe return fix are live. Return from Stripe passed on staging.</td>
+<td>Radar free rules and 3 dispute events on the live webhook, owner. Confirm the Stripe account is in live mode (earlier notes say production Stripe was in test mode), owner. A real dispute event has never been seen live.</td>
+</tr>
+<tr>
+<td>AI quality</td>
+<td>12</td>
+<td>42</td>
+<td>45</td>
+<td>Honest AI wording is live. The accuracy fixes are not.</td>
+<td>Merge and re-check extraction (22 critical errors on the old run), briefing deadline and review assist, driver. Owner spot check of golden cases (40 minutes).</td>
+</tr>
+<tr>
+<td>Security and auth</td>
+<td>10</td>
+<td>60</td>
+<td>74</td>
+<td>Audit, dependency and captcha fixes are live. Audit found 0 FAIL and 0 P0.</td>
+<td>Flip BFF_SERVICE_TOKEN_ENFORCED at go live (D486), Supabase Auth settings check, owner.</td>
+</tr>
+<tr>
+<td>Legal and trust</td>
+<td>10</td>
+<td>60</td>
+<td>66</td>
+<td>Safe play wording (D531, D532) is in the platform. Brief emailed to counsel.</td>
+<td>Counsel review, 48 hour breach notice wording, Sentry phone alert, owner.</td>
+</tr>
+<tr>
+<td>Website</td>
+<td>6</td>
+<td>67</td>
+<td>78</td>
+<td>Pushed and live.</td>
+<td>Help centre regeneration and the A-503 close, driver and owner.</td>
+</tr>
+<tr>
+<td>Operations and monitoring</td>
+<td>10</td>
+<td>40</td>
+<td>52</td>
+<td>Health 200, migrations applied, Sentry triage fixes live.</td>
+<td>No timed restore test, no tested phone alert, Railway branch needs the join commit 1b57c2b fast forwarded. Driver and owner.</td>
+</tr>
+<tr>
+<td>Support</td>
+<td>5</td>
+<td>40</td>
+<td>42</td>
+<td>No change in what customers can reach.</td>
+<td>Support inbox process and live help articles, driver.</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+<td><strong>44</strong></td>
+<td><strong>60</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2>2. Remaining GA blockers</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Blocker</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Stripe fraud controls: turn on Radar built in rules, add the 3 dispute events to the live webhook, confirm live mode (R29-FRAUD-CONTROLS-01)</td>
+<td>Owner</td>
+</tr>
+<tr>
+<td>2</td>
+<td>WITHDRAWN, see the correction below: the kiro-ai fixes are in production</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>3</td>
+<td>BFF service token flip and Supabase Auth settings at go live (R29-GA-SEC-AUDIT-01)</td>
+<td>Owner</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Counsel review and breach notice wording (R29-LEGAL-SAFE-PLAY-01, R285-LEGAL-KIRO-A10-01)</td>
+<td>Owner</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Post promote owner checks (R285-OWNER-POST-PROMOTE-STEPS-01) and a timed restore test</td>
+<td>Owner and driver</td>
+</tr>
+</tbody></table></div>
+<p>The portal P0 (R29-PORTAL-PROD-FEATURES-FAILING-01) is on hold and not customer facing.</p>
+<h2>3. Caveats</h2>
+<p>BUILT means awaiting certification. The score is judgment on evidence listed above, not a test run. Legal sufficiency belongs to counsel.</p>
+<h2>Correction</h2>
+<p>Correction 2026-11-03: the extraction safety nets, the clarification deadline backstop and the review assist rubric ARE in production as afc9c7ef6, f67d51d77 and bbbdcab00 (cherry picked copies of c18b58197, ca701937b, 4b0e2d633; checked with git merge-base against 2cf45f3). What is left is the paid re-check of extraction under D507.</p>
+
+</article>
+</main></body></html>

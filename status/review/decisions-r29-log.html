@@ -8,9 +8,9 @@
 <p class="rv-kicker">Owner review</p>
 <h1>R2.9 owner decision log</h1>
 <p><span class="rv-row">R29-OWNER-DECISIONS-LOG-01</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>2f2561d84d</code>. A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>e9a90b89ce</code>. A read only copy, the source file is what counts.</p>
 </header>
-<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-OWNER-DECISIONS-LOG-01 &middot; WIP</span><span class="rtitle">Owner decision log for R2.9, readable on the board (D525 to D532 and the same day owner answers)</span><p>docs/release-2.9/DECISIONS-R29-LOG.md, linked under Owner review; appended the same turn each new decision is made</p></div></section>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-OWNER-DECISIONS-LOG-01 &middot; BUILT</span><span class="rtitle">Owner decision log for R2.9, readable on the board (D525 to D532 and the same day owner answers)</span><p>docs/release-2.9/DECISIONS-R29-LOG.md on main (8c84f397df), appended whenever a decision is made. Was WIP 2026-11-03 - docs/release-2.9/DECISIONS-R29-LOG.md, linked under Owner review; appended the same turn each new decision is made</p></div></section>
 <article class="doc">
 <h1>R2.9 owner decision log</h1>
 <p>Velstrian Tenderworks. Newest first. Each decision names the board row it moved. &quot;Waiting on&quot; means the next action after the decision.</p>
@@ -25,6 +25,139 @@
 </tr>
 </thead>
 <tbody><tr>
+<td>D557</td>
+<td>2026-11-04</td>
+<td>Owner: &quot;you must not defer, must not silently drop, must not ignore and must not compromise and must be efficient and effective as well and must finish all. do required staging and production deployments. i do approve you all the required deployments&quot;. Standing approval for every staging and production deployment R2.9 needs (platform web, portal, Railway API and worker, Supabase migrations shipped with their code, website), like D539 for any sha. Each production promote quotes this text with the sha it deploys. RULE 0-G still applies to any new recurring cost.</td>
+<td>R2.9 deploys</td>
+<td>Active</td>
+</tr>
+<tr>
+<td>D556</td>
+<td>2026-11-04</td>
+<td>Owner delegates product, platform, design and implementation decisions to the driver as head of platform, product and design, to make Velstrian Bid and Velstrian Buy top 1 percent premium products, working continuously and autonomously (first window 6 hours from about 01:30 UTC). The driver decides and records each decision in this log, writes the quality standard (docs/release-2.9/PRODUCT-QUALITY-STANDARD.md) and builds to it. Unchanged by this delegation, because hooks and earlier rules enforce them: a production push carries the owner approval text naming the sha, a new RECURRING cost needs a RULE 0-G cost statement before it is switched on, no dead product returns, PPN 026 only, the identity rule.</td>
+<td>All R2.9 product rows</td>
+<td>Active</td>
+</tr>
+<tr>
+<td>D555</td>
+<td>2026-11-04</td>
+<td>Master design blueprint (docs/release-2.9/MASTER-DESIGN-BLUEPRINT-2026-11-04.md) approved, all 9 choices as recommended. (1) GA ships the smaller shell set: no Clients for non agencies, no All products for single product orgs, no Members on 1 seat, mobile follows role and seat rules, one stable shell for shared pages. The full one table navPolicy follows in the first 30 days. (2) One Start a bid door with 3 path cards (answer a tender, send a quick quote, apply for funding) and a 3 step workspace (Understand, Write, Check and send). (3) Buyer compliance centre led by legal obligations, buyer framed evidence vault, funding start screen over the built packs. (4) Trial ended organisations see only upgrade and Billing, advisor off. (5) In app Today list now, email digests only after a RULE 0-G cost statement. (6) Buyer AI advisor over their own records after GA. (7) Custom fields max 5 per new entity, AI read and document export off by default per field, keep 15 where data exists. (8) Integrations CSV and Zapier first. (9) Charities are a sector, not a new organisation type.</td>
+<td>R29-MASTER-DESIGN-01 and its build rows</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td>D554</td>
+<td>2026-11-04</td>
+<td>Model choice stays as built for this release: Auto default with the three level picker under Generate. Choosing a specific model (Gemini, OpenAI, Claude) for Pro and Portfolio, at organisation level on the credits page with credits drained by weight, and the website consumption copy, come in a later release (phase 2 row R29-MODEL-CHOICE-ORG-SETTING-01).</td>
+<td>R29-MODEL-CHOICE-ORG-SETTING-01</td>
+<td>Phase 2</td>
+</tr>
+<tr>
+<td>D553</td>
+<td>2026-11-04</td>
+<td>Bid and Buy are separate products for separate customers, a customer sees only what they bought. (1) The product chosen on the website travels into signup and is saved on the organisation at once, a visitor with no product gets one plain onboarding question (write bids, or buy and evaluate them). (2) Every website product page button names and carries its product. (3) The other product is offered on the Billing page only. (4) An organisation with no product sees a one off two card chooser. Organisations holding both keep today&#39;s behaviour.</td>
+<td>R29-PRODUCT-SEPARATION-01</td>
+<td>In build: driver</td>
+</tr>
+<tr>
+<td>D552</td>
+<td>2026-11-03</td>
+<td>Owner: enable OpenAI as a sub-processor now. There are no customers, so no existing organisation is owed the DPA clause 6.4 notice: announced today with no notice window for this change, OpenAI listed in DPA Schedule 1 on the app and the website, terms version bumped, AI_OPENAI_SECOND_PROVIDER on with round 4. A model still serves customers only after passing its family eval (D322).</td>
+<td>R29-STEP-P3-TRUST-OPENAI-DPA-NOTICE-01</td>
+<td>In build: driver, ships with round 4</td>
+</tr>
+<tr>
+<td>D551</td>
+<td>2026-11-03</td>
+<td>Owner: yes, switch on paid AI overage (CREDIT_OVERAGE_ENABLED) in production, so customers who use up their monthly AI credits can buy extra usage through Stripe. Switched on with production round 4 (Railway velstrian-api and velstrian-worker, Vercel production), only after the Stripe overage walk passes on staging. Off again by setting the variable to false, no code change.</td>
+<td>R29-STEP-P2-EXTRA-USAGE-SELF-SERVE-01</td>
+<td>Round 4</td>
+</tr>
+<tr>
+<td>D550</td>
+<td>2026-11-03</td>
+<td>No financial liability for Velstrian while there are no customers. The website does not state any liability cap or liability terms. It says the full terms are available on request. Reviewed when the first real customers are onboarded. Supersedes the website part of D532 (the 12 month fees cap). No counsel review until then.</td>
+<td>website terms and DPA (A-512 follow up), R29-STEP-LEGAL-KIRO-A02-01</td>
+<td>In build: driver</td>
+</tr>
+<tr>
+<td>D549</td>
+<td>2026-11-03</td>
+<td>Owner: &quot;accept the 3 AI passes&quot;. Commit 3cbd9fafd0 (eval_passed reloads the stored eval results every 5 minutes) also switches on three passes already recorded on production: bid_rfp_missed_asks@v1, bid_free_tender_briefing_plain_rewrite@v1, chatbot_public@v5, together with bid_rfp_contradictions@v1. Accepted, ships in the next production round. Also 2026-11-03 evening: production round 3 of 46988ad aborted at local quality gates (arch-web, trufflehog), nothing deployed, row R29-PROMOTE-R3-GATES-01.</td>
+<td>R29-GA-AI rows</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td>D547</td>
+<td>2026-11-03</td>
+<td>Owner approved all 9 recommendations of GA-SUPPORT-AND-AI-TO-95-PLAN.md: (1) GA extraction bar = zero critical errors plus measured precision and recall with a human check label on extractions, 95/97 bar is phase 2; (2) promote the contradiction pass once its golden eval passes; (3) a further paid evaluation cap of GBP 15, staging only, worst case stated first; (4) move the GA slice of the help rows to phase 1; (5) Kiro style panel review for the remaining golden set, accepted as the owner&#39;s; (6) first reply within one working day stays internal (D532); (7) weekly by hand production canary, never scheduled; (8) mailbox phone alert on the day of the production support proof; (9) eval gate enforce in production once a measured floor exists.</td>
+<td>GA Support and AI quality rows</td>
+<td>In execution</td>
+</tr>
+<tr>
+<td>D546</td>
+<td>2026-11-03</td>
+<td>Owner: a BUILT row whose fix commit is live in production (an ancestor of the production commit) counts as owner confirmed and moves to FIXED. Applied to 165 platform rows live in 90d3075; website rows live on velstrian.com likewise.</td>
+<td>Board-wide</td>
+<td>Done</td>
+</tr>
+<tr>
+<td>D545</td>
+<td>2026-11-03</td>
+<td>Owner: yes to raising the lifetime AI programme ceiling of evaluation org 8e088ab9 (D135 cap GBP 24, all time spend GBP 50.31) to about GBP 60 for the remaining D507 evaluation runs, and yes to Cloudflare Browser Cache TTL Respect Existing Headers (the agent guardrail refused the Cloudflare API change: owner sets it in the dashboard or allows the MCP rule).</td>
+<td>R29-GA-AI-ACCURACY-RECHECK-01, A-519</td>
+<td>Ceiling used process scope; Cloudflare pending owner</td>
+</tr>
+<tr>
+<td>D544</td>
+<td>2026-11-03</td>
+<td>Supabase point in time recovery (PITR) is NOT bought now. Today RPO is up to 24 hours (daily backup), RTO about 7 minutes (restore test 2026-11-03). PITR is a future paid option, to be considered with the subscription plans (for example a shorter recovery point offered on higher tiers) once there are paying customers.</td>
+<td>R29-OPS-PITR-FUTURE-01</td>
+<td>Phase 2, owner decision when pricing is reviewed</td>
+</tr>
+<tr>
+<td>D543</td>
+<td>2026-11-03</td>
+<td>PRODUCTION ROUND 2 DEPLOYED 90d3075 (batch 3: sign in cookie chunks, legal summaries, formatter dashes, GA UI polish, staging hygiene, CSP billing fix, AI engine T07 T15 T16 GraphRAG wiring switched off). 31 local gates PASS clean checkout; web dpl_8M8ezEEb READY app.velstrian.com, portal dpl_9trYyp81 READY portal.velstrian.com with the owner rotated portal Supabase keys and PLATFORM_* pair, Railway api and worker SUCCESS. Health 200.</td>
+<td>R29 production round 2, R29-PORTAL-PROD-FEATURES-FAILING-01</td>
+<td>Done, portal sign in to confirm</td>
+</tr>
+<tr>
+<td>D542</td>
+<td>2026-11-03</td>
+<td>Breach notification stays 72 hours (owner: we agreed on 72 hour notification), as the live DPA clause 8.2 already says. Owner approves the remaining GA steps to be done by the driver: Radar built in rules, restore test (under GBP 1), paid AI accuracy re-check within the D507 cap, Sentry test alert.</td>
+<td>R29-GA-BREACH-NOTICE-48H-01, R29-GA-READINESS-100-01</td>
+<td>Done / in progress</td>
+</tr>
+<tr>
+<td>D541</td>
+<td>2026-11-03</td>
+<td>PRODUCTION DEPLOYED (owner: &quot;A, approve the acknowledgement and deploy to production&quot;). prod:promote 2cf45f3: 33 local gates PASS in a clean checkout, web dpl_7GBJVN3z app.velstrian.com READY, portal dpl_G1tVygFP portal.velstrian.com READY, Railway velstrian-api and velstrian-worker SUCCESS by CLI upload (the railway-production git push was rejected non fast forward by two hotfixes already contained in the batch; join commit 1b57c2b ready to fast forward the branch). Production database carries 7130, 7140, 7200, 7230, 7240, 7250, 7260, 7270, 7320. Health: api /healthz 200, app /api/health 200. Website pushed by the owner 1493de74, live.</td>
+<td>R29 production promote, R285-OWNER-WEBSITE-PUSH-APPROVAL-01</td>
+<td>Done</td>
+</tr>
+<tr>
+<td>D540</td>
+<td>2026-11-03</td>
+<td>OWNER DECISION NEEDED. The production promote of 67bcda2 is blocked by pnpm billing:audit: 5 staging deployments (web dpl_BEwq5y81, portal dpl_HaQbkofW, dpl_GFHgpGua, dpl_6jqKELRY, dpl_85NKXK2C) were dashboard REDEPLOYS on 2026-11-01/02, not CLI uploads. One-off, already built on the fixed Standard machine, no recurring cost. Option A (recommended): approve a narrow expiring acknowledgement list in scripts/staging/billing-allowlist.json (exact ids, reason, expiry 2026-11-10; any other non-CLI deployment still fails). Option B: wait until about 2026-11-09 when they leave the 7 day window. The agent guardrail refused A without the owner, correctly. Staging is deployed and the production database already carries the new migrations (7130, 7140, 7200, 7230, 7240, 7250, 7260, 7320), all additive and safe with the old code.</td>
+<td>R29-BILLING-AUDIT-ACK-REDEPLOYS-01, R29 production promote</td>
+<td>Owner chose A (2026-11-03): built b636cdc2ce</td>
+</tr>
+<tr>
+<td>D539</td>
+<td>2026-11-03</td>
+<td>Owner away 6 hours. Push budget for today: up to 3 staging plus production rounds, any sha (67bcda2 first, up to 2 more for finished fixes): about 3 main pushes, about GBP 3 to 9 of Actions, 3 Vercel production deploys. Website: one push to website main WITHOUT the owner check on 8093, only after the 45 gate chain is green with Lighthouse and screenshots left as evidence (replaces the 8093 step of D529 for this push).</td>
+<td>R285-OWNER-WEBSITE-PUSH-APPROVAL-01, R29 production promote</td>
+<td>In progress: driver</td>
+</tr>
+<tr>
+<td>D538</td>
+<td>2026-11-03</td>
+<td>After a session restart, deploy autonomously to staging (Railway API, Supabase migrations, Vercel) and then to production, then keep executing every remaining item: GA first, then everything else (do not stop at week 1). Portal work ON HOLD. Platform and website are top priority. The driver also takes over all website work from Kiro (Kiro stops).</td>
+<td>All GA rows</td>
+<td>Resume plan in memory, deploy next</td>
+</tr>
+<tr>
 <td>D537</td>
 <td>2026-11-03</td>
 <td>Homepage security section becomes a compact trust strip of 4 badges linking to /security, full content moved to /security, nothing deleted.</td>

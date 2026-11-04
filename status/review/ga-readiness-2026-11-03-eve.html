@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>GA readiness re-score, 2026-11-03 late evening</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>GA readiness re-score, 2026-11-03 late evening</h1>
+<p><span class="rv-row">R29-GA-READINESS-AUDIT-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/GA-READINESS-2026-11-03-EVE.md</code>, rendered from <code>0ff17d6fad</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-GA-READINESS-AUDIT-01</span><p>This row is not in the tracker. The mapping line is stale.</p></div></section>
+<article class="doc">
+<h1>GA readiness re-score, 2026-11-03 late evening</h1>
+<p>Velstrian Tenderworks. Row R29-GA-READINESS-AUDIT-01. Read only re-score after production round 2 (90d3075, D543).</p>
+<h2>Short answer</h2>
+<ul>
+<li><strong>Score on what is live in production: 72 out of 100, up from 61.</strong> Platform 90d3075, website 75735af3.</li>
+<li><strong>Expected once round 3 (1cc8c90cd2, on staging now, 49 commits past 90d3075) reaches production: about 77.</strong></li>
+<li><strong>Verdict:</strong> ready for an invite only launch once the 4 blockers below are checked, not yet for open paying signup.</li>
+<li><strong>GA blockers left: 4</strong> (was 5).</li>
+<li><strong>Earliest dates:</strong> invite only Thursday 5 November after round 3 is promoted and the owner checks are done, open signup Monday 9 November.</li>
+</ul>
+<h2>How it was checked</h2>
+<p>A fix gets full credit only if <code>git merge-base --is-ancestor &lt;sha&gt; 90d3075ec1</code> answers yes. In production: afc9c7ef6, ac191f197, 4ebf00068, 37532d2db, 81e583c4e, d0921a7b4, cdc71b93f, 1a5e592bd, 4c6785f37, f9b26067f, c4491ad52, 67bcda2251, 4b3e5847a, bad810685. <strong>Not in production (round 3 or later):</strong> 6f361fcf43 (invitee captcha fix), 2d4008d687 (staging live Stripe key guard), 94cacec996 (dispute walk), 7b34ddcf01 and the 5 Gemini help articles, ba9c4ef08f (buy walk). Evidence measured on staging with round 3 code gets partial credit and is marked below. Tracker rows were read from RELEASE-2.9-TRACKER.md and decisions D538 to D545 from DECISIONS-R29-LOG.md. Nothing was re-run for this document.</p>
+<h2>1. Score by area (production credit)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Weight</th>
+<th>Before</th>
+<th>After</th>
+<th>After round 3</th>
+<th>What is left, owner</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sign up and onboarding</td>
+<td>10</td>
+<td>68</td>
+<td>71</td>
+<td>82</td>
+<td>Hook timeout fix and invitee captcha fix are staging only. Android fingerprint check, owner.</td>
+</tr>
+<tr>
+<td>Core bid journey</td>
+<td>12</td>
+<td>60</td>
+<td>63</td>
+<td>68</td>
+<td>Extraction has 5 unflagged conflicts, clean re-measure tomorrow, driver. Self service journey PASS is staging only.</td>
+</tr>
+<tr>
+<td>Core buy journey</td>
+<td>10</td>
+<td>70</td>
+<td>72</td>
+<td>80</td>
+<td>Walk 10 of 12 on staging, 2 blocked by staging AI prepay and a route, driver.</td>
+</tr>
+<tr>
+<td>Billing and payments</td>
+<td>15</td>
+<td>58</td>
+<td>80</td>
+<td>84</td>
+<td>Dispute never seen end to end (walk built, run left), driver. Radar for Fraud Teams is a paid owner decision. Staging live key guard is round 3.</td>
+</tr>
+<tr>
+<td>AI quality</td>
+<td>12</td>
+<td>45</td>
+<td>52</td>
+<td>62</td>
+<td>Review assist 19 of 20 and briefing 3 of 3 were measured on staging, partial credit. Extraction clean re-measure, driver. Owner spot check of golden cases.</td>
+</tr>
+<tr>
+<td>Security and auth</td>
+<td>10</td>
+<td>74</td>
+<td>88</td>
+<td>90</td>
+<td>Owner confirms the BFF token row. Live key guard in round 3.</td>
+</tr>
+<tr>
+<td>Legal and trust</td>
+<td>10</td>
+<td>66</td>
+<td>74</td>
+<td>74</td>
+<td>Counsel review of safe play wording, owner. Breach notice is settled at 72 hours (D542).</td>
+</tr>
+<tr>
+<td>Website</td>
+<td>6</td>
+<td>78</td>
+<td>84</td>
+<td>86</td>
+<td>Tender finder speed fix is built, not live, driver.</td>
+</tr>
+<tr>
+<td>Operations and monitoring</td>
+<td>10</td>
+<td>52</td>
+<td>76</td>
+<td>76</td>
+<td>Phone notification in the Gmail app, owner. Railway branch join, owner approval. PITR not bought (D544), RPO up to 24 h.</td>
+</tr>
+<tr>
+<td>Support</td>
+<td>5</td>
+<td>42</td>
+<td>52</td>
+<td>70</td>
+<td>Support emails and in app reports reaching the inbox are round 3 only, driver.</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+<td><strong>61</strong></td>
+<td><strong>72</strong></td>
+<td><strong>77</strong></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2>2. Remaining GA blockers</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Blocker</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Promote round 3 to production (hook timeout, invitee captcha, support, AI fixes). Needs the owner approval text.</td>
+<td>Owner and driver</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Extraction clean re-measure (5 unflagged conflicts), paid under D507 and D545</td>
+<td>Driver</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Counsel review of the safe play wording</td>
+<td>Owner</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Owner checks: Android fingerprint, Gmail phone notification, BFF row confirmation (R285-OWNER-POST-PROMOTE-STEPS-01)</td>
+<td>Owner</td>
+</tr>
+</tbody></table></div>
+<h2>3. Caveats</h2>
+<p>BUILT means awaiting certification. The score is judgment on the evidence above, not a test run. Weights are unchanged from the earlier documents. Legal sufficiency belongs to counsel. The round 3 column is a forecast, not a measurement.</p>
+
+</article>
+</main></body></html>
