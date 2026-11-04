@@ -39,9 +39,9 @@
     "@resvg/resvg-js": "^2.6.2",
     "esbuild": "^0.28.1",
     "lighthouse": "^13.3.0",
-    "satori": "^0.12.2",
-    "serve": "^14.2.6",
+    "satori": "^0.63.2",
     "sharp": "^0.35.5",
+    "sirv-cli": "^3.0.1",
     "tsx": "^4.19.2"
   },
   "dependencies": {
@@ -50,8 +50,9 @@
   "overrides": {
     "qs": "^6.15.2",
     "compression": "^1.8.2",
-    "fast-uri": "^3.1.8",
+    "fast-uri": "^3.1.9",
     "brace-expansion@1": "^1.1.21",
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.1",
+    "fflate": "^0.7.5"
   }
 }

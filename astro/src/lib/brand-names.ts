@@ -101,14 +101,15 @@ export const REPLY_TIME = "within three to five business days";
  *
  * hello, support, sales and security are the SAME mailbox under D280: the
  * keys stay so a page can say what it is writing about, and they all resolve
- * to PUBLIC_EMAIL. privacy, dpo and legal are outside D280 and unchanged.
+ * to PUBLIC_EMAIL. privacy and dpo also resolve to it since 2026-11-03
+ * (R29-LEGAL-REVIEW-AGAIN-01: one data protection contact). legal is unchanged.
  */
 export const CONTACT_EMAILS = {
   hello: PUBLIC_EMAIL,
   support: PUBLIC_EMAIL,
   security: PUBLIC_EMAIL,
-  privacy: "privacy@velstrian.com",
-  dpo: "dpo@velstrian.com",
+  privacy: PUBLIC_EMAIL,
+  dpo: PUBLIC_EMAIL,
   legal: "legal@velstrian.com",
   sales: PUBLIC_EMAIL,
   contact: PUBLIC_EMAIL,

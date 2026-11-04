@@ -87,9 +87,10 @@ interface Props {
    * one document, so nothing here may be a fixed id.
    */
   id: string;
+  eager?: boolean;
 }
 
-const { id } = Astro.props;
+const { id, eager = false } = Astro.props;
 
 /** The ONE definition of each key. Previously typed out in two components. */
 const SITEKEY = '0x4AAAAAADML7D0t7OQT4B4R';
@@ -135,6 +136,7 @@ const FAILED =
   <div
     class="cf-turnstile"
     data-turnstile
+    data-eager={eager ? 'true' : undefined}
     data-err={`${id}-turnstile-err`}
     data-sitekey-prod={SITEKEY}
     data-sitekey-test={SITEKEY_TEST}
@@ -204,6 +206,13 @@ const FAILED =
       if (input && !input.value && token) input.value = token;
       if (!tokenOf(form)) continue;
       waiting.delete(form);
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submitBtn && submitBtn.dataset.origText) {
+        const label = submitBtn.querySelector<HTMLElement>('.ea-btn__label') ?? submitBtn;
+        label.textContent = submitBtn.dataset.origText;
+        delete submitBtn.dataset.origText;
+        submitBtn.removeAttribute('aria-busy');
+      }
       form.requestSubmit();
     }
   };
@@ -246,6 +255,15 @@ const FAILED =
     for (const [form, holder] of byForm) {
       const err = holder.dataset.err ? document.getElementById(holder.dataset.err) : null;
 
+      // Start check when page is interactive if configured eager.
+      if (holder.dataset.eager === 'true') {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => requestTurnstile(holders), { once: true });
+        } else {
+          requestTurnstile(holders);
+        }
+      }
+
       // Load on first focus anywhere in the form, including the submit button.
       form.addEventListener('focusin', () => requestTurnstile(holders), { once: true });
 
@@ -270,6 +288,14 @@ const FAILED =
           e.preventDefault();
           e.stopImmediatePropagation();
 
+          const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.setAttribute('aria-busy', 'true');
+            const label = submitBtn.querySelector<HTMLElement>('.ea-btn__label') ?? submitBtn;
+            if (!submitBtn.dataset.origText) submitBtn.dataset.origText = label.textContent ?? '';
+            label.textContent = 'Checking security...';
+          }
+
           if (err) {
             // The pending wording is server-rendered, so it is correct with no
             // JavaScript work at all. Only the give-up case rewrites it.
@@ -286,6 +312,12 @@ const FAILED =
                 if (!waiting.has(form)) return;
                 waiting.delete(form);
                 if (err.dataset.msgFailed) err.textContent = err.dataset.msgFailed;
+                if (submitBtn && submitBtn.dataset.origText) {
+                  const label = submitBtn.querySelector<HTMLElement>('.ea-btn__label') ?? submitBtn;
+                  label.textContent = submitBtn.dataset.origText;
+                  delete submitBtn.dataset.origText;
+                  submitBtn.removeAttribute('aria-busy');
+                }
               }, wait);
             }
           }

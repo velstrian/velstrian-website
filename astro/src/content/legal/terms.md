@@ -99,7 +99,7 @@ You confirm that you and your users are not on a UK, US or EU sanctions list and
 
 ## 4. AI Output Disclaimer
 
-<dl class="deflist"> <dt>Important, AI outputs are not advice</dt> <dd> <p>The Velstrian platform uses artificial intelligence models from Google (Gemini) and Anthropic (Claude), the AI providers listed in our Data Processing Agreement, to generate PPN 026 social value scores and bid content, and, for existing customers, legacy sustainability and security-evidence guidance. We add another AI provider only after giving the notice our Data Processing Agreement sets out. We use trusted AI providers, and a change at one of them can affect the service.</p> <p><strong>AI outputs are drafts to help you. Please check them before you rely on them or submit them.</strong> These outputs do not constitute legal, surveying, financial, or professional advice. They are provided for informational and decision-support purposes only.</p> </dd> <dt>No guarantee of winning</dt> <dd> <p>Velstrian helps you write better bids, faster. Whether a bid or tender wins is decided by the buyer, so we cannot promise any result.</p> </dd> </dl>
+<dl class="deflist"> <dt>Important, AI outputs are not advice</dt> <dd> <p>The Velstrian platform uses artificial intelligence models from Google (Gemini) and Anthropic (Claude), the AI providers listed in our Data Processing Agreement, to generate PPN 026 social value scores and bid content. We add another AI provider only after giving the notice our Data Processing Agreement sets out. We use trusted AI providers, and a change at one of them can affect the service.</p> <p><strong>AI outputs are drafts to help you. Please check them before you rely on them or submit them.</strong> These outputs do not constitute legal, surveying, financial, or professional advice. They are provided for informational and decision-support purposes only.</p> </dd> <dt>No guarantee of winning</dt> <dd> <p>Velstrian helps you write better bids, faster. Whether a bid or tender wins is decided by the buyer, so we cannot promise any result.</p> </dd> </dl>
 
 <details class="lc-details" id="ai-detail"> <summary>AI Disclaimer, model behaviour, accuracy, professional review</summary> <div class="lc-details__body"> <p>You should not rely solely on AI outputs to make compliance decisions, submit regulatory returns, or advise clients. Velstrian strongly recommends that all significant compliance or procurement decisions are reviewed by a qualified professional before action is taken.</p> <p>AI model outputs may contain errors, omissions, or outdated information. Velstrian does not warrant the accuracy, completeness, or fitness for purpose of any AI-generated content.</p> <ul> <li>Outputs reflect the model's training data and may not capture the latest regulatory changes.</li> <li>Confidence scores indicate model certainty, not factual accuracy.</li> <li>Always cross-check material thresholds and dates against the source legislation.</li> <li>For regulated submissions, obtain a sign-off from a qualified surveyor, lawyer, or compliance officer.</li> </ul> </div> </details>
 
@@ -125,13 +125,13 @@ Personal data is processed in accordance with our [Privacy Policy](/privacy/). I
 
 ## 8. Service Availability and Warranties
 
-Velstrian targets **99.5% monthly uptime**. The figure is a target, not a promise, and no credits are due if we miss it. We may perform maintenance with reasonable prior notice. Planned downtime is excluded from uptime calculations.
+Velstrian aims for **99.5% monthly uptime**. This is an aim we work to, not a guarantee, and no credits are due if we miss it. We may perform maintenance with reasonable prior notice. Planned downtime is excluded from uptime calculations.
 
 We provide Velstrian with reasonable skill and care and so that it works materially as described in our documentation. If it does not, tell us within 30 days of noticing. We will fix it. If we cannot fix it within 30 days, either of us can end your subscription, which then stops at the end of the paid period and is not renewed. This is your only remedy for that failure. Fees already paid are not refunded. An AI output that is inaccurate or incomplete is not such a failure, because you check every output before use (sections 2 and 4). Apart from this, Velstrian is provided as it is and as available, and we give no other warranty the law lets us leave out. The service is for business customers only.
 
 99.5<sup>%</sup>
 
-Monthly uptime target across all production services. Independent public status monitoring is published at status.velstrian.com.
+Monthly uptime we aim for across all production services. Independent public status monitoring is published at status.velstrian.com.
 
 [View status page](https://status.velstrian.com)
 

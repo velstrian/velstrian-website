@@ -181,7 +181,7 @@ const schema = [
         </div>
       </div>
 
-      <Turnstile id="tf" />
+      <Turnstile id="tf" eager />
 
       <div class="ea-actions tf-form__actions">
         <Action as="button" type="submit" id="tf-submit">Search tenders</Action>
@@ -521,6 +521,10 @@ const schema = [
 
     busy = true;
     submit.setAttribute('aria-busy', 'true');
+    const submitLabel = submit.querySelector<HTMLElement>('.ea-btn__label') ?? submit;
+    const idleText = submit.dataset.idleText || submitLabel.textContent || 'Search tenders';
+    submit.dataset.idleText = idleText;
+    submitLabel.textContent = 'Searching...';
     say('busy', 'busy', page);
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 20000);
@@ -556,6 +560,10 @@ const schema = [
       clearTimeout(timer);
       busy = false;
       submit.removeAttribute('aria-busy');
+      if (submit.dataset.idleText) {
+        submitLabel.textContent = submit.dataset.idleText;
+        delete submit.dataset.idleText;
+      }
       resetCheck();
     }
   });
