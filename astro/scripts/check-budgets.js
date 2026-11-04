@@ -473,7 +473,10 @@ const BUDGETS = {
      *
      *   videoFile   25 MiB, Cloudflare Pages' hard per file limit, so a file
      *               over it would fail the deploy rather than this gate.
-     *   videoTotal  70 MB against 66.9 MB measured 2026-11-02. Was 52 MB against
+     *   videoTotal  30 MB against 26.05 MB measured 2026-11-03 across 28 files
+     *               (R29-HELP-VIDEO-REENCODE-01: the three /help cuts re-encoded
+     *               to 720p H.264 with the voice over kept, 45.6 MB to 5.9 MB).
+     *               Was 70 MB against 66.9 MB measured 2026-11-02. Was 52 MB against
      *               49.7 MB (the 1.9 MB tour plus the three help cuts). A-506 /
      *               R29-CONTENT-KIRO-CREW-01 adds the product video series: two
      *               voiced walkthroughs and eight feature shorts on
@@ -490,7 +493,7 @@ const BUDGETS = {
      *               brief 21 report; re-encoding the three /help cuts on the
      *               platform side would bring it back under 52 MB. */
   videoFile: 25 * 1024 * 1024,
-  videoTotal: 70 * MB,
+  videoTotal: 30 * MB,
 };
 
 /* ══════════════════════════════════════════════════════════════════════════
