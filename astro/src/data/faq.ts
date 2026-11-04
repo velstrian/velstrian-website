@@ -112,7 +112,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         answer:
           // D236 (2026-10-19): sign up is self serve. The answer above this
           // line described the request step that D236 removed.
-          `Choose a plan on the pricing page and select ${START_LABEL}. You create your account, pay by card through Stripe, and can start scoring bids or preparing your evidence straight away. The card is held securely by Stripe and never stored by us.`,
+          `Choose a plan on the pricing page and select its start button. You create your account, pay by card through Stripe, and can start scoring bids or preparing your evidence straight away. The card is held securely by Stripe and never stored by us.`,
         link: { label: START_LABEL, href: SIGNUP_URL },
       },
       {

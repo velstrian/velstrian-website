@@ -150,7 +150,14 @@
  * else. Violet and teal appear nowhere near a control, a hover or a focus ring.
  */
 import Button from '../ui/Button.astro';
-import { SIGNUP_URL } from '../../data/app';
+import { SIGNUP_URL, START_LABEL } from '../../data/app';
+import { productStart, type Product } from '../../data/product-start';
+
+/* D553: the page passes the product it is about. Left out, the button is the
+   neutral Start now to the bare sign up page, where the app asks. */
+interface Props { product?: Product }
+const { product } = Astro.props;
+const start = product ? productStart(product) : { href: SIGNUP_URL, label: START_LABEL };
 import { analyse } from '../../lib/tender-matrix';
 /*
  * THE SAME TWO FORMATTERS THE LIVE TERMINAL USES, 2026-09-01. They live in
@@ -453,7 +460,7 @@ const CHECKED = SAMPLES.map((s) => {
       offer at two scroll depths, not a second competing action.
     */}
     <div class="btn-row">
-      <Button href={SIGNUP_URL}>Start now</Button>
+      <Button href={start.href}>{start.label}</Button>
       <Button href="/tools/tender-compliance-matrix/" variant="secondary">
         Read a tender, free
       </Button>

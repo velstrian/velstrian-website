@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { APP_ORIGIN, WALKTHROUGH_URL } from './src/data/app.ts';
+import { PRODUCT_START, productStart } from './src/data/product-start.ts';
 
 /**
  * Serve `/Assets/...` from the repository root DURING DEV ONLY.
@@ -207,7 +208,19 @@ function rehypeAppOrigin({ origin, walkthrough }) {
     const walk = (node) => {
       if (node.type === 'element' && node.tagName === 'a' && node.properties && typeof node.properties.href === 'string') {
         const href = node.properties.href;
-        if (href === 'walkthrough:') node.properties.href = walkthrough;
+        /* D553: a product start link in content is written `start:bid` or
+           `start:buy`. Its href AND its words come from src/data/product-start.ts,
+           so a post can never carry a hand typed plan or label. */
+        const startMatch = /^start:(bid|buy)$/.exec(href);
+        if (startMatch) {
+          const start = productStart(startMatch[1]);
+          node.properties.href = start.href;
+          node.children = [{ type: 'text', value: start.label }];
+        }
+        else if (/^start:/.test(href)) {
+          throw new Error(`D553: ${file?.path ?? 'content'} links to ${href}. Use one of ${Object.keys(PRODUCT_START).map((k) => `start:${k}`).join(', ')}.`);
+        }
+        else if (href === 'walkthrough:') node.properties.href = walkthrough;
         else if (CALENDLY_LINK.test(href)) {
           throw new Error(`A-472: ${file?.path ?? 'content'} links to ${href}. Write it as walkthrough: so the booking link stays one line in src/data/app.ts.`);
         }

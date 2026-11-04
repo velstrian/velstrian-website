@@ -20,15 +20,39 @@ import Band from '../evidenced/Band.astro';
 import {
   COMPARE_LEAD,
   COMPARE_MORE,
+  BUY_COMPARE,
   CREDIT_PAGES,
   PLANS,
+  BUYER_PLANS,
 } from '../../data/pricing';
+import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../../lib/brand-names';
 
-const ALL_COMPARE = [...COMPARE_LEAD, ...COMPARE_MORE];
-/* The recommended plan's column, read from PLANS rather than assumed, so the
-   tint follows the plan if the recommendation ever moves. 1 based, plus one
-   for the feature column. */
-const REC_COL = PLANS.findIndex((p) => p.recommended) + 2;
+/*
+ * A-521 and D553 (owner 2026-11-04): one table per product, each in its own
+ * named section, from the same plan source and the same markup, so Velstrian
+ * Buy has the same depth as Velstrian Bid and the two never share a table.
+ * The recommended plan's column is read from the plans rather than assumed, so
+ * the tint follows the plan if the recommendation ever moves. 1 based, plus
+ * one for the feature column. Buy has no recommended plan, so no tint.
+ */
+const TABLES = [
+  {
+    id: 'compare-bid',
+    name: PRODUCT_NAME_BID,
+    plans: PLANS.map((p) => p.name),
+    rows: [...COMPARE_LEAD, ...COMPARE_MORE],
+    recCol: PLANS.findIndex((p) => p.recommended) + 2,
+    note: 'Bids are not metered, which is why that row reads unlimited on every plan. The meter is AI credits, and the number each plan includes is the row below it.',
+  },
+  {
+    id: 'compare-buy',
+    name: PRODUCT_NAME_BUY,
+    plans: BUYER_PLANS.map((p) => p.name),
+    rows: BUY_COMPARE,
+    recCol: 0,
+    note: 'Both plans have the same tools. What changes is users, AI credits, guest evaluators and how you can pay.',
+  },
+];
 ---
 
 <Band tone="light-alt" class="pricing-compare" id="compare" labelledby="compare-title">
@@ -39,57 +63,58 @@ const REC_COL = PLANS.findIndex((p) => p.recommended) + 2;
         <h2 class="ea-h2" id="compare-title">Compare the details.</h2>
       </div>
       <p class="ea-lead">
-        Every plan runs the same statutory checks. What changes between them is seats, AI credits and post-award tracking.
+        Each product has its own plans and its own table. Find yours, then compare its plans side by side.
       </p>
     </div>
 
     <div class="pricing-compare__details-wrap" data-reveal>
-          <h3 class="ea-h3 pricing-compare__subheading">Velstrian Bid</h3>
+      {
+        TABLES.map((t) => (
+          <section class="pricing-compare__product" aria-labelledby={`${t.id}-title`}>
+            <h3 class="ea-h3 pricing-compare__subheading" id={`${t.id}-title`}>{t.name}</h3>
 
-          <div class="pricing-table-scroll pricing-table-scroll--sticky" tabindex="0" role="region" aria-label="Velstrian Bid features by plan, scrollable">
-            <table class="ea-mini-table pricing-table pricing-table--compare" data-rec-col={REC_COL > 1 ? REC_COL : undefined}>
-              <caption class="visually-hidden">Velstrian Bid features by plan</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Feature</th>
-                  <th scope="col">Starter</th>
-                  <th scope="col">Pro</th>
-                  <th scope="col">Portfolio</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  ALL_COMPARE.map((r) => (
-                    <tr>
-                      <th scope="row">{r.feature}</th>
-                      {r.cells.map((c) => (
-                        <td>
-                          {c === true ? (
-                            <>
-                              <span class="pricing-tick" aria-hidden="true">✓</span>
-                              <span class="visually-hidden">Included</span>
-                            </>
-                          ) : c === false ? (
-                            <>
-                              <span class="pricing-dash" aria-hidden="true">-</span>
-                              <span class="visually-hidden">Not included</span>
-                            </>
-                          ) : (
-                            c
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-          </div>
+            <div class="pricing-table-scroll pricing-table-scroll--sticky" tabindex="0" role="region" aria-label={`${t.name} features by plan, scrollable`}>
+              <table class="ea-mini-table pricing-table pricing-table--compare" data-rec-col={t.recCol > 1 ? t.recCol : undefined}>
+                <caption class="visually-hidden">{t.name} features by plan</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Feature</th>
+                    {t.plans.map((name) => <th scope="col">{name}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    t.rows.map((r) => (
+                      <tr>
+                        <th scope="row">{r.feature}</th>
+                        {r.cells.map((c) => (
+                          <td>
+                            {c === true ? (
+                              <>
+                                <span class="pricing-tick" aria-hidden="true">✓</span>
+                                <span class="visually-hidden">Included</span>
+                              </>
+                            ) : c === false ? (
+                              <>
+                                <span class="pricing-dash" aria-hidden="true">-</span>
+                                <span class="visually-hidden">Not included</span>
+                              </>
+                            ) : (
+                              c
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
 
-          <p class="pricing-compare__note">
-            Bids are not metered, which is why that row reads unlimited on every plan. The meter is
-            AI credits, and the number each plan includes is the row below it.
-          </p>
+            <p class="pricing-compare__note">{t.note}</p>
+          </section>
+        ))
+      }
 
           <div class="pricing-credits-deep-dive">
             <p class="ea-label pricing-compare__how">How AI credits are counted</p>
@@ -106,7 +131,7 @@ const REC_COL = PLANS.findIndex((p) => p.recommended) + 2;
                 </thead>
                 <tbody>
                   {
-                    PLANS.map((p) => (
+                    [...PLANS, ...BUYER_PLANS].map((p) => (
                       <tr>
                         <th scope="row">{p.name}</th>
                         <td>{p.credits.toLocaleString('en-GB')}</td>
@@ -176,6 +201,10 @@ const REC_COL = PLANS.findIndex((p) => p.recommended) + 2;
 
   .pricing-compare__subheading {
     margin-bottom: var(--space-4);
+  }
+
+  .pricing-compare__product + .pricing-compare__product {
+    margin-top: var(--space-8);
   }
 
   .pricing-table-scroll {

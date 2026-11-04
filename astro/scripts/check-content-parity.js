@@ -895,7 +895,8 @@ if (redirectLines === null) {
  * The owner found one action under two names on the home page: "Start 7 day
  * trial" in the hero, Start in three steps and the closing band, "Start now"
  * in the header and on every plan card. Every link to the app's sign up page,
- * on every built route, must read START_LABEL from src/data/app.ts. Read
+ * on every built route, must read START_LABEL from src/data/app.ts, or its
+ * product's label when it carries a plan (D553, the block below). Read
  * from the source file, not retyped here, so the label can change in one
  * place and this check follows it. A visually hidden suffix (", on the Pro
  * plan, billed monthly") is part of the accessible name, not the label, so it
@@ -905,17 +906,80 @@ const APP_TS = fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'app.ts
 const START_LABEL = (APP_TS.match(/export const START_LABEL = '([^']+)'/) || [])[1];
 const APP_ORIGIN = (APP_TS.match(/export const APP_ORIGIN = '([^']+)'/) || [])[1];
 const labelFaults = [];
+
+/* ------------------------------------------------------------------ *
+ * EACH PRODUCT PAGE NAMES AND CARRIES ITS PRODUCT (D553, owner 2026-11-04)
+ *
+ * Velstrian Bid and Velstrian Buy are separate products for separate
+ * customers. A sign up link that carries `?plan=bid_...` must read the Bid
+ * label, one that carries `?plan=buyer_...` the Buy label, and a bare link to
+ * the sign up page must read the neutral START_LABEL. On a route listed in
+ * src/data/product-pages.json a bare link FAILS, so is a link for the other
+ * product, and so is a listed route with no link for its own product (the
+ * list would be lying). The site header button is the neutral one on every
+ * page and is exempt by its class. Labels and plan prefixes are read from
+ * src/data/product-start.ts and brand-names.ts, never retyped here.
+ * ------------------------------------------------------------------ */
+const productFaults = [];
+const BRAND_TS = fs.readFileSync(path.join(__dirname, '..', 'src', 'lib', 'brand-names.ts'), 'utf8');
+const PS_TS = fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'product-start.ts'), 'utf8');
+const PRODUCT_PAGES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'product-pages.json'), 'utf8'));
+const PRODUCTS = {};
+for (const m of PS_TS.matchAll(/(\w+): \{ name: (\w+), label: `([^`]+)`, planKey: '([^']+)', planPrefix: '([^']+)' \}/g)) {
+  const name = (BRAND_TS.match(new RegExp(`export const ${m[2]} = "([^"]+)"`)) || [])[1];
+  PRODUCTS[m[1]] = { name, label: m[3].replace(/\$\{(\w+)\}/g, () => name), planKey: m[4], planPrefix: m[5] };
+}
+if (!PRODUCTS.bid || !PRODUCTS.buy || !PRODUCTS.bid.name || !PRODUCTS.buy.name) {
+  productFaults.push('src/data/product-start.ts no longer declares PRODUCT_START for bid and buy in the shape this check reads');
+}
+const pageProduct = (route) => {
+  for (const [product, pats] of Object.entries(PRODUCT_PAGES)) {
+    if (product.startsWith('$')) continue;
+    for (const pat of pats) {
+      if (pat.endsWith('*') ? route.startsWith(pat.slice(0, -1)) && route.length > pat.length - 1 : route === pat) return product;
+    }
+  }
+  return null;
+};
+for (const [product, pats] of Object.entries(PRODUCT_PAGES)) {
+  if (product.startsWith('$')) continue;
+  if (!PRODUCTS[product]) productFaults.push(`product-pages.json names "${product}", which product-start.ts does not declare`);
+  for (const pat of pats) {
+    const hit = [...built].some((r) => (pat.endsWith('*') ? r.startsWith(pat.slice(0, -1)) && r.length > pat.length - 1 : r === pat));
+    if (!hit) productFaults.push(`product-pages.json lists ${pat}, which matches no built route`);
+  }
+}
+const CHROME_CTA = /\bclass=["'][^"']*\b(?:ca-nav-cta|ca-mob-btn)\b/;
+
 if (!START_LABEL || !APP_ORIGIN) {
   labelFaults.push('src/data/app.ts no longer exports START_LABEL and APP_ORIGIN as plain strings');
 } else {
   const origin = APP_ORIGIN.replace(/[.]/g, '\\.');
-  const signupHref = new RegExp(`<a\\b[^>]*\\bhref=["']${origin}/signup[^"']*["'][^>]*>([\\s\\S]*?)</a>`, 'gi');
+  const signupHref = new RegExp(`<a\\b([^>]*\\bhref=["']${origin}/signup([^"']*)["'][^>]*)>([\\s\\S]*?)</a>`, 'gi');
   for (const route of built) {
     const html = strip(fs.readFileSync(fileFor(route), 'utf8'));
+    const own = pageProduct(route);
+    let ownLinks = 0;
     for (const m of html.matchAll(signupHref)) {
-      const label = text(m[1].replace(/<span[^>]*visually-hidden[^>]*>[\s\S]*?<\/span>/gi, ' '));
+      const label = text(m[3].replace(/<span[^>]*visually-hidden[^>]*>[\s\S]*?<\/span>/gi, ' '));
+      const plan = (decode(m[2]).match(/[?&]plan=([^&#]+)/) || [])[1];
+      const product = plan ? Object.keys(PRODUCTS).find((k) => plan.startsWith(PRODUCTS[k].planPrefix)) : null;
+      if (plan && !product) {
+        productFaults.push(`${route.padEnd(38)} plan "${plan}" belongs to no product in product-start.ts`);
+        continue;
+      }
+      if (product) {
+        if (label !== PRODUCTS[product].label) productFaults.push(`${route.padEnd(38)} "${label}" on a ${PRODUCTS[product].name} plan link, must read "${PRODUCTS[product].label}"`);
+        if (own && product !== own) productFaults.push(`${route.padEnd(38)} a ${PRODUCTS[product].name} sign up link on a ${PRODUCTS[own].name} page`);
+        if (product === own) ownLinks++;
+        continue;
+      }
       if (label !== START_LABEL) labelFaults.push(`${route.padEnd(38)} "${label}"`);
+      if (own && !CHROME_CTA.test(m[1])) {
+        productFaults.push(`${route.padEnd(38)} bare sign up link "${label}" on a ${PRODUCTS[own].name} page, use productStart('${own}')`);
+      }
     }
+    if (own && PRODUCTS[own] && ownLinks === 0) productFaults.push(`${route.padEnd(38)} listed as a ${PRODUCTS[own].name} page but has no ${PRODUCTS[own].name} start link`);
   }
 }
 
@@ -981,6 +1045,17 @@ if (stale.length) {
   console.log(`  ${stale.length} allow-list entr(ies) matched nothing — delete them, the content is back:`);
   for (const k of stale) console.log(`    ${k}`);
   console.log('');
+}
+
+if (productFaults.length) {
+  console.error(`content-parity: ${productFaults.length} PRODUCT PAGE START LINK FAULT(S) (D553)
+`);
+  for (const f of [...new Set(productFaults)]) console.error(`      ${f}`);
+  console.error('');
+  console.error("  A page about one product names it and carries its plan. Use productStart() from src/data/product-start.ts,");
+  console.error('  or remove the route from src/data/product-pages.json if the page is about neither product.');
+  console.error('');
+  process.exit(1);
 }
 
 if (labelFaults.length) {

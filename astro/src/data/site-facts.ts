@@ -77,6 +77,9 @@ export const GUEST_REVIEWERS = {
 };
 
 /** The security and compliance statement, D255: what we do, said positively. */
+/** D241: single sign-on is on every plan of both products (catalogue.ts, through site-facts.json). */
+export const SSO_EVERY_PLAN: boolean = FACTS.plans.sso_every_plan === true;
+
 export const CERTIFICATION_STATEMENT = FACTS.certifications.statement;
 
 /** The six trust badges the live footer shows, word for word (D255). */

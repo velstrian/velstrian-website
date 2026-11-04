@@ -16,10 +16,17 @@
 import Action from './Action.astro';
 import { SIGNUP_URL, WALKTHROUGH_URL, START_LABEL } from '../../data/app';
 import { TRIAL_DAYS } from '../../data/pricing';
+import { productStart, type Product } from '../../data/product-start';
 
 interface Props {
   title?: string;
   lead?: string;
+  /**
+   * D553: the product this page is about. Set, the primary button names it and
+   * carries its plan. Left out, the page is about neither product and the
+   * button is the neutral Start now to the bare sign up page.
+   */
+  product?: Product;
   primary?: { href: string; label: string };
   secondary?: { href: string; label: string; newWindow?: boolean };
 }
@@ -27,7 +34,8 @@ interface Props {
 const {
   title = 'Your next bid can start today.',
   lead = `Try it free for ${TRIAL_DAYS} days, or talk it through with us first.`,
-  primary = { href: SIGNUP_URL, label: START_LABEL },
+  product,
+  primary = product ? productStart(product) : { href: SIGNUP_URL, label: START_LABEL },
   secondary = { href: WALKTHROUGH_URL, label: 'Book a call', newWindow: true },
 } = Astro.props;
 ---

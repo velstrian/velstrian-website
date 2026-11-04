@@ -160,7 +160,7 @@ Velstrian Bid includes an integrated evidence tracker that lets you log evidence
 
 The workflow runs end to end in a single sitting: contract profile in, measures priced against the TOMs library, narrative drafted, evidence plan attached, response exported. For an SME with no dedicated social value team, the work that changes is the assembly, not the judgement. You still decide which commitments your organisation can actually keep.
 
-> **Ready to score your next bid?** Velstrian Bid handles measure scoring, AI narrative drafting, and evidence tracking, all in one platform. [Start now](app:/signup)
+> **Ready to score your next bid?** Velstrian Bid handles measure scoring, AI narrative drafting, and evidence tracking, all in one platform. [Start with Velstrian Bid](start:bid)
 
 ## Sources
 
@@ -178,4 +178,4 @@ Last reviewed: 30 August 2026. Any monetary figures shown in the worked example 
 
 Build a cited social value response from evidence your team has already submitted, ready for review before it goes in.
 
-[Start now](app:/signup)
+[Start with Velstrian Bid](start:bid)
