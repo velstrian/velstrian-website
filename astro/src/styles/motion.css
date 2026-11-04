@@ -2436,6 +2436,72 @@
   }
 }
 
+/* ── FROSTED ONCE THE PAGE MOVES, R29-WEBSITE-GLASS-01 (owner approved
+ *    2026-11-04) ──────────────────────────────────────────────────────────
+ *
+ * At the top of the page the bar is the solid ground Nav.astro paints, exactly as
+ * before. Over the first header height of scrolling it eases to the brand
+ * record's strong glass, the bar's own ground at --glass-alpha-strong under
+ * --blur-glass, so content passing beneath reads as a soft wash of colour.
+ *
+ * THE TWO REPORTS IN Nav.astro AND NavDropdown.astro ARE ANSWERED, NOT OVERRIDDEN. Both found words
+ * legible through a translucent bar, and both were measuring a blur that
+ * never ran: the header carried view-transition-name, which makes it a
+ * backdrop root, so this ::before blurred an empty backdrop. The view transition
+ * block below now names the row instead. Measured 2026-11-04 at 1440 with the hero h1 and a
+ * section h2 parked in the bar's band: sharp at 72 percent before that
+ * move, a wash with no readable letterform after it.
+ *
+ * NO SCRIPT. A scroll driven animation on the root scroller, so it costs no
+ * main thread time at all and cannot touch blocking time. Longhands, for the
+ * lightningcss reason recorded on `.sv-progress` above.
+ *
+ * THE HEADER'S OWN FILL CLEARS WITH IT, because `.ca-nav.on-light` in Nav.astro paints
+ * the same ground on the header box for check-treatments.js and an opaque
+ * header would hide the frost. At scroll 0 both are the untouched solid
+ * ground, so anything measuring the top of the page sees no change.
+ *
+ * FALLBACKS. No backdrop-filter or no scroll timeline: the @supports fails
+ * and the bar stays solid, never a see-through bar without a blur. A reader
+ * who asks for reduced transparency gets the solid bar too. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) and (animation-timeline: scroll()) {
+  #ca-nav,
+  #ca-nav::before {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+    animation-range-start: 0;
+    animation-range-end: var(--v3-header-h);
+  }
+  #ca-nav.on-light {
+    animation-name: ca-nav-clear;
+  }
+  #ca-nav::before {
+    animation-name: ca-nav-frost;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  #ca-nav.on-light,
+  #ca-nav::before {
+    animation-name: none;
+  }
+}
+
+@keyframes ca-nav-clear {
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes ca-nav-frost {
+  to {
+    background-color: color-mix(in srgb, var(--c-bg) var(--glass-alpha-strong), transparent);
+    -webkit-backdrop-filter: var(--blur-glass);
+    backdrop-filter: var(--blur-glass);
+  }
+}
+
 /* ── PAGE TO PAGE, R285-WEB-GEMINI-UIUX P3-6 (driver decision, 2026-10-23) ──
  *
  * A short crossfade between pages, done by the browser and nothing else. The
@@ -2471,7 +2537,17 @@
     animation-timing-function: var(--ease);
   }
 
-  #ca-nav {
+  /* THE NAME SITS ON THE ROW, NOT THE HEADER (R29-WEBSITE-GLASS-01). An
+     element with a view-transition-name is a BACKDROP ROOT (Filter Effects 2),
+     so with the name on #ca-nav the bar's frosted ::before blurred the
+     header's own empty backdrop and drew no blur at all: measured 2026-11-04,
+     the hero h1 read sharp through a 72 percent fill under blur(16px), and
+     read as a soft wash once the filter sat outside the header. This is very
+     likely what the 2026-08-31 and A-515 measurements in Nav.astro and
+     NavDropdown.astro were seeing. The row holds every word, logo and button
+     the bar has, so the bar still holds still across a navigation, and the
+     ground behind it is the same colour on both pages. */
+  #ca-nav > .ca-nav-row {
     view-transition-name: site-header;
   }
 

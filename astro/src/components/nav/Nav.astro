@@ -560,6 +560,10 @@ const menus = NAV.menus.map((menu) => ({
     background: var(--c-bg);
   }
 
+  /* FROSTED ONCE THE PAGE MOVES (R29-WEBSITE-GLASS-01): the scroll driven
+     frost for this bar and its ::before lives in styles/motion.css, because
+     check-motion.js allows a scroll timeline nowhere else. */
+
   .ca-nav-row {
     display: grid;
     grid-template-columns: auto 1fr auto;
