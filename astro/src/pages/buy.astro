@@ -39,10 +39,11 @@ import '../styles/evidenced.css';
 import { faqPage, breadcrumbs } from '../lib/schema';
 import { SITE } from '../data/site';
 import { PRODUCT_NAME_BUY, PLATFORM_SHORT_NAME } from '../lib/brand-names';
-import { BUYER_PLANS, startHref, START_LABEL, TRIAL_NOTE } from '../data/pricing';
+import { BUYER_PLANS, productStart, TRIAL_NOTE } from '../data/pricing';
 
 const [BUYER_PRO] = BUYER_PLANS;
-const buyerStart = { href: startHref(BUYER_PRO.planKey), label: START_LABEL };
+/* D553: every start button on /buy/ names Velstrian Buy and starts on Buyer Pro. */
+const buyerStart = productStart('buy', BUYER_PRO.planKey);
 
 /* A buyer's start, in plain words. Each step restates the old /buy/ page:
    the requirement and rubric settled before bids arrive, suppliers invited by

@@ -110,5 +110,5 @@ Yes, where you can do so appropriately. Private sector buyers often run informal
 
 Velstrian Bid drafts RFP, RFI, PQQ and SQ answers grounded in your own submitted bids, so the same disciplined evidence you need for a public tender strengthens your private sector responses too.
 
-[Start now](app:/signup)
+[Start with Velstrian Bid](start:bid)
 [See Velstrian Bid →](/bid/)

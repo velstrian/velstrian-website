@@ -14,6 +14,7 @@ import Band from './Band.astro';
 import IconTile from './IconTile.astro';
 import Action from './Action.astro';
 import { SIGNUP_URL, START_LABEL } from '../../data/app';
+import { productStart, type Product } from '../../data/product-start';
 import { START_FORMATS, START_MAX_MB, PACK_MAX_MB } from '../../data/site-facts';
 import FlashCards from '../ui/FlashCards.astro';
 import type { IconName } from '../../data/icons';
@@ -21,6 +22,12 @@ import type { IconName } from '../../data/icons';
 interface Step { icon: IconName; title: string; body: string }
 interface Props {
   steps?: Step[];
+  /**
+   * D553: the product this page is about. Set, the button names it and carries
+   * its plan. Left out, the page is about neither product and the button is the
+   * neutral Start now to the bare sign up page, where the app asks.
+   */
+  product?: Product;
   action?: { href: string; label: string };
   /**
    * Show the steps as FlashCards in steps mode (D305, piloted on /bid/ by lane
@@ -43,7 +50,8 @@ const SUPPLIER_STEPS: Step[] = [
 
 const {
   steps = SUPPLIER_STEPS,
-  action = { href: SIGNUP_URL, label: START_LABEL },
+  product,
+  action = product ? productStart(product) : { href: SIGNUP_URL, label: START_LABEL },
   flash = false,
 } = Astro.props;
 const cards = steps.map((s, i) => ({ id: `start-${i + 1}`, title: s.title, summary: s.body, icon: s.icon }));

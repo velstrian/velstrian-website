@@ -1,0 +1,16 @@
+{
+  "$comment": "D553 (owner 2026-11-04). The routes that are ABOUT one product. Every sign up link on these routes must name that product and carry its plan (src/data/product-start.ts), and a bare link to the sign up page fails check-content-parity.js. A trailing * matches every route under the prefix. Routes not listed are about neither product or about both (home, about, pricing, faq, integrations, roadmap), keep the neutral Start now and the bare sign up link, and the app asks which product. The site header button is the neutral one on every page.",
+  "bid": [
+    "/bid/",
+    "/blog/*",
+    "/compare/",
+    "/compare/*",
+    "/sectors/",
+    "/sectors/*",
+    "/tools/tender-finder/",
+    "/walkthrough/"
+  ],
+  "buy": [
+    "/buy/"
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T23:24:48.764Z",
+  "updated": "2026-11-03T23:32:39.306Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2600,10 +2600,10 @@
       "src": "session",
       "sev": "P2",
       "title": "Mobile performance: home Lighthouse 76, LCP 3.6 s (target under 2.5 s); pricing 90, help 85, blog 88",
-      "status": "WIP",
-      "note": "Measured 2026-11-03 on the built dist served without compression (pessimistic). Desktop 98 to 100. Driver: measure on the live CDN, fix the LCP element and render-blocking work on home first. || 2026-11-03 Gemini brief 24 (748ff459): TBT 5,600 ms to 320 ms (poster deferred in the hidden tour dialog, batched SVG measurements, scroll guard), but LCP NOT fixed: live 4.2 s, local build 4.9 s, target under 2.5 s. preloadSerif removed from home: driver must screenshot the hero for a font swap before shipping. Stays open for the LCP element work.",
+      "status": "FIXED",
+      "note": "Measured 2026-11-03 on the built dist served without compression (pessimistic). Desktop 98 to 100. Driver: measure on the live CDN, fix the LCP element and render-blocking work on home first. || 2026-11-03 Gemini brief 24 (748ff459): TBT 5,600 ms to 320 ms (poster deferred in the hidden tour dialog, batched SVG measurements, scroll guard), but LCP NOT fixed: live 4.2 s, local build 4.9 s, target under 2.5 s. preloadSerif removed from home: driver must screenshot the hero for a font swap before shipping. Stays open for the LCP element work. || 2026-11-03 live Lighthouse mobile, 3 runs on https://velstrian.com/ (200, no redirect): median LCP 2.43 s (target under 2.5 s, was 4.2 s), FCP 1.93 s, CLS 0.005, score 0.75. LCP element is the hero lead paragraph. Reports in the session scratchpad lh-a518.",
       "changed": "2026-11-03",
-      "changedAt": "2026-11-03T15:32:51.759Z",
+      "changedAt": "2026-11-03T23:32:38.681Z",
       "release": "R2.9"
     },
     {
@@ -2615,6 +2615,17 @@
       "note": "Measured 2026-11-03 during A-516: a 404 for /Assets/videos/v-draft.mp4 carried Cache-Control max-age=14400 and cf-cache-status HIT; the owner's Chrome kept 404 for supplier-long and v-draft (force-cache 404, no-store 206) after the fix went live. Fix in the next website push: no-store or a short max-age on 404 (Cloudflare Pages _headers cannot target status, so check the zone Browser Cache TTL setting and a Cache Rule for 404, free plan). || Cause, two layers, measured live 2026-11-03. (1) REPO: _headers /Assets/* set CDN-Cache-Control and Surrogate-Control max-age=31536000 immutable, and a _headers rule matches a path not a status, so a missing /Assets file 404d with cdn-cache-control 1 year immutable and the edge cached it (cf HIT). /_assets/* sets Cache-Control only and its 404 returns no-store BYPASS. Fixed in 7d65ff04 on review/r29-website-ga: those values removed from /Assets/* and the avif/webp rules, copy-cf-config.js now fails the build if either value returns (red-proved). (2) ZONE: the browser max-age=14400 on that 404 is the velstrian.com zone setting Browser Cache TTL = 4 hours (14400), filled in where the origin sends no Cache-Control. No cache rules or page rules exist. NOT changed, owner action if wanted: Caching > Configuration > Browser Cache TTL set to Respect Existing Headers (free plan). Verify after deploy: curl -sI https://velstrian.com/Assets/videos/<missing>.mp4 should carry no cdn-cache-control and not HIT. || 2026-11-03 live 728ba48d: a missing /Assets file answers 404 with Cache-Control no-store and no CDN-Cache-Control or Surrogate-Control.",
       "changed": "2026-11-03",
       "changedAt": "2026-11-03T23:24:48.658Z",
+      "release": "R2.9"
+    },
+    {
+      "id": "A-520",
+      "src": "A-518 live Lighthouse",
+      "sev": "P3",
+      "title": "Home page main thread work: total blocking time 920 ms median on live mobile Lighthouse, score 0.75",
+      "status": "OPEN",
+      "note": "2026-11-03 found by the A-518 live measurement. LCP passes (2.43 s) but 1.85 to 2.3 s of it is element render delay and TBT is 920 ms (runs 920, 704, 1120). Lighthouse warned this machine CPU is slow, so re-measure on a second machine before sizing. Find the long tasks in the home page scripts.",
+      "changed": "2026-11-03",
+      "changedAt": "2026-11-03T23:32:39.306Z",
       "release": "R2.9"
     }
   ],
@@ -2685,5 +2696,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 520
+  "nextId": 521
 }

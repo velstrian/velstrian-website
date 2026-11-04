@@ -49,7 +49,7 @@ import ProductScreen, { type ScreenName } from '../components/evidenced/ProductS
 import Close from '../components/evidenced/Close.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import Photo from '../components/ui/Photo.astro';
-import { SIGNUP_URL, START_LABEL } from '../data/app';
+import { productStart, type Product } from '../data/product-start';
 import { TRIAL_NOTE } from '../data/pricing';
 import { PRODUCT_NAME_BID } from '../lib/brand-names';
 import { breadcrumbs } from '../lib/schema';
@@ -74,6 +74,8 @@ interface DetailItem {
 }
 
 interface Props {
+  /** D553: the product this page is about, passed by the page, never guessed. */
+  product: Product;
   title: string;
   description: string;
   ogDescription: string;
@@ -117,6 +119,7 @@ const {
   detail,
   person,
 } = Astro.props;
+const start = productStart(Astro.props.product);
 
 /* The one row every sector shares, from site-facts.ts, never typed. */
 const sourcesRow: DetailItem = {
@@ -158,7 +161,7 @@ if (faq.length) {
 >
   <PageHero id="sector-title" label={sectorLabel} title={`Stronger bids for ${heroTitleAccent}`} lead={heroDescription}>
     <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current={sectorLabel} /></div>
-    <Action href={SIGNUP_URL}>{START_LABEL}</Action>
+    <Action href={start.href}>{start.label}</Action>
     <Action href="/bid/" variant="secondary">Explore {PRODUCT_NAME_BID}</Action>
     <Fragment slot="note">{TRIAL_NOTE}</Fragment>
   </PageHero>
@@ -252,6 +255,7 @@ if (faq.length) {
   </Band>
 
   <Close
+    product="bid"
     title="Find the work. Win it. Prove you delivered."
     lead={finalCtaSub}
   />
