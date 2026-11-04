@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T23:24:37.065Z",
+  "updated": "2026-11-04T23:33:44.857Z",
   "release": "2.9",
   "note": "DERIVED, not authored. Generated from RELEASE-2.9-TRACKER.md and RELEASE-2.9-DEFECT-REGISTER.md by status/build-platform-board.js. Those documents are what a release is certified against and they win every disagreement, and this view is stale by at most one run. Re-run the generator after editing either document.",
   "sources": [
@@ -531,7 +531,7 @@
         {
           "title": "R2.9 owner decision log",
           "href": "review/decisions-r29-log.html",
-          "sha": "6d99385eda"
+          "sha": "bf180b533b"
         }
       ]
     },
@@ -6035,8 +6035,8 @@
       "sevExplicit": true,
       "lane": "PRODUCT",
       "changed": "2026-11-04",
-      "changedAt": "2026-11-04T18:42:26.000Z",
-      "changedAtSource": "commit 10ad7dcd",
+      "changedAt": "2026-11-04T23:24:46.000Z",
+      "changedAtSource": "commit 5c74621c",
       "status": "BUILT",
       "title": "[SEV:P0][LANE:SECURITY][PHASE:1][GA:BLOCKER] Owner 2026-11-04: deep review and fix of all roles and permissions with external research, correct per role, customer type (supplier, agency, buyer public and private, both) and persona, with organisation customisable permissions inside safe bounds. Leaving an organisation is handled by owners and admins (member requests to leave, admin approves), account deletion stays available for UK GDPR. Paper: docs/release-2.9/RBAC-SEATS-AND-LICENCE-INTEGRITY-2026-11-04.md.",
       "note": ""

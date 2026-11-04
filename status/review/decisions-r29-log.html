@@ -8,7 +8,7 @@
 <p class="rv-kicker">Owner review</p>
 <h1>R2.9 owner decision log</h1>
 <p><span class="rv-row">R29-OWNER-DECISIONS-LOG-01</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>6d99385eda</code>. A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>bf180b533b</code>. A read only copy, the source file is what counts.</p>
 </header>
 <section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-OWNER-DECISIONS-LOG-01 &middot; BUILT</span><span class="rtitle">Owner decision log for R2.9, readable on the board (D525 to D532 and the same day owner answers)</span><p>docs/release-2.9/DECISIONS-R29-LOG.md on main (8c84f397df), appended whenever a decision is made. Was WIP 2026-11-03 - docs/release-2.9/DECISIONS-R29-LOG.md, linked under Owner review; appended the same turn each new decision is made</p></div></section>
 <article class="doc">
@@ -25,6 +25,27 @@
 </tr>
 </thead>
 <tbody><tr>
+<td>D570</td>
+<td>2026-11-04</td>
+<td>Production Stripe: NO key change. Measured: production web and the Railway velstrian-api both hold LIVE keys (sk_live), and the live account Velstrian Tenderworks holds the whole Bid catalogue under the kept pre rebrand lookup keys crowagent_crowmark_* (Starter 49/529, Pro 149/1609, Portfolio 549/5929, D298 to D301 kept Stripe keys), which checkout and the drift guard both read through the D245 bridge. The 2026-11-02 PriceDriftError (API-6X) ran before the API key was set live on 2026-11-03. The earlier recommendation to point production back at the sandbox was wrong and is withdrawn. The saved card error (WEB-D4) is an organisation whose stored Stripe customer is from the sandbox era: fixed in code so a missing customer reads as no saved card and the next checkout creates a live customer.</td>
+<td>R29-SENTRY-BILLING-STRIPE-READS-01</td>
+<td>Code fix in progress</td>
+</tr>
+<tr>
+<td>D569</td>
+<td>2026-11-04</td>
+<td>Owner: yes, move OPEN bids still on PPN 002 to PPN 026. Finished bids (submitted, won, lost, not bid, withdrawn) keep the edition they were built against (D19 unchanged for them).</td>
+<td>R29-PPN002-OPEN-CONTRACTS-01</td>
+<td>Migration being written, ships with round 6</td>
+</tr>
+<tr>
+<td>D568</td>
+<td>2026-11-04</td>
+<td>Owner: OK to the round 6 production defaults: admins no longer manage billing by default (owner can switch it on, 7470), and the 3 device sign in limit (7440) may end up to 34 old sessions of 2 production users on their next sign in.</td>
+<td>R29-ROUND6-PROD-MIGRATIONS-01</td>
+<td>Accepted, 7500 writing assist still waiting on the owner</td>
+</tr>
+<tr>
 <td>D567</td>
 <td>2026-11-04</td>
 <td>Owner, on writing assist: &quot;what is the issue to unlock now for customers ? this is cutomers cost so let them to use if they need, this must be calculated as part of their plan usage credits&quot;. Writing assist ships for GA: built into the answer editor, ai.writing_assist switched on, every use charged to the organisation plan usage credits like every other AI feature, eval and walk before production.</td>

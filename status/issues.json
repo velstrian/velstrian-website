@@ -2677,10 +2677,10 @@
       "src": "git 2026-11-04",
       "sev": "P2",
       "title": "R29-HELP-VIDEO-REENCODE-01 help videos re-encoded 45.8 MB to 6.2 MB: new files not served at the production URL, edge cache still holds the old files",
-      "status": "BUILT",
-      "note": "2026-11-04 4a19a28a is on origin/main, and origin/main:Assets/videos/help/00-buyer-start-here.mp4 is 1494620 bytes. Live check 23:22 UTC: https://velstrian.com/Assets/videos/help/00-buyer-start-here.mp4 answers 200 video/mp4 with Content-Length 13641596 (the OLD file), cf-cache-status HIT, Age 86313, Cache-Control immutable max-age 31536000. A cache-busted URL returns 1494620, so the origin has the new file. Needs a Cloudflare purge by URL of the three .mp4 files (owner action), then recheck. Not FIXED until the plain URL returns the new size.",
+      "status": "FIXED",
+      "note": "2026-11-04 4a19a28a is on origin/main, and origin/main:Assets/videos/help/00-buyer-start-here.mp4 is 1494620 bytes. Live check 23:22 UTC: https://velstrian.com/Assets/videos/help/00-buyer-start-here.mp4 answers 200 video/mp4 with Content-Length 13641596 (the OLD file), cf-cache-status HIT, Age 86313, Cache-Control immutable max-age 31536000. A cache-busted URL returns 1494620, so the origin has the new file. Needs a Cloudflare purge by URL of the three .mp4 files (owner action), then recheck. Not FIXED until the plain URL returns the new size. FIXED 2026-11-04: owner approved the purge, Cloudflare purge by URL of the 3 mp4 files on velstrian.com and www (free plan, success). Recheck: all 3 plain URLs answer 200 video/mp4 with the new sizes 1494620, 1390063, 3266821 bytes, cf-cache-status MISS.",
       "changed": "2026-11-04",
-      "changedAt": "2026-11-04T23:23:56.590Z",
+      "changedAt": "2026-11-04T23:33:29.941Z",
       "release": "R2.9"
     },
     {
