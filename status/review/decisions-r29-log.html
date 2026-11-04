@@ -8,7 +8,7 @@
 <p class="rv-kicker">Owner review</p>
 <h1>R2.9 owner decision log</h1>
 <p><span class="rv-row">R29-OWNER-DECISIONS-LOG-01</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>e9a90b89ce</code>. A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>dfe99be52c</code>. A read only copy, the source file is what counts.</p>
 </header>
 <section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-OWNER-DECISIONS-LOG-01 &middot; BUILT</span><span class="rtitle">Owner decision log for R2.9, readable on the board (D525 to D532 and the same day owner answers)</span><p>docs/release-2.9/DECISIONS-R29-LOG.md on main (8c84f397df), appended whenever a decision is made. Was WIP 2026-11-03 - docs/release-2.9/DECISIONS-R29-LOG.md, linked under Owner review; appended the same turn each new decision is made</p></div></section>
 <article class="doc">
@@ -25,6 +25,48 @@
 </tr>
 </thead>
 <tbody><tr>
+<td>D563</td>
+<td>2026-11-04</td>
+<td>Driver (D556), nav audit K and L: Buy organisations keep the Evidence vault and All reports, both now buyer framed (R29-BUYER-DEPTH-01). The General and Branding settings rows show only to owners and admins, viewers and managers do not see organisation settings they cannot change. Applied in the navPolicy table for round 5.</td>
+<td>R29-NAV-PERSONA-ITEMS-01</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>D562</td>
+<td>2026-11-04</td>
+<td>Driver (D556): quick bids show three steps (Check, Review and send, Submit), Submit stays its own step as the owner asked in R285-P2-DROP-15. The legacy label Social value themes (older PPN 002 method) stays on legacy PPN 002 contracts only, as history, and is withheld on PPN 026 work (the keep legacy as history decision).</td>
+<td>R29-BID-CHECK-SEND-FOLLOWUPS-01</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>D561</td>
+<td>2026-11-04</td>
+<td>Driver (D556): round 4 scope is frozen so it ships. It holds everything merged into review/r29-batch4 by 8bc7250127 plus the three lanes finishing now (drafting speed and actions role lens, Check and send follow ups, website home speed A-520). The full one table navPolicy (review/r29-nav-policy) and anything started after this decision ride round 5, because the GA navigation set already fixes the visible defects. Next: one combined verification, staging promote with migrations 7340, 7350, 7360, 7370, one combined staging walk, production under D557.</td>
+<td>Round 4</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>D560</td>
+<td>2026-11-04</td>
+<td>Driver (D556), bid drafting speed and nothing lost: (1) answers are drafted at the same time (the built bid_multi_agent_draft route) on staging first, measured in the round 4 walk against the D559 target (first draft within 3 minutes) with quality checked, kept in production only if quality holds. (2) The worker is woken when a job is enqueued instead of polling faster, so pickup is near instant with NO extra recurring polling cost (the 30 s idle poll stays as the fallback). (3) Query expansion moves from the pro model to flash only after its D322 eval passes, inside the D547 cap. (4) An answer that fails only on length is saved with a plain Short answer flag for the person to extend, never discarded (Q8).</td>
+<td>R29-E2E10-04, R29-BID-DRAFT-SPEED-02</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>D559</td>
+<td>2026-11-04</td>
+<td>Driver (D556), master design pass 2: (1) the submit path is a GA blocker because 0 of 10 bids reached submitted, rows R29-E2E10-05, 02, 11, 01, 03, 07 tagged GA:BLOCKER. (2) The final stage is one guided Check and send stage in four steps (Check, Review, Export, Submit), each its own route with a stepper and one primary button, a bid has one status field, Export is never blocked (a draft file plus a plain list of open items), the deadline is recorded when the bid is created. (3) Time targets: a verdict or tender summary within 60 s, a first draft within 3 minutes, signup to first draft within 10 minutes. (4) Sole traders review their own bid, an agency client can be the reviewer.</td>
+<td>R29-MASTER-DESIGN-01, R29-E2E10-01 to 15</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>D558</td>
+<td>2026-11-04</td>
+<td>Driver (D556): /workflows always opens in the settings rail (one stable rule, retires the old keep-the-Buy-rail behaviour). Trial ended organisations keep Help as well as Billing so a stuck customer can reach support. The palette must receive the organisation type (row R29-NAV-PALETTE-ORG-KIND-01).</td>
+<td>R29-NAV-CONTEXT-SWITCH-01, R29-NAV-PERSONA-ITEMS-01</td>
+<td>Decided</td>
+</tr>
+<tr>
 <td>D557</td>
 <td>2026-11-04</td>
 <td>Owner: &quot;you must not defer, must not silently drop, must not ignore and must not compromise and must be efficient and effective as well and must finish all. do required staging and production deployments. i do approve you all the required deployments&quot;. Standing approval for every staging and production deployment R2.9 needs (platform web, portal, Railway API and worker, Supabase migrations shipped with their code, website), like D539 for any sha. Each production promote quotes this text with the sha it deploys. RULE 0-G still applies to any new recurring cost.</td>
