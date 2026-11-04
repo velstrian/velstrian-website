@@ -124,7 +124,7 @@ module.exports = defineConfig({
     ...(process.env.CA_LEGACY_SERVER === '1'
       ? [
           {
-            command: 'npx serve . -l 8092',
+            command: 'npx sirv . --dev --quiet --host :: --port 8092',
             url: 'http://127.0.0.1:8092/index.html',
             reuseExistingServer: true,
             timeout: 60000,
@@ -137,7 +137,16 @@ module.exports = defineConfig({
       // astro/src, and a half-written dist produces failures that look like
       // content defects. If dist is older than astro/src, that is a stale
       // artefact and the run should say so rather than silently rebuild.
-      command: 'npx serve astro/dist -l 8095',
+      //
+      // sirv-cli, not serve (R29-SEC-DEPENDABOT-WEBSITE-01, 2026-11-03). serve
+      // pins serve-handler, which pins minimatch 3.1.5 (GHSA-g3hv-75wg-m249,
+      // fixed only in 11.0.1). An override cannot fix it: minimatch 11 exports
+      // { minimatch } rather than a function, so serve-handler's
+      // require('minimatch')(...) would throw on every directory listing.
+      // --dev reads files per request, as serve did, so a rebuild is served
+      // without a restart. --host :: binds both 127.0.0.1 and localhost,
+      // which the specs use interchangeably.
+      command: 'npx sirv astro/dist --dev --quiet --host :: --port 8095',
       url: 'http://127.0.0.1:8095/',
       reuseExistingServer: true,
       timeout: 60000,
