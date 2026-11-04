@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T08:38:00.467Z",
+  "updated": "2026-11-04T23:23:57.614Z",
   "unreadable": [],
   "_deploy_why": "index.html renders DATA.deploy on WHICHEVER board is selected, and check-board-contract.js requires every field the page dereferences to exist on BOTH boards. This board carries its own answer rather than a copy of the platform's, because the owner's rule of 2026-08-09 is that this deployable is SEPARATE. A reader who lands on the Website tab must not infer that the platform's four-deploy budget applies here, and a reader on the Platform tab must not infer that the website spends it.",
   "deploy": {
@@ -2623,7 +2623,7 @@
       "sev": "P3",
       "title": "Home page main thread work: total blocking time 920 ms median on live mobile Lighthouse, score 0.75",
       "status": "BUILT",
-      "note": "2026-11-03 found by the A-518 live measurement. LCP passes (2.43 s) but 1.85 to 2.3 s of it is element render delay and TBT is 920 ms (runs 920, 704, 1120). Lighthouse warned this machine CPU is slow, so re-measure on a second machine before sizing. Find the long tasks in the home page scripts. || 2026-11-04 c1421ec2 on review/r29-website-round4: eight universal :has(> #hero-title) rules made every text change restyle about 720 elements, scoped to the hero classes. Geometry reading scripts start after first paint, reads before writes. Local Lighthouse mobile median: TBT 796 to 81 ms, LCP 2348 to 2007 ms, score 0.78 to 0.97. Ships in the round 4 website push.",
+      "note": "2026-11-03 found by the A-518 live measurement. LCP passes (2.43 s) but 1.85 to 2.3 s of it is element render delay and TBT is 920 ms (runs 920, 704, 1120). Lighthouse warned this machine CPU is slow, so re-measure on a second machine before sizing. Find the long tasks in the home page scripts. || 2026-11-04 c1421ec2 on review/r29-website-round4: eight universal :has(> #hero-title) rules made every text change restyle about 720 elements, scoped to the hero classes. Geometry reading scripts start after first paint, reads before writes. Local Lighthouse mobile median: TBT 796 to 81 ms, LCP 2348 to 2007 ms, score 0.78 to 0.97. Ships in the round 4 website push. || 2026-11-04 reconcile: c1421ec2 is on origin/main and its code is live: the Band script chunk imports ./idle.DLqOGh93.js, https://velstrian.com/_assets/idle.DLqOGh93.js answers 200 application/javascript. Live mobile Lighthouse TBT after the deploy has NOT been measured, so it stays BUILT until it is.",
       "changed": "2026-11-04",
       "changedAt": "2026-11-04T08:38:00.466Z",
       "release": "R2.9"
@@ -2633,10 +2633,65 @@
       "src": "owner 2026-11-04",
       "sev": "P2",
       "title": "Pricing page: the Feature depth, Compare the details table exists only for Velstrian Bid, Velstrian Buy has none",
-      "status": "BUILT",
-      "note": "2026-11-04 owner report on https://velstrian.com/pricing/. Buy buyers get no detailed comparison of their plans. Build the Buy table from the same plan source as the Bid one (D553 product separation). || 2026-11-04 f73940b4 on review/r29-website-product-ctas: Buy comparison table built from BUYER_PLANS and site-facts, separate Bid and Buy sections. Same commit: D553 every product page button names and carries its product (central product-start.ts), guard in check-content-parity red proven. Ships in the single website push.",
+      "status": "FIXED",
+      "note": "2026-11-04 owner report on https://velstrian.com/pricing/. Buy buyers get no detailed comparison of their plans. Build the Buy table from the same plan source as the Bid one (D553 product separation). || 2026-11-04 f73940b4 on review/r29-website-product-ctas: Buy comparison table built from BUYER_PLANS and site-facts, separate Bid and Buy sections. Same commit: D553 every product page button names and carries its product (central product-start.ts), guard in check-content-parity red proven. Ships in the single website push. || 2026-11-04 reconcile: f73940b4 is on origin/main. Live check 23:22 UTC: https://velstrian.com/pricing/ answers 200 text/html and contains the compare-buy section id plus the 'Compare the details' and 'Feature depth' headings (Bid and Buy tables are separate sections).",
       "changed": "2026-11-04",
-      "changedAt": "2026-11-04T01:17:58.819Z",
+      "changedAt": "2026-11-04T23:23:57.090Z",
+      "release": "R2.9"
+    },
+    {
+      "id": "A-522",
+      "src": "git 2026-11-04",
+      "sev": "P2",
+      "title": "R29-WEBSITE-GLASS-01 frosted hero status card and scroll frosted header",
+      "status": "FIXED",
+      "note": "2026-11-04 8bfca940 on origin/main (pushed by owner 16:32 UTC). Live check 23:22 UTC: https://velstrian.com/_assets/evidenced.BcPbzFrc.css answers 200 text/css and contains the .ea-stage--hero .ea-stage__float .ea-seq backdrop-filter rule inside the @supports block, plus the #ca-nav scroll-timeline rule. Visual result not screenshotted by this reconcile.",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:23:55.757Z",
+      "release": "R2.9"
+    },
+    {
+      "id": "A-523",
+      "src": "git 2026-11-04",
+      "sev": "P2",
+      "title": "D550 website states no liability terms, full terms on request",
+      "status": "FIXED",
+      "note": "2026-11-04 b2787634 on origin/main. Live check: https://velstrian.com/terms/ answers 200 text/html, contains 'Full Terms on Request' (2 hits) and zero hits for 'Limitation of Liability'.",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:23:56.057Z",
+      "release": "R2.9"
+    },
+    {
+      "id": "A-524",
+      "src": "git 2026-11-04",
+      "sev": "P2",
+      "title": "Help centre and legal pages regenerated from platform round 4, 67 articles, OpenAI listed (D552)",
+      "status": "FIXED",
+      "note": "2026-11-04 a4cd88e1 on origin/main. Live check: https://velstrian.com/sub-processors/ answers 200 and names OpenAI (3 hits), https://velstrian.com/help/ answers 200. The '67 articles' count was not matched on the live help page text, so the count itself is unverified.",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:23:56.309Z",
+      "release": "R2.9"
+    },
+    {
+      "id": "A-525",
+      "src": "git 2026-11-04",
+      "sev": "P2",
+      "title": "R29-HELP-VIDEO-REENCODE-01 help videos re-encoded 45.8 MB to 6.2 MB: new files not served at the production URL, edge cache still holds the old files",
+      "status": "BUILT",
+      "note": "2026-11-04 4a19a28a is on origin/main, and origin/main:Assets/videos/help/00-buyer-start-here.mp4 is 1494620 bytes. Live check 23:22 UTC: https://velstrian.com/Assets/videos/help/00-buyer-start-here.mp4 answers 200 video/mp4 with Content-Length 13641596 (the OLD file), cf-cache-status HIT, Age 86313, Cache-Control immutable max-age 31536000. A cache-busted URL returns 1494620, so the origin has the new file. Needs a Cloudflare purge by URL of the three .mp4 files (owner action), then recheck. Not FIXED until the plain URL returns the new size.",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:23:56.590Z",
+      "release": "R2.9"
+    },
+    {
+      "id": "A-526",
+      "src": "git 2026-11-04",
+      "sev": "P3",
+      "title": "R29-SEC-DEPENDABOT-WEBSITE-01 fast-uri 3.1.9, satori 0.63.2, serve replaced by sirv-cli, fflate 0.7.5",
+      "status": "BUILT",
+      "note": "2026-11-04 eccbf1f1 on origin/main. A dependency change has no live asset to check, so it stays BUILT. The production site built and served from later commits on top of it (8bfca940 live), which shows the build passes with it. Dependabot alert closure on GitHub was not checked.",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:23:56.852Z",
       "release": "R2.9"
     }
   ],
@@ -2707,5 +2762,5 @@
       "note": "Owner, 2026-09-08: \"show me google flagged items one by one with single line easy to understand description and your recommendation and other options, one by one and one at a time\". Do not batch them and do not assume a verdict."
     }
   ],
-  "nextId": 522
+  "nextId": 527
 }

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>GA readiness re-score, 2026-11-04 afternoon</title>
+<link rel="stylesheet" href="review.css"></head>
+<body><main>
+<p class="back"><a href="../index.html#platform">Back to the board</a></p>
+<header class="rv-head">
+<p class="rv-kicker">Owner review</p>
+<h1>GA readiness re-score, 2026-11-04 afternoon</h1>
+<p><span class="rv-row">R29-GA-READINESS-AUDIT-01</span></p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/GA-READINESS-2026-11-04.md</code>, rendered from <code>8d44eb9000</code>. A read only copy, the source file is what counts.</p>
+</header>
+<section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-GA-READINESS-AUDIT-01</span><p>This row is not in the tracker. The mapping line is stale.</p></div></section>
+<article class="doc">
+<h1>GA readiness re-score, 2026-11-04 afternoon</h1>
+<p>Velstrian Tenderworks. Row R29-GA-READINESS-AUDIT-01. Read only re-score after production round 4 (main e087e40d41). Same method as GA-READINESS-2026-11-03-EVE.md.</p>
+<h2>Short answer</h2>
+<ul>
+<li><strong>Score on what is live in production: 82 out of 100, up from 72.</strong> Platform e087e40d41, website a4cd88e1.</li>
+<li><strong>Verdict:</strong> ready for an invite only launch after the owner checks, not yet for open paying signup.</li>
+<li><strong>GA blockers left: 6</strong> (was 9 on the website file).</li>
+</ul>
+<h2>How it was checked</h2>
+<p>A fix gets full credit only if <code>git merge-base --is-ancestor &lt;sha&gt; e087e40d41</code> answers yes. Confirmed in production: bc95534055 (extraction refusal message), 6f361fcf43 and 49223650ce (invitee), 2d4008d687 (staging live key guard), 94cacec996 (dispute walk file), 4d818f54b8 (Check and send fix), 0e8a150479 (Railway branch join). Staging walks of 2026-11-04 (nav per persona 9 of 9, 5 bids to SUBMITTED, drafts 44 to 60 s, top up with 4242 passed) earn staging credit only. Round 5 (nav D563, RBAC on 12 routes, prompt registry, questions read stall fix, custom field filters) is not live and earns nothing. Nothing was re-run for this document. No production measurement of AI quality or support delivery exists, so those are marked not measured.</p>
+<h2>Score by area (production credit)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Weight</th>
+<th>Evening</th>
+<th>Now</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sign up and onboarding</td>
+<td>10</td>
+<td>71</td>
+<td>82</td>
+<td>R29-GA-SIGNUP-ALIAS-FAILED-01, R29-GA-INVITEE-NOT-JOINED-01 now live</td>
+</tr>
+<tr>
+<td>Core bid journey</td>
+<td>12</td>
+<td>60</td>
+<td>72</td>
+<td>R29-BID-EXTRACT-REFUSAL-SILENT-01 bc95534055, R29-E2E10-01 to 15, D559, D560. Extraction re-measure still open</td>
+</tr>
+<tr>
+<td>Core buy journey</td>
+<td>10</td>
+<td>72</td>
+<td>76</td>
+<td>Buyer depth live, walk 10 of 12 on staging, duty records not walked</td>
+</tr>
+<tr>
+<td>Billing and payments</td>
+<td>15</td>
+<td>80</td>
+<td>86</td>
+<td>Overage switch ON, chip fix R29-E2E10-07. Dispute end to end not run</td>
+</tr>
+<tr>
+<td>AI quality</td>
+<td>12</td>
+<td>52</td>
+<td>62</td>
+<td>OpenAI second provider D552 live. Measurements are staging only</td>
+</tr>
+<tr>
+<td>Security and auth</td>
+<td>10</td>
+<td>88</td>
+<td>90</td>
+<td>Dependency fixes and key guard live</td>
+</tr>
+<tr>
+<td>Legal and trust</td>
+<td>10</td>
+<td>78</td>
+<td>80</td>
+<td>D550 and summaries live. Counsel on hold</td>
+</tr>
+<tr>
+<td>Website</td>
+<td>6</td>
+<td>84</td>
+<td>88</td>
+<td>a4cd88e1, 45 of 45 gates</td>
+</tr>
+<tr>
+<td>Operations and monitoring</td>
+<td>10</td>
+<td>76</td>
+<td>80</td>
+<td>Branch join, 13 migrations applied</td>
+</tr>
+<tr>
+<td>Support</td>
+<td>5</td>
+<td>52</td>
+<td>72</td>
+<td>Ack email, contextual help, 66 articles. Delivery not measured</td>
+</tr>
+</tbody></table></div>
+<h2>Remaining GA blockers</h2>
+<ol>
+<li>Extraction clean re-measure, 5 unflagged conflicts (R29-GA-AI-ACCURACY-RECHECK-01), driver.</li>
+<li>Dispute end to end run (R29-GA-DISPUTE-END-TO-END-01), driver.</li>
+<li>Buyer conflict and payment duty record walk, needs a seeded published requirement, driver.</li>
+<li>Owner checks: Android fingerprint, Gmail phone notification (R29-GA-SENTRY-PHONE-ALERT-01), look at the BUILT rows.</li>
+<li>Portal staging login (R29-PORTAL-STAGING-LOGIN-TURNSTILE-01), owner manual.</li>
+<li>bid_narrative v6 golden eval (R29-AI-EVAL-BID-NARRATIVE-V6-01), paid, inside the D547 cap.</li>
+</ol>
+<h2>Caveats</h2>
+<p>The weighted sum is 81.8, shown as 82. The score is judgment on the evidence above, not a test run. BUILT means awaiting certification. Not committed.</p>
+
+</article>
+</main></body></html>

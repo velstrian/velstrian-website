@@ -8,7 +8,7 @@
 <p class="rv-kicker">Owner review</p>
 <h1>R2.9 owner decision log</h1>
 <p><span class="rv-row">R29-OWNER-DECISIONS-LOG-01</span></p>
-<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>dfe99be52c</code>. A read only copy, the source file is what counts.</p>
+<p class="rv-meta">Source <code>crowagent-platform/docs/release-2.9/DECISIONS-R29-LOG.md</code>, rendered from <code>6d99385eda</code>. A read only copy, the source file is what counts.</p>
 </header>
 <section class="rv-ask" aria-labelledby="ask"><h2 id="ask">What you are asked to decide</h2><div class="item"><span class="rid">R29-OWNER-DECISIONS-LOG-01 &middot; BUILT</span><span class="rtitle">Owner decision log for R2.9, readable on the board (D525 to D532 and the same day owner answers)</span><p>docs/release-2.9/DECISIONS-R29-LOG.md on main (8c84f397df), appended whenever a decision is made. Was WIP 2026-11-03 - docs/release-2.9/DECISIONS-R29-LOG.md, linked under Owner review; appended the same turn each new decision is made</p></div></section>
 <article class="doc">
@@ -25,6 +25,34 @@
 </tr>
 </thead>
 <tbody><tr>
+<td>D567</td>
+<td>2026-11-04</td>
+<td>Owner, on writing assist: &quot;what is the issue to unlock now for customers ? this is cutomers cost so let them to use if they need, this must be calculated as part of their plan usage credits&quot;. Writing assist ships for GA: built into the answer editor, ai.writing_assist switched on, every use charged to the organisation plan usage credits like every other AI feature, eval and walk before production.</td>
+<td>R29-WRITING-ASSIST-FLAG-ABSENT-01</td>
+<td>Decided, build next</td>
+</tr>
+<tr>
+<td>D566</td>
+<td>2026-11-04</td>
+<td>Driver (D556) on RBAC-SEATS-AND-LICENCE-INTEGRITY-2026-11-04.md Q1, Q4, Q5, Q7, Q9, Q10 and the section 8 driver list: leaving becomes a request approved by an owner or admin with a hand over step, an organisation switch &quot;members can leave without asking&quot; default off, account deletion always available (UK GDPR). Downgrade keeps all members, blocks invites, 14 day grace then extra writers become read only and the owner chooses who stays. Billing authority is owner by default with a switch for Admin. Owner recovery: nudge to a second owner, documented manual recovery with proof of authority. Bid and Buy in one organisation: internal conflict wall on the same tender. Agency staff: the client owner can remove them, the agency cannot remove client staff. Keep 6 stored roles and 16 capabilities, organisation switches not custom roles, Evaluator, Moderator and Award approver as Reviewer profiles, session cap 3 devices newest wins (admin range 1 to 5), passive sharing flag only at GA, role style email warning, overrides can never grant a never capability, step up on the leave request.</td>
+<td>R29-RBAC-REDESIGN-01, R29-SEAT-LIMITS-BY-PLAN-01, R29-LICENCE-SHARING-PREVENTION-01</td>
+<td>Decided, build next</td>
+</tr>
+<tr>
+<td>D565</td>
+<td>2026-11-04</td>
+<td>Owner on the same paper: Q2 reviewer cap uses the locked guest reviewer numbers as one pool with internal reviewers (Starter 3, Pro 10, Portfolio 25, Buyer Pro 10, Buyer Portfolio 25), no new price. Q3 two free billing contacts per organisation. Q6 SSO and SCIM plan gating stays as built and is promoted as the anti sharing option on Pro and above. Q8 add to the Terms: &quot;Each seat is for one named person. We monitor seat use for fair use and may ask you to add seats.&quot; and show &quot;One person, one seat&quot; at invite.</td>
+<td>R29-SEAT-LIMITS-BY-PLAN-01, R29-LICENCE-SHARING-PREVENTION-01</td>
+<td>Decided, build next</td>
+</tr>
+<tr>
+<td>D564</td>
+<td>2026-11-04</td>
+<td>Owner: self service leave organisation is not the right approach, leaving is handled by organisation owners and admins. Deep review of all roles and permissions with external research, per role, customer type and persona, with organisation customisable permissions, seats restricted to the plan, and licence sharing prevented.</td>
+<td>R29-RBAC-REDESIGN-01, R29-SEAT-LIMITS-BY-PLAN-01, R29-LICENCE-SHARING-PREVENTION-01, R29-RBAC-PERSONA-MATRIX-WALK-01</td>
+<td>Paper ee6054e65d, build next</td>
+</tr>
+<tr>
 <td>D563</td>
 <td>2026-11-04</td>
 <td>Driver (D556), nav audit K and L: Buy organisations keep the Evidence vault and All reports, both now buyer framed (R29-BUYER-DEPTH-01). The General and Branding settings rows show only to owners and admins, viewers and managers do not see organisation settings they cannot change. Applied in the navPolicy table for round 5.</td>

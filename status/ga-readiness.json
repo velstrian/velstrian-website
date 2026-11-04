@@ -1,80 +1,80 @@
 {
-  "updated": "2026-11-03T23:29:30.560Z",
-  "overall": 72,
-  "verdict": "Ready for an invite only launch once round 4 is in production and the owner checks it, not yet for open paying signup. Production runs rounds 1 (2cf45f3) and 2 (90d3075) only. Round 3 failed its promote gates and deployed nothing, so every round 3 and batch4 gain is staging only and earns staging credit only",
-  "earliestDate": "Invite only: the day round 4 reaches production and the owner checks it. Open signup: about 4 days after that, if the silent extraction refusal message is fixed in round 4",
-  "blockers": 9,
-  "detail": "review/ga-readiness-2026-11-03-eve.html",
+  "updated": "2026-11-04T16:04:03.553Z",
+  "overall": 79,
+  "verdict": "Ready for an invite only launch now that round 4 is in production (main e087e40d41), subject to the owner checks. Not yet for open paying signup until the extraction re-measure, the dispute end to end run and a real buyer duty record walk are done. Credit is given only to what is live in production. Staging walks earn staging credit only and are named as such",
+  "earliestDate": "Invite only: now, after the owner checks (Android fingerprint, Gmail phone notification, owner look at the BUILT rows). Open signup: not dated, it waits on the extraction re-measure, the dispute run and the buyer duty record walk",
+  "blockers": 6,
+  "detail": "review/ga-readiness-2026-11-04.html",
   "areas": [
     {
       "name": "Sign up and onboarding",
       "weight": 10,
-      "score": 71,
+      "score": 82,
       "status": "amber",
-      "why": "Sign in cookie chunks and invite fixes live (90d3075). The send email hook timeout fix and the invitee captcha fix (R29-GA-SIGNUP-ALIAS-FAILED-01, R29-GA-INVITEE-NOT-JOINED-01, 6f361fcf43, 49223650ce) are staging only. Android fingerprint stays an owner check. Round 4 would raise it once live"
+      "why": "Live in e087e40d41: send email hook timeout fix and invitee captcha and join fix (R29-GA-SIGNUP-ALIAS-FAILED-01, R29-GA-INVITEE-NOT-JOINED-01, 6f361fcf43, 49223650ce), GA nav D555. Left: Android fingerprint is an owner check, invitee join not re-walked on production. Prod DB got 13 missing migrations (PROD-MIGRATION-GAP-2026-11-04)"
     },
     {
       "name": "Core bid journey",
       "weight": 12,
-      "score": 60,
+      "score": 72,
       "status": "amber",
-      "why": "Extraction safety nets live (afc9c7ef6), critical recall 1.0 but 5 unflagged conflicts left, clean re-measure due 4 November. Down 3: after an AI budget refusal the page still says requirements can be suggested (R29-BID-EXTRACT-REFUSAL-SILENT-01, open). Seven bid walk defects open. Single deadline net is round 4 only"
+      "why": "Live: refusal message fix (R29-BID-EXTRACT-REFUSAL-SILENT-01, bc95534055), Check and send D559 with fix 4d818f54b8, the 15 bid walk fixes (R29-E2E10-01 to 15) and drafting speed D560. Staging only: 5 bids reached SUBMITTED, drafts 44 to 60 s, so staging credit. Extraction 5 unflagged conflicts remain (R29-GA-AI-ACCURACY-RECHECK-01, clean re-measure not run). Multi agent drafting is OFF in production"
     },
     {
       "name": "Core buy journey",
       "weight": 10,
-      "score": 72,
+      "score": 76,
       "status": "amber",
-      "why": "Preview charge fix and UI polish live. Buy walk 10 of 12 on staging, 0 product defects. Staging Gemini credits are back, the tender pack AI review re-walk is pending. Role personas seeded on staging only"
+      "why": "Live: buyer depth and buyer duty records, product separation D553. Buy walk 10 of 12 on staging with 0 product defects (R29-GA-BUY-CREDITS-ROLES-REMEASURE-01). Buyer conflict and payment duty records not walked, no seeded published requirement. Not measured on production"
     },
     {
       "name": "Billing and payments",
       "weight": 15,
-      "score": 80,
-      "status": "amber",
-      "why": "Live mode confirmed (R29-GA-STRIPE-LIVE-MODE-CONFIRM-01), 3 dispute events on the live webhook, Radar CVC and postcode rules on. A dispute has never been seen end to end (R29-GA-DISPUTE-END-TO-END-01, walk built, not run). Radar for Fraud Teams not bought. Staging live key guard (2d4008d687) is round 4 only"
+      "score": 86,
+      "status": "green",
+      "why": "Live: credit overage switch ON, staging live key guard (R29-GA-STAGING-LIVE-STRIPE-01, 2d4008d687), credit chip equals estimate (R29-E2E10-07). Stripe 4242 top up passed on staging only. Live mode confirmed, dispute events on the live webhook. Left: a dispute has never been seen end to end (R29-GA-DISPUTE-END-TO-END-01, walk 94cacec996 built, not run). Radar for Fraud Teams not bought"
     },
     {
       "name": "AI quality",
       "weight": 12,
-      "score": 52,
+      "score": 62,
       "status": "amber",
-      "why": "Honest wording and extraction, briefing and review assist fixes live. Review assist 19 of 20 and briefing 3 of 3 were measured on staging with unreleased fixes, so partial credit only. Extraction 5 unflagged conflicts left. Round 4 AI fixes and its 628 of 628 local run earn nothing until live"
+      "why": "Live: OpenAI second provider D552 (switch ON), review assist and briefing fixes (R29-AI-REVIEW-ASSIST-RA03-01, R29-AI-BRIEFING-CONF01-DEADLINE-01, shipped in round 4), grounding gate message (R29-E2E10-03). Measured on staging only: review assist 19 of 20, briefing 3 of 3, extraction 5 unflagged conflicts. Open: bid_narrative v6 golden eval (R29-AI-EVAL-BID-NARRATIVE-V6-01), extraction clean re-measure. Production AI quality not measured. 2026-11-04 staging re-measure in progress: critical errors 6 to 3, recall 0.883, v6 narrative 4 of 4, staging credit only until shipped"
     },
     {
       "name": "Security and auth",
       "weight": 10,
-      "score": 88,
+      "score": 90,
       "status": "green",
-      "why": "Audit and dependency fixes live. BFF token enforcement confirmed on production by probe, Supabase Auth settings audited, passkey name fixed. Left: owner confirmation of both BUILT rows. Live key guard is round 4"
+      "why": "Live: dependency security fixes, staging live key guard (2d4008d687), BFF token enforcement confirmed by probe earlier. Left: owner confirms the BUILT rows. Round 5 RBAC on 12 routes is not live, so no credit"
     },
     {
       "name": "Legal and trust",
       "weight": 10,
-      "score": 78,
+      "score": 80,
       "status": "amber",
-      "why": "Up 4: AI policy signed (ISO 42001 policy row FIXED) and legal B-OWNER answers recorded. Breach notice 72 hours already in the live DPA (D542). Generated legal summaries are staging only. Liability caps are on hold by owner decision until customers are onboarded, not a GA gap."
+      "why": "Live: legal D550 and the generated plain summaries (R29-LEGAL-GENERATED-SUMMARY-01), 72 hour breach notice in the DPA (D542), AI policy signed. Liability caps and counsel review are on hold by owner decision until customers onboard, not a GA gap"
     },
     {
       "name": "Website",
       "weight": 6,
-      "score": 84,
-      "status": "amber",
-      "why": "Live 75735af3 with 61 help articles. 728ba48d passed 45 of 45 gates (legal alignment, LCP 2.17 s, cache headers) but the push is pending the owner. 66 articles and re-encoded help videos are not live, so no credit yet. Amber because green starts at 85"
+      "score": 88,
+      "status": "green",
+      "why": "Website round 4 a4cd88e1 is live and passed 45 of 45 gates, with the 66 help articles (R29-GA-HELP-ARTICLES-COMPLETE-01). Tender finder speed fix and re-encoded help videos: not measured live"
     },
     {
       "name": "Operations and monitoring",
       "weight": 10,
-      "score": 76,
+      "score": 80,
       "status": "amber",
-      "why": "Restore test done (RTO about 7 min, RPO up to 24 h). Sentry alert test emails received. Left: phone notification in the Gmail app (owner), Railway branch join a2759d1 ready but ships with round 4, no point in time recovery (D544)"
+      "why": "Live: Railway api and worker SUCCESS, Railway branch joined and fast forwarded (R29-GA-RAILWAY-BRANCH-JOIN-01, 0e8a150479), 13 missing prod migrations applied. Sentry alert test emails received. Left: phone notification in the Gmail app (R29-GA-SENTRY-PHONE-ALERT-01, owner), no point in time recovery (D544, RPO up to 24 h), portal staging login still open (R29-PORTAL-STAGING-LOGIN-TURNSTILE-01, owner manual)"
     },
     {
       "name": "Support",
       "weight": 5,
-      "score": 52,
+      "score": 88,
       "status": "amber",
-      "why": "Production has no support process change. Help centre 61 articles live. In app reports reaching the inbox, support emails and contextual help are round 4 only, and 66 articles wait on the website push"
+      "why": "Live in round 4: acknowledgement email, contextual help, 66 help articles. Measured on PRODUCTION 2026-11-04 (R29-GA-SUPPORT-ACK-EMAIL-01): ticket CA-21FC647C, inbox email in about 4 s, acknowledgement in about 2 s, first reply 7 min 6 s. Left: automated staging support walk (R29-SUPPORT-PATH-STAGING-E2E-01) and production failure alerts (R29-SUPPORT-PATH-PROD-FAILURE-ALERTS-01)"
     }
   ]
 }
