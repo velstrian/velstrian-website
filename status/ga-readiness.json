@@ -1,9 +1,9 @@
 {
-  "updated": "2026-11-04T16:04:03.553Z",
+  "updated": "2026-11-04T23:43:22.697Z",
   "overall": 79,
-  "verdict": "Ready for an invite only launch now that round 4 is in production (main e087e40d41), subject to the owner checks. Not yet for open paying signup until the extraction re-measure, the dispute end to end run and a real buyer duty record walk are done. Credit is given only to what is live in production. Staging walks earn staging credit only and are named as such",
-  "earliestDate": "Invite only: now, after the owner checks (Android fingerprint, Gmail phone notification, owner look at the BUILT rows). Open signup: not dated, it waits on the extraction re-measure, the dispute run and the buyer duty record walk",
-  "blockers": 6,
+  "verdict": "Production credit only: 79 out of 100 (true weighted mean 79.20). Ready for an invite only launch after the owner checks. Not ready for open paying signup: the roles and seat redesign, the Sentry fixes and the evidence vault 502 fix are on staging only (round 6, since 23:16 UTC), and extraction accuracy is unfinished. Staging work earns staging credit only and is named as such. Projected 81.5 once round 6 is in production and re-measured, which is still short of 95",
+  "earliestDate": "Invite only: now, after the owner checks (Android fingerprint, Gmail phone notification, owner look at the BUILT rows). Open signup: not dated. It waits on round 6 reaching production, the RBAC persona matrix walk, the extraction re-measure and a production measurement of AI quality",
+  "blockers": 5,
   "detail": "review/ga-readiness-2026-11-04.html",
   "areas": [
     {
@@ -11,70 +11,150 @@
       "weight": 10,
       "score": 82,
       "status": "amber",
-      "why": "Live in e087e40d41: send email hook timeout fix and invitee captcha and join fix (R29-GA-SIGNUP-ALIAS-FAILED-01, R29-GA-INVITEE-NOT-JOINED-01, 6f361fcf43, 49223650ce), GA nav D555. Left: Android fingerprint is an owner check, invitee join not re-walked on production. Prod DB got 13 missing migrations (PROD-MIGRATION-GAP-2026-11-04)"
+      "why": "Unchanged. Live in e087e40d41: send email hook timeout fix and invitee captcha and join fix (R29-GA-SIGNUP-ALIAS-FAILED-01, R29-GA-INVITEE-NOT-JOINED-01), GA nav D555. Not measured on production: invitee join re-walk, Android fingerprint (owner check). Round 6 mobile fixes (R29-MOBILE-NAV-SAFE-AREA-01 and 3 more) are staging only, no credit. Projection holds at 82 until the Android check and the invitee re-walk are done.",
+      "projected": 82
     },
     {
       "name": "Core bid journey",
       "weight": 12,
-      "score": 72,
+      "score": 68,
       "status": "amber",
-      "why": "Live: refusal message fix (R29-BID-EXTRACT-REFUSAL-SILENT-01, bc95534055), Check and send D559 with fix 4d818f54b8, the 15 bid walk fixes (R29-E2E10-01 to 15) and drafting speed D560. Staging only: 5 bids reached SUBMITTED, drafts 44 to 60 s, so staging credit. Extraction 5 unflagged conflicts remain (R29-GA-AI-ACCURACY-RECHECK-01, clean re-measure not run). Multi agent drafting is OFF in production"
+      "why": "Down from 72. Live: refusal message fix (R29-BID-EXTRACT-REFUSAL-SILENT-01), Check and send D559, R29-E2E10-01 to 15, drafting speed D560. Two measured production defects are now counted and are not fixed in production: evidence vault answers 502 on every load after the last file is deleted (R29-EVIDENCE-VAULT-EMPTY-AFTER-DELETE-502-01, Sentry WEB-FP, fixed on staging only) and home first briefing 504 (R29-SENTRY-FIRST-BRIEFING-504-01, Sentry WEB-E4, staging only). Extraction clean re-measure still open (R29-GA-AI-ACCURACY-RECHECK-01 WIP, critical errors 3). Multi agent drafting OFF in production. Staging 5 bids SUBMITTED earns staging credit only.",
+      "projected": 76
     },
     {
       "name": "Core buy journey",
       "weight": 10,
       "score": 76,
       "status": "amber",
-      "why": "Live: buyer depth and buyer duty records, product separation D553. Buy walk 10 of 12 on staging with 0 product defects (R29-GA-BUY-CREDITS-ROLES-REMEASURE-01). Buyer conflict and payment duty records not walked, no seeded published requirement. Not measured on production"
+      "why": "Unchanged. Live: buyer depth and duty records, product separation D553, batch 4 buy fixes in round 4. Duty record walk 9 steps PASS on staging only (R29-GA-BUY-DUTY-RECORDS-WALK-01), buy walk 10 of 12 on staging (R29-GA-BUY-CREDITS-ROLES-REMEASURE-01). Nothing measured on production.",
+      "projected": 76
     },
     {
       "name": "Billing and payments",
       "weight": 15,
-      "score": 86,
+      "score": 88,
       "status": "green",
-      "why": "Live: credit overage switch ON, staging live key guard (R29-GA-STAGING-LIVE-STRIPE-01, 2d4008d687), credit chip equals estimate (R29-E2E10-07). Stripe 4242 top up passed on staging only. Live mode confirmed, dispute events on the live webhook. Left: a dispute has never been seen end to end (R29-GA-DISPUTE-END-TO-END-01, walk 94cacec996 built, not run). Radar for Fraud Teams not bought"
+      "why": "Up from 86. Measured 2026-11-04: Stripe production is LIVE on both web and API (sk_live) and the live account holds the full Bid catalogue under the kept lookup keys (D570). Credit overage ON, credit chip fix R29-E2E10-07. Dispute walked end to end on STAGING with Stripe TEST (R29-GA-DISPUTE-END-TO-END-01), staging credit only, no live dispute exists. Open: R29-SENTRY-BILLING-STRIPE-READS-01 WIP (saved card read WEB-D4), credit pack 504 fix is staging only, Radar for Fraud Teams not bought. No live mode card payment has been measured end to end.",
+      "projected": 90
     },
     {
       "name": "AI quality",
       "weight": 12,
       "score": 62,
       "status": "amber",
-      "why": "Live: OpenAI second provider D552 (switch ON), review assist and briefing fixes (R29-AI-REVIEW-ASSIST-RA03-01, R29-AI-BRIEFING-CONF01-DEADLINE-01, shipped in round 4), grounding gate message (R29-E2E10-03). Measured on staging only: review assist 19 of 20, briefing 3 of 3, extraction 5 unflagged conflicts. Open: bid_narrative v6 golden eval (R29-AI-EVAL-BID-NARRATIVE-V6-01), extraction clean re-measure. Production AI quality not measured. 2026-11-04 staging re-measure in progress: critical errors 6 to 3, recall 0.883, v6 narrative 4 of 4, staging credit only until shipped"
+      "why": "Unchanged. Live: OpenAI second provider D552, review assist and briefing fixes, grounding gate message (R29-E2E10-03). Staging only: v6 narrative AIC-005 9 of 9 (R29-AI-EVAL-BID-NARRATIVE-V6-01, production pass not recorded), extraction recall 0.908, precision 0.931, critical errors 3 and they vary run to run (R29-GA-AI-ACCURACY-RECHECK-01). Production AI quality is not measured. Round 6 provider fan-out and writing assist (R29-SENTRY-AI-PROVIDER-EXHAUSTED-FANOUT-01, R29-WRITING-ASSIST-FLAG-ABSENT-01) are staging only.",
+      "projected": 64
     },
     {
       "name": "Security and auth",
       "weight": 10,
-      "score": 90,
+      "score": 88,
       "status": "green",
-      "why": "Live: dependency security fixes, staging live key guard (2d4008d687), BFF token enforcement confirmed by probe earlier. Left: owner confirms the BUILT rows. Round 5 RBAC on 12 routes is not live, so no credit"
+      "why": "Down from 90. Live: dependency security fixes, staging live key guard, BFF token enforcement. Counted against it: on production a fault reading the read only writer state answers full writer (R29-SENTRY-RBAC-READ-ONLY-FAIL-CLOSED-01, fixed on staging only). Roles redesign and seat limits (R29-RBAC-REDESIGN-01, R29-SEAT-LIMITS-BY-PLAN-01) are BUILT and on staging only, the persona matrix walk (R29-RBAC-PERSONA-MATRIX-WALK-01) is OPEN. Projection depends on that walk passing.",
+      "projected": 92
     },
     {
       "name": "Legal and trust",
       "weight": 10,
       "score": 80,
       "status": "amber",
-      "why": "Live: legal D550 and the generated plain summaries (R29-LEGAL-GENERATED-SUMMARY-01), 72 hour breach notice in the DPA (D542), AI policy signed. Liability caps and counsel review are on hold by owner decision until customers onboard, not a GA gap"
+      "why": "Unchanged. Live: legal D550 and plain summaries, 72 hour breach notice in the DPA (D542), AI policy signed. Liability caps and counsel review are on hold by owner decision until customers onboard, so this area is held at 80 by that decision, not by a defect.",
+      "projected": 80
     },
     {
       "name": "Website",
       "weight": 6,
-      "score": 88,
+      "score": 90,
       "status": "green",
-      "why": "Website round 4 a4cd88e1 is live and passed 45 of 45 gates, with the 66 help articles (R29-GA-HELP-ARTICLES-COMPLETE-01). Tender finder speed fix and re-encoded help videos: not measured live"
+      "why": "Up from 88. Website 8bfca940 live and help videos re-encoded and purged at the Cloudflare edge today with new file sizes verified live (D572, A-525), plus 66 help articles (R29-GA-HELP-ARTICLES-COMPLETE-01). Tender finder speed fix not measured live.",
+      "projected": 90
     },
     {
       "name": "Operations and monitoring",
       "weight": 10,
       "score": 80,
       "status": "amber",
-      "why": "Live: Railway api and worker SUCCESS, Railway branch joined and fast forwarded (R29-GA-RAILWAY-BRANCH-JOIN-01, 0e8a150479), 13 missing prod migrations applied. Sentry alert test emails received. Left: phone notification in the Gmail app (R29-GA-SENTRY-PHONE-ALERT-01, owner), no point in time recovery (D544, RPO up to 24 h), portal staging login still open (R29-PORTAL-STAGING-LOGIN-TURNSTILE-01, owner manual)"
+      "why": "Unchanged. Live: Railway api and worker SUCCESS, branch joined, 13 missing prod migrations applied, Sentry alert test emails received. The Sentry sweep of 108 issues (rows R29-SENTRY-*) found 8 in production, and their fixes are on staging only, so no credit yet. Left: phone notification in the Gmail app (R29-GA-SENTRY-PHONE-ALERT-01, owner), no point in time recovery (D544, RPO up to 24 h), portal staging login (R29-PORTAL-STAGING-LOGIN-TURNSTILE-01, owner manual). Round 6 needs migrations 7400 to 7520 applied to production with its release.",
+      "projected": 84
     },
     {
       "name": "Support",
       "weight": 5,
       "score": 88,
-      "status": "amber",
-      "why": "Live in round 4: acknowledgement email, contextual help, 66 help articles. Measured on PRODUCTION 2026-11-04 (R29-GA-SUPPORT-ACK-EMAIL-01): ticket CA-21FC647C, inbox email in about 4 s, acknowledgement in about 2 s, first reply 7 min 6 s. Left: automated staging support walk (R29-SUPPORT-PATH-STAGING-E2E-01) and production failure alerts (R29-SUPPORT-PATH-PROD-FAILURE-ALERTS-01)"
+      "status": "green",
+      "why": "Unchanged. Measured on PRODUCTION 2026-11-04 (R29-GA-SUPPORT-ACK-EMAIL-01): ticket CA-21FC647C, inbox email about 4 s, acknowledgement about 2 s, first reply 7 min 6 s. 66 help articles. Left: automated staging support walk (R29-SUPPORT-PATH-STAGING-E2E-01) and production failure alerts (R29-SUPPORT-PATH-PROD-FAILURE-ALERTS-01).",
+      "projected": 88
     }
-  ]
+  ],
+  "overallExact": 79.2,
+  "projection": {
+    "basis": "PROJECTION, not a measurement. Assumes round 6 (staging since 2026-11-04 23:16 UTC, migrations 7400 to 7520) is promoted to production and its staging walks pass. Each projected area score is judgement on the rows named in that area and stays unmeasured on production until the walks are done.",
+    "overall": 82,
+    "overallExact": 81.5,
+    "target": 95,
+    "gapToTarget": 13.5,
+    "neededFor95": [
+      {
+        "area": "Core bid journey",
+        "item": "Round 6 in production (vault 502 and home briefing 504 fixes), then walk a bid to SUBMITTED on production",
+        "rows": "R29-EVIDENCE-VAULT-EMPTY-AFTER-DELETE-502-01, R29-SENTRY-FIRST-BRIEFING-504-01, proposed new R29-GA-PROD-BID-WALK-01"
+      },
+      {
+        "area": "Core bid journey",
+        "item": "Extraction clean re-measure with critical errors 0 and stable across runs",
+        "rows": "R29-GA-AI-ACCURACY-RECHECK-01"
+      },
+      {
+        "area": "Core bid journey",
+        "item": "Owner decision whether multi agent drafting goes ON in production (currently OFF)",
+        "rows": "proposed new R29-GA-MULTIAGENT-DRAFTING-DECISION-01"
+      },
+      {
+        "area": "AI quality",
+        "item": "Record the v6 narrative golden pass on production and measure review assist, briefing and extraction on production, none is measured there today",
+        "rows": "R29-AI-EVAL-BID-NARRATIVE-V6-01, proposed new R29-GA-AI-PROD-MEASURE-01"
+      },
+      {
+        "area": "Core buy journey",
+        "item": "Walk buyer duty records, credits and roles on production with a seeded published requirement",
+        "rows": "R29-GA-BUY-DUTY-RECORDS-WALK-01, R29-GA-BUY-CREDITS-ROLES-REMEASURE-01, proposed new R29-GA-BUY-PROD-WALK-01"
+      },
+      {
+        "area": "Sign up and onboarding",
+        "item": "Invitee join re-walk on production, Android fingerprint and mobile check",
+        "rows": "proposed new R29-GA-INVITEE-PROD-REWALK-01, R29-MOBILE-NAV-SAFE-AREA-01 (owner)"
+      },
+      {
+        "area": "Security and auth",
+        "item": "Persona matrix walk on staging after the redesign, then the same roles live in production",
+        "rows": "R29-RBAC-PERSONA-MATRIX-WALK-01, R29-RBAC-REDESIGN-01, R29-SEAT-LIMITS-BY-PLAN-01, R29-SENTRY-RBAC-READ-ONLY-FAIL-CLOSED-01"
+      },
+      {
+        "area": "Billing and payments",
+        "item": "One live mode card payment and refund measured end to end on production, and close the saved card read",
+        "rows": "proposed new R29-GA-LIVE-PAYMENT-SMOKE-01, R29-SENTRY-BILLING-STRIPE-READS-01"
+      },
+      {
+        "area": "Operations and monitoring",
+        "item": "Phone alert confirmed, point in time recovery decision, production failure alerts for the support path",
+        "rows": "R29-GA-SENTRY-PHONE-ALERT-01 (owner), D544, R29-SUPPORT-PATH-PROD-FAILURE-ALERTS-01"
+      },
+      {
+        "area": "Support",
+        "item": "Automated staging support walk",
+        "rows": "R29-SUPPORT-PATH-STAGING-E2E-01"
+      },
+      {
+        "area": "Website",
+        "item": "Measure the tender finder speed fix live",
+        "rows": "proposed new R29-GA-TENDER-FINDER-LIVE-MEASURE-01"
+      },
+      {
+        "area": "Legal and trust",
+        "item": "Held at 80 by the owner decision to postpone counsel review and liability caps until customers onboard. With legal at 80 every other area must average about 96.7 to reach an overall 95, so the owner decides whether the 95 target counts this area",
+        "rows": "owner decision, no row"
+      }
+    ]
+  }
 }
