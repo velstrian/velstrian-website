@@ -206,7 +206,12 @@ const offSelectors = tabs
 
 <script>
   import { initTabs } from '../../scripts/tabs';
-  initTabs();
+  import { afterPaint } from '../../scripts/idle';
+  /* A-520: the selection glide reads offsetLeft, which forced the page's
+     first layout ahead of its first paint. The inline bootstrap above has
+     already hidden the unselected panels, so waiting one frame shows nothing
+     different, and until then each tab is a working anchor. */
+  afterPaint(() => initTabs());
 </script>
 
 {/*
