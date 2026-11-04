@@ -158,6 +158,15 @@ const UPDATE = process.argv.includes('--update');
  * when a loss must be tolerated across several builds.
  */
 const ALLOWED_LOSSES = new Map([
+  /* 2026-11-03, D550 (owner decision): no liability terms on the website while
+     there are no customers. Section 6 of the Terms now says the full terms are
+     available on request, under the heading "6. Full Terms on Request". */
+  ['/terms/  heading: limitation of liability',
+   'D550: the liability clause is removed from the website. Section 6 now says the full terms are available on request.'],
+  ['/terms/  heading: liability limits at a glance',
+   'D550: the liability table is removed with the clause it summarised. The full terms are available on request.'],
+  ['/terms/  heading: liability',
+   'D550: the "Liability" card in the six clauses strip is now "Full terms", pointing at section 6.'],
   /* 2026-10-28, R285-WEB-GEMINI-SEO (owner instruction): reworded section and FAQ
      heading in ppn-026-what-has-published-and-what-has-not. Editorial policy:
      PPN 026 only, never name PPN 002. */

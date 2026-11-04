@@ -1,6 +1,6 @@
 ---
 title: "Terms of Service and Agreement | Velstrian"
-description: "Velstrian Systems Ltd terms of service: customer account use, subscriptions, acceptable use, data handling, liability and service changes."
+description: "Velstrian Systems Ltd terms of service: customer account use, subscriptions, acceptable use, data handling and service changes."
 heading: "Terms of Service."
 lastUpdated: "2026-11-03"
 version: "2026-11-03"
@@ -11,7 +11,7 @@ summary:
   - "When you cancel, your plan keeps working to the end of the period you paid for. Fees already paid are not refunded."
   - "You keep ownership of your content. We use it only to provide the service."
   - "AI drafts can be wrong, so check every answer before you use it."
-  - "Our liability is limited to the fees for the 12 months before the event that led to a claim."
+  - "The full terms are available on request."
   - "These terms are governed by the laws of England and Wales."
 ---
 ## The six clauses customers ask about
@@ -36,7 +36,7 @@ Tap any card to jump straight to the full clause. The complete agreement follows
 
   IF YOU RENUMBER A HEADING IN THIS FILE, THESE MOVE WITH IT.
 -->
-<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>Velstrian Systems Ltd (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are drafts you check before use. They are not legal or professional advice.</p> </a> <a href="#6-limitation-of-liability" class="prose-card"> <span aria-hidden="true"></span> <h3>Liability</h3> <p>One cap for all claims, including data protection: the fees you paid in the 12 months before the claim.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
+<div role="group" class="prose-cards" aria-label="Terms at a glance"> <a href="#1-parties-and-agreement" class="prose-card"> <span aria-hidden="true"></span> <h3>Parties</h3> <p>Velstrian Systems Ltd (England &amp; Wales) and you, the customer.</p> </a> <a href="#2-subscription-and-access" class="prose-card"> <span aria-hidden="true"></span> <h3>Subscription</h3> <p>Monthly or annual, GBP, cancel any time, no partial refunds.</p> </a> <a href="#3-acceptable-use" class="prose-card"> <span aria-hidden="true"></span> <h3>Acceptable use</h3> <p>Permitted vs prohibited activities on the platform.</p> </a> <a href="#4-ai-output-disclaimer" class="prose-card"> <span aria-hidden="true"></span> <h3>AI disclaimer</h3> <p>AI outputs are drafts you check before use. They are not legal or professional advice.</p> </a> <a href="#6-full-terms-on-request" class="prose-card"> <span aria-hidden="true"></span> <h3>Full terms</h3> <p>Available on request. Email us and we will send them.</p> </a> <a href="#9-governing-law-and-disputes" class="prose-card"> <span aria-hidden="true"></span> <h3>Governing law</h3> <p>England &amp; Wales. Courts of England &amp; Wales.</p> </a> </div>
 
 ## Full terms of service
 
@@ -111,21 +111,15 @@ You confirm that you and your users are not on a UK, US or EU sanctions list and
 - You are responsible for your content and for how you use Velstrian. You will cover us for losses, including reasonable legal costs, that we suffer from a claim by someone else that your content, or your use of Velstrian in breach of these Terms, infringes their rights or breaks the law.
 - We do not give an indemnity for claims about your use of AI output. You are responsible for checking AI output before you use it. If someone claims that part of the Velstrian software itself infringes their rights, tell us and we will, at our choice, fix it, replace it or end your subscription, which then stops at the end of the paid period.
 
-## 6. Limitation of Liability
+## 6. Full Terms on Request
 
-<dl class="deflist"> <dt>Liability cap</dt> <dd>In these Terms, <strong>Annual Fees</strong> means the fees you paid or must pay for the 12 months before the event that led to the claim. If you have subscribed for less than 12 months, it means the fees for the first 12 months of your current plan. Our total liability to you for all claims arising under or in connection with these Terms, whether in contract, negligence or otherwise, <strong>and including claims arising from a personal data breach, a breach of our Data Processing Agreement or of our security obligations</strong>, will not be more than <strong>the Annual Fees</strong>. This one cap covers every kind of claim together in any 12 month period. If you need a higher limit, ask us and we may agree one for an extra charge.</dd> </dl>
-
-### Liability limits at a glance
-
-<div class="prose-scroll" role="region" aria-label="Liability and exclusions (table)" tabindex="0"><table class="lc-table"> <caption>Liability and exclusions</caption> <thead> <tr><th scope="col">Category</th><th scope="col">Treatment</th></tr> </thead> <tbody> <tr><th scope="row">Liability cap (all claims, including data protection and security)</th><td>The Annual Fees: the fees paid or payable for the 12 months before the event. One cap covering every kind of claim together in any 12 months</td></tr> <tr><th scope="row">Loss of profit, revenue, savings, goodwill, customers, business or contracts</th><td>Excluded</td></tr> <tr><th scope="row">Loss of a bid, tender or opportunity, or a buyer's decision</th><td>Excluded</td></tr> <tr><th scope="row">Indirect or consequential loss</th><td>Excluded</td></tr> <tr><th scope="row">Loss or corruption of data</th><td>We restore your data from our most recent backup</td></tr> <tr><th scope="row">Regulatory fines or penalties (for example from the ICO)</th><td>No indemnity</td></tr> <tr><th scope="row">Time to bring a claim</th><td>12 months from when you knew, or should have known</td></tr> <tr><th scope="row">Death or personal injury (negligence)</th><td>Not limited</td></tr> <tr><th scope="row">Fraud / fraudulent misrepresentation</th><td>Not limited</td></tr> </tbody> </table></div>
-
-<details class="lc-details" id="liability-detail"> <summary>Liability, full clause text</summary> <div class="lc-details__body"> <p>In these Terms, Annual Fees means the fees you paid or must pay for the 12 months before the event that led to the claim. If you have subscribed for less than 12 months, it means the fees for the first 12 months of your current plan. Our total liability to you for all claims arising under or in connection with these Terms, whether in contract, negligence or otherwise, and including claims arising from a personal data breach, a breach of our Data Processing Agreement or of our security obligations, will not be more than the Annual Fees. This one cap covers every kind of claim together in any 12 month period. If you need a higher limit, ask us and we may agree one for an extra charge.</p> <p>We are not liable for loss of profit, revenue, savings, goodwill, customers, business or contracts, for the loss of a bid, tender or opportunity, or for any decision a buyer makes about your bid, whether the loss is direct or indirect. We are not liable for indirect or consequential loss. We are not liable for loss or corruption of data except that we will take reasonable steps to restore your data from our most recent backup.</p> <p>Velstrian gives no indemnity to you for regulatory fines or penalties imposed by any supervisory authority (for example the ICO).</p> <p>Any claim against us must be brought within 12 months of the date you first knew, or should reasonably have known, of the event behind it.</p> <p>Nothing in these Terms limits our liability for death or personal injury caused by negligence, for fraud or fraudulent misrepresentation, or for anything else the law does not allow us to limit or exclude.</p> </div> </details>
+The full terms are available on request. Email [contact@velstrian.com](mailto:contact@velstrian.com) and we will send them to you.
 
 <div id="data-processing-agreement" class="legal-anchor"></div>
 
 ## 7. Data Processing
 
-Personal data is processed in accordance with our [Privacy Policy](/privacy/). If we process personal data on your behalf, our [Data Processing Agreement](/dpa/) forms part of these Terms. It sets out how we handle that data for you under Article 28 UK GDPR. The liability limits in section 6 also cover the Data Processing Agreement, and are stated only there. If you would like a copy for your records, request one using the buttons below.
+Personal data is processed in accordance with our [Privacy Policy](/privacy/). If we process personal data on your behalf, our [Data Processing Agreement](/dpa/) forms part of these Terms. It sets out how we handle that data for you under Article 28 UK GDPR. If you would like a copy for your records, request one using the buttons below.
 
 [Request DPA](mailto:legal@velstrian.com?subject=DPA%20Request) [Contact Support](mailto:contact@velstrian.com)
 

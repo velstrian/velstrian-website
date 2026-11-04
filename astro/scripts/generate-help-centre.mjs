@@ -254,16 +254,34 @@ function legalMarkdown(markup, route) {
  * quietly become a second copy of the legal text.
  */
 const PENDING_PLATFORM_CORRECTIONS = [
-  /* EMPTY, and that is the state to keep it in. The Upstash entries for
-     /sub-processors and /residency and the Resend entry for /retention all
-     expired on 2026-10-26, when the app lane corrected the platform pages, and
-     this generator failed until each was deleted, as designed. */
+  /* The Upstash entries for /sub-processors and /residency and the Resend entry
+     for /retention all expired on 2026-10-26, when the app lane corrected the
+     platform pages, and this generator failed until each was deleted, as
+     designed. Empty is the state to return this table to. */
+  /* [D550 2026-11-03] No liability terms on the website while there are no
+     customers. The full terms are available on request. The platform DPA page
+     still states the D532 cap, so the website drops it here until that page is
+     corrected. `field: 'summary'` matches one "In short" point instead of the body. */
+  {
+    route: 'dpa',
+    field: 'summary',
+    find: /^One liability limit covers all claims:/,
+    replace: 'The full terms are available on request.',
+    why: 'D550, the DPA summary point stating the liability limit',
+  },
+  {
+    route: 'dpa',
+    find: /<h2>10\. Liability and governing law<\/h2>\s*<p>Our liability under this DPA[\s\S]*?<\/p>/,
+    replace:
+      '<h2>10. Full terms and governing law</h2><p>The full terms are available on request. Email <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> and we will send them to you. The DPA is governed by the laws of England and Wales, with jurisdiction in the courts of England.</p>',
+    why: 'D550, the DPA section 10 liability text',
+  },
 ];
 
 /** Applies the corrections for one route, and fails on any that has expired. */
 function applyCorrections(route, markup) {
   let html = markup;
-  for (const c of PENDING_PLATFORM_CORRECTIONS.filter((x) => x.route === route)) {
+  for (const c of PENDING_PLATFORM_CORRECTIONS.filter((x) => x.route === route && x.field !== 'summary')) {
     if (!c.find.test(html)) {
       throw new Error(
         `generate-help-centre: the platform page src/shared/legal/public-pages/${route}.tsx no longer holds the text a pending correction fixes (${c.why}). The platform is corrected: delete this entry from PENDING_PLATFORM_CORRECTIONS.`,
@@ -313,7 +331,17 @@ function legalSummaryLines(summary, route) {
   if (!Array.isArray(summary) || summary.length === 0 || !summary.every((x) => typeof x === 'string' && x.trim() !== '')) {
     throw new Error(`generate-help-centre: src/shared/legal/public-pages/${route}.tsx exports a summary that is not a list of plain strings`);
   }
-  return ['summary:', ...summary.map((x) => `  - ${yaml(x.trim())}`)];
+  const points = summary.map((x) => x.trim());
+  for (const c of PENDING_PLATFORM_CORRECTIONS.filter((x) => x.route === route && x.field === 'summary')) {
+    const at = points.findIndex((x) => c.find.test(x));
+    if (at === -1) {
+      throw new Error(
+        `generate-help-centre: the summary of src/shared/legal/public-pages/${route}.tsx no longer holds the point a pending correction fixes (${c.why}). The platform is corrected: delete this entry from PENDING_PLATFORM_CORRECTIONS.`,
+      );
+    }
+    points[at] = c.replace;
+  }
+  return ['summary:', ...points.map((x) => `  - ${yaml(x)}`)];
 }
 
 /** Everything this script would write, as { absolutePath: contents }. */
