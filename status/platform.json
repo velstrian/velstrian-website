@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T23:33:44.857Z",
+  "updated": "2026-11-04T23:45:46.991Z",
   "release": "2.9",
   "note": "DERIVED, not authored. Generated from RELEASE-2.9-TRACKER.md and RELEASE-2.9-DEFECT-REGISTER.md by status/build-platform-board.js. Those documents are what a release is certified against and they win every disagreement, and this view is stale by at most one run. Re-run the generator after editing either document.",
   "sources": [
@@ -9,18 +9,18 @@
     "crowagent-platform/docs/release-2.9/PHASE-ASSIGNMENT-*.md"
   ],
   "phaseBreakdown": {
-    "generatedAt": "2026-11-04T23:23:41.733Z",
-    "sourceFingerprint": "480:-34778282",
+    "generatedAt": "2026-11-04T23:41:49.167Z",
+    "sourceFingerprint": "486:-2067132465",
     "note": "Phase counts cover items NOT YET DONE (OPEN + WIP + BUILT + DECISION). FIXED and CLEARED items are assigned to NO phase, which is why the phase totals do not approach the release total. BUILT means implemented and awaiting certification - it is NOT outstanding work.",
-    "totalRaised": 480,
+    "totalRaised": 486,
     "done": 237,
-    "remaining": 210,
+    "remaining": 216,
     "phases": {
       "1": {
-        "items": 181,
-        "open": 12,
-        "built": 155,
-        "wip": 14,
+        "items": 187,
+        "open": 14,
+        "built": 158,
+        "wip": 15,
         "decision": 0,
         "onHold": 0
       },
@@ -107,7 +107,6 @@
         "R29-WEBSITE-MERGE-PUSH-01",
         "R29-GA-BID-DRAFT-REVIEW-UNMEASURED-01",
         "R29-PPN002-OPEN-CONTRACTS-01",
-        "R29-SUPPORT-PATH-STAGING-E2E-01",
         "R29-BID-REFUSAL-CODE-DAILY-LIMIT-01",
         "R29-UI-ALIGNMENT-SWEEP-01",
         "R29-ACTIONS-ROLE-LENS-01",
@@ -140,6 +139,7 @@
         "R29-NAV-PALETTE-ORG-KIND-01",
         "R29-RESPONSE-STRAY-SPLIT-WORD-01",
         "R29-STEP-TENDER-INTAKE-WORKER-VELSTRIAN-01",
+        "R29-SUPPORT-PATH-STAGING-E2E-01",
         "R29-WALK-QUESTIONS-READ-STALL-01",
         "R29-MIGRATION-7360-LONGTEXT-CONFIRM-01",
         "R29-RBAC-BOUNDARY-UNCLASSIFIED-01",
@@ -148,6 +148,7 @@
         "R29-STEP-SECURITY-SCANS-WEEKLY-01",
         "R29-WALK-PORTAL-TURNSTILE-AUTOMATION-01",
         "R285-P2-SWEEP-04-01",
+        "R29-A11Y-REVIEW-CHECKBOX-16PX-01",
         "R29-AI-D388-66-ROWS-UNREVIEWED-01",
         "R29-SUPPORT-PATH-PROD-FAILURE-ALERTS-01",
         "R29-WALK-BUY-SEED-PUBLISHED-01",
@@ -163,6 +164,7 @@
         "R29-BATCH4-PREEXISTING-TEST-FAILS-01",
         "R29-BOARD-MKT-UPLOAD-01",
         "R29-EVAL-CALLS-ATTRIBUTED-TO-EVAL-ORG-01",
+        "R29-GA-BUY-DUTY-RECORDS-WALK-01",
         "R29-GA-BUY-HOMETIMEOUT-01",
         "R29-GA-BUY-NOTFOUND-01",
         "R29-GA-BUY-NOTICES404-01",
@@ -172,6 +174,7 @@
         "R29-GA-BUY-ZEROCRED-SUGGEST-01",
         "R29-GA-GAPS-WALK-2026-11-04",
         "R29-GA-HELP-ARTICLES-COMPLETE-01",
+        "R29-GA-MOBILE-SWEEP-01",
         "R29-GA-RAILWAY-BRANCH-JOIN-01",
         "R29-GA-SUPPORT-ACK-EMAIL-01",
         "R29-GA-SUPPORT-CONTEXT-HELP-01",
@@ -195,7 +198,10 @@
         "R29-WEB-PREEXISTING-RED-TESTS-03",
         "R29-WEB-PREEXISTING-RED-TESTS-04",
         "R29-WRITING-ASSIST-FLAG-ABSENT-01",
+        "R29-A11Y-TAP-TARGETS-44-01",
+        "R29-STAGING-PANEL-EVAL-FIXTURE-01",
         "R29-SUPABASE-USAGE-BADGE-01",
+        "R29-PPN-LABEL-PLAIN-WORDS-01",
         "R286-ONBOARDING-VIDEO-02",
         "R286-PLATFORM-VIDEO-SERIES-01",
         "R29-AI-ADVISOR-AIC028-RESIDUAL-01",
@@ -248,7 +254,8 @@
         "R29-STEP-P3-AI-RAG-FLOOR-CALIBRATE-01",
         "R29-STEP-P3-AI-GRAPHRAG-BUILD-01"
       ]
-    }
+    },
+    "stale": true
   },
   "legend": {
     "FIXED": "Implemented and verified. Tracker verdict DONE or MET.",
@@ -336,16 +343,16 @@
     "authority": "DECLARED state, not a live read. Vercel is the authority on what production is running — never report deploy or phase state from a repository document or git log (owner rule 6). Check with: node scripts/verify-deploy-budget.mjs --deployments=<file.json>",
     "appliesToRelease": "2.9",
     "staleBudget": false,
-    "headline": "4 Vercel production deploys for the whole release, one per phase boundary. 0 spent, 4 remaining, 3 spent OUTSIDE a boundary and unrecoverable.",
+    "headline": "4 Vercel production deploys for the whole release, one per phase boundary. 0 spent, 4 remaining, 12 spent OUTSIDE a boundary and unrecoverable.",
     "budget": 4,
     "spent": 0,
     "remaining": 4,
-    "breached": 3,
+    "breached": 12,
     "phases": [
       {
         "phase": 1,
         "name": "PHASE 1 - FIXES, ENHANCEMENTS OF EXISTING FUNCTIONALITY AND GENERAL AVAILABILITY",
-        "items": 181,
+        "items": 187,
         "sha": null,
         "shipped": null,
         "state": "NOT MERGED",
@@ -363,22 +370,76 @@
     ],
     "violations": [
       {
+        "sha": "f89e959",
+        "project": "web",
+        "when": "2026-10-29 12:08 UTC",
+        "why": "PWA install icons promote (R29-PWA-INSTALL-ICONS-01, a677b3327). Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
+      },
+      {
+        "sha": "f89e959",
+        "project": "portal",
+        "when": "2026-10-29 12:13 UTC",
+        "why": "PWA install icons promote, portal half. Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
+      },
+      {
+        "sha": null,
+        "project": "portal",
+        "when": "2026-10-31 18:02 UTC",
+        "why": "Portal only CLI deploy of unknown sha. The reason is not recorded in the repo, Vercel shows source cli. To be confirmed by the owner."
+      },
+      {
+        "sha": null,
+        "project": "portal",
+        "when": "2026-11-01 02:09 UTC",
+        "why": "Portal only redeploy (Vercel source redeploy), same code as the previous portal build. The reason is not recorded in the repo. To be confirmed by the owner."
+      },
+      {
+        "sha": null,
+        "project": "portal",
+        "when": "2026-11-01 02:47 UTC",
+        "why": "Portal only redeploy (Vercel source redeploy), same code as the previous portal build. The reason is not recorded in the repo. To be confirmed by the owner."
+      },
+      {
+        "sha": null,
+        "project": "portal",
+        "when": "2026-11-01 02:53 UTC",
+        "why": "Portal only redeploy (Vercel source redeploy), same code as the previous portal build. The reason is not recorded in the repo. To be confirmed by the owner."
+      },
+      {
         "sha": "2cf45f354c",
-        "project": "web+portal",
-        "when": "2026-11-03",
-        "why": "R2.9 round 1 production promote. Promoted mid phase under the owner standing approval (D539 for rounds 1 and 2, D557 for round 4), so it is counted against the budget outside a phase boundary."
+        "project": "web",
+        "when": "2026-11-03 11:03 UTC",
+        "why": "R2.9 round 1 production promote (D541). Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
+      },
+      {
+        "sha": "2cf45f354c",
+        "project": "portal",
+        "when": "2026-11-03 11:11 UTC",
+        "why": "R2.9 round 1 production promote, portal half (D541). Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
       },
       {
         "sha": "90d3075ec1",
-        "project": "web+portal",
-        "when": "2026-11-03",
-        "why": "R2.9 round 2 production promote. Promoted mid phase under the owner standing approval (D539 for rounds 1 and 2, D557 for round 4), so it is counted against the budget outside a phase boundary."
+        "project": "web",
+        "when": "2026-11-03 13:27 UTC",
+        "why": "R2.9 round 2 production promote (D543). Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
+      },
+      {
+        "sha": "90d3075ec1",
+        "project": "portal",
+        "when": "2026-11-03 13:38 UTC",
+        "why": "R2.9 round 2 production promote, portal half, with the owner rotated portal keys (D543). Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
       },
       {
         "sha": "e087e40d41",
-        "project": "web+portal",
-        "when": "2026-11-04",
-        "why": "R2.9 round 4 production promote (dpl_FS2g33U3ZHogpinjqeutEiKcFzhK web, dpl_HX3PJ2mkp7m49gUYWGyn5KE9pW79 portal). Promoted mid phase under the owner standing approval (D539 for rounds 1 and 2, D557 for round 4), so it is counted against the budget outside a phase boundary."
+        "project": "web",
+        "when": "2026-11-04 14:26 UTC",
+        "why": "R2.9 round 4 production promote (D557). Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
+      },
+      {
+        "sha": "e087e40d41",
+        "project": "portal",
+        "when": "2026-11-04 14:31 UTC",
+        "why": "R2.9 round 4 production promote, portal half (D557). Promoted mid phase under the owner standing approval, so it is counted outside a phase boundary."
       }
     ],
     "assignment": "docs/release-2.9/PHASE-ASSIGNMENT-2026-11-04.md"
@@ -531,7 +592,7 @@
         {
           "title": "R2.9 owner decision log",
           "href": "review/decisions-r29-log.html",
-          "sha": "bf180b533b"
+          "sha": "b6a75afe28"
         }
       ]
     },
@@ -594,7 +655,9 @@
       ]
     }
   ],
-  "unreadable": [],
+  "unreadable": [
+    "status/phase-breakdown.json — STALE. It was generated from a different issue set than this board (fingerprint 486:-2067132465 vs 493:2019061052). The per-phase panel is SUPPRESSED rather than shown with out-of-date numbers. Re-run: node scripts/assign-phases.mjs <path-to-platform.json>, then rebuild this board."
+  ],
   "issues": [
     {
       "id": "R285-KIRO-NATIVE-PRETOOLUSE-GUARD-01",
@@ -6009,9 +6072,9 @@
       "sevExplicit": true,
       "lane": "PRODUCT",
       "changed": "2026-11-04",
-      "changedAt": "2026-11-04T15:58:36.000Z",
-      "changedAtSource": "commit 918c6929",
-      "status": "OPEN",
+      "changedAt": "2026-11-04T23:42:16.000Z",
+      "changedAtSource": "commit ead5ca97",
+      "status": "BUILT",
       "title": "[SEV:P2][LANE:QA][PHASE:1][GA:WEEK1] Owner 2026-11-04: automate the support path end to end ON STAGING as a permanent walk spec run with every release walk, no timer and no new recurring cost: in app help form submits, the support_tickets row exists, the acknowledgement email and the support inbox email are delivered (Brevo log read only). Production stays manual by RULE 0-P. Measured by hand on production 2026-11-04: ticket CA-21FC647C, inbox about 4 s, acknowledgement about 2 s, first reply 7 min 6 s.",
       "note": ""
     },
@@ -6477,8 +6540,8 @@
       "sevExplicit": true,
       "lane": "PRODUCT",
       "changed": "2026-11-04",
-      "changedAt": "2026-11-04T23:24:07.000Z",
-      "changedAtSource": "commit 28f8890d",
+      "changedAt": "2026-11-04T23:34:05.000Z",
+      "changedAtSource": "commit 2167e89a",
       "status": "OPEN",
       "title": "[SEV:P1][LANE:DB][PHASE:1] Round 6 database changes on production. Preflight docs/release-2.9/ops/PROD-MIGRATION-PREFLIGHT-ROUND6-2026-11-04.md: production at 7320, needs 7330 to 7370 and 7400 to 7520 in order with the round 6 code.",
       "note": ""
@@ -6520,6 +6583,175 @@
       "changedAtSource": "commit 28f8890d",
       "status": "BUILT",
       "title": "[SEV:P2][LANE:WEB][PHASE:1] One passing 503 on the session timeout read left the tab on the 24 hour default instead of the organisation's idle sign out.",
+      "note": ""
+    },
+    {
+      "id": "R29-PPN-LABEL-PLAIN-WORDS-01",
+      "src": "R2.9 tracker",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:42:16.000Z",
+      "changedAtSource": "commit ead5ca97",
+      "status": "WIP",
+      "title": "[SEV:P3][LANE:WEB][PHASE:1] The bid header shows the raw \"social value rules PPN 026\" with no plain explanation (RULE 0-U).",
+      "note": ""
+    },
+    {
+      "id": "R29-A11Y-REVIEW-CHECKBOX-16PX-01",
+      "src": "R2.9 tracker",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:42:16.000Z",
+      "changedAtSource": "commit ead5ca97",
+      "status": "OPEN",
+      "title": "[SEV:P2][LANE:WEB][PHASE:1] Review page has four checkboxes at 16 by 16 px on mobile, below the WCAG 2.5.8 AA 24 px minimum.",
+      "note": ""
+    },
+    {
+      "id": "R29-A11Y-TAP-TARGETS-44-01",
+      "src": "R2.9 tracker",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:42:16.000Z",
+      "changedAtSource": "commit ead5ca97",
+      "status": "OPEN",
+      "title": "[SEV:P3][LANE:WEB][PHASE:1] Mobile tap targets under 44 px (AAA, Apple and Android guidance): bids list 27 targets (row checkboxes 24 by 24, Actions controls), questions \"Select question\" checkboxes 20 by 20 and \"No source found\" buttons 112 by 24, the beta Test mode link 82 by 24 and the footer email link 130 by 24 on every page.",
+      "note": ""
+    },
+    {
+      "id": "R29-STAGING-PANEL-EVAL-FIXTURE-01",
+      "src": "R2.9 tracker",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:42:16.000Z",
+      "changedAtSource": "commit ead5ca97",
+      "status": "OPEN",
+      "title": "[SEV:P3][LANE:QA][PHASE:1] The seeded panel evaluation e2850000-0000-4000-d400-000000000101 is scored and closed, so the declare and refuse UI path cannot be re-walked. Needs a second always open panel evaluation on staging, created through the product.",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-BUY-DUTY-RECORDS-WALK-01",
+      "src": "R2.9 tracker",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:42:16.000Z",
+      "changedAtSource": "commit ead5ca97",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:QA][PHASE:1] Buyer duty record walk (conflict declaration, scoring refusal, award, payment duty record).",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-MOBILE-SWEEP-01",
+      "src": "R2.9 tracker",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:42:16.000Z",
+      "changedAtSource": "commit ead5ca97",
+      "status": "BUILT",
+      "title": "[SEV:P2][LANE:QA][PHASE:1] Mobile sweep at Pixel 7 and 390 px over every main page.",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-PROD-BID-WALK-01",
+      "src": "R2.9 tracker",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:45:23.000Z",
+      "changedAtSource": "commit 4a1e2443",
+      "status": "OPEN",
+      "title": "[SEV:P1][LANE:QA][PHASE:1][GA:BLOCKER] GA area Core bid journey: walk a bid to SUBMITTED on production after round 6, with draft times.",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-MULTIAGENT-DRAFTING-DECISION-01",
+      "src": "R2.9 tracker",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:45:23.000Z",
+      "changedAtSource": "commit 4a1e2443",
+      "status": "OPEN",
+      "title": "[SEV:P2][LANE:AI][PHASE:1][GA:WEEK1] GA area Core bid journey: multi agent drafting is OFF in production; decide on or off with its quality and cost measured.",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-AI-PROD-MEASURE-01",
+      "src": "R2.9 tracker",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:45:23.000Z",
+      "changedAtSource": "commit 4a1e2443",
+      "status": "OPEN",
+      "title": "[SEV:P1][LANE:AI-EVAL][PHASE:1][GA:BLOCKER] GA area AI quality: production AI quality has never been measured; one bounded eval on production within the D547 eval cap.",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-BUY-PROD-WALK-01",
+      "src": "R2.9 tracker",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:45:23.000Z",
+      "changedAtSource": "commit 4a1e2443",
+      "status": "OPEN",
+      "title": "[SEV:P1][LANE:QA][PHASE:1][GA:BLOCKER] GA area Core buy journey: walk the buy journey (requirement, publish, evaluate, award, duty records) on production.",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-INVITEE-PROD-REWALK-01",
+      "src": "R2.9 tracker",
+      "sev": "P2",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:45:23.000Z",
+      "changedAtSource": "commit 4a1e2443",
+      "status": "OPEN",
+      "title": "[SEV:P2][LANE:QA][PHASE:1][GA:WEEK1] GA area Sign up: invitee join re walked on production after round 6.",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-LIVE-PAYMENT-SMOKE-01",
+      "src": "R2.9 tracker",
+      "sev": "P1",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:45:23.000Z",
+      "changedAtSource": "commit 4a1e2443",
+      "status": "OPEN",
+      "title": "[SEV:P1][LANE:BILLING][PHASE:1][GA:BLOCKER] GA area Billing: one live mode card payment measured end to end on production (smallest price, refunded).",
+      "note": ""
+    },
+    {
+      "id": "R29-GA-TENDER-FINDER-LIVE-MEASURE-01",
+      "src": "R2.9 tracker",
+      "sev": "P3",
+      "sevExplicit": true,
+      "lane": "PRODUCT",
+      "changed": "2026-11-04",
+      "changedAt": "2026-11-04T23:45:23.000Z",
+      "changedAtSource": "commit 4a1e2443",
+      "status": "OPEN",
+      "title": "[SEV:P3][LANE:PERF][PHASE:1][GA:WEEK1] GA area Website: measure the tender finder speed fix live.",
       "note": ""
     },
     {
