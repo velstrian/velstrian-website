@@ -258,24 +258,8 @@ const PENDING_PLATFORM_CORRECTIONS = [
      for /retention all expired on 2026-10-26, when the app lane corrected the
      platform pages, and this generator failed until each was deleted, as
      designed. Empty is the state to return this table to. */
-  /* [D550 2026-11-03] No liability terms on the website while there are no
-     customers. The full terms are available on request. The platform DPA page
-     still states the D532 cap, so the website drops it here until that page is
-     corrected. `field: 'summary'` matches one "In short" point instead of the body. */
-  {
-    route: 'dpa',
-    field: 'summary',
-    find: /^One liability limit covers all claims:/,
-    replace: 'The full terms are available on request.',
-    why: 'D550, the DPA summary point stating the liability limit',
-  },
-  {
-    route: 'dpa',
-    find: /<h2>10\. Liability and governing law<\/h2>\s*<p>Our liability under this DPA[\s\S]*?<\/p>/,
-    replace:
-      '<h2>10. Full terms and governing law</h2><p>The full terms are available on request. Email <a href="mailto:contact@velstrian.com">contact@velstrian.com</a> and we will send them to you. The DPA is governed by the laws of England and Wales, with jurisdiction in the courts of England.</p>',
-    why: 'D550, the DPA section 10 liability text',
-  },
+  /* [D550 2026-11-04] The two D550 entries expired when the platform DPA page was corrected
+     (velstrian-platform ae7d964aec), deleted as designed. */
 ];
 
 /** Applies the corrections for one route, and fails on any that has expired. */
