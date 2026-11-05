@@ -83,6 +83,7 @@
     <li><a href="#as-dec">Decisions: recorded and open</a></li>
     <li><a href="#as-road">Roadmap, rows and what is on hold</a></li>
     <li><a href="#as-capacity">Capacity and rate limits</a></li>
+    <li><a href="#as-wa">End to end architecture by pillar</a></li>
   </ol>
 </details>
 
@@ -1385,3 +1386,180 @@ Assumptions, none measured: 22 working days, 80 percent of calls in 8 hours, bus
 <code>docs/legal/data-processing-agreement.md</code>, <code>packages/pricing/catalogue.ts</code> and
 <code>docs/release-2.8.4/scope/DECISION-GATES.md</code>. Where this page and those files disagree, the
 files win.</p>
+
+<!-- ═══ 24. END TO END ARCHITECTURE BY WELL-ARCHITECTED PILLAR ═══ -->
+<h2 id="as-wa"><span class="n">Section 24</span>The whole AI system end to end, by Well-Architected pillar, and the provider accounts behind it</h2>
+
+<p class="dated"><b>Designed and measured 5 November 2026.</b> Owner instruction: deep architecture for the whole AI model
+and its ecosystem, end to end, in Well-Architected style, with every work item created. Master paper:
+<code>velstrian-platform/docs/release-2.9/AI-ARCHITECTURE-WELL-ARCHITECTED-2026-11-05.md</code>. Provider accounts, projects, keys and
+automatic customer lanes (Annex A): <code>AI-PROVIDER-ACCOUNT-ARCHITECTURE-2026-11-05.md</code>. What our code does at a limit:
+<code>AI-IMPLEMENTATION-AUDIT-2026-11-05.md</code> (findings AUDIT-01 to AUDIT-16, not repeated here). Limits and capacity maths:
+<code>AI-CAPACITY-AND-RATE-LIMITS-STRATEGY-2026-11-05.md</code>. Frameworks: AWS Well-Architected
+(<code>docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html</code>) and the Google Cloud Well-Architected
+Framework (<code>docs.cloud.google.com/architecture/framework</code>), both read 5 November 2026 for pillar names and one line
+definitions only. This is a design. Nothing was built, changed at a provider or pushed.</p>
+
+<div class="verdict">
+  <h3>In plain words</h3>
+  <p>The code already has a strong set of controls on every AI call. What is thin is what surrounds the code: the AI company accounts
+  (staging and production share an OpenAI key and a Google billing account, so staging running dry can switch production off), where the keys
+  live, what we see per customer, and whether the quality tests actually stop a bad release (today the gate only watches).
+  <b>61 gaps, each now a tracker row: 23 new and 38 already filed.</b> Every step needed for general availability costs 0 pounds a month.</p>
+</div>
+
+<figure>
+  <svg class="fig" viewBox="0 0 900 400" role="img" aria-labelledby="as-wa-t">
+    <title id="as-wa-t">One request from the browser to the AI company and back, with every control point. Row one: browser and web
+    layer (session, 28 second hold, trace id), API (payment hold, credit reserve), the one door every call passes (size and rate limits,
+    topic check, personal data minimising), the router (approved model, registered prompt, daily and programme ceilings). Row two, right to
+    left: a planned key resolver, the provider call with cache, retry and breaker and a fallback to another provider among Google, Anthropic
+    and OpenAI, answer checks, the ledger and credit settle, and a plain waiting message back to the customer.</title>
+    <defs>
+      <marker id="wa-a" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-aim" d="M0,0 L8,4 L0,8 z"/></marker>
+      <marker id="wa-w" viewBox="0 0 8 8" refX="7.5" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mh-warn" d="M0,0 L8,4 L0,8 z"/></marker>
+    </defs>
+    <text class="cap" x="30" y="22">A REQUEST, THERE AND BACK, 18 CONTROL POINTS (C1 TO C18)</text>
+
+    <rect class="r" x="30" y="36" rx="10" width="190" height="104"/>
+    <text class="hd" x="46" y="60">Browser and web</text>
+    <text class="sm" x="46" y="80">C1 session, org, plan</text>
+    <text class="sm" x="46" y="98">C2 28 s hold</text>
+    <text class="sm" x="46" y="116">C3 trace id</text>
+
+    <rect class="r" x="250" y="36" rx="10" width="190" height="104"/>
+    <text class="hd" x="266" y="60">API route</text>
+    <text class="sm" x="266" y="80">C4 payment hold</text>
+    <text class="sm" x="266" y="98">C5 reserve credits</text>
+    <text class="sm" x="266" y="116">before any work</text>
+
+    <rect class="r-aim" x="470" y="36" rx="10" width="190" height="104"/>
+    <text class="hd" x="486" y="60">The one door</text>
+    <text class="sm" x="486" y="80">C6 size, rate limits</text>
+    <text class="sm" x="486" y="98">C7 topic check</text>
+    <text class="sm" x="486" y="116">C8 personal data minimised</text>
+
+    <rect class="r" x="690" y="36" rx="10" width="180" height="104"/>
+    <text class="hd" x="706" y="60">Router</text>
+    <text class="sm" x="706" y="80">C9 approved model</text>
+    <text class="sm" x="706" y="98">C10 registered prompt</text>
+    <text class="sm" x="706" y="116">C11 money ceilings</text>
+
+    <rect class="r-ghost" x="690" y="200" rx="10" width="180" height="104"/>
+    <text class="hd" x="706" y="224">Key resolver</text>
+    <text class="sm" x="706" y="244">Planned: key for this org</text>
+    <text class="sm" x="706" y="262">and provider, from Vault</text>
+    <text class="sm" x="706" y="280">Today: one env variable</text>
+
+    <rect class="r-warn" x="470" y="200" rx="10" width="190" height="104"/>
+    <text class="hd" x="486" y="224">Provider call</text>
+    <text class="sm" x="486" y="244">C12 cache, batch lane</text>
+    <text class="sm" x="486" y="262">C13 retry and breaker</text>
+    <text class="sm" x="486" y="280">C14 fallback provider</text>
+
+    <rect class="r-ok" x="250" y="200" rx="10" width="190" height="104"/>
+    <text class="hd" x="266" y="224">Answer checks</text>
+    <text class="sm" x="266" y="244">C15 cut off, figure,</text>
+    <text class="sm" x="266" y="262">claim and chat checks</text>
+    <text class="sm" x="266" y="280">before the customer sees it</text>
+
+    <rect class="r-ok" x="30" y="200" rx="10" width="190" height="104"/>
+    <text class="hd" x="46" y="224">Ledger and credits</text>
+    <text class="sm" x="46" y="244">C16 one row per call</text>
+    <text class="sm" x="46" y="262">C17 no charge on failure</text>
+    <text class="sm" x="46" y="280">C18 plain waiting message</text>
+
+    <path class="e-aim" d="M220,88 L246,88" marker-end="url(#wa-a)"/>
+    <path class="e-aim" d="M440,88 L466,88" marker-end="url(#wa-a)"/>
+    <path class="e-aim" d="M660,88 L686,88" marker-end="url(#wa-a)"/>
+    <path class="e-aim" d="M780,140 L780,196" marker-end="url(#wa-a)"/>
+    <path class="e-aim" d="M690,252 L664,252" marker-end="url(#wa-a)"/>
+    <path class="e-aim" d="M470,252 L444,252" marker-end="url(#wa-a)"/>
+    <path class="e-aim" d="M250,252 L224,252" marker-end="url(#wa-a)"/>
+    <path class="e-warn" d="M125,200 L125,160 L345,160 L345,144" marker-end="url(#wa-w)"/>
+
+    <text class="cap" x="30" y="338">THREE AI COMPANIES BEHIND THE PROVIDER CALL</text>
+    <rect class="r" x="30" y="348" rx="8" width="270" height="40"/>
+    <text class="sm" x="46" y="372">Google Gemini (main)</text>
+    <rect class="r" x="320" y="348" rx="8" width="270" height="40"/>
+    <text class="sm" x="336" y="372">Anthropic Claude</text>
+    <rect class="r" x="610" y="348" rx="8" width="260" height="40"/>
+    <text class="sm" x="626" y="372">OpenAI (held back, off switch)</text>
+  </svg>
+  <figcaption class="sm">Arrows run with the request, the curved line is the answer going back to the customer. The ghost box is
+  not built yet. Control points and the file for each are in the master paper, section 2.</figcaption>
+</figure>
+
+<h3>Gaps by pillar</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Pillar</th><th class="num">New rows</th><th class="num">Existing rows reused</th><th class="num">Gaps</th><th>Biggest gap, measured</th></tr></thead>
+  <tbody>
+    <tr><td><b>1 Operational excellence</b></td><td class="num">6</td><td class="num">4</td><td class="num">10</td><td>Eval gate ships in observe mode and blocks nothing (<code>eval_gate.py</code> lines 1 to 8). No AI incident runbook, no account register</td></tr>
+    <tr><td><b>2 Security and privacy</b></td><td class="num">8</td><td class="num">4</td><td class="num">12</td><td>Keys are plain environment variables read in five places, no rotation record. No test that attacks drafting with hostile tender text. No provider region pin found</td></tr>
+    <tr><td><b>3 Reliability</b></td><td class="num">3</td><td class="num">15</td><td class="num">18</td><td>Staging error rate 4.9 percent. A zero balance on one Google billing account stops every key on it, staging included</td></tr>
+    <tr><td><b>4 Performance efficiency</b></td><td class="num">2</td><td class="num">3</td><td class="num">5</td><td>Briefing p95 46.8 s on Claude. Streaming exists in code, no caller uses it</td></tr>
+    <tr><td><b>5 Cost optimisation</b></td><td class="num">1</td><td class="num">4</td><td class="num">5</td><td><code>credits_charged</code> never written (0 of 16,029 rows). Ceilings do not scale with customers</td></tr>
+    <tr><td><b>6 Sustainability</b></td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td>Pro class model on a 184 token query. 2,198 embedding calls for 166 RAG questions</td></tr>
+    <tr><td><b>AI quality</b></td><td class="num">1</td><td class="num">4</td><td class="num">5</td><td>Extraction fails every bar on staging (recall 0.779). Production has 18 calls in 30 days, so no production rate exists</td></tr>
+    <tr><td><b>Observability</b></td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td>No per organisation view of latency, refusals, errors, spend, balance or quota. 11.9 percent of staging rows have no organisation</td></tr>
+    <tr><td><b>Total</b></td><td class="num"><b>23</b></td><td class="num"><b>38</b></td><td class="num"><b>61</b></td><td>Each carries its GA area and an estimated score effect in the master paper, section 11. Estimates, not measurements</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Provider accounts: how many projects, and can a large customer get its own keys automatically</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Provider</th><th>How many</th><th>Make a project or workspace by code</th><th>Make the key by code</th><th>Source, read 5 November 2026</th></tr></thead>
+  <tbody>
+    <tr><td><b>OpenAI</b></td><td>No limit stated on the page read [Unconfirmed]</td><td>Yes, projects (archive only, no delete)</td><td>Yes, a service account returns the key once. Per project rate limits and a hard monthly spend limit also by code</td><td><code>developers.openai.com/api/reference/resources/organization/subresources/projects</code></td></tr>
+    <tr><td><b>Anthropic</b></td><td>100 workspaces by default, more on request, archived do not count</td><td>Yes, with an Admin API key</td><td><b>No.</b> Their FAQ says keys are made in the Console. Way round: one service account key plus a per request workspace header [Unconfirmed that service account keys can be made by code]</td><td><code>platform.claude.com/docs/en/manage-claude/workspaces</code>, <code>.../admin-api</code>, <code>.../rate-limits-api</code></td></tr>
+    <tr><td><b>Google</b></td><td>Project quota per user and per organisation, default number not stated [Unconfirmed]</td><td>Yes, project then link billing, then enable the API [route Unconfirmed]</td><td>Yes, the API Keys service is programmatic</td><td><code>docs.cloud.google.com/resource-manager/docs/creating-managing-projects</code>, <code>docs.cloud.google.com/api-keys/docs/overview</code>, <code>aistudio.google.com/docs/billing</code></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout fix"><b>The most important finding.</b> Google applies the tier, the monthly cap and the zero balance stop at the
+<b>billing account</b>, not the project: "Tiers, rate limits, and billing account caps are all determined at the billing account level" and
+"service is paused for all projects linked to that billing account" (<code>aistudio.google.com/docs/billing</code>). Our two projects share
+one, so a second project gives a separate per minute allowance but does not protect production from staging running out of credit. Staging
+needs its own billing account.</div>
+
+<h3>Target in five lines</h3>
+<ol class="sm">
+  <li>Production, staging and eval are separate projects or workspaces at each provider, and staging and eval sit on their own Google billing account.</li>
+  <li>Small and medium customers share the production pool with per organisation credits and fair share. When per minute limits bind, organisations are spread over several Google projects.</li>
+  <li>A large customer gets a dedicated lane (own project or workspace, our key, cost passed through in the plan) or brings its own key. One automatic job creates it when the plan is bought, and the customer stays on the shared pool until it succeeds, so a purchase never waits on a provider.</li>
+  <li>Keys live in Supabase Vault, which we already pay for. The app asks for the key for this organisation and provider at call time. Provider admin keys stay out of the API runtime.</li>
+  <li>A daily balance, cap and key expiry check alerts at 70 percent in plain words, with no new timer unless you approve one.</li>
+</ol>
+
+<h3>Phased plan</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>When</th><th>What</th><th>Main rows</th><th class="num">One off</th><th class="num">Per month</th></tr></thead>
+  <tbody>
+    <tr><td><b>Now, GA</b></td><td>Environment split, billing split, alerts, register, runbook, injection test, residency and retention check</td><td>R29-AI-GOOGLE-PROJECT-SPLIT-01, R29-AI-GOOGLE-STAGING-BILLING-SPLIT-01, R29-AI-STAGING-OPENAI-KEY-SPLIT-01, R29-AI-ACCOUNT-REGISTER-01, R29-AI-KEY-EXPIRY-ALERT-01, R29-AI-INCIDENT-RUNBOOK-01, R29-AI-INJECTION-REDTEAM-01</td><td class="num">Prepaid amount you choose for the staging billing account</td><td class="num">0</td></tr>
+    <tr><td><b>About 10 customers</b></td><td>Key resolver, Vault storage, admin key custody</td><td>R29-AI-KEY-RESOLVER-01, R29-AI-KEY-VAULT-01, R29-AI-ADMIN-KEY-CUSTODY-01</td><td class="num">Build time</td><td class="num">0</td></tr>
+    <tr><td><b>About 100 customers</b></td><td>Pool shards, automatic dedicated lane, teardown</td><td>R29-AI-GOOGLE-SHARD-POOL-01, R29-AI-LANE-PROVISION-01, R29-AI-LANE-TEARDOWN-01</td><td class="num">Build time</td><td class="num">0 plus lane usage, passed through</td></tr>
+    <tr><td><b>First enterprise customer</b></td><td>Enterprise plan, bring your own key, DPA check</td><td>R29-AI-ENTERPRISE-LANE-PLAN-01, R29-AI-ENTERPRISE-BYOK-01, R29-AI-DPA-LANE-SUBPROCESSOR-01</td><td class="num">Your pricing decision</td><td class="num">Customer pays</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout fix"><b>Decisions for the owner, each with a recommendation.</b>
+(1) Staging Google billing: separate billing account, because a separate project alone does not stop a zero staging balance stopping production.
+(2) Eval gate: enforce for surfaces with a golden set, shipped with the product fix it guards, your approval needed to make it blocking.
+(3) Worker concurrency: threads first, a second replica only if queue wait stays over 10 seconds, and its Railway cost stated first.
+(4) Second provider for structured output: build Claude structured output rather than switch OpenAI on.
+(5) Dedicated lane automation: build the foundations at about 10 customers, the automation at about 100 or the first enterprise ask.
+(6) Key store: Supabase Vault.
+(7) Streaming: advisor and chat first.
+(8) Weekly human read of 10 production outputs, by hand, no timer.
+(9) Data residency: measure first, promise nothing before.
+(10) Bring your own key: on request only. The recurring cost that exists only because of this design: none found. Anything that later shows a fee comes back to you first.</div>
+
+<p class="sm">Unconfirmed and still to close: provider retention terms, per vendor region options, Vertex reserved capacity price, Google project quota default,
+Anthropic service account key creation by code, OpenAI project count limit, Vault and Secret Manager volume pricing. Both framework pillar pages
+were read for names and definitions only. Prepared by Velstrian Tenderworks, 5 November 2026.</p>
