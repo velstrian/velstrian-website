@@ -613,7 +613,7 @@
     ]
   },
   "ai_use": {
-    "measured": "2026-10-24, A-417 (platform row R285-P3-AI-PUBLIC-AI-PAGE-01). Each line re-read against crowagent-platform: api/app/services/ai/surface_policy.py DEFAULT_MODELS (one model per task, bid_* on Gemini 2.5 Pro or Flash, buy_preread on Claude), docs/legal/data-processing-agreement.md Schedule 1 items 7 and 8 (Anthropic (Claude) and Google (Gemini), the only AI sub-processors today), owner decisions D314 and D350 (production and staging Gemini and Anthropic keys are paid accounts, so neither provider trains on what we send), D344 (customer content never used to improve the service by default), and status/architecture-ai-strategy.html section 3 for what is built today. Lines marked coming are owner decisions not yet built (D341, D342, D344 opt in, D346, D366, D367, D371 notice) and are worded in the future tense. OpenAI is onboarded by D368 but is not in Schedule 1 until the D329 sub-processor notice has run, so no page names it as a provider",
+    "measured": "2026-10-24, A-417 (platform row R285-P3-AI-PUBLIC-AI-PAGE-01). Each line re-read against crowagent-platform: api/app/services/ai/surface_policy.py DEFAULT_MODELS (one model per task, bid_* on Gemini 2.5 Pro or Flash, buy_preread on Claude), docs/legal/data-processing-agreement.md Schedule 1 items 7 and 8 (Anthropic (Claude) and Google (Gemini), the only AI sub-processors today), owner decisions D314 and D350 (production and staging Gemini and Anthropic keys are paid accounts, so neither provider trains on what we send), D344 (customer content never used to improve the service by default), and status/architecture-ai-strategy.html section 3 for what is built today. Lines marked coming are owner decisions not yet built (D341, D342, D344 opt in, D346, D366, D367, D371 notice) and are worded in the future tense. OpenAI is DPA Schedule 1 item 17 (D368), processed in the United States, used only where a model has passed our quality tests for a task. Owner decision D585 (2026-11-05): the D329 sub-processor notice counts as run, because there are no paying customers to notify, so OpenAI is named as a provider on the provider_pages and not_yet_providers is now empty",
     "page": "/ai/",
     "groups": [
       {
@@ -675,8 +675,11 @@
         ]
       }
     ],
-    "not_yet_providers": [
-      "OpenAI"
+    "not_yet_providers": [],
+    "providers": [
+      { "name": "Google Gemini", "region": "Not region pinned, processed outside the EU under contract.", "purpose": "AI drafting" },
+      { "name": "Anthropic Claude", "region": "Global, no UK or EU option, processed outside the EU under contract.", "purpose": "AI reasoning and the buyer pre-read" },
+      { "name": "OpenAI", "region": "The United States, under contract.", "purpose": "AI drafting and analysis across Velstrian Bid, only with a model that has passed our quality tests for that task" }
     ],
     "provider_pages": [
       "/ai/",

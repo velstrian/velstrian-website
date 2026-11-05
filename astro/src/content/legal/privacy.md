@@ -11,7 +11,7 @@ summary:
   - "We collect what we need to run your account, your bids and your billing, and use it for that."
   - "Each use has a lawful basis under UK GDPR: contract, legitimate interests, consent or legal obligation."
   - "We keep personal data only as long as we need it, then delete or anonymise it."
-  - "AI drafting sends only the text a task needs to Google Gemini and Anthropic Claude, outside the EU, under contract."
+  - "AI drafting sends only the text a task needs to Google Gemini and Anthropic Claude, outside the EU, under contract, and may use OpenAI, processed in the United States under contract."
   - "You can ask to see, correct, delete, move or limit your data, or object to how we use it."
   - "If you are unhappy with how we handle your data, you can complain to the ICO."
 ---How Velstrian Systems Ltd collects, uses, and protects personal data under UK GDPR. Lawful bases, retention, sub-processors, your rights, and ICO contact info.
@@ -34,7 +34,7 @@ Access, rectification, erasure, restriction, portability, and objection, exercis
 
 ### Transparent AI handling
 
-We use Google Gemini and Anthropic Claude as AI sub-processors. They process the text a task needs outside the EU, under contract. The sub-processors section below says where and on what terms.
+We use Google Gemini and Anthropic Claude as AI sub-processors. They process the text a task needs outside the EU, under contract. We may also use OpenAI, which processes the text a task needs in the United States, under contract, only with a model that has passed our quality tests for that task. The sub-processors section below says where and on what terms.
 
 ## The detail, in full
 
@@ -153,7 +153,7 @@ Where personal data is transferred outside the UK, we rely on UK IDTA or EU SCCs
 
 ## Automated decisions & AI
 
-In accordance with Article 22 UK GDPR, we confirm that Velstrian does not make any decision about you that is based solely on automated processing and that produces legal effects. Velstrian uses AI models from Google (Gemini) and Anthropic (Claude) to draft content, such as bid answers and social value narratives. All such outputs are advisory and must be reviewed and signed off by a human before use.
+In accordance with Article 22 UK GDPR, we confirm that Velstrian does not make any decision about you that is based solely on automated processing and that produces legal effects. Velstrian uses AI models from Google (Gemini) and Anthropic (Claude) to draft content, such as bid answers and social value narratives, and may use OpenAI for AI drafting and analysis in Velstrian Bid, only with a model that has passed our quality tests for that task. All such outputs are advisory and must be reviewed and signed off by a human before use.
 
 ## Subject Access Request (DSAR) procedure
 
@@ -182,6 +182,22 @@ The inputs are processed only to produce the output, which is returned to you. Y
 Where it is processed and under what contract
 
 Anthropic runs Claude on its global service, which offers no UK or EU location. For UK and EEA customers our contract is with Anthropic Ireland, Limited, under Anthropic's Commercial Terms, which include the EU Standard Contractual Clauses and the UK International Data Transfer Agreement. By default Anthropic does not train its models on what we send, and deletes inputs and outputs within 30 days, or up to 2 years where they are flagged for a usage policy breach, and it keeps trust and safety classification scores for up to 7 years. Anthropic acts as a data processor on our behalf.
+
+## OpenAI AI processing
+
+Velstrian may use OpenAI's models as an AI sub-processor for AI drafting and analysis in Velstrian Bid, only with a model that has passed our quality tests for that task.
+
+What data is sent
+
+The text the task needs, which can include tender documents, your answers, your library and documents you upload. This can contain personal data, such as a name in a CV, and we do not remove it before sending. We do not send account credentials or billing details to OpenAI.
+
+How it is used
+
+The inputs are processed only to produce the output, which is returned to you. You review every output before use. AI output is advisory and is not a final decision. OpenAI does not train its models on what we send.
+
+Where it is processed and under what contract
+
+OpenAI processes the text in the United States. We rely on the EU Standard Contractual Clauses with the UK Addendum, or the UK International Data Transfer Agreement, for the transfer. OpenAI acts as a data processor on our behalf. The contract terms are available on request.
 
 ## Sentry retention & error scrubbing
 

@@ -138,3 +138,13 @@ export function aiUseGroup(id: string): AiUseGroup {
 
 /** "Google Gemini and Anthropic Claude", the AI sub-processors in DPA Schedule 1 today. */
 export const AI_PROVIDERS = listJoin(FACTS.regions.ai_processors_outside_eu);
+
+/* A-417, D585. Every AI sub-processor named on the provider pages, each with
+   its purpose and the region it processes in, the same facts /sub-processors/
+   states. OpenAI (United States) was held off the provider pages by
+   not_yet_providers until D585 ruled the D329 notice run. */
+export interface AiProvider { name: string; region: string; purpose: string }
+export const AI_PROVIDER_LIST = FACTS.ai_use.providers as AiProvider[];
+
+/** "Google Gemini, Anthropic Claude and OpenAI", every AI provider named today. */
+export const AI_PROVIDER_NAMES = listJoin(AI_PROVIDER_LIST.map((p) => p.name));

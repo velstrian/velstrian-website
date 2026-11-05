@@ -9,15 +9,18 @@
  *
  * EVERY CLAIM IS READ FROM site-facts.json ai_use, never typed here. Each line
  * carries its evidence there, and check-site-facts.mjs fails the build when
- * this page drops a line, when a line marked coming stops saying will or
- * coming, or when a provider page names OpenAI before the D329 notice has run.
+ * this page drops a line or when a line marked coming stops saying will or
+ * coming. OpenAI was held off the provider pages by ai_use.not_yet_providers
+ * until owner decision D585 (2026-11-05) ruled the D329 notice run, so the
+ * providers card now names all three (Gemini, Claude, OpenAI), each with its
+ * purpose and region, from ai_use.providers.
  * A line marked coming is an owner decision that is not built yet (D341,
  * D342, D344 opt in, D346, D366, D367, D371). It is shown with a "Coming
  * next" chip and worded in the future tense, so nothing reads as built.
  *
- * THE PROVIDERS AND THE REGION come from regions.ai_processors_outside_eu and
- * DATA_HANDLING_SENTENCE, the same records /security/ and the home page read,
- * so the three pages cannot disagree.
+ * THE PROVIDERS AND THE REGION come from ai_use.providers and
+ * DATA_HANDLING_SENTENCE, the same facts /security/ and /sub-processors/
+ * state, so the pages cannot disagree.
  *
  * WHAT IS LEFT OUT ON PURPOSE. No accuracy figure and no win rate (website
  * CLAUDE.md rule 5), and no promise that the AI never makes a mistake or that
@@ -42,7 +45,7 @@ import IconTile from '../components/evidenced/IconTile.astro';
 import Close from '../components/evidenced/Close.astro';
 import '../styles/evidenced.css';
 import { breadcrumbs } from '../lib/schema';
-import { aiUseGroup, AI_PROVIDERS, DATA_HANDLING_SENTENCE } from '../data/site-facts';
+import { aiUseGroup, AI_PROVIDER_LIST, DATA_HANDLING_SENTENCE } from '../data/site-facts';
 import { PRODUCT_NAME_BID, PRODUCT_NAME_BUY } from '../lib/brand-names';
 import type { IconName } from '../data/icons';
 
@@ -207,7 +210,16 @@ const LEVELS: { plan: string; levels: string }[] = [
       </ul>
       <div class="ea-card ai-providers" data-reveal>
         <p class="ea-label">AI providers today</p>
-        <p class="ai-providers__names">{AI_PROVIDERS}</p>
+        <dl class="ai-providers__list">
+          {
+            AI_PROVIDER_LIST.map((p) => (
+              <div class="ai-providers__row">
+                <dt>{p.name}</dt>
+                <dd>{p.purpose}. {p.region}</dd>
+              </div>
+            ))
+          }
+        </dl>
         <p class="ai-providers__note">Each one is a sub-processor under contract, listed with every other service we use.</p>
         <a class="ea-link" href="/security/#sub-processors">See every sub-processor</a>
       </div>
@@ -350,10 +362,32 @@ const LEVELS: { plan: string; levels: string }[] = [
     margin: 0;
   }
 
-  .ai-providers__names {
-    font-size: var(--t-ea-h3);
+  .ai-providers__list {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .ai-providers__row {
+    display: grid;
+    gap: var(--space-1);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--ea-rule);
+  }
+
+  .ai-providers__row:last-of-type {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .ai-providers__row dt {
     font-weight: var(--t-w-ea-strong);
     color: var(--ea-ink);
+  }
+
+  .ai-providers__row dd {
+    margin: 0;
+    color: var(--ea-sub);
   }
 
   .ai-providers__note {
