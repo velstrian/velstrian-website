@@ -2167,14 +2167,14 @@ async function pbRenderGa() {
   const t = document.getElementById('pbgaareas');
   t.textContent = '';
   const hr = pbEl('tr');
-  ['Area', 'Weight', 'Score (production)', 'After round 6 (projected)', 'Why'].forEach((h) => { const th = pbEl('th', '', h); th.scope = 'col'; hr.append(th); });
+  ['Area', 'Weight', 'Score (production)', 'After round 6 (projected)', 'Target and rows to target', 'Why'].forEach((h) => { const th = pbEl('th', '', h); th.scope = 'col'; hr.append(th); });
   t.append(hr);
   (ga.areas || []).forEach((a) => {
     const tr = pbEl('tr');
     const sc = pbEl('td', '', String(a.score));
     sc.style.color = col(a.status || band(Number(a.score)));
     sc.style.fontWeight = '700';
-    tr.append(pbEl('td', '', a.name), pbEl('td', '', String(a.weight) + '%'), sc, pbEl('td', '', a.projected === undefined ? '' : String(a.projected)), pbEl('td', '', a.why || ''));
+    tr.append(pbEl('td', '', a.name), pbEl('td', '', String(a.weight) + '%'), sc, pbEl('td', '', a.projected === undefined ? '' : String(a.projected)), pbEl('td', '', a.target === undefined ? '' : String(a.target) + ': ' + (a.rowsToTarget || []).length + ' rows (see plan)'), pbEl('td', '', a.why || ''));
     t.append(tr);
   });
   if (ga.projection) {
@@ -2185,6 +2185,7 @@ async function pbRenderGa() {
     (pj.neededFor95 || []).forEach((n) => ul.append(pbEl('li', '', n.area + ': ' + n.item + ' [' + n.rows + ']')));
     head.append(pbEl('p', '', 'Still needed to pass ' + pj.target + ':'), ul);
   }
+  if (ga.plan95) head.append(pbEl('p', '', 'GA 95 plan: ' + ga.plan95 + '. ' + (ga.plan95Note || '')));
   const link = document.getElementById('pbgalink');
   link.textContent = '';
   if (ga.detail) {
