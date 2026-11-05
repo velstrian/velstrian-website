@@ -181,7 +181,7 @@ The inputs are processed only to produce the output, which is returned to you. Y
 
 Where it is processed and under what contract
 
-Anthropic runs Claude on its global service, which offers no UK or EU location. For UK and EEA customers our contract is with Anthropic Ireland, Limited, under Anthropic's Commercial Terms, which include the EU Standard Contractual Clauses and the UK International Data Transfer Agreement. By default Anthropic does not train its models on what we send, and deletes inputs and outputs within 30 days, or up to 2 years where they are flagged for a usage policy breach. Anthropic acts as a data processor on our behalf.
+Anthropic runs Claude on its global service, which offers no UK or EU location. For UK and EEA customers our contract is with Anthropic Ireland, Limited, under Anthropic's Commercial Terms, which include the EU Standard Contractual Clauses and the UK International Data Transfer Agreement. By default Anthropic does not train its models on what we send, and deletes inputs and outputs within 30 days, or up to 2 years where they are flagged for a usage policy breach, and it keeps trust and safety classification scores for up to 7 years. Anthropic acts as a data processor on our behalf.
 
 ## Sentry retention & error scrubbing
 

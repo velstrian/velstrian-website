@@ -393,13 +393,6 @@ const EXCEPTIONS = [
     why: "A sub-processor's registered company address (Google Ireland Limited and Google Cloud EMEA Limited), which the list must publish under Article 28. It says where a company is registered, not where customer data is stored.",
   },
   {
-    record: 'regions',
-    route: /^\/residency\/$/,
-    hit: /^Dublin$/,
-    ctxMatch: /Stripe Payments Europe, Ltd Billing, VAT handling, card vaulting EU \(Dublin\)/,
-    why: "Where Stripe processes billing data, disclosed on the residency page as the law requires. It is a statement about the payment processor, not a claim that customer documents stay in a region.",
-  },
-  {
     record: 'product_status',
     route: /^\/retention\/$/,
     hit: /^request access$/i,
