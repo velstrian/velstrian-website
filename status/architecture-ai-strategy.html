@@ -82,6 +82,7 @@
     <li><a href="#as-gov">Governance, risk and the backlog</a></li>
     <li><a href="#as-dec">Decisions: recorded and open</a></li>
     <li><a href="#as-road">Roadmap, rows and what is on hold</a></li>
+    <li><a href="#as-capacity">Capacity and rate limits</a></li>
   </ol>
 </details>
 
@@ -1268,6 +1269,115 @@ six cards, names AI features by what they do for you rather than by code name, o
 (Fast, Standard, Best) instead of a list of vendors, and puts every decision in one table with a
 recommendation. Every surface name, price and source sits behind a plus sign or in a table for the
 expert reader. Nothing was dropped to make it short.</div>
+
+<!-- ═══ 23. CAPACITY AND RATE LIMITS ═══ -->
+<h2 id="as-capacity"><span class="n">Section 23</span>Capacity and rate limits: never stop a customer as we grow</h2>
+
+<p class="dated"><b>Read and measured 5 November 2026.</b> Owner question: how do we make sure AI provider limits
+never stop customers as we grow. Full paper with every URL:
+<code>velstrian-platform/docs/release-2.9/AI-CAPACITY-AND-RATE-LIMITS-STRATEGY-2026-11-05.md</code>.
+This is a plan. Nothing was built or pushed by this research.</p>
+
+<div class="verdict">
+  <h3>The risk in plain words</h3>
+  <p>All customers share a few AI accounts, and each AI company limits how much one account can use per
+  minute and per month. When we hit a limit, every customer is refused at once. The limits stay put while
+  our customer count rises. <b>Two walls come first, and both are cheap to move: a counter in our own code
+  at about 40 active organisations, and Google's first paid level at 250 US dollars a month, reached at
+  about 12 active organisations.</b></p>
+</div>
+
+<div class="cards">
+  <div class="card warn"><span class="no">1. Our own cap</span><h4>60 Gemini calls a minute, for everyone</h4>
+  <p>Every Gemini call passes one counter of 60 per 60 seconds for the whole environment
+  (<code>gemini_rag.py</code> lines 111 and 126, applied at <code>provider_calls.py</code> line 718). It is
+  written into the code, not a setting. It already refused 105 production calls between 30 July and
+  13 August 2026.</p></div>
+  <div class="card warn"><span class="no">2. Google money wall</span><h4>250 US dollars a month on Tier 1</h4>
+  <p>Google pauses the whole billing account at the monthly cap. A zero prepaid balance stops every key at
+  once with HTTP 402, and a prepaid account cannot be switched to postpaid. Source in the table below.</p></div>
+  <div class="card warn"><span class="no">3. No real baseline</span><h4>Production has one organisation</h4>
+  <p>4,422 calls and 0.83 US dollars since May. The sizing uses staging, which is tests and overstates real
+  use. The first 10 paying customers replace the guess with a measurement.</p></div>
+  <div class="card ok"><span class="no">4. Not the bottleneck</span><h4>Anthropic and OpenAI at our size</h4>
+  <p>Their token limits are large next to our projection. Both pause the account at a monthly spend cap
+  that depends on the level.</p></div>
+  <div class="card ok"><span class="no">5. Already built</span><h4>Failover chain and ledger</h4>
+  <p>Gemini Pro to Flash, then another provider on a sustained 429, 5xx, timeout or empty answer
+  (<code>fallback_chain.py</code>), with every call in <code>ai_calls</code>. A gateway would duplicate it.</p></div>
+</div>
+
+<h3>Provider limits, read on 5 November 2026</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Provider</th><th>Levels and what moves you up</th><th>Monthly cap</th><th>Rate limits</th><th>Source</th></tr></thead>
+  <tbody>
+    <tr><td><b>Google Gemini API</b></td><td>Free, Tier 1 (billing linked), Tier 2 (100 US dollars paid and 3 days), Tier 3 (1,000 US dollars paid and 30 days). Automatic, about 10 minutes</td><td class="num">Tier 1 250 US dollars, Tier 2 2,000, Tier 3 20,000 to 100,000 plus. Pauses every project on the billing account</td><td>Per project, not per key. Per model RPM, TPM and RPD are <b>not published</b> on the docs pages [Unconfirmed]. Tier 1 burst limit 10 US dollars per 10 minutes</td><td><code>aistudio.google.com/docs/rate-limits</code> and <code>/docs/billing</code></td></tr>
+    <tr><td><b>Google Vertex AI</b></td><td>Standard PayGo with usage tiers by 30 day spend. Provisioned Throughput is a fixed cost, fixed term subscription</td><td class="num">Provisioned price, terms and overflow [Unconfirmed]</td><td>Per project, increase in the console. London appears in the locations table, model list not shown [Unconfirmed]. No residency guarantee on the global endpoint</td><td><code>docs.cloud.google.com/vertex-ai/generative-ai/docs/</code> dynamic-shared-quota, provisioned-throughput/overview, learn/locations, quotas</td></tr>
+    <tr><td><b>Anthropic Claude</b></td><td>Start, Build, Scale, Custom. Automatic by usage history, thresholds not on the page [Unconfirmed]</td><td class="num">500, 1,000, 200,000 US dollars. At the cap: 429 with no retry header until the 1st</td><td>Sonnet 5.5 Start 4,000 RPM, 2M input and 400k output tokens a minute. Build 10,000, 5M, 1M. Scale 13,000, 10M, 2M. Cached reads do not count. Workspaces give per environment limits. Priority Tier no longer sold</td><td><code>platform.claude.com/docs/en/api/rate-limits</code> and <code>/service-tiers</code></td></tr>
+    <tr><td><b>OpenAI</b></td><td>Free, Build (5 US dollars), Launch (100), Grow (500) of total credit bought. Automatic</td><td class="num">100, 500, 5,000, 200,000 US dollars</td><td>Build 5,000 RPM and 1M TPM, Launch 10,000 and 4M, Grow 15,000 and 40M (Astra, Sol, Terra). Ramp rule 50 percent per 15 minutes above 1M TPM. Batch for non urgent work. Scale and Reserved Tier through sales</td><td><code>developers.openai.com/api/docs/guides/rate-limits</code></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="sm">Gateways read: Vercel AI Gateway orders providers by health and fails over (<code>vercel.com/docs/ai-gateway/models-and-providers/provider-options</code>),
+OpenRouter tries the next model on rate limiting or downtime (<code>openrouter.ai/docs/guides/routing/model-fallbacks</code>). Fees for both
+[Unconfirmed]. No engineering write up on provider capacity was found for Intercom, Notion, Zendesk, GitHub, Harvey, Jasper, Responsive or Loopio, so none is claimed.
+Fair share patterns come from Cohere's serving fairness post (<code>cohere.com/blog/serving-fairness</code>, read as a search snippet).</p>
+
+<h3>Capacity projection, from our own ledger</h3>
+<p class="sm">Staging, 125 organisation days, successful calls: calls per day p50 21, mean 180, p95 967.
+Spend per day p50 0.035, mean 0.92, p95 5.61 US dollars. About 1,800 input and 511 output tokens per call.
+Assumptions, none measured: 22 working days, 80 percent of calls in 8 hours, busiest minute 5 times the average, all organisations active together.</p>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Active organisations</th><th class="num">Peak calls a minute (light, planning, heavy)</th><th class="num">Peak input tokens a minute, planning</th><th class="num">Spend a month in US dollars (light, planning, heavy)</th></tr></thead>
+  <tbody>
+    <tr><td><b>10</b></td><td class="num">2, 15, 81</td><td class="num">27,000</td><td class="num">8, 202, 1,234</td></tr>
+    <tr><td><b>100</b></td><td class="num">18, 150, 810</td><td class="num">270,000</td><td class="num">77, 2,024, 12,335</td></tr>
+    <tr><td><b>1,000</b></td><td class="num">175, 1,500, 8,100</td><td class="num">2,700,000</td><td class="num">770, 20,240, 123,350</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Limit</th><th class="num">Light reaches it at</th><th class="num">Planning reaches it at</th><th class="num">Heavy reaches it at</th></tr></thead>
+  <tbody>
+    <tr><td>Our own 60 calls a minute cap</td><td class="num">343 organisations</td><td class="num"><b>40</b></td><td class="num">7</td></tr>
+    <tr><td>Google Tier 1, 250 US dollars a month</td><td class="num">324</td><td class="num"><b>12</b></td><td class="num">2</td></tr>
+    <tr><td>Google Tier 2, 2,000 US dollars a month</td><td class="num">2,597</td><td class="num">99</td><td class="num">16</td></tr>
+    <tr><td>Google Tier 3, from 20,000 US dollars a month</td><td class="num">25,974</td><td class="num">988</td><td class="num">162</td></tr>
+    <tr><td>Anthropic Start, 500 US dollars a month, if Claude carried it</td><td class="num">649</td><td class="num">25</td><td class="num">4</td></tr>
+    <tr><td>OpenAI Build, 1M input tokens a minute</td><td class="num">3,175</td><td class="num">370</td><td class="num">69</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Ranked action plan</h3>
+<div class="tblwrap">
+<table class="doc-tbl">
+  <thead><tr><th>Rank</th><th>Row</th><th>What</th><th class="num">Cost a month</th></tr></thead>
+  <tbody>
+    <tr><td><span class="pill p-bad">1</span></td><td>R29-AI-GOOGLE-QUOTA-TIER-01 (existing)</td><td>Owner reads the Google tier, billing type and per model limits in AI Studio, decides pre funding, adds a 70 percent alert</td><td class="num">0. Pre funding is cash timing, credits expire after 12 months</td></tr>
+    <tr><td><span class="pill p-bad">2</span></td><td>R29-AI-GEMINI-SLOT-CAP-01 (new)</td><td>Make the 60 per 60 second cap a setting sized from the confirmed tier, keep a reserved share for interactive work</td><td class="num">0</td></tr>
+    <tr><td><span class="pill p-warn">3</span></td><td>R29-AI-CAPACITY-SCALING-01 (existing, building)</td><td>Per organisation credits as the customer limit, shared ceiling becomes a scaling fuse with a 70 percent alert</td><td class="num">0</td></tr>
+    <tr><td><span class="pill p-warn">4</span></td><td>R29-AI-PROVIDER-HEADROOM-ALERT-01 (new)</td><td>Check spend and balance against each provider's monthly cap, alert at 70 percent. Any new timer needs your approval first</td><td class="num">0</td></tr>
+    <tr><td><span class="pill p-info">5</span></td><td>R29-AI-TENANT-FAIRSHARE-01 (new)</td><td>Per organisation concurrency cap, interactive before bulk, long jobs queued, audit use of the batch lane</td><td class="num">0</td></tr>
+    <tr><td><span class="pill p-info">6</span></td><td>R29-AI-DEGRADED-MESSAGE-01 (new)</td><td>Plain waiting message instead of an error, no credits charged for a refused call</td><td class="num">0</td></tr>
+    <tr><td><span class="pill p-info">7</span></td><td>R29-AI-STAGING-OPENAI-KEY-SPLIT-01 (existing)</td><td>Separate OpenAI key for staging</td><td class="num">0</td></tr>
+    <tr><td><span class="pill p-info">8</span></td><td>R29-AI-ANTHROPIC-WORKSPACE-SPLIT-01 (new)</td><td>Confirm staging and production Claude keys use separate workspaces with their own limits</td><td class="num">0</td></tr>
+    <tr><td><span class="pill p-good">9</span></td><td>R285-P3-AI-VERTEX-CREDITS-PLAN-01 (existing, D465)</td><td>Vertex plan with UK or EU region and reserved capacity, decide at about 100 organisations</td><td class="num">[Unconfirmed], needs a Google quote</td></tr>
+    <tr><td><span class="pill p-good">10</span></td><td>R29-AI-ENTERPRISE-BYOK-01 (new)</td><td>Optional bring your own provider key for enterprise customers, phase 2</td><td class="num">0 to us</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout fix"><b>Decisions for the owner, each with a recommendation.</b>
+(1) Pre fund Google to climb tiers: recommended, pay 100 US dollars now for Tier 2 after 3 days and 1,000 US dollars at about 10 customers for Tier 3 after 30 days. It is credit you would use anyway, and it expires after 12 months.
+(2) Keep Google as the main provider to 100 organisations: recommended yes, Vertex reserved capacity terms were not on the pages read.
+(3) Add a routing gateway: recommended no, we already own the failover chain and the ledger.
+(4) Bring your own key for enterprise: recommended later, phase 2, on customer demand.
+(5) Reserved capacity at Anthropic: recommended ask sales only when needed, Priority Tier is no longer sold.</div>
 
 <p class="sm">Prepared by Velstrian Tenderworks, 24 October 2026, revision 2. Sources:
 <code>velstrian-platform/docs/release-2.8.5/ai-strategy/INTERNAL-AI-AUDIT-2026-10-24.md</code>,
