@@ -18,10 +18,12 @@ import Stage from '../evidenced/Stage.astro';
 import Sequence from '../evidenced/Sequence.astro';
 /* D275: the one start label with the one trial line beside it. Buyer Pro has
    the same 7 day trial as Velstrian Bid (D278, catalogue.ts trialAllowance). */
-import { BUYER_PLANS, startHref, START_LABEL, TRIAL_NOTE } from '../../data/pricing';
+import { BUYER_PLANS, productStart, TRIAL_NOTE } from '../../data/pricing';
 import { PRODUCT_NAME_BUY } from '../../lib/brand-names';
 
 const [BUYER_PRO] = BUYER_PLANS;
+/* D553: the Buy hero names its product and starts on Buyer Pro. */
+const start = productStart('buy', BUYER_PRO.planKey);
 ---
 
 <Band tone="light" class="ea-hero" labelledby="buy-hero-title">
@@ -31,7 +33,7 @@ const [BUYER_PRO] = BUYER_PLANS;
       {PRODUCT_NAME_BUY} is procurement software for public and private buyers, including councils, schools, housing associations and private companies, to request quotes and compare supplier replies fairly.
     </p>
     <div class="ea-actions">
-      <Action href={startHref(BUYER_PRO.planKey)}>{START_LABEL}</Action>
+      <Action href={start.href}>{start.label}</Action>
       <Action href="#what-it-does" variant="secondary">See how it works</Action>
     </div>
     <p class="ea-hero__note">Your team does all the scoring. {TRIAL_NOTE}</p>

@@ -58,5 +58,8 @@ const { label, count, autoplay = false } = Astro.props;
 
 <script>
   import { initCarousels } from '../../scripts/carousel';
-  initCarousels();
+  import { whenIdle } from '../../scripts/idle';
+  /* A-520: the carousel measures its first screen, so it waits for an idle
+     gap after the first paint. The first screen is already in the markup. */
+  whenIdle(initCarousels);
 </script>

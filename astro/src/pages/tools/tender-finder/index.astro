@@ -42,7 +42,10 @@ import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
 import { PRODUCT_NAME_BID } from '../../../lib/brand-names';
 import '../../../styles/evidenced.css';
 import Turnstile from '../../../components/forms/Turnstile.astro';
-import { SIGNUP_URL, START_LABEL } from '../../../data/app';
+import { productStart } from '../../../data/product-start';
+
+/* D553: this page is about Velstrian Bid, so its start buttons name it. */
+const bidStart = productStart('bid');
 import { breadcrumbs } from '../../../lib/schema';
 import { SITE } from '../../../data/site';
 import { FACTS, LIVE_SOURCES, FIT_COUNT_WORD } from '../../../data/site-facts';
@@ -181,7 +184,7 @@ const schema = [
         </div>
       </div>
 
-      <Turnstile id="tf" />
+      <Turnstile id="tf" eager />
 
       <div class="ea-actions tf-form__actions">
         <Action as="button" type="submit" id="tf-submit">Search tenders</Action>
@@ -240,7 +243,7 @@ const schema = [
       </p>
       <div class="ea-actions tf-down__actions">
         <Action as="button" id="tf-retry">Try again</Action>
-        <Action href={SIGNUP_URL} variant="secondary">{START_LABEL}</Action>
+        <Action href={bidStart.href} variant="secondary">{bidStart.label}</Action>
       </div>
       <p class="tf-down__more">
         Once you sign up, {PRODUCT_NAME_BID} sends new matches to you by email. Or look at the
@@ -272,7 +275,7 @@ const schema = [
 
       <div class="tf-upsell">
         <p>Want new matches by email and a fit score for each tender?</p>
-        <Action href={SIGNUP_URL}>{START_LABEL}</Action>
+        <Action href={bidStart.href}>{bidStart.label}</Action>
       </div>
     </div>
 
@@ -343,6 +346,7 @@ const schema = [
   </Band>
 
   <Close
+    product="bid"
     title="Want these by email, scored for fit?"
     lead={`${PRODUCT_NAME_BID} saves your search and emails you new matching notices. It also scores each tender for fit across ${FIT_COUNT_WORD} dimensions, so you see what is worth bidding for first.`}
   />
@@ -521,6 +525,10 @@ const schema = [
 
     busy = true;
     submit.setAttribute('aria-busy', 'true');
+    const submitLabel = submit.querySelector<HTMLElement>('.ea-btn__label') ?? submit;
+    const idleText = submit.dataset.idleText || submitLabel.textContent || 'Search tenders';
+    submit.dataset.idleText = idleText;
+    submitLabel.textContent = 'Searching...';
     say('busy', 'busy', page);
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 20000);
@@ -556,6 +564,10 @@ const schema = [
       clearTimeout(timer);
       busy = false;
       submit.removeAttribute('aria-busy');
+      if (submit.dataset.idleText) {
+        submitLabel.textContent = submit.dataset.idleText;
+        delete submit.dataset.idleText;
+      }
       resetCheck();
     }
   });

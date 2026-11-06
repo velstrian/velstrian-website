@@ -179,7 +179,10 @@ import { BRAND_LINE, BRAND_LINE_SUB } from '../../data/site';
 
 <script>
   import { initRotators } from '../../scripts/rotator';
-  initRotators();
+  import { whenIdle } from '../../scripts/idle';
+  /* A-520: after the first paint, so the lead paragraph is not held behind
+     it. The first answer is already in the markup and readable. */
+  whenIdle(initRotators);
 </script>
 
 <style>

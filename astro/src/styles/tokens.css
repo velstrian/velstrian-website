@@ -2749,6 +2749,15 @@
   --shadow-card:  var(--gloss-inset), 0 1px 2px rgba(0, 0, 0, 0.28), 0 14px 36px -14px rgba(0, 0, 0, 0.55);
   --shadow-panel: var(--gloss-inset), 0 24px 60px rgba(2, 4, 10, 0.45);
   --blur-glass:   blur(16px) saturate(1.6);   /* live's exact backdrop filter */
+  /* ── HOW MUCH OF THE GROUND A FROSTED SURFACE KEEPS, R29-WEBSITE-GLASS-01 ──
+     The brand record's own figure, not a new one: brand.source.json draws
+     --glass-bg-strong at 0.78 alpha. A call site mixes ITS ground with it,
+     `color-mix(in srgb, var(--c-bg) var(--glass-alpha-strong), transparent)`,
+     so the light header frosts white and a dark one frosts dark without a
+     second token. Always paired with --blur-glass, inside an @supports, with
+     the solid ground as the fallback. A fill without the blur is the one bad
+     outcome (Nav.astro, "THE BAR'S FROST"). */
+  --glass-alpha-strong: 78%;
   /* ── THE NAV MENU GLASS, R285-WEB-GEMINI-AUDIT-5 (Gemini's values, adopted
      by the owner 2026-10-23). A lighter, more frosted sheet than the shared
      glass above: 88 percent white, a 20px blur at 180 percent saturation, a
@@ -3641,6 +3650,22 @@
     url(/Assets/images/r285-gemini/close-band-texture-1600.webp) type('image/webp') 1x,
     url(/Assets/images/r285-gemini/close-band-texture-2400.webp) type('image/webp') 2x
   );
+}
+
+@media (max-width: 699px) {
+  :root {
+    --stage-texture: image-set(
+      url(/Assets/images/r285-gemini/stage-texture-1600.avif) type('image/avif') 1x,
+      url(/Assets/images/r285-gemini/stage-texture-1600.webp) type('image/webp') 1x
+    );
+    --close-texture: image-set(
+      url(/Assets/images/r285-gemini/close-band-texture-1600.avif) type('image/avif') 1x,
+      url(/Assets/images/r285-gemini/close-band-texture-1600.webp) type('image/webp') 1x
+    );
+  }
+}
+
+:root {
   --stage-texture-strength: 0.35;
   --stage-texture-blend: soft-light;
   /* The close band's own bloom. The stage bloom lights the TOP LEFT, which is

@@ -1184,11 +1184,33 @@
      *
      * ── THE HOOK IS `:has()` ON THE ID THIS FILE ALREADY NAMES ─────────────
      *
-     * `*:has(> #hero-title)` is the headline's own wrapper and
-     * `*:has(> * > #hero-title)` is the hero section, so the entire cadence is
-     * reached without this file learning one component class name. It is the
-     * choice `#hero-title` itself already made two rules up, at one and two
-     * levels of remove.
+     * `:has(> #hero-title)` is the headline's own wrapper and
+     * `:has(> * > #hero-title)` is the hero section. It is the choice
+     * `#hero-title` itself already made two rules up, at one and two levels of
+     * remove.
+     *
+     * ── THE SUBJECT IS NAMED, AND THAT IS A MEASURED COST, A-520 ───────────
+     *
+     * These were written `*:has(...)` so that this file never had to learn a
+     * component class name. A universal subject makes the browser test the
+     * `:has()` on every element of every route, so every element is marked as
+     * affected by it, and from then on any text change or node insertion
+     * anywhere on the page re-styles far more than the node that changed.
+     * Measured on the built home page at 412 wide, which carries no
+     * `#hero-title` at all: one text change then a style read took 6.5ms with
+     * the universal subject and 0.6ms with these eight rules removed, and
+     * Lighthouse mobile TBT fell from 796ms to 177ms median of three on this
+     * change alone. The subject is therefore `:where(.hero__inner)` and
+     * `:where(.hero)`, the wrapper and section of HeroStack.astro, which is
+     * the only markup these rules were ever built for. `:where()` adds zero
+     * specificity, so every selector scores exactly what it scored before and
+     * the reduce block below still ties with it.
+     *
+     * NOTHING RENDERED CHANGES. The two routes that carry `#hero-title` today,
+     * /roadmap/ and /cookie-preferences/, render it through PageHero inside an
+     * `.ea-sec` band, where the unlayered `main .ea-sec *` reset in
+     * evidenced.css already wins over this layer: every child of the headline
+     * wrapper there computed `animation-name: none` before this change.
      *
      * IT ALSO HAS TO OUTRANK (0,3,2), WHICH IS WHY EVERY SELECTOR CARRIES THE
      * ID. The structural row rule below computes to (0,3,2) and would otherwise
@@ -1241,7 +1263,7 @@
      * SECTION keeps `sv-land`, which is the only opacity animation in the block
      * and is already neutralised to a floor of 1 by the rule above so the
      * headline can own the one fade. */
-    *:has(> #hero-title) {
+    :where(.hero__inner):has(> #hero-title) {
       animation-name: none;
     }
 
@@ -1252,7 +1274,7 @@
        KEYFRAME: a 12px mono label has no glyph mass to deblur and 5px on it
        would be illegible rather than soft. `filter: blur(0)` still resolves, so
        the keyframe is unchanged and nothing here forks. */
-    *:has(> #hero-title) > *:first-child {
+    :where(.hero__inner):has(> #hero-title) > *:first-child {
       --hero-land-blur: 0px;
       animation-name: sv-land-hero;
       animation-duration: var(--hero-brow-dur);
@@ -1276,8 +1298,8 @@
        held at `animation-name: none` by the id rule. Stated as a range rather
        than as three separate selectors so that a row added to the bottom of the
        hero joins the cascade instead of silently falling back to delay 0. */
-    *:has(> #hero-title) > *:nth-child(n + 3),
-    *:has(> * > #hero-title) > *:last-child {
+    :where(.hero__inner):has(> #hero-title) > *:nth-child(n + 3),
+    :where(.hero):has(> * > #hero-title) > *:last-child {
       animation-name: sv-land-row;
       animation-duration: var(--hero-follow-dur);
       animation-timing-function: var(--m-ease-land);
@@ -1286,9 +1308,9 @@
         calc(var(--hero-land-hold) + var(--hero-land-step) * var(--hero-follow-i, 3));
     }
 
-    *:has(> #hero-title) > *:nth-child(3) { --hero-follow-i: 3; }
-    *:has(> #hero-title) > *:nth-child(4) { --hero-follow-i: 4; }
-    *:has(> #hero-title) > *:nth-child(5) { --hero-follow-i: 5; }
+    :where(.hero__inner):has(> #hero-title) > *:nth-child(3) { --hero-follow-i: 3; }
+    :where(.hero__inner):has(> #hero-title) > *:nth-child(4) { --hero-follow-i: 4; }
+    :where(.hero__inner):has(> #hero-title) > *:nth-child(5) { --hero-follow-i: 5; }
 
     /* The one-pass light sweep across the hero buttons (sv-btn-sweep) was
        removed on 2026-10-21, R285-WEB-ENTERPRISE-REDESIGN-01, with the hover
@@ -1296,7 +1318,7 @@
     /* The closing gate note is a sibling of the wrapper rather than a row
        inside it, so it is reached from the section instead. It is last on the
        page and last in, which is the whole of the choice. */
-    *:has(> * > #hero-title) > *:last-child { --hero-follow-i: 6; }
+    :where(.hero):has(> * > #hero-title) > *:last-child { --hero-follow-i: 6; }
 
     /* ── The rows inside it. Travel only, staggered.
      *
@@ -1451,10 +1473,10 @@
        makes the reset equal on specificity and later in source order, so it
        wins. Anything added to that block is added here in the same edit or the
        reader who asked for stillness is the only one who gets motion. */
-    *:has(> #hero-title),
-    *:has(> #hero-title) > *:first-child,
-    *:has(> #hero-title) > *:nth-child(n + 3),
-    *:has(> * > #hero-title) > *:last-child,
+    :where(.hero__inner):has(> #hero-title),
+    :where(.hero__inner):has(> #hero-title) > *:first-child,
+    :where(.hero__inner):has(> #hero-title) > *:nth-child(n + 3),
+    :where(.hero):has(> * > #hero-title) > *:last-child,
     /* The CTA sweep, repeated verbatim for the reason the four lines above are.
        It is already generated inside `no-preference` and can never run here, so
        this is the belt-and-braces half of the same contract: it makes
@@ -1463,7 +1485,7 @@
        scripts/check-sheen.js asserts the neighbouring half of this on the same
        control: under `reduce` the hovered primary's ::after background-position
        does not move at all. */
-    *:has(> #hero-title) .btn::after,
+    :where(.hero__inner):has(> #hero-title) .btn::after,
     #hero-title,
     #hero-title > span,
     main .surface,
@@ -2414,6 +2436,72 @@
   }
 }
 
+/* ── FROSTED ONCE THE PAGE MOVES, R29-WEBSITE-GLASS-01 (owner approved
+ *    2026-11-04) ──────────────────────────────────────────────────────────
+ *
+ * At the top of the page the bar is the solid ground Nav.astro paints, exactly as
+ * before. Over the first header height of scrolling it eases to the brand
+ * record's strong glass, the bar's own ground at --glass-alpha-strong under
+ * --blur-glass, so content passing beneath reads as a soft wash of colour.
+ *
+ * THE TWO REPORTS IN Nav.astro AND NavDropdown.astro ARE ANSWERED, NOT OVERRIDDEN. Both found words
+ * legible through a translucent bar, and both were measuring a blur that
+ * never ran: the header carried view-transition-name, which makes it a
+ * backdrop root, so this ::before blurred an empty backdrop. The view transition
+ * block below now names the row instead. Measured 2026-11-04 at 1440 with the hero h1 and a
+ * section h2 parked in the bar's band: sharp at 72 percent before that
+ * move, a wash with no readable letterform after it.
+ *
+ * NO SCRIPT. A scroll driven animation on the root scroller, so it costs no
+ * main thread time at all and cannot touch blocking time. Longhands, for the
+ * lightningcss reason recorded on `.sv-progress` above.
+ *
+ * THE HEADER'S OWN FILL CLEARS WITH IT, because `.ca-nav.on-light` in Nav.astro paints
+ * the same ground on the header box for check-treatments.js and an opaque
+ * header would hide the frost. At scroll 0 both are the untouched solid
+ * ground, so anything measuring the top of the page sees no change.
+ *
+ * FALLBACKS. No backdrop-filter or no scroll timeline: the @supports fails
+ * and the bar stays solid, never a see-through bar without a blur. A reader
+ * who asks for reduced transparency gets the solid bar too. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) and (animation-timeline: scroll()) {
+  #ca-nav,
+  #ca-nav::before {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+    animation-range-start: 0;
+    animation-range-end: var(--v3-header-h);
+  }
+  #ca-nav.on-light {
+    animation-name: ca-nav-clear;
+  }
+  #ca-nav::before {
+    animation-name: ca-nav-frost;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  #ca-nav.on-light,
+  #ca-nav::before {
+    animation-name: none;
+  }
+}
+
+@keyframes ca-nav-clear {
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes ca-nav-frost {
+  to {
+    background-color: color-mix(in srgb, var(--c-bg) var(--glass-alpha-strong), transparent);
+    -webkit-backdrop-filter: var(--blur-glass);
+    backdrop-filter: var(--blur-glass);
+  }
+}
+
 /* ── PAGE TO PAGE, R285-WEB-GEMINI-UIUX P3-6 (driver decision, 2026-10-23) ──
  *
  * A short crossfade between pages, done by the browser and nothing else. The
@@ -2449,7 +2537,17 @@
     animation-timing-function: var(--ease);
   }
 
-  #ca-nav {
+  /* THE NAME SITS ON THE ROW, NOT THE HEADER (R29-WEBSITE-GLASS-01). An
+     element with a view-transition-name is a BACKDROP ROOT (Filter Effects 2),
+     so with the name on #ca-nav the bar's frosted ::before blurred the
+     header's own empty backdrop and drew no blur at all: measured 2026-11-04,
+     the hero h1 read sharp through a 72 percent fill under blur(16px), and
+     read as a soft wash once the filter sat outside the header. This is very
+     likely what the 2026-08-31 and A-515 measurements in Nav.astro and
+     NavDropdown.astro were seeing. The row holds every word, logo and button
+     the bar has, so the bar still holds still across a navigation, and the
+     ground behind it is the same colour on both pages. */
+  #ca-nav > .ca-nav-row {
     view-transition-name: site-header;
   }
 

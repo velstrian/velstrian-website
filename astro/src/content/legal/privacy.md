@@ -40,7 +40,7 @@ We use Google Gemini and Anthropic Claude as AI sub-processors. They process the
 
 Every clause below is written for clarity. Jump to any section, or send a question to our data protection contact.
 
-<aside aria-label="Data protection contact" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Data protection contact</p> <p>For privacy enquiries or a subject access request, contact <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></p> </div> </aside>
+<aside aria-label="Data protection contact" class="legal-aside"> <div class="legal-aside__card"> <p class="ea-label legal-aside__label">Data protection contact</p> <p>For privacy enquiries or a subject access request, contact <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></p> </div> </aside>
 
 ## Data controller
 
@@ -59,7 +59,6 @@ Velstrian Systems Ltd is registered as a data controller with the UK Information
 We may collect and process the following data about you:
 
 - **Account data:** Information that you provide by filling in forms on our site or via our application (app.velstrian.com). This includes email address, full name, and password hash (via Supabase Auth).
-- **Sustainability data:** Activity and energy-consumption figures submitted through legacy reporting features, available to existing customers only. This is essential for the Velstrian platform.
 - **Social Value data:** Procurement descriptions, National TOMs selections, and submissions you enter for social value scoring and Velstrian Bid narrative generation.
 - **Usage data:** Details of your visits to our site including, but not limited to, traffic data, location data, weblogs and other communication data, API call counts, feature usage events, timestamps, and subscription plan.
 - **Billing data:** Stripe customer ID and subscription status. We do not store raw card numbers. These are handled directly by Stripe.
@@ -70,7 +69,7 @@ We may collect and process the following data about you:
 
 We use information held about you in the following ways:
 
-- To provide the Velstrian service, including Velstrian Bid and legacy features retained for existing customers, such as authentication, sustainability reporting, security-evidence preparation, and Social Value scoring based on National TOMs.
+- To provide the Velstrian service, Velstrian Bid and Velstrian Buy, for public and private work, including authentication and Social Value scoring based on National TOMs.
 - To process billing and maintain financial records through Stripe.
 - To improve the product through aggregate analytics and user feedback (consent-gated via PostHog).
 - To monitor and fix errors, ensuring service stability (via Sentry).
@@ -108,7 +107,7 @@ If an administrator turns this on, the number of bids you won and lost in each s
 
 We retain personal data only for as long as necessary for the purposes set out in this policy, in line with UK GDPR Article 5(1)(e) (storage limitation). When we no longer need your personal data, we will securely delete or anonymise it.
 
-<div class="prose-scroll" role="region" aria-label="Table" tabindex="0"><table class="pv-table"> <thead> <tr> <th>Data category</th> <th>Retention period</th> <th>Basis</th> </tr> </thead> <tbody> <tr><td>Account data</td><td>Purged within 30 days of account deletion</td><td>UK GDPR Art 17</td></tr> <tr><td>Financial / invoice records</td><td>Up to 7 years (anonymised audit trail)</td><td>UK HMRC requirement</td></tr> <tr><td>Shared examples (optional)</td><td>Until sharing is turned off, then deleted straight away</td><td>Your administrator's opt in</td></tr> <tr><td>Usage events</td><td>13 months</td><td>Product analytics</td></tr> <tr><td>Error events (Sentry)</td><td>30 days</td><td>Diagnostics</td></tr> <tr><td>Analytics (PostHog)</td><td>12 months</td><td>Aggregate insights</td></tr> </tbody> </table></div>
+<div class="prose-scroll" role="region" aria-label="Table" tabindex="0"><table class="pv-table"> <thead> <tr> <th>Data category</th> <th>Retention period</th> <th>Basis</th> </tr> </thead> <tbody> <tr><td>Account data</td><td>Purged within 30 days of account deletion</td><td>UK GDPR Art 17</td></tr> <tr><td>Financial / invoice records</td><td>Up to 7 years (anonymised audit trail)</td><td>UK HMRC requirement</td></tr> <tr><td>Shared examples (optional)</td><td>Until sharing is turned off, then deleted straight away</td><td>Your administrator's opt in</td></tr> <tr><td>Usage events</td><td>12 months</td><td>Product analytics</td></tr> <tr><td>Error events (Sentry)</td><td>30 days</td><td>Diagnostics</td></tr> <tr><td>Analytics (PostHog)</td><td>12 months</td><td>Aggregate insights</td></tr> </tbody> </table></div>
 
 ## Your rights under UK GDPR
 
@@ -125,9 +124,9 @@ You have the following rights in respect of personal data we hold about you. To 
 
 ## Data protection contact
 
-Our data protection contact handles all data protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact them for any matter related to Velstrian Bid or to any legacy feature retained for existing customers data handling.
+Our data protection contact handles all data protection enquiries, subject access requests, erasure requests, and incident notifications. You can contact them about how Velstrian Bid or Velstrian Buy handles your data.
 
-<dl class="deflist"> <dt>Contact details</dt> <dd>Email: <a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a> | <a href="mailto:privacy@velstrian.com">privacy@velstrian.com</a></dd> </dl>
+<dl class="deflist"> <dt>Contact details</dt> <dd>Email: <a href="mailto:contact@velstrian.com">contact@velstrian.com</a></dd> </dl>
 
 ## Cookies
 
@@ -157,7 +156,7 @@ In accordance with Article 22 UK GDPR, we confirm that Velstrian does not make a
 
 ## Subject Access Request (DSAR) procedure
 
-You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [privacy@velstrian.com](mailto:privacy@velstrian.com) with the subject line “DSAR, \[type of request\]”. Please include the email address associated with your Velstrian account and a brief description of the request. We will verify your identity where necessary and respond within one calendar month of receipt.
+You can exercise your data-subject rights (Articles 15-21 UK GDPR) by emailing [contact@velstrian.com](mailto:contact@velstrian.com) with the subject line “DSAR, \[type of request\]”. Please include the email address associated with your Velstrian account and a brief description of the request. We will verify your identity where necessary and respond within one calendar month of receipt.
 
 ## Google Gemini AI processing
 
@@ -205,7 +204,7 @@ We use Sentry for error monitoring to ensure the stability of the Velstrian plat
 
 ## Contact & ICO complaint
 
-<dl class="deflist deflist--ledger"> <dt>Company</dt> <dd>Velstrian Systems Ltd</dd> <dt>Companies House No.</dt> <dd>17076461</dd> <dt>Registered office</dt> <dd>Reading, Berkshire, RG1 6SP, GB</dd> <dt>Data Protection</dt> <dd><a href="mailto:dpo@velstrian.com">dpo@velstrian.com</a></dd> </dl>
+<dl class="deflist deflist--ledger"> <dt>Company</dt> <dd>Velstrian Systems Ltd</dd> <dt>Companies House No.</dt> <dd>17076461</dd> <dt>Registered office</dt> <dd>Reading, Berkshire, RG1 6SP, GB</dd> <dt>Data Protection</dt> <dd><a href="mailto:contact@velstrian.com">contact@velstrian.com</a></dd> </dl>
 
 If you are not satisfied with our response to a data protection request, you have the right to complain to the UK Information Commissioner’s Office (ICO).
 

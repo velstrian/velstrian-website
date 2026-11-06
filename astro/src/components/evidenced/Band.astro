@@ -84,7 +84,10 @@ const MOTION_LABEL = 'Pause background motion';
 <script>
   import { initEvidenced } from '../../scripts/evidenced';
   import { initPremium } from '../../scripts/premium';
+  import { whenIdle } from '../../scripts/idle';
 
+  /* A-520: the rails measure scrollWidth, so they wait for an idle gap after
+     the first paint rather than forcing a layout ahead of it. */
   initEvidenced();
-  initPremium();
+  whenIdle(initPremium);
 </script>

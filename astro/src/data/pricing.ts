@@ -88,7 +88,11 @@
  * header; the gate is the thing that stops the next one.
  */
 import { SIGNUP_URL, START_LABEL } from './app.ts';
-import { GUEST_REVIEWERS, LIVE_SOURCES } from './site-facts.ts';
+import { GUEST_REVIEWERS, LIVE_SOURCES, SSO_EVERY_PLAN } from './site-facts.ts';
+import { PRODUCT_START, startHref, productStart } from './product-start.ts';
+
+export { PRODUCT_START, startHref, productStart };
+export type { Product } from './product-start.ts';
 
 export { SIGNUP_URL, START_LABEL };
 
@@ -107,7 +111,6 @@ export { SIGNUP_URL, START_LABEL };
  * web/src/features/billing/v2/plan-token.ts returns null for `crowmark_<tier>`,
  * so the old tokens did not carry the chosen plan through sign up.
  */
-/** The sign up link for one plan and billing period, or the bare sign up page. */
 /** The extra seat add on for Pro and Buyer Pro, in pounds. Source of truth:
     crowagent-platform packages/pricing/catalogue.ts SEAT_ADDON_MONTHLY_PENCE
     (4500) and the annual seat add on (£486, 45 x 10.8, D196). */
@@ -120,11 +123,6 @@ export function annualDiscountPct(plan: { monthly?: number | null; annual?: numb
   return Math.round((1 - plan.annual / (plan.monthly * 12)) * 100);
 }
 
-export function startHref(planKey?: string, annual = false): string {
-  if (!planKey) return SIGNUP_URL;
-  const token = annual ? `${planKey}_annual` : planKey;
-  return `${SIGNUP_URL}?plan=${encodeURIComponent(token)}`;
-}
 
 /** A quieter second action under a plan's main button. */
 export interface PlanLink {
@@ -179,7 +177,7 @@ export const PLANS: Plan[] = [
     seats: 1,
     credits: 200,
     includes: 'Tender feed, cited drafting, social value calculation and PDF or DOCX export.',
-    cta: START_LABEL,
+    cta: PRODUCT_START.bid.label,
     planKey: 'bid_starter',
   },
   {
@@ -192,8 +190,8 @@ export const PLANS: Plan[] = [
     seats: 5,
     credits: 750,
     includes: 'Everything in Starter, plus delivery tracking, monthly reports and the section 52 and 71 checks.',
-    cta: START_LABEL,
-    planKey: 'bid_pro',
+    cta: PRODUCT_START.bid.label,
+    planKey: PRODUCT_START.bid.planKey,
     recommended: true,
   },
   {
@@ -216,7 +214,7 @@ export const PLANS: Plan[] = [
        (D206, catalogue.ts integrations flag). */
     includes: 'Everything in Pro, plus the Integrations package, branded exports and a named contact.',
     moreSeatsByArrangement: true,
-    cta: 'Buy Portfolio',
+    cta: PRODUCT_START.bid.label,
     planKey: 'bid_portfolio',
     secondary: {
       label: 'Talk to us about contracts',
@@ -260,6 +258,12 @@ export interface BuyerPlan {
   guestEvaluators: number;
   /** The third line on the card. See Plan.includes. */
   includes: string;
+  /** True where extra seats can be bought on the card at SEAT_ADDON. Buyer Pro. */
+  seatAddOns?: boolean;
+  /** True where more users than `seats` can be arranged. Buyer Portfolio. */
+  moreSeatsByArrangement?: boolean;
+  /** True where the plan can also be paid by invoice on 30 days with a PO number. */
+  invoiceTerms?: boolean;
   cta: string;
   planKey: string;
   secondary?: PlanLink;
@@ -275,8 +279,9 @@ export const BUYER_PLANS: BuyerPlan[] = [
     credits: 750,
     guestEvaluators: 10,
     includes: '10 guest evaluators, requirement builder, evidence locator and delivery monitoring.',
-    cta: START_LABEL,
-    planKey: 'buyer_pro',
+    seatAddOns: true,
+    cta: PRODUCT_START.buy.label,
+    planKey: PRODUCT_START.buy.planKey,
   },
   {
     name: 'Buyer Portfolio',
@@ -287,7 +292,9 @@ export const BUYER_PLANS: BuyerPlan[] = [
     credits: 3000,
     guestEvaluators: 25,
     includes: '25 guest evaluators. Pay by card, or by invoice on 30 days with a PO number.',
-    cta: START_LABEL,
+    moreSeatsByArrangement: true,
+    invoiceTerms: true,
+    cta: PRODUCT_START.buy.label,
     planKey: 'buyer_portfolio',
     secondary: {
       label: 'Talk to us about frameworks (approved supplier lists)',
@@ -402,8 +409,8 @@ export type Cell = true | false | string;
 
 export interface CompareRow {
   feature: string;
-  /** Starter, Pro, Portfolio, in that order. */
-  cells: [Cell, Cell, Cell];
+  /** One cell per plan, in the order of the product's plan array. */
+  cells: Cell[];
 }
 
 /*
@@ -487,6 +494,35 @@ export const COMPARE_LEAD: CompareRow[] = [
  * A supplier reading a feature table needs to know the product checks both, not
  * that it checks something with a slash in it.
  */
+/*
+ * A-521 (owner report 2026-11-04): /pricing/ had a feature table for Velstrian
+ * Bid only. Velstrian Buy gets the same depth, and every cell is read from
+ * BUYER_PLANS, SEAT_ADDON or site-facts.json, never typed beside them, for the
+ * same reason the Bid rows are derived from PLANS. One cell per buyer plan.
+ */
+function buyerCells(cell: (p: BuyerPlan) => Cell): Cell[] {
+  return BUYER_PLANS.map(cell);
+}
+
+function buyerSeatCell(p: BuyerPlan): string {
+  const users = `${p.seats} user${p.seats === 1 ? '' : 's'}`;
+  if (p.moreSeatsByArrangement) return `${users} included, more by arrangement`;
+  if (p.seatAddOns) return `${users}, add more for £${SEAT_ADDON.monthly} a month each`;
+  return users;
+}
+
+export const BUY_COMPARE: CompareRow[] = [
+  { feature: 'AI credits a month', cells: buyerCells((p) => p.credits.toLocaleString('en-GB')) },
+  { feature: 'Seats (licensing)', cells: buyerCells(buyerSeatCell) },
+  { feature: 'Guest evaluators', cells: buyerCells((p) => String(p.guestEvaluators)) },
+  { feature: 'Requirement builder', cells: buyerCells(() => true) },
+  { feature: 'Evidence locator across every response you receive', cells: buyerCells(() => true) },
+  { feature: 'Delivery monitoring', cells: buyerCells(() => true) },
+  { feature: 'Single sign-on (SAML 2.0)', cells: buyerCells(() => SSO_EVERY_PLAN) },
+  { feature: 'Pay by card', cells: buyerCells(() => true) },
+  { feature: 'Pay by invoice on 30 days with a PO number', cells: buyerCells((p) => p.invoiceTerms === true) },
+];
+
 export const COMPARE_MORE: CompareRow[] = [
   { feature: 'Post-award delivery tracking and monthly reports', cells: [false, true, true] },
   {
@@ -616,7 +652,7 @@ export const PRICING_FAQS: Faq[] = [
        omission as the removed "no card taken" lines, just by silence rather
        than by a false sentence. */
     answer:
-      `Choose a plan and select ${START_LABEL}. Your first ${TRIAL_DAYS} days are free, on the ${FAQ_STARTER.name} features for ${usersLabel(FAQ_STARTER.seats)} with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within ${TRIAL_DAYS} days and pay nothing. There is one free trial per organisation and work email domain.`,
+      `Choose a plan and select its start button. Your first ${TRIAL_DAYS} days are free, on the ${FAQ_STARTER.name} features for ${usersLabel(FAQ_STARTER.seats)} with ${TRIAL_CREDITS} AI credits. A card is needed to start, held securely by Stripe and never stored by us. Cancel within ${TRIAL_DAYS} days and pay nothing. There is one free trial per organisation and work email domain.`,
   },
   {
     question: 'How do I get access?',
@@ -626,7 +662,7 @@ export const PRICING_FAQS: Faq[] = [
        checkout. The old wording let the true first half stand for the whole
        process. */
     answer:
-      `Choose a plan and select ${START_LABEL}. You create your account, pay by card through Stripe, and start straight away. There is nothing to request first. If you would like a walk through before you start, book a demo.`,
+      `Choose a plan and select its start button. You create your account, pay by card through Stripe, and start straight away. There is nothing to request first. If you would like a walk through before you start, book a demo.`,
   },
   {
     question: 'Are there any hidden setup fees?',

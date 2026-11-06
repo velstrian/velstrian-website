@@ -126,5 +126,5 @@ No. Frameworks and DPS are structured in lots by size, specialism or geography s
 
 Velstrian Bid pulls Find a Tender, Contracts Finder, Public Contracts Scotland and EU TED every day, so framework refreshes, DPS entry points and mini-competitions land in front of you rather than getting missed in a crowded inbox. You can browse live opportunities with our [free Tender Finder](/tools/tender-finder/) and check tender requirements with our [free Tender Compliance Matrix](/tools/tender-compliance-matrix/).
 
-[Start now](app:/signup)
+[Start with Velstrian Bid](start:bid)
 [See Velstrian Bid →](/bid/)

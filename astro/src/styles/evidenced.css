@@ -1000,6 +1000,52 @@ main .ea-sec * {
   transform-origin: 0 50%;
 }
 
+/* ── THE HERO STATUS CARD IS FROSTED GLASS, R29-WEBSITE-GLASS-01 ─────────────
+   Owner approved 2026-11-04. Only the card floating over a hero stage, where
+   the violet ground is behind it: the card keeps --glass-alpha-strong of its
+   own white and the stage shows through under --blur-glass, with a white rim
+   (--glass-menu-edge) for the soft light edge in place of the grey hairline.
+
+   THE WORDS STAY ON SOLID GROUND. Each step is its own well, and the wells
+   are not glass, so the labels and details measure exactly what they did. The
+   held step's wash is translucent, so it is laid over the card's solid white
+   here, or the violet would come through it and pull its purple text down.
+   The title is the one line written on the glass itself, so it takes the sub
+   ink, which keeps it at AA over the frosted violet (measured, see the
+   R29-WEBSITE-GLASS-01 report).
+
+   FALLBACKS. No backdrop-filter: the @supports fails and the card is the
+   solid white card above. Reduced transparency: the same solid card. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .ea-stage--hero .ea-stage__float .ea-seq {
+    background: color-mix(in srgb, var(--ea-raised) var(--glass-alpha-strong), transparent);
+    -webkit-backdrop-filter: var(--blur-glass);
+    backdrop-filter: var(--blur-glass);
+    box-shadow: var(--elev-floating), inset 0 0 0 1px var(--glass-menu-edge);
+  }
+
+  .ea-stage--hero .ea-stage__float .ea-seq__title {
+    color: var(--ea-sub);
+  }
+
+  .ea-stage--hero .ea-stage__float .ea-seq__step--held {
+    background: linear-gradient(var(--ea-refusal-wash), var(--ea-refusal-wash)), var(--ea-raised);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .ea-stage--hero .ea-stage__float .ea-seq {
+    background: var(--ea-raised);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: var(--elev-floating), 0 0 0 1px var(--ea-rule);
+  }
+
+  .ea-stage--hero .ea-stage__float .ea-seq__title {
+    color: var(--ea-muted);
+  }
+}
+
 /* The sequence. `armed` is the first frame (set by the script on a card below
    the fold, or by the inline line in Sequence.astro before first paint for
    `play="load"`), `run` plays it, and no state at all IS the finished card. */

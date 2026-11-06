@@ -24,7 +24,10 @@ import ProductScreen from '../../components/evidenced/ProductScreen.astro';
 import Close from '../../components/evidenced/Close.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { SITE } from '../../data/site';
-import { SIGNUP_URL, START_LABEL } from '../../data/app';
+import { productStart } from '../../data/product-start';
+
+/* D553: this page is about Velstrian Bid, so its start buttons name it. */
+const bidStart = productStart('bid');
 import { PLANS, TRIAL_NOTE } from '../../data/pricing';
 import { breadcrumbs } from '../../lib/schema';
 import { routeUrl } from '../../lib/route-url';
@@ -111,7 +114,7 @@ const schema = [
   >
     <div slot="before" class="ea-trail"><Breadcrumb trail={trail} current="Compare" /></div>
     <Action href="#comparisons">See the comparisons</Action>
-    <Action href={SIGNUP_URL} variant="secondary">{START_LABEL}</Action>
+    <Action href={bidStart.href} variant="secondary">{bidStart.label}</Action>
     <Fragment slot="note">{TRIAL_NOTE}</Fragment>
   </PageHero>
 

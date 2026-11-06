@@ -25,6 +25,8 @@
  * with scripts/tabs.ts, the site's one switcher.
  */
 
+import { afterPaint, whenIdle } from './idle';
+
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 interface Line {
@@ -238,13 +240,21 @@ export function initSequences(): void {
     c.dataset.seqState = 'run';
   };
   const pending = new Set<HTMLElement>();
-  cards.forEach((c) => {
+  /* Every rect is read BEFORE any card is armed (A-520). Arming writes an
+     attribute, and a read after a write forces a fresh style and layout, so
+     a read, write, read, write loop paid one full recalculation per card.
+     Reading first pays it once. */
+  const below = cards.map((c) => {
+    if (c.dataset.seq === 'load') return false;
+    const r = c.getBoundingClientRect();
+    return r.width === 0 || r.top > innerHeight;
+  });
+  cards.forEach((c, i) => {
     if (c.dataset.seq === 'load') {
       requestAnimationFrame(() => requestAnimationFrame(() => run(c)));
       return;
     }
-    const r = c.getBoundingClientRect();
-    if (r.width === 0 || r.top > innerHeight) {
+    if (below[i]) {
       c.dataset.seqState = 'armed';
       pending.add(c);
     }
@@ -321,13 +331,21 @@ export function initAurora(): void {
   };
   let off = store() === '0';
   const set = () => {
-    document.querySelectorAll<HTMLElement>('[data-aurora]').forEach((s) => {
+    /* All rects first, then the writes (A-520). The old loop read a slab,
+       wrote it, then read the next, so every read after the first forced a
+       fresh style and layout. This runs on every scroll frame, so it also
+       writes only when a slab's state actually changes. */
+    const slabs = Array.from(document.querySelectorAll<HTMLElement>('[data-aurora]'));
+    const states = slabs.map((s) => {
       const r = s.getBoundingClientRect();
-      s.dataset.aurora = !off && !document.hidden && r.height && r.bottom > 0 && r.top < innerHeight ? 'run' : 'hold';
+      return !off && !document.hidden && r.height && r.bottom > 0 && r.top < innerHeight ? 'run' : 'hold';
+    });
+    slabs.forEach((s, i) => {
+      if (s.dataset.aurora !== states[i]) s.dataset.aurora = states[i];
     });
     btns.forEach((b) => {
-      b.hidden = false;
-      b.ariaPressed = String(off);
+      if (b.hidden) b.hidden = false;
+      if (b.ariaPressed !== String(off)) b.ariaPressed = String(off);
     });
   };
   btns.forEach((b) => {
@@ -341,11 +359,21 @@ export function initAurora(): void {
   onGeometry(set);
 }
 
+/*
+ * A-520: the order of work, measured on the built home page. Each of these
+ * reads geometry, and the first read at module time forced the whole page's
+ * first style and layout inside this script, ahead of the hero's first paint.
+ * The tour only adds listeners, so it is ready at once. The sequences start
+ * right after the first paint, so the hero card still plays on load. The
+ * rest start in idle gaps, each in its own task, all within the whenIdle
+ * timeout. Reveal and refusal arm only what is still below the fold when
+ * they run, so nothing a reader is already looking at is hidden.
+ */
 export function initEvidenced(): void {
-  initAurora();
-  initReveal();
-  initSequences();
   initTour();
-  initCitations();
-  initRefusal();
+  afterPaint(initSequences);
+  whenIdle(initAurora);
+  whenIdle(initReveal);
+  whenIdle(initCitations);
+  whenIdle(initRefusal);
 }

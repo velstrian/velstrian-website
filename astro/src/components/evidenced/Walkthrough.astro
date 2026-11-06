@@ -35,6 +35,7 @@
 import Action from './Action.astro';
 import { CAPTURES, type Capture, type CropView } from '../../data/product-captures';
 import { SIGNUP_URL, START_LABEL } from '../../data/app';
+import { productStart, type Product } from '../../data/product-start';
 import { TRIAL_DAYS } from '../../data/pricing';
 
 interface Step {
@@ -142,8 +143,11 @@ const total = slides.length + 1;
 interface Props {
   /** The heading level of each step: h2 on its own page, h3 inside a titled band. */
   level?: 'h2' | 'h3';
+  /** D553: the product the journey shows. Left out, the end button is neutral. */
+  product?: Product;
 }
-const { level = 'h3' } = Astro.props;
+const { level = 'h3', product } = Astro.props;
+const start = product ? productStart(product) : { href: SIGNUP_URL, label: START_LABEL };
 const Heading = level;
 ---
 
@@ -210,7 +214,7 @@ const Heading = level;
             <Heading class="ea-walk__end-title">From finding a contract to keeping your promises, in one place.</Heading>
             <p class="ea-walk__line">Try it with your own documents. Card needed to start, cancel within {TRIAL_DAYS} days and pay nothing.</p>
             <div class="ea-actions">
-              <Action href={SIGNUP_URL}>{START_LABEL}</Action>
+              <Action href={start.href}>{start.label}</Action>
               <Action as="button" variant="secondary" data-car-to="0">See it again</Action>
             </div>
           </div>
